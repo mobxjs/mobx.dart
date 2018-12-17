@@ -1,2 +1,2 @@
 # mobx.dart
-MobX for the Dart language
+[MobX](https://github.com/mobxjs/mobx) for the Dart language
