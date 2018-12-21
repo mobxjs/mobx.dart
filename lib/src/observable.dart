@@ -1,17 +1,33 @@
+import 'package:mobx/src/global_state.dart';
+
 class Atom {
   String name;
 
   Atom(String this.name);
 
   reportObserved() {
-    print("Used ${this.name}");
+    global.reportObserved(this);
   }
 
-  reportChanged() {
-    print("Changed ${this.name}");
+  reportChanged() {}
+
+  Set<Derivation> observers = Set();
+
+  addObserver(Derivation d) {
+    observers.add(d);
   }
 
-  Set _observers;
+  removeObserver(Derivation d) {
+    observers.removeWhere((ob) => ob == d);
+  }
+}
+
+abstract class Derivation {
+  String name;
+  Set<Atom> observing;
+  Set<Atom> newObserving;
+
+  void execute() {}
 }
 
 class ObservableValue<T> extends Atom {
@@ -30,21 +46,18 @@ class ObservableValue<T> extends Atom {
     _value = value;
     reportChanged();
   }
-
-  @override
-  reportObserved() {
-    print("Used ${this.name} = ${this._value}");
-  }
-
-  @override
-  reportChanged() {
-    print("Changed ${this.name} = ${this._value}");
-  }
 }
 
-class ComputedValue<T> extends Atom {
-  List _observing;
+class ComputedValue<T> extends Atom implements Derivation {
+  @override
+  Set<Atom> observing = Set();
 
+  @override
+  Set<Atom> newObserving;
+
+  T _value;
+
+  @override
   T Function() _fn;
 
   ComputedValue(
@@ -53,10 +66,24 @@ class ComputedValue<T> extends Atom {
   ) : super(name);
 
   T get value {
-    return this._fn();
+    global.startBatch();
+    computeValue(true);
+    global.endBatch();
+
+    reportObserved();
+    return _value;
+  }
+
+  computeValue(bool track) {
+    if (track) {
+      global.trackDerivation(this);
+    } else {
+      execute();
+    }
+  }
+
+  @override
+  void execute() {
+    _value = _fn();
   }
 }
-
-class ObservableList {}
-
-class ObservableMap {}

@@ -1,4 +1,4 @@
-import 'package:mobx.dart/src/observable.dart';
+import 'package:mobx/src/observable.dart';
 import "package:test/test.dart";
 
 void main() {
@@ -17,6 +17,12 @@ void main() {
       return x.value + y.value;
     });
 
+    x.value = 30;
     expect(c.value, equals(30));
+  });
+
+  test('Derivation', (){
+
+    var x =
   });
 }
