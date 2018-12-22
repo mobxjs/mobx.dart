@@ -1,4 +1,6 @@
+import 'package:mobx/src/computed.dart';
 import 'package:mobx/src/observable.dart';
+import 'package:mobx/src/reaction.dart';
 import "package:test/test.dart";
 
 void main() {
@@ -18,11 +20,21 @@ void main() {
     });
 
     x.value = 30;
-    expect(c.value, equals(30));
+    y.value = 20;
+    expect(c.value, equals(50));
   });
 
-  test('Derivation', (){
+  test('Reaction', () {
+    var c = ObservableValue.of('counter', 0);
+    int nextValue;
 
-    var x =
+    Reaction('reaction', () {
+      nextValue = c.value + 1;
+    }).schedule();
+
+    expect(nextValue, equals(1));
+
+    c.value = 10;
+    expect(nextValue, equals(11));
   });
 }

@@ -1,36 +1,49 @@
-import 'package:mobx/mobx.dart';
 import 'package:mobx/src/global_state.dart';
+import 'package:mobx/src/observable.dart';
 
 abstract class Derivation {
   String name;
-  Set<Atom> observing;
-  Set<Atom> newObserving;
+  Set<Atom> observables;
+  Set<Atom> newObservables;
 
-  void execute() {}
+  void onBecomeStale() {}
 }
 
 class Reaction implements Derivation {
   void Function() _onInvalidate;
+  bool _isScheduled = false;
 
   @override
   String name;
 
   @override
-  Set<Atom> newObserving;
+  Set<Atom> newObservables;
 
   @override
-  Set<Atom> observing;
+  Set<Atom> observables;
 
   Reaction(this.name, this._onInvalidate);
 
   @override
-  void execute() {
-    _runReaction();
+  void onBecomeStale() {
+    schedule();
   }
 
-  _runReaction() {
+  execute() {
     global.startBatch();
     _onInvalidate();
     global.endBatch();
+  }
+
+  dispose() {}
+
+  schedule() {
+    if (_isScheduled) {
+      return;
+    }
+
+    _isScheduled = true;
+    global.enqueueReaction(this);
+    global.runReactions();
   }
 }

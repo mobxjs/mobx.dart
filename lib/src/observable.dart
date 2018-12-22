@@ -10,7 +10,11 @@ class Atom {
     global.reportObserved(this);
   }
 
-  reportChanged() {}
+  reportChanged() {
+    global.startBatch();
+    global.propagateChanged(this);
+    global.endBatch();
+  }
 
   Set<Derivation> observers = Set();
 
@@ -38,45 +42,5 @@ class ObservableValue<T> extends Atom {
   set value(T value) {
     _value = value;
     reportChanged();
-  }
-}
-
-class ComputedValue<T> extends Atom implements Derivation {
-  @override
-  Set<Atom> observing = Set();
-
-  @override
-  Set<Atom> newObserving;
-
-  T _value;
-
-  @override
-  T Function() _fn;
-
-  ComputedValue(
-    String name,
-    this._fn,
-  ) : super(name);
-
-  T get value {
-    global.startBatch();
-    computeValue(true);
-    global.endBatch();
-
-    reportObserved();
-    return _value;
-  }
-
-  computeValue(bool track) {
-    if (track) {
-      global.trackDerivation(this);
-    } else {
-      execute();
-    }
-  }
-
-  @override
-  void execute() {
-    _value = _fn();
   }
 }

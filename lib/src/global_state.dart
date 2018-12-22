@@ -1,47 +1,50 @@
-import 'package:mobx/mobx.dart';
+import 'package:mobx/src/observable.dart';
 import 'package:mobx/src/reaction.dart';
 
 class _GlobalState {
   int _batch = 0;
-  Derivation currentDerivation;
+
+  Derivation trackingDerivation;
+  List<Reaction> _pendingReactions = [];
+  bool _isRunningReactions = false;
 
   startBatch() {
     _batch++;
   }
 
   trackDerivation(Derivation d) {
-    var prevDerivation = currentDerivation;
-    currentDerivation = d;
+    var prevDerivation = trackingDerivation;
+    trackingDerivation = d;
 
     resetDerivationState(d);
-    d.execute();
+    d.onBecomeStale();
 
-    currentDerivation = prevDerivation;
+    trackingDerivation = prevDerivation;
     bindDependencies(d);
   }
 
   reportObserved(Atom atom) {
-    var derivation = currentDerivation;
+    var derivation = trackingDerivation;
 
     if (derivation != null) {
-      derivation.newObserving.add(atom);
+      derivation.newObservables.add(atom);
     }
   }
 
   endBatch() {
     if (--_batch == 0) {
-      _runReactions();
+      runReactions();
     }
   }
 
   resetDerivationState(Derivation d) {
-    d.newObserving = Set();
+    d.newObservables = Set();
   }
 
   bindDependencies(Derivation d) {
-    var oldObservables = d.observing.intersection(d.newObserving);
-    var staleObservables = d.observing.difference(d.newObserving);
-    var newObservables = d.newObserving.difference(d.observing);
+    var oldObservables = d.observables.intersection(d.newObservables);
+    var staleObservables = d.observables.difference(d.newObservables);
+    var newObservables = d.newObservables.difference(d.observables);
 
     for (var ob in staleObservables) {
       ob.removeObserver(d);
@@ -51,10 +54,33 @@ class _GlobalState {
       ob.addObserver(d);
     }
 
-    d.observing = oldObservables.union(newObservables);
+    d.observables = oldObservables.union(newObservables);
   }
 
-  _runReactions() {}
+  enqueueReaction(Reaction reaction) {
+    _pendingReactions.add(reaction);
+  }
+
+  runReactions() {
+    if (_batch > 0 || _isRunningReactions) {
+      return;
+    }
+
+    _isRunningReactions = true;
+
+    var allReactions = _pendingReactions.toList(growable: false);
+    for (var reaction in allReactions) {
+      reaction.execute();
+    }
+
+    _isRunningReactions = false;
+  }
+
+  propagateChanged(Atom atom) {
+    for (var observer in atom.observers) {
+      observer.onBecomeStale();
+    }
+  }
 }
 
 var global = _GlobalState();
