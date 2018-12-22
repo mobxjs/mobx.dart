@@ -4,9 +4,13 @@ import 'package:mobx/src/reaction.dart';
 class _GlobalState {
   int _batch = 0;
 
+  static int _nextIdCounter = 0;
+
   Derivation trackingDerivation;
   List<Reaction> _pendingReactions = [];
   bool _isRunningReactions = false;
+
+  get nextId => ++_nextIdCounter;
 
   startBatch() {
     _batch++;
@@ -70,7 +74,7 @@ class _GlobalState {
 
     var allReactions = _pendingReactions.toList(growable: false);
     for (var reaction in allReactions) {
-      reaction.execute();
+      reaction.run();
     }
 
     _isRunningReactions = false;

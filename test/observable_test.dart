@@ -28,7 +28,7 @@ void main() {
     var c = ObservableValue.of('counter', 0);
     int nextValue;
 
-    Reaction('reaction', () {
+    Reaction(() {
       nextValue = c.value + 1;
     }).schedule();
 
@@ -36,5 +36,24 @@ void main() {
 
     c.value = 10;
     expect(nextValue, equals(11));
+  });
+
+  test('Reaction with 2 observables', () {
+    var x = ObservableValue.of('greeting', 'Hello');
+    var y = ObservableValue.of('name', 'Pavan');
+    String message;
+
+    var reaction = Reaction(() {
+      message = "${x.value} ${y.value}";
+    });
+
+    reaction.schedule();
+
+    expect(message, equals("Hello Pavan"));
+
+    x.value = "Hey";
+    expect(message, equals("Hey Pavan"));
+    y.value = "MobX";
+    expect(message, equals("Hey MobX"));
   });
 }

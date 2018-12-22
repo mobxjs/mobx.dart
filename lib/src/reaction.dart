@@ -22,14 +22,17 @@ class Reaction implements Derivation {
   @override
   Set<Atom> observables;
 
-  Reaction(this.name, this._onInvalidate);
+  Reaction(onInvalidate, {String name}) {
+    this.name = name ?? "Reaction@${global.nextId}";
+    _onInvalidate = onInvalidate;
+  }
 
   @override
   void onBecomeStale() {
     schedule();
   }
 
-  execute() {
+  run() {
     global.startBatch();
     _onInvalidate();
     global.endBatch();
