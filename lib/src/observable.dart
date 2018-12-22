@@ -1,4 +1,5 @@
 import 'package:mobx/src/global_state.dart';
+import 'package:mobx/src/reaction.dart';
 
 class Atom {
   String name;
@@ -20,14 +21,6 @@ class Atom {
   removeObserver(Derivation d) {
     observers.removeWhere((ob) => ob == d);
   }
-}
-
-abstract class Derivation {
-  String name;
-  Set<Atom> observing;
-  Set<Atom> newObserving;
-
-  void execute() {}
 }
 
 class ObservableValue<T> extends Atom {

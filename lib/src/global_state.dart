@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:mobx/src/reaction.dart';
 
 class _GlobalState {
   int _batch = 0;
