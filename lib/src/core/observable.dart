@@ -1,5 +1,5 @@
-import 'package:mobx/src/global_state.dart';
-import 'package:mobx/src/reaction.dart';
+import 'package:mobx/src/core/global_state.dart';
+import 'package:mobx/src/core/reaction.dart';
 
 class Atom {
   String name;

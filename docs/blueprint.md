@@ -1,4 +1,4 @@
-# The MobX Specification
+# Implementation Blueprint
 
 This document outlines the core behaviors of MobX that need to be implemented for an effective reactive system.
 
@@ -20,6 +20,8 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 
 - Reactions are scheduled with a sync-scheduler or debounced with a timer-based scheduler
 - They are reactions with not output value and only cause side-effects
+- Handle exceptions and report them back with global handlers
+- Can dispose
 
 ### Global Tracker
 

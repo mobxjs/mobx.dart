@@ -1,12 +1,12 @@
-import 'package:mobx/src/observable.dart';
-import 'package:mobx/src/reaction.dart';
+import 'package:mobx/src/core/observable.dart';
+import 'package:mobx/src/core/reaction.dart';
 
 class _GlobalState {
   int _batch = 0;
 
   static int _nextIdCounter = 0;
 
-  Derivation trackingDerivation;
+  Derivation _trackingDerivation;
   List<Reaction> _pendingReactions = [];
   bool _isRunningReactions = false;
   List<Atom> _pendingUnobservations = [];
@@ -17,19 +17,21 @@ class _GlobalState {
     _batch++;
   }
 
-  trackDerivation(Derivation d) {
-    var prevDerivation = trackingDerivation;
-    trackingDerivation = d;
+  T trackDerivation<T>(Derivation d, T Function() fn) {
+    var prevDerivation = _trackingDerivation;
+    _trackingDerivation = d;
 
-    resetDerivationState(d);
-    d.onBecomeStale();
+    _resetDerivationState(d);
+    var result = fn();
 
-    trackingDerivation = prevDerivation;
+    _trackingDerivation = prevDerivation;
     bindDependencies(d);
+
+    return result;
   }
 
   reportObserved(Atom atom) {
-    var derivation = trackingDerivation;
+    var derivation = _trackingDerivation;
 
     if (derivation != null) {
       derivation.newObservables.add(atom);
@@ -46,10 +48,6 @@ class _GlobalState {
 
       _pendingUnobservations.clear();
     }
-  }
-
-  resetDerivationState(Derivation d) {
-    d.newObservables = Set();
   }
 
   bindDependencies(Derivation d) {
@@ -109,6 +107,10 @@ class _GlobalState {
 
     atom.isPendingUnobservation = true;
     _pendingUnobservations.add(atom);
+  }
+
+  _resetDerivationState(Derivation d) {
+    d.newObservables = Set();
   }
 }
 

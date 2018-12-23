@@ -1,6 +1,6 @@
-import 'package:mobx/src/global_state.dart';
-import 'package:mobx/src/observable.dart';
-import 'package:mobx/src/reaction.dart';
+import 'package:mobx/src/core/global_state.dart';
+import 'package:mobx/src/core/observable.dart';
+import 'package:mobx/src/core/reaction.dart';
 
 class ComputedValue<T> extends Atom implements Derivation {
   @override
@@ -30,7 +30,7 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   computeValue(bool track) {
     if (track) {
-      global.trackDerivation(this);
+      _value = global.trackDerivation(this, this._fn);
     } else {
       onBecomeStale();
     }

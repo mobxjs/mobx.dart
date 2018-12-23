@@ -1,6 +1,6 @@
-import 'package:mobx/src/computed.dart';
-import 'package:mobx/src/observable.dart';
-import 'package:mobx/src/reaction.dart';
+import 'package:mobx/src/core/computed.dart';
+import 'package:mobx/src/core/observable.dart';
+import 'package:mobx/src/core/reaction.dart';
 import "package:test/test.dart";
 
 void main() {
@@ -28,14 +28,18 @@ void main() {
     var c = ObservableValue.of('counter', 0);
     int nextValue;
 
-    Reaction(() {
+    var r = Reaction(() {
       nextValue = c.value + 1;
-    }).schedule();
+    });
+
+    r.schedule();
 
     expect(nextValue, equals(1));
 
     c.value = 10;
     expect(nextValue, equals(11));
+
+    r.dispose();
   });
 
   test('Reaction with 2 observables', () {
@@ -55,5 +59,26 @@ void main() {
     expect(message, equals("Hey Pavan"));
     y.value = "MobX";
     expect(message, equals("Hey MobX"));
+
+    reaction.dispose();
+  });
+
+  test('Reaction with changing observables', () {
+    var x = ObservableValue.of('x', 10);
+    var y = ObservableValue.of('y', 20);
+    int value;
+
+    var reaction = Reaction(() {
+      value = (value == null) ? x.value : y.value;
+    });
+
+    reaction.schedule();
+
+    expect(value, equals(10));
+    x.value = 30;
+
+    expect(value, equals(20)); // Should use y now
+
+    reaction.dispose();
   });
 }

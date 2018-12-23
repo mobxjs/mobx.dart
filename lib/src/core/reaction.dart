@@ -1,5 +1,5 @@
-import 'package:mobx/src/global_state.dart';
-import 'package:mobx/src/observable.dart';
+import 'package:mobx/src/core/global_state.dart';
+import 'package:mobx/src/core/observable.dart';
 
 abstract class Derivation {
   String name;
@@ -22,7 +22,7 @@ class Reaction implements Derivation {
   Set<Atom> newObservables;
 
   @override
-  Set<Atom> observables;
+  Set<Atom> observables = Set();
 
   Reaction(onInvalidate, {String name}) {
     this.name = name ?? "Reaction@${global.nextId}";
@@ -34,7 +34,19 @@ class Reaction implements Derivation {
     schedule();
   }
 
-  track() {}
+  track(void Function() fn) {
+    global.startBatch();
+
+    _isRunning = true;
+    global.trackDerivation(this, fn);
+    _isRunning = false;
+
+    if (_isDisposed) {
+      global.clearObservables(this);
+    }
+
+    global.endBatch();
+  }
 
   run() {
     if (_isDisposed) {
@@ -42,7 +54,11 @@ class Reaction implements Derivation {
     }
 
     global.startBatch();
+
+    _isScheduled = false;
+
     _onInvalidate();
+
     global.endBatch();
   }
 
