@@ -4,7 +4,11 @@ import 'package:mobx/src/reaction.dart';
 class Atom {
   String name;
 
+  bool isPendingUnobservation = false;
+
   Atom(String this.name);
+
+  Set<Derivation> observers = Set();
 
   reportObserved() {
     global.reportObserved(this);
@@ -16,14 +20,15 @@ class Atom {
     global.endBatch();
   }
 
-  Set<Derivation> observers = Set();
-
   addObserver(Derivation d) {
     observers.add(d);
   }
 
   removeObserver(Derivation d) {
     observers.removeWhere((ob) => ob == d);
+    if (observers.isEmpty) {
+      global.enqueueForUnobservation(this);
+    }
   }
 }
 

@@ -9,6 +9,7 @@ class _GlobalState {
   Derivation trackingDerivation;
   List<Reaction> _pendingReactions = [];
   bool _isRunningReactions = false;
+  List<Atom> _pendingUnobservations = [];
 
   get nextId => ++_nextIdCounter;
 
@@ -38,6 +39,12 @@ class _GlobalState {
   endBatch() {
     if (--_batch == 0) {
       runReactions();
+
+      for (var ob in _pendingUnobservations) {
+        ob.isPendingUnobservation = false;
+      }
+
+      _pendingUnobservations.clear();
     }
   }
 
@@ -84,6 +91,24 @@ class _GlobalState {
     for (var observer in atom.observers) {
       observer.onBecomeStale();
     }
+  }
+
+  clearObservables(Derivation derivation) {
+    var observables = derivation.observables;
+    derivation.observables = Set();
+
+    for (var x in observables) {
+      x.removeObserver(derivation);
+    }
+  }
+
+  void enqueueForUnobservation(Atom atom) {
+    if (atom.isPendingUnobservation) {
+      return;
+    }
+
+    atom.isPendingUnobservation = true;
+    _pendingUnobservations.add(atom);
   }
 }
 

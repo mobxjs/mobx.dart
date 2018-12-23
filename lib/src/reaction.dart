@@ -12,6 +12,8 @@ abstract class Derivation {
 class Reaction implements Derivation {
   void Function() _onInvalidate;
   bool _isScheduled = false;
+  bool _isDisposed = false;
+  bool _isRunning = false;
 
   @override
   String name;
@@ -32,13 +34,33 @@ class Reaction implements Derivation {
     schedule();
   }
 
+  track() {}
+
   run() {
+    if (_isDisposed) {
+      return;
+    }
+
     global.startBatch();
     _onInvalidate();
     global.endBatch();
   }
 
-  dispose() {}
+  dispose() {
+    if (_isDisposed) {
+      return;
+    }
+
+    _isDisposed = true;
+
+    if (_isRunning) {
+      return;
+    }
+
+    global.startBatch();
+    global.clearObservables(this);
+    global.endBatch();
+  }
 
   schedule() {
     if (_isScheduled) {
