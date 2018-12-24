@@ -19,7 +19,7 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 ### Reaction
 
 - Reactions are scheduled with a sync-scheduler or debounced with a timer-based scheduler
-- They are reactions with not output value and only cause side-effects
+- They are derivations with no output value and only cause side-effects
 - Handle exceptions and report them back with global handlers
 - Can dispose
 
@@ -29,9 +29,16 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 - Determine the underlying dependencies when derivations are executed
 - Keeps track of current derivation
 - Keeps track of the nesting depth and use that to executed affected reactions
+- Works in a transactional manner for executing pending reactions
 
 ### Action
 
 ## API
 
 - Convenience layer to provide programmer friendly interface to the Core Actors and behaviors
+
+### Cross cutting layers
+
+- Memoization of computation with DependencyState
+- Spying and Traceability
+- Exception handling and propagation

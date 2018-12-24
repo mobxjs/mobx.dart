@@ -51,19 +51,18 @@ class _GlobalState {
   }
 
   bindDependencies(Derivation d) {
-    var oldObservables = d.observables.intersection(d.newObservables);
     var staleObservables = d.observables.difference(d.newObservables);
     var newObservables = d.newObservables.difference(d.observables);
-
-    for (var ob in staleObservables) {
-      ob.removeObserver(d);
-    }
 
     for (var ob in newObservables) {
       ob.addObserver(d);
     }
 
-    d.observables = oldObservables.union(newObservables);
+    for (var ob in staleObservables) {
+      ob.removeObserver(d);
+    }
+
+    d.observables = d.newObservables;
   }
 
   enqueueReaction(Reaction reaction) {
@@ -77,11 +76,11 @@ class _GlobalState {
 
     _isRunningReactions = true;
 
-    var allReactions = _pendingReactions.toList(growable: false);
-    for (var reaction in allReactions) {
+    for (var reaction in _pendingReactions) {
       reaction.run();
     }
 
+    _pendingReactions = [];
     _isRunningReactions = false;
   }
 
