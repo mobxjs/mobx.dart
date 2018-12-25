@@ -35,9 +35,9 @@ class Atom {
 class ObservableValue<T> extends Atom {
   T _value;
 
-  ObservableValue(String name) : super(name);
-
-  ObservableValue.of(String name, this._value) : super(name);
+  ObservableValue(value, {String name}) : super(name) {
+    this._value = value;
+  }
 
   T get value {
     reportObserved();

@@ -57,7 +57,9 @@ class Reaction implements Derivation {
 
     _isScheduled = false;
 
-    _onInvalidate();
+    if (global.shouldCompute(this)) {
+      _onInvalidate();
+    }
 
     global.endBatch();
   }
@@ -84,7 +86,7 @@ class Reaction implements Derivation {
     }
 
     _isScheduled = true;
-    global.enqueueReaction(this);
+    global.addPendingReaction(this);
     global.runReactions();
   }
 }

@@ -65,7 +65,7 @@ class _GlobalState {
     d.observables = d.newObservables;
   }
 
-  enqueueReaction(Reaction reaction) {
+  addPendingReaction(Reaction reaction) {
     _pendingReactions.add(reaction);
   }
 
@@ -110,6 +110,10 @@ class _GlobalState {
 
   _resetDerivationState(Derivation d) {
     d.newObservables = Set();
+  }
+
+  bool shouldCompute(Reaction reaction) {
+    return true;
   }
 }
 
