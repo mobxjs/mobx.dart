@@ -12,11 +12,25 @@ void main() {
     expect(x.value, equals(100));
 
     var str = observable('hello');
-    expect(str is ObservableValue<String>, equals(true));
+    expect(str is ObservableValue<String>, isTrue);
     expect(str.value, equals('hello'));
 
     str.value = 'mobx';
     expect(str.value, equals('mobx'));
+  });
+
+  test('Raw observables', () {
+    var x = ObservableValue(1000);
+    expect(x is ObservableValue<int>, isTrue);
+
+    expect(x.value, equals(1000));
+
+    var x1 = ObservableValue<int>(null);
+    expect(x1.value, isNull);
+
+    var y = ObservableValue('Hello', name: 'greeting');
+    expect(y.value, equals('Hello'));
+    expect(y.name, equals('greeting'));
   });
 
   test('Computed value', () {

@@ -35,7 +35,7 @@ class Atom {
 class ObservableValue<T> extends Atom {
   T _value;
 
-  ObservableValue(value, {String name}) : super(name) {
+  ObservableValue(T value, {String name}) : super(name) {
     this._value = value;
   }
 
