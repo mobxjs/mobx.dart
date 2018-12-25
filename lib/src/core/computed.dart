@@ -1,6 +1,5 @@
-import 'package:mobx/src/core/global_state.dart';
-import 'package:mobx/src/core/observable.dart';
-import 'package:mobx/src/core/reaction.dart';
+import 'package:mobx/src/core/base_types.dart';
+import 'package:mobx/src/utils.dart';
 
 class ComputedValue<T> extends Atom implements Derivation {
   @override
@@ -9,10 +8,18 @@ class ComputedValue<T> extends Atom implements Derivation {
   @override
   Set<Atom> newObservables;
 
-  T _value;
-
   @override
   T Function() _fn;
+
+  @override
+  DerivationState dependenciesState = DerivationState.NOT_TRACKING;
+
+  @override
+  bool get isAComputedValue => true;
+
+  T _value;
+
+  bool _isComputing = false;
 
   ComputedValue(
     String name,
@@ -20,24 +27,67 @@ class ComputedValue<T> extends Atom implements Derivation {
   ) : super(name);
 
   T get value {
-    global.startBatch();
-    computeValue(true);
-    global.endBatch();
+    if (_isComputing) {
+      fail('Cycle detected in computation ${name}: ${_fn}');
+    }
 
-    reportObserved();
+    if (!global.isInBatch() && observers.isEmpty) {
+      if (global.shouldCompute(this)) {
+        global.startBatch();
+        _value = computeValue(false);
+        global.endBatch();
+      }
+    } else {
+      reportObserved();
+      if (global.shouldCompute(this)) {
+        if (_trackAndCompute()) {
+          global.propagateChangeConfirmed(this);
+        }
+      }
+    }
+
     return _value;
   }
 
-  computeValue(bool track) {
+  T computeValue(bool track) {
+    _isComputing = true;
+    global.computationDepth++;
+
+    T value;
     if (track) {
-      _value = global.trackDerivation(this, this._fn);
+      value = global.trackDerivation(this, this._fn);
     } else {
-      onBecomeStale();
+      value = _fn();
     }
+
+    global.computationDepth--;
+    _isComputing = false;
+
+    return value;
+  }
+
+  suspend() {
+    global.clearObservables(this);
+    _value = null;
   }
 
   @override
   void onBecomeStale() {
-    _value = _fn();
+    global.propagatePossiblyChanged(this);
+  }
+
+  bool _trackAndCompute() {
+    var oldValue = _value;
+    var wasSuspended = dependenciesState == DerivationState.NOT_TRACKING;
+
+    var newValue = computeValue(true);
+
+    var changed = wasSuspended || (oldValue != newValue);
+
+    if (changed) {
+      _value = newValue;
+    }
+
+    return changed;
   }
 }

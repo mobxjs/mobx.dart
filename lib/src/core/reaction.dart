@@ -1,13 +1,4 @@
-import 'package:mobx/src/core/global_state.dart';
-import 'package:mobx/src/core/observable.dart';
-
-abstract class Derivation {
-  String name;
-  Set<Atom> observables;
-  Set<Atom> newObservables;
-
-  void onBecomeStale() {}
-}
+import 'package:mobx/src/core/base_types.dart';
 
 class Reaction implements Derivation {
   void Function() _onInvalidate;
@@ -23,6 +14,12 @@ class Reaction implements Derivation {
 
   @override
   Set<Atom> observables = Set();
+
+  @override
+  DerivationState dependenciesState = DerivationState.NOT_TRACKING;
+
+  @override
+  bool get isAComputedValue => false;
 
   Reaction(onInvalidate, {String name}) {
     this.name = name ?? "Reaction@${global.nextId}";

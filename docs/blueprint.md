@@ -18,6 +18,7 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 ### ComputedValue<T>
 
 - Is an observable which derives its value from a set of dependent observables
+- Compare values structurally or as scalars
 
 ### Reaction
 

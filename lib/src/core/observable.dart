@@ -1,36 +1,4 @@
-import 'package:mobx/src/core/global_state.dart';
-import 'package:mobx/src/core/reaction.dart';
-
-class Atom {
-  String name;
-
-  bool isPendingUnobservation = false;
-
-  Atom(String this.name);
-
-  Set<Derivation> observers = Set();
-
-  reportObserved() {
-    global.reportObserved(this);
-  }
-
-  reportChanged() {
-    global.startBatch();
-    global.propagateChanged(this);
-    global.endBatch();
-  }
-
-  addObserver(Derivation d) {
-    observers.add(d);
-  }
-
-  removeObserver(Derivation d) {
-    observers.removeWhere((ob) => ob == d);
-    if (observers.isEmpty) {
-      global.enqueueForUnobservation(this);
-    }
-  }
-}
+import 'package:mobx/src/core/base_types.dart';
 
 class ObservableValue<T> extends Atom {
   T _value;
