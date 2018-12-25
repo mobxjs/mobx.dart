@@ -60,17 +60,15 @@ class GlobalState {
     var lowestNewDerivationState = DerivationState.UP_TO_DATE;
 
     // Add newly found observables
-    for (var ob in newObservables) {
-      ob.addObserver(d);
+    for (var observable in newObservables) {
+      observable.addObserver(d);
 
-      // ComputedValue is a possible derivation
-      if (ob is! Derivation) {
-        continue;
-      }
-
-      var drv = ob as Derivation;
-      if (drv.dependenciesState.index > lowestNewDerivationState.index) {
-        lowestNewDerivationState = drv.dependenciesState;
+      // ComputedValue = ObservableValue + Derivation
+      if (observable is Derivation) {
+        var drv = observable as Derivation;
+        if (drv.dependenciesState.index > lowestNewDerivationState.index) {
+          lowestNewDerivationState = drv.dependenciesState;
+        }
       }
     }
 

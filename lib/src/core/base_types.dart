@@ -43,6 +43,7 @@ abstract class Derivation {
   String name;
   Set<Atom> observables;
   Set<Atom> newObservables;
+
   DerivationState dependenciesState;
 
   bool get isAComputedValue;
