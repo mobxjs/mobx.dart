@@ -4,7 +4,7 @@ import 'package:mobx/src/api/reaction.dart';
 import 'package:test/test.dart';
 
 main() {
-  test('Action', () {
+  test('Action basics work', () {
     var a = action((String name, String value) {
       expect(name, equals('name'));
       expect(value, equals('MobX'));
@@ -92,5 +92,16 @@ main() {
     expect(total, equals(41)); // total should still be 11 + 30
 
     d();
+  });
+
+  test('Action can be invoked with named args', () {
+    String message;
+
+    var a = action(({String name, String value}) {
+      message = '${name}: ${value}';
+    });
+
+    a([], {'name': 'Hello', 'value': 'MobX'});
+    expect(message, equals('Hello: MobX'));
   });
 }

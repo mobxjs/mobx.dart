@@ -1,5 +1,4 @@
 import 'package:mobx/src/api/observable.dart';
-import 'package:mobx/src/core/computed.dart';
 import 'package:mobx/src/core/observable.dart';
 import "package:test/test.dart";
 
@@ -31,17 +30,5 @@ void main() {
     var y = ObservableValue('Hello', name: 'greeting');
     expect(y.value, equals('Hello'));
     expect(y.name, equals('greeting'));
-  });
-
-  test('Computed value', () {
-    var x = observable(20);
-    var y = observable(10);
-    var c = ComputedValue<int>('counter', () {
-      return x.value + y.value;
-    });
-
-    x.value = 30;
-    y.value = 20;
-    expect(c.value, equals(50));
   });
 }

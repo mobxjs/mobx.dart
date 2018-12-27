@@ -1,3 +1,4 @@
+import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/base_types.dart';
 import 'package:mobx/src/core/reaction.dart';
 
@@ -46,7 +47,8 @@ class GlobalState {
     if (--_batch == 0) {
       runReactions();
 
-      for (var ob in _pendingUnobservations) {
+      for (var i = 0; i < _pendingUnobservations.length; i++) {
+        var ob = _pendingUnobservations[i];
         ob.isPendingUnobservation = false;
 
         if (ob.observers.isEmpty) {
@@ -57,7 +59,7 @@ class GlobalState {
         }
       }
 
-      _pendingUnobservations.clear();
+      _pendingUnobservations = [];
     }
   }
 
@@ -199,29 +201,33 @@ class GlobalState {
         return true;
 
       case DerivationState.POSSIBLY_STALE:
-        var prevTracked = untrackedStart();
+        return untracked(() {
+          for (var obs in derivation.observables) {
+            if (_isComputedValue(obs)) {
+              // Force a computation
+              // Must work without any type-errors as we are dealing with a ComputedValue<T>
+              (obs as dynamic).value;
 
-        for (var obs in derivation.observables) {
-          if (derivation.isAComputedValue) {
-            // Force a computation
-            (obs as dynamic)
-                .value; // Must work without any type-errors as we are dealing with a ComputedValue<T>
-
-            if (derivation.dependenciesState == DerivationState.STALE) {
-              untrackedEnd(prevTracked);
-              return true;
+              if (derivation.dependenciesState == DerivationState.STALE) {
+                return true;
+              }
             }
           }
-        }
 
-        resetDerivationState(derivation);
-        untrackedEnd(prevTracked);
-        return false;
+          resetDerivationState(derivation);
+          return false;
+        });
     }
+
+    return false;
   }
 
   bool isInBatch() {
     return _batch > 0;
+  }
+
+  bool isComputingDerivation() {
+    return _trackingDerivation != null;
   }
 
   untrackedStart() {
@@ -232,5 +238,13 @@ class GlobalState {
 
   untrackedEnd(Derivation prevDerivation) {
     _trackingDerivation = prevDerivation;
+  }
+
+  bool _isComputedValue(dynamic obj) {
+    if (obj is Derivation) {
+      return obj.isAComputedValue;
+    }
+
+    return false;
   }
 }

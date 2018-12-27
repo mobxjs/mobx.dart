@@ -8,7 +8,6 @@ class ComputedValue<T> extends Atom implements Derivation {
   @override
   Set<Atom> newObservables;
 
-  @override
   T Function() _fn;
 
   @override
@@ -21,10 +20,9 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   bool _isComputing = false;
 
-  ComputedValue(
-    String name,
-    this._fn,
-  ) : super(name);
+  ComputedValue(T Function() fn, {String name}) : super(name) {
+    this._fn = fn;
+  }
 
   T get value {
     if (_isComputing) {
