@@ -66,6 +66,7 @@ class ComputedValue<T> extends Atom implements Derivation {
     return value;
   }
 
+  @override
   suspend() {
     global.clearObservables(this);
     _value = null;
@@ -82,12 +83,16 @@ class ComputedValue<T> extends Atom implements Derivation {
 
     var newValue = computeValue(true);
 
-    var changed = wasSuspended || (oldValue != newValue);
+    var changed = wasSuspended || !_isEqual(oldValue, newValue);
 
     if (changed) {
       _value = newValue;
     }
 
     return changed;
+  }
+
+  bool _isEqual(T x, T y) {
+    return x == y;
   }
 }

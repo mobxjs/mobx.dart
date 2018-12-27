@@ -48,7 +48,8 @@ abstract class Derivation {
 
   bool get isAComputedValue;
 
-  void onBecomeStale() {}
+  onBecomeStale() {}
+  suspend() {}
 }
 
 var global = GlobalState();

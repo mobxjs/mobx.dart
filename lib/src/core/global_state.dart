@@ -48,6 +48,13 @@ class GlobalState {
 
       for (var ob in _pendingUnobservations) {
         ob.isPendingUnobservation = false;
+
+        if (ob.observers.isEmpty) {
+          if (ob is Derivation) {
+            // An Atom that is also a Derivation is a ComputedValue
+            (ob as Derivation).suspend();
+          }
+        }
       }
 
       _pendingUnobservations.clear();

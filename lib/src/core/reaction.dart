@@ -86,4 +86,9 @@ class Reaction implements Derivation {
     global.addPendingReaction(this);
     global.runReactions();
   }
+
+  @override
+  suspend() {
+    // Not applicable right now
+  }
 }
