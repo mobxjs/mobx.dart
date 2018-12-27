@@ -22,9 +22,9 @@
 ### Reactions 
 
 - [x] Create `Reaction` with `autorun()`
-- [x] Create `Reaction` with `reaction()`
-- [x] Create `Reaction` with `when()`
-- [x] Create `Reaction` with `when()` returning `Future<T>`
+- [ ] Create `Reaction` with `reaction()`
+- [ ] Create `Reaction` with `when()`
+- [ ] Create `Reaction` with `when()` returning `Future<T>`
  
 
 ### Actions 
