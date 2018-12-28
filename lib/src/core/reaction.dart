@@ -21,6 +21,8 @@ class Reaction implements Derivation {
   @override
   bool get isAComputedValue => false;
 
+  get isDisposed => _isDisposed;
+
   Reaction(onInvalidate, {String name}) {
     this.name = name ?? "Reaction@${global.nextId}";
     _onInvalidate = onInvalidate;

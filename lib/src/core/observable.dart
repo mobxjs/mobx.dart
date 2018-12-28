@@ -4,6 +4,7 @@ class ObservableValue<T> extends Atom {
   T _value;
 
   ObservableValue(T value, {String name}) : super(name) {
+    this.name = name ?? 'Observable@${global.nextId}';
     this._value = value;
   }
 

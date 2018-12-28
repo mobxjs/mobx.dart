@@ -22,7 +22,9 @@
 ### Reactions 
 
 - [x] Create `Reaction` with `autorun()`
+    - [x] with delay
 - [ ] Create `Reaction` with `reaction()`
+    - [ ] with delay
 - [ ] Create `Reaction` with `when()`
 - [ ] Create `Reaction` with `when()` returning `Future<T>`
  

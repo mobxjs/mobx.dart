@@ -21,6 +21,7 @@ class ComputedValue<T> extends Atom implements Derivation {
   bool _isComputing = false;
 
   ComputedValue(T Function() fn, {String name}) : super(name) {
+    this.name = name ?? 'Computed@${global.nextId}';
     this._fn = fn;
   }
 

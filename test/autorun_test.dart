@@ -1,3 +1,4 @@
+import 'package:fake_async/fake_async.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
 import "package:test/test.dart";
@@ -55,6 +56,36 @@ void main() {
     x.value = 30;
 
     expect(value, equals(20)); // Should use y now
+
+    dispose();
+  });
+
+  test('with delayed scheduler', () {
+    Function dispose;
+    const delayMs = 5000;
+
+    var x = observable(10);
+    var value = 0;
+
+    fakeAsync((async) {
+      dispose = autorun(() {
+        value = x.value + 1;
+      }, delay: delayMs);
+
+      async.elapse(Duration(milliseconds: 2500));
+
+      expect(value, 0); // autorun() should not have executed at this time
+
+      async.elapse(Duration(milliseconds: 2500));
+
+      expect(value, 11); // autorun() should have executed
+
+      x.value = 100;
+
+      expect(value, 11); // should still retain the last value
+      async.elapse(Duration(milliseconds: delayMs));
+      expect(value, 101); // should change now
+    });
 
     dispose();
   });

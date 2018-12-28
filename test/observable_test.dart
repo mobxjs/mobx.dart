@@ -10,9 +10,12 @@ void main() {
     x.value = 100;
     expect(x.value, equals(100));
 
-    var str = observable('hello');
+    expect(x.name, startsWith('Observable@'));
+
+    var str = observable('hello', name: 'greeting');
     expect(str is ObservableValue<String>, isTrue);
     expect(str.value, equals('hello'));
+    expect(str.name, equals('greeting'));
 
     str.value = 'mobx';
     expect(str.value, equals('mobx'));
