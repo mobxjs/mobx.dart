@@ -6,9 +6,13 @@ import 'package:mobx/src/core/reaction.dart';
 import 'package:mobx/src/utils.dart';
 
 class ReactionDisposer {
-  Reaction $mobx;
+  Reaction _rxn;
 
-  ReactionDisposer(this.$mobx);
+  Reaction get $mobx => _rxn;
+
+  ReactionDisposer(Reaction rxn) {
+    _rxn = rxn;
+  }
 
   call() => $mobx.dispose();
 }
@@ -60,7 +64,7 @@ ReactionDisposer autorun(Function fn, {String name, int delay}) {
   return ReactionDisposer(rxn);
 }
 
-ReactionDisposer reaction<T>(T predicate(), void effect(T),
+ReactionDisposer reaction<T>(T Function() predicate, void Function(T) effect,
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
 
@@ -112,8 +116,8 @@ ReactionDisposer reaction<T>(T predicate(), void effect(T),
 }
 
 ReactionDisposer when(
-  bool predicate(),
-  void effect(), {
+  bool Function() predicate,
+  void Function() effect, {
   String name,
 }) {
   ReactionDisposer disposer;
@@ -131,7 +135,7 @@ ReactionDisposer when(
   return disposer;
 }
 
-Future<void> asyncWhen(bool predicate(), {String name}) {
+Future<void> asyncWhen(bool Function() predicate, {String name}) {
   var completer = Completer<void>();
 
   var disposer = when(predicate, completer.complete, name: name);
