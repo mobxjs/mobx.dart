@@ -23,8 +23,7 @@ class Reaction implements Derivation {
 
   get isDisposed => _isDisposed;
 
-  Reaction(onInvalidate, {String name}) {
-    this.name = name ?? "Reaction@${global.nextId}";
+  Reaction(onInvalidate, {String this.name}) {
     _onInvalidate = onInvalidate;
   }
 

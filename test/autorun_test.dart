@@ -12,6 +12,7 @@ void main() {
       nextValue = c.value + 1;
     });
 
+    expect(dispose.$mobx.name, startsWith('Autorun@'));
     expect(nextValue, equals(1));
 
     c.value = 10;
@@ -31,9 +32,10 @@ void main() {
 
     var dispose = autorun(() {
       message = "${x.value} ${y.value}";
-    });
+    }, name: 'Message Effect');
 
     expect(message, equals("Hello Pavan"));
+    expect(dispose.$mobx.name, equals("Message Effect"));
 
     x.value = "Hey";
     expect(message, equals("Hey Pavan"));

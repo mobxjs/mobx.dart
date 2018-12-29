@@ -1,10 +1,17 @@
 import 'dart:async';
 
 import 'package:mobx/src/api/action.dart';
+import 'package:mobx/src/core/base_types.dart';
 import 'package:mobx/src/core/reaction.dart';
 import 'package:mobx/src/utils.dart';
 
-typedef ReactionDisposer = void Function();
+class ReactionDisposer {
+  Reaction $mobx;
+
+  ReactionDisposer(this.$mobx);
+
+  call() => $mobx.dispose();
+}
 
 /**
  * Executes the reaction whenever the dependent observables change.
@@ -16,11 +23,13 @@ typedef ReactionDisposer = void Function();
 ReactionDisposer autorun(Function fn, {String name, int delay}) {
   Reaction rxn;
 
+  var rxnName = name ?? 'Autorun@${global.nextId}';
+
   if (delay == null) {
     // Sync scheduler
     rxn = Reaction(() {
       rxn.track(fn);
-    }, name: name);
+    }, name: rxnName);
   } else {
     // Delayed scheduler
     var scheduler = createDelayedScheduler(delay);
@@ -44,18 +53,20 @@ ReactionDisposer autorun(Function fn, {String name, int delay}) {
           }
         });
       }
-    }, name: name);
+    }, name: rxnName);
   }
 
   rxn.schedule();
-  return rxn.dispose;
+  return ReactionDisposer(rxn);
 }
 
-ReactionDisposer reaction<T>(T Function() predicate, Function(T) effect,
+ReactionDisposer reaction<T>(T predicate(), void effect(T),
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
 
-  var effectAction = action((T value) => effect(value), name: name);
+  var rxnName = name ?? 'Reaction@${global.nextId}';
+  var effectAction =
+      action((T value) => effect(value), name: '${rxnName}-effect');
 
   var runSync = (delay == null);
   var scheduler = delay != null ? createDelayedScheduler(delay) : null;
@@ -94,8 +105,41 @@ ReactionDisposer reaction<T>(T Function() predicate, Function(T) effect,
       isScheduled = true;
       scheduler(reactionRunner);
     }
-  }, name: name);
+  }, name: rxnName);
 
   rxn.schedule();
-  return rxn.dispose;
+  return ReactionDisposer(rxn);
+}
+
+ReactionDisposer when(
+  bool predicate(),
+  void effect(), {
+  String name,
+}) {
+  ReactionDisposer disposer;
+
+  var rxnName = name ?? 'When@${global.nextId}';
+  var effectAction = action(effect, name: '${rxnName}-effect');
+
+  disposer = autorun(() {
+    if (predicate()) {
+      disposer();
+      effectAction();
+    }
+  }, name: rxnName);
+
+  return disposer;
+}
+
+Future<void> asyncWhen(bool predicate(), {String name}) {
+  var completer = Completer<void>();
+
+  var disposer = when(predicate, completer.complete, name: name);
+
+  completer.future.catchError((error) {
+    disposer();
+    throw error;
+  });
+
+  return completer.future;
 }
