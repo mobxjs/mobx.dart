@@ -10,7 +10,7 @@ class Action {
     this.name = name ?? 'Action@${global.nextId}';
   }
 
-  dynamic call([List args = const [], Map<String, dynamic> namedArgs]) {
+  call([List args = const [], Map<String, dynamic> namedArgs]) {
     var prevDerivation = _startAction();
 
     try {
@@ -39,6 +39,10 @@ class Action {
     global.endBatch();
     global.untrackedEnd(prevDerivation);
   }
+}
+
+runInAction(Function fn, {String name}) {
+  return Action(fn, name: name)();
 }
 
 /**

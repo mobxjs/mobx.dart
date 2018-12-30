@@ -20,6 +20,25 @@ class GlobalState {
     _batch++;
   }
 
+  endBatch() {
+    if (--_batch == 0) {
+      runReactions();
+
+      for (var i = 0; i < _pendingUnobservations.length; i++) {
+        var ob = _pendingUnobservations[i];
+        ob.isPendingUnobservation = false;
+
+        if (ob.observers.isEmpty) {
+          if (isComputedValue(ob)) {
+            (ob as Derivation).suspend();
+          }
+        }
+      }
+
+      _pendingUnobservations = [];
+    }
+  }
+
   T trackDerivation<T>(Derivation d, T Function() fn) {
     var prevDerivation = _trackingDerivation;
     _trackingDerivation = d;
@@ -43,26 +62,6 @@ class GlobalState {
     }
   }
 
-  endBatch() {
-    if (--_batch == 0) {
-      runReactions();
-
-      for (var i = 0; i < _pendingUnobservations.length; i++) {
-        var ob = _pendingUnobservations[i];
-        ob.isPendingUnobservation = false;
-
-        if (ob.observers.isEmpty) {
-          if (ob is Derivation) {
-            // An Atom that is also a Derivation is a ComputedValue
-            (ob as Derivation).suspend();
-          }
-        }
-      }
-
-      _pendingUnobservations = [];
-    }
-  }
-
   bindDependencies(Derivation d) {
     var staleObservables = d.observables.difference(d.newObservables);
     var newObservables = d.newObservables.difference(d.observables);
@@ -73,7 +72,7 @@ class GlobalState {
       observable.addObserver(d);
 
       // ComputedValue = ObservableValue + Derivation
-      if (observable is Derivation) {
+      if (isComputedValue(observable)) {
         var drv = observable as Derivation;
         if (drv.dependenciesState.index > lowestNewDerivationState.index) {
           lowestNewDerivationState = drv.dependenciesState;
@@ -203,7 +202,7 @@ class GlobalState {
       case DerivationState.POSSIBLY_STALE:
         return untracked(() {
           for (var obs in derivation.observables) {
-            if (_isComputedValue(obs)) {
+            if (isComputedValue(obs)) {
               // Force a computation
               // Must work without any type-errors as we are dealing with a ComputedValue<T>
               (obs as dynamic).value;
@@ -240,7 +239,7 @@ class GlobalState {
     _trackingDerivation = prevDerivation;
   }
 
-  bool _isComputedValue(dynamic obj) {
+  bool isComputedValue(dynamic obj) {
     if (obj is Derivation) {
       return obj.isAComputedValue;
     }

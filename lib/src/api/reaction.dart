@@ -5,6 +5,8 @@ import 'package:mobx/src/core/base_types.dart';
 import 'package:mobx/src/core/reaction.dart';
 import 'package:mobx/src/utils.dart';
 
+/// A callable class that is used to dispose a reaction, autorun or when
+///
 class ReactionDisposer {
   Reaction _rxn;
 
@@ -17,25 +19,24 @@ class ReactionDisposer {
   call() => $mobx.dispose();
 }
 
-/**
- * Executes the reaction whenever the dependent observables change.
- *
- * Optional configuration:
- * name: debug name for this reaction
- * delay: debouncing delay in milliseconds
- */
+/// Executes the reaction whenever the dependent observables change.
+///
+/// Optional configuration:
+/// [name]: debug name for this reaction
+/// [delay]: debouncing delay in milliseconds
+///
 ReactionDisposer autorun(Function fn, {String name, int delay}) {
   Reaction rxn;
 
   var rxnName = name ?? 'Autorun@${global.nextId}';
 
   if (delay == null) {
-    // Sync scheduler
+    // Use a sync-scheduler.
     rxn = Reaction(() {
       rxn.track(fn);
     }, name: rxnName);
   } else {
-    // Delayed scheduler
+    // Use a delayed scheduler.
     var scheduler = createDelayedScheduler(delay);
     var isScheduled = false;
     Timer timer;
