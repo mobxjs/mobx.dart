@@ -15,20 +15,21 @@ import 'package:mobx/src/utils.dart';
 /// dispose(); // dispose the autorun()
 /// ```
 ///
-/// In the above code, `dispose` is of type `ReactionDisposer`. It also includes a
-/// special property `$mobx`, that has a reference to the underlying reaction. Most
-/// of the time you won't need this, but it's good to have it for those special cases!
-/// MobX uses it internally for _unit-testing_ and other developer features like _spying_ and
-/// _tracing_.
+/// In the above code, `dispose` is of type `ReactionDisposer`.
 class ReactionDisposer {
   Reaction _rxn;
 
+  /// A special property that has a reference to the underlying reaction. Most
+  /// of the time you won't need this, but it's good to have it for those special cases!
+  /// MobX uses it internally for _unit-testing_ and other developer features like _spying_ and
+  /// _tracing_.
   Reaction get $mobx => _rxn;
 
   ReactionDisposer(Reaction rxn) {
     _rxn = rxn;
   }
 
+  /// Invoking it will dispose the underlying [reaction]
   call() => $mobx.dispose();
 }
 
@@ -95,6 +96,17 @@ ReactionDisposer autorun(Function fn, {String name, int delay}) {
   return ReactionDisposer(rxn);
 }
 
+/// Executes the [predicate] function and tracks the observables used in it. Returns
+/// a function to dispose the reaction.
+///
+/// The [predicate] is supposed to return a value of type T. When it changes, the
+/// [effect] function is executed.
+///
+/// *Note*: Only the [predicate] function is tracked and not the [effect].
+///
+/// You can also pass in an optional [name], a debouncing [delay] in milliseconds. Use
+/// [fireImmediately] if you want to invoke the effect immediately without waiting for
+/// the [predicate] to change its value.
 ReactionDisposer reaction<T>(T Function() predicate, void Function(T) effect,
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
@@ -146,6 +158,12 @@ ReactionDisposer reaction<T>(T Function() predicate, void Function(T) effect,
   return ReactionDisposer(rxn);
 }
 
+/// A one-time reaction that auto-disposes when the [predicate] becomes true. It also
+/// executes the [effect] when the predicate turns true.
+///
+/// You can read it as: "*when* [predicate()] turns true, the [effect()] is executed."
+///
+/// Returns a function to dispose pre-maturely.
 ReactionDisposer when(
   bool Function() predicate,
   void Function() effect, {
@@ -166,6 +184,14 @@ ReactionDisposer when(
   return disposer;
 }
 
+/// A variant of [when()] which returns a Future. The Future completes when the [predicate()] turns true.
+/// Note that there is no effect function here. Typically you would await on the Future and execute the
+/// effect after that.
+///
+/// ```
+/// await asyncWhen(() => x.value > 10);
+/// // ... execute the effect ...
+/// ```
 Future<void> asyncWhen(bool Function() predicate, {String name}) {
   var completer = Completer<void>();
 
