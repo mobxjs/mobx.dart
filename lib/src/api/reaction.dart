@@ -5,8 +5,21 @@ import 'package:mobx/src/core/base_types.dart';
 import 'package:mobx/src/core/reaction.dart';
 import 'package:mobx/src/utils.dart';
 
-/// A callable class that is used to dispose a reaction, autorun or when
+/// A callable class that is used to dispose a [reaction], [autorun] or [when]
 ///
+/// ```
+/// var dispose = autorun((){
+///   // ...
+/// });
+///
+/// dispose(); // dispose the autorun()
+/// ```
+///
+/// In the above code, `dispose` is of type `ReactionDisposer`. It also includes a
+/// special property `$mobx`, that has a reference to the underlying reaction. Most
+/// of the time you won't need this, but it's good to have it for those special cases!
+/// MobX uses it internally for _unit-testing_ and other developer features like _spying_ and
+/// _tracing_.
 class ReactionDisposer {
   Reaction _rxn;
 
@@ -19,12 +32,29 @@ class ReactionDisposer {
   call() => $mobx.dispose();
 }
 
-/// Executes the reaction whenever the dependent observables change.
+/// Executes the specified [fn], whenever the dependent observables change. It returns
+/// a disposer that can be used to dispose the autorun.
 ///
 /// Optional configuration:
-/// [name]: debug name for this reaction
-/// [delay]: debouncing delay in milliseconds
+/// * [name]: debug name for this reaction
+/// * [delay]: debouncing delay in milliseconds
 ///
+/// ```
+/// var x = observable(10);
+/// var y = observable(20);
+/// var total = observable(0);
+///
+/// var dispose = autorun((){
+///   print('x = ${x}, y = ${y}, total = ${total}');
+/// });
+///
+/// x.value = 20; // will cause autorun() to re-trigger.
+///
+/// dispose(); // This disposes the autorun() and will not be triggered again
+///
+/// x.value = 30; // Will not cause autorun() to re-trigger as it's disposed.
+/// ```
+
 ReactionDisposer autorun(Function fn, {String name, int delay}) {
   Reaction rxn;
 

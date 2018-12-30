@@ -21,7 +21,7 @@ ObservableValue<T> observable<T>(T initialValue, {String name}) {
 
 /// Creates a computed value with an optional [name].
 ///
-/// The passed in function: [fn] is used to give back the computed value.
+/// The passed in function: [fn], is used to give back the computed value.
 /// Computed values can depend on other observables and computed values!
 /// This makes them both an *observable* and an *observer*.
 /// Computed values are also referred to as _derived-values_ because they inherently _derive_ their
@@ -42,6 +42,10 @@ ObservableValue<T> observable<T>(T initialValue, {String name}) {
 ///
 /// print('total = ${total.value}'); // prints "total = 200"
 /// ```
+///
+/// A computed value is _cached_ and it recomputes only when the dependent observables actually
+/// change. This makes them fast and you are free to use them throughout your application. Internally
+/// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
 ComputedValue<T> computed<T>(T Function() fn, {String name}) {
   return ComputedValue(fn, name: name);
 }
