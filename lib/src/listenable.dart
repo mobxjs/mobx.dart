@@ -1,20 +1,10 @@
 import 'package:mobx/src/core/action.dart';
+import 'package:mobx/src/core/base_types.dart';
 
 abstract class Listenable {
   List<Function> changeListeners;
   Function observe<T>(void Function(ChangeNotification<T>) handler,
       {bool fireImmediately});
-}
-
-class ChangeNotification<T> {
-  /// One of add | update | delete
-  String type;
-
-  T oldValue;
-  T newValue;
-  Listenable object;
-
-  ChangeNotification({this.type, this.newValue, this.oldValue, this.object});
 }
 
 bool hasListeners(Listenable obj) {
@@ -33,7 +23,7 @@ Function registerListener(Listenable obj, Function handler) {
   };
 }
 
-notifyListeners(Listenable obj, ChangeNotification change) {
+notifyListeners<T>(Listenable obj, ChangeNotification<T> change) {
   untracked(() {
     if (obj.changeListeners == null) {
       return;
