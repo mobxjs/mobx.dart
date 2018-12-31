@@ -1,6 +1,6 @@
 # mobx
 
-![](doc/dart.png) + ![](doc/mobx.png)
+![](doc/mobx.png)
 
 [MobX](https://github.com/mobxjs/mobx) for the Dart language.
 
