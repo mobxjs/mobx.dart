@@ -26,8 +26,8 @@
 - [x] Create `Reaction` with `reaction()`
     - [x] with `delay`
     - [x] with `fireImmediately`
-- [ ] Create `Reaction` with `when()`
-- [ ] Create `Reaction` with `when()` returning `Future<T>`
+- [x] Create `Reaction` with `when()`
+- [x] Create `Reaction` with `when()` returning `Future<T>`
  
 
 ### Actions 
@@ -49,4 +49,3 @@
 - [ ] Logo
 - [ ] Documentation
 - [ ] Website (published on github.io)
-
