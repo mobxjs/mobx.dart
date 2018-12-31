@@ -1,5 +1,7 @@
 # mobx
 
+[![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
+
 ![](doc/mobx.png)
 
 [MobX](https://github.com/mobxjs/mobx) for the Dart language.
