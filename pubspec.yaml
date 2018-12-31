@@ -7,9 +7,7 @@ homepage: https://github.com/mobxjs/mobx.dart
 environment:
   sdk: '>=2.1.0 <3.0.0'
 
-dependencies:
-  coveralls: ^5.0.0
-
 dev_dependencies:
+  coveralls: ^5.0.0
   test: ^1.5.1
   fake_async: ^1.0.1
