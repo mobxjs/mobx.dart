@@ -1,3 +1,5 @@
+import 'package:mobx/mobx.dart';
+import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/base_types.dart';
 import 'package:mobx/src/utils.dart';
 
@@ -93,5 +95,27 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   bool _isEqual(T x, T y) {
     return x == y;
+  }
+
+  Function observe<T>(void Function(ChangeNotification<T>) handler,
+      {bool fireImmediately}) {
+    var firstTime = true;
+    T prevValue;
+
+    return autorun(() {
+      var newValue = this.value as T;
+      if (firstTime == true || fireImmediately == true) {
+        untracked(() {
+          handler(ChangeNotification(
+              type: 'update',
+              object: this,
+              oldValue: prevValue,
+              newValue: newValue));
+        });
+      }
+
+      firstTime = false;
+      prevValue = newValue;
+    });
   }
 }

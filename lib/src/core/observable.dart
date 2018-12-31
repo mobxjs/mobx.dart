@@ -1,7 +1,8 @@
 import 'package:mobx/src/core/base_types.dart';
+import 'package:mobx/src/interceptable.dart';
 import 'package:mobx/src/listenable.dart';
 
-class ObservableValue<T> extends Atom implements Listenable {
+class ObservableValue<T> extends Atom implements Listenable, Interceptable {
   T _value;
 
   ObservableValue(T value, {String name}) : super(name) {
@@ -16,14 +17,38 @@ class ObservableValue<T> extends Atom implements Listenable {
 
   set value(T value) {
     var oldValue = _value;
-    _value = value;
+    var newValue = _prepareNewValue(value);
+
+    if (newValue == WillChangeNotification.UNCHANGED) {
+      return;
+    }
+
+    _value = newValue as T;
+
     reportChanged();
 
     if (hasListeners(this)) {
-      var change = ChangeNotification(
+      var change = ChangeNotification<T>(
           newValue: value, oldValue: oldValue, type: 'update', object: this);
-      notifyListeners(this, change);
+      notifyListeners<T>(this, change);
     }
+  }
+
+  dynamic _prepareNewValue(T newValue) {
+    if (hasInterceptors(this)) {
+      var change = interceptChange(
+          this,
+          WillChangeNotification(
+              newValue: newValue, type: 'update', object: this));
+
+      if (change == null) {
+        return WillChangeNotification.UNCHANGED;
+      }
+
+      newValue = change.newValue;
+    }
+
+    return (newValue != _value) ? newValue : WillChangeNotification.UNCHANGED;
   }
 
   // Listenable ------
@@ -39,5 +64,15 @@ class ObservableValue<T> extends Atom implements Listenable {
     }
 
     return registerListener(this, handler);
+  }
+
+  // Interceptable ----------
+  @override
+  List<Function> interceptors;
+
+  @override
+  Function intercept<T>(
+      WillChangeNotification<T> Function(WillChangeNotification<T>) handler) {
+    return registerInterceptor(this, handler);
   }
 }

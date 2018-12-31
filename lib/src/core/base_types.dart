@@ -73,4 +73,28 @@ abstract class Derivation {
   suspend() {}
 }
 
+class WillChangeNotification<T> {
+  /// One of add | update | delete
+  String type;
+
+  T newValue;
+  dynamic object;
+
+  static WillChangeNotification UNCHANGED = WillChangeNotification();
+
+  WillChangeNotification({this.type, this.newValue, this.object});
+}
+
+class ChangeNotification<T> {
+  /// One of add | update | delete
+  String type;
+
+  T oldValue;
+  T newValue;
+
+  dynamic object;
+
+  ChangeNotification({this.type, this.newValue, this.oldValue, this.object});
+}
+
 var global = GlobalState();

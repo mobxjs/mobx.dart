@@ -45,10 +45,8 @@ runInAction(Function fn, {String name}) {
   return Action(fn, name: name)();
 }
 
-/**
- * Untracked ensures there is no tracking derivation while the given action runs.
- * This is useful in cases where no observers should be linked to a running (tracking) derivation.
- */
+/// Untracked ensures there is no tracking derivation while the given action runs.
+/// This is useful in cases where no observers should be linked to a running (tracking) derivation.
 T untracked<T>(T Function() action) {
   var prev = global.untrackedStart();
   try {
@@ -58,11 +56,9 @@ T untracked<T>(T Function() action) {
   }
 }
 
-/**
- * During a transaction, no derivations (Reaction or ComputedValue<T>) will be run
- * and will be deferred until the end of the transaction (batch). Transactions can
- * be nested, in which case, no derivation will be run until the top-most batch completes
- */
+/// During a transaction, no derivations (Reaction or ComputedValue<T>) will be run
+/// and will be deferred until the end of the transaction (batch). Transactions can
+/// be nested, in which case, no derivation will be run until the top-most batch completes
 T transaction<T>(T Function() action) {
   global.startBatch();
   try {
