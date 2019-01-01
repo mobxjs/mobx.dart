@@ -59,7 +59,7 @@ class ReactionDisposer {
 ReactionDisposer autorun(Function fn, {String name, int delay}) {
   Reaction rxn;
 
-  var rxnName = name ?? 'Autorun@${global.nextId}';
+  var rxnName = name ?? 'Autorun@${ctx.nextId}';
   var trackingFn = prepareTrackingFunction(fn);
 
   if (delay == null) {
@@ -113,7 +113,7 @@ ReactionDisposer reaction<T>(Function predicate, void Function(T) effect,
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
 
-  var rxnName = name ?? 'Reaction@${global.nextId}';
+  var rxnName = name ?? 'Reaction@${ctx.nextId}';
   var trackingPredicateFn = prepareTrackingFunction(predicate);
 
   var effectAction =
@@ -190,7 +190,7 @@ ReactionDisposer when(
 }) {
   ReactionDisposer disposer;
 
-  var rxnName = name ?? 'When@${global.nextId}';
+  var rxnName = name ?? 'When@${ctx.nextId}';
   var effectAction = action(effect, name: '${rxnName}-effect');
 
   disposer = autorun((Reaction r) {

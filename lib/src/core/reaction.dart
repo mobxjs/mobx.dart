@@ -30,17 +30,17 @@ class Reaction implements Derivation {
   }
 
   track(void Function() fn) {
-    global.startBatch();
+    ctx.startBatch();
 
     _isRunning = true;
-    global.trackDerivation(this, fn);
+    ctx.trackDerivation(this, fn);
     _isRunning = false;
 
     if (_isDisposed) {
-      global.clearObservables(this);
+      ctx.clearObservables(this);
     }
 
-    global.endBatch();
+    ctx.endBatch();
   }
 
   run() {
@@ -48,15 +48,15 @@ class Reaction implements Derivation {
       return;
     }
 
-    global.startBatch();
+    ctx.startBatch();
 
     _isScheduled = false;
 
-    if (global.shouldCompute(this)) {
+    if (ctx.shouldCompute(this)) {
       _onInvalidate();
     }
 
-    global.endBatch();
+    ctx.endBatch();
   }
 
   dispose() {
@@ -70,9 +70,9 @@ class Reaction implements Derivation {
       return;
     }
 
-    global.startBatch();
-    global.clearObservables(this);
-    global.endBatch();
+    ctx.startBatch();
+    ctx.clearObservables(this);
+    ctx.endBatch();
   }
 
   schedule() {
@@ -81,8 +81,8 @@ class Reaction implements Derivation {
     }
 
     _isScheduled = true;
-    global.addPendingReaction(this);
-    global.runReactions();
+    ctx.addPendingReaction(this);
+    ctx.runReactions();
   }
 
   @override

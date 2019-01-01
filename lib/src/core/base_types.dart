@@ -1,4 +1,4 @@
-import 'package:mobx/src/core/global_state.dart';
+import 'package:mobx/src/core/context.dart';
 
 class Atom {
   String name;
@@ -12,13 +12,13 @@ class Atom {
   Set<Derivation> observers = Set();
 
   reportObserved() {
-    global.reportObserved(this);
+    ctx.reportObserved(this);
   }
 
   reportChanged() {
-    global.startBatch();
-    global.propagateChanged(this);
-    global.endBatch();
+    ctx.startBatch();
+    ctx.propagateChanged(this);
+    ctx.endBatch();
   }
 
   addObserver(Derivation d) {
@@ -32,7 +32,7 @@ class Atom {
   removeObserver(Derivation d) {
     observers.removeWhere((ob) => ob == d);
     if (observers.isEmpty) {
-      global.enqueueForUnobservation(this);
+      ctx.enqueueForUnobservation(this);
     }
   }
 }
@@ -95,4 +95,4 @@ class ChangeNotification<T> {
   ChangeNotification({this.type, this.newValue, this.oldValue, this.object});
 }
 
-var global = GlobalState();
+var ctx = ReactiveContext();

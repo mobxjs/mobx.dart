@@ -16,7 +16,7 @@ main() {
     y.value = 20;
     expect(c.value, equals(50));
 
-    expect(global.isComputingDerivation(), isFalse);
+    expect(ctx.isComputingDerivation(), isFalse);
   });
 
   test('Computed value hierarchy', () {
@@ -68,7 +68,7 @@ main() {
     expect(c1ComputationCount, equals(3));
     expect(c3ComputationCount, equals(2));
 
-    expect(global.isComputingDerivation(), isFalse);
+    expect(ctx.isComputingDerivation(), isFalse);
 
     d();
   });

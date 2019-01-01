@@ -6,7 +6,7 @@ class ObservableValue<T> extends Atom implements Listenable, Interceptable {
   T _value;
 
   ObservableValue(T value, {String name}) : super(name) {
-    this.name = name ?? 'Observable@${global.nextId}';
+    this.name = name ?? 'Observable@${ctx.nextId}';
     this._value = value;
   }
 

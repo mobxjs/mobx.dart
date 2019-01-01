@@ -2,30 +2,32 @@ import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/base_types.dart';
 import 'package:mobx/src/core/reaction.dart';
 
-class GlobalState {
+class ReactiveState {
   int _batch = 0;
 
-  static int _nextIdCounter = 0;
+  int nextIdCounter = 0;
 
   Derivation _trackingDerivation;
   List<Reaction> _pendingReactions = [];
   bool _isRunningReactions = false;
   List<Atom> _pendingUnobservations = [];
+}
 
-  int computationDepth = 0;
+class ReactiveContext {
+  ReactiveState _state = ReactiveState();
 
-  get nextId => ++_nextIdCounter;
+  get nextId => ++_state.nextIdCounter;
 
   startBatch() {
-    _batch++;
+    _state._batch++;
   }
 
   endBatch() {
-    if (--_batch == 0) {
+    if (--_state._batch == 0) {
       runReactions();
 
-      for (var i = 0; i < _pendingUnobservations.length; i++) {
-        var ob = _pendingUnobservations[i];
+      for (var i = 0; i < _state._pendingUnobservations.length; i++) {
+        var ob = _state._pendingUnobservations[i];
         ob.isPendingUnobservation = false;
 
         if (ob.observers.isEmpty) {
@@ -35,27 +37,27 @@ class GlobalState {
         }
       }
 
-      _pendingUnobservations = [];
+      _state._pendingUnobservations = [];
     }
   }
 
   T trackDerivation<T>(Derivation d, T Function() fn) {
-    var prevDerivation = _trackingDerivation;
-    _trackingDerivation = d;
+    var prevDerivation = _state._trackingDerivation;
+    _state._trackingDerivation = d;
 
     resetDerivationState(d);
     d.newObservables = Set();
 
     var result = fn();
 
-    _trackingDerivation = prevDerivation;
+    _state._trackingDerivation = prevDerivation;
     bindDependencies(d);
 
     return result;
   }
 
   reportObserved(Atom atom) {
-    var derivation = _trackingDerivation;
+    var derivation = _state._trackingDerivation;
 
     if (derivation != null) {
       derivation.newObservables.add(atom);
@@ -95,22 +97,22 @@ class GlobalState {
   }
 
   addPendingReaction(Reaction reaction) {
-    _pendingReactions.add(reaction);
+    _state._pendingReactions.add(reaction);
   }
 
   runReactions() {
-    if (_batch > 0 || _isRunningReactions) {
+    if (_state._batch > 0 || _state._isRunningReactions) {
       return;
     }
 
-    _isRunningReactions = true;
+    _state._isRunningReactions = true;
 
-    for (var reaction in _pendingReactions) {
+    for (var reaction in _state._pendingReactions) {
       reaction.run();
     }
 
-    _pendingReactions = [];
-    _isRunningReactions = false;
+    _state._pendingReactions = [];
+    _state._isRunningReactions = false;
   }
 
   propagateChanged(Atom atom) {
@@ -176,7 +178,7 @@ class GlobalState {
     }
 
     atom.isPendingUnobservation = true;
-    _pendingUnobservations.add(atom);
+    _state._pendingUnobservations.add(atom);
   }
 
   resetDerivationState(Derivation d) {
@@ -222,21 +224,21 @@ class GlobalState {
   }
 
   bool isInBatch() {
-    return _batch > 0;
+    return _state._batch > 0;
   }
 
   bool isComputingDerivation() {
-    return _trackingDerivation != null;
+    return _state._trackingDerivation != null;
   }
 
   untrackedStart() {
-    var prevDerivation = _trackingDerivation;
-    _trackingDerivation = null;
+    var prevDerivation = _state._trackingDerivation;
+    _state._trackingDerivation = null;
     return prevDerivation;
   }
 
   untrackedEnd(Derivation prevDerivation) {
-    _trackingDerivation = prevDerivation;
+    _state._trackingDerivation = prevDerivation;
   }
 
   bool isComputedValue(dynamic obj) {

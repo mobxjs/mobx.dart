@@ -7,7 +7,7 @@ class Action {
   Action(Function fn, {String name}) {
     _fn = fn;
 
-    this.name = name ?? 'Action@${global.nextId}';
+    this.name = name ?? 'Action@${ctx.nextId}';
   }
 
   call([List args = const [], Map<String, dynamic> namedArgs]) {
@@ -29,15 +29,15 @@ class Action {
   }
 
   Derivation _startAction() {
-    var prevDerivation = global.untrackedStart();
-    global.startBatch();
+    var prevDerivation = ctx.untrackedStart();
+    ctx.startBatch();
 
     return prevDerivation;
   }
 
   _endAction(Derivation prevDerivation) {
-    global.endBatch();
-    global.untrackedEnd(prevDerivation);
+    ctx.endBatch();
+    ctx.untrackedEnd(prevDerivation);
   }
 }
 
@@ -48,11 +48,11 @@ runInAction(Function fn, {String name}) {
 /// Untracked ensures there is no tracking derivation while the given action runs.
 /// This is useful in cases where no observers should be linked to a running (tracking) derivation.
 T untracked<T>(T Function() action) {
-  var prev = global.untrackedStart();
+  var prev = ctx.untrackedStart();
   try {
     return action();
   } finally {
-    global.untrackedEnd(prev);
+    ctx.untrackedEnd(prev);
   }
 }
 
@@ -60,10 +60,10 @@ T untracked<T>(T Function() action) {
 /// and will be deferred until the end of the transaction (batch). Transactions can
 /// be nested, in which case, no derivation will be run until the top-most batch completes
 T transaction<T>(T Function() action) {
-  global.startBatch();
+  ctx.startBatch();
   try {
     return action();
   } finally {
-    global.endBatch();
+    ctx.endBatch();
   }
 }

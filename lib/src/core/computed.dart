@@ -20,7 +20,7 @@ class ComputedValue<T> extends Atom implements Derivation {
   bool _isComputing = false;
 
   ComputedValue(T Function() fn, {String name}) : super(name) {
-    this.name = name ?? 'Computed@${global.nextId}';
+    this.name = name ?? 'Computed@${ctx.nextId}';
     this._fn = fn;
   }
 
@@ -29,17 +29,17 @@ class ComputedValue<T> extends Atom implements Derivation {
       fail('Cycle detected in computation ${name}: ${_fn}');
     }
 
-    if (!global.isInBatch() && observers.isEmpty) {
-      if (global.shouldCompute(this)) {
-        global.startBatch();
+    if (!ctx.isInBatch() && observers.isEmpty) {
+      if (ctx.shouldCompute(this)) {
+        ctx.startBatch();
         _value = computeValue(false);
-        global.endBatch();
+        ctx.endBatch();
       }
     } else {
       reportObserved();
-      if (global.shouldCompute(this)) {
+      if (ctx.shouldCompute(this)) {
         if (_trackAndCompute()) {
-          global.propagateChangeConfirmed(this);
+          ctx.propagateChangeConfirmed(this);
         }
       }
     }
@@ -49,16 +49,14 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   T computeValue(bool track) {
     _isComputing = true;
-    global.computationDepth++;
 
     T value;
     if (track) {
-      value = global.trackDerivation(this, this._fn);
+      value = ctx.trackDerivation(this, this._fn);
     } else {
       value = _fn();
     }
 
-    global.computationDepth--;
     _isComputing = false;
 
     return value;
@@ -66,13 +64,13 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   @override
   suspend() {
-    global.clearObservables(this);
+    ctx.clearObservables(this);
     _value = null;
   }
 
   @override
   void onBecomeStale() {
-    global.propagatePossiblyChanged(this);
+    ctx.propagatePossiblyChanged(this);
   }
 
   bool _trackAndCompute() {
