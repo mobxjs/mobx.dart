@@ -4,10 +4,10 @@
 set -e
 
 # Verify that the libraries are error free.
-# dartanalyzer --fatal-warnings .
+dartanalyzer --fatal-warnings .
 
 # Run the tests.
-# dart --enable-asserts test/all.dart
+dart --enable-asserts test/all.dart
 
 # Install dart_coveralls; gather and send coverage data.
 if [ "$REPO_TOKEN" ]; then
