@@ -1,5 +1,7 @@
 # mobx
 
+
+[![pub package](https://img.shields.io/pub/v/mobx.svg)](https://pub.dartlang.org/packages/mobx)
 [![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
 [![Coverage Status](https://coveralls.io/repos/github/mobxjs/mobx.dart/badge.svg?branch=master)](https://coveralls.io/github/mobxjs/mobx.dart?branch=master)
 
