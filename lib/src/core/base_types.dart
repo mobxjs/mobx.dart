@@ -67,8 +67,8 @@ abstract class Derivation {
 
   DerivationState dependenciesState;
 
-  onBecomeStale() {}
-  suspend() {}
+  onBecomeStale();
+  suspend();
 }
 
 class WillChangeNotification<T> {
