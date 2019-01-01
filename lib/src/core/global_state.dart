@@ -241,7 +241,8 @@ class GlobalState {
 
   bool isComputedValue(dynamic obj) {
     if (obj is Derivation) {
-      return obj.isAComputedValue;
+      // The only other kind of Derivation is a ComputedValue
+      return obj is! Reaction;
     }
 
     return false;

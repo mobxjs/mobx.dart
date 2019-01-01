@@ -79,6 +79,7 @@ ReactionDisposer autorun(Function fn, {String name, int delay}) {
 
         if (timer != null) {
           timer.cancel();
+          timer = null;
         }
 
         timer = scheduler(() {
@@ -122,16 +123,15 @@ ReactionDisposer reaction<T>(T Function() predicate, void Function(T) effect,
   var scheduler = delay != null ? createDelayedScheduler(delay) : null;
 
   var firstTime = true;
-  var isScheduled = false;
   T value;
 
   reactionRunner() {
-    isScheduled = false;
     if (rxn.isDisposed) {
       return;
     }
 
     var changed = false;
+
     rxn.track(() {
       var nextValue = trackingPredicateFn(rxn);
       changed = firstTime || (nextValue != value);
@@ -148,12 +148,28 @@ ReactionDisposer reaction<T>(T Function() predicate, void Function(T) effect,
     }
   }
 
+  Timer timer;
+  var isScheduled = false;
+
   rxn = Reaction(() {
     if (firstTime || runSync) {
       reactionRunner();
     } else if (!isScheduled) {
       isScheduled = true;
-      scheduler(reactionRunner);
+
+      if (timer != null) {
+        timer.cancel();
+        timer = null;
+      }
+
+      timer = scheduler(() {
+        isScheduled = false;
+        if (!rxn.isDisposed) {
+          reactionRunner();
+        } else {
+          timer.cancel();
+        }
+      });
     }
   }, name: rxnName);
 

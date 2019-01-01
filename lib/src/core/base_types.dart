@@ -67,8 +67,6 @@ abstract class Derivation {
 
   DerivationState dependenciesState;
 
-  bool get isAComputedValue;
-
   onBecomeStale() {}
   suspend() {}
 }

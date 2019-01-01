@@ -1,7 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/base_types.dart';
-import 'package:mobx/src/core/reaction.dart';
 import 'package:mobx/src/utils.dart';
 
 class ComputedValue<T> extends Atom implements Derivation {
@@ -15,9 +14,6 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   @override
   DerivationState dependenciesState = DerivationState.NOT_TRACKING;
-
-  @override
-  bool get isAComputedValue => true;
 
   T _value;
 

@@ -18,9 +18,6 @@ class Reaction implements Derivation {
   @override
   DerivationState dependenciesState = DerivationState.NOT_TRACKING;
 
-  @override
-  bool get isAComputedValue => false;
-
   get isDisposed => _isDisposed;
 
   Reaction(onInvalidate, {String this.name}) {
