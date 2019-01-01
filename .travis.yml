@@ -7,3 +7,4 @@ dart_task:
   - dartanalyzer: --fatal-warnings lib
     dartfmt: true
 
+script: ./travis.sh
