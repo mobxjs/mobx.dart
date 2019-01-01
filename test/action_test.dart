@@ -1,6 +1,7 @@
 import 'package:mobx/src/api/action.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
+import 'package:mobx/src/core/action.dart';
 import 'package:test/test.dart';
 
 main() {
@@ -103,5 +104,82 @@ main() {
 
     a([], {'name': 'Hello', 'value': 'MobX'});
     expect(message, equals('Hello: MobX'));
+  });
+
+  test('nested actions work', () {
+    var x = observable(10);
+    var y = observable(20);
+
+    var executionCount = 0;
+
+    var d = autorun(() {
+      x.value + y.value;
+      executionCount++;
+    });
+
+    action(() {
+      x.value = 100;
+
+      expect(executionCount, equals(1)); // No notifications are fired
+      action(() {
+        y.value = 200;
+        expect(executionCount, equals(1)); // No notifications are fired
+      })();
+    })();
+
+    // Notifications are fired now
+    expect(executionCount, equals(2));
+
+    d();
+  });
+
+  test('runInAction works', () {
+    var x = observable(10);
+    var y = observable(20);
+
+    var executionCount = 0;
+    var total = 0;
+
+    var d = autorun(() {
+      total = x.value + y.value;
+      executionCount++;
+    });
+
+    runInAction(() {
+      x.value = 100;
+      y.value = 200;
+
+      expect(executionCount, equals(1)); // No notifications are fired
+    });
+
+    // Notifications are fired now
+    expect(executionCount, equals(2));
+    expect(total, equals(300));
+
+    d();
+  });
+
+  test('transaction works', () {
+    var x = observable(10);
+    var y = observable(20);
+
+    var total = 0;
+
+    var d = autorun(() {
+      total = x.value + y.value;
+    });
+
+    transaction(() {
+      x.value = 100;
+      y.value = 200;
+
+      // within a transaction(), there are no notifications fired, so the total should not change
+      expect(total, equals(30));
+    });
+
+    // Notifications fire now, causing autorun() to execute
+    expect(total, equals(300));
+
+    d();
   });
 }
