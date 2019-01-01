@@ -1,5 +1,5 @@
 name: mobx
-version: 0.0.6
+version: 0.0.7
 description: Reactive State Management for Dart apps.
 author: Pavan Podila <pavan@pixelingene.com>
 homepage: https://github.com/mobxjs/mobx.dart
