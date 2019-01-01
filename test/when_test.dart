@@ -25,6 +25,14 @@ void main() {
     expect(executed, isFalse); // No more effects as its disposed
   });
 
+  test('when with default name', () {
+    var d = when(() => true, () {});
+
+    expect(d.$mobx.name, startsWith('When@'));
+
+    d();
+  });
+
   test('Async When', () {
     var x = observable(10);
     asyncWhen(() => x.value > 10, name: 'Async-when').then((_) {

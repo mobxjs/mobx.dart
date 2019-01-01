@@ -60,11 +60,12 @@ ReactionDisposer autorun(Function fn, {String name, int delay}) {
   Reaction rxn;
 
   var rxnName = name ?? 'Autorun@${global.nextId}';
+  var trackingFn = prepareTrackingFunction(fn);
 
   if (delay == null) {
     // Use a sync-scheduler.
     rxn = Reaction(() {
-      rxn.track(fn);
+      rxn.track(() => trackingFn(rxn));
     }, name: rxnName);
   } else {
     // Use a delayed scheduler.
@@ -83,7 +84,7 @@ ReactionDisposer autorun(Function fn, {String name, int delay}) {
         timer = scheduler(() {
           isScheduled = false;
           if (!rxn.isDisposed) {
-            rxn.track(fn);
+            rxn.track(() => trackingFn(rxn));
           } else {
             timer.cancel();
           }
@@ -112,6 +113,8 @@ ReactionDisposer reaction<T>(T Function() predicate, void Function(T) effect,
   Reaction rxn;
 
   var rxnName = name ?? 'Reaction@${global.nextId}';
+  var trackingPredicateFn = prepareTrackingFunction(predicate);
+
   var effectAction =
       action((T value) => effect(value), name: '${rxnName}-effect');
 
@@ -130,7 +133,7 @@ ReactionDisposer reaction<T>(T Function() predicate, void Function(T) effect,
 
     var changed = false;
     rxn.track(() {
-      var nextValue = predicate();
+      var nextValue = trackingPredicateFn(rxn);
       changed = firstTime || (nextValue != value);
       value = nextValue;
     });
@@ -174,9 +177,9 @@ ReactionDisposer when(
   var rxnName = name ?? 'When@${global.nextId}';
   var effectAction = action(effect, name: '${rxnName}-effect');
 
-  disposer = autorun(() {
+  disposer = autorun((Reaction r) {
     if (predicate()) {
-      disposer();
+      r.dispose();
       effectAction();
     }
   }, name: rxnName);
