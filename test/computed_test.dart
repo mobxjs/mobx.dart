@@ -72,4 +72,27 @@ main() {
 
     d();
   });
+
+  test('computed can be observed', () {
+    var x = observable(10);
+    var y = observable(20);
+
+    var executionCount = 0;
+
+    var total = computed(() {
+      executionCount++;
+      return x.value + y.value;
+    });
+
+    var dispose1 = total.observe((change) {
+      expect(change.newValue, equals(30));
+      expect(executionCount, equals(1));
+    });
+
+    dispose1(); // no more observations
+
+    x.value = 100; // should not invoke observe
+
+    expect(executionCount, equals(1));
+  });
 }
