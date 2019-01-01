@@ -1,6 +1,7 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
+import 'package:mobx/src/core/reaction.dart';
 import "package:test/test.dart";
 
 void main() {
@@ -90,5 +91,23 @@ void main() {
     });
 
     dispose();
+  });
+
+  test('autorun with pre-mature disposal in predicate', () {
+    var x = observable(10);
+
+    var d = autorun((Reaction r) {
+      var isGreaterThan10 = x.value > 10;
+
+      if (isGreaterThan10) {
+        r.dispose();
+      }
+    });
+
+    expect(d.$mobx.isDisposed, isFalse);
+
+    x.value = 11;
+    expect(d.$mobx.isDisposed, isTrue);
+    d();
   });
 }

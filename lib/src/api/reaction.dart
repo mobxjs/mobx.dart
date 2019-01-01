@@ -109,7 +109,7 @@ ReactionDisposer autorun(Function fn, {String name, int delay}) {
 /// You can also pass in an optional [name], a debouncing [delay] in milliseconds. Use
 /// [fireImmediately] if you want to invoke the effect immediately without waiting for
 /// the [predicate] to change its value.
-ReactionDisposer reaction<T>(T Function() predicate, void Function(T) effect,
+ReactionDisposer reaction<T>(Function predicate, void Function(T) effect,
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
 

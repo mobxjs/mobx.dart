@@ -1,6 +1,7 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
+import 'package:mobx/src/core/reaction.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -99,6 +100,30 @@ void main() {
       expect(executed, isTrue);
     });
 
+    d();
+  });
+
+  test('reaction with pre-mature disposal in predicate', () {
+    var x = observable(10);
+    var executed = false;
+
+    var d = reaction((Reaction r) {
+      var isGreaterThan10 = x.value > 10;
+
+      if (isGreaterThan10) {
+        r.dispose();
+      }
+
+      return isGreaterThan10;
+    }, (_) {
+      executed = true;
+    });
+
+    expect(d.$mobx.isDisposed, isFalse);
+
+    x.value = 11;
+    expect(executed, isTrue);
+    expect(d.$mobx.isDisposed, isTrue);
     d();
   });
 }
