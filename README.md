@@ -55,6 +55,6 @@
 
 ## Public facing
 
-- [ ] Logo
+- [x] Logo
 - [ ] Documentation
 - [ ] Website (published on github.io)
