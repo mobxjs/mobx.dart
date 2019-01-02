@@ -31,6 +31,12 @@ class ReactiveContext {
         ob.isPendingUnobservation = false;
 
         if (ob.observers.isEmpty) {
+          if (ob.isBeingObserved) {
+            // if this observable had reactive observers, trigger the hooks
+            ob.isBeingObserved = false;
+            ob.notifyOnBecomeUnobserved();
+          }
+
           if (isComputedValue(ob)) {
             (ob as Derivation).suspend();
           }
@@ -61,6 +67,10 @@ class ReactiveContext {
 
     if (derivation != null) {
       derivation.newObservables.add(atom);
+      if (!atom.isBeingObserved) {
+        atom.isBeingObserved = true;
+        atom.notifyOnBecomeObserved();
+      }
     }
   }
 

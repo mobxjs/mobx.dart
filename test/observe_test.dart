@@ -78,4 +78,69 @@ main() {
     x.value = 200;
     expect(executionCount, 3); // no change here
   });
+
+  test('onBecomeObserved/onBecomeUnobserved works for observables', () {
+    var x = observable(10);
+    var executionCount = 0;
+
+    var d1 = x.onBecomeObserved(() {
+      executionCount++;
+    });
+
+    var d2 = x.onBecomeUnobserved(() {
+      executionCount++;
+    });
+
+    var d3 = autorun(() {
+      x.value;
+    });
+
+    expect(executionCount, equals(1));
+
+    d3(); // dispose the autorun
+    expect(executionCount, equals(2));
+
+    d1();
+    d2();
+  });
+
+  test('onBecomeObserved/onBecomeUnobserved works for computeds', () {
+    var x = observable(10);
+    var x1 = computed(() {
+      x.value + 1;
+    });
+    var executionCount = 0;
+
+    var d1 = x1.onBecomeObserved(() {
+      executionCount++;
+    });
+
+    var d2 = x1.onBecomeUnobserved(() {
+      executionCount++;
+    });
+
+    var d3 = autorun(() {
+      x1.value;
+    });
+
+    expect(executionCount, equals(1));
+
+    d3(); // dispose the autorun
+    expect(executionCount, equals(2));
+
+    d1();
+    d2();
+  });
+
+  test('onBecomeObserved/onBecomeUnobserved throws if null is passed', () {
+    var x = observable(10);
+
+    expect(() {
+      x.onBecomeObserved(null);
+    }, throwsException);
+
+    expect(() {
+      x.onBecomeUnobserved(null);
+    }, throwsException);
+  });
 }

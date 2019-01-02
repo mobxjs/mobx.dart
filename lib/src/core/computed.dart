@@ -26,7 +26,7 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   T get value {
     if (_isComputing) {
-      fail('Cycle detected in computation ${name}: ${_fn}');
+      throw MobXException('Cycle detected in computation ${name}: ${_fn}');
     }
 
     if (!ctx.isInBatch() && observers.isEmpty) {

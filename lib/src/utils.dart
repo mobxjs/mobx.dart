@@ -3,10 +3,6 @@ import 'dart:mirrors';
 
 import 'package:mobx/src/core/reaction.dart';
 
-fail(String message) {
-  throw Exception(message);
-}
-
 const ms = const Duration(milliseconds: 1);
 
 Timer Function(Function) createDelayedScheduler(int delayMs) {
