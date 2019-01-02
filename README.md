@@ -45,10 +45,10 @@
 ## Cross cutting features
 
 - [x] Observability API for `ObservableValue` and `ComputedValue` 
-    - `observe`
-    - `intercept`
-    - `onBecomeObserved`
-    - `onBecomeUnobserved`
+    - [x] `observe`
+    - [x] `intercept`
+    - [x] `onBecomeObserved`
+    - [x] `onBecomeUnobserved`
 - [ ] Spying and Tracing
 - [ ] Exception handling and Error recovery
 
