@@ -51,6 +51,7 @@
     - [x] `onBecomeUnobserved`
 - [ ] Spying and Tracing
 - [ ] Exception handling and Error recovery
+- [ ] Debuggability
 
 
 ## Public facing
