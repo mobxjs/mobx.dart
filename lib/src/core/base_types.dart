@@ -1,5 +1,4 @@
 import 'package:mobx/src/core/context.dart';
-import 'package:mobx/src/utils.dart';
 
 const ON_BECOME_OBSERVED = 'onBecomeObserved';
 const ON_BECOME_UNOBSERVED = 'onBecomeUnobserved';

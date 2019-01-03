@@ -1,7 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/base_types.dart';
-import 'package:mobx/src/utils.dart';
 
 class ComputedValue<T> extends Atom implements Derivation {
   @override
