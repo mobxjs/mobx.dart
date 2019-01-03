@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:mobx/src/api/action.dart';
 import 'package:mobx/src/api/reaction_helper.dart';
-import 'package:mobx/src/core/base_types.dart';
+import 'package:mobx/src/core/atom_derivation.dart';
 import 'package:mobx/src/core/reaction.dart';
 import 'package:mobx/src/utils.dart';
 

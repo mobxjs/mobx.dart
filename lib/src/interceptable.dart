@@ -1,5 +1,5 @@
 import 'package:mobx/src/core/action.dart';
-import 'package:mobx/src/core/base_types.dart';
+import 'package:mobx/src/core/atom_derivation.dart';
 
 abstract class Interceptable {
   List<Function> interceptors;

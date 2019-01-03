@@ -1,4 +1,4 @@
-import 'package:mobx/src/core/base_types.dart';
+import 'package:mobx/src/core/atom_derivation.dart';
 
 class Reaction implements Derivation {
   void Function() _onInvalidate;
