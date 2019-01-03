@@ -13,7 +13,15 @@ class Atom {
 
   bool isBeingObserved = false;
 
-  Atom(String this.name);
+  Atom(String this.name, {Function onObserve, Function onUnobserve}) {
+    if (onObserve != null) {
+      onBecomeObserved(onObserve);
+    }
+
+    if (onUnobserve != null) {
+      onBecomeUnobserved(onUnobserve);
+    }
+  }
 
   Set<Derivation> observers = Set();
 

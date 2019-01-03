@@ -1,4 +1,6 @@
+import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/observable.dart';
+import 'package:mobx/src/core/base_types.dart';
 import 'package:mobx/src/core/observable.dart';
 import "package:test/test.dart";
 
@@ -33,5 +35,23 @@ void main() {
     var y = ObservableValue('Hello', name: 'greeting');
     expect(y.value, equals('Hello'));
     expect(y.name, equals('greeting'));
+  });
+
+  test('Atom can be used directly', () {
+    var executionCount = 0;
+    var a = Atom('test', onObserve: () {
+      executionCount++;
+    }, onUnobserve: () {
+      executionCount++;
+    });
+
+    var d = autorun(() {
+      a.reportObserved();
+    });
+
+    expect(executionCount, equals(1)); // onBecomeObserved gets called
+
+    d();
+    expect(executionCount, equals(2)); // onBecomeUnobserved gets called
   });
 }
