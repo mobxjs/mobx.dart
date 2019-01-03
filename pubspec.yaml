@@ -1,12 +1,7 @@
 name: mobx
-version: 0.0.10
-description: "MobX is a library for reactively managing the state of your applications. It comes with a set of building blocks
-such as observables, actions, and reactions. Observables carry the reactive state; Reactions observe the observable state
-and cause side-effects in the application; Actions are used to cause mutations on the observable-state.
-
-MobX also determines the dependencies of a Reaction automatically with no explicit wiring.
-This makes it a library that advocates Transparent Functional Reactive Programming (TFRP). It can be used in Dart and Flutter
-apps to manage the client-side state of the application."
+version: 0.0.11
+description: "MobX is a library for reactively managing the state of your applications. Use the power of observables, actions, and reactions
+to supercharge your Dart and Flutter apps."
 author: Pavan Podila <pavan@pixelingene.com>
 homepage: https://github.com/mobxjs/mobx.dart
 
