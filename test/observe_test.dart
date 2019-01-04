@@ -3,10 +3,10 @@ import 'package:test/test.dart';
 
 main() {
   test('observe', () {
-    var x = observable(10);
+    final x = observable(10);
     var executed = false;
 
-    var dispose = x.observe<int>((change) {
+    final dispose = x.observe<int>((change) {
       expect(change.newValue, equals(10));
       expect(change.oldValue, isNull);
       executed = true;
@@ -18,10 +18,10 @@ main() {
   });
 
   test('observe fires when changed', () {
-    var x = observable(10);
+    final x = observable(10);
     var executed = false;
 
-    var dispose = x.observe<int>((change) {
+    final dispose = x.observe<int>((change) {
       expect(change.newValue, equals(100));
       expect(change.oldValue, 10);
       executed = true;
@@ -36,10 +36,10 @@ main() {
   });
 
   test('observe can be disposed', () {
-    var x = observable(10);
+    final x = observable(10);
     var executed = false;
 
-    var dispose = x.observe<int>((change) {
+    final dispose = x.observe<int>((change) {
       executed = true;
     }, fireImmediately: true);
 
@@ -53,18 +53,18 @@ main() {
   });
 
   test('observe can have multiple listeners', () {
-    var x = observable(10);
+    final x = observable(10);
     var executionCount = 0;
 
-    var dispose1 = x.observe<int>((change) {
+    final dispose1 = x.observe<int>((change) {
       executionCount++;
     });
 
-    var dispose2 = x.observe<int>((change) {
+    final dispose2 = x.observe<int>((change) {
       executionCount++;
     });
 
-    var dispose3 = x.observe<int>((change) {
+    final dispose3 = x.observe<int>((change) {
       executionCount++;
     });
 
@@ -80,18 +80,18 @@ main() {
   });
 
   test('onBecomeObserved/onBecomeUnobserved works for observables', () {
-    var x = observable(10);
+    final x = observable(10);
     var executionCount = 0;
 
-    var d1 = x.onBecomeObserved(() {
+    final d1 = x.onBecomeObserved(() {
       executionCount++;
     });
 
-    var d2 = x.onBecomeUnobserved(() {
+    final d2 = x.onBecomeUnobserved(() {
       executionCount++;
     });
 
-    var d3 = autorun((_) {
+    final d3 = autorun((_) {
       x.value;
     });
 
@@ -105,21 +105,21 @@ main() {
   });
 
   test('onBecomeObserved/onBecomeUnobserved works for computeds', () {
-    var x = observable(10);
-    var x1 = computed(() {
+    final x = observable(10);
+    final x1 = computed(() {
       x.value + 1;
     });
     var executionCount = 0;
 
-    var d1 = x1.onBecomeObserved(() {
+    final d1 = x1.onBecomeObserved(() {
       executionCount++;
     });
 
-    var d2 = x1.onBecomeUnobserved(() {
+    final d2 = x1.onBecomeUnobserved(() {
       executionCount++;
     });
 
-    var d3 = autorun((_) {
+    final d3 = autorun((_) {
       x1.value;
     });
 
@@ -133,7 +133,7 @@ main() {
   });
 
   test('onBecomeObserved/onBecomeUnobserved throws if null is passed', () {
-    var x = observable(10);
+    final x = observable(10);
 
     expect(() {
       x.onBecomeObserved(null);

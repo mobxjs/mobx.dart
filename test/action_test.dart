@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 
 main() {
   test('Action basics work', () {
-    var a = action((String name, String value) {
+    final a = action((String name, String value) {
       expect(name, equals('name'));
       expect(value, equals('MobX'));
     });
@@ -16,15 +16,15 @@ main() {
   });
 
   test('Action modifications are picked up', () {
-    var x = observable(10);
+    final x = observable(10);
 
     var total = 0;
-    var a = action(() {
+    final a = action(() {
       x.value = x.value +
           1; // No reaction-infinite-loop as we are not tracking the observables
     });
 
-    var dispose = autorun((_) {
+    final dispose = autorun((_) {
       total = x.value * 10;
     });
 
@@ -37,14 +37,14 @@ main() {
   });
 
   test('Action modifications are batched', () {
-    var x = observable(10);
-    var y = observable(20);
-    var z = observable(30);
+    final x = observable(10);
+    final y = observable(20);
+    final z = observable(30);
 
     var total = 0;
     var autorunExecutionCount = 0;
 
-    var dispose = autorun((_) {
+    final dispose = autorun((_) {
       total = x.value + y.value + z.value;
       autorunExecutionCount++;
     });
@@ -52,7 +52,7 @@ main() {
     expect(total, equals(60));
     expect(autorunExecutionCount, equals(1));
 
-    var a = action(() {
+    final a = action(() {
       x.value++;
       y.value++;
       z.value++;
@@ -70,15 +70,15 @@ main() {
   });
 
   test('action inside autorun should be untracked', () {
-    var x = observable(10);
-    var y = observable(20);
+    final x = observable(10);
+    final y = observable(20);
 
     var total = 0;
-    var a = action(() {
+    final a = action(() {
       return y.value;
     });
 
-    var d = autorun((_) {
+    final d = autorun((_) {
       total = x.value + a();
     });
 
@@ -98,7 +98,7 @@ main() {
   test('Action can be invoked with named args', () {
     String message;
 
-    var a = action(({String name, String value}) {
+    final a = action(({String name, String value}) {
       message = '${name}: ${value}';
     });
 
@@ -107,12 +107,12 @@ main() {
   });
 
   test('nested actions work', () {
-    var x = observable(10);
-    var y = observable(20);
+    final x = observable(10);
+    final y = observable(20);
 
     var executionCount = 0;
 
-    var d = autorun((_) {
+    final d = autorun((_) {
       x.value + y.value;
       executionCount++;
     });
@@ -134,13 +134,13 @@ main() {
   });
 
   test('runInAction works', () {
-    var x = observable(10);
-    var y = observable(20);
+    final x = observable(10);
+    final y = observable(20);
 
     var executionCount = 0;
     var total = 0;
 
-    var d = autorun((_) {
+    final d = autorun((_) {
       total = x.value + y.value;
       executionCount++;
     });
@@ -160,12 +160,12 @@ main() {
   });
 
   test('transaction works', () {
-    var x = observable(10);
-    var y = observable(20);
+    final x = observable(10);
+    final y = observable(20);
 
     var total = 0;
 
-    var d = autorun((_) {
+    final d = autorun((_) {
       total = x.value + y.value;
     });
 

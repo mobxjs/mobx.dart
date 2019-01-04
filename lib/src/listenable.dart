@@ -12,11 +12,11 @@ bool hasListeners(Listenable obj) {
 }
 
 Function registerListener(Listenable obj, Function handler) {
-  var listeners = obj.changeListeners ?? (obj.changeListeners = List());
+  final listeners = obj.changeListeners ?? (obj.changeListeners = List());
   listeners.add(handler);
 
   return () {
-    var index = listeners.indexOf(handler);
+    final index = listeners.indexOf(handler);
     if (index != -1) {
       listeners.removeAt(index);
     }
@@ -29,9 +29,9 @@ notifyListeners<T>(Listenable obj, ChangeNotification<T> change) {
       return;
     }
 
-    var listeners = obj.changeListeners.toList(growable: false);
+    final listeners = obj.changeListeners.toList(growable: false);
     for (var i = 0; i < listeners.length; i++) {
-      var listener = listeners[i];
+      final listener = listeners[i];
 
       listener(change);
     }

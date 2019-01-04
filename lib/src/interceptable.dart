@@ -12,11 +12,11 @@ bool hasInterceptors(Interceptable obj) {
 }
 
 Function registerInterceptor(Interceptable obj, Function handler) {
-  var listeners = obj.interceptors ?? (obj.interceptors = List());
+  final listeners = obj.interceptors ?? (obj.interceptors = List());
   listeners.add(handler);
 
   return () {
-    var index = listeners.indexOf(handler);
+    final index = listeners.indexOf(handler);
     if (index != -1) {
       listeners.removeAt(index);
     }
@@ -31,9 +31,9 @@ WillChangeNotification<T> interceptChange<T>(
     }
 
     var nextChange = change;
-    var listeners = obj.interceptors.toList(growable: false);
+    final listeners = obj.interceptors.toList(growable: false);
     for (var i = 0; i < listeners.length; i++) {
-      var listener = listeners[i];
+      final listener = listeners[i];
 
       nextChange = listener(nextChange);
       if (nextChange == null) {

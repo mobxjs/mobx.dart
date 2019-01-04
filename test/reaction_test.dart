@@ -7,8 +7,8 @@ import 'package:test/test.dart';
 void main() {
   test('Reaction basics', () {
     var executed = false;
-    var x = observable(10);
-    var d = reaction((_) {
+    final x = observable(10);
+    final d = reaction((_) {
       return x.value > 10;
     }, (isGreaterThan10) {
       executed = true;
@@ -31,10 +31,10 @@ void main() {
   });
 
   test('Reaction with delay', () {
-    var x = observable(10);
+    final x = observable(10);
     var executed = false;
 
-    var d = reaction((_) {
+    final d = reaction((_) {
       return x.value > 10;
     }, (isGreaterThan10) {
       executed = true;
@@ -55,10 +55,10 @@ void main() {
   });
 
   test('Reaction that fires immediately', () {
-    var x = observable(10);
+    final x = observable(10);
     var executed = false;
 
-    var d = reaction((_) {
+    final d = reaction((_) {
       return x.value > 10;
     }, (isGreaterThan10) {
       executed = true;
@@ -69,10 +69,10 @@ void main() {
   });
 
   test('Reaction that fires immediately with delay', () {
-    var x = observable(10);
+    final x = observable(10);
     var executed = false;
 
-    var d = reaction((_) {
+    final d = reaction((_) {
       return x.value > 10;
     }, (isGreaterThan10) {
       executed = true;
@@ -104,11 +104,11 @@ void main() {
   });
 
   test('reaction with pre-mature disposal in predicate', () {
-    var x = observable(10);
+    final x = observable(10);
     var executed = false;
 
-    var d = reaction((Reaction r) {
-      var isGreaterThan10 = x.value > 10;
+    final d = reaction((Reaction r) {
+      final isGreaterThan10 = x.value > 10;
 
       if (isGreaterThan10) {
         r.dispose();

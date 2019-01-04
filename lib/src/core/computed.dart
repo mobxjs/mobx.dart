@@ -73,12 +73,12 @@ class ComputedValue<T> extends Atom implements Derivation {
   }
 
   bool _trackAndCompute() {
-    var oldValue = _value;
-    var wasSuspended = dependenciesState == DerivationState.NOT_TRACKING;
+    final oldValue = _value;
+    final wasSuspended = dependenciesState == DerivationState.NOT_TRACKING;
 
-    var newValue = computeValue(true);
+    final newValue = computeValue(true);
 
-    var changed = wasSuspended || !_isEqual(oldValue, newValue);
+    final changed = wasSuspended || !_isEqual(oldValue, newValue);
 
     if (changed) {
       _value = newValue;
@@ -97,7 +97,7 @@ class ComputedValue<T> extends Atom implements Derivation {
     T prevValue;
 
     return autorun((_) {
-      var newValue = this.value as T;
+      final newValue = this.value as T;
       if (firstTime == true || fireImmediately == true) {
         untracked(() {
           handler(ChangeNotification(

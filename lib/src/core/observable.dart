@@ -16,8 +16,8 @@ class ObservableValue<T> extends Atom implements Listenable, Interceptable {
   }
 
   set value(T value) {
-    var oldValue = _value;
-    var newValue = _prepareNewValue(value);
+    final oldValue = _value;
+    final newValue = _prepareNewValue(value);
 
     if (newValue == WillChangeNotification.UNCHANGED) {
       return;
@@ -28,7 +28,7 @@ class ObservableValue<T> extends Atom implements Listenable, Interceptable {
     reportChanged();
 
     if (hasListeners(this)) {
-      var change = ChangeNotification<T>(
+      final change = ChangeNotification<T>(
           newValue: value, oldValue: oldValue, type: 'update', object: this);
       notifyListeners<T>(this, change);
     }
@@ -36,7 +36,7 @@ class ObservableValue<T> extends Atom implements Listenable, Interceptable {
 
   dynamic _prepareNewValue(T newValue) {
     if (hasInterceptors(this)) {
-      var change = interceptChange(
+      final change = interceptChange(
           this,
           WillChangeNotification(
               newValue: newValue, type: 'update', object: this));

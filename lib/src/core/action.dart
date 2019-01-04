@@ -11,7 +11,7 @@ class Action {
   }
 
   call([List args = const [], Map<String, dynamic> namedArgs]) {
-    var prevDerivation = _startAction();
+    final prevDerivation = _startAction();
 
     try {
       // Invoke the actual function
@@ -19,7 +19,7 @@ class Action {
         return Function.apply(_fn, args);
       } else {
         // Convert to symbol-based named-args
-        var namedSymbolArgs =
+        final namedSymbolArgs =
             namedArgs.map((key, value) => MapEntry(Symbol(key), value));
         return Function.apply(_fn, args, namedSymbolArgs);
       }
@@ -29,7 +29,7 @@ class Action {
   }
 
   Derivation _startAction() {
-    var prevDerivation = ctx.untrackedStart();
+    final prevDerivation = ctx.untrackedStart();
     ctx.startBatch();
 
     return prevDerivation;
@@ -48,7 +48,7 @@ runInAction(Function fn, {String name}) {
 /// Untracked ensures there is no tracking derivation while the given action runs.
 /// This is useful in cases where no observers should be linked to a running (tracking) derivation.
 T untracked<T>(T Function() action) {
-  var prev = ctx.untrackedStart();
+  final prev = ctx.untrackedStart();
   try {
     return action();
   } finally {

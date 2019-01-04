@@ -24,7 +24,7 @@ class Atom {
 
   Set<Derivation> observers = Set();
 
-  var _observationListeners = Map<String, Set<Function>>();
+  final _observationListeners = Map<String, Set<Function>>();
 
   reportObserved() {
     ctx.reportObserved(this);

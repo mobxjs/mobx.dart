@@ -14,7 +14,7 @@ class ReactiveState {
 }
 
 class ReactiveContext {
-  ReactiveState _state = ReactiveState();
+  final ReactiveState _state = ReactiveState();
 
   get nextId => ++_state.nextIdCounter;
 
@@ -27,7 +27,7 @@ class ReactiveContext {
       runReactions();
 
       for (var i = 0; i < _state._pendingUnobservations.length; i++) {
-        var ob = _state._pendingUnobservations[i];
+        final ob = _state._pendingUnobservations[i];
         ob.isPendingUnobservation = false;
 
         if (ob.observers.isEmpty) {
@@ -48,13 +48,13 @@ class ReactiveContext {
   }
 
   T trackDerivation<T>(Derivation d, T Function() fn) {
-    var prevDerivation = _state._trackingDerivation;
+    final prevDerivation = _state._trackingDerivation;
     _state._trackingDerivation = d;
 
     resetDerivationState(d);
     d.newObservables = Set();
 
-    var result = fn();
+    final result = fn();
 
     _state._trackingDerivation = prevDerivation;
     bindDependencies(d);
@@ -63,7 +63,7 @@ class ReactiveContext {
   }
 
   reportObserved(Atom atom) {
-    var derivation = _state._trackingDerivation;
+    final derivation = _state._trackingDerivation;
 
     if (derivation != null) {
       derivation.newObservables.add(atom);
@@ -75,8 +75,8 @@ class ReactiveContext {
   }
 
   bindDependencies(Derivation d) {
-    var staleObservables = d.observables.difference(d.newObservables);
-    var newObservables = d.newObservables.difference(d.observables);
+    final staleObservables = d.observables.difference(d.newObservables);
+    final newObservables = d.newObservables.difference(d.observables);
     var lowestNewDerivationState = DerivationState.UP_TO_DATE;
 
     // Add newly found observables
@@ -85,7 +85,7 @@ class ReactiveContext {
 
       // ComputedValue = ObservableValue + Derivation
       if (isComputedValue(observable)) {
-        var drv = observable as Derivation;
+        final drv = observable as Derivation;
         if (drv.dependenciesState.index > lowestNewDerivationState.index) {
           lowestNewDerivationState = drv.dependenciesState;
         }
@@ -93,7 +93,7 @@ class ReactiveContext {
     }
 
     // Remove previous observables
-    for (var ob in staleObservables) {
+    for (final ob in staleObservables) {
       ob.removeObserver(d);
     }
 
@@ -117,7 +117,7 @@ class ReactiveContext {
 
     _state._isRunningReactions = true;
 
-    for (var reaction in _state._pendingReactions) {
+    for (final reaction in _state._pendingReactions) {
       reaction.run();
     }
 
@@ -172,7 +172,7 @@ class ReactiveContext {
   }
 
   clearObservables(Derivation derivation) {
-    var observables = derivation.observables;
+    final observables = derivation.observables;
     derivation.observables = Set();
 
     for (var x in observables) {
@@ -242,7 +242,7 @@ class ReactiveContext {
   }
 
   untrackedStart() {
-    var prevDerivation = _state._trackingDerivation;
+    final prevDerivation = _state._trackingDerivation;
     _state._trackingDerivation = null;
     return prevDerivation;
   }

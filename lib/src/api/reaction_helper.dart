@@ -37,7 +37,7 @@ ReactionDisposer createAutorun(Function(Reaction) trackingFn,
     {String name, int delay}) {
   Reaction rxn;
 
-  var rxnName = name ?? 'Autorun@${ctx.nextId}';
+  final rxnName = name ?? 'Autorun@${ctx.nextId}';
 
   if (delay == null) {
     // Use a sync-scheduler.
@@ -46,7 +46,7 @@ ReactionDisposer createAutorun(Function(Reaction) trackingFn,
     }, name: rxnName);
   } else {
     // Use a delayed scheduler.
-    var scheduler = createDelayedScheduler(delay);
+    final scheduler = createDelayedScheduler(delay);
     var isScheduled = false;
     Timer timer;
 
@@ -80,13 +80,13 @@ ReactionDisposer createReaction<T>(
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
 
-  var rxnName = name ?? 'Reaction@${ctx.nextId}';
+  final rxnName = name ?? 'Reaction@${ctx.nextId}';
 
-  var effectAction =
+  final effectAction =
       action((T value) => effect(value), name: '${rxnName}-effect');
 
-  var runSync = (delay == null);
-  var scheduler = delay != null ? createDelayedScheduler(delay) : null;
+  final runSync = (delay == null);
+  final scheduler = delay != null ? createDelayedScheduler(delay) : null;
 
   var firstTime = true;
   T value;
@@ -99,12 +99,12 @@ ReactionDisposer createReaction<T>(
     var changed = false;
 
     rxn.track(() {
-      var nextValue = predicate(rxn);
+      final nextValue = predicate(rxn);
       changed = firstTime || (nextValue != value);
       value = nextValue;
     });
 
-    var canInvokeEffect =
+    final canInvokeEffect =
         (firstTime && fireImmediately == true) || (!firstTime && changed);
     if (canInvokeEffect) {
       effectAction([value]);
@@ -150,8 +150,8 @@ ReactionDisposer createWhenReaction(
 }) {
   ReactionDisposer disposer;
 
-  var rxnName = name ?? 'When@${ctx.nextId}';
-  var effectAction = action(effect, name: '${rxnName}-effect');
+  final rxnName = name ?? 'When@${ctx.nextId}';
+  final effectAction = action(effect, name: '${rxnName}-effect');
 
   disposer = createAutorun((Reaction r) {
     if (predicate()) {
@@ -164,9 +164,10 @@ ReactionDisposer createWhenReaction(
 }
 
 Future<void> createAsyncWhenReaction(bool Function() predicate, {String name}) {
-  var completer = Completer<void>();
+  final completer = Completer<void>();
 
-  var disposer = createWhenReaction(predicate, completer.complete, name: name);
+  final disposer =
+      createWhenReaction(predicate, completer.complete, name: name);
 
   completer.future.catchError((error) {
     disposer();

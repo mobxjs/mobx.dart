@@ -1,0 +1,4 @@
+linter:
+  rules:
+    - prefer_final_locals
+    - prefer_final_fields
