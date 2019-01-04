@@ -4,13 +4,11 @@ import 'package:mobx/src/api/reaction.dart';
 import 'package:mobx/src/core/atom_derivation.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   test('Computed value', () {
     final x = observable(20);
     final y = observable(10);
-    final c = computed(() {
-      return x.value + y.value;
-    });
+    final c = computed(() => x.value + y.value);
 
     x.value = 30;
     y.value = 20;
@@ -32,9 +30,7 @@ main() {
       return x.value + y.value;
     }, name: 'c1');
 
-    final c2 = computed(() {
-      return z.value;
-    }, name: 'c2');
+    final c2 = computed(() => z.value, name: 'c2');
 
     final c3 = computed(() {
       c3ComputationCount++;

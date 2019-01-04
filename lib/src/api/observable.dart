@@ -15,9 +15,8 @@ import 'package:mobx/src/core/observable.dart';
 ///
 /// print('x = ${x.value}'); // read an observable's value
 /// ```
-ObservableValue<T> observable<T>(T initialValue, {String name}) {
-  return ObservableValue(initialValue, name: name);
-}
+ObservableValue<T> observable<T>(T initialValue, {String name}) =>
+    ObservableValue(initialValue, name: name);
 
 /// Creates a computed value with an optional [name].
 ///
@@ -46,6 +45,5 @@ ObservableValue<T> observable<T>(T initialValue, {String name}) {
 /// A computed value is _cached_ and it recomputes only when the dependent observables actually
 /// change. This makes them fast and you are free to use them throughout your application. Internally
 /// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
-ComputedValue<T> computed<T>(T Function() fn, {String name}) {
-  return ComputedValue(fn, name: name);
-}
+ComputedValue<T> computed<T>(T Function() fn, {String name}) =>
+    ComputedValue(fn, name: name);

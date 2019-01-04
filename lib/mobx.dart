@@ -28,6 +28,8 @@
 ///
 library mobx;
 
+import 'package:mobx/src/api/observable.dart';
+
 export 'package:mobx/src/api/action.dart';
 export 'package:mobx/src/api/observable.dart';
 export 'package:mobx/src/api/reaction.dart';

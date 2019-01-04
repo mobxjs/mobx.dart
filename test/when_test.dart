@@ -6,9 +6,7 @@ void main() {
   test('When', () {
     var executed = false;
     final x = observable(10);
-    final d = when(() {
-      return x.value > 10;
-    }, () {
+    final d = when(() => x.value > 10, () {
       executed = true;
     }, name: 'Basic when');
 

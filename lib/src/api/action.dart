@@ -32,6 +32,4 @@ import 'package:mobx/src/core/action.dart';
 /// notifications and propagates them only after the completion of the action. Actions
 /// can also be nested inside, in which case the change notification will propagate when
 /// the top-level action completes.
-Action action(Function fn, {String name}) {
-  return Action(fn, name: name);
-}
+Action action(Function fn, {String name}) => Action(fn, name: name);

@@ -4,7 +4,7 @@ import 'package:mobx/src/api/reaction.dart';
 import 'package:mobx/src/core/action.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   test('Action basics work', () {
     final a = action((String name, String value) {
       expect(name, equals('name'));
@@ -74,9 +74,7 @@ main() {
     final y = observable(20);
 
     var total = 0;
-    final a = action(() {
-      return y.value;
-    });
+    final a = action(() => y.value);
 
     final d = autorun((_) {
       total = x.value + a();
@@ -99,7 +97,7 @@ main() {
     String message;
 
     final a = action(({String name, String value}) {
-      message = '${name}: ${value}';
+      message = '$name: $value';
     });
 
     a([], {'name': 'Hello', 'value': 'MobX'});
@@ -113,6 +111,7 @@ main() {
     var executionCount = 0;
 
     final d = autorun((_) {
+      // ignore: unnecessary_statements
       x.value + y.value;
       executionCount++;
     });

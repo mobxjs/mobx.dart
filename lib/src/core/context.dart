@@ -1,5 +1,6 @@
 import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/atom_derivation.dart';
+import 'package:mobx/src/core/computed.dart';
 import 'package:mobx/src/core/reaction.dart';
 
 class ReactiveState {
@@ -16,29 +17,30 @@ class ReactiveState {
 class ReactiveContext {
   final ReactiveState _state = ReactiveState();
 
-  get nextId => ++_state.nextIdCounter;
+  int get nextId => ++_state.nextIdCounter;
 
-  startBatch() {
+  void startBatch() {
     _state._batch++;
   }
 
-  endBatch() {
+  void endBatch() {
     if (--_state._batch == 0) {
       runReactions();
 
       for (var i = 0; i < _state._pendingUnobservations.length; i++) {
-        final ob = _state._pendingUnobservations[i];
-        ob.isPendingUnobservation = false;
+        final ob = _state._pendingUnobservations[i]
+          ..isPendingUnobservation = false;
 
         if (ob.observers.isEmpty) {
           if (ob.isBeingObserved) {
             // if this observable had reactive observers, trigger the hooks
-            ob.isBeingObserved = false;
-            ob.notifyOnBecomeUnobserved();
+            ob
+              ..isBeingObserved = false
+              ..notifyOnBecomeUnobserved();
           }
 
-          if (isComputedValue(ob)) {
-            (ob as Derivation).suspend();
+          if (ob is ComputedValue) {
+            ob.suspend();
           }
         }
       }
@@ -62,55 +64,60 @@ class ReactiveContext {
     return result;
   }
 
-  reportObserved(Atom atom) {
+  void reportObserved(Atom atom) {
     final derivation = _state._trackingDerivation;
 
     if (derivation != null) {
       derivation.newObservables.add(atom);
       if (!atom.isBeingObserved) {
-        atom.isBeingObserved = true;
-        atom.notifyOnBecomeObserved();
+        atom
+          ..isBeingObserved = true
+          ..notifyOnBecomeObserved();
       }
     }
   }
 
-  bindDependencies(Derivation d) {
-    final staleObservables = d.observables.difference(d.newObservables);
-    final newObservables = d.newObservables.difference(d.observables);
-    var lowestNewDerivationState = DerivationState.UP_TO_DATE;
+  void bindDependencies(Derivation derivation) {
+    final staleObservables =
+        derivation.observables.difference(derivation.newObservables);
+    final newObservables =
+        derivation.newObservables.difference(derivation.observables);
+    var lowestNewDerivationState = DerivationState.upToDate;
 
     // Add newly found observables
-    for (var observable in newObservables) {
-      observable.addObserver(d);
+    for (final observable in newObservables) {
+      observable.addObserver(derivation);
 
       // ComputedValue = ObservableValue + Derivation
-      if (isComputedValue(observable)) {
-        final drv = observable as Derivation;
-        if (drv.dependenciesState.index > lowestNewDerivationState.index) {
-          lowestNewDerivationState = drv.dependenciesState;
+      if (observable is ComputedValue) {
+        if (observable.dependenciesState.index >
+            lowestNewDerivationState.index) {
+          lowestNewDerivationState = observable.dependenciesState;
         }
       }
     }
 
     // Remove previous observables
     for (final ob in staleObservables) {
-      ob.removeObserver(d);
+      ob.removeObserver(derivation);
     }
 
-    if (lowestNewDerivationState != DerivationState.UP_TO_DATE) {
-      d.dependenciesState = lowestNewDerivationState;
-      d.onBecomeStale();
+    if (lowestNewDerivationState != DerivationState.upToDate) {
+      derivation
+        ..dependenciesState = lowestNewDerivationState
+        ..onBecomeStale();
     }
 
-    d.observables = d.newObservables;
-    d.newObservables = Set(); // No need for newObservables beyond this point
+    derivation
+      ..observables = derivation.newObservables
+      ..newObservables = Set(); // No need for newObservables beyond this point
   }
 
-  addPendingReaction(Reaction reaction) {
+  void addPendingReaction(Reaction reaction) {
     _state._pendingReactions.add(reaction);
   }
 
-  runReactions() {
+  void runReactions() {
     if (_state._batch > 0 || _state._isRunningReactions) {
       return;
     }
@@ -121,65 +128,67 @@ class ReactiveContext {
       reaction.run();
     }
 
-    _state._pendingReactions = [];
-    _state._isRunningReactions = false;
+    _state
+      .._pendingReactions = []
+      .._isRunningReactions = false;
   }
 
-  propagateChanged(Atom atom) {
-    if (atom.lowestObserverState == DerivationState.STALE) {
+  void propagateChanged(Atom atom) {
+    if (atom.lowestObserverState == DerivationState.stale) {
       return;
     }
 
-    atom.lowestObserverState = DerivationState.STALE;
+    atom.lowestObserverState = DerivationState.stale;
 
-    for (var observer in atom.observers) {
-      if (observer.dependenciesState == DerivationState.UP_TO_DATE) {
+    for (final observer in atom.observers) {
+      if (observer.dependenciesState == DerivationState.upToDate) {
         observer.onBecomeStale();
       }
-      observer.dependenciesState = DerivationState.STALE;
+      observer.dependenciesState = DerivationState.stale;
     }
   }
 
   void propagatePossiblyChanged(Atom atom) {
-    if (atom.lowestObserverState != DerivationState.UP_TO_DATE) {
+    if (atom.lowestObserverState != DerivationState.upToDate) {
       return;
     }
 
-    atom.lowestObserverState = DerivationState.POSSIBLY_STALE;
+    atom.lowestObserverState = DerivationState.possiblyStale;
 
-    for (var observer in atom.observers) {
-      if (observer.dependenciesState == DerivationState.UP_TO_DATE) {
-        observer.dependenciesState = DerivationState.POSSIBLY_STALE;
-        observer.onBecomeStale();
+    for (final observer in atom.observers) {
+      if (observer.dependenciesState == DerivationState.upToDate) {
+        observer
+          ..dependenciesState = DerivationState.possiblyStale
+          ..onBecomeStale();
       }
     }
   }
 
   void propagateChangeConfirmed(Atom atom) {
-    if (atom.lowestObserverState == DerivationState.STALE) {
+    if (atom.lowestObserverState == DerivationState.stale) {
       return;
     }
 
-    atom.lowestObserverState = DerivationState.STALE;
+    atom.lowestObserverState = DerivationState.stale;
 
-    for (var observer in atom.observers) {
-      if (observer.dependenciesState == DerivationState.POSSIBLY_STALE) {
-        observer.dependenciesState = DerivationState.STALE;
-      } else if (observer.dependenciesState == DerivationState.UP_TO_DATE) {
-        atom.lowestObserverState = DerivationState.UP_TO_DATE;
+    for (final observer in atom.observers) {
+      if (observer.dependenciesState == DerivationState.possiblyStale) {
+        observer.dependenciesState = DerivationState.stale;
+      } else if (observer.dependenciesState == DerivationState.upToDate) {
+        atom.lowestObserverState = DerivationState.upToDate;
       }
     }
   }
 
-  clearObservables(Derivation derivation) {
+  void clearObservables(Derivation derivation) {
     final observables = derivation.observables;
     derivation.observables = Set();
 
-    for (var x in observables) {
+    for (final x in observables) {
       x.removeObserver(derivation);
     }
 
-    derivation.dependenciesState = DerivationState.NOT_TRACKING;
+    derivation.dependenciesState = DerivationState.notTracking;
   }
 
   void enqueueForUnobservation(Atom atom) {
@@ -191,35 +200,34 @@ class ReactiveContext {
     _state._pendingUnobservations.add(atom);
   }
 
-  resetDerivationState(Derivation d) {
-    if (d.dependenciesState == DerivationState.UP_TO_DATE) {
+  void resetDerivationState(Derivation d) {
+    if (d.dependenciesState == DerivationState.upToDate) {
       return;
     }
 
-    d.dependenciesState = DerivationState.UP_TO_DATE;
-    for (var obs in d.observables) {
-      obs.lowestObserverState = DerivationState.UP_TO_DATE;
+    d.dependenciesState = DerivationState.upToDate;
+    for (final obs in d.observables) {
+      obs.lowestObserverState = DerivationState.upToDate;
     }
   }
 
   bool shouldCompute(Derivation derivation) {
     switch (derivation.dependenciesState) {
-      case DerivationState.UP_TO_DATE:
+      case DerivationState.upToDate:
         return false;
 
-      case DerivationState.NOT_TRACKING:
-      case DerivationState.STALE:
+      case DerivationState.notTracking:
+      case DerivationState.stale:
         return true;
 
-      case DerivationState.POSSIBLY_STALE:
+      case DerivationState.possiblyStale:
         return untracked(() {
-          for (var obs in derivation.observables) {
-            if (isComputedValue(obs)) {
+          for (final obs in derivation.observables) {
+            if (obs is ComputedValue) {
               // Force a computation
-              // Must work without any type-errors as we are dealing with a ComputedValue<T>
-              (obs as dynamic).value;
+              obs.value;
 
-              if (derivation.dependenciesState == DerivationState.STALE) {
+              if (derivation.dependenciesState == DerivationState.stale) {
                 return true;
               }
             }
@@ -233,30 +241,18 @@ class ReactiveContext {
     return false;
   }
 
-  bool isInBatch() {
-    return _state._batch > 0;
-  }
+  bool isInBatch() => _state._batch > 0;
 
-  bool isComputingDerivation() {
-    return _state._trackingDerivation != null;
-  }
+  bool isComputingDerivation() => _state._trackingDerivation != null;
 
-  untrackedStart() {
+  Derivation untrackedStart() {
     final prevDerivation = _state._trackingDerivation;
     _state._trackingDerivation = null;
     return prevDerivation;
   }
 
-  untrackedEnd(Derivation prevDerivation) {
+  // ignore: use_setters_to_change_properties
+  void untrackedEnd(Derivation prevDerivation) {
     _state._trackingDerivation = prevDerivation;
-  }
-
-  bool isComputedValue(dynamic obj) {
-    if (obj is Derivation) {
-      // The only other kind of Derivation is a ComputedValue
-      return obj is! Reaction;
-    }
-
-    return false;
   }
 }

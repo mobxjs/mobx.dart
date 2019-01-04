@@ -1,12 +1,12 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   test('observe', () {
     final x = observable(10);
     var executed = false;
 
-    final dispose = x.observe<int>((change) {
+    final dispose = x.observe((change) {
       expect(change.newValue, equals(10));
       expect(change.oldValue, isNull);
       executed = true;
@@ -21,7 +21,7 @@ main() {
     final x = observable(10);
     var executed = false;
 
-    final dispose = x.observe<int>((change) {
+    final dispose = x.observe((change) {
       expect(change.newValue, equals(100));
       expect(change.oldValue, 10);
       executed = true;
@@ -39,7 +39,7 @@ main() {
     final x = observable(10);
     var executed = false;
 
-    final dispose = x.observe<int>((change) {
+    final dispose = x.observe((change) {
       executed = true;
     }, fireImmediately: true);
 
@@ -56,15 +56,15 @@ main() {
     final x = observable(10);
     var executionCount = 0;
 
-    final dispose1 = x.observe<int>((change) {
+    final dispose1 = x.observe((change) {
       executionCount++;
     });
 
-    final dispose2 = x.observe<int>((change) {
+    final dispose2 = x.observe((change) {
       executionCount++;
     });
 
-    final dispose3 = x.observe<int>((change) {
+    final dispose3 = x.observe((change) {
       executionCount++;
     });
 
@@ -107,6 +107,7 @@ main() {
   test('onBecomeObserved/onBecomeUnobserved works for computeds', () {
     final x = observable(10);
     final x1 = computed(() {
+      // ignore: unnecessary_statements
       x.value + 1;
     });
     var executionCount = 0;

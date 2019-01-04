@@ -1,16 +1,16 @@
 import 'package:mobx/src/core/atom_derivation.dart';
 
 class Action {
-  Function _fn;
-  String name;
-
   Action(Function fn, {String name}) {
     _fn = fn;
 
     this.name = name ?? 'Action@${ctx.nextId}';
   }
 
-  call([List args = const [], Map<String, dynamic> namedArgs]) {
+  Function _fn;
+  String name;
+
+  dynamic call([List args = const [], Map<String, dynamic> namedArgs]) {
     final prevDerivation = _startAction();
 
     try {
@@ -35,15 +35,14 @@ class Action {
     return prevDerivation;
   }
 
-  _endAction(Derivation prevDerivation) {
-    ctx.endBatch();
-    ctx.untrackedEnd(prevDerivation);
+  void _endAction(Derivation prevDerivation) {
+    ctx
+      ..endBatch()
+      ..untrackedEnd(prevDerivation);
   }
 }
 
-runInAction(Function fn, {String name}) {
-  return Action(fn, name: name)();
-}
+Action runInAction(Function fn, {String name}) => Action(fn, name: name)();
 
 /// Untracked ensures there is no tracking derivation while the given action runs.
 /// This is useful in cases where no observers should be linked to a running (tracking) derivation.

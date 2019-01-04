@@ -4,6 +4,7 @@ import 'package:mobx/src/api/action.dart';
 import 'package:mobx/src/core/atom_derivation.dart';
 import 'package:mobx/src/core/reaction.dart';
 import 'package:mobx/src/utils.dart';
+import 'package:mobx/src/api/reaction.dart';
 
 /// A callable class that is used to dispose a [reaction], [autorun] or [when]
 ///
@@ -17,6 +18,10 @@ import 'package:mobx/src/utils.dart';
 ///
 /// In the above code, `dispose` is of type `ReactionDisposer`.
 class ReactionDisposer {
+  ReactionDisposer(Reaction rxn) {
+    _rxn = rxn;
+  }
+
   Reaction _rxn;
 
   /// A special property that has a reference to the underlying reaction. Most
@@ -25,12 +30,8 @@ class ReactionDisposer {
   /// _tracing_.
   Reaction get $mobx => _rxn;
 
-  ReactionDisposer(Reaction rxn) {
-    _rxn = rxn;
-  }
-
   /// Invoking it will dispose the underlying [reaction]
-  call() => $mobx.dispose();
+  void call() => $mobx.dispose();
 }
 
 ReactionDisposer createAutorun(Function(Reaction) trackingFn,
@@ -83,15 +84,15 @@ ReactionDisposer createReaction<T>(
   final rxnName = name ?? 'Reaction@${ctx.nextId}';
 
   final effectAction =
-      action((T value) => effect(value), name: '${rxnName}-effect');
+      action((T value) => effect(value), name: '$rxnName-effect');
 
-  final runSync = (delay == null);
+  final runSync = delay == null;
   final scheduler = delay != null ? createDelayedScheduler(delay) : null;
 
   var firstTime = true;
   T value;
 
-  reactionRunner() {
+  void reactionRunner() {
     if (rxn.isDisposed) {
       return;
     }
@@ -139,7 +140,9 @@ ReactionDisposer createReaction<T>(
     }
   }, name: rxnName);
 
+  // ignore: cascade_invocations
   rxn.schedule();
+
   return ReactionDisposer(rxn);
 }
 
@@ -148,19 +151,15 @@ ReactionDisposer createWhenReaction(
   void Function() effect, {
   String name,
 }) {
-  ReactionDisposer disposer;
-
   final rxnName = name ?? 'When@${ctx.nextId}';
-  final effectAction = action(effect, name: '${rxnName}-effect');
+  final effectAction = action(effect, name: '$rxnName-effect');
 
-  disposer = createAutorun((Reaction r) {
+  return createAutorun((reaction) {
     if (predicate()) {
-      r.dispose();
+      reaction.dispose();
       effectAction();
     }
   }, name: rxnName);
-
-  return disposer;
 }
 
 Future<void> createAsyncWhenReaction(bool Function() predicate, {String name}) {

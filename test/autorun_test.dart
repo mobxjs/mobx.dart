@@ -1,8 +1,7 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
-import 'package:mobx/src/core/reaction.dart';
-import "package:test/test.dart";
+import 'package:test/test.dart';
 
 void main() {
   test('autorun', () {
@@ -32,16 +31,16 @@ void main() {
     String message;
 
     final dispose = autorun((_) {
-      message = "${x.value} ${y.value}";
+      message = '${x.value} ${y.value}';
     }, name: 'Message Effect');
 
-    expect(message, equals("Hello Pavan"));
-    expect(dispose.$mobx.name, equals("Message Effect"));
+    expect(message, equals('Hello Pavan'));
+    expect(dispose.$mobx.name, equals('Message Effect'));
 
-    x.value = "Hey";
-    expect(message, equals("Hey Pavan"));
-    y.value = "MobX";
-    expect(message, equals("Hey MobX"));
+    x.value = 'Hey';
+    expect(message, equals('Hey Pavan'));
+    y.value = 'MobX';
+    expect(message, equals('Hey MobX'));
 
     dispose();
   });
@@ -96,11 +95,11 @@ void main() {
   test('autorun with pre-mature disposal in predicate', () {
     final x = observable(10);
 
-    final d = autorun((Reaction r) {
+    final d = autorun((reaction) {
       final isGreaterThan10 = x.value > 10;
 
       if (isGreaterThan10) {
-        r.dispose();
+        reaction.dispose();
       }
     });
 

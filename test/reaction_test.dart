@@ -1,16 +1,13 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
-import 'package:mobx/src/core/reaction.dart';
 import 'package:test/test.dart';
 
 void main() {
   test('Reaction basics', () {
     var executed = false;
     final x = observable(10);
-    final d = reaction((_) {
-      return x.value > 10;
-    }, (isGreaterThan10) {
+    final d = reaction((_) => x.value > 10, (isGreaterThan10) {
       executed = true;
     }, name: 'Basic Reaction');
 
@@ -34,9 +31,7 @@ void main() {
     final x = observable(10);
     var executed = false;
 
-    final d = reaction((_) {
-      return x.value > 10;
-    }, (isGreaterThan10) {
+    final d = reaction((_) => x.value > 10, (isGreaterThan10) {
       executed = true;
     }, delay: 1000);
 
@@ -58,9 +53,7 @@ void main() {
     final x = observable(10);
     var executed = false;
 
-    final d = reaction((_) {
-      return x.value > 10;
-    }, (isGreaterThan10) {
+    final d = reaction((_) => x.value > 10, (isGreaterThan10) {
       executed = true;
     }, fireImmediately: true);
 
@@ -72,9 +65,7 @@ void main() {
     final x = observable(10);
     var executed = false;
 
-    final d = reaction((_) {
-      return x.value > 10;
-    }, (isGreaterThan10) {
+    final d = reaction((_) => x.value > 10, (isGreaterThan10) {
       executed = true;
     }, delay: 1000, fireImmediately: true);
 
@@ -107,11 +98,11 @@ void main() {
     final x = observable(10);
     var executed = false;
 
-    final d = reaction((Reaction r) {
+    final d = reaction((reaction) {
       final isGreaterThan10 = x.value > 10;
 
       if (isGreaterThan10) {
-        r.dispose();
+        reaction.dispose();
       }
 
       return isGreaterThan10;
