@@ -8,7 +8,7 @@ void main() {
   test('Reaction basics', () {
     var executed = false;
     var x = observable(10);
-    var d = reaction(() {
+    var d = reaction((_) {
       return x.value > 10;
     }, (isGreaterThan10) {
       executed = true;
@@ -34,7 +34,7 @@ void main() {
     var x = observable(10);
     var executed = false;
 
-    var d = reaction(() {
+    var d = reaction((_) {
       return x.value > 10;
     }, (isGreaterThan10) {
       executed = true;
@@ -58,7 +58,7 @@ void main() {
     var x = observable(10);
     var executed = false;
 
-    var d = reaction(() {
+    var d = reaction((_) {
       return x.value > 10;
     }, (isGreaterThan10) {
       executed = true;
@@ -72,7 +72,7 @@ void main() {
     var x = observable(10);
     var executed = false;
 
-    var d = reaction(() {
+    var d = reaction((_) {
       return x.value > 10;
     }, (isGreaterThan10) {
       executed = true;

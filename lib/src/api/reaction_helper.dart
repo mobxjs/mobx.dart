@@ -33,12 +33,11 @@ class ReactionDisposer {
   call() => $mobx.dispose();
 }
 
-ReactionDisposer createAutorun(Function(Reaction) fn,
+ReactionDisposer createAutorun(Function(Reaction) trackingFn,
     {String name, int delay}) {
   Reaction rxn;
 
   var rxnName = name ?? 'Autorun@${ctx.nextId}';
-  var trackingFn = prepareTrackingFunction(fn);
 
   if (delay == null) {
     // Use a sync-scheduler.
@@ -76,12 +75,12 @@ ReactionDisposer createAutorun(Function(Reaction) fn,
   return ReactionDisposer(rxn);
 }
 
-ReactionDisposer createReaction<T>(Function predicate, void Function(T) effect,
+ReactionDisposer createReaction<T>(
+    T Function(Reaction) predicate, void Function(T) effect,
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
 
   var rxnName = name ?? 'Reaction@${ctx.nextId}';
-  var trackingPredicateFn = prepareTrackingFunction(predicate);
 
   var effectAction =
       action((T value) => effect(value), name: '${rxnName}-effect');
@@ -100,7 +99,7 @@ ReactionDisposer createReaction<T>(Function predicate, void Function(T) effect,
     var changed = false;
 
     rxn.track(() {
-      var nextValue = trackingPredicateFn(rxn);
+      var nextValue = predicate(rxn);
       changed = firstTime || (nextValue != value);
       value = nextValue;
     });
