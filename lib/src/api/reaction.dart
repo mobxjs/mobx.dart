@@ -29,7 +29,7 @@ import 'package:mobx/src/utils.dart';
 /// x.value = 30; // Will not cause autorun() to re-trigger as it's disposed.
 /// ```
 
-ReactionDisposer autorun(Function fn, {String name, int delay}) {
+ReactionDisposer autorun(Function(Reaction) fn, {String name, int delay}) {
   return createAutorun(fn, name: name, delay: delay);
 }
 

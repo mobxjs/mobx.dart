@@ -9,7 +9,7 @@ void main() {
     var c = observable(0);
     int nextValue;
 
-    var dispose = autorun(() {
+    var dispose = autorun((_) {
       nextValue = c.value + 1;
     });
 
@@ -31,7 +31,7 @@ void main() {
     var y = observable('Pavan');
     String message;
 
-    var dispose = autorun(() {
+    var dispose = autorun((_) {
       message = "${x.value} ${y.value}";
     }, name: 'Message Effect');
 
@@ -51,7 +51,7 @@ void main() {
     var y = observable(20);
     int value;
 
-    var dispose = autorun(() {
+    var dispose = autorun((_) {
       value = (value == null) ? x.value : y.value;
     });
 
@@ -71,7 +71,7 @@ void main() {
     var value = 0;
 
     fakeAsync((async) {
-      dispose = autorun(() {
+      dispose = autorun((_) {
         value = x.value + 1;
       }, delay: delayMs);
 

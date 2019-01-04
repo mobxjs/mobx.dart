@@ -45,7 +45,7 @@ void main() {
       executionCount++;
     });
 
-    var d = autorun(() {
+    var d = autorun((_) {
       a.reportObserved();
     });
 

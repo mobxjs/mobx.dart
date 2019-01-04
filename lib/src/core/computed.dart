@@ -96,7 +96,7 @@ class ComputedValue<T> extends Atom implements Derivation {
     var firstTime = true;
     T prevValue;
 
-    return autorun(() {
+    return autorun((_) {
       var newValue = this.value as T;
       if (firstTime == true || fireImmediately == true) {
         untracked(() {

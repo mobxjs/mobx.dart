@@ -41,7 +41,7 @@ main() {
       return c1.value + c2.value;
     }, name: 'c3');
 
-    var d = autorun(() {
+    var d = autorun((_) {
       c3.value;
     });
 

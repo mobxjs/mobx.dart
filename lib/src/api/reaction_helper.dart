@@ -33,7 +33,8 @@ class ReactionDisposer {
   call() => $mobx.dispose();
 }
 
-ReactionDisposer createAutorun(Function fn, {String name, int delay}) {
+ReactionDisposer createAutorun(Function(Reaction) fn,
+    {String name, int delay}) {
   Reaction rxn;
 
   var rxnName = name ?? 'Autorun@${ctx.nextId}';

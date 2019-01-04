@@ -24,7 +24,7 @@ main() {
           1; // No reaction-infinite-loop as we are not tracking the observables
     });
 
-    var dispose = autorun(() {
+    var dispose = autorun((_) {
       total = x.value * 10;
     });
 
@@ -44,7 +44,7 @@ main() {
     var total = 0;
     var autorunExecutionCount = 0;
 
-    var dispose = autorun(() {
+    var dispose = autorun((_) {
       total = x.value + y.value + z.value;
       autorunExecutionCount++;
     });
@@ -78,7 +78,7 @@ main() {
       return y.value;
     });
 
-    var d = autorun(() {
+    var d = autorun((_) {
       total = x.value + a();
     });
 
@@ -112,7 +112,7 @@ main() {
 
     var executionCount = 0;
 
-    var d = autorun(() {
+    var d = autorun((_) {
       x.value + y.value;
       executionCount++;
     });
@@ -140,7 +140,7 @@ main() {
     var executionCount = 0;
     var total = 0;
 
-    var d = autorun(() {
+    var d = autorun((_) {
       total = x.value + y.value;
       executionCount++;
     });
@@ -165,7 +165,7 @@ main() {
 
     var total = 0;
 
-    var d = autorun(() {
+    var d = autorun((_) {
       total = x.value + y.value;
     });
 

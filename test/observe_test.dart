@@ -91,7 +91,7 @@ main() {
       executionCount++;
     });
 
-    var d3 = autorun(() {
+    var d3 = autorun((_) {
       x.value;
     });
 
@@ -119,7 +119,7 @@ main() {
       executionCount++;
     });
 
-    var d3 = autorun(() {
+    var d3 = autorun((_) {
       x1.value;
     });
 
