@@ -4,6 +4,7 @@ import 'package:mobx/src/api/action.dart';
 import 'package:mobx/src/core/atom_derivation.dart';
 import 'package:mobx/src/core/reaction.dart';
 import 'package:mobx/src/utils.dart';
+import 'package:mobx/src/api/reaction.dart';
 
 /// A callable class that is used to dispose a [reaction], [autorun] or [when]
 ///
@@ -17,6 +18,10 @@ import 'package:mobx/src/utils.dart';
 ///
 /// In the above code, `dispose` is of type `ReactionDisposer`.
 class ReactionDisposer {
+  ReactionDisposer(Reaction rxn) {
+    _rxn = rxn;
+  }
+
   Reaction _rxn;
 
   /// A special property that has a reference to the underlying reaction. Most
@@ -25,19 +30,15 @@ class ReactionDisposer {
   /// _tracing_.
   Reaction get $mobx => _rxn;
 
-  ReactionDisposer(Reaction rxn) {
-    _rxn = rxn;
-  }
-
   /// Invoking it will dispose the underlying [reaction]
-  call() => $mobx.dispose();
+  void call() => $mobx.dispose();
 }
 
 ReactionDisposer createAutorun(Function(Reaction) trackingFn,
     {String name, int delay}) {
   Reaction rxn;
 
-  var rxnName = name ?? 'Autorun@${ctx.nextId}';
+  final rxnName = name ?? 'Autorun@${ctx.nextId}';
 
   if (delay == null) {
     // Use a sync-scheduler.
@@ -46,7 +47,7 @@ ReactionDisposer createAutorun(Function(Reaction) trackingFn,
     }, name: rxnName);
   } else {
     // Use a delayed scheduler.
-    var scheduler = createDelayedScheduler(delay);
+    final scheduler = createDelayedScheduler(delay);
     var isScheduled = false;
     Timer timer;
 
@@ -80,18 +81,18 @@ ReactionDisposer createReaction<T>(
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
 
-  var rxnName = name ?? 'Reaction@${ctx.nextId}';
+  final rxnName = name ?? 'Reaction@${ctx.nextId}';
 
-  var effectAction =
-      action((T value) => effect(value), name: '${rxnName}-effect');
+  final effectAction =
+      action((T value) => effect(value), name: '$rxnName-effect');
 
-  var runSync = (delay == null);
-  var scheduler = delay != null ? createDelayedScheduler(delay) : null;
+  final runSync = delay == null;
+  final scheduler = delay != null ? createDelayedScheduler(delay) : null;
 
   var firstTime = true;
   T value;
 
-  reactionRunner() {
+  void reactionRunner() {
     if (rxn.isDisposed) {
       return;
     }
@@ -99,12 +100,12 @@ ReactionDisposer createReaction<T>(
     var changed = false;
 
     rxn.track(() {
-      var nextValue = predicate(rxn);
+      final nextValue = predicate(rxn);
       changed = firstTime || (nextValue != value);
       value = nextValue;
     });
 
-    var canInvokeEffect =
+    final canInvokeEffect =
         (firstTime && fireImmediately == true) || (!firstTime && changed);
     if (canInvokeEffect) {
       effectAction([value]);
@@ -139,7 +140,9 @@ ReactionDisposer createReaction<T>(
     }
   }, name: rxnName);
 
+  // ignore: cascade_invocations
   rxn.schedule();
+
   return ReactionDisposer(rxn);
 }
 
@@ -148,25 +151,22 @@ ReactionDisposer createWhenReaction(
   void Function() effect, {
   String name,
 }) {
-  ReactionDisposer disposer;
+  final rxnName = name ?? 'When@${ctx.nextId}';
+  final effectAction = action(effect, name: '$rxnName-effect');
 
-  var rxnName = name ?? 'When@${ctx.nextId}';
-  var effectAction = action(effect, name: '${rxnName}-effect');
-
-  disposer = createAutorun((Reaction r) {
+  return createAutorun((reaction) {
     if (predicate()) {
-      r.dispose();
+      reaction.dispose();
       effectAction();
     }
   }, name: rxnName);
-
-  return disposer;
 }
 
 Future<void> createAsyncWhenReaction(bool Function() predicate, {String name}) {
-  var completer = Completer<void>();
+  final completer = Completer<void>();
 
-  var disposer = createWhenReaction(predicate, completer.complete, name: name);
+  final disposer =
+      createWhenReaction(predicate, completer.complete, name: name);
 
   completer.future.catchError((error) {
     disposer();

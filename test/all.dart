@@ -1,13 +1,13 @@
 import 'action_test.dart' as action_test;
+import 'autorun_test.dart' as autorun_test;
 import 'computed_test.dart' as computed_test;
 import 'intercept_test.dart' as intercept_test;
-import 'autorun_test.dart' as autorun_test;
+import 'observable_test.dart' as observable_test;
+import 'observe_test.dart' as observe_test;
 import 'reaction_test.dart' as reaction_test;
 import 'when_test.dart' as when_test;
-import 'observe_test.dart' as observe_test;
-import 'observable_test.dart' as observable_test;
 
-main() {
+void main() {
   observable_test.main();
   computed_test.main();
   action_test.main();

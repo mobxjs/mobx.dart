@@ -1,12 +1,12 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   test('intercept', () {
-    var x = observable(10);
+    final x = observable(10);
     var executed = false;
 
-    var dispose = x.intercept<int>((change) {
+    final dispose = x.intercept((change) {
       // prevent a change
       change.newValue = 33;
       executed = true;
@@ -21,11 +21,9 @@ main() {
   });
 
   test('intercept prevents a change', () {
-    var x = observable(10);
+    final x = observable(10);
 
-    var dispose = x.intercept<int>((change) {
-      return null;
-    });
+    final dispose = x.intercept((change) => null);
 
     x.value = 100;
     expect(x.value, equals(10));
@@ -34,14 +32,14 @@ main() {
   });
 
   test('intercept can be chained', () {
-    var x = observable(10);
+    final x = observable(10);
 
-    var dispose1 = x.intercept<int>((change) {
+    final dispose1 = x.intercept((change) {
       change.newValue = change.newValue + 10;
       return change;
     });
 
-    var dispose2 = x.intercept<int>((change) {
+    final dispose2 = x.intercept((change) {
       change.newValue = change.newValue + 10;
       return change;
     });
@@ -54,18 +52,16 @@ main() {
   });
 
   test('intercept chain can be short-circuited', () {
-    var x = observable(10);
+    final x = observable(10);
 
-    var dispose1 = x.intercept<int>((change) {
+    final dispose1 = x.intercept((change) {
       change.newValue = change.newValue + 10;
       return change;
     });
 
-    var dispose2 = x.intercept<int>((change) {
-      return null;
-    });
+    final dispose2 = x.intercept((change) => null);
 
-    var dispose3 = x.intercept<int>((change) {
+    final dispose3 = x.intercept((change) {
       change.newValue = change.newValue + 10;
       return change;
     });

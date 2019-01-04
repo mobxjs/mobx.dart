@@ -1,15 +1,14 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
-import 'package:mobx/src/core/reaction.dart';
-import "package:test/test.dart";
+import 'package:test/test.dart';
 
 void main() {
   test('autorun', () {
-    var c = observable(0);
+    final c = observable(0);
     int nextValue;
 
-    var dispose = autorun((_) {
+    final dispose = autorun((_) {
       nextValue = c.value + 1;
     });
 
@@ -27,31 +26,31 @@ void main() {
   });
 
   test('autorun with 2 observables', () {
-    var x = observable('Hello');
-    var y = observable('Pavan');
+    final x = observable('Hello');
+    final y = observable('Pavan');
     String message;
 
-    var dispose = autorun((_) {
-      message = "${x.value} ${y.value}";
+    final dispose = autorun((_) {
+      message = '${x.value} ${y.value}';
     }, name: 'Message Effect');
 
-    expect(message, equals("Hello Pavan"));
-    expect(dispose.$mobx.name, equals("Message Effect"));
+    expect(message, equals('Hello Pavan'));
+    expect(dispose.$mobx.name, equals('Message Effect'));
 
-    x.value = "Hey";
-    expect(message, equals("Hey Pavan"));
-    y.value = "MobX";
-    expect(message, equals("Hey MobX"));
+    x.value = 'Hey';
+    expect(message, equals('Hey Pavan'));
+    y.value = 'MobX';
+    expect(message, equals('Hey MobX'));
 
     dispose();
   });
 
   test('autorun with changing observables', () {
-    var x = observable(10);
-    var y = observable(20);
+    final x = observable(10);
+    final y = observable(20);
     int value;
 
-    var dispose = autorun((_) {
+    final dispose = autorun((_) {
       value = (value == null) ? x.value : y.value;
     });
 
@@ -67,7 +66,7 @@ void main() {
     Function dispose;
     const delayMs = 5000;
 
-    var x = observable(10);
+    final x = observable(10);
     var value = 0;
 
     fakeAsync((async) {
@@ -94,13 +93,13 @@ void main() {
   });
 
   test('autorun with pre-mature disposal in predicate', () {
-    var x = observable(10);
+    final x = observable(10);
 
-    var d = autorun((Reaction r) {
-      var isGreaterThan10 = x.value > 10;
+    final d = autorun((reaction) {
+      final isGreaterThan10 = x.value > 10;
 
       if (isGreaterThan10) {
-        r.dispose();
+        reaction.dispose();
       }
     });
 

@@ -1,22 +1,27 @@
 import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/atom_derivation.dart';
 
-abstract class Interceptable {
-  List<Function> interceptors;
-  Function intercept<T>(
+typedef Interceptor<T> = Function(WillChangeNotification<T>);
+
+abstract class Interceptable<T> {
+  List<Interceptor<T>> interceptors;
+
+  Function intercept(
       WillChangeNotification<T> Function(WillChangeNotification<T>) handler);
 }
 
-bool hasInterceptors(Interceptable obj) {
-  return obj.interceptors != null && obj.interceptors.length > 0;
-}
+bool hasInterceptors<T>(Interceptable<T> obj) =>
+    obj.interceptors != null && obj.interceptors.isNotEmpty;
 
-Function registerInterceptor(Interceptable obj, Function handler) {
-  var listeners = obj.interceptors ?? (obj.interceptors = List());
-  listeners.add(handler);
+Function registerInterceptor<T>(
+    Interceptable<T> obj, Interceptor<T> interceptor) {
+  if (obj.interceptors == null) {
+    obj.interceptors = [];
+  }
+  final listeners = obj.interceptors..add(interceptor);
 
   return () {
-    var index = listeners.indexOf(handler);
+    final index = listeners.indexOf(interceptor);
     if (index != -1) {
       listeners.removeAt(index);
     }
@@ -24,23 +29,22 @@ Function registerInterceptor(Interceptable obj, Function handler) {
 }
 
 WillChangeNotification<T> interceptChange<T>(
-    Interceptable obj, WillChangeNotification<T> change) {
-  return untracked(() {
-    if (obj.interceptors == null) {
-      return change;
-    }
-
-    var nextChange = change;
-    var listeners = obj.interceptors.toList(growable: false);
-    for (var i = 0; i < listeners.length; i++) {
-      var listener = listeners[i];
-
-      nextChange = listener(nextChange);
-      if (nextChange == null) {
-        break;
+        Interceptable<T> obj, WillChangeNotification<T> change) =>
+    untracked(() {
+      if (obj.interceptors == null) {
+        return change;
       }
-    }
 
-    return nextChange;
-  });
-}
+      var nextChange = change;
+      final interceptors = obj.interceptors.toList(growable: false);
+      for (var i = 0; i < interceptors.length; i++) {
+        final listener = interceptors[i];
+
+        nextChange = listener(nextChange);
+        if (nextChange == null) {
+          break;
+        }
+      }
+
+      return nextChange;
+    });

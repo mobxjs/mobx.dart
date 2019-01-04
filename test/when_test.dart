@@ -5,10 +5,8 @@ import 'package:test/test.dart';
 void main() {
   test('When', () {
     var executed = false;
-    var x = observable(10);
-    var d = when(() {
-      return x.value > 10;
-    }, () {
+    final x = observable(10);
+    final d = when(() => x.value > 10, () {
       executed = true;
     }, name: 'Basic when');
 
@@ -26,7 +24,7 @@ void main() {
   });
 
   test('when with default name', () {
-    var d = when(() => true, () {});
+    final d = when(() => true, () {});
 
     expect(d.$mobx.name, startsWith('When@'));
 
@@ -34,7 +32,7 @@ void main() {
   });
 
   test('Async When', () {
-    var x = observable(10);
+    final x = observable(10);
     asyncWhen(() => x.value > 10, name: 'Async-when').then((_) {
       expect(true, isTrue);
     });

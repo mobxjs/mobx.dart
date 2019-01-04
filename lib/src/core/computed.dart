@@ -3,6 +3,11 @@ import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/atom_derivation.dart';
 
 class ComputedValue<T> extends Atom implements Derivation {
+  ComputedValue(T Function() fn, {String name}) : super(name) {
+    this.name = name ?? 'Computed@${ctx.nextId}';
+    _fn = fn;
+  }
+
   @override
   Set<Atom> observables = Set();
 
@@ -12,26 +17,21 @@ class ComputedValue<T> extends Atom implements Derivation {
   T Function() _fn;
 
   @override
-  DerivationState dependenciesState = DerivationState.NOT_TRACKING;
+  DerivationState dependenciesState = DerivationState.notTracking;
 
   T _value;
 
   bool _isComputing = false;
 
-  ComputedValue(T Function() fn, {String name}) : super(name) {
-    this.name = name ?? 'Computed@${ctx.nextId}';
-    this._fn = fn;
-  }
-
   T get value {
     if (_isComputing) {
-      throw MobXException('Cycle detected in computation ${name}: ${_fn}');
+      throw MobXException('Cycle detected in computation $name: $_fn');
     }
 
     if (!ctx.isInBatch() && observers.isEmpty) {
       if (ctx.shouldCompute(this)) {
         ctx.startBatch();
-        _value = computeValue(false);
+        _value = computeValue(track: false);
         ctx.endBatch();
       }
     } else {
@@ -46,12 +46,12 @@ class ComputedValue<T> extends Atom implements Derivation {
     return _value;
   }
 
-  T computeValue(bool track) {
+  T computeValue({bool track}) {
     _isComputing = true;
 
     T value;
     if (track) {
-      value = ctx.trackDerivation(this, this._fn);
+      value = ctx.trackDerivation(this, _fn);
     } else {
       value = _fn();
     }
@@ -62,7 +62,7 @@ class ComputedValue<T> extends Atom implements Derivation {
   }
 
   @override
-  suspend() {
+  void suspend() {
     ctx.clearObservables(this);
     _value = null;
   }
@@ -73,12 +73,12 @@ class ComputedValue<T> extends Atom implements Derivation {
   }
 
   bool _trackAndCompute() {
-    var oldValue = _value;
-    var wasSuspended = dependenciesState == DerivationState.NOT_TRACKING;
+    final oldValue = _value;
+    final wasSuspended = dependenciesState == DerivationState.notTracking;
 
-    var newValue = computeValue(true);
+    final newValue = computeValue(track: true);
 
-    var changed = wasSuspended || !_isEqual(oldValue, newValue);
+    final changed = wasSuspended || !_isEqual(oldValue, newValue);
 
     if (changed) {
       _value = newValue;
@@ -87,17 +87,15 @@ class ComputedValue<T> extends Atom implements Derivation {
     return changed;
   }
 
-  bool _isEqual(T x, T y) {
-    return x == y;
-  }
+  bool _isEqual(T x, T y) => x == y;
 
-  Function observe<T>(void Function(ChangeNotification<T>) handler,
+  Function observe(void Function(ChangeNotification<T>) handler,
       {bool fireImmediately}) {
     var firstTime = true;
     T prevValue;
 
     return autorun((_) {
-      var newValue = this.value as T;
+      final newValue = value;
       if (firstTime == true || fireImmediately == true) {
         untracked(() {
           handler(ChangeNotification(

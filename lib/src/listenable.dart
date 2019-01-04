@@ -1,37 +1,41 @@
 import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/atom_derivation.dart';
 
-abstract class Listenable {
-  List<Function> changeListeners;
-  Function observe<T>(void Function(ChangeNotification<T>) handler,
+abstract class Listenable<T> {
+  List<Listener<T>> changeListeners;
+
+  Function observe(void Function(ChangeNotification<T>) handler,
       {bool fireImmediately});
 }
 
-bool hasListeners(Listenable obj) {
-  return obj.changeListeners != null && obj.changeListeners.length > 0;
-}
+typedef Listener<T> = Function(ChangeNotification<T>);
 
-Function registerListener(Listenable obj, Function handler) {
-  var listeners = obj.changeListeners ?? (obj.changeListeners = List());
-  listeners.add(handler);
+bool hasListeners<T>(Listenable<T> obj) =>
+    obj.changeListeners != null && obj.changeListeners.isNotEmpty;
+
+Function() registerListener<T>(Listenable<T> listenable, Listener<T> listener) {
+  if (listenable.changeListeners == null) {
+    listenable.changeListeners = [];
+  }
+  final listeners = listenable.changeListeners..add(listener);
 
   return () {
-    var index = listeners.indexOf(handler);
+    final index = listeners.indexOf(listener);
     if (index != -1) {
       listeners.removeAt(index);
     }
   };
 }
 
-notifyListeners<T>(Listenable obj, ChangeNotification<T> change) {
+void notifyListeners<T>(Listenable<T> obj, ChangeNotification<T> change) {
   untracked(() {
     if (obj.changeListeners == null) {
       return;
     }
 
-    var listeners = obj.changeListeners.toList(growable: false);
+    final listeners = obj.changeListeners.toList(growable: false);
     for (var i = 0; i < listeners.length; i++) {
-      var listener = listeners[i];
+      final listener = listeners[i];
 
       listener(change);
     }

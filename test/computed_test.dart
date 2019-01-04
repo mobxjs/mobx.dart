@@ -4,13 +4,11 @@ import 'package:mobx/src/api/reaction.dart';
 import 'package:mobx/src/core/atom_derivation.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   test('Computed value', () {
-    var x = observable(20);
-    var y = observable(10);
-    var c = computed(() {
-      return x.value + y.value;
-    });
+    final x = observable(20);
+    final y = observable(10);
+    final c = computed(() => x.value + y.value);
 
     x.value = 30;
     y.value = 20;
@@ -20,28 +18,26 @@ main() {
   });
 
   test('Computed value hierarchy', () {
-    var x = observable(10, name: 'x');
-    var y = observable(20, name: 'y');
-    var z = observable(30, name: 'z');
+    final x = observable(10, name: 'x');
+    final y = observable(20, name: 'y');
+    final z = observable(30, name: 'z');
 
     var c1ComputationCount = 0;
     var c3ComputationCount = 0;
 
-    var c1 = computed(() {
+    final c1 = computed(() {
       c1ComputationCount++;
       return x.value + y.value;
     }, name: 'c1');
 
-    var c2 = computed(() {
-      return z.value;
-    }, name: 'c2');
+    final c2 = computed(() => z.value, name: 'c2');
 
-    var c3 = computed(() {
+    final c3 = computed(() {
       c3ComputationCount++;
       return c1.value + c2.value;
     }, name: 'c3');
 
-    var d = autorun((_) {
+    final d = autorun((_) {
       c3.value;
     });
 
@@ -74,17 +70,17 @@ main() {
   });
 
   test('computed can be observed', () {
-    var x = observable(10);
-    var y = observable(20);
+    final x = observable(10);
+    final y = observable(20);
 
     var executionCount = 0;
 
-    var total = computed(() {
+    final total = computed(() {
       executionCount++;
       return x.value + y.value;
     });
 
-    var dispose1 = total.observe((change) {
+    final dispose1 = total.observe((change) {
       expect(change.newValue, equals(30));
       expect(executionCount, equals(1));
     });

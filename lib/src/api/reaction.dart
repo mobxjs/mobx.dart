@@ -26,9 +26,8 @@ import 'package:mobx/src/core/reaction.dart';
 /// x.value = 30; // Will not cause autorun() to re-trigger as it's disposed.
 /// ```
 
-ReactionDisposer autorun(Function(Reaction) fn, {String name, int delay}) {
-  return createAutorun(fn, name: name, delay: delay);
-}
+ReactionDisposer autorun(Function(Reaction) fn, {String name, int delay}) =>
+    createAutorun(fn, name: name, delay: delay);
 
 /// Executes the [predicate] function and tracks the observables used in it. Returns
 /// a function to dispose the reaction.
@@ -42,11 +41,10 @@ ReactionDisposer autorun(Function(Reaction) fn, {String name, int delay}) {
 /// [fireImmediately] if you want to invoke the effect immediately without waiting for
 /// the [predicate] to change its value.
 ReactionDisposer reaction<T>(
-    T Function(Reaction) predicate, void Function(T) effect,
-    {String name, int delay, bool fireImmediately}) {
-  return createReaction(predicate, effect,
-      name: name, delay: delay, fireImmediately: fireImmediately);
-}
+        T Function(Reaction) predicate, void Function(T) effect,
+        {String name, int delay, bool fireImmediately}) =>
+    createReaction(predicate, effect,
+        name: name, delay: delay, fireImmediately: fireImmediately);
 
 /// A one-time reaction that auto-disposes when the [predicate] becomes true. It also
 /// executes the [effect] when the predicate turns true.
@@ -58,9 +56,8 @@ ReactionDisposer when(
   bool Function() predicate,
   void Function() effect, {
   String name,
-}) {
-  return createWhenReaction(predicate, effect, name: name);
-}
+}) =>
+    createWhenReaction(predicate, effect, name: name);
 
 /// A variant of [when()] which returns a Future. The Future completes when the [predicate()] turns true.
 /// Note that there is no effect function here. Typically you would await on the Future and execute the
@@ -70,6 +67,5 @@ ReactionDisposer when(
 /// await asyncWhen(() => x.value > 10);
 /// // ... execute the effect ...
 /// ```
-Future<void> asyncWhen(bool Function() predicate, {String name}) {
-  return createAsyncWhenReaction(predicate, name: name);
-}
+Future<void> asyncWhen(bool Function() predicate, {String name}) =>
+    createAsyncWhenReaction(predicate, name: name);

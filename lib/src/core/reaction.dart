@@ -1,6 +1,10 @@
 import 'package:mobx/src/core/atom_derivation.dart';
 
 class Reaction implements Derivation {
+  Reaction(onInvalidate, {this.name}) {
+    _onInvalidate = onInvalidate;
+  }
+
   void Function() _onInvalidate;
   bool _isScheduled = false;
   bool _isDisposed = false;
@@ -16,20 +20,16 @@ class Reaction implements Derivation {
   Set<Atom> observables = Set();
 
   @override
-  DerivationState dependenciesState = DerivationState.NOT_TRACKING;
+  DerivationState dependenciesState = DerivationState.notTracking;
 
-  get isDisposed => _isDisposed;
-
-  Reaction(onInvalidate, {String this.name}) {
-    _onInvalidate = onInvalidate;
-  }
+  bool get isDisposed => _isDisposed;
 
   @override
   void onBecomeStale() {
     schedule();
   }
 
-  track(void Function() fn) {
+  void track(void Function() fn) {
     ctx.startBatch();
 
     _isRunning = true;
@@ -43,7 +43,7 @@ class Reaction implements Derivation {
     ctx.endBatch();
   }
 
-  run() {
+  void run() {
     if (_isDisposed) {
       return;
     }
@@ -59,7 +59,7 @@ class Reaction implements Derivation {
     ctx.endBatch();
   }
 
-  dispose() {
+  void dispose() {
     if (_isDisposed) {
       return;
     }
@@ -70,23 +70,25 @@ class Reaction implements Derivation {
       return;
     }
 
-    ctx.startBatch();
-    ctx.clearObservables(this);
-    ctx.endBatch();
+    ctx
+      ..startBatch()
+      ..clearObservables(this)
+      ..endBatch();
   }
 
-  schedule() {
+  void schedule() {
     if (_isScheduled) {
       return;
     }
 
     _isScheduled = true;
-    ctx.addPendingReaction(this);
-    ctx.runReactions();
+    ctx
+      ..addPendingReaction(this)
+      ..runReactions();
   }
 
   @override
-  suspend() {
+  void suspend() {
     // Not applicable right now
   }
 }

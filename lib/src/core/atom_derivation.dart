@@ -1,18 +1,12 @@
 import 'package:mobx/src/core/context.dart';
 
-const ON_BECOME_OBSERVED = 'onBecomeObserved';
-const ON_BECOME_UNOBSERVED = 'onBecomeUnobserved';
+enum _ListenerKind {
+  onBecomeObserved,
+  onBecomeUnobserved,
+}
 
 class Atom {
-  String name;
-
-  bool isPendingUnobservation = false;
-
-  DerivationState lowestObserverState = DerivationState.NOT_TRACKING;
-
-  bool isBeingObserved = false;
-
-  Atom(String this.name, {Function onObserve, Function onUnobserve}) {
+  Atom(this.name, {Function onObserve, Function onUnobserve}) {
     if (onObserve != null) {
       onBecomeObserved(onObserve);
     }
@@ -22,21 +16,30 @@ class Atom {
     }
   }
 
+  String name;
+
+  bool isPendingUnobservation = false;
+
+  DerivationState lowestObserverState = DerivationState.notTracking;
+
+  bool isBeingObserved = false;
+
   Set<Derivation> observers = Set();
 
-  var _observationListeners = Map<String, Set<Function>>();
+  final Map<_ListenerKind, Set<Function()>> _observationListeners = {};
 
-  reportObserved() {
+  void reportObserved() {
     ctx.reportObserved(this);
   }
 
-  reportChanged() {
-    ctx.startBatch();
-    ctx.propagateChanged(this);
-    ctx.endBatch();
+  void reportChanged() {
+    ctx
+      ..startBatch()
+      ..propagateChanged(this)
+      ..endBatch();
   }
 
-  addObserver(Derivation d) {
+  void addObserver(Derivation d) {
     observers.add(d);
 
     if (lowestObserverState.index > d.dependenciesState.index) {
@@ -44,54 +47,50 @@ class Atom {
     }
   }
 
-  removeObserver(Derivation d) {
+  void removeObserver(Derivation d) {
     observers.removeWhere((ob) => ob == d);
     if (observers.isEmpty) {
       ctx.enqueueForUnobservation(this);
     }
   }
 
-  notifyOnBecomeObserved() {
-    if (_observationListeners[ON_BECOME_OBSERVED] != null) {
-      _observationListeners[ON_BECOME_OBSERVED]
-          .forEach((listener) => listener());
-    }
+  void notifyOnBecomeObserved() {
+    final listeners = _observationListeners[_ListenerKind.onBecomeObserved];
+    listeners?.forEach(_notifyListener);
   }
 
-  notifyOnBecomeUnobserved() {
-    if (_observationListeners[ON_BECOME_UNOBSERVED] != null) {
-      _observationListeners[ON_BECOME_UNOBSERVED]
-          .forEach((listener) => listener());
-    }
+  static void _notifyListener(Function() listener) => listener();
+
+  void notifyOnBecomeUnobserved() {
+    final listeners = _observationListeners[_ListenerKind.onBecomeUnobserved];
+    listeners?.forEach(_notifyListener);
   }
 
-  void Function() onBecomeObserved(Function fn) {
-    return _addListener(ON_BECOME_OBSERVED, fn);
-  }
+  void Function() onBecomeObserved(Function fn) =>
+      _addListener(_ListenerKind.onBecomeObserved, fn);
 
-  void Function() onBecomeUnobserved(Function fn) {
-    return _addListener(ON_BECOME_UNOBSERVED, fn);
-  }
+  void Function() onBecomeUnobserved(Function fn) =>
+      _addListener(_ListenerKind.onBecomeUnobserved, fn);
 
-  void Function() _addListener(String key, Function fn) {
+  void Function() _addListener(_ListenerKind kind, Function fn) {
     if (fn == null) {
-      throw MobXException('${key} handler cannot be null');
+      throw MobXException('$kind handler cannot be null');
     }
 
-    if (_observationListeners[key] == null) {
-      _observationListeners[key] = Set()..add(fn);
+    if (_observationListeners[kind] == null) {
+      _observationListeners[kind] = Set()..add(fn);
     } else {
-      _observationListeners[key].add(fn);
+      _observationListeners[kind].add(fn);
     }
 
     return () {
-      if (_observationListeners[key] == null) {
+      if (_observationListeners[kind] == null) {
         return;
       }
 
-      _observationListeners[key].removeWhere((f) => f == fn);
-      if (_observationListeners[key].isEmpty) {
-        _observationListeners[key] = null;
+      _observationListeners[kind].removeWhere((f) => f == fn);
+      if (_observationListeners[kind].isEmpty) {
+        _observationListeners[kind] = null;
       }
     };
   }
@@ -100,12 +99,12 @@ class Atom {
 enum DerivationState {
   // before being run or (outside batch and not being observed)
   // at this point derivation is not holding any data about dependency tree
-  NOT_TRACKING,
+  notTracking,
 
   // no shallow dependency changed since last computation
   // won't recalculate derivation
   // this is what makes mobx fast
-  UP_TO_DATE,
+  upToDate,
 
   // some deep dependency changed, but don't know if shallow dependency changed
   // will require to check first if UP_TO_DATE or POSSIBLY_STALE
@@ -113,11 +112,11 @@ enum DerivationState {
   //
   // having this state is second big optimization:
   // don't have to recompute on every dependency change, but only when it's needed
-  POSSIBLY_STALE,
+  possiblyStale,
 
   // A shallow dependency has changed since last computation and the derivation
   // will need to recompute when it's needed next.
-  STALE
+  stale
 }
 
 abstract class Derivation {
@@ -127,23 +126,25 @@ abstract class Derivation {
 
   DerivationState dependenciesState;
 
-  onBecomeStale();
-  suspend();
+  void onBecomeStale();
+  void suspend();
 }
 
 class WillChangeNotification<T> {
+  WillChangeNotification({this.type, this.newValue, this.object});
+
   /// One of add | update | delete
   String type;
 
   T newValue;
   dynamic object;
 
-  static WillChangeNotification UNCHANGED = WillChangeNotification();
-
-  WillChangeNotification({this.type, this.newValue, this.object});
+  static WillChangeNotification unchanged = WillChangeNotification();
 }
 
 class ChangeNotification<T> {
+  ChangeNotification({this.type, this.newValue, this.oldValue, this.object});
+
   /// One of add | update | delete
   String type;
 
@@ -151,13 +152,12 @@ class ChangeNotification<T> {
   T newValue;
 
   dynamic object;
-
-  ChangeNotification({this.type, this.newValue, this.oldValue, this.object});
 }
 
 class MobXException implements Exception {
-  String message;
   MobXException(this.message);
+
+  String message;
 }
 
-var ctx = ReactiveContext();
+final ReactiveContext ctx = ReactiveContext();
