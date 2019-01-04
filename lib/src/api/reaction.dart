@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:mobx/src/api/action.dart';
 import 'package:mobx/src/api/reaction_helper.dart';
-import 'package:mobx/src/core/atom_derivation.dart';
 import 'package:mobx/src/core/reaction.dart';
-import 'package:mobx/src/utils.dart';
 
 /// Executes the specified [fn], whenever the dependent observables change. It returns
 /// a disposer that can be used to dispose the autorun.
