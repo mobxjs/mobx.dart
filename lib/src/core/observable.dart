@@ -1,4 +1,5 @@
-import 'package:mobx/src/core/atom_derivation.dart';
+import 'package:mobx/src/core/atom.dart';
+import 'package:mobx/src/core/context.dart';
 import 'package:mobx/src/interceptable.dart';
 import 'package:mobx/src/listenable.dart';
 
@@ -30,7 +31,10 @@ class ObservableValue<T> extends Atom
 
     if (hasListeners(this)) {
       final change = ChangeNotification<T>(
-          newValue: value, oldValue: oldValue, type: 'update', object: this);
+          newValue: value,
+          oldValue: oldValue,
+          type: OperationType.update,
+          object: this);
       notifyListeners(this, change);
     }
   }
@@ -41,7 +45,7 @@ class ObservableValue<T> extends Atom
       final change = interceptChange(
           this,
           WillChangeNotification(
-              newValue: prepared, type: 'update', object: this));
+              newValue: prepared, type: OperationType.update, object: this));
 
       if (change == null) {
         return WillChangeNotification.unchanged;
@@ -62,7 +66,10 @@ class ObservableValue<T> extends Atom
   Function observe(Listener<T> listener, {bool fireImmediately}) {
     if (fireImmediately == true) {
       listener(ChangeNotification<T>(
-          type: 'update', newValue: _value, oldValue: null, object: this));
+          type: OperationType.update,
+          newValue: _value,
+          oldValue: null,
+          object: this));
     }
 
     return registerListener(this, listener);

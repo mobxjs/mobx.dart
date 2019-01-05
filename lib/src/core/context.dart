@@ -1,6 +1,7 @@
 import 'package:mobx/src/core/action.dart';
-import 'package:mobx/src/core/atom_derivation.dart';
+import 'package:mobx/src/core/atom.dart';
 import 'package:mobx/src/core/computed.dart';
+import 'package:mobx/src/core/derivation.dart';
 import 'package:mobx/src/core/reaction.dart';
 
 class ReactiveState {
@@ -256,3 +257,11 @@ class ReactiveContext {
     _state._trackingDerivation = prevDerivation;
   }
 }
+
+class MobXException implements Exception {
+  MobXException(this.message);
+
+  String message;
+}
+
+final ReactiveContext ctx = ReactiveContext();

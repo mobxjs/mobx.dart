@@ -1,4 +1,5 @@
 import 'package:mobx/src/core/context.dart';
+import 'package:mobx/src/core/derivation.dart';
 
 enum _ListenerKind {
   onBecomeObserved,
@@ -96,68 +97,28 @@ class Atom {
   }
 }
 
-enum DerivationState {
-  // before being run or (outside batch and not being observed)
-  // at this point derivation is not holding any data about dependency tree
-  notTracking,
-
-  // no shallow dependency changed since last computation
-  // won't recalculate derivation
-  // this is what makes mobx fast
-  upToDate,
-
-  // some deep dependency changed, but don't know if shallow dependency changed
-  // will require to check first if UP_TO_DATE or POSSIBLY_STALE
-  // currently only ComputedValue will propagate POSSIBLY_STALE
-  //
-  // having this state is second big optimization:
-  // don't have to recompute on every dependency change, but only when it's needed
-  possiblyStale,
-
-  // A shallow dependency has changed since last computation and the derivation
-  // will need to recompute when it's needed next.
-  stale
-}
-
-abstract class Derivation {
-  String name;
-  Set<Atom> observables;
-  Set<Atom> newObservables;
-
-  DerivationState dependenciesState;
-
-  void onBecomeStale();
-  void suspend();
-}
-
 class WillChangeNotification<T> {
   WillChangeNotification({this.type, this.newValue, this.object});
 
   /// One of add | update | delete
-  String type;
+  final OperationType type;
 
   T newValue;
-  dynamic object;
+  final dynamic object;
 
   static WillChangeNotification unchanged = WillChangeNotification();
 }
+
+enum OperationType { add, update, delete }
 
 class ChangeNotification<T> {
   ChangeNotification({this.type, this.newValue, this.oldValue, this.object});
 
   /// One of add | update | delete
-  String type;
+  final OperationType type;
 
-  T oldValue;
+  final T oldValue;
   T newValue;
 
   dynamic object;
 }
-
-class MobXException implements Exception {
-  MobXException(this.message);
-
-  String message;
-}
-
-final ReactiveContext ctx = ReactiveContext();

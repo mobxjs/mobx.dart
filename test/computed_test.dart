@@ -1,7 +1,7 @@
 import 'package:mobx/src/api/action.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
-import 'package:mobx/src/core/atom_derivation.dart';
+import 'package:mobx/src/core/context.dart';
 import 'package:test/test.dart';
 
 void main() {

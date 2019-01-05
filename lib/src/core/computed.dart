@@ -1,6 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core/action.dart';
-import 'package:mobx/src/core/atom_derivation.dart';
+import 'package:mobx/src/core/atom.dart';
+import 'package:mobx/src/core/context.dart';
+import 'package:mobx/src/core/derivation.dart';
 
 class ComputedValue<T> extends Atom implements Derivation {
   ComputedValue(T Function() fn, {String name}) : super(name) {
@@ -99,7 +101,7 @@ class ComputedValue<T> extends Atom implements Derivation {
       if (firstTime == true || fireImmediately == true) {
         untracked(() {
           handler(ChangeNotification(
-              type: 'update',
+              type: OperationType.update,
               object: this,
               oldValue: prevValue,
               newValue: newValue));
