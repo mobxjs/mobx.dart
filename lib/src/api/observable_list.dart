@@ -5,7 +5,7 @@ import 'package:mobx/src/core/observable.dart';
 
 class ObservableList<T> implements List<ObservableValue<T>> {
   final _atom = Atom('ObservableArray');
-  var _list = <ObservableValue<T>>[];
+  final _list = <ObservableValue<T>>[];
 
   @override
   ObservableValue<T> get first {
@@ -122,7 +122,7 @@ class ObservableList<T> implements List<ObservableValue<T>> {
   }
 
   @override
-  ObservableValue<T> expand<ObservableValue<T>>(
+  Iterable<ObservableValue<T>> expand<ObservableValue<T>>(
       Iterable<ObservableValue<T>> Function(ObservableValue<T> element) f) {
     // TODO: implement expand
     return _list.expand(f);
@@ -142,10 +142,10 @@ class ObservableList<T> implements List<ObservableValue<T>> {
   }
 
   @override
-  T fold<T>(T initialValue,
-      T Function(T previousValue, ObservableValue<T> element) combine) {
+  U fold<U>(U initialValue,
+      U Function(U previousValue, ObservableValue<T> element) combine) {
     // TODO: implement fold
-    return null;
+    return _list.fold(initialValue, combine);
   }
 
   @override
