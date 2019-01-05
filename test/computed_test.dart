@@ -1,7 +1,7 @@
 import 'package:mobx/src/api/action.dart';
+import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
-import 'package:mobx/src/core/context.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -14,7 +14,7 @@ void main() {
     y.value = 20;
     expect(c.value, equals(50));
 
-    expect(ctx.isComputingDerivation(), isFalse);
+    expect(mobxContext.isComputingDerivation(), isFalse);
   });
 
   test('Computed value hierarchy', () {
@@ -64,7 +64,7 @@ void main() {
     expect(c1ComputationCount, equals(3));
     expect(c3ComputationCount, equals(2));
 
-    expect(ctx.isComputingDerivation(), isFalse);
+    expect(mobxContext.isComputingDerivation(), isFalse);
 
     d();
   });

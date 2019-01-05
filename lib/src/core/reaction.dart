@@ -3,10 +3,11 @@ import 'package:mobx/src/core/context.dart';
 import 'package:mobx/src/core/derivation.dart';
 
 class Reaction implements Derivation {
-  Reaction(onInvalidate, {this.name}) {
+  Reaction(this._context, Function() onInvalidate, {this.name}) {
     _onInvalidate = onInvalidate;
   }
 
+  final ReactiveContext _context;
   void Function() _onInvalidate;
   bool _isScheduled = false;
   bool _isDisposed = false;
@@ -32,17 +33,17 @@ class Reaction implements Derivation {
   }
 
   void track(void Function() fn) {
-    ctx.startBatch();
+    _context.startBatch();
 
     _isRunning = true;
-    ctx.trackDerivation(this, fn);
+    _context.trackDerivation(this, fn);
     _isRunning = false;
 
     if (_isDisposed) {
-      ctx.clearObservables(this);
+      _context.clearObservables(this);
     }
 
-    ctx.endBatch();
+    _context.endBatch();
   }
 
   void run() {
@@ -50,15 +51,15 @@ class Reaction implements Derivation {
       return;
     }
 
-    ctx.startBatch();
+    _context.startBatch();
 
     _isScheduled = false;
 
-    if (ctx.shouldCompute(this)) {
+    if (_context.shouldCompute(this)) {
       _onInvalidate();
     }
 
-    ctx.endBatch();
+    _context.endBatch();
   }
 
   void dispose() {
@@ -72,7 +73,7 @@ class Reaction implements Derivation {
       return;
     }
 
-    ctx
+    _context
       ..startBatch()
       ..clearObservables(this)
       ..endBatch();
@@ -84,7 +85,7 @@ class Reaction implements Derivation {
     }
 
     _isScheduled = true;
-    ctx
+    _context
       ..addPendingReaction(this)
       ..runReactions();
   }

@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/core/observable.dart';
 import 'package:test/test.dart';
@@ -23,15 +24,15 @@ void main() {
   });
 
   test('Raw observables', () {
-    final x = ObservableValue(1000);
+    final x = ObservableValue(mobxContext, 1000);
     expect(x is ObservableValue<int>, isTrue);
 
     expect(x.value, equals(1000));
 
-    final x1 = ObservableValue<int>(null);
+    final x1 = ObservableValue<int>(mobxContext, null);
     expect(x1.value, isNull);
 
-    final y = ObservableValue('Hello', name: 'greeting');
+    final y = ObservableValue(mobxContext, 'Hello', name: 'greeting');
     expect(y.value, equals('Hello'));
     expect(y.name, equals('greeting'));
   });

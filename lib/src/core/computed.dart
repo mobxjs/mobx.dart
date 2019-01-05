@@ -1,14 +1,13 @@
 import 'package:mobx/mobx.dart';
-import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/atom.dart';
 import 'package:mobx/src/core/context.dart';
 import 'package:mobx/src/core/derivation.dart';
 
 class ComputedValue<T> extends Atom implements Derivation {
-  ComputedValue(T Function() fn, {String name}) : super(name) {
-    this.name = name ?? 'Computed@${ctx.nextId}';
-    _fn = fn;
-  }
+  ComputedValue(this._context, this._fn, {String name})
+      : super(_context, name: name ?? _context.name('Computed'));
+
+  final ReactiveContext _context;
 
   @override
   Set<Atom> observables = Set();
@@ -30,17 +29,17 @@ class ComputedValue<T> extends Atom implements Derivation {
       throw MobXException('Cycle detected in computation $name: $_fn');
     }
 
-    if (!ctx.isInBatch() && observers.isEmpty) {
-      if (ctx.shouldCompute(this)) {
-        ctx.startBatch();
+    if (!_context.isInBatch() && observers.isEmpty) {
+      if (_context.shouldCompute(this)) {
+        _context.startBatch();
         _value = computeValue(track: false);
-        ctx.endBatch();
+        _context.endBatch();
       }
     } else {
       reportObserved();
-      if (ctx.shouldCompute(this)) {
+      if (_context.shouldCompute(this)) {
         if (_trackAndCompute()) {
-          ctx.propagateChangeConfirmed(this);
+          _context.propagateChangeConfirmed(this);
         }
       }
     }
@@ -53,7 +52,7 @@ class ComputedValue<T> extends Atom implements Derivation {
 
     T value;
     if (track) {
-      value = ctx.trackDerivation(this, _fn);
+      value = _context.trackDerivation(this, _fn);
     } else {
       value = _fn();
     }
@@ -65,13 +64,13 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   @override
   void suspend() {
-    ctx.clearObservables(this);
+    _context.clearObservables(this);
     _value = null;
   }
 
   @override
   void onBecomeStale() {
-    ctx.propagatePossiblyChanged(this);
+    _context.propagatePossiblyChanged(this);
   }
 
   bool _trackAndCompute() {
@@ -99,7 +98,7 @@ class ComputedValue<T> extends Atom implements Derivation {
     return autorun((_) {
       final newValue = value;
       if (firstTime == true || fireImmediately == true) {
-        untracked(() {
+        _context.untracked(() {
           handler(ChangeNotification(
               type: OperationType.update,
               object: this,
@@ -110,6 +109,6 @@ class ComputedValue<T> extends Atom implements Derivation {
 
       firstTime = false;
       prevValue = newValue;
-    });
+    }, context: _context);
   }
 }

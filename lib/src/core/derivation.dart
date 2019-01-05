@@ -24,7 +24,7 @@ enum DerivationState {
 }
 
 abstract class Derivation {
-  String name;
+  String get name;
   Set<Atom> observables;
   Set<Atom> newObservables;
 
