@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/api/reaction_helper.dart';
+import 'package:mobx/src/core/context.dart';
 import 'package:mobx/src/core/reaction.dart';
 
 /// Executes the specified [fn], whenever the dependent observables change. It returns
@@ -26,8 +28,9 @@ import 'package:mobx/src/core/reaction.dart';
 /// x.value = 30; // Will not cause autorun() to re-trigger as it's disposed.
 /// ```
 
-ReactionDisposer autorun(Function(Reaction) fn, {String name, int delay}) =>
-    createAutorun(fn, name: name, delay: delay);
+ReactionDisposer autorun(Function(Reaction) fn,
+        {String name, int delay, ReactiveContext context}) =>
+    createAutorun(context ?? mobxContext, fn, name: name, delay: delay);
 
 /// Executes the [predicate] function and tracks the observables used in it. Returns
 /// a function to dispose the reaction.
@@ -42,8 +45,11 @@ ReactionDisposer autorun(Function(Reaction) fn, {String name, int delay}) =>
 /// the [predicate] to change its value.
 ReactionDisposer reaction<T>(
         T Function(Reaction) predicate, void Function(T) effect,
-        {String name, int delay, bool fireImmediately}) =>
-    createReaction(predicate, effect,
+        {String name,
+        int delay,
+        bool fireImmediately,
+        ReactiveContext context}) =>
+    createReaction(context ?? mobxContext, predicate, effect,
         name: name, delay: delay, fireImmediately: fireImmediately);
 
 /// A one-time reaction that auto-disposes when the [predicate] becomes true. It also
@@ -56,8 +62,9 @@ ReactionDisposer when(
   bool Function() predicate,
   void Function() effect, {
   String name,
+  ReactiveContext context,
 }) =>
-    createWhenReaction(predicate, effect, name: name);
+    createWhenReaction(context ?? mobxContext, predicate, effect, name: name);
 
 /// A variant of [when()] which returns a Future. The Future completes when the [predicate()] turns true.
 /// Note that there is no effect function here. Typically you would await on the Future and execute the
@@ -67,5 +74,6 @@ ReactionDisposer when(
 /// await asyncWhen(() => x.value > 10);
 /// // ... execute the effect ...
 /// ```
-Future<void> asyncWhen(bool Function() predicate, {String name}) =>
-    createAsyncWhenReaction(predicate, name: name);
+Future<void> asyncWhen(bool Function() predicate,
+        {String name, ReactiveContext context}) =>
+    createAsyncWhenReaction(context ?? mobxContext, predicate, name: name);

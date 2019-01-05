@@ -1,4 +1,4 @@
-import 'package:mobx/src/core/action.dart';
+import 'package:mobx/src/api/action.dart';
 import 'package:mobx/src/core/atom.dart';
 
 abstract class Listenable<T> {

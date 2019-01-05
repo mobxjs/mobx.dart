@@ -1,3 +1,4 @@
+import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/core/atom.dart';
 import 'package:mobx/src/core/computed.dart';
 import 'package:mobx/src/core/context.dart';
@@ -17,8 +18,9 @@ import 'package:mobx/src/core/observable.dart';
 ///
 /// print('x = ${x.value}'); // read an observable's value
 /// ```
-ObservableValue<T> observable<T>(T initialValue, {String name}) =>
-    ObservableValue(initialValue, name: name);
+ObservableValue<T> observable<T>(T initialValue,
+        {String name, ReactiveContext context}) =>
+    ObservableValue(context ?? mobxContext, initialValue, name: name);
 
 /// Creates a computed value with an optional [name].
 ///
@@ -47,8 +49,9 @@ ObservableValue<T> observable<T>(T initialValue, {String name}) =>
 /// A computed value is _cached_ and it recomputes only when the dependent observables actually
 /// change. This makes them fast and you are free to use them throughout your application. Internally
 /// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
-ComputedValue<T> computed<T>(T Function() fn, {String name}) =>
-    ComputedValue(fn, name: name);
+ComputedValue<T> computed<T>(T Function() fn,
+        {String name, ReactiveContext context}) =>
+    ComputedValue(context ?? mobxContext, fn, name: name);
 
 /// Creates a simple Atom for tracking its usage in a reactive context. This is useful when
 /// you don't need the value but instead a way of knowing when it becomes active and inactive
@@ -56,6 +59,8 @@ ComputedValue<T> computed<T>(T Function() fn, {String name}) =>
 ///
 /// Use the [onObserved] and [onUnobserved] handlers to know when the atom is active and inactive
 /// respectively. Use a debug [name] to identify easily.
-Atom createAtom({String name, Function onObserved, Function onUnobserved}) =>
-    Atom(name ?? 'Atom@${ctx.nextId}',
-        onObserve: onObserved, onUnobserve: onUnobserved);
+Atom createAtom({String name, Function onObserved, Function onUnobserved}) {
+  final context = mobxContext;
+  return Atom(context,
+      name: name, onObserve: onObserved, onUnobserve: onUnobserved);
+}

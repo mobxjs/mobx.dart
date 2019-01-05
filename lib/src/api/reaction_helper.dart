@@ -34,15 +34,16 @@ class ReactionDisposer {
   void call() => $mobx.dispose();
 }
 
-ReactionDisposer createAutorun(Function(Reaction) trackingFn,
+ReactionDisposer createAutorun(
+    ReactiveContext context, Function(Reaction) trackingFn,
     {String name, int delay}) {
   Reaction rxn;
 
-  final rxnName = name ?? 'Autorun@${ctx.nextId}';
+  final rxnName = name ?? context.name('Autorun');
 
   if (delay == null) {
     // Use a sync-scheduler.
-    rxn = Reaction(() {
+    rxn = Reaction(context, () {
       rxn.track(() => trackingFn(rxn));
     }, name: rxnName);
   } else {
@@ -51,7 +52,7 @@ ReactionDisposer createAutorun(Function(Reaction) trackingFn,
     var isScheduled = false;
     Timer timer;
 
-    rxn = Reaction(() {
+    rxn = Reaction(context, () {
       if (!isScheduled) {
         isScheduled = true;
 
@@ -76,12 +77,12 @@ ReactionDisposer createAutorun(Function(Reaction) trackingFn,
   return ReactionDisposer(rxn);
 }
 
-ReactionDisposer createReaction<T>(
+ReactionDisposer createReaction<T>(ReactiveContext context,
     T Function(Reaction) predicate, void Function(T) effect,
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
 
-  final rxnName = name ?? 'Reaction@${ctx.nextId}';
+  final rxnName = name ?? context.name('Reaction');
 
   final effectAction =
       action((T value) => effect(value), name: '$rxnName-effect');
@@ -118,7 +119,7 @@ ReactionDisposer createReaction<T>(
   Timer timer;
   var isScheduled = false;
 
-  rxn = Reaction(() {
+  rxn = Reaction(context, () {
     if (firstTime || runSync) {
       reactionRunner();
     } else if (!isScheduled) {
@@ -147,14 +148,15 @@ ReactionDisposer createReaction<T>(
 }
 
 ReactionDisposer createWhenReaction(
+  ReactiveContext context,
   bool Function() predicate,
   void Function() effect, {
   String name,
 }) {
-  final rxnName = name ?? 'When@${ctx.nextId}';
+  final rxnName = name ?? context.name('When');
   final effectAction = action(effect, name: '$rxnName-effect');
 
-  return createAutorun((reaction) {
+  return createAutorun(context, (reaction) {
     if (predicate()) {
       reaction.dispose();
       effectAction();
@@ -162,11 +164,13 @@ ReactionDisposer createWhenReaction(
   }, name: rxnName);
 }
 
-Future<void> createAsyncWhenReaction(bool Function() predicate, {String name}) {
+Future<void> createAsyncWhenReaction(
+    ReactiveContext context, bool Function() predicate,
+    {String name}) {
   final completer = Completer<void>();
 
   final disposer =
-      createWhenReaction(predicate, completer.complete, name: name);
+      createWhenReaction(context, predicate, completer.complete, name: name);
 
   completer.future.catchError((error) {
     disposer();
