@@ -1,6 +1,5 @@
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/observable.dart';
-import 'package:mobx/src/core/atom.dart';
 import 'package:mobx/src/core/observable.dart';
 import 'package:test/test.dart';
 
