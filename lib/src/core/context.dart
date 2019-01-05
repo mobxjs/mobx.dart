@@ -4,32 +4,32 @@ import 'package:mobx/src/core/computed.dart';
 import 'package:mobx/src/core/derivation.dart';
 import 'package:mobx/src/core/reaction.dart';
 
-class ReactiveState {
-  int _batch = 0;
+class _ReactiveState {
+  int batch = 0;
 
   int nextIdCounter = 0;
 
-  Derivation _trackingDerivation;
-  List<Reaction> _pendingReactions = [];
-  bool _isRunningReactions = false;
-  List<Atom> _pendingUnobservations = [];
+  Derivation trackingDerivation;
+  List<Reaction> pendingReactions = [];
+  bool isRunningReactions = false;
+  List<Atom> pendingUnobservations = [];
 }
 
 class ReactiveContext {
-  final ReactiveState _state = ReactiveState();
+  final _ReactiveState _state = _ReactiveState();
 
   int get nextId => ++_state.nextIdCounter;
 
   void startBatch() {
-    _state._batch++;
+    _state.batch++;
   }
 
   void endBatch() {
-    if (--_state._batch == 0) {
+    if (--_state.batch == 0) {
       runReactions();
 
-      for (var i = 0; i < _state._pendingUnobservations.length; i++) {
-        final ob = _state._pendingUnobservations[i]
+      for (var i = 0; i < _state.pendingUnobservations.length; i++) {
+        final ob = _state.pendingUnobservations[i]
           ..isPendingUnobservation = false;
 
         if (ob.observers.isEmpty) {
@@ -46,27 +46,27 @@ class ReactiveContext {
         }
       }
 
-      _state._pendingUnobservations = [];
+      _state.pendingUnobservations = [];
     }
   }
 
   T trackDerivation<T>(Derivation d, T Function() fn) {
-    final prevDerivation = _state._trackingDerivation;
-    _state._trackingDerivation = d;
+    final prevDerivation = _state.trackingDerivation;
+    _state.trackingDerivation = d;
 
     resetDerivationState(d);
     d.newObservables = Set();
 
     final result = fn();
 
-    _state._trackingDerivation = prevDerivation;
+    _state.trackingDerivation = prevDerivation;
     bindDependencies(d);
 
     return result;
   }
 
   void reportObserved(Atom atom) {
-    final derivation = _state._trackingDerivation;
+    final derivation = _state.trackingDerivation;
 
     if (derivation != null) {
       derivation.newObservables.add(atom);
@@ -115,23 +115,23 @@ class ReactiveContext {
   }
 
   void addPendingReaction(Reaction reaction) {
-    _state._pendingReactions.add(reaction);
+    _state.pendingReactions.add(reaction);
   }
 
   void runReactions() {
-    if (_state._batch > 0 || _state._isRunningReactions) {
+    if (_state.batch > 0 || _state.isRunningReactions) {
       return;
     }
 
-    _state._isRunningReactions = true;
+    _state.isRunningReactions = true;
 
-    for (final reaction in _state._pendingReactions) {
+    for (final reaction in _state.pendingReactions) {
       reaction.run();
     }
 
     _state
-      .._pendingReactions = []
-      .._isRunningReactions = false;
+      ..pendingReactions = []
+      ..isRunningReactions = false;
   }
 
   void propagateChanged(Atom atom) {
@@ -198,7 +198,7 @@ class ReactiveContext {
     }
 
     atom.isPendingUnobservation = true;
-    _state._pendingUnobservations.add(atom);
+    _state.pendingUnobservations.add(atom);
   }
 
   void resetDerivationState(Derivation d) {
@@ -242,19 +242,19 @@ class ReactiveContext {
     return false;
   }
 
-  bool isInBatch() => _state._batch > 0;
+  bool isInBatch() => _state.batch > 0;
 
-  bool isComputingDerivation() => _state._trackingDerivation != null;
+  bool isComputingDerivation() => _state.trackingDerivation != null;
 
   Derivation untrackedStart() {
-    final prevDerivation = _state._trackingDerivation;
-    _state._trackingDerivation = null;
+    final prevDerivation = _state.trackingDerivation;
+    _state.trackingDerivation = null;
     return prevDerivation;
   }
 
   // ignore: use_setters_to_change_properties
   void untrackedEnd(Derivation prevDerivation) {
-    _state._trackingDerivation = prevDerivation;
+    _state.trackingDerivation = prevDerivation;
   }
 }
 
