@@ -18,6 +18,7 @@
 - [x] Create `ObservableValue<T>` via `observable<T>()`
 - [ ] Create `ObservableList<T>`
 - [ ] Create `ObservableMap<K, T>`
+- [x] Atoms with `createAtom()`
 
 ### Computed Observables 
 
