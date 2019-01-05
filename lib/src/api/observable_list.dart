@@ -3,85 +3,122 @@ import 'dart:math';
 import 'package:mobx/src/core/atom.dart';
 import 'package:mobx/src/core/observable.dart';
 
-class ObservableArray<T> implements List<ObservableValue<T>> {
-  var _atom = Atom('ObservableArray');
-  var _list = List<ObservableValue<T>>();
+class ObservableList<T> implements List<ObservableValue<T>> {
+  final _atom = Atom('ObservableArray');
+  var _list = <ObservableValue<T>>[];
 
   @override
-  ObservableValue<T> first;
+  ObservableValue<T> get first {
+    _atom.reportObserved();
+    return _list.first;
+  }
 
   @override
-  ObservableValue<T> last;
+  set first(ObservableValue<T> value) {
+    _list.first = value;
+    _atom.reportChanged();
+  }
 
   @override
-  int length;
+  ObservableValue<T> get last {
+    _atom.reportObserved();
+    return _list.last;
+  }
+
+  @override
+  set last(ObservableValue<T> value) {
+    _list.last = value;
+    _atom.reportChanged();
+  }
+
+  @override
+  int get length {
+    _atom.reportObserved();
+    return _list.length;
+  }
+
+  @override
+  set length(int value) {
+    _list.length = value;
+    _atom.reportChanged();
+  }
 
   @override
   List<ObservableValue<T>> operator +(List<ObservableValue<T>> other) {
-    // TODO: implement +
-    return null;
+    final newList = _list + other;
+    _atom.reportObserved();
+
+    return newList;
   }
 
   @override
   ObservableValue<T> operator [](int index) {
-    // TODO: implement []
-    return null;
+    _atom.reportObserved();
+    return _list[index];
   }
 
   @override
   void operator []=(int index, ObservableValue<T> value) {
-    // TODO: implement []=
+    final oldValue = _list[index];
+
+    if (oldValue != value) {
+      _list[index] = value;
+      _atom.reportChanged();
+    }
   }
 
   @override
   void add(ObservableValue<T> value) {
-    // TODO: implement add
+    _list.add(value);
+    _atom.reportChanged();
   }
 
   @override
   void addAll(Iterable<ObservableValue<T>> iterable) {
-    // TODO: implement addAll
+    _list.addAll(iterable);
+    _atom.reportChanged();
   }
 
   @override
   bool any(bool Function(ObservableValue<T> element) test) {
-    // TODO: implement any
-    return null;
+    _atom.reportObserved();
+    return _list.any(test);
   }
 
   @override
   Map<int, ObservableValue<T>> asMap() {
-    // TODO: implement asMap
-    return null;
+    _atom.reportObserved();
+    return _list.asMap();
   }
 
   @override
   List<R> cast<R>() {
-    // TODO: implement cast
-    return null;
+    _atom.reportObserved();
+    return _list.cast<R>();
   }
 
   @override
   void clear() {
-    // TODO: implement clear
+    _list.clear();
+    _atom.reportChanged();
   }
 
   @override
   bool contains(Object element) {
-    // TODO: implement contains
-    return null;
+    _atom.reportObserved();
+    return _list.contains(element);
   }
 
   @override
   ObservableValue<T> elementAt(int index) {
-    // TODO: implement elementAt
-    return null;
+    _atom.reportObserved();
+    return _list.elementAt(index);
   }
 
   @override
   bool every(bool Function(ObservableValue<T> element) test) {
-    // TODO: implement every
-    return null;
+    _atom.reportObserved();
+    return _list.every(test);
   }
 
   @override
@@ -93,14 +130,15 @@ class ObservableArray<T> implements List<ObservableValue<T>> {
 
   @override
   void fillRange(int start, int end, [ObservableValue<T> fillValue]) {
-    // TODO: implement fillRange
+    _list.fillRange(start, end, fillValue);
+    _atom.reportChanged();
   }
 
   @override
   ObservableValue<T> firstWhere(bool Function(ObservableValue<T> element) test,
       {ObservableValue<T> Function() orElse}) {
-    // TODO: implement firstWhere
-    return null;
+    _atom.reportObserved();
+    return _list.firstWhere(test);
   }
 
   @override
@@ -112,32 +150,33 @@ class ObservableArray<T> implements List<ObservableValue<T>> {
 
   @override
   Iterable<ObservableValue<T>> followedBy(Iterable<ObservableValue<T>> other) {
-    // TODO: implement followedBy
-    return null;
+    _atom.reportObserved();
+    return _list.followedBy(other);
   }
 
   @override
   void forEach(void Function(ObservableValue<T> element) f) {
-    // TODO: implement forEach
+    _atom.reportObserved();
+    _list.forEach(f);
   }
 
   @override
   Iterable<ObservableValue<T>> getRange(int start, int end) {
-    // TODO: implement getRange
-    return null;
+    _atom.reportObserved();
+    return _list.getRange(start, end);
   }
 
   @override
   int indexOf(ObservableValue<T> element, [int start = 0]) {
-    // TODO: implement indexOf
-    return null;
+    _atom.reportObserved();
+    return _list.indexOf(element, start);
   }
 
   @override
   int indexWhere(bool Function(ObservableValue<T> element) test,
       [int start = 0]) {
-    // TODO: implement indexWhere
-    return null;
+    _atom.reportObserved();
+    return _list.indexWhere(test, start);
   }
 
   @override
@@ -164,34 +203,34 @@ class ObservableArray<T> implements List<ObservableValue<T>> {
 
   @override
   String join([String separator = ""]) {
-    // TODO: implement join
-    return null;
+    _atom.reportObserved();
+    return _list.join(separator);
   }
 
   @override
   int lastIndexOf(ObservableValue<T> element, [int start]) {
-    // TODO: implement lastIndexOf
-    return null;
+    _atom.reportObserved();
+    return _list.lastIndexOf(element, start);
   }
 
   @override
   int lastIndexWhere(bool Function(ObservableValue<T> element) test,
       [int start]) {
-    // TODO: implement lastIndexWhere
-    return null;
+    _atom.reportObserved();
+    return _list.lastIndexWhere(test, start);
   }
 
   @override
   ObservableValue<T> lastWhere(bool Function(ObservableValue<T> element) test,
       {ObservableValue<T> Function() orElse}) {
-    // TODO: implement lastWhere
-    return null;
+    _atom.reportObserved();
+    return _list.lastWhere(test, orElse: orElse);
   }
 
   @override
-  Iterable<T> map<T>(T Function(ObservableValue<T> e) f) {
-    // TODO: implement map
-    return null;
+  Iterable<U> map<U>(U Function(ObservableValue<T> e) f) {
+    _atom.reportObserved();
+    return _list.map(f);
   }
 
   @override
@@ -199,140 +238,158 @@ class ObservableArray<T> implements List<ObservableValue<T>> {
       ObservableValue<T> Function(
               ObservableValue<T> value, ObservableValue<T> element)
           combine) {
-    // TODO: implement reduce
-    return null;
+    _atom.reportObserved();
+    return _list.reduce(combine);
   }
 
   @override
   bool remove(Object value) {
-    // TODO: implement remove
-    return null;
+    final didRemove = _list.remove(value);
+    _atom.reportChanged();
+
+    return didRemove;
   }
 
   @override
   ObservableValue<T> removeAt(int index) {
-    // TODO: implement removeAt
-    return null;
+    final value = _list.removeAt(index);
+    _atom.reportChanged();
+
+    return value;
   }
 
   @override
   ObservableValue<T> removeLast() {
-    // TODO: implement removeLast
-    return null;
+    final value = _list.removeLast();
+    _atom.reportChanged();
+    
+    return value;
   }
 
   @override
   void removeRange(int start, int end) {
-    // TODO: implement removeRange
+    _list.removeRange(start, end);
+    _atom.reportChanged();
   }
 
   @override
   void removeWhere(bool Function(ObservableValue<T> element) test) {
-    // TODO: implement removeWhere
+    _list.removeWhere(test);
+    _atom.reportChanged();
   }
 
   @override
   void replaceRange(
       int start, int end, Iterable<ObservableValue<T>> replacement) {
-    // TODO: implement replaceRange
+    _list.replaceRange(start, end, replacement);
+    _atom.reportChanged();
   }
 
   @override
   void retainWhere(bool Function(ObservableValue<T> element) test) {
-    // TODO: implement retainWhere
+    _list.retainWhere(test);
+    _atom.reportChanged();
   }
 
   @override
-  // TODO: implement reversed
-  Iterable<ObservableValue<T>> get reversed => null;
+  Iterable<ObservableValue<T>> get reversed {
+    _atom.reportObserved();
+    return _list.reversed;
+  }
 
   @override
   void setAll(int index, Iterable<ObservableValue<T>> iterable) {
-    // TODO: implement setAll
+    _list.setAll(index, iterable);
+    _atom.reportChanged();
   }
 
   @override
   void setRange(int start, int end, Iterable<ObservableValue<T>> iterable,
       [int skipCount = 0]) {
-    // TODO: implement setRange
+    _list.setRange(start, end, iterable, skipCount);
+    _atom.reportChanged();
   }
 
   @override
   void shuffle([Random random]) {
-    // TODO: implement shuffle
+    _list.shuffle(random);
+    _atom.reportChanged();
   }
 
   @override
-  // TODO: implement single
-  ObservableValue<T> get single => null;
+  ObservableValue<T> get single {
+    _atom.reportObserved();
+    return _list.single;
+  }
 
   @override
   ObservableValue<T> singleWhere(bool Function(ObservableValue<T> element) test,
       {ObservableValue<T> Function() orElse}) {
-    // TODO: implement singleWhere
-    return null;
+    _atom.reportObserved();
+    return _list.singleWhere(test, orElse: orElse);
   }
 
   @override
   Iterable<ObservableValue<T>> skip(int count) {
-    // TODO: implement skip
-    return null;
+    _atom.reportObserved();
+    return _list.skip(count);
   }
 
   @override
   Iterable<ObservableValue<T>> skipWhile(
       bool Function(ObservableValue<T> value) test) {
-    // TODO: implement skipWhile
-    return null;
+    _atom.reportObserved();
+    return _list.skipWhile(test);
   }
 
   @override
   void sort(
       [int Function(ObservableValue<T> a, ObservableValue<T> b) compare]) {
-    // TODO: implement sort
+    _list.sort(compare);
+    _atom.reportChanged();
   }
 
   @override
   List<ObservableValue<T>> sublist(int start, [int end]) {
-    // TODO: implement sublist
-    return null;
+    _atom.reportObserved();
+    return _list.sublist(start, end);
   }
 
   @override
   Iterable<ObservableValue<T>> take(int count) {
-    // TODO: implement take
-    return null;
+    _atom.reportObserved();
+    return _list.take(count);
   }
 
   @override
   Iterable<ObservableValue<T>> takeWhile(
       bool Function(ObservableValue<T> value) test) {
-    // TODO: implement takeWhile
-    return null;
+    _atom.reportObserved();
+    return _list.takeWhile(test);
   }
 
   @override
   List<ObservableValue<T>> toList({bool growable = true}) {
-    // TODO: implement toList
-    return null;
+    _atom.reportObserved();
+    return _list.toList(growable: growable);
   }
 
   @override
   Set<ObservableValue<T>> toSet() {
-    // TODO: implement toSet
-    return null;
+    _atom.reportObserved();
+    return _list.toSet();
   }
 
   @override
   Iterable<ObservableValue<T>> where(
       bool Function(ObservableValue<T> element) test) {
-    // TODO: implement where
-    return null;
+    _atom.reportObserved();
+    return _list.where(test);
   }
 
   @override
-  Iterable<T> whereType<T>() {
-    // TODO: implement whereType
-    return null;
+  Iterable<U> whereType<U>() {
+    _atom.reportObserved();
+    return _list.whereType<U>();
   }
 }
