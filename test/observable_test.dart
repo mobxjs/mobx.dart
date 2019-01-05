@@ -37,13 +37,16 @@ void main() {
     expect(y.name, equals('greeting'));
   });
 
-  test('Atom can be used directly', () {
+  test('createAtom works', () {
     var executionCount = 0;
-    final a = Atom('test', onObserve: () {
-      executionCount++;
-    }, onUnobserve: () {
-      executionCount++;
-    });
+    final a = createAtom(
+        name: 'test',
+        onObserved: () {
+          executionCount++;
+        },
+        onUnobserved: () {
+          executionCount++;
+        });
 
     final d = autorun((_) {
       a.reportObserved();
@@ -53,5 +56,11 @@ void main() {
 
     d();
     expect(executionCount, equals(2)); // onBecomeUnobserved gets called
+  });
+
+  test('createAtom provides a default name', () {
+    final a = createAtom();
+
+    expect(a.name, startsWith('Atom@'));
   });
 }
