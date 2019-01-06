@@ -1,7 +1,10 @@
 import 'package:fake_async/fake_async.dart';
-import 'package:mobx/src/api/observable.dart';
-import 'package:mobx/src/api/reaction.dart';
+import 'package:mobx/src/core/reaction.dart';
+import 'package:mobx/mobx.dart' hide when;
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   test('Reaction basics', () {
@@ -116,5 +119,19 @@ void main() {
     expect(executed, isTrue);
     expect(d.$mobx.isDisposed, isTrue);
     d();
+  });
+
+  test('Reaction uses provided context', () {
+    final context = MockContext();
+    void onInvalidate() {}
+    final reaction = Reaction(context, onInvalidate);
+
+    void trackingFn() {}
+
+    reaction.track(trackingFn);
+
+    verify(context.startBatch());
+    verify(context.trackDerivation(reaction, trackingFn));
+    verify(context.endBatch());
   });
 }
