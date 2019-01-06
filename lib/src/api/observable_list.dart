@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:mobx/src/core/atom.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core/observable.dart';
 
 class ObservableList<T> implements List<ObservableValue<T>> {
-  final _atom = Atom('ObservableArray');
+  final _atom = createAtom(name: 'ObservableArray');
   final _list = <ObservableValue<T>>[];
 
   @override
@@ -137,7 +137,7 @@ class ObservableList<T> implements List<ObservableValue<T>> {
   ObservableValue<T> firstWhere(bool Function(ObservableValue<T> element) test,
       {ObservableValue<T> Function() orElse}) {
     _atom.reportObserved();
-    return _list.firstWhere(test);
+    return _list.firstWhere(test, orElse: orElse);
   }
 
   @override
