@@ -2,7 +2,10 @@ import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/core/observable.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   test('Basic observable<T>', () {
@@ -62,5 +65,14 @@ void main() {
     final a = createAtom();
 
     expect(a.name, startsWith('Atom@'));
+  });
+
+  test('observable uses provided context', () {
+    final context = MockContext();
+    final value = ObservableValue(context, 0)..value += 1;
+
+    verify(context.startBatch());
+    verify(context.propagateChanged(value));
+    verify(context.endBatch());
   });
 }
