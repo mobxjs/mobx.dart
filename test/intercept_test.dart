@@ -1,5 +1,10 @@
 import 'package:mobx/mobx.dart';
+import 'package:mobx/src/core/atom.dart';
+import 'package:mobx/src/interceptable.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   test('intercept', () {
@@ -72,5 +77,14 @@ void main() {
     dispose1();
     dispose2();
     dispose3();
+  });
+
+  test('Interceptors uses provided context', () {
+    final context = MockContext();
+    Interceptors(context)
+      ..intercept((_) {})
+      ..interceptChange(WillChangeNotification());
+
+    verify(context.untracked(any));
   });
 }
