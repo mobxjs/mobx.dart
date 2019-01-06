@@ -1,7 +1,10 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   test('autorun', () {
@@ -108,5 +111,11 @@ void main() {
     x.value = 11;
     expect(d.$mobx.isDisposed, isTrue);
     d();
+  });
+
+  test('autorun uses provided context', () {
+    final context = MockContext();
+    autorun((_) {}, context: context);
+    verify(context.runReactions());
   });
 }
