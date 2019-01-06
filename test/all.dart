@@ -2,6 +2,7 @@ import 'action_test.dart' as action_test;
 import 'autorun_test.dart' as autorun_test;
 import 'computed_test.dart' as computed_test;
 import 'intercept_test.dart' as intercept_test;
+import 'listenable_test.dart' as listenable_test;
 import 'observable_test.dart' as observable_test;
 import 'observe_test.dart' as observe_test;
 import 'reaction_test.dart' as reaction_test;
@@ -16,4 +17,5 @@ void main() {
   when_test.main();
   observe_test.main();
   intercept_test.main();
+  listenable_test.main();
 }
