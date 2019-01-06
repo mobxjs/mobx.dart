@@ -1,6 +1,9 @@
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
+import 'package:mockito/mockito.dart' hide when;
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   test('When', () {
@@ -38,5 +41,11 @@ void main() {
     });
 
     x.value = 11;
+  });
+
+  test('when uses provided context', () {
+    final context = MockContext();
+    when(() => true, () {}, context: context);
+    verify(context.runReactions());
   });
 }
