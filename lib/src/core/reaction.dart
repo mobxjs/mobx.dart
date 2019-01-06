@@ -2,6 +2,29 @@ import 'package:mobx/src/core/atom.dart';
 import 'package:mobx/src/core/context.dart';
 import 'package:mobx/src/core/derivation.dart';
 
+class TrackingReaction extends Reaction {
+  TrackingReaction(ReactiveContext context, Function() onInvalidate,
+      {String name})
+      : super(context, onInvalidate, name: name);
+
+  Derivation startTracking() {
+    _context.startBatch();
+    _isRunning = true;
+    return _context.startTracking(this);
+  }
+
+  void endTracking(Derivation previous) {
+    _context.endTracking(this, previous);
+    _isRunning = false;
+
+    if (_isDisposed) {
+      _context.clearObservables(this);
+    }
+
+    _context.endBatch();
+  }
+}
+
 class Reaction implements Derivation {
   Reaction(this._context, Function() onInvalidate, {this.name}) {
     _onInvalidate = onInvalidate;
