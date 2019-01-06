@@ -39,7 +39,7 @@ ReactionDisposer createAutorun(
     {String name, int delay}) {
   Reaction rxn;
 
-  final rxnName = name ?? context.name('Autorun');
+  final rxnName = name ?? context.nameFor('Autorun');
 
   if (delay == null) {
     // Use a sync-scheduler.
@@ -82,7 +82,7 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
     {String name, int delay, bool fireImmediately}) {
   Reaction rxn;
 
-  final rxnName = name ?? context.name('Reaction');
+  final rxnName = name ?? context.nameFor('Reaction');
 
   final effectAction =
       action((T value) => effect(value), name: '$rxnName-effect');
@@ -153,7 +153,7 @@ ReactionDisposer createWhenReaction(
   void Function() effect, {
   String name,
 }) {
-  final rxnName = name ?? context.name('When');
+  final rxnName = name ?? context.nameFor('When');
   final effectAction = action(effect, name: '$rxnName-effect');
 
   return createAutorun(context, (reaction) {

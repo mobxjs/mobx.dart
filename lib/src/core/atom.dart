@@ -8,7 +8,7 @@ enum _ListenerKind {
 
 class Atom {
   Atom(this._context, {String name, Function onObserve, Function onUnobserve})
-      : name = name ?? _context.name('Atom') {
+      : name = name ?? _context.nameFor('Atom') {
     if (onObserve != null) {
       onBecomeObserved(onObserve);
     }
