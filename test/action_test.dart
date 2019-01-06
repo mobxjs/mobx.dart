@@ -1,7 +1,6 @@
 import 'package:mobx/src/api/action.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
-import 'package:mobx/src/core/action.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
@@ -188,8 +187,9 @@ void main() {
   test('action uses provided context', () {
     final context = MockContext();
     void fn() {}
-    final action = Action(context, fn);
-    action();
+    final act = action(fn, context: context);
+
+    act();
 
     verify(context.nameFor('Action'));
     verify(context.untrackedStart());
