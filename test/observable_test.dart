@@ -24,15 +24,15 @@ void main() {
   });
 
   test('Raw observables', () {
-    final x = ObservableValue(mobxContext, 1000);
+    final x = ObservableValue(currentContext, 1000);
     expect(x is ObservableValue<int>, isTrue);
 
     expect(x.value, equals(1000));
 
-    final x1 = ObservableValue<int>(mobxContext, null);
+    final x1 = ObservableValue<int>(currentContext, null);
     expect(x1.value, isNull);
 
-    final y = ObservableValue(mobxContext, 'Hello', name: 'greeting');
+    final y = ObservableValue(currentContext, 'Hello', name: 'greeting');
     expect(y.value, equals('Hello'));
     expect(y.name, equals('greeting'));
   });

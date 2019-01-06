@@ -14,7 +14,7 @@ void main() {
     y.value = 20;
     expect(c.value, equals(50));
 
-    expect(mobxContext.isComputingDerivation(), isFalse);
+    expect(currentContext.isComputingDerivation(), isFalse);
   });
 
   test('Computed value hierarchy', () {
@@ -64,7 +64,7 @@ void main() {
     expect(c1ComputationCount, equals(3));
     expect(c3ComputationCount, equals(2));
 
-    expect(mobxContext.isComputingDerivation(), isFalse);
+    expect(currentContext.isComputingDerivation(), isFalse);
 
     d();
   });

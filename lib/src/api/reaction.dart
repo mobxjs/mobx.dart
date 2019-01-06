@@ -30,7 +30,7 @@ import 'package:mobx/src/core/reaction.dart';
 
 ReactionDisposer autorun(Function(Reaction) fn,
         {String name, int delay, ReactiveContext context}) =>
-    createAutorun(context ?? mobxContext, fn, name: name, delay: delay);
+    createAutorun(context ?? currentContext, fn, name: name, delay: delay);
 
 /// Executes the [predicate] function and tracks the observables used in it. Returns
 /// a function to dispose the reaction.
@@ -49,7 +49,7 @@ ReactionDisposer reaction<T>(
         int delay,
         bool fireImmediately,
         ReactiveContext context}) =>
-    createReaction(context ?? mobxContext, predicate, effect,
+    createReaction(context ?? currentContext, predicate, effect,
         name: name, delay: delay, fireImmediately: fireImmediately);
 
 /// A one-time reaction that auto-disposes when the [predicate] becomes true. It also
@@ -64,7 +64,8 @@ ReactionDisposer when(
   String name,
   ReactiveContext context,
 }) =>
-    createWhenReaction(context ?? mobxContext, predicate, effect, name: name);
+    createWhenReaction(context ?? currentContext, predicate, effect,
+        name: name);
 
 /// A variant of [when()] which returns a Future. The Future completes when the [predicate()] turns true.
 /// Note that there is no effect function here. Typically you would await on the Future and execute the
@@ -76,4 +77,4 @@ ReactionDisposer when(
 /// ```
 Future<void> asyncWhen(bool Function() predicate,
         {String name, ReactiveContext context}) =>
-    createAsyncWhenReaction(context ?? mobxContext, predicate, name: name);
+    createAsyncWhenReaction(context ?? currentContext, predicate, name: name);
