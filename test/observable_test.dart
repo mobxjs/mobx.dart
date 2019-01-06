@@ -69,7 +69,7 @@ void main() {
 
   test('observable uses provided context', () {
     final context = MockContext();
-    final value = ObservableValue(context, 0)..value += 1;
+    final value = observable(0, context: context)..value += 1;
 
     verify(context.startBatch());
     verify(context.propagateChanged(value));
