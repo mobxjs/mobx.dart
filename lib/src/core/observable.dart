@@ -2,11 +2,15 @@ import 'package:mobx/src/core/atom.dart';
 import 'package:mobx/src/core/context.dart';
 import 'package:mobx/src/interceptable.dart';
 import 'package:mobx/src/listenable.dart';
+import 'package:mobx/src/utils.dart';
 
 class ObservableValue<T> extends Atom
-    implements Listenable<T>, Interceptable<T> {
+    implements Interceptable<T>, Listenable<T> {
   ObservableValue(ReactiveContext context, this._value, {String name})
-      : super(context, name: name ?? context.nameFor('Observable'));
+      : _interceptors = Interceptors(context),
+        super(context, name: name ?? context.nameFor('Observable'));
+
+  final Interceptors<T> _interceptors;
 
   T _value;
 
@@ -39,11 +43,9 @@ class ObservableValue<T> extends Atom
 
   dynamic _prepareNewValue(T newValue) {
     var prepared = newValue;
-    if (hasInterceptors(this)) {
-      final change = interceptChange(
-          this,
-          WillChangeNotification(
-              newValue: prepared, type: OperationType.update, object: this));
+    if (_interceptors.hasInterceptors) {
+      final change = _interceptors.interceptChange(WillChangeNotification(
+          newValue: prepared, type: OperationType.update, object: this));
 
       if (change == null) {
         return WillChangeNotification.unchanged;
@@ -73,14 +75,7 @@ class ObservableValue<T> extends Atom
     return registerListener(this, listener);
   }
 
-  // Interceptable ----------
-
   @override
-  List<Interceptor<T>> interceptors;
-
-  @override
-  Function intercept(
-          WillChangeNotification<T> Function(WillChangeNotification<T>)
-              handler) =>
-      registerInterceptor(this, handler);
+  Dispose intercept(Interceptor<T> interceptor) =>
+      _interceptors.intercept(interceptor);
 }
