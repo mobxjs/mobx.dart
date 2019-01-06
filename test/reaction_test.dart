@@ -123,15 +123,12 @@ void main() {
 
   test('Reaction uses provided context', () {
     final context = MockContext();
-    void onInvalidate() {}
-    final reaction = Reaction(context, onInvalidate);
+    int trackingFn(Reaction reaction) => 1;
+    void onInvalidate(int i) {}
+    final rx = reaction(trackingFn, onInvalidate, context: context);
 
-    void trackingFn() {}
-
-    reaction.track(trackingFn);
-
-    verify(context.startBatch());
-    verify(context.trackDerivation(reaction, trackingFn));
-    verify(context.endBatch());
+    verify(context.nameFor('Reaction'));
+    verify(context.addPendingReaction(rx.$mobx));
+    verify(context.runReactions());
   });
 }
