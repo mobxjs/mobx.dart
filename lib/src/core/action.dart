@@ -3,7 +3,7 @@ import 'package:mobx/src/core/derivation.dart';
 
 class Action {
   Action(this._context, this._fn, {String name})
-      : name = name ?? _context.name('Action');
+      : name = name ?? _context.nameFor('Action');
 
   final ReactiveContext _context;
 

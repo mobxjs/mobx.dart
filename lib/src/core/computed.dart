@@ -5,7 +5,7 @@ import 'package:mobx/src/core/derivation.dart';
 
 class ComputedValue<T> extends Atom implements Derivation {
   ComputedValue(this._context, this._fn, {String name})
-      : super(_context, name: name ?? _context.name('Computed'));
+      : super(_context, name: name ?? _context.nameFor('Computed'));
 
   final ReactiveContext _context;
 

@@ -19,7 +19,7 @@ class ReactiveContext {
 
   int get nextId => ++_state.nextIdCounter;
 
-  String name(String prefix) {
+  String nameFor(String prefix) {
     assert(prefix != null);
     assert(prefix.isNotEmpty);
     return '$prefix@$nextId';

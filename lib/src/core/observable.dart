@@ -6,7 +6,7 @@ import 'package:mobx/src/listenable.dart';
 class ObservableValue<T> extends Atom
     implements Listenable<T>, Interceptable<T> {
   ObservableValue(ReactiveContext context, this._value, {String name})
-      : super(context, name: name ?? context.name('Observable'));
+      : super(context, name: name ?? context.nameFor('Observable'));
 
   T _value;
 
