@@ -122,9 +122,8 @@ class ObservableList<T> implements List<ObservableValue<T>> {
   }
 
   @override
-  Iterable<ObservableValue<T>> expand<ObservableValue<T>>(
-      Iterable<ObservableValue<T>> Function(ObservableValue<T> element) f) {
-    // TODO: implement expand
+  Iterable<U> expand<U>(Iterable<U> Function(ObservableValue<T> element) f) {
+    _atom.reportObserved();
     return _list.expand(f);
   }
 
@@ -144,7 +143,7 @@ class ObservableList<T> implements List<ObservableValue<T>> {
   @override
   U fold<U>(U initialValue,
       U Function(U previousValue, ObservableValue<T> element) combine) {
-    // TODO: implement fold
+    _atom.reportObserved();
     return _list.fold(initialValue, combine);
   }
 
@@ -181,28 +180,36 @@ class ObservableList<T> implements List<ObservableValue<T>> {
 
   @override
   void insert(int index, ObservableValue<T> element) {
-    // TODO: implement insert
+    _list.insert(index, element);
+    _atom.reportChanged();
   }
 
   @override
   void insertAll(int index, Iterable<ObservableValue<T>> iterable) {
-    // TODO: implement insertAll
+    _list.insertAll(index, iterable);
+    _atom.reportChanged();
   }
 
   @override
-  // TODO: implement isEmpty
-  bool get isEmpty => null;
+  bool get isEmpty {
+    _atom.reportObserved();
+    return _list.isEmpty;
+  }
 
   @override
-  // TODO: implement isNotEmpty
-  bool get isNotEmpty => null;
+  bool get isNotEmpty {
+    _atom.reportObserved();
+    return _list.isNotEmpty;
+  }
 
   @override
-  // TODO: implement iterator
-  Iterator<ObservableValue<T>> get iterator => null;
+  Iterator<ObservableValue<T>> get iterator {
+    _atom.reportObserved();
+    return _list.iterator;
+  }
 
   @override
-  String join([String separator = ""]) {
+  String join([String separator = '']) {
     _atom.reportObserved();
     return _list.join(separator);
   }
@@ -262,7 +269,7 @@ class ObservableList<T> implements List<ObservableValue<T>> {
   ObservableValue<T> removeLast() {
     final value = _list.removeLast();
     _atom.reportChanged();
-    
+
     return value;
   }
 
