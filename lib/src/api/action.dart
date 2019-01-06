@@ -35,21 +35,21 @@ import 'package:mobx/src/core/context.dart';
 /// can also be nested inside, in which case the change notification will propagate when
 /// the top-level action completes.
 Action action(Function fn, {String name, ReactiveContext context}) =>
-    Action(context ?? mobxContext, fn, name: name);
+    Action(context ?? currentContext, fn, name: name);
 
 Action runInAction(Function fn, {String name, ReactiveContext context}) =>
-    Action(context ?? mobxContext, fn, name: name)();
+    Action(context ?? currentContext, fn, name: name)();
 
 /// Untracked ensures there is no tracking derivation while the given action runs.
 /// This is useful in cases where no observers should be linked to a running (tracking) derivation.
 T untracked<T>(T Function() action, {ReactiveContext context}) =>
-    (context ?? mobxContext).untracked(action);
+    (context ?? currentContext).untracked(action);
 
 /// During a transaction, no derivations (Reaction or ComputedValue<T>) will be run
 /// and will be deferred until the end of the transaction (batch). Transactions can
 /// be nested, in which case, no derivation will be run until the top-most batch completes
 T transaction<T>(T Function() action, {ReactiveContext context}) {
-  final ctx = context ?? mobxContext
+  final ctx = context ?? currentContext
     ..startBatch();
   try {
     return action();
