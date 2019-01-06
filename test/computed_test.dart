@@ -1,5 +1,4 @@
 import 'package:mobx/src/api/context.dart';
-import 'package:mobx/src/core/computed.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mobx/mobx.dart' hide when;
 import 'package:test/test.dart';
@@ -98,7 +97,7 @@ void main() {
     final context = MockContext();
     int fn() => 1;
 
-    final value = ComputedValue(context, fn)..computeValue(track: true);
+    final value = computed(fn, context: context)..computeValue(track: true);
 
     verify(context.nameFor('Computed'));
     verify(context.trackDerivation(value, fn));
