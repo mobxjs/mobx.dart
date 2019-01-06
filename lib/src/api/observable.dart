@@ -59,8 +59,10 @@ ComputedValue<T> computed<T>(T Function() fn,
 ///
 /// Use the [onObserved] and [onUnobserved] handlers to know when the atom is active and inactive
 /// respectively. Use a debug [name] to identify easily.
-Atom createAtom({String name, Function onObserved, Function onUnobserved}) {
-  final context = currentContext;
-  return Atom(context,
-      name: name, onObserve: onObserved, onUnobserve: onUnobserved);
-}
+Atom createAtom(
+        {String name,
+        Function onObserved,
+        Function onUnobserved,
+        ReactiveContext context}) =>
+    Atom(context ?? currentContext,
+        name: name, onObserve: onObserved, onUnobserve: onUnobserved);
