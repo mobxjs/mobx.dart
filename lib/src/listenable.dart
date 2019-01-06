@@ -1,43 +1,44 @@
-import 'package:mobx/src/api/action.dart';
+import 'dart:collection';
+
 import 'package:mobx/src/core/atom.dart';
+import 'package:mobx/src/core/context.dart';
+import 'package:mobx/src/utils.dart';
 
+typedef Listener<T> = void Function(ChangeNotification<T>);
+
+// ignore: one_member_abstracts
 abstract class Listenable<T> {
-  List<Listener<T>> changeListeners;
-
-  Function observe(void Function(ChangeNotification<T>) handler,
-      {bool fireImmediately});
+  Dispose observe(Listener<T> listener, {bool fireImmediately});
 }
 
-typedef Listener<T> = Function(ChangeNotification<T>);
+class Listeners<T> {
+  Listeners(this._context) : assert(_context != null);
 
-bool hasListeners<T>(Listenable<T> obj) =>
-    obj.changeListeners != null && obj.changeListeners.isNotEmpty;
+  final ReactiveContext _context;
 
-Function() registerListener<T>(Listenable<T> listenable, Listener<T> listener) {
-  if (listenable.changeListeners == null) {
-    listenable.changeListeners = [];
+  Set<Listener<T>> _listeners;
+
+  bool get hasListeners => _listeners?.isNotEmpty ?? false;
+
+  Dispose registerListener(Listener<T> listener) {
+    assert(listener != null);
+
+    _listeners ??= LinkedHashSet();
+    _listeners.add(listener);
+    return () => _listeners.remove(listener);
   }
-  final listeners = listenable.changeListeners..add(listener);
 
-  return () {
-    final index = listeners.indexOf(listener);
-    if (index != -1) {
-      listeners.removeAt(index);
-    }
-  };
-}
+  void notifyListeners(ChangeNotification<T> change) {
+    assert(change != null);
 
-void notifyListeners<T>(Listenable<T> obj, ChangeNotification<T> change) {
-  untracked(() {
-    if (obj.changeListeners == null) {
+    if (!hasListeners) {
       return;
     }
 
-    final listeners = obj.changeListeners.toList(growable: false);
-    for (var i = 0; i < listeners.length; i++) {
-      final listener = listeners[i];
-
-      listener(change);
-    }
-  });
+    _context.untracked(() {
+      for (final listener in _listeners.toList(growable: false)) {
+        listener(change);
+      }
+    });
+  }
 }
