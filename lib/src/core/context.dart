@@ -1,4 +1,3 @@
-import 'package:mobx/src/core/action.dart';
 import 'package:mobx/src/core/atom.dart';
 import 'package:mobx/src/core/computed.dart';
 import 'package:mobx/src/core/derivation.dart';
@@ -19,6 +18,12 @@ class ReactiveContext {
   final _ReactiveState _state = _ReactiveState();
 
   int get nextId => ++_state.nextIdCounter;
+
+  String nameFor(String prefix) {
+    assert(prefix != null);
+    assert(prefix.isNotEmpty);
+    return '$prefix@$nextId';
+  }
 
   void startBatch() {
     _state.batch++;
@@ -256,6 +261,15 @@ class ReactiveContext {
   void untrackedEnd(Derivation prevDerivation) {
     _state.trackingDerivation = prevDerivation;
   }
+
+  T untracked<T>(T Function() action) {
+    final prevDerivation = untrackedStart();
+    try {
+      return action();
+    } finally {
+      untrackedEnd(prevDerivation);
+    }
+  }
 }
 
 class MobXException implements Exception {
@@ -263,5 +277,3 @@ class MobXException implements Exception {
 
   String message;
 }
-
-final ReactiveContext ctx = ReactiveContext();

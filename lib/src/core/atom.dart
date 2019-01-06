@@ -7,7 +7,8 @@ enum _ListenerKind {
 }
 
 class Atom {
-  Atom(this.name, {Function onObserve, Function onUnobserve}) {
+  Atom(this._context, {String name, Function onObserve, Function onUnobserve})
+      : name = name ?? _context.nameFor('Atom') {
     if (onObserve != null) {
       onBecomeObserved(onObserve);
     }
@@ -17,7 +18,9 @@ class Atom {
     }
   }
 
-  String name;
+  final ReactiveContext _context;
+
+  final String name;
 
   bool isPendingUnobservation = false;
 
@@ -30,11 +33,11 @@ class Atom {
   final Map<_ListenerKind, Set<Function()>> _observationListeners = {};
 
   void reportObserved() {
-    ctx.reportObserved(this);
+    _context.reportObserved(this);
   }
 
   void reportChanged() {
-    ctx
+    _context
       ..startBatch()
       ..propagateChanged(this)
       ..endBatch();
@@ -51,7 +54,7 @@ class Atom {
   void removeObserver(Derivation d) {
     observers.removeWhere((ob) => ob == d);
     if (observers.isEmpty) {
-      ctx.enqueueForUnobservation(this);
+      _context.enqueueForUnobservation(this);
     }
   }
 

@@ -1,7 +1,11 @@
 import 'package:mobx/mobx.dart';
+import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/core/observable.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   test('Basic observable<T>', () {
@@ -23,15 +27,15 @@ void main() {
   });
 
   test('Raw observables', () {
-    final x = ObservableValue(1000);
+    final x = ObservableValue(currentContext, 1000);
     expect(x is ObservableValue<int>, isTrue);
 
     expect(x.value, equals(1000));
 
-    final x1 = ObservableValue<int>(null);
+    final x1 = ObservableValue<int>(currentContext, null);
     expect(x1.value, isNull);
 
-    final y = ObservableValue('Hello', name: 'greeting');
+    final y = ObservableValue(currentContext, 'Hello', name: 'greeting');
     expect(y.value, equals('Hello'));
     expect(y.name, equals('greeting'));
   });
@@ -61,5 +65,14 @@ void main() {
     final a = createAtom();
 
     expect(a.name, startsWith('Atom@'));
+  });
+
+  test('observable uses provided context', () {
+    final context = MockContext();
+    final value = observable(0, context: context)..value += 1;
+
+    verify(context.startBatch());
+    verify(context.propagateChanged(value));
+    verify(context.endBatch());
   });
 }

@@ -1,8 +1,9 @@
-import 'package:mobx/src/api/action.dart';
-import 'package:mobx/src/api/observable.dart';
-import 'package:mobx/src/api/reaction.dart';
-import 'package:mobx/src/core/context.dart';
+import 'package:mobx/src/api/context.dart';
+import 'package:mockito/mockito.dart';
+import 'package:mobx/mobx.dart' hide when;
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   test('Computed value', () {
@@ -14,7 +15,7 @@ void main() {
     y.value = 20;
     expect(c.value, equals(50));
 
-    expect(ctx.isComputingDerivation(), isFalse);
+    expect(currentContext.isComputingDerivation(), isFalse);
   });
 
   test('Computed value hierarchy', () {
@@ -64,7 +65,7 @@ void main() {
     expect(c1ComputationCount, equals(3));
     expect(c3ComputationCount, equals(2));
 
-    expect(ctx.isComputingDerivation(), isFalse);
+    expect(currentContext.isComputingDerivation(), isFalse);
 
     d();
   });
@@ -90,5 +91,15 @@ void main() {
     x.value = 100; // should not invoke observe
 
     expect(executionCount, equals(1));
+  });
+
+  test('computed uses provided context', () {
+    final context = MockContext();
+    int fn() => 1;
+
+    final value = computed(fn, context: context)..computeValue(track: true);
+
+    verify(context.nameFor('Computed'));
+    verify(context.trackDerivation(value, fn));
   });
 }

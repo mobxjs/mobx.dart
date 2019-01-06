@@ -1,8 +1,10 @@
 import 'package:mobx/src/api/action.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
-import 'package:mobx/src/core/action.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   test('Action basics work', () {
@@ -180,5 +182,19 @@ void main() {
     expect(total, equals(300));
 
     d();
+  });
+
+  test('action uses provided context', () {
+    final context = MockContext();
+    void fn() {}
+    final act = action(fn, context: context);
+
+    act();
+
+    verify(context.nameFor('Action'));
+    verify(context.untrackedStart());
+    verify(context.startBatch());
+    verify(context.endBatch());
+    verify(context.untrackedEnd(null));
   });
 }
