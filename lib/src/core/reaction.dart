@@ -46,21 +46,23 @@ class Reaction implements Derivation {
   bool _isRunning = false;
 
   @override
-  String name;
+  final String name;
 
   @override
-  Set<Atom> newObservables;
+  Set<Atom> _newObservables;
 
   @override
-  Set<Atom> observables = Set();
+  // ignore: prefer_final_fields
+  Set<Atom> _observables = Set();
 
   @override
-  DerivationState dependenciesState = DerivationState.notTracking;
+  // ignore: prefer_final_fields
+  DerivationState _dependenciesState = DerivationState.notTracking;
 
   bool get isDisposed => _isDisposed;
 
   @override
-  void onBecomeStale() {
+  void _onBecomeStale() {
     schedule();
   }
 
@@ -68,22 +70,22 @@ class Reaction implements Derivation {
   Derivation _startTracking() {
     _context.startBatch();
     _isRunning = true;
-    return _context.startTracking(this);
+    return _context._startTracking(this);
   }
 
   @experimental
   void _endTracking(Derivation previous) {
-    _context.endTracking(this, previous);
+    _context._endTracking(this, previous);
     _isRunning = false;
 
     if (_isDisposed) {
-      _context.clearObservables(this);
+      _context._clearObservables(this);
     }
 
     _context.endBatch();
   }
 
-  void track(void Function() fn) {
+  void _track(void Function() fn) {
     _context.startBatch();
 
     _isRunning = true;
@@ -91,7 +93,7 @@ class Reaction implements Derivation {
     _isRunning = false;
 
     if (_isDisposed) {
-      _context.clearObservables(this);
+      _context._clearObservables(this);
     }
 
     _context.endBatch();
@@ -106,7 +108,7 @@ class Reaction implements Derivation {
 
     _isScheduled = false;
 
-    if (_context.shouldCompute(this)) {
+    if (_context._shouldCompute(this)) {
       _onInvalidate();
     }
 
@@ -126,7 +128,7 @@ class Reaction implements Derivation {
 
     _context
       ..startBatch()
-      ..clearObservables(this)
+      .._clearObservables(this)
       ..endBatch();
   }
 
@@ -142,7 +144,7 @@ class Reaction implements Derivation {
   }
 
   @override
-  void suspend() {
+  void _suspend() {
     // Not applicable right now
   }
 }

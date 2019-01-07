@@ -14,3 +14,9 @@ part 'core/reaction_helper.dart';
 part 'core/context.dart';
 part 'core/observable.dart';
 part 'core/computed.dart';
+
+class MobXException implements Exception {
+  MobXException(this.message);
+
+  String message;
+}

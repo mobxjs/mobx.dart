@@ -5,15 +5,17 @@ class ComputedValue<T> extends Atom implements Derivation {
       : super(context, name: name ?? context.nameFor('Computed'));
 
   @override
-  Set<Atom> observables = Set();
+  // ignore: prefer_final_fields
+  Set<Atom> _observables = Set();
 
   @override
-  Set<Atom> newObservables;
+  Set<Atom> _newObservables;
 
   T Function() _fn;
 
   @override
-  DerivationState dependenciesState = DerivationState.notTracking;
+  // ignore: prefer_final_fields
+  DerivationState _dependenciesState = DerivationState.notTracking;
 
   T _value;
 
@@ -24,17 +26,17 @@ class ComputedValue<T> extends Atom implements Derivation {
       throw MobXException('Cycle detected in computation $name: $_fn');
     }
 
-    if (!_context.isInBatch() && observers.isEmpty) {
-      if (_context.shouldCompute(this)) {
+    if (!_context._isInBatch() && _observers.isEmpty) {
+      if (_context._shouldCompute(this)) {
         _context.startBatch();
         _value = computeValue(track: false);
         _context.endBatch();
       }
     } else {
       reportObserved();
-      if (_context.shouldCompute(this)) {
+      if (_context._shouldCompute(this)) {
         if (_trackAndCompute()) {
-          _context.propagateChangeConfirmed(this);
+          _context._propagateChangeConfirmed(this);
         }
       }
     }
@@ -58,19 +60,19 @@ class ComputedValue<T> extends Atom implements Derivation {
   }
 
   @override
-  void suspend() {
-    _context.clearObservables(this);
+  void _suspend() {
+    _context._clearObservables(this);
     _value = null;
   }
 
   @override
-  void onBecomeStale() {
-    _context.propagatePossiblyChanged(this);
+  void _onBecomeStale() {
+    _context._propagatePossiblyChanged(this);
   }
 
   bool _trackAndCompute() {
     final oldValue = _value;
-    final wasSuspended = dependenciesState == DerivationState.notTracking;
+    final wasSuspended = _dependenciesState == DerivationState.notTracking;
 
     final newValue = computeValue(track: true);
 

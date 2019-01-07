@@ -38,7 +38,7 @@ ReactionDisposer createAutorun(
   if (delay == null) {
     // Use a sync-scheduler.
     rxn = Reaction(context, () {
-      rxn.track(() => trackingFn(rxn));
+      rxn._track(() => trackingFn(rxn));
     }, name: rxnName);
   } else {
     // Use a delayed scheduler.
@@ -58,7 +58,7 @@ ReactionDisposer createAutorun(
         timer = scheduler(() {
           isScheduled = false;
           if (!rxn.isDisposed) {
-            rxn.track(() => trackingFn(rxn));
+            rxn._track(() => trackingFn(rxn));
           } else {
             timer.cancel();
           }
@@ -94,7 +94,7 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
 
     var changed = false;
 
-    rxn.track(() {
+    rxn._track(() {
       final nextValue = predicate(rxn);
       changed = firstTime || (nextValue != value);
       value = nextValue;
