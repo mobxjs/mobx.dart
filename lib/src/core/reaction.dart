@@ -70,7 +70,7 @@ class Reaction implements Derivation {
   Derivation _startTracking() {
     _context.startBatch();
     _isRunning = true;
-    return _context.startTracking(this);
+    return _context._startTracking(this);
   }
 
   @experimental

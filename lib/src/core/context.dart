@@ -52,7 +52,7 @@ class ReactiveContext {
     }
   }
 
-  Derivation startTracking(Derivation derivation) {
+  Derivation _startTracking(Derivation derivation) {
     final prevDerivation = _state.trackingDerivation;
     _state.trackingDerivation = derivation;
 
@@ -68,7 +68,7 @@ class ReactiveContext {
   }
 
   T trackDerivation<T>(Derivation d, T Function() fn) {
-    final prevDerivation = startTracking(d);
+    final prevDerivation = _startTracking(d);
     final result = fn();
     _endTracking(d, prevDerivation);
     return result;
