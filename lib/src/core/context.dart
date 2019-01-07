@@ -174,7 +174,7 @@ class ReactiveContext {
     }
   }
 
-  void propagateChangeConfirmed(Atom atom) {
+  void _propagateChangeConfirmed(Atom atom) {
     if (atom._lowestObserverState == DerivationState.stale) {
       return;
     }

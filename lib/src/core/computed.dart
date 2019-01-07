@@ -36,7 +36,7 @@ class ComputedValue<T> extends Atom implements Derivation {
       reportObserved();
       if (_context.shouldCompute(this)) {
         if (_trackAndCompute()) {
-          _context.propagateChangeConfirmed(this);
+          _context._propagateChangeConfirmed(this);
         }
       }
     }
