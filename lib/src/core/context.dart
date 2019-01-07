@@ -251,7 +251,7 @@ class ReactiveContext {
     return false;
   }
 
-  bool isInBatch() => _state.batch > 0;
+  bool _isInBatch() => _state.batch > 0;
 
   bool isComputingDerivation() => _state.trackingDerivation != null;
 

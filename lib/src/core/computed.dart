@@ -26,7 +26,7 @@ class ComputedValue<T> extends Atom implements Derivation {
       throw MobXException('Cycle detected in computation $name: $_fn');
     }
 
-    if (!_context.isInBatch() && _observers.isEmpty) {
+    if (!_context._isInBatch() && _observers.isEmpty) {
       if (_context._shouldCompute(this)) {
         _context.startBatch();
         _value = computeValue(track: false);
