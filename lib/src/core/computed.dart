@@ -14,7 +14,8 @@ class ComputedValue<T> extends Atom implements Derivation {
   T Function() _fn;
 
   @override
-  DerivationState dependenciesState = DerivationState.notTracking;
+  // ignore: prefer_final_fields
+  DerivationState _dependenciesState = DerivationState.notTracking;
 
   T _value;
 
@@ -71,7 +72,7 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   bool _trackAndCompute() {
     final oldValue = _value;
-    final wasSuspended = dependenciesState == DerivationState.notTracking;
+    final wasSuspended = _dependenciesState == DerivationState.notTracking;
 
     final newValue = computeValue(track: true);
 

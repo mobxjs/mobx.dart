@@ -28,7 +28,7 @@ abstract class Derivation {
   Set<Atom> _observables;
   Set<Atom> _newObservables;
 
-  DerivationState dependenciesState;
+  DerivationState _dependenciesState;
 
   void onBecomeStale();
   void suspend();

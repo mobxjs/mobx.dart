@@ -100,9 +100,9 @@ class ReactiveContext {
 
       // ComputedValue = ObservableValue + Derivation
       if (observable is ComputedValue) {
-        if (observable.dependenciesState.index >
+        if (observable._dependenciesState.index >
             lowestNewDerivationState.index) {
-          lowestNewDerivationState = observable.dependenciesState;
+          lowestNewDerivationState = observable._dependenciesState;
         }
       }
     }
@@ -114,7 +114,7 @@ class ReactiveContext {
 
     if (lowestNewDerivationState != DerivationState.upToDate) {
       derivation
-        ..dependenciesState = lowestNewDerivationState
+        .._dependenciesState = lowestNewDerivationState
         ..onBecomeStale();
     }
 
@@ -151,10 +151,10 @@ class ReactiveContext {
     atom.lowestObserverState = DerivationState.stale;
 
     for (final observer in atom.observers) {
-      if (observer.dependenciesState == DerivationState.upToDate) {
+      if (observer._dependenciesState == DerivationState.upToDate) {
         observer.onBecomeStale();
       }
-      observer.dependenciesState = DerivationState.stale;
+      observer._dependenciesState = DerivationState.stale;
     }
   }
 
@@ -166,9 +166,9 @@ class ReactiveContext {
     atom.lowestObserverState = DerivationState.possiblyStale;
 
     for (final observer in atom.observers) {
-      if (observer.dependenciesState == DerivationState.upToDate) {
+      if (observer._dependenciesState == DerivationState.upToDate) {
         observer
-          ..dependenciesState = DerivationState.possiblyStale
+          .._dependenciesState = DerivationState.possiblyStale
           ..onBecomeStale();
       }
     }
@@ -182,9 +182,9 @@ class ReactiveContext {
     atom.lowestObserverState = DerivationState.stale;
 
     for (final observer in atom.observers) {
-      if (observer.dependenciesState == DerivationState.possiblyStale) {
-        observer.dependenciesState = DerivationState.stale;
-      } else if (observer.dependenciesState == DerivationState.upToDate) {
+      if (observer._dependenciesState == DerivationState.possiblyStale) {
+        observer._dependenciesState = DerivationState.stale;
+      } else if (observer._dependenciesState == DerivationState.upToDate) {
         atom.lowestObserverState = DerivationState.upToDate;
       }
     }
@@ -198,7 +198,7 @@ class ReactiveContext {
       x.removeObserver(derivation);
     }
 
-    derivation.dependenciesState = DerivationState.notTracking;
+    derivation._dependenciesState = DerivationState.notTracking;
   }
 
   void enqueueForUnobservation(Atom atom) {
@@ -211,18 +211,18 @@ class ReactiveContext {
   }
 
   void resetDerivationState(Derivation d) {
-    if (d.dependenciesState == DerivationState.upToDate) {
+    if (d._dependenciesState == DerivationState.upToDate) {
       return;
     }
 
-    d.dependenciesState = DerivationState.upToDate;
+    d._dependenciesState = DerivationState.upToDate;
     for (final obs in d._observables) {
       obs.lowestObserverState = DerivationState.upToDate;
     }
   }
 
   bool shouldCompute(Derivation derivation) {
-    switch (derivation.dependenciesState) {
+    switch (derivation._dependenciesState) {
       case DerivationState.upToDate:
         return false;
 
@@ -237,7 +237,7 @@ class ReactiveContext {
               // Force a computation
               obs.value;
 
-              if (derivation.dependenciesState == DerivationState.stale) {
+              if (derivation._dependenciesState == DerivationState.stale) {
                 return true;
               }
             }

@@ -56,7 +56,8 @@ class Reaction implements Derivation {
   Set<Atom> _observables = Set();
 
   @override
-  DerivationState dependenciesState = DerivationState.notTracking;
+  // ignore: prefer_final_fields
+  DerivationState _dependenciesState = DerivationState.notTracking;
 
   bool get isDisposed => _isDisposed;
 

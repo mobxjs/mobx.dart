@@ -45,8 +45,8 @@ class Atom {
   void addObserver(Derivation d) {
     observers.add(d);
 
-    if (lowestObserverState.index > d.dependenciesState.index) {
-      lowestObserverState = d.dependenciesState;
+    if (lowestObserverState.index > d._dependenciesState.index) {
+      lowestObserverState = d._dependenciesState;
     }
   }
 
