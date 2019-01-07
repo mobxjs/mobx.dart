@@ -109,7 +109,7 @@ class ReactiveContext {
 
     // Remove previous observables
     for (final ob in staleObservables) {
-      ob.removeObserver(derivation);
+      ob._removeObserver(derivation);
     }
 
     if (lowestNewDerivationState != DerivationState.upToDate) {
@@ -195,7 +195,7 @@ class ReactiveContext {
     derivation._observables = Set();
 
     for (final x in observables) {
-      x.removeObserver(derivation);
+      x._removeObserver(derivation);
     }
 
     derivation._dependenciesState = DerivationState.notTracking;
