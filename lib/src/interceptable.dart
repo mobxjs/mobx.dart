@@ -1,7 +1,6 @@
 import 'dart:collection';
 
-import 'package:mobx/src/core/atom.dart';
-import 'package:mobx/src/core/context.dart';
+import 'package:mobx/src/core.dart';
 import 'package:mobx/src/utils.dart';
 
 typedef Interceptor<T> = WillChangeNotification<T> Function(

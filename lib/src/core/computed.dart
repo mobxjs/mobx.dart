@@ -1,13 +1,8 @@
-import 'package:mobx/mobx.dart';
-import 'package:mobx/src/core/atom.dart';
-import 'package:mobx/src/core/context.dart';
-import 'package:mobx/src/core/derivation.dart';
+part of '../core.dart';
 
 class ComputedValue<T> extends Atom implements Derivation {
-  ComputedValue(this._context, this._fn, {String name})
-      : super(_context, name: name ?? _context.nameFor('Computed'));
-
-  final ReactiveContext _context;
+  ComputedValue(ReactiveContext context, this._fn, {String name})
+      : super(context, name: name ?? context.nameFor('Computed'));
 
   @override
   Set<Atom> observables = Set();

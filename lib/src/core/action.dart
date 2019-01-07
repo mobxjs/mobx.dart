@@ -1,5 +1,4 @@
-import 'package:mobx/src/core/context.dart';
-import 'package:mobx/src/core/derivation.dart';
+part of '../core.dart';
 
 class Action {
   Action(this._context, this._fn, {String name})

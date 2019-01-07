@@ -1,7 +1,4 @@
-import 'package:meta/meta.dart';
-import 'package:mobx/src/core/atom.dart';
-import 'package:mobx/src/core/context.dart';
-import 'package:mobx/src/core/derivation.dart';
+part of '../core.dart';
 
 /// Tracks changes that happen between [start] and [end].
 ///

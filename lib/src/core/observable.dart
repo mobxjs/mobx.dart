@@ -1,8 +1,4 @@
-import 'package:mobx/src/core/atom.dart';
-import 'package:mobx/src/core/context.dart';
-import 'package:mobx/src/interceptable.dart';
-import 'package:mobx/src/listenable.dart';
-import 'package:mobx/src/utils.dart';
+part of '../core.dart';
 
 class ObservableValue<T> extends Atom
     implements Interceptable<T>, Listenable<T> {

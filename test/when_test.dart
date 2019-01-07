@@ -1,7 +1,6 @@
-import 'package:mobx/src/api/observable.dart';
-import 'package:mobx/src/api/reaction.dart';
 import 'package:mockito/mockito.dart' hide when;
 import 'package:test/test.dart';
+import 'package:mobx/mobx.dart';
 
 import 'shared_mocks.dart';
 

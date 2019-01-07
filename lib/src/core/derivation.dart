@@ -1,4 +1,4 @@
-import 'package:mobx/src/core/atom.dart';
+part of '../core.dart';
 
 enum DerivationState {
   // before being run or (outside batch and not being observed)

@@ -1,7 +1,4 @@
 import 'package:mobx/mobx.dart';
-import 'package:mobx/src/api/context.dart';
-import 'package:mobx/src/api/observable.dart';
-import 'package:mobx/src/core/observable.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
