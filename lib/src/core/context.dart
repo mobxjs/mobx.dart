@@ -201,7 +201,7 @@ class ReactiveContext {
     derivation._dependenciesState = DerivationState.notTracking;
   }
 
-  void enqueueForUnobservation(Atom atom) {
+  void _enqueueForUnobservation(Atom atom) {
     if (atom._isPendingUnobservation) {
       return;
     }
