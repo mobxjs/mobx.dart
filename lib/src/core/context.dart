@@ -71,17 +71,9 @@ class ReactiveContext {
   }
 
   T trackDerivation<T>(Derivation d, T Function() fn) {
-    final prevDerivation = _state.trackingDerivation;
-    _state.trackingDerivation = d;
-
-    resetDerivationState(d);
-    d.newObservables = Set();
-
+    final prevDerivation = startTracking(d);
     final result = fn();
-
-    _state.trackingDerivation = prevDerivation;
-    bindDependencies(d);
-
+    endTracking(d, prevDerivation);
     return result;
   }
 
