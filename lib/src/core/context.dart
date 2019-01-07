@@ -35,10 +35,10 @@ class ReactiveContext {
           ..isPendingUnobservation = false;
 
         if (ob._observers.isEmpty) {
-          if (ob.isBeingObserved) {
+          if (ob._isBeingObserved) {
             // if this observable had reactive observers, trigger the hooks
             ob
-              ..isBeingObserved = false
+              .._isBeingObserved = false
               ..notifyOnBecomeUnobserved();
           }
 
@@ -79,9 +79,9 @@ class ReactiveContext {
 
     if (derivation != null) {
       derivation._newObservables.add(atom);
-      if (!atom.isBeingObserved) {
+      if (!atom._isBeingObserved) {
         atom
-          ..isBeingObserved = true
+          .._isBeingObserved = true
           ..notifyOnBecomeObserved();
       }
     }
