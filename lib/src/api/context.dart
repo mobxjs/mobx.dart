@@ -1,4 +1,4 @@
-import 'package:mobx/src/core/context.dart';
+import 'package:mobx/src/core.dart';
 
 /// Current Mobx context.
 /// At the moment it is a singleton, but in the future

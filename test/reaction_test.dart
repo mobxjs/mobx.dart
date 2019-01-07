@@ -1,8 +1,7 @@
 import 'package:fake_async/fake_async.dart';
-import 'package:mobx/src/core/reaction.dart';
-import 'package:mobx/mobx.dart' hide when;
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+import 'package:mobx/mobx.dart' hide when;
 
 import 'shared_mocks.dart';
 

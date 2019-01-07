@@ -1,6 +1,4 @@
-import 'package:mobx/src/api/action.dart';
-import 'package:mobx/src/api/observable.dart';
-import 'package:mobx/src/api/reaction.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
@@ -196,5 +194,28 @@ void main() {
     verify(context.startBatch());
     verify(context.endBatch());
     verify(context.untrackedEnd(null));
+  });
+
+  test('untracked works', () {
+    final x = observable(0);
+    var count = 0;
+
+    final d = autorun((_) {
+      // No tracking should be performed since we are reading inside untracked()
+      untracked(() {
+        x.value;
+      });
+
+      count++;
+    });
+
+    expect(count, equals(1));
+
+    x.value = 100;
+
+    // Should be no change in count
+    expect(count, equals(1));
+
+    d();
   });
 }

@@ -1,4 +1,4 @@
-# mobx
+# mobx.dart
 
 
 [![pub package](https://img.shields.io/pub/v/mobx.svg)](https://pub.dartlang.org/packages/mobx)
