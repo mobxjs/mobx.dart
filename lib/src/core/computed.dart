@@ -61,7 +61,7 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   @override
   void _suspend() {
-    _context.clearObservables(this);
+    _context._clearObservables(this);
     _value = null;
   }
 

@@ -79,7 +79,7 @@ class Reaction implements Derivation {
     _isRunning = false;
 
     if (_isDisposed) {
-      _context.clearObservables(this);
+      _context._clearObservables(this);
     }
 
     _context.endBatch();
@@ -93,7 +93,7 @@ class Reaction implements Derivation {
     _isRunning = false;
 
     if (_isDisposed) {
-      _context.clearObservables(this);
+      _context._clearObservables(this);
     }
 
     _context.endBatch();
@@ -128,7 +128,7 @@ class Reaction implements Derivation {
 
     _context
       ..startBatch()
-      ..clearObservables(this)
+      .._clearObservables(this)
       ..endBatch();
   }
 

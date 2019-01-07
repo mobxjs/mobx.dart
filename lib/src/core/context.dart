@@ -190,7 +190,7 @@ class ReactiveContext {
     }
   }
 
-  void clearObservables(Derivation derivation) {
+  void _clearObservables(Derivation derivation) {
     final observables = derivation._observables;
     derivation._observables = Set();
 
