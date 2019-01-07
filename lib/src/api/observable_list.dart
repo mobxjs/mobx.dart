@@ -1,9 +1,8 @@
 import 'dart:math';
 
 import 'package:mobx/mobx.dart';
-import 'package:mobx/src/core/observable.dart';
 
-class ObservableList<T> implements List<ObservableValue<T>> {
+mixin _ObservableListMixin<T> implements List<ObservableValue<T>> {
   final _atom = createAtom(name: 'ObservableArray');
   final _list = <ObservableValue<T>>[];
 
@@ -400,3 +399,7 @@ class ObservableList<T> implements List<ObservableValue<T>> {
     return _list.whereType<U>();
   }
 }
+
+class ObservableList<T>
+    with _ObservableListMixin<T>
+    implements List<ObservableValue<T>> {}
