@@ -1,8 +1,5 @@
 import 'package:mobx/src/api/context.dart';
-import 'package:mobx/src/core/atom.dart';
-import 'package:mobx/src/core/computed.dart';
-import 'package:mobx/src/core/context.dart';
-import 'package:mobx/src/core/observable.dart';
+import 'package:mobx/src/core.dart';
 
 /// Create an observable value with an [initialValue] and an optional [name]
 ///

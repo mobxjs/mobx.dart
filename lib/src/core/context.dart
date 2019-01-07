@@ -1,7 +1,4 @@
-import 'package:mobx/src/core/atom.dart';
-import 'package:mobx/src/core/computed.dart';
-import 'package:mobx/src/core/derivation.dart';
-import 'package:mobx/src/core/reaction.dart';
+part of '../core.dart';
 
 class _ReactiveState {
   int batch = 0;

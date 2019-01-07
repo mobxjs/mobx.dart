@@ -1,5 +1,4 @@
-import 'package:mobx/src/api/context.dart';
-import 'package:mobx/src/core/atom.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mobx/src/listenable.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';

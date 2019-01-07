@@ -1,10 +1,4 @@
-import 'dart:async';
-
-import 'package:mobx/src/api/action.dart';
-import 'package:mobx/src/api/reaction.dart';
-import 'package:mobx/src/core/context.dart';
-import 'package:mobx/src/core/reaction.dart';
-import 'package:mobx/src/utils.dart';
+part of '../core.dart';
 
 /// A callable class that is used to dispose a [reaction], [autorun] or [when]
 ///

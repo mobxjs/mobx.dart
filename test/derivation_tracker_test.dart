@@ -1,6 +1,4 @@
 import 'package:mobx/mobx.dart';
-import 'package:mobx/src/api/context.dart';
-import 'package:mobx/src/core/reaction.dart';
 import 'package:test/test.dart';
 
 void main() {

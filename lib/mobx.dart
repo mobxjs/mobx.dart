@@ -30,15 +30,9 @@ library mobx;
 
 import 'package:mobx/src/api/observable.dart';
 
+export 'package:mobx/src/core.dart';
+
 export 'package:mobx/src/api/action.dart';
-export 'package:mobx/src/core/action.dart' show Action;
-export 'package:mobx/src/api/observable.dart';
-export 'package:mobx/src/core/observable.dart' show ObservableValue;
-export 'package:mobx/src/api/reaction.dart';
-export 'package:mobx/src/api/reaction_helper.dart' show ReactionDisposer;
-export 'package:mobx/src/core/reaction.dart' show Reaction, DerivationTracker;
 export 'package:mobx/src/api/context.dart';
-export 'package:mobx/src/core/context.dart' show ReactiveContext;
-export 'package:mobx/src/core/computed.dart' show ComputedValue;
-export 'package:mobx/src/core/atom.dart'
-    show Atom, WillChangeNotification, ChangeNotification;
+export 'package:mobx/src/api/observable.dart';
+export 'package:mobx/src/api/reaction.dart';
