@@ -43,8 +43,8 @@ void main() {
         'followedBy': (_) => _.followedBy([observable(10)]),
         'skip': (_) => _.skip(1),
         'whereType': (_) => _.whereType<num>(),
-        'singleWhere': (_) =>
-            _.singleWhere((_) => _.value == 20, orElse: () => observable(0)),
+        'singleWhere': (_) => _ignoreException(() =>
+            _.singleWhere((_) => _.value == 20, orElse: () => observable(0))),
         'lastIndexOf': (_) => _.lastIndexOf(observable(20)),
         'indexOf': (_) => _.indexOf(observable(20)),
         'getRange': (_) => _.getRange(0, 0),
@@ -61,12 +61,18 @@ void main() {
             _.firstWhere((_) => true, orElse: () => observable(0)),
         'every': (_) => _.every((_) => true),
         'any': (_) => _.any((_) => true),
+        'expand': (_) => _.expand((_) => [observable(100)]),
+        '[]': (_) => _[0],
+        '+': (_) => _ + [observable(100)],
       }.forEach(_templateReadTest);
     });
   });
 
   group('fires reportChanged() for write-methods', () {
     <String, void Function(ObservableList<int>)>{
+      'length=': (_) => _.length = 0,
+      'last=': (_) => _.last = observable(100),
+      'first=': (_) => _.first = observable(100),
       'insertAll': (_) => _.insertAll(0, [observable(100)]),
       'insert': (_) => _.insert(0, observable(100)),
       'sort': (_) => _.sort(),
@@ -83,6 +89,8 @@ void main() {
       'removeRange': (_) => _.removeRange(0, 0),
       'removeAt': (_) => _.removeAt(0),
       'removeWhere': (_) => _.removeWhere((_) => true),
+      'shuffle': (_) => _.shuffle(),
+      'retainWhere': (_) => _.retainWhere((_) => true),
     }.forEach(_templateWriteTest);
   });
 }
@@ -100,6 +108,7 @@ void _templateReadTest(
     String description, void Function(ObservableList<int>) fn) {
   test(description, () {
     final list = ObservableList<int>();
+    list.add(observable(20));
 
     var count = -1;
 
