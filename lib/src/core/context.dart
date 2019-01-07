@@ -32,7 +32,7 @@ class ReactiveContext {
 
       for (var i = 0; i < _state.pendingUnobservations.length; i++) {
         final ob = _state.pendingUnobservations[i]
-          ..isPendingUnobservation = false;
+          .._isPendingUnobservation = false;
 
         if (ob._observers.isEmpty) {
           if (ob._isBeingObserved) {
@@ -202,11 +202,11 @@ class ReactiveContext {
   }
 
   void enqueueForUnobservation(Atom atom) {
-    if (atom.isPendingUnobservation) {
+    if (atom._isPendingUnobservation) {
       return;
     }
 
-    atom.isPendingUnobservation = true;
+    atom._isPendingUnobservation = true;
     _state.pendingUnobservations.add(atom);
   }
 

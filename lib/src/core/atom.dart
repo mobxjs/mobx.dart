@@ -21,7 +21,8 @@ class Atom {
 
   final String name;
 
-  bool isPendingUnobservation = false;
+  // ignore: prefer_final_fields
+  bool _isPendingUnobservation = false;
 
   DerivationState _lowestObserverState = DerivationState.notTracking;
 
