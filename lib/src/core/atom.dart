@@ -35,7 +35,7 @@ class Atom {
   final Map<_ListenerKind, Set<Function()>> _observationListeners = {};
 
   void reportObserved() {
-    _context.reportObserved(this);
+    _context._reportObserved(this);
   }
 
   void reportChanged() {

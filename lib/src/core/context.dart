@@ -74,7 +74,7 @@ class ReactiveContext {
     return result;
   }
 
-  void reportObserved(Atom atom) {
+  void _reportObserved(Atom atom) {
     final derivation = _state.trackingDerivation;
 
     if (derivation != null) {
