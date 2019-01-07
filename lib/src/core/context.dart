@@ -115,7 +115,7 @@ class ReactiveContext {
     if (lowestNewDerivationState != DerivationState.upToDate) {
       derivation
         .._dependenciesState = lowestNewDerivationState
-        ..onBecomeStale();
+        .._onBecomeStale();
     }
 
     derivation
@@ -152,7 +152,7 @@ class ReactiveContext {
 
     for (final observer in atom.observers) {
       if (observer._dependenciesState == DerivationState.upToDate) {
-        observer.onBecomeStale();
+        observer._onBecomeStale();
       }
       observer._dependenciesState = DerivationState.stale;
     }
@@ -169,7 +169,7 @@ class ReactiveContext {
       if (observer._dependenciesState == DerivationState.upToDate) {
         observer
           .._dependenciesState = DerivationState.possiblyStale
-          ..onBecomeStale();
+          .._onBecomeStale();
       }
     }
   }

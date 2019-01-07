@@ -66,7 +66,7 @@ class ComputedValue<T> extends Atom implements Derivation {
   }
 
   @override
-  void onBecomeStale() {
+  void _onBecomeStale() {
     _context.propagatePossiblyChanged(this);
   }
 

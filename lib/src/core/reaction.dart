@@ -62,7 +62,7 @@ class Reaction implements Derivation {
   bool get isDisposed => _isDisposed;
 
   @override
-  void onBecomeStale() {
+  void _onBecomeStale() {
     schedule();
   }
 
