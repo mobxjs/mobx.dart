@@ -62,7 +62,7 @@ class ReactiveContext {
     return prevDerivation;
   }
 
-  void endTracking(Derivation currentDerivation, Derivation prevDerivation) {
+  void _endTracking(Derivation currentDerivation, Derivation prevDerivation) {
     _state.trackingDerivation = prevDerivation;
     _bindDependencies(currentDerivation);
   }
@@ -70,7 +70,7 @@ class ReactiveContext {
   T trackDerivation<T>(Derivation d, T Function() fn) {
     final prevDerivation = startTracking(d);
     final result = fn();
-    endTracking(d, prevDerivation);
+    _endTracking(d, prevDerivation);
     return result;
   }
 

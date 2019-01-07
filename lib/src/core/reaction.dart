@@ -75,7 +75,7 @@ class Reaction implements Derivation {
 
   @experimental
   void _endTracking(Derivation previous) {
-    _context.endTracking(this, previous);
+    _context._endTracking(this, previous);
     _isRunning = false;
 
     if (_isDisposed) {
