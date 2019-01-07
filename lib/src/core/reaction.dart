@@ -49,10 +49,11 @@ class Reaction implements Derivation {
   String name;
 
   @override
-  Set<Atom> newObservables;
+  Set<Atom> _newObservables;
 
   @override
-  Set<Atom> observables = Set();
+  // ignore: prefer_final_fields
+  Set<Atom> _observables = Set();
 
   @override
   DerivationState dependenciesState = DerivationState.notTracking;

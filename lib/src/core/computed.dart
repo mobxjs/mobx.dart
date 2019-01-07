@@ -5,10 +5,11 @@ class ComputedValue<T> extends Atom implements Derivation {
       : super(context, name: name ?? context.nameFor('Computed'));
 
   @override
-  Set<Atom> observables = Set();
+  // ignore: prefer_final_fields
+  Set<Atom> _observables = Set();
 
   @override
-  Set<Atom> newObservables;
+  Set<Atom> _newObservables;
 
   T Function() _fn;
 

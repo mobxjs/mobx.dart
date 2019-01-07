@@ -57,7 +57,7 @@ class ReactiveContext {
     _state.trackingDerivation = derivation;
 
     resetDerivationState(derivation);
-    derivation.newObservables = Set();
+    derivation._newObservables = Set();
 
     return prevDerivation;
   }
@@ -78,7 +78,7 @@ class ReactiveContext {
     final derivation = _state.trackingDerivation;
 
     if (derivation != null) {
-      derivation.newObservables.add(atom);
+      derivation._newObservables.add(atom);
       if (!atom.isBeingObserved) {
         atom
           ..isBeingObserved = true
@@ -89,9 +89,9 @@ class ReactiveContext {
 
   void bindDependencies(Derivation derivation) {
     final staleObservables =
-        derivation.observables.difference(derivation.newObservables);
+        derivation._observables.difference(derivation._newObservables);
     final newObservables =
-        derivation.newObservables.difference(derivation.observables);
+        derivation._newObservables.difference(derivation._observables);
     var lowestNewDerivationState = DerivationState.upToDate;
 
     // Add newly found observables
@@ -119,8 +119,8 @@ class ReactiveContext {
     }
 
     derivation
-      ..observables = derivation.newObservables
-      ..newObservables = Set(); // No need for newObservables beyond this point
+      .._observables = derivation._newObservables
+      .._newObservables = Set(); // No need for newObservables beyond this point
   }
 
   void addPendingReaction(Reaction reaction) {
@@ -191,8 +191,8 @@ class ReactiveContext {
   }
 
   void clearObservables(Derivation derivation) {
-    final observables = derivation.observables;
-    derivation.observables = Set();
+    final observables = derivation._observables;
+    derivation._observables = Set();
 
     for (final x in observables) {
       x.removeObserver(derivation);
@@ -216,7 +216,7 @@ class ReactiveContext {
     }
 
     d.dependenciesState = DerivationState.upToDate;
-    for (final obs in d.observables) {
+    for (final obs in d._observables) {
       obs.lowestObserverState = DerivationState.upToDate;
     }
   }
@@ -232,7 +232,7 @@ class ReactiveContext {
 
       case DerivationState.possiblyStale:
         return untracked(() {
-          for (final obs in derivation.observables) {
+          for (final obs in derivation._observables) {
             if (obs is ComputedValue) {
               // Force a computation
               obs.value;
