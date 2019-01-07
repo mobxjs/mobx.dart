@@ -158,7 +158,7 @@ class ReactiveContext {
     }
   }
 
-  void propagatePossiblyChanged(Atom atom) {
+  void _propagatePossiblyChanged(Atom atom) {
     if (atom._lowestObserverState != DerivationState.upToDate) {
       return;
     }

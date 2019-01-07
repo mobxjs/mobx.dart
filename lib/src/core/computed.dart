@@ -67,7 +67,7 @@ class ComputedValue<T> extends Atom implements Derivation {
 
   @override
   void _onBecomeStale() {
-    _context.propagatePossiblyChanged(this);
+    _context._propagatePossiblyChanged(this);
   }
 
   bool _trackAndCompute() {
