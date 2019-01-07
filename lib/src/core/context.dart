@@ -144,11 +144,11 @@ class ReactiveContext {
   }
 
   void propagateChanged(Atom atom) {
-    if (atom.lowestObserverState == DerivationState.stale) {
+    if (atom._lowestObserverState == DerivationState.stale) {
       return;
     }
 
-    atom.lowestObserverState = DerivationState.stale;
+    atom._lowestObserverState = DerivationState.stale;
 
     for (final observer in atom._observers) {
       if (observer._dependenciesState == DerivationState.upToDate) {
@@ -159,11 +159,11 @@ class ReactiveContext {
   }
 
   void propagatePossiblyChanged(Atom atom) {
-    if (atom.lowestObserverState != DerivationState.upToDate) {
+    if (atom._lowestObserverState != DerivationState.upToDate) {
       return;
     }
 
-    atom.lowestObserverState = DerivationState.possiblyStale;
+    atom._lowestObserverState = DerivationState.possiblyStale;
 
     for (final observer in atom._observers) {
       if (observer._dependenciesState == DerivationState.upToDate) {
@@ -175,17 +175,17 @@ class ReactiveContext {
   }
 
   void propagateChangeConfirmed(Atom atom) {
-    if (atom.lowestObserverState == DerivationState.stale) {
+    if (atom._lowestObserverState == DerivationState.stale) {
       return;
     }
 
-    atom.lowestObserverState = DerivationState.stale;
+    atom._lowestObserverState = DerivationState.stale;
 
     for (final observer in atom._observers) {
       if (observer._dependenciesState == DerivationState.possiblyStale) {
         observer._dependenciesState = DerivationState.stale;
       } else if (observer._dependenciesState == DerivationState.upToDate) {
-        atom.lowestObserverState = DerivationState.upToDate;
+        atom._lowestObserverState = DerivationState.upToDate;
       }
     }
   }
@@ -217,7 +217,7 @@ class ReactiveContext {
 
     d._dependenciesState = DerivationState.upToDate;
     for (final obs in d._observables) {
-      obs.lowestObserverState = DerivationState.upToDate;
+      obs._lowestObserverState = DerivationState.upToDate;
     }
   }
 

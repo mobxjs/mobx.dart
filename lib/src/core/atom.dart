@@ -23,7 +23,7 @@ class Atom {
 
   bool isPendingUnobservation = false;
 
-  DerivationState lowestObserverState = DerivationState.notTracking;
+  DerivationState _lowestObserverState = DerivationState.notTracking;
 
   bool isBeingObserved = false;
 
@@ -45,8 +45,8 @@ class Atom {
   void addObserver(Derivation d) {
     _observers.add(d);
 
-    if (lowestObserverState.index > d._dependenciesState.index) {
-      lowestObserverState = d._dependenciesState;
+    if (_lowestObserverState.index > d._dependenciesState.index) {
+      _lowestObserverState = d._dependenciesState;
     }
   }
 
