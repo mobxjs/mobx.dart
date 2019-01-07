@@ -85,7 +85,7 @@ class Reaction implements Derivation {
     _context.endBatch();
   }
 
-  void track(void Function() fn) {
+  void _track(void Function() fn) {
     _context.startBatch();
 
     _isRunning = true;
