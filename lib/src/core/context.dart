@@ -56,7 +56,7 @@ class ReactiveContext {
     final prevDerivation = _state.trackingDerivation;
     _state.trackingDerivation = derivation;
 
-    resetDerivationState(derivation);
+    _resetDerivationState(derivation);
     derivation._newObservables = Set();
 
     return prevDerivation;
@@ -210,7 +210,7 @@ class ReactiveContext {
     _state.pendingUnobservations.add(atom);
   }
 
-  void resetDerivationState(Derivation d) {
+  void _resetDerivationState(Derivation d) {
     if (d._dependenciesState == DerivationState.upToDate) {
       return;
     }
@@ -243,7 +243,7 @@ class ReactiveContext {
             }
           }
 
-          resetDerivationState(derivation);
+          _resetDerivationState(derivation);
           return false;
         });
     }
