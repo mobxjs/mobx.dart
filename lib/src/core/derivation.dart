@@ -31,5 +31,5 @@ abstract class Derivation {
   DerivationState _dependenciesState;
 
   void _onBecomeStale();
-  void suspend();
+  void _suspend();
 }

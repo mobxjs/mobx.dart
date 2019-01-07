@@ -144,7 +144,7 @@ class Reaction implements Derivation {
   }
 
   @override
-  void suspend() {
+  void _suspend() {
     // Not applicable right now
   }
 }

@@ -43,7 +43,7 @@ class ReactiveContext {
           }
 
           if (ob is ComputedValue) {
-            ob.suspend();
+            ob._suspend();
           }
         }
       }
