@@ -96,7 +96,7 @@ class ReactiveContext {
 
     // Add newly found observables
     for (final observable in newObservables) {
-      observable.addObserver(derivation);
+      observable._addObserver(derivation);
 
       // ComputedValue = ObservableValue + Derivation
       if (observable is ComputedValue) {
