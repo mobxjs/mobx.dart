@@ -59,7 +59,7 @@ class Atom {
     }
   }
 
-  void notifyOnBecomeObserved() {
+  void _notifyOnBecomeObserved() {
     final listeners = _observationListeners[_ListenerKind.onBecomeObserved];
     listeners?.forEach(_notifyListener);
   }

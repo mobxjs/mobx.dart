@@ -82,7 +82,7 @@ class ReactiveContext {
       if (!atom._isBeingObserved) {
         atom
           .._isBeingObserved = true
-          ..notifyOnBecomeObserved();
+          .._notifyOnBecomeObserved();
       }
     }
   }
