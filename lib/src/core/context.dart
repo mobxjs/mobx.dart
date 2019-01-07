@@ -221,7 +221,7 @@ class ReactiveContext {
     }
   }
 
-  bool shouldCompute(Derivation derivation) {
+  bool _shouldCompute(Derivation derivation) {
     switch (derivation._dependenciesState) {
       case DerivationState.upToDate:
         return false;

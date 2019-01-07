@@ -108,7 +108,7 @@ class Reaction implements Derivation {
 
     _isScheduled = false;
 
-    if (_context.shouldCompute(this)) {
+    if (_context._shouldCompute(this)) {
       _onInvalidate();
     }
 

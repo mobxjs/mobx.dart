@@ -27,14 +27,14 @@ class ComputedValue<T> extends Atom implements Derivation {
     }
 
     if (!_context.isInBatch() && _observers.isEmpty) {
-      if (_context.shouldCompute(this)) {
+      if (_context._shouldCompute(this)) {
         _context.startBatch();
         _value = computeValue(track: false);
         _context.endBatch();
       }
     } else {
       reportObserved();
-      if (_context.shouldCompute(this)) {
+      if (_context._shouldCompute(this)) {
         if (_trackAndCompute()) {
           _context._propagateChangeConfirmed(this);
         }
