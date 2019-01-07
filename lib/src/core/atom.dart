@@ -66,7 +66,7 @@ class Atom {
 
   static void _notifyListener(Function() listener) => listener();
 
-  void notifyOnBecomeUnobserved() {
+  void _notifyOnBecomeUnobserved() {
     final listeners = _observationListeners[_ListenerKind.onBecomeUnobserved];
     listeners?.forEach(_notifyListener);
   }
