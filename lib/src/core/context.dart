@@ -34,7 +34,7 @@ class ReactiveContext {
         final ob = _state.pendingUnobservations[i]
           ..isPendingUnobservation = false;
 
-        if (ob.observers.isEmpty) {
+        if (ob._observers.isEmpty) {
           if (ob.isBeingObserved) {
             // if this observable had reactive observers, trigger the hooks
             ob
@@ -150,7 +150,7 @@ class ReactiveContext {
 
     atom.lowestObserverState = DerivationState.stale;
 
-    for (final observer in atom.observers) {
+    for (final observer in atom._observers) {
       if (observer._dependenciesState == DerivationState.upToDate) {
         observer._onBecomeStale();
       }
@@ -165,7 +165,7 @@ class ReactiveContext {
 
     atom.lowestObserverState = DerivationState.possiblyStale;
 
-    for (final observer in atom.observers) {
+    for (final observer in atom._observers) {
       if (observer._dependenciesState == DerivationState.upToDate) {
         observer
           .._dependenciesState = DerivationState.possiblyStale
@@ -181,7 +181,7 @@ class ReactiveContext {
 
     atom.lowestObserverState = DerivationState.stale;
 
-    for (final observer in atom.observers) {
+    for (final observer in atom._observers) {
       if (observer._dependenciesState == DerivationState.possiblyStale) {
         observer._dependenciesState = DerivationState.stale;
       } else if (observer._dependenciesState == DerivationState.upToDate) {

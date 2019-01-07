@@ -27,7 +27,7 @@ class Atom {
 
   bool isBeingObserved = false;
 
-  Set<Derivation> observers = Set();
+  final Set<Derivation> _observers = Set();
 
   final Map<_ListenerKind, Set<Function()>> _observationListeners = {};
 
@@ -43,7 +43,7 @@ class Atom {
   }
 
   void addObserver(Derivation d) {
-    observers.add(d);
+    _observers.add(d);
 
     if (lowestObserverState.index > d._dependenciesState.index) {
       lowestObserverState = d._dependenciesState;
@@ -51,8 +51,8 @@ class Atom {
   }
 
   void removeObserver(Derivation d) {
-    observers.removeWhere((ob) => ob == d);
-    if (observers.isEmpty) {
+    _observers.removeWhere((ob) => ob == d);
+    if (_observers.isEmpty) {
       _context.enqueueForUnobservation(this);
     }
   }
