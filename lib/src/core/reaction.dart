@@ -1,6 +1,41 @@
+import 'package:meta/meta.dart';
 import 'package:mobx/src/core/atom.dart';
 import 'package:mobx/src/core/context.dart';
 import 'package:mobx/src/core/derivation.dart';
+
+/// Tracks changes that happen between [start] and [end].
+///
+/// This should only be used in situations where it is not possible to
+/// track changes inside a callback function.
+@experimental
+class DerivationTracker {
+  DerivationTracker(ReactiveContext context, Function() onInvalidate,
+      {String name})
+      : _reaction = Reaction(context, onInvalidate, name: name);
+
+  final Reaction _reaction;
+  Derivation _previousDerivation;
+
+  void start() {
+    if (_reaction._isRunning) {
+      return;
+    }
+    _previousDerivation = _reaction._startTracking();
+  }
+
+  void end() {
+    if (!_reaction._isRunning) {
+      return;
+    }
+    _reaction._endTracking(_previousDerivation);
+    _previousDerivation = null;
+  }
+
+  void dispose() {
+    end();
+    _reaction.dispose();
+  }
+}
 
 class Reaction implements Derivation {
   Reaction(this._context, Function() onInvalidate, {this.name}) {
@@ -30,6 +65,25 @@ class Reaction implements Derivation {
   @override
   void onBecomeStale() {
     schedule();
+  }
+
+  @experimental
+  Derivation _startTracking() {
+    _context.startBatch();
+    _isRunning = true;
+    return _context.startTracking(this);
+  }
+
+  @experimental
+  void _endTracking(Derivation previous) {
+    _context.endTracking(this, previous);
+    _isRunning = false;
+
+    if (_isDisposed) {
+      _context.clearObservables(this);
+    }
+
+    _context.endBatch();
   }
 
   void track(void Function() fn) {
