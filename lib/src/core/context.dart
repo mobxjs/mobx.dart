@@ -64,7 +64,7 @@ class ReactiveContext {
 
   void endTracking(Derivation currentDerivation, Derivation prevDerivation) {
     _state.trackingDerivation = prevDerivation;
-    bindDependencies(currentDerivation);
+    _bindDependencies(currentDerivation);
   }
 
   T trackDerivation<T>(Derivation d, T Function() fn) {
@@ -87,7 +87,7 @@ class ReactiveContext {
     }
   }
 
-  void bindDependencies(Derivation derivation) {
+  void _bindDependencies(Derivation derivation) {
     final staleObservables =
         derivation._observables.difference(derivation._newObservables);
     final newObservables =
