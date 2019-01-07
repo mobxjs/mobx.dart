@@ -275,9 +275,3 @@ class ReactiveContext {
     }
   }
 }
-
-class MobXException implements Exception {
-  MobXException(this.message);
-
-  String message;
-}
