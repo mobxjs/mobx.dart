@@ -21,18 +21,21 @@ class Atom {
 
   final String name;
 
-  bool isPendingUnobservation = false;
+  // ignore: prefer_final_fields
+  bool _isPendingUnobservation = false;
 
-  DerivationState lowestObserverState = DerivationState.notTracking;
+  DerivationState _lowestObserverState = DerivationState.notTracking;
 
-  bool isBeingObserved = false;
+  // ignore: prefer_final_fields
+  bool _isBeingObserved = false;
+  bool get isBeingObserved => _isBeingObserved;
 
-  Set<Derivation> observers = Set();
+  final Set<Derivation> _observers = Set();
 
   final Map<_ListenerKind, Set<Function()>> _observationListeners = {};
 
   void reportObserved() {
-    _context.reportObserved(this);
+    _context._reportObserved(this);
   }
 
   void reportChanged() {
@@ -42,29 +45,29 @@ class Atom {
       ..endBatch();
   }
 
-  void addObserver(Derivation d) {
-    observers.add(d);
+  void _addObserver(Derivation d) {
+    _observers.add(d);
 
-    if (lowestObserverState.index > d.dependenciesState.index) {
-      lowestObserverState = d.dependenciesState;
+    if (_lowestObserverState.index > d._dependenciesState.index) {
+      _lowestObserverState = d._dependenciesState;
     }
   }
 
-  void removeObserver(Derivation d) {
-    observers.removeWhere((ob) => ob == d);
-    if (observers.isEmpty) {
-      _context.enqueueForUnobservation(this);
+  void _removeObserver(Derivation d) {
+    _observers.removeWhere((ob) => ob == d);
+    if (_observers.isEmpty) {
+      _context._enqueueForUnobservation(this);
     }
   }
 
-  void notifyOnBecomeObserved() {
+  void _notifyOnBecomeObserved() {
     final listeners = _observationListeners[_ListenerKind.onBecomeObserved];
     listeners?.forEach(_notifyListener);
   }
 
   static void _notifyListener(Function() listener) => listener();
 
-  void notifyOnBecomeUnobserved() {
+  void _notifyOnBecomeUnobserved() {
     final listeners = _observationListeners[_ListenerKind.onBecomeUnobserved];
     listeners?.forEach(_notifyListener);
   }
