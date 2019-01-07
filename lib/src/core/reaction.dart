@@ -46,7 +46,7 @@ class Reaction implements Derivation {
   bool _isRunning = false;
 
   @override
-  String name;
+  final String name;
 
   @override
   Set<Atom> _newObservables;
