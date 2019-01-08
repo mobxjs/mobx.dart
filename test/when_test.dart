@@ -42,6 +42,17 @@ void main() {
     x.value = 11;
   });
 
+  test('Exceptions inside asyncWhen are caught and reaction is disposed', () {
+    final x = observable(10);
+    expect(() {
+      asyncWhen(() => throw Exception('FAIL'), name: 'Async-when').then((_) {
+        expect(true, isTrue);
+      });
+    }, throwsException);
+
+    x.value = 11;
+  });
+
   test('when uses provided context', () {
     final context = MockContext();
     when(() => true, () {}, context: context);
