@@ -64,7 +64,7 @@ ReactionDisposer createAutorun(
           }
         });
       }
-    }, name: rxnName);
+    }, name: rxnName, onError: onError);
   }
 
   rxn.schedule();
