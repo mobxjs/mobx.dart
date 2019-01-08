@@ -47,8 +47,9 @@ void main() {
 
       async.elapse(Duration(milliseconds: 500)); // should now trigger effect
       expect(executed, isTrue);
+
+      d();
     });
-    d();
   });
 
   test('Reaction that fires immediately', () {
@@ -91,9 +92,9 @@ void main() {
       expect(executed, isFalse);
       async.elapse(Duration(milliseconds: 1000)); // should now trigger effect
       expect(executed, isTrue);
-    });
 
-    d();
+      d();
+    });
   });
 
   test('reaction with pre-mature disposal in predicate', () {
