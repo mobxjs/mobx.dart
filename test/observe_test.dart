@@ -144,4 +144,36 @@ void main() {
       x.onBecomeUnobserved(null);
     }, throwsException);
   });
+
+  test('multiple onBecomeObserved/onBecomeUnobserved can be attached', () {
+    final x = observable(10);
+
+    var observedCount = 0;
+    var unobservedCount = 0;
+
+    var disposers = <Function>[
+      x.onBecomeObserved(() {
+        observedCount++;
+      }),
+      x.onBecomeObserved(() {
+        observedCount++;
+      }),
+      x.onBecomeUnobserved(() {
+        unobservedCount++;
+      }),
+      x.onBecomeUnobserved(() {
+        unobservedCount++;
+      }),
+    ];
+
+    var d = autorun((_) {
+      x.value;
+    });
+
+    expect(observedCount, equals(2));
+    d();
+    expect(unobservedCount, equals(2));
+
+    disposers.forEach((f) => f());
+  });
 }
