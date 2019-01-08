@@ -117,7 +117,7 @@ void main() {
     var thrown = false;
     final dispose = autorun((_) {
       throw Exception('FAILED in autorun');
-    }, onError: (_, _1) {
+    }, onError: (_, _a) {
       thrown = true;
     });
 

@@ -128,7 +128,7 @@ void main() {
           throw Exception('FAILED in reaction');
         },
         (_) {},
-        onError: (_, _1) {
+        onError: (_, _a) {
           thrown = true;
         });
 

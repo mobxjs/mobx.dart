@@ -49,7 +49,7 @@ void main() {
           throw Exception('FAILED in when');
         },
         () {},
-        onError: (_, _1) {
+        onError: (_, _a) {
           thrown = true;
         });
 
