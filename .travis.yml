@@ -1,0 +1,48 @@
+# Created with package:mono_repo v1.2.1
+language: dart
+
+jobs:
+  include:
+    - stage: analyze
+      name: "SDK: stable - DIR: mobx - TASKS: dartanalyzer --fatal-infos --fatal-warnings ."
+      script: ./tool/travis.sh dartanalyzer
+      env: PKG="mobx"
+      dart: stable
+    - stage: analyze
+      name: "SDK: dev - DIR: mobx - TASKS: dartanalyzer --fatal-infos --fatal-warnings ."
+      script: ./tool/travis.sh dartanalyzer
+      env: PKG="mobx"
+      dart: dev
+    - stage: analyze
+      name: "SDK: stable - DIR: mobx - TASKS: dartfmt -n --set-exit-if-changed ."
+      script: ./tool/travis.sh dartfmt
+      env: PKG="mobx"
+      dart: stable
+    - stage: analyze
+      name: "SDK: dev - DIR: mobx - TASKS: dartfmt -n --set-exit-if-changed ."
+      script: ./tool/travis.sh dartfmt
+      env: PKG="mobx"
+      dart: dev
+    - stage: unit_test
+      name: "SDK: stable - DIR: mobx - TASKS: pub run test"
+      script: ./tool/travis.sh test
+      env: PKG="mobx"
+      dart: stable
+    - stage: unit_test
+      name: "SDK: dev - DIR: mobx - TASKS: pub run test"
+      script: ./tool/travis.sh test
+      env: PKG="mobx"
+      dart: dev
+
+stages:
+  - analyze
+  - unit_test
+
+# Only building master means that we don't run two builds for each pull request.
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - "$HOME/.pub-cache"
