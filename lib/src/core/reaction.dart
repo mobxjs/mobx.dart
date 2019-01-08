@@ -1,43 +1,13 @@
 part of '../core.dart';
 
-/// Tracks changes that happen between [start] and [end].
-///
-/// This should only be used in situations where it is not possible to
-/// track changes inside a callback function.
-@experimental
-class DerivationTracker {
-  DerivationTracker(ReactiveContext context, Function() onInvalidate,
-      {String name})
-      : _reaction = Reaction(context, onInvalidate, name: name);
-
-  final Reaction _reaction;
-  Derivation _previousDerivation;
-
-  void start() {
-    if (_reaction._isRunning) {
-      return;
-    }
-    _previousDerivation = _reaction._startTracking();
-  }
-
-  void end() {
-    if (!_reaction._isRunning) {
-      return;
-    }
-    _reaction._endTracking(_previousDerivation);
-    _previousDerivation = null;
-  }
-
-  void dispose() {
-    end();
-    _reaction.dispose();
-  }
-}
-
 class Reaction implements Derivation {
-  Reaction(this._context, Function() onInvalidate, {this.name}) {
+  Reaction(this._context, Function() onInvalidate,
+      {this.name, void Function(Object, Reaction) onError}) {
     _onInvalidate = onInvalidate;
+    _onError = onError;
   }
+
+  void Function(Object, Reaction) _onError;
 
   final ReactiveContext _context;
   void Function() _onInvalidate;
@@ -109,7 +79,12 @@ class Reaction implements Derivation {
     _isScheduled = false;
 
     if (_context._shouldCompute(this)) {
-      _onInvalidate();
+      try {
+        _onInvalidate();
+      } on Object catch (e) {
+        // Note: "on Object" accounts for both Error and Exception
+        _reportException(e);
+      }
     }
 
     _context.endBatch();
@@ -146,5 +121,46 @@ class Reaction implements Derivation {
   @override
   void _suspend() {
     // Not applicable right now
+  }
+
+  void _reportException(Object exception) {
+    if (_onError != null) {
+      _onError(exception, this);
+      return;
+    }
+  }
+}
+
+/// Tracks changes that happen between [start] and [end].
+///
+/// This should only be used in situations where it is not possible to
+/// track changes inside a callback function.
+@experimental
+class DerivationTracker {
+  DerivationTracker(ReactiveContext context, Function() onInvalidate,
+      {String name})
+      : _reaction = Reaction(context, onInvalidate, name: name);
+
+  final Reaction _reaction;
+  Derivation _previousDerivation;
+
+  void start() {
+    if (_reaction._isRunning) {
+      return;
+    }
+    _previousDerivation = _reaction._startTracking();
+  }
+
+  void end() {
+    if (!_reaction._isRunning) {
+      return;
+    }
+    _reaction._endTracking(_previousDerivation);
+    _previousDerivation = null;
+  }
+
+  void dispose() {
+    end();
+    _reaction.dispose();
   }
 }
