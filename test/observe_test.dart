@@ -154,7 +154,7 @@ void main() {
       var observedCount = 0;
       var unobservedCount = 0;
 
-      var disposers = <Function>[
+      final disposers = <Function>[
         x.onBecomeObserved(() {
           observedCount++;
         }),
@@ -169,7 +169,7 @@ void main() {
         }),
       ];
 
-      var d = autorun((_) {
+      final d = autorun((_) {
         x.value;
       });
 
@@ -177,6 +177,7 @@ void main() {
       d();
       expect(unobservedCount, equals(2));
 
+      // ignore: avoid_function_literals_in_foreach_calls
       disposers.forEach((f) => f());
     });
   });
