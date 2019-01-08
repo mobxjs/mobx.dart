@@ -113,6 +113,18 @@ void main() {
     d();
   });
 
+  test('autorun fires onError on exception', () {
+    var thrown = false;
+    final dispose = autorun((_) {
+      throw Exception('FAILED in autorun');
+    }, onError: (_, _1) {
+      thrown = true;
+    });
+
+    expect(thrown, isTrue);
+    dispose();
+  });
+
   test('autorun uses provided context', () {
     final context = MockContext();
     autorun((_) {}, context: context);

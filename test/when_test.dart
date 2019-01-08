@@ -8,7 +8,7 @@ void main() {
   test('When', () {
     var executed = false;
     final x = observable(10);
-    final d = when(() => x.value > 10, () {
+    final d = when((_) => x.value > 10, () {
       executed = true;
     }, name: 'Basic when');
 
@@ -26,7 +26,7 @@ void main() {
   });
 
   test('when with default name', () {
-    final d = when(() => true, () {});
+    final d = when((_) => true, () {});
 
     expect(d.$mobx.name, startsWith('When@'));
 
@@ -35,21 +35,36 @@ void main() {
 
   test('Async When', () {
     final x = observable(10);
-    asyncWhen(() => x.value > 10, name: 'Async-when').then((_) {
+    asyncWhen((_) => x.value > 10, name: 'Async-when').then((_) {
       expect(true, isTrue);
     });
 
     x.value = 11;
   });
 
+  test('when fires onError on exception', () {
+    var thrown = false;
+    final dispose = when(
+        (_) {
+          throw Exception('FAILED in when');
+        },
+        () {},
+        onError: (_, _1) {
+          thrown = true;
+        });
+
+    expect(thrown, isTrue);
+    dispose();
+  });
+
   test('Exceptions inside asyncWhen are caught and reaction is disposed', () {
-    asyncWhen(() => throw Exception('FAIL'), name: 'Async-when')
+    asyncWhen((_) => throw Exception('FAIL'), name: 'Async-when')
         .catchError((_) => expect(true, isTrue));
-  }, skip: 'Failing and need to investigate');
+  });
 
   test('when uses provided context', () {
     final context = MockContext();
-    when(() => true, () {}, context: context);
+    when((_) => true, () {}, context: context);
     verify(context.runReactions());
   });
 }

@@ -121,6 +121,21 @@ void main() {
     d();
   });
 
+  test('reaction fires onError on exception', () {
+    var thrown = false;
+    final dispose = reaction(
+        (_) {
+          throw Exception('FAILED in reaction');
+        },
+        (_) {},
+        onError: (_, _1) {
+          thrown = true;
+        });
+
+    expect(thrown, isTrue);
+    dispose();
+  });
+
   test('Reaction uses provided context', () {
     final context = MockContext();
     int trackingFn(Reaction reaction) => 1;

@@ -144,14 +144,14 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
   return ReactionDisposer(rxn);
 }
 
-ReactionDisposer createWhenReaction(
-    ReactiveContext context, bool Function() predicate, void Function() effect,
+ReactionDisposer createWhenReaction(ReactiveContext context,
+    bool Function(Reaction) predicate, void Function() effect,
     {String name, void Function(Object, Reaction) onError}) {
   final rxnName = name ?? context.nameFor('When');
   final effectAction = action(effect, name: '$rxnName-effect');
 
   return createAutorun(context, (reaction) {
-    if (predicate()) {
+    if (predicate(reaction)) {
       reaction.dispose();
       effectAction();
     }
@@ -159,7 +159,7 @@ ReactionDisposer createWhenReaction(
 }
 
 Future<void> createAsyncWhenReaction(
-    ReactiveContext context, bool Function() predicate,
+    ReactiveContext context, bool Function(Reaction) predicate,
     {String name}) {
   final completer = Completer<void>();
   createWhenReaction(context, predicate, completer.complete, name: name,
