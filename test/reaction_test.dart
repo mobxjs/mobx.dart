@@ -121,7 +121,7 @@ void main() {
     d();
   });
 
-  test('reaction fires onError on exception', () {
+  test('reaction fires onError on exception inside predicate', () {
     var thrown = false;
     final dispose = reaction(
         (_) {
@@ -133,6 +133,23 @@ void main() {
         });
 
     expect(thrown, isTrue);
+    expect(dispose.$mobx.errorValue, isException);
+    dispose();
+  });
+
+  test('reaction fires onError on exception inside effect', () {
+    var thrown = false;
+    var x = observable(false);
+
+    final dispose = reaction((_) => x.value, (_) {
+      throw Exception('FAILED in reaction');
+    }, onError: (_, _a) {
+      thrown = true;
+    });
+
+    x.value = true; // force a change
+    expect(thrown, isTrue);
+    expect(dispose.$mobx.errorValue, isException);
     dispose();
   });
 

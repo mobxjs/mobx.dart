@@ -93,6 +93,7 @@ class Reaction implements Derivation {
         _onInvalidate();
       } on Object catch (e) {
         // Note: "on Object" accounts for both Error and Exception
+        _errorValue = MobXCaughtException(e);
         _reportException(e);
       }
     }

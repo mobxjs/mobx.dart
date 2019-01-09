@@ -122,6 +122,7 @@ void main() {
     });
 
     expect(thrown, isTrue);
+    expect(dispose.$mobx.errorValue, isException);
     dispose();
   });
 
