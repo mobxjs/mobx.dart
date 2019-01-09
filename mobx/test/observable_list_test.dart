@@ -20,7 +20,7 @@ void main() {
     });
 
     group('fires reportObserved() for read-methods', () {
-      <String, void Function(ObservableList<int>)>{
+      <String, Function(ObservableList<int>)>{
         'map': (_) => _.map((x) => x),
         'isEmpty': (_) => _.isEmpty,
         'isNotEmpty': (_) => _.isNotEmpty,
