@@ -112,13 +112,24 @@ void main() {
           shouldThrow = false;
           throw Exception('FAIL');
         }
-      })
-        ..value;
+      });
 
+      expect(() {
+        x.value;
+      }, throwsException);
       expect(x.errorValue, isException);
 
       x.value;
       expect(x.errorValue, isNull);
+    });
+
+    test('throws on finding a cycle', () {
+      ComputedValue<int> c1;
+      c1 = computed(() => c1.value);
+
+      expect(() {
+        c1.value;
+      }, throwsException);
     });
   });
 }

@@ -47,6 +47,11 @@ class ComputedValue<T> extends Atom implements Derivation {
       }
     }
 
+    if (_context._isCaughtException(this)) {
+      // ignore: only_throw_errors
+      throw _errorValue._exception;
+    }
+
     return _value;
   }
 
