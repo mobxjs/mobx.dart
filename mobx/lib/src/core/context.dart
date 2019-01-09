@@ -237,27 +237,25 @@ class ReactiveContext {
         return true;
 
       case DerivationState.possiblyStale:
-        final prevDerivation = untrackedStart();
-        for (final obs in derivation._observables) {
-          if (obs is ComputedValue) {
-            // Force a computation
-            try {
-              obs.value;
-            } on Object catch (_) {
-              untrackedEnd(prevDerivation);
-              return true;
-            }
+        return untracked(() {
+          for (final obs in derivation._observables) {
+            if (obs is ComputedValue) {
+              // Force a computation
+              try {
+                obs.value;
+              } on Object catch (_) {
+                return true;
+              }
 
-            if (derivation._dependenciesState == DerivationState.stale) {
-              untrackedEnd(prevDerivation);
-              return true;
+              if (derivation._dependenciesState == DerivationState.stale) {
+                return true;
+              }
             }
           }
-        }
 
-        _resetDerivationState(derivation);
-        untrackedEnd(prevDerivation);
-        return false;
+          _resetDerivationState(derivation);
+          return false;
+        });
     }
 
     return false;
