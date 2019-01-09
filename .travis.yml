@@ -1,42 +1,25 @@
-# Created with package:mono_repo v1.2.1
+os:
+  - linux
 language: dart
+sudo: false
+addons:
+  apt:
+    # Flutter depends on /usr/lib/x86_64-linux-gnu/libstdc++.so.6 version GLIBCXX_3.4.18
+    sources:
+      - ubuntu-toolchain-r-test # if we don't specify this, the libstdc++6 we get is the wrong version
+    packages:
+      - libstdc++6
+      - fonts-droid
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b beta
+  - ./flutter/bin/flutter doctor
 
-jobs:
-  include:
-    - stage: analyze
-      name: "SDK: stable - DIR: mobx - TASKS: dartanalyzer --fatal-infos --fatal-warnings ."
-      script: ./tool/travis.sh dartanalyzer
-      env: PKG="mobx"
-      dart: stable
-    - stage: analyze
-      name: "SDK: dev - DIR: mobx - TASKS: dartanalyzer --fatal-infos --fatal-warnings ."
-      script: ./tool/travis.sh dartanalyzer
-      env: PKG="mobx"
-      dart: dev
-    - stage: analyze
-      name: "SDK: stable - DIR: mobx - TASKS: dartfmt -n --set-exit-if-changed ."
-      script: ./tool/travis.sh dartfmt
-      env: PKG="mobx"
-      dart: stable
-    - stage: analyze
-      name: "SDK: dev - DIR: mobx - TASKS: dartfmt -n --set-exit-if-changed ."
-      script: ./tool/travis.sh dartfmt
-      env: PKG="mobx"
-      dart: dev
-    - stage: unit_test
-      name: "SDK: stable - DIR: mobx - TASKS: pub run test"
-      script: ./tool/travis.sh test
-      env: PKG="mobx"
-      dart: stable
-    - stage: unit_test
-      name: "SDK: dev - DIR: mobx - TASKS: pub run test"
-      script: ./tool/travis.sh test
-      env: PKG="mobx"
-      dart: dev
+env:
+  - PACKAGE=mobx
+  - PACKAGE=flutter_mobx FLUTTER=true
 
-stages:
-  - analyze
-  - unit_test
+script:
+  - ./tool/run.sh
 
 # Only building master means that we don't run two builds for each pull request.
 branches:
@@ -45,4 +28,4 @@ branches:
 
 cache:
   directories:
-    - "$HOME/.pub-cache"
+    - '$HOME/.pub-cache'
