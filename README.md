@@ -16,7 +16,9 @@
 ### Observables 
 
 - [x] Create `ObservableValue<T>` via `observable<T>()`
-- [ ] Create `ObservableList<T>`
+- [x] Create `ObservableList<T>`
+    - [ ] observe hook
+    - [ ] intercept hook
 - [ ] Create `ObservableMap<K, T>`
 - [x] Atoms with `createAtom()`
 
@@ -51,7 +53,10 @@
     - [x] `onBecomeObserved`
     - [x] `onBecomeUnobserved`
 - [ ] Spying and Tracing
+- [ ] Global configuration
 - [ ] Exception handling and Error recovery
+    - [x] Error boundary
+    - [ ] Disabling Error boundary in global config
 - [ ] Debuggability
 
 
