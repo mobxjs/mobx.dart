@@ -242,7 +242,7 @@ class ReactiveContext {
             // Force a computation
             try {
               obs.value;
-            } on Object catch (e) {
+            } on Object catch (_) {
               untrackedEnd(prevDerivation);
               return true;
             }

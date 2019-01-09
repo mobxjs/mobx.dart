@@ -70,7 +70,7 @@ class Reaction implements Derivation {
     }
 
     if (_context._isCaughtException(this)) {
-      _reportException(_errorValue);
+      _reportException(_errorValue._exception);
     }
 
     _context.endBatch();
