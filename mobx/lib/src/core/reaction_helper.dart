@@ -30,7 +30,7 @@ class ReactionDisposer {
 
 ReactionDisposer createAutorun(
     ReactiveContext context, Function(Reaction) trackingFn,
-    {String name, int delay}) {
+    {String name, int delay, void Function(Object, Reaction) onError}) {
   Reaction rxn;
 
   final rxnName = name ?? context.nameFor('Autorun');
@@ -39,7 +39,7 @@ ReactionDisposer createAutorun(
     // Use a sync-scheduler.
     rxn = Reaction(context, () {
       rxn._track(() => trackingFn(rxn));
-    }, name: rxnName);
+    }, name: rxnName, onError: onError);
   } else {
     // Use a delayed scheduler.
     final scheduler = createDelayedScheduler(delay);
@@ -64,7 +64,7 @@ ReactionDisposer createAutorun(
           }
         });
       }
-    }, name: rxnName);
+    }, name: rxnName, onError: onError);
   }
 
   rxn.schedule();
@@ -73,7 +73,10 @@ ReactionDisposer createAutorun(
 
 ReactionDisposer createReaction<T>(ReactiveContext context,
     T Function(Reaction) predicate, void Function(T) effect,
-    {String name, int delay, bool fireImmediately}) {
+    {String name,
+    int delay,
+    bool fireImmediately,
+    void Function(Object, Reaction) onError}) {
   Reaction rxn;
 
   final rxnName = name ?? context.nameFor('Reaction');
@@ -133,7 +136,7 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
         }
       });
     }
-  }, name: rxnName);
+  }, name: rxnName, onError: onError);
 
   // ignore: cascade_invocations
   rxn.schedule();
@@ -141,34 +144,28 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
   return ReactionDisposer(rxn);
 }
 
-ReactionDisposer createWhenReaction(
-  ReactiveContext context,
-  bool Function() predicate,
-  void Function() effect, {
-  String name,
-}) {
+ReactionDisposer createWhenReaction(ReactiveContext context,
+    bool Function(Reaction) predicate, void Function() effect,
+    {String name, void Function(Object, Reaction) onError}) {
   final rxnName = name ?? context.nameFor('When');
   final effectAction = action(effect, name: '$rxnName-effect');
 
   return createAutorun(context, (reaction) {
-    if (predicate()) {
+    if (predicate(reaction)) {
       reaction.dispose();
       effectAction();
     }
-  }, name: rxnName);
+  }, name: rxnName, onError: onError);
 }
 
 Future<void> createAsyncWhenReaction(
-    ReactiveContext context, bool Function() predicate,
+    ReactiveContext context, bool Function(Reaction) predicate,
     {String name}) {
   final completer = Completer<void>();
-
-  final disposer =
-      createWhenReaction(context, predicate, completer.complete, name: name);
-
-  completer.future.catchError((error) {
-    disposer();
-    throw error;
+  createWhenReaction(context, predicate, completer.complete, name: name,
+      onError: (error, reaction) {
+    reaction.dispose();
+    completer.completeError(error);
   });
 
   return completer.future;

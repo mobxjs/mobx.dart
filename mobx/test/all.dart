@@ -17,8 +17,8 @@ void main() {
 
   action_test.main();
 
-  reaction_test.main();
   autorun_test.main();
+  reaction_test.main();
   when_test.main();
 
   observe_test.main();

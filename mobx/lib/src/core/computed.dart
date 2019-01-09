@@ -5,6 +5,12 @@ class ComputedValue<T> extends Atom implements Derivation {
       : super(context, name: name ?? context.nameFor('Computed'));
 
   @override
+  MobXCaughtException _errorValue;
+
+  @override
+  MobXCaughtException get errorValue => _errorValue;
+
+  @override
   // ignore: prefer_final_fields
   Set<Atom> _observables = Set();
 
@@ -51,7 +57,12 @@ class ComputedValue<T> extends Atom implements Derivation {
     if (track) {
       value = _context.trackDerivation(this, _fn);
     } else {
-      value = _fn();
+      try {
+        value = _fn();
+        _errorValue = null;
+      } on Object catch (e) {
+        _errorValue = MobXCaughtException(e);
+      }
     }
 
     _isComputing = false;
@@ -76,7 +87,9 @@ class ComputedValue<T> extends Atom implements Derivation {
 
     final newValue = computeValue(track: true);
 
-    final changed = wasSuspended || !_isEqual(oldValue, newValue);
+    final changed = wasSuspended ||
+        _context._isCaughtException(this) ||
+        !_isEqual(oldValue, newValue);
 
     if (changed) {
       _value = newValue;

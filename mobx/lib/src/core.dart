@@ -22,3 +22,9 @@ class MobXException implements Exception {
 
   String message;
 }
+
+class MobXCaughtException implements Exception {
+  MobXCaughtException(exception) : _exception = exception;
+
+  Object _exception;
+}

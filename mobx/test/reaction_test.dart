@@ -47,8 +47,9 @@ void main() {
 
       async.elapse(Duration(milliseconds: 500)); // should now trigger effect
       expect(executed, isTrue);
+
+      d();
     });
-    d();
   });
 
   test('Reaction that fires immediately', () {
@@ -91,9 +92,9 @@ void main() {
       expect(executed, isFalse);
       async.elapse(Duration(milliseconds: 1000)); // should now trigger effect
       expect(executed, isTrue);
-    });
 
-    d();
+      d();
+    });
   });
 
   test('reaction with pre-mature disposal in predicate', () {
@@ -118,6 +119,38 @@ void main() {
     expect(executed, isTrue);
     expect(d.$mobx.isDisposed, isTrue);
     d();
+  });
+
+  test('reaction fires onError on exception inside predicate', () {
+    var thrown = false;
+    final dispose = reaction(
+        (_) {
+          throw Exception('FAILED in reaction');
+        },
+        (_) {},
+        onError: (_, _a) {
+          thrown = true;
+        });
+
+    expect(thrown, isTrue);
+    expect(dispose.$mobx.errorValue, isException);
+    dispose();
+  });
+
+  test('reaction fires onError on exception inside effect', () {
+    var thrown = false;
+    final x = observable(false);
+
+    final dispose = reaction((_) => x.value, (_) {
+      throw Exception('FAILED in reaction');
+    }, onError: (_, _a) {
+      thrown = true;
+    });
+
+    x.value = true; // force a change
+    expect(thrown, isTrue);
+    expect(dispose.$mobx.errorValue, isException);
+    dispose();
   });
 
   test('Reaction uses provided context', () {

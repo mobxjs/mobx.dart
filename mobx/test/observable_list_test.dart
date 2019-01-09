@@ -48,8 +48,10 @@ void main() {
         'lastIndexOf': (_) => _.lastIndexOf(observable(20)),
         'indexOf': (_) => _.indexOf(observable(20)),
         'getRange': (_) => _.getRange(0, 0),
+
         // ignore: avoid_function_literals_in_foreach_calls
         'forEach': (_) => _.forEach((_a) {}),
+
         'contains': (_) => _.contains(null),
         'where': (_) => _.where((_) => true),
         'takeWhile': (_) => _.takeWhile((_) => true),
@@ -102,6 +104,7 @@ dynamic _ignoreException(Function fn) {
   } on Object catch (_) {
     // Catching on Object since it takes care of both Error and Exception
     // Ignore
+    return null;
   }
 }
 

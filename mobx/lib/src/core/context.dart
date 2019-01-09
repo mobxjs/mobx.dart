@@ -69,7 +69,13 @@ class ReactiveContext {
 
   T trackDerivation<T>(Derivation d, T Function() fn) {
     final prevDerivation = _startTracking(d);
-    final result = fn();
+    T result;
+    try {
+      result = fn();
+      d._errorValue = null;
+    } on Object catch (e) {
+      d._errorValue = MobXCaughtException(e);
+    }
     _endTracking(d, prevDerivation);
     return result;
   }
@@ -235,7 +241,11 @@ class ReactiveContext {
           for (final obs in derivation._observables) {
             if (obs is ComputedValue) {
               // Force a computation
-              obs.value;
+              try {
+                obs.value;
+              } on Object catch (_) {
+                return true;
+              }
 
               if (derivation._dependenciesState == DerivationState.stale) {
                 return true;
@@ -252,6 +262,7 @@ class ReactiveContext {
   }
 
   bool _isInBatch() => _state.batch > 0;
+  bool _isCaughtException(Derivation d) => d._errorValue is MobXCaughtException;
 
   bool isComputingDerivation() => _state.trackingDerivation != null;
 
