@@ -1,0 +1,10 @@
+dart:
+  - stable
+  - dev
+
+stages:
+  - analyze:
+      - dartanalyzer: --fatal-infos --fatal-warnings .
+      - dartfmt
+  - unit_test:
+      - test

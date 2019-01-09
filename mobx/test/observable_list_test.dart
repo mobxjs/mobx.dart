@@ -20,7 +20,7 @@ void main() {
     });
 
     group('fires reportObserved() for read-methods', () {
-      <String, void Function(ObservableList<int>)>{
+      <String, Function(ObservableList<int>)>{
         'map': (_) => _.map((x) => x),
         'isEmpty': (_) => _.isEmpty,
         'isNotEmpty': (_) => _.isNotEmpty,
@@ -48,6 +48,7 @@ void main() {
         'lastIndexOf': (_) => _.lastIndexOf(observable(20)),
         'indexOf': (_) => _.indexOf(observable(20)),
         'getRange': (_) => _.getRange(0, 0),
+        // ignore: avoid_function_literals_in_foreach_calls
         'forEach': (_) => _.forEach((_a) {}),
         'contains': (_) => _.contains(null),
         'where': (_) => _.where((_) => true),
@@ -107,8 +108,7 @@ dynamic _ignoreException(Function fn) {
 void _templateReadTest(
     String description, void Function(ObservableList<int>) fn) {
   test(description, () {
-    final list = ObservableList<int>();
-    list.add(observable(20));
+    final list = ObservableList<int>()..add(observable(20));
 
     var count = -1;
 
@@ -126,8 +126,7 @@ void _templateReadTest(
 void _templateWriteTest(
     String description, void Function(ObservableList<int>) fn) {
   test(description, () {
-    final list = ObservableList<int>();
-    list.add(observable(20));
+    final list = ObservableList<int>()..add(observable(20));
 
     var count = -1;
 
