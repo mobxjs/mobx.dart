@@ -8,6 +8,9 @@ class ComputedValue<T> extends Atom implements Derivation {
   MobXCaughtException _errorValue;
 
   @override
+  MobXCaughtException get errorValue => _errorValue;
+
+  @override
   // ignore: prefer_final_fields
   Set<Atom> _observables = Set();
 
@@ -56,6 +59,7 @@ class ComputedValue<T> extends Atom implements Derivation {
     } else {
       try {
         value = _fn();
+        _errorValue = null;
       } on Object catch (e) {
         _errorValue = MobXCaughtException(e);
       }

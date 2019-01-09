@@ -102,4 +102,21 @@ void main() {
     verify(context.nameFor('Computed'));
     verify(context.trackDerivation(value, fn));
   });
+
+  test('computed catches exception in evaluation', () {
+    var shouldThrow = true;
+
+    final x = computed(() {
+      if (shouldThrow) {
+        shouldThrow = false;
+        throw Exception('FAIL');
+      }
+    })
+      ..value;
+
+    expect(x.errorValue, isException);
+
+    x.value;
+    expect(x.errorValue, isNull);
+  });
 }

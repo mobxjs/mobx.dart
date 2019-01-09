@@ -32,6 +32,9 @@ class Reaction implements Derivation {
   @override
   MobXCaughtException _errorValue;
 
+  @override
+  MobXCaughtException get errorValue => _errorValue;
+
   bool get isDisposed => _isDisposed;
 
   @override

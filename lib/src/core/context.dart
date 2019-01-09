@@ -72,6 +72,7 @@ class ReactiveContext {
     T result;
     try {
       result = fn();
+      d._errorValue = null;
     } on Object catch (e) {
       d._errorValue = MobXCaughtException(e);
     }

@@ -29,6 +29,7 @@ abstract class Derivation {
   Set<Atom> _newObservables;
 
   MobXCaughtException _errorValue;
+  MobXCaughtException get errorValue;
 
   DerivationState _dependenciesState;
 
