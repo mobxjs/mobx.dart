@@ -139,7 +139,7 @@ void main() {
 
   test('reaction fires onError on exception inside effect', () {
     var thrown = false;
-    var x = observable(false);
+    final x = observable(false);
 
     final dispose = reaction((_) => x.value, (_) {
       throw Exception('FAILED in reaction');
