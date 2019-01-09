@@ -5,131 +5,147 @@ import 'package:test/test.dart';
 import 'shared_mocks.dart';
 
 void main() {
-  test('Action basics work', () {
-    final a = action((String name, String value) {
-      expect(name, equals('name'));
-      expect(value, equals('MobX'));
+  group('Action', () {
+    test('basics work', () {
+      final a = action((String name, String value) {
+        expect(name, equals('name'));
+        expect(value, equals('MobX'));
+      });
+
+      a(['name', 'MobX']);
+      expect(a.name, startsWith('Action'));
     });
 
-    a(['name', 'MobX']);
-    expect(a.name, startsWith('Action'));
-  });
+    test('modifications are picked up', () {
+      final x = observable(10);
 
-  test('Action modifications are picked up', () {
-    final x = observable(10);
+      var total = 0;
+      final a = action(() {
+        x.value = x.value +
+            1; // No reaction-infinite-loop as we are not tracking the observables
+      });
 
-    var total = 0;
-    final a = action(() {
-      x.value = x.value +
-          1; // No reaction-infinite-loop as we are not tracking the observables
+      final dispose = autorun((_) {
+        total = x.value * 10;
+      });
+
+      expect(total, equals(100));
+
+      a();
+      expect(total, equals(110));
+
+      dispose();
     });
 
-    final dispose = autorun((_) {
-      total = x.value * 10;
+    test('modifications are batched', () {
+      final x = observable(10);
+      final y = observable(20);
+      final z = observable(30);
+
+      var total = 0;
+      var autorunExecutionCount = 0;
+
+      final dispose = autorun((_) {
+        total = x.value + y.value + z.value;
+        autorunExecutionCount++;
+      });
+
+      expect(total, equals(60));
+      expect(autorunExecutionCount, equals(1));
+
+      final a = action(() {
+        x.value++;
+        y.value++;
+        z.value++;
+      });
+
+      a();
+      expect(total, equals(63));
+      expect(autorunExecutionCount, equals(2));
+
+      a();
+      expect(total, equals(66));
+      expect(autorunExecutionCount, equals(3));
+
+      dispose();
     });
 
-    expect(total, equals(100));
+    test('inside autorun should be untracked', () {
+      final x = observable(10);
+      final y = observable(20);
 
-    a();
-    expect(total, equals(110));
+      var total = 0;
+      final a = action(() => y.value);
 
-    dispose();
-  });
+      final d = autorun((_) {
+        total = x.value + a();
+      });
 
-  test('Action modifications are batched', () {
-    final x = observable(10);
-    final y = observable(20);
-    final z = observable(30);
+      expect(total, equals(30));
 
-    var total = 0;
-    var autorunExecutionCount = 0;
+      // This should not trigger the autorun as y.value is accessed inside the action(),
+      // which by design should be untracked
+      y.value = 30;
 
-    final dispose = autorun((_) {
-      total = x.value + y.value + z.value;
-      autorunExecutionCount++;
+      expect(total, equals(30)); // total should still be 10 + 20
+      x.value = 11;
+      expect(total, equals(41)); // total should still be 11 + 30
+
+      d();
     });
 
-    expect(total, equals(60));
-    expect(autorunExecutionCount, equals(1));
+    test('can be invoked with named args', () {
+      String message;
 
-    final a = action(() {
-      x.value++;
-      y.value++;
-      z.value++;
+      final a = action(({String name, String value}) {
+        message = '$name: $value';
+      });
+
+      a([], {'name': 'Hello', 'value': 'MobX'});
+      expect(message, equals('Hello: MobX'));
     });
 
-    a();
-    expect(total, equals(63));
-    expect(autorunExecutionCount, equals(2));
+    test('when nested works', () {
+      final x = observable(10);
+      final y = observable(20);
 
-    a();
-    expect(total, equals(66));
-    expect(autorunExecutionCount, equals(3));
+      var executionCount = 0;
 
-    dispose();
-  });
+      final d = autorun((_) {
+        // ignore: unnecessary_statements
+        x.value + y.value;
+        executionCount++;
+      });
 
-  test('action inside autorun should be untracked', () {
-    final x = observable(10);
-    final y = observable(20);
-
-    var total = 0;
-    final a = action(() => y.value);
-
-    final d = autorun((_) {
-      total = x.value + a();
-    });
-
-    expect(total, equals(30));
-
-    // This should not trigger the autorun as y.value is accessed inside the action(),
-    // which by design should be untracked
-    y.value = 30;
-
-    expect(total, equals(30)); // total should still be 10 + 20
-    x.value = 11;
-    expect(total, equals(41)); // total should still be 11 + 30
-
-    d();
-  });
-
-  test('Action can be invoked with named args', () {
-    String message;
-
-    final a = action(({String name, String value}) {
-      message = '$name: $value';
-    });
-
-    a([], {'name': 'Hello', 'value': 'MobX'});
-    expect(message, equals('Hello: MobX'));
-  });
-
-  test('nested actions work', () {
-    final x = observable(10);
-    final y = observable(20);
-
-    var executionCount = 0;
-
-    final d = autorun((_) {
-      // ignore: unnecessary_statements
-      x.value + y.value;
-      executionCount++;
-    });
-
-    action(() {
-      x.value = 100;
-
-      expect(executionCount, equals(1)); // No notifications are fired
       action(() {
-        y.value = 200;
+        x.value = 100;
+
         expect(executionCount, equals(1)); // No notifications are fired
+        action(() {
+          y.value = 200;
+          expect(executionCount, equals(1)); // No notifications are fired
+        })();
       })();
-    })();
 
-    // Notifications are fired now
-    expect(executionCount, equals(2));
+      // Notifications are fired now
+      expect(executionCount, equals(2));
 
-    d();
+      d();
+    });
+
+    test('uses provided context', () {
+      final context = MockContext();
+      void fn() {}
+      final act = action(fn, context: context);
+
+      act();
+
+      verify(context.nameFor('Action'));
+      verify(context.untrackedStart());
+      verify(context.startBatch());
+      verify(context.endBatch());
+      verify(context.untrackedEnd(null));
+    });
   });
 
   test('runInAction works', () {
@@ -180,20 +196,6 @@ void main() {
     expect(total, equals(300));
 
     d();
-  });
-
-  test('action uses provided context', () {
-    final context = MockContext();
-    void fn() {}
-    final act = action(fn, context: context);
-
-    act();
-
-    verify(context.nameFor('Action'));
-    verify(context.untrackedStart());
-    verify(context.startBatch());
-    verify(context.endBatch());
-    verify(context.untrackedEnd(null));
   });
 
   test('untracked works', () {
