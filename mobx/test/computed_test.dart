@@ -130,6 +130,10 @@ void main() {
       expect(() {
         c1.value;
       }, throwsException);
+
+      // ignore: avoid_as
+      expect((c1.errorValue.exception as MobXException).message.toLowerCase(),
+          contains('cycle'));
     });
   });
 }
