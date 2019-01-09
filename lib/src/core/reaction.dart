@@ -29,6 +29,9 @@ class Reaction implements Derivation {
   // ignore: prefer_final_fields
   DerivationState _dependenciesState = DerivationState.notTracking;
 
+  @override
+  MobXCaughtException _errorValue;
+
   bool get isDisposed => _isDisposed;
 
   @override
@@ -64,6 +67,10 @@ class Reaction implements Derivation {
 
     if (_isDisposed) {
       _context._clearObservables(this);
+    }
+
+    if (_context._isCaughtException(this)) {
+      _reportException(_errorValue);
     }
 
     _context.endBatch();

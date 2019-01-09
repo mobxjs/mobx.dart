@@ -28,6 +28,8 @@ abstract class Derivation {
   Set<Atom> _observables;
   Set<Atom> _newObservables;
 
+  MobXCaughtException _errorValue;
+
   DerivationState _dependenciesState;
 
   void _onBecomeStale();
