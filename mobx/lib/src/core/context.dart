@@ -11,12 +11,17 @@ class _ReactiveState {
   List<Atom> pendingUnobservations = [];
 }
 
+/// Configuration used by [ReactiveContext]
 class ReactiveConfig {
   ReactiveConfig({this.disableErrorBoundaries});
 
+  /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main =
       ReactiveConfig(disableErrorBoundaries: false);
-  var disableErrorBoundaries = false;
+
+  /// Whether MobX should throw exceptions instead of catching them and storing
+  /// inside the [Reaction.errorValue] property of [Reaction].
+  bool disableErrorBoundaries = false;
 }
 
 class ReactiveContext {

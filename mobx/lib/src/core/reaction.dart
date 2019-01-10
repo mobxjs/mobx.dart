@@ -141,6 +141,7 @@ class Reaction implements Derivation {
     }
 
     if (_context.config.disableErrorBoundaries == true) {
+      // ignore: only_throw_errors
       throw exception;
     }
   }
