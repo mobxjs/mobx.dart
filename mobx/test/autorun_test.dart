@@ -132,5 +132,13 @@ void main() {
       autorun((_) {}, context: context);
       verify(context.runReactions());
     });
+
+    test('can be disposed inside the tracking function', () {
+      final dispose = autorun((_) {
+        _.dispose();
+      });
+
+      expect(dispose.$mobx.isDisposed, isTrue);
+    });
   });
 }
