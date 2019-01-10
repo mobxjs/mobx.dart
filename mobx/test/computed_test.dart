@@ -135,5 +135,13 @@ void main() {
       expect((c1.errorValue.exception as MobXException).message.toLowerCase(),
           contains('cycle'));
     });
+
+    test('with disableErrorBoundaries = true, exception is thrown', () {
+      final c = computed(() => throw Exception('FAIL'),
+          context: createContext(
+              config: ReactiveConfig(disableErrorBoundaries: true)));
+
+      expect(() => c.value, throwsException);
+    });
   });
 }

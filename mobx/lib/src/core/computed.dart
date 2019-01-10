@@ -61,11 +61,15 @@ class ComputedValue<T> extends Atom implements Derivation {
     if (track) {
       value = _context.trackDerivation(this, _fn);
     } else {
-      try {
+      if (_context.config.disableErrorBoundaries == true) {
         value = _fn();
-        _errorValue = null;
-      } on Object catch (e) {
-        _errorValue = MobXCaughtException(e);
+      } else {
+        try {
+          value = _fn();
+          _errorValue = null;
+        } on Object catch (e) {
+          _errorValue = MobXCaughtException(e);
+        }
       }
     }
 

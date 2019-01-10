@@ -161,11 +161,25 @@ void main() {
       final context = MockContext();
       int trackingFn(Reaction reaction) => 1;
       void onInvalidate(int i) {}
-      final rx = reaction(trackingFn, onInvalidate, context: context);
+      final dispose = reaction(trackingFn, onInvalidate, context: context);
 
       verify(context.nameFor('Reaction'));
-      verify(context.addPendingReaction(rx.$mobx));
+      verify(context.addPendingReaction(dispose.$mobx));
       verify(context.runReactions());
+
+      dispose();
+    });
+
+    test('reaction throws when config.disableErrorBoundaries = true', () {
+      final context =
+          ReactiveContext(config: ReactiveConfig(disableErrorBoundaries: true));
+
+      expect(() {
+        final dispose =
+            reaction((_) => throw Exception('FAIL'), (_) {}, context: context);
+
+        dispose();
+      }, throwsException);
     });
   });
 }

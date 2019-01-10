@@ -11,7 +11,21 @@ class _ReactiveState {
   List<Atom> pendingUnobservations = [];
 }
 
+class ReactiveConfig {
+  ReactiveConfig({this.disableErrorBoundaries});
+
+  static final ReactiveConfig main =
+      ReactiveConfig(disableErrorBoundaries: false);
+  var disableErrorBoundaries = false;
+}
+
 class ReactiveContext {
+  ReactiveContext({ReactiveConfig config}) {
+    this.config = config ?? ReactiveConfig.main;
+  }
+
+  ReactiveConfig config;
+
   final _ReactiveState _state = _ReactiveState();
 
   int get nextId => ++_state.nextIdCounter;
@@ -70,12 +84,18 @@ class ReactiveContext {
   T trackDerivation<T>(Derivation d, T Function() fn) {
     final prevDerivation = _startTracking(d);
     T result;
-    try {
+
+    if (config.disableErrorBoundaries == true) {
       result = fn();
-      d._errorValue = null;
-    } on Object catch (e) {
-      d._errorValue = MobXCaughtException(e);
+    } else {
+      try {
+        result = fn();
+        d._errorValue = null;
+      } on Object catch (e) {
+        d._errorValue = MobXCaughtException(e);
+      }
     }
+
     _endTracking(d, prevDerivation);
     return result;
   }
@@ -241,10 +261,14 @@ class ReactiveContext {
           for (final obs in derivation._observables) {
             if (obs is ComputedValue) {
               // Force a computation
-              try {
+              if (config.disableErrorBoundaries == true) {
                 obs.value;
-              } on Object catch (_) {
-                return true;
+              } else {
+                try {
+                  obs.value;
+                } on Object catch (_) {
+                  return true;
+                }
               }
 
               if (derivation._dependenciesState == DerivationState.stale) {
