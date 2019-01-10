@@ -25,15 +25,15 @@ void main() {
     });
 
     test('works with current context', () {
-      final x = ObservableValue(currentContext, 1000);
+      final x = ObservableValue(mainContext, 1000);
       expect(x is ObservableValue<int>, isTrue);
 
       expect(x.value, equals(1000));
 
-      final x1 = ObservableValue<int>(currentContext, null);
+      final x1 = ObservableValue<int>(mainContext, null);
       expect(x1.value, isNull);
 
-      final y = ObservableValue(currentContext, 'Hello', name: 'greeting');
+      final y = ObservableValue(mainContext, 'Hello', name: 'greeting');
       expect(y.value, equals('Hello'));
       expect(y.name, equals('greeting'));
     });

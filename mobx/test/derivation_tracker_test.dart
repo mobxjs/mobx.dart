@@ -6,7 +6,7 @@ void main() {
     test('reacts to changes to reactive values between begin and end', () {
       var i = 0;
 
-      final tracker = DerivationTracker(currentContext, () {
+      final tracker = DerivationTracker(mainContext, () {
         i++;
       });
 
@@ -42,7 +42,7 @@ void main() {
 
     test('can be used multiple times', () {
       var i = 0;
-      final tracker = DerivationTracker(currentContext, () {
+      final tracker = DerivationTracker(mainContext, () {
         i++;
       });
       final var1 = observable(0);
@@ -74,7 +74,7 @@ void main() {
 
     test("when disposed, doesn't call onInvalidate", () {
       var i = 0;
-      final tracker = DerivationTracker(currentContext, () {
+      final tracker = DerivationTracker(mainContext, () {
         i++;
       });
       final var1 = observable(0);
@@ -91,7 +91,7 @@ void main() {
 
     test('calling start multiple times before calling end does nothing', () {
       var i = 0;
-      final tracker = DerivationTracker(currentContext, () {
+      final tracker = DerivationTracker(mainContext, () {
         i++;
       });
       final var1 = observable(0);
@@ -112,7 +112,7 @@ void main() {
 
     test('calling end multiple times after start does nothing', () {
       var i = 0;
-      final tracker = DerivationTracker(currentContext, () {
+      final tracker = DerivationTracker(mainContext, () {
         i++;
       });
       final var1 = observable(0);
@@ -129,7 +129,7 @@ void main() {
 
     test('calling dispose multiple times does nothing', () {
       var i = 0;
-      final tracker = DerivationTracker(currentContext, () {
+      final tracker = DerivationTracker(mainContext, () {
         i++;
       });
       final var1 = observable(0);
@@ -147,7 +147,7 @@ void main() {
     test('autorun works inside tracking', () {
       var i = 0;
       var autoVar = 0;
-      final tracker = DerivationTracker(currentContext, () {
+      final tracker = DerivationTracker(mainContext, () {
         i++;
       });
       final var1 = observable(0);

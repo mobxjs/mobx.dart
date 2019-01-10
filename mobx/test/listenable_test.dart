@@ -10,7 +10,7 @@ void main() {
     test('dispose function removes added listener', () {
       void listener(ChangeNotification<int> change) {}
 
-      final listeners = Listeners<int>(currentContext);
+      final listeners = Listeners<int>(mainContext);
       expect(listeners.hasListeners, isFalse);
 
       final dispose = listeners.registerListener(listener);

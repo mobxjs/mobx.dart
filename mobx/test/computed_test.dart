@@ -16,7 +16,7 @@ void main() {
       y.value = 20;
       expect(c.value, equals(50));
 
-      expect(currentContext.isComputingDerivation(), isFalse);
+      expect(mainContext.isComputingDerivation(), isFalse);
     });
 
     test('value hierarchy', () {
@@ -66,7 +66,7 @@ void main() {
       expect(c1ComputationCount, equals(3));
       expect(c3ComputationCount, equals(2));
 
-      expect(currentContext.isComputingDerivation(), isFalse);
+      expect(mainContext.isComputingDerivation(), isFalse);
 
       d();
     });
