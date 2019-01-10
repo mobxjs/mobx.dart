@@ -11,7 +11,7 @@ final ReactiveContext mainContext = createContext();
 ///
 /// You can use this to run a reactivity system in parallel to the main app-level
 /// system. All actions, reactions will be run within this context. Make sure to pass
-/// this context in calls to [autorun], [reaction], [when], [action], [observable], etc.
+/// this context in calls to autorun, reaction, when, action, observable, etc.
 ///
 /// Most of the time you should be fine with the [mainContext]
 ReactiveContext createContext() => ReactiveContext();
