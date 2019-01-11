@@ -9,6 +9,16 @@ void main() {
       expect(ctx.config, equals(ReactiveConfig.main));
     });
 
-    test('global onReactionError is invoked for reaction errors', () {});
+    test('global onReactionError is invoked for reaction errors', () {
+      var caught = false;
+
+      final dispose = mainContext.onReactionError((_) => caught = true);
+      final dispose1 = autorun((_) => throw Exception('autorun FAIL'));
+
+      expect(caught, isTrue);
+
+      dispose();
+      dispose1();
+    });
   });
 }

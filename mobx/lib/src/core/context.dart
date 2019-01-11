@@ -25,7 +25,7 @@ class ReactiveConfig {
   /// inside the [Reaction.errorValue] property of [Reaction].
   bool disableErrorBoundaries = false;
 
-  final Set<ReactionErrorHandler> onReactionErrorHandlers = Set();
+  final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
 }
 
 class ReactiveContext {
@@ -320,9 +320,16 @@ class ReactiveContext {
   }
 
   Dispose onReactionError(ReactionErrorHandler handler) {
-    config.onReactionErrorHandlers.add(handler);
+    config._reactionErrorHandlers.add(handler);
     return () {
-      config.onReactionErrorHandlers.removeWhere((f) => f == handler);
+      config._reactionErrorHandlers.removeWhere((f) => f == handler);
     };
+  }
+
+  void _notifyReactionErrorHandlers(Object exception) {
+    // ignore: avoid_function_literals_in_foreach_calls
+    config._reactionErrorHandlers.forEach((f) {
+      f(exception);
+    });
   }
 }
