@@ -11,6 +11,8 @@ class _ReactiveState {
   List<Atom> pendingUnobservations = [];
 }
 
+typedef ReactionErrorHandler = void Function(Object error);
+
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
   ReactiveConfig({this.disableErrorBoundaries});
@@ -22,6 +24,8 @@ class ReactiveConfig {
   /// Whether MobX should throw exceptions instead of catching them and storing
   /// inside the [Reaction.errorValue] property of [Reaction].
   bool disableErrorBoundaries = false;
+
+  final Set<ReactionErrorHandler> onReactionErrorHandlers = Set();
 }
 
 class ReactiveContext {
@@ -313,5 +317,12 @@ class ReactiveContext {
     } finally {
       untrackedEnd(prevDerivation);
     }
+  }
+
+  Dispose onReactionError(ReactionErrorHandler handler) {
+    config.onReactionErrorHandlers.add(handler);
+    return () {
+      config.onReactionErrorHandlers.removeWhere((f) => f == handler);
+    };
   }
 }

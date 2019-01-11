@@ -8,5 +8,7 @@ void main() {
 
       expect(ctx.config, equals(ReactiveConfig.main));
     });
+
+    test('global onReactionError is invoked for reaction errors', () {});
   });
 }
