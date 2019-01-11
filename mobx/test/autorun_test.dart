@@ -1,4 +1,5 @@
 import 'package:fake_async/fake_async.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
 import 'package:mockito/mockito.dart';
@@ -139,6 +140,28 @@ void main() {
       });
 
       expect(dispose.$mobx.isDisposed, isTrue);
+    });
+
+    test('can be disposed inside the tracking function with delay', () {
+      final x = observable(10);
+      ReactionDisposer dispose;
+
+      fakeAsync((async) {
+        dispose = autorun((_) {
+          final value = x.value + 1;
+          if (value > 10) {
+            _.dispose();
+          }
+        }, delay: 1000);
+
+        async.elapse(Duration(milliseconds: 1000));
+
+        x.value = 11;
+
+        async.elapse(Duration(milliseconds: 1000));
+
+        expect(dispose.$mobx.isDisposed, isTrue);
+      });
     });
   });
 }
