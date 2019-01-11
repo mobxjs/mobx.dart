@@ -145,7 +145,7 @@ class Reaction implements Derivation {
       throw exception;
     }
 
-    _context._notifyReactionErrorHandlers(exception);
+    _context._notifyReactionErrorHandlers(exception, this);
   }
 }
 

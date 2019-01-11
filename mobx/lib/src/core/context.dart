@@ -11,7 +11,7 @@ class _ReactiveState {
   List<Atom> pendingUnobservations = [];
 }
 
-typedef ReactionErrorHandler = void Function(Object error);
+typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
@@ -326,10 +326,10 @@ class ReactiveContext {
     };
   }
 
-  void _notifyReactionErrorHandlers(Object exception) {
+  void _notifyReactionErrorHandlers(Object exception, Reaction reaction) {
     // ignore: avoid_function_literals_in_foreach_calls
     config._reactionErrorHandlers.forEach((f) {
-      f(exception);
+      f(exception, reaction);
     });
   }
 }
