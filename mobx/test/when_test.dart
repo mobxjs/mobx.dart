@@ -1,3 +1,4 @@
+import 'package:fake_async/fake_async.dart';
 import 'package:mockito/mockito.dart' hide when;
 import 'package:test/test.dart';
 import 'package:mobx/mobx.dart';
@@ -73,6 +74,37 @@ void main() {
       final context = MockContext();
       when((_) => true, () {}, context: context);
       verify(context.runReactions());
+    });
+
+    test('throws if timeout occurs before when() completes', () {
+      fakeAsync((async) {
+        final x = observable(10);
+        var thrown = false;
+        final d =
+            when((_) => x.value > 10, () {}, timeout: 1000, onError: (_, _a) {
+          thrown = true;
+        });
+
+        async.elapse(Duration(milliseconds: 1000)); // cause a timeout
+        expect(thrown, isTrue);
+        expect(d.$mobx.isDisposed, isTrue);
+
+        d();
+      });
+    });
+    test('does NOT throw if when() completes before timeout', () {
+      fakeAsync((async) {
+        final x = observable(10);
+        final d = when((_) => x.value > 10, () {}, timeout: 1000);
+
+        x.value = 11;
+        expect(() {
+          async.elapse(Duration(milliseconds: 1000));
+        }, returnsNormally);
+        expect(d.$mobx.isDisposed, isTrue);
+
+        d();
+      });
     });
   });
 }

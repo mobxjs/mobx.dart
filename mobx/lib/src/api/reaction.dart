@@ -65,9 +65,10 @@ ReactionDisposer reaction<T>(
 ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect,
         {String name,
         ReactiveContext context,
+        int timeout,
         void Function(Object, Reaction) onError}) =>
     createWhenReaction(context ?? mainContext, predicate, effect,
-        name: name, onError: onError);
+        name: name, timeout: timeout, onError: onError);
 
 /// A variant of [when()] which returns a Future. The Future completes when the [predicate()] turns true.
 /// Note that there is no effect function here. Typically you would await on the Future and execute the
@@ -78,5 +79,6 @@ ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect,
 /// // ... execute the effect ...
 /// ```
 Future<void> asyncWhen(bool Function(Reaction) predicate,
-        {String name, ReactiveContext context}) =>
-    createAsyncWhenReaction(context ?? mainContext, predicate, name: name);
+        {String name, int timeout, ReactiveContext context}) =>
+    createAsyncWhenReaction(context ?? mainContext, predicate,
+        name: name, timeout: timeout);

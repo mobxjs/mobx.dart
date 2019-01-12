@@ -146,13 +146,38 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
 
 ReactionDisposer createWhenReaction(ReactiveContext context,
     bool Function(Reaction) predicate, void Function() effect,
-    {String name, void Function(Object, Reaction) onError}) {
+    {String name, int timeout, void Function(Object, Reaction) onError}) {
   final rxnName = name ?? context.nameFor('When');
   final effectAction = action(effect, name: '$rxnName-effect');
 
-  return createAutorun(context, (reaction) {
+  Timer timer;
+  ReactionDisposer dispose;
+
+  // Run a race with a timeout!
+  if (timeout != null) {
+    timer = Timer(ms * timeout, () {
+      // Timed out before a disposal, effectively a Timeout-Error!
+      if (!dispose.$mobx.isDisposed) {
+        dispose();
+
+        final error = MobXException('WHEN_TIMEOUT');
+        if (onError != null) {
+          onError(error, dispose.$mobx);
+        } else {
+          // TODO(pavanpodila): Should this be reported with onReactionError handler???
+          throw error;
+        }
+      }
+    });
+  }
+
+  return dispose = createAutorun(context, (reaction) {
     if (predicate(reaction)) {
       reaction.dispose();
+      if (timer != null) {
+        timer.cancel();
+        timer = null;
+      }
       effectAction();
     }
   }, name: rxnName, onError: onError);
@@ -160,10 +185,10 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
 
 Future<void> createAsyncWhenReaction(
     ReactiveContext context, bool Function(Reaction) predicate,
-    {String name}) {
+    {String name, int timeout}) {
   final completer = Completer<void>();
-  createWhenReaction(context, predicate, completer.complete, name: name,
-      onError: (error, reaction) {
+  createWhenReaction(context, predicate, completer.complete,
+      name: name, timeout: timeout, onError: (error, reaction) {
     reaction.dispose();
     completer.completeError(error);
   });
