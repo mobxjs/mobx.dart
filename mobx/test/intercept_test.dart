@@ -6,84 +6,87 @@ import 'package:test/test.dart';
 import 'shared_mocks.dart';
 
 void main() {
-  test('intercept', () {
-    final x = observable(10);
-    var executed = false;
+  group('intercept', () {
+    test('basics work', () {
+      final x = observable(10);
+      var executed = false;
 
-    final dispose = x.intercept((change) {
-      // prevent a change
-      change.newValue = 33;
-      executed = true;
-      return change;
+      final dispose = x.intercept((change) {
+        // prevent a change
+        change.newValue = 33;
+        executed = true;
+        return change;
+      });
+
+      x.value = 100;
+      expect(x.value, equals(33));
+      expect(executed, isTrue);
+
+      dispose();
     });
 
-    x.value = 100;
-    expect(x.value, equals(33));
-    expect(executed, isTrue);
+    test('prevents a change', () {
+      final x = observable(10);
 
-    dispose();
-  });
+      final dispose = x.intercept((change) => null);
 
-  test('intercept prevents a change', () {
-    final x = observable(10);
+      x.value = 100;
+      expect(x.value, equals(10));
 
-    final dispose = x.intercept((change) => null);
-
-    x.value = 100;
-    expect(x.value, equals(10));
-
-    dispose();
-  });
-
-  test('intercept can be chained', () {
-    final x = observable(10);
-
-    final dispose1 = x.intercept((change) {
-      change.newValue = change.newValue + 10;
-      return change;
+      dispose();
     });
 
-    final dispose2 = x.intercept((change) {
-      change.newValue = change.newValue + 10;
-      return change;
+    test('can be chained', () {
+      final x = observable(10);
+
+      final dispose1 = x.intercept((change) {
+        change.newValue = change.newValue + 10;
+        return change;
+      });
+
+      final dispose2 = x.intercept((change) {
+        change.newValue = change.newValue + 10;
+        return change;
+      });
+
+      x.value = 100;
+      expect(x.value, equals(120));
+
+      dispose1();
+      dispose2();
     });
 
-    x.value = 100;
-    expect(x.value, equals(120));
+    test('chain can be short-circuited', () {
+      final x = observable(10);
 
-    dispose1();
-    dispose2();
-  });
+      final dispose1 = x.intercept((change) {
+        change.newValue = change.newValue + 10;
+        return change;
+      });
 
-  test('intercept chain can be short-circuited', () {
-    final x = observable(10);
+      final dispose2 = x.intercept((change) => null);
 
-    final dispose1 = x.intercept((change) {
-      change.newValue = change.newValue + 10;
-      return change;
+      final dispose3 = x.intercept((change) {
+        change.newValue = change.newValue + 10;
+        return change;
+      });
+
+      x.value = 100;
+      expect(
+          x.value, equals(10)); // no change as the interceptor-2 has nullified
+
+      dispose1();
+      dispose2();
+      dispose3();
     });
 
-    final dispose2 = x.intercept((change) => null);
+    test('uses provided context', () {
+      final context = MockContext();
+      Interceptors(context)
+        ..intercept((_) {})
+        ..interceptChange(WillChangeNotification());
 
-    final dispose3 = x.intercept((change) {
-      change.newValue = change.newValue + 10;
-      return change;
+      verify(context.untracked(any));
     });
-
-    x.value = 100;
-    expect(x.value, equals(10)); // no change as the interceptor-2 has nullified
-
-    dispose1();
-    dispose2();
-    dispose3();
-  });
-
-  test('Interceptors uses provided context', () {
-    final context = MockContext();
-    Interceptors(context)
-      ..intercept((_) {})
-      ..interceptChange(WillChangeNotification());
-
-    verify(context.untracked(any));
   });
 }

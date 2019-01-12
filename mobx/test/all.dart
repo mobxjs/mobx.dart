@@ -1,6 +1,7 @@
 import 'action_test.dart' as action_test;
 import 'autorun_test.dart' as autorun_test;
 import 'computed_test.dart' as computed_test;
+import 'context_test.dart' as context_test;
 import 'derivation_tracker_test.dart' as derivation_tracker_test;
 import 'intercept_test.dart' as intercept_test;
 import 'listenable_test.dart' as listenable_test;
@@ -25,4 +26,5 @@ void main() {
   intercept_test.main();
   listenable_test.main();
   derivation_tracker_test.main();
+  context_test.main();
 }

@@ -1,3 +1,4 @@
+import 'package:fake_async/fake_async.dart';
 import 'package:mockito/mockito.dart' hide when;
 import 'package:test/test.dart';
 import 'package:mobx/mobx.dart';
@@ -5,66 +6,106 @@ import 'package:mobx/mobx.dart';
 import 'shared_mocks.dart';
 
 void main() {
-  test('When', () {
-    var executed = false;
-    final x = observable(10);
-    final d = when((_) => x.value > 10, () {
-      executed = true;
-    }, name: 'Basic when');
+  group('When', () {
+    test('basics work', () {
+      var executed = false;
+      final x = observable(10);
+      final d = when((_) => x.value > 10, () {
+        executed = true;
+      }, name: 'Basic when');
 
-    expect(executed, isFalse);
-    expect(d.$mobx.name, 'Basic when');
+      expect(executed, isFalse);
+      expect(d.$mobx.name, 'Basic when');
 
-    x.value = 11;
+      x.value = 11;
 
-    expect(executed, isTrue);
-    expect(d.$mobx.isDisposed, isTrue);
-    executed = false;
+      expect(executed, isTrue);
+      expect(d.$mobx.isDisposed, isTrue);
+      executed = false;
 
-    x.value = 12;
-    expect(executed, isFalse); // No more effects as its disposed
-  });
-
-  test('when with default name', () {
-    final d = when((_) => true, () {});
-
-    expect(d.$mobx.name, startsWith('When@'));
-
-    d();
-  });
-
-  test('Async When', () {
-    final x = observable(10);
-    asyncWhen((_) => x.value > 10, name: 'Async-when').then((_) {
-      expect(true, isTrue);
+      x.value = 12;
+      expect(executed, isFalse); // No more effects as its disposed
     });
 
-    x.value = 11;
-  });
+    test('with default name', () {
+      final d = when((_) => true, () {});
 
-  test('when fires onError on exception', () {
-    var thrown = false;
-    final dispose = when(
-        (_) {
-          throw Exception('FAILED in when');
-        },
-        () {},
-        onError: (_, _a) {
+      expect(d.$mobx.name, startsWith('When@'));
+
+      d();
+    });
+
+    test('works with asyncWhen', () {
+      final x = observable(10);
+      asyncWhen((_) => x.value > 10, name: 'Async-when').then((_) {
+        expect(true, isTrue);
+      });
+
+      x.value = 11;
+    });
+
+    test('fires onError on exception', () {
+      var thrown = false;
+      final dispose = when(
+          (_) {
+            throw Exception('FAILED in when');
+          },
+          () {},
+          onError: (_, _a) {
+            thrown = true;
+          });
+
+      expect(thrown, isTrue);
+      dispose();
+    });
+
+    test('exceptions inside asyncWhen are caught and reaction is disposed', () {
+      Reaction rxn;
+      asyncWhen((_) {
+        rxn = _;
+        throw Exception('FAIL');
+      }, name: 'Async-when')
+          .catchError((_) {
+        expect(rxn.isDisposed, isTrue);
+      });
+    });
+
+    test('uses provided context', () {
+      final context = MockContext();
+      when((_) => true, () {}, context: context);
+      verify(context.runReactions());
+    });
+
+    test('throws if timeout occurs before when() completes', () {
+      fakeAsync((async) {
+        final x = observable(10);
+        var thrown = false;
+        final d =
+            when((_) => x.value > 10, () {}, timeout: 1000, onError: (_, _a) {
           thrown = true;
         });
 
-    expect(thrown, isTrue);
-    dispose();
-  });
+        async.elapse(Duration(milliseconds: 1000)); // cause a timeout
+        expect(thrown, isTrue);
+        expect(d.$mobx.isDisposed, isTrue);
 
-  test('Exceptions inside asyncWhen are caught and reaction is disposed', () {
-    asyncWhen((_) => throw Exception('FAIL'), name: 'Async-when')
-        .catchError((_) => expect(true, isTrue));
-  });
+        d();
+      });
+    });
 
-  test('when uses provided context', () {
-    final context = MockContext();
-    when((_) => true, () {}, context: context);
-    verify(context.runReactions());
+    test('does NOT throw if when() completes before timeout', () {
+      fakeAsync((async) {
+        final x = observable(10);
+        final d = when((_) => x.value > 10, () {}, timeout: 1000);
+
+        x.value = 11;
+        expect(() {
+          async.elapse(Duration(milliseconds: 1000));
+        }, returnsNormally);
+        expect(d.$mobx.isDisposed, isTrue);
+
+        d();
+      });
+    });
   });
 }

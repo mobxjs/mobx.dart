@@ -6,24 +6,26 @@ import 'package:test/test.dart';
 import 'shared_mocks.dart';
 
 void main() {
-  test('dispose function removes added listener', () {
-    void listener(ChangeNotification<int> change) {}
+  group('Listenable', () {
+    test('dispose function removes added listener', () {
+      void listener(ChangeNotification<int> change) {}
 
-    final listeners = Listeners<int>(currentContext);
-    expect(listeners.hasListeners, isFalse);
+      final listeners = Listeners<int>(mainContext);
+      expect(listeners.hasListeners, isFalse);
 
-    final dispose = listeners.registerListener(listener);
-    expect(listeners.hasListeners, isTrue);
+      final dispose = listeners.registerListener(listener);
+      expect(listeners.hasListeners, isTrue);
 
-    dispose();
-    expect(listeners.hasListeners, isFalse);
-  });
+      dispose();
+      expect(listeners.hasListeners, isFalse);
+    });
 
-  test('Listeners uses provided context', () {
-    final context = MockContext();
-    Listeners(context)
-      ..registerListener((_) {})
-      ..notifyListeners(ChangeNotification());
-    verify(context.untracked(any));
+    test('uses provided context', () {
+      final context = MockContext();
+      Listeners(context)
+        ..registerListener((_) {})
+        ..notifyListeners(ChangeNotification());
+      verify(context.untracked(any));
+    });
   });
 }

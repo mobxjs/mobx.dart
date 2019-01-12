@@ -33,6 +33,15 @@ while (( "$#" )); do
     echo -e '\033[1mTASK: test\033[22m'
     echo -e 'pub run test'
     pub run test || EXIT_CODE=$?
+    # Install dart_coveralls; gather and send coverage data.
+    if [ "$REPO_TOKEN" ]; then
+    pub global activate dart_coveralls
+    pub global run dart_coveralls report \
+      --token $REPO_TOKEN \
+      --retry 2 \
+      --exclude-test-files \
+      test/all.dart
+    fi
     ;;
   *) echo -e "\033[31mNot expecting TASK '${TASK}'. Error!\033[0m"
     EXIT_CODE=1

@@ -11,7 +11,30 @@ class _ReactiveState {
   List<Atom> pendingUnobservations = [];
 }
 
+typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
+
+/// Configuration used by [ReactiveContext]
+class ReactiveConfig {
+  ReactiveConfig({this.disableErrorBoundaries});
+
+  /// The main or default configuration used by [ReactiveContext]
+  static final ReactiveConfig main =
+      ReactiveConfig(disableErrorBoundaries: false);
+
+  /// Whether MobX should throw exceptions instead of catching them and storing
+  /// inside the [Reaction.errorValue] property of [Reaction].
+  bool disableErrorBoundaries = false;
+
+  final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
+}
+
 class ReactiveContext {
+  ReactiveContext({ReactiveConfig config}) {
+    this.config = config ?? ReactiveConfig.main;
+  }
+
+  ReactiveConfig config;
+
   final _ReactiveState _state = _ReactiveState();
 
   int get nextId => ++_state.nextIdCounter;
@@ -70,12 +93,18 @@ class ReactiveContext {
   T trackDerivation<T>(Derivation d, T Function() fn) {
     final prevDerivation = _startTracking(d);
     T result;
-    try {
+
+    if (config.disableErrorBoundaries == true) {
       result = fn();
-      d._errorValue = null;
-    } on Object catch (e) {
-      d._errorValue = MobXCaughtException(e);
+    } else {
+      try {
+        result = fn();
+        d._errorValue = null;
+      } on Object catch (e) {
+        d._errorValue = MobXCaughtException(e);
+      }
     }
+
     _endTracking(d, prevDerivation);
     return result;
   }
@@ -241,10 +270,14 @@ class ReactiveContext {
           for (final obs in derivation._observables) {
             if (obs is ComputedValue) {
               // Force a computation
-              try {
+              if (config.disableErrorBoundaries == true) {
                 obs.value;
-              } on Object catch (_) {
-                return true;
+              } else {
+                try {
+                  obs.value;
+                } on Object catch (_) {
+                  return true;
+                }
               }
 
               if (derivation._dependenciesState == DerivationState.stale) {
@@ -284,5 +317,19 @@ class ReactiveContext {
     } finally {
       untrackedEnd(prevDerivation);
     }
+  }
+
+  Dispose onReactionError(ReactionErrorHandler handler) {
+    config._reactionErrorHandlers.add(handler);
+    return () {
+      config._reactionErrorHandlers.removeWhere((f) => f == handler);
+    };
+  }
+
+  void _notifyReactionErrorHandlers(Object exception, Reaction reaction) {
+    // ignore: avoid_function_literals_in_foreach_calls
+    config._reactionErrorHandlers.forEach((f) {
+      f(exception, reaction);
+    });
   }
 }

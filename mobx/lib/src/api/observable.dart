@@ -17,7 +17,7 @@ import 'package:mobx/src/core.dart';
 /// ```
 ObservableValue<T> observable<T>(T initialValue,
         {String name, ReactiveContext context}) =>
-    ObservableValue(context ?? currentContext, initialValue, name: name);
+    ObservableValue(context ?? mainContext, initialValue, name: name);
 
 /// Creates a computed value with an optional [name].
 ///
@@ -48,7 +48,7 @@ ObservableValue<T> observable<T>(T initialValue,
 /// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
 ComputedValue<T> computed<T>(T Function() fn,
         {String name, ReactiveContext context}) =>
-    ComputedValue(context ?? currentContext, fn, name: name);
+    ComputedValue(context ?? mainContext, fn, name: name);
 
 /// Creates a simple Atom for tracking its usage in a reactive context. This is useful when
 /// you don't need the value but instead a way of knowing when it becomes active and inactive
@@ -61,5 +61,5 @@ Atom createAtom(
         Function onObserved,
         Function onUnobserved,
         ReactiveContext context}) =>
-    Atom(context ?? currentContext,
+    Atom(context ?? mainContext,
         name: name, onObserve: onObserved, onUnobserve: onUnobserved);

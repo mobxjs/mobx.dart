@@ -27,4 +27,7 @@ class MobXCaughtException implements Exception {
   MobXCaughtException(exception) : _exception = exception;
 
   Object _exception;
+  Object get exception => _exception;
 }
+
+typedef Dispose = void Function();

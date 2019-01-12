@@ -29,7 +29,7 @@ ReactionDisposer autorun(Function(Reaction) fn,
         int delay,
         ReactiveContext context,
         void Function(Object, Reaction) onError}) =>
-    createAutorun(context ?? currentContext, fn,
+    createAutorun(context ?? mainContext, fn,
         name: name, delay: delay, onError: onError);
 
 /// Executes the [predicate] function and tracks the observables used in it. Returns
@@ -50,7 +50,7 @@ ReactionDisposer reaction<T>(
         bool fireImmediately,
         ReactiveContext context,
         void Function(Object, Reaction) onError}) =>
-    createReaction(context ?? currentContext, predicate, effect,
+    createReaction(context ?? mainContext, predicate, effect,
         name: name,
         delay: delay,
         fireImmediately: fireImmediately,
@@ -65,9 +65,10 @@ ReactionDisposer reaction<T>(
 ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect,
         {String name,
         ReactiveContext context,
+        int timeout,
         void Function(Object, Reaction) onError}) =>
-    createWhenReaction(context ?? currentContext, predicate, effect,
-        name: name, onError: onError);
+    createWhenReaction(context ?? mainContext, predicate, effect,
+        name: name, timeout: timeout, onError: onError);
 
 /// A variant of [when()] which returns a Future. The Future completes when the [predicate()] turns true.
 /// Note that there is no effect function here. Typically you would await on the Future and execute the
@@ -78,5 +79,6 @@ ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect,
 /// // ... execute the effect ...
 /// ```
 Future<void> asyncWhen(bool Function(Reaction) predicate,
-        {String name, ReactiveContext context}) =>
-    createAsyncWhenReaction(context ?? currentContext, predicate, name: name);
+        {String name, int timeout, ReactiveContext context}) =>
+    createAsyncWhenReaction(context ?? mainContext, predicate,
+        name: name, timeout: timeout);
