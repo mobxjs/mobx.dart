@@ -92,6 +92,7 @@ void main() {
         d();
       });
     });
+
     test('does NOT throw if when() completes before timeout', () {
       fakeAsync((async) {
         final x = observable(10);
