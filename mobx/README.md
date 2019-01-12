@@ -33,7 +33,8 @@
     - [x] with `delay`
     - [x] with `fireImmediately`
 - [x] Create `Reaction` with `when()`
-- [x] Create `Reaction` with `when()` returning `Future<T>`
+    - [x] `when` with timeout
+    - [x] `when()` returning `Future<T>`
  
 
 ### Actions 
@@ -51,7 +52,11 @@
     - [x] `onBecomeObserved`
     - [x] `onBecomeUnobserved`
 - [ ] Spying and Tracing
-- [ ] Exception handling and Error recovery
+- [x] Exception handling and Error recovery
+    - [x] `onReactionError` on the context for catching global errors
+    - [x] `onError` handler for reactions
+    - [x] `disableErrorBoundaries` option for the reactive context
+    
 - [ ] Debuggability
 
 
