@@ -42,6 +42,7 @@
 ### Actions 
 
 - [x] Create `Action` with `action()`
+- [x] Execute within `runInAction`
 - [x] Create untracked-action with `untracked<T>()`
 - [x] Create transaction with `transaction<T>()`
 
