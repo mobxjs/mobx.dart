@@ -16,7 +16,9 @@
 ### Observables 
 
 - [x] Create `ObservableValue<T>` via `observable<T>()`
-- [ ] Create `ObservableList<T>`
+- [x] Create `ObservableList<T>`
+    - [ ] `observe` and `intercept`
+    - [ ] `onBecomeObserved` and `onBecomeUnobserved`
 - [ ] Create `ObservableMap<K, T>`
 - [x] Atoms with `createAtom()`
 
