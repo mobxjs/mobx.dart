@@ -1,5 +1,4 @@
 import 'package:mobx/mobx.dart';
-import 'package:mobx/src/listenable.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
@@ -11,13 +10,13 @@ void main() {
       void listener(ChangeNotification<int> change) {}
 
       final listeners = Listeners<int>(mainContext);
-      expect(listeners.hasListeners, isFalse);
+      expect(listeners.hasHandlers, isFalse);
 
       final dispose = listeners.registerListener(listener);
-      expect(listeners.hasListeners, isTrue);
+      expect(listeners.hasHandlers, isTrue);
 
       dispose();
-      expect(listeners.hasListeners, isFalse);
+      expect(listeners.hasHandlers, isFalse);
     });
 
     test('uses provided context', () {

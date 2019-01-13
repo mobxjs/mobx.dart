@@ -29,7 +29,7 @@ class ObservableValue<T> extends Atom
 
     reportChanged();
 
-    if (_listeners.hasListeners) {
+    if (_listeners.hasHandlers) {
       final change = ChangeNotification<T>(
           newValue: value,
           oldValue: oldValue,
@@ -41,7 +41,7 @@ class ObservableValue<T> extends Atom
 
   dynamic _prepareNewValue(T newValue) {
     var prepared = newValue;
-    if (_interceptors.hasInterceptors) {
+    if (_interceptors.hasHandlers) {
       final change = _interceptors.interceptChange(WillChangeNotification(
           newValue: prepared, type: OperationType.update, object: this));
 
