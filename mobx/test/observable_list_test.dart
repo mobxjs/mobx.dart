@@ -8,6 +8,8 @@ void main() {
       final list = ObservableList<int>();
       var count = -1;
 
+      expect(list.name, startsWith('ObservableList'));
+
       final d = autorun((_) {
         count = list.length;
       });
