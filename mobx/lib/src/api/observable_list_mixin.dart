@@ -401,7 +401,7 @@ mixin ObservableListMixin<T>
   }
 
   @override
-  observe(Listener<ListChangeNotification<T>> listener,
+  Dispose observe(Listener<ListChangeNotification<T>> listener,
       {bool fireImmediately}) {
     var x = 1;
     return () {};

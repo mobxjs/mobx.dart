@@ -1,6 +1,6 @@
 /// MobX is a library for *reactively* managing the state of your applications.
 ///
-/// Describe the state of your application as a graph of [observable]-values. Setup
+/// Describe the state of your application as a graph of observable-values. Setup
 /// reactions that observe these observable values. When a dependent observable changes, the reactions
 /// are automatically triggered. The observables are treated as the implicit dependencies of the reaction. No
 /// explicit wiring is needed, besides just using it inside a reaction.
