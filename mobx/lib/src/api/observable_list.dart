@@ -32,18 +32,11 @@ class ObservableList<T>
   final _atom = createAtom(name: 'ObservableArray');
   final _list = <ObservableValue<T>>[];
 
+  //---------------------- Read Methods ---------------------------- //
   @override
   ObservableValue<T> get first {
     _atom.reportObserved();
     return _list.first;
-  }
-
-  @override
-  set first(ObservableValue<T> value) {
-    final oldValue = _list.first;
-
-    _list.first = value;
-    _notifyUpdate(0, value.value, oldValue.value);
   }
 
   @override
@@ -53,23 +46,9 @@ class ObservableList<T>
   }
 
   @override
-  set last(ObservableValue<T> value) {
-    final oldValue = _list.last;
-
-    _list.last = value;
-    _notifyUpdate(_list.length - 1, value.value, oldValue.value);
-  }
-
-  @override
   int get length {
     _atom.reportObserved();
     return _list.length;
-  }
-
-  @override
-  set length(int value) {
-    _list.length = value;
-    _atom.reportChanged();
   }
 
   @override
@@ -84,28 +63,6 @@ class ObservableList<T>
   ObservableValue<T> operator [](int index) {
     _atom.reportObserved();
     return _list[index];
-  }
-
-  @override
-  void operator []=(int index, ObservableValue<T> value) {
-    final oldValue = _list[index];
-
-    if (oldValue != value) {
-      _list[index] = value;
-      _notifyUpdate(index, value.value, oldValue.value);
-    }
-  }
-
-  @override
-  void add(ObservableValue<T> value) {
-    _list.add(value);
-    _atom.reportChanged();
-  }
-
-  @override
-  void addAll(Iterable<ObservableValue<T>> iterable) {
-    _list.addAll(iterable);
-    _atom.reportChanged();
   }
 
   @override
@@ -124,12 +81,6 @@ class ObservableList<T>
   List<R> cast<R>() {
     _atom.reportObserved();
     return _list.cast<R>();
-  }
-
-  @override
-  void clear() {
-    _list.clear();
-    _atom.reportChanged();
   }
 
   @override
@@ -154,12 +105,6 @@ class ObservableList<T>
   Iterable<U> expand<U>(Iterable<U> Function(ObservableValue<T> element) f) {
     _atom.reportObserved();
     return _list.expand(f);
-  }
-
-  @override
-  void fillRange(int start, int end, [ObservableValue<T> fillValue]) {
-    _list.fillRange(start, end, fillValue);
-    _atom.reportChanged();
   }
 
   @override
@@ -205,18 +150,6 @@ class ObservableList<T>
       [int start = 0]) {
     _atom.reportObserved();
     return _list.indexWhere(test, start);
-  }
-
-  @override
-  void insert(int index, ObservableValue<T> element) {
-    _list.insert(index, element);
-    _atom.reportChanged();
-  }
-
-  @override
-  void insertAll(int index, Iterable<ObservableValue<T>> iterable) {
-    _list.insertAll(index, iterable);
-    _atom.reportChanged();
   }
 
   @override
@@ -276,81 +209,6 @@ class ObservableList<T>
           combine) {
     _atom.reportObserved();
     return _list.reduce(combine);
-  }
-
-  @override
-  bool remove(Object value) {
-    final didRemove = _list.remove(value);
-    _atom.reportChanged();
-
-    return didRemove;
-  }
-
-  @override
-  ObservableValue<T> removeAt(int index) {
-    final value = _list.removeAt(index);
-    _atom.reportChanged();
-
-    return value;
-  }
-
-  @override
-  ObservableValue<T> removeLast() {
-    final value = _list.removeLast();
-    _atom.reportChanged();
-
-    return value;
-  }
-
-  @override
-  void removeRange(int start, int end) {
-    _list.removeRange(start, end);
-    _atom.reportChanged();
-  }
-
-  @override
-  void removeWhere(bool Function(ObservableValue<T> element) test) {
-    _list.removeWhere(test);
-    _atom.reportChanged();
-  }
-
-  @override
-  void replaceRange(
-      int start, int end, Iterable<ObservableValue<T>> replacement) {
-    _list.replaceRange(start, end, replacement);
-    _atom.reportChanged();
-  }
-
-  @override
-  void retainWhere(bool Function(ObservableValue<T> element) test) {
-    _list.retainWhere(test);
-    _atom.reportChanged();
-  }
-
-  @override
-  void setAll(int index, Iterable<ObservableValue<T>> iterable) {
-    _list.setAll(index, iterable);
-    _atom.reportChanged();
-  }
-
-  @override
-  void setRange(int start, int end, Iterable<ObservableValue<T>> iterable,
-      [int skipCount = 0]) {
-    _list.setRange(start, end, iterable, skipCount);
-    _atom.reportChanged();
-  }
-
-  @override
-  void shuffle([Random random]) {
-    _list.shuffle(random);
-    _atom.reportChanged();
-  }
-
-  @override
-  void sort(
-      [int Function(ObservableValue<T> a, ObservableValue<T> b) compare]) {
-    _list.sort(compare);
-    _atom.reportChanged();
   }
 
   @override
@@ -429,6 +287,159 @@ class ObservableList<T>
     return _list.whereType<U>();
   }
 
+  //------------------ Write Methods -------------------- //
+  @override
+  set first(ObservableValue<T> value) {
+    final oldValue = _list.first;
+
+    _list.first = value;
+    _notifyChildUpdate(0, value.value, oldValue.value);
+  }
+
+  @override
+  set last(ObservableValue<T> value) {
+    final oldValue = _list.last;
+
+    _list.last = value;
+    _notifyChildUpdate(_list.length - 1, value.value, oldValue.value);
+  }
+
+  @override
+  void operator []=(int index, ObservableValue<T> value) {
+    final oldValue = _list[index];
+
+    if (oldValue != value) {
+      _list[index] = value;
+      _notifyChildUpdate(index, value.value, oldValue.value);
+    }
+  }
+
+  @override
+  set length(int value) {
+    _list.length = value;
+    _notifyListUpdate(0, null, null);
+  }
+
+  @override
+  void add(ObservableValue<T> value) {
+    _list.add(value);
+    _notifyListUpdate(_list.length, [value.value], null);
+  }
+
+  @override
+  void addAll(Iterable<ObservableValue<T>> iterable) {
+    _list.addAll(iterable);
+    _notifyListUpdate(
+        0, iterable.toList(growable: false).map((_) => _.value), null);
+  }
+
+  @override
+  void clear() {
+    _list.clear();
+    _notifyListUpdate(0, null, null);
+  }
+
+  @override
+  void fillRange(int start, int end, [ObservableValue<T> fillValue]) {
+    _list.fillRange(start, end, fillValue);
+    _notifyListUpdate(start, null, null);
+  }
+
+  @override
+  void insert(int index, ObservableValue<T> element) {
+    _list.insert(index, element);
+    _notifyListUpdate(index, [element.value], null);
+  }
+
+  @override
+  void insertAll(int index, Iterable<ObservableValue<T>> iterable) {
+    _list.insertAll(index, iterable);
+    _notifyListUpdate(
+        index, iterable.toList(growable: false).map((_) => _.value), null);
+  }
+
+  @override
+  bool remove(Object value) {
+    final index = _list.indexWhere((_) => _.value == value);
+    final didRemove = _list.remove(value);
+
+    if (didRemove) {
+      _notifyListUpdate(index, null, value == null ? null : [value]);
+    }
+
+    return didRemove;
+  }
+
+  @override
+  ObservableValue<T> removeAt(int index) {
+    final value = _list.removeAt(index);
+    _notifyListUpdate(index, null, value == null ? null : [value.value]);
+
+    return value;
+  }
+
+  @override
+  ObservableValue<T> removeLast() {
+    final value = _list.removeLast();
+
+    // Index is _list.length as it points to the index before the last element is removed
+    _notifyListUpdate(_list.length, null, value == null ? null : [value.value]);
+
+    return value;
+  }
+
+  @override
+  void removeRange(int start, int end) {
+    _list.removeRange(start, end);
+    _notifyListUpdate(start, null, null);
+  }
+
+  @override
+  void removeWhere(bool Function(ObservableValue<T> element) test) {
+    _list.removeWhere(test);
+    _notifyListUpdate(0, null, null);
+  }
+
+  @override
+  void replaceRange(
+      int start, int end, Iterable<ObservableValue<T>> replacement) {
+    _list.replaceRange(start, end, replacement);
+    _notifyListUpdate(start, null, null);
+  }
+
+  @override
+  void retainWhere(bool Function(ObservableValue<T> element) test) {
+    _list.retainWhere(test);
+    _notifyListUpdate(0, null, null);
+  }
+
+  @override
+  void setAll(int index, Iterable<ObservableValue<T>> iterable) {
+    _list.setAll(index, iterable);
+    _notifyListUpdate(index, null, null);
+  }
+
+  @override
+  void setRange(int start, int end, Iterable<ObservableValue<T>> iterable,
+      [int skipCount = 0]) {
+    _list.setRange(start, end, iterable, skipCount);
+    _atom.reportChanged();
+  }
+
+  @override
+  void shuffle([Random random]) {
+    _list.shuffle(random);
+    _notifyListUpdate(0, null, null);
+  }
+
+  @override
+  void sort(
+      [int Function(ObservableValue<T> a, ObservableValue<T> b) compare]) {
+    _list.sort(compare);
+
+    _notifyListUpdate(0, null, null);
+  }
+
   @override
   Dispose observe(Listener<ListChangeNotification<T>> listener,
       {bool fireImmediately}) {
@@ -444,7 +455,7 @@ class ObservableList<T>
     return _listeners.add(listener);
   }
 
-  void _notifyUpdate(int index, T newValue, T oldValue) {
+  void _notifyChildUpdate(int index, T newValue, T oldValue) {
     _atom.reportChanged();
 
     final change = ListChangeNotification(
@@ -453,6 +464,23 @@ class ObservableList<T>
         oldValue: oldValue,
         object: this,
         type: OperationType.update);
+
+    _listeners.notifyListeners(change);
+  }
+
+  void _notifyListUpdate(int index, List<T> added, List<T> removed) {
+    _atom.reportChanged();
+
+    final change = ListChangeNotification(
+        index: index,
+        added: added,
+        removed: removed,
+        object: this,
+        type: (added != null && added.isNotEmpty)
+            ? OperationType.add
+            : (removed != null && removed.isNotEmpty
+                ? OperationType.remove
+                : OperationType.update));
 
     _listeners.notifyListeners(change);
   }
