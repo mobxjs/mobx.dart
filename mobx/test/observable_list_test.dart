@@ -39,6 +39,21 @@ void main() {
       expect(count, equals(2));
     });
 
+    test('Autorun should execute when items are added to an empty list', () {
+      final list = ObservableList<int>();
+
+      var count = 0;
+      autorun((_) {
+        for (final v in list) {
+          count++;
+        }
+      });
+      expect(count, equals(0));
+
+      list.add(0);
+      expect(count, equals(1));
+    });
+
     group('fires reportObserved() for read-methods', () {
       <String, Function(ObservableList<int>)>{
         'isEmpty': (_) => _.isEmpty,
@@ -154,7 +169,6 @@ void _templateWriteTest(
     verifyNever(atom.reportObserved());
 
     // fire the write method, causing reportChanged() to be invoked.
-    // This should be picked up in the autorun()
     fn(list);
 
     verify(atom.reportChanged());
