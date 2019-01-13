@@ -396,4 +396,8 @@ mixin ObservableListMixin<T> implements List<ObservableValue<T>> {
     _atom.reportObserved();
     return _list.whereType<U>();
   }
+
+  void _notifyChildUpdate(int index, T newValue, T oldValue) {
+    _atom.reportChanged();
+  }
 }

@@ -1,6 +1,4 @@
-import 'dart:collection';
-
-import 'package:mobx/src/core.dart';
+part of 'core.dart';
 
 typedef Listener<T> = void Function(ChangeNotification<T>);
 
@@ -9,32 +7,19 @@ abstract class Listenable<T> {
   Dispose observe(Listener<T> listener, {bool fireImmediately});
 }
 
-class Listeners<T> {
-  Listeners(this._context) : assert(_context != null);
+class Listeners<T>
+    extends NotificationHandlers<ChangeNotification<T>, Listener<T>> {
+  Listeners(ReactiveContext context) : super(context);
 
-  final ReactiveContext _context;
-
-  Set<Listener<T>> _listeners;
-
-  bool get hasListeners => _listeners?.isNotEmpty ?? false;
-
-  Dispose registerListener(Listener<T> listener) {
-    assert(listener != null);
-
-    _listeners ??= LinkedHashSet();
-    _listeners.add(listener);
-    return () => _listeners.remove(listener);
-  }
+  Dispose registerListener(Listener<T> listener) => add(listener);
 
   void notifyListeners(ChangeNotification<T> change) {
-    assert(change != null);
-
-    if (!hasListeners) {
+    if (!_canHandle(change)) {
       return;
     }
 
     _context.untracked(() {
-      for (final listener in _listeners.toList(growable: false)) {
+      for (final listener in _handlers.toList(growable: false)) {
         listener(change);
       }
     });
