@@ -1,6 +1,9 @@
-part of '../core.dart';
+import 'dart:math';
 
-mixin ObservableListMixin<T> implements List<ObservableValue<T>> {
+import 'package:mobx/mobx.dart';
+
+mixin ObservableListMixin<T>
+    implements List<ObservableValue<T>>, Listenable<ListChangeNotification<T>> {
   final _atom = createAtom(name: 'ObservableArray');
   final _list = <ObservableValue<T>>[];
 
@@ -397,7 +400,46 @@ mixin ObservableListMixin<T> implements List<ObservableValue<T>> {
     return _list.whereType<U>();
   }
 
+  @override
+  observe(Listener<ListChangeNotification<T>> listener,
+      {bool fireImmediately}) {
+    var x = 1;
+    return () {};
+  }
+
   void _notifyChildUpdate(int index, T newValue, T oldValue) {
     _atom.reportChanged();
+
+    final change = ListChangeNotification(
+        index: index,
+        newValue: newValue,
+        oldValue: oldValue,
+        object: this,
+        type: OperationType.update);
   }
+}
+
+typedef ListChangeListener<TNotification> = void Function(
+    ListChangeNotification<TNotification>);
+
+class ListChangeNotification<T> {
+  ListChangeNotification(
+      {this.index,
+      this.type,
+      this.newValue,
+      this.oldValue,
+      this.object,
+      this.added,
+      this.removed});
+
+  final OperationType type;
+
+  final int index;
+  final T newValue;
+  final T oldValue;
+
+  final List<T> added;
+  final List<T> removed;
+
+  final ObservableListMixin<T> object;
 }

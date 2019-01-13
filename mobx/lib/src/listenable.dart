@@ -1,19 +1,19 @@
 part of 'core.dart';
 
-typedef Listener<T> = void Function(ChangeNotification<T>);
+typedef Listener<TNotification> = void Function(TNotification);
 
 // ignore: one_member_abstracts
-abstract class Listenable<T> {
-  Dispose observe(Listener<T> listener, {bool fireImmediately});
+abstract class Listenable<TNotification> {
+  Dispose observe(Listener<TNotification> listener, {bool fireImmediately});
 }
 
-class Listeners<T>
-    extends NotificationHandlers<ChangeNotification<T>, Listener<T>> {
+class Listeners<TNotification>
+    extends NotificationHandlers<TNotification, Listener<TNotification>> {
   Listeners(ReactiveContext context) : super(context);
 
-  Dispose registerListener(Listener<T> listener) => add(listener);
+  Dispose registerListener(Listener<TNotification> listener) => add(listener);
 
-  void notifyListeners(ChangeNotification<T> change) {
+  void notifyListeners(TNotification change) {
     if (!_canHandle(change)) {
       return;
     }

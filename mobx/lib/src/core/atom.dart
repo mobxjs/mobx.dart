@@ -113,7 +113,7 @@ class WillChangeNotification<T> {
   static WillChangeNotification unchanged = WillChangeNotification();
 }
 
-enum OperationType { add, update, delete }
+enum OperationType { add, update, remove }
 
 class ChangeNotification<T> {
   ChangeNotification({this.type, this.newValue, this.oldValue, this.object});
