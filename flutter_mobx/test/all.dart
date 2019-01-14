@@ -102,4 +102,9 @@ void main() {
 
     verify(mock.dispose());
   });
+
+  test('Observer builder must not be null', () {
+    // ignore:missing_required_param,prefer_const_constructors
+    expect(() => Observer(), throwsA(isInstanceOf<AssertionError>()));
+  });
 }
