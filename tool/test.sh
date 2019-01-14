@@ -4,7 +4,7 @@ set -x
 
 if [[ "${FLUTTER}" = true ]]
 then
-  $FLUTTER_CMD test test/all.dart
+  $FLUTTER_CMD test --coverage --coverage-path coverage/lcov.info test/all.dart
 else
-  pub run test test/all.dart
+  pub run test_coverage
 fi

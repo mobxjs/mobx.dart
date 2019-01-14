@@ -18,3 +18,6 @@ doc/api/
 
 .vscode/settings.json
 flutter_mobx/android/local.properties
+
+coverage/
+.test_coverage.dart
