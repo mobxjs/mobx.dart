@@ -16,7 +16,7 @@ void main() {
 
       expect(count, equals(0));
 
-      list.add(observable(20));
+      list.add(20);
       expect(count, equals(1));
       d();
     });
@@ -40,15 +40,14 @@ void main() {
         'take': (_) => _.take(1),
         'sublist': (_) => _.sublist(0),
         'elementAt': (_) => _ignoreException(() => _.elementAt(0)),
-        'reduce': (_) =>
-            _ignoreException(() => _.reduce((_, _a) => observable(0))),
-        'followedBy': (_) => _.followedBy([observable(10)]),
+        'reduce': (_) => _ignoreException(() => _.reduce((_, _a) => 0)),
+        'followedBy': (_) => _.followedBy([10]),
         'skip': (_) => _.skip(1),
         'whereType': (_) => _.whereType<num>(),
-        'singleWhere': (_) => _ignoreException(() =>
-            _.singleWhere((_) => _.value == 20, orElse: () => observable(0))),
-        'lastIndexOf': (_) => _.lastIndexOf(observable(20)),
-        'indexOf': (_) => _.indexOf(observable(20)),
+        'singleWhere': (_) => _ignoreException(
+            () => _.singleWhere((_) => _ == 20, orElse: () => 0)),
+        'lastIndexOf': (_) => _.lastIndexOf(20),
+        'indexOf': (_) => _.indexOf(20),
         'getRange': (_) => _.getRange(0, 0),
 
         // ignore: avoid_function_literals_in_foreach_calls
@@ -59,16 +58,14 @@ void main() {
         'takeWhile': (_) => _.takeWhile((_) => true),
         'skipWhile': (_) => _.skipWhile((_) => true),
         'indexWhere': (_) => _.indexWhere((_) => true),
-        'lastWhere': (_) =>
-            _.lastWhere((_) => true, orElse: () => observable(0)),
+        'lastWhere': (_) => _.lastWhere((_) => true, orElse: () => 0),
         'lastIndexWhere': (_) => _.lastIndexWhere((_) => true),
-        'firstWhere': (_) =>
-            _.firstWhere((_) => true, orElse: () => observable(0)),
+        'firstWhere': (_) => _.firstWhere((_) => true, orElse: () => 0),
         'every': (_) => _.every((_) => true),
         'any': (_) => _.any((_) => true),
-        'expand': (_) => _.expand((_) => [observable(100)]),
+        'expand': (_) => _.expand((_) => [100]),
         '[]': (_) => _[0],
-        '+': (_) => _ + [observable(100)],
+        '+': (_) => _ + [100],
       }.forEach(_templateReadTest);
     });
   });
@@ -76,21 +73,21 @@ void main() {
   group('fires reportChanged() for write-methods', () {
     <String, void Function(ObservableList<int>)>{
       'length=': (_) => _.length = 0,
-      'last=': (_) => _.last = observable(100),
-      'first=': (_) => _.first = observable(100),
-      'insertAll': (_) => _.insertAll(0, [observable(100)]),
-      'insert': (_) => _.insert(0, observable(100)),
+      'last=': (_) => _.last = 100,
+      'first=': (_) => _.first = 100,
+      'insertAll': (_) => _.insertAll(0, [100]),
+      'insert': (_) => _.insert(0, 100),
       'sort': (_) => _.sort(),
-      'setRange': (_) => _.setRange(0, 0, [observable(100)]),
-      'fillRange': (_) => _.fillRange(0, 0, observable(100)),
-      'replaceRange': (_) => _.replaceRange(0, 0, [observable(100)]),
-      'setAll': (_) => _.setAll(0, [observable(100)]),
-      '[]=': (_) => _[0] = observable(100),
-      'add': (_) => _.add(observable(100)),
-      'addAll': (_) => _.addAll([observable(100)]),
+      'setRange': (_) => _.setRange(0, 0, [100]),
+      'fillRange': (_) => _.fillRange(0, 0, 100),
+      'replaceRange': (_) => _.replaceRange(0, 0, [100]),
+      'setAll': (_) => _.setAll(0, [100]),
+      '[]=': (_) => _[0] = 100,
+      'add': (_) => _.add(100),
+      'addAll': (_) => _.addAll([100]),
       'clear': (_) => _.clear(),
       'removeLast': (_) => _.removeLast(),
-      'remove': (_) => _.remove(null),
+      'remove': (_) => _.remove(20),
       'removeRange': (_) => _.removeRange(0, 0),
       'removeAt': (_) => _.removeAt(0),
       'removeWhere': (_) => _.removeWhere((_) => true),
@@ -113,7 +110,7 @@ dynamic _ignoreException(Function fn) {
 void _templateReadTest(
     String description, void Function(ObservableList<int>) fn) {
   test(description, () {
-    final list = ObservableList<int>()..add(observable(20));
+    final list = ObservableList<int>()..add(20);
 
     var count = -1;
 
@@ -122,7 +119,7 @@ void _templateReadTest(
       count++;
     });
 
-    list.add(observable(20));
+    list.add(20);
     expect(count, equals(1));
     d();
   });
@@ -131,7 +128,7 @@ void _templateReadTest(
 void _templateWriteTest(
     String description, void Function(ObservableList<int>) fn) {
   test(description, () {
-    final list = ObservableList<int>()..add(observable(20));
+    final list = ObservableList<int>()..add(20);
 
     var count = -1;
 
