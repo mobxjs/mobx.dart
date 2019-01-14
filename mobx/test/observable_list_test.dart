@@ -131,17 +131,29 @@ void _templateWriteTest(
     final list = ObservableList<int>()..add(20);
 
     var count = -1;
+    var observedCount = 0;
 
-    final d = autorun((_) {
+    final d1 = autorun((_) {
       list.length;
       count++;
     });
+
+    final d2 = list.observe((_) {
+      observedCount++; // +1
+    });
+
+    final d3 = list.observe((_) {
+      observedCount++; // +1
+    }, fireImmediately: true); // +1 due to fireImmediately
 
     // fire the write method, causing reportChanged() to be invoked.
     // This should be picked up in the autorun()
     fn(list);
 
     expect(count, equals(1));
-    d();
+    expect(observedCount, equals(1 + 1 + 1));
+    d1();
+    d2();
+    d3();
   });
 }

@@ -407,7 +407,7 @@ class ObservableList<T>
   @override
   void setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
     _list.setRange(start, end, iterable, skipCount);
-    _atom.reportChanged();
+    _notifyListUpdate(start, null, null);
   }
 
   @override
