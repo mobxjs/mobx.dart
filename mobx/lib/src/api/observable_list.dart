@@ -397,8 +397,10 @@ class ObservableList<T>
 
   @override
   void retainWhere(bool Function(T element) test) {
+    final removedItems = _list.where((_) => !test(_)).toList(growable: false);
+
     _list.retainWhere(test);
-    _notifyListUpdate(0, null, null);
+    _notifyListUpdate(0, null, removedItems);
   }
 
   @override
