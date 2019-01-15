@@ -6,11 +6,11 @@ import 'package:test/test.dart';
 import 'shared_mocks.dart';
 
 void main() {
-  group('computed()', () {
+  group('Computed', () {
     test('basics work', () {
       final x = Observable(20);
       final y = Observable(10);
-      final c = computed(() => x.value + y.value);
+      final c = Computed(() => x.value + y.value);
 
       x.value = 30;
       y.value = 20;
@@ -27,14 +27,14 @@ void main() {
       var c1ComputationCount = 0;
       var c3ComputationCount = 0;
 
-      final c1 = computed(() {
+      final c1 = Computed(() {
         c1ComputationCount++;
         return x.value + y.value;
       }, name: 'c1');
 
-      final c2 = computed(() => z.value, name: 'c2');
+      final c2 = Computed(() => z.value, name: 'c2');
 
-      final c3 = computed(() {
+      final c3 = Computed(() {
         c3ComputationCount++;
         return c1.value + c2.value;
       }, name: 'c3');
@@ -77,7 +77,7 @@ void main() {
 
       var executionCount = 0;
 
-      final total = computed(() {
+      final total = Computed(() {
         executionCount++;
         return x.value + y.value;
       });
@@ -98,7 +98,7 @@ void main() {
       final context = MockContext();
       int fn() => 1;
 
-      final value = computed(fn, context: context)..computeValue(track: true);
+      final value = Computed(fn, context: context)..computeValue(track: true);
 
       verify(context.nameFor('Computed'));
       verify(context.trackDerivation(value, fn));
@@ -107,7 +107,7 @@ void main() {
     test('catches exception in evaluation', () {
       var shouldThrow = true;
 
-      final x = computed(() {
+      final x = Computed(() {
         if (shouldThrow) {
           shouldThrow = false;
           throw Exception('FAIL');
@@ -124,8 +124,8 @@ void main() {
     });
 
     test('throws on finding a cycle', () {
-      ComputedValue<int> c1;
-      c1 = computed(() => c1.value);
+      Computed<int> c1;
+      c1 = Computed(() => c1.value);
 
       expect(() {
         c1.value;
@@ -137,7 +137,7 @@ void main() {
     });
 
     test('with disableErrorBoundaries = true, exception is thrown', () {
-      final c = computed(() => throw Exception('FAIL'),
+      final c = Computed(() => throw Exception('FAIL'),
           context: createContext(
               config: ReactiveConfig(disableErrorBoundaries: true)));
 
