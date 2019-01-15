@@ -2,19 +2,26 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
+import 'package:mobx/mobx.dart' hide when;
+import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
 
-class MockTracker extends Mock implements DerivationTracker {}
+class MockReaction extends Mock implements ReactionImpl {}
 
 class TestObserver extends Observer {
-  const TestObserver(this.tracker, {ObserverBuilder builder})
+  const TestObserver(this.reaction, {BuildObserved builder})
       : super(builder: builder);
 
-  final DerivationTracker tracker;
+  final Reaction reaction;
 
   @override
-  DerivationTracker createDerivationTracker(Function() onInvalidate) => tracker;
+  Reaction createReaction(Function() onInvalidate) => reaction;
+}
+
+void stubTrack(MockReaction mock) {
+  when(mock.track(any)).thenAnswer((invocation) {
+    invocation.positionalArguments[0]();
+  });
 }
 
 void main() {
@@ -59,41 +66,52 @@ void main() {
     expect(renderCount, equals(1));
   });
 
-  testWidgets('Observer build should call tracker start and end',
-      (tester) async {
-    final mock = MockTracker();
+  testWidgets('Observer build should call reaction.track', (tester) async {
+    final mock = MockReaction();
+    stubTrack(mock);
 
     await tester.pumpWidget(
         TestObserver(mock, builder: (context) => const Placeholder()));
 
-    verify(mock.start());
-    verify(mock.end());
+    verify(mock.track(any));
   });
 
-  testWidgets(
-      'Observer build should call tracker start and end even when build throws',
+  testWidgets('Observer should keep working even if builder throws once',
       (tester) async {
-    final mock = MockTracker();
     final error = Error();
 
     dynamic exception;
+
+    final prevOnError = FlutterError.onError;
 
     FlutterError.onError = (details) {
       exception = details.exception;
     };
 
-    await tester.pumpWidget(TestObserver(mock, builder: (context) {
-      throw error;
+    final count = Observable(0);
+
+    final widget = Container();
+    await tester.pumpWidget(Observer(builder: (context) {
+      if (count.value == 0) {
+        throw error;
+      }
+      return widget;
     }));
 
+    FlutterError.onError = prevOnError;
+
+    count.value++;
+
+    await tester.pump();
+
+    expect(tester.firstWidget(find.byWidget(widget)), equals(widget));
+
     expect(exception, equals(error));
-    verify(mock.start());
-    verify(mock.end());
   });
 
-  testWidgets('Observer unmount should dispose DerivationTracker',
-      (tester) async {
-    final mock = MockTracker();
+  testWidgets('Observer unmount should dispose Reaction', (tester) async {
+    final mock = MockReaction();
+    stubTrack(mock);
 
     await tester.pumpWidget(
         TestObserver(mock, builder: (context) => const Placeholder()));

@@ -6,12 +6,13 @@ class _ReactiveState {
   int nextIdCounter = 0;
 
   Derivation trackingDerivation;
-  List<Reaction> pendingReactions = [];
+  List<ReactionImpl> pendingReactions = [];
   bool isRunningReactions = false;
   List<Atom> pendingUnobservations = [];
 }
 
-typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
+typedef ReactionErrorHandler = void Function(
+    Object error, ReactionImpl reaction);
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
@@ -22,7 +23,7 @@ class ReactiveConfig {
       ReactiveConfig(disableErrorBoundaries: false);
 
   /// Whether MobX should throw exceptions instead of catching them and storing
-  /// inside the [Reaction.errorValue] property of [Reaction].
+  /// inside the [ReactionImpl.errorValue] property of [ReactionImpl].
   bool disableErrorBoundaries = false;
 
   final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
@@ -158,7 +159,7 @@ class ReactiveContext {
       .._newObservables = Set(); // No need for newObservables beyond this point
   }
 
-  void addPendingReaction(Reaction reaction) {
+  void addPendingReaction(ReactionImpl reaction) {
     _state.pendingReactions.add(reaction);
   }
 
@@ -326,7 +327,7 @@ class ReactiveContext {
     };
   }
 
-  void _notifyReactionErrorHandlers(Object exception, Reaction reaction) {
+  void _notifyReactionErrorHandlers(Object exception, ReactionImpl reaction) {
     // ignore: avoid_function_literals_in_foreach_calls
     config._reactionErrorHandlers.forEach((f) {
       f(exception, reaction);
