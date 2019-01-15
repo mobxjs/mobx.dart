@@ -1,6 +1,9 @@
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/observable_list.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+class MockAtom extends Mock implements Atom {}
 
 void main() {
   group('ObservableList', () {
@@ -8,7 +11,7 @@ void main() {
       final list = ObservableList<int>();
       var count = -1;
 
-      expect(list.name, startsWith('ObservableList'));
+      expect(list.name, startsWith('ObservableList<int>@'));
 
       final d = autorun((_) {
         count = list.length;
@@ -21,29 +24,66 @@ void main() {
       d();
     });
 
+    test('cast returns a live view to list', () {
+      final list = ObservableList<num>.of(<num>[0, 1, 2, 3, 4, 5, 6]);
+      final casted = list.cast<int>();
+
+      var count = 0;
+      autorun((_) {
+        // ignore:unnecessary_statements
+        casted[1];
+        count++;
+      });
+      expect(count, equals(1));
+
+      list[1] = 99;
+      expect(casted[1], equals(99));
+      expect(count, equals(2));
+    });
+
+    test('Autorun should execute when items are added to an empty list', () {
+      final list = ObservableList<int>();
+
+      var count = 0;
+      autorun((_) {
+        for (final _ in list) {
+          count++;
+        }
+      });
+      expect(count, equals(0));
+
+      list.add(0);
+      expect(count, equals(1));
+    });
+
+    test('observe basics work', () {
+      final list = ObservableList.of([0]);
+
+      var count = 0;
+
+      list
+        ..observe((change) {
+          count++;
+        })
+        ..add(1);
+
+      expect(count, equals(1));
+    });
+
     group('fires reportObserved() for read-methods', () {
       <String, Function(ObservableList<int>)>{
-        'map': (_) => _.map((x) => x),
         'isEmpty': (_) => _.isEmpty,
         'isNotEmpty': (_) => _.isNotEmpty,
         'iterator': (_) => _.iterator,
-        'reversed': (_) => _.reversed,
         'single': (_) => _ignoreException(() => _.single),
         'first': (_) => _ignoreException(() => _.first),
         'last': (_) => _ignoreException(() => _.last),
         'toSet': (_) => _.toSet(),
         'toList': (_) => _.toList(),
-        'cast': (_) => _.cast(),
         'join': (_) => _.join(),
-        'asMap': (_) => _.asMap(),
         'fold': (_) => _.fold(0, (sum, item) => sum),
-        'take': (_) => _.take(1),
         'sublist': (_) => _.sublist(0),
         'elementAt': (_) => _ignoreException(() => _.elementAt(0)),
-        'reduce': (_) => _ignoreException(() => _.reduce((_, _a) => 0)),
-        'followedBy': (_) => _.followedBy([10]),
-        'skip': (_) => _.skip(1),
-        'whereType': (_) => _.whereType<num>(),
         'singleWhere': (_) => _ignoreException(
             () => _.singleWhere((_) => _ == 20, orElse: () => 0)),
         'lastIndexOf': (_) => _.lastIndexOf(20),
@@ -54,16 +94,13 @@ void main() {
         'forEach': (_) => _.forEach((_a) {}),
 
         'contains': (_) => _.contains(null),
-        'where': (_) => _.where((_) => true),
-        'takeWhile': (_) => _.takeWhile((_) => true),
-        'skipWhile': (_) => _.skipWhile((_) => true),
         'indexWhere': (_) => _.indexWhere((_) => true),
         'lastWhere': (_) => _.lastWhere((_) => true, orElse: () => 0),
         'lastIndexWhere': (_) => _.lastIndexWhere((_) => true),
         'firstWhere': (_) => _.firstWhere((_) => true, orElse: () => 0),
         'every': (_) => _.every((_) => true),
+        'asMap': (_) => _.asMap(),
         'any': (_) => _.any((_) => true),
-        'expand': (_) => _.expand((_) => [100]),
         '[]': (_) => _[0],
         '+': (_) => _ + [100],
       }.forEach(_templateReadTest);
@@ -78,8 +115,8 @@ void main() {
       'insertAll': (_) => _.insertAll(0, [100]),
       'insert': (_) => _.insert(0, 100),
       'sort': (_) => _.sort(),
-      'setRange': (_) => _.setRange(0, 0, [100]),
-      'fillRange': (_) => _.fillRange(0, 0, 100),
+      'setRange': (_) => _.setRange(0, 1, [100]),
+      'fillRange': (_) => _.fillRange(0, 2, 100),
       'replaceRange': (_) => _.replaceRange(0, 0, [100]),
       'setAll': (_) => _.setAll(0, [100]),
       '[]=': (_) => _[0] = 100,
@@ -87,13 +124,29 @@ void main() {
       'addAll': (_) => _.addAll([100]),
       'clear': (_) => _.clear(),
       'removeLast': (_) => _.removeLast(),
-      'remove': (_) => _.remove(20),
-      'removeRange': (_) => _.removeRange(0, 0),
+      'remove': (_) => _.remove(0),
+      'removeRange': (_) => _.removeRange(0, 1),
       'removeAt': (_) => _.removeAt(0),
       'removeWhere': (_) => _.removeWhere((_) => true),
       'shuffle': (_) => _.shuffle(),
-      'retainWhere': (_) => _.retainWhere((_) => true),
+      'retainWhere': (_) => _.retainWhere((_) => false),
     }.forEach(_templateWriteTest);
+  });
+
+  group('fires reportObserved() lazily on iterator returning methods', () {
+    <String, Iterable Function(ObservableList<int>)>{
+      'map': (_) => _.map((v) => v + 3),
+      'expand': (_) => _.expand((v) => [3, 2]),
+      'where': (_) => _.where((v) => v < 30),
+      'whereType': (_) => _.whereType<int>(),
+      'skip': (_) => _.skip(0),
+      'skipWhile': (_) => _.skipWhile((v) => v > 100),
+      'followedBy': (_) => _.followedBy([30]),
+      'take': (_) => _.take(1),
+      'takeWhile': (_) => _.takeWhile((_) => true),
+      'cast': (_) => _.cast<num>(),
+      'reversed': (_) => _.reversed
+    }.forEach(_templateIterableReadTest);
   });
 }
 
@@ -110,50 +163,52 @@ dynamic _ignoreException(Function fn) {
 void _templateReadTest(
     String description, void Function(ObservableList<int>) fn) {
   test(description, () {
-    final list = ObservableList<int>()..add(20);
+    final atom = MockAtom();
+    final list = wrapInObservableList(atom, [0, 1, 2, 3]);
 
-    var count = -1;
+    verifyNever(atom.reportChanged());
+    verifyNever(atom.reportObserved());
 
-    final d = autorun((_) {
-      fn(list); // fire the read-method, causing reportObserved() to be invoked
-      count++;
-    });
+    fn(list);
 
-    list.add(20);
-    expect(count, equals(1));
-    d();
+    verify(atom.reportObserved());
+    verifyNever(atom.reportChanged());
   });
 }
 
 void _templateWriteTest(
     String description, void Function(ObservableList<int>) fn) {
   test(description, () {
-    final list = ObservableList<int>()..add(20);
+    final atom = MockAtom();
+    final list = wrapInObservableList(atom, [0, 1, 2, 3]);
 
-    var count = -1;
-    var observedCount = 0;
-
-    final d1 = autorun((_) {
-      list.length;
-      count++;
-    });
-
-    final d2 = list.observe((_) {
-      observedCount++; // +1
-    });
-
-    final d3 = list.observe((_) {
-      observedCount++; // +1
-    }, fireImmediately: true); // +1 due to fireImmediately
+    verifyNever(atom.reportChanged());
+    verifyNever(atom.reportObserved());
 
     // fire the write method, causing reportChanged() to be invoked.
-    // This should be picked up in the autorun()
     fn(list);
 
-    expect(count, equals(1));
-    expect(observedCount, equals(1 + 1 + 1));
-    d1();
-    d2();
-    d3();
+    verify(atom.reportChanged());
+  });
+}
+
+void _templateIterableReadTest(
+    String description, Iterable Function(ObservableList<int>) testCase) {
+  test(description, () {
+    final atom = MockAtom();
+    final list = wrapInObservableList(atom, [0, 1, 2, 3]);
+
+    // No reports on iterator iterator transformation
+    final iterable = testCase(list);
+
+    verifyNever(atom.reportObserved());
+    verifyNever(atom.reportChanged());
+
+    // Observation reports happen when the iterator is iterated
+    // ignore:avoid_function_literals_in_foreach_calls
+    iterable.forEach((_) {});
+
+    verify(atom.reportObserved());
+    verifyNever(atom.reportChanged());
   });
 }

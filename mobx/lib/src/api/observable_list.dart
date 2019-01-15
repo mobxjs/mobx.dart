@@ -1,7 +1,14 @@
+import 'dart:collection';
 import 'dart:math';
 
+import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core.dart';
+
+Atom _listAtom<T>(ReactiveContext context) {
+  final ctx = context ?? mainContext;
+  return Atom(name: ctx.nameFor('ObservableList<$T>'), context: ctx);
+}
 
 /// Create a list of [T].
 ///
@@ -9,40 +16,40 @@ import 'package:mobx/src/core.dart';
 /// write-methods (eg: [List.add], [List.insert]) making it easier to use it inside reactions.
 ///
 /// ```dart
-/// final list = ObservableList<int>();
-/// list.add(100);
+/// final list = ObservableList<int>.of([1]);
 ///
-/// print(list.first.value); // prints 100
+/// autorun((_) {
+///   print(list.first);
+/// }) // prints 1
+///
+/// list[0] = 100; // autorun prints 100
 /// ```
 class ObservableList<T>
-    implements List<T>, Listenable<ListChangeNotification<T>> {
-  ObservableList({String name, ReactiveContext context}) {
-    _context = context ?? mainContext;
-    _name = name ?? _context.nameFor('ObservableList<$T>');
-    _listeners = Listeners(_context);
-  }
+    with
+        // ignore: prefer_mixin
+        ListMixin<T>
+    implements
+        Listenable<ListChangeNotification<T>> {
+  ObservableList({ReactiveContext context})
+      : this._wrap(context, _listAtom<T>(context), []);
 
-  String get name => _name;
+  ObservableList.of(Iterable<T> elements, {ReactiveContext context})
+      : this._wrap(context, _listAtom<T>(context),
+            List<T>.of(elements, growable: true));
 
-  String _name;
-  Listeners<ListChangeNotification<T>> _listeners;
-  ReactiveContext _context;
+  ObservableList._wrap(ReactiveContext context, this._atom, this._list)
+      : _context = context ?? mainContext;
 
-  final _atom = Atom(name: 'Atom@ObservableList<$T>');
-  final _list = <T>[];
+  final ReactiveContext _context;
+  final Atom _atom;
+  final List<T> _list;
 
-  //---------------------- Read Methods ---------------------------- //
-  @override
-  T get first {
-    _atom.reportObserved();
-    return _list.first;
-  }
+  Listeners<ListChangeNotification<T>> _listenersField;
 
-  @override
-  T get last {
-    _atom.reportObserved();
-    return _list.last;
-  }
+  Listeners<ListChangeNotification<T>> get _listeners =>
+      _listenersField ??= Listeners(_context);
+
+  String get name => _atom.name;
 
   @override
   int get length {
@@ -51,10 +58,15 @@ class ObservableList<T>
   }
 
   @override
+  set length(int value) {
+    _list.length = value;
+    _notifyListUpdate(0, null, null);
+  }
+
+  @override
   List<T> operator +(List<T> other) {
     final newList = _list + other;
     _atom.reportObserved();
-
     return newList;
   }
 
@@ -65,117 +77,31 @@ class ObservableList<T>
   }
 
   @override
-  bool any(bool Function(T element) test) {
-    _atom.reportObserved();
-    return _list.any(test);
+  void operator []=(int index, T value) {
+    final oldValue = _list[index];
+
+    if (oldValue != value) {
+      _list[index] = value;
+      _notifyChildUpdate(index, value, oldValue);
+    }
   }
 
   @override
-  Map<int, T> asMap() {
-    _atom.reportObserved();
-    return _list.asMap();
+  void add(T element) {
+    _list.add(element);
+    _notifyListUpdate(_list.length, [element], null);
   }
 
   @override
-  List<R> cast<R>() {
-    _atom.reportObserved();
-    return _list.cast<R>();
-  }
-
-  @override
-  bool contains(Object element) {
-    _atom.reportObserved();
-    return _list.contains(element);
-  }
-
-  @override
-  T elementAt(int index) {
-    _atom.reportObserved();
-    return _list.elementAt(index);
-  }
-
-  @override
-  bool every(bool Function(T element) test) {
-    _atom.reportObserved();
-    return _list.every(test);
-  }
-
-  @override
-  Iterable<U> expand<U>(Iterable<U> Function(T element) f) {
-    _atom.reportObserved();
-    return _list.expand(f);
-  }
-
-  @override
-  T firstWhere(bool Function(T element) test, {T Function() orElse}) {
-    _atom.reportObserved();
-    return _list.firstWhere(test, orElse: orElse);
-  }
-
-  @override
-  U fold<U>(U initialValue, U Function(U previousValue, T element) combine) {
-    _atom.reportObserved();
-    return _list.fold(initialValue, combine);
-  }
-
-  @override
-  Iterable<T> followedBy(Iterable<T> other) {
-    _atom.reportObserved();
-    return _list.followedBy(other);
-  }
-
-  @override
-  void forEach(void Function(T element) f) {
-    _atom.reportObserved();
-    _list.forEach(f);
-  }
-
-  @override
-  Iterable<T> getRange(int start, int end) {
-    _atom.reportObserved();
-    return _list.getRange(start, end);
-  }
-
-  @override
-  int indexOf(T element, [int start = 0]) {
-    _atom.reportObserved();
-    return _list.indexOf(element, start);
-  }
-
-  @override
-  int indexWhere(bool Function(T element) test, [int start = 0]) {
-    _atom.reportObserved();
-    return _list.indexWhere(test, start);
-  }
-
-  @override
-  bool get isEmpty {
-    _atom.reportObserved();
-    return _list.isEmpty;
-  }
-
-  @override
-  bool get isNotEmpty {
-    _atom.reportObserved();
-    return _list.isNotEmpty;
+  void addAll(Iterable<T> iterable) {
+    _list.addAll(iterable);
+    _notifyListUpdate(0, iterable.toList(growable: false), null);
   }
 
   @override
   Iterator<T> get iterator {
     _atom.reportObserved();
     return _list.iterator;
-  }
-
-  @override
-  String join([String separator = '']) {
-    _atom.reportObserved();
-    return _list.join(separator);
-  }
-
-  @override
-  int lastIndexOf(T element, [int start]) {
-    _atom.reportObserved();
-    return _list.lastIndexOf(element, start);
   }
 
   @override
@@ -191,45 +117,9 @@ class ObservableList<T>
   }
 
   @override
-  Iterable<U> map<U>(U Function(T e) f) {
-    _atom.reportObserved();
-    return _list.map(f);
-  }
-
-  @override
-  T reduce(T Function(T value, T element) combine) {
-    _atom.reportObserved();
-    return _list.reduce(combine);
-  }
-
-  @override
   T get single {
     _atom.reportObserved();
     return _list.single;
-  }
-
-  @override
-  Iterable<T> get reversed {
-    _atom.reportObserved();
-    return _list.reversed;
-  }
-
-  @override
-  T singleWhere(bool Function(T element) test, {T Function() orElse}) {
-    _atom.reportObserved();
-    return _list.singleWhere(test, orElse: orElse);
-  }
-
-  @override
-  Iterable<T> skip(int count) {
-    _atom.reportObserved();
-    return _list.skip(count);
-  }
-
-  @override
-  Iterable<T> skipWhile(bool Function(T value) test) {
-    _atom.reportObserved();
-    return _list.skipWhile(test);
   }
 
   @override
@@ -239,16 +129,14 @@ class ObservableList<T>
   }
 
   @override
-  Iterable<T> take(int count) {
+  Map<int, T> asMap() {
+    // TODO(katis): the map should be observable, with the same atom
     _atom.reportObserved();
-    return _list.take(count);
+    return _list.asMap();
   }
 
   @override
-  Iterable<T> takeWhile(bool Function(T value) test) {
-    _atom.reportObserved();
-    return _list.takeWhile(test);
-  }
+  List<R> cast<R>() => ObservableList._wrap(_context, _atom, _list.cast<R>());
 
   @override
   List<T> toList({bool growable = true}) {
@@ -257,66 +145,11 @@ class ObservableList<T>
   }
 
   @override
-  Set<T> toSet() {
-    _atom.reportObserved();
-    return _list.toSet();
-  }
-
-  @override
-  Iterable<T> where(bool Function(T element) test) {
-    _atom.reportObserved();
-    return _list.where(test);
-  }
-
-  @override
-  Iterable<U> whereType<U>() {
-    _atom.reportObserved();
-    return _list.whereType<U>();
-  }
-
-  //------------------ Write Methods -------------------- //
-  @override
   set first(T value) {
     final oldValue = _list.first;
 
     _list.first = value;
     _notifyChildUpdate(0, value, oldValue);
-  }
-
-  @override
-  set last(T value) {
-    final oldValue = _list.last;
-
-    _list.last = value;
-    _notifyChildUpdate(_list.length - 1, value, oldValue);
-  }
-
-  @override
-  void operator []=(int index, T value) {
-    final oldValue = _list[index];
-
-    if (oldValue != value) {
-      _list[index] = value;
-      _notifyChildUpdate(index, value, oldValue);
-    }
-  }
-
-  @override
-  set length(int value) {
-    _list.length = value;
-    _notifyListUpdate(0, null, null);
-  }
-
-  @override
-  void add(T value) {
-    _list.add(value);
-    _notifyListUpdate(_list.length, [value], null);
-  }
-
-  @override
-  void addAll(Iterable<T> iterable) {
-    _list.addAll(iterable);
-    _notifyListUpdate(0, iterable.toList(growable: false), null);
   }
 
   @override
@@ -327,8 +160,8 @@ class ObservableList<T>
   }
 
   @override
-  void fillRange(int start, int end, [T fillValue]) {
-    _list.fillRange(start, end, fillValue);
+  void fillRange(int start, int end, [T fill]) {
+    _list.fillRange(start, end, fill);
     _notifyListUpdate(start, null, null);
   }
 
@@ -345,12 +178,12 @@ class ObservableList<T>
   }
 
   @override
-  bool remove(Object value) {
-    final index = _list.indexWhere((_) => _ == value);
-    final didRemove = _list.remove(value);
+  bool remove(Object element) {
+    final index = _list.indexOf(element);
+    final didRemove = _list.remove(element);
 
     if (didRemove) {
-      _notifyListUpdate(index, null, value == null ? null : [value]);
+      _notifyListUpdate(index, null, element == null ? null : [element]);
     }
 
     return didRemove;
@@ -360,7 +193,6 @@ class ObservableList<T>
   T removeAt(int index) {
     final value = _list.removeAt(index);
     _notifyListUpdate(index, null, value == null ? null : [value]);
-
     return value;
   }
 
@@ -389,8 +221,8 @@ class ObservableList<T>
   }
 
   @override
-  void replaceRange(int start, int end, Iterable<T> replacement) {
-    _list.replaceRange(start, end, replacement);
+  void replaceRange(int start, int end, Iterable<T> newContents) {
+    _list.replaceRange(start, end, newContents);
     _notifyListUpdate(start, null, null);
   }
 
@@ -423,7 +255,6 @@ class ObservableList<T>
   @override
   void sort([int Function(T a, T b) compare]) {
     _list.sort(compare);
-
     _notifyListUpdate(0, null, null);
   }
 
@@ -497,3 +328,7 @@ class ListChangeNotification<T> {
 
   final ObservableList<T> object;
 }
+
+@visibleForTesting
+ObservableList<T> wrapInObservableList<T>(Atom atom, List<T> list) =>
+    ObservableList._wrap(mainContext, atom, list);
