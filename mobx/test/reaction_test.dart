@@ -9,7 +9,7 @@ void main() {
   group('Reaction', () {
     test('basics work', () {
       var executed = false;
-      final x = observable(10);
+      final x = Observable(10);
       final d = reaction((_) => x.value > 10, (isGreaterThan10) {
         executed = true;
       }, name: 'Basic Reaction');
@@ -32,7 +32,7 @@ void main() {
     });
 
     test('works with delay', () {
-      final x = observable(10);
+      final x = Observable(10);
       var executed = false;
 
       final d = reaction((_) => x.value > 10, (isGreaterThan10) {
@@ -56,7 +56,7 @@ void main() {
     });
 
     test('that fires immediately', () {
-      final x = observable(10);
+      final x = Observable(10);
       var executed = false;
 
       final d = reaction((_) => x.value > 10, (isGreaterThan10) {
@@ -68,7 +68,7 @@ void main() {
     });
 
     test('that fires immediately with delay', () {
-      final x = observable(10);
+      final x = Observable(10);
       var executed = false;
 
       final d = reaction((_) => x.value > 10, (isGreaterThan10) {
@@ -102,7 +102,7 @@ void main() {
     });
 
     test('with pre-mature disposal in predicate', () {
-      final x = observable(10);
+      final x = Observable(10);
       var executed = false;
 
       final d = reaction((reaction) {
@@ -143,7 +143,7 @@ void main() {
 
     test('fires onError on exception inside effect', () {
       var thrown = false;
-      final x = observable(false);
+      final x = Observable(false);
 
       final dispose = reaction((_) => x.value, (_) {
         throw Exception('FAILED in reaction');

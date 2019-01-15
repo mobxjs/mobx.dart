@@ -10,8 +10,7 @@ import 'package:mobx/src/core.dart';
 ///
 /// ```dart
 /// final list = ObservableList<int>();
-///
-/// list.add(observable(100));
+/// list.add(100);
 ///
 /// print(list.first.value); // prints 100
 /// ```

@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 void main() {
   group('observe', () {
     test('works', () {
-      final x = observable(10);
+      final x = Observable(10);
       var executed = false;
 
       final dispose = x.observe((change) {
@@ -19,7 +19,7 @@ void main() {
     });
 
     test('fires when changed', () {
-      final x = observable(10);
+      final x = Observable(10);
       var executed = false;
 
       final dispose = x.observe((change) {
@@ -37,7 +37,7 @@ void main() {
     });
 
     test('can be disposed', () {
-      final x = observable(10);
+      final x = Observable(10);
       var executed = false;
 
       final dispose = x.observe((change) {
@@ -54,7 +54,7 @@ void main() {
     });
 
     test('can have multiple listeners', () {
-      final x = observable(10);
+      final x = Observable(10);
       var executionCount = 0;
 
       final dispose1 = x.observe((change) {
@@ -83,7 +83,7 @@ void main() {
 
   group('onBecomeObserved / onBecomeUnobserved', () {
     test('works for observables', () {
-      final x = observable(10);
+      final x = Observable(10);
       var executionCount = 0;
 
       final d1 = x.onBecomeObserved(() {
@@ -108,7 +108,7 @@ void main() {
     });
 
     test('works for computeds', () {
-      final x = observable(10);
+      final x = Observable(10);
       final x1 = computed(() {
         // ignore: unnecessary_statements
         x.value + 1;
@@ -137,7 +137,7 @@ void main() {
     });
 
     test('throws if null is passed', () {
-      final x = observable(10);
+      final x = Observable(10);
 
       expect(() {
         x.onBecomeObserved(null);
@@ -149,7 +149,7 @@ void main() {
     });
 
     test('multiple can be attached', () {
-      final x = observable(10);
+      final x = Observable(10);
 
       var observedCount = 0;
       var unobservedCount = 0;
@@ -182,7 +182,7 @@ void main() {
     });
 
     test('fails for null handler', () {
-      final x = observable(100);
+      final x = Observable(100);
 
       var observeFailed = false;
       var interceptFailed = false;
