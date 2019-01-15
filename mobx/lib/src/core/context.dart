@@ -65,7 +65,7 @@ class ReactiveContext {
               .._notifyOnBecomeUnobserved();
           }
 
-          if (ob is ComputedValue) {
+          if (ob is Computed) {
             ob._suspend();
           }
         }
@@ -134,7 +134,7 @@ class ReactiveContext {
       observable._addObserver(derivation);
 
       // ComputedValue = ObservableValue + Derivation
-      if (observable is ComputedValue) {
+      if (observable is Computed) {
         if (observable._dependenciesState.index >
             lowestNewDerivationState.index) {
           lowestNewDerivationState = observable._dependenciesState;
@@ -268,7 +268,7 @@ class ReactiveContext {
       case DerivationState.possiblyStale:
         return untracked(() {
           for (final obs in derivation._observables) {
-            if (obs is ComputedValue) {
+            if (obs is Computed) {
               // Force a computation
               if (config.disableErrorBoundaries == true) {
                 obs.value;
