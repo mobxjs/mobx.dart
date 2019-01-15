@@ -145,12 +145,6 @@ class ObservableList<T>
   }
 
   @override
-  Set<T> toSet() {
-    _atom.reportObserved();
-    return _list.toSet();
-  }
-
-  @override
   set first(T value) {
     final oldValue = _list.first;
 
