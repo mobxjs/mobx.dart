@@ -22,7 +22,7 @@ class Observable<T> extends Atom
   Observable._(ReactiveContext context, this._value, {String name})
       : _interceptors = Interceptors(context),
         _listeners = Listeners(context),
-        super(context, name: name ?? context.nameFor('Observable'));
+        super._(context, name: name ?? context.nameFor('Observable'));
 
   final Interceptors<T> _interceptors;
   final Listeners<ChangeNotification<T>> _listeners;

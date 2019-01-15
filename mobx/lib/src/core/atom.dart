@@ -6,14 +6,29 @@ enum _ListenerKind {
 }
 
 class Atom {
-  Atom(this._context, {String name, Function onObserve, Function onUnobserve})
+  /// Creates a simple Atom for tracking its usage in a reactive context. This is useful when
+  /// you don't need the value but instead a way of knowing when it becomes active and inactive
+  /// in a reaction.
+  ///
+  /// Use the [onObserved] and [onUnobserved] handlers to know when the atom is active and inactive
+  /// respectively. Use a debug [name] to identify easily.
+  factory Atom(
+          {String name,
+          Function() onObserved,
+          Function() onUnobserved,
+          ReactiveContext context}) =>
+      Atom._(context ?? mainContext,
+          name: name, onObserved: onObserved, onUnobserved: onUnobserved);
+
+  Atom._(this._context,
+      {String name, Function() onObserved, Function() onUnobserved})
       : name = name ?? _context.nameFor('Atom') {
-    if (onObserve != null) {
-      onBecomeObserved(onObserve);
+    if (onObserved != null) {
+      onBecomeObserved(onObserved);
     }
 
-    if (onUnobserve != null) {
-      onBecomeUnobserved(onUnobserve);
+    if (onUnobserved != null) {
+      onBecomeUnobserved(onUnobserved);
     }
   }
 

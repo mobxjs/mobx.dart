@@ -51,7 +51,7 @@ void main() {
   group('createAtom()', () {
     test('basics works', () {
       var executionCount = 0;
-      final a = createAtom(
+      final a = Atom(
           name: 'test',
           onObserved: () {
             executionCount++;
@@ -71,7 +71,7 @@ void main() {
     });
 
     test('provides a default name', () {
-      final a = createAtom();
+      final a = Atom();
 
       expect(a.name, startsWith('Atom@'));
     });

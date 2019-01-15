@@ -28,7 +28,7 @@ class ObservableList<T>
   Listeners<ListChangeNotification<T>> _listeners;
   ReactiveContext _context;
 
-  final _atom = createAtom(name: 'Atom@ObservableList<$T>');
+  final _atom = Atom(name: 'Atom@ObservableList<$T>');
   final _list = <T>[];
 
   //---------------------- Read Methods ---------------------------- //

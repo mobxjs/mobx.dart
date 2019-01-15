@@ -1,6 +1,5 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx/src/api/observable.dart';
 import 'package:mobx/src/api/reaction.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
