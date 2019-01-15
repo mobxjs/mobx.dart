@@ -9,7 +9,7 @@ void main() {
   group('When', () {
     test('basics work', () {
       var executed = false;
-      final x = observable(10);
+      final x = Observable(10);
       final d = when((_) => x.value > 10, () {
         executed = true;
       }, name: 'Basic when');
@@ -36,7 +36,7 @@ void main() {
     });
 
     test('works with asyncWhen', () {
-      final x = observable(10);
+      final x = Observable(10);
       asyncWhen((_) => x.value > 10, name: 'Async-when').then((_) {
         expect(true, isTrue);
       });
@@ -78,7 +78,7 @@ void main() {
 
     test('throws if timeout occurs before when() completes', () {
       fakeAsync((async) {
-        final x = observable(10);
+        final x = Observable(10);
         var thrown = false;
         final d =
             when((_) => x.value > 10, () {}, timeout: 1000, onError: (_, _a) {
@@ -95,7 +95,7 @@ void main() {
 
     test('does NOT throw if when() completes before timeout', () {
       fakeAsync((async) {
-        final x = observable(10);
+        final x = Observable(10);
         final d = when((_) => x.value > 10, () {}, timeout: 1000);
 
         x.value = 11;

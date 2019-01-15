@@ -9,9 +9,9 @@ import 'package:mobx/src/core.dart';
 /// * [delay]: debouncing delay in milliseconds
 ///
 /// ```
-/// var x = observable(10);
-/// var y = observable(20);
-/// var total = observable(0);
+/// var x = Observable(10);
+/// var y = Observable(20);
+/// var total = Observable(0);
 ///
 /// var dispose = autorun((){
 ///   print('x = ${x}, y = ${y}, total = ${total}');

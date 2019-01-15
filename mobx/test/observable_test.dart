@@ -7,7 +7,7 @@ import 'shared_mocks.dart';
 void main() {
   group('observable<T>', () {
     test('basics work', () {
-      final x = observable<int>(null);
+      final x = Observable<int>(null);
       expect(x.value, equals(null));
 
       x.value = 100;
@@ -15,8 +15,8 @@ void main() {
 
       expect(x.name, startsWith('Observable@'));
 
-      final str = observable('hello', name: 'greeting');
-      expect(str is ObservableValue<String>, isTrue);
+      final str = Observable('hello', name: 'greeting');
+      expect(str is Observable<String>, isTrue);
       expect(str.value, equals('hello'));
       expect(str.name, equals('greeting'));
 
@@ -25,22 +25,22 @@ void main() {
     });
 
     test('works with current context', () {
-      final x = ObservableValue(mainContext, 1000);
-      expect(x is ObservableValue<int>, isTrue);
+      final x = Observable(1000, context: mainContext);
+      expect(x is Observable<int>, isTrue);
 
       expect(x.value, equals(1000));
 
-      final x1 = ObservableValue<int>(mainContext, null);
+      final x1 = Observable<int>(null, context: mainContext);
       expect(x1.value, isNull);
 
-      final y = ObservableValue(mainContext, 'Hello', name: 'greeting');
+      final y = Observable('Hello', name: 'greeting', context: mainContext);
       expect(y.value, equals('Hello'));
       expect(y.name, equals('greeting'));
     });
 
     test('uses provided context', () {
       final context = MockContext();
-      final value = observable(0, context: context)..value += 1;
+      final value = Observable(0, context: context)..value += 1;
 
       verify(context.startBatch());
       verify(context.propagateChanged(value));
@@ -51,7 +51,7 @@ void main() {
   group('createAtom()', () {
     test('basics works', () {
       var executionCount = 0;
-      final a = createAtom(
+      final a = Atom(
           name: 'test',
           onObserved: () {
             executionCount++;
@@ -71,7 +71,7 @@ void main() {
     });
 
     test('provides a default name', () {
-      final a = createAtom();
+      final a = Atom();
 
       expect(a.name, startsWith('Atom@'));
     });

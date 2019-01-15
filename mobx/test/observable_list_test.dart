@@ -86,8 +86,8 @@ void main() {
         'elementAt': (_) => _ignoreException(() => _.elementAt(0)),
         'singleWhere': (_) => _ignoreException(
             () => _.singleWhere((_) => _ == 20, orElse: () => 0)),
-        'lastIndexOf': (_) => _.lastIndexOf(observable(20)),
-        'indexOf': (_) => _.indexOf(observable(20)),
+        'lastIndexOf': (_) => _.lastIndexOf(20),
+        'indexOf': (_) => _.indexOf(20),
         'getRange': (_) => _.getRange(0, 0),
 
         // ignore: avoid_function_literals_in_foreach_calls

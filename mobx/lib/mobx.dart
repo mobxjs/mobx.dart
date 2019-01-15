@@ -11,8 +11,8 @@
 /// Consider the following example:
 ///
 /// ```dart
-/// var x = observable(10);
-/// var y = observable(20);
+/// var x = Observable(10);
+/// var y = Observable(20);
 ///
 /// autorun((){
 ///   print(x.value + y.value); // just referencing the observable values is enough to start tracking
@@ -39,6 +39,5 @@ export 'package:mobx/src/core.dart'
 
 export 'package:mobx/src/api/action.dart';
 export 'package:mobx/src/api/context.dart';
-export 'package:mobx/src/api/observable.dart';
 export 'package:mobx/src/api/observable_list.dart' hide wrapInObservableList;
 export 'package:mobx/src/api/reaction.dart';

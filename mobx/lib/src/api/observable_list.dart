@@ -7,7 +7,7 @@ import 'package:mobx/src/core.dart';
 
 Atom _listAtom<T>(ReactiveContext context) {
   final ctx = context ?? mainContext;
-  return createAtom(name: ctx.nameFor('ObservableList<$T>'), context: ctx);
+  return Atom(name: ctx.nameFor('ObservableList<$T>'), context: ctx);
 }
 
 /// Create a list of [T].

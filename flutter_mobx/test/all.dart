@@ -20,7 +20,7 @@ class TestObserver extends Observer {
 void main() {
   testWidgets('Observer re-renders when observed state changes',
       (tester) async {
-    final message = observable('Click');
+    final message = Observable('Click');
 
     final key = UniqueKey();
 
@@ -44,7 +44,7 @@ void main() {
       (tester) async {
     var renderCount = 0;
 
-    final i = observable(0);
+    final i = Observable(0);
 
     await tester.pumpWidget(Observer(builder: (context) {
       renderCount++;
