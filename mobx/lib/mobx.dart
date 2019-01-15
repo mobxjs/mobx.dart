@@ -39,6 +39,5 @@ export 'package:mobx/src/core.dart'
 
 export 'package:mobx/src/api/action.dart';
 export 'package:mobx/src/api/context.dart';
-export 'package:mobx/src/api/observable.dart';
 export 'package:mobx/src/api/observable_list.dart';
 export 'package:mobx/src/api/reaction.dart';
