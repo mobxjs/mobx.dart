@@ -56,6 +56,20 @@ void main() {
       expect(count, equals(1));
     });
 
+    test('observe basics work', () {
+      final list = ObservableList.of([0]);
+
+      var count = 0;
+
+      list
+        ..observe((change) {
+          count++;
+        })
+        ..add(1);
+
+      expect(count, equals(1));
+    });
+
     group('fires reportObserved() for read-methods', () {
       <String, Function(ObservableList<int>)>{
         'isEmpty': (_) => _.isEmpty,
@@ -85,6 +99,7 @@ void main() {
         'lastIndexWhere': (_) => _.lastIndexWhere((_) => true),
         'firstWhere': (_) => _.firstWhere((_) => true, orElse: () => 0),
         'every': (_) => _.every((_) => true),
+        'asMap': (_) => _.asMap(),
         'any': (_) => _.any((_) => true),
         '[]': (_) => _[0],
         '+': (_) => _ + [100],
