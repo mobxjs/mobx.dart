@@ -12,33 +12,25 @@ part of '../core.dart';
 ///
 /// In the above code, `dispose` is of type `ReactionDisposer`.
 class ReactionDisposer {
-  ReactionDisposer(Reaction rxn) {
-    _rxn = rxn;
-  }
+  ReactionDisposer(this.reaction);
 
-  Reaction _rxn;
-
-  /// A special property that has a reference to the underlying reaction. Most
-  /// of the time you won't need this, but it's good to have it for those special cases!
-  /// MobX uses it internally for _unit-testing_ and other developer features like _spying_ and
-  /// _tracing_.
-  Reaction get $mobx => _rxn;
+  final Reaction reaction;
 
   /// Invoking it will dispose the underlying [reaction]
-  void call() => $mobx.dispose();
+  void call() => reaction.dispose();
 }
 
 ReactionDisposer createAutorun(
-    ReactiveContext context, Function(Reaction) trackingFn,
-    {String name, int delay, void Function(Object, Reaction) onError}) {
-  Reaction rxn;
+    ReactiveContext context, Function(ReactionImpl) trackingFn,
+    {String name, int delay, void Function(Object, ReactionImpl) onError}) {
+  ReactionImpl rxn;
 
   final rxnName = name ?? context.nameFor('Autorun');
 
   if (delay == null) {
     // Use a sync-scheduler.
-    rxn = Reaction(context, () {
-      rxn._track(() => trackingFn(rxn));
+    rxn = ReactionImpl(context, () {
+      rxn.track(() => trackingFn(rxn));
     }, name: rxnName, onError: onError);
   } else {
     // Use a delayed scheduler.
@@ -46,7 +38,7 @@ ReactionDisposer createAutorun(
     var isScheduled = false;
     Timer timer;
 
-    rxn = Reaction(context, () {
+    rxn = ReactionImpl(context, () {
       if (!isScheduled) {
         isScheduled = true;
 
@@ -58,7 +50,7 @@ ReactionDisposer createAutorun(
         timer = scheduler(() {
           isScheduled = false;
           if (!rxn.isDisposed) {
-            rxn._track(() => trackingFn(rxn));
+            rxn.track(() => trackingFn(rxn));
           } else {
             timer.cancel();
           }
@@ -72,12 +64,12 @@ ReactionDisposer createAutorun(
 }
 
 ReactionDisposer createReaction<T>(ReactiveContext context,
-    T Function(Reaction) predicate, void Function(T) effect,
+    T Function(ReactionImpl) predicate, void Function(T) effect,
     {String name,
     int delay,
     bool fireImmediately,
-    void Function(Object, Reaction) onError}) {
-  Reaction rxn;
+    void Function(Object, ReactionImpl) onError}) {
+  ReactionImpl rxn;
 
   final rxnName = name ?? context.nameFor('Reaction');
 
@@ -97,7 +89,7 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
 
     var changed = false;
 
-    rxn._track(() {
+    rxn.track(() {
       final nextValue = predicate(rxn);
       changed = firstTime || (nextValue != value);
       value = nextValue;
@@ -116,7 +108,7 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
   Timer timer;
   var isScheduled = false;
 
-  rxn = Reaction(context, () {
+  rxn = ReactionImpl(context, () {
     if (firstTime || runSync) {
       reactionRunner();
     } else if (!isScheduled) {
@@ -145,8 +137,8 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
 }
 
 ReactionDisposer createWhenReaction(ReactiveContext context,
-    bool Function(Reaction) predicate, void Function() effect,
-    {String name, int timeout, void Function(Object, Reaction) onError}) {
+    bool Function(ReactionImpl) predicate, void Function() effect,
+    {String name, int timeout, void Function(Object, ReactionImpl) onError}) {
   final rxnName = name ?? context.nameFor('When');
   final effectAction = action(effect, name: '$rxnName-effect');
 
@@ -157,12 +149,12 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
   if (timeout != null) {
     timer = Timer(ms * timeout, () {
       // Timed out before a disposal, effectively a Timeout-Error!
-      if (!dispose.$mobx.isDisposed) {
+      if (!dispose.reaction.isDisposed) {
         dispose();
 
         final error = MobXException('WHEN_TIMEOUT');
         if (onError != null) {
-          onError(error, dispose.$mobx);
+          onError(error, dispose.reaction);
         } else {
           // TODO(pavanpodila): Should this be reported with onReactionError handler???
           throw error;
@@ -184,7 +176,7 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
 }
 
 Future<void> createAsyncWhenReaction(
-    ReactiveContext context, bool Function(Reaction) predicate,
+    ReactiveContext context, bool Function(ReactionImpl) predicate,
     {String name, int timeout}) {
   final completer = Completer<void>();
   createWhenReaction(context, predicate, completer.complete,

@@ -1,13 +1,18 @@
 part of '../core.dart';
 
-class Reaction implements Derivation {
-  Reaction(this._context, Function() onInvalidate,
-      {this.name, void Function(Object, Reaction) onError}) {
+abstract class Reaction implements Derivation {
+  bool get isDisposed;
+  void dispose();
+}
+
+class ReactionImpl implements Reaction {
+  ReactionImpl(this._context, Function() onInvalidate,
+      {this.name, void Function(Object, ReactionImpl) onError}) {
     _onInvalidate = onInvalidate;
     _onError = onError;
   }
 
-  void Function(Object, Reaction) _onError;
+  void Function(Object, ReactionImpl) _onError;
 
   final ReactiveContext _context;
   void Function() _onInvalidate;
@@ -35,6 +40,7 @@ class Reaction implements Derivation {
   @override
   MobXCaughtException get errorValue => _errorValue;
 
+  @override
   bool get isDisposed => _isDisposed;
 
   @override
@@ -43,14 +49,14 @@ class Reaction implements Derivation {
   }
 
   @experimental
-  Derivation _startTracking() {
+  Derivation startTracking() {
     _context.startBatch();
     _isRunning = true;
     return _context._startTracking(this);
   }
 
   @experimental
-  void _endTracking(Derivation previous) {
+  void endTracking(Derivation previous) {
     _context._endTracking(this, previous);
     _isRunning = false;
 
@@ -61,7 +67,7 @@ class Reaction implements Derivation {
     _context.endBatch();
   }
 
-  void _track(void Function() fn) {
+  void track(void Function() fn) {
     _context.startBatch();
 
     _isRunning = true;
@@ -101,6 +107,7 @@ class Reaction implements Derivation {
     _context.endBatch();
   }
 
+  @override
   void dispose() {
     if (_isDisposed) {
       return;
@@ -146,39 +153,5 @@ class Reaction implements Derivation {
     }
 
     _context._notifyReactionErrorHandlers(exception, this);
-  }
-}
-
-/// Tracks changes that happen between [start] and [end].
-///
-/// This should only be used in situations where it is not possible to
-/// track changes inside a callback function.
-@experimental
-class DerivationTracker {
-  DerivationTracker(ReactiveContext context, Function() onInvalidate,
-      {String name})
-      : _reaction = Reaction(context, onInvalidate, name: name);
-
-  final Reaction _reaction;
-  Derivation _previousDerivation;
-
-  void start() {
-    if (_reaction._isRunning) {
-      return;
-    }
-    _previousDerivation = _reaction._startTracking();
-  }
-
-  void end() {
-    if (!_reaction._isRunning) {
-      return;
-    }
-    _reaction._endTracking(_previousDerivation);
-    _previousDerivation = null;
-  }
-
-  void dispose() {
-    end();
-    _reaction.dispose();
   }
 }
