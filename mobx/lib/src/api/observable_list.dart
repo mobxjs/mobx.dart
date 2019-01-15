@@ -322,8 +322,9 @@ class ObservableList<T>
 
   @override
   void clear() {
+    final oldItems = _list.toList(growable: false);
     _list.clear();
-    _notifyListUpdate(0, null, null);
+    _notifyListUpdate(0, null, oldItems);
   }
 
   @override
@@ -376,14 +377,16 @@ class ObservableList<T>
 
   @override
   void removeRange(int start, int end) {
+    final removedItems = _list.sublist(start, end);
     _list.removeRange(start, end);
-    _notifyListUpdate(start, null, null);
+    _notifyListUpdate(start, null, removedItems);
   }
 
   @override
   void removeWhere(bool Function(T element) test) {
+    final removedItems = _list.where(test).toList(growable: false);
     _list.removeWhere(test);
-    _notifyListUpdate(0, null, null);
+    _notifyListUpdate(0, null, removedItems);
   }
 
   @override
