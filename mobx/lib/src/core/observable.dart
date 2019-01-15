@@ -1,14 +1,14 @@
 part of '../core.dart';
 
 class ObservableValue<T> extends Atom
-    implements Interceptable<T>, Listenable<T> {
+    implements Interceptable<T>, Listenable<ChangeNotification<T>> {
   ObservableValue(ReactiveContext context, this._value, {String name})
       : _interceptors = Interceptors(context),
         _listeners = Listeners(context),
         super(context, name: name ?? context.nameFor('Observable'));
 
   final Interceptors<T> _interceptors;
-  final Listeners<T> _listeners;
+  final Listeners<ChangeNotification<T>> _listeners;
 
   T _value;
 
@@ -29,7 +29,7 @@ class ObservableValue<T> extends Atom
 
     reportChanged();
 
-    if (_listeners.hasListeners) {
+    if (_listeners.hasHandlers) {
       final change = ChangeNotification<T>(
           newValue: value,
           oldValue: oldValue,
@@ -41,7 +41,7 @@ class ObservableValue<T> extends Atom
 
   dynamic _prepareNewValue(T newValue) {
     var prepared = newValue;
-    if (_interceptors.hasInterceptors) {
+    if (_interceptors.hasHandlers) {
       final change = _interceptors.interceptChange(WillChangeNotification(
           newValue: prepared, type: OperationType.update, object: this));
 
@@ -56,7 +56,8 @@ class ObservableValue<T> extends Atom
   }
 
   @override
-  Dispose observe(Listener<T> listener, {bool fireImmediately}) {
+  Dispose observe(Listener<ChangeNotification<T>> listener,
+      {bool fireImmediately}) {
     if (fireImmediately == true) {
       listener(ChangeNotification<T>(
           type: OperationType.update,

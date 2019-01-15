@@ -15,3 +15,9 @@ doc/api/
 # Misc
 .idea
 *.iml
+
+.vscode/settings.json
+flutter_mobx/android/local.properties
+
+coverage/
+.test_coverage.dart

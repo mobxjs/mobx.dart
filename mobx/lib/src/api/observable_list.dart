@@ -1,9 +1,16 @@
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
+import 'package:mobx/src/core.dart';
 
-/// Create an observable list of [T].
+Atom _listAtom<T>(ReactiveContext context) {
+  final ctx = context ?? mainContext;
+  return createAtom(name: ctx.nameFor('ObservableList<$T>'), context: ctx);
+}
+
+/// Create a list of [T].
 ///
 /// The ObservableList tracks the various read-methods (eg: [List.first], [List.last]) and
 /// write-methods (eg: [List.add], [List.insert]) making it easier to use it inside reactions.
@@ -17,22 +24,32 @@ import 'package:mobx/mobx.dart';
 ///
 /// list[0] = 100; // autorun prints 100
 /// ```
-///
-// ignore: prefer_mixin
-class ObservableList<T> with ListMixin<T> {
+class ObservableList<T>
+    with
+        // ignore: prefer_mixin
+        ListMixin<T>
+    implements
+        Listenable<ListChangeNotification<T>> {
   ObservableList({ReactiveContext context})
-      : _atom = createAtom(name: 'ObservableList<$T>', context: context),
-        _list = <T>[];
+      : this._wrap(context, _listAtom<T>(context), []);
 
   ObservableList.of(Iterable<T> elements, {ReactiveContext context})
-      : _atom = createAtom(name: 'ObservableList<$T>', context: context),
-        _list = List<T>.of(elements, growable: true);
+      : this._wrap(context, _listAtom<T>(context),
+            List<T>.of(elements, growable: true));
 
-  @visibleForTesting
-  ObservableList._wrap(this._list, this._atom);
+  ObservableList._wrap(ReactiveContext context, this._atom, this._list)
+      : _context = context ?? mainContext;
 
+  final ReactiveContext _context;
   final Atom _atom;
   final List<T> _list;
+
+  Listeners<ListChangeNotification<T>> _listenersField;
+
+  Listeners<ListChangeNotification<T>> get _listeners =>
+      _listenersField ??= Listeners(_context);
+
+  String get name => _atom.name;
 
   @override
   int get length {
@@ -43,7 +60,14 @@ class ObservableList<T> with ListMixin<T> {
   @override
   set length(int value) {
     _list.length = value;
-    _atom.reportChanged();
+    _notifyListUpdate(0, null, null);
+  }
+
+  @override
+  List<T> operator +(List<T> other) {
+    final newList = _list + other;
+    _atom.reportObserved();
+    return newList;
   }
 
   @override
@@ -54,32 +78,54 @@ class ObservableList<T> with ListMixin<T> {
 
   @override
   void operator []=(int index, T value) {
-    _list[index] = value;
-    _atom.reportChanged();
+    final oldValue = _list[index];
+
+    if (oldValue != value) {
+      _list[index] = value;
+      _notifyChildUpdate(index, value, oldValue);
+    }
   }
 
   @override
   void add(T element) {
     _list.add(element);
-    _atom.reportChanged();
+    _notifyListUpdate(_list.length, [element], null);
   }
 
   @override
   void addAll(Iterable<T> iterable) {
     _list.addAll(iterable);
-    _atom.reportChanged();
+    _notifyListUpdate(0, iterable.toList(growable: false), null);
+  }
+
+  @override
+  Iterator<T> get iterator {
+    _atom.reportObserved();
+    return _list.iterator;
+  }
+
+  @override
+  int lastIndexWhere(bool Function(T element) test, [int start]) {
+    _atom.reportObserved();
+    return _list.lastIndexWhere(test, start);
+  }
+
+  @override
+  T lastWhere(bool Function(T element) test, {T Function() orElse}) {
+    _atom.reportObserved();
+    return _list.lastWhere(test, orElse: orElse);
+  }
+
+  @override
+  T get single {
+    _atom.reportObserved();
+    return _list.single;
   }
 
   @override
   List<T> sublist(int start, [int end]) {
     _atom.reportObserved();
     return _list.sublist(start, end);
-  }
-
-  @override
-  void insertAll(int index, Iterable<T> iterable) {
-    _list.insertAll(index, iterable);
-    _atom.reportChanged();
   }
 
   @override
@@ -90,9 +136,205 @@ class ObservableList<T> with ListMixin<T> {
   }
 
   @override
-  List<R> cast<R>() => ObservableList._wrap(_list.cast<R>(), _atom);
+  List<R> cast<R>() => ObservableList._wrap(_context, _atom, _list.cast<R>());
+
+  @override
+  List<T> toList({bool growable = true}) {
+    _atom.reportObserved();
+    return _list.toList(growable: growable);
+  }
+
+  @override
+  Set<T> toSet() {
+    _atom.reportObserved();
+    return _list.toSet();
+  }
+
+  @override
+  set first(T value) {
+    final oldValue = _list.first;
+
+    _list.first = value;
+    _notifyChildUpdate(0, value, oldValue);
+  }
+
+  @override
+  void clear() {
+    final oldItems = _list.toList(growable: false);
+    _list.clear();
+    _notifyListUpdate(0, null, oldItems);
+  }
+
+  @override
+  void fillRange(int start, int end, [T fill]) {
+    _list.fillRange(start, end, fill);
+    _notifyListUpdate(start, null, null);
+  }
+
+  @override
+  void insert(int index, T element) {
+    _list.insert(index, element);
+    _notifyListUpdate(index, [element], null);
+  }
+
+  @override
+  void insertAll(int index, Iterable<T> iterable) {
+    _list.insertAll(index, iterable);
+    _notifyListUpdate(index, iterable.toList(growable: false), null);
+  }
+
+  @override
+  bool remove(Object element) {
+    final index = _list.indexOf(element);
+    final didRemove = _list.remove(element);
+
+    if (didRemove) {
+      _notifyListUpdate(index, null, element == null ? null : [element]);
+    }
+
+    return didRemove;
+  }
+
+  @override
+  T removeAt(int index) {
+    final value = _list.removeAt(index);
+    _notifyListUpdate(index, null, value == null ? null : [value]);
+    return value;
+  }
+
+  @override
+  T removeLast() {
+    final value = _list.removeLast();
+
+    // Index is _list.length as it points to the index before the last element is removed
+    _notifyListUpdate(_list.length, null, value == null ? null : [value]);
+
+    return value;
+  }
+
+  @override
+  void removeRange(int start, int end) {
+    final removedItems = _list.sublist(start, end);
+    _list.removeRange(start, end);
+    _notifyListUpdate(start, null, removedItems);
+  }
+
+  @override
+  void removeWhere(bool Function(T element) test) {
+    final removedItems = _list.where(test).toList(growable: false);
+    _list.removeWhere(test);
+    _notifyListUpdate(0, null, removedItems);
+  }
+
+  @override
+  void replaceRange(int start, int end, Iterable<T> newContents) {
+    _list.replaceRange(start, end, newContents);
+    _notifyListUpdate(start, null, null);
+  }
+
+  @override
+  void retainWhere(bool Function(T element) test) {
+    final removedItems = _list.where((_) => !test(_)).toList(growable: false);
+
+    _list.retainWhere(test);
+    _notifyListUpdate(0, null, removedItems);
+  }
+
+  @override
+  void setAll(int index, Iterable<T> iterable) {
+    _list.setAll(index, iterable);
+    _notifyListUpdate(index, null, null);
+  }
+
+  @override
+  void setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
+    _list.setRange(start, end, iterable, skipCount);
+    _notifyListUpdate(start, null, null);
+  }
+
+  @override
+  void shuffle([Random random]) {
+    _list.shuffle(random);
+    _notifyListUpdate(0, null, null);
+  }
+
+  @override
+  void sort([int Function(T a, T b) compare]) {
+    _list.sort(compare);
+    _notifyListUpdate(0, null, null);
+  }
+
+  @override
+  Dispose observe(Listener<ListChangeNotification<T>> listener,
+      {bool fireImmediately}) {
+    if (fireImmediately == true) {
+      final change = ListChangeNotification(
+          object: this,
+          index: 0,
+          type: OperationType.add,
+          added: toList(growable: false));
+      listener(change);
+    }
+
+    return _listeners.add(listener);
+  }
+
+  void _notifyChildUpdate(int index, T newValue, T oldValue) {
+    _atom.reportChanged();
+
+    final change = ListChangeNotification(
+        index: index,
+        newValue: newValue,
+        oldValue: oldValue,
+        object: this,
+        type: OperationType.update);
+
+    _listeners.notifyListeners(change);
+  }
+
+  void _notifyListUpdate(int index, List<T> added, List<T> removed) {
+    _atom.reportChanged();
+
+    final change = ListChangeNotification(
+        index: index,
+        added: added,
+        removed: removed,
+        object: this,
+        type: (added != null && added.isNotEmpty)
+            ? OperationType.add
+            : (removed != null && removed.isNotEmpty
+                ? OperationType.remove
+                : OperationType.update));
+
+    _listeners.notifyListeners(change);
+  }
+}
+
+typedef ListChangeListener<TNotification> = void Function(
+    ListChangeNotification<TNotification>);
+
+class ListChangeNotification<T> {
+  ListChangeNotification(
+      {this.index,
+      this.type,
+      this.newValue,
+      this.oldValue,
+      this.object,
+      this.added,
+      this.removed});
+
+  final OperationType type;
+
+  final int index;
+  final T newValue;
+  final T oldValue;
+
+  final List<T> added;
+  final List<T> removed;
+
+  final ObservableList<T> object;
 }
 
 @visibleForTesting
-ObservableList<T> wrapInObservableList<T>(List<T> list, Atom atom) =>
-    ObservableList._wrap(list, atom);
+ObservableList<T> wrapInObservableList<T>(Atom atom, List<T> list) =>
+    ObservableList._wrap(mainContext, atom, list);

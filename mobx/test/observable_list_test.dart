@@ -11,6 +11,8 @@ void main() {
       final list = ObservableList<int>();
       var count = -1;
 
+      expect(list.name, startsWith('ObservableList<int>@'));
+
       final d = autorun((_) {
         count = list.length;
       });
@@ -44,7 +46,7 @@ void main() {
 
       var count = 0;
       autorun((_) {
-        for (final v in list) {
+        for (final _ in list) {
           count++;
         }
       });
@@ -147,7 +149,7 @@ void _templateReadTest(
     String description, void Function(ObservableList<int>) fn) {
   test(description, () {
     final atom = MockAtom();
-    final list = wrapInObservableList([0, 1, 2, 3], atom);
+    final list = wrapInObservableList(atom, [0, 1, 2, 3]);
 
     verifyNever(atom.reportChanged());
     verifyNever(atom.reportObserved());
@@ -163,7 +165,7 @@ void _templateWriteTest(
     String description, void Function(ObservableList<int>) fn) {
   test(description, () {
     final atom = MockAtom();
-    final list = wrapInObservableList([0, 1, 2, 3], atom);
+    final list = wrapInObservableList(atom, [0, 1, 2, 3]);
 
     verifyNever(atom.reportChanged());
     verifyNever(atom.reportObserved());
@@ -179,7 +181,7 @@ void _templateIterableReadTest(
     String description, Iterable Function(ObservableList<int>) testCase) {
   test(description, () {
     final atom = MockAtom();
-    final list = wrapInObservableList([0, 1, 2, 3], atom);
+    final list = wrapInObservableList(atom, [0, 1, 2, 3]);
 
     // No reports on iterator iterator transformation
     final iterable = testCase(list);

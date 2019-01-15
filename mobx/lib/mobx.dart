@@ -1,6 +1,6 @@
 /// MobX is a library for *reactively* managing the state of your applications.
 ///
-/// Describe the state of your application as a graph of [observable]-values. Setup
+/// Describe the state of your application as a graph of observable-values. Setup
 /// reactions that observe these observable values. When a dependent observable changes, the reactions
 /// are automatically triggered. The observables are treated as the implicit dependencies of the reaction. No
 /// explicit wiring is needed, besides just using it inside a reaction.
@@ -28,9 +28,14 @@
 ///
 library mobx;
 
-import 'package:mobx/src/api/observable.dart';
-
-export 'package:mobx/src/core.dart';
+export 'package:mobx/src/core.dart'
+    hide
+        createAsyncWhenReaction,
+        createAutorun,
+        createReaction,
+        createWhenReaction,
+        NotificationHandlers,
+        DerivationState;
 
 export 'package:mobx/src/api/action.dart';
 export 'package:mobx/src/api/context.dart';

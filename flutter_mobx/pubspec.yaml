@@ -1,0 +1,24 @@
+name: flutter_mobx
+description: Flutter Mobx.dart integration.
+version: 0.0.1
+author:
+homepage:
+
+environment:
+  sdk: '>=2.1.0-dev <3.0.0'
+
+dependencies:
+  mobx: ^0.0.17
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  mockito: ^4.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+dependency_overrides:
+  mobx:
+    path: ../mobx
