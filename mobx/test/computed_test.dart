@@ -8,8 +8,8 @@ import 'shared_mocks.dart';
 void main() {
   group('computed()', () {
     test('basics work', () {
-      final x = observable(20);
-      final y = observable(10);
+      final x = Observable(20);
+      final y = Observable(10);
       final c = computed(() => x.value + y.value);
 
       x.value = 30;
@@ -20,9 +20,9 @@ void main() {
     });
 
     test('value hierarchy', () {
-      final x = observable(10, name: 'x');
-      final y = observable(20, name: 'y');
-      final z = observable(30, name: 'z');
+      final x = Observable(10, name: 'x');
+      final y = Observable(20, name: 'y');
+      final z = Observable(30, name: 'z');
 
       var c1ComputationCount = 0;
       var c3ComputationCount = 0;
@@ -72,8 +72,8 @@ void main() {
     });
 
     test('can be observed', () {
-      final x = observable(10);
-      final y = observable(20);
+      final x = Observable(10);
+      final y = Observable(20);
 
       var executionCount = 0;
 

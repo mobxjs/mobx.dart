@@ -17,7 +17,7 @@ void main() {
     });
 
     test('modifications are picked up', () {
-      final x = observable(10);
+      final x = Observable(10);
 
       var total = 0;
       final a = action(() {
@@ -38,9 +38,9 @@ void main() {
     });
 
     test('modifications are batched', () {
-      final x = observable(10);
-      final y = observable(20);
-      final z = observable(30);
+      final x = Observable(10);
+      final y = Observable(20);
+      final z = Observable(30);
 
       var total = 0;
       var autorunExecutionCount = 0;
@@ -71,8 +71,8 @@ void main() {
     });
 
     test('inside autorun should be untracked', () {
-      final x = observable(10);
-      final y = observable(20);
+      final x = Observable(10);
+      final y = Observable(20);
 
       var total = 0;
       final a = action(() => y.value);
@@ -106,8 +106,8 @@ void main() {
     });
 
     test('when nested works', () {
-      final x = observable(10);
-      final y = observable(20);
+      final x = Observable(10);
+      final y = Observable(20);
 
       var executionCount = 0;
 
@@ -149,8 +149,8 @@ void main() {
   });
 
   test('runInAction works', () {
-    final x = observable(10);
-    final y = observable(20);
+    final x = Observable(10);
+    final y = Observable(20);
 
     var executionCount = 0;
     var total = 0;
@@ -175,8 +175,8 @@ void main() {
   });
 
   test('transaction works', () {
-    final x = observable(10);
-    final y = observable(20);
+    final x = Observable(10);
+    final y = Observable(20);
 
     var total = 0;
 
@@ -199,7 +199,7 @@ void main() {
   });
 
   test('untracked works', () {
-    final x = observable(0);
+    final x = Observable(0);
     var count = 0;
 
     final d = autorun((_) {

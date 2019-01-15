@@ -13,9 +13,9 @@ import 'package:mobx/src/core.dart';
 /// You can give a debug-friendly [name] to identify the action.
 ///
 /// ```
-/// var x = observable(10);
-/// var y = observable(20);
-/// var total = observable(0);
+/// var x = Observable(10);
+/// var y = Observable(20);
+/// var total = Observable(0);
 ///
 /// autorun((){
 ///   print('x = ${x}, y = ${y}, total = ${total}');
