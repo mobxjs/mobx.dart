@@ -17,7 +17,7 @@ doc/api/
 *.iml
 
 .vscode/settings.json
-flutter_mobx/android/local.properties
+local.properties
 
 coverage/
 .test_coverage.dart
