@@ -6,7 +6,7 @@ class _ReactiveState {
   int nextIdCounter = 0;
 
   Derivation trackingDerivation;
-  List<ReactionImpl> pendingReactions = [];
+  List<Reaction> pendingReactions = [];
   bool isRunningReactions = false;
   List<Atom> pendingUnobservations = [];
 }
@@ -158,7 +158,7 @@ class ReactiveContext {
       .._newObservables = Set(); // No need for newObservables beyond this point
   }
 
-  void addPendingReaction(ReactionImpl reaction) {
+  void addPendingReaction(Reaction reaction) {
     _state.pendingReactions.add(reaction);
   }
 
@@ -170,7 +170,7 @@ class ReactiveContext {
     _state.isRunningReactions = true;
 
     for (final reaction in _state.pendingReactions) {
-      reaction.run();
+      reaction._run();
     }
 
     _state
@@ -326,7 +326,7 @@ class ReactiveContext {
     };
   }
 
-  void _notifyReactionErrorHandlers(Object exception, ReactionImpl reaction) {
+  void _notifyReactionErrorHandlers(Object exception, Reaction reaction) {
     // ignore: avoid_function_literals_in_foreach_calls
     config._reactionErrorHandlers.forEach((f) {
       f(exception, reaction);
