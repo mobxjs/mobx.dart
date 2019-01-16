@@ -2,9 +2,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_mobx_hooks/flutter_mobx_hooks.dart';
 import 'package:mobx/mobx.dart';
+
+import 'package:flutter_mobx_hooks/src/use_observer.dart';
 
 class TestWidget extends HookWidget {
   const TestWidget({@required this.count});
