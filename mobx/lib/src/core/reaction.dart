@@ -3,6 +3,8 @@ part of '../core.dart';
 abstract class Reaction implements Derivation {
   bool get isDisposed;
   void dispose();
+
+  void _run();
 }
 
 class ReactionImpl implements Reaction {
@@ -85,7 +87,8 @@ class ReactionImpl implements Reaction {
     _context.endBatch();
   }
 
-  void run() {
+  @override
+  void _run() {
     if (_isDisposed) {
       return;
     }
