@@ -21,8 +21,8 @@ class ReactionDisposer {
 }
 
 ReactionDisposer createAutorun(
-    ReactiveContext context, Function(ReactionImpl) trackingFn,
-    {String name, int delay, void Function(Object, ReactionImpl) onError}) {
+    ReactiveContext context, Function(Reaction) trackingFn,
+    {String name, int delay, void Function(Object, Reaction) onError}) {
   ReactionImpl rxn;
 
   final rxnName = name ?? context.nameFor('Autorun');
@@ -64,11 +64,11 @@ ReactionDisposer createAutorun(
 }
 
 ReactionDisposer createReaction<T>(ReactiveContext context,
-    T Function(ReactionImpl) predicate, void Function(T) effect,
+    T Function(Reaction) predicate, void Function(T) effect,
     {String name,
     int delay,
     bool fireImmediately,
-    void Function(Object, ReactionImpl) onError}) {
+    void Function(Object, Reaction) onError}) {
   ReactionImpl rxn;
 
   final rxnName = name ?? context.nameFor('Reaction');
@@ -137,8 +137,8 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
 }
 
 ReactionDisposer createWhenReaction(ReactiveContext context,
-    bool Function(ReactionImpl) predicate, void Function() effect,
-    {String name, int timeout, void Function(Object, ReactionImpl) onError}) {
+    bool Function(Reaction) predicate, void Function() effect,
+    {String name, int timeout, void Function(Object, Reaction) onError}) {
   final rxnName = name ?? context.nameFor('When');
   final effectAction = action(effect, name: '$rxnName-effect');
 
@@ -176,7 +176,7 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
 }
 
 Future<void> createAsyncWhenReaction(
-    ReactiveContext context, bool Function(ReactionImpl) predicate,
+    ReactiveContext context, bool Function(Reaction) predicate,
     {String name, int timeout}) {
   final completer = Completer<void>();
   createWhenReaction(context, predicate, completer.complete,

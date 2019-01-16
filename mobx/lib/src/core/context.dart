@@ -11,8 +11,7 @@ class _ReactiveState {
   List<Atom> pendingUnobservations = [];
 }
 
-typedef ReactionErrorHandler = void Function(
-    Object error, ReactionImpl reaction);
+typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
@@ -23,7 +22,7 @@ class ReactiveConfig {
       ReactiveConfig(disableErrorBoundaries: false);
 
   /// Whether MobX should throw exceptions instead of catching them and storing
-  /// inside the [ReactionImpl.errorValue] property of [ReactionImpl].
+  /// inside the [Reaction.errorValue] property of [Reaction].
   bool disableErrorBoundaries = false;
 
   final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
