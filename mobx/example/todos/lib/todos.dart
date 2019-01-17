@@ -15,8 +15,10 @@ class Todo {
 
   // This boilerplate will be hidden away once the Code-generators are in place
 
+  //region Private Fields
   final _description = Observable('');
   final _done = Observable(false);
+  //endregion
 
   String get description => _description.value;
   set description(String value) => _description.value = value;
@@ -45,7 +47,11 @@ class TodoList {
 
     _pendingTodos = Computed(() => todos.where((todo) => todo.done != true));
     _completedTodos = Computed(() => todos.where((todo) => todo.done == true));
+
+    addTodo = action(_addTodo);
   }
+
+  //region Private Fields
   final _todos = ObservableList<Todo>();
   final _filter = Observable<VisibilityFilter>(VisibilityFilter.all);
   final _currentDescription = Observable<String>('');
@@ -53,6 +59,7 @@ class TodoList {
   Computed<ObservableList<Todo>> _visibleTodos;
   Computed<ObservableList<Todo>> _pendingTodos;
   Computed<ObservableList<Todo>> _completedTodos;
+  //endregion
 
   ObservableList<Todo> get todos => _todos;
   VisibilityFilter get filter => _filter.value;
@@ -72,4 +79,9 @@ class TodoList {
   Action changeFilter;
   Action removeCompleted;
   Action markAllAsCompleted;
+
+  void _addTodo(String description) {
+    final todo = Todo(description);
+    todos.add(todo);
+  }
 }
