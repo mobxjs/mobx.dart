@@ -170,7 +170,7 @@ class ReactiveContext {
     _state.isRunningReactions = true;
 
     for (final reaction in _state.pendingReactions) {
-      reaction.run();
+      reaction._run();
     }
 
     _state

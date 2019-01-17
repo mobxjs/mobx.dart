@@ -1,4 +1,5 @@
 import 'package:fake_async/fake_async.dart';
+import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:mobx/mobx.dart' hide when;
@@ -117,11 +118,11 @@ void main() {
         executed = true;
       });
 
-      expect(d.$mobx.isDisposed, isFalse);
+      expect(d.reaction.isDisposed, isFalse);
 
       x.value = 11;
       expect(executed, isTrue);
-      expect(d.$mobx.isDisposed, isTrue);
+      expect(d.reaction.isDisposed, isTrue);
       d();
     });
 
@@ -137,7 +138,7 @@ void main() {
           });
 
       expect(thrown, isTrue);
-      expect(dispose.$mobx.errorValue, isException);
+      expect(dispose.reaction.errorValue, isException);
       dispose();
     });
 
@@ -153,7 +154,7 @@ void main() {
 
       x.value = true; // force a change
       expect(thrown, isTrue);
-      expect(dispose.$mobx.errorValue, isException);
+      expect(dispose.reaction.errorValue, isException);
       dispose();
     });
 
@@ -164,7 +165,7 @@ void main() {
       final dispose = reaction(trackingFn, onInvalidate, context: context);
 
       verify(context.nameFor('Reaction'));
-      verify(context.addPendingReaction(dispose.$mobx));
+      verify(context.addPendingReaction(dispose.reaction));
       verify(context.runReactions());
 
       dispose();
@@ -180,6 +181,83 @@ void main() {
 
         dispose();
       }, throwsException);
+    });
+
+    group('start/endTracking', () {
+      test('reacts to changes to reactive values between begin and end', () {
+        var i = 0;
+
+        final reaction = ReactionImpl(mainContext, () {
+          i++;
+        });
+
+        final var1 = Observable(0);
+        final var2 = Observable(0);
+
+        final prevDerivation = reaction.startTracking();
+        final var3 = Observable(0);
+        var1.value;
+        reaction.endTracking(prevDerivation);
+
+        // No changes, no calls to onInvalidate
+        expect(i, equals(0));
+
+        // Change outside tracking, no onInvalidate call
+        var2.value += 1;
+        expect(i, equals(0));
+
+        // Change outside tracking to an observable created inside tracking
+        // no onInvalidate call
+        var3.value += 1;
+        expect(i, equals(0));
+
+        // Changing a value that was read when tracking was active
+        // calls onInvalidate
+        var1.value += 1;
+        expect(i, equals(1));
+
+        // No calls to onInvalidate after first change
+        var1.value += 1;
+        expect(i, equals(1));
+      });
+
+      test("when disposed, doesn't call onInvalidate", () {
+        var i = 0;
+        final reaction = ReactionImpl(mainContext, () {
+          i++;
+        });
+        final var1 = Observable(0);
+
+        final prevDerivation = reaction.startTracking();
+        var1.value;
+        reaction
+          ..endTracking(prevDerivation)
+          ..dispose();
+
+        var1.value += 1;
+        expect(i, equals(0));
+      });
+
+      test('autorun works inside tracking', () {
+        var i = 0;
+        var autoVar = 0;
+        final reaction = ReactionImpl(mainContext, () {
+          i++;
+        });
+        final var1 = Observable(0);
+
+        final prevDerivation = reaction.startTracking();
+        var1.value;
+        autorun((_) {
+          autoVar += var1.value;
+        });
+        reaction.endTracking(prevDerivation);
+
+        var1.value = 1;
+
+        expect(i, equals(1));
+        expect(autoVar, equals(1));
+      });
     });
   });
 }

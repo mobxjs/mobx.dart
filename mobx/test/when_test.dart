@@ -15,12 +15,12 @@ void main() {
       }, name: 'Basic when');
 
       expect(executed, isFalse);
-      expect(d.$mobx.name, 'Basic when');
+      expect(d.reaction.name, 'Basic when');
 
       x.value = 11;
 
       expect(executed, isTrue);
-      expect(d.$mobx.isDisposed, isTrue);
+      expect(d.reaction.isDisposed, isTrue);
       executed = false;
 
       x.value = 12;
@@ -30,7 +30,7 @@ void main() {
     test('with default name', () {
       final d = when((_) => true, () {});
 
-      expect(d.$mobx.name, startsWith('When@'));
+      expect(d.reaction.name, startsWith('When@'));
 
       d();
     });
@@ -87,7 +87,7 @@ void main() {
 
         async.elapse(Duration(milliseconds: 1000)); // cause a timeout
         expect(thrown, isTrue);
-        expect(d.$mobx.isDisposed, isTrue);
+        expect(d.reaction.isDisposed, isTrue);
 
         d();
       });
@@ -102,7 +102,7 @@ void main() {
         expect(() {
           async.elapse(Duration(milliseconds: 1000));
         }, returnsNormally);
-        expect(d.$mobx.isDisposed, isTrue);
+        expect(d.reaction.isDisposed, isTrue);
 
         d();
       });

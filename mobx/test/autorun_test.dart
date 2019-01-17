@@ -16,7 +16,7 @@ void main() {
         nextValue = c.value + 1;
       });
 
-      expect(dispose.$mobx.name, startsWith('Autorun@'));
+      expect(dispose.reaction.name, startsWith('Autorun@'));
       expect(nextValue, equals(1));
 
       c.value = 10;
@@ -39,7 +39,7 @@ void main() {
       }, name: 'Message Effect');
 
       expect(message, equals('Hello Pavan'));
-      expect(dispose.$mobx.name, equals('Message Effect'));
+      expect(dispose.reaction.name, equals('Message Effect'));
 
       x.value = 'Hey';
       expect(message, equals('Hey Pavan'));
@@ -107,10 +107,10 @@ void main() {
         }
       });
 
-      expect(d.$mobx.isDisposed, isFalse);
+      expect(d.reaction.isDisposed, isFalse);
 
       x.value = 11;
-      expect(d.$mobx.isDisposed, isTrue);
+      expect(d.reaction.isDisposed, isTrue);
       d();
     });
 
@@ -123,7 +123,7 @@ void main() {
       });
 
       expect(thrown, isTrue);
-      expect(dispose.$mobx.errorValue, isException);
+      expect(dispose.reaction.errorValue, isException);
       dispose();
     });
 
@@ -138,7 +138,7 @@ void main() {
         _.dispose();
       });
 
-      expect(dispose.$mobx.isDisposed, isTrue);
+      expect(dispose.reaction.isDisposed, isTrue);
     });
 
     test('can be disposed inside the tracking function with delay', () {
@@ -159,7 +159,7 @@ void main() {
 
         async.elapse(Duration(milliseconds: 1000));
 
-        expect(dispose.$mobx.isDisposed, isTrue);
+        expect(dispose.reaction.isDisposed, isTrue);
       });
     });
   });

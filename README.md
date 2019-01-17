@@ -2,7 +2,7 @@
 
 [![pub package](https://img.shields.io/pub/v/mobx.svg)](https://pub.dartlang.org/packages/mobx)
 [![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
-![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)
+[![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 
 ![](mobx/doc/mobx.png)
 
@@ -16,7 +16,7 @@
 
 - [x] Create `ObservableValue<T>` via `observable<T>()`
 - [x] Create `ObservableList<T>`
-  - [ ] observe hook
+  - [x] observe hook
   - [ ] intercept hook
 - [ ] Create `ObservableMap<K, T>`
 - [x] Atoms with `createAtom()`
@@ -50,10 +50,10 @@
   - [x] `onBecomeObserved`
   - [x] `onBecomeUnobserved`
 - [ ] Spying and Tracing
-- [ ] Global configuration
+- [x] Global configuration
 - [ ] Exception handling and Error recovery
   - [x] Error boundary
-  - [ ] Disabling Error boundary in global config
+  - [x] Disabling Error boundary in global config
 - [ ] Debuggability
 
 ## Public facing
@@ -62,10 +62,3 @@
 - [ ] Documentation
 - [ ] Website (published on github.io)
 
-# Developing
-
-Install the [`mono_repo`](https://github.com/dart-lang/mono_repo) tool with `pub`:
-
-```
-> pub global activate mono_repo
-```
