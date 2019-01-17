@@ -1,0 +1,15 @@
+targets:
+  $default:
+    builders:
+      mobx_codegen|mobx:
+        enabled: true
+
+builders:
+  todo_reporter:
+    target: ':observable_generator'
+    import: 'package:mobx_codegen/builder.dart'
+    builder_factories: ['observableGenerator']
+    build_extensions: { '.dart': ['.observable.g.part'] }
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ['source_gen|combining_builder']

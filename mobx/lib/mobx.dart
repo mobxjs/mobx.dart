@@ -38,6 +38,7 @@ export 'package:mobx/src/core.dart'
         ReactionImpl,
         DerivationState;
 
+export 'package:mobx/src/api/annotations.dart';
 export 'package:mobx/src/api/action.dart';
 export 'package:mobx/src/api/context.dart';
 export 'package:mobx/src/api/observable_list.dart' hide wrapInObservableList;
