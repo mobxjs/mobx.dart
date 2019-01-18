@@ -41,19 +41,18 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: Center(
-          child: Observer(
-            builder: (_) => Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      'You have pushed the button this many times:',
-                    ),
-                    Text(
-                      '${counter.value}',
-                      style: const TextStyle(fontSize: 20),
-                    )
-                  ],
-                ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Observer(
+                  builder: (_) => Text(
+                        '${counter.value}',
+                        style: const TextStyle(fontSize: 20),
+                      )),
+            ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
