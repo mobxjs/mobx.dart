@@ -35,6 +35,7 @@ export 'package:mobx/src/core.dart'
         createReaction,
         createWhenReaction,
         NotificationHandlers,
+        ReactionImpl,
         DerivationState;
 
 export 'package:mobx/src/api/action.dart';
