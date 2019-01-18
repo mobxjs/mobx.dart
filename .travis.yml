@@ -17,6 +17,7 @@ before_script:
 env:
   - PACKAGE=mobx
   - PACKAGE=flutter_mobx FLUTTER=true
+  - PACKAGE=flutter_mobx/example/todos FLUTTER=true
 
 script:
   - ./tool/run.sh
