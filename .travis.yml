@@ -16,6 +16,8 @@ before_script:
 
 env:
   - PACKAGE=mobx
+  - PACKAGE=mobx_codegen
+  - PACKAGE=example
   - PACKAGE=flutter_mobx FLUTTER=true
 
 script:
