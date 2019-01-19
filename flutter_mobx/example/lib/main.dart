@@ -12,27 +12,31 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: const CounterExample(title: 'Flutter Demo Home Page'),
       );
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key, this.title}) : super(key: key);
+class CounterExample extends StatefulWidget {
+  const CounterExample({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _CounterExampleState createState() => _CounterExampleState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  _MyHomePageState() {
+class _CounterExampleState extends State<CounterExample> {
+  _CounterExampleState() {
     incrementCounter = action(() {
-      counter.value = counter.value + 1;
+      counter++;
     });
   }
 
-  Observable<int> counter = Observable(0);
+  final Observable<int> _counter = Observable(0);
+
+  int get counter => _counter.value;
+  set counter(int value) => _counter.value = value;
+
   Action incrementCounter;
 
   @override
@@ -49,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Observer(
                   builder: (_) => Text(
-                        '${counter.value}',
+                        '$counter',
                         style: const TextStyle(fontSize: 20),
                       )),
             ],
