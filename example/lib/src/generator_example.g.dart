@@ -44,8 +44,6 @@ class _$User extends User {
   @override
   String get fullName => _$fullNameComputed.value;
 
-  // Actions here
-
   final _$UserActionController = ActionController(name: 'User');
 
   @override
