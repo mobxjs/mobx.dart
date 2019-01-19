@@ -18,6 +18,12 @@ class ObserverHook extends Hook<void> {
 
   @override
   HookState<void, Hook> createState() => ObserverHookState();
+
+  Reaction createReaction(void Function() onInvalidate) {
+    final ctx = context ?? mainContext;
+    final name = ctx.nameFor('ObserverHook-Reaction');
+    return ReactionImpl(context ?? mainContext, onInvalidate, name: name);
+  }
 }
 
 class ObserverHookState extends HookState<void, ObserverHook> {
@@ -32,7 +38,7 @@ class ObserverHookState extends HookState<void, ObserverHook> {
   }
 
   void _initReaction() {
-    _reaction = ReactionImpl(hook.context ?? mainContext, onInvalidate);
+    _reaction = hook.createReaction(onInvalidate);
   }
 
   void onInvalidate() => setState(_noOp);
@@ -41,6 +47,7 @@ class ObserverHookState extends HookState<void, ObserverHook> {
 
   @override
   void build(BuildContext context) {
+    print('START TRACKING ${_reaction.name}');
     _prevDerivation = _reaction.startTracking();
   }
 
@@ -48,6 +55,7 @@ class ObserverHookState extends HookState<void, ObserverHook> {
   void didBuild() {
     super.didBuild();
 
+    print('END TRACKING ${_reaction.name}');
     _reaction.endTracking(_prevDerivation);
     _prevDerivation = null;
   }
