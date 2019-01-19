@@ -43,4 +43,18 @@ class _$User extends User {
 
   @override
   String get fullName => _$fullNameComputed.value;
+
+  // Actions here
+
+  final _$UserActionController = ActionController(name: 'User');
+
+  @override
+  void updateNames({String firstName, String lastName}) {
+    final _$prevDerivation = _$UserActionController.startAction();
+    try {
+      return super.updateNames(firstName: firstName, lastName: lastName);
+    } finally {
+      _$UserActionController.endAction(_$prevDerivation);
+    }
+  }
 }

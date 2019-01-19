@@ -33,7 +33,7 @@ import 'package:mobx/src/core.dart';
 /// notifications and propagates them only after the completion of the action. Actions
 /// can also be nested inside, in which case the change notification will propagate when
 /// the top-level action completes.
-Action action(Function fn, {String name, ReactiveContext context}) =>
+Action createAction(Function fn, {String name, ReactiveContext context}) =>
     Action(context ?? mainContext, fn, name: name);
 
 Action runInAction(Function fn, {String name, ReactiveContext context}) =>
