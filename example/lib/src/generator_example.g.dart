@@ -8,8 +8,13 @@ part of 'generator_example.dart';
 
 class _$User extends User {
   _$User() : super._() {
-    _$fullNameComputed = Computed(() => super.fullName);
+    _$fullNameComputed = Computed<String>(() => super.fullName);
   }
+
+  Computed<String> _$fullNameComputed;
+
+  @override
+  String get fullName => _$fullNameComputed.value;
 
   final _$firstNameAtom = Atom(name: 'User.firstName');
 
@@ -38,11 +43,6 @@ class _$User extends User {
     super.lastName = value;
     _$lastNameAtom.reportChanged();
   }
-
-  Computed<String> _$fullNameComputed;
-
-  @override
-  String get fullName => _$fullNameComputed.value;
 
   final _$UserActionController = ActionController(name: 'User');
 
