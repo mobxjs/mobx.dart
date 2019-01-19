@@ -19,6 +19,6 @@ abstract class User {
   @action
   void updateNames({String firstName, String lastName}) {
     if (firstName != null) this.firstName = firstName;
-    if (lastName != null) this.lastName = firstName;
+    if (lastName != null) this.lastName = lastName;
   }
 }
