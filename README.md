@@ -14,7 +14,7 @@
 
 ### Observables
 
-- [x] Create `ObservableValue<T>` via `observable<T>()`
+- [x] Create `Observable<T>` via `Observable<T>()`
 - [x] Create `ObservableList<T>`
   - [x] observe hook
   - [ ] intercept hook
@@ -23,7 +23,7 @@
 
 ### Computed Observables
 
-- [x] Create `ComputedValue<T>` via `computed<T>()`
+- [x] Create `Computed<T>` via `Computed<T>()`
 - [x] 2-phase change propagation
 
 ### Reactions
@@ -44,7 +44,7 @@
 
 ## Cross cutting features
 
-- [x] Observability API for `ObservableValue` and `ComputedValue`
+- [x] Observability API for `Observable` and `Computed`
   - [x] `observe`
   - [x] `intercept`
   - [x] `onBecomeObserved`
@@ -61,4 +61,3 @@
 - [x] Logo
 - [ ] Documentation
 - [ ] Website (published on github.io)
-

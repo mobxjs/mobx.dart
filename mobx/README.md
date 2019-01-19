@@ -46,7 +46,7 @@
 
 ## Cross cutting features
 
-- [x] Observability API for `ObservableValue` and `ComputedValue`
+- [x] Observability API for `Observable` and `Computed`
   - [x] `observe`
   - [x] `intercept`
   - [x] `onBecomeObserved`
