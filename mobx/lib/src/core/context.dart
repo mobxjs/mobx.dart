@@ -133,7 +133,7 @@ class ReactiveContext {
     for (final observable in newObservables) {
       observable._addObserver(derivation);
 
-      // ComputedValue = ObservableValue + Derivation
+      // Computed = Observable + Derivation
       if (observable is Computed) {
         if (observable._dependenciesState.index >
             lowestNewDerivationState.index) {
