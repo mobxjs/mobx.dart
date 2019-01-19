@@ -36,5 +36,24 @@ void main() {
       user.lastName = 'Addams';
       expect(fullName, equals('John Addams'));
     });
+
+    test('@action works', () {
+      final user = User();
+
+      var runCount = 0;
+      var fullName = '';
+
+      autorun((_) {
+        runCount++;
+        fullName = user.fullName;
+      });
+
+      expect(fullName, equals('Jane Doe'));
+      expect(runCount, equals(1));
+
+      user.updateNames(firstName: 'John', lastName: 'Johnson');
+      expect(fullName, equals('John Johnson'));
+      expect(runCount, equals(2));
+    });
   });
 }

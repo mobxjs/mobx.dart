@@ -80,7 +80,7 @@ class Action {
 @experimental
 class ActionController {
   ActionController({ReactiveContext context, String name})
-      : _context = context,
+      : _context = context ?? mainContext,
         name = name ?? context.nameFor('Action');
 
   final ReactiveContext _context;
