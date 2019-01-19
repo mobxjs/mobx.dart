@@ -1,6 +1,5 @@
 # mobx.dart
 
-
 [![pub package](https://img.shields.io/pub/v/mobx.svg)](https://pub.dartlang.org/packages/mobx)
 [![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
 [![Coverage Status](https://coveralls.io/repos/github/mobxjs/mobx.dart/badge.svg?branch=master)](https://coveralls.io/github/mobxjs/mobx.dart?branch=master)
@@ -13,55 +12,51 @@
 
 ## Building blocks
 
-### Observables 
+### Observables
 
-- [x] Create `ObservableValue<T>` via `observable<T>()`
+- [x] Create `Observable<T>` via `Observable<T>()`
 - [x] Create `ObservableList<T>`
-    - [ ] `observe` and `intercept`
-    - [ ] `onBecomeObserved` and `onBecomeUnobserved`
+  - [ ] `observe` and `intercept`
+  - [ ] `onBecomeObserved` and `onBecomeUnobserved`
 - [ ] Create `ObservableMap<K, T>`
-- [x] Atoms with `createAtom()`
+- [x] Atoms with `Atom()`
 
-### Computed Observables 
+### Computed Observables
 
-- [x] Create `ComputedValue<T>` via `computed<T>()`
+- [x] Create `Computed<T>` via `Computed<T>()`
 - [x] 2-phase change propagation
 
-### Reactions 
+### Reactions
 
 - [x] Create `Reaction` with `autorun()`
-    - [x] with `delay`
+  - [x] with `delay`
 - [x] Create `Reaction` with `reaction()`
-    - [x] with `delay`
-    - [x] with `fireImmediately`
+  - [x] with `delay`
+  - [x] with `fireImmediately`
 - [x] Create `Reaction` with `when()`
-    - [x] `when` with timeout
-    - [x] `when()` returning `Future<T>`
- 
+  - [x] `when` with timeout
+  - [x] `when()` returning `Future<T>`
 
-### Actions 
+### Actions
 
-- [x] Create `Action` with `action()`
+- [x] Create `Action` with `Action()`
 - [x] Execute within `runInAction`
 - [x] Create untracked-action with `untracked<T>()`
 - [x] Create transaction with `transaction<T>()`
 
-
 ## Cross cutting features
 
-- [x] Observability API for `ObservableValue` and `ComputedValue` 
-    - [x] `observe`
-    - [x] `intercept`
-    - [x] `onBecomeObserved`
-    - [x] `onBecomeUnobserved`
+- [x] Observability API for `ObservableValue` and `ComputedValue`
+  - [x] `observe`
+  - [x] `intercept`
+  - [x] `onBecomeObserved`
+  - [x] `onBecomeUnobserved`
 - [ ] Spying and Tracing
 - [x] Exception handling and Error recovery
-    - [x] `onReactionError` on the context for catching global errors
-    - [x] `onError` handler for reactions
-    - [x] `disableErrorBoundaries` option for the reactive context
-    
+  - [x] `onReactionError` on the context for catching global errors
+  - [x] `onError` handler for reactions
+  - [x] `disableErrorBoundaries` option for the reactive context
 - [ ] Debuggability
-
 
 ## Public facing
 
