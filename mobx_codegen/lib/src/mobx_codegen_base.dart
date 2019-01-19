@@ -10,7 +10,7 @@ import 'package:mobx/mobx.dart' show Store;
 import 'package:mobx/src/api/annotations.dart'
     show ComputedMethod, MakeAction, MakeObservable;
 
-class ObservableGenerator extends Generator {
+class StoreGenerator extends Generator {
   final _storeChecker = TypeChecker.fromRuntime(Store);
 
   @override
@@ -24,14 +24,14 @@ class ObservableGenerator extends Generator {
   }
 
   String generateStoreClassCode(ClassElement storeClass) {
-    final visitor = new ObservableClassVisitor(storeClass.name);
+    final visitor = new StoreClassVisitor(storeClass.name);
     storeClass.visitChildren(visitor);
     return visitor.source;
   }
 }
 
-class ObservableClassVisitor extends SimpleElementVisitor {
-  ObservableClassVisitor(this._parentName) : _className = '_\$$_parentName';
+class StoreClassVisitor extends SimpleElementVisitor {
+  StoreClassVisitor(this._parentName) : _className = '_\$$_parentName';
 
   final String _parentName;
   final String _className;

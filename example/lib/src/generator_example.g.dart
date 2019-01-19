@@ -3,7 +3,7 @@
 part of 'generator_example.dart';
 
 // **************************************************************************
-// ObservableGenerator
+// StoreGenerator
 // **************************************************************************
 
 class _$User extends User {

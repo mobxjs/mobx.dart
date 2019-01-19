@@ -112,7 +112,7 @@ final String pkgName = 'pkg';
 
 // Recreate generator for each test because we repeatedly create
 // classes with the same name in the same library, which will clash.
-Builder get builder => new PartBuilder([new ObservableGenerator()], '.g.dart');
+Builder get builder => new PartBuilder([new StoreGenerator()], '.g.dart');
 
 Future<String> generate(String source) async {
   final srcs = {
