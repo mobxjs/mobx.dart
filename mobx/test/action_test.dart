@@ -7,7 +7,7 @@ import 'shared_mocks.dart';
 void main() {
   group('Action', () {
     test('basics work', () {
-      final a = createAction((String name, String value) {
+      final a = Action((String name, String value) {
         expect(name, equals('name'));
         expect(value, equals('MobX'));
       });
@@ -20,7 +20,7 @@ void main() {
       final x = Observable(10);
 
       var total = 0;
-      final a = createAction(() {
+      final a = Action(() {
         x.value = x.value +
             1; // No reaction-infinite-loop as we are not tracking the observables
       });
@@ -53,7 +53,7 @@ void main() {
       expect(total, equals(60));
       expect(autorunExecutionCount, equals(1));
 
-      final a = createAction(() {
+      final a = Action(() {
         x.value++;
         y.value++;
         z.value++;
@@ -75,7 +75,7 @@ void main() {
       final y = Observable(20);
 
       var total = 0;
-      final a = createAction(() => y.value);
+      final a = Action(() => y.value);
 
       final d = autorun((_) {
         total = x.value + a();
@@ -97,7 +97,7 @@ void main() {
     test('can be invoked with named args', () {
       String message;
 
-      final a = createAction(({String name, String value}) {
+      final a = Action(({String name, String value}) {
         message = '$name: $value';
       });
 
@@ -117,11 +117,11 @@ void main() {
         executionCount++;
       });
 
-      createAction(() {
+      Action(() {
         x.value = 100;
 
         expect(executionCount, equals(1)); // No notifications are fired
-        createAction(() {
+        Action(() {
           y.value = 200;
           expect(executionCount, equals(1)); // No notifications are fired
         })();
@@ -136,7 +136,7 @@ void main() {
     test('uses provided context', () {
       final context = MockContext();
       void fn() {}
-      final act = createAction(fn, context: context);
+      final act = Action(fn, context: context);
 
       act();
 
