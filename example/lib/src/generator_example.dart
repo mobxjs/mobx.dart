@@ -15,4 +15,10 @@ abstract class User {
 
   @computed
   String get fullName => '$firstName $lastName';
+
+  @action
+  void updateNames({String firstName, String lastName}) {
+    if (firstName != null) this.firstName = firstName;
+    if (lastName != null) this.lastName = firstName;
+  }
 }

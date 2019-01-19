@@ -47,7 +47,7 @@ void main() {
       expect(c1ComputationCount, equals(1));
       expect(c3ComputationCount, equals(1));
 
-      action(() {
+      createAction(() {
         // Setting values such that c3 need not be computed again
         x.value = 20;
         y.value = 10;
@@ -59,7 +59,7 @@ void main() {
       // should be recomputed as both x and y have changed
       expect(c1ComputationCount, equals(2));
 
-      action(() {
+      createAction(() {
         x.value = 30;
       })();
 

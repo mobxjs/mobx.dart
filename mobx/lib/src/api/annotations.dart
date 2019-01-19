@@ -9,3 +9,9 @@ class ComputedMethod {
 }
 
 const ComputedMethod computed = ComputedMethod._();
+
+class MakeAction {
+  const MakeAction._();
+}
+
+const MakeAction action = MakeAction._();

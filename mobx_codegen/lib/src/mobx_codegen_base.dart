@@ -4,7 +4,8 @@ import 'package:build/build.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:source_gen/source_gen.dart';
 
-import 'package:mobx/mobx.dart' show ComputedMethod, MakeObservable;
+import 'package:mobx/src/api/annotations.dart'
+    show ComputedMethod, MakeAction, MakeObservable;
 
 class ObservableGenerator extends GeneratorForAnnotation<MakeObservable> {
   @override
@@ -29,6 +30,8 @@ class ObservableClassVisitor extends SimpleElementVisitor {
 
   final List<ComputedMethodData> _computedMethods = [];
 
+  final List<String> _actionOverrides = [];
+
   String get source => """
   class $_className extends $_parentName {
     $_className() : super._() {
@@ -38,12 +41,24 @@ class ObservableClassVisitor extends SimpleElementVisitor {
     ${_observableFields.join('\n')}
 
     ${_computedMethods.map((m) => m.code).join('\n')}
+
+    ${_actionControllerField}
+
+    ${_actionOverrides.join('\n')}
   }
   """;
 
   final _observableChecker = TypeChecker.fromRuntime(MakeObservable);
 
   final _computedChecker = TypeChecker.fromRuntime(ComputedMethod);
+
+  final _actionChecker = TypeChecker.fromRuntime(MakeAction);
+
+  String get _actionControllerField => _actionOverrides.isEmpty
+      ? ''
+      : "final $_actionControllerName = ActionController(name: '$_parentName');";
+
+  String get _actionControllerName => '_\$${_parentName}ActionController';
 
   @override
   visitFieldElement(FieldElement element) async {
@@ -90,6 +105,84 @@ class ObservableClassVisitor extends SimpleElementVisitor {
       _computedMethods.add(new ComputedMethodData(initComputed, code));
     }
     return null;
+  }
+
+  @override
+  visitMethodElement(MethodElement element) {
+    if (!element.isAsynchronous &&
+        _actionChecker.hasAnnotationOfExact(element)) {
+      final name = element.name;
+      final returnType = element.returnType.name;
+
+      String surroundNonEmpty(String prefix, String suffix, String str) =>
+          str.isEmpty ? str : '$prefix$str$suffix';
+
+      final typeParams = surroundNonEmpty(
+          '<',
+          '>',
+          element.typeParameters.map((param) {
+            if (param.bound == null) {
+              return param.name;
+            } else {
+              return '${param.name} extends ${param.bound}';
+            }
+          }).join(', '));
+
+      final typeArgs = surroundNonEmpty('<', '>',
+          element.typeParameters.map((param) => param.name).join(', '));
+
+      String paramCode(ParameterElement param) => param.defaultValueCode == null
+          ? '${param.type.name} ${param.name}'
+          : '${param.type.name} ${param.name} = ${param.defaultValueCode}';
+
+      String argCode(ParameterElement param) => param.name;
+
+      final positionalParams = element.parameters
+          .where((param) => param.isPositional && !param.isOptionalPositional)
+          .toList();
+      final positionalParamList = positionalParams.map(paramCode).join(', ');
+      final positionalArgs = positionalParams.map(argCode).join(', ');
+
+      final optionalParams = element.parameters
+          .where((param) => param.isOptionalPositional)
+          .toList();
+      final optionalParamList = optionalParams.map(paramCode).join(', ');
+      final optionalArgs = optionalParams.map(argCode).join(', ');
+
+      String namedArgCode(ParameterElement param) =>
+          '${param.name}: ${param.name}';
+
+      final namedParams =
+          element.parameters.where((param) => param.isNamed).toList();
+      final namedArgs = namedParams.map(namedArgCode).join(', ');
+      final namedParamList = namedParams.map(paramCode).join(', ');
+
+      final params = [
+        positionalParamList,
+        surroundNonEmpty('[', ']', optionalParamList),
+        surroundNonEmpty('{', '}', namedParamList)
+      ].where((s) => s.isNotEmpty).join(', ');
+
+      final args = [positionalArgs, optionalArgs, namedArgs]
+          .where((s) => s.isNotEmpty)
+          .join(', ');
+
+      final code = """
+        @override
+        $returnType $name$typeParams($params) {
+          final _\$prevDerivation = $_actionControllerName.startAction();
+          try {
+            return super.$name$typeArgs($args);
+          } finally {
+            $_actionControllerName.endAction(_\$prevDerivation);
+          }
+        }
+      """;
+
+      _actionOverrides.add(code);
+    }
+
+    return super.visitMethodElement(element);
   }
 }
 

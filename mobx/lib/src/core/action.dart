@@ -41,3 +41,26 @@ class Action {
       ..untrackedEnd(prevDerivation);
   }
 }
+
+@experimental
+class ActionController {
+  ActionController({ReactiveContext context, String name})
+      : _context = context,
+        name = name ?? context.nameFor('Action');
+
+  final ReactiveContext _context;
+  final String name;
+
+  Derivation startAction() {
+    final prevDerivation = _context.untrackedStart();
+    _context.startBatch();
+
+    return prevDerivation;
+  }
+
+  void endAction(Derivation prevDerivation) {
+    _context
+      ..endBatch()
+      ..untrackedEnd(prevDerivation);
+  }
+}

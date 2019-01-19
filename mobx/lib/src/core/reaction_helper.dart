@@ -74,7 +74,7 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
   final rxnName = name ?? context.nameFor('Reaction');
 
   final effectAction =
-      action((T value) => effect(value), name: '$rxnName-effect');
+      createAction((T value) => effect(value), name: '$rxnName-effect');
 
   final runSync = delay == null;
   final scheduler = delay != null ? createDelayedScheduler(delay) : null;
@@ -140,7 +140,7 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
     bool Function(Reaction) predicate, void Function() effect,
     {String name, int timeout, void Function(Object, Reaction) onError}) {
   final rxnName = name ?? context.nameFor('When');
-  final effectAction = action(effect, name: '$rxnName-effect');
+  final effectAction = createAction(effect, name: '$rxnName-effect');
 
   Timer timer;
   ReactionDisposer dispose;
