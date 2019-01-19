@@ -1,3 +1,4 @@
+import 'action_controller_test.dart' as action_controller_test;
 import 'action_test.dart' as action_test;
 import 'autorun_test.dart' as autorun_test;
 import 'computed_test.dart' as computed_test;
@@ -11,6 +12,7 @@ import 'reaction_test.dart' as reaction_test;
 import 'when_test.dart' as when_test;
 
 void main() {
+  action_controller_test.main();
   observable_test.main();
   observable_list_test.main();
   computed_test.main();
