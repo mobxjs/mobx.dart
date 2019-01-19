@@ -39,7 +39,7 @@ export 'package:mobx/src/core.dart'
         DerivationState;
 
 export 'package:mobx/src/api/annotations.dart'
-    show action, computed, observable;
+    show action, computed, observable, Store;
 export 'package:mobx/src/api/action.dart';
 export 'package:mobx/src/api/context.dart';
 export 'package:mobx/src/api/observable_list.dart' hide wrapInObservableList;

@@ -12,8 +12,7 @@ import 'package:mobx/mobx.dart';
 
 part 'test_user.g.dart';
 
-@observable
-abstract class User {
+abstract class User implements Store {
   User._();
   factory User() = _\$User;
 
@@ -103,7 +102,7 @@ void main() {
       expect(await generate(source), isEmpty);
     });
 
-    test('generates for class with @observer annotation', () async {
+    test('generates for a class that implements Store', () async {
       expect(await generate(validInput), endsWith(validOutput));
     });
   });
@@ -159,9 +158,12 @@ class MakeAction {
 }
 
 const MakeAction action = MakeAction._();
+
+abstract class Store {}
 """;
 
 const fakeMobxSource = """
 library mobx;
+
 export 'package:mobx/src/api/annotations.dart';
 """;

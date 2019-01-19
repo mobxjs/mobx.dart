@@ -2,8 +2,7 @@ import 'package:mobx/mobx.dart';
 
 part 'generator_example.g.dart';
 
-@observable
-abstract class User {
+abstract class User implements Store {
   User._();
   factory User() = _$User;
 

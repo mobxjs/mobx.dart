@@ -1,22 +1,32 @@
+import 'dart:async';
+
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:source_gen/source_gen.dart';
+import 'package:mobx/mobx.dart' show Store;
 
 import 'package:mobx/src/api/annotations.dart'
     show ComputedMethod, MakeAction, MakeObservable;
 
-class ObservableGenerator extends GeneratorForAnnotation<MakeObservable> {
+class ObservableGenerator extends Generator {
+  final _storeChecker = TypeChecker.fromRuntime(Store);
+
   @override
-  generateForAnnotatedElement(
-      Element element, ConstantReader annotation, BuildStep buildStep) {
-    if (element.kind == ElementKind.CLASS) {
-      final visitor = new ObservableClassVisitor(element.name);
-      element.visitChildren(visitor);
-      return visitor.source;
-    }
-    return null;
+  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
+    return library.classes
+        .where((c) => c.isAbstract)
+        .where((c) => c.interfaces.any(_storeChecker.isExactlyType))
+        .map(generateStoreClassCode)
+        .toSet()
+        .join('\n\n');
+  }
+
+  String generateStoreClassCode(ClassElement storeClass) {
+    final visitor = new ObservableClassVisitor(storeClass.name);
+    storeClass.visitChildren(visitor);
+    return visitor.source;
   }
 }
 
