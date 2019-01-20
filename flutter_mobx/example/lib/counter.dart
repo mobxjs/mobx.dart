@@ -4,11 +4,10 @@ import 'package:mobx/mobx.dart';
 
 part 'counter.g.dart';
 
-@observable
-class Counter {
-  factory Counter() = _$Counter;
-  Counter._();
+class Counter = CounterBase with _$Counter;
 
+@observable
+abstract class CounterBase implements Store {
   @observable
   int value = 0;
 

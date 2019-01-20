@@ -3,13 +3,11 @@
 part of 'counter.dart';
 
 // **************************************************************************
-// ObservableGenerator
+// StoreGenerator
 // **************************************************************************
 
-class _$Counter extends Counter {
-  _$Counter() : super._() {}
-
-  final _$valueAtom = Atom(name: 'Counter.value');
+mixin _$Counter on CounterBase, Store {
+  final _$valueAtom = Atom(name: 'CounterBase.value');
 
   @override
   int get value {
@@ -23,15 +21,15 @@ class _$Counter extends Counter {
     _$valueAtom.reportChanged();
   }
 
-  final _$CounterActionController = ActionController(name: 'Counter');
+  final _$CounterBaseActionController = ActionController(name: 'CounterBase');
 
   @override
   void increment() {
-    final _$prevDerivation = _$CounterActionController.startAction();
+    final _$prevDerivation = _$CounterBaseActionController.startAction();
     try {
       return super.increment();
     } finally {
-      _$CounterActionController.endAction(_$prevDerivation);
+      _$CounterBaseActionController.endAction(_$prevDerivation);
     }
   }
 }

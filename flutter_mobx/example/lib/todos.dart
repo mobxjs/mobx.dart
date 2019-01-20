@@ -1,9 +1,11 @@
 import 'package:mobx/mobx.dart';
 part 'todos.g.dart';
 
+class Todo = TodoBase with _$Todo;
+
 @observable
-class Todo {
-  Todo(this.description);
+abstract class TodoBase implements Store {
+  TodoBase(this.description);
 
   @observable
   String description = '';

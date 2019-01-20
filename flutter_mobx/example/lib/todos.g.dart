@@ -3,13 +3,11 @@
 part of 'todos.dart';
 
 // **************************************************************************
-// ObservableGenerator
+// StoreGenerator
 // **************************************************************************
 
-class _$Todo extends Todo {
-  _$Todo() : super._() {}
-
-  final _$descriptionAtom = Atom(name: 'Todo.description');
+mixin _$Todo on TodoBase, Store {
+  final _$descriptionAtom = Atom(name: 'TodoBase.description');
 
   @override
   String get description {
@@ -23,7 +21,7 @@ class _$Todo extends Todo {
     _$descriptionAtom.reportChanged();
   }
 
-  final _$doneAtom = Atom(name: 'Todo.done');
+  final _$doneAtom = Atom(name: 'TodoBase.done');
 
   @override
   bool get done {
