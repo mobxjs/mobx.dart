@@ -5,7 +5,7 @@ targets:
         enabled: true
 
 builders:
-  todo_reporter:
+  mobx_generator:
     target: ':store_generator'
     import: 'package:mobx_codegen/builder.dart'
     builder_factories: ['storeGenerator']
