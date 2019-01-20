@@ -68,7 +68,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       final template = ObservableTemplate()
         ..storeTemplate = _storeTemplate
         ..atomName = '_\$${element.name}Atom'
-        ..type = element.type.name
+        ..type = element.type.displayName
         ..name = element.name;
 
       _storeTemplate.observables.add(template);
@@ -82,7 +82,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       final template = ComputedTemplate()
         ..computedName = '_\$${element.name}Computed'
         ..name = element.name
-        ..type = element.returnType.name;
+        ..type = element.returnType.displayName;
       _storeTemplate.computeds.add(template);
     }
     return null;
@@ -94,11 +94,11 @@ class StoreMixinVisitor extends SimpleElementVisitor {
         _actionChecker.hasAnnotationOfExact(element)) {
       final typeParam = (TypeParameterElement elem) => TypeParamTemplate()
         ..name = elem.name
-        ..bound = elem.bound?.name;
+        ..bound = elem.bound?.displayName;
 
       final param = (ParameterElement elem) => ParamTemplate()
         ..name = elem.name
-        ..type = elem.type.name
+        ..type = elem.type.displayName
         ..defaultValue = elem.defaultValueCode;
 
       final positionalParams = element.parameters
@@ -115,7 +115,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       final template = ActionTemplate()
         ..storeTemplate = _storeTemplate
         ..name = element.name
-        ..returnType = element.returnType.name
+        ..returnType = element.returnType.displayName
         ..typeParams = element.typeParameters.map(typeParam)
         ..positionalParams = positionalParams.map(param)
         ..optionalParams = optionalParams.map(param)
