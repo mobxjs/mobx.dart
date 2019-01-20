@@ -4,11 +4,11 @@ class Todo {
   Todo(String description) {
     this.description = description;
 
-    markDone = action((bool flag) {
+    markDone = Action((bool flag) {
       done = flag;
     });
 
-    setDescription = action((String description) {
+    setDescription = Action((String description) {
       this.description = description;
     });
   }
@@ -48,7 +48,7 @@ class TodoList {
     _pendingTodos = Computed(() => todos.where((todo) => todo.done != true));
     _completedTodos = Computed(() => todos.where((todo) => todo.done == true));
 
-    addTodo = action(_addTodo);
+    addTodo = Action(_addTodo);
   }
 
   //region Private Fields

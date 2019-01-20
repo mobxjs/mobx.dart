@@ -13,7 +13,7 @@ class CounterExample extends StatefulWidget {
 
 class _CounterExampleState extends State<CounterExample> {
   _CounterExampleState() {
-    incrementCounter = action(() {
+    incrementCounter = Action(() {
       counter++;
     });
   }
