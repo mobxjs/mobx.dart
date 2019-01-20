@@ -3,7 +3,6 @@ part 'todos.g.dart';
 
 class Todo = TodoBase with _$Todo;
 
-@observable
 abstract class TodoBase implements Store {
   TodoBase(this.description);
 
@@ -16,56 +15,48 @@ abstract class TodoBase implements Store {
 
 enum VisibilityFilter { all, pending, completed }
 
-class TodoList {
-  TodoList() {
-    _visibleTodos = Computed(() {
-      switch (filter) {
-        case VisibilityFilter.pending:
-          return pendingTodos;
-        case VisibilityFilter.completed:
-          return completedTodos;
-        default:
-          return todos;
-      }
-    });
+class TodoList = TodoListBase with _$TodoList;
 
-    _pendingTodos = Computed(() => todos.where((todo) => todo.done != true));
-    _completedTodos = Computed(() => todos.where((todo) => todo.done == true));
+abstract class TodoListBase implements Store {
+  @observable
+  final todos = ObservableList<Todo>();
 
-    addTodo = Action(_addTodo);
+  @observable
+  var filter = VisibilityFilter.all;
+
+  @computed
+  ObservableList<Todo> get pendingTodos =>
+      todos.where((todo) => todo.done != true);
+
+  @computed
+  ObservableList<Todo> get completedTodos =>
+      todos.where((todo) => todo.done == true);
+
+  @computed
+  ObservableList<Todo> get visibleTodos {
+    switch (filter) {
+      case VisibilityFilter.pending:
+        return pendingTodos;
+      case VisibilityFilter.completed:
+        return completedTodos;
+      default:
+        return todos;
+    }
   }
 
-  //region Private Fields
-  final _todos = ObservableList<Todo>();
-  final _filter = Observable<VisibilityFilter>(VisibilityFilter.all);
-  final _currentDescription = Observable<String>('');
+  @observable
+  String currentDescription = '';
 
-  Computed<ObservableList<Todo>> _visibleTodos;
-  Computed<ObservableList<Todo>> _pendingTodos;
-  Computed<ObservableList<Todo>> _completedTodos;
-  //endregion
-
-  ObservableList<Todo> get todos => _todos;
-  VisibilityFilter get filter => _filter.value;
-
-  set filter(VisibilityFilter value) => _filter.value = value;
-  String get currentDescription => _currentDescription.value;
-
-  set currentDescription(String value) => _currentDescription.value = value;
-
-  ObservableList<Todo> get visibleTodos => _visibleTodos.value;
-  ObservableList<Todo> get pendingTodos => _pendingTodos.value;
-  ObservableList<Todo> get completedTodos => _completedTodos.value;
-
-  Action addTodo;
-  Action removeTodo;
-  Action changeDescription;
-  Action changeFilter;
-  Action removeCompleted;
-  Action markAllAsCompleted;
-
-  void _addTodo(String description) {
+  @action
+  void addTodo(String description) {
     final todo = Todo(description);
     todos.add(todo);
   }
+
+//  @action removeTodo(){}
+//  @action changeDescription(){}
+//  @action changeFilter(){}
+//  @action removeCompleted(){}
+//  @action markAllAsCompleted(){}
+
 }
