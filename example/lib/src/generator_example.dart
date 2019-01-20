@@ -32,4 +32,7 @@ abstract class AdminBase extends User implements Store {
 
   @observable
   String userName = 'admin';
+
+  @observable
+  ObservableList<String> accessRights = ObservableList();
 }

@@ -68,4 +68,18 @@ mixin _$Admin on AdminBase, Store {
     super.userName = value;
     _$userNameAtom.reportChanged();
   }
+
+  final _$accessRightsAtom = Atom(name: 'AdminBase.accessRights');
+
+  @override
+  ObservableList<String> get accessRights {
+    _$accessRightsAtom.reportObserved();
+    return super.accessRights;
+  }
+
+  @override
+  set accessRights(ObservableList<String> value) {
+    super.accessRights = value;
+    _$accessRightsAtom.reportChanged();
+  }
 }
