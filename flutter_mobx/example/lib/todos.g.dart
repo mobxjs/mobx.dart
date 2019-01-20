@@ -56,6 +56,20 @@ mixin _$TodoList on TodoListBase, Store {
           Computed<ObservableList>(() => super.visibleTodos))
       .value;
 
+  final _$todosAtom = Atom(name: 'TodoListBase.todos');
+
+  @override
+  ObservableList<Todo> get todos {
+    _$todosAtom.reportObserved();
+    return super.todos;
+  }
+
+  @override
+  set todos(ObservableList<Todo> value) {
+    super.todos = value;
+    _$todosAtom.reportChanged();
+  }
+
   final _$filterAtom = Atom(name: 'TodoListBase.filter');
 
   @override

@@ -19,7 +19,7 @@ class TodoList = TodoListBase with _$TodoList;
 
 abstract class TodoListBase implements Store {
   @observable
-  final todos = ObservableList<Todo>();
+  ObservableList<Todo> todos = ObservableList<Todo>();
 
   @observable
   var filter = VisibilityFilter.all;
