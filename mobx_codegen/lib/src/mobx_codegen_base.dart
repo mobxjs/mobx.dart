@@ -21,7 +21,6 @@ class StoreGenerator extends Generator {
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
     final generate = (baseClass) sync* {
       final mixedClass = library.classes
-          .where((c) => c.isMixinApplication)
           .firstWhere((c) => c.supertype == baseClass.type, orElse: () => null);
       if (mixedClass != null) {
         yield generateStoreClassCode(library, baseClass, mixedClass);

@@ -25,7 +25,9 @@ abstract class UserBase implements Store {
   }
 }
 
-class Admin = AdminBase with _$Admin;
+class Admin extends AdminBase with _$Admin {
+  Admin(int id) : super(id);
+}
 
 abstract class AdminBase extends User implements Store {
   AdminBase(int id) : super(id);
