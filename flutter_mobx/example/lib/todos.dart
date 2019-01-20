@@ -1,33 +1,15 @@
 import 'package:mobx/mobx.dart';
+part 'todos.g.dart';
 
+@observable
 class Todo {
-  Todo(String description) {
-    this.description = description;
+  Todo(this.description);
 
-    markDone = action((bool flag) {
-      done = flag;
-    });
+  @observable
+  String description = '';
 
-    setDescription = action((String description) {
-      this.description = description;
-    });
-  }
-
-  // This boilerplate will be hidden away once the Code-generators are in place
-
-  //region Private Fields
-  final _description = Observable('');
-  final _done = Observable(false);
-  //endregion
-
-  String get description => _description.value;
-  set description(String value) => _description.value = value;
-
-  bool get done => _done.value;
-  set done(bool value) => _done.value = value;
-
-  Action setDescription;
-  Action markDone;
+  @observable
+  bool done = false;
 }
 
 enum VisibilityFilter { all, pending, completed }
@@ -48,7 +30,7 @@ class TodoList {
     _pendingTodos = Computed(() => todos.where((todo) => todo.done != true));
     _completedTodos = Computed(() => todos.where((todo) => todo.done == true));
 
-    addTodo = action(_addTodo);
+    addTodo = Action(_addTodo);
   }
 
   //region Private Fields
