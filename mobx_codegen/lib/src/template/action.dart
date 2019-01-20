@@ -17,26 +17,29 @@ class ActionTemplate {
   CommaList<String> _optionalArgs;
   CommaList<NamedArgTemplate> _namedArgs;
 
-  set typeParams(Iterable<TypeParamTemplate> params) =>
-      _typeParams = SurroundedCommaList('<', '>', params.toList());
-  set positionalParams(Iterable<ParamTemplate> params) =>
-      _positionalParams = CommaList(params.toList());
-  set optionalParams(Iterable<ParamTemplate> params) =>
-      _optionalParams = SurroundedCommaList('[', ']', params.toList());
-  set namedParams(Iterable<ParamTemplate> params) =>
-      _namedParams = SurroundedCommaList('{', '}', params.toList());
+  set typeParams(Iterable<TypeParamTemplate> params) {
+    _typeParams = SurroundedCommaList('<', '>', params.toList());
+    _typeArgs =
+        SurroundedCommaList('<', '>', params.map((p) => p.asArgument).toList());
+  }
+
+  set positionalParams(Iterable<ParamTemplate> params) {
+    _positionalParams = CommaList(params.toList());
+    _positionalArgs = CommaList(params.map((p) => p.asArgument).toList());
+  }
+
+  set optionalParams(Iterable<ParamTemplate> params) {
+    _optionalParams = SurroundedCommaList('[', ']', params.toList());
+    _optionalArgs = CommaList(params.map((p) => p.asArgument).toList());
+  }
+
+  set namedParams(Iterable<ParamTemplate> params) {
+    _namedParams = SurroundedCommaList('{', '}', params.toList());
+    _namedArgs = CommaList(params.map((p) => p.asNamedArgument).toList());
+  }
 
   CommaList get _params =>
       CommaList([_positionalParams, _optionalParams, _namedParams]);
-
-  set typeArgs(Iterable<String> args) =>
-      _typeArgs = SurroundedCommaList('<', '>', args.toList());
-  set positionalArgs(Iterable<String> args) =>
-      _positionalArgs = CommaList(args.toList());
-  set optionalArgs(Iterable<String> args) =>
-      _optionalArgs = CommaList(args.toList());
-  set namedArgs(Iterable<NamedArgTemplate> args) =>
-      _namedArgs = CommaList(args.toList());
 
   CommaList get _args =>
       CommaList([_positionalArgs, _optionalArgs, _namedArgs]);
@@ -59,6 +62,10 @@ class ParamTemplate {
   String type;
   String defaultValue;
 
+  String get asArgument => name;
+
+  NamedArgTemplate get asNamedArgument => NamedArgTemplate()..name = name;
+
   @override
   String toString() =>
       defaultValue == null ? '$type $name' : '$type $name = $defaultValue';
@@ -67,6 +74,8 @@ class ParamTemplate {
 class TypeParamTemplate {
   String name;
   String bound;
+
+  String get asArgument => name;
 
   @override
   String toString() => bound == null ? name : '$name extends $bound';

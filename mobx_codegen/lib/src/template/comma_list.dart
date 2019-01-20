@@ -1,7 +1,7 @@
 import 'package:mobx_codegen/src/template/util.dart';
 
 class CommaList<T> {
-  CommaList(this.templates);
+  CommaList(this.templates) : assert(templates != null);
 
   final List<T> templates;
 
@@ -11,7 +11,10 @@ class CommaList<T> {
 }
 
 class SurroundedCommaList<T> {
-  SurroundedCommaList(this.prefix, this.suffix, this.templates);
+  SurroundedCommaList(this.prefix, this.suffix, this.templates)
+      : assert(prefix != null),
+        assert(suffix != null),
+        assert(templates != null);
 
   final String prefix;
   final String suffix;

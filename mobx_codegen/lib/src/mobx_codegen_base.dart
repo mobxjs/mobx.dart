@@ -101,11 +101,6 @@ class StoreMixinVisitor extends SimpleElementVisitor {
         ..type = elem.type.name
         ..defaultValue = elem.defaultValueCode;
 
-      final arg = (Element elem) => elem.name;
-
-      final namedArg =
-          (ParameterElement elem) => NamedArgTemplate()..name = elem.name;
-
       final positionalParams = element.parameters
           .where((param) => param.isPositional && !param.isOptionalPositional)
           .toList();
@@ -122,13 +117,9 @@ class StoreMixinVisitor extends SimpleElementVisitor {
         ..name = element.name
         ..returnType = element.returnType.name
         ..typeParams = element.typeParameters.map(typeParam)
-        ..typeArgs = element.typeParameters.map(arg)
         ..positionalParams = positionalParams.map(param)
-        ..positionalArgs = positionalParams.map(arg)
         ..optionalParams = optionalParams.map(param)
-        ..optionalArgs = optionalParams.map(arg)
-        ..namedParams = namedParams.map(param)
-        ..namedArgs = namedParams.map(namedArg);
+        ..namedParams = namedParams.map(param);
 
       _storeTemplate.actions.add(template);
     }
