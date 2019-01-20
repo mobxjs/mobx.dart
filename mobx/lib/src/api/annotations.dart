@@ -15,3 +15,5 @@ class MakeAction {
 }
 
 const MakeAction action = MakeAction._();
+
+abstract class Store {}
