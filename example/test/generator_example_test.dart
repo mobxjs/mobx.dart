@@ -72,4 +72,21 @@ void main() {
     admin.userName = 'root';
     expect(userName, equals('root'));
   });
+
+  test('Admins new', () {
+    final admin = Admin(1);
+
+    var rights = '';
+    autorun((_) => rights = admin.accessRights.join(','));
+
+    expect(rights, equals(''));
+
+    admin.accessRights = ObservableList.of(['fileshare', 'webserver']);
+
+    expect(rights, equals('fileshare,webserver'));
+
+    admin.accessRights.removeAt(0);
+
+    expect(rights, equals('webserver'));
+  });
 }
