@@ -37,23 +37,23 @@ mixin _$Todo on TodoBase, Store {
 }
 
 mixin _$TodoList on TodoListBase, Store {
-  Computed<ObservableList> _$pendingTodosComputed;
+  Computed<ObservableList<Todo>> _$pendingTodosComputed;
 
   @override
-  ObservableList get pendingTodos => (_$pendingTodosComputed ??=
-          Computed<ObservableList>(() => super.pendingTodos))
+  ObservableList<Todo> get pendingTodos => (_$pendingTodosComputed ??=
+          Computed<ObservableList<Todo>>(() => super.pendingTodos))
       .value;
-  Computed<ObservableList> _$completedTodosComputed;
+  Computed<ObservableList<Todo>> _$completedTodosComputed;
 
   @override
-  ObservableList get completedTodos => (_$completedTodosComputed ??=
-          Computed<ObservableList>(() => super.completedTodos))
+  ObservableList<Todo> get completedTodos => (_$completedTodosComputed ??=
+          Computed<ObservableList<Todo>>(() => super.completedTodos))
       .value;
-  Computed<ObservableList> _$visibleTodosComputed;
+  Computed<ObservableList<Todo>> _$visibleTodosComputed;
 
   @override
-  ObservableList get visibleTodos => (_$visibleTodosComputed ??=
-          Computed<ObservableList>(() => super.visibleTodos))
+  ObservableList<Todo> get visibleTodos => (_$visibleTodosComputed ??=
+          Computed<ObservableList<Todo>>(() => super.visibleTodos))
       .value;
 
   final _$todosAtom = Atom(name: 'TodoListBase.todos');
