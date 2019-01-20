@@ -3,57 +3,73 @@ import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('A group of tests', () {
-    test('@observable works', () {
-      final user = User();
+  void testStoreBasics(String name, User Function() createStore) {
+    group(name, () {
+      test('@observable works', () {
+        final user = createStore();
 
-      var firstName = '';
+        var firstName = '';
 
-      autorun((_) {
-        firstName = user.firstName;
+        autorun((_) {
+          firstName = user.firstName;
+        });
+
+        expect(firstName, equals('Jane'));
+
+        user.firstName = 'Jill';
+        expect(firstName, equals('Jill'));
       });
 
-      expect(firstName, equals('Jane'));
+      test('@computed works', () {
+        final user = createStore();
 
-      user.firstName = 'Jill';
-      expect(firstName, equals('Jill'));
-    });
+        var fullName = '';
 
-    test('@computed works', () {
-      final user = User();
+        autorun((_) {
+          fullName = user.fullName;
+        });
 
-      var fullName = '';
+        expect(fullName, equals('Jane Doe'));
 
-      autorun((_) {
-        fullName = user.fullName;
+        user.firstName = 'John';
+        expect(fullName, equals('John Doe'));
+
+        user.lastName = 'Addams';
+        expect(fullName, equals('John Addams'));
       });
 
-      expect(fullName, equals('Jane Doe'));
+      test('@action works', () {
+        final user = createStore();
 
-      user.firstName = 'John';
-      expect(fullName, equals('John Doe'));
+        var runCount = 0;
+        var fullName = '';
 
-      user.lastName = 'Addams';
-      expect(fullName, equals('John Addams'));
-    });
+        autorun((_) {
+          runCount++;
+          fullName = user.fullName;
+        });
 
-    test('@action works', () {
-      final user = User();
+        expect(fullName, equals('Jane Doe'));
+        expect(runCount, equals(1));
 
-      var runCount = 0;
-      var fullName = '';
-
-      autorun((_) {
-        runCount++;
-        fullName = user.fullName;
+        user.updateNames(firstName: 'John', lastName: 'Johnson');
+        expect(fullName, equals('John Johnson'));
+        expect(runCount, equals(2));
       });
-
-      expect(fullName, equals('Jane Doe'));
-      expect(runCount, equals(1));
-
-      user.updateNames(firstName: 'John', lastName: 'Johnson');
-      expect(fullName, equals('John Johnson'));
-      expect(runCount, equals(2));
     });
+  }
+
+  ({'User': () => User(1), 'Admin': () => Admin(1)}).forEach(testStoreBasics);
+
+  test('Admins new generated field works', () {
+    final admin = Admin(1);
+
+    var userName = '';
+    autorun((_) => userName = admin.userName);
+
+    expect(userName, equals('admin'));
+
+    admin.userName = 'root';
+    expect(userName, equals('root'));
   });
 }

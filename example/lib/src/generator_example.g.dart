@@ -3,15 +3,17 @@
 part of 'generator_example.dart';
 
 // **************************************************************************
-// ObservableGenerator
+// StoreGenerator
 // **************************************************************************
 
-class _$User extends User {
-  _$User() : super._() {
-    _$fullNameComputed = Computed(() => super.fullName);
-  }
+mixin _$User on UserBase, Store {
+  Computed<String> _$fullNameComputed;
 
-  final _$firstNameAtom = Atom(name: 'User.firstName');
+  @override
+  String get fullName =>
+      (_$fullNameComputed ??= Computed<String>(() => super.fullName)).value;
+
+  final _$firstNameAtom = Atom(name: 'UserBase.firstName');
 
   @override
   String get firstName {
@@ -25,7 +27,7 @@ class _$User extends User {
     _$firstNameAtom.reportChanged();
   }
 
-  final _$lastNameAtom = Atom(name: 'User.lastName');
+  final _$lastNameAtom = Atom(name: 'UserBase.lastName');
 
   @override
   String get lastName {
@@ -39,20 +41,31 @@ class _$User extends User {
     _$lastNameAtom.reportChanged();
   }
 
-  Computed<String> _$fullNameComputed;
-
-  @override
-  String get fullName => _$fullNameComputed.value;
-
-  final _$UserActionController = ActionController(name: 'User');
+  final _$UserBaseActionController = ActionController(name: 'UserBase');
 
   @override
   void updateNames({String firstName, String lastName}) {
-    final _$prevDerivation = _$UserActionController.startAction();
+    final _$prevDerivation = _$UserBaseActionController.startAction();
     try {
       return super.updateNames(firstName: firstName, lastName: lastName);
     } finally {
-      _$UserActionController.endAction(_$prevDerivation);
+      _$UserBaseActionController.endAction(_$prevDerivation);
     }
+  }
+}
+
+mixin _$Admin on AdminBase, Store {
+  final _$userNameAtom = Atom(name: 'AdminBase.userName');
+
+  @override
+  String get userName {
+    _$userNameAtom.reportObserved();
+    return super.userName;
+  }
+
+  @override
+  set userName(String value) {
+    super.userName = value;
+    _$userNameAtom.reportChanged();
   }
 }
