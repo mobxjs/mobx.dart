@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 void main() {
   group('A group of tests', () {
     test('@observable works', () {
-      final user = User();
+      final user = User(12);
 
       var firstName = '';
 
@@ -20,7 +20,7 @@ void main() {
     });
 
     test('@computed works', () {
-      final user = User();
+      final user = User(21);
 
       var fullName = '';
 
@@ -38,7 +38,7 @@ void main() {
     });
 
     test('@action works', () {
-      final user = User();
+      final user = User(33);
 
       var runCount = 0;
       var fullName = '';

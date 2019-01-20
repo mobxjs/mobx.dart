@@ -2,9 +2,12 @@ import 'package:mobx/mobx.dart';
 
 part 'generator_example.g.dart';
 
-abstract class User implements Store {
-  User._();
-  factory User() = _$User;
+class User = UserBase with _$User;
+
+abstract class UserBase implements Store {
+  UserBase(this.id);
+
+  final int id;
 
   @observable
   String firstName = 'Jane';
@@ -20,4 +23,13 @@ abstract class User implements Store {
     if (firstName != null) this.firstName = firstName;
     if (lastName != null) this.lastName = lastName;
   }
+}
+
+class Admin = AdminBase with _$Admin;
+
+abstract class AdminBase extends User implements Store {
+  AdminBase(int id) : super(id);
+
+  @observable
+  String userName = 'admin';
 }

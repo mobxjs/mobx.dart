@@ -5,6 +5,7 @@ import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:mobx_codegen/src/template/action.dart';
+import 'package:mobx_codegen/src/template/computed.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:source_gen/source_gen.dart';
@@ -18,26 +19,37 @@ class StoreGenerator extends Generator {
 
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
+    final generate = (baseClass) sync* {
+      final mixedClass = library.classes
+          .where((c) => c.isMixinApplication)
+          .firstWhere((c) => c.supertype == baseClass.type, orElse: () => null);
+      if (mixedClass != null) {
+        yield generateStoreClassCode(library, baseClass, mixedClass);
+      }
+    };
+
     return library.classes
         .where((c) => c.isAbstract)
         .where((c) => c.interfaces.any(_storeChecker.isExactlyType))
-        .map(generateStoreClassCode)
+        .expand(generate)
         .toSet()
         .join('\n\n');
   }
 
-  String generateStoreClassCode(ClassElement storeClass) {
-    final visitor = new StoreClassVisitor(storeClass.name);
-    storeClass.visitChildren(visitor);
+  String generateStoreClassCode(
+      LibraryReader library, ClassElement baseClass, ClassElement mixedClass) {
+    final visitor =
+        new StoreMixinVisitor(baseClass.name, '_\$${mixedClass.name}');
+    baseClass.visitChildren(visitor);
     return visitor.source;
   }
 }
 
-class StoreClassVisitor extends SimpleElementVisitor {
-  StoreClassVisitor(String parentName) {
+class StoreMixinVisitor extends SimpleElementVisitor {
+  StoreMixinVisitor(String parentName, String name) {
     _storeTemplate = StoreTemplate()
       ..parentName = parentName
-      ..name = '_\$$parentName';
+      ..name = name;
   }
 
   final _observableChecker = TypeChecker.fromRuntime(MakeObservable);
@@ -67,10 +79,11 @@ class StoreClassVisitor extends SimpleElementVisitor {
   @override
   visitPropertyAccessorElement(PropertyAccessorElement element) {
     if (element.isGetter && _computedChecker.hasAnnotationOfExact(element)) {
-      _storeTemplate.addComputed(
-          computedName: '_\$${element.name}Computed',
-          name: element.name,
-          type: element.returnType.name);
+      final template = ComputedTemplate()
+        ..computedName = '_\$${element.name}Computed'
+        ..name = element.name
+        ..type = element.returnType.name;
+      _storeTemplate.computeds.add(template);
     }
     return null;
   }
@@ -88,7 +101,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
         ..type = elem.type.name
         ..defaultValue = elem.defaultValueCode;
 
-      final arg = (ParameterElement elem) => elem.name;
+      final arg = (Element elem) => elem.name;
 
       final namedArg =
           (ParameterElement elem) => NamedArgTemplate()..name = elem.name;
@@ -109,7 +122,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
         ..name = element.name
         ..returnType = element.returnType.name
         ..typeParams = element.typeParameters.map(typeParam)
-        ..typeArgs = element.typeParameters.map((param) => param.name)
+        ..typeArgs = element.typeParameters.map(arg)
         ..positionalParams = positionalParams.map(param)
         ..positionalArgs = positionalParams.map(arg)
         ..optionalParams = optionalParams.map(param)

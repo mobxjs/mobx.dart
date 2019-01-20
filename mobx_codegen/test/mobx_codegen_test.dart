@@ -12,9 +12,12 @@ import 'package:mobx/mobx.dart';
 
 part 'test_user.g.dart';
 
-abstract class User implements Store {
-  User._();
-  factory User() = _\$User;
+class User = UserBase with _\$User;
+
+abstract class UserBase implements Store {
+  UserBase(this.id);
+
+  final int id;
 
   @observable
   String firstName = 'Jane';
@@ -34,17 +37,14 @@ abstract class User implements Store {
 """;
 
 const validOutput = """
-class _\$User extends User {
-  _\$User() : super._() {
-    _\$fullNameComputed = Computed<String>(() => super.fullName);
-  }
-
+mixin _\$User on UserBase, Store {
   Computed<String> _\$fullNameComputed;
 
   @override
-  String get fullName => _\$fullNameComputed.value;
+  String get fullName =>
+      (_\$fullNameComputed ??= Computed<String>(() => super.fullName)).value;
 
-  final _\$firstNameAtom = Atom(name: 'User.firstName');
+  final _\$firstNameAtom = Atom(name: 'UserBase.firstName');
 
   @override
   String get firstName {
@@ -58,7 +58,7 @@ class _\$User extends User {
     _\$firstNameAtom.reportChanged();
   }
 
-  final _\$lastNameAtom = Atom(name: 'User.lastName');
+  final _\$lastNameAtom = Atom(name: 'UserBase.lastName');
 
   @override
   String get lastName {
@@ -72,15 +72,15 @@ class _\$User extends User {
     _\$lastNameAtom.reportChanged();
   }
 
-  final _\$UserActionController = ActionController(name: 'User');
+  final _\$UserBaseActionController = ActionController(name: 'UserBase');
 
   @override
   void updateNames({String firstName, String lastName}) {
-    final _\$prevDerivation = _\$UserActionController.startAction();
+    final _\$prevDerivation = _\$UserBaseActionController.startAction();
     try {
       return super.updateNames(firstName: firstName, lastName: lastName);
     } finally {
-      _\$UserActionController.endAction(_\$prevDerivation);
+      _\$UserBaseActionController.endAction(_\$prevDerivation);
     }
   }
 }

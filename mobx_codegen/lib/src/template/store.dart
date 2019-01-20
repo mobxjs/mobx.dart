@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
@@ -9,24 +8,8 @@ class StoreTemplate {
   String parentName;
 
   final Rows<ObservableTemplate> observables = Rows();
-  final Rows<ComputedTemplate> _computeds = Rows();
-  final Rows<ComputedInitTemplate> _computedInitializers = Rows();
+  final Rows<ComputedTemplate> computeds = Rows();
   final Rows<ActionTemplate> actions = Rows();
-
-  void addComputed(
-      {@required String computedName,
-      @required String type,
-      @required String name}) {
-    _computeds.add(ComputedTemplate()
-      ..computedName = computedName
-      ..name = name
-      ..type = type);
-
-    _computedInitializers.add(ComputedInitTemplate()
-      ..computedName = computedName
-      ..name = name
-      ..type = type);
-  }
 
   String _actionControllerName;
   String get actionControllerName =>
@@ -38,12 +21,8 @@ class StoreTemplate {
 
   @override
   String toString() => """
-  class $name extends $parentName {
-    $name() : super._() {
-      $_computedInitializers
-    }
-
-    $_computeds
+  mixin $name on $parentName, Store {
+    $computeds
 
     $observables
 
