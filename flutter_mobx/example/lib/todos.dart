@@ -22,7 +22,7 @@ abstract class TodoListBase implements Store {
   ObservableList<Todo> todos = ObservableList<Todo>();
 
   @observable
-  var filter = VisibilityFilter.all;
+  VisibilityFilter filter = VisibilityFilter.all;
 
   @computed
   ObservableList<Todo> get pendingTodos =>
