@@ -2,6 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 
+part 'counter.g.dart';
+
+class Counter = CounterBase with _$Counter;
+
+abstract class CounterBase implements Store {
+  @observable
+  int value = 0;
+
+  @action
+  void increment() {
+    value++;
+  }
+}
+
 class CounterExample extends StatefulWidget {
   const CounterExample({Key key, this.title}) : super(key: key);
 
@@ -12,18 +26,7 @@ class CounterExample extends StatefulWidget {
 }
 
 class _CounterExampleState extends State<CounterExample> {
-  _CounterExampleState() {
-    incrementCounter = Action(() {
-      counter++;
-    });
-  }
-
-  final Observable<int> _counter = Observable(0);
-
-  int get counter => _counter.value;
-  set counter(int value) => _counter.value = value;
-
-  Action incrementCounter;
+  final _counter = Counter();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -39,14 +42,14 @@ class _CounterExampleState extends State<CounterExample> {
               ),
               Observer(
                   builder: (_) => Text(
-                        '$counter',
+                        '${_counter.value}',
                         style: const TextStyle(fontSize: 20),
                       )),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: incrementCounter,
+          onPressed: _counter.increment,
           tooltip: 'Increment',
           child: const Icon(Icons.add),
         ),

@@ -9,7 +9,7 @@ environment:
 dependencies:
   path: ^1.4.1
   source_gen: ^0.9.4
-  mobx: ^0.0.17
+  mobx: ^0.0.20
 
 dependency_overrides:
   mobx:
