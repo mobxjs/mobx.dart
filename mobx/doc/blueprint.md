@@ -6,16 +6,15 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 
 ### Atom
 
-### ObservableValue<T>
+### Observable<T>
 
 - Can be observed and intercepted
-
 
 ### Derivation
 
 - Depends on a set of observables to do its work.
 
-### ComputedValue<T>
+### Computed<T>
 
 - Is an observable which derives its value from a set of dependent observables
 - Compare values structurally or as scalars
@@ -47,4 +46,3 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 - Memoization of computation with DependencyState
 - Spying and Traceability
 - Exception handling and propagation
-

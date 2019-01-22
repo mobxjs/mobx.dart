@@ -12,7 +12,7 @@ enum DerivationState {
 
   // some deep dependency changed, but don't know if shallow dependency changed
   // will require to check first if UP_TO_DATE or POSSIBLY_STALE
-  // currently only ComputedValue will propagate POSSIBLY_STALE
+  // currently only Computed will propagate POSSIBLY_STALE
   //
   // having this state is second big optimization:
   // don't have to recompute on every dependency change, but only when it's needed

@@ -15,9 +15,9 @@ doc/api/
 # Misc
 .idea
 *.iml
-
+local.properties
 .vscode/settings.json
-flutter_mobx/android/local.properties
+Generated.xcconfig
 
 coverage/
 .test_coverage.dart
