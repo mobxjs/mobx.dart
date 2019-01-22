@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+
 part 'todos.g.dart';
 
 class Todo = TodoBase with _$Todo;
@@ -59,4 +62,50 @@ abstract class TodoListBase implements Store {
 //  @action removeCompleted(){}
 //  @action markAllAsCompleted(){}
 
+}
+
+class TodoExample extends StatefulWidget {
+  const TodoExample({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _TodoExampleState createState() => _TodoExampleState();
+}
+
+class _TodoExampleState extends State<TodoExample> {
+  final _todoList = TodoList();
+  final _todoController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Container(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                controller: _todoController,
+              ),
+              RaisedButton(
+                  child: const Text('Add Todo'),
+                  onPressed: () {
+                    _todoList.addTodo(_todoController.text);
+                  }),
+              Observer(
+                  builder: (_) => ListView.builder(
+                        controller: scrollController,
+                        shrinkWrap: true,
+                        itemCount: _todoList.todos.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Text(_todoList.todos[index].description);
+                        },
+                      )),
+            ],
+          ),
+        ),
+      );
 }
