@@ -49,6 +49,18 @@ mixin _$TodoList on TodoListBase, Store {
   ObservableList<Todo> get completedTodos => (_$completedTodosComputed ??=
           Computed<ObservableList<Todo>>(() => super.completedTodos))
       .value;
+  Computed<bool> _$hasCompletedTodosComputed;
+
+  @override
+  bool get hasCompletedTodos => (_$hasCompletedTodosComputed ??=
+          Computed<bool>(() => super.hasCompletedTodos))
+      .value;
+  Computed<bool> _$hasPendingTodosComputed;
+
+  @override
+  bool get hasPendingTodos => (_$hasPendingTodosComputed ??=
+          Computed<bool>(() => super.hasPendingTodos))
+      .value;
   Computed<ObservableList<Todo>> _$visibleTodosComputed;
 
   @override

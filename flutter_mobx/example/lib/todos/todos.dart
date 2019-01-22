@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 part 'todos.g.dart';
 
@@ -27,11 +28,17 @@ abstract class TodoListBase implements Store {
 
   @computed
   ObservableList<Todo> get pendingTodos =>
-      todos.where((todo) => todo.done != true);
+      ObservableList.of(todos.where((todo) => todo.done != true));
 
   @computed
   ObservableList<Todo> get completedTodos =>
-      todos.where((todo) => todo.done == true);
+      ObservableList.of(todos.where((todo) => todo.done == true));
+
+  @computed
+  bool get hasCompletedTodos => completedTodos.isNotEmpty;
+
+  @computed
+  bool get hasPendingTodos => pendingTodos.isNotEmpty;
 
   @computed
   ObservableList<Todo> get visibleTodos {
@@ -52,6 +59,7 @@ abstract class TodoListBase implements Store {
   void addTodo(String description) {
     final todo = Todo(description);
     todos.add(todo);
+    currentDescription = '';
   }
 
   @action
@@ -81,14 +89,70 @@ abstract class TodoListBase implements Store {
 }
 
 class TodoExample extends StatefulWidget {
+  const TodoExample();
+
   @override
   State<StatefulWidget> createState() => _TodoExampleState();
 }
 
 class _TodoExampleState extends State<TodoExample> {
+  final _list = TodoList();
+
+  final _textController = TextEditingController(text: '');
+
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        children: <Widget>[
+          Observer(
+            builder: (_) => TextField(
+                  autofocus: true,
+                  controller: _textController,
+                  onChanged: _onTextChanged,
+                  onSubmitted: _onTextSubmitted,
+                ),
+          ),
+          Observer(
+              builder: (_) => ButtonBar(
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text('Remove Completed'),
+                        onPressed: _list.hasCompletedTodos
+                            ? _list.removeCompleted
+                            : null,
+                      ),
+                      RaisedButton(
+                        child: Text('Mark All Completed'),
+                        onPressed: _list.hasPendingTodos
+                            ? _list.markAllAsCompleted
+                            : null,
+                      )
+                    ],
+                  )),
+          Observer(
+              builder: (_) => Flexible(
+                    child: ListView.builder(
+                        itemCount: _list.todos.length,
+                        itemBuilder: (_, index) {
+                          final todo = _list.todos[index];
+                          return Observer(
+                              builder: (_) => CheckboxListTile(
+                                    value: todo.done,
+                                    onChanged: (value) => todo.done = value,
+                                    title: Text(todo.description),
+                                  ));
+                        }),
+                  )),
+        ],
+      ));
+
+  void _onTextChanged(String newValue) {
+    _list.changeDescription(newValue);
+  }
+
+  void _onTextSubmitted(String value) {
+    _list.addTodo(value);
+    _textController.clear();
   }
 }
