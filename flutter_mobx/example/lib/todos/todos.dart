@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 part 'todos.g.dart';
 
@@ -53,10 +54,41 @@ abstract class TodoListBase implements Store {
     todos.add(todo);
   }
 
-//  @action removeTodo(){}
-//  @action changeDescription(){}
-//  @action changeFilter(){}
-//  @action removeCompleted(){}
-//  @action markAllAsCompleted(){}
+  @action
+  void removeTodo(Todo todo) {
+    todos.removeWhere((x) => x == todo);
+  }
 
+  // ignore: use_setters_to_change_properties
+  @action
+  void changeDescription(String description) =>
+      currentDescription = description;
+
+  // ignore: use_setters_to_change_properties
+  @action
+  void changeFilter(VisibilityFilter filter) => this.filter = filter;
+
+  @action
+  void removeCompleted() {
+    todos.removeWhere((todo) => todo.done);
+  }
+
+  @action
+  void markAllAsCompleted() {
+    // ignore: avoid_function_literals_in_foreach_calls
+    todos.forEach((todo) => todo.done = true);
+  }
+}
+
+class TodoExample extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _TodoExampleState();
+}
+
+class _TodoExampleState extends State<TodoExample> {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return null;
+  }
 }

@@ -110,4 +110,54 @@ mixin _$TodoList on TodoListBase, Store {
       _$TodoListBaseActionController.endAction(_$prevDerivation);
     }
   }
+
+  @override
+  void removeTodo(Todo todo) {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.removeTodo(todo);
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
+
+  @override
+  void changeDescription(String description) {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.changeDescription(description);
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
+
+  @override
+  void changeFilter(VisibilityFilter filter) {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.changeFilter(filter);
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
+
+  @override
+  void removeCompleted() {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.removeCompleted();
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
+
+  @override
+  void markAllAsCompleted() {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.markAllAsCompleted();
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
 }
