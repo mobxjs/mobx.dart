@@ -30,7 +30,7 @@ class MobXCaughtException implements Exception {
   Object get exception => _exception;
 
   @override
-  String toString() => 'MobXCaughtException: ${exception}';
+  String toString() => 'MobXCaughtException: $exception';
 }
 
 typedef Dispose = void Function();
