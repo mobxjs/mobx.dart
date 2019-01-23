@@ -1,4 +1,4 @@
-name: example
+name: mobx_codegen_example
 description: A starting point for Dart libraries or applications.
 version: 0.0.1
 author: Joni Katajamäki <joni.katajamaki@gmail.com>
@@ -7,14 +7,14 @@ environment:
   sdk: '>=2.1.0-dev <3.0.0'
 
 dependencies:
-  mobx: ^0.0.19
+  mobx: ^0.0.20
   mobx_codegen: ^0.0.1
 
 dependency_overrides:
   mobx:
-    path: ../mobx
+    path: ../../mobx
   mobx_codegen:
-    path: ../mobx_codegen
+    path: ../../mobx_codegen
 
 dev_dependencies:
   build_runner: ^1.1.3
