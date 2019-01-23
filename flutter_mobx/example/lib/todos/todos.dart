@@ -182,8 +182,4 @@ class _TodoExampleState extends State<TodoExample> {
     _list.addTodo(value);
     _textController.clear();
   }
-
-  void _handleFilterChanged(Object value) {
-    _list.filter = value;
-  }
 }
