@@ -80,7 +80,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       return null;
     }
 
-    if (_checkFieldErrors(element)) {
+    if (_fieldIsNotValid(element)) {
       return null;
     }
 
@@ -94,7 +94,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
     return null;
   }
 
-  bool _checkFieldErrors(FieldElement element) => any([
+  bool _fieldIsNotValid(FieldElement element) => any([
         _errors.staticObservables.addIf(element.isStatic, element.name),
         _errors.finalObservables.addIf(element.isFinal, element.name)
       ]);
@@ -120,7 +120,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       return null;
     }
 
-    if (_checkMethodErrors(element)) {
+    if (_methodIsNotValid(element)) {
       return null;
     }
 
@@ -158,7 +158,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
     return null;
   }
 
-  bool _checkMethodErrors(MethodElement element) => any([
+  bool _methodIsNotValid(MethodElement element) => any([
         _errors.staticActions.addIf(element.isStatic, element.name),
         _errors.asyncActions.addIf(element.isAsynchronous, element.name),
       ]);
