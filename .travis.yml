@@ -19,6 +19,7 @@ env:
   - PACKAGE=mobx_codegen
   - PACKAGE=example
   - PACKAGE=flutter_mobx FLUTTER=true
+  - PACKAGE=flutter_mobx/example FLUTTER=true
 
 script:
   - ./tool/run.sh

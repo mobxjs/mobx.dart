@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx_example/counter.dart';
+import 'package:flutter_mobx_example/todos/todos.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const CounterExample(title: 'Flutter Demo Home Page'),
+        home: const TodoExample(),
+//        home: const CounterExample(title: 'Flutter Demo Home Page'),
       );
 }

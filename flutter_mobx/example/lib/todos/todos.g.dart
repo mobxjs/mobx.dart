@@ -49,6 +49,18 @@ mixin _$TodoList on TodoListBase, Store {
   ObservableList<Todo> get completedTodos => (_$completedTodosComputed ??=
           Computed<ObservableList<Todo>>(() => super.completedTodos))
       .value;
+  Computed<bool> _$hasCompletedTodosComputed;
+
+  @override
+  bool get hasCompletedTodos => (_$hasCompletedTodosComputed ??=
+          Computed<bool>(() => super.hasCompletedTodos))
+      .value;
+  Computed<bool> _$hasPendingTodosComputed;
+
+  @override
+  bool get hasPendingTodos => (_$hasPendingTodosComputed ??=
+          Computed<bool>(() => super.hasPendingTodos))
+      .value;
   Computed<ObservableList<Todo>> _$visibleTodosComputed;
 
   @override
@@ -106,6 +118,56 @@ mixin _$TodoList on TodoListBase, Store {
     final _$prevDerivation = _$TodoListBaseActionController.startAction();
     try {
       return super.addTodo(description);
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
+
+  @override
+  void removeTodo(Todo todo) {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.removeTodo(todo);
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
+
+  @override
+  void changeDescription(String description) {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.changeDescription(description);
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
+
+  @override
+  void changeFilter(VisibilityFilter filter) {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.changeFilter(filter);
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
+
+  @override
+  void removeCompleted() {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.removeCompleted();
+    } finally {
+      _$TodoListBaseActionController.endAction(_$prevDerivation);
+    }
+  }
+
+  @override
+  void markAllAsCompleted() {
+    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    try {
+      return super.markAllAsCompleted();
     } finally {
       _$TodoListBaseActionController.endAction(_$prevDerivation);
     }
