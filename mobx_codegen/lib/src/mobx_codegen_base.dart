@@ -45,10 +45,8 @@ class StoreGenerator extends Generator {
 }
 
 class StoreMixinVisitor extends SimpleElementVisitor {
-  StoreMixinVisitor(String parentName, String name,
-      [void Function(String message) logSevere])
-      : _logSevere = logSevere ?? log.severe,
-        _errors = StoreClassCodegenErrors(name) {
+  StoreMixinVisitor(String parentName, String name)
+      : _errors = StoreClassCodegenErrors(name) {
     _storeTemplate = StoreTemplate()
       ..parentName = parentName
       ..mixinName = '_\$$name';
@@ -64,11 +62,9 @@ class StoreMixinVisitor extends SimpleElementVisitor {
 
   final StoreClassCodegenErrors _errors;
 
-  final void Function(String message) _logSevere;
-
   String get source {
     if (_errors.hasErrors) {
-      _logSevere(_errors.message);
+      log.severe(_errors.message);
       return '';
     }
     return _storeTemplate.toString();
