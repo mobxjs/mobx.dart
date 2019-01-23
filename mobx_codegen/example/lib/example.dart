@@ -1,0 +1,1 @@
+library mobx_codegen_example;
