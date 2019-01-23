@@ -117,6 +117,30 @@ class _TodoExampleState extends State<TodoExample> {
                 ),
           ),
           Observer(
+            builder: (_) => Column(
+                  children: <Widget>[
+                    RadioListTile(
+                        dense: true,
+                        title: const Text('All'),
+                        value: VisibilityFilter.all,
+                        groupValue: _list.filter,
+                        onChanged: _list.changeFilter),
+                    RadioListTile(
+                        dense: true,
+                        title: const Text('Pending'),
+                        value: VisibilityFilter.pending,
+                        groupValue: _list.filter,
+                        onChanged: _list.changeFilter),
+                    RadioListTile(
+                        dense: true,
+                        title: const Text('Completed'),
+                        value: VisibilityFilter.completed,
+                        groupValue: _list.filter,
+                        onChanged: _list.changeFilter),
+                  ],
+                ),
+          ),
+          Observer(
               builder: (_) => ButtonBar(
                     children: <Widget>[
                       RaisedButton(
@@ -136,7 +160,7 @@ class _TodoExampleState extends State<TodoExample> {
           Observer(
               builder: (_) => Flexible(
                     child: ListView.builder(
-                        itemCount: _list.todos.length,
+                        itemCount: _list.visibleTodos.length,
                         itemBuilder: (_, index) {
                           final todo = _list.todos[index];
                           return Observer(
@@ -157,5 +181,9 @@ class _TodoExampleState extends State<TodoExample> {
   void _onTextSubmitted(String value) {
     _list.addTodo(value);
     _textController.clear();
+  }
+
+  void _handleFilterChanged(Object value) {
+    _list.filter = value;
   }
 }
