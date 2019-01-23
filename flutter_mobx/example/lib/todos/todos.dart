@@ -108,6 +108,9 @@ class _TodoExampleState extends State<TodoExample> {
           Observer(
             builder: (_) => TextField(
                   autofocus: true,
+                  decoration: const InputDecoration(
+                      labelText: 'Add a Todo',
+                      contentPadding: EdgeInsets.all(8)),
                   controller: _textController,
                   onChanged: _onTextChanged,
                   onSubmitted: _onTextSubmitted,
