@@ -117,13 +117,13 @@ class _TodoExampleState extends State<TodoExample> {
               builder: (_) => ButtonBar(
                     children: <Widget>[
                       RaisedButton(
-                        child: Text('Remove Completed'),
+                        child: const Text('Remove Completed'),
                         onPressed: _list.hasCompletedTodos
                             ? _list.removeCompleted
                             : null,
                       ),
                       RaisedButton(
-                        child: Text('Mark All Completed'),
+                        child: const Text('Mark All Completed'),
                         onPressed: _list.hasPendingTodos
                             ? _list.markAllAsCompleted
                             : null,
