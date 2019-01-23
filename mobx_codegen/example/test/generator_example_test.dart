@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:mobx_codegen_example/src/generator_example.dart';
+import '../lib/src/generator_example.dart';
 import 'package:test/test.dart';
 
 void main() {
