@@ -86,6 +86,54 @@ mixin _\$User on UserBase, Store {
 }
 """;
 
+const invalidInput = """
+library test_user;
+
+import 'package:mobx/mobx.dart';
+
+part 'test_user.g.dart';
+
+class User = UserBase with _\$User;
+
+abstract class UserBase implements Store {
+  UserBase(this.id);
+
+  @observable
+  final int id;
+
+  @observable
+  final String firstName = 'Jane';
+
+  @observable
+  String lastName = 'Doe';
+
+  @computed
+  String get fullName => '\$firstName \$lastName';
+
+  @observable
+  static int foobar = 123;
+
+  @action
+  void updateNames({String firstName, String lastName}) {
+    if (firstName != null) this.firstName = firstName;
+    if (lastName != null) this.lastName = firstName;
+  }
+
+  @action
+  Future updateUserFromDb() async { }
+
+  @action
+  static UserBase getUser(int id) async {}
+}
+""";
+
+const invalidOutput = """
+Could not make class "User" observable. Changes needed:
+  1. Remove static modifier from the field "foobar"
+  2. Remove static modifier from the method "getUser"
+  3. Remove final modifier from fields "id" and "firstName"
+  4. Remove async modifier from methods "updateUserFromDb" and "getUser\"""";
+
 void main() {
   group('generator', () {
     test('ignores empty library', () async {
@@ -105,6 +153,10 @@ void main() {
     test('generates for a class that implements Store', () async {
       expect(await generate(validInput), endsWith(validOutput));
     });
+
+    test('invalid output', () async {
+      expect(await generate(invalidInput), endsWith(invalidOutput));
+    });
   });
 }
 
@@ -121,13 +173,10 @@ Future<String> generate(String source) async {
     '$pkgName|lib/test_user.dart': source,
   };
 
-  // Capture any error from generation; if there is one, return that instead of
-  // the generated output.
   String error;
   void captureError(LogRecord logRecord) {
-    if (logRecord.error is InvalidGenerationSourceError) {
-      if (error != null) throw StateError('Expected at most one error.');
-      error = logRecord.error.toString();
+    if (logRecord.level == Level.SEVERE) {
+      error = logRecord.message;
     }
   }
 
