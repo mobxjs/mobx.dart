@@ -4,7 +4,7 @@ import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/rows.dart';
 
 class StoreTemplate {
-  String name;
+  String mixinName;
   String parentName;
 
   final Rows<ObservableTemplate> observables = Rows();
@@ -21,7 +21,7 @@ class StoreTemplate {
 
   @override
   String toString() => """
-  mixin $name on $parentName, Store {
+  mixin $mixinName on $parentName, Store {
     $computeds
 
     $observables
