@@ -83,8 +83,9 @@ abstract class TodoListBase implements Store {
 
   @action
   void markAllAsCompleted() {
-    // ignore: avoid_function_literals_in_foreach_calls
-    todos.forEach((todo) => todo.done = true);
+    for (final todo in todos) {
+      todo.done = true;
+    }
   }
 }
 
@@ -98,88 +99,113 @@ class TodoExample extends StatefulWidget {
 class _TodoExampleState extends State<TodoExample> {
   final _list = TodoList();
 
-  final _textController = TextEditingController(text: '');
-
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(),
       body: Column(
         children: <Widget>[
-          Observer(
-            builder: (_) => TextField(
-                  autofocus: true,
-                  decoration: const InputDecoration(
-                      labelText: 'Add a Todo',
-                      contentPadding: EdgeInsets.all(8)),
-                  controller: _textController,
-                  onChanged: _onTextChanged,
-                  onSubmitted: _onTextSubmitted,
-                ),
-          ),
-          Observer(
-            builder: (_) => Column(
-                  children: <Widget>[
-                    RadioListTile(
-                        dense: true,
-                        title: const Text('All'),
-                        value: VisibilityFilter.all,
-                        groupValue: _list.filter,
-                        onChanged: _list.changeFilter),
-                    RadioListTile(
-                        dense: true,
-                        title: const Text('Pending'),
-                        value: VisibilityFilter.pending,
-                        groupValue: _list.filter,
-                        onChanged: _list.changeFilter),
-                    RadioListTile(
-                        dense: true,
-                        title: const Text('Completed'),
-                        value: VisibilityFilter.completed,
-                        groupValue: _list.filter,
-                        onChanged: _list.changeFilter),
-                  ],
-                ),
-          ),
-          Observer(
-              builder: (_) => ButtonBar(
-                    children: <Widget>[
-                      RaisedButton(
-                        child: const Text('Remove Completed'),
-                        onPressed: _list.hasCompletedTodos
-                            ? _list.removeCompleted
-                            : null,
-                      ),
-                      RaisedButton(
-                        child: const Text('Mark All Completed'),
-                        onPressed: _list.hasPendingTodos
-                            ? _list.markAllAsCompleted
-                            : null,
-                      )
-                    ],
-                  )),
-          Observer(
-              builder: (_) => Flexible(
-                    child: ListView.builder(
-                        itemCount: _list.visibleTodos.length,
-                        itemBuilder: (_, index) {
-                          final todo = _list.todos[index];
-                          return Observer(
-                              builder: (_) => CheckboxListTile(
-                                    value: todo.done,
-                                    onChanged: (value) => todo.done = value,
-                                    title: Text(todo.description),
-                                  ));
-                        }),
-                  )),
+          AddTodo(list: _list),
+          ActionBar(list: _list),
+          TodoListView(list: _list)
         ],
       ));
+}
+
+class TodoListView extends StatelessWidget {
+  const TodoListView({@required this.list});
+
+  final TodoList list;
+
+  @override
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => Flexible(
+            child: ListView.builder(
+                itemCount: list.visibleTodos.length,
+                itemBuilder: (_, index) {
+                  final todo = list.todos[index];
+                  return Observer(
+                      builder: (_) => CheckboxListTile(
+                            value: todo.done,
+                            onChanged: (value) => todo.done = value,
+                            title: Text(todo.description),
+                          ));
+                }),
+          ));
+}
+
+class ActionBar extends StatelessWidget {
+  const ActionBar({@required this.list});
+
+  final TodoList list;
+
+  @override
+  Widget build(BuildContext context) => Column(children: <Widget>[
+        Observer(
+          builder: (_) => Column(
+                children: <Widget>[
+                  RadioListTile(
+                      dense: true,
+                      title: const Text('All'),
+                      value: VisibilityFilter.all,
+                      groupValue: list.filter,
+                      onChanged: list.changeFilter),
+                  RadioListTile(
+                      dense: true,
+                      title: const Text('Pending'),
+                      value: VisibilityFilter.pending,
+                      groupValue: list.filter,
+                      onChanged: list.changeFilter),
+                  RadioListTile(
+                      dense: true,
+                      title: const Text('Completed'),
+                      value: VisibilityFilter.completed,
+                      groupValue: list.filter,
+                      onChanged: list.changeFilter),
+                ],
+              ),
+        ),
+        Observer(
+            builder: (_) => ButtonBar(
+                  children: <Widget>[
+                    RaisedButton(
+                      child: const Text('Remove Completed'),
+                      onPressed:
+                          list.hasCompletedTodos ? list.removeCompleted : null,
+                    ),
+                    RaisedButton(
+                      child: const Text('Mark All Completed'),
+                      onPressed:
+                          list.hasPendingTodos ? list.markAllAsCompleted : null,
+                    )
+                  ],
+                ))
+      ]);
+}
+
+class AddTodo extends StatelessWidget {
+  AddTodo({@required this.list});
+
+  final TodoList list;
+  final _textController = TextEditingController(text: '');
+
+  @override
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => TextField(
+              autofocus: true,
+              decoration: const InputDecoration(
+                  labelText: 'Add a Todo', contentPadding: EdgeInsets.all(8)),
+              controller: _textController,
+              onChanged: _onTextChanged,
+              onSubmitted: _onTextSubmitted,
+            ),
+      );
 
   void _onTextChanged(String newValue) {
-    _list.changeDescription(newValue);
+    list.changeDescription(newValue);
   }
 
   void _onTextSubmitted(String value) {
-    _list.addTodo(value);
+    list.addTodo(value);
     _textController.clear();
   }
 }

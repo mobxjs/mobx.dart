@@ -121,7 +121,6 @@ linter:
     - unnecessary_this
     - unrelated_type_equality_checks
     - use_rethrow_when_possible
-    - use_setters_to_change_properties
     - use_string_buffers
     - use_to_and_as_if_applicable
     - valid_regexps
