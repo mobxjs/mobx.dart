@@ -6,6 +6,24 @@ import 'package:test/test.dart';
 import 'shared_mocks.dart';
 
 void main() {
+  group('MapKeysIterable', () {
+    test('length reports observed', () {
+      final atom = MockAtom();
+
+      verifyNever(atom.reportObserved());
+      expect(MapKeysIterable(['a', 'b'], atom).length, equals(2));
+      verify(atom.reportObserved());
+    });
+
+    test('contains reports observed', () {
+      final atom = MockAtom();
+
+      verifyNever(atom.reportObserved());
+      expect(MapKeysIterable(['a', 'b'], atom).contains('a'), isTrue);
+      verify(atom.reportObserved());
+    });
+  });
+
   group('ObservableList', () {
     test('Observing a map key works', () {
       final map = ObservableMap.of({'a': 1});
@@ -77,6 +95,7 @@ void main() {
         'keys': (m) => m.keys,
         'values': (m) => m.values,
         'entries': (m) => m.entries,
+        'cast': (m) => m.cast().keys
       }.forEach(runIterableTest);
     });
 
