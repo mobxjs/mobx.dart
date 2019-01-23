@@ -67,12 +67,10 @@ abstract class TodoListBase implements Store {
     todos.removeWhere((x) => x == todo);
   }
 
-  // ignore: use_setters_to_change_properties
   @action
   void changeDescription(String description) =>
       currentDescription = description;
 
-  // ignore: use_setters_to_change_properties
   @action
   void changeFilter(VisibilityFilter filter) => this.filter = filter;
 
