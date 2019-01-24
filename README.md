@@ -10,7 +10,16 @@
 
 > Supercharge the state-management in your Dart apps with Transparent Functional Reactive Programming (TFRP)
 
-## Building blocks
+## Introduction
+
+## Core Concepts
+
+- Observables
+- Computed
+- Actions
+- Reactions
+
+## Roadmap
 
 ### Observables
 
@@ -18,7 +27,7 @@
 - [x] Create `ObservableList<T>`
   - [x] observe hook
   - [ ] intercept hook
-- [ ] Create `ObservableMap<K, T>`
+- [x] Create `ObservableMap<K, T>`
 - [x] Atoms with `createAtom()`
 
 ### Computed Observables
@@ -38,7 +47,7 @@
 
 ### Actions
 
-- [x] Create `Action` with `action()`
+- [x] Create `Action`
 - [x] Create untracked-action with `untracked<T>()`
 - [x] Create transaction with `transaction<T>()`
 
@@ -51,7 +60,7 @@
   - [x] `onBecomeUnobserved`
 - [ ] Spying and Tracing
 - [x] Global configuration
-- [ ] Exception handling and Error recovery
+- [x] Exception handling and Error recovery
   - [x] Error boundary
   - [x] Disabling Error boundary in global config
 - [ ] Debuggability
