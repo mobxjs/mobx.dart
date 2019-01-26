@@ -47,10 +47,7 @@ class _CounterExampleState extends State<CounterExample> {
 
 ```
 
-Notice the use of the `Observer` that listens to the `_counter.value`
-observable and rebuilds on changes. Any observable used in the
-builder function is automatically tracked by MobX. Anytime it 
-changes, the widget is rebuilt and rendered.
+Notice the use of the `Observer` widget that listens to `_counter.value`, an observable, and rebuilds on changes. 
 
 **You can [go here](example) for more examples**
  
