@@ -1,3 +1,62 @@
 # flutter_mobx
 
-Flutter integration with Mobx.dart
+> Flutter integration with [MobX.dart](https://github.com/mobxjs/mobx.dart).
+
+Provides the **`Observer`** widget that listens to observables and automatically
+rebuilds on changes.
+
+### Example
+```dart
+class CounterExample extends StatefulWidget {
+  const CounterExample({Key key}) : super(key: key);
+
+  @override
+  _CounterExampleState createState() => _CounterExampleState();
+}
+
+class _CounterExampleState extends State<CounterExample> {
+  final _counter = Counter();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Counter'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Observer(
+                  builder: (_) => Text(
+                        '${_counter.value}',
+                        style: const TextStyle(fontSize: 20),
+                      )),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _counter.increment,
+          tooltip: 'Increment',
+          child: const Icon(Icons.add),
+        ),
+      );
+}
+
+```
+
+Notice the use of the `Observer` that listens to the `_counter.value`
+observable and rebuilds on changes. Any observable used in the
+builder function is automatically tracked by MobX. Anytime it 
+changes, the widget is rebuilt and rendered.
+
+### Observer
+
+`Observer(Widget Function(BuildContext context) builder)`
+
+The **`builder`** function will be monitored by MobX and tracks all
+the _observables_ that are being used inside it. When any of the
+_observables_ change, builder will be called again to rebuild the 
+`Widget`. This gives you a seamless way to create a reactive `Widget`.
