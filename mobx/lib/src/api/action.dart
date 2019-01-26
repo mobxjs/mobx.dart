@@ -1,7 +1,7 @@
 import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/core.dart';
 
-Action runInAction(Function fn, {String name, ReactiveContext context}) =>
+T runInAction<T>(T Function() fn, {String name, ReactiveContext context}) =>
     Action(fn, name: name, context: context)();
 
 /// Untracked ensures there is no tracking derivation while the given action runs.
