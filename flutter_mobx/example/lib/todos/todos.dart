@@ -120,7 +120,7 @@ class TodoListView extends StatelessWidget {
             child: ListView.builder(
                 itemCount: list.visibleTodos.length,
                 itemBuilder: (_, index) {
-                  final todo = list.todos[index];
+                  final todo = list.visibleTodos[index];
                   return Observer(
                       builder: (_) => CheckboxListTile(
                             value: todo.done,
