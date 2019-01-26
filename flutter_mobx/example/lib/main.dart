@@ -24,7 +24,9 @@ class MyApp extends StatelessWidget {
 class ExampleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Flutter MobX Examples'),
+      ),
       body: Center(
         child: Column(
           children: <Widget>[
