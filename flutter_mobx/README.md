@@ -52,6 +52,8 @@ observable and rebuilds on changes. Any observable used in the
 builder function is automatically tracked by MobX. Anytime it 
 changes, the widget is rebuilt and rendered.
 
+**You can [go here](example) for more examples**
+ 
 ### Observer
 
 `Observer(Widget Function(BuildContext context) builder)`
