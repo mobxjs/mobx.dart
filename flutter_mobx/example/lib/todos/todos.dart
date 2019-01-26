@@ -25,6 +25,9 @@ abstract class TodoListBase implements Store {
   @observable
   VisibilityFilter filter = VisibilityFilter.all;
 
+  @observable
+  String currentDescription = '';
+
   @computed
   ObservableList<Todo> get pendingTodos =>
       ObservableList.of(todos.where((todo) => todo.done != true));
@@ -54,9 +57,6 @@ abstract class TodoListBase implements Store {
         return todos;
     }
   }
-
-  @observable
-  String currentDescription = '';
 
   @action
   void addTodo(String description) {
