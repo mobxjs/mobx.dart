@@ -53,6 +53,11 @@
 
 ## Cross cutting features
 
+- [x] Use of a `ReactiveContext` and `ReactiveConfig` to isolate the reactivity. This is an _advanced_ feature and useful in
+case you are running multiple independent reactive systems without causing any interference between them. This is
+possible if a library chooses to use MobX internally and the library gets consumed by an app that also uses MobX. In that
+scenario, you want the reactivity of the library NOT to interfere with the reactivity within the app. For most cases, you don't
+have to worry about this. MobX will default to using the singleton `mainContext`, which is at the app level.
 - [x] Observability API for `Observable` and `Computed`
   - [x] `observe`
   - [x] `intercept`

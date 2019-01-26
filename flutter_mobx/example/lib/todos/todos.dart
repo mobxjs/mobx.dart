@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 part 'todos.g.dart';
 
+//region State
 class Todo = TodoBase with _$Todo;
 
 abstract class TodoBase implements Store {
@@ -39,6 +40,10 @@ abstract class TodoListBase implements Store {
 
   @computed
   bool get hasPendingTodos => pendingTodos.isNotEmpty;
+
+  @computed
+  String get itemsDescription =>
+      '${pendingTodos.length} pending, ${completedTodos.length} completed';
 
   @computed
   ObservableList<Todo> get visibleTodos {
@@ -86,7 +91,9 @@ abstract class TodoListBase implements Store {
     }
   }
 }
+//endregion
 
+//region UI
 class TodoExample extends StatefulWidget {
   const TodoExample();
 
@@ -99,14 +106,26 @@ class _TodoExampleState extends State<TodoExample> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Todos'),
+      ),
       body: Column(
         children: <Widget>[
           AddTodo(list: _list),
           ActionBar(list: _list),
+          Description(list: _list),
           TodoListView(list: _list)
         ],
       ));
+}
+
+class Description extends StatelessWidget {
+  const Description({this.list});
+
+  final TodoList list;
+  @override
+  Widget build(BuildContext context) =>
+      Observer(builder: (_) => Text(list.itemsDescription));
 }
 
 class TodoListView extends StatelessWidget {
@@ -123,9 +142,22 @@ class TodoListView extends StatelessWidget {
                   final todo = list.visibleTodos[index];
                   return Observer(
                       builder: (_) => CheckboxListTile(
+                            controlAffinity: ListTileControlAffinity.leading,
                             value: todo.done,
                             onChanged: (value) => todo.done = value,
-                            title: Text(todo.description),
+                            title: Row(
+                              children: <Widget>[
+                                Expanded(
+                                    child: Text(
+                                  todo.description,
+                                  overflow: TextOverflow.ellipsis,
+                                )),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () => list.removeTodo(todo),
+                                )
+                              ],
+                            ),
                           ));
                 }),
           ));
@@ -207,3 +239,4 @@ class AddTodo extends StatelessWidget {
     _textController.clear();
   }
 }
+//endregion
