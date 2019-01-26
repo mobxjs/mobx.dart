@@ -5,7 +5,6 @@ import 'package:flutter_mobx_example/todos/todo_widgets.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) => MaterialApp(
         initialRoute: '/',
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
           '/counter': (_) => const CounterExample(),
           '/todos': (_) => const TodoExample(),
         },
-//        home: const CounterExample(title: 'Flutter Demo Home Page'),
       );
 }
 
