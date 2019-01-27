@@ -1,6 +1,6 @@
 name: flutter_mobx
 description: Flutter Mobx.dart integration.
-version: 0.0.2
+version: 0.0.3
 author: Joni Katajamäki <joni.katajamaki@gmail.com>
 homepage: https://github.com/mobxjs/mobx.dart
 
