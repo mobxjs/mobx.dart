@@ -16,6 +16,22 @@ abstract class CounterBase implements Store {
   }
 }
 
+class Counter1 {
+  Counter1() {
+    increment = Action(_increment);
+  }
+
+  final _value = Observable(0);
+  int get value => _value.value;
+
+  set value(int newValue) => _value.value = newValue;
+  Action increment;
+
+  void _increment() {
+    _value.value++;
+  }
+}
+
 class CounterExample extends StatefulWidget {
   const CounterExample({Key key}) : super(key: key);
 
