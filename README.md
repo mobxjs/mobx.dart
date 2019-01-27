@@ -214,7 +214,7 @@ void waitForCompletion() async {
 - [x] Create untracked-action with `untracked<T>()`
 - [x] Create transaction with `transaction<T>()`
 
-## Cross cutting features
+### Cross cutting features
 
 - [x] Use of a `ReactiveContext` and `ReactiveConfig` to isolate the reactivity. This is an _advanced_ feature and useful in
       case you are running multiple independent reactive systems without causing any interference between them. This is
@@ -233,7 +233,7 @@ void waitForCompletion() async {
   - [x] Disabling Error boundary in global config
 - [ ] Debuggability
 
-## Public facing
+### Public facing
 
 - [x] Logo
 - [ ] Documentation
