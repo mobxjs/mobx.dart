@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 
-![](doc/mobx.png)
+![](https://raw.githubusercontent.com/mobxjs/mobx.dart/master/mobx/doc/mobx.png)
 
 [MobX](https://github.com/mobxjs/mobx) for the Dart language.
 
@@ -30,11 +30,7 @@ console log, a network call to re-rendering the UI.
 
 For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
 
-<a href="https://www.packtpub.com/web-development/mobx-quick-start-guide"><img src="mobx/doc/book.png" height="128"></a>
-
 ## Core Concepts
-
-![MobX Triad](doc/mobx-triad.png)
 
 At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
 
@@ -74,7 +70,7 @@ class Counter {
 ```
 
 On first sight, this does look like some boilerplate code which can quickly go out of hand!
-This is why we added [mobx_codegen](../mobx_codegen) to the mix that allows you to replace the above code with the following:
+This is why we added [mobx_codegen](https://pub.dartlang.org/packages/mobx_codegen) to the mix that allows you to replace the above code with the following:
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -99,7 +95,7 @@ Note the use of annotations to mark the observable properties of the class. Yes,
 but its fixed for any class. As you build more complex classes this boilerplate
 will fade away and you will mostly focus on the code within the braces.
 
-**Note**: Annotations are available via the [mobx_codegen](../mobx_codegen) package.
+**Note**: Annotations are available via the [mobx_codegen](https://pub.dartlang.org/packages/mobx_codegen) package.
 
 ### Actions
 
