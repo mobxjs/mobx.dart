@@ -1,6 +1,6 @@
 name: mobx_codegen
 description: Code generator for Mobx.dart
-version: 0.0.1
+version: 0.0.2
 author: Joni Katajamäki <joni.katajamaki@gmail.com>
 homepage: https://github.com/mobxjs/mobx.dart
 

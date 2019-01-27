@@ -1,5 +1,8 @@
 # flutter_mobx
 
+[![pub package](https://img.shields.io/pub/v/flutter_mobx.svg)](https://pub.dartlang.org/packages/flutter_mobx)
+[![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
+
 > Flutter integration with [MobX.dart](https://pub.dartlang.org/packages/mobx).
 
 Provides the **`Observer`** widget that listens to observables and automatically
