@@ -24,10 +24,6 @@ dependencies:
   flutter_mobx:
     path: ../
 
-dependencies_override:
-  mobx:
-    path: ../../mobx
-
 dev_dependencies:
   build_runner: ^1.0.0
   mobx_codegen:
