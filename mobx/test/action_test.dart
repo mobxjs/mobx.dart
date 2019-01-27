@@ -220,4 +220,26 @@ void main() {
 
     d();
   });
+
+  test('runInAction return type', () {
+    final x = Observable(10);
+
+    var executionCount = 0;
+    var total = 0;
+
+    final d = autorun((_) {
+      total = x.value;
+      executionCount++;
+    });
+
+    final value = runInAction(() => x.value = 100);
+
+    expect(value, equals(100));
+
+    // Notifications are fired now
+    expect(executionCount, equals(2));
+    expect(total, equals(100));
+
+    d();
+  });
 }
