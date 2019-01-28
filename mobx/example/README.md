@@ -1,16 +1,10 @@
 # Examples
 
-## Todos
-
-This example showcases some of the core features of MobX such as `Observable`, `Computed` and `Action`. We have intentionally left out `Reaction` to keep it simple.
-
-The **Todos** example is a classic way of showcasing a framework or a library. Here, you can see how MobX can simplify your code.
-
-### Annotations
+## Annotations
 
 Annotations drastically simplify the usage of MobX by tastefully tucking away all the boilerplate in the generated files (`*.g.dart`).
 
-> This example uses annotations, which is supported by the [`mobx_codegen`](https://pub.dartlang.org/packages/mobx_codegen) package. To run
+> These examples use annotations, which is supported by the [`mobx_codegen`](https://pub.dartlang.org/packages/mobx_codegen) package. To run
 > the code-generator, we are using the following command:
 
 ```text
@@ -18,9 +12,38 @@ $> cd $PATH_TO_MOBX_DART/mobx/example
 $> flutter packages pub run build_runner build
 ```
 
-### Source
+## Counter
 
-All of the code is inside [example.dart](lib/example.dart)
+A really simple **Counter**. After all this is how you start off a Dart/Flutter project :-)
+
+```dart
+import 'package:mobx/mobx.dart';
+
+part 'counter.g.dart';
+
+class Counter = CounterBase with _$Counter;
+
+abstract class CounterBase implements Store {
+  @observable
+  int value = 0;
+
+  @action
+  void increment() {
+    value++;
+  }
+}
+
+```
+
+Notice the **`@observable`** `value` property and the **`@action`** `increment()`that mutates it.
+
+## Todos
+
+This example showcases some of the core features of MobX such as `Observable`, `Computed` and `Action`. We have intentionally left out `Reaction` to keep it simple.
+
+The **Todos** example is a classic way of showcasing a framework or a library. Here, you can see how MobX can simplify your code.
+
+### [todos.dart](lib/todos.dart)
 
 A `Todo` entity is at the heart of the **Todos** example. A bit of boilerplate is needed to make the code-generator do the rest for you.
 
