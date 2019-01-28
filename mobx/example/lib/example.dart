@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 
-part 'todos.g.dart';
+part 'example.g.dart';
 
 class Todo = TodoBase with _$Todo;
 
