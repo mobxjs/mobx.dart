@@ -198,7 +198,7 @@ dispose();
 
 **`ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`**
 
-Monitors the observables used inside `predicate()` and runs the `effect()` upon a change. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`.
+Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
 
 ```dart
 import 'package:mobx/mobx.dart';
