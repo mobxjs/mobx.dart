@@ -3,5 +3,37 @@
 [![pub package](https://img.shields.io/pub/v/mobx_codegen.svg)](https://pub.dartlang.org/packages/mobx_codegen)
 [![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
 
-Adds support for annotating your MobX code with `@observable`, `@computed`, `@action`, making it
-super simple to use MobX.
+Adds support for annotating your MobX code with **`@observable`**, **`@computed`**, **`@action`**, making it
+super simple to use MobX. 
+
+> Note that these annotations only work inside store-classes.
+
+**store-classes** are abstract and implement the Store interface. When you run the `build_runner`, it will automatically generate the `*.g.dart file` that must be imported in your file.
+
+```
+$> cd $YOUR_PROJECT_DIR
+$> flutter packages pub run build_runner build
+```
+
+### Example
+
+```dart
+import 'package:mobx/mobx.dart';
+
+// Include generated file
+part 'todos.g.dart';
+
+// This is the class used by rest of your codebase
+class Todo = TodoBase with _$Todo;
+
+// The store-class
+abstract class TodoBase implements Store {
+  TodoBase(this.description);
+
+  @observable
+  String description = '';
+
+  @observable
+  bool done = false;
+}
+```
