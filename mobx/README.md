@@ -30,6 +30,8 @@ console log, a network call to re-rendering the UI.
 
 For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
 
+![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/mobx/doc/book.png)
+
 ## Core Concepts
 
 ![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/mobx/doc/mobx-triad.png)
