@@ -2,6 +2,8 @@
 
 # Files and directories created by pub
 .dart_tool/
+ios/
+android/
 .packages
 .pub/
 build/
