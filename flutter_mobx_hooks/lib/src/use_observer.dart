@@ -1,18 +1,19 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mobx/mobx.dart';
-
 // ignore: implementation_imports
 import 'package:mobx/src/core.dart' show ReactionImpl;
 
+
+
 void useObserver({ReactiveContext context}) {
   final observer =
-      context == null ? const ObserverHook() : ObserverHook(context: context);
+      context == null ? const _ObserverHook() : _ObserverHook(context: context);
   Hook.use(observer);
 }
 
-class ObserverHook extends Hook<void> {
-  const ObserverHook({this.context});
+class _ObserverHook extends Hook<void> {
+  const _ObserverHook({this.context});
 
   final ReactiveContext context;
 
@@ -26,7 +27,7 @@ class ObserverHook extends Hook<void> {
   }
 }
 
-class ObserverHookState extends HookState<void, ObserverHook> {
+class ObserverHookState extends HookState<void, _ObserverHook> {
   ReactionImpl _reaction;
   Derivation _prevDerivation;
 
