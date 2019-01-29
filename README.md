@@ -31,7 +31,7 @@ console log, a network call to re-rendering the UI.
 
 For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
 
-<a href="https://www.packtpub.com/web-development/mobx-quick-start-guide"><img src="mobx/doc/book.png" height="128"></a>
+[![](mobx/doc/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
 
 ## Core Concepts
 
@@ -154,14 +154,65 @@ return a `ReactionDisposer`, a function that can be called to dispose the reacti
 Runs the reaction immediately and also on any change in the observables used inside
 `fn`.
 
+```dart
+import 'package:mobx/mobx.dart';
+
+String greeting = Observable('Hello World');
+
+final dispose = autorun((_){
+  print(greeting.value);
+});
+
+greeting.value = 'Hello MobX';
+
+// Done with the autorun()
+dispose();
+
+
+// Prints:
+// Hello World
+// Hello MobX
+```
+
 **`ReactionDisposer reaction<T>(T Function(Reaction) predicate, void Function(T) effect)`**
 
 Monitors the observables used inside the `predicate()` function and runs the `effect()` when
 the predicate returns a different value. Only the observables inside `predicate()` are tracked.
 
+```dart
+import 'package:mobx/mobx.dart';
+
+String greeting = Observable('Hello World');
+
+final dispose = reaction((_) => greeting.value, (msg) => print(msg));
+
+greeting.value = 'Hello MobX'; // Cause a change
+
+// Done with the reaction()
+dispose();
+
+
+// Prints:
+// Hello MobX
+```
+
 **`ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`**
 
 Monitors the observables used inside `predicate()` and runs the `effect()` upon a change. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`.
+
+```dart
+import 'package:mobx/mobx.dart';
+
+String greeting = Observable('Hello World');
+
+final dispose = when((_) => greeting.value == 'Hello MobX', () => print('Someone greeted MobX'));
+
+greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
+
+
+// Prints:
+// Someone greeted MobX
+```
 
 **`Future<void> asyncWhen(bool Function(Reaction) predicate)`**
 
@@ -174,6 +225,70 @@ void waitForCompletion() async {
   await asyncWhen(() => _completed.value == true);
 
   print('Completed');
+}
+```
+
+**Observer**
+
+One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the [`flutter_mobx`](flutter_mobx) package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
+
+Below is the _Counter_ example in its entirety.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+
+part 'counter.g.dart';
+
+class Counter = CounterBase with _$Counter;
+
+abstract class CounterBase implements Store {
+  @observable
+  int value = 0;
+
+  @action
+  void increment() {
+    value++;
+  }
+}
+
+class CounterExample extends StatefulWidget {
+  const CounterExample({Key key}) : super(key: key);
+
+  @override
+  _CounterExampleState createState() => _CounterExampleState();
+}
+
+class _CounterExampleState extends State<CounterExample> {
+  final _counter = Counter();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Counter'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Observer(
+                  builder: (_) => Text(
+                        '${_counter.value}',
+                        style: const TextStyle(fontSize: 20),
+                      )),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _counter.increment,
+          tooltip: 'Increment',
+          child: const Icon(Icons.add),
+        ),
+      );
 }
 ```
 
