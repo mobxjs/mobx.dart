@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 
-![](https://raw.githubusercontent.com/mobxjs/mobx.dart/master/mobx/doc/mobx.png)
+![](https://github.com/mobxjs/mobx.dart/raw/master/mobx/doc/mobx.png)
 
 [MobX](https://github.com/mobxjs/mobx) for the Dart language.
 
@@ -32,7 +32,7 @@ For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www
 
 ## Core Concepts
 
-![MobX Triad](https://raw.githubusercontent.com/mobxjs/mobx.dart/readme-updates/mobx/doc/mobx-triad.png)
+![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/mobx/doc/mobx-triad.png)
 
 At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
 
