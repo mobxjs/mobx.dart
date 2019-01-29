@@ -1,11 +1,10 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_mobx_hooks/src/use_observer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
-
-import 'package:flutter_mobx_hooks/src/use_observer.dart';
 
 class MockReaction extends Mock implements ReactionImpl {}
 
@@ -120,7 +119,7 @@ void main() {
       ]);
     });
 
-    testWidgets('erros', (tester) async {
+    testWidgets('errors', (tester) async {
       final outerKey = GlobalKey(debugLabel: 'outerKey');
       final innerKey = GlobalKey(debugLabel: 'innerKey');
 
@@ -130,15 +129,18 @@ void main() {
       var outerRenderCount = 0;
       var innerRenderCount = 0;
 
+      // we cache the instance, or else outer build rebuild the inner widget too
+      final innerWidget = UseObserver(() {
+        innerRenderCount++;
+        return StateWidget(key: innerKey, state: innerState);
+      });
+
       Widget builder() {
         outerRenderCount++;
         return Column(
           children: <Widget>[
             StateWidget(key: outerKey, state: outerState),
-            UseObserver(() {
-              innerRenderCount++;
-              return StateWidget(key: innerKey, state: innerState);
-            })
+            innerWidget,
           ],
         );
       }

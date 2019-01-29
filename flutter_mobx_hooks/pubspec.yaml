@@ -5,12 +5,14 @@ author:
 homepage:
 
 environment:
-  sdk: '>=2.1.0-dev <3.0.0'
+  sdk: ">=2.1.0-dev <3.0.0"
 
 dependencies:
-  mobx: ^0.0.17
+  mobx: ^0.0.28
   flutter_hooks:
-    git: git://github.com/rrousselGit/flutter_hooks.git
+    git:
+      url: git://github.com/rrousselGit/flutter_hooks.git
+      ref: did-build
   flutter:
     sdk: flutter
 
