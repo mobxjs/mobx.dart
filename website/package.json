@@ -1,0 +1,14 @@
+{
+  "name": "mobx.dart",
+  "version": "1.0.0",
+  "description": "The website for Mobx.dart",
+  "scripts": {
+    "build": "fiddly",
+    "watch": "fiddly watch",
+    "serve": "serve public -l 8020"
+  },
+  "devDependencies": {
+    "fiddly": "^0.8.0",
+    "serve": "^10.1.1"
+  }
+}

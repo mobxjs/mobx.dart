@@ -1,0 +1,6 @@
+{
+  "name": "Mobx.dart",
+  "logo": "assets/mobx.png",
+  "styles": "./assets/styles.css",
+  "additionalFiles": ["./docs/concepts.md", "./docs/community.md"]
+}
