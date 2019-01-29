@@ -26,8 +26,11 @@ class MobXException implements Exception {
 class MobXCaughtException implements Exception {
   MobXCaughtException(exception) : _exception = exception;
 
-  Object _exception;
+  final Object _exception;
   Object get exception => _exception;
+
+  @override
+  String toString() => 'MobXCaughtException: $exception';
 }
 
 typedef Dispose = void Function();
