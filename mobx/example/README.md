@@ -12,7 +12,7 @@ $> cd $PATH_TO_MOBX_DART/mobx/example
 $> flutter packages pub run build_runner build
 ```
 
-## Counter
+## Counter ([`counter.dart`](https://github.com/mobxjs/mobx.dart/blob/master/mobx/example/lib/counter.dart))
 
 A really simple **Counter**. After all this is how you start off a Dart/Flutter project :-)
 
@@ -37,13 +37,13 @@ abstract class CounterBase implements Store {
 
 Notice the **`@observable`** `value` property and the **`@action`** `increment()`that mutates it.
 
-## Todos
+## Todos ([`todos.dart`](https://github.com/mobxjs/mobx.dart/blob/master/mobx/example/lib/todos.dart))
 
 This example showcases some of the core features of MobX such as `Observable`, `Computed` and `Action`. We have intentionally left out `Reaction` to keep it simple.
 
 The **Todos** example is a classic way of showcasing a framework or a library. Here, you can see how MobX can simplify your code.
 
-### [todos.dart](lib/todos.dart)
+### Todo
 
 A `Todo` entity is at the heart of the **Todos** example. A bit of boilerplate is needed to make the code-generator do the rest for you.
 
