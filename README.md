@@ -147,7 +147,9 @@ abstract class CounterBase implements Store {
 Reactions complete the _MobX triad_ of **observables**, **actions** and **reactions**. They are
 the observers of the reactive-system and get notified whenever an observable they
 track is changed. Reactions come in few flavors as listed below. All of them
-return a `ReactionDisposer`, a function that can be called to dispose the reaction. One striking feature of all reactions is that they automatically track all the observables without any explicit wiring. The act of reading an observable within a reaction is enough to track it!
+return a `ReactionDisposer`, a function that can be called to dispose the reaction.
+
+One _striking feature_ of reactions is that they _automatically track_ all the observables without any explicit wiring. The act of _reading an observable_ within a reaction is enough to track it!
 
 > The code you write with MobX appears to be literally ceremony-free!
 
