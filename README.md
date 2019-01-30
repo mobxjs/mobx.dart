@@ -124,9 +124,9 @@ import 'package:mobx/mobx.dart';
 
 part 'counter.g.dart';
 
-class Contact = _Contact with _$Contact;
+class Contact = ContactBase with _$Contact;
 
-abstract class _Contact implements Store {
+abstract class ContactBase implements Store {
   @observable
   String firstName;
 
