@@ -75,7 +75,7 @@ class Counter {
 ```
 
 On first sight, this does look like some boilerplate code which can quickly go out of hand!
-This is why we added [mobx_codegen](mobx_codegen) to the mix that allows you to replace the above code with the following:
+This is why we added **[mobx_codegen](mobx_codegen)** to the mix that allows you to replace the above code with the following:
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -100,7 +100,7 @@ Note the use of annotations to mark the observable properties of the class. Yes,
 but its fixed for any class. As you build more complex classes this boilerplate
 will fade away and you will mostly focus on the code within the braces.
 
-**Note**: Annotations are available via the [mobx_codegen](mobx_codegen) package.
+**Note**: Annotations are available via the **[mobx_codegen](mobx_codegen)** package.
 
 ### Actions
 
@@ -147,7 +147,9 @@ abstract class CounterBase implements Store {
 Reactions complete the _MobX triad_ of **observables**, **actions** and **reactions**. They are
 the observers of the reactive-system and get notified whenever an observable they
 track is changed. Reactions come in few flavors as listed below. All of them
-return a `ReactionDisposer`, a function that can be called to dispose the reaction.
+return a `ReactionDisposer`, a function that can be called to dispose the reaction. One striking feature of all reactions is that they automatically track all the observables without any explicit wiring. The act of reading an observable within a reaction is enough to track it!
+
+> The code you write with MobX appears to be literally ceremony-free!
 
 **`ReactionDisposer autorun(Function(Reaction) fn)`**
 
@@ -230,7 +232,7 @@ void waitForCompletion() async {
 
 **Observer**
 
-One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the [`flutter_mobx`](flutter_mobx) package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
+One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the **[`flutter_mobx`](flutter_mobx)** package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
 
 Below is the _Counter_ example in its entirety.
 
