@@ -1,14 +1,14 @@
 ---
 name: Flutter
 menu: Getting Started
-route: '/getting-started/flutter'
+route: "/getting-started/flutter"
 ---
 
 # Flutter
 
 For this tutorial, we will start with a slightly modified version of the example created from `flutter create`.
 
-```
+```dart
 class CounterExample extends StatefulWidget {
   CounterExample({Key key}) : super(key: key);
 
@@ -60,7 +60,7 @@ class _CounterExampleState extends State<CounterExample> {
 
 Add the following dependencies to your pubspec.yaml
 
-```
+```yaml
 dependencies:
   mobx: <latest version>
   flutter_mobx: <latest version>
@@ -68,7 +68,7 @@ dependencies:
 
 Next add the following dev dependencies
 
-```
+```yaml
 dev_dependencies:
   build_runner: ^1.0.0
   mobx_codegen: <latest version>
@@ -78,7 +78,7 @@ dev_dependencies:
 
 First, let's create a store.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 // Include generated file
@@ -105,7 +105,7 @@ Then we will run `flutter packages pub run build_runner build` to build the clas
 
 Finally, we will add the Counter store to our CounterExample. We will also wrap the UI that should re-render on store updates with the Observer widget.
 
-```
+```dart
 class CounterExample extends StatefulWidget {
   CounterExample({Key key}) : super(key: key);
 
@@ -147,6 +147,4 @@ class _CounterExampleState extends State<CounterExample> {
 
 Our end result will look exactly the same as our start!
 
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-    <img src="/public/end_result.png" alt="End result" />
-</div>
+![end_result.png](end_result.png)

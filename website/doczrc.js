@@ -1,7 +1,8 @@
 export default {
-    title: 'Mobx.dart',
-    description: 'The website for Mobx.dart',
-    src: './docs',
+    title: 'MobX.dart',
+    description: 'The MobX state-management library for building Dart and Flutter Apps.',
+    src: './src',
+    files: '**/*.{md,markdown,mdx}',
     debug: false,
     htmlContext: {
         head: {}
@@ -10,7 +11,7 @@ export default {
         logo: {
             src: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/mobx/doc/mobx.png'
         },
-        mode: 'dark',
+        mode: 'light',
         colors: {
             primary: '#1389FD'
         }

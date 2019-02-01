@@ -1,5 +1,5 @@
 ---
-route: '/'
+route: "/"
 ---
 
 # Mobx.dart
