@@ -1,12 +1,13 @@
 ---
-name: Flutter
-menu: Getting Started
+name: Getting Started
 route: "/getting-started/flutter"
 ---
 
-# Flutter
+import endResult from "./end_result.png";
 
-For this tutorial, we will start with a slightly modified version of the example created from `flutter create`.
+# Getting Started
+
+For this tutorial, we will start with a slightly modified version of the example created from `flutter create`. Once you generate a project, here's what you get inside `lib/main.dart`:
 
 ```dart
 class CounterExample extends StatefulWidget {
@@ -56,9 +57,9 @@ class _CounterExampleState extends State<CounterExample> {
 
 ```
 
-## Installation
+## Installing Dependencies
 
-Add the following dependencies to your pubspec.yaml
+Add the following **dependencies** to your pubspec.yaml
 
 ```yaml
 dependencies:
@@ -66,7 +67,7 @@ dependencies:
   flutter_mobx: <latest version>
 ```
 
-Next add the following dev dependencies
+Next add the following **dev_dependencies**
 
 ```yaml
 dev_dependencies:
@@ -147,4 +148,4 @@ class _CounterExampleState extends State<CounterExample> {
 
 Our end result will look exactly the same as our start!
 
-![end_result.png](end_result.png)
+<img src={endResult} />
