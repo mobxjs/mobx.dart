@@ -1,7 +1,9 @@
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
+import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
+import 'package:mobx_codegen/src/template/observable_future.dart';
 import 'package:mobx_codegen/src/template/rows.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/template/util.dart';
@@ -187,38 +189,39 @@ void main() {
     test('renders properly', () {
       final template = ActionTemplate()
         ..storeTemplate = (StoreTemplate()..parentName = 'ParentClass')
-        ..name = 'myAction'
-        ..returnType = 'ReturnType'
-        ..typeParams = [
-          TypeParamTemplate()..name = 'T',
-          TypeParamTemplate()
-            ..name = 'S'
-            ..bound = 'String'
-        ]
-        ..positionalParams = [
-          ParamTemplate()
-            ..name = 'arg1'
-            ..type = 'T'
-        ]
-        ..optionalParams = [
-          ParamTemplate()
-            ..name = 'arg2'
-            ..type = 'S'
-            ..defaultValue = '"arg2value"',
-          ParamTemplate()
-            ..name = 'arg3'
-            ..type = 'String'
-        ]
-        ..namedParams = [
-          ParamTemplate()
-            ..name = 'namedArg1'
-            ..type = 'String'
-            ..defaultValue = '"default"',
-          ParamTemplate()
-            ..name = 'namedArg2'
-            ..type = 'int'
-            ..defaultValue = '3'
-        ];
+        ..method = (MethodOverrideTemplate()
+          ..name = 'myAction'
+          ..returnType = 'ReturnType'
+          ..setTypeParams([
+            TypeParamTemplate()..name = 'T',
+            TypeParamTemplate()
+              ..name = 'S'
+              ..bound = 'String'
+          ])
+          ..positionalParams = [
+            ParamTemplate()
+              ..name = 'arg1'
+              ..type = 'T'
+          ]
+          ..optionalParams = [
+            ParamTemplate()
+              ..name = 'arg2'
+              ..type = 'S'
+              ..defaultValue = '"arg2value"',
+            ParamTemplate()
+              ..name = 'arg3'
+              ..type = 'String'
+          ]
+          ..namedParams = [
+            ParamTemplate()
+              ..name = 'namedArg1'
+              ..type = 'String'
+              ..defaultValue = '"default"',
+            ParamTemplate()
+              ..name = 'namedArg2'
+              ..type = 'int'
+              ..defaultValue = '3'
+          ]);
 
       expect(template.toString(), equals("""
     @override
@@ -230,6 +233,53 @@ void main() {
         _\$ParentClassActionController.endAction(_\$prevDerivation);
       }
     }"""));
+    });
+  });
+
+  group('ObservableFutureTemplate', () {
+    test('renders properly', () {
+      final template = ObservableFutureTemplate()
+        ..method = (MethodOverrideTemplate()
+          ..name = 'fetchData'
+          ..returnType = 'Future'
+          ..returnTypeArgs = SurroundedCommaList('<', '>', ['T'])
+          ..setTypeParams([
+            TypeParamTemplate()..name = 'T',
+            TypeParamTemplate()
+              ..name = 'S'
+              ..bound = 'String'
+          ])
+          ..positionalParams = [
+            ParamTemplate()
+              ..name = 'arg1'
+              ..type = 'T'
+          ]
+          ..optionalParams = [
+            ParamTemplate()
+              ..name = 'arg2'
+              ..type = 'S'
+              ..defaultValue = '"arg2value"',
+            ParamTemplate()
+              ..name = 'arg3'
+              ..type = 'String'
+          ]
+          ..namedParams = [
+            ParamTemplate()
+              ..name = 'namedArg1'
+              ..type = 'String'
+              ..defaultValue = '"default"',
+            ParamTemplate()
+              ..name = 'namedArg2'
+              ..type = 'int'
+              ..defaultValue = '3'
+          ]);
+
+      expect(template.toString(), equals("""
+  @override
+  ObservableFuture<T> fetchData<T, S extends String>(T arg1, [S arg2 = "arg2value", String arg3], {String namedArg1 = "default", int namedArg2 = 3}) {
+    final _\$future = super.fetchData<T, S>(arg1, arg2, arg3, namedArg1: namedArg1, namedArg2: namedArg2);
+    return ObservableFuture<T>(_\$future);
+  }"""));
     });
   });
 }

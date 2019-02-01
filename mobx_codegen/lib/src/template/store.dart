@@ -1,6 +1,7 @@
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
+import 'package:mobx_codegen/src/template/observable_future.dart';
 import 'package:mobx_codegen/src/template/rows.dart';
 
 class StoreTemplate {
@@ -10,6 +11,7 @@ class StoreTemplate {
   final Rows<ObservableTemplate> observables = Rows();
   final Rows<ComputedTemplate> computeds = Rows();
   final Rows<ActionTemplate> actions = Rows();
+  final Rows<ObservableFutureTemplate> observableFutures = Rows();
 
   String _actionControllerName;
   String get actionControllerName =>
@@ -25,6 +27,8 @@ class StoreTemplate {
     $computeds
 
     $observables
+
+    $observableFutures
 
     $_actionControllerField
 

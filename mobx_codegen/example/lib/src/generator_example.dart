@@ -37,4 +37,9 @@ abstract class AdminBase extends User implements Store {
 
   @observable
   ObservableList<String> accessRights = ObservableList();
+
+  @observable
+  Future<String> loadPrivileges() async {
+    return 'adsfadsf';
+  }
 }

@@ -152,19 +152,35 @@ void main() {
     });
   });
 
-  group('StaticActionMethods', () {
+  group('InvalidStaticMethods', () {
     test('message returns singular message with one field added', () {
-      final fields = StaticActionMethods()..addIf(true, 'testMethod');
+      final fields = InvalidStaticMethods()..addIf(true, 'testMethod');
       expect(fields.message,
           'Remove static modifier from the method "testMethod"');
     });
 
     test('message returns plural message with multiple fields added', () {
-      final fields = StaticActionMethods()
+      final fields = InvalidStaticMethods()
         ..addIf(true, 'testMethod1')
         ..addIf(true, 'testMethod2');
       expect(fields.message,
           'Remove static modifier from methods "testMethod1" and "testMethod2"');
+    });
+  });
+
+  group('NonAsyncMethods', () {
+    test('message returns singular message with one field added', () {
+      final fields = NonAsyncMethods()..addIf(true, 'testMethod');
+      expect(fields.message,
+          'Add async modifier or return a Future from the method "testMethod"');
+    });
+
+    test('message returns plural message with multiple fields added', () {
+      final fields = NonAsyncMethods()
+        ..addIf(true, 'testMethod1')
+        ..addIf(true, 'testMethod2');
+      expect(fields.message,
+          'Add async modifier or return a Future from methods "testMethod1" and "testMethod2"');
     });
   });
 }
