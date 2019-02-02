@@ -1,5 +1,6 @@
 name: flutter_mobx
-description: Flutter integration for MobX. It provides the Observer widget that automatically rebuilds
+description:
+  Flutter integration for MobX. It provides the Observer widget that automatically rebuilds
   when the tracked observables change.
 version: 0.0.8
 author: Joni Katajamäki <joni.katajamaki@gmail.com>
@@ -9,7 +10,7 @@ environment:
   sdk: '>=2.1.0-dev <3.0.0'
 
 dependencies:
-  mobx: ^0.0.20
+  mobx: ^0.0.34
   flutter:
     sdk: flutter
 
@@ -17,5 +18,9 @@ dev_dependencies:
   mockito: ^4.0.0
   flutter_test:
     sdk: flutter
+
+dependency_overrides:
+  mobx:
+    path: ../mobx
 
 flutter:

@@ -7,8 +7,8 @@ environment:
   sdk: '>=2.1.0-dev <3.0.0'
 
 dependencies:
-  mobx: ^0.0.20
-  mobx_codegen: ^0.0.1
+  mobx: ^0.0.34
+  mobx_codegen: ^0.0.4
 
 dependency_overrides:
   mobx:
