@@ -5,18 +5,25 @@ Atom _observableMapAtom<K, V>(ReactiveContext context) {
   return Atom(name: ctx.nameFor('ObservableMap<$K, $V>'), context: ctx);
 }
 
-// ignore:prefer_mixin
-class ObservableMap<K, V> with MapMixin<K, V> {
+class ObservableMap<K, V>
+    with
+        // ignore:prefer_mixin
+        MapMixin<K, V>
+    implements
+        Listenable<MapChange<K, V>> {
   ObservableMap({ReactiveContext context})
-      : _atom = _observableMapAtom<K, V>(context),
+      : _context = context ?? mainContext,
+        _atom = _observableMapAtom<K, V>(context),
         _map = <K, V>{};
 
   ObservableMap.of(Map<K, V> other, {ReactiveContext context})
-      : _atom = _observableMapAtom<K, V>(context),
+      : _context = context ?? mainContext,
+        _atom = _observableMapAtom<K, V>(context),
         _map = Map.of(other);
 
   ObservableMap.linkedHashMapFrom(Map<K, V> other, {ReactiveContext context})
-      : _atom = _observableMapAtom<K, V>(context),
+      : _context = context ?? mainContext,
+        _atom = _observableMapAtom<K, V>(context),
         _map = LinkedHashMap.from(other);
 
   ObservableMap.splayTreeMapFrom(Map<K, V> other,
@@ -24,13 +31,23 @@ class ObservableMap<K, V> with MapMixin<K, V> {
       // ignore: avoid_annotating_with_dynamic
       bool Function(dynamic) isValidKey,
       ReactiveContext context})
-      : _atom = _observableMapAtom<K, V>(context),
+      : _context = context ?? mainContext,
+        _atom = _observableMapAtom<K, V>(context),
         _map = SplayTreeMap.from(other, compare, isValidKey);
 
-  ObservableMap._wrap(this._map, this._atom);
+  ObservableMap._wrap(this._context, this._map, this._atom);
 
+  final ReactiveContext _context;
   final Atom _atom;
   final Map<K, V> _map;
+
+  Listeners<MapChange<K, V>> _listenersField;
+
+  Listeners<MapChange<K, V>> get _listeners =>
+      _listenersField ??= Listeners(_context);
+
+  bool get _hasListeners =>
+      _listenersField != null && _listenersField.hasHandlers;
 
   @override
   V operator [](Object key) {
@@ -40,13 +57,33 @@ class ObservableMap<K, V> with MapMixin<K, V> {
 
   @override
   void operator []=(K key, V value) {
-    _map[key] = value;
+    if (_hasListeners) {
+      if (_map.containsKey(key)) {
+        final oldValue = _map[key];
+        _map[key] = value;
+        _reportUpdate(key, value, oldValue);
+      } else {
+        _map[key] = value;
+        _reportAdd(key, value);
+      }
+    } else {
+      _map[key] = value;
+    }
     _atom.reportChanged();
   }
 
   @override
   void clear() {
-    _map.clear();
+    if (isEmpty) {
+      return;
+    }
+    if (_hasListeners) {
+      final removed = Map<K, V>.from(_map);
+      _map.clear();
+      removed.forEach(_reportRemove);
+    } else {
+      _map.clear();
+    }
     _atom.reportChanged();
   }
 
@@ -54,10 +91,20 @@ class ObservableMap<K, V> with MapMixin<K, V> {
   Iterable<K> get keys => MapKeysIterable(_map.keys, _atom);
 
   @override
-  Map<RK, RV> cast<RK, RV>() => ObservableMap._wrap(super.cast(), _atom);
+  Map<RK, RV> cast<RK, RV>() =>
+      ObservableMap._wrap(_context, super.cast(), _atom);
 
   @override
   V remove(Object key) {
+    if (_hasListeners) {
+      if (_map.containsKey(key)) {
+        final value = _map.remove(key);
+        _reportRemove(key, value);
+        _atom.reportChanged();
+        return value;
+      }
+      return null;
+    }
     final value = _map.remove(key);
     _atom.reportChanged();
     return value;
@@ -86,11 +133,62 @@ class ObservableMap<K, V> with MapMixin<K, V> {
     _atom.reportObserved();
     return _map.containsKey(key);
   }
+
+  void _reportUpdate(K key, V newValue, V oldValue) {
+    _listeners.notifyListeners(MapChange<K, V>(
+      type: OperationType.update,
+      key: key,
+      newValue: newValue,
+      oldValue: oldValue,
+      object: this,
+    ));
+  }
+
+  void _reportAdd(K key, V newValue) {
+    _listeners.notifyListeners(MapChange<K, V>(
+      type: OperationType.add,
+      key: key,
+      newValue: newValue,
+      object: this,
+    ));
+  }
+
+  void _reportRemove(K key, V oldValue) {
+    _listeners.notifyListeners(MapChange<K, V>(
+      type: OperationType.remove,
+      key: key,
+      oldValue: oldValue,
+      object: this,
+    ));
+  }
+
+  @override
+  Dispose observe(MapChangeListener<K, V> listener, {bool fireImmediately}) {
+    final dispose = _listeners.add(listener);
+    if (fireImmediately == true) {
+      _map.forEach(_reportAdd);
+    }
+    return dispose;
+  }
 }
 
 @visibleForTesting
 ObservableMap<K, V> wrapInObservableMap<K, V>(Atom atom, Map<K, V> map) =>
-    ObservableMap._wrap(map, atom);
+    ObservableMap._wrap(mainContext, map, atom);
+
+typedef MapChangeListener<K, V> = void Function(MapChange<K, V>);
+
+class MapChange<K, V> {
+  MapChange({this.type, this.key, this.newValue, this.oldValue, this.object});
+
+  final OperationType type;
+
+  final K key;
+  final V newValue;
+  final V oldValue;
+
+  final ObservableMap<K, V> object;
+}
 
 // ignore:prefer_mixin
 class MapKeysIterable<K> with IterableMixin<K> {

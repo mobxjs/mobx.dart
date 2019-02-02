@@ -24,7 +24,7 @@ void main() {
     });
   });
 
-  group('ObservableList', () {
+  group('ObservableMap', () {
     test('Observing a map key works', () {
       final map = ObservableMap.of({'a': 1});
 
@@ -114,6 +114,85 @@ void main() {
         'updateAll': (m) => m.updateAll((_, value) => value + 1),
         'putIfAbsent absent': (m) => m.putIfAbsent('d', () => 4),
       }.forEach(runWriteTest);
+    });
+
+    test('[]= reports an add change when there are listeners', () {
+      MapChange change;
+      final map = ObservableMap()..observe((c) => change = c);
+      map['a'] = 1;
+
+      expect(change.type, equals(OperationType.add));
+      expect(change.key, 'a');
+      expect(change.oldValue, null);
+      expect(change.newValue, 1);
+    });
+
+    test('[]= reports an update when there are listeners', () {
+      MapChange change;
+      final map = ObservableMap.of({'a': 0})..observe((c) => change = c);
+      map['a'] = 1;
+
+      expect(change.type, equals(OperationType.update));
+      expect(change.key, 'a');
+      expect(change.oldValue, 0);
+      expect(change.newValue, 1);
+    });
+
+    test('clear reports removed change when there are listeners', () {
+      final changes = <MapChange>[];
+      ObservableMap.of({'a': 0, 'b': 1, 'c': 2})
+        ..observe(changes.add)
+        ..clear();
+
+      for (final change in changes) {
+        expect(change.type, equals(OperationType.remove));
+      }
+
+      expect(changes[0].key, equals('a'));
+      expect(changes[0].oldValue, equals(0));
+
+      expect(changes[1].key, equals('b'));
+      expect(changes[1].oldValue, equals(1));
+
+      expect(changes[2].key, equals('c'));
+      expect(changes[2].oldValue, equals(2));
+    });
+
+    test(
+        'remove reports remove change when there are listeners and the item exists',
+        () {
+      MapChange change;
+      ObservableMap.of({'a': 0})
+        ..observe((c) => change = c)
+        ..remove('a');
+
+      expect(change.key, equals('a'));
+      expect(change.oldValue, equals(0));
+    });
+
+    test(
+        "remove doesn't report changes when there are listeners and the item doesn't exist",
+        () {
+      MapChange change;
+      ObservableMap.of({'a': 0})
+        ..observe((c) => change = c)
+        ..remove('b');
+
+      expect(change, isNull);
+    });
+
+    test('observe sends changes immediately when fireImmediately is true', () {
+      final changes = <MapChange>[];
+      ObservableMap.of({'a': 0, 'b': 1})
+          .observe(changes.add, fireImmediately: true);
+
+      expect(changes[0].type, equals(OperationType.add));
+      expect(changes[0].key, equals('a'));
+      expect(changes[0].newValue, equals(0));
+
+      expect(changes[1].type, equals(OperationType.add));
+      expect(changes[1].key, equals('b'));
+      expect(changes[1].newValue, equals(1));
     });
   });
 }
