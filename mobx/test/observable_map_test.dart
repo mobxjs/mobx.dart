@@ -180,6 +180,20 @@ void main() {
 
       expect(change, isNull);
     });
+
+    test('observe sends changes immediately when fireImmediately is true', () {
+      final changes = <MapChange>[];
+      ObservableMap.of({'a': 0, 'b': 1})
+          .observe(changes.add, fireImmediately: true);
+
+      expect(changes[0].type, equals(OperationType.add));
+      expect(changes[0].key, equals('a'));
+      expect(changes[0].newValue, equals(0));
+
+      expect(changes[1].type, equals(OperationType.add));
+      expect(changes[1].key, equals('b'));
+      expect(changes[1].newValue, equals(1));
+    });
   });
 }
 
