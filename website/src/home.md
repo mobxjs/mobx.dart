@@ -13,6 +13,10 @@ route: "/"
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)&nbsp;
 [![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+<a href="https://github.com/mobxjs/mobx.dart">
+    <img src="https://simpleicons.org/icons/github.svg" height="32"/>
+</a>
+
 ## Introduction
 
 MobX is a state-management library that makes it simple to connect the
