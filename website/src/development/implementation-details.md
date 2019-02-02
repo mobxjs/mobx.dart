@@ -6,4 +6,4 @@ route: "/implementation-details"
 
 # Implementation Details
 
-- Do not use `dart:mirrors` as it is not supported in Flutter
+- Avoid `dart:mirrors` as it is not supported in Flutter
