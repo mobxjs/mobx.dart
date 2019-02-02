@@ -1,9 +1,4 @@
-import 'dart:collection';
-import 'dart:math';
-
-import 'package:meta/meta.dart';
-import 'package:mobx/mobx.dart';
-import 'package:mobx/src/core.dart';
+part of '../observable_collections.dart';
 
 Atom _listAtom<T>(ReactiveContext context) {
   final ctx = context ?? mainContext;
@@ -129,11 +124,7 @@ class ObservableList<T>
   }
 
   @override
-  Map<int, T> asMap() {
-    // TODO(katis): the map should be observable, with the same atom
-    _atom.reportObserved();
-    return _list.asMap();
-  }
+  Map<int, T> asMap() => ObservableMap._wrap(_list.asMap(), _atom);
 
   @override
   List<R> cast<R>() => ObservableList._wrap(_context, _atom, _list.cast<R>());

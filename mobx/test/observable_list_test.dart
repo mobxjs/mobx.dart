@@ -1,9 +1,9 @@
 import 'package:mobx/mobx.dart';
-import 'package:mobx/src/api/observable_list.dart';
+import 'package:mobx/src/api/observable_collections.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-class MockAtom extends Mock implements Atom {}
+import 'shared_mocks.dart';
 
 void main() {
   group('ObservableList', () {
@@ -70,6 +70,21 @@ void main() {
       expect(count, equals(1));
     });
 
+    test('asMap returns an observable and unmodifiable view to the list', () {
+      final list = ObservableList.of([1, 2, 3]);
+      final map = list.asMap();
+
+      var mapChanges = 0;
+      autorun((_) {
+        mapChanges++;
+        map.forEach((_, __) {});
+      });
+      expect(mapChanges, equals(1));
+
+      list.add(4);
+      expect(mapChanges, equals(2));
+    });
+
     group('fires reportObserved() for read-methods', () {
       <String, Function(ObservableList<int>)>{
         'isEmpty': (_) => _.isEmpty,
@@ -99,7 +114,6 @@ void main() {
         'lastIndexWhere': (_) => _.lastIndexWhere((_) => true),
         'firstWhere': (_) => _.firstWhere((_) => true, orElse: () => 0),
         'every': (_) => _.every((_) => true),
-        'asMap': (_) => _.asMap(),
         'any': (_) => _.any((_) => true),
         '[]': (_) => _[0],
         '+': (_) => _ + [100],
