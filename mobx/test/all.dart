@@ -8,6 +8,7 @@ import 'listenable_test.dart' as listenable_test;
 import 'observable_future_test.dart' as observable_future_test;
 import 'observable_list_test.dart' as observable_list_test;
 import 'observable_map_test.dart' as observable_map_test;
+import 'observable_set_test.dart' as observable_set_test;
 import 'observable_test.dart' as observable_test;
 import 'observe_test.dart' as observe_test;
 import 'reaction_test.dart' as reaction_test;
@@ -19,6 +20,7 @@ void main() {
   observable_future_test.main();
   observable_list_test.main();
   observable_map_test.main();
+  observable_set_test.main();
   computed_test.main();
 
   action_test.main();
