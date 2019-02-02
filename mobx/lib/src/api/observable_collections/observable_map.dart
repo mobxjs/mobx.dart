@@ -165,8 +165,7 @@ class ObservableMap<K, V>
   @override
   Dispose observe(MapChangeListener<K, V> listener, {bool fireImmediately}) {
     if (fireImmediately == true) {
-      throw ArgumentError(
-          "ObservableMap.observe doesn't support fireImmediately");
+      _map.forEach(_reportAdd);
     }
     return _listeners.add(listener);
   }
