@@ -9,7 +9,7 @@ export default {
     },
     themeConfig: {
         logo: {
-            src: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/mobx/doc/mobx.png'
+            src: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/website/src/images/mobx.png'
         },
         mode: 'light',
         colors: {
