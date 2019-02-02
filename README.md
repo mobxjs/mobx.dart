@@ -3,7 +3,6 @@
 [![pub package](https://img.shields.io/pub/v/mobx.svg)](https://pub.dartlang.org/packages/mobx)
 [![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
-
 [![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/mobx.png)
@@ -42,6 +41,10 @@ console log, a network call to re-rendering the UI.
 For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
 
 [![](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
+
+## Get Started
+
+Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx-dart.netlify.com/getting-started).
 
 ## Core Concepts
 
