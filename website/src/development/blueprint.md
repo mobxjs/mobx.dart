@@ -1,4 +1,10 @@
-# Implementation Blueprint
+---
+name: Blueprint
+menu: Development Notes
+route: "/blueprint"
+---
+
+# Blueprint (WIP)
 
 This document outlines the core behaviors of MobX that need to be implemented for an effective reactive system.
 
@@ -6,7 +12,7 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 
 ### Atom
 
-### Observable<T>
+### `Observable<T>`
 
 - Can be observed and intercepted
 
@@ -14,7 +20,7 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 
 - Depends on a set of observables to do its work.
 
-### Computed<T>
+### `Computed<T>`
 
 - Is an observable which derives its value from a set of dependent observables
 - Compare values structurally or as scalars
