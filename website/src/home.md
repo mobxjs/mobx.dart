@@ -8,6 +8,11 @@ route: "/"
 
 > Supercharge the state-management in your Dart apps with Transparent Functional Reactive Programming (TFRP)
 
+[![pub package](https://img.shields.io/pub/v/mobx.svg)](https://pub.dartlang.org/packages/mobx)&nbsp;
+[![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)&nbsp;
+[![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)&nbsp;
+[![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Introduction
 
 MobX is a state-management library that makes it simple to connect the
@@ -23,3 +28,9 @@ console log, a network call to re-rendering the UI.
 
 > MobX has been a very effective library for the JavaScript
 > apps and this port to the Dart language aims to bring the same levels of productivity.
+
+## Go deep
+
+For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
+
+[![](https://github.com/mobxjs/mobx.dart/raw/master/mobx/doc/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
