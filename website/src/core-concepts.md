@@ -5,7 +5,7 @@ route: "/concepts"
 
 # Core Concepts
 
-![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/mobx/doc/mobx-triad.png)
+![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/mobx-triad.png)
 
 At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
 
