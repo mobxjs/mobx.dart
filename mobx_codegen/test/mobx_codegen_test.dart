@@ -33,6 +33,11 @@ abstract class UserBase implements Store {
     if (firstName != null) this.firstName = firstName;
     if (lastName != null) this.lastName = firstName;
   }
+
+  @observable
+  Future<String> foobar() async {
+    return 'foobar';
+  }
 }
 """;
 
@@ -70,6 +75,12 @@ mixin _\$User on UserBase, Store {
   set lastName(String value) {
     super.lastName = value;
     _\$lastNameAtom.reportChanged();
+  }
+
+  @override
+  ObservableFuture<String> foobar() {
+    final _\$future = super.foobar();
+    return ObservableFuture<String>(_\$future);
   }
 
   final _\$UserBaseActionController = ActionController(name: 'UserBase');
