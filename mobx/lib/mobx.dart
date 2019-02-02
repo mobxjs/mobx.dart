@@ -42,6 +42,8 @@ export 'package:mobx/src/api/annotations.dart'
     show action, computed, observable, Store;
 export 'package:mobx/src/api/action.dart';
 export 'package:mobx/src/api/context.dart';
+export 'package:mobx/src/api/observable_future.dart'
+    show ObservableFuture, FutureStatus;
 export 'package:mobx/src/api/observable_collections.dart'
     show ObservableList, ObservableMap;
 export 'package:mobx/src/api/reaction.dart';

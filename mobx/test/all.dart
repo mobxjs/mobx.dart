@@ -5,6 +5,7 @@ import 'computed_test.dart' as computed_test;
 import 'context_test.dart' as context_test;
 import 'intercept_test.dart' as intercept_test;
 import 'listenable_test.dart' as listenable_test;
+import 'observable_future_test.dart' as observable_future_test;
 import 'observable_list_test.dart' as observable_list_test;
 import 'observable_map_test.dart' as observable_map_test;
 import 'observable_test.dart' as observable_test;
@@ -15,6 +16,7 @@ import 'when_test.dart' as when_test;
 void main() {
   action_controller_test.main();
   observable_test.main();
+  observable_future_test.main();
   observable_list_test.main();
   observable_map_test.main();
   computed_test.main();
