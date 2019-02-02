@@ -1,5 +1,5 @@
 name: flutter_mobx_example
-description: A new Flutter project.
+description: Examples for flutter_mobx.
 private: true
 
 # The following defines the version and build number for your application.
@@ -23,10 +23,6 @@ dependencies:
   mobx: ^0.0.20
   flutter_mobx:
     path: ../
-
-dependencies_override:
-  mobx:
-    path: ../../mobx
 
 dev_dependencies:
   build_runner: ^1.0.0

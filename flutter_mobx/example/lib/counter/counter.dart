@@ -17,9 +17,7 @@ abstract class CounterBase implements Store {
 }
 
 class CounterExample extends StatefulWidget {
-  const CounterExample({Key key, this.title}) : super(key: key);
-
-  final String title;
+  const CounterExample({Key key}) : super(key: key);
 
   @override
   _CounterExampleState createState() => _CounterExampleState();
@@ -31,7 +29,7 @@ class _CounterExampleState extends State<CounterExample> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: const Text('Counter'),
         ),
         body: Center(
           child: Column(
