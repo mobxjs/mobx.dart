@@ -5,6 +5,11 @@ import 'package:test/test.dart';
 
 void main() {
   group('ObservableFuture', () {
+    test('value constructor creates an immediately fulfilled future', () {
+      final future = ObservableFuture.value('success');
+      expect(future.value, equals('success'));
+    });
+
     test('status should be pending while running and fulfilled when completed',
         () async {
       final completer = Completer<String>();
@@ -150,5 +155,43 @@ void main() {
       // ignore:avoid_catches_without_on_clauses
     } catch (_) {}
     expect(getResult(), equals(null));
+  });
+
+  test('stream should work', () async {
+    final future = ObservableFuture(Future(() => 1));
+
+    final value = await future.asStream().first;
+    expect(value, equals(1));
+  });
+
+  test('then works', () async {
+    final future = ObservableFuture(Future(() => 1)).then((i) => i + 1);
+
+    expect(await future, equals(2));
+  });
+
+  test('catchError works', () async {
+    final future = ObservableFuture(Future(() {
+      // ignore:only_throw_errors
+      throw 'Error';
+    })).catchError((error) => 1);
+
+    expect(await future, equals(1));
+  });
+
+  test('timeout works', () async {
+    final completer = Completer<int>();
+    final future =
+        ObservableFuture(completer.future).timeout(Duration(milliseconds: 1));
+
+    expect(() async => await future,
+        throwsA(const TypeMatcher<TimeoutException>()));
+  });
+
+  test('whenComplete works', () async {
+    var called = false;
+    await ObservableFuture(Future(() => 1)).whenComplete(() => called = true);
+
+    expect(called, isTrue);
   });
 }
