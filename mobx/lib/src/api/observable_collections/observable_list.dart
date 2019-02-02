@@ -124,7 +124,7 @@ class ObservableList<T>
   }
 
   @override
-  Map<int, T> asMap() => ObservableMap._wrap(_list.asMap(), _atom);
+  Map<int, T> asMap() => ObservableMap._wrap(_context, _list.asMap(), _atom);
 
   @override
   List<R> cast<R>() => ObservableList._wrap(_context, _atom, _list.cast<R>());
