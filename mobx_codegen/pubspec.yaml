@@ -20,6 +20,7 @@ dev_dependencies:
   build_test: ^0.10.5
   test_coverage: ^0.2.0
   test: ^1.0.0
+  mockito: ^4.0.0
 
 dependency_overrides:
   mobx:
