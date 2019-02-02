@@ -1,5 +1,6 @@
 ---
 name: Community
+route: "/community"
 ---
 
 # Community
