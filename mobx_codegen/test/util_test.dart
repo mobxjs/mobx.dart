@@ -9,12 +9,14 @@ class MockMethod extends Mock implements MethodElement {}
 class MockType extends Mock implements DartType {}
 
 MockMethod mockMethod({
+  bool returnsVoid = false,
   bool returnsFuture = false,
   bool returnsFutureOr = false,
   bool isAsync = false,
   bool isGenerator = false,
 }) {
   final returnType = MockType();
+  when(returnType.isVoid).thenReturn(returnsVoid);
   when(returnType.isDartAsyncFuture).thenReturn(returnsFuture);
   when(returnType.isDartAsyncFutureOr).thenReturn(returnsFutureOr);
 
@@ -27,12 +29,20 @@ MockMethod mockMethod({
 
 void main() {
   group('returnsFuture', () {
-    test('should return true if element.isDartAsyncFuture is true', () {
+    test('should return false if element.returnType.isVoid is true', () {
+      final method =
+          mockMethod(returnsVoid: true, isAsync: true, isGenerator: false);
+      expect(returnsFuture(method), isFalse);
+    });
+
+    test('should return true if element.returnType.isDartAsyncFuture is true',
+        () {
       final method = mockMethod(returnsFuture: true);
       expect(returnsFuture(method), isTrue);
     });
 
-    test('should return true if element.isDartAsyncFutureOr is true', () {
+    test('should return true if element.returnType.isDartAsyncFutureOr is true',
+        () {
       final method = mockMethod(returnsFutureOr: true);
       expect(returnsFuture(method), isTrue);
     });
