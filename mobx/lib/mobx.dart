@@ -45,5 +45,14 @@ export 'package:mobx/src/api/context.dart';
 export 'package:mobx/src/api/observable_future.dart'
     show ObservableFuture, FutureStatus;
 export 'package:mobx/src/api/observable_collections.dart'
-    show ObservableList, ObservableMap;
+    show
+        ObservableList,
+        ListChange,
+        ListChangeListener,
+        ObservableMap,
+        MapChange,
+        MapChangeListener,
+        ObservableSet,
+        SetChange,
+        SetChangeListener;
 export 'package:mobx/src/api/reaction.dart';

@@ -24,7 +24,7 @@ class ObservableList<T>
         // ignore: prefer_mixin
         ListMixin<T>
     implements
-        Listenable<ListChangeNotification<T>> {
+        Listenable<ListChange<T>> {
   ObservableList({ReactiveContext context})
       : this._wrap(context, _listAtom<T>(context), []);
 
@@ -39,9 +39,9 @@ class ObservableList<T>
   final Atom _atom;
   final List<T> _list;
 
-  Listeners<ListChangeNotification<T>> _listenersField;
+  Listeners<ListChange<T>> _listenersField;
 
-  Listeners<ListChangeNotification<T>> get _listeners =>
+  Listeners<ListChange<T>> get _listeners =>
       _listenersField ??= Listeners(_context);
 
   String get name => _atom.name;
@@ -250,10 +250,9 @@ class ObservableList<T>
   }
 
   @override
-  Dispose observe(Listener<ListChangeNotification<T>> listener,
-      {bool fireImmediately}) {
+  Dispose observe(Listener<ListChange<T>> listener, {bool fireImmediately}) {
     if (fireImmediately == true) {
-      final change = ListChangeNotification(
+      final change = ListChange(
           object: this,
           index: 0,
           type: OperationType.add,
@@ -267,7 +266,7 @@ class ObservableList<T>
   void _notifyChildUpdate(int index, T newValue, T oldValue) {
     _atom.reportChanged();
 
-    final change = ListChangeNotification(
+    final change = ListChange(
         index: index,
         newValue: newValue,
         oldValue: oldValue,
@@ -280,7 +279,7 @@ class ObservableList<T>
   void _notifyListUpdate(int index, List<T> added, List<T> removed) {
     _atom.reportChanged();
 
-    final change = ListChangeNotification(
+    final change = ListChange(
         index: index,
         added: added,
         removed: removed,
@@ -296,10 +295,10 @@ class ObservableList<T>
 }
 
 typedef ListChangeListener<TNotification> = void Function(
-    ListChangeNotification<TNotification>);
+    ListChange<TNotification>);
 
-class ListChangeNotification<T> {
-  ListChangeNotification(
+class ListChange<T> {
+  ListChange(
       {this.index,
       this.type,
       this.newValue,
