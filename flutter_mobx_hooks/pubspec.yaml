@@ -9,10 +9,7 @@ environment:
 
 dependencies:
   mobx: ^0.0.28
-  flutter_hooks:
-    git:
-      url: git://github.com/rrousselGit/flutter_hooks.git
-      ref: did-build
+  flutter_hooks: 0.3.0-dev.2
   flutter:
     sdk: flutter
 
