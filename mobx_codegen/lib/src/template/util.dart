@@ -7,5 +7,4 @@ String surroundNonEmpty(String prefix, String suffix, dynamic content) {
 
 bool returnsFuture(MethodElement method) =>
     method.returnType.isDartAsyncFuture ||
-    method.returnType.isDartAsyncFutureOr ||
     (method.isAsynchronous && !method.returnType.isVoid && !method.isGenerator);

@@ -41,10 +41,11 @@ void main() {
       expect(returnsFuture(method), isTrue);
     });
 
-    test('should return true if element.returnType.isDartAsyncFutureOr is true',
+    test(
+        'should return false if element.returnType.isDartAsyncFutureOr is true',
         () {
       final method = mockMethod(returnsFutureOr: true);
-      expect(returnsFuture(method), isTrue);
+      expect(returnsFuture(method), isFalse);
     });
 
     test('should return true if element is async and not a generator', () {
