@@ -2,21 +2,24 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 import 'package:mockito/mockito.dart';
+import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
+
+class MockTypeChecker extends Mock implements TypeChecker {}
 
 class MockMethod extends Mock implements MethodElement {}
 
 class MockType extends Mock implements DartType {}
 
-MockMethod mockMethod({
-  bool returnsVoid = false,
+MockMethod mockFutureMethod({
+  bool returnsDynamic = false,
   bool returnsFuture = false,
   bool returnsFutureOr = false,
   bool isAsync = false,
   bool isGenerator = false,
 }) {
   final returnType = MockType();
-  when(returnType.isVoid).thenReturn(returnsVoid);
+  when(returnType.isDynamic).thenReturn(returnsDynamic);
   when(returnType.isDartAsyncFuture).thenReturn(returnsFuture);
   when(returnType.isDartAsyncFutureOr).thenReturn(returnsFutureOr);
 
@@ -27,39 +30,68 @@ MockMethod mockMethod({
   return method;
 }
 
+MockMethod mockStreamMethod({
+  bool isAsync = false,
+  bool isGenerator = false,
+  bool returnsDynamic = false,
+}) {
+  final returnType = MockType();
+  when(returnType.isDynamic).thenReturn(returnsDynamic);
+
+  final method = MockMethod();
+  when(method.returnType).thenReturn(returnType);
+  when(method.isAsynchronous).thenReturn(isAsync);
+  when(method.isGenerator).thenReturn(isGenerator);
+  return method;
+}
+
+MockTypeChecker streamChecker({bool isStream = false}) {
+  final checker = MockTypeChecker();
+  when(checker.isAssignableFromType(any)).thenReturn(isStream);
+  return checker;
+}
+
 void main() {
-  group('returnsFuture', () {
-    test('should return false if element.returnType.isVoid is true', () {
-      final method =
-          mockMethod(returnsVoid: true, isAsync: true, isGenerator: false);
-      expect(returnsFuture(method), isFalse);
+  group('AsyncMethodChecker', () {
+    group('returnsFuture', () {
+      test('true if returns Future', () {
+        final method = mockFutureMethod(returnsFuture: true);
+        expect(AsyncMethodChecker().returnsFuture(method), isTrue);
+      });
+
+      test('false if returns FutureOr', () {
+        final method = mockFutureMethod(returnsFutureOr: true);
+        expect(AsyncMethodChecker().returnsFuture(method), isFalse);
+      });
+
+      test('true if method is async and returns dynamic', () {
+        final method = mockFutureMethod(
+            isAsync: true, isGenerator: false, returnsDynamic: true);
+        expect(AsyncMethodChecker().returnsFuture(method), isTrue);
+      });
+
+      test('false if method is async generator', () {
+        final method = mockFutureMethod(
+            isAsync: true, isGenerator: true, returnsDynamic: true);
+        expect(AsyncMethodChecker().returnsFuture(method), isFalse);
+      });
     });
 
-    test('should return true if element.returnType.isDartAsyncFuture is true',
-        () {
-      final method = mockMethod(returnsFuture: true);
-      expect(returnsFuture(method), isTrue);
-    });
+    group('returnsStream', () {
+      test('true if returns Stream', () {
+        expect(
+            AsyncMethodChecker(streamChecker(isStream: true))
+                .returnsStream(MockMethod()),
+            isTrue);
+      });
 
-    test('should return true if element.returnType.isDartAsyncFutureOr is true',
-        () {
-      final method = mockMethod(returnsFutureOr: true);
-      expect(returnsFuture(method), isTrue);
-    });
-
-    test('should return true if element is async and not a generator', () {
-      final method = mockMethod(isAsync: true);
-      expect(returnsFuture(method), isTrue);
-    });
-
-    test('should return false if element is async and a generator', () {
-      final method = mockMethod(isAsync: true, isGenerator: true);
-      expect(returnsFuture(method), isFalse);
-    });
-
-    test('should return false if no matches', () {
-      final method = mockMethod();
-      expect(returnsFuture(method), isFalse);
+      test('true if is async generator and returns dynamic', () {
+        final checker = AsyncMethodChecker(streamChecker(isStream: false));
+        expect(
+            checker.returnsStream(mockStreamMethod(
+                isAsync: true, isGenerator: true, returnsDynamic: true)),
+            isTrue);
+      });
     });
   });
 }

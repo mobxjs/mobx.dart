@@ -10,6 +10,7 @@ import 'package:mobx_codegen/src/template/computed.dart';
 import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/observable_future.dart';
+import 'package:mobx_codegen/src/template/observable_stream.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 import 'package:source_gen/source_gen.dart';
@@ -60,6 +61,8 @@ class StoreMixinVisitor extends SimpleElementVisitor {
   final _computedChecker = TypeChecker.fromRuntime(ComputedMethod);
 
   final _actionChecker = TypeChecker.fromRuntime(MakeAction);
+
+  final _asyncChecker = AsyncMethodChecker();
 
   StoreTemplate _storeTemplate;
 
@@ -125,21 +128,32 @@ class StoreMixinVisitor extends SimpleElementVisitor {
 
       _storeTemplate.actions.add(template);
     } else if (_observableChecker.hasAnnotationOfExact(element)) {
-      if (_observableFutureIsNotValid(element)) {
+      if (_asyncObservableIsNotValid(element)) {
         return null;
       }
-      final template = ObservableFutureTemplate()
-        ..method = MethodOverrideTemplate.fromElement(element);
 
-      _storeTemplate.observableFutures.add(template);
+      if (_asyncChecker.returnsFuture(element)) {
+        final template = ObservableFutureTemplate()
+          ..method = MethodOverrideTemplate.fromElement(element);
+
+        _storeTemplate.observableFutures.add(template);
+      } else if (_asyncChecker.returnsStream(element)) {
+        final template = ObservableStreamTemplate()
+          ..method = MethodOverrideTemplate.fromElement(element);
+
+        _storeTemplate.observableStreams.add(template);
+      }
     }
 
     return null;
   }
 
-  bool _observableFutureIsNotValid(MethodElement element) => any([
-        _errors.staticMethods.addIf(element.isStatic, element.name),
-        _errors.nonAsyncMethods.addIf(!returnsFuture(element), element.name)
+  bool _asyncObservableIsNotValid(MethodElement method) => any([
+        _errors.staticMethods.addIf(method.isStatic, method.name),
+        _errors.nonAsyncMethods.addIf(
+            !_asyncChecker.returnsFuture(method) &&
+                !_asyncChecker.returnsStream(method),
+            method.name),
       ]);
 
   bool _actionIsNotValid(MethodElement element) => any([
