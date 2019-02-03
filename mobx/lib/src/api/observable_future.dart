@@ -7,7 +7,6 @@ import 'package:mobx/src/core.dart';
 @experimental
 enum FutureStatus { pending, rejected, fulfilled }
 
-///
 @experimental
 class ObservableFuture<T> implements Future<T> {
   /// Create a new observable future that tracks the state of the provided future.
