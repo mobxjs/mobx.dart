@@ -5,12 +5,17 @@ private: true
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
-
+  sdk: '>=2.0.0-dev.68.0 <3.0.0'
 
 dependencies:
-  mobx: ^0.0.26
+  mobx: ^0.0.35
 
 dev_dependencies:
   build_runner: ^1.0.0
-  mobx_codegen: ^0.0.3
+  mobx_codegen: ^0.0.5
+
+dependency_overrides:
+  mobx:
+    path: ../../mobx
+  mobx_codegen:
+    path: ../../mobx_codegen

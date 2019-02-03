@@ -82,4 +82,16 @@ mixin _$Admin on AdminBase, Store {
     super.accessRights = value;
     _$accessRightsAtom.reportChanged();
   }
+
+  @override
+  ObservableFuture<String> loadPrivileges([String foo]) {
+    final _$future = super.loadPrivileges(foo);
+    return ObservableFuture<String>(_$future);
+  }
+
+  @override
+  ObservableStream<T> loadStuff<T>(String arg1, {T value}) {
+    final _$stream = super.loadStuff<T>(arg1, value: value);
+    return ObservableStream<T>(_$stream);
+  }
 }

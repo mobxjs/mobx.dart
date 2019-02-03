@@ -5,11 +5,20 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 [![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-![](mobx/doc/mobx.png)
+![](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/mobx.png)
 
 [MobX](https://github.com/mobxjs/mobx) for the Dart language.
 
 > Supercharge the state-management in your Dart apps with Transparent Functional Reactive Programming (TFRP)
+
+- **[Introduction](#introduction)**
+- **[Core Concepts](#core-concepts)**
+  - [Observables](#observables)
+  - [Computed Observables](#computed-observables)
+  - [Actions](#actions)
+  - [Reactions](#reactions)
+- **[Roadmap](#roadmap)**
+- **[Contributing](#contributing)**
 
 ## Introduction
 
@@ -31,11 +40,15 @@ console log, a network call to re-rendering the UI.
 
 For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
 
-[![](mobx/doc/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
+[![](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
+
+### Get Started
+
+Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx-dart.netlify.com/getting-started).
 
 ## Core Concepts
 
-![MobX Triad](mobx/doc/mobx-triad.png)
+![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/mobx-triad.png)
 
 At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
 
@@ -71,11 +84,10 @@ class Counter {
     _value.value++;
   }
 }
-
 ```
 
 On first sight, this does look like some boilerplate code which can quickly go out of hand!
-This is why we added [mobx_codegen](mobx_codegen) to the mix that allows you to replace the above code with the following:
+This is why we added **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** to the mix that allows you to replace the above code with the following:
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -93,14 +105,45 @@ abstract class CounterBase implements Store {
     value++;
   }
 }
-
 ```
 
 Note the use of annotations to mark the observable properties of the class. Yes, there is some header boilerplate here
 but its fixed for any class. As you build more complex classes this boilerplate
 will fade away and you will mostly focus on the code within the braces.
 
-**Note**: Annotations are available via the [mobx_codegen](mobx_codegen) package.
+**Note**: Annotations are available via the **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** package.
+
+### Computed Observables
+
+> What can be derived, should be derived. Automatically.
+
+The state of your application consists of _**core-state**_ and _**derived-state**_. The _core-state_ is state inherent to the domain you are dealing with. For example, if you have a `Contact` entity, the `firstName` and `lastName` form the _core-state_ of `Contact`. However, `fullName` is _derived-state_, obtained by combining `firstName` and `lastName`.
+
+Such _derived state_, that depends on _core-state_ or _other derived-state_ is called a **Computed Observable**. It is automatically kept in sync when its underlying observables change.
+
+> State in MobX = Core-State + Derived-State
+
+```dart
+import 'package:mobx/mobx.dart';
+
+part 'counter.g.dart';
+
+class Contact = ContactBase with _$Contact;
+
+abstract class ContactBase implements Store {
+  @observable
+  String firstName;
+
+  @observable
+  String lastName;
+
+  @computed
+  String get fullName => '$firstName, $lastName';
+
+}
+```
+
+In the example above **`fullName`** is automatically kept in sync if either `firstName` and/or `lastName` changes.
 
 ### Actions
 
@@ -139,7 +182,6 @@ abstract class CounterBase implements Store {
     value++;
   }
 }
-
 ```
 
 ### Reactions
@@ -148,6 +190,10 @@ Reactions complete the _MobX triad_ of **observables**, **actions** and **reacti
 the observers of the reactive-system and get notified whenever an observable they
 track is changed. Reactions come in few flavors as listed below. All of them
 return a `ReactionDisposer`, a function that can be called to dispose the reaction.
+
+One _striking feature_ of reactions is that they _automatically track_ all the observables without any explicit wiring. The act of _reading an observable_ within a reaction is enough to track it!
+
+> The code you write with MobX appears to be literally ceremony-free!
 
 **`ReactionDisposer autorun(Function(Reaction) fn)`**
 
@@ -230,7 +276,7 @@ void waitForCompletion() async {
 
 **Observer**
 
-One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the [`flutter_mobx`](flutter_mobx) package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
+One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
 
 Below is the _Counter_ example in its entirety.
 
@@ -292,6 +338,8 @@ class _CounterExampleState extends State<CounterExample> {
 }
 ```
 
+---
+
 ## Roadmap
 
 ### Observables
@@ -300,12 +348,13 @@ class _CounterExampleState extends State<CounterExample> {
 - [x] Create `ObservableList<T>`
   - [x] observe hook
   - [ ] intercept hook
-- [ ] Create `ObservableMap<K, T>`
-  - [ ] observe hook
+- [x] Create `ObservableMap<K, T>`
+  - [x] observe hook
   - [ ] intercept hook
-- [ ] Create `ObservableSet<T>`
-  - [ ] observe hook
+- [x] Create `ObservableSet<T>`
+  - [x] observe hook
   - [ ] intercept hook
+- [x] Create `ObservableFuture<T>`
 - [x] Atoms with `createAtom()`
 
 ### Computed Observables
@@ -321,7 +370,9 @@ class _CounterExampleState extends State<CounterExample> {
   - [x] with `delay`
   - [x] with `fireImmediately`
 - [x] Create `Reaction` with `when()`
+  - [x] with `timeout`
 - [x] Create `Reaction` with `asyncWhen()` returning `Future<T>`
+  - [x] with `timeout`
 
 ### Actions
 
@@ -345,6 +396,7 @@ class _CounterExampleState extends State<CounterExample> {
 - [x] Global configuration
 - [x] Exception handling and Error recovery
   - [x] Error boundary
+  - [x] `onError` handler for `autorun`, `reaction`, `when`
   - [x] Disabling Error boundary in global config
 - [ ] Debuggability
 
@@ -352,4 +404,21 @@ class _CounterExampleState extends State<CounterExample> {
 
 - [x] Logo
 - [ ] Documentation
-- [ ] Website (published on github.io)
+- [x] Website (published on [mobx-dart.netlify.com](https://mobx-dart.netlify.com/getting-started))
+
+---
+
+## Contributing
+
+If you have read up till here, then 🎉🎉🎉. There are couple of ways in which you can contribute to
+the growing community of `MobX.dart`.
+
+- Pick up any issue marked with ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+- Propose any feature, enhancement
+- Report a bug
+- Fix a bug
+- Participate in a discussion and help in decision making
+- Write and improve some **documentation**. Documentation is super critical and its importance
+  cannot be overstated!
+- Send in a Pull Request :-)
+- Chime in and [![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

@@ -1,0 +1,221 @@
+---
+name: Getting Started
+route: "/getting-started"
+---
+
+import endResult from "./mobx-counter.gif";
+
+# Getting Started
+
+For this tutorial, we will start with a slightly modified version of the example created from `flutter create`. Once you generate a project, here's what you get inside `lib/main.dart`. This is our starting point.
+
+```
+class CounterExample extends StatefulWidget {
+  CounterExample({Key key}) : super(key: key);
+
+  @override
+  _CounterExampleState createState() => _CounterExampleState();
+}
+
+class _CounterExampleState extends State<CounterExample> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Counter'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.display1,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+```
+
+## Installing Dependencies
+
+Add the following **dependencies** to your `pubspec.yaml`. We have deliberately skipped the version information. This will fetch the latest versions from _pub_.
+
+```
+dependencies:
+  mobx:
+  flutter_mobx:
+```
+
+Next add the following **dev_dependencies**:
+
+```
+dev_dependencies:
+  build_runner: ^1.0.0
+  mobx_codegen:
+```
+
+In your project folder, run this command to fetch all the packages:
+
+```
+flutter packages get
+```
+
+At this point you should have all the necessary packages to continue development.
+
+## Adding a Store
+
+Now, let's create a MobX store. A store in MobX is a way of collecting the related observable state under one class. The store allows us to use annotations and keeps the code simple. Create a new file `counter.dart` and add the following code to it.
+
+```
+import 'package:mobx/mobx.dart';
+
+// Include generated file
+part 'counter.g.dart';
+
+// This is the class used by rest of your codebase
+class Counter = CounterBase with _$Counter;
+
+// The store-class
+abstract class CounterBase implements Store {
+  @observable
+  int value = 0;
+
+  @action
+  void increment() {
+    value++;
+  }
+}
+```
+
+The interesting parts here are:
+
+- The abstract class `CounterBase` that implements the `Store` interface. All of your store-related code should be placed inside this abstract class. We create a `Counter` class to blend in the code from the `build_runner`.
+- The generated code will be inside the part file: `counter.g.dart`, which we include with the _`part` directive_. Without this, the `build_runner` will not produce any output.
+- The `@observable` annotation to mark the `value` as observable.
+- Use of `@action` to to mark the `increment()` method as an action.
+
+Run the following command inside your project folder. This generates the code in `counter.g.dart`, which we have already included as part file.
+
+```
+flutter packages pub run build_runner build
+```
+
+On the command-line, here's the output we got from running it. Your's might be slightly different.
+
+```
+➜  [mobx_getting_started]> flutter packages pub run build_runner build
+[INFO] Generating build script...
+[INFO] Generating build script completed, took 319ms
+
+[INFO] Initializing inputs
+[INFO] Reading cached asset graph...
+[INFO] Reading cached asset graph completed, took 76ms
+
+[INFO] Checking for updates since last build...
+[INFO] Checking for updates since last build completed, took 705ms
+
+[INFO] Running build...
+[INFO] 1.1s elapsed, 0/3 actions completed.
+[INFO] 6.7s elapsed, 2/3 actions completed.
+[INFO] 7.7s elapsed, 3/3 actions completed.
+[INFO] Running build completed, took 7.7s
+
+[INFO] Caching finalized dependency graph...
+[INFO] Caching finalized dependency graph completed, took 33ms
+
+[INFO] Succeeded after 7.8s with 2 outputs (6 actions)
+
+```
+
+## Add Store & Observer to Widget
+
+Now comes the part where we connect the MobX store to the Widget. In your `main.dart`, replace the code with the following:
+
+```
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+
+import 'counter.dart'; // Import the Counter
+
+final counter = Counter(); // Instantiate the store
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'MobX',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('MobX Counter'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            // Wrapping in the Observer will automatically re-render on changes to counter.value
+            Observer(
+              builder: (_) => Text(
+                    '${counter.value}',
+                    style: Theme.of(context).textTheme.display1,
+                  ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: counter.increment,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+```
+
+You will notice above that we have not used any `StatefulWidget` instances! The state is stored in the `Counter` store and the `Observer` widget reads the `counter.value` to render the count. Just the simple act of reading the `counter.value` is enough for the `Observer` to start tracking and re-render on changes.
+
+## And we are done!
+
+Our end result will look exactly the same as our start! As you tap on the `FloatingActionButton`, the counter will increment and update automatically.
+
+<img src={endResult} width={300} />

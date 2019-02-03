@@ -1,0 +1,11 @@
+{
+    "name": "mobx.dart",
+    "scripts": {
+        "dev": "docz dev",
+        "build": "docz build"
+    },
+    "dependencies": {
+        "docz": "^0.13.7",
+        "docz-theme-default": "^0.13.7"
+    }
+}

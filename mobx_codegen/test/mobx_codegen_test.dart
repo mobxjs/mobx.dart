@@ -33,6 +33,16 @@ abstract class UserBase implements Store {
     if (firstName != null) this.firstName = firstName;
     if (lastName != null) this.lastName = firstName;
   }
+
+  @observable
+  Future<String> foobar() async {
+    return 'foobar';
+  }
+
+  @observable
+  Stream<T> loadStuff<T>(String arg1, {T value}) async* {
+    yield value;
+  }
 }
 """;
 
@@ -70,6 +80,18 @@ mixin _\$User on UserBase, Store {
   set lastName(String value) {
     super.lastName = value;
     _\$lastNameAtom.reportChanged();
+  }
+
+  @override
+  ObservableFuture<String> foobar() {
+    final _\$future = super.foobar();
+    return ObservableFuture<String>(_\$future);
+  }
+
+  @override
+  ObservableStream<T> loadStuff<T>(String arg1, {T value}) {
+    final _\$stream = super.loadStuff<T>(arg1, value: value);
+    return ObservableStream<T>(_\$stream);
   }
 
   final _\$UserBaseActionController = ActionController(name: 'UserBase');
@@ -124,6 +146,11 @@ abstract class UserBase implements Store {
 
   @action
   static UserBase getUser(int id) async {}
+
+  @observable
+  String nonAsyncObservableMethod() {
+    return 'nonAsyncObservableMethod';
+  }
 }
 """;
 
@@ -132,7 +159,8 @@ Could not make class "User" observable. Changes needed:
   1. Remove static modifier from the field "foobar"
   2. Remove static modifier from the method "getUser"
   3. Remove final modifier from fields "id" and "firstName"
-  4. Remove async modifier from methods "updateUserFromDb" and "getUser\"""";
+  4. Remove async modifier from methods "updateUserFromDb" and "getUser\"
+  5. Return a Future or a Stream from the method "nonAsyncObservableMethod\"""";
 
 void main() {
   group('generator', () {

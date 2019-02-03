@@ -1,0 +1,14 @@
+# Logs
+*.log
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Dependency directories
+node_modules/
+
+# dotenv environment variables file
+.env
+
+# docz cache
+.docz/

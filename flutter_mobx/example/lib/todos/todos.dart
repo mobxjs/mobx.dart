@@ -58,6 +58,14 @@ abstract class TodoListBase implements Store {
     }
   }
 
+  @computed
+  bool get canRemoveAllCompleted =>
+      hasCompletedTodos && filter != VisibilityFilter.pending;
+
+  @computed
+  bool get canMarkAllCompleted =>
+      hasPendingTodos && filter != VisibilityFilter.completed;
+
   @action
   void addTodo(String description) {
     final todo = Todo(description);
