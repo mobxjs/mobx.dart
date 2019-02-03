@@ -42,7 +42,7 @@ For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www
 
 [![](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
 
-## Get Started
+### Get Started
 
 Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx-dart.netlify.com/getting-started).
 
@@ -348,12 +348,13 @@ class _CounterExampleState extends State<CounterExample> {
 - [x] Create `ObservableList<T>`
   - [x] observe hook
   - [ ] intercept hook
-- [ ] Create `ObservableMap<K, T>`
-  - [ ] observe hook
+- [x] Create `ObservableMap<K, T>`
+  - [x] observe hook
   - [ ] intercept hook
-- [ ] Create `ObservableSet<T>`
-  - [ ] observe hook
+- [x] Create `ObservableSet<T>`
+  - [x] observe hook
   - [ ] intercept hook
+- [x] Create `ObservableFuture<T>`
 - [x] Atoms with `createAtom()`
 
 ### Computed Observables
@@ -369,7 +370,9 @@ class _CounterExampleState extends State<CounterExample> {
   - [x] with `delay`
   - [x] with `fireImmediately`
 - [x] Create `Reaction` with `when()`
+  - [x] with `timeout`
 - [x] Create `Reaction` with `asyncWhen()` returning `Future<T>`
+  - [x] with `timeout`
 
 ### Actions
 
@@ -393,6 +396,7 @@ class _CounterExampleState extends State<CounterExample> {
 - [x] Global configuration
 - [x] Exception handling and Error recovery
   - [x] Error boundary
+  - [x] `onError` handler for `autorun`, `reaction`, `when`
   - [x] Disabling Error boundary in global config
 - [ ] Debuggability
 
@@ -400,7 +404,7 @@ class _CounterExampleState extends State<CounterExample> {
 
 - [x] Logo
 - [ ] Documentation
-- [ ] Website (published on github.io)
+- [x] Website (published on [mobx-dart.netlify.com](https://mobx-dart.netlify.com/getting-started))
 
 ---
 
