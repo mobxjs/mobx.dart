@@ -47,5 +47,14 @@ export 'package:mobx/src/api/observable_future.dart'
 export 'package:mobx/src/api/observable_stream.dart'
     show ObservableStream, StreamStatus;
 export 'package:mobx/src/api/observable_collections.dart'
-    show ObservableList, ObservableMap;
+    show
+        ObservableList,
+        ListChange,
+        ListChangeListener,
+        ObservableMap,
+        MapChange,
+        MapChangeListener,
+        ObservableSet,
+        SetChange,
+        SetChangeListener;
 export 'package:mobx/src/api/reaction.dart';
