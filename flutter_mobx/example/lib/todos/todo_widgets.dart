@@ -107,13 +107,15 @@ class ActionBar extends StatelessWidget {
                   children: <Widget>[
                     RaisedButton(
                       child: const Text('Remove Completed'),
-                      onPressed:
-                          list.canRemoveAllCompleted ? list.removeCompleted : null,
+                      onPressed: list.canRemoveAllCompleted
+                          ? list.removeCompleted
+                          : null,
                     ),
                     RaisedButton(
                       child: const Text('Mark All Completed'),
-                      onPressed:
-                          list.hasPendingTodos ? list.markAllAsCompleted : null,
+                      onPressed: list.canMarkAllCompleted
+                          ? list.markAllAsCompleted
+                          : null,
                     )
                   ],
                 ))

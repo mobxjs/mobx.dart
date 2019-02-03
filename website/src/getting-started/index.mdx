@@ -3,7 +3,7 @@ name: Getting Started
 route: "/getting-started"
 ---
 
-import endResult from "./end-result.png";
+import endResult from "./mobx-counter.gif";
 
 # Getting Started
 
@@ -85,7 +85,7 @@ At this point you should have all the necessary packages to continue development
 
 ## Adding a Store
 
-Now, let's create a MobX store. The store allows us to use annotations and keeps the code simple. Create a new file `counter.dart` and add the following code to it.
+Now, let's create a MobX store. A store in MobX is a way of collecting the related observable state under one class. The store allows us to use annotations and keeps the code simple. Create a new file `counter.dart` and add the following code to it.
 
 ```
 import 'package:mobx/mobx.dart';
@@ -110,10 +110,10 @@ abstract class CounterBase implements Store {
 
 The interesting parts here are:
 
+- The abstract class `CounterBase` that implements the `Store` interface. All of your store-related code should be placed inside this abstract class. We create a `Counter` class to blend in the code from the `build_runner`.
+- The generated code will be inside the part file: `counter.g.dart`, which we include with the _`part` directive_. Without this, the `build_runner` will not produce any output.
 - The `@observable` annotation to mark the `value` as observable.
 - Use of `@action` to to mark the `increment()` method as an action.
-- The abstract class `CounterBase` that implements the `Store` interface. All of your store-related code should be placed inside this abstract class. We create a `Counter` class to blend in the code from the `build_runner`.
-- The generated code will be inside the part file: `counter.g.dart`. Without this, the `build_runner` will not produce any output.
 
 Run the following command inside your project folder. This generates the code in `counter.g.dart`, which we have already included as part file.
 
@@ -121,7 +121,7 @@ Run the following command inside your project folder. This generates the code in
 flutter packages pub run build_runner build
 ```
 
-Here's the output that we got from running it. Your's might be slightly different.
+On the command-line, here's the output we got from running it. Your's might be slightly different.
 
 ```
 ➜  [mobx_getting_started]> flutter packages pub run build_runner build
@@ -171,21 +171,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Getting Started with MobX'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  final String title;
-
-  const MyHomePage({@required this.title});
+  const MyHomePage();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MobX'),
+        title: Text('MobX Counter'),
       ),
       body: Center(
         child: Column(
