@@ -16,20 +16,16 @@ abstract class CounterBase implements Store {
   }
 }
 
-class CounterExample extends StatefulWidget {
-  const CounterExample({Key key}) : super(key: key);
+// Create the store
+final Counter counter = Counter();
 
-  @override
-  _CounterExampleState createState() => _CounterExampleState();
-}
-
-class _CounterExampleState extends State<CounterExample> {
-  final _counter = Counter();
+class CounterExample extends StatelessWidget {
+  const CounterExample();
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Counter'),
+          title: const Text('MobX Counter'),
         ),
         body: Center(
           child: Column(
@@ -40,14 +36,14 @@ class _CounterExampleState extends State<CounterExample> {
               ),
               Observer(
                   builder: (_) => Text(
-                        '${_counter.value}',
+                        '${counter.value}',
                         style: const TextStyle(fontSize: 20),
                       )),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: _counter.increment,
+          onPressed: counter.increment,
           tooltip: 'Increment',
           child: const Icon(Icons.add),
         ),
