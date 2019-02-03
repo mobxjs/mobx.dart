@@ -83,7 +83,7 @@ class NonAsyncMethods extends PropertyErrors {
 
   @override
   String get message =>
-      'Add async modifier or return a Future from $property $propertyList';
+      'Return a Future or a Stream from $property $propertyList';
 }
 
 class InvalidStaticMethods extends PropertyErrors {

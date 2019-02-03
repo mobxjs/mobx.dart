@@ -172,7 +172,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = NonAsyncMethods()..addIf(true, 'testMethod');
       expect(fields.message,
-          'Add async modifier or return a Future from the method "testMethod"');
+          'Return a Future or a Stream from the method "testMethod"');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -180,7 +180,7 @@ void main() {
         ..addIf(true, 'testMethod1')
         ..addIf(true, 'testMethod2');
       expect(fields.message,
-          'Add async modifier or return a Future from methods "testMethod1" and "testMethod2"');
+          'Return a Future or a Stream from methods "testMethod1" and "testMethod2"');
     });
   });
 }
