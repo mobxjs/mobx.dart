@@ -11,25 +11,22 @@ void main() {
       final ctrl = StreamController<int>.broadcast();
       final stream = ObservableStream(ctrl.stream);
 
-      String getValue() => stream.match(
-            waiting: () => 'waiting',
-            value: (i) => 'value',
-            done: (_) => 'done',
-            error: (err) => 'error',
-          );
+      final values = <String>[];
+      autorun((_) {
+        values.add(stream.match(
+          waiting: () => 'waiting',
+          active: (i) => 'value',
+          done: (_, __) => 'done',
+          error: (err) => 'error',
+        ));
+      });
 
-      expect(getValue(), equals('waiting'));
-
-      ctrl.add(1);
-      await asyncWhen((_) => stream.value == 1);
-      expect(getValue(), equals('value'));
-
-      ctrl.addError('ERROR');
-      await asyncWhen((_) => stream.error == 'ERROR');
-      expect(getValue(), equals('error'));
+      ctrl
+        ..add(1)
+        ..addError('ERROR');
 
       await ctrl.close();
-      expect(getValue(), equals('done'));
+      expect(values, equals(['waiting', 'value', 'error', 'done']));
     });
 
     test('omitting done in match uses value instead for values', () async {
@@ -37,16 +34,17 @@ void main() {
       final ctrl = StreamController<int>.broadcast();
       final stream = ObservableStream(ctrl.stream);
 
-      String getValue() => stream.match(
-            value: (i) => 'value/done',
-          );
+      final values = <String>[];
+
+      autorun((_) {
+        values.add(stream.match(
+            waiting: () => 'waiting', active: (i) => 'value/done'));
+      });
 
       ctrl.add(1);
-      await asyncWhen((_) => stream.value == 1);
-      expect(getValue(), equals('value/done'));
-
       await ctrl.close();
-      expect(getValue(), equals('value/done'));
+
+      expect(values, equals(['waiting', 'value/done', 'value/done']));
     });
 
     test('omitting done in match uses error instead for errors', () async {
@@ -54,16 +52,19 @@ void main() {
       final ctrl = StreamController<int>.broadcast();
       final stream = ObservableStream(ctrl.stream);
 
-      String getValue() => stream.match(
-            error: (i) => 'error/done',
-          );
+      final values = <String>[];
+
+      autorun((_) {
+        values.add(stream.match(
+          waiting: () => 'waiting',
+          error: (i) => 'error/done',
+        ));
+      });
 
       ctrl.addError('ERROR');
-      await asyncWhen((_) => stream.error == 'ERROR');
-      expect(getValue(), equals('error/done'));
-
       await ctrl.close();
-      expect(getValue(), equals('error/done'));
+
+      expect(values, equals(['waiting', 'error/done', 'error/done']));
     });
 
     test('providing no initialValue sets initial status to waiting', () async {
@@ -80,8 +81,70 @@ void main() {
         yield 1;
       }(), initialValue: 0);
 
-      expect(stream.status, equals(StreamStatus.value));
+      expect(stream.status, equals(StreamStatus.active));
       expect(stream.value, equals(0));
+    });
+
+    test('transforming the stream works', () async {
+      final stream = ObservableStream(() async* {
+        yield 1;
+        yield 2;
+        yield 3;
+      }())
+          .where((i) => i > 1)
+          .map((i) => i.toString())
+          .configure(initialValue: '0');
+
+      final values = <String>[];
+      autorun((_) {
+        values.add(stream.value);
+      });
+
+      await asyncWhen((_) => stream.status == StreamStatus.done);
+
+      expect(values, equals(['0', '2', '3']));
+    });
+
+    test('pauses and unpauses when starting/stopping observation', () async {
+      // ignore:close_sinks
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      final future = asyncWhen(
+          (_) => stream.status == StreamStatus.done || stream.value == 2);
+      expect(ctrl.isPaused, isFalse);
+
+      ctrl.add(2);
+      await future;
+      expect(ctrl.isPaused, isTrue);
+
+      final future2 = asyncWhen((_) => stream.value == 3);
+      expect(ctrl.isPaused, isFalse);
+
+      ctrl.add(3);
+      await future2;
+      expect(ctrl.isPaused, isTrue);
+    });
+
+    test('cancelOnError cancels the stream on first error', () async {
+      final ctrl = StreamController<int>();
+      final stream =
+          ObservableStream(ctrl.stream, initialValue: 0, cancelOnError: true);
+
+      final values = <int>[];
+      autorun((_) {
+        values.add(stream.data);
+      });
+
+      ctrl
+        ..add(1)
+        ..addError(2)
+        ..add(3)
+        ..add(4);
+
+      await ctrl.close();
+
+      expect(values, equals([0, 1, 2]));
     });
   });
 }
