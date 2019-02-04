@@ -81,14 +81,15 @@ class StateWidget extends StatelessWidget {
       tester.widget<StateWidget>(find.byKey(key)).value;
 }
 
-Iterable<ObserverHookState> _findObserverHook() {
-  return find.byElementType(HookElement).evaluate().map((e) {
-    // ignore: avoid_as
-    return (e as HookElement).debugHooks;
-  }).fold<List<ObserverHookState>>([], (result, value) {
-    return result..addAll(value.whereType<ObserverHookState>());
-  });
-}
+Iterable<ObserverHookState> _findObserverHook() => find
+      .byElementType(HookElement)
+      .evaluate()
+      // ignore: avoid_as
+      .map((e) => (e as HookElement).debugHooks)
+      .fold<List<ObserverHookState>>(
+          [],
+          (result, value) =>
+              result..addAll(value.whereType<ObserverHookState>()));
 
 void main() {
   group('useObserver', () {

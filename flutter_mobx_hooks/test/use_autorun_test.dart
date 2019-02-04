@@ -23,15 +23,13 @@ ReactionDisposer mockAutorun(
   int delay,
   ReactiveContext context,
   void Function(Object, Reaction) onError,
-}) {
-  return AutorunHook.run(
+}) => AutorunHook.run(
     fn,
     name: argThat(equals(name), named: 'name'),
     delay: argThat(equals(delay), named: 'delay'),
     context: argThat(equals(context), named: 'context'),
     onError: argThat(equals(onError), named: 'onError'),
   );
-}
 
 void main() {
   // necessary alias to AutorunHook.run, or else verifyNoMoreInterations
@@ -99,7 +97,8 @@ void main() {
             context: context, delay: 42, name: 'foo', onError: onError))
         .thenReturn(dispose);
 
-    await tester.pumpWidget(build(handler, onError: onError, name: 'foo', delay: 42, context: context));
+    await tester.pumpWidget(build(handler,
+        onError: onError, name: 'foo', delay: 42, context: context));
 
     verify(mockAutorun(handler,
         context: context, delay: 42, name: 'foo', onError: onError));
