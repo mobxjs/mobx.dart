@@ -14,7 +14,15 @@ class TestObserver extends ObserverHook {
   final MockReaction reaction;
 
   @override
-  Reaction createReaction(void Function() onInvalidate) => reaction;
+  TestObserverState createState() => TestObserverState();
+}
+
+class TestObserverState extends ObserverHookState {
+  @override
+  TestObserver get hook => super.hook;
+
+  @override
+  Reaction createReaction() => hook.reaction;
 }
 
 void useTestObserver(MockReaction reaction) {
@@ -32,10 +40,8 @@ class UseObserver extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('START BUILD $counter');
     useObserver();
     final widget = builder();
-    print('END BUILD $counter');
     return widget;
   }
 }
@@ -75,6 +81,15 @@ class StateWidget extends StatelessWidget {
       tester.widget<StateWidget>(find.byKey(key)).value;
 }
 
+Iterable<ObserverHookState> _findObserverHook() {
+  return find.byElementType(HookElement).evaluate().map((e) {
+    // ignore: avoid_as
+    return (e as HookElement).debugHooks;
+  }).fold<List<ObserverHookState>>([], (result, value) {
+    return result..addAll(value.whereType<ObserverHookState>());
+  });
+}
+
 void main() {
   group('useObserver', () {
     testWidgets('Widget updated when observable state updates', (tester) async {
@@ -91,16 +106,19 @@ void main() {
     });
 
     testWidgets('ObserverHookState disposes reaction', (tester) async {
-      final reaction = MockReaction();
+      await tester.pumpWidget(HookBuilder(
+        builder: (_) {
+          useObserver();
+          return Container();
+        },
+      ));
 
-      await tester
-          .pumpWidget(UseObserverWithReaction(reaction, () => Container()));
-
-      verifyNever(reaction.dispose());
+      final hook = _findObserverHook().first;
+      expect(hook.reaction.isDisposed, false);
 
       await tester.pumpWidget(Container());
 
-      verify(reaction.dispose()).called(1);
+      expect(hook.reaction.isDisposed, true);
     });
 
     testWidgets(
@@ -162,7 +180,6 @@ void main() {
       expect(StateWidget.findValue(tester, innerKey), equals(1));
       expect(StateWidget.findValue(tester, outerKey), equals(0));
 
-      print('LAST');
       outerState.value++;
       await tester.pump();
       expect(outerRenderCount, equals(2));

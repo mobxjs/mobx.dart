@@ -4,42 +4,37 @@ import 'package:mobx/mobx.dart';
 // ignore: implementation_imports
 import 'package:mobx/src/core.dart' show ReactionImpl;
 
-
-
 void useObserver({ReactiveContext context}) {
   final observer =
-      context == null ? const _ObserverHook() : _ObserverHook(context: context);
+      context == null ? const ObserverHook() : ObserverHook(context: context);
   Hook.use(observer);
 }
 
-class _ObserverHook extends Hook<void> {
-  const _ObserverHook({this.context});
+@visibleForTesting
+class ObserverHook extends Hook<void> {
+  const ObserverHook({this.context});
 
   final ReactiveContext context;
 
   @override
   HookState<void, Hook> createState() => ObserverHookState();
-
-  Reaction createReaction(void Function() onInvalidate) {
-    final ctx = context ?? mainContext;
-    final name = ctx.nameFor('ObserverHook-Reaction');
-    return ReactionImpl(context ?? mainContext, onInvalidate, name: name);
-  }
 }
 
-class ObserverHookState extends HookState<void, _ObserverHook> {
-  ReactionImpl _reaction;
-  Derivation _prevDerivation;
+@visibleForTesting
+class ObserverHookState extends HookState<void, ObserverHook> {
+  ReactionImpl reaction;
+  Derivation prevDerivation;
 
   @override
   void initHook() {
     super.initHook();
-
-    _initReaction();
+    reaction = createReaction();
   }
 
-  void _initReaction() {
-    _reaction = hook.createReaction(onInvalidate);
+  Reaction createReaction() {
+    final ctx = hook.context ?? mainContext;
+    final name = ctx.nameFor('ObserverHook-Reaction');
+    return ReactionImpl(ctx, onInvalidate, name: name);
   }
 
   void onInvalidate() => setState(_noOp);
@@ -48,22 +43,19 @@ class ObserverHookState extends HookState<void, _ObserverHook> {
 
   @override
   void build(BuildContext context) {
-    print('START TRACKING ${_reaction.name}');
-    _prevDerivation = _reaction.startTracking();
+    prevDerivation = reaction.startTracking();
   }
 
   @override
   void didBuild() {
     super.didBuild();
-
-    print('END TRACKING ${_reaction.name}');
-    _reaction.endTracking(_prevDerivation);
-    _prevDerivation = null;
+    reaction.endTracking(prevDerivation);
+    prevDerivation = null;
   }
 
   @override
   void dispose() {
-    _reaction.dispose();
+    reaction.dispose();
 
     super.dispose();
   }
