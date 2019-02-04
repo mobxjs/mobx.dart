@@ -14,6 +14,10 @@ As you can expect the **Todos** app manages a list of `Todo` items. Each `Todo` 
 
 > If the boilerplate seems new, take a look at the [Counter example](/examples/counter)
 
+### `Todo` class
+
+We first start by defining the Observable state of our application. This is usually the first step in modeling your application. In this case, we have a `TodoList` managing a list of `Todo` instances.
+
 The `Todo` class should be self-explanatory.
 
 ```
@@ -29,5 +33,9 @@ abstract class TodoBase implements Store {
   bool done = false;
 }
 ```
+
+### `TodoList` class
+
+Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of `TodoList` is a list of `Todo`s, a `filter` that tracks the visibility-filter applied on the list of todos and the `currentDescription`, which tracks the description entered by the user for a new todo.
 
 ## Connecting the UI
