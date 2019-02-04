@@ -6,4 +6,28 @@ route: /examples/todos
 
 # Todos
 
-WIP
+In this example, we will build the classic [TodoMVC](http://todomvc.com/), which has become the default way of showcasing the capabilities of a state-management library.
+
+## Creating the Observable state
+
+As you can expect the **Todos** app manages a list of `Todo` items. Each `Todo` can be defined by a simple class like the following. You should now be familiar with the little boilerplate here.
+
+> If the boilerplate seems new, take a look at the [Counter example](/examples/counter)
+
+The `Todo` class should be self-explanatory.
+
+```
+class Todo = TodoBase with _$Todo;
+
+abstract class TodoBase implements Store {
+  TodoBase(this.description);
+
+  @observable
+  String description = '';
+
+  @observable
+  bool done = false;
+}
+```
+
+## Connecting the UI

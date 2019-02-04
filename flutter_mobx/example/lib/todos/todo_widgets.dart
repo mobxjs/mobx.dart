@@ -31,9 +31,15 @@ class Description extends StatelessWidget {
   const Description({this.list});
 
   final TodoList list;
+
   @override
-  Widget build(BuildContext context) =>
-      Observer(builder: (_) => Text(list.itemsDescription));
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text(
+            list.itemsDescription,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )));
 }
 
 class TodoListView extends StatelessWidget {
