@@ -3,10 +3,7 @@ export default {
     description: 'The MobX state-management library for building Dart and Flutter Apps.',
     src: './src',
     files: '**/*.{md,markdown,mdx}',
-    debug: false,
-    htmlContext: {
-        head: {}
-    },
+    repository: 'https://github.com/mobxjs/mobx.dart',
     themeConfig: {
         logo: {
             src: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/website/src/images/mobx.png'
@@ -17,5 +14,4 @@ export default {
         }
     },
     menu: ['Home', 'Getting Started', 'Core Concepts', 'Examples', 'Community', 'API Overview', 'Development Notes'],
-    plugins: []
-}
+};
