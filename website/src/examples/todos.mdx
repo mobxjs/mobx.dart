@@ -14,13 +14,11 @@ In this example, we will build the classic [TodoMVC](http://todomvc.com/), which
 
 ## Creating the Observable state
 
-As you can expect the **Todos** app manages a list of `Todo` items. Each `Todo` can be defined by a simple class like the following.
-
-### Todo class
-
 We first start by defining the Observable state of our application. This is usually the first step in modeling your application. In this case, we have a `TodoList` managing a list of `Todo` instances.
 
-The `Todo` class should be self-explanatory.
+A `Todo` is defined by a simple class like the following.
+
+### Todo class
 
 ```
 class Todo = TodoBase with _$Todo;
@@ -42,7 +40,11 @@ You should now be familiar with the little boilerplate here.
 
 ### TodoList class
 
-Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of `TodoList` is a list of `Todo`s, a `filter` that tracks the visibility-filter applied on the list of todos and the `currentDescription`, which tracks the description entered by the user for a new todo.
+Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of `TodoList` includes:
+
+- [x] a list of `Todo`s
+- [x] a `filter` that tracks the visibility-filter applied on the list of todos
+- [x] the `currentDescription`, which tracks the description entered by the user for a new todo.
 
 This can be seen with the `@observable` properties.
 
@@ -66,11 +68,13 @@ abstract class TodoListBase implements Store {
 
 **Computed Properties**
 
-To render a useful UI, we also need a bunch of _derived (aka computed)_ properties. These properties are not inherent to the `TodoList` but derived from the core-state. Our UI looks like below, so you can identify the mapping of the computed properties to the various widgets.
+To render a useful UI, we also need a bunch of _derived (aka computed)_ properties. These properties are not inherent to the `TodoList` but derived from the core-state. Our UI looks like below, so you can identify the mapping of the _computed properties_ to the various widgets.
 
 <img src={todosImage} width={300} />
 
 ```
+class TodoList = TodoListBase with _$TodoList;
+
 abstract class TodoListBase implements Store {
   // ...
 
@@ -125,9 +129,11 @@ abstract class TodoListBase implements Store {
 
 **Actions**
 
-Actions are the semantic operations that mutate the observable state. They also create transaction-boundary to ensure all notifications are sent out only at the end of an action. In our case, we have a few actions such as:
+Actions are the semantic operations that mutate the observable state. They also create a transaction-boundary to ensure all notifications are sent out only at the end of an action. In our case, we have a few actions such as:
 
 ```
+class TodoList = TodoListBase with _$TodoList;
+
 abstract class TodoListBase implements Store {
   // ...
 
@@ -263,7 +269,7 @@ abstract class TodoListBase implements Store {
 
 Note that all of the details of the store are together. This is an important benefit of MobX: it keeps all the state-related code together. _**Co-location**_ is an important virtue and adds lot of value as you build more complex apps with sophisticated state-management.
 
-Co-location also helps in readability of your code and almost becomes self-explanatory. By choosing _Domain-specific_ names for your properties, actions and stores, there will be a clear mapping between the Business-domain and state code.
+Co-location also helps in _readability_ of your code. By choosing _Domain-specific_ names for your properties, actions and stores, there will be a clear mapping between the Business-domain and state code.
 
 ## Connecting the UI
 
@@ -396,6 +402,66 @@ class AddTodo extends StatelessWidget {
     list.addTodo(value);
     _textController.clear();
   }
+}
+
+```
+
+**ActionBar**
+
+And finally we have the `ActionBar` that contains the radio-buttons to select a filter. It also has the buttons to mark all todos and remove the completed ones.
+
+Notice that _there is no business logic here_. Most of the state of the UI is controlled by _computed-properties_. This is an important modeling tip that you can use in state-management and even unit-testing!
+
+```
+class ActionBar extends StatelessWidget {
+  const ActionBar({@required this.list});
+
+  final TodoList list;
+
+  @override
+  Widget build(BuildContext context) => Column(children: <Widget>[
+        Observer(
+          builder: (_) => Column(
+                children: <Widget>[
+                  RadioListTile(
+                      dense: true,
+                      title: const Text('All'),
+                      value: VisibilityFilter.all,
+                      groupValue: list.filter,
+                      onChanged: list.changeFilter),
+                  RadioListTile(
+                      dense: true,
+                      title: const Text('Pending'),
+                      value: VisibilityFilter.pending,
+                      groupValue: list.filter,
+                      onChanged: list.changeFilter),
+                  RadioListTile(
+                      dense: true,
+                      title: const Text('Completed'),
+                      value: VisibilityFilter.completed,
+                      groupValue: list.filter,
+                      onChanged: list.changeFilter),
+                ],
+              ),
+        ),
+        Observer(
+            builder: (_) => ButtonBar(
+                  children: <Widget>[
+                    RaisedButton(
+                      child: const Text('Remove Completed'),
+                      onPressed: list.canRemoveAllCompleted
+                          ? list.removeCompleted
+                          : null,
+                    ),
+                    RaisedButton(
+                      child: const Text('Mark All Completed'),
+                      onPressed: list.canMarkAllCompleted
+                          ? list.markAllAsCompleted
+                          : null,
+                    )
+                  ],
+                ))
+      ]);
 }
 
 ```
