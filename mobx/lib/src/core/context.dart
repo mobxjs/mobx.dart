@@ -1,6 +1,6 @@
 part of '../core.dart';
 
-class ReactiveState {
+class _ReactiveState {
   int batch = 0;
 
   int nextIdCounter = 0;
@@ -37,7 +37,7 @@ class ReactiveContext {
 
   ReactiveConfig config;
 
-  final ReactiveState _state = ReactiveState();
+  final _ReactiveState _state = _ReactiveState();
 
   int get nextId => ++_state.nextIdCounter;
 
