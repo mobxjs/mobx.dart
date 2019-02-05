@@ -16,6 +16,6 @@ export default {
             primary: '#1389FD'
         }
     },
-    menu: ['Home', 'Getting Started', 'Core Concepts', 'Community', 'Development Notes'],
+    menu: ['Home', 'Getting Started', 'Core Concepts', 'Examples', 'Community', 'API Overview', 'Development Notes'],
     plugins: []
 }

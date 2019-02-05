@@ -1,6 +1,6 @@
 ---
 name: Core Concepts
-route: "/concepts"
+route: /concepts
 ---
 
 # Core Concepts

@@ -1,0 +1,405 @@
+---
+name: Todos
+menu: Examples
+route: /examples/todos
+---
+
+import todosImage from "./todos.png";
+
+# Todos
+
+In this example, we will build the classic [TodoMVC](http://todomvc.com/), which has become the default way of showcasing the capabilities of a state-management library.
+
+> See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx/example/lib/todos).
+
+## Creating the Observable state
+
+As you can expect the **Todos** app manages a list of `Todo` items. Each `Todo` can be defined by a simple class like the following.
+
+### Todo class
+
+We first start by defining the Observable state of our application. This is usually the first step in modeling your application. In this case, we have a `TodoList` managing a list of `Todo` instances.
+
+The `Todo` class should be self-explanatory.
+
+```
+class Todo = TodoBase with _$Todo;
+
+abstract class TodoBase implements Store {
+  TodoBase(this.description);
+
+  @observable
+  String description = '';
+
+  @observable
+  bool done = false;
+}
+```
+
+You should now be familiar with the little boilerplate here.
+
+> If the boilerplate seems new, take a look at the [Counter example](/examples/counter)
+
+### TodoList class
+
+Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of `TodoList` is a list of `Todo`s, a `filter` that tracks the visibility-filter applied on the list of todos and the `currentDescription`, which tracks the description entered by the user for a new todo.
+
+This can be seen with the `@observable` properties.
+
+```
+enum VisibilityFilter { all, pending, completed }
+
+class TodoList = TodoListBase with _$TodoList;
+
+abstract class TodoListBase implements Store {
+  @observable
+  ObservableList<Todo> todos = ObservableList<Todo>();
+
+  @observable
+  VisibilityFilter filter = VisibilityFilter.all;
+
+  @observable
+  String currentDescription = '';
+
+}
+```
+
+**Computed Properties**
+
+To render a useful UI, we also need a bunch of _derived (aka computed)_ properties. These properties are not inherent to the `TodoList` but derived from the core-state. Our UI looks like below, so you can identify the mapping of the computed properties to the various widgets.
+
+<img src={todosImage} width={300} />
+
+```
+abstract class TodoListBase implements Store {
+  // ...
+
+  @computed
+  ObservableList<Todo> get pendingTodos =>
+      ObservableList.of(todos.where((todo) => todo.done != true));
+
+  @computed
+  ObservableList<Todo> get completedTodos =>
+      ObservableList.of(todos.where((todo) => todo.done == true));
+
+  @computed
+  bool get hasCompletedTodos => completedTodos.isNotEmpty;
+
+  @computed
+  bool get hasPendingTodos => pendingTodos.isNotEmpty;
+
+  @computed
+  String get itemsDescription {
+    if (todos.isEmpty) {
+      return "There are no Todos here. Why don't you add one?.";
+    }
+
+    final suffix = pendingTodos.length == 1 ? 'todo' : 'todos';
+    return '${pendingTodos.length} pending $suffix, ${completedTodos.length} completed';
+  }
+
+  @computed
+  ObservableList<Todo> get visibleTodos {
+    switch (filter) {
+      case VisibilityFilter.pending:
+        return pendingTodos;
+      case VisibilityFilter.completed:
+        return completedTodos;
+      default:
+        return todos;
+    }
+  }
+
+  @computed
+  bool get canRemoveAllCompleted =>
+      hasCompletedTodos && filter != VisibilityFilter.pending;
+
+  @computed
+  bool get canMarkAllCompleted =>
+      hasPendingTodos && filter != VisibilityFilter.completed;
+
+  // ...
+
+}
+```
+
+**Actions**
+
+Actions are the semantic operations that mutate the observable state. They also create transaction-boundary to ensure all notifications are sent out only at the end of an action. In our case, we have a few actions such as:
+
+```
+abstract class TodoListBase implements Store {
+  // ...
+
+  @action
+  void addTodo(String description) {
+    final todo = Todo(description);
+    todos.add(todo);
+    currentDescription = '';
+  }
+
+  @action
+  void removeTodo(Todo todo) {
+    todos.removeWhere((x) => x == todo);
+  }
+
+  @action
+  void changeDescription(String description) =>
+      currentDescription = description;
+
+  @action
+  void changeFilter(VisibilityFilter filter) => this.filter = filter;
+
+  @action
+  void removeCompleted() {
+    todos.removeWhere((todo) => todo.done);
+  }
+
+  @action
+  void markAllAsCompleted() {
+    for (final todo in todos) {
+      todo.done = true;
+    }
+  }
+
+  // ...
+}
+```
+
+### The power of co-location
+
+Here is the complete `TodoList` with all the observable, computed properties and the actions.
+
+```
+class TodoList = TodoListBase with _$TodoList;
+
+abstract class TodoListBase implements Store {
+  @observable
+  ObservableList<Todo> todos = ObservableList<Todo>();
+
+  @observable
+  VisibilityFilter filter = VisibilityFilter.all;
+
+  @observable
+  String currentDescription = '';
+
+  @computed
+  ObservableList<Todo> get pendingTodos =>
+      ObservableList.of(todos.where((todo) => todo.done != true));
+
+  @computed
+  ObservableList<Todo> get completedTodos =>
+      ObservableList.of(todos.where((todo) => todo.done == true));
+
+  @computed
+  bool get hasCompletedTodos => completedTodos.isNotEmpty;
+
+  @computed
+  bool get hasPendingTodos => pendingTodos.isNotEmpty;
+
+  @computed
+  String get itemsDescription {
+    if (todos.isEmpty) {
+      return "There are no Todos here. Why don't you add one?.";
+    }
+
+    final suffix = pendingTodos.length == 1 ? 'todo' : 'todos';
+    return '${pendingTodos.length} pending $suffix, ${completedTodos.length} completed';
+  }
+
+  @computed
+  ObservableList<Todo> get visibleTodos {
+    switch (filter) {
+      case VisibilityFilter.pending:
+        return pendingTodos;
+      case VisibilityFilter.completed:
+        return completedTodos;
+      default:
+        return todos;
+    }
+  }
+
+  @computed
+  bool get canRemoveAllCompleted =>
+      hasCompletedTodos && filter != VisibilityFilter.pending;
+
+  @computed
+  bool get canMarkAllCompleted =>
+      hasPendingTodos && filter != VisibilityFilter.completed;
+
+  @action
+  void addTodo(String description) {
+    final todo = Todo(description);
+    todos.add(todo);
+    currentDescription = '';
+  }
+
+  @action
+  void removeTodo(Todo todo) {
+    todos.removeWhere((x) => x == todo);
+  }
+
+  @action
+  void changeDescription(String description) =>
+      currentDescription = description;
+
+  @action
+  void changeFilter(VisibilityFilter filter) => this.filter = filter;
+
+  @action
+  void removeCompleted() {
+    todos.removeWhere((todo) => todo.done);
+  }
+
+  @action
+  void markAllAsCompleted() {
+    for (final todo in todos) {
+      todo.done = true;
+    }
+  }
+}
+
+```
+
+Note that all of the details of the store are together. This is an important benefit of MobX: it keeps all the state-related code together. _**Co-location**_ is an important virtue and adds lot of value as you build more complex apps with sophisticated state-management.
+
+Co-location also helps in readability of your code and almost becomes self-explanatory. By choosing _Domain-specific_ names for your properties, actions and stores, there will be a clear mapping between the Business-domain and state code.
+
+## Connecting the UI
+
+Now that the state has been defined, the UI becomes a natural, and _visual_ extension of the Store. In case of MobX, we can sprinkle the _Widget-tree_ with as many `Observer` widgets as needed. You can observe as little as you want or as much as needed!
+
+> **MobX** is smart enough to know what you are observing and automatically starts tracking it. There is no extra work needed on your part. This results in friction-free code and makes it a joy to use `Observer`.
+
+At the highest level, this is what your widget tree looks like:
+
+```
+final TodoList list = TodoList();
+
+class TodoExample extends StatelessWidget {
+  const TodoExample();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: const Text('Todos'),
+      ),
+      body: Column(
+        children: <Widget>[
+          AddTodo(list: list),
+          ActionBar(list: list),
+          Description(list: list),
+          TodoListView(list: list)
+        ],
+      ));
+}
+
+
+```
+
+Note that we are keeping the state outside the widget. This is also called _**"Lifting the State"**_, which makes the root Widget a `StatelessWidget`. _Line#1_ lifts the state and is passed around directly as constructor parameters. Another way of passing this would be to use an `InheritedWidget`.
+
+Each of the children in the root-Widget is an `Observer`. Let's take the simplest of all the children: `Description`.
+
+**Description**
+
+```
+class Description extends StatelessWidget {
+  const Description({this.list});
+
+  final TodoList list;
+
+  @override
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text(
+            list.itemsDescription,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )));
+}
+
+```
+
+The _builder-function_ passed into `Observer` monitors all observables referenced inside. In this case, the `list.itemsDescription` is referenced. The act of reading this observable is a hint to MobX to start tracking. Anytime it changes, the `Observer` will rebuild the widget. Notice that there is no extra work needed from your side!
+
+**TodoListView**
+
+The `TodoListView` is yet another `Observer`, in particular of the `list.visibleTodos`
+
+```
+class TodoListView extends StatelessWidget {
+  const TodoListView({@required this.list});
+
+  final TodoList list;
+
+  @override
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => Flexible(
+            child: ListView.builder(
+                itemCount: list.visibleTodos.length,
+                itemBuilder: (_, index) {
+                  final todo = list.visibleTodos[index];
+                  return Observer(
+                      builder: (_) => CheckboxListTile(
+                            controlAffinity: ListTileControlAffinity.leading,
+                            value: todo.done,
+                            onChanged: (value) => todo.done = value,
+                            title: Row(
+                              children: <Widget>[
+                                Expanded(
+                                    child: Text(
+                                  todo.description,
+                                  overflow: TextOverflow.ellipsis,
+                                )),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () => list.removeTodo(todo),
+                                )
+                              ],
+                            ),
+                          ));
+                }),
+          ));
+}
+
+```
+
+**AddTodo**
+
+Similarly, here is the `AddTodo` widget that observes the `list.currentDescription` and also fires the `list.changeDescription` action.
+
+```
+class AddTodo extends StatelessWidget {
+  AddTodo({@required this.list});
+
+  final TodoList list;
+  final _textController = TextEditingController(text: '');
+
+  @override
+  Widget build(BuildContext context) => Observer(
+        builder: (_) => TextField(
+              autofocus: true,
+              decoration: const InputDecoration(
+                  labelText: 'Add a Todo', contentPadding: EdgeInsets.all(8)),
+              controller: _textController,
+              onChanged: _onTextChanged,
+              onSubmitted: _onTextSubmitted,
+            ),
+      );
+
+  void _onTextChanged(String newValue) {
+    list.changeDescription(newValue);
+  }
+
+  void _onTextSubmitted(String value) {
+    list.addTodo(value);
+    _textController.clear();
+  }
+}
+
+```
+
+## Summary
+
+Hope you can see the clarity of expressing the observable-state with `@observable`, `@computed`, and `@action`. Using the `Observer` widget, you get an automatically-updating Widget that renders the observable-state.

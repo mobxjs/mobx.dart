@@ -1,6 +1,6 @@
 ---
 name: Community
-route: "/community"
+route: /community
 ---
 
 # Community

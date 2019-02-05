@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_mobx_example/todos/todos.dart';
 
-class TodoExample extends StatefulWidget {
+final TodoList list = TodoList();
+
+class TodoExample extends StatelessWidget {
   const TodoExample();
-
-  @override
-  State<StatefulWidget> createState() => _TodoExampleState();
-}
-
-class _TodoExampleState extends State<TodoExample> {
-  final _list = TodoList();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -19,10 +14,10 @@ class _TodoExampleState extends State<TodoExample> {
       ),
       body: Column(
         children: <Widget>[
-          AddTodo(list: _list),
-          ActionBar(list: _list),
-          Description(list: _list),
-          TodoListView(list: _list)
+          AddTodo(list: list),
+          ActionBar(list: list),
+          Description(list: list),
+          TodoListView(list: list)
         ],
       ));
 }
@@ -31,9 +26,15 @@ class Description extends StatelessWidget {
   const Description({this.list});
 
   final TodoList list;
+
   @override
-  Widget build(BuildContext context) =>
-      Observer(builder: (_) => Text(list.itemsDescription));
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text(
+            list.itemsDescription,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )));
 }
 
 class TodoListView extends StatelessWidget {
