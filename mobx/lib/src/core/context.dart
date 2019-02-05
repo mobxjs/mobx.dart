@@ -41,6 +41,9 @@ class ReactiveContext {
 
   int get nextId => ++_state.nextIdCounter;
 
+  int get computationDepth => _state.computationDepth;
+  set computationDepth(int value) => _state.computationDepth = value;
+
   String nameFor(String prefix) {
     assert(prefix != null);
     assert(prefix.isNotEmpty);
@@ -78,9 +81,7 @@ class ReactiveContext {
   }
 
   void checkIfStateModificationsAreAllowed(Atom atom) {
-    final hasObservers = atom._observers.isNotEmpty;
-
-    if (_state.computationDepth > 0 && hasObservers) {
+    if (_state.computationDepth > 0 && atom.hasObservers) {
       throw MobXException(
           'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}');
     }

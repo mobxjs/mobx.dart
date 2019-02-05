@@ -24,14 +24,28 @@ void main() {
       dispose1();
     });
 
-    test('cannot change observables inside computed', () {
+    test('can change observables inside computed if there are no observers',
+        () {
       final x = Observable(0);
 
-      final c = Computed(() {
-        x.value++;
-      });
+      final c = Computed(() => x.value++);
 
-      expect(() => c.value, throwsException);
+      expect(() => c.value, returnsNormally);
+    });
+
+    test('cannot change observables inside computed if they have observers',
+        () {
+      final x = Observable(0);
+
+      final c = Computed<int>(() => x.value++);
+
+      expect(() {
+        final d = autorun((_) => x.value);
+        // Fetch the value which is in turn mutating the observable (x.value).
+        // This is not allowed because there is an observer: autorun.
+        c.value;
+        d();
+      }, throwsException);
     });
   });
 }

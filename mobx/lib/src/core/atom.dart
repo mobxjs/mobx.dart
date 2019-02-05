@@ -46,6 +46,8 @@ class Atom {
 
   final Set<Derivation> _observers = Set();
 
+  bool get hasObservers => _observers.isNotEmpty;
+
   final Map<_ListenerKind, Set<Function()>> _observationListeners = {};
 
   void reportObserved() {
