@@ -86,6 +86,7 @@ class Computed<T> extends Atom implements Derivation {
 
   T computeValue({bool track}) {
     _isComputing = true;
+    _context._state.computationDepth++;
 
     T value;
     if (track) {
@@ -103,6 +104,7 @@ class Computed<T> extends Atom implements Derivation {
       }
     }
 
+    _context._state.computationDepth--;
     _isComputing = false;
 
     return value;

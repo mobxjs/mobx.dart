@@ -1,6 +1,10 @@
-import 'package:mobx/mobx.dart';
+import 'package:mobx/mobx.dart' as mobx;
 import 'package:mockito/mockito.dart';
 
-class MockContext extends Mock implements ReactiveContext {}
+class MockState extends Mock implements mobx.ReactiveState {}
 
-class MockAtom extends Mock implements Atom {}
+class MockContext extends Mock implements mobx.ReactiveContext {
+  final MockState _state = MockState();
+}
+
+class MockAtom extends Mock implements mobx.Atom {}

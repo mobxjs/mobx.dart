@@ -1,6 +1,6 @@
 part of '../core.dart';
 
-class _ReactiveState {
+class ReactiveState {
   int batch = 0;
 
   int nextIdCounter = 0;
@@ -9,6 +9,8 @@ class _ReactiveState {
   List<Reaction> pendingReactions = [];
   bool isRunningReactions = false;
   List<Atom> pendingUnobservations = [];
+
+  int computationDepth = 0;
 }
 
 typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
@@ -35,7 +37,7 @@ class ReactiveContext {
 
   ReactiveConfig config;
 
-  final _ReactiveState _state = _ReactiveState();
+  final ReactiveState _state = ReactiveState();
 
   int get nextId => ++_state.nextIdCounter;
 
@@ -72,6 +74,15 @@ class ReactiveContext {
       }
 
       _state.pendingUnobservations = [];
+    }
+  }
+
+  void checkIfStateModificationsAreAllowed(Atom atom) {
+    final hasObservers = atom._observers.isNotEmpty;
+
+    if (_state.computationDepth > 0 && hasObservers) {
+      throw MobXException(
+          'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}');
     }
   }
 
