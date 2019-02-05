@@ -33,7 +33,7 @@ class Description extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Text(
             list.itemsDescription,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           )));
 }
 
