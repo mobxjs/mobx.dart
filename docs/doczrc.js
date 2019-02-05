@@ -6,7 +6,7 @@ export default {
     repository: 'https://github.com/mobxjs/mobx.dart',
     themeConfig: {
         logo: {
-            src: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/website/src/images/mobx.png'
+            src: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/mobx.png'
         },
         mode: 'light',
         colors: {
