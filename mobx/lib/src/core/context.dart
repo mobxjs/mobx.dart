@@ -9,21 +9,32 @@ class _ReactiveState {
   List<Reaction> pendingReactions = [];
   bool isRunningReactions = false;
   List<Atom> pendingUnobservations = [];
+
+  // Tracks if within a computed property evaluation
+  int computationDepth = 0;
+
+  // Tracks if observables can be mutated
+  bool allowStateChanges = true;
 }
 
 typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
 
+enum EnforceActions { observed, always, never }
+
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
-  ReactiveConfig({this.disableErrorBoundaries});
+  ReactiveConfig({this.disableErrorBoundaries, this.enforceActions});
 
   /// The main or default configuration used by [ReactiveContext]
-  static final ReactiveConfig main =
-      ReactiveConfig(disableErrorBoundaries: false);
+  static final ReactiveConfig main = ReactiveConfig(
+      disableErrorBoundaries: false, enforceActions: EnforceActions.never);
 
   /// Whether MobX should throw exceptions instead of catching them and storing
   /// inside the [Reaction.errorValue] property of [Reaction].
-  bool disableErrorBoundaries = false;
+  final bool disableErrorBoundaries;
+
+  // Should observables be mutated inside an action
+  final EnforceActions enforceActions;
 
   final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
 }
@@ -33,7 +44,13 @@ class ReactiveContext {
     this.config = config ?? ReactiveConfig.main;
   }
 
-  ReactiveConfig config;
+  ReactiveConfig _config;
+
+  ReactiveConfig get config => _config;
+  set config(ReactiveConfig newValue) {
+    _config = newValue;
+    _state.allowStateChanges = _config.enforceActions == EnforceActions.never;
+  }
 
   final _ReactiveState _state = _ReactiveState();
 
@@ -72,6 +89,34 @@ class ReactiveContext {
       }
 
       _state.pendingUnobservations = [];
+    }
+  }
+
+  void checkIfStateModificationsAreAllowed(Atom atom) {
+    // Cannot mutate observables inside a computed
+    if (_state.computationDepth > 0 && atom.hasObservers) {
+      throw MobXException(
+          'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}');
+    }
+
+    if (_state.allowStateChanges) {
+      return;
+    }
+
+    switch (config.enforceActions) {
+      case EnforceActions.never:
+        return;
+
+      case EnforceActions.observed:
+        if (atom.hasObservers) {
+          throw MobXException(
+              'Side effects like changing state are not allowed at this point. Tried to modify: ${atom.name}');
+        }
+        break;
+
+      case EnforceActions.always:
+        throw MobXException(
+            'Since strict-mode is enabled, changing observed observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
     }
   }
 
@@ -299,23 +344,23 @@ class ReactiveContext {
 
   bool isComputingDerivation() => _state.trackingDerivation != null;
 
-  Derivation untrackedStart() {
+  Derivation startUntracked() {
     final prevDerivation = _state.trackingDerivation;
     _state.trackingDerivation = null;
     return prevDerivation;
   }
 
   // ignore: use_setters_to_change_properties
-  void untrackedEnd(Derivation prevDerivation) {
+  void endUntracked(Derivation prevDerivation) {
     _state.trackingDerivation = prevDerivation;
   }
 
   T untracked<T>(T Function() action) {
-    final prevDerivation = untrackedStart();
+    final prevDerivation = startUntracked();
     try {
       return action();
     } finally {
-      untrackedEnd(prevDerivation);
+      endUntracked(prevDerivation);
     }
   }
 
@@ -331,5 +376,24 @@ class ReactiveContext {
     config._reactionErrorHandlers.forEach((f) {
       f(exception, reaction);
     });
+  }
+
+  bool startAllowStateChanges({bool allow}) {
+    final prevValue = _state.allowStateChanges;
+    _state.allowStateChanges = allow;
+
+    return prevValue;
+  }
+
+  void endAllowStateChanges({bool allow}) {
+    _state.allowStateChanges = allow;
+  }
+
+  void _pushComputation() {
+    _state.computationDepth++;
+  }
+
+  void _popComputation() {
+    _state.computationDepth--;
   }
 }

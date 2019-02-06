@@ -5,6 +5,11 @@ import 'package:test/test.dart';
 import 'shared_mocks.dart';
 
 void main() {
+  setUp(() {
+    // Ensure we are starting with clean slate each time
+    mainContext.config = ReactiveConfig.main;
+  });
+
   group('Action', () {
     test('basics work', () {
       final a = Action((String name, String value) {
@@ -141,10 +146,71 @@ void main() {
       act();
 
       verify(context.nameFor('Action'));
-      verify(context.untrackedStart());
+      verify(context.startUntracked());
       verify(context.startBatch());
       verify(context.endBatch());
-      verify(context.untrackedEnd(null));
+      verify(context.endUntracked(null));
+    });
+
+    test(
+        'on mainContext, should throw if mutating outside an action, with observers',
+        () {
+      mainContext.config =
+          ReactiveConfig(enforceActions: EnforceActions.observed);
+
+      final x = Observable(0);
+
+      // Should work as there are no observers
+      expect(() => x.value = 1, returnsNormally);
+
+      // Add observer
+      final d = autorun((_) => x.value);
+
+      // Should fail now
+      expect(() => x.value = 2, throwsException);
+
+      d();
+    });
+
+    test(
+        'on custom context, should throw if mutating outside an action, with observers',
+        () {
+      final context = ReactiveContext(
+          config: ReactiveConfig(
+              disableErrorBoundaries: true,
+              enforceActions: EnforceActions.observed));
+      final x = Observable(0, context: context);
+
+      // Should work as there are no observers
+      expect(() => x.value = 1, returnsNormally);
+
+      // Add observer
+      final d = autorun((_) => x.value, context: context);
+
+      // Should fail now
+      expect(() => x.value = 2, throwsException);
+
+      d();
+    });
+
+    test('should throw if mutating outside an action, when always enforced',
+        () {
+      final context = ReactiveContext(
+          config: ReactiveConfig(
+              disableErrorBoundaries: true,
+              enforceActions: EnforceActions.always));
+      final x = Observable(0, context: context);
+
+      // Should fail even if there are no observers
+      expect(() => x.value = 1, throwsException);
+
+      // Add observer
+      final d = autorun((_) => x.value, context: context);
+
+      // Should fail now as well
+      expect(() => x.value = 2, throwsException);
+
+      d();
     });
   });
 
