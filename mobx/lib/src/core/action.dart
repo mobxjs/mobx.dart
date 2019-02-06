@@ -77,9 +77,9 @@ class ActionController {
     _context.startBatch();
     final prevAllowStateChanges = _context.startAllowStateChanges(allow: true);
 
-    return ActionRunInfo()
-      ..prevDerivation = prevDerivation
-      ..prevAllowStateChanges = prevAllowStateChanges;
+    return ActionRunInfo(
+        prevDerivation: prevDerivation,
+        prevAllowStateChanges: prevAllowStateChanges);
   }
 
   void endAction(ActionRunInfo info) {
@@ -91,6 +91,8 @@ class ActionController {
 }
 
 class ActionRunInfo {
-  Derivation prevDerivation;
-  bool prevAllowStateChanges;
+  ActionRunInfo({this.prevDerivation, this.prevAllowStateChanges});
+
+  final Derivation prevDerivation;
+  final bool prevAllowStateChanges;
 }
