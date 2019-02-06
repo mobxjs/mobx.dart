@@ -47,4 +47,14 @@ abstract class AdminBase extends User implements Store {
   Stream<T> loadStuff<T>(String arg1, {T value}) async* {
     yield value;
   }
+
+  @action
+  @observable
+  Future<void> loadAccessRights() async {
+    final items = Stream.fromIterable(['web', 'filesystem'])
+        .asyncMap((ev) => Future.delayed(Duration(milliseconds: 10), () => ev));
+    await for (final item in items) {
+      accessRights.add(item);
+    }
+  }
 }

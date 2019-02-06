@@ -142,9 +142,6 @@ abstract class UserBase implements Store {
   }
 
   @action
-  Future updateUserFromDb() async { }
-
-  @action
   static UserBase getUser(int id) async {}
 
   @observable
@@ -159,8 +156,7 @@ Could not make class "User" observable. Changes needed:
   1. Remove static modifier from the field "foobar"
   2. Remove static modifier from the method "getUser"
   3. Remove final modifier from fields "id" and "firstName"
-  4. Remove async modifier from methods "updateUserFromDb" and "getUser\"
-  5. Return a Future or a Stream from the method "nonAsyncObservableMethod\"""";
+  4. Return a Future or a Stream from the method "nonAsyncObservableMethod\"""";
 
 void main() {
   group('generator', () {

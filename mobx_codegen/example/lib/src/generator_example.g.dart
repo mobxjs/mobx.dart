@@ -94,4 +94,12 @@ mixin _$Admin on AdminBase, Store {
     final _$stream = super.loadStuff<T>(arg1, value: value);
     return ObservableStream<T>(_$stream);
   }
+
+  final _$loadAccessRightsAsyncAction = AsyncAction('loadAccessRights');
+
+  @override
+  ObservableFuture<void> loadAccessRights() {
+    return ObservableFuture<void>(
+        _$loadAccessRightsAsyncAction.run(() => super.loadAccessRights()));
+  }
 }

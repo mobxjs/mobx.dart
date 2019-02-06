@@ -58,3 +58,4 @@ export 'package:mobx/src/api/observable_collections.dart'
         SetChange,
         SetChangeListener;
 export 'package:mobx/src/api/reaction.dart';
+export 'package:mobx/src/api/async_action.dart' show AsyncAction;
