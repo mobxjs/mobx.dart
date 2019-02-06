@@ -64,22 +64,22 @@ class ObservableFuture<T> implements Future<T> {
   dynamic get result => _result.value;
 
   void _fulfill(T value) {
-    final prevDerivation = _actions.startAction();
+    final actionInfo = _actions.startAction();
     try {
       _status.value = FutureStatus.fulfilled;
       _result.value = value;
     } finally {
-      _actions.endAction(prevDerivation);
+      _actions.endAction(actionInfo);
     }
   }
 
   void _reject(error) {
-    final prevDerivation = _actions.startAction();
+    final actionInfo = _actions.startAction();
     try {
       _status.value = FutureStatus.rejected;
       _result.value = error;
     } finally {
-      _actions.endAction(prevDerivation);
+      _actions.endAction(actionInfo);
     }
   }
 

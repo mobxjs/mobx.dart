@@ -296,33 +296,33 @@ class _ObservableStreamController<T> {
   }
 
   void _onData(T data) {
-    final prevDerivation = _actions.startAction();
+    final actionInfo = _actions.startAction();
     try {
       _status.value = StreamStatus.active;
       _valueType.value = _ValueType.value;
       _data.value = data;
     } finally {
-      _actions.endAction(prevDerivation);
+      _actions.endAction(actionInfo);
     }
   }
 
   void _onError(error) {
-    final prevDerivation = _actions.startAction();
+    final actionInfo = _actions.startAction();
     try {
       _status.value = StreamStatus.active;
       _valueType.value = _ValueType.error;
       _data.value = error;
     } finally {
-      _actions.endAction(prevDerivation);
+      _actions.endAction(actionInfo);
     }
   }
 
   void _onDone() {
-    final prevDerivation = _actions.startAction();
+    final actionInfo = _actions.startAction();
     try {
       _status.value = StreamStatus.done;
     } finally {
-      _actions.endAction(prevDerivation);
+      _actions.endAction(actionInfo);
     }
   }
 }

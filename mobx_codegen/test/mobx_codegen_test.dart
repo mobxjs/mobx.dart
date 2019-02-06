@@ -98,11 +98,11 @@ mixin _\$User on UserBase, Store {
 
   @override
   void updateNames({String firstName, String lastName}) {
-    final _\$prevDerivation = _\$UserBaseActionController.startAction();
+    final _\$actionInfo = _\$UserBaseActionController.startAction();
     try {
       return super.updateNames(firstName: firstName, lastName: lastName);
     } finally {
-      _\$UserBaseActionController.endAction(_\$prevDerivation);
+      _\$UserBaseActionController.endAction(_\$actionInfo);
     }
   }
 }

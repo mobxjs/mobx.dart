@@ -38,34 +38,34 @@ class AsyncAction {
   static dynamic _noOp() => null;
 
   R _run<R>(Zone self, ZoneDelegate parent, Zone zone, R Function() f) {
-    final prevDerivation = _actions.startAction();
+    final actionInfo = _actions.startAction();
     try {
       final result = parent.run(zone, f);
       return result;
     } finally {
-      _actions.endAction(prevDerivation);
+      _actions.endAction(actionInfo);
     }
   }
 
   R _runUnary<R, A>(
       Zone self, ZoneDelegate parent, Zone zone, R Function(A a) f, A a) {
-    final prevDerivation = _actions.startAction();
+    final actionInfo = _actions.startAction();
     try {
       final result = parent.runUnary(zone, f, a);
       return result;
     } finally {
-      _actions.endAction(prevDerivation);
+      _actions.endAction(actionInfo);
     }
   }
 
   R _runBinary<R, A, B>(Zone self, ZoneDelegate parent, Zone zone,
       R Function(A a, B b) f, A a, B b) {
-    final prevDerivation = _actions.startAction();
+    final actionInfo = _actions.startAction();
     try {
       final result = parent.runBinary(zone, f, a, b);
       return result;
     } finally {
-      _actions.endAction(prevDerivation);
+      _actions.endAction(actionInfo);
     }
   }
 }

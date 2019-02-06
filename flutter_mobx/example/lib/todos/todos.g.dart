@@ -17,6 +17,7 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   set description(String value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$descriptionAtom);
     super.description = value;
     _$descriptionAtom.reportChanged();
   }
@@ -31,6 +32,7 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   set done(bool value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$doneAtom);
     super.done = value;
     _$doneAtom.reportChanged();
   }
@@ -73,6 +75,18 @@ mixin _$TodoList on TodoListBase, Store {
   ObservableList<Todo> get visibleTodos => (_$visibleTodosComputed ??=
           Computed<ObservableList<Todo>>(() => super.visibleTodos))
       .value;
+  Computed<bool> _$canRemoveAllCompletedComputed;
+
+  @override
+  bool get canRemoveAllCompleted => (_$canRemoveAllCompletedComputed ??=
+          Computed<bool>(() => super.canRemoveAllCompleted))
+      .value;
+  Computed<bool> _$canMarkAllCompletedComputed;
+
+  @override
+  bool get canMarkAllCompleted => (_$canMarkAllCompletedComputed ??=
+          Computed<bool>(() => super.canMarkAllCompleted))
+      .value;
 
   final _$todosAtom = Atom(name: 'TodoListBase.todos');
 
@@ -84,6 +98,7 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set todos(ObservableList<Todo> value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$todosAtom);
     super.todos = value;
     _$todosAtom.reportChanged();
   }
@@ -98,6 +113,7 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set filter(VisibilityFilter value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$filterAtom);
     super.filter = value;
     _$filterAtom.reportChanged();
   }
@@ -113,6 +129,7 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set currentDescription(String value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$currentDescriptionAtom);
     super.currentDescription = value;
     _$currentDescriptionAtom.reportChanged();
   }
@@ -121,61 +138,61 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   void addTodo(String description) {
-    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction();
     try {
       return super.addTodo(description);
     } finally {
-      _$TodoListBaseActionController.endAction(_$prevDerivation);
+      _$TodoListBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void removeTodo(Todo todo) {
-    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction();
     try {
       return super.removeTodo(todo);
     } finally {
-      _$TodoListBaseActionController.endAction(_$prevDerivation);
+      _$TodoListBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void changeDescription(String description) {
-    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction();
     try {
       return super.changeDescription(description);
     } finally {
-      _$TodoListBaseActionController.endAction(_$prevDerivation);
+      _$TodoListBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void changeFilter(VisibilityFilter filter) {
-    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction();
     try {
       return super.changeFilter(filter);
     } finally {
-      _$TodoListBaseActionController.endAction(_$prevDerivation);
+      _$TodoListBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void removeCompleted() {
-    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction();
     try {
       return super.removeCompleted();
     } finally {
-      _$TodoListBaseActionController.endAction(_$prevDerivation);
+      _$TodoListBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void markAllAsCompleted() {
-    final _$prevDerivation = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction();
     try {
       return super.markAllAsCompleted();
     } finally {
-      _$TodoListBaseActionController.endAction(_$prevDerivation);
+      _$TodoListBaseActionController.endAction(_$actionInfo);
     }
   }
 }

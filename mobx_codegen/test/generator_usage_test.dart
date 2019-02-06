@@ -116,6 +116,16 @@ abstract class _TestStore implements Store {
 }
 
 void main() {
+  EnforceActions prevEnforceActions;
+  setUp(() {
+    prevEnforceActions = mainContext.config.enforceActions;
+    mainContext.config = ReactiveConfig(enforceActions: EnforceActions.always);
+  });
+
+  tearDown(() {
+    mainContext.config = ReactiveConfig(enforceActions: prevEnforceActions);
+  });
+
   test('setting fields with action works', () {
     final store = TestStore('field1', field2: 'field2');
 
@@ -164,7 +174,8 @@ void main() {
 
     final future = store.loadStuff2();
 
-    await asyncWhen((_) => future.status == FutureStatus.fulfilled);
+    await asyncWhen((_) => future.status == FutureStatus.fulfilled)
+        .timeout(Duration(seconds: 1));
 
     expect(stuff, equals(['stuff', 'stuff0', 'stuff1', 'stuff2', 'stuff3']));
   });
