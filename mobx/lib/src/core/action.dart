@@ -64,7 +64,7 @@ class Action {
   }
 
   Derivation _startAction() {
-    final prevDerivation = _context.untrackedStart();
+    final prevDerivation = _context.startUntracked();
     _context.startBatch();
 
     return prevDerivation;
@@ -73,7 +73,7 @@ class Action {
   void _endAction(Derivation prevDerivation) {
     _context
       ..endBatch()
-      ..untrackedEnd(prevDerivation);
+      ..endUntracked(prevDerivation);
   }
 }
 
@@ -86,16 +86,25 @@ class ActionController {
   final ReactiveContext _context;
   final String name;
 
-  Derivation startAction() {
-    final prevDerivation = _context.untrackedStart();
+  ActionRunInfo startAction() {
+    final prevDerivation = _context.startUntracked();
     _context.startBatch();
+    final prevAllowStateChanges = _context.startAllowStateChanges(true);
 
-    return prevDerivation;
+    return ActionRunInfo()
+      ..prevDerivation = prevDerivation
+      ..prevAllowStateChanges = prevAllowStateChanges;
   }
 
-  void endAction(Derivation prevDerivation) {
+  void endAction(ActionRunInfo info) {
     _context
+      ..endAllowStateChanges(info.prevAllowStateChanges)
       ..endBatch()
-      ..untrackedEnd(prevDerivation);
+      ..endUntracked(info.prevDerivation);
   }
+}
+
+class ActionRunInfo {
+  Derivation prevDerivation;
+  bool prevAllowStateChanges;
 }

@@ -141,10 +141,10 @@ void main() {
       act();
 
       verify(context.nameFor('Action'));
-      verify(context.untrackedStart());
+      verify(context.startUntracked());
       verify(context.startBatch());
       verify(context.endBatch());
-      verify(context.untrackedEnd(null));
+      verify(context.endUntracked(null));
     });
   });
 

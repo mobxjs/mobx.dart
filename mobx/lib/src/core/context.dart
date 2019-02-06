@@ -11,9 +11,13 @@ class _ReactiveState {
   List<Atom> pendingUnobservations = [];
 
   int computationDepth = 0;
+
+  bool allowStateChanges = true;
 }
 
 typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
+
+enum EnforceActionType { observed, always, never }
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
@@ -27,22 +31,29 @@ class ReactiveConfig {
   /// inside the [Reaction.errorValue] property of [Reaction].
   bool disableErrorBoundaries = false;
 
+  // Should observables be mutated inside an action
+  EnforceActionType enforceActions = EnforceActionType.never;
+
   final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
 }
 
 class ReactiveContext {
-  ReactiveContext({ReactiveConfig config}) {
-    this.config = config ?? ReactiveConfig.main;
-  }
+  ReactiveContext({ReactiveConfig config})
+      : this.config = config ?? ReactiveConfig.main {}
 
-  ReactiveConfig config;
+  final ReactiveConfig config;
 
   final _ReactiveState _state = _ReactiveState();
 
   int get nextId => ++_state.nextIdCounter;
 
+  // Tracks if within a computed property evaluation
   int get computationDepth => _state.computationDepth;
   set computationDepth(int value) => _state.computationDepth = value;
+
+  // Tracks if observables can be mutated
+  bool get allowStateChanges => _state.allowStateChanges;
+  set allowStateChanges(bool value) => _state.allowStateChanges = value;
 
   String nameFor(String prefix) {
     assert(prefix != null);
@@ -81,6 +92,7 @@ class ReactiveContext {
   }
 
   void checkIfStateModificationsAreAllowed(Atom atom) {
+    // Cannot mutate observables inside a computed
     if (_state.computationDepth > 0 && atom.hasObservers) {
       throw MobXException(
           'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}');
@@ -311,23 +323,23 @@ class ReactiveContext {
 
   bool isComputingDerivation() => _state.trackingDerivation != null;
 
-  Derivation untrackedStart() {
+  Derivation startUntracked() {
     final prevDerivation = _state.trackingDerivation;
     _state.trackingDerivation = null;
     return prevDerivation;
   }
 
   // ignore: use_setters_to_change_properties
-  void untrackedEnd(Derivation prevDerivation) {
+  void endUntracked(Derivation prevDerivation) {
     _state.trackingDerivation = prevDerivation;
   }
 
   T untracked<T>(T Function() action) {
-    final prevDerivation = untrackedStart();
+    final prevDerivation = startUntracked();
     try {
       return action();
     } finally {
-      untrackedEnd(prevDerivation);
+      endUntracked(prevDerivation);
     }
   }
 
@@ -343,5 +355,16 @@ class ReactiveContext {
     config._reactionErrorHandlers.forEach((f) {
       f(exception, reaction);
     });
+  }
+
+  bool startAllowStateChanges(bool allow) {
+    final prevValue = allowStateChanges;
+    allowStateChanges = allow;
+
+    return prevValue;
+  }
+
+  void endAllowStateChanges(bool prevAllowStateChanges) {
+    allowStateChanges = prevAllowStateChanges;
   }
 }
