@@ -1,12 +1,12 @@
 import 'package:fake_async/fake_async.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mockito/mockito.dart' hide when;
 import 'package:test/test.dart';
-import 'package:mobx/mobx.dart';
 
 import 'shared_mocks.dart';
 
 void main() {
-  group('When', () {
+  group('when()', () {
     test('basics work', () {
       var executed = false;
       final x = Observable(10);
