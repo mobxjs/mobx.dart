@@ -98,10 +98,10 @@ void main() {
       final context = MockContext();
       int fn() => 1;
 
-      final value = Computed(fn, context: context)..computeValue(track: true);
+      final c = Computed(fn, context: context)..computeValue(track: true);
 
       verify(context.nameFor('Computed'));
-      verify(context.trackDerivation(value, fn));
+      verify(context.trackDerivation(c, fn));
     });
 
     test('catches exception in evaluation', () {
