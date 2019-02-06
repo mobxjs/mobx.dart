@@ -5,7 +5,7 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 [![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-![](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/mobx.png)
+![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx.png)
 
 [MobX](https://github.com/mobxjs/mobx) for the Dart language.
 
@@ -40,7 +40,7 @@ console log, a network call to re-rendering the UI.
 
 For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
 
-[![](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
+[![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
 
 ### Get Started
 
@@ -48,7 +48,7 @@ Follow along with the [Getting Started guide on the MobX.dart Website](https://m
 
 ## Core Concepts
 
-![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/website/src/images/mobx-triad.png)
+![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx-triad.png)
 
 At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
 

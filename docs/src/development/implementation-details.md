@@ -1,7 +1,7 @@
 ---
 name: Implementation Details
 menu: Development Notes
-route: "/implementation-details"
+route: /implementation-details
 ---
 
 # Implementation Details
