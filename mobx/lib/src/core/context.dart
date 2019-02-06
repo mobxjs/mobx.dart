@@ -39,7 +39,7 @@ class ReactiveConfig {
 
 class ReactiveContext {
   ReactiveContext({ReactiveConfig config})
-      : this.config = config ?? ReactiveConfig.main {}
+      : this.config = config ?? ReactiveConfig.main;
 
   final ReactiveConfig config;
 
@@ -357,14 +357,14 @@ class ReactiveContext {
     });
   }
 
-  bool startAllowStateChanges(bool allow) {
+  bool startAllowStateChanges({bool allow}) {
     final prevValue = allowStateChanges;
     allowStateChanges = allow;
 
     return prevValue;
   }
 
-  void endAllowStateChanges(bool prevAllowStateChanges) {
-    allowStateChanges = prevAllowStateChanges;
+  void endAllowStateChanges({bool allow}) {
+    allowStateChanges = allow;
   }
 }

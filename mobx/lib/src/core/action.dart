@@ -36,17 +36,16 @@ class Action {
   factory Action(Function fn, {ReactiveContext context, String name}) =>
       Action._(context ?? mainContext, fn, name: name);
 
-  Action._(this._context, this._fn, {String name})
-      : name = name ?? _context.nameFor('Action');
+  Action._(ReactiveContext context, this._fn, {String name})
+      : _controller = ActionController(context: context, name: name);
 
-  final ReactiveContext _context;
+  final ActionController _controller;
 
   final Function _fn;
-
-  final String name;
+  String get name => _controller.name;
 
   dynamic call([List args = const [], Map<String, dynamic> namedArgs]) {
-    final prevDerivation = _startAction();
+    final runInfo = _controller.startAction();
 
     try {
       // Invoke the actual function
@@ -59,21 +58,8 @@ class Action {
         return Function.apply(_fn, args, namedSymbolArgs);
       }
     } finally {
-      _endAction(prevDerivation);
+      _controller.endAction(runInfo);
     }
-  }
-
-  Derivation _startAction() {
-    final prevDerivation = _context.startUntracked();
-    _context.startBatch();
-
-    return prevDerivation;
-  }
-
-  void _endAction(Derivation prevDerivation) {
-    _context
-      ..endBatch()
-      ..endUntracked(prevDerivation);
   }
 }
 
@@ -89,7 +75,7 @@ class ActionController {
   ActionRunInfo startAction() {
     final prevDerivation = _context.startUntracked();
     _context.startBatch();
-    final prevAllowStateChanges = _context.startAllowStateChanges(true);
+    final prevAllowStateChanges = _context.startAllowStateChanges(allow: true);
 
     return ActionRunInfo()
       ..prevDerivation = prevDerivation
@@ -98,7 +84,7 @@ class ActionController {
 
   void endAction(ActionRunInfo info) {
     _context
-      ..endAllowStateChanges(info.prevAllowStateChanges)
+      ..endAllowStateChanges(allow: info.prevAllowStateChanges)
       ..endBatch()
       ..endUntracked(info.prevDerivation);
   }

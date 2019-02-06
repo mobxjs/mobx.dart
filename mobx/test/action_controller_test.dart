@@ -17,7 +17,7 @@ void main() {
       verifyInOrder([
         context.startUntracked(),
         context.startBatch(),
-        context.startAllowStateChanges(true),
+        context.startAllowStateChanges(allow: true),
       ]);
     });
 
@@ -36,7 +36,7 @@ void main() {
         ..endAction(runInfo);
 
       verifyInOrder([
-        context.endAllowStateChanges(false),
+        context.endAllowStateChanges(allow: false),
         context.endBatch(),
         context.endUntracked(prevDerivation),
       ]);
