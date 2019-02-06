@@ -57,6 +57,8 @@ class Observable<T> extends Atom
   }
 
   dynamic _prepareNewValue(T newValue) {
+    _context.checkIfStateModificationsAreAllowed(this);
+
     var prepared = newValue;
     if (_interceptors.hasHandlers) {
       final change = _interceptors.interceptChange(WillChangeNotification(
