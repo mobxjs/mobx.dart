@@ -146,5 +146,36 @@ void main() {
 
       expect(values, equals([0, 1, 2]));
     });
+
+    <String, ObservableStream Function(ObservableStream<int>)>{
+      'asBroadcastStream': (s) => s.asBroadcastStream(),
+      'asyncExpand': (s) =>
+          s.asyncExpand((n) => Stream.fromIterable(Iterable<int>.generate(n))),
+      'asyncMap': (s) => s.asyncMap((n) => Future.value(n + 1)),
+      'cast': (s) => s.cast<num>(),
+      'distinct': (s) => s.distinct(),
+      'expand': (s) => s.expand((n) => Iterable<int>.generate(n)),
+      'skip': (s) => s.skip(2),
+      'skipWhile': (s) => s.skipWhile((n) => n > 3),
+      'take': (s) => s.take(5),
+      'takeWhile': (s) => s.takeWhile((n) => n < 4),
+      'where': (s) => s.where((n) => n != 2)
+    }.forEach(testStreamCombinator);
+  });
+}
+
+void testStreamCombinator<T>(
+    String description, ObservableStream Function(ObservableStream<int>) body) {
+  test(description, () async {
+    final stream =
+        ObservableStream(Stream.fromIterable(Iterable<int>.generate(10)));
+    final transformed = body(stream);
+
+    dynamic value;
+    autorun((_) {
+      value = transformed.value;
+    });
+    await asyncWhen((_) => transformed.status == StreamStatus.done);
+    expect(value, isNotNull);
   });
 }
