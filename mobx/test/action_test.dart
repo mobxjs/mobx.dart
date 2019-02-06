@@ -242,4 +242,42 @@ void main() {
 
     d();
   });
+
+  test('should throw if mutating outside an action, with observers', () {
+    final context = ReactiveContext(
+        config: ReactiveConfig(
+            disableErrorBoundaries: true,
+            enforceActions: EnforceActions.observed));
+    final x = Observable(0, context: context);
+
+    // Should work as there are no observers
+    expect(() => x.value = 1, returnsNormally);
+
+    // Add observer
+    final d = autorun((_) => x.value, context: context);
+
+    // Should fail now
+    expect(() => x.value = 2, throwsException);
+
+    d();
+  });
+
+  test('should throw if mutating outside an action, when always enforced', () {
+    final context = ReactiveContext(
+        config: ReactiveConfig(
+            disableErrorBoundaries: true,
+            enforceActions: EnforceActions.always));
+    final x = Observable(0, context: context);
+
+    // Should fail even if there are no observers
+    expect(() => x.value = 1, throwsException);
+
+    // Add observer
+    final d = autorun((_) => x.value, context: context);
+
+    // Should fail now as well
+    expect(() => x.value = 2, throwsException);
+
+    d();
+  });
 }

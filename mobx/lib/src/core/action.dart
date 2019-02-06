@@ -39,10 +39,10 @@ class Action {
   Action._(ReactiveContext context, this._fn, {String name})
       : _controller = ActionController(context: context, name: name);
 
-  final ActionController _controller;
-
-  final Function _fn;
   String get name => _controller.name;
+
+  final ActionController _controller;
+  final Function _fn;
 
   dynamic call([List args = const [], Map<String, dynamic> namedArgs]) {
     final runInfo = _controller.startAction();

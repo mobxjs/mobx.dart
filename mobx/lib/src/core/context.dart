@@ -10,50 +10,47 @@ class _ReactiveState {
   bool isRunningReactions = false;
   List<Atom> pendingUnobservations = [];
 
+  // Tracks if within a computed property evaluation
   int computationDepth = 0;
 
+  // Tracks if observables can be mutated
   bool allowStateChanges = true;
 }
 
 typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
 
-enum EnforceActionType { observed, always, never }
+enum EnforceActions { observed, always, never }
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
-  ReactiveConfig({this.disableErrorBoundaries});
+  ReactiveConfig({this.disableErrorBoundaries, this.enforceActions});
 
   /// The main or default configuration used by [ReactiveContext]
-  static final ReactiveConfig main =
-      ReactiveConfig(disableErrorBoundaries: false);
+  static final ReactiveConfig main = ReactiveConfig(
+      disableErrorBoundaries: false, enforceActions: EnforceActions.never);
 
   /// Whether MobX should throw exceptions instead of catching them and storing
   /// inside the [Reaction.errorValue] property of [Reaction].
   bool disableErrorBoundaries = false;
 
   // Should observables be mutated inside an action
-  EnforceActionType enforceActions = EnforceActionType.never;
+  EnforceActions enforceActions = EnforceActions.never;
 
   final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
 }
 
 class ReactiveContext {
   ReactiveContext({ReactiveConfig config})
-      : config = config ?? ReactiveConfig.main;
+      : config = config ?? ReactiveConfig.main {
+    _state.allowStateChanges =
+        this.config.enforceActions == EnforceActions.never;
+  }
 
   final ReactiveConfig config;
 
   final _ReactiveState _state = _ReactiveState();
 
   int get nextId => ++_state.nextIdCounter;
-
-  // Tracks if within a computed property evaluation
-  int get computationDepth => _state.computationDepth;
-  set computationDepth(int value) => _state.computationDepth = value;
-
-  // Tracks if observables can be mutated
-  bool get allowStateChanges => _state.allowStateChanges;
-  set allowStateChanges(bool value) => _state.allowStateChanges = value;
 
   String nameFor(String prefix) {
     assert(prefix != null);
@@ -96,6 +93,26 @@ class ReactiveContext {
     if (_state.computationDepth > 0 && atom.hasObservers) {
       throw MobXException(
           'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}');
+    }
+
+    if (_state.allowStateChanges) {
+      return;
+    }
+
+    switch (config.enforceActions) {
+      case EnforceActions.never:
+        return;
+
+      case EnforceActions.observed:
+        if (atom.hasObservers) {
+          throw MobXException(
+              'Side effects like changing state are not allowed at this point. Tried to modify: ${atom.name}');
+        }
+        break;
+
+      case EnforceActions.always:
+        throw MobXException(
+            'Since strict-mode is enabled, changing observed observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
     }
   }
 
@@ -358,13 +375,21 @@ class ReactiveContext {
   }
 
   bool startAllowStateChanges({bool allow}) {
-    final prevValue = allowStateChanges;
-    allowStateChanges = allow;
+    final prevValue = _state.allowStateChanges;
+    _state.allowStateChanges = allow;
 
     return prevValue;
   }
 
   void endAllowStateChanges({bool allow}) {
-    allowStateChanges = allow;
+    _state.allowStateChanges = allow;
+  }
+
+  void _pushComputation() {
+    _state.computationDepth++;
+  }
+
+  void _popComputation() {
+    _state.computationDepth--;
   }
 }
