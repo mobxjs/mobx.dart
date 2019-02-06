@@ -31,22 +31,26 @@ class ReactiveConfig {
 
   /// Whether MobX should throw exceptions instead of catching them and storing
   /// inside the [Reaction.errorValue] property of [Reaction].
-  bool disableErrorBoundaries = false;
+  final bool disableErrorBoundaries;
 
   // Should observables be mutated inside an action
-  EnforceActions enforceActions = EnforceActions.never;
+  final EnforceActions enforceActions;
 
   final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
 }
 
 class ReactiveContext {
-  ReactiveContext({ReactiveConfig config})
-      : config = config ?? ReactiveConfig.main {
-    _state.allowStateChanges =
-        this.config.enforceActions == EnforceActions.never;
+  ReactiveContext({ReactiveConfig config}) {
+    this.config = config ?? ReactiveConfig.main;
   }
 
-  final ReactiveConfig config;
+  ReactiveConfig _config;
+
+  ReactiveConfig get config => _config;
+  set config(ReactiveConfig newValue) {
+    _config = newValue;
+    _state.allowStateChanges = _config.enforceActions == EnforceActions.never;
+  }
 
   final _ReactiveState _state = _ReactiveState();
 
