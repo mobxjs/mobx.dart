@@ -39,7 +39,7 @@ class ReactiveConfig {
 
 class ReactiveContext {
   ReactiveContext({ReactiveConfig config})
-      : this.config = config ?? ReactiveConfig.main;
+      : config = config ?? ReactiveConfig.main;
 
   final ReactiveConfig config;
 
