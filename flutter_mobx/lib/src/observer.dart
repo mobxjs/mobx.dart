@@ -8,10 +8,9 @@ import 'package:mobx/src/core.dart' show ReactionImpl;
 
 typedef BuildObserved = Widget Function(BuildContext);
 
-/// A widget that rebuilds every time an observable referenced in the [builder]
-/// function is altered.
 class Observer extends StatefulWidget {
-  /// Returns a new Observer instance.
+  /// Returns a widget that rebuilds every time an observable referenced in the
+  /// [builder] function is altered.
   ///
   /// The [builder] argument must not be null.
   const Observer({@required this.builder, Key key, this.context})
