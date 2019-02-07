@@ -7,6 +7,45 @@ import 'package:mobx/src/core.dart';
 @experimental
 enum FutureStatus { pending, rejected, fulfilled }
 
+class FutureResult<T> {
+  FutureResult(ReactiveContext context, Future<T> _future, initialResult,
+      FutureStatus initialStatus)
+      : _actions = ActionController(
+            context: context, name: context.nameFor('ObservableFuture<$T>')),
+        _status = Observable(initialStatus),
+        _result = Observable(initialResult) {
+    _future.then(_fulfill, onError: _reject);
+  }
+
+  final ActionController _actions;
+
+  final Observable<FutureStatus> _status;
+  FutureStatus get status => _status.value;
+
+  final Observable _result;
+  dynamic get result => _result.value;
+
+  void _fulfill(T value) {
+    final prevDerivation = _actions.startAction();
+    try {
+      _status.value = FutureStatus.fulfilled;
+      _result.value = value;
+    } finally {
+      _actions.endAction(prevDerivation);
+    }
+  }
+
+  void _reject(error) {
+    final prevDerivation = _actions.startAction();
+    try {
+      _status.value = FutureStatus.rejected;
+      _result.value = error;
+    } finally {
+      _actions.endAction(prevDerivation);
+    }
+  }
+}
+
 @experimental
 class ObservableFuture<T> implements Future<T> {
   /// Create a new observable future that tracks the state of the provided future.
@@ -27,61 +66,45 @@ class ObservableFuture<T> implements Future<T> {
       : this._(context ?? mainContext, Future.error(error),
             FutureStatus.rejected, error);
 
-  ObservableFuture._(ReactiveContext context, this._future,
-      FutureStatus initialStatus, initialResult)
-      : _context = context,
-        _status = Observable(initialStatus, context: context),
-        _actions = ActionController(
-            context: context, name: context.nameFor('ObservableFuture<$T>')),
-        _result = Observable(initialResult) {
-    _future.then(_fulfill, onError: _reject);
-  }
+  ObservableFuture._(
+      this._context, this._future, this._initialStatus, this._initialResult)
+      : assert(_context != null),
+        assert(_future != null);
 
   final ReactiveContext _context;
-  final ActionController _actions;
   Future<T> _future;
+  FutureStatus _initialStatus;
+  dynamic _initialResult;
 
-  final Observable<FutureStatus> _status;
+  FutureResult<T> _resultField;
+
+  FutureResult<T> get _result {
+    if (_resultField == null) {
+      _resultField =
+          FutureResult(_context, _future, _initialResult, _initialStatus);
+      _initialResult = null;
+      _initialStatus = null;
+    }
+    return _resultField;
+  }
 
   /// Observable status of this.
-  FutureStatus get status => _status.value;
-
-  final Observable _result;
+  FutureStatus get status => _result.status;
 
   /// Value if this completed with a value.
   ///
   /// Null otherwise.
-  T get value => status == FutureStatus.fulfilled ? _result.value : null;
+  T get value => status == FutureStatus.fulfilled ? _result.result : null;
 
   /// Error value if this completed with an error
   ///
   /// Null otherwise.
-  T get error => status == FutureStatus.rejected ? _result.value : null;
+  T get error => status == FutureStatus.rejected ? _result.result : null;
 
   /// Error or value of this.
   ///
   /// Null if this hasn't yet completed.
-  dynamic get result => _result.value;
-
-  void _fulfill(T value) {
-    final actionInfo = _actions.startAction();
-    try {
-      _status.value = FutureStatus.fulfilled;
-      _result.value = value;
-    } finally {
-      _actions.endAction(actionInfo);
-    }
-  }
-
-  void _reject(error) {
-    final actionInfo = _actions.startAction();
-    try {
-      _status.value = FutureStatus.rejected;
-      _result.value = error;
-    } finally {
-      _actions.endAction(actionInfo);
-    }
-  }
+  dynamic get result => _result.result;
 
   /// Maps the current state of this.
   ///
@@ -91,12 +114,12 @@ class ObservableFuture<T> implements Future<T> {
       // ignore:avoid_annotating_with_dynamic
       R Function(dynamic) rejected,
       R Function() pending}) {
-    final status = _status.value;
+    final status = this.status;
 
     if (status == FutureStatus.fulfilled) {
-      return fulfilled == null ? null : fulfilled(_result.value);
+      return fulfilled == null ? null : fulfilled(result);
     } else if (status == FutureStatus.rejected) {
-      return rejected == null ? null : rejected(_result.value);
+      return rejected == null ? null : rejected(result);
     }
     return pending == null ? null : pending();
   }
@@ -107,7 +130,7 @@ class ObservableFuture<T> implements Future<T> {
   /// Useful when you don't want to clear the result of the previous operation while
   /// executing the new operation.
   ObservableFuture<T> replace(Future<T> nextFuture) =>
-      ObservableFuture<T>._(_context, nextFuture, status, _result.value);
+      ObservableFuture<T>._(_context, nextFuture, status, result);
 
   @override
   Stream<T> asStream() => _future.asStream();
