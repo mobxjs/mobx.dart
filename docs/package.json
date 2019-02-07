@@ -1,5 +1,11 @@
 {
-    "name": "mobx.dart",
+    "name": "mobx.dart-docs",
+    "description": "Documentation Website for MobX.dart",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mobxjs/mobx.dart"
+    },
+    "license": "MIT",
     "scripts": {
         "dev": "docz dev",
         "build": "docz build"
