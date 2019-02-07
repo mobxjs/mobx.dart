@@ -76,6 +76,8 @@ void main() {
     });
 
     test('inside autorun should be untracked', () {
+      mainContext.config = ReactiveConfig(enforceActions: EnforceActions.never);
+
       final x = Observable(10);
       final y = Observable(20);
 
@@ -97,6 +99,8 @@ void main() {
       expect(total, equals(41)); // total should still be 11 + 30
 
       d();
+
+      mainContext.config = ReactiveConfig.main;
     });
 
     test('can be invoked with named args', () {
@@ -241,6 +245,8 @@ void main() {
   });
 
   test('transaction works', () {
+    mainContext.config = ReactiveConfig(enforceActions: EnforceActions.never);
+
     final x = Observable(10);
     final y = Observable(20);
 
@@ -262,6 +268,8 @@ void main() {
     expect(total, equals(300));
 
     d();
+
+    mainContext.config = ReactiveConfig.main;
   });
 
   test('untracked works', () {

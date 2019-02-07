@@ -7,6 +7,11 @@ import 'package:test/test.dart';
 import 'shared_mocks.dart';
 
 void main() {
+  setUp(() => mainContext.config =
+      ReactiveConfig(enforceActions: EnforceActions.never));
+
+  tearDown(() => mainContext.config = ReactiveConfig.main);
+
   group('autorun()', () {
     test('basics work', () {
       final c = Observable(0);

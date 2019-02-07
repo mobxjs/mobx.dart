@@ -3,6 +3,11 @@ import '../lib/src/generator_example.dart';
 import 'package:test/test.dart';
 
 void main() {
+  setUp(() => mainContext.config =
+      ReactiveConfig(enforceActions: EnforceActions.never));
+
+  tearDown(() => mainContext.config = ReactiveConfig.main);
+
   void testStoreBasics(String name, User Function() createStore) {
     group(name, () {
       test('@observable works', () {
