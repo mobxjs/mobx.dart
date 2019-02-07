@@ -14,6 +14,9 @@ void useObserver({ReactiveContext context}) {
 class ObserverHook extends Hook<void> {
   const ObserverHook({this.context});
 
+  // TODO(rrousselGit): scoped constructor
+
+
   final ReactiveContext context;
 
   @override
