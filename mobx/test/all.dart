@@ -1,5 +1,6 @@
 import 'action_controller_test.dart' as action_controller_test;
 import 'action_test.dart' as action_test;
+import 'async_action_test.dart' as async_action_test;
 import 'autorun_test.dart' as autorun_test;
 import 'computed_test.dart' as computed_test;
 import 'context_test.dart' as context_test;
@@ -18,6 +19,7 @@ import 'when_test.dart' as when_test;
 void main() {
   action_controller_test.main();
   action_test.main();
+  async_action_test.main();
   autorun_test.main();
   computed_test.main();
   context_test.main();

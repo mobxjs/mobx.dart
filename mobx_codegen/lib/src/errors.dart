@@ -12,7 +12,7 @@ class StoreClassCodegenErrors implements CodegenError {
       staticObservables,
       staticMethods,
       finalObservables,
-      asyncActions,
+      asyncGeneratorActions,
       nonAsyncMethods
     ];
   }
@@ -22,7 +22,7 @@ class StoreClassCodegenErrors implements CodegenError {
   final PropertyErrors finalObservables = FinalObservableFields();
   final PropertyErrors staticObservables = StaticObservableFields();
   final PropertyErrors staticMethods = InvalidStaticMethods();
-  final PropertyErrors asyncActions = AsyncActionMethods();
+  final PropertyErrors asyncGeneratorActions = AsyncGeneratorActionMethods();
   final PropertyErrors nonAsyncMethods = NonAsyncMethods();
 
   List<CodegenError> _errorCategories;
@@ -69,12 +69,13 @@ class StaticObservableFields extends PropertyErrors {
   String get message => 'Remove static modifier from $property $propertyList';
 }
 
-class AsyncActionMethods extends PropertyErrors {
+class AsyncGeneratorActionMethods extends PropertyErrors {
   @override
   Pluralize propertyPlural = const Pluralize('the method', 'methods');
 
   @override
-  String get message => 'Remove async modifier from $property $propertyList';
+  String get message =>
+      'Replace async* modifier with async from $property $propertyList';
 }
 
 class NonAsyncMethods extends PropertyErrors {

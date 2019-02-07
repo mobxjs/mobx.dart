@@ -1,4 +1,5 @@
 import 'package:mobx_codegen/src/template/action.dart';
+import 'package:mobx_codegen/src/template/async_action.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/observable_future.dart';
@@ -12,6 +13,7 @@ class StoreTemplate {
   final Rows<ObservableTemplate> observables = Rows();
   final Rows<ComputedTemplate> computeds = Rows();
   final Rows<ActionTemplate> actions = Rows();
+  final Rows<AsyncActionTemplate> asyncActions = Rows();
   final Rows<ObservableFutureTemplate> observableFutures = Rows();
   final Rows<ObservableStreamTemplate> observableStreams = Rows();
 
@@ -33,6 +35,8 @@ class StoreTemplate {
     $observableFutures
 
     $observableStreams
+
+    $asyncActions
 
     $_actionControllerField
 

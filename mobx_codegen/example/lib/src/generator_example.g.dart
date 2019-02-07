@@ -23,6 +23,7 @@ mixin _$User on UserBase, Store {
 
   @override
   set firstName(String value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$firstNameAtom);
     super.firstName = value;
     _$firstNameAtom.reportChanged();
   }
@@ -37,6 +38,7 @@ mixin _$User on UserBase, Store {
 
   @override
   set lastName(String value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$lastNameAtom);
     super.lastName = value;
     _$lastNameAtom.reportChanged();
   }
@@ -45,11 +47,11 @@ mixin _$User on UserBase, Store {
 
   @override
   void updateNames({String firstName, String lastName}) {
-    final _$prevDerivation = _$UserBaseActionController.startAction();
+    final _$actionInfo = _$UserBaseActionController.startAction();
     try {
       return super.updateNames(firstName: firstName, lastName: lastName);
     } finally {
-      _$UserBaseActionController.endAction(_$prevDerivation);
+      _$UserBaseActionController.endAction(_$actionInfo);
     }
   }
 }
@@ -65,6 +67,7 @@ mixin _$Admin on AdminBase, Store {
 
   @override
   set userName(String value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$userNameAtom);
     super.userName = value;
     _$userNameAtom.reportChanged();
   }
@@ -79,6 +82,7 @@ mixin _$Admin on AdminBase, Store {
 
   @override
   set accessRights(ObservableList<String> value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$accessRightsAtom);
     super.accessRights = value;
     _$accessRightsAtom.reportChanged();
   }
@@ -93,5 +97,13 @@ mixin _$Admin on AdminBase, Store {
   ObservableStream<T> loadStuff<T>(String arg1, {T value}) {
     final _$stream = super.loadStuff<T>(arg1, value: value);
     return ObservableStream<T>(_$stream);
+  }
+
+  final _$loadAccessRightsAsyncAction = AsyncAction('loadAccessRights');
+
+  @override
+  ObservableFuture<void> loadAccessRights() {
+    return ObservableFuture<void>(
+        _$loadAccessRightsAsyncAction.run(() => super.loadAccessRights()));
   }
 }
