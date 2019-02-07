@@ -43,8 +43,14 @@ abstract class TodoListBase implements Store {
   bool get hasPendingTodos => pendingTodos.isNotEmpty;
 
   @computed
-  String get itemsDescription =>
-      '${pendingTodos.length} pending, ${completedTodos.length} completed';
+  String get itemsDescription {
+    if (todos.isEmpty) {
+      return "There are no Todos here. Why don't you add one?.";
+    }
+
+    final suffix = pendingTodos.length == 1 ? 'todo' : 'todos';
+    return '${pendingTodos.length} pending $suffix, ${completedTodos.length} completed';
+  }
 
   @computed
   ObservableList<Todo> get visibleTodos {

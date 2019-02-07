@@ -57,6 +57,8 @@ class ObservableMap<K, V>
 
   @override
   void operator []=(K key, V value) {
+    _context.checkIfStateModificationsAreAllowed(_atom);
+
     if (_hasListeners) {
       if (_map.containsKey(key)) {
         final oldValue = _map[key];
@@ -74,6 +76,8 @@ class ObservableMap<K, V>
 
   @override
   void clear() {
+    _context.checkIfStateModificationsAreAllowed(_atom);
+
     if (isEmpty) {
       return;
     }
@@ -96,6 +100,8 @@ class ObservableMap<K, V>
 
   @override
   V remove(Object key) {
+    _context.checkIfStateModificationsAreAllowed(_atom);
+
     if (_hasListeners) {
       if (_map.containsKey(key)) {
         final value = _map.remove(key);
@@ -105,6 +111,7 @@ class ObservableMap<K, V>
       }
       return null;
     }
+
     final value = _map.remove(key);
     _atom.reportChanged();
     return value;

@@ -36,17 +36,16 @@ class Action {
   factory Action(Function fn, {ReactiveContext context, String name}) =>
       Action._(context ?? mainContext, fn, name: name);
 
-  Action._(this._context, this._fn, {String name})
-      : name = name ?? _context.nameFor('Action');
+  Action._(ReactiveContext context, this._fn, {String name})
+      : _controller = ActionController(context: context, name: name);
 
-  final ReactiveContext _context;
+  String get name => _controller.name;
 
+  final ActionController _controller;
   final Function _fn;
 
-  final String name;
-
   dynamic call([List args = const [], Map<String, dynamic> namedArgs]) {
-    final prevDerivation = _startAction();
+    final runInfo = _controller.startAction();
 
     try {
       // Invoke the actual function
@@ -59,21 +58,8 @@ class Action {
         return Function.apply(_fn, args, namedSymbolArgs);
       }
     } finally {
-      _endAction(prevDerivation);
+      _controller.endAction(runInfo);
     }
-  }
-
-  Derivation _startAction() {
-    final prevDerivation = _context.untrackedStart();
-    _context.startBatch();
-
-    return prevDerivation;
-  }
-
-  void _endAction(Derivation prevDerivation) {
-    _context
-      ..endBatch()
-      ..untrackedEnd(prevDerivation);
   }
 }
 
@@ -86,16 +72,27 @@ class ActionController {
   final ReactiveContext _context;
   final String name;
 
-  Derivation startAction() {
-    final prevDerivation = _context.untrackedStart();
+  ActionRunInfo startAction() {
+    final prevDerivation = _context.startUntracked();
     _context.startBatch();
+    final prevAllowStateChanges = _context.startAllowStateChanges(allow: true);
 
-    return prevDerivation;
+    return ActionRunInfo(
+        prevDerivation: prevDerivation,
+        prevAllowStateChanges: prevAllowStateChanges);
   }
 
-  void endAction(Derivation prevDerivation) {
+  void endAction(ActionRunInfo info) {
     _context
+      ..endAllowStateChanges(allow: info.prevAllowStateChanges)
       ..endBatch()
-      ..untrackedEnd(prevDerivation);
+      ..endUntracked(info.prevDerivation);
   }
+}
+
+class ActionRunInfo {
+  ActionRunInfo({this.prevDerivation, this.prevAllowStateChanges});
+
+  final Derivation prevDerivation;
+  final bool prevAllowStateChanges;
 }

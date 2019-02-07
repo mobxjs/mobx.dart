@@ -1,7 +1,7 @@
 ---
 name: Blueprint
 menu: Development Notes
-route: "/blueprint"
+route: /blueprint
 ---
 
 # Blueprint (WIP)
