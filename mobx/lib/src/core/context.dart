@@ -27,7 +27,7 @@ class ReactiveConfig {
 
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
-      disableErrorBoundaries: false, enforceActions: EnforceActions.never);
+      disableErrorBoundaries: false, enforceActions: EnforceActions.observed);
 
   /// Whether MobX should throw exceptions instead of catching them and storing
   /// inside the [Reaction.errorValue] property of [Reaction].

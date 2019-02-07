@@ -25,6 +25,11 @@ void stubTrack(MockReaction mock) {
 }
 
 void main() {
+  setUp(() => mainContext.config =
+      ReactiveConfig(enforceActions: EnforceActions.never));
+
+  tearDown(() => mainContext.config = ReactiveConfig.main);
+
   testWidgets('Observer re-renders when observed state changes',
       (tester) async {
     final message = Observable('Click');
