@@ -64,6 +64,7 @@ mixin _\$User on UserBase, Store {
 
   @override
   set firstName(String value) {
+    mainContext.checkIfStateModificationsAreAllowed(_\$firstNameAtom);
     super.firstName = value;
     _\$firstNameAtom.reportChanged();
   }
@@ -78,6 +79,7 @@ mixin _\$User on UserBase, Store {
 
   @override
   set lastName(String value) {
+    mainContext.checkIfStateModificationsAreAllowed(_\$lastNameAtom);
     super.lastName = value;
     _\$lastNameAtom.reportChanged();
   }

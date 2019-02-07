@@ -110,6 +110,7 @@ void main() {
 
   @override
   set fieldName(FieldType value) {
+    mainContext.checkIfStateModificationsAreAllowed(_atomFieldName);
     super.fieldName = value;
     _atomFieldName.reportChanged();
   }"""));
