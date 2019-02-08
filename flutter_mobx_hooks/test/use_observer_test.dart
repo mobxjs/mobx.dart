@@ -99,11 +99,10 @@ void main() {
       await tester.pumpWidget(UseObserver(() =>
           Text('Count ${count.value}', textDirection: TextDirection.ltr)));
 
-      expect(tester.widget<Text>(find.byType(Text)).data, equals('Count 0'));
-
-      count.value++;
+      expect(find.text('Count 0'), findsOneWidget);
+      Action(() => count.value++)();
       await tester.pump();
-      expect(tester.widget<Text>(find.byType(Text)).data, equals('Count 1'));
+      expect(find.text('Count 1'), findsOneWidget);
     });
 
     testWidgets('ObserverHookState disposes reaction', (tester) async {
@@ -174,14 +173,15 @@ void main() {
       expect(outerRenderCount, equals(1));
       expect(innerRenderCount, equals(1));
 
-      innerState.value++;
+      Action(() => innerState.value++)();
+
       await tester.pump();
       expect(outerRenderCount, equals(1));
       expect(innerRenderCount, equals(2));
       expect(StateWidget.findValue(tester, innerKey), equals(1));
       expect(StateWidget.findValue(tester, outerKey), equals(0));
 
-      outerState.value++;
+      Action(() => outerState.value++)();
       await tester.pump();
       expect(outerRenderCount, equals(2));
       expect(innerRenderCount, equals(2));
