@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:mobx/mobx.dart';
+part of '../async.dart';
 
 class AsyncAction {
   AsyncAction(String name, {ReactiveContext context})

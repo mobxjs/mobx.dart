@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:mobx/src/api/observable_stream.dart';
+import 'package:mobx/src/api/async.dart';
 import 'package:mobx/src/api/reaction.dart';
 import 'package:test/test.dart';
 
@@ -147,7 +147,7 @@ void main() {
       expect(values, equals([0, 1, 2]));
     });
 
-    <String, ObservableStream Function(ObservableStream<int>)>{
+    <String, StreamTestBody>{
       'asBroadcastStream': (s) => s.asBroadcastStream(),
       'asyncExpand': (s) =>
           s.asyncExpand((n) => Stream.fromIterable(Iterable<int>.generate(n))),
@@ -162,10 +162,52 @@ void main() {
       'where': (s) => s.where((n) => n != 2)
     }.forEach(testStreamCombinator);
   });
+
+  <String, Case>{
+    'any': futureCase((s) => s.any((v) => v > 3), true),
+    'contains': futureCase((s) => s.contains(3), true),
+    'drain': futureCase((s) => s.drain<int>(3), 3),
+    'elementAt': futureCase((s) => s.elementAt(2), 2),
+    'every': futureCase((s) => s.every((n) => n < 100), true),
+    'first': futureCase((s) => s.first, 0),
+    'firstWhere': futureCase((s) => s.firstWhere((n) => n == 2), 2),
+    'fold': futureCase((s) => s.fold<int>(0, (a, b) => a + b), 45),
+    'forEach': futureCase((s) => s.forEach((n) {}), null as dynamic),
+    'isEmpty': futureCase((s) => s.isEmpty, false),
+    'join': futureCase((s) => s.join(' '), '0 1 2 3 4 5 6 7 8 9'),
+    'last': futureCase((s) => s.last, 9),
+    'lastWhere': futureCase((s) => s.lastWhere((n) => n <= 8), 8),
+    'length': futureCase((s) => s.length, 10),
+    'pipe': futureCase(
+        (s) => s.pipe(StreamController.broadcast()), null as dynamic),
+    'reduce': futureCase((s) => s.reduce((a, b) => a + b), 45),
+    'single': futureCase((s) => s.single, 0, length: 1),
+    'singleWhere': futureCase((s) => s.singleWhere((n) => n == 8), 8),
+    'toList': futureCase((s) => s.toList(), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    'toSet':
+        futureCase((s) => s.toSet(), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].toSet()),
+  }.forEach(testStreamToFutureCombinator);
 }
 
-void testStreamCombinator<T>(
-    String description, ObservableStream Function(ObservableStream<int>) body) {
+Case<F> futureCase<
+        R,
+        F extends ObservableFuture<R> Function(
+            ObservableStream<int>)>(F body, R result, {int length = 10}) =>
+    Case(body, result, length);
+
+class Case<F extends Function> {
+  Case(this.body, this.result, this.length);
+
+  final int length;
+  final F body;
+  final dynamic result;
+}
+
+typedef FutureTestBody = ObservableFuture Function(ObservableStream<int>);
+
+typedef StreamTestBody = ObservableStream Function(ObservableStream<int>);
+
+void testStreamCombinator<T>(String description, StreamTestBody body) {
   test(description, () async {
     final stream =
         ObservableStream(Stream.fromIterable(Iterable<int>.generate(10)));
@@ -177,5 +219,19 @@ void testStreamCombinator<T>(
     });
     await asyncWhen((_) => transformed.status == StreamStatus.done);
     expect(value, isNotNull);
+  });
+}
+
+void testStreamToFutureCombinator<T>(String description, Case testCase) {
+  test(description, () async {
+    final stream = ObservableStream(
+        Stream.fromIterable(Iterable<int>.generate(testCase.length)));
+    final ObservableFuture future = testCase.body(stream);
+    expect(future.value, isNull);
+
+    autorun((_) => future.value);
+
+    await future;
+    expect(future.value, equals(testCase.result));
   });
 }

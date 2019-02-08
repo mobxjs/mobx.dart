@@ -1,8 +1,4 @@
-import 'dart:async';
-
-import 'package:meta/meta.dart';
-import 'package:mobx/src/api/context.dart';
-import 'package:mobx/src/core.dart';
+part of '../async.dart';
 
 @experimental
 enum FutureStatus { pending, rejected, fulfilled }
@@ -133,7 +129,8 @@ class ObservableFuture<T> implements Future<T> {
       ObservableFuture<T>._(_context, nextFuture, status, result);
 
   @override
-  Stream<T> asStream() => _future.asStream();
+  ObservableStream<T> asStream() =>
+      ObservableStream._(_context, _future.asStream(), value, false);
 
   @override
   ObservableFuture<T> catchError(Function onError,
