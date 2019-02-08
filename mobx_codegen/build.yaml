@@ -1,7 +1,7 @@
 targets:
   $default:
     builders:
-      mobx_codegen|mobx:
+      mobx_codegen|mobx_generator:
         enabled: true
 
 builders:

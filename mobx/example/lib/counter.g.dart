@@ -17,6 +17,7 @@ mixin _$Counter on CounterBase, Store {
 
   @override
   set value(int value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$valueAtom);
     super.value = value;
     _$valueAtom.reportChanged();
   }
@@ -25,11 +26,11 @@ mixin _$Counter on CounterBase, Store {
 
   @override
   void increment() {
-    final _$prevDerivation = _$CounterBaseActionController.startAction();
+    final _$actionInfo = _$CounterBaseActionController.startAction();
     try {
       return super.increment();
     } finally {
-      _$CounterBaseActionController.endAction(_$prevDerivation);
+      _$CounterBaseActionController.endAction(_$actionInfo);
     }
   }
 }
