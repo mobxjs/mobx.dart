@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:mobx/src/api/async/observable_stream.dart';
+import 'package:mobx/src/api/async.dart';
 import 'package:mobx/src/api/reaction.dart';
 import 'package:test/test.dart';
 
