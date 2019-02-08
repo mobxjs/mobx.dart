@@ -54,7 +54,8 @@ void main() {
 
     testWidgets('calls WhenHook.when on hook creation and no more',
         (tester) async {
-      when(ranWhen(any, any, context: mobx.mainContext)).thenReturn(ReactionDisposerMock());
+      when(ranWhen(any, any, context: mobx.mainContext))
+          .thenReturn(ReactionDisposerMock());
       await tester.pumpWidget(HookBuilder(builder: (_) {
         useWhen((_) {}, () {});
         return Container();

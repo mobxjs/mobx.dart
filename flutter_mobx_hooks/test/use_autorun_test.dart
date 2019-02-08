@@ -23,13 +23,14 @@ ReactionDisposer mockAutorun(
   int delay,
   ReactiveContext context,
   void Function(Object, Reaction) onError,
-}) => AutorunHook.run(
-    fn,
-    name: argThat(equals(name), named: 'name'),
-    delay: argThat(equals(delay), named: 'delay'),
-    context: argThat(equals(context), named: 'context'),
-    onError: argThat(equals(onError), named: 'onError'),
-  );
+}) =>
+    AutorunHook.run(
+      fn,
+      name: argThat(equals(name), named: 'name'),
+      delay: argThat(equals(delay), named: 'delay'),
+      context: argThat(equals(context), named: 'context'),
+      onError: argThat(equals(onError), named: 'onError'),
+    );
 
 void main() {
   // necessary alias to AutorunHook.run, or else verifyNoMoreInterations
