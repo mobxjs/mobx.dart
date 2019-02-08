@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:mobx/src/api/observable_future.dart';
+import 'package:mobx/src/api/async/observable_future.dart';
 import 'package:test/test.dart';
 
 void main() {
