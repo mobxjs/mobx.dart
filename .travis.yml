@@ -38,6 +38,7 @@ jobs:
         - ./flutter/bin/flutter doctor
       script: ./tool/run.sh
     - name: flutter_mobx_hooks
+      if: branch = master
       env: PACKAGE=flutter_mobx_hooks FLUTTER=true ALLOW_FAILURE=true
       before_script:
         - git clone https://github.com/flutter/flutter.git -b beta
@@ -45,20 +46,22 @@ jobs:
       script: ./tool/run.sh
 
     - stage: flutter related (master)
-      name: flutter_mobx
+      name: flutter_mobx_hooks
+      env: PACKAGE=flutter_mobx_hooks FLUTTER=true
+      before_script:
+        - git clone https://github.com/flutter/flutter.git
+        - ./flutter/bin/flutter doctor
+      script: ./tool/run.sh
+    - name: flutter_mobx
+      if: branch = master
       env: PACKAGE=flutter_mobx FLUTTER=true
       before_script:
         - git clone https://github.com/flutter/flutter.git
         - ./flutter/bin/flutter doctor
       script: ./tool/run.sh
     - name: flutter_mobx/example
+      if: branch = master
       env: PACKAGE=flutter_mobx/example FLUTTER=true
-      before_script:
-        - git clone https://github.com/flutter/flutter.git
-        - ./flutter/bin/flutter doctor
-      script: ./tool/run.sh
-    - name: flutter_mobx_hooks
-      env: PACKAGE=flutter_mobx_hooks FLUTTER=true
       before_script:
         - git clone https://github.com/flutter/flutter.git
         - ./flutter/bin/flutter doctor
