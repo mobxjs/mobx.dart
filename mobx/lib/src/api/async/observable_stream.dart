@@ -1,8 +1,4 @@
-import 'dart:async';
-
-import 'package:meta/meta.dart';
-import 'package:mobx/src/api/context.dart';
-import 'package:mobx/src/core.dart';
+part of '../async.dart';
 
 @experimental
 enum StreamStatus { waiting, active, done }
@@ -88,10 +84,14 @@ class ObservableStream<T> implements Stream<T> {
   ObservableStream<R> _wrap<R>(Stream<R> stream) =>
       ObservableStream._(_context, stream, null, _cancelOnError);
 
+  ObservableFuture<R> _wrapFuture<R>(Future<R> future) =>
+      ObservableFuture._(_context, future, FutureStatus.pending, null);
+
   // Delegated methods
 
   @override
-  Future<bool> any(bool Function(T element) test) => _stream.any(test);
+  ObservableFuture<bool> any(bool Function(T element) test) =>
+      _wrapFuture(_stream.any(test));
 
   @override
   ObservableStream<T> asBroadcastStream(
@@ -111,39 +111,45 @@ class ObservableStream<T> implements Stream<T> {
   ObservableStream<R> cast<R>() => _wrap(_stream.cast());
 
   @override
-  Future<bool> contains(Object needle) => _stream.contains(needle);
+  ObservableFuture<bool> contains(Object needle) =>
+      _wrapFuture(_stream.contains(needle));
 
   @override
   ObservableStream<T> distinct([bool Function(T previous, T next) equals]) =>
       _wrap(_stream.distinct(equals));
 
   @override
-  Future<E> drain<E>([E futureValue]) => _stream.drain(futureValue);
+  ObservableFuture<E> drain<E>([E futureValue]) =>
+      _wrapFuture(_stream.drain(futureValue));
 
   @override
-  Future<T> elementAt(int index) => _stream.elementAt(index);
+  ObservableFuture<T> elementAt(int index) =>
+      _wrapFuture(_stream.elementAt(index));
 
   @override
-  Future<bool> every(bool Function(T element) test) => _stream.every(test);
+  ObservableFuture<bool> every(bool Function(T element) test) =>
+      _wrapFuture(_stream.every(test));
 
   @override
   ObservableStream<S> expand<S>(Iterable<S> Function(T element) convert) =>
       _wrap(_stream.expand(convert));
 
   @override
-  Future<T> get first => _stream.first;
+  ObservableFuture<T> get first => _wrapFuture(_stream.first);
 
   @override
-  Future<T> firstWhere(bool Function(T element) test, {T Function() orElse}) =>
-      _stream.firstWhere(test, orElse: orElse);
+  ObservableFuture<T> firstWhere(bool Function(T element) test,
+          {T Function() orElse}) =>
+      _wrapFuture(_stream.firstWhere(test, orElse: orElse));
 
   @override
-  Future<S> fold<S>(
+  ObservableFuture<S> fold<S>(
           S initialValue, S Function(S previous, T element) combine) =>
-      _stream.fold(initialValue, combine);
+      _wrapFuture(_stream.fold(initialValue, combine));
 
   @override
-  Future forEach(void Function(T element) action) => _stream.forEach(action);
+  ObservableFuture forEach(void Function(T element) action) =>
+      _wrapFuture(_stream.forEach(action));
 
   @override
   ObservableStream<T> handleError(Function onError,
@@ -155,20 +161,22 @@ class ObservableStream<T> implements Stream<T> {
   bool get isBroadcast => _stream.isBroadcast;
 
   @override
-  Future<bool> get isEmpty => _stream.isEmpty;
+  ObservableFuture<bool> get isEmpty => _wrapFuture(_stream.isEmpty);
 
   @override
-  Future<String> join([String separator = '']) => _stream.join(separator);
+  ObservableFuture<String> join([String separator = '']) =>
+      _wrapFuture(_stream.join(separator));
 
   @override
-  Future<T> get last => _stream.last;
+  ObservableFuture<T> get last => _wrapFuture(_stream.last);
 
   @override
-  Future<T> lastWhere(bool Function(T element) test, {T Function() orElse}) =>
-      _stream.lastWhere(test, orElse: orElse);
+  ObservableFuture<T> lastWhere(bool Function(T element) test,
+          {T Function() orElse}) =>
+      _wrapFuture(_stream.lastWhere(test, orElse: orElse));
 
   @override
-  Future<int> get length => _stream.length;
+  ObservableFuture<int> get length => _wrapFuture(_stream.length);
 
   @override
   StreamSubscription<T> listen(void Function(T event) onData,
@@ -183,18 +191,20 @@ class ObservableStream<T> implements Stream<T> {
       _wrap(_stream.map(convert));
 
   @override
-  Future pipe(StreamConsumer<T> streamConsumer) => _stream.pipe(streamConsumer);
+  ObservableFuture pipe(StreamConsumer<T> streamConsumer) =>
+      _wrapFuture(_stream.pipe(streamConsumer));
 
   @override
-  Future<T> reduce(T Function(T previous, T element) combine) =>
-      _stream.reduce(combine);
+  ObservableFuture<T> reduce(T Function(T previous, T element) combine) =>
+      _wrapFuture(_stream.reduce(combine));
 
   @override
-  Future<T> get single => _stream.single;
+  ObservableFuture<T> get single => _wrapFuture(_stream.single);
 
   @override
-  Future<T> singleWhere(bool Function(T element) test, {T Function() orElse}) =>
-      _stream.singleWhere(test, orElse: orElse);
+  ObservableFuture<T> singleWhere(bool Function(T element) test,
+          {T Function() orElse}) =>
+      _wrapFuture(_stream.singleWhere(test, orElse: orElse));
 
   @override
   ObservableStream<T> skip(int count) => _wrap(_stream.skip(count));
@@ -216,10 +226,10 @@ class ObservableStream<T> implements Stream<T> {
       _wrap(_stream.timeout(timeLimit, onTimeout: onTimeout));
 
   @override
-  Future<List<T>> toList() => _stream.toList();
+  ObservableFuture<List<T>> toList() => _wrapFuture(_stream.toList());
 
   @override
-  Future<Set<T>> toSet() => _stream.toSet();
+  ObservableFuture<Set<T>> toSet() => _wrapFuture(_stream.toSet());
 
   @override
   ObservableStream<S> transform<S>(StreamTransformer<T, S> streamTransformer) =>
