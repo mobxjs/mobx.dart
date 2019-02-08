@@ -190,11 +190,10 @@ void main() {
 }
 
 Case<F> futureCase<
-    R,
-    F extends ObservableFuture<R> Function(
-        ObservableStream<int>)>(F body, R result, {int length = 10}) {
-  return Case(body, result, length);
-}
+        R,
+        F extends ObservableFuture<R> Function(
+            ObservableStream<int>)>(F body, R result, {int length = 10}) =>
+    Case(body, result, length);
 
 class Case<F extends Function> {
   Case(this.body, this.result, this.length);
