@@ -10,10 +10,6 @@ addons:
     packages:
       - libstdc++6
       - fonts-droid
-before_script:
-  - git clone https://github.com/flutter/flutter.git -b beta
-  - ./flutter/bin/flutter doctor
-
 env:
   - PACKAGE=mobx
   - PACKAGE=mobx_codegen
@@ -22,9 +18,28 @@ env:
   - PACKAGE=flutter_mobx/example FLUTTER=true
   - PACKAGE=flutter_mobx_hooks FLUTTER=true
 
-script:
-  - ./tool/run.sh
+jobs:
+  include:
+    - stage: beta
+      before_script:
+        - git clone https://github.com/flutter/flutter.git -b beta
+        - ./flutter/bin/flutter doctor
+      script:
+        - ./tool/run.sh
+      matrix:
+        allow_failures:
+          # hooks currently depends on master, so we run it to see if it pass, but it's ok to fail.
+          - env: PACKAGE=flutter_mobx_hooks
+        # see https://docs.travis-ci.com/user/build-matrix/#fast-finishing
+        fast_finish: true
+
+    - stage: master
+      before_script:
+        - git clone https://github.com/flutter/flutter.git
+        - ./flutter/bin/flutter doctor
+      script:
+        - ./tool/run.sh
 
 cache:
   directories:
-    - '$HOME/.pub-cache'
+    - "$HOME/.pub-cache"
