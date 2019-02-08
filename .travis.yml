@@ -38,7 +38,7 @@ jobs:
         - ./flutter/bin/flutter doctor
       script: ./tool/run.sh
     - name: flutter_mobx_hooks
-      env: PACKAGE=flutter_mobx_hooks FLUTTER=true
+      env: PACKAGE=flutter_mobx_hooks FLUTTER=true ALLOW_FAILURE=true
       before_script:
         - git clone https://github.com/flutter/flutter.git -b beta
         - ./flutter/bin/flutter doctor
