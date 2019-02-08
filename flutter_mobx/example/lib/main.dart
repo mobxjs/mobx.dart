@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx_example/counter/counter.dart';
-import 'package:flutter_mobx_example/todos/todo_widgets.dart';
+
+import 'counter/counter.dart';
+import 'todos/todo_widgets.dart';
 
 void main() => runApp(MyApp());
 
