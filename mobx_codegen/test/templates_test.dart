@@ -110,6 +110,7 @@ void main() {
 
   @override
   set fieldName(FieldType value) {
+    mainContext.checkIfStateModificationsAreAllowed(_atomFieldName);
     super.fieldName = value;
     _atomFieldName.reportChanged();
   }"""));
@@ -226,11 +227,11 @@ void main() {
       expect(template.toString(), equals("""
     @override
     ReturnType myAction<T, S extends String>(T arg1, [S arg2 = "arg2value", String arg3], {String namedArg1 = "default", int namedArg2 = 3}) {
-      final _\$prevDerivation = _\$ParentClassActionController.startAction();
+      final _\$actionInfo = _\$ParentClassActionController.startAction();
       try {
         return super.myAction<T, S>(arg1, arg2, arg3, namedArg1: namedArg1, namedArg2: namedArg2);
       } finally {
-        _\$ParentClassActionController.endAction(_\$prevDerivation);
+        _\$ParentClassActionController.endAction(_\$actionInfo);
       }
     }"""));
     });

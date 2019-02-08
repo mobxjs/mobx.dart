@@ -138,17 +138,17 @@ void main() {
 
   group('AsyncActionMethods', () {
     test('message returns singular message with one field added', () {
-      final fields = AsyncActionMethods()..addIf(true, 'testMethod');
-      expect(
-          fields.message, 'Remove async modifier from the method "testMethod"');
+      final fields = AsyncGeneratorActionMethods()..addIf(true, 'testMethod');
+      expect(fields.message,
+          'Replace async* modifier with async from the method "testMethod"');
     });
 
     test('message returns plural message with multiple fields added', () {
-      final fields = AsyncActionMethods()
+      final fields = AsyncGeneratorActionMethods()
         ..addIf(true, 'testMethod1')
         ..addIf(true, 'testMethod2');
       expect(fields.message,
-          'Remove async modifier from methods "testMethod1" and "testMethod2"');
+          'Replace async* modifier with async from methods "testMethod1" and "testMethod2"');
     });
   });
 

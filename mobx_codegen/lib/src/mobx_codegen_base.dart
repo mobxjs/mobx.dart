@@ -6,6 +6,7 @@ import 'package:build/build.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
+import 'package:mobx_codegen/src/template/async_action.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
 import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
@@ -122,11 +123,19 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       if (_actionIsNotValid(element)) {
         return null;
       }
-      final template = ActionTemplate()
-        ..storeTemplate = _storeTemplate
-        ..method = MethodOverrideTemplate.fromElement(element);
+      if (element.isAsynchronous) {
+        final template = AsyncActionTemplate()
+          ..isObservable = _observableChecker.hasAnnotationOfExact(element)
+          ..method = MethodOverrideTemplate.fromElement(element);
 
-      _storeTemplate.actions.add(template);
+        _storeTemplate.asyncActions.add(template);
+      } else {
+        final template = ActionTemplate()
+          ..storeTemplate = _storeTemplate
+          ..method = MethodOverrideTemplate.fromElement(element);
+
+        _storeTemplate.actions.add(template);
+      }
     } else if (_observableChecker.hasAnnotationOfExact(element)) {
       if (_asyncObservableIsNotValid(element)) {
         return null;
@@ -158,7 +167,8 @@ class StoreMixinVisitor extends SimpleElementVisitor {
 
   bool _actionIsNotValid(MethodElement element) => any([
         _errors.staticMethods.addIf(element.isStatic, element.name),
-        _errors.asyncActions.addIf(element.isAsynchronous, element.name),
+        _errors.asyncGeneratorActions
+            .addIf(element.isAsynchronous && element.isGenerator, element.name),
       ]);
 }
 
