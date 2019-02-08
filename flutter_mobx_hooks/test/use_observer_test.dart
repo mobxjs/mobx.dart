@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx_hooks/src/use_observer.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mobx/mobx.dart' as mobx;
 import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
 
@@ -93,6 +94,45 @@ Iterable<ObserverHookState> _findObserverHook() => find
 
 void main() {
   group('useObserver', () {
+    testWidgets('useObserver recreates reaction when context changes',
+        (tester) async {
+      await tester.pumpWidget(HookBuilder(builder: (_) {
+        useObserver();
+        return Container();
+      }));
+
+      final hookState = _findObserverHook().first;
+
+      final Reaction reaction = hookState.reaction;
+
+      await tester.pumpWidget(HookBuilder(builder: (_) {
+        useObserver(context: ReactiveContext());
+        return Container();
+      }));
+
+      expect(hookState.reaction, isNot(reaction));
+      expect(reaction.isDisposed, true);
+    });
+    testWidgets("useObserver don't recreate reaction when context goes from null to mainContext",
+        (tester) async {
+      await tester.pumpWidget(HookBuilder(builder: (_) {
+        useObserver();
+        return Container();
+      }));
+
+      final hookState = _findObserverHook().first;
+
+      final Reaction reaction = hookState.reaction;
+
+      await tester.pumpWidget(HookBuilder(builder: (_) {
+        useObserver(context: mobx.mainContext);
+        return Container();
+      }));
+
+      expect(hookState.reaction, reaction);
+      expect(reaction.isDisposed, false);
+    });
+
     testWidgets('Widget updated when observable state updates', (tester) async {
       final count = Observable(0);
 
