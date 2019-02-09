@@ -85,7 +85,7 @@ void main() {
     verifyZeroInteractions(dispose);
 
     await tester.pumpWidget(Container());
-    verify(dispose()).called(1);
+    verify(dispose.call()).called(1);
   });
 
   testWidgets('pass down arguments to autorun', (tester) async {
@@ -121,11 +121,11 @@ void main() {
     verifyZeroInteractions(dispose);
 
     await tester.pumpWidget(build(null, context: context2));
-    verify(dispose()).called(1);
+    verify(dispose.call()).called(1);
     verifyZeroInteractions(dispose2);
     verifyNoMoreInteractions(dispose);
 
     await tester.pumpWidget(Container());
-    verify(dispose2()).called(1);
+    verify(dispose2.call()).called(1);
   });
 }
