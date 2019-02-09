@@ -1,4 +1,10 @@
 [[redirects]]
+  from = "https://mobx-dart.netlify.com/*"
+  to = "https://mobx.pub/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
