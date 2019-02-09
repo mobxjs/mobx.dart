@@ -10,20 +10,63 @@ addons:
     packages:
       - libstdc++6
       - fonts-droid
-before_script:
-  - git clone https://github.com/flutter/flutter.git -b beta
-  - ./flutter/bin/flutter doctor
 
-env:
-  - PACKAGE=mobx
-  - PACKAGE=mobx_codegen
-  - PACKAGE=mobx_codegen/example
-  - PACKAGE=flutter_mobx FLUTTER=true
-  - PACKAGE=flutter_mobx/example FLUTTER=true
+jobs:
+  include:
+    - stage: mobx core
+      name: mobx
+      env: PACKAGE=mobx
+      script: ./tool/run.sh
+    - name: mobx_codegen
+      env: PACKAGE=mobx_codegen
+      script: ./tool/run.sh
+    - name: mobx_codegen/example
+      env: PACKAGE=mobx_codegen/example
+      script: ./tool/run.sh
+  
+    - stage: flutter related (beta)
+      name: flutter_mobx
+      env: PACKAGE=flutter_mobx FLUTTER=true
+      before_script:
+        - git clone https://github.com/flutter/flutter.git -b beta
+        - ./flutter/bin/flutter doctor
+      script: ./tool/run.sh
+    - name: flutter_mobx/example
+      env: PACKAGE=flutter_mobx/example FLUTTER=true
+      before_script:
+        - git clone https://github.com/flutter/flutter.git -b beta
+        - ./flutter/bin/flutter doctor
+      script: ./tool/run.sh
+    - name: flutter_mobx_hooks
+      if: branch = master
+      env: PACKAGE=flutter_mobx_hooks FLUTTER=true ALLOW_FAILURE=true
+      before_script:
+        - git clone https://github.com/flutter/flutter.git -b beta
+        - ./flutter/bin/flutter doctor
+      script: ./tool/run.sh
 
-script:
-  - ./tool/run.sh
+    - stage: flutter related (master)
+      name: flutter_mobx_hooks
+      env: PACKAGE=flutter_mobx_hooks FLUTTER=true
+      before_script:
+        - git clone https://github.com/flutter/flutter.git
+        - ./flutter/bin/flutter doctor
+      script: ./tool/run.sh
+    - name: flutter_mobx
+      if: branch = master
+      env: PACKAGE=flutter_mobx FLUTTER=true
+      before_script:
+        - git clone https://github.com/flutter/flutter.git
+        - ./flutter/bin/flutter doctor
+      script: ./tool/run.sh
+    - name: flutter_mobx/example
+      if: branch = master
+      env: PACKAGE=flutter_mobx/example FLUTTER=true
+      before_script:
+        - git clone https://github.com/flutter/flutter.git
+        - ./flutter/bin/flutter doctor
+      script: ./tool/run.sh
 
 cache:
   directories:
-    - '$HOME/.pub-cache'
+    - "$HOME/.pub-cache"
