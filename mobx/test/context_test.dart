@@ -47,5 +47,38 @@ void main() {
         d();
       }, throwsException);
     });
+
+    test('throws Exception for reactions that do not converge', () {
+      var firstTime = true;
+      final a = Observable(0);
+      final d = autorun((_) {
+        a.value;
+        if (firstTime) {
+          firstTime = false;
+          return;
+        }
+
+        // cyclic-dependency!!!
+        // this autorun() will keep on getting triggered as a.value keeps changing
+        // every time it's invoked
+        a.value = a.value + 1;
+      }, name: 'Cyclic Reaction');
+
+      expect(() => a.value = 1, throwsException);
+      d();
+    });
+  });
+
+  group('ReactiveConfig', () {
+    test('clone works', () {
+      final config = ReactiveConfig.main;
+      final clone = config.clone(maxIterations: 10);
+
+      expect(clone.maxIterations, equals(10));
+      expect(clone.maxIterations != config.maxIterations, isTrue);
+      expect(clone.disableErrorBoundaries == config.disableErrorBoundaries,
+          isTrue);
+      expect(clone.enforceActions == config.enforceActions, isTrue);
+    });
   });
 }

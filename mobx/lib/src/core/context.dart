@@ -1,29 +1,49 @@
 part of '../core.dart';
 
 class _ReactiveState {
+  /// Current batch depth. This is used to track the depth of `transaction` / `action`.
+  /// When the batch ends, we execute all the [pendingReactions]
   int batch = 0;
 
+  /// Monotonically increasing counter for assigning a name to an action/reaction/atom
   int nextIdCounter = 0;
 
+  /// Tracks the currently executing derivation (reactions or computeds).
+  /// The Observables used here are linked to this derivation.
   Derivation trackingDerivation;
+
+  /// The reactions that must be triggered at the end of a `transaction` or an `action`
   List<Reaction> pendingReactions = [];
+
+  /// Are we in middle of executing the [pendingReactions].
   bool isRunningReactions = false;
+
+  /// The atoms that must be disconnected from their observed reactions. This happens
+  /// if a reaction has been disposed during a batch
   List<Atom> pendingUnobservations = [];
 
-  // Tracks if within a computed property evaluation
+  /// Tracks if within a computed property evaluation
   int computationDepth = 0;
 
-  // Tracks if observables can be mutated
+  /// Tracks if observables can be mutated
   bool allowStateChanges = true;
 }
 
 typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
 
+/// Defines the behavior for observables mutated outside actions
+///
+/// `observed`: If there are observers for the mutated observable, then throw. Else allow mutation outside an action.
+/// `always`: Always throw if an observable is mutated outside an action
+/// `never`: Allow mutating observables outside actions
 enum EnforceActions { observed, always, never }
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
-  ReactiveConfig({this.disableErrorBoundaries, this.enforceActions});
+  ReactiveConfig(
+      {this.disableErrorBoundaries,
+      this.enforceActions,
+      this.maxIterations = 100});
 
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
@@ -33,10 +53,23 @@ class ReactiveConfig {
   /// inside the [Reaction.errorValue] property of [Reaction].
   final bool disableErrorBoundaries;
 
-  // Should observables be mutated inside an action
+  /// Should observables be mutated inside an action
   final EnforceActions enforceActions;
 
+  /// Max number of iterations before bailing out for a cyclic reaction
+  final int maxIterations;
+
   final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
+
+  ReactiveConfig clone(
+          {bool disableErrorBoundaries,
+          bool enforceActions,
+          int maxIterations}) =>
+      ReactiveConfig(
+          disableErrorBoundaries:
+              disableErrorBoundaries ?? this.disableErrorBoundaries,
+          enforceActions: enforceActions ?? this.enforceActions,
+          maxIterations: maxIterations ?? this.maxIterations);
 }
 
 class ReactiveContext {
@@ -52,7 +85,7 @@ class ReactiveContext {
     _state.allowStateChanges = _config.enforceActions == EnforceActions.never;
   }
 
-  final _ReactiveState _state = _ReactiveState();
+  _ReactiveState _state = _ReactiveState();
 
   int get nextId => ++_state.nextIdCounter;
 
@@ -212,10 +245,34 @@ class ReactiveContext {
       return;
     }
 
+    _runReactionsInternal();
+  }
+
+  void _runReactionsInternal() {
     _state.isRunningReactions = true;
 
-    for (final reaction in _state.pendingReactions) {
-      reaction._run();
+    var iterations = 0;
+    final allReactions = _state.pendingReactions;
+
+    // While running reactions, new reactions might be triggered.
+    // Hence we work with two variables and check whether
+    // we converge to no remaining reactions after a while.
+    while (allReactions.isNotEmpty) {
+      if (++iterations == config.maxIterations) {
+        final failingReaction = allReactions[0];
+
+        // Resetting ensures we have no bad-state left
+        _resetState();
+
+        throw MobXException(
+            "Reaction doesn't converge to a stable state after ${config.maxIterations} iterations. Probably there is a cycle in the reactive function: $failingReaction");
+      }
+
+      final remainingReactions = allReactions.toList(growable: false);
+      allReactions.clear();
+      for (final reaction in remainingReactions) {
+        reaction._run();
+      }
     }
 
     _state
@@ -395,5 +452,10 @@ class ReactiveContext {
 
   void _popComputation() {
     _state.computationDepth--;
+  }
+
+  void _resetState() {
+    _state = _ReactiveState()
+      ..allowStateChanges = _config.enforceActions == EnforceActions.never;
   }
 }
