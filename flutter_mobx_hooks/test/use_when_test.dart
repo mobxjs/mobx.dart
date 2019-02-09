@@ -101,7 +101,7 @@ void main() {
       verifyZeroInteractions(disposer);
       await tester.pumpWidget(Container());
 
-      verify(disposer()).called(1);
+      verify(disposer.call()).called(1);
     });
   });
 }
