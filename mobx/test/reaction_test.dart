@@ -32,6 +32,13 @@ void main() {
           executed, isFalse); // reaction has been disposed, so no more effects
     });
 
+    test('crashes if asserts are ommited', () {
+      expect(() => ReactionImpl(null, () {}),
+          throwsA(const TypeMatcher<AssertionError>()));
+      expect(() => ReactionImpl(mainContext, null),
+          throwsA(const TypeMatcher<AssertionError>()));
+    });
+
     test('works with delay', () {
       final x = Observable(10);
       var executed = false;

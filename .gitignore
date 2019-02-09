@@ -19,6 +19,7 @@ doc/api/
 *.iml
 local.properties
 .vscode/settings.json
+local.properties
 Generated.xcconfig
 
 coverage/

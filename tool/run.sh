@@ -1,6 +1,11 @@
 #!/bin/bash
 
-set -e
+if [[ "${ALLOW_FAILURE}" = true ]]
+then
+  set +e
+else
+  set -e
+fi
 set -x
 
 export TOOL_DIR="$PWD/tool"
