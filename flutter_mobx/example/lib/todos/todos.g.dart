@@ -36,6 +36,18 @@ mixin _$Todo on TodoBase, Store {
     super.done = value;
     _$doneAtom.reportChanged();
   }
+
+  final _$TodoBaseActionController = ActionController(name: 'TodoBase');
+
+  @override
+  void changeState({bool newState}) {
+    final _$actionInfo = _$TodoBaseActionController.startAction();
+    try {
+      return super.changeState(newState: newState);
+    } finally {
+      _$TodoBaseActionController.endAction(_$actionInfo);
+    }
+  }
 }
 
 mixin _$TodoList on TodoListBase, Store {

@@ -12,6 +12,11 @@ abstract class TodoBase implements Store {
 
   @observable
   bool done = false;
+
+  @action
+  void changeState({bool newState}) {
+    done = newState;
+  }
 }
 
 enum VisibilityFilter { all, pending, completed }
