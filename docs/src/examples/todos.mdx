@@ -21,6 +21,10 @@ A `Todo` is defined by a simple class like the following.
 ### Todo class
 
 ```
+import 'package:mobx/mobx.dart';
+
+part 'todo.g.dart';
+
 class Todo = TodoBase with _$Todo;
 
 abstract class TodoBase implements Store {
@@ -49,6 +53,10 @@ Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of `T
 This can be seen with the `@observable` properties.
 
 ```
+import 'package:mobx/mobx.dart';
+
+part 'todo_list.g.dart';
+
 enum VisibilityFilter { all, pending, completed }
 
 class TodoList = TodoListBase with _$TodoList;

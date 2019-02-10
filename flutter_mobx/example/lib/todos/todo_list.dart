@@ -1,18 +1,7 @@
+import 'package:flutter_mobx_example/todos/todo.dart';
 import 'package:mobx/mobx.dart';
 
-part 'todos.g.dart';
-
-class Todo = TodoBase with _$Todo;
-
-abstract class TodoBase implements Store {
-  TodoBase(this.description);
-
-  @observable
-  String description = '';
-
-  @observable
-  bool done = false;
-}
+part 'todo_list.g.dart';
 
 enum VisibilityFilter { all, pending, completed }
 

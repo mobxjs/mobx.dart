@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'todos.dart';
+import 'todo_list.dart';
 
 final TodoList list = TodoList();
 
