@@ -54,8 +54,8 @@ class TodoListView extends StatelessWidget {
                       builder: (_) => CheckboxListTile(
                             controlAffinity: ListTileControlAffinity.leading,
                             value: todo.done,
-                            onChanged: (value) => 
-                                todo.changeState(newState: value),
+                            onChanged: (value) =>
+                                todo.markDone(newState: value),
                             title: Row(
                               children: <Widget>[
                                 Expanded(

@@ -14,7 +14,7 @@ abstract class TodoBase implements Store {
   bool done = false;
 
   @action
-  void changeState({bool newState}) {
+  void markDone({bool newState}) {
     done = newState;
   }
 }

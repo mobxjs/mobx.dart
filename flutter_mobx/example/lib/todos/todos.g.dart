@@ -40,10 +40,10 @@ mixin _$Todo on TodoBase, Store {
   final _$TodoBaseActionController = ActionController(name: 'TodoBase');
 
   @override
-  void changeState({bool newState}) {
+  void markDone({bool newState}) {
     final _$actionInfo = _$TodoBaseActionController.startAction();
     try {
-      return super.changeState(newState: newState);
+      return super.markDone(newState: newState);
     } finally {
       _$TodoBaseActionController.endAction(_$actionInfo);
     }
