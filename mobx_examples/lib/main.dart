@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobx_examples/counter/counter.dart';
-import 'package:mobx_examples/todos/todo_widgets.dart';
+import 'package:mobx_examples/examples.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,9 +12,8 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/': (_) => ExampleList(),
-          '/counter': (_) => const CounterExample(),
-          '/todos': (_) => const TodoExample(),
-        },
+        }..addEntries(
+            examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
       );
 }
 
@@ -25,18 +23,16 @@ class ExampleList extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Flutter MobX Examples'),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              child: const Text('Counter'),
-              onPressed: () => Navigator.pushNamed(context, '/counter'),
-            ),
-            RaisedButton(
-              child: const Text('Todos'),
-              onPressed: () => Navigator.pushNamed(context, '/todos'),
-            )
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: examples.length,
+        itemBuilder: (_, int index) {
+          final ex = examples[index];
+
+          return ListTile(
+            title: Text(ex.title),
+            subtitle: Text(ex.description),
+            onTap: () => Navigator.pushNamed(context, ex.path),
+          );
+        },
       ));
 }
