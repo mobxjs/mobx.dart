@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobx_examples/counter/counter.dart';
+import 'package:mobx_examples/counter/counter_widgets.dart';
 import 'package:mobx_examples/github/github_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
 

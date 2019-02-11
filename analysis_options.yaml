@@ -124,3 +124,8 @@ linter:
     - use_to_and_as_if_applicable
     - valid_regexps
     - void_checks
+
+analyzer:
+  exclude:
+    - mobx_examples/lib/**/*.g.dart
+    - flutter_mobx/example/lib/**/*.g.dart

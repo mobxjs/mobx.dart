@@ -3,10 +3,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'todo_list.dart';
 
-final TodoList list = TodoList();
-
-class TodoExample extends StatelessWidget {
+class TodoExample extends StatefulWidget {
   const TodoExample();
+
+  @override
+  TodoExampleState createState() => TodoExampleState();
+}
+
+class TodoExampleState extends State<TodoExample> {
+  final TodoList list = TodoList();
 
   @override
   Widget build(BuildContext context) => Scaffold(

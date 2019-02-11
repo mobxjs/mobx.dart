@@ -5,9 +5,14 @@ import 'package:mobx_examples/github/github_store.dart';
 
 final GithubStore store = GithubStore();
 
-class GithubExample extends StatelessWidget {
+class GithubExample extends StatefulWidget {
   const GithubExample();
 
+  @override
+  GithubExampleState createState() => GithubExampleState();
+}
+
+class GithubExampleState extends State<GithubExample> {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
@@ -71,7 +76,7 @@ class RepositoryListView extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         repo.name,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(' (${repo.stargazersCount} ⭐️)'),
                     ],
@@ -99,13 +104,13 @@ class ShowError extends StatelessWidget {
               Container(
                 width: 8,
               ),
-              Text(
+              const Text(
                 'Failed to fetch repos for',
                 style: TextStyle(color: Colors.deepOrange),
               ),
               Text(
                 store.user,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.deepOrange, fontWeight: FontWeight.bold),
               )
             ])
