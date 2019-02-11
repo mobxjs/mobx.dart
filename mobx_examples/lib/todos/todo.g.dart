@@ -6,8 +6,8 @@ part of 'todo.dart';
 // StoreGenerator
 // **************************************************************************
 
-mixin _$Todo on TodoBase, Store {
-  final _$descriptionAtom = Atom(name: 'TodoBase.description');
+mixin _$Todo on _Todo, Store {
+  final _$descriptionAtom = Atom(name: '_Todo.description');
 
   @override
   String get description {
@@ -22,7 +22,7 @@ mixin _$Todo on TodoBase, Store {
     _$descriptionAtom.reportChanged();
   }
 
-  final _$doneAtom = Atom(name: 'TodoBase.done');
+  final _$doneAtom = Atom(name: '_Todo.done');
 
   @override
   bool get done {

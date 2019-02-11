@@ -3,9 +3,9 @@ import 'package:mobx/mobx.dart';
 
 part 'github_store.g.dart';
 
-class GithubStore = GithubStoreBase with _$GithubStore;
+class GithubStore = _GithubStore with _$GithubStore;
 
-abstract class GithubStoreBase implements Store {
+abstract class _GithubStore implements Store {
   final GitHub client = createGitHubClient();
 
   @observable
@@ -26,7 +26,6 @@ abstract class GithubStoreBase implements Store {
   }
 
   @action
-  @observable
   Future<List<Repository>> _getRepos({String user = 'pavanpodila'}) async {
     repositories = [];
     repositories =

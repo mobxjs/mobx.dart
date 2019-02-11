@@ -5,9 +5,9 @@ part 'todo_list.g.dart';
 
 enum VisibilityFilter { all, pending, completed }
 
-class TodoList = TodoListBase with _$TodoList;
+class TodoList = _TodoList with _$TodoList;
 
-abstract class TodoListBase implements Store {
+abstract class _TodoList implements Store {
   @observable
   ObservableList<Todo> todos = ObservableList<Todo>();
 

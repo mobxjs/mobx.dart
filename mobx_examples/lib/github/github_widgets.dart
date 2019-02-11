@@ -39,6 +39,7 @@ class UserInput extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 8),
               child: TextField(
+                autocorrect: false,
                 autofocus: true,
                 onChanged: store.setUser,
                 onSubmitted: (_) => store.fetchRepos(),

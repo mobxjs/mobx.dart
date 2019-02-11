@@ -6,8 +6,8 @@ part of 'github_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-mixin _$GithubStore on GithubStoreBase, Store {
-  final _$repositoriesAtom = Atom(name: 'GithubStoreBase.repositories');
+mixin _$GithubStore on _GithubStore, Store {
+  final _$repositoriesAtom = Atom(name: '_GithubStore.repositories');
 
   @override
   List<Repository> get repositories {
@@ -22,7 +22,7 @@ mixin _$GithubStore on GithubStoreBase, Store {
     _$repositoriesAtom.reportChanged();
   }
 
-  final _$fetchReposFutureAtom = Atom(name: 'GithubStoreBase.fetchReposFuture');
+  final _$fetchReposFutureAtom = Atom(name: '_GithubStore.fetchReposFuture');
 
   @override
   ObservableFuture<List<Repository>> get fetchReposFuture {
@@ -37,7 +37,7 @@ mixin _$GithubStore on GithubStoreBase, Store {
     _$fetchReposFutureAtom.reportChanged();
   }
 
-  final _$userAtom = Atom(name: 'GithubStoreBase.user');
+  final _$userAtom = Atom(name: '_GithubStore.user');
 
   @override
   String get user {
@@ -55,31 +55,29 @@ mixin _$GithubStore on GithubStoreBase, Store {
   final _$_getReposAsyncAction = AsyncAction('_getRepos');
 
   @override
-  ObservableFuture<List<Repository>> _getRepos({String user = 'pavanpodila'}) {
-    return ObservableFuture<List<Repository>>(
-        _$_getReposAsyncAction.run(() => super._getRepos(user: user)));
+  Future<List<Repository>> _getRepos({String user = 'pavanpodila'}) {
+    return _$_getReposAsyncAction.run(() => super._getRepos(user: user));
   }
 
-  final _$GithubStoreBaseActionController =
-      ActionController(name: 'GithubStoreBase');
+  final _$_GithubStoreActionController = ActionController(name: '_GithubStore');
 
   @override
   void fetchRepos() {
-    final _$actionInfo = _$GithubStoreBaseActionController.startAction();
+    final _$actionInfo = _$_GithubStoreActionController.startAction();
     try {
       return super.fetchRepos();
     } finally {
-      _$GithubStoreBaseActionController.endAction(_$actionInfo);
+      _$_GithubStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setUser(String text) {
-    final _$actionInfo = _$GithubStoreBaseActionController.startAction();
+    final _$actionInfo = _$_GithubStoreActionController.startAction();
     try {
       return super.setUser(text);
     } finally {
-      _$GithubStoreBaseActionController.endAction(_$actionInfo);
+      _$_GithubStoreActionController.endAction(_$actionInfo);
     }
   }
 }

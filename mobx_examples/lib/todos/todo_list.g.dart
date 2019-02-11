@@ -6,7 +6,7 @@ part of 'todo_list.dart';
 // StoreGenerator
 // **************************************************************************
 
-mixin _$TodoList on TodoListBase, Store {
+mixin _$TodoList on _TodoList, Store {
   Computed<ObservableList<Todo>> _$pendingTodosComputed;
 
   @override
@@ -56,7 +56,7 @@ mixin _$TodoList on TodoListBase, Store {
           Computed<bool>(() => super.canMarkAllCompleted))
       .value;
 
-  final _$todosAtom = Atom(name: 'TodoListBase.todos');
+  final _$todosAtom = Atom(name: '_TodoList.todos');
 
   @override
   ObservableList<Todo> get todos {
@@ -71,7 +71,7 @@ mixin _$TodoList on TodoListBase, Store {
     _$todosAtom.reportChanged();
   }
 
-  final _$filterAtom = Atom(name: 'TodoListBase.filter');
+  final _$filterAtom = Atom(name: '_TodoList.filter');
 
   @override
   VisibilityFilter get filter {
@@ -86,8 +86,7 @@ mixin _$TodoList on TodoListBase, Store {
     _$filterAtom.reportChanged();
   }
 
-  final _$currentDescriptionAtom =
-      Atom(name: 'TodoListBase.currentDescription');
+  final _$currentDescriptionAtom = Atom(name: '_TodoList.currentDescription');
 
   @override
   String get currentDescription {
@@ -102,65 +101,65 @@ mixin _$TodoList on TodoListBase, Store {
     _$currentDescriptionAtom.reportChanged();
   }
 
-  final _$TodoListBaseActionController = ActionController(name: 'TodoListBase');
+  final _$_TodoListActionController = ActionController(name: '_TodoList');
 
   @override
   void addTodo(String description) {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.addTodo(description);
     } finally {
-      _$TodoListBaseActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void removeTodo(Todo todo) {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.removeTodo(todo);
     } finally {
-      _$TodoListBaseActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void changeDescription(String description) {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.changeDescription(description);
     } finally {
-      _$TodoListBaseActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void changeFilter(VisibilityFilter filter) {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.changeFilter(filter);
     } finally {
-      _$TodoListBaseActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void removeCompleted() {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.removeCompleted();
     } finally {
-      _$TodoListBaseActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void markAllAsCompleted() {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.markAllAsCompleted();
     } finally {
-      _$TodoListBaseActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.endAction(_$actionInfo);
     }
   }
 }
