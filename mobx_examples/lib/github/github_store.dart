@@ -12,11 +12,17 @@ abstract class GithubStoreBase implements Store {
   List<Repository> repositories = [];
 
   @observable
-  ObservableFuture<List<Repository>> fetchReposFuture;
+  ObservableFuture<List<Repository>> fetchReposFuture = emptyResponse;
+
+  @observable
+  String user = '';
+
+  static ObservableFuture<List<Repository>> emptyResponse =
+      ObservableFuture.value([]);
 
   @action
   void fetchRepos() {
-    fetchReposFuture = ObservableFuture(_getRepos());
+    fetchReposFuture = ObservableFuture(_getRepos(user: user));
   }
 
   @action
@@ -27,5 +33,11 @@ abstract class GithubStoreBase implements Store {
         await client.repositories.listUserRepositories(user).toList();
 
     return repositories;
+  }
+
+  @action
+  void setUser(String text) {
+    fetchReposFuture = emptyResponse;
+    user = text;
   }
 }

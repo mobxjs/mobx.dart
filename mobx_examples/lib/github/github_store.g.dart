@@ -37,6 +37,21 @@ mixin _$GithubStore on GithubStoreBase, Store {
     _$fetchReposFutureAtom.reportChanged();
   }
 
+  final _$userAtom = Atom(name: 'GithubStoreBase.user');
+
+  @override
+  String get user {
+    _$userAtom.reportObserved();
+    return super.user;
+  }
+
+  @override
+  set user(String value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$userAtom);
+    super.user = value;
+    _$userAtom.reportChanged();
+  }
+
   final _$_getReposAsyncAction = AsyncAction('_getRepos');
 
   @override
@@ -53,6 +68,16 @@ mixin _$GithubStore on GithubStoreBase, Store {
     final _$actionInfo = _$GithubStoreBaseActionController.startAction();
     try {
       return super.fetchRepos();
+    } finally {
+      _$GithubStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setUser(String text) {
+    final _$actionInfo = _$GithubStoreBaseActionController.startAction();
+    try {
+      return super.setUser(text);
     } finally {
       _$GithubStoreBaseActionController.endAction(_$actionInfo);
     }
