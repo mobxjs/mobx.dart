@@ -6,8 +6,8 @@ part of 'counter.dart';
 // StoreGenerator
 // **************************************************************************
 
-mixin _$Counter on CounterBase, Store {
-  final _$valueAtom = Atom(name: 'CounterBase.value');
+mixin _$Counter on _Counter, Store {
+  final _$valueAtom = Atom(name: '_Counter.value');
 
   @override
   int get value {
@@ -22,15 +22,15 @@ mixin _$Counter on CounterBase, Store {
     _$valueAtom.reportChanged();
   }
 
-  final _$CounterBaseActionController = ActionController(name: 'CounterBase');
+  final _$_CounterActionController = ActionController(name: '_Counter');
 
   @override
   void increment() {
-    final _$actionInfo = _$CounterBaseActionController.startAction();
+    final _$actionInfo = _$_CounterActionController.startAction();
     try {
       return super.increment();
     } finally {
-      _$CounterBaseActionController.endAction(_$actionInfo);
+      _$_CounterActionController.endAction(_$actionInfo);
     }
   }
 }

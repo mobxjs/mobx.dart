@@ -6,8 +6,8 @@ part of 'todo.dart';
 // StoreGenerator
 // **************************************************************************
 
-mixin _$Todo on TodoBase, Store {
-  final _$descriptionAtom = Atom(name: 'TodoBase.description');
+mixin _$Todo on _Todo, Store {
+  final _$descriptionAtom = Atom(name: '_Todo.description');
 
   @override
   String get description {
@@ -22,7 +22,7 @@ mixin _$Todo on TodoBase, Store {
     _$descriptionAtom.reportChanged();
   }
 
-  final _$doneAtom = Atom(name: 'TodoBase.done');
+  final _$doneAtom = Atom(name: '_Todo.done');
 
   @override
   bool get done {
@@ -35,5 +35,17 @@ mixin _$Todo on TodoBase, Store {
     mainContext.checkIfStateModificationsAreAllowed(_$doneAtom);
     super.done = value;
     _$doneAtom.reportChanged();
+  }
+
+  final _$_TodoActionController = ActionController(name: '_Todo');
+
+  @override
+  void markDone({bool value}) {
+    final _$actionInfo = _$_TodoActionController.startAction();
+    try {
+      return super.markDone(value: value);
+    } finally {
+      _$_TodoActionController.endAction(_$actionInfo);
+    }
   }
 }
