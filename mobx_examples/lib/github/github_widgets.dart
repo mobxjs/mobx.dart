@@ -3,8 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_examples/github/github_store.dart';
 
-final GithubStore store = GithubStore();
-
 class GithubExample extends StatefulWidget {
   const GithubExample();
 
@@ -13,6 +11,8 @@ class GithubExample extends StatefulWidget {
 }
 
 class GithubExampleState extends State<GithubExample> {
+  final GithubStore store = GithubStore();
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
@@ -46,8 +46,10 @@ class UserInput extends StatelessWidget {
               child: TextField(
                 autocorrect: false,
                 autofocus: true,
-                onChanged: store.setUser,
-                onSubmitted: (_) => store.fetchRepos(),
+                onSubmitted: (String user) {
+                  store.setUser(user);
+                  store.fetchRepos();
+                },
               ),
             ),
           ),
@@ -67,23 +69,40 @@ class RepositoryListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Expanded(
         child: Observer(
-          builder: (_) => ListView.builder(
-              itemCount: store.repositories.length,
-              itemBuilder: (_, int index) {
-                final repo = store.repositories[index];
-                return ListTile(
-                  title: Row(
-                    children: <Widget>[
-                      Text(
-                        repo.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(' (${repo.stargazersCount} ⭐️)'),
-                    ],
+          builder: (_) {
+            if (store.fetchReposFuture.status != FutureStatus.fulfilled) {
+              return Container();
+            }
+
+            if (store.repositories.length == 0) {
+              return Row(
+                children: <Widget>[
+                  const Text('We could not find any repos for user: '),
+                  Text(
+                    store.user,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(repo.description ?? ''),
-                );
-              }),
+                ],
+              );
+            }
+            return ListView.builder(
+                itemCount: store.repositories.length,
+                itemBuilder: (_, int index) {
+                  final repo = store.repositories[index];
+                  return ListTile(
+                    title: Row(
+                      children: <Widget>[
+                        Text(
+                          repo.name,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(' (${repo.stargazersCount} ⭐️)'),
+                      ],
+                    ),
+                    subtitle: Text(repo.description ?? ''),
+                  );
+                });
+          },
         ),
       );
 }

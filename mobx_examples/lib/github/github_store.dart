@@ -8,9 +8,10 @@ class GithubStore = _GithubStore with _$GithubStore;
 abstract class _GithubStore implements Store {
   final GitHub client = createGitHubClient();
 
-  @observable
+  /// No need to observe this as we are relying on the [fetchReposFuture.status]
   List<Repository> repositories = [];
 
+  /// We are starting with an empty future to avoid a null check
   @observable
   ObservableFuture<List<Repository>> fetchReposFuture = emptyResponse;
 
@@ -21,17 +22,12 @@ abstract class _GithubStore implements Store {
       ObservableFuture.value([]);
 
   @action
-  void fetchRepos() {
-    fetchReposFuture = ObservableFuture(_getRepos(user: user));
-  }
-
-  @action
-  Future<List<Repository>> _getRepos({String user = 'pavanpodila'}) async {
+  Future<List<Repository>> fetchRepos() async {
     repositories = [];
-    repositories =
-        await client.repositories.listUserRepositories(user).toList();
+    final future = client.repositories.listUserRepositories(user).toList();
+    fetchReposFuture = ObservableFuture(future);
 
-    return repositories;
+    return repositories = await future;
   }
 
   @action
