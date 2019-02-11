@@ -13,7 +13,7 @@ addons:
 
 jobs:
   include:
-    - stage: mobx core
+    - stage: MobX Core
       name: mobx
       env: PACKAGE=mobx
       script: ./tool/run.sh
@@ -24,7 +24,7 @@ jobs:
       env: PACKAGE=mobx_codegen/example
       script: ./tool/run.sh
   
-    - stage: flutter related (beta)
+    - stage: Flutter Related (beta)
       name: flutter_mobx
       env: PACKAGE=flutter_mobx FLUTTER=true
       before_script:
@@ -45,7 +45,7 @@ jobs:
         - ./flutter/bin/flutter doctor
       script: ./tool/run.sh
 
-    - stage: flutter related (master)
+    - stage: Flutter Related (master)
       name: flutter_mobx_hooks
       env: PACKAGE=flutter_mobx_hooks FLUTTER=true
       before_script:
