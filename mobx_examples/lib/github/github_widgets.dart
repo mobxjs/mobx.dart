@@ -72,12 +72,13 @@ class RepositoryListView extends StatelessWidget {
   Widget build(BuildContext context) => Expanded(
         child: Observer(
           builder: (_) {
-            if (store.fetchReposFuture.status != FutureStatus.fulfilled) {
+            if (!store.hasResults) {
               return Container();
             }
 
             if (store.repositories.isEmpty) {
               return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Text('We could not find any repos for user: '),
                   Text(

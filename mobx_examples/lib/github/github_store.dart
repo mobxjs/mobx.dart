@@ -18,6 +18,11 @@ abstract class _GithubStore implements Store {
   @observable
   String user = '';
 
+  @computed
+  bool get hasResults =>
+      fetchReposFuture != emptyResponse &&
+      fetchReposFuture.status == FutureStatus.fulfilled;
+
   static ObservableFuture<List<Repository>> emptyResponse =
       ObservableFuture.value([]);
 

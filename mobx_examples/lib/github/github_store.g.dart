@@ -9,6 +9,12 @@ part of 'github_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
 
 mixin _$GithubStore on _GithubStore, Store {
+  Computed<bool> _$hasResultsComputed;
+
+  @override
+  bool get hasResults =>
+      (_$hasResultsComputed ??= Computed<bool>(() => super.hasResults)).value;
+
   final _$fetchReposFutureAtom = Atom(name: '_GithubStore.fetchReposFuture');
 
   @override
