@@ -4,6 +4,9 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
 import 'package:build/src/builder/build_step.dart';
+import 'package:mobx/mobx.dart' show Store;
+import 'package:mobx/src/api/annotations.dart'
+    show ComputedMethod, MakeAction, MakeObservable;
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
@@ -15,10 +18,6 @@ import 'package:mobx_codegen/src/template/observable_stream.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 import 'package:source_gen/source_gen.dart';
-import 'package:mobx/mobx.dart' show Store;
-
-import 'package:mobx/src/api/annotations.dart'
-    show ComputedMethod, MakeAction, MakeObservable;
 
 class StoreGenerator extends Generator {
   final _storeChecker = TypeChecker.fromRuntime(Store);

@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/counter/counter.dart';
 
-part 'counter.g.dart';
+class CounterExample extends StatefulWidget {
+  const CounterExample();
 
-class Counter = _Counter with _$Counter;
-
-abstract class _Counter implements Store {
-  @observable
-  int value = 0;
-
-  @action
-  void increment() {
-    value++;
-  }
+  @override
+  CounterExampleState createState() => CounterExampleState();
 }
 
-// Create the store
-final Counter counter = Counter();
-
-class CounterExample extends StatelessWidget {
-  const CounterExample();
+class CounterExampleState extends State<CounterExample> {
+  final Counter counter = Counter();
 
   @override
   Widget build(BuildContext context) => Scaffold(

@@ -3,10 +3,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'todo_list.dart';
 
-final TodoList list = TodoList();
-
-class TodoExample extends StatelessWidget {
+class TodoExample extends StatefulWidget {
   const TodoExample();
+
+  @override
+  TodoExampleState createState() => TodoExampleState();
+}
+
+class TodoExampleState extends State<TodoExample> {
+  final TodoList list = TodoList();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -54,7 +59,7 @@ class TodoListView extends StatelessWidget {
                       builder: (_) => CheckboxListTile(
                             controlAffinity: ListTileControlAffinity.leading,
                             value: todo.done,
-                            onChanged: (value) => todo.markDone(value: value),
+                            onChanged: (value) => todo.done = value,
                             title: Row(
                               children: <Widget>[
                                 Expanded(

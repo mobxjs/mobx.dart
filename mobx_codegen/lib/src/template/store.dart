@@ -27,6 +27,8 @@ class StoreTemplate {
 
   @override
   String toString() => """
+  // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+
   mixin $mixinName on $parentName, Store {
     $computeds
 

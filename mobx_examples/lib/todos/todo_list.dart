@@ -1,5 +1,5 @@
-import 'package:flutter_mobx_example/todos/todo.dart';
 import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/todos/todo.dart';
 
 part 'todo_list.g.dart';
 

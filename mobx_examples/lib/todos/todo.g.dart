@@ -38,16 +38,4 @@ mixin _$Todo on _Todo, Store {
     super.done = value;
     _$doneAtom.reportChanged();
   }
-
-  final _$_TodoActionController = ActionController(name: '_Todo');
-
-  @override
-  void markDone({bool value}) {
-    final _$actionInfo = _$_TodoActionController.startAction();
-    try {
-      return super.markDone(value: value);
-    } finally {
-      _$_TodoActionController.endAction(_$actionInfo);
-    }
-  }
 }

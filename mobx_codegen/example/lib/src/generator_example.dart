@@ -2,10 +2,10 @@ import 'package:mobx/mobx.dart';
 
 part 'generator_example.g.dart';
 
-class User = UserBase with _$User;
+class User = _User with _$User;
 
-abstract class UserBase implements Store {
-  UserBase(this.id);
+abstract class _User implements Store {
+  _User(this.id);
 
   final int id;
 
