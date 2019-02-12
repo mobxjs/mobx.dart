@@ -52,13 +52,8 @@ class ObserverState extends State<Observer> {
       }
     });
 
-    assert(() {
-      if (!_reaction.hasObservables) {
-        throw Exception(
-            'There are no observables detected in the builder function for ${_reaction.name}');
-      }
-      return true;
-    }());
+    assert(_reaction.hasObservables,
+        'There are no observables detected in the builder function for ${_reaction.name}');
 
     if (error != null) {
       throw error;

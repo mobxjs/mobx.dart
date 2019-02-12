@@ -71,8 +71,10 @@ void main() {
   });
 
   testWidgets('Observer build should call reaction.track', (tester) async {
+    var x = Observable(0);
     final mock = MockReaction();
     stubTrack(mock);
+    when(mock.hasObservables).thenReturn(true);
 
     await tester.pumpWidget(
         TestObserver(mock, builder: (context) => const Placeholder()));
@@ -116,6 +118,7 @@ void main() {
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
     final mock = MockReaction();
     stubTrack(mock);
+    when(mock.hasObservables).thenReturn(true);
 
     await tester.pumpWidget(
         TestObserver(mock, builder: (context) => const Placeholder()));
@@ -128,5 +131,26 @@ void main() {
   test('Observer builder must not be null', () {
     // ignore:missing_required_param,prefer_const_constructors
     expect(() => Observer(), throwsA(isInstanceOf<AssertionError>()));
+  });
+
+  testWidgets('Observer should assert when there are no observables in builder',
+      (tester) async {
+    await tester
+        .pumpWidget(Observer(builder: (context) => const Placeholder()));
+
+    expect(tester.takeException(), isInstanceOf<AssertionError>());
+  });
+
+  testWidgets(
+      'Observer should NOT assert when there are observables in builder',
+      (tester) async {
+    var x = Observable(0);
+
+    await tester.pumpWidget(Observer(builder: (context) {
+      x.value;
+      return const Placeholder();
+    }));
+
+    expect(tester.takeException(), isNull);
   });
 }
