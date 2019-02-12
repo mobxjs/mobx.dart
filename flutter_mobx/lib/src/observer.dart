@@ -1,12 +1,9 @@
 library flutter_mobx;
 
+// ignore_for_file:implementation_imports
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
-
-// ignore:implementation_imports
 import 'package:mobx/src/core.dart' show ReactionImpl;
-
-typedef BuildObserved = Widget Function(BuildContext);
 
 class Observer extends StatefulWidget {
   /// Returns a widget that rebuilds every time an observable referenced in the
@@ -18,7 +15,7 @@ class Observer extends StatefulWidget {
         super(key: key);
 
   final ReactiveContext context;
-  final BuildObserved builder;
+  final WidgetBuilder builder;
 
   @visibleForTesting
   Reaction createReaction(Function() onInvalidate) =>

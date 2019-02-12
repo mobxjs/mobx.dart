@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_test/flutter_test.dart';
-
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when;
 import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
@@ -9,7 +8,7 @@ import 'package:mockito/mockito.dart';
 class MockReaction extends Mock implements ReactionImpl {}
 
 class TestObserver extends Observer {
-  const TestObserver(this.reaction, {BuildObserved builder})
+  const TestObserver(this.reaction, {WidgetBuilder builder})
       : super(builder: builder);
 
   final Reaction reaction;
