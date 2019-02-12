@@ -71,7 +71,6 @@ void main() {
   });
 
   testWidgets('Observer build should call reaction.track', (tester) async {
-    var x = Observable(0);
     final mock = MockReaction();
     stubTrack(mock);
     when(mock.hasObservables).thenReturn(true);
@@ -144,7 +143,7 @@ void main() {
   testWidgets(
       'Observer should NOT assert when there are observables in builder',
       (tester) async {
-    var x = Observable(0);
+    final x = Observable(0);
 
     await tester.pumpWidget(Observer(builder: (context) {
       x.value;
