@@ -1,8 +1,8 @@
 import 'package:fake_async/fake_async.dart';
+import 'package:mobx/mobx.dart' hide when;
 import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'package:mobx/mobx.dart' hide when;
 
 import 'shared_mocks.dart';
 
@@ -264,6 +264,18 @@ void main() {
 
         expect(i, equals(1));
         expect(autoVar, equals(1));
+      });
+
+      test('ReactionImpl tracks observables', () {
+        final reaction = ReactionImpl(mainContext, () {})..track(() {});
+
+        expect(reaction.hasObservables, isFalse);
+
+        final x = Observable(0);
+        final reaction1 = ReactionImpl(mainContext, () {})
+          ..track(() => x.value + 1);
+
+        expect(reaction1.hasObservables, isTrue);
       });
     });
   });

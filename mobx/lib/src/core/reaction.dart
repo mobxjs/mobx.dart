@@ -34,6 +34,8 @@ class ReactionImpl implements Reaction {
   // ignore: prefer_final_fields
   Set<Atom> _observables = Set();
 
+  bool get hasObservables => _observables.isNotEmpty;
+
   @override
   // ignore: prefer_final_fields
   DerivationState _dependenciesState = DerivationState.notTracking;
