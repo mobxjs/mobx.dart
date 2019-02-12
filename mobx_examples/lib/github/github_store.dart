@@ -8,10 +8,10 @@ class GithubStore = _GithubStore with _$GithubStore;
 abstract class _GithubStore implements Store {
   final GitHub client = createGitHubClient();
 
-  /// No need to observe this as we are relying on the [fetchReposFuture.status]
+  // No need to observe this as we are relying on the fetchReposFuture.status
   List<Repository> repositories = [];
 
-  /// We are starting with an empty future to avoid a null check
+  // We are starting with an empty future to avoid a null check
   @observable
   ObservableFuture<List<Repository>> fetchReposFuture = emptyResponse;
 

@@ -6,6 +6,8 @@ part of 'todo.dart';
 // StoreGenerator
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+
 mixin _$Todo on _Todo, Store {
   final _$descriptionAtom = Atom(name: '_Todo.description');
 

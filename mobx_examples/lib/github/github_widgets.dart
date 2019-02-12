@@ -48,6 +48,8 @@ class UserInput extends StatelessWidget {
                 autofocus: true,
                 onSubmitted: (String user) {
                   store.setUser(user);
+
+                  // ignore: cascade_invocations
                   store.fetchRepos();
                 },
               ),
@@ -74,7 +76,7 @@ class RepositoryListView extends StatelessWidget {
               return Container();
             }
 
-            if (store.repositories.length == 0) {
+            if (store.repositories.isEmpty) {
               return Row(
                 children: <Widget>[
                   const Text('We could not find any repos for user: '),
@@ -85,6 +87,7 @@ class RepositoryListView extends StatelessWidget {
                 ],
               );
             }
+
             return ListView.builder(
                 itemCount: store.repositories.length,
                 itemBuilder: (_, int index) {

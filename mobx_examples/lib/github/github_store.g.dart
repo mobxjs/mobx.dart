@@ -6,6 +6,8 @@ part of 'github_store.dart';
 // StoreGenerator
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+
 mixin _$GithubStore on _GithubStore, Store {
   final _$fetchReposFutureAtom = Atom(name: '_GithubStore.fetchReposFuture');
 

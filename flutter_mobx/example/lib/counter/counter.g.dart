@@ -6,6 +6,8 @@ part of 'counter.dart';
 // StoreGenerator
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+
 mixin _$Counter on _Counter, Store {
   final _$valueAtom = Atom(name: '_Counter.value');
 

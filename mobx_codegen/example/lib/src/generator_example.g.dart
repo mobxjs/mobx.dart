@@ -6,14 +6,16 @@ part of 'generator_example.dart';
 // StoreGenerator
 // **************************************************************************
 
-mixin _$User on UserBase, Store {
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+
+mixin _$User on _User, Store {
   Computed<String> _$fullNameComputed;
 
   @override
   String get fullName =>
       (_$fullNameComputed ??= Computed<String>(() => super.fullName)).value;
 
-  final _$firstNameAtom = Atom(name: 'UserBase.firstName');
+  final _$firstNameAtom = Atom(name: '_User.firstName');
 
   @override
   String get firstName {
@@ -28,7 +30,7 @@ mixin _$User on UserBase, Store {
     _$firstNameAtom.reportChanged();
   }
 
-  final _$lastNameAtom = Atom(name: 'UserBase.lastName');
+  final _$lastNameAtom = Atom(name: '_User.lastName');
 
   @override
   String get lastName {
@@ -43,18 +45,20 @@ mixin _$User on UserBase, Store {
     _$lastNameAtom.reportChanged();
   }
 
-  final _$UserBaseActionController = ActionController(name: 'UserBase');
+  final _$_UserActionController = ActionController(name: '_User');
 
   @override
   void updateNames({String firstName, String lastName}) {
-    final _$actionInfo = _$UserBaseActionController.startAction();
+    final _$actionInfo = _$_UserActionController.startAction();
     try {
       return super.updateNames(firstName: firstName, lastName: lastName);
     } finally {
-      _$UserBaseActionController.endAction(_$actionInfo);
+      _$_UserActionController.endAction(_$actionInfo);
     }
   }
 }
+
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
 
 mixin _$Admin on AdminBase, Store {
   final _$userNameAtom = Atom(name: 'AdminBase.userName');
