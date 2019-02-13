@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: echo $PWD
-      - run: cd mobx.dart/mobx
+      - run: cd mobx
+      - run: echo $PWD
       - run: pub get
       - run: dartanalyzer --fatal-infos --fatal-warnings .
