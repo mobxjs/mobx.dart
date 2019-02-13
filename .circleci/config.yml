@@ -5,8 +5,7 @@ jobs:
       - image: google/dart
     steps:
       - checkout
-      - run: ls
-      - run: cd mobx
-      - run: ls
-      - run: pub get
-      - run: dartanalyzer --fatal-infos --fatal-warnings .
+      - run: |
+          cd mobx
+          pub get
+          dartanalyzer --fatal-infos --fatal-warnings .
