@@ -5,4 +5,7 @@ jobs:
       - image: google/dart
     steps:
       - checkout
-      - run: echo "hello world"
+      - run: echo $PWD
+      - run: cd mobx
+      - run: pub get
+      - run: dartanalyzer --fatal-infos --fatal-warnings .
