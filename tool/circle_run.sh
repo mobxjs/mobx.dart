@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
+
+#!/bin/bash
 
 set -o errexit
 set -o nounset
-set -o pipefail
+set -o xtrace
 
 cd mobx
 pub get
