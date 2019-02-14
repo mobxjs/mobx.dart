@@ -9,4 +9,4 @@ jobs:
           cd mobx
           pub get
           dartanalyzer --fatal-infos --fatal-warnings .
-          dart --pause-isolates-on-exit --enable_asserts --enable-vm-service test/all.dart
+          dart --enable_asserts --enable-vm-service test/all.dart
