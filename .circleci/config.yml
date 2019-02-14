@@ -48,3 +48,4 @@ workflows:
       - build_mobx
       - build_mobx_codegen
       - build_mobx_codegen_example
+      - build_flutter_mobx
