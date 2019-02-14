@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 executors:
   get_dart_sdk:
     docker:
@@ -43,9 +43,16 @@ jobs:
       - run: tool/circle_run.sh
 
 workflows:
-  version: 2
+  version: 2.1
   mobx_packages:
     jobs:
-      - build_mobx
-      - build_mobx_codegen
-      - build_mobx_codegen_example
+      - get_sources
+      - build_mobx:
+          requires:
+            - get_sources
+      - build_mobx_codegen:
+          requires:
+            - get_sources
+      - build_mobx_codegen_example:
+          requires:
+            - get_sources
