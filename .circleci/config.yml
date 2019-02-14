@@ -5,8 +5,4 @@ jobs:
       - image: google/dart
     steps:
       - checkout
-      - run: |
-          cd mobx
-          pub get
-          dartanalyzer --fatal-infos --fatal-warnings .
-          dart --enable_asserts --enable-vm-service test/all.dart
+      - run: tool/circle_run.sh
