@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: google/dart
-    working_directory: mobx
+    working_directory: ./mobx
     steps:
       - checkout
       - run: tool/circle_run.sh
