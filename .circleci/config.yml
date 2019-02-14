@@ -3,13 +3,14 @@ jobs:
   fetch_dart:
     docker:
       - image: google/dart
+    steps:
+      - checkout
 
   build_mobx:
     requires: fetch_dart
     environment:
       - PACKAGE: mobx
     steps:
-      - checkout
       - run: tool/circle_run.sh
 
   build_mobx_codegen:
@@ -18,7 +19,6 @@ jobs:
     environment:
       - PACKAGE: mobx_codegen
     steps:
-      - checkout
       - run: tool/circle_run.sh
 
   build_mobx_codegen_example:
@@ -27,7 +27,6 @@ jobs:
     environment:
       - PACKAGE: mobx_codegen/example
     steps:
-      - checkout
       - run: tool/circle_run.sh
 
 workflows:
