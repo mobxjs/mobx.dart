@@ -29,3 +29,11 @@ jobs:
     steps:
       - checkout
       - run: tool/circle_run.sh
+
+workflows:
+  version: 2
+  mobx_core:
+    jobs:
+      - build_mobx
+      - build_mobx_codegen
+      - build_mobx_codegen_example
