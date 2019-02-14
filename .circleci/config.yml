@@ -1,35 +1,50 @@
 version: 2
-jobs:
-  build_mobx:
+executors:
+  get_dart_sdk:
     docker:
       - image: google/dart
+    working_directory: /project
+
+jobs:
+  get_sources:
+    executor: get_dart_sdk
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: /project
+          paths:
+            - .
+
+  build_mobx:
+    executor: get_dart_sdk
     environment:
       - PACKAGE: mobx
     steps:
-      - checkout
+      - attach_workspace:
+          at: /project
       - run: tool/circle_run.sh
 
   build_mobx_codegen:
-    docker:
-      - image: google/dart
+    executor: get_dart_sdk
     environment:
       - PACKAGE: mobx_codegen
     steps:
-      - checkout
+      - attach_workspace:
+          at: /project
       - run: tool/circle_run.sh
 
   build_mobx_codegen_example:
-    docker:
-      - image: google/dart
+    executor: get_dart_sdk
     environment:
       - PACKAGE: mobx_codegen/example
     steps:
-      - checkout
+      - attach_workspace:
+          at: /project
       - run: tool/circle_run.sh
 
 workflows:
   version: 2
-  mobx_core:
+  mobx_packages:
     jobs:
       - build_mobx
       - build_mobx_codegen
