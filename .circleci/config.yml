@@ -3,6 +3,9 @@ executors:
   dart_sdk_image:
     docker:
       - image: google/dart
+  flutter_sdk_image:
+    docker:
+      - image: cirrusci/flutter
 
 jobs:
   build_mobx:
@@ -25,6 +28,15 @@ jobs:
     executor: dart_sdk_image
     environment:
       - PACKAGE: mobx_codegen/example
+    steps:
+      - checkout
+      - run: tool/circle_run.sh
+
+  build_flutter_mobx:
+    executor: flutter_sdk_image
+    environment:
+      - FLUTTER: true
+      - PACKAGE: flutter_mobx
     steps:
       - checkout
       - run: tool/circle_run.sh
