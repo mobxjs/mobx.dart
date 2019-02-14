@@ -1,12 +1,12 @@
 version: 2.1
 executors:
-  get_dart_sdk:
+  dart_sdk_image:
     docker:
       - image: google/dart
 
 jobs:
   build_mobx:
-    executor: get_dart_sdk
+    executor: dart_sdk_image
     environment:
       - PACKAGE: mobx
     steps:
@@ -14,7 +14,7 @@ jobs:
       - run: tool/circle_run.sh
 
   build_mobx_codegen:
-    executor: get_dart_sdk
+    executor: dart_sdk_image
     environment:
       - PACKAGE: mobx_codegen
     steps:
@@ -22,7 +22,7 @@ jobs:
       - run: tool/circle_run.sh
 
   build_mobx_codegen_example:
-    executor: get_dart_sdk
+    executor: dart_sdk_image
     environment:
       - PACKAGE: mobx_codegen/example
     steps:
