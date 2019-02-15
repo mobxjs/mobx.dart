@@ -11,6 +11,6 @@ dependencies:
   mobx_codegen: ^0.0.8
 
 dev_dependencies:
-  build_runner: ^1.2.6
+  build_runner: ^1.2.5
   test_coverage: ^0.2.0
   test: ^1.0.0
