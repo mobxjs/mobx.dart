@@ -5,8 +5,11 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
+  turnOffEnforceActions();
+
   group('Reaction', () {
     test('basics work', () {
       var executed = false;

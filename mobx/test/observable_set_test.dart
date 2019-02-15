@@ -1,11 +1,14 @@
 import 'package:mobx/src/api/observable_collections.dart';
 import 'package:mobx/src/core.dart';
-import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
+  turnOffEnforceActions();
+
   group('ObservableSet', () {
     test('linkedHashSetFrom creates a set that iterates at insertion order',
         () {
