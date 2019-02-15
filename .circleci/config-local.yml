@@ -1,0 +1,50 @@
+version: 2
+jobs:
+  build_mobx:
+    docker:
+      - image: google/dart
+    environment:
+      - FLUTTER: false
+      - PACKAGE: mobx
+    steps:
+      - checkout
+      - run:
+          command: tool/circle_run.sh
+  build_mobx_codegen:
+    docker:
+      - image: google/dart
+    environment:
+      - FLUTTER: false
+      - PACKAGE: mobx_codegen
+    steps:
+      - checkout
+      - run:
+          command: tool/circle_run.sh
+  build_mobx_codegen_example:
+    docker:
+      - image: google/dart
+    environment:
+      - FLUTTER: false
+      - PACKAGE: mobx_codegen/example
+    steps:
+      - checkout
+      - run:
+          command: tool/circle_run.sh
+  build_flutter_mobx:
+    docker:
+      - image: cirrusci/flutter
+    environment:
+      - FLUTTER: true
+      - PACKAGE: flutter_mobx
+    steps:
+      - checkout
+      - run:
+          command: tool/circle_run.sh
+workflows:
+  version: 2
+  mobx_packages:
+    jobs:
+      - build_mobx
+      - build_mobx_codegen
+      - build_mobx_codegen_example
+      - build_flutter_mobx

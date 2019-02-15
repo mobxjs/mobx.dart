@@ -1,12 +1,12 @@
 # mobx_codegen
 
 [![pub package](https://img.shields.io/pub/v/mobx_codegen.svg)](https://pub.dartlang.org/packages/mobx_codegen)
-[![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
+[![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 
 > MobX Code Generation library
 
 Adds support for annotating your MobX code with **`@observable`**, **`@computed`**, **`@action`**, making it
-super simple to use MobX. 
+super simple to use MobX.
 
 > Note that these annotations only work inside store-classes.
 

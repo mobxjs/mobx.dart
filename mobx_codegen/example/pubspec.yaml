@@ -7,16 +7,10 @@ environment:
   sdk: '>=2.1.0-dev <3.0.0'
 
 dependencies:
-  mobx: ^0.0.35
-  mobx_codegen: ^0.0.5
-
-dependency_overrides:
-  mobx:
-    path: ../../mobx
-  mobx_codegen:
-    path: ../../mobx_codegen
+  mobx: ^0.0.37
+  mobx_codegen: ^0.0.8
 
 dev_dependencies:
-  build_runner: ^1.2.5
+  build_runner: 1.2.6
   test_coverage: ^0.2.0
   test: ^1.0.0

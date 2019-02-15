@@ -5,12 +5,10 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
-  setUp(() => mainContext.config =
-      ReactiveConfig(enforceActions: EnforceActions.never));
-
-  tearDown(() => mainContext.config = ReactiveConfig.main);
+  turnOffEnforceActions();
 
   group('autorun()', () {
     test('basics work', () {

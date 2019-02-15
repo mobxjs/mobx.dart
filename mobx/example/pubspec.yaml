@@ -8,14 +8,8 @@ environment:
   sdk: '>=2.0.0-dev.68.0 <3.0.0'
 
 dependencies:
-  mobx: ^0.0.35
+  mobx: ^0.0.37
 
 dev_dependencies:
-  build_runner: ^1.0.0
-  mobx_codegen: ^0.0.5
-
-dependency_overrides:
-  mobx:
-    path: ../../mobx
-  mobx_codegen:
-    path: ../../mobx_codegen
+  build_runner: 1.2.6
+  mobx_codegen: ^0.0.8

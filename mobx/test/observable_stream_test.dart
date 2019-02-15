@@ -4,7 +4,11 @@ import 'package:mobx/src/api/async.dart';
 import 'package:mobx/src/api/reaction.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
+  turnOffEnforceActions();
+
   group('ObservableStream', () {
     test('match works', () async {
       // ignore:close_sinks
