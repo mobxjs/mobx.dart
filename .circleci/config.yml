@@ -3,6 +3,9 @@ executors:
   dart_sdk_image:
     docker:
       - image: google/dart
+  flutter_sdk_image:
+    docker:
+      - image: cirrusci/flutter:latest
 
 jobs:
   # Dart packages ---
@@ -35,7 +38,7 @@ jobs:
 
   # Flutter packages ---
   build_flutter_mobx:
-    machine: true
+    executor: flutter_sdk_image
     environment:
       - FLUTTER: true
       - PACKAGE: flutter_mobx
