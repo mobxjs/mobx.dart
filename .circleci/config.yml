@@ -35,7 +35,7 @@ jobs:
 
   # Flutter packages ---
   build_flutter_mobx:
-    executor: dart_sdk_image
+    machine: true
     environment:
       - FLUTTER: true
       - PACKAGE: flutter_mobx
