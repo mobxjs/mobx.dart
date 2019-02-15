@@ -5,7 +5,7 @@ executors:
       - image: google/dart
   flutter_sdk_image:
     docker:
-      - image: cirrusci/flutter:latest
+      - image: cirrusci/flutter:1.0.0
 
 jobs:
   # Dart packages ---
