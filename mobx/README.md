@@ -1,7 +1,7 @@
 # mobx.dart
 
 [![pub package](https://img.shields.io/pub/v/mobx.svg)](https://pub.dartlang.org/packages/mobx)
-[![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
+[![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 
 ![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx.png)
