@@ -412,10 +412,10 @@ class ReactiveContext {
     _state.trackingDerivation = prevDerivation;
   }
 
-  T untracked<T>(T Function() action) {
+  T untracked<T>(T Function() fn) {
     final prevDerivation = startUntracked();
     try {
-      return action();
+      return fn();
     } finally {
       endUntracked(prevDerivation);
     }

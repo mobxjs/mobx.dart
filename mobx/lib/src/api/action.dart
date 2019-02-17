@@ -6,17 +6,17 @@ T runInAction<T>(T Function() fn, {String name, ReactiveContext context}) =>
 
 /// Untracked ensures there is no tracking derivation while the given action runs.
 /// This is useful in cases where no observers should be linked to a running (tracking) derivation.
-T untracked<T>(T Function() action, {ReactiveContext context}) =>
-    (context ?? mainContext).untracked(action);
+T untracked<T>(T Function() fn, {ReactiveContext context}) =>
+    (context ?? mainContext).untracked(fn);
 
 /// During a transaction, no derivations (Reaction or Computed<T>) will be run
 /// and will be deferred until the end of the transaction (batch). Transactions can
 /// be nested, in which case, no derivation will be run until the top-most batch completes
-T transaction<T>(T Function() action, {ReactiveContext context}) {
+T transaction<T>(T Function() fn, {ReactiveContext context}) {
   final ctx = context ?? mainContext
     ..startBatch();
   try {
-    return action();
+    return fn();
   } finally {
     ctx.endBatch();
   }
