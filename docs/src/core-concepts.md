@@ -294,3 +294,10 @@ class _CounterExampleState extends State<CounterExample> {
       );
 }
 ```
+
+## Deeper coverage
+
+There are some articles written by [Michel Weststrate](https://twitter.com/mweststrate) which go into the philosophy of MobX. Definitely worth reading them.
+
+- [The Fundamental Principles behind MobX](https://hackernoon.com/the-fundamental-principles-behind-mobx-7a725f71f3e8)
+- [Becoming fully reactive - an in-depth explanation of MobX](https://hackernoon.com/becoming-fully-reactive-an-in-depth-explanation-of-mobservable-55995262a254)
