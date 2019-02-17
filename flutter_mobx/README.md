@@ -63,3 +63,5 @@ The **`builder`** function will be monitored by MobX and tracks all
 the _observables_ that are being used inside it. When any of the
 _observables_ change, builder will be called again to rebuild the
 `Widget`. This gives you a seamless way to create a reactive `Widget`.
+
+Note that the `Observer` will also throw an `AssertionError` if no observables are discovered in the `builder` function.
