@@ -5,6 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core.dart' show ReactionImpl;
 
+/// Observer observes the observables used in the `builder` function and rebuilds the Widget
+/// whenever any of them change. There is no need to do any other wiring besides simply referencing
+/// the required observables.
+///
+/// Internally, [Observer] uses a `Reaction` around the `builder` function. If your `builder` function does not contain
+/// any observables, [Observer] will throw an [AssertionError]. This is a debug-time hint to let you know that you are not observing any observables.
 class Observer extends StatefulWidget {
   /// Returns a widget that rebuilds every time an observable referenced in the
   /// [builder] function is altered.
@@ -22,10 +28,10 @@ class Observer extends StatefulWidget {
       ReactionImpl(context ?? mainContext, onInvalidate);
 
   @override
-  State<Observer> createState() => ObserverState();
+  State<Observer> createState() => _ObserverState();
 }
 
-class ObserverState extends State<Observer> {
+class _ObserverState extends State<Observer> {
   ReactionImpl _reaction;
 
   @override

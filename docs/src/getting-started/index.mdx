@@ -111,7 +111,7 @@ abstract class CounterBase implements Store {
 The interesting parts here are:
 
 - The abstract class `CounterBase` that implements the `Store` interface. All of your store-related code should be placed inside this abstract class. We create a `Counter` class to blend in the code from the `build_runner`.
-- The generated code will be inside the part file: `counter.g.dart`, which we include with the _`part` directive_. Without this, the `build_runner` will not produce any output.
+- The generated code will be inside the part file: `counter.g.dart`, which we include with the _`part` directive_. Without this, the `build_runner` will not produce any output. The generated file contains the `_$Counter` mixin.
 - The `@observable` annotation to mark the `value` as observable.
 - Use of `@action` to to mark the `increment()` method as an action.
 
