@@ -17,6 +17,7 @@ doc/api/
 # Misc
 .idea
 *.iml
+*.log
 local.properties
 .vscode/settings.json
 local.properties

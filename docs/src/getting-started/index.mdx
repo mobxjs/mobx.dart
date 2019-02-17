@@ -148,6 +148,12 @@ On the command-line, here's the output we got from running it. Your's might be s
 
 ```
 
+> If you are making changes to the store and want to generate `*.g.dart` files automatically, you can use the following command:
+
+> ```
+> flutter packages pub run build_runner watch
+> ```
+
 ## Add Store & Observer to Widget
 
 Now comes the part where we connect the MobX store to the Widget. In your `main.dart`, replace the code with the following:
