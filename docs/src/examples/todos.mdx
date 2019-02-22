@@ -10,7 +10,7 @@ import todosImage from "./todos.png";
 
 In this example, we will build the classic [TodoMVC](http://todomvc.com/), which has become the default way of showcasing the capabilities of a state-management library.
 
-> See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx/example/lib/todos).
+> See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
 
 ## Creating the Observable state
 
@@ -25,10 +25,10 @@ import 'package:mobx/mobx.dart';
 
 part 'todo.g.dart';
 
-class Todo = TodoBase with _$Todo;
+class Todo = _Todo with _$Todo;
 
-abstract class TodoBase implements Store {
-  TodoBase(this.description);
+abstract class _Todo implements Store {
+  _Todo(this.description);
 
   @observable
   String description = '';
@@ -59,9 +59,9 @@ part 'todo_list.g.dart';
 
 enum VisibilityFilter { all, pending, completed }
 
-class TodoList = TodoListBase with _$TodoList;
+class TodoList = _TodoList with _$TodoList;
 
-abstract class TodoListBase implements Store {
+abstract class _TodoList implements Store {
   @observable
   ObservableList<Todo> todos = ObservableList<Todo>();
 
@@ -81,9 +81,9 @@ To render a useful UI, we also need a bunch of _derived (aka computed)_ properti
 <img src={todosImage} width={300} />
 
 ```
-class TodoList = TodoListBase with _$TodoList;
+class TodoList = _TodoList with _$TodoList;
 
-abstract class TodoListBase implements Store {
+abstract class _TodoList implements Store {
   // ...
 
   @computed
@@ -140,9 +140,9 @@ abstract class TodoListBase implements Store {
 Actions are the semantic operations that mutate the observable state. They also create a transaction-boundary to ensure all notifications are sent out only at the end of an action. In our case, we have a few actions such as:
 
 ```
-class TodoList = TodoListBase with _$TodoList;
+class TodoList = _TodoList with _$TodoList;
 
-abstract class TodoListBase implements Store {
+abstract class _TodoList implements Store {
   // ...
 
   @action
@@ -185,9 +185,9 @@ abstract class TodoListBase implements Store {
 Here is the complete `TodoList` with all the observable, computed properties and the actions.
 
 ```
-class TodoList = TodoListBase with _$TodoList;
+class TodoList = _TodoList with _$TodoList;
 
-abstract class TodoListBase implements Store {
+abstract class _TodoList implements Store {
   @observable
   ObservableList<Todo> todos = ObservableList<Todo>();
 

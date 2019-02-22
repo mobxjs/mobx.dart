@@ -15,4 +15,4 @@ route: /community
 
 ## Podcasts
 
-- [Chat with Hillel Coren on ItsAllWidgets](https://itsallwidgets.com/podcast/episodes/21/pavan-podila).
+- [Chat with Hillel Coren on It's All Widgets!](https://itsallwidgets.com/podcast/episodes/21/pavan-podila).
