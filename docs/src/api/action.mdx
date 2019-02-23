@@ -67,6 +67,10 @@ By default, MobX enforces a rule that all mutations to observables should happen
 
 Although not advisable, you can relax this restriction by setting a different `config` for the [**`ReactiveContext`**](/api/context#reactivecontext).
 
+### Async actions
+
+The action methods can also be async, which allows you to intersperse mutations along with async calls. The code-generator takes care of ensuring all mutations are wrapped within actions.
+
 ## runInAction
 
 **`T runInAction<T>(T Function() fn, {String name, ReactiveContext context})`**

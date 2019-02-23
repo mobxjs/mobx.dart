@@ -12,4 +12,9 @@ abstract class _Todo implements Store {
 
   @observable
   bool done = false;
+
+  @action
+  void markDone(bool flag) {
+    done = flag;
+  }
 }
