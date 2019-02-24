@@ -1,12 +1,18 @@
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
+import 'package:mobx_codegen/src/template/comma_list.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/observable_future.dart';
 import 'package:mobx_codegen/src/template/observable_stream.dart';
+import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/template/rows.dart';
 
 class StoreTemplate {
+  final SurroundedCommaList<TypeParamTemplate> typeParams =
+      new SurroundedCommaList('<', '>', []);
+  final SurroundedCommaList<String> typeArgs =
+      new SurroundedCommaList('<', '>', []);
   String mixinName;
   String parentName;
 
@@ -29,7 +35,7 @@ class StoreTemplate {
   String toString() => """
   // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
 
-  mixin $mixinName on $parentName, Store {
+  mixin $mixinName$typeParams on $parentName$typeArgs, Store {
     $computeds
 
     $observables

@@ -25,12 +25,12 @@ abstract class _User implements Store {
   }
 }
 
-class Admin extends AdminBase with _$Admin {
+class Admin extends _Admin with _$Admin {
   Admin(int id) : super(id);
 }
 
-abstract class AdminBase extends User implements Store {
-  AdminBase(int id) : super(id);
+abstract class _Admin extends User implements Store {
+  _Admin(int id) : super(id);
 
   @observable
   String userName = 'admin';
@@ -57,4 +57,11 @@ abstract class AdminBase extends User implements Store {
       accessRights.add(item);
     }
   }
+}
+
+class Item<A> = _Item<A> with _$Item<A>;
+
+abstract class _Item<T> implements Store {
+  @observable
+  T value;
 }

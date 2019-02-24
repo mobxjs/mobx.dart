@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
 import 'package:build/src/builder/build_step.dart';
@@ -24,13 +25,21 @@ class StoreGenerator extends Generator {
 
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
-    final generate = (baseClass) sync* {
-      final mixedClass = library.classes
-          .firstWhere((c) => c.supertype == baseClass.type, orElse: () => null);
+    Iterable<String> generate(ClassElement baseClass) sync* {
+      final mixedClass =
+          library.classes.where((c) => c != baseClass).firstWhere((c) {
+        if (c.supertype.typeArguments.isNotEmpty &&
+            baseClass.typeParameters.length ==
+                c.supertype.typeArguments.length) {
+          final t = baseClass.type.instantiate(c.supertype.typeArguments);
+          return t.isSupertypeOf(c.type);
+        }
+        return c.supertype == baseClass.type;
+      }, orElse: () => null);
       if (mixedClass != null) {
         yield generateStoreClassCode(library, baseClass, mixedClass);
       }
-    };
+    }
 
     return library.classes
         .where((c) => c.isAbstract)
@@ -42,17 +51,21 @@ class StoreGenerator extends Generator {
 
   String generateStoreClassCode(
       LibraryReader library, ClassElement baseClass, ClassElement mixedClass) {
-    final visitor = new StoreMixinVisitor(baseClass.name, mixedClass.name);
+    final visitor = new StoreMixinVisitor(baseClass, mixedClass.name);
     baseClass.visitChildren(visitor);
     return visitor.source;
   }
 }
 
 class StoreMixinVisitor extends SimpleElementVisitor {
-  StoreMixinVisitor(String parentName, String name)
+  StoreMixinVisitor(ClassElement parentClass, String name)
       : _errors = StoreClassCodegenErrors(name) {
     _storeTemplate = StoreTemplate()
-      ..parentName = parentName
+      ..typeParams
+          .templates
+          .addAll(parentClass.typeParameters.map(typeParamTemplate))
+      ..typeArgs.templates.addAll(parentClass.typeParameters.map((t) => t.name))
+      ..parentName = parentClass.name
       ..mixinName = '_\$$name';
   }
 
