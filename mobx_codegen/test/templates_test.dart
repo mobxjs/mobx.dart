@@ -4,6 +4,7 @@ import 'package:mobx_codegen/src/template/computed.dart';
 import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/observable_future.dart';
+import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/template/rows.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/template/util.dart';

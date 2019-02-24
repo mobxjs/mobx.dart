@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:mobx_codegen/src/template/params.dart';
 import 'package:source_gen/source_gen.dart';
 
 String surroundNonEmpty(String prefix, String suffix, dynamic content) {
@@ -27,3 +28,8 @@ class AsyncMethodChecker {
           method.isGenerator &&
           method.returnType.isDynamic);
 }
+
+TypeParamTemplate typeParamTemplate(TypeParameterElement param) =>
+    TypeParamTemplate()
+      ..name = param.name
+      ..bound = param.bound?.displayName;

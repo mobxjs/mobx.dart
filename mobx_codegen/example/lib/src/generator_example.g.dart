@@ -60,8 +60,8 @@ mixin _$User on _User, Store {
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
 
-mixin _$Admin on AdminBase, Store {
-  final _$userNameAtom = Atom(name: 'AdminBase.userName');
+mixin _$Admin on _Admin, Store {
+  final _$userNameAtom = Atom(name: '_Admin.userName');
 
   @override
   String get userName {
@@ -76,7 +76,7 @@ mixin _$Admin on AdminBase, Store {
     _$userNameAtom.reportChanged();
   }
 
-  final _$accessRightsAtom = Atom(name: 'AdminBase.accessRights');
+  final _$accessRightsAtom = Atom(name: '_Admin.accessRights');
 
   @override
   ObservableList<String> get accessRights {
@@ -109,5 +109,24 @@ mixin _$Admin on AdminBase, Store {
   ObservableFuture<void> loadAccessRights() {
     return ObservableFuture<void>(
         _$loadAccessRightsAsyncAction.run(() => super.loadAccessRights()));
+  }
+}
+
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+
+mixin _$Item<T> on _Item<T>, Store {
+  final _$valueAtom = Atom(name: '_Item.value');
+
+  @override
+  T get value {
+    _$valueAtom.reportObserved();
+    return super.value;
+  }
+
+  @override
+  set value(T value) {
+    mainContext.checkIfStateModificationsAreAllowed(_$valueAtom);
+    super.value = value;
+    _$valueAtom.reportChanged();
   }
 }
