@@ -1,6 +1,9 @@
 # mobx.dart
 
-[![pub package](https://img.shields.io/pub/v/mobx.svg)](https://pub.dartlang.org/packages/mobx)
+[![pub package](https://img.shields.io/pub/v/mobx.svg?label=mobx)](https://pub.dartlang.org/packages/mobx)
+[![pub package](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx)](https://pub.dartlang.org/packages/flutter_mobx
+[![pub package](https://img.shields.io/pub/v/mobx_codegen.svg?label=mobx_codegen)](https://pub.dartlang.org/packages/mobx_codegen)
+
 [![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 [![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

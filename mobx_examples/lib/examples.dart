@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobx_examples/clock/clock_widgets.dart';
 import 'package:mobx_examples/counter/counter_widgets.dart';
 import 'package:mobx_examples/github/github_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
@@ -35,5 +36,11 @@ final List<Example> examples = [
     description: 'Get a list of repos for a user',
     path: '/github',
     widgetBuilder: (_) => const GithubExample(),
+  ),
+  Example(
+    title: 'Clock',
+    description: 'A simple ticking Clock, made with an Atom',
+    path: '/clock',
+    widgetBuilder: (_) => const ClockExample(),
   ),
 ];
