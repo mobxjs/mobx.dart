@@ -136,15 +136,13 @@ class AddTodo extends StatelessWidget {
   final _textController = TextEditingController(text: '');
 
   @override
-  Widget build(BuildContext context) => Observer(
-        builder: (_) => TextField(
-              autofocus: true,
-              decoration: const InputDecoration(
-                  labelText: 'Add a Todo', contentPadding: EdgeInsets.all(8)),
-              controller: _textController,
-              onChanged: _onTextChanged,
-              onSubmitted: _onTextSubmitted,
-            ),
+  Widget build(BuildContext context) => TextField(
+        autofocus: true,
+        decoration: const InputDecoration(
+            labelText: 'Add a Todo', contentPadding: EdgeInsets.all(8)),
+        controller: _textController,
+        onChanged: _onTextChanged,
+        onSubmitted: _onTextSubmitted,
       );
 
   void _onTextChanged(String newValue) {

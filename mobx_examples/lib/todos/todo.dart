@@ -14,6 +14,7 @@ abstract class _Todo implements Store {
   bool done = false;
 
   @action
+  // ignore: avoid_positional_boolean_parameters
   void markDone(bool flag) {
     done = flag;
   }
