@@ -122,7 +122,48 @@ An `ObservableSet` gives you a deeper level of observability on a set of values.
 
 ## ObservableFuture
 
+The `ObservableFuture` is the reactive wrapper around a `Future`. You can use it to show the UI under various states of a `Future`, from `pending` to `fulfilled` or `rejected`. The `status`, `result` and `error` fields of an `ObservableFuture` are observable and can be consumed on the UI.
+
+Here is a simple `LoadingIndicator` widget that uses the `ObservableFuture` to show a progress bar during a fetch operation:
+
+```
+
+// github_store.dart
+part 'github_store.g.dart';
+
+class GithubStore = _GithubStore with _$GithubStore;
+
+abstract class _GithubStore implements Store {
+  // ...
+
+  static ObservableFuture<List<Repository>> emptyResponse =
+      ObservableFuture.value([]);
+
+  // We are starting with an empty future to avoid a null check
+  @observable
+  ObservableFuture<List<Repository>> fetchReposFuture = emptyResponse;
+
+  // ...
+}
+
+// github_widgets.dart
+class LoadingIndicator extends StatelessWidget {
+  const LoadingIndicator(this.store);
+
+  final GithubStore store;
+
+  @override
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => store.fetchReposFuture.status == FutureStatus.pending
+          ? const LinearProgressIndicator()
+          : Container());
+}
+
+```
+
 ## ObservableStream
+
+Similar to `ObservableFuture`, an **`ObservableStream`** provides a reactive wrapper around a `Stream`. This gives an easy way to observe and re-render whenever there is new `data`, or `error` or a `status` change on the `ObservableStream`.
 
 ## Atom
 

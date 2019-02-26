@@ -22,14 +22,22 @@ class GithubExampleState extends State<GithubExample> {
         children: <Widget>[
           UserInput(store),
           ShowError(store),
-          Observer(
-              builder: (_) =>
-                  store.fetchReposFuture.status == FutureStatus.pending
-                      ? const LinearProgressIndicator()
-                      : Container()),
+          LoadingIndicator(store),
           RepositoryListView(store)
         ],
       ));
+}
+
+class LoadingIndicator extends StatelessWidget {
+  const LoadingIndicator(this.store);
+
+  final GithubStore store;
+
+  @override
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => store.fetchReposFuture.status == FutureStatus.pending
+          ? const LinearProgressIndicator()
+          : Container());
 }
 
 class UserInput extends StatelessWidget {
