@@ -4,6 +4,29 @@ menu: API Overview
 route: /api/context
 ---
 
+# Context
+
+The MobX reactive system operates in a context where it is aware of the various observables and their linked reactions. Within this context, if an observable changes, any linked reaction would automatically execute. By default, there is a singleton, top-level context called the **`mainContext`**. All reactivity occurs within this context.
+
+> Creating custom context is an advanced feature and not needed for your normal usage.
+
+However, MobX also allows you to create your own context and run reactions specifically within that. This is useful if you have independent reactive systems that don't need to share the same context. Imagine a library that uses MobX internally to run some reactivity. If that library is used in a Flutter app, which is also using MobX, there is no need for the library and the app to share the `mainContext`. This is a good use-case for creating a custom context.
+
 ## ReactiveContext
 
+### `ReactiveContext({ReactiveConfig config})`
+
+Create a `ReactiveContext` by passing a configuration object. If no configuration is passed, it will used the defaults.
+
 ## ReactiveConfig
+
+### `ReactiveConfig({bool disableErrorBoundaries, EnforceActions enforceActions, int maxIterations})`
+
+- **`disableErrorBoundaries`**: When `true`, MobX will not guard against exceptions thrown during reactions. By default, it is `false`, which means MobX will catch unhandled exceptions and ensure the consistency of the reactive system.
+- **`enforceActions`**: This is an enumeration of the various behaviors in MobX for dealing with stray observable mutations. Stray mutations are those that are **not** wrapped in actions. By default, it is set to `observed`. This means if there is an observable which is being observed and you mutate it outside of an action, MobX will throw an exception.
+
+```
+enum EnforceActions { observed, always, never }
+```
+
+- **`maxIterations`**: This is the number of iterations MobX will run through before treating the reaction as _unstable_. At this point, it will throw an exception. Unstable reactions do not settle down and keep on triggering more reactions. This is most likely due to a cyclical chain of dependencies. The default is set to `100`.

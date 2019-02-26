@@ -1,6 +1,5 @@
 ---
 name: Blueprint
-menu: Development Notes
 route: /blueprint
 ---
 
@@ -52,3 +51,7 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 - Memoization of computation with DependencyState
 - Spying and Traceability
 - Exception handling and propagation
+
+## Implementation Details
+
+- Avoid `dart:mirrors` as it is not supported in Flutter

@@ -4,14 +4,17 @@ export default {
     src: './src',
     files: '**/*.{md,markdown,mdx}',
     repository: 'https://github.com/mobxjs/mobx.dart',
+
     themeConfig: {
         logo: {
             src: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/mobx.png'
         },
         mode: 'light',
         colors: {
-            primary: '#1389FD'
+            primary: '#1389FD',
+            codeColor: '#fa6000',
+            blockquoteColor: '#00579b'
         }
     },
-    menu: ['Home', 'Getting Started', 'Core Concepts', 'Examples', 'Community', 'API Overview', 'Development Notes'],
+    menu: ['Home', 'Getting Started', 'Core Concepts', 'Examples', 'Community', 'API Overview'],
 };
