@@ -225,7 +225,7 @@ Similar to `when` but returns a `Future`, which is fulfilled when the `predicate
 final completed = Observable(false);
 
 void waitForCompletion() async {
-  await asyncWhen(() => _completed.value == true);
+  await asyncWhen(() => completed.value == true);
 
   print('Completed');
 }
