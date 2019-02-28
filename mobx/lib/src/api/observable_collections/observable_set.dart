@@ -20,6 +20,7 @@ class ObservableSet<T>
       ReactiveContext context})
       : this._(
             context ?? mainContext,
+            // ignore: prefer_collection_literals
             LinkedHashSet(
                 equals: equals, hashCode: hashCode, isValidKey: isValidKey)
               ..addAll(other));

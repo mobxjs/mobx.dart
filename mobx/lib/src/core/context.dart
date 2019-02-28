@@ -59,7 +59,7 @@ class ReactiveConfig {
   /// Max number of iterations before bailing out for a cyclic reaction
   final int maxIterations;
 
-  final Set<ReactionErrorHandler> _reactionErrorHandlers = Set();
+  final Set<ReactionErrorHandler> _reactionErrorHandlers = {};
 
   ReactiveConfig clone(
           {bool disableErrorBoundaries,
@@ -158,7 +158,7 @@ class ReactiveContext {
     _state.trackingDerivation = derivation;
 
     _resetDerivationState(derivation);
-    derivation._newObservables = Set();
+    derivation._newObservables = {};
 
     return prevDerivation;
   }
@@ -233,7 +233,7 @@ class ReactiveContext {
 
     derivation
       .._observables = derivation._newObservables
-      .._newObservables = Set(); // No need for newObservables beyond this point
+      .._newObservables = {}; // No need for newObservables beyond this point
   }
 
   void addPendingReaction(Reaction reaction) {
@@ -329,7 +329,7 @@ class ReactiveContext {
 
   void _clearObservables(Derivation derivation) {
     final observables = derivation._observables;
-    derivation._observables = Set();
+    derivation._observables = {};
 
     for (final x in observables) {
       x._removeObserver(derivation);

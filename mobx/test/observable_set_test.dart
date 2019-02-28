@@ -70,7 +70,7 @@ void main() {
 
     group('fires reportObserved() for read methods', () {
       <String, void Function(ObservableSet<int>)>{
-        'union': (m) => m.union(Set.of([2, 5, 6])),
+        'union': (m) => m.union({2, 5, 6}),
         'toSet': (m) => m.toSet(),
         'length': (m) => m.length,
         'lookup': (m) => m.lookup(1),
@@ -80,7 +80,7 @@ void main() {
         'any': (m) => m.any((i) => i == 2),
         'contains': (m) => m.contains(3),
         'containsAll': (m) => m.containsAll([1, 2]),
-        'difference': (m) => m.difference(Set.of([2, 3])),
+        'difference': (m) => m.difference({2, 3}),
         'elementAt': (m) => m.elementAt(2),
         'every': (m) => m.every((i) => i < 10),
         'first': (m) => m.first,
@@ -88,7 +88,7 @@ void main() {
         'fold': (m) => m.fold<int>(0, (a, b) => a + b),
         // ignore:avoid_function_literals_in_foreach_calls
         'forEach': (m) => m.forEach((i) {}),
-        'intersection': (m) => m.intersection(Set.of([2, 10])),
+        'intersection': (m) => m.intersection({2, 10}),
         'isEmpty': (m) => m.isEmpty,
         'isNotEmpty': (m) => m.isNotEmpty,
         'join': (m) => m.join(', '),
@@ -132,7 +132,7 @@ void main() {
 void runReadTest(String description, void Function(ObservableSet<int>) body) {
   test(description, () {
     final atom = MockAtom();
-    final map = wrapInObservableSet(atom, Set.of([1, 2, 3, 4]));
+    final map = wrapInObservableSet(atom, {1, 2, 3, 4});
 
     verifyNever(atom.reportChanged());
     verifyNever(atom.reportObserved());
@@ -147,7 +147,7 @@ void runReadTest(String description, void Function(ObservableSet<int>) body) {
 void runWriteTest(String description, void Function(ObservableSet<int>) body) {
   test(description, () {
     final atom = MockAtom();
-    final map = wrapInObservableSet(atom, Set.of([1, 2, 3, 4]));
+    final map = wrapInObservableSet(atom, {1, 2, 3, 4});
 
     verifyNever(atom.reportChanged());
     verifyNever(atom.reportObserved());
@@ -162,7 +162,7 @@ void runIterableTest(
     String description, Iterable Function(ObservableSet<int>) body) {
   test(description, () {
     final atom = MockAtom();
-    final map = wrapInObservableSet(atom, Set.of([1, 2, 3, 4]));
+    final map = wrapInObservableSet(atom, {1, 2, 3, 4});
 
     verifyNever(atom.reportChanged());
     verifyNever(atom.reportObserved());

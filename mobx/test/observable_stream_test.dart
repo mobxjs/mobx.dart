@@ -188,8 +188,7 @@ void main() {
     'single': futureCase((s) => s.single, 0, length: 1),
     'singleWhere': futureCase((s) => s.singleWhere((n) => n == 8), 8),
     'toList': futureCase((s) => s.toList(), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
-    'toSet':
-        futureCase((s) => s.toSet(), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].toSet()),
+    'toSet': futureCase((s) => s.toSet(), {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}),
   }.forEach(testStreamToFutureCombinator);
 }
 
