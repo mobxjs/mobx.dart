@@ -4,9 +4,11 @@ menu: API Overview
 route: /api/reaction
 ---
 
+import mobxTriad from "../images/mobx-triad.png";
+
 # Reactions
 
-![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx-triad.png)
+<img src={mobxTriad} />
 
 The **MobX triad** is completed when we add **Reactions** into the mix. Having reactions is what triggers the reactivity in the system. A reaction implicitly tracks all the observables which are being used and then re-executes its logic whenever the depending observables change.
 
