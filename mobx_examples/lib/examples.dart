@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx_examples/clock/clock_widgets.dart';
 import 'package:mobx_examples/counter/counter_widgets.dart';
+import 'package:mobx_examples/form/form_widgets.dart';
 import 'package:mobx_examples/github/github_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
 
@@ -42,5 +43,11 @@ final List<Example> examples = [
     description: 'A simple ticking Clock, made with an Atom',
     path: '/clock',
     widgetBuilder: (_) => const ClockExample(),
+  ),
+  Example(
+    title: 'Login Form',
+    description: 'A login form with validations',
+    path: '/form',
+    widgetBuilder: (_) => const FormExample(),
   ),
 ];

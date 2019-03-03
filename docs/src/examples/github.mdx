@@ -141,7 +141,9 @@ class GithubExampleState extends State<GithubExample> {
 
 ```
 
-Most of the widgets in the column should be self-explanatory. The simplest of these is the `LoadingIndicator`, a `StatelessWidget`, that tracks when the fetch operation is in progress.
+Most of the widgets in the `Column` should be self-explanatory. The simplest of these is the `LoadingIndicator`, a `StatelessWidget`, that tracks when the fetch operation is in progress. The `Observer` is from the [**flutter_mobx**](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx) package that tracks the use of _observables_ within its _builder-function_ and rebuilds on change. Notice we rely on the `fetchReposFuture` field, an `ObservableFuture`, to show the loading indicator when the `status` is _pending_.
+
+### LoadingIndicator
 
 ```
 class LoadingIndicator extends StatelessWidget {
@@ -160,7 +162,7 @@ class LoadingIndicator extends StatelessWidget {
 
 ### RepositoryListView
 
-The list-view for repositories also shows the state for an empty list of repos. If there is at least one repo, it will build the `ListView` and render the repositories. Notice the use of the computed filed `hasResults`, which simplifies the overall logic of the component.
+The list-view for repositories also shows the state for an empty list of repos. If there is at least one repo, it will build the `ListView` and render the repositories. Notice the use of the computed field `hasResults`, which simplifies the overall logic of the component.
 
 ```
 class RepositoryListView extends StatelessWidget {
