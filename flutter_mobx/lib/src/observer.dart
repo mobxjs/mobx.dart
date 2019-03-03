@@ -15,17 +15,22 @@ class Observer extends StatefulWidget {
   /// Returns a widget that rebuilds every time an observable referenced in the
   /// [builder] function is altered.
   ///
-  /// The [builder] argument must not be null.
-  const Observer({@required this.builder, Key key, this.context})
+  /// The [builder] argument must not be null. Use the [context] to specify a ReactiveContext other than the `mainContext`.
+  /// Normally there is no need to change this. [name] can be used to give a debug-friendly identifier.
+  const Observer({@required this.builder, Key key, this.context, this.name})
       : assert(builder != null),
         super(key: key);
 
+  final String name;
   final ReactiveContext context;
   final WidgetBuilder builder;
 
   @visibleForTesting
-  Reaction createReaction(Function() onInvalidate) =>
-      ReactionImpl(context ?? mainContext, onInvalidate);
+  Reaction createReaction(Function() onInvalidate) {
+    final ctx = context ?? mainContext;
+    return ReactionImpl(ctx, onInvalidate,
+        name: name ?? 'Observer@${ctx.nextId}');
+  }
 
   @override
   State<Observer> createState() => _ObserverState();
