@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_examples/form/form_store.dart';
 
 class FormExample extends StatefulWidget {
@@ -21,12 +22,14 @@ class _FormExampleState extends State<FormExample> {
           padding: const EdgeInsets.all(8),
           child: Column(
             children: <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Username',
-                    errorText: 'Error Text',
-                    hintText: 'Hint Text',
-                    helperText: 'Helper Text'),
+              Observer(
+                builder: (_) => TextField(
+                      onChanged: store.setName,
+                      decoration: InputDecoration(
+                          labelText: 'Username',
+                          hintText: 'Pick a username',
+                          helperText: 'Helper Text'),
+                    ),
               ),
               TextField(
                 decoration: InputDecoration(
