@@ -24,26 +24,34 @@ class _FormExampleState extends State<FormExample> {
             children: <Widget>[
               Observer(
                 builder: (_) => TextField(
-                      onChanged: store.setName,
+                      onChanged: store.setUsername,
                       decoration: InputDecoration(
                           labelText: 'Username',
                           hintText: 'Pick a username',
-                          helperText: 'Helper Text'),
+                          errorText: store.error.username),
                     ),
               ),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Email',
-                    errorText: 'Error Text',
-                    hintText: 'Hint Text',
-                    helperText: 'Helper Text'),
+              Observer(
+                  builder: (_) => store.isUserCheckPending
+                      ? const LinearProgressIndicator()
+                      : Container()),
+              Observer(
+                builder: (_) => TextField(
+                      onChanged: store.setEmail,
+                      decoration: InputDecoration(
+                          labelText: 'Email',
+                          hintText: 'Enter your email address',
+                          errorText: store.error.email),
+                    ),
               ),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Password',
-                    errorText: 'Error Text',
-                    hintText: 'Hint Text',
-                    helperText: 'Helper Text'),
+              Observer(
+                builder: (_) => TextField(
+                      onChanged: store.setPassword,
+                      decoration: InputDecoration(
+                          labelText: 'Password',
+                          hintText: 'Set a password',
+                          errorText: store.error.password),
+                    ),
               ),
               RaisedButton(
                 child: const Text('Sign up'),

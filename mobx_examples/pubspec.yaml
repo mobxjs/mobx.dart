@@ -17,6 +17,7 @@ dependencies:
   flutter_mobx:
   mobx_codegen:
   github:
+  validators:
   flutter:
     sdk: flutter
 
