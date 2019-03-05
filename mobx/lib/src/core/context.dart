@@ -143,7 +143,7 @@ class ReactiveContext {
       case EnforceActions.observed:
         if (atom.hasObservers) {
           throw MobXException(
-              'Side effects like changing state are not allowed at this point. Tried to modify: ${atom.name}');
+              'Side effects like changing state are not allowed at this point. Please wrap the code in an "action". Tried to modify: ${atom.name}');
         }
         break;
 
