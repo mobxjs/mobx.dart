@@ -50,9 +50,8 @@ abstract class _FormStore implements Store {
   void _setupValidations() {
     _disposers = [
       reaction((_) => name, validateUsername),
-      reaction((_) => email, (value) => error.email = validateEmail(value)),
-      reaction(
-          (_) => password, (value) => error.password = validatePassword(value))
+      reaction((_) => email, validateEmail),
+      reaction((_) => password, validatePassword)
     ];
   }
 
@@ -81,11 +80,15 @@ abstract class _FormStore implements Store {
     error.username = null;
   }
 
-  String validatePassword(String value) =>
-      isNull(value) || value.isEmpty ? 'Cannot be blank' : null;
+  @action
+  void validatePassword(String value) {
+    error.password = isNull(value) || value.isEmpty ? 'Cannot be blank' : null;
+  }
 
-  String validateEmail(String value) =>
-      isEmail(value) ? null : 'Not a valid email';
+  @action
+  void validateEmail(String value) {
+    error.email = isEmail(value) ? null : 'Not a valid email';
+  }
 
   Future<bool> checkValidUsername(String value) async {
     await Future.delayed(Duration(seconds: 1));
@@ -97,6 +100,12 @@ abstract class _FormStore implements Store {
     for (final d in _disposers) {
       d();
     }
+  }
+
+  void validateAll() {
+    validatePassword(password);
+    validateEmail(email);
+    validateUsername(name);
   }
 }
 

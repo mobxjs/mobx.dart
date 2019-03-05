@@ -32,9 +32,10 @@ class _FormExampleState extends State<FormExample> {
                     ),
               ),
               Observer(
-                  builder: (_) => store.isUserCheckPending
-                      ? const LinearProgressIndicator()
-                      : Container()),
+                  builder: (_) => AnimatedOpacity(
+                      child: const LinearProgressIndicator(),
+                      duration: Duration(milliseconds: 300),
+                      opacity: store.isUserCheckPending ? 1 : 0)),
               Observer(
                 builder: (_) => TextField(
                       onChanged: store.setEmail,
@@ -55,7 +56,7 @@ class _FormExampleState extends State<FormExample> {
               ),
               RaisedButton(
                 child: const Text('Sign up'),
-                onPressed: () {},
+                onPressed: store.validateAll,
               )
             ],
           ),

@@ -120,6 +120,26 @@ mixin _$FormStore on _FormStore, Store {
       _$_FormStoreActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  void validatePassword(String value) {
+    final _$actionInfo = _$_FormStoreActionController.startAction();
+    try {
+      return super.validatePassword(value);
+    } finally {
+      _$_FormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateEmail(String value) {
+    final _$actionInfo = _$_FormStoreActionController.startAction();
+    try {
+      return super.validateEmail(value);
+    } finally {
+      _$_FormStoreActionController.endAction(_$actionInfo);
+    }
+  }
 }
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
