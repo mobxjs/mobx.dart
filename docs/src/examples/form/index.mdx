@@ -1,0 +1,183 @@
+---
+name: Form
+menu: Examples
+route: /examples/form
+---
+
+import formImage from "./form.png";
+import formGif from "./form.gif";
+
+# Login Form
+
+In this article we will use the complete _MobX triad_ to do form validation. This will involve the creation of a `FormStore` that contains the **observables**, **actions** to mutate the fields and **reactions** that do validations when a field changes.
+
+> See the full code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/form).
+
+## Defining the FormStore
+
+This example borrows from the typical sign-up form with fields for `username`, `email` and `password`.
+
+<img src={formImage} width={400} />
+
+This can be defined with the following `Store` class.
+
+```
+import 'package:mobx/mobx.dart';
+
+part 'form_store.g.dart';
+
+class FormStore = _FormStore with _$FormStore;
+
+abstract class _FormStore implements Store {
+  @observable
+  String name = '';
+
+  @observable
+  String email = '';
+
+  @observable
+  String password = '';
+}
+```
+
+> Make sure to run the `build_runner` to generate the `*.g.dart` file. You can do it by running the following command on your project folder. This will watch your files and regenerate on change.
+>
+> `flutter packages pub run build_runner watch --delete-conflicting-outputs`
+
+## Actions to mutate the fields
+
+The actions that mutate these fields are straightforward. They are invoked whenever the user edits and modifies the `TextFields` corresponding to the _observable-properties_.
+
+```
+abstract class _FormStore implements Store {
+
+  // ...
+
+  @action
+  void setUsername(String value) {
+    name = value;
+  }
+
+  @action
+  void setEmail(String value) {
+    email = value;
+  }
+
+  @action
+  void setPassword(String value) {
+    password = value;
+  }
+}
+```
+
+## Validations as side-effects
+
+Validations on the fields is not an explicit action that is invoked on the `FormStore`. Instead, it is considered a side-effect of a change in one of the fields. In MobX, we can model such side-effects with **`reactions`**.
+
+Reactions come in a few flavors but we are going to focus on the aptly named [`reaction(selector, effect)`](http://localhost:3000/api/reaction#reaction) that takes in two arguments. The first one is a _selector-function_ that monitors the observables used within it. It is supposed to return a value that is compared with a previously returned value. When it changes, it will invoke the _effect-function_ (the second argument).
+
+For the form-validation use case, we want to monitor when any of the fields change value. At that point, we will invoke the side-effect to validate the field. This can be done with three separate reactions, one for each field. You can also observe that these functions are annotated with `@action`. This is because they are modifying the observable field `error`, of type `FormErrorState` and as a principle we never want to do any stray mutations in MobX. Hence the `@action` annotation.
+
+> Notice the use of nesting a `Store` like `FormErrorState` inside the parent `FormStore`. For all practical purposes, think of MobX stores as regular Dart classes with special reactive properties. You can compose these stores the way you like.
+
+```
+abstract class _FormStore implements Store {
+
+  // ...
+
+  final FormErrorState error = FormErrorState();
+
+  @action
+  void validateUsername(String value) {
+    if (isNull(value) || value.isEmpty) {
+      error.username = 'Cannot be blank';
+      return;
+    }
+
+    error.username = null;
+  }
+
+  @action
+  void validatePassword(String value) {
+    error.password = isNull(value) || value.isEmpty ? 'Cannot be blank' : null;
+  }
+
+  @action
+  void validateEmail(String value) {
+    error.email = isEmail(value) ? null : 'Not a valid email';
+  }
+}
+
+```
+
+The `FormErrorState` is defined to capture the `String` error-message for each field.
+
+```
+class FormErrorState = _FormErrorState with _$FormErrorState;
+
+abstract class _FormErrorState implements Store {
+  @observable
+  String username;
+
+  @observable
+  String email;
+
+  @observable
+  String password;
+}
+
+```
+
+### Async validations
+
+The validations above are purely synchronous and run entirely on the client. What if you want to check that the username is not colliding with an existing one? This can only be done by looking at the complete list of usernames on the server-side. We can simulate this with a fake async call and use the result to determine if the username is valid.
+
+The `validateUsername()` action can be tweaked as follows:
+
+```
+abstract class _FormStore implements Store {
+  // ...
+
+  @observable
+  ObservableFuture<bool> _usernameCheck = ObservableFuture.value(true);
+
+  @action
+  // ignore: avoid_void_async
+  Future validateUsername(String value) async {
+    if (isNull(value) || value.isEmpty) {
+      error.username = 'Cannot be blank';
+      return;
+    }
+
+    try {
+      // Wrap the future to track the status of the call with an ObservableFuture
+      _usernameCheck = ObservableFuture(checkValidUsername(value));
+
+      error.username = null;
+
+      final isValid = await _usernameCheck;
+      if (!isValid) {
+        error.username = 'Username cannot be "admin"';
+        return;
+      }
+    } on Object catch (_) {
+      error.username = null;
+    }
+
+    error.username = null;
+  }
+}
+
+```
+
+In the above code, we wrap the async call (`checkValidUsername`) within an `ObservableFuture`. This allows us to observe the change in `status` and show visual feedback. Rest of the code should look very familiar. You can see that writing such code in MobX is fairly natural and does not require using any special API or abstractions.
+
+### Wait, what about the Widgets?
+
+The `Widget` hierarchy needed here is fairly simple with a list of `Observer` widgets for each field, wrapped in a `Column`. It is really not the most interesting part of the example and hence been left out. Do take a look at the [source code](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/form) to see its simplicity.
+
+<img src={formGif} />
+
+## Summary
+
+This example was a quick exposition on using the three core abstractions of MobX: **observables**, **actions** and **reactions**. The inter-relationships of these constructs is simple and can be picked up in short order. As you explore MobX, you will see there is no rise in the _conceptual learning curve_. It plateaus very quickly and lets you focus back on building your awesome apps.
