@@ -4,8 +4,6 @@ menu: Examples
 route: /examples/todos
 ---
 
-import todosImage from "./todos.png";
-
 # Todos
 
 In this example, we will build the classic [TodoMVC](http://todomvc.com/), which has become the default way of showcasing the capabilities of a state-management library.
@@ -77,6 +75,8 @@ abstract class _TodoList implements Store {
 **Computed Properties**
 
 To render a useful UI, we also need a bunch of _derived (aka computed)_ properties. These properties are not inherent to the `TodoList` but derived from the core-state. Our UI looks like below, so you can identify the mapping of the _computed properties_ to the various widgets.
+
+import todosImage from "./todos.png";
 
 <img src={todosImage} width={300} />
 
@@ -475,5 +475,9 @@ class ActionBar extends StatelessWidget {
 ```
 
 ## Summary
+
+import todosGif from "./todos.gif";
+
+<img src={todosGif} />
 
 Hope you can see the clarity of expressing the observable-state with `@observable`, `@computed`, and `@action`. Using the `Observer` widget, you get an automatically-updating Widget that renders the observable-state.

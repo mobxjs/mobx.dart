@@ -18,6 +18,8 @@ dependencies:
   mobx_codegen:
   github:
   validators:
+  hnpwa_client:
+  url_launcher:
   flutter:
     sdk: flutter
 

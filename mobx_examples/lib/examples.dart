@@ -3,6 +3,7 @@ import 'package:mobx_examples/clock/clock_widgets.dart';
 import 'package:mobx_examples/counter/counter_widgets.dart';
 import 'package:mobx_examples/form/form_widgets.dart';
 import 'package:mobx_examples/github/github_widgets.dart';
+import 'package:mobx_examples/hackernews/news_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
 
 class Example {
@@ -49,5 +50,11 @@ final List<Example> examples = [
     description: 'A login form with validations',
     path: '/form',
     widgetBuilder: (_) => const FormExample(),
+  ),
+  Example(
+    title: 'Hacker News',
+    description: 'Simple reader for Hacker News',
+    path: '/hn',
+    widgetBuilder: (_) => const HackerNewsExample(),
   ),
 ];

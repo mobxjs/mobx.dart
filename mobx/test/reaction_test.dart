@@ -165,6 +165,8 @@ void main() {
       x.value = true; // force a change
       expect(thrown, isTrue);
       expect(dispose.reaction.errorValue, isException);
+      expect(dispose.reaction.errorValue.toString(),
+          contains('MobXCaughtException'));
       dispose();
     });
 
