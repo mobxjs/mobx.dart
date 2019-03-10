@@ -60,34 +60,18 @@ class FeedItemsView extends StatelessWidget {
             ? store.latestItemsFuture
             : store.topItemsFuture;
 
-        Widget child;
         switch (future.status) {
           case FutureStatus.pending:
-            child = Center(child: const Text('Loading items...'));
-            break;
-
-          case FutureStatus.fulfilled:
-            final List<FeedItem> items = future.result;
-            child = ListView.builder(
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: items.length,
-                itemBuilder: (_, index) {
-                  final item = items[index];
-                  return ListTile(
-                    leading: Text('${item.points}'),
-                    title: Text(
-                      item.title,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                        'Comments: ${item.commentsCount}, posted by ${item.user}'),
-                    onTap: () => store.openUrl(item.url),
-                  );
-                });
-            break;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                CircularProgressIndicator(),
+                Text('Loading items...'),
+              ],
+            );
 
           case FutureStatus.rejected:
-            child = Row(
+            return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text(
@@ -100,9 +84,33 @@ class FeedItemsView extends StatelessWidget {
                 )
               ],
             );
-        }
 
-        return RefreshIndicator(onRefresh: _refresh, child: child);
+          case FutureStatus.fulfilled:
+            final List<FeedItem> items = future.result;
+            return RefreshIndicator(
+              onRefresh: _refresh,
+              child: ListView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: items.length,
+                  itemBuilder: (_, index) {
+                    final item = items[index];
+                    return ListTile(
+                      leading: Text(
+                        '${item.points}',
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      title: Text(
+                        item.title,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                          '- ${item.user}, ${item.commentsCount} comment(s)'),
+                      onTap: () => store.openUrl(item.url),
+                    );
+                  }),
+            );
+            break;
+        }
       });
 
   Future _refresh() =>
