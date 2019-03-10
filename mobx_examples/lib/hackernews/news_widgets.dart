@@ -60,25 +60,49 @@ class FeedItemsView extends StatelessWidget {
             ? store.latestItemsFuture
             : store.topItemsFuture;
 
-        if (future.status == FutureStatus.pending) {
-          return Center(child: const Text('Loading items...'));
+        Widget child;
+        switch (future.status) {
+          case FutureStatus.pending:
+            child = Center(child: const Text('Loading items...'));
+            break;
+
+          case FutureStatus.fulfilled:
+            final List<FeedItem> items = future.result;
+            child = ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: items.length,
+                itemBuilder: (_, index) {
+                  final item = items[index];
+                  return ListTile(
+                    leading: Text('${item.points}'),
+                    title: Text(
+                      item.title,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                        'Comments: ${item.commentsCount}, posted by ${item.user}'),
+                    onTap: () => store.openUrl(item.url),
+                  );
+                });
+            break;
+
+          case FutureStatus.rejected:
+            child = Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'Failed to load items.',
+                  style: TextStyle(color: Colors.red),
+                ),
+                RaisedButton(
+                  child: const Text('Tap to try again'),
+                  onPressed: _refresh,
+                )
+              ],
+            );
         }
 
-        final List<FeedItem> items = future.result;
-        return RefreshIndicator(
-          onRefresh: _refresh,
-          child: ListView.builder(
-              physics: const AlwaysScrollableScrollPhysics(),
-              itemCount: items.length,
-              itemBuilder: (_, index) {
-                final item = items[index];
-                return ListTile(
-                  title: Text(item.title),
-                  subtitle: Text(item.url),
-                  onTap: () => store.openUrl(item.url),
-                );
-              }),
-        );
+        return RefreshIndicator(onRefresh: _refresh, child: child);
       });
 
   Future _refresh() =>
