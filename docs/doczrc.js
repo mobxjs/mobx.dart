@@ -23,7 +23,7 @@ export default {
         "Getting Started",
         "Core Concepts",
         "Examples",
-        "Cookbook",
+        "Guides",
         "Community",
         "API Overview"
     ]
