@@ -109,7 +109,6 @@ class FeedItemsView extends StatelessWidget {
                     );
                   }),
             );
-            break;
         }
       });
 
