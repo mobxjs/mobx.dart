@@ -20,6 +20,7 @@ dependencies:
   validators:
   hnpwa_client:
   url_launcher:
+  provider:
   flutter:
     sdk: flutter
 

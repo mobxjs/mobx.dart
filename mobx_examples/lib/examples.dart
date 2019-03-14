@@ -4,6 +4,7 @@ import 'package:mobx_examples/counter/counter_widgets.dart';
 import 'package:mobx_examples/form/form_widgets.dart';
 import 'package:mobx_examples/github/github_widgets.dart';
 import 'package:mobx_examples/hackernews/news_widgets.dart';
+import 'package:mobx_examples/multi_counter/multi_counter_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
 
 class Example {
@@ -26,6 +27,12 @@ final List<Example> examples = [
     description: 'The classic Counter that can be incremented.',
     path: '/counter',
     widgetBuilder: (_) => const CounterExample(),
+  ),
+  Example(
+    title: 'Multi Counter',
+    description: 'Multiple Counters with a shared Store using Provider.',
+    path: '/multi-counter',
+    widgetBuilder: (_) => const MultiCounterExample(),
   ),
   Example(
     title: 'Todos',

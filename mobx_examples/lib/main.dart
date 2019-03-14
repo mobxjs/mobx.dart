@@ -31,6 +31,7 @@ class ExampleList extends StatelessWidget {
           return ListTile(
             title: Text(ex.title),
             subtitle: Text(ex.description),
+            trailing: const Icon(Icons.navigate_next),
             onTap: () => Navigator.pushNamed(context, ex.path),
           );
         },
