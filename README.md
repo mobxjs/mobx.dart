@@ -43,8 +43,8 @@ console log, a network call to re-rendering the UI.
 
 We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program.
 
-- [<img src={publicisSapientLogo} height={64} />](https://publicis.sapient.com)
-- [<img src={wunderdogLogo} height={64} />](https://wunderdog.fi)
+- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/publicis-sapient-sponsor.png" height="64">](https://publicis.sapient.com)
+- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/wunderdog-sponsor.png" height="64">](https://wunderdog.fi)
 
 ### Get Started
 
