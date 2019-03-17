@@ -39,15 +39,22 @@ console log, a network call to re-rendering the UI.
 > MobX has been a very effective library for the JavaScript
 > apps and this port to the Dart language aims to bring the same levels of productivity.
 
+## Sponsors
+
+We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program.
+
+- [<img src={publicisSapientLogo} height={64} />](https://publicis.sapient.com)
+- [<img src={wunderdogLogo} height={64} />](https://wunderdog.fi)
+
+### Get Started
+
+Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx-dart.netlify.com/getting-started).
+
 ### Go deep
 
 For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
 
 [![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
-
-### Get Started
-
-Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx-dart.netlify.com/getting-started).
 
 ## Core Concepts
 
