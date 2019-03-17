@@ -39,7 +39,7 @@ console log, a network call to re-rendering the UI.
 > MobX has been a very effective library for the JavaScript
 > apps and this port to the Dart language aims to bring the same levels of productivity.
 
-## Sponsors
+### Sponsors
 
 We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program.
 
