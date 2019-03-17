@@ -95,7 +95,7 @@ class ObservableFuture<T> implements Future<T> {
   /// Error value if this completed with an error
   ///
   /// Null otherwise.
-  T get error => status == FutureStatus.rejected ? _result.result : null;
+  dynamic get error => status == FutureStatus.rejected ? _result.result : null;
 
   /// Error or value of this.
   ///
