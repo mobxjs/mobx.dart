@@ -3,12 +3,58 @@ menu: Guides
 route: /guides/output
 ---
 
-# Build output (WIP)
+# Build output
 
 This list gives you some tips to control and manage the generated files coming out of the `build_runner`.
 
 ## Continuous generation with the `watch` command
 
+As you work on your stores, you would want to keep the `build_runner` active, constantly generating the `*.g.dart` files. The trick to keep it running is to use the **`watch`** sub-command, as shown below:
+
+```
+flutter packages pub run build_runner watch
+```
+
+OR
+
+```
+pub run build_runner watch
+```
+
 ## Starting a clean build
 
-## Generate the build output in a separate folder
+Sometimes `build_runner` will simply refuse to run the build if you already have some generated files. This could happen if the version of **dart** or **flutter** has changed. In those case, it is best to start clean and regenerate all the files. You can either use the `clean` sub-command or simply start off by deleting the existing generated files.
+
+- Clean and remove all generated files
+
+```
+flutter packages pub run build_runner clean
+```
+
+- Delete conflicting files
+
+```
+flutter packages pub run build_runner watch --delete-conflicting-outputs
+```
+
+## DO NOT use import aliases inside `Store` classes
+
+Inside your `Store` files, **avoid** using types with **import aliases**. This is due to a limitation with `build_runner` that does not pick the aliases for the imports.
+
+For example, if you have a `simple_store.dart` file, where an `@observable` field _(lines 9-10)_ is using the aliased import, `build_runner` will not generate correctly and cause compile errors.
+
+```
+import 'package:mobx/mobx.dart';
+import 'package:example_flutter/models/event.dart' as model;
+
+part 'simple_store.g.dart';
+
+class SimpleStore = _SimpleStore with _$SimpleStore;
+
+abstract class _SimpleStore implements Store {
+  @observable
+  List<model.Event> events = List();
+}
+```
+
+It's best to avoid import aliases inside the `Store` class. Possibly in a future version, this will be fixed.

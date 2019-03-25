@@ -1,0 +1,9 @@
+{
+  "name": "mobx.dart",
+  "version": "1.0.0",
+  "description": "This file is purely to leverage NPM for running the scripts. This is NOT to track any dependencies.",
+  "scripts": {
+    "gen:mobx_examples": "pushd mobx_examples; flutter packages pub run build_runner watch --delete-conflicting-outputs; popd mobx_examples",
+    "gen:mobx_codegen": "pushd mobx_codegen; flutter packages pub run build_runner watch --delete-conflicting-outputs; popd mobx_examples"
+  }
+}
