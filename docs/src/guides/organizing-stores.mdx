@@ -117,7 +117,7 @@ import dependencyOrder from "./dependency-order.png";
 This breakdown has a few advantages:
 
 - The `Widget` layer is primarily stateless and contains a good dose of `Observer` widgets sprinkled wherever the reactive-state is being rendered. You can be as generous as you need to be to with the `Observers` in selectively observing the state.
-- The `Store` layer is primarily composed of the `@observable` and `@computed` fields. Additionally you will have the `action` methods that mutate the observable state. This layer is primarily meant to add the reactivity you need to render the UI. There is no actual work being performed here besides keeping track of the _reactive-state_.
+- The `Store` layer is primarily composed of the `@observable` and `@computed` fields. Additionally you will have the `@action` methods that mutate the observable state. This layer is primarily meant to add the reactivity you need to render the UI. There is no actual work being performed here besides keeping track of the _reactive-state_.
 - The `Service` layer is where you do all the heavy lifting with data. This will include API calls to fetch and send data, format according to the needs of the UI, do data transformations, apply rule-based validation and error checking and so on. All the inputs needed are clearly sent in, making this layer completely stateless!
 
 In short, we have taken cues from the [SOLID](https://en.wikipedia.org/wiki/SOLID) principles and applied them here :-).
