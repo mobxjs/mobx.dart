@@ -5,10 +5,121 @@ route: /guides/stores
 
 # Organizing Stores (WIP)
 
+The primary purpose of **MobX** is to simplify the management of _Reactive State_ in your application. As your application scales, the amount of state you manage will also increase. This requires some techniques to break down your application state and divvy it up across a set of stores. Of course, putting everything in one `Store` is not prudent, so we apply _divide-and-conquer_ instead.
+
 ## General approach to managing Stores
 
-## Nested stores
+When you look at the UI on the screen, all you see is a flattened graphic. But what escapes your eye is the _Object Model_ that brought it to life on the screen. That _Object Model_ is a tree of `Widgets`, a hierarchy. Just like the UI, think of the Reactive State of your application as a hierarchy of `Stores`.
 
-## Store co-ordination
+import storeHierarchy from "./store-hierarchy.png";
 
-## Controlling the observability
+<img src={storeHierarchy} />
+
+When you are starting out, a single store is enough to get going. As it grows in size, you will see that it is accumulating a lot of additional fields and actions that don't all belong together. It is then time to break it down and move the related observable state and actions to its own `Store`. For example, consider the store below:
+
+```
+abstract class _MainStore implements Store {
+
+  @observable
+  String title;
+
+  @observable
+  String name;
+
+  @observable
+  String email;
+
+  @observable
+  String phone;
+
+  @action
+  void setTitle(String value) => title = value;
+
+  @action
+  void setName(String value) => name = value;
+
+  @action
+  void setEmail(String value) => email = value;
+
+  @action
+  void setPhone(String value) => phone = value;
+}
+```
+
+The above `Store` is for an app that has the home page that shows the `title`. There is a form on the second page that accepts the `name`, `email` and `phone` values. Even though it's easier to keep the fields together, it's a good idea to move the form fields to its own `Store`. That forms a nice conceptual boundary and helps in breaking the `MainStore` down.
+
+> Think in terms of **conceptual boundaries** for your stores, aka **Cohesiveness**.
+
+Let's create a sub-store called `PersonDetails` and move the fields into it:
+
+```
+class PersonDetails = _PersonDetails with _$PersonDetails;
+
+abstract class _PersonDetails implements Store {
+
+  @observable
+  String name;
+
+  @observable
+  String email;
+
+  @observable
+  String phone;
+
+  @action
+  void setName(String value) => name = value;
+
+  @action
+  void setEmail(String value) => email = value;
+
+  @action
+  void setPhone(String value) => phone = value;
+
+}
+```
+
+The `_MainStore` now looks much simpler to read:
+
+```
+abstract class _MainStore implements Store {
+
+  @observable
+  String title;
+
+  final details = PersonDetails();
+
+  @action
+  void setTitle(String value) => title = value;
+}
+
+```
+
+Note that we are not making the `details` field into an `@observable` as its value is not going to change. The reactive-state that matters is inside the `PersonDetails`, which is already marked `@observbale`.
+
+> ### Store co-ordination
+>
+> Stores should be made as **independent** as possible with all of their inputs clearly defined. All their **dependencies** should be fed in via **constructor parameters** or through **fields**. Any external communication that needs to happen from the Store should be done via **callbacks**. Adopting this approach improves the **portability** and also simplifies **testing**.
+
+## The triad of Widget - Store - Service
+
+The responsibilities of State management can be clearly demarcated across three entities:
+
+1. **Widget**: this paints the visual representation of the reactive-state
+2. **Store**: holds the reactive state of the application
+3. **Service**: performs work, which can result in a change to the state. Typically this abstracts the CRUD operations to an API or hides details of any stateless worker process.
+
+The dependency order is always top-down from the **Widget**, through the **Store**, down to the **Service**.
+
+import dependencyOrder from "./dependency-order.png";
+
+<img src={dependencyOrder} />
+
+This breakdown has a few advantages:
+
+- The `Widget` layer is primarily stateless and contains a good dose of `Observer` widgets sprinkled wherever the reactive-state is being rendered. You can be as generous as you need to be to with the `Observers` in selectively observing the state.
+- The `Store` layer is primarily composed of the `@observable` and `@computed` fields. Additionally you will have the `action` methods that mutate the observable state. This layer is primarily meant to add the reactivity you need to render the UI. There is no actual work being performed here besides keeping track of the _reactive-state_.
+- The `Service` layer is where you do all the heavy lifting with data. This will include API calls to fetch and send data, format according to the needs of the UI, do data transformations, apply rule-based validation and error checking and so on. All the inputs needed are clearly sent in, making this layer completely stateless!
+
+In short, we have taken cues from the [SOLID](https://en.wikipedia.org/wiki/SOLID) principles and applied them here :-).
+
+> **Single Responsibility** is the most important attribute of this triad pattern.
