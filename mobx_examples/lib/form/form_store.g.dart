@@ -31,7 +31,7 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set name(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$nameAtom);
+    _$nameAtom.context.checkIfStateModificationsAreAllowed(_$nameAtom);
     super.name = value;
     _$nameAtom.reportChanged();
   }
@@ -46,7 +46,7 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set email(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$emailAtom);
+    _$emailAtom.context.checkIfStateModificationsAreAllowed(_$emailAtom);
     super.email = value;
     _$emailAtom.reportChanged();
   }
@@ -61,7 +61,7 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set password(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$passwordAtom);
+    _$passwordAtom.context.checkIfStateModificationsAreAllowed(_$passwordAtom);
     super.password = value;
     _$passwordAtom.reportChanged();
   }
@@ -76,7 +76,8 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set _usernameCheck(ObservableFuture<bool> value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$_usernameCheckAtom);
+    _$_usernameCheckAtom.context
+        .checkIfStateModificationsAreAllowed(_$_usernameCheckAtom);
     super._usernameCheck = value;
     _$_usernameCheckAtom.reportChanged();
   }
@@ -161,7 +162,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   set username(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$usernameAtom);
+    _$usernameAtom.context.checkIfStateModificationsAreAllowed(_$usernameAtom);
     super.username = value;
     _$usernameAtom.reportChanged();
   }
@@ -176,7 +177,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   set email(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$emailAtom);
+    _$emailAtom.context.checkIfStateModificationsAreAllowed(_$emailAtom);
     super.email = value;
     _$emailAtom.reportChanged();
   }
@@ -191,7 +192,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   set password(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$passwordAtom);
+    _$passwordAtom.context.checkIfStateModificationsAreAllowed(_$passwordAtom);
     super.password = value;
     _$passwordAtom.reportChanged();
   }

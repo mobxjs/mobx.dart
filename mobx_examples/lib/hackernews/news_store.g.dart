@@ -20,7 +20,8 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   set latestItemsFuture(ObservableFuture<List<FeedItem>> value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$latestItemsFutureAtom);
+    _$latestItemsFutureAtom.context
+        .checkIfStateModificationsAreAllowed(_$latestItemsFutureAtom);
     super.latestItemsFuture = value;
     _$latestItemsFutureAtom.reportChanged();
   }
@@ -35,7 +36,8 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   set topItemsFuture(ObservableFuture<List<FeedItem>> value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$topItemsFutureAtom);
+    _$topItemsFutureAtom.context
+        .checkIfStateModificationsAreAllowed(_$topItemsFutureAtom);
     super.topItemsFuture = value;
     _$topItemsFutureAtom.reportChanged();
   }

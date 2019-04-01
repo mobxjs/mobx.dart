@@ -19,7 +19,8 @@ mixin _$Todo on _Todo, Store {
 
   @override
   set description(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$descriptionAtom);
+    _$descriptionAtom.context
+        .checkIfStateModificationsAreAllowed(_$descriptionAtom);
     super.description = value;
     _$descriptionAtom.reportChanged();
   }
@@ -34,7 +35,7 @@ mixin _$Todo on _Todo, Store {
 
   @override
   set done(bool value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$doneAtom);
+    _$doneAtom.context.checkIfStateModificationsAreAllowed(_$doneAtom);
     super.done = value;
     _$doneAtom.reportChanged();
   }
