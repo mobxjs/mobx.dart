@@ -19,7 +19,7 @@ mixin _$NestedStore on _NestedStore, Store {
 
   @override
   set name(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$nameAtom);
+    _$nameAtom.context.checkIfStateModificationsAreAllowed(_$nameAtom);
     super.name = value;
     _$nameAtom.reportChanged();
   }

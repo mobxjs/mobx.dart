@@ -25,7 +25,8 @@ mixin _$User on _User, Store {
 
   @override
   set firstName(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$firstNameAtom);
+    _$firstNameAtom.context
+        .checkIfStateModificationsAreAllowed(_$firstNameAtom);
     super.firstName = value;
     _$firstNameAtom.reportChanged();
   }
@@ -40,7 +41,7 @@ mixin _$User on _User, Store {
 
   @override
   set lastName(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$lastNameAtom);
+    _$lastNameAtom.context.checkIfStateModificationsAreAllowed(_$lastNameAtom);
     super.lastName = value;
     _$lastNameAtom.reportChanged();
   }
@@ -71,7 +72,7 @@ mixin _$Admin on _Admin, Store {
 
   @override
   set userName(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$userNameAtom);
+    _$userNameAtom.context.checkIfStateModificationsAreAllowed(_$userNameAtom);
     super.userName = value;
     _$userNameAtom.reportChanged();
   }
@@ -86,7 +87,8 @@ mixin _$Admin on _Admin, Store {
 
   @override
   set accessRights(ObservableList<String> value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$accessRightsAtom);
+    _$accessRightsAtom.context
+        .checkIfStateModificationsAreAllowed(_$accessRightsAtom);
     super.accessRights = value;
     _$accessRightsAtom.reportChanged();
   }
@@ -125,7 +127,7 @@ mixin _$Item<T> on _Item<T>, Store {
 
   @override
   set value(T value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$valueAtom);
+    _$valueAtom.context.checkIfStateModificationsAreAllowed(_$valueAtom);
     super.value = value;
     _$valueAtom.reportChanged();
   }

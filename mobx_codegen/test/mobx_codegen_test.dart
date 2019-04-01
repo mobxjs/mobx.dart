@@ -1,8 +1,8 @@
 import 'package:build/build.dart';
+import 'package:build_test/build_test.dart';
 import 'package:logging/logging.dart';
 import 'package:mobx_codegen/mobx_codegen.dart';
 import 'package:source_gen/source_gen.dart';
-import 'package:build_test/build_test.dart';
 import 'package:test/test.dart';
 
 const validInput = """
@@ -64,7 +64,8 @@ mixin _\$User on UserBase, Store {
 
   @override
   set firstName(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_\$firstNameAtom);
+    _\$firstNameAtom.context
+        .checkIfStateModificationsAreAllowed(_\$firstNameAtom);
     super.firstName = value;
     _\$firstNameAtom.reportChanged();
   }
@@ -79,7 +80,7 @@ mixin _\$User on UserBase, Store {
 
   @override
   set lastName(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_\$lastNameAtom);
+    _\$lastNameAtom.context.checkIfStateModificationsAreAllowed(_\$lastNameAtom);
     super.lastName = value;
     _\$lastNameAtom.reportChanged();
   }
@@ -186,7 +187,7 @@ mixin _\$Item<T> on _Item<T>, Store {
 
   @override
   set value(T value) {
-    mainContext.checkIfStateModificationsAreAllowed(_\$valueAtom);
+    _\$valueAtom.context.checkIfStateModificationsAreAllowed(_\$valueAtom);
     super.value = value;
     _\$valueAtom.reportChanged();
   }

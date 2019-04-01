@@ -33,6 +33,7 @@ class Atom {
   }
 
   final ReactiveContext _context;
+  ReactiveContext get context => _context;
 
   final String name;
 
