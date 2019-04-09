@@ -15,6 +15,7 @@ pubspec.lock
 **/doc/api/
 
 # Misc
+node_modules
 .idea
 *.iml
 *.log
