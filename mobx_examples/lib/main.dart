@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobx_examples/examples.dart';
+import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
+final MultiCounterStore store = MultiCounterStore();
+
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) => Provider<MultiCounterStore>(
+      value: store,
+      child: MaterialApp(
         initialRoute: '/',
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -14,7 +20,7 @@ class MyApp extends StatelessWidget {
           '/': (_) => ExampleList(),
         }..addEntries(
             examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
-      );
+      ));
 }
 
 class ExampleList extends StatelessWidget {

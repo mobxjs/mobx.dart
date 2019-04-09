@@ -8,6 +8,10 @@ name: Build Output
 
 This list gives you some tips to control and manage the generated files coming out of the `build_runner`.
 
+## Use the correct SDK version
+
+The version of the `sdk` used in the `pubspec.yaml` has a big influence on what packages are downloaded as part of the `pub get` command. Make sure you are using at least **`2.1.0-dev`**.
+
 ## Continuous generation with the `watch` command
 
 As you work on your stores, you would want to keep the `build_runner` active, constantly generating the `*.g.dart` files. The trick to keep it running is to use the **`watch`** sub-command, as shown below:

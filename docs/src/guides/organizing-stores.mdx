@@ -124,3 +124,62 @@ This breakdown has a few advantages:
 In short, we have taken cues from the [SOLID](https://en.wikipedia.org/wiki/SOLID) principles and applied them here :-).
 
 > **Single Responsibility** is the most important attribute of this triad pattern.
+
+## Using Providers to avoid Singletons
+
+The provider-pattern has become a standard way of making the top level stores available across the entire app. It avoids creating a singleton-`Store`, making it easier to use the `Store` as a plain class instance.
+
+Using the [provider][1] package on pub, you can setup a repository of stores at the App level. Then using the `Provider.of<T>()` api, you can read this value inside your `Widget.build()` methods.
+
+In the example below, we are setting up a store at the app-level:
+
+```
+final MultiCounterStore store = MultiCounterStore();
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Provider<MultiCounterStore>(
+      value: store,
+      child: MaterialApp(
+        initialRoute: '/',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        routes: {
+          '/': (_) => ExampleList(),
+        }..addEntries(
+            examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
+      ));
+}
+```
+
+Then inside a nested widget, deep inside, you can retrieve the store with the `Provider.of<T>(BuildContext context)` api. You will do this in the `build` method of the `Widget`, where the `context` is available.
+
+```
+class CounterListPage extends StatelessWidget {
+  const CounterListPage();
+
+  @override
+  Widget build(BuildContext context) {
+    final store = Provider.of<MultiCounterStore>(context);
+
+    return Observer(
+        builder: (_) => Column(children: <Widget>[
+              RaisedButton(
+                onPressed: store.addCounter,
+                child: const Text('Add Counter'),
+              ),
+            ]));
+  }
+}
+```
+
+### A variety of providers
+
+There are multiple types of `Providers` available in the [provider][1] package. The ones most relevant and useful to MobX are:
+
+- `Provider` for single values, known before hand
+- `StatefulProvider` for constructing and disposing values on the fly. This is good when the value has a fixed lifetime.
+- `MultiProvider` for passing multiple values
+
+[1]: https://pub.dartlang.org/packages/provider
