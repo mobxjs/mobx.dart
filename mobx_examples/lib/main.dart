@@ -9,7 +9,7 @@ final MultiCounterStore store = MultiCounterStore();
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Provider<MultiCounterStore>(
+  Widget build(BuildContext context) => Provider<MultiCounterStore>.value(
       value: store,
       child: MaterialApp(
         initialRoute: '/',
