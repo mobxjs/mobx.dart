@@ -33,6 +33,7 @@ class Atom {
   }
 
   final ReactiveContext _context;
+  ReactiveContext get context => _context;
 
   final String name;
 
@@ -44,7 +45,7 @@ class Atom {
   // ignore: prefer_final_fields
   bool _isBeingObserved = false;
 
-  final Set<Derivation> _observers = Set();
+  final Set<Derivation> _observers = {};
 
   bool get hasObservers => _observers.isNotEmpty;
 
@@ -100,7 +101,7 @@ class Atom {
     }
 
     if (_observationListeners[kind] == null) {
-      _observationListeners[kind] = Set()..add(fn);
+      _observationListeners[kind] = {}..add(fn);
     } else {
       _observationListeners[kind].add(fn);
     }

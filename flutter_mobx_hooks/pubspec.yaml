@@ -1,0 +1,19 @@
+name: flutter_mobx_hooks
+description: Flutter hooks Mobx.dart integration.
+version: 0.0.1
+author:
+homepage:
+
+environment:
+  sdk: ">=2.1.0-dev <3.0.0"
+
+dependencies:
+  mobx: ^0.0.36
+  flutter_hooks: 0.3.0-dev.3
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^4.0.0

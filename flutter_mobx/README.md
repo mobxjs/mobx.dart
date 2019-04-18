@@ -1,7 +1,7 @@
 # flutter_mobx
 
 [![pub package](https://img.shields.io/pub/v/flutter_mobx.svg)](https://pub.dartlang.org/packages/flutter_mobx)
-[![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
+[![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 
 > Flutter integration with [MobX.dart](https://pub.dartlang.org/packages/mobx).
 
@@ -63,3 +63,5 @@ The **`builder`** function will be monitored by MobX and tracks all
 the _observables_ that are being used inside it. When any of the
 _observables_ change, builder will be called again to rebuild the
 `Widget`. This gives you a seamless way to create a reactive `Widget`.
+
+Note that the `Observer` will also throw an `AssertionError` if no observables are discovered in the `builder` function.

@@ -4,8 +4,11 @@ import 'package:mockito/mockito.dart' hide when;
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
+  turnOffEnforceActions();
+
   group('when()', () {
     test('basics work', () {
       var executed = false;

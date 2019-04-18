@@ -1,7 +1,10 @@
 # mobx.dart
 
-[![pub package](https://img.shields.io/pub/v/mobx.svg)](https://pub.dartlang.org/packages/mobx)
-[![Build Status](https://travis-ci.com/mobxjs/mobx.dart.svg?branch=master)](https://travis-ci.com/mobxjs/mobx.dart)
+[![pub package](https://img.shields.io/pub/v/mobx.svg?label=mobx)](https://pub.dartlang.org/packages/mobx)
+[![pub package](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx)](https://pub.dartlang.org/packages/flutter_mobx)
+[![pub package](https://img.shields.io/pub/v/mobx_codegen.svg?label=mobx_codegen)](https://pub.dartlang.org/packages/mobx_codegen)
+
+[![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 [![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -36,15 +39,22 @@ console log, a network call to re-rendering the UI.
 > MobX has been a very effective library for the JavaScript
 > apps and this port to the Dart language aims to bring the same levels of productivity.
 
+### Sponsors
+
+We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program.
+
+- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/publicis-sapient-sponsor.png" height="64">](https://publicis.sapient.com)
+- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/wunderdog-sponsor.png" height="64">](https://wunderdog.fi)
+
+### Get Started
+
+Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx-dart.netlify.com/getting-started).
+
 ### Go deep
 
 For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
 
 [![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
-
-### Get Started
-
-Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx-dart.netlify.com/getting-started).
 
 ## Core Concepts
 

@@ -12,13 +12,16 @@ pubspec.lock
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
-doc/api/
+**/doc/api/
 
 # Misc
+node_modules
 .idea
 *.iml
+*.log
 local.properties
 .vscode/settings.json
+local.properties
 Generated.xcconfig
 
 coverage/

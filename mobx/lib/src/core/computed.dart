@@ -42,7 +42,7 @@ class Computed<T> extends Atom implements Derivation {
 
   @override
   // ignore: prefer_final_fields
-  Set<Atom> _observables = Set();
+  Set<Atom> _observables = {};
 
   @override
   Set<Atom> _newObservables;

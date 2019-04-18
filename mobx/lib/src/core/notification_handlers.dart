@@ -10,6 +10,7 @@ class NotificationHandlers<TNotification, THandler extends Function> {
   Dispose add(THandler handler) {
     assert(handler != null);
 
+    // ignore: prefer_collection_literals
     _handlers ??= LinkedHashSet<THandler>();
     final listeners = _handlers..add(handler);
     return () => listeners.remove(handler);

@@ -9,11 +9,11 @@ class ActionTemplate {
   String toString() => """
     @override
     ${method.returnType} ${method.name}${method.typeParams}(${method.params}) {
-      final _\$prevDerivation = ${storeTemplate.actionControllerName}.startAction();
+      final _\$actionInfo = ${storeTemplate.actionControllerName}.startAction();
       try {
         return super.${method.name}${method.typeArgs}(${method.args});
       } finally {
-        ${storeTemplate.actionControllerName}.endAction(_\$prevDerivation);
+        ${storeTemplate.actionControllerName}.endAction(_\$actionInfo);
       }
     }""";
 }

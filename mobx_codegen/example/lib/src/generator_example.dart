@@ -2,10 +2,10 @@ import 'package:mobx/mobx.dart';
 
 part 'generator_example.g.dart';
 
-class User = UserBase with _$User;
+class User = _User with _$User;
 
-abstract class UserBase implements Store {
-  UserBase(this.id);
+abstract class _User implements Store {
+  _User(this.id);
 
   final int id;
 
@@ -25,12 +25,12 @@ abstract class UserBase implements Store {
   }
 }
 
-class Admin extends AdminBase with _$Admin {
+class Admin extends _Admin with _$Admin {
   Admin(int id) : super(id);
 }
 
-abstract class AdminBase extends User implements Store {
-  AdminBase(int id) : super(id);
+abstract class _Admin extends User implements Store {
+  _Admin(int id) : super(id);
 
   @observable
   String userName = 'admin';
@@ -47,4 +47,21 @@ abstract class AdminBase extends User implements Store {
   Stream<T> loadStuff<T>(String arg1, {T value}) async* {
     yield value;
   }
+
+  @action
+  @observable
+  Future<void> loadAccessRights() async {
+    final items = Stream.fromIterable(['web', 'filesystem'])
+        .asyncMap((ev) => Future.delayed(Duration(milliseconds: 10), () => ev));
+    await for (final item in items) {
+      accessRights.add(item);
+    }
+  }
+}
+
+class Item<A> = _Item<A> with _$Item<A>;
+
+abstract class _Item<T> implements Store {
+  @observable
+  T value;
 }

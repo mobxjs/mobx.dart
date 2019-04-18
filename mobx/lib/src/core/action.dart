@@ -63,7 +63,12 @@ class Action {
   }
 }
 
-@experimental
+/// `ActionController` is used to define the start/end boundaries of code which
+/// should be wrapped inside an action. This ensures all observable mutations are neatly
+/// encapsulated.
+///
+/// You would rarely need to use this directly. This is primarily meant for the **`mobx_codegen`** package.
+///
 class ActionController {
   ActionController({ReactiveContext context, String name})
       : _context = context ?? mainContext,

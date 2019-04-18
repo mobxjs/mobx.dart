@@ -1,12 +1,15 @@
 import 'package:fake_async/fake_async.dart';
+import 'package:mobx/mobx.dart' hide when;
 import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'package:mobx/mobx.dart' hide when;
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
+  turnOffEnforceActions();
+
   group('Reaction', () {
     test('basics work', () {
       var executed = false;
@@ -30,6 +33,13 @@ void main() {
       x.value = 11;
       expect(
           executed, isFalse); // reaction has been disposed, so no more effects
+    });
+
+    test('crashes if asserts are ommited', () {
+      expect(() => ReactionImpl(null, () {}),
+          throwsA(const TypeMatcher<AssertionError>()));
+      expect(() => ReactionImpl(mainContext, null),
+          throwsA(const TypeMatcher<AssertionError>()));
     });
 
     test('works with delay', () {
@@ -155,6 +165,8 @@ void main() {
       x.value = true; // force a change
       expect(thrown, isTrue);
       expect(dispose.reaction.errorValue, isException);
+      expect(dispose.reaction.errorValue.toString(),
+          contains('MobXCaughtException'));
       dispose();
     });
 
@@ -257,6 +269,18 @@ void main() {
 
         expect(i, equals(1));
         expect(autoVar, equals(1));
+      });
+
+      test('ReactionImpl tracks observables', () {
+        final reaction = ReactionImpl(mainContext, () {})..track(() {});
+
+        expect(reaction.hasObservables, isFalse);
+
+        final x = Observable(0);
+        final reaction1 = ReactionImpl(mainContext, () {})
+          ..track(() => x.value + 1);
+
+        expect(reaction1.hasObservables, isTrue);
       });
     });
   });

@@ -4,8 +4,12 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
 import 'package:build/src/builder/build_step.dart';
+import 'package:mobx/mobx.dart' show Store;
+import 'package:mobx/src/api/annotations.dart'
+    show ComputedMethod, MakeAction, MakeObservable;
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
+import 'package:mobx_codegen/src/template/async_action.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
 import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
@@ -14,23 +18,27 @@ import 'package:mobx_codegen/src/template/observable_stream.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 import 'package:source_gen/source_gen.dart';
-import 'package:mobx/mobx.dart' show Store;
-
-import 'package:mobx/src/api/annotations.dart'
-    show ComputedMethod, MakeAction, MakeObservable;
 
 class StoreGenerator extends Generator {
   final _storeChecker = TypeChecker.fromRuntime(Store);
 
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
-    final generate = (baseClass) sync* {
-      final mixedClass = library.classes
-          .firstWhere((c) => c.supertype == baseClass.type, orElse: () => null);
+    Iterable<String> generate(ClassElement baseClass) sync* {
+      final mixedClass =
+          library.classes.where((c) => c != baseClass).firstWhere((c) {
+        if (c.supertype.typeArguments.isNotEmpty &&
+            baseClass.typeParameters.length ==
+                c.supertype.typeArguments.length) {
+          final t = baseClass.type.instantiate(c.supertype.typeArguments);
+          return t.isSupertypeOf(c.type);
+        }
+        return c.supertype == baseClass.type;
+      }, orElse: () => null);
       if (mixedClass != null) {
         yield generateStoreClassCode(library, baseClass, mixedClass);
       }
-    };
+    }
 
     return library.classes
         .where((c) => c.isAbstract)
@@ -42,17 +50,21 @@ class StoreGenerator extends Generator {
 
   String generateStoreClassCode(
       LibraryReader library, ClassElement baseClass, ClassElement mixedClass) {
-    final visitor = new StoreMixinVisitor(baseClass.name, mixedClass.name);
+    final visitor = new StoreMixinVisitor(baseClass, mixedClass.name);
     baseClass.visitChildren(visitor);
     return visitor.source;
   }
 }
 
 class StoreMixinVisitor extends SimpleElementVisitor {
-  StoreMixinVisitor(String parentName, String name)
+  StoreMixinVisitor(ClassElement parentClass, String name)
       : _errors = StoreClassCodegenErrors(name) {
     _storeTemplate = StoreTemplate()
-      ..parentName = parentName
+      ..typeParams
+          .templates
+          .addAll(parentClass.typeParameters.map(typeParamTemplate))
+      ..typeArgs.templates.addAll(parentClass.typeParameters.map((t) => t.name))
+      ..parentName = parentClass.name
       ..mixinName = '_\$$name';
   }
 
@@ -122,11 +134,19 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       if (_actionIsNotValid(element)) {
         return null;
       }
-      final template = ActionTemplate()
-        ..storeTemplate = _storeTemplate
-        ..method = MethodOverrideTemplate.fromElement(element);
+      if (element.isAsynchronous) {
+        final template = AsyncActionTemplate()
+          ..isObservable = _observableChecker.hasAnnotationOfExact(element)
+          ..method = MethodOverrideTemplate.fromElement(element);
 
-      _storeTemplate.actions.add(template);
+        _storeTemplate.asyncActions.add(template);
+      } else {
+        final template = ActionTemplate()
+          ..storeTemplate = _storeTemplate
+          ..method = MethodOverrideTemplate.fromElement(element);
+
+        _storeTemplate.actions.add(template);
+      }
     } else if (_observableChecker.hasAnnotationOfExact(element)) {
       if (_asyncObservableIsNotValid(element)) {
         return null;
@@ -158,7 +178,8 @@ class StoreMixinVisitor extends SimpleElementVisitor {
 
   bool _actionIsNotValid(MethodElement element) => any([
         _errors.staticMethods.addIf(element.isStatic, element.name),
-        _errors.asyncActions.addIf(element.isAsynchronous, element.name),
+        _errors.asyncGeneratorActions
+            .addIf(element.isAsynchronous && element.isGenerator, element.name),
       ]);
 }
 

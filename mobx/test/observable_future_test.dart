@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:mobx/src/api/observable_future.dart';
+import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -161,6 +161,15 @@ void main() {
 
       final value = await future.asStream().first;
       expect(value, equals(1));
+    });
+
+    test('observing stream should work', () async {
+      final future = ObservableFuture(Future(() => 1));
+      final stream = future.asStream();
+
+      await asyncWhen((_) => stream.value == 1);
+      expect(stream.value, equals(1));
+      expect(future.value, equals(1));
     });
 
     test('then works', () async {

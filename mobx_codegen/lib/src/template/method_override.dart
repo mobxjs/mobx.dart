@@ -1,15 +1,13 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
+import 'package:mobx_codegen/src/template/params.dart';
+import 'package:mobx_codegen/src/template/util.dart';
 
 class MethodOverrideTemplate {
   MethodOverrideTemplate();
 
   MethodOverrideTemplate.fromElement(MethodElement method) {
-    final typeParam = (TypeParameterElement elem) => TypeParamTemplate()
-      ..name = elem.name
-      ..bound = elem.bound?.displayName;
-
     final param = (ParameterElement elem) => ParamTemplate()
       ..name = elem.name
       ..type = elem.type.displayName
@@ -33,7 +31,7 @@ class MethodOverrideTemplate {
     this
       ..name = method.name
       ..returnType = method.returnType.displayName
-      ..setTypeParams(method.typeParameters.map(typeParam))
+      ..setTypeParams(method.typeParameters.map(typeParamTemplate))
       ..positionalParams = positionalParams.map(param)
       ..optionalParams = optionalParams.map(param)
       ..namedParams = namedParams.map(param)
@@ -84,35 +82,4 @@ class MethodOverrideTemplate {
   SurroundedCommaList<TypeParamTemplate> get typeParams => _typeParams;
 
   SurroundedCommaList<String> get typeArgs => _typeArgs;
-}
-
-class ParamTemplate {
-  String name;
-  String type;
-  String defaultValue;
-
-  String get asArgument => name;
-
-  NamedArgTemplate get asNamedArgument => NamedArgTemplate()..name = name;
-
-  @override
-  String toString() =>
-      defaultValue == null ? '$type $name' : '$type $name = $defaultValue';
-}
-
-class TypeParamTemplate {
-  String name;
-  String bound;
-
-  String get asArgument => name;
-
-  @override
-  String toString() => bound == null ? name : '$name extends $bound';
-}
-
-class NamedArgTemplate {
-  String name;
-
-  @override
-  String toString() => '$name: $name';
 }

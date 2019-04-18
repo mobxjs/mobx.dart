@@ -1,30 +1,42 @@
 library flutter_mobx;
 
+// ignore_for_file:implementation_imports
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
-
-// ignore:implementation_imports
 import 'package:mobx/src/core.dart' show ReactionImpl;
 
-typedef BuildObserved = Widget Function(BuildContext);
-
+/// Observer observes the observables used in the `builder` function and rebuilds the Widget
+/// whenever any of them change. There is no need to do any other wiring besides simply referencing
+/// the required observables.
+///
+/// Internally, [Observer] uses a `Reaction` around the `builder` function. If your `builder` function does not contain
+/// any observables, [Observer] will throw an [AssertionError]. This is a debug-time hint to let you know that you are not observing any observables.
 class Observer extends StatefulWidget {
-  const Observer({@required this.builder, Key key, this.context})
+  /// Returns a widget that rebuilds every time an observable referenced in the
+  /// [builder] function is altered.
+  ///
+  /// The [builder] argument must not be null. Use the [context] to specify a ReactiveContext other than the `mainContext`.
+  /// Normally there is no need to change this. [name] can be used to give a debug-friendly identifier.
+  const Observer({@required this.builder, Key key, this.context, this.name})
       : assert(builder != null),
         super(key: key);
 
+  final String name;
   final ReactiveContext context;
-  final BuildObserved builder;
+  final WidgetBuilder builder;
 
   @visibleForTesting
-  Reaction createReaction(Function() onInvalidate) =>
-      ReactionImpl(context ?? mainContext, onInvalidate);
+  Reaction createReaction(Function() onInvalidate) {
+    final ctx = context ?? mainContext;
+    return ReactionImpl(ctx, onInvalidate,
+        name: name ?? 'Observer@${ctx.nextId}');
+  }
 
   @override
-  State<Observer> createState() => ObserverState();
+  State<Observer> createState() => _ObserverState();
 }
 
-class ObserverState extends State<Observer> {
+class _ObserverState extends State<Observer> {
   ReactionImpl _reaction;
 
   @override
@@ -50,6 +62,9 @@ class ObserverState extends State<Observer> {
         error = ex;
       }
     });
+
+    assert(_reaction.hasObservables,
+        'There are no observables detected in the builder function for ${_reaction.name}');
 
     if (error != null) {
       throw error;

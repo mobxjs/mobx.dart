@@ -1,16 +1,16 @@
 import 'package:build/build.dart';
+import 'package:build_test/build_test.dart';
 import 'package:logging/logging.dart';
 import 'package:mobx_codegen/mobx_codegen.dart';
 import 'package:source_gen/source_gen.dart';
-import 'package:build_test/build_test.dart';
 import 'package:test/test.dart';
 
 const validInput = """
-library test_user;
+library generator_sample;
 
 import 'package:mobx/mobx.dart';
 
-part 'test_user.g.dart';
+part 'generator_sample.g.dart';
 
 class User = UserBase with _\$User;
 
@@ -64,6 +64,8 @@ mixin _\$User on UserBase, Store {
 
   @override
   set firstName(String value) {
+    _\$firstNameAtom.context
+        .checkIfStateModificationsAreAllowed(_\$firstNameAtom);
     super.firstName = value;
     _\$firstNameAtom.reportChanged();
   }
@@ -78,6 +80,7 @@ mixin _\$User on UserBase, Store {
 
   @override
   set lastName(String value) {
+    _\$lastNameAtom.context.checkIfStateModificationsAreAllowed(_\$lastNameAtom);
     super.lastName = value;
     _\$lastNameAtom.reportChanged();
   }
@@ -98,22 +101,22 @@ mixin _\$User on UserBase, Store {
 
   @override
   void updateNames({String firstName, String lastName}) {
-    final _\$prevDerivation = _\$UserBaseActionController.startAction();
+    final _\$actionInfo = _\$UserBaseActionController.startAction();
     try {
       return super.updateNames(firstName: firstName, lastName: lastName);
     } finally {
-      _\$UserBaseActionController.endAction(_\$prevDerivation);
+      _\$UserBaseActionController.endAction(_\$actionInfo);
     }
   }
 }
 """;
 
 const invalidInput = """
-library test_user;
+library generator_sample;
 
 import 'package:mobx/mobx.dart';
 
-part 'test_user.g.dart';
+part 'generator_sample.g.dart';
 
 class User = UserBase with _\$User;
 
@@ -142,9 +145,6 @@ abstract class UserBase implements Store {
   }
 
   @action
-  Future updateUserFromDb() async { }
-
-  @action
   static UserBase getUser(int id) async {}
 
   @observable
@@ -159,8 +159,40 @@ Could not make class "User" observable. Changes needed:
   1. Remove static modifier from the field "foobar"
   2. Remove static modifier from the method "getUser"
   3. Remove final modifier from fields "id" and "firstName"
-  4. Remove async modifier from methods "updateUserFromDb" and "getUser\"
-  5. Return a Future or a Stream from the method "nonAsyncObservableMethod\"""";
+  4. Return a Future or a Stream from the method "nonAsyncObservableMethod\"""";
+
+const validGenericStoreInput = """
+library generator_sample;
+
+import 'package:mobx/mobx.dart';
+
+part 'generator_sample.g.dart';
+
+class Item<A> = _Item<A> with _\$Item<A>;
+
+abstract class _Item<T> implements Store {
+  @observable
+  T value;
+}""";
+
+const validGenericStoreOutput = """
+mixin _\$Item<T> on _Item<T>, Store {
+  final _\$valueAtom = Atom(name: '_Item.value');
+
+  @override
+  T get value {
+    _\$valueAtom.reportObserved();
+    return super.value;
+  }
+
+  @override
+  set value(T value) {
+    _\$valueAtom.context.checkIfStateModificationsAreAllowed(_\$valueAtom);
+    super.value = value;
+    _\$valueAtom.reportChanged();
+  }
+}
+""";
 
 void main() {
   group('generator', () {
@@ -168,7 +200,7 @@ void main() {
       expect(await generate(''), isEmpty);
     });
 
-    test('ignores non-annotated class', () async {
+    test("ignores class that doesn't implement Store", () async {
       const source = """
         class MyClass {
           void foobar() => 'Hello';
@@ -185,6 +217,11 @@ void main() {
     test('invalid output', () async {
       expect(await generate(invalidInput), endsWith(invalidOutput));
     });
+
+    test('generates for a generic class implementing Store', () async {
+      expect(await generate(validGenericStoreInput),
+          endsWith(validGenericStoreOutput));
+    });
   });
 }
 
@@ -198,7 +235,7 @@ Future<String> generate(String source) async {
   final srcs = {
     'mobx|lib/src/api/annotations.dart': fakeAnnotationsSource,
     'mobx|lib/mobx.dart': fakeMobxSource,
-    '$pkgName|lib/test_user.dart': source,
+    '$pkgName|lib/generator_sample.dart': source,
   };
 
   String error;
@@ -213,7 +250,8 @@ Future<String> generate(String source) async {
       rootPackage: pkgName, writer: writer, onLog: captureError);
   return error ??
       new String.fromCharCodes(
-          writer.assets[new AssetId(pkgName, 'lib/test_user.g.dart')] ?? []);
+          writer.assets[new AssetId(pkgName, 'lib/generator_sample.g.dart')] ??
+              []);
 }
 
 // Just needs the annotations for the tests

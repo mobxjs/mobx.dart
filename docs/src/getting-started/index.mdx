@@ -71,7 +71,7 @@ Next add the following **dev_dependencies**:
 
 ```
 dev_dependencies:
-  build_runner: ^1.0.0
+  build_runner: ^1.2.5
   mobx_codegen:
 ```
 
@@ -94,10 +94,10 @@ import 'package:mobx/mobx.dart';
 part 'counter.g.dart';
 
 // This is the class used by rest of your codebase
-class Counter = CounterBase with _$Counter;
+class Counter = _Counter with _$Counter;
 
 // The store-class
-abstract class CounterBase implements Store {
+abstract class _Counter implements Store {
   @observable
   int value = 0;
 
@@ -110,8 +110,8 @@ abstract class CounterBase implements Store {
 
 The interesting parts here are:
 
-- The abstract class `CounterBase` that implements the `Store` interface. All of your store-related code should be placed inside this abstract class. We create a `Counter` class to blend in the code from the `build_runner`.
-- The generated code will be inside the part file: `counter.g.dart`, which we include with the _`part` directive_. Without this, the `build_runner` will not produce any output.
+- The abstract class `_Counter` that implements the `Store` interface. All of your store-related code should be placed inside this abstract class. We create a `Counter` class to blend in the code from the `build_runner`.
+- The generated code will be inside the part file: `counter.g.dart`, which we include with the _`part` directive_. Without this, the `build_runner` will not produce any output. The generated file contains the `_$Counter` mixin.
 - The `@observable` annotation to mark the `value` as observable.
 - Use of `@action` to to mark the `increment()` method as an action.
 
@@ -147,6 +147,23 @@ On the command-line, here's the output we got from running it. Your's might be s
 [INFO] Succeeded after 7.8s with 2 outputs (6 actions)
 
 ```
+
+> ### Stay on watch
+>
+> If you are making changes to the store and want to generate `*.g.dart` files automatically, you can use the following command:
+
+> ```
+> flutter packages pub run build_runner watch
+> ```
+>
+> ### Starting Clean
+>
+> Sometimes you may have an error running this command due to existing files, possibly generated from an earlier version of
+> `build_runner`. In that case, you can add the following flag to delete the `*.g.dart` files before generating them.
+>
+> ```
+> flutter packages pub run build_runner watch --delete-conflicting-outputs
+> ```
 
 ## Add Store & Observer to Widget
 
