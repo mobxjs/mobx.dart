@@ -136,8 +136,11 @@ In the example below, we are setting up a store at the app-level:
 ```
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Provider<MultiCounterStore>(
-      builder: (_) => MultiCounterStore(),
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        Provider<MultiCounterStore>(builder: (_) => MultiCounterStore())
+      ],
       child: MaterialApp(
         initialRoute: '/',
         theme: ThemeData(
@@ -147,7 +150,9 @@ class MyApp extends StatelessWidget {
           '/': (_) => ExampleList(),
         }..addEntries(
             examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
-      ));
+      ),
+    );
+  }
 }
 ```
 
