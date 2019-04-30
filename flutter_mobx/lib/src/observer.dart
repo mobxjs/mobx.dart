@@ -34,6 +34,10 @@ class Observer extends StatefulWidget {
 
   @override
   State<Observer> createState() => _ObserverState();
+
+  log(String msg) {
+    debugPrint(msg);
+  }
 }
 
 class _ObserverState extends State<Observer> {
@@ -63,8 +67,10 @@ class _ObserverState extends State<Observer> {
       }
     });
 
-    assert(_reaction.hasObservables,
-        'There are no observables detected in the builder function for ${_reaction.name}');
+    if (!_reaction.hasObservables) {
+      widget.log(
+          'There are no observables detected in the builder function for ${_reaction.name}');
+    }
 
     if (error != null) {
       throw error;
