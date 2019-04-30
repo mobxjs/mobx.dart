@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 class MockReaction extends Mock implements ReactionImpl {}
 
 class TestObserver extends Observer {
-  TestObserver(this.reaction, {WidgetBuilder builder})
+  const TestObserver(this.reaction, {WidgetBuilder builder})
       : super(builder: builder);
 
   final Reaction reaction;
@@ -17,14 +17,18 @@ class TestObserver extends Observer {
   Reaction createReaction(Function() onInvalidate) => reaction;
 }
 
+// ignore: must_be_immutable
 class LoggingObserver extends Observer {
-  LoggingObserver({Key key, @required WidgetBuilder builder})
-      : super(key: key, builder: builder);
+  // ignore: prefer_const_constructors_in_immutables
+  LoggingObserver({
+    @required WidgetBuilder builder,
+    Key key,
+  }) : super(key: key, builder: builder);
 
   String previousLog;
 
   @override
-  log(String msg) {
+  void log(String msg) {
     previousLog = msg;
     return super.log(msg);
   }

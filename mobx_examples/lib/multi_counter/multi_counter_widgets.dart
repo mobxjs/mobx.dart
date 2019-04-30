@@ -64,7 +64,7 @@ class CounterListPage extends StatelessWidget {
 }
 
 class CounterViewPage extends StatelessWidget {
-  CounterViewPage({@required this.store, @required this.index});
+  const CounterViewPage({@required this.store, @required this.index});
 
   final int index;
   final MultiCounterStore store;

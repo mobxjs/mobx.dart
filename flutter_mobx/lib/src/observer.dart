@@ -35,7 +35,7 @@ class Observer extends StatefulWidget {
   @override
   State<Observer> createState() => _ObserverState();
 
-  log(String msg) {
+  void log(String msg) {
     debugPrint(msg);
   }
 }
