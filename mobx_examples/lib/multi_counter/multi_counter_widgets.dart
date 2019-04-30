@@ -14,7 +14,7 @@ class _MultiCounterExampleState extends State<MultiCounterExample> {
   final MultiCounterStore store = MultiCounterStore();
 
   @override
-  Widget build(BuildContext context) => Provider<MultiCounterStore>(
+  Widget build(BuildContext context) => Provider<MultiCounterStore>.value(
         value: store,
         child: Scaffold(
           appBar: AppBar(

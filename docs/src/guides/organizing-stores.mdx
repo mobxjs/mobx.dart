@@ -134,12 +134,13 @@ Using the [provider][1] package on pub, you can setup a repository of stores at 
 In the example below, we are setting up a store at the app-level:
 
 ```
-final MultiCounterStore store = MultiCounterStore();
-
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Provider<MultiCounterStore>(
-      value: store,
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        Provider<MultiCounterStore>(builder: (_) => MultiCounterStore())
+      ],
       child: MaterialApp(
         initialRoute: '/',
         theme: ThemeData(
@@ -149,7 +150,9 @@ class MyApp extends StatelessWidget {
           '/': (_) => ExampleList(),
         }..addEntries(
             examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
-      ));
+      ),
+    );
+  }
 }
 ```
 
@@ -176,10 +179,10 @@ class CounterListPage extends StatelessWidget {
 
 ### A variety of providers
 
-There are multiple types of `Providers` available in the [provider][1] package. The ones most relevant and useful to MobX are:
+There are multiple types of `Providers` available in the [provider][1] package (version `2.0.0-dev`). The ones most relevant and useful to MobX are:
 
-- `Provider` for single values, known before hand
-- `StatefulProvider` for constructing and disposing values on the fly. This is good when the value has a fixed lifetime.
+- `Provider` for constructing and disposing values on the fly. This is good when the value has a fixed lifetime.
+- `Provider.value`, a `Provider` constructor for single values, known before hand
 - `MultiProvider` for passing multiple values
 
 [1]: https://pub.dartlang.org/packages/provider
