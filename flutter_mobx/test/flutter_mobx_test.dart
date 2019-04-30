@@ -8,13 +8,26 @@ import 'package:mockito/mockito.dart';
 class MockReaction extends Mock implements ReactionImpl {}
 
 class TestObserver extends Observer {
-  const TestObserver(this.reaction, {WidgetBuilder builder})
+  TestObserver(this.reaction, {WidgetBuilder builder})
       : super(builder: builder);
 
   final Reaction reaction;
 
   @override
   Reaction createReaction(Function() onInvalidate) => reaction;
+}
+
+class LoggingObserver extends Observer {
+  LoggingObserver({Key key, @required WidgetBuilder builder})
+      : super(key: key, builder: builder);
+
+  String previousLog;
+
+  @override
+  log(String msg) {
+    previousLog = msg;
+    return super.log(msg);
+  }
 }
 
 void stubTrack(MockReaction mock) {
@@ -132,24 +145,26 @@ void main() {
     expect(() => Observer(), throwsA(isInstanceOf<AssertionError>()));
   });
 
-  testWidgets('Observer should assert when there are no observables in builder',
+  testWidgets('Observer should log when there are no observables in builder',
       (tester) async {
-    await tester
-        .pumpWidget(Observer(builder: (context) => const Placeholder()));
+    final observer = LoggingObserver(
+      builder: (_) => const Placeholder(),
+    );
+    await tester.pumpWidget(observer);
 
-    expect(tester.takeException(), isInstanceOf<AssertionError>());
+    expect(observer.previousLog, isNotNull);
   });
 
-  testWidgets(
-      'Observer should NOT assert when there are observables in builder',
+  testWidgets('Observer should NOT log when there are observables in builder',
       (tester) async {
     final x = Observable(0);
-
-    await tester.pumpWidget(Observer(builder: (context) {
+    final observer = LoggingObserver(builder: (context) {
       x.value;
       return const Placeholder();
-    }));
+    });
 
-    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(observer);
+
+    expect(observer.previousLog, isNull);
   });
 }
