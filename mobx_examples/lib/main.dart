@@ -5,22 +5,22 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
-final MultiCounterStore store = MultiCounterStore();
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
-      providers: [Provider<MultiCounterStore>.value(value: store)],
-      child: MaterialApp(
-        initialRoute: '/',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        routes: {
-          '/': (_) => ExampleList(),
-        }..addEntries(
-            examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
-      ));
+          providers: [
+            Provider<MultiCounterStore>(builder: (_) => MultiCounterStore())
+          ],
+          child: MaterialApp(
+            initialRoute: '/',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            routes: {
+              '/': (_) => ExampleList(),
+            }..addEntries(
+                examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
+          ));
 }
 
 class ExampleList extends StatelessWidget {
