@@ -9,7 +9,7 @@ import endResult from "./mobx-counter.gif";
 
 For this tutorial, we will start with a slightly modified version of the example created from `flutter create`. Once you generate a project, here's what you get inside `lib/main.dart`. This is our starting point.
 
-```
+```dart
 class CounterExample extends StatefulWidget {
   CounterExample({Key key}) : super(key: key);
 
@@ -87,7 +87,7 @@ At this point you should have all the necessary packages to continue development
 
 Now, let's create a MobX store. A store in MobX is a way of collecting the related observable state under one class. The store allows us to use annotations and keeps the code simple. Create a new file `counter.dart` and add the following code to it.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 // Include generated file
@@ -169,7 +169,7 @@ On the command-line, here's the output we got from running it. Your's might be s
 
 Now comes the part where we connect the MobX store to the Widget. In your `main.dart`, replace the code with the following:
 
-```
+```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 

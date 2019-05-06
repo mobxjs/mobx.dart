@@ -21,7 +21,7 @@ This example borrows from the typical sign-up form with fields for `username`, `
 
 This can be defined with the following `Store` class.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 part 'form_store.g.dart';
@@ -48,7 +48,7 @@ abstract class _FormStore implements Store {
 
 The actions that mutate these fields are straightforward. They are invoked whenever the user edits and modifies the `TextFields` corresponding to the _observable-properties_.
 
-```
+```dart
 abstract class _FormStore implements Store {
 
   // ...
@@ -80,7 +80,7 @@ For the form-validation use case, we want to monitor when any of the fields chan
 
 > Notice the use of nesting a `Store` like `FormErrorState` inside the parent `FormStore`. For all practical purposes, think of MobX stores as regular Dart classes with special reactive properties. You can compose these stores the way you like.
 
-```
+```dart
 abstract class _FormStore implements Store {
 
   // ...
@@ -112,7 +112,7 @@ abstract class _FormStore implements Store {
 
 The `FormErrorState` is defined to capture the `String` error-message for each field.
 
-```
+```dart
 class FormErrorState = _FormErrorState with _$FormErrorState;
 
 abstract class _FormErrorState implements Store {
@@ -134,7 +134,7 @@ The validations above are purely synchronous and run entirely on the client. Wha
 
 The `validateUsername()` action can be tweaked as follows:
 
-```
+```dart
 abstract class _FormStore implements Store {
   // ...
 

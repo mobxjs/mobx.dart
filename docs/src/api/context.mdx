@@ -25,7 +25,7 @@ Create a `ReactiveContext` by passing a configuration object. If no configuratio
 - **`disableErrorBoundaries`**: When `true`, MobX will not guard against exceptions thrown during reactions. By default, it is `false`, which means MobX will catch unhandled exceptions and ensure the consistency of the reactive system.
 - **`enforceActions`**: This is an enumeration of the various behaviors in MobX for dealing with stray observable mutations. Stray mutations are those that are **not** wrapped in actions. By default, it is set to `observed`. This means if there is an observable which is being observed and you mutate it outside of an action, MobX will throw an exception.
 
-```
+```dart
 enum EnforceActions { observed, always, never }
 ```
 

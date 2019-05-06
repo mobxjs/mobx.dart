@@ -19,7 +19,7 @@ defining the state of the application as a tree of observables, you can expose a
 
 A simple reactive-counter is represented by the following observable:
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 final counter = Observable(0);
@@ -27,7 +27,7 @@ final counter = Observable(0);
 
 More complex observables, such as classes, can be created as well.
 
-```
+```dart
 class Counter {
   Counter() {
     increment = Action(_increment);
@@ -48,7 +48,7 @@ class Counter {
 On first sight, this does look like some boilerplate code which can quickly go out of hand!
 This is why we added **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** to the mix that allows you to replace the above code with the following:
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 part 'counter.g.dart';
@@ -82,7 +82,7 @@ Such _derived state_, that depends on _core-state_ or _other derived-state_ is c
 
 > State in MobX = Core-State + Derived-State
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 part 'counter.g.dart';
@@ -115,7 +115,7 @@ Thus the observers are notified only upon the atomic completion of the action.
 Note that actions can also be nested, in which case the notifications go out
 when the top-most action has completed.
 
-```
+```dart
 final counter = Observable(0);
 
 final increment = Action((){
@@ -125,7 +125,7 @@ final increment = Action((){
 
 When creating actions inside a class, you can take advantage of annotations!
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 part 'counter.g.dart';
@@ -159,7 +159,7 @@ One _striking feature_ of reactions is that they _automatically track_ all the o
 Runs the reaction immediately and also on any change in the observables used inside
 `fn`.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 String greeting = Observable('Hello World');
@@ -184,7 +184,7 @@ dispose();
 Monitors the observables used inside the `predicate()` function and runs the `effect()` when
 the predicate returns a different value. Only the observables inside `predicate()` are tracked.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 String greeting = Observable('Hello World');
@@ -205,7 +205,7 @@ dispose();
 
 Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 String greeting = Observable('Hello World');
@@ -223,7 +223,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
 
-```
+```dart
 final completed = Observable(false);
 
 void waitForCompletion() async {
@@ -239,7 +239,7 @@ One of the most visual reactions in the app is the UI. The **Observer** widget (
 
 Below is the _Counter_ example in its entirety.
 
-```
+```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';

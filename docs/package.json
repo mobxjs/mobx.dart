@@ -11,7 +11,7 @@
         "build": "docz build"
     },
     "dependencies": {
-        "docz": "^0.13.7",
-        "docz-theme-default": "^0.13.7"
+        "docz": "^1.1.0",
+        "docz-theme-default": "^1.1.0"
     }
 }

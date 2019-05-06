@@ -18,7 +18,7 @@ A `Todo` is defined by a simple class like the following.
 
 ### Todo class
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 part 'todo.g.dart';
@@ -50,7 +50,7 @@ Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of `T
 
 This can be seen with the `@observable` properties.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 part 'todo_list.g.dart';
@@ -80,7 +80,7 @@ import todosImage from "./todos.png";
 
 <img src={todosImage} width={300} />
 
-```
+```dart
 class TodoList = _TodoList with _$TodoList;
 
 abstract class _TodoList implements Store {
@@ -139,7 +139,7 @@ abstract class _TodoList implements Store {
 
 Actions are the semantic operations that mutate the observable state. They also create a transaction-boundary to ensure all notifications are sent out only at the end of an action. In our case, we have a few actions such as:
 
-```
+```dart
 class TodoList = _TodoList with _$TodoList;
 
 abstract class _TodoList implements Store {
@@ -184,7 +184,7 @@ abstract class _TodoList implements Store {
 
 Here is the complete `TodoList` with all the observable, computed properties and the actions.
 
-```
+```dart
 class TodoList = _TodoList with _$TodoList;
 
 abstract class _TodoList implements Store {
@@ -287,7 +287,7 @@ Now that the state has been defined, the UI becomes a natural, and _visual_ exte
 
 At the highest level, this is what your widget tree looks like:
 
-```
+```dart
 final TodoList list = TodoList();
 
 class TodoExample extends StatelessWidget {
@@ -317,7 +317,7 @@ Each of the children in the root-Widget is an `Observer`. Let's take the simples
 
 **Description**
 
-```
+```dart
 class Description extends StatelessWidget {
   const Description({this.list});
 
@@ -341,7 +341,7 @@ The _builder-function_ passed into `Observer` monitors all observables reference
 
 The `TodoListView` is yet another `Observer`, in particular of the `list.visibleTodos`
 
-```
+```dart
 class TodoListView extends StatelessWidget {
   const TodoListView({@required this.list});
 
@@ -383,7 +383,7 @@ class TodoListView extends StatelessWidget {
 
 Similarly, here is the `AddTodo` widget that observes the `list.currentDescription` and also fires the `list.changeDescription` action.
 
-```
+```dart
 class AddTodo extends StatelessWidget {
   AddTodo({@required this.list});
 
@@ -420,7 +420,7 @@ And finally we have the `ActionBar` that contains the radio-buttons to select a 
 
 Notice that _there is no business logic here_. Most of the state of the UI is controlled by _computed-properties_. This is an important modeling tip that you can use in state-management and even unit-testing!
 
-```
+```dart
 class ActionBar extends StatelessWidget {
   const ActionBar({@required this.list});
 

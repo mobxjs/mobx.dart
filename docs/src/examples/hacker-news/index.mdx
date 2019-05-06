@@ -18,7 +18,7 @@ The hacker-news client essentially shows a list of items for the latest and the 
 
 Thus the reactive state of this example looks like so:
 
-```
+```dart
 import 'package:hnpwa_client/hnpwa_client.dart';
 import 'package:mobx/mobx.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -63,7 +63,7 @@ The two actions `fetchLatest()` and `fetchTop()` create a new instance of the `O
 
 The root widgets is simple a tab-container of two tabs, one of Latest and one for Top news:
 
-```
+```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hnpwa_client/hnpwa_client.dart';
@@ -128,7 +128,7 @@ import observableFuture from "./mobx-ObservableFuture.png";
 
 Thus for visual feedback, it is important to show each of these three states separately. `Pending` is normally shown with some loading-indicator. `Fulfilled` will be shown as as `ListView` of `FeedItem`s and finally `Rejected` is the error state. You can see each of these in the following snippet:
 
-```
+```dart
 class FeedItemsView extends StatelessWidget {
   const FeedItemsView(this.store, this.type);
 

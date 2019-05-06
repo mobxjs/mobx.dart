@@ -16,7 +16,7 @@ The first step is to define the reactive (aka _observable_) state of your UI. Th
 
 In this case, we want a simple UI where we accept the _github-ID_ as input. We use that to fetch the user's repositories. This call will be made using the [github](https://pub.dartlang.org/packages/github) package, the results for which are stored as a `List<Repository>`. The `GithubStore` class so far looks like so:
 
-```
+```dart
 import 'package:github/server.dart';
 import 'package:mobx/mobx.dart';
 
@@ -46,7 +46,7 @@ The call to fetch repositories is an async operation. We do want to track and sh
 
 In our case, we will use one like below. The `ObservableFuture` is tracking the results, which is a `List<Repository>`.
 
-```
+```dart
 abstract class _GithubStore implements Store {
   // ...
 
@@ -81,7 +81,7 @@ Now that we have our reactive state ready, we can focus on defining the actions 
 
 Both of these have been incorporated in the `_GithubStore` class:
 
-```
+```dart
 abstract class _GithubStore implements Store {
   // ...
 
@@ -111,7 +111,7 @@ And with that we are ready with our _observable state and actions_. Let's get on
 
 The top-level widget is a `StatefulWidget` that holds the instance of the `GithubStore` and assembles all of the other _observer-Widgets_.
 
-```
+```dart
 class GithubExample extends StatefulWidget {
   const GithubExample();
 
@@ -143,7 +143,7 @@ Most of the widgets in the `Column` should be self-explanatory. The simplest of 
 
 ### LoadingIndicator
 
-```
+```dart
 class LoadingIndicator extends StatelessWidget {
   const LoadingIndicator(this.store);
 
@@ -162,7 +162,7 @@ class LoadingIndicator extends StatelessWidget {
 
 The list-view for repositories also shows the state for an empty list of repos. If there is at least one repo, it will build the `ListView` and render the repositories. Notice the use of the computed field `hasResults`, which simplifies the overall logic of the component.
 
-```
+```dart
 class RepositoryListView extends StatelessWidget {
   const RepositoryListView(this.store);
 

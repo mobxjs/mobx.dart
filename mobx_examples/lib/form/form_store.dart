@@ -1,13 +1,21 @@
+import 'dart:ui';
+
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 
 part 'form_store.g.dart';
 
+class CustomColor extends Color {
+  CustomColor(int value) : super(value);
+}
+
 class FormStore = _FormStore with _$FormStore;
 
 abstract class _FormStore implements Store {
-
   final FormErrorState error = FormErrorState();
+
+  @observable
+  CustomColor color;
 
   @observable
   String name = '';

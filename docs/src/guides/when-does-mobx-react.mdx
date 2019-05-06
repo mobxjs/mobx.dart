@@ -30,7 +30,7 @@ Every observable tracks a value. When you assign a new value to the observable, 
 
 The value an observable holds, can be anything from a simple number to a complex data structure like a `List`, `Map`, `Set`, etc. When you mark a field with the `@observable` annotation, you are essentially creating an `Observable<T>`, whose value is of the type you specified for the field.
 
-```
+```dart
 part 'person.g.dart';
 
 class Person = _Person with _$Person;
@@ -46,7 +46,7 @@ abstract class _Person implements Store {
 
 In the above code, you have two observables of type `Observable<String>`. When a new value is assigned to these fields, the notifications will fire and all the associated reactions will be re-triggered.
 
-```
+```dart
 final person = Person()..name = 'MobX';
 
 reaction((_) => person.name, (name) => print(name));
@@ -62,7 +62,7 @@ In the above code, notice that there is no explicit subscription or wiring neede
 
 This is just an extension of _Rule 1._ For MobX to do its job, you have to ensure only Observables are being read inside the reaction. If you happen to read the value instead of the observable, no tracking will take place. A simple example is shown below:
 
-```
+```dart
 final count = Observable(10);
 var value = count.value;
 

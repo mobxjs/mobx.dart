@@ -6,7 +6,7 @@ part of 'form_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$FormStore on _FormStore, Store {
   Computed<bool> _$isUserCheckPendingComputed;
@@ -20,6 +20,21 @@ mixin _$FormStore on _FormStore, Store {
   @override
   bool get canLogin =>
       (_$canLoginComputed ??= Computed<bool>(() => super.canLogin)).value;
+
+  final _$colorAtom = Atom(name: '_FormStore.color');
+
+  @override
+  CustomColor get color {
+    _$colorAtom.reportObserved();
+    return super.color;
+  }
+
+  @override
+  set color(CustomColor value) {
+    _$colorAtom.context.checkIfStateModificationsAreAllowed(_$colorAtom);
+    super.color = value;
+    _$colorAtom.reportChanged();
+  }
 
   final _$nameAtom = Atom(name: '_FormStore.name');
 
@@ -143,7 +158,7 @@ mixin _$FormStore on _FormStore, Store {
   }
 }
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$FormErrorState on _FormErrorState, Store {
   Computed<bool> _$hasErrorsComputed;

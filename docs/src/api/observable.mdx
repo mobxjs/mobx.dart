@@ -28,7 +28,7 @@ The derived state can be much bigger than the core-state. This is understandable
 
 An `Observable` is used to track a single value, either primitive or complex. Whenever it changes value, it will fire a notification so that all connected reactions will re-execute.
 
-```
+```dart
 final counter = Observable(0); // intially 0
 
 final list = Observable<List<Todo>>(); // start with an initialValue of null
@@ -36,7 +36,7 @@ final list = Observable<List<Todo>>(); // start with an initialValue of null
 
 If you use a `Store` class, you could do the following to annotate observable properties of the class:
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 part 'todo.g.dart';
@@ -69,7 +69,7 @@ abstract class _Todo implements Store {
 
 **Computeds** form the derived state of your application. They depend on other observables or computeds for their value. Any time the depending observables change, they will recompute their new value. Computeds are also smart and **cache** their previous value. Only when the computed-value is different than the cached-value, will they fire notifications. This behavior is key to ensure the connected reactions don't execute unnecessarily.
 
-```
+```dart
 final first = Observable('Pavan');
 final last = Observable('Podila');
 
@@ -84,7 +84,7 @@ print(fullName.value); // Siri Podila
 
 With **annotations**, this can become easier to use:
 
-```
+```dart
 part 'todo_list.g.dart';
 
 class Contact = _Contact with _$Contact;
@@ -126,7 +126,7 @@ The `ObservableFuture` is the reactive wrapper around a `Future`. You can use it
 
 Here is a simple `LoadingIndicator` widget that uses the `ObservableFuture` to show a progress bar during a fetch operation:
 
-```
+```dart
 
 // github_store.dart
 part 'github_store.g.dart';
@@ -184,7 +184,7 @@ Here is a simple clock that relies on an `Atom` to notify every second.
 - In each tick of the timer, we call `_atom.reportChanged()`. This notifies the MobX reactive system that the atom has changed value and all connected reactions should be re-executed.
 - When the `now` property is read the first time, the clock gets observed and starts ticking. It also fires the `_atom.reportObserved()` to make MobX start tracking this atom.
 
-```
+```dar
 import 'dart:async';
 
 import 'package:mobx/mobx.dart';

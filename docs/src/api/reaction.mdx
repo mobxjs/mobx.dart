@@ -25,7 +25,7 @@ Reactions, or Derivations come in few flavors: `autorun`, `reaction`, `when` and
 Runs the reaction immediately and also on any change in the observables used inside
 `fn`.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 String greeting = Observable('Hello World');
@@ -52,7 +52,7 @@ dispose();
 Monitors the observables used inside the `predicate()` function and runs the `effect()` when
 the predicate returns a different value. Only the observables inside `predicate()` are tracked.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 String greeting = Observable('Hello World');
@@ -75,7 +75,7 @@ dispose();
 
 Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
 
-```
+```dart
 import 'package:mobx/mobx.dart';
 
 String greeting = Observable('Hello World');
@@ -95,7 +95,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
 
-```
+```dart
 final completed = Observable(false);
 
 void waitForCompletion() async {
@@ -113,7 +113,7 @@ One of the most visual reactions in the app is the UI. The **Observer** widget (
 
 Below is the _Counter_ example in its entirety.
 
-```
+```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
