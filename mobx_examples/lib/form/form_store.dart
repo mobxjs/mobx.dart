@@ -6,9 +6,6 @@ part 'form_store.g.dart';
 class FormStore = _FormStore with _$FormStore;
 
 abstract class _FormStore implements Store {
-  _FormStore() {
-    _setupValidations();
-  }
 
   final FormErrorState error = FormErrorState();
 
@@ -47,7 +44,7 @@ abstract class _FormStore implements Store {
     password = value;
   }
 
-  void _setupValidations() {
+  void setupValidations() {
     _disposers = [
       reaction((_) => name, validateUsername),
       reaction((_) => email, validateEmail),

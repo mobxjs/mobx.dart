@@ -12,6 +12,18 @@ class FormExample extends StatefulWidget {
 class _FormExampleState extends State<FormExample> {
   final FormStore store = FormStore();
 
+
+  @override
+  void initState() {
+    store.setupValidations();
+  }
+
+
+  @override
+  void dispose() {
+    store.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
