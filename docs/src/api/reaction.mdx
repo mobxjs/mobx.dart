@@ -91,7 +91,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 ## asyncWhen
 
-**`Future<void> asyncWhen(bool Function(Reaction) predicate)`**
+### `Future<void> asyncWhen(bool Function(Reaction) predicate)`
 
 Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
 
