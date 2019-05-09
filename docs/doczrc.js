@@ -16,6 +16,12 @@ export default {
             primary: "#1389FD",
             codeColor: "#fa6000",
             blockquoteColor: "#00579b"
+        },
+        styles: {
+            code: `
+            font-size: 1em;
+            padding: 0.1rem 0.5rem;
+            `
         }
     },
     menu: [
