@@ -6,7 +6,7 @@ part of 'generator_example.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$User on _User, Store {
   Computed<String> _$fullNameComputed;
@@ -59,7 +59,7 @@ mixin _$User on _User, Store {
   }
 }
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$Admin on _Admin, Store {
   final _$userNameAtom = Atom(name: '_Admin.userName');
@@ -114,7 +114,7 @@ mixin _$Admin on _Admin, Store {
   }
 }
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$Item<T> on _Item<T>, Store {
   final _$valueAtom = Atom(name: '_Item.value');
