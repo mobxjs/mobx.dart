@@ -4,7 +4,6 @@
 
 A set of examples for using [MobX](https://github.com/mobxjs/mobx.dart).
 
-test
 ## Counter
 
 ## Todos
