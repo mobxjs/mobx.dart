@@ -4,7 +4,7 @@ part 'generator_example.g.dart';
 
 class User = _User with _$User;
 
-abstract class _User implements Store {
+abstract class _User with Store {
   _User(this.id);
 
   final int id;
@@ -29,7 +29,7 @@ class Admin extends _Admin with _$Admin {
   Admin(int id) : super(id);
 }
 
-abstract class _Admin extends User implements Store {
+abstract class _Admin extends User with Store {
   _Admin(int id) : super(id);
 
   @observable
@@ -61,7 +61,7 @@ abstract class _Admin extends User implements Store {
 
 class Item<A> = _Item<A> with _$Item<A>;
 
-abstract class _Item<T> implements Store {
+abstract class _Item<T> with Store {
   @observable
   T value;
 }

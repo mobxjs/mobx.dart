@@ -56,7 +56,7 @@ part 'simple_store.g.dart';
 
 class SimpleStore = _SimpleStore with _$SimpleStore;
 
-abstract class _SimpleStore implements Store {
+abstract class _SimpleStore with Store {
   @observable
   List<model.Event> events = List();
 }
@@ -86,7 +86,7 @@ We can now use this type with our observable values, like below. With this chang
 part 'color_store.g.dart';
 
 class ColorStore = _ColorStore with _$ColorStore;
-abstract class _ColorStore implements Store {
+abstract class _ColorStore with Store {
   
   @observable
   CustomColor selectedColor;

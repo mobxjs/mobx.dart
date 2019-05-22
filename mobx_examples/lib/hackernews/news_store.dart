@@ -8,7 +8,7 @@ enum FeedType { latest, top }
 
 class HackerNewsStore = _HackerNewsStore with _$HackerNewsStore;
 
-abstract class _HackerNewsStore implements Store {
+abstract class _HackerNewsStore with Store {
   final HnpwaClient _client = HnpwaClient();
 
   @observable

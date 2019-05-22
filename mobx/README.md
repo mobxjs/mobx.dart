@@ -91,7 +91,7 @@ part 'counter.g.dart';
 
 class Counter = CounterBase with _$Counter;
 
-abstract class CounterBase implements Store {
+abstract class CounterBase with Store {
   @observable
   int value = 0;
 
@@ -125,7 +125,7 @@ part 'counter.g.dart';
 
 class Contact = ContactBase with _$Contact;
 
-abstract class ContactBase implements Store {
+abstract class ContactBase with Store {
   @observable
   String firstName;
 
@@ -168,7 +168,7 @@ part 'counter.g.dart';
 
 class Counter = CounterBase with _$Counter;
 
-abstract class CounterBase implements Store {
+abstract class CounterBase with Store {
   @observable
   int value = 0;
 
@@ -284,7 +284,7 @@ part 'counter.g.dart';
 
 class Counter = CounterBase with _$Counter;
 
-abstract class CounterBase implements Store {
+abstract class CounterBase with Store {
   @observable
   int value = 0;
 

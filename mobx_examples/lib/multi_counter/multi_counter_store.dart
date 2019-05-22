@@ -4,7 +4,7 @@ part 'multi_counter_store.g.dart';
 
 class SingleCounter = _SingleCounter with _$SingleCounter;
 
-abstract class _SingleCounter implements Store {
+abstract class _SingleCounter with Store {
   @observable
   int value = 0;
 
@@ -26,7 +26,7 @@ abstract class _SingleCounter implements Store {
 
 class MultiCounterStore = _MultiCounterStore with _$MultiCounterStore;
 
-abstract class _MultiCounterStore implements Store {
+abstract class _MultiCounterStore with Store {
   final ObservableList<SingleCounter> counters = ObservableList();
 
   @action

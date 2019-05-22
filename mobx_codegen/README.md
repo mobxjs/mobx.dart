@@ -29,7 +29,7 @@ part 'todos.g.dart';
 class Todo = TodoBase with _$Todo;
 
 // The store-class
-abstract class TodoBase implements Store {
+abstract class TodoBase with Store {
   TodoBase(this.description);
 
   @observable

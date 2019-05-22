@@ -43,7 +43,7 @@ part 'todo.g.dart';
 
 class Todo = _Todo with _$Todo;
 
-abstract class _Todo implements Store {
+abstract class _Todo with Store {
   _Todo(this.description);
 
   @observable
@@ -89,7 +89,7 @@ part 'todo_list.g.dart';
 
 class Contact = _Contact with _$Contact;
 
-abstract class _Contact implements Store {
+abstract class _Contact with Store {
   @observable
   String first = 'Pavan';
 
@@ -133,7 +133,7 @@ part 'github_store.g.dart';
 
 class GithubStore = _GithubStore with _$GithubStore;
 
-abstract class _GithubStore implements Store {
+abstract class _GithubStore with Store {
   // ...
 
   static ObservableFuture<List<Repository>> emptyResponse =

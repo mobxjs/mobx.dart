@@ -35,7 +35,7 @@ part 'person.g.dart';
 
 class Person = _Person with _$Person;
 
-abstract class _Person implements Store {
+abstract class _Person with Store {
   @observable
   String name;
 
