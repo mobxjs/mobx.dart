@@ -5,7 +5,7 @@ part 'generator_usage_test.g.dart';
 
 class TestStore = _TestStore with _$TestStore;
 
-abstract class _TestStore implements Store {
+abstract class _TestStore with Store {
   _TestStore(this.field1, {this.field2});
 
   @observable

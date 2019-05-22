@@ -42,7 +42,7 @@ class StoreGenerator extends Generator {
 
     return library.classes
         .where((c) => c.isAbstract)
-        .where((c) => c.interfaces.any(_storeChecker.isExactlyType))
+        .where((c) => c.mixins.any(_storeChecker.isExactlyType))
         .expand(generate)
         .toSet()
         .join('\n\n');
