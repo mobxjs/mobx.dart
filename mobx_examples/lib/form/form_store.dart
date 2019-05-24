@@ -11,7 +11,7 @@ class CustomColor extends Color {
 
 class FormStore = _FormStore with _$FormStore;
 
-abstract class _FormStore implements Store {
+abstract class _FormStore with Store {
   final FormErrorState error = FormErrorState();
 
   @observable
@@ -116,7 +116,7 @@ abstract class _FormStore implements Store {
 
 class FormErrorState = _FormErrorState with _$FormErrorState;
 
-abstract class _FormErrorState implements Store {
+abstract class _FormErrorState with Store {
   @observable
   String username;
 

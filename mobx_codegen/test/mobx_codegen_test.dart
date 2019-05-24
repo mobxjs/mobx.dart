@@ -14,7 +14,7 @@ part 'generator_sample.g.dart';
 
 class User = UserBase with _\$User;
 
-abstract class UserBase implements Store {
+abstract class UserBase with Store {
   UserBase(this.id);
 
   final int id;
@@ -120,7 +120,7 @@ part 'generator_sample.g.dart';
 
 class User = UserBase with _\$User;
 
-abstract class UserBase implements Store {
+abstract class UserBase with Store {
   UserBase(this.id);
 
   @observable
@@ -170,7 +170,7 @@ part 'generator_sample.g.dart';
 
 class Item<A> = _Item<A> with _\$Item<A>;
 
-abstract class _Item<T> implements Store {
+abstract class _Item<T> with Store {
   @observable
   T value;
 }""";
@@ -210,7 +210,7 @@ void main() {
       expect(await generate(source), isEmpty);
     });
 
-    test('generates for a class that implements Store', () async {
+    test('generates for a class that mixing Store', () async {
       expect(await generate(validInput), endsWith(validOutput));
     });
 
@@ -218,7 +218,7 @@ void main() {
       expect(await generate(invalidInput), endsWith(invalidOutput));
     });
 
-    test('generates for a generic class implementing Store', () async {
+    test('generates for a generic class mixing Store', () async {
       expect(await generate(validGenericStoreInput),
           endsWith(validGenericStoreOutput));
     });

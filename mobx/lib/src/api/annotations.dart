@@ -22,4 +22,6 @@ class MakeAction {
 /// documentation.
 const MakeAction action = MakeAction._();
 
-abstract class Store {}
+mixin Store {
+  void dispose() {}
+}

@@ -23,7 +23,7 @@ part 'counter.g.dart';
 
 class Counter = CounterBase with _$Counter;
 
-abstract class CounterBase implements Store {
+abstract class CounterBase with Store {
   @observable
   int value = 0;
 
@@ -54,7 +54,7 @@ part 'example.g.dart';
 
 class Todo = TodoBase with _$Todo;
 
-abstract class TodoBase implements Store {
+abstract class TodoBase with Store {
   TodoBase(this.description);
 
   @observable
@@ -79,7 +79,7 @@ enum VisibilityFilter { all, pending, completed }
 
 class TodoList = TodoListBase with _$TodoList;
 
-abstract class TodoListBase implements Store {
+abstract class TodoListBase with Store {
   @observable
   ObservableList<Todo> todos = ObservableList<Todo>();
 
@@ -132,7 +132,7 @@ The operations that can be performed on the TodoList are marked with `@action`. 
 ```dart
 class TodoList = TodoListBase with _$TodoList;
 
-abstract class TodoListBase implements Store {
+abstract class TodoListBase with Store {
   // ...
 
   @action

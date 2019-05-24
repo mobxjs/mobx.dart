@@ -19,7 +19,7 @@ import storeHierarchy from "./store-hierarchy.png";
 When you are starting out, a single store is enough to get going. As it grows in size, you will see that it is accumulating a lot of additional fields and actions that don't all belong together. It is then time to break it down and move the related observable state and actions to its own `Store`. For example, consider the store below:
 
 ```dart
-abstract class _MainStore implements Store {
+abstract class _MainStore with Store {
 
   @observable
   String title;
@@ -56,7 +56,7 @@ Let's create a sub-store called `PersonDetails` and move the fields into it:
 ```dart
 class PersonDetails = _PersonDetails with _$PersonDetails;
 
-abstract class _PersonDetails implements Store {
+abstract class _PersonDetails with Store {
 
   @observable
   String name;
@@ -82,7 +82,7 @@ abstract class _PersonDetails implements Store {
 The `_MainStore` now looks much simpler to read:
 
 ```dart
-abstract class _MainStore implements Store {
+abstract class _MainStore with Store {
 
   @observable
   String title;

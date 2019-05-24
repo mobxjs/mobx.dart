@@ -25,7 +25,7 @@ part 'todo.g.dart';
 
 class Todo = _Todo with _$Todo;
 
-abstract class _Todo implements Store {
+abstract class _Todo with Store {
   _Todo(this.description);
 
   @observable
@@ -59,7 +59,7 @@ enum VisibilityFilter { all, pending, completed }
 
 class TodoList = _TodoList with _$TodoList;
 
-abstract class _TodoList implements Store {
+abstract class _TodoList with Store {
   @observable
   ObservableList<Todo> todos = ObservableList<Todo>();
 
@@ -83,7 +83,7 @@ import todosImage from "./todos.png";
 ```dart
 class TodoList = _TodoList with _$TodoList;
 
-abstract class _TodoList implements Store {
+abstract class _TodoList with Store {
   // ...
 
   @computed
@@ -142,7 +142,7 @@ Actions are the semantic operations that mutate the observable state. They also 
 ```dart
 class TodoList = _TodoList with _$TodoList;
 
-abstract class _TodoList implements Store {
+abstract class _TodoList with Store {
   // ...
 
   @action
@@ -187,7 +187,7 @@ Here is the complete `TodoList` with all the observable, computed properties and
 ```dart
 class TodoList = _TodoList with _$TodoList;
 
-abstract class _TodoList implements Store {
+abstract class _TodoList with Store {
   @observable
   ObservableList<Todo> todos = ObservableList<Todo>();
 

@@ -12,16 +12,16 @@ class FormExample extends StatefulWidget {
 class _FormExampleState extends State<FormExample> {
   final FormStore store = FormStore();
 
-
   @override
   void initState() {
+    super.initState();
     store.setupValidations();
   }
-
 
   @override
   void dispose() {
     store.dispose();
+    super.dispose();
   }
 
   @override

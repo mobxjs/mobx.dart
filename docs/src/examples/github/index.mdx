@@ -24,7 +24,7 @@ part 'github_store.g.dart';
 
 class GithubStore = _GithubStore with _$GithubStore;
 
-abstract class _GithubStore implements Store {
+abstract class _GithubStore with Store {
   final GitHub client = createGitHubClient();
 
   List<Repository> repositories = [];
@@ -47,7 +47,7 @@ The call to fetch repositories is an async operation. We do want to track and sh
 In our case, we will use one like below. The `ObservableFuture` is tracking the results, which is a `List<Repository>`.
 
 ```dart
-abstract class _GithubStore implements Store {
+abstract class _GithubStore with Store {
   // ...
 
   // We are starting with an empty future to avoid a null check
@@ -82,7 +82,7 @@ Now that we have our reactive state ready, we can focus on defining the actions 
 Both of these have been incorporated in the `_GithubStore` class:
 
 ```dart
-abstract class _GithubStore implements Store {
+abstract class _GithubStore with Store {
   // ...
 
   @action
