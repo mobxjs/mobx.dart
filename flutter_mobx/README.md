@@ -1,6 +1,6 @@
 # flutter_mobx
 
-[![pub package](https://img.shields.io/pub/v/flutter_mobx.svg)](https://pub.dartlang.org/packages/flutter_mobx)
+[![pub package](https://img.shields.io/pub/v/flutter_mobx.svg&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
 [![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 
 > Flutter integration with [MobX.dart](https://pub.dartlang.org/packages/mobx).

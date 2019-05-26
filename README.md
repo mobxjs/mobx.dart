@@ -1,8 +1,8 @@
 # mobx.dart
 
-[![pub package](https://img.shields.io/pub/v/mobx.svg?label=mobx)](https://pub.dartlang.org/packages/mobx)
-[![pub package](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx)](https://pub.dartlang.org/packages/flutter_mobx)
-[![pub package](https://img.shields.io/pub/v/mobx_codegen.svg?label=mobx_codegen)](https://pub.dartlang.org/packages/mobx_codegen)
+[![pub package](https://img.shields.io/pub/v/mobx.svg?label=mobx&color=blue)](https://pub.dartlang.org/packages/mobx)
+[![pub package](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
+[![pub package](https://img.shields.io/pub/v/mobx_codegen.svg?label=mobx_codegen&color=blue)](https://pub.dartlang.org/packages/mobx_codegen)
 
 [![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)

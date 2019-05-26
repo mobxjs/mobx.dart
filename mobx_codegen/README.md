@@ -1,6 +1,6 @@
 # mobx_codegen
 
-[![pub package](https://img.shields.io/pub/v/mobx_codegen.svg)](https://pub.dartlang.org/packages/mobx_codegen)
+[![pub package](https://img.shields.io/pub/v/mobx_codegen.svg&color=blue)](https://pub.dartlang.org/packages/mobx_codegen)
 [![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 
 > MobX Code Generation library
