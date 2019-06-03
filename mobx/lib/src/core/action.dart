@@ -71,8 +71,10 @@ class Action {
 ///
 class ActionController {
   ActionController({ReactiveContext context, String name})
-      : _context = context ?? mainContext,
-        name = name ?? context.nameFor('Action');
+      : this._(context ?? mainContext, name: name);
+
+  ActionController._(this._context, {String name})
+      : name = name ?? _context.nameFor('Action');
 
   final ReactiveContext _context;
   final String name;
