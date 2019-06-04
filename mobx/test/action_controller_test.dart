@@ -8,6 +8,9 @@ class MockDerivation extends Mock implements Derivation {}
 
 void main() {
   group('ActionController', () {
+    test('can be created with both null context and name', () {
+      ActionController();
+    });
     test(
         'startAction calls startUntracked, startBatch and startAllowStateChanges',
         () {
