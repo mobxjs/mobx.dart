@@ -196,7 +196,7 @@ abstract class CounterBase with Store {
 
 #### Asynchronous Actions
 
-MobX.dart handles asynchronous actions [automatically](https://github.com/mobxjs/mobx.dart/pull/89) and does not require wrapping the code with ```runInAction```. 
+MobX.dart handles asynchronous actions automatically and does not require wrapping the code with [`runInAction`](https://mobx.pub/api/action#runinaction). 
 
 ```dart
 @observable
