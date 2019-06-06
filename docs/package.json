@@ -7,11 +7,14 @@
     },
     "license": "MIT",
     "scripts": {
-        "dev": "docz dev",
+        "start": "docz dev --typescript",
         "build": "docz build"
     },
     "dependencies": {
         "docz": "^1.2.0",
         "docz-theme-default": "^1.2.0"
+    },
+    "devDependencies": {
+        "@types/react": "^16.8.19"
     }
 }
