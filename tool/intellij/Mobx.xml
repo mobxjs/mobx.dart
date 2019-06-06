@@ -1,0 +1,9 @@
+<templateSet group="Mobx">
+  <template name="str" value="part '$NAME$.g.dart';&#10;&#10;class $NAMECAPITALIZE$ = _$NAMECAPITALIZE$ with _$$$NAMECAPITALIZE$;&#10;&#10;abstract class _$NAMECAPITALIZE$ with Store {&#10;  @observable&#10;  int value = 0;&#10;&#10;  @action&#10;  void increment() {&#10;    value++;&#10;  }&#10;}" description="Mobx Store" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;store&quot;" alwaysStopAt="true" />
+    <variable name="NAMECAPITALIZE" expression="capitalize(NAME)" defaultValue="&quot;Store&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+</templateSet>
