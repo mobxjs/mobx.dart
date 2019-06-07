@@ -23,6 +23,13 @@
   "homepage": "https://github.com/mobxjs/mobx.dart#readme",
   "version": "1.0.0",
   "main": "doczrc.js",
-  "keywords": ["mobx", "flutter", "dart", "reactive", "state", "docs"],
+  "keywords": [
+    "mobx",
+    "flutter",
+    "dart",
+    "reactive",
+    "state",
+    "docs"
+  ],
   "author": "Pavan Podila <pavan@pixelingene.com>"
 }

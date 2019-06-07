@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1+1
+
+- README updates
+
+## 0.2.1
+
+- An internal change was made to support the new restrictions around [non-covariant type variables in superinterfaces](https://github.com/dart-lang/language/blob/master/accepted/future-releases/contravariant-superinterface-2018/feature-specification.md). This was causing compile errors in the Flutter `beta`/`dev`/`master` channels.
+
 ## 0.2.0
 
 - A breaking change has been introduced to the use of the `Store` type. Previously it was meant to be used as an _interface_, which has now changed to a **mixin**. Instead of doing:

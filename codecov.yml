@@ -1,15 +1,13 @@
 coverage:
+  range: 80..90
   status:
     project:
       default: off
       mobx:
-        target: 90%
-        flags: frontend
+        flags: mobx
       mobx_codegen:
-        target: 90%
         flags: mobx_codegen
       flutter_mobx:
-        target: 90%
         flags: flutter_mobx
 
 flags:
