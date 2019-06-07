@@ -6,6 +6,8 @@ part of 'todos.dart';
 // StoreGenerator
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
+
 mixin _$Todo on TodoBase, Store {
   final _$descriptionAtom = Atom(name: 'TodoBase.description');
 
@@ -17,7 +19,8 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   set description(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$descriptionAtom);
+    _$descriptionAtom.context
+        .checkIfStateModificationsAreAllowed(_$descriptionAtom);
     super.description = value;
     _$descriptionAtom.reportChanged();
   }
@@ -32,11 +35,13 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   set done(bool value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$doneAtom);
+    _$doneAtom.context.checkIfStateModificationsAreAllowed(_$doneAtom);
     super.done = value;
     _$doneAtom.reportChanged();
   }
 }
+
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$TodoList on TodoListBase, Store {
   Computed<ObservableList<Todo>> _$pendingTodosComputed;
@@ -86,7 +91,7 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set todos(ObservableList<Todo> value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$todosAtom);
+    _$todosAtom.context.checkIfStateModificationsAreAllowed(_$todosAtom);
     super.todos = value;
     _$todosAtom.reportChanged();
   }
@@ -101,7 +106,7 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set filter(VisibilityFilter value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$filterAtom);
+    _$filterAtom.context.checkIfStateModificationsAreAllowed(_$filterAtom);
     super.filter = value;
     _$filterAtom.reportChanged();
   }
@@ -117,7 +122,8 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set currentDescription(String value) {
-    mainContext.checkIfStateModificationsAreAllowed(_$currentDescriptionAtom);
+    _$currentDescriptionAtom.context
+        .checkIfStateModificationsAreAllowed(_$currentDescriptionAtom);
     super.currentDescription = value;
     _$currentDescriptionAtom.reportChanged();
   }

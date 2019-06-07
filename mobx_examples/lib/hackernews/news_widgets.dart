@@ -55,6 +55,7 @@ class FeedItemsView extends StatelessWidget {
   final FeedType type;
 
   @override
+  // ignore: missing_return
   Widget build(BuildContext context) => Observer(builder: (_) {
         final future = type == FeedType.latest
             ? store.latestItemsFuture

@@ -8,8 +8,7 @@ abstract class Interceptable<T> {
   Dispose intercept(Interceptor<T> interceptor);
 }
 
-class Interceptors<T>
-    extends NotificationHandlers<WillChangeNotification<T>, Interceptor<T>>
+class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>>
     implements Interceptable<T> {
   Interceptors(ReactiveContext context) : super(context);
 

@@ -82,6 +82,7 @@ void main() {
     test('uses provided context', () {
       final context = MockContext();
       Interceptors(context)
+        // ignore: missing_return
         ..intercept((_) {})
         ..interceptChange(WillChangeNotification());
 
