@@ -27,15 +27,6 @@ jobs:
       - checkout
       - run: tool/circle_run.sh
 
-  build_mobx_codegen_example:
-    executor: dart_sdk_image
-    environment:
-      - FLUTTER: false
-      - PACKAGE: mobx_codegen/example
-    steps:
-      - checkout
-      - run: tool/circle_run.sh
-
   # Flutter packages ---
   build_flutter_mobx:
     executor: flutter_sdk_image
@@ -52,5 +43,4 @@ workflows:
     jobs:
       - build_mobx
       - build_mobx_codegen
-      - build_mobx_codegen_example
       - build_flutter_mobx
