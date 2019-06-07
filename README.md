@@ -194,6 +194,26 @@ abstract class CounterBase with Store {
 }
 ```
 
+#### Asynchronous Actions
+
+MobX.dart handles asynchronous actions automatically and does not require wrapping the code with [`runInAction`](https://mobx.pub/api/action#runinaction). 
+
+```dart
+@observable
+String stuff = '';
+
+@observable
+loading = false;
+
+@action
+Future<void> loadStuff() async {
+  loading = true; //This notifies observers
+  stuff = await fetchStuff();
+  loading = false; //This also notifies observers
+}
+```
+  
+
 ### Reactions
 
 Reactions complete the _MobX triad_ of **observables**, **actions** and **reactions**. They are
