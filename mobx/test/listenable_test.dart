@@ -26,5 +26,12 @@ void main() {
         ..notifyListeners(ChangeNotification());
       verify(context.untracked(any));
     });
+
+    test('detects invalid function handlers', () {
+      final context = MockContext();
+
+      expect(() => Listeners(context).add(() {}),
+          throwsA(const TypeMatcher<AssertionError>()));
+    });
   });
 }

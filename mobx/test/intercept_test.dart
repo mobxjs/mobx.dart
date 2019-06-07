@@ -88,5 +88,12 @@ void main() {
 
       verify(context.untracked(any));
     });
+
+    test('detects invalid function handlers', () {
+      final context = MockContext();
+
+      expect(() => Interceptors(context).add(() {}),
+          throwsA(const TypeMatcher<AssertionError>()));
+    });
   });
 }

@@ -15,6 +15,13 @@ class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>>
   @override
   Dispose intercept(Interceptor<T> interceptor) => add(interceptor);
 
+  @override
+  Dispose add(Function handler) {
+    assert(handler is Interceptor<T>, 'Invalid handler function: $handler');
+
+    return super.add(handler);
+  }
+
   WillChangeNotification interceptChange(WillChangeNotification<T> change) {
     if (!_canHandle(change)) {
       return change;
