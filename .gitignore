@@ -16,6 +16,7 @@ pubspec.lock
 
 # Misc
 node_modules
+.idea/workspace.xml
 *.log
 local.properties
 .vscode/settings.json
