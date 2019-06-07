@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "docz dev --typescript",
-    "build": "docz build"
+    "build": "docz build --typescript"
   },
   "dependencies": {
     "docz": "^1.2.0",
