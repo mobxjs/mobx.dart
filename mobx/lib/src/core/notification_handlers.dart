@@ -1,17 +1,17 @@
 part of '../core.dart';
 
-class NotificationHandlers<TNotification, THandler extends Function> {
+class NotificationHandlers<TNotification> {
   NotificationHandlers(this._context) : assert(_context != null);
 
   final ReactiveContext _context;
 
-  Set<THandler> _handlers;
+  Set<Function> _handlers;
 
-  Dispose add(THandler handler) {
+  Dispose add(covariant Function handler) {
     assert(handler != null);
 
     // ignore: prefer_collection_literals
-    _handlers ??= LinkedHashSet<THandler>();
+    _handlers ??= LinkedHashSet<Function>();
     final listeners = _handlers..add(handler);
     return () => listeners.remove(handler);
   }

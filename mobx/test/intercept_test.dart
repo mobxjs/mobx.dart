@@ -82,7 +82,8 @@ void main() {
     test('uses provided context', () {
       final context = MockContext();
       Interceptors(context)
-        ..intercept((_) {})
+        // ignore: missing_return
+        ..add((_) {})
         ..interceptChange(WillChangeNotification());
 
       verify(context.untracked(any));

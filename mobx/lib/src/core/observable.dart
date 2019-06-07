@@ -85,10 +85,10 @@ class Observable<T> extends Atom
           object: this));
     }
 
-    return _listeners.registerListener(listener);
+    return _listeners.add(listener);
   }
 
   @override
   Dispose intercept(Interceptor<T> interceptor) =>
-      _interceptors.intercept(interceptor);
+      _interceptors.add(interceptor);
 }

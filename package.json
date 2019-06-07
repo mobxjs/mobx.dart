@@ -5,6 +5,7 @@
   "scripts": {
     "pub:get:mobx": "cd mobx; flutter packages pub get;",
     "pub:get:mobx_codegen": "cd mobx_codegen; flutter packages pub get;",
+    "gen:mobx:example": "cd mobx/example; flutter packages pub run build_runner watch --delete-conflicting-outputs;",
     "gen:mobx_examples": "cd mobx_examples; flutter packages pub run build_runner watch --delete-conflicting-outputs;",
     "gen:mobx_codegen": "cd mobx_codegen; flutter packages pub run build_runner watch --delete-conflicting-outputs;"
   }

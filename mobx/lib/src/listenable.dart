@@ -7,11 +7,11 @@ abstract class Listenable<TNotification> {
   Dispose observe(Listener<TNotification> listener, {bool fireImmediately});
 }
 
-class Listeners<TNotification>
-    extends NotificationHandlers<TNotification, Listener<TNotification>> {
+class Listeners<TNotification> extends NotificationHandlers<TNotification> {
   Listeners(ReactiveContext context) : super(context);
 
-  Dispose registerListener(Listener<TNotification> listener) => add(listener);
+  @override
+  Dispose add(Listener<TNotification> handler) => super.add(handler);
 
   void notifyListeners(TNotification change) {
     if (!_canHandle(change)) {
