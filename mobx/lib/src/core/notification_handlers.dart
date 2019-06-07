@@ -7,7 +7,7 @@ class NotificationHandlers<TNotification> {
 
   Set<Function> _handlers;
 
-  Dispose add(Function handler) {
+  Dispose add(covariant Function handler) {
     assert(handler != null);
 
     // ignore: prefer_collection_literals

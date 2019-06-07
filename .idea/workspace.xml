@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f21c0f2-8a81-4fa9-8639-1f7492d9f4bb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/notification_handlers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/notification_handlers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/observable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/observable.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/lib/src/interceptable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/interceptable.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/lib/src/listenable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/listenable.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/test/intercept_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/intercept_test.dart" afterDir="false" />
@@ -20,66 +21,16 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager">
-    <option name="groupingKeys">
-      <option value="directory" />
-    </option>
-  </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mobx/lib/src/interceptable.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobx/test/intercept_test.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="96" column="7" lean-forward="true" selection-start-line="96" selection-start-column="7" selection-end-line="96" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobx/test/observe_test.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="157" column="21" lean-forward="true" selection-start-line="157" selection-start-column="21" selection-end-line="157" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/atom.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-674">
-              <caret line="51" column="44" selection-start-line="51" selection-start-column="44" selection-end-line="51" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobx/lib/src/listenable.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mobx/test/listenable_test.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+            <state relative-caret-position="199">
+              <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -111,20 +62,20 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/mobx_examples/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/mobx/lib/src/core/observable.dart" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/mobx/example/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/mobx/lib/src/core/notification_handlers.dart" />
         <option value="$PROJECT_DIR$/mobx/example/lib/counter.dart" />
         <option value="$PROJECT_DIR$/mobx_examples/lib/form/form_store.dart" />
         <option value="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_widgets.dart" />
         <option value="$PROJECT_DIR$/docs/package.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/mobx/test/observe_test.dart" />
-        <option value="$PROJECT_DIR$/mobx/test/intercept_test.dart" />
+        <option value="$PROJECT_DIR$/mobx/lib/src/core/notification_handlers.dart" />
         <option value="$PROJECT_DIR$/mobx/lib/src/listenable.dart" />
-        <option value="$PROJECT_DIR$/mobx/lib/src/interceptable.dart" />
+        <option value="$PROJECT_DIR$/mobx/lib/src/core/observable.dart" />
+        <option value="$PROJECT_DIR$/mobx/test/intercept_test.dart" />
         <option value="$PROJECT_DIR$/mobx/test/listenable_test.dart" />
+        <option value="$PROJECT_DIR$/mobx/lib/src/interceptable.dart" />
       </list>
     </option>
   </component>
@@ -165,6 +116,23 @@
               <item name="mobx" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="observable_collections" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
@@ -278,34 +246,34 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="tests_in_mobx - 2019.06.07 at 13h 58m 04s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 36m 03s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 13h 58m 53s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 36m 32s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 13h 59m 12s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 36m 48s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 13h 59m 28s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 37m 03s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 13h 59m 44s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 37m 25s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 14h 00m 33s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 37m 37s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 14h 00m 46s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 37m 56s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 14h 01m 20s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 38m 11s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 14h 01m 40s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 38m 26s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 14h 01m 55s.xml">
+    <history-entry file="tests_in_mobx - 2019.06.07 at 17h 38m 41s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
   </component>
@@ -313,24 +281,24 @@
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4983957" visible="true" weight="0.26190478" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4983957" visible="true" weight="0.26190478" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.50160426" side_tool="true" weight="0.25274727" />
       <window_info id="Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32941177" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49958643" visible="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Dart Analysis" order="7" weight="0.32941177" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32941177" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4993895" weight="0.32941177" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32941177" />
-      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50041354" side_tool="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Flutter Performance" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="14" weight="0.32941177" />
       <window_info anchor="bottom" id="TypeScript" order="15" />
@@ -624,27 +592,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/observable.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="92" column="25" lean-forward="true" selection-start-line="92" selection-start-column="25" selection-end-line="92" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/notification_handlers.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/lib/src/interceptable.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobx/test/observe_test.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="423">
@@ -659,24 +606,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2276">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1000">
+          <caret line="52" column="29" lean-forward="true" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/notification_handlers.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mobx/lib/src/listenable.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/observable.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="92" column="23" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobx/test/intercept_test.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="96" column="7" lean-forward="true" selection-start-line="96" selection-start-column="7" selection-end-line="96" selection-end-column="7" />
+        <state relative-caret-position="439">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobx/test/listenable_test.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+        <state relative-caret-position="419">
+          <caret line="27" column="7" lean-forward="true" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/interceptable.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
         </state>
       </provider>
     </entry>

@@ -12,7 +12,7 @@ void main() {
       final listeners = Listeners<ChangeNotification<int>>(mainContext);
       expect(listeners.hasHandlers, isFalse);
 
-      final dispose = listeners.registerListener(listener);
+      final dispose = listeners.add(listener);
       expect(listeners.hasHandlers, isTrue);
 
       dispose();
@@ -22,16 +22,9 @@ void main() {
     test('uses provided context', () {
       final context = MockContext();
       Listeners(context)
-        ..registerListener((_) {})
+        ..add((_) {})
         ..notifyListeners(ChangeNotification());
       verify(context.untracked(any));
-    });
-
-    test('detects invalid function handlers', () {
-      final context = MockContext();
-
-      expect(() => Listeners(context).add(() {}),
-          throwsA(const TypeMatcher<AssertionError>()));
     });
   });
 }

@@ -8,19 +8,11 @@ abstract class Interceptable<T> {
   Dispose intercept(Interceptor<T> interceptor);
 }
 
-class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>>
-    implements Interceptable<T> {
+class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>> {
   Interceptors(ReactiveContext context) : super(context);
 
   @override
-  Dispose intercept(Interceptor<T> interceptor) => add(interceptor);
-
-  @override
-  Dispose add(Function handler) {
-    assert(handler is Interceptor<T>, 'Invalid handler function: $handler');
-
-    return super.add(handler);
-  }
+  Dispose add(Interceptor<T> handler) => super.add(handler);
 
   WillChangeNotification interceptChange(WillChangeNotification<T> change) {
     if (!_canHandle(change)) {

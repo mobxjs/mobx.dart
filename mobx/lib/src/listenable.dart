@@ -10,15 +10,8 @@ abstract class Listenable<TNotification> {
 class Listeners<TNotification> extends NotificationHandlers<TNotification> {
   Listeners(ReactiveContext context) : super(context);
 
-  Dispose registerListener(Listener<TNotification> listener) => add(listener);
-
   @override
-  Dispose add(Function handler) {
-    assert(handler is Listener<TNotification>,
-        'Invalid handler function: $handler');
-
-    return super.add(handler);
-  }
+  Dispose add(Listener<TNotification> handler) => super.add(handler);
 
   void notifyListeners(TNotification change) {
     if (!_canHandle(change)) {
