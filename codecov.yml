@@ -1,0 +1,26 @@
+coverage:
+  status:
+    project:
+      default: off
+      mobx:
+        target: 90%
+        flags: frontend
+      mobx_codegen:
+        target: 90%
+        flags: mobx_codegen
+      flutter_mobx:
+        target: 90%
+        flags: flutter_mobx
+
+flags:
+  # filter the folder(s) you wish to measure by that flag
+  mobx:
+    # only include files in the mobx folder
+    paths:
+      - mobx/lib/
+  mobx_codegen:
+    paths:
+      - mobx_codegen/lib/
+  flutter_mobx:
+    paths:
+      - flutter_mobx/lib/
