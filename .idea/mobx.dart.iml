@@ -3,28 +3,20 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/flutter_mobx/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/flutter_mobx/build" />
-      <excludeFolder url="file://$MODULE_DIR$/flutter_mobx/example/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/flutter_mobx/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mobx/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/mobx/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/mobx/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mobx/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/mobx/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/mobx/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mobx_codegen/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/mobx_codegen/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/mobx_codegen/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mobx_codegen/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/mobx_codegen/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/mobx_codegen/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/mobx_examples/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/mobx_examples/build" />
-      <excludeFolder url="file://$MODULE_DIR$/mobx_examples/ios/.symlinks/plugins/url_launcher/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/mobx_examples/ios/.symlinks/plugins/url_launcher/build" />
-      <excludeFolder url="file://$MODULE_DIR$/mobx_examples/ios/.symlinks/plugins/url_launcher/example/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/mobx_examples/ios/.symlinks/plugins/url_launcher/example/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Dart SDK" level="project" />
-    <orderEntry type="library" name="Dart Packages" level="project" />
   </component>
 </module>

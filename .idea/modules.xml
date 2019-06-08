@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/docs/docs.iml" filepath="$PROJECT_DIR$/docs/docs.iml" />
       <module fileurl="file://$PROJECT_DIR$/flutter_mobx/flutter_mobx.iml" filepath="$PROJECT_DIR$/flutter_mobx/flutter_mobx.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobx/mobx.iml" filepath="$PROJECT_DIR$/mobx/mobx.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mobx.dart.iml" filepath="$PROJECT_DIR$/mobx.dart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mobx.dart.iml" filepath="$PROJECT_DIR$/.idea/mobx.dart.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobx_codegen/mobx_codegen.iml" filepath="$PROJECT_DIR$/mobx_codegen/mobx_codegen.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobx_examples/mobx_examples.iml" filepath="$PROJECT_DIR$/mobx_examples/mobx_examples.iml" />
     </modules>
