@@ -5,8 +5,7 @@ class AsyncAction {
       : this._(context ?? mainContext, name);
 
   AsyncAction._(ReactiveContext context, String name)
-      : assert(context != null),
-        assert(name != null),
+      : assert(name != null),
         _actions = ActionController(context: context, name: name);
 
   final ActionController _actions;
@@ -35,6 +34,8 @@ class AsyncAction {
 
   static dynamic _noOp() => null;
 
+  // Will be invoked for a catch clause that has a single argument: exception or
+  // when a result is produced
   R _run<R>(Zone self, ZoneDelegate parent, Zone zone, R Function() f) {
     final actionInfo = _actions.startAction();
     try {
@@ -56,6 +57,7 @@ class AsyncAction {
     }
   }
 
+  // Will be invoked for a catch clause that has two arguments: exception and stacktrace
   R _runBinary<R, A, B>(Zone self, ZoneDelegate parent, Zone zone,
       R Function(A a, B b) f, A a, B b) {
     final actionInfo = _actions.startAction();
