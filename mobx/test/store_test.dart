@@ -7,7 +7,7 @@ void main() {
   group('Store', () {
     // ignore: unnecessary_lambdas
     test('can call dispose', () {
-      TestStore().dispose();
+      expect(TestStore().dispose, returnsNormally);
     });
   });
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1+2
+
+- Improving test coverage
+
 ## 0.2.1+1
 
 - README updates

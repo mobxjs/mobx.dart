@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="" />
-    <list id="046abe40-ce26-42b1-93e6-623526357dfc" name="idea" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mobx.dart.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mobx.dart.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/mobx/lib/src/api/store.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobx/test/annotations_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/flutter_mobx.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/flutter_mobx.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx.dart.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/mobx.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/mobx.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/annotations.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/annotations.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/mobx.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/mobx.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/mobx_codegen.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/mobx_codegen.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/store_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/store_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,10 +25,13 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mobx_codegen/pubspec.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <entry file="file://$PROJECT_DIR$/mobx/CHANGELOG.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="80">
+                <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -51,8 +49,6 @@
         <option value="$PROJECT_DIR$/mobx/README.md" />
         <option value="$PROJECT_DIR$/flutter_mobx/README.md" />
         <option value="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/mobx/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/mobx/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/mobx_codegen/example/pubspec.yaml" />
         <option value="$PROJECT_DIR$/mobx_codegen/example/README.md" />
@@ -60,6 +56,14 @@
         <option value="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/.circleci/config.yml" />
         <option value="$PROJECT_DIR$/codecov.yml" />
+        <option value="$PROJECT_DIR$/mobx/lib/src/api/store.dart" />
+        <option value="$PROJECT_DIR$/mobx_codegen/lib/mobx_codegen.dart" />
+        <option value="$PROJECT_DIR$/mobx/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/mobx/lib/src/api/annotations.dart" />
+        <option value="$PROJECT_DIR$/mobx/lib/mobx.dart" />
+        <option value="$PROJECT_DIR$/mobx/test/annotations_test.dart" />
+        <option value="$PROJECT_DIR$/mobx/test/store_test.dart" />
+        <option value="$PROJECT_DIR$/mobx/CHANGELOG.md" />
       </list>
     </option>
   </component>
@@ -89,13 +93,65 @@
             <path>
               <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
               <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
               <item name="mobx_codegen" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
               <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
               <item name="mobx_codegen" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx_codegen" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -122,6 +178,11 @@
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -134,7 +195,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in flutter_mobx">
+  <component name="RunManager" selected="Dart Test.tests in mobx">
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/mobx" />
       <option name="scope" value="FOLDER" />
@@ -161,35 +222,35 @@
     </list>
   </component>
   <component name="TestHistory">
-    <history-entry file="mobx_codegen_tests - 2019.06.07 at 18h 37m 44s.xml">
-      <configuration name="mobx_codegen tests" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.07 at 18h 43m 38s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx_codegen - 2019.06.07 at 18h 44m 51s.xml">
-      <configuration name="tests in mobx_codegen" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx_codegen - 2019.06.07 at 18h 45m 09s.xml">
-      <configuration name="tests in mobx_codegen" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx_codegen - 2019.06.07 at 18h 46m 03s.xml">
-      <configuration name="tests in mobx_codegen" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx_codegen - 2019.06.07 at 18h 46m 22s.xml">
-      <configuration name="tests in mobx_codegen" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx_codegen - 2019.06.07 at 18h 54m 09s.xml">
-      <configuration name="tests in mobx_codegen" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx_codegen - 2019.06.07 at 18h 55m 59s.xml">
-      <configuration name="tests in mobx_codegen" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="tests_in_flutter_mobx - 2019.06.07 at 18h 56m 25s.xml">
       <configuration name="tests in flutter_mobx" configurationId="FlutterTestConfigType" />
     </history-entry>
     <history-entry file="tests_in_flutter_mobx - 2019.06.07 at 18h 57m 29s.xml">
       <configuration name="tests in flutter_mobx" configurationId="FlutterTestConfigType" />
+    </history-entry>
+    <history-entry file="tests_in_mobx - 2019.06.08 at 08h 51m 02s.xml">
+      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests_in_mobx - 2019.06.08 at 08h 51m 58s.xml">
+      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests_in_mobx - 2019.06.08 at 08h 58m 39s.xml">
+      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests_in_mobx - 2019.06.08 at 09h 01m 34s.xml">
+      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests_in_mobx - 2019.06.08 at 09h 03m 50s.xml">
+      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests_in_mobx - 2019.06.08 at 09h 04m 05s.xml">
+      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests_in_mobx - 2019.06.08 at 09h 04m 29s.xml">
+      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests_in_mobx - 2019.06.08 at 09h 05m 15s.xml">
+      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -202,8 +263,8 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Messages" weight="0.32976446" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32869378" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32869378" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32869378" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -214,7 +275,7 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32976446" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50123054" side_tool="true" weight="0.32762313" />
       <window_info anchor="bottom" id="Flutter Performance" order="12" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.4987695" visible="true" weight="0.32869378" />
+      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.4987695" weight="0.32869378" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -245,7 +306,8 @@
     <MESSAGE value="updating readmes, removing the example code in mobx_codegen, fixing the flag in codecov.yml" />
     <MESSAGE value="removing the code coverage for mobx_codegen/example" />
     <MESSAGE value="tightening the coverage range in codecov" />
-    <option name="LAST_COMMIT_MESSAGE" value="tightening the coverage range in codecov" />
+    <MESSAGE value=".idea files to keep the project config in place" />
+    <option name="LAST_COMMIT_MESSAGE" value=".idea files to keep the project config in place" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -296,13 +358,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/pubspec.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flutter_mobx/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
@@ -318,16 +373,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="60">
             <caret line="3" selection-start-line="3" selection-end-line="3" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/CHANGELOG.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="120">
-            <caret line="6" selection-start-line="6" selection-end-line="6" />
           </first_editor>
           <second_editor />
         </state>
@@ -401,10 +446,107 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/notification_handlers.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="57" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx_codegen/lib/src/annotations.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx_codegen/lib/mobx_codegen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mobx_codegen/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
+        <state relative-caret-position="320">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/example/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/example/lib/todos.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/api/store.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/mobx.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="47" column="18" lean-forward="true" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#2064#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.5/lib/src/core_matchers.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="145" column="14" selection-start-line="145" selection-start-column="14" selection-end-line="145" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/test/store_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="42" lean-forward="true" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/api/annotations.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
           <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/test/annotations_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/CHANGELOG.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="80">
+            <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
