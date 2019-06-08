@@ -26,5 +26,15 @@ void main() {
         ..notifyListeners(ChangeNotification());
       verify(context.untracked(any));
     });
+
+    test('asserts for null notifications', () {
+      final handlers = Listeners(MockContext())
+        // ignore: missing_return
+        ..add((_) {});
+
+      expect(() {
+        handlers.notifyListeners(null);
+      }, throwsA(const TypeMatcher<AssertionError>()));
+    });
   });
 }

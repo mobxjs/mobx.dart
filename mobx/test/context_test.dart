@@ -67,6 +67,13 @@ void main() {
       expect(() => a.value = 1, throwsException);
       d();
     });
+
+    test('throws AssertionError if a name prefix is not provided', () {
+      final context = createContext();
+
+      expect(() => context.nameFor(null),
+          throwsA(const TypeMatcher<AssertionError>()));
+    });
   });
 
   group('ReactiveConfig', () {
@@ -79,6 +86,16 @@ void main() {
       expect(clone.disableErrorBoundaries == config.disableErrorBoundaries,
           isTrue);
       expect(clone.enforceActions == config.enforceActions, isTrue);
+    });
+
+    test('when no overrides are provided the clone reuses source values', () {
+      final config = ReactiveConfig.main;
+      final clone = config.clone(); // No change
+
+      expect(clone.maxIterations, equals(config.maxIterations));
+      expect(
+          clone.disableErrorBoundaries, equals(config.disableErrorBoundaries));
+      expect(clone.enforceActions, equals(config.enforceActions));
     });
   });
 }

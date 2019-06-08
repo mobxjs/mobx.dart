@@ -88,5 +88,15 @@ void main() {
 
       verify(context.untracked(any));
     });
+
+    test('asserts for null notifications', () {
+      final handlers = Interceptors(MockContext())
+        // ignore: missing_return
+        ..add((_) {});
+
+      expect(() {
+        handlers.interceptChange(null);
+      }, throwsA(const TypeMatcher<AssertionError>()));
+    });
   });
 }
