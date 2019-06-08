@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/async/async_action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/async/async_action.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codecov.yml" beforeDir="false" afterPath="$PROJECT_DIR$/codecov.yml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,11 +36,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobx/test/async_action_test.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="453">
+              <caret line="34" column="22" lean-forward="true" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/codecov.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -88,7 +94,6 @@
         <option value="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" />
         <option value="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/.circleci/config.yml" />
-        <option value="$PROJECT_DIR$/codecov.yml" />
         <option value="$PROJECT_DIR$/mobx/lib/src/api/store.dart" />
         <option value="$PROJECT_DIR$/mobx_codegen/lib/mobx_codegen.dart" />
         <option value="$PROJECT_DIR$/mobx/pubspec.yaml" />
@@ -106,6 +111,7 @@
         <option value="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_store.dart" />
         <option value="$PROJECT_DIR$/mobx/lib/src/api/async/async_action.dart" />
         <option value="$PROJECT_DIR$/mobx/test/async_action_test.dart" />
+        <option value="$PROJECT_DIR$/codecov.yml" />
       </list>
     </option>
   </component>
@@ -282,7 +288,7 @@
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.25579977" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.25579977" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.5010707" side_tool="true" weight="0.25579977" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -300,7 +306,7 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32976446" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50123054" side_tool="true" weight="0.32762313" />
       <window_info anchor="bottom" id="Flutter Performance" order="12" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="13" sideWeight="0.4987695" visible="true" weight="0.32869378" />
+      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.4987695" visible="true" weight="0.32869378" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -333,7 +339,8 @@
     <MESSAGE value="tightening the coverage range in codecov" />
     <MESSAGE value=".idea files to keep the project config in place" />
     <MESSAGE value="improving test coverage" />
-    <option name="LAST_COMMIT_MESSAGE" value="improving test coverage" />
+    <MESSAGE value="removing the assertion check in async_actions" />
+    <option name="LAST_COMMIT_MESSAGE" value="removing the assertion check in async_actions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -393,13 +400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
           <caret line="45" column="26" lean-forward="true" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codecov.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="18" column="15" lean-forward="true" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -719,8 +719,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mobx/test/async_action_test.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="453">
+          <caret line="34" column="22" lean-forward="true" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codecov.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
         </state>
       </provider>
     </entry>
