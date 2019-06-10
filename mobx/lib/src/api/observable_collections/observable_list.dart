@@ -166,8 +166,13 @@ class ObservableList<T>
   void fillRange(int start, int end, [T fill]) {
     _context.checkIfStateModificationsAreAllowed(_atom);
 
+    final oldContents = _list.sublist(start, end);
+
     _list.fillRange(start, end, fill);
-    _notifyListUpdate(start, null, null);
+
+    final newContents = _list.sublist(start, end);
+
+    _notifyListUpdate(start, newContents, oldContents);
   }
 
   @override
