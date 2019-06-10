@@ -88,17 +88,17 @@ class ObservableList<T>
   @override
   void add(T element) {
     _context.checkIfStateModificationsAreAllowed(_atom);
-
+    final index = _list.length;
     _list.add(element);
-    _notifyListUpdate(_list.length, [element], null);
+    _notifyListUpdate(index, [element], null);
   }
 
   @override
   void addAll(Iterable<T> iterable) {
     _context.checkIfStateModificationsAreAllowed(_atom);
-
+    final index = _list.length;
     _list.addAll(iterable);
-    _notifyListUpdate(0, iterable.toList(growable: false), null);
+    _notifyListUpdate(index, iterable.toList(growable: false), null);
   }
 
   @override
@@ -242,9 +242,9 @@ class ObservableList<T>
   @override
   void replaceRange(int start, int end, Iterable<T> newContents) {
     _context.checkIfStateModificationsAreAllowed(_atom);
-
+    final oldContents = _list.sublist(start, end);
     _list.replaceRange(start, end, newContents);
-    _notifyListUpdate(start, null, null);
+    _notifyListUpdate(start, newContents, oldContents);
   }
 
   @override
