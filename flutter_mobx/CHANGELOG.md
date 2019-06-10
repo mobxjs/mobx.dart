@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1+2
+
+- CHANGELOG updates which got missed out in previous versions
+
 ## 0.2.1+1
 
 - README updates
@@ -11,6 +15,12 @@
 ## 0.2.0
 
 - Upgrading to use the `0.2.0` version of `mobx`
+
+### 0.0.2 - 0.1.3
+
+- Warn when no observables are found in the `Observer`'s `builder` function. This was originally an `AssertionError`, which was deemed to be too strong and caused apps to crash in debug mode.
+- Updates to tests
+- Updates to documentation
 
 ## 0.0.1 - First release.
 
