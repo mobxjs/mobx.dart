@@ -2,7 +2,9 @@
 
 ### Add Live Templates
 
-Copy file `MobX.xml` to `AndroidStudio3.4/templates/`
+Copy file `MobX.xml` to:
+- Windows: `C:\Users\<userName>\.AndroidStudio<version>\config\templates\`
+- macOS: `/Users/<userName>/Library/Preferences/AndroidStudio<version>/templates/`
 
 Restart AndroidStudio
 
