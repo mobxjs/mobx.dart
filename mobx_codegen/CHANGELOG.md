@@ -15,3 +15,14 @@
 ## 0.2.0
 
 - A breaking change has been introduced to the use of the `Store` type. Previously it was meant to be used as an _interface_, which has now changed to a **mixin**.
+
+## 0.0.2 - 0.1.3
+
+- Move all the codegen parts to separate templates
+- Documentation updates
+- Support for async actions
+- CircleCI integration improvements
+
+## 0.0.1 - First Release
+
+- Added support for `@observable`, `@computed` and `@action`
