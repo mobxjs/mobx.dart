@@ -57,13 +57,12 @@ class _ObserverState extends State<Observer> {
   @override
   Widget build(BuildContext context) {
     Widget built;
-    dynamic error;
 
     _reaction.track(() {
       try {
         built = widget.builder(context);
-      } on Object catch (ex) {
-        error = ex;
+      } on Object catch (_) {
+        rethrow;
       }
     });
 
@@ -72,9 +71,6 @@ class _ObserverState extends State<Observer> {
           'There are no observables detected in the builder function for ${_reaction.name}');
     }
 
-    if (error != null) {
-      throw error;
-    }
     return built;
   }
 
