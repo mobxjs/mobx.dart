@@ -1,0 +1,23 @@
+<templateSet group="MobX">
+  <template name="str" value="part '$NAME$.g.dart';&#10;&#10;class $NAMECAPITALIZE$ = _$NAMECAPITALIZE$ with _$$$NAMECAPITALIZE$;&#10;&#10;abstract class _$NAMECAPITALIZE$ with Store {&#10;  $END$&#10;}" description="MobX Store" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;store&quot;" alwaysStopAt="true" />
+    <variable name="NAMECAPITALIZE" expression="capitalize(NAME)" defaultValue="&quot;Store&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+  <template name="obs" value="@observable&#10;$TYPE$ $PROPERTY$ = $VALUE$;&#10;$END$" description="MobX Observable" toReformat="true" toShortenFQNames="true">
+    <variable name="TYPE" expression="" defaultValue="&quot;int&quot;" alwaysStopAt="true" />
+    <variable name="PROPERTY" expression="" defaultValue="&quot;value&quot;" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="&quot;0&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+  <template name="act" value="@action&#10;void $METHOD$() {&#10;  $END$&#10;}" description="MobX Action" toReformat="true" toShortenFQNames="true">
+    <variable name="METHOD" expression="" defaultValue="&quot;fooBar&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+</templateSet>
