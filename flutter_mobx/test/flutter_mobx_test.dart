@@ -98,10 +98,9 @@ void main() {
     verify(mock.track(any));
   });
 
-  testWidgets('Observer should keep working even if builder throws once',
+  testWidgets(
+      'Observer should re-throw exceptions occuring inside the reaction',
       (tester) async {
-    final error = Error();
-
     dynamic exception;
 
     final prevOnError = FlutterError.onError;
@@ -115,7 +114,7 @@ void main() {
     final widget = Container();
     await tester.pumpWidget(Observer(builder: (context) {
       if (count.value == 0) {
-        throw error;
+        throw Error();
       }
       return widget;
     }));
@@ -128,7 +127,7 @@ void main() {
 
     expect(tester.firstWidget(find.byWidget(widget)), equals(widget));
 
-    expect(exception, equals(error));
+    expect(exception, isInstanceOf<FlutterError>());
   });
 
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
