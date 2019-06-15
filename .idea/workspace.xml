@@ -8,7 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/intellij/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/tool/intellij/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,73 +39,22 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobx_codegen/CHANGELOG.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="343">
-                <caret line="23" column="35" lean-forward="true" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flutter_mobx/pubspec.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="22" column="16" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flutter_mobx/CHANGELOG.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="355">
-                <caret line="20" column="165" lean-forward="true" selection-start-line="20" selection-start-column="165" selection-end-line="20" selection-end-column="165" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tool/intellij/MobX.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+            <state relative-caret-position="80">
+              <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tool/intellij/README.md">
+        <entry file="file://$PROJECT_DIR$/flutter_mobx/CHANGELOG.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="320">
-                <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="120">
+                <caret line="5" column="171" selection-start-line="5" selection-start-column="171" selection-end-line="5" selection-end-column="171" />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
-              <caret line="72" selection-start-line="72" selection-end-line="72" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2680">
-              <caret line="134" column="20" selection-start-line="134" selection-start-column="20" selection-end-line="134" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -124,6 +74,11 @@
     </dirStrings>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="rethrow-inside-observer" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -157,16 +112,16 @@
         <option value="$PROJECT_DIR$/mobx/test/async_action_test.dart" />
         <option value="$PROJECT_DIR$/codecov.yml" />
         <option value="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart" />
-        <option value="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" />
-        <option value="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" />
         <option value="$PROJECT_DIR$/tool/intellij/README.md" />
+        <option value="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="53" />
+    <option name="y" value="41" />
     <option name="width" value="1680" />
-    <option name="height" value="1027" />
+    <option name="height" value="1028" />
   </component>
   <component name="ProjectLevelVcsManager">
     <OptionsSetting value="false" id="Update" />
@@ -176,6 +131,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -242,8 +199,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -321,13 +276,11 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.gen:mobx_examples" />
+        <item itemvalue="npm.gen:mobx_examples" />
       </list>
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="tests_in_mobx - 2019.06.10 at 14h 39m 40s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="tests_in_mobx - 2019.06.10 at 14h 39m 56s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
@@ -355,12 +308,15 @@
     <history-entry file="tests_in_mobx - 2019.06.10 at 14h 45m 30s.xml">
       <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="tests_in_mobx - 2019.06.15 at 08h 38m 22s.xml">
+      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="1027" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.2735043" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.2765568" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.5010707" side_tool="true" weight="0.25579977" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -377,8 +333,8 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32976446" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50123054" side_tool="true" weight="0.32762313" />
       <window_info anchor="bottom" id="Flutter Performance" order="12" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.4987695" visible="true" weight="0.3169165" />
-      <window_info anchor="bottom" id="Messages" order="14" weight="0.32976446" />
+      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.4987695" weight="0.3169165" />
+      <window_info active="true" anchor="bottom" id="Messages" order="14" visible="true" weight="0.32976446" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -488,23 +444,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mobx/lib/mobx.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="47" column="18" lean-forward="true" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#2064#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.5/lib/src/core_matchers.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="145" column="14" selection-start-line="145" selection-start-column="14" selection-end-line="145" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobx/test/store_test.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -795,25 +734,8 @@
     <entry file="file://$PROJECT_DIR$/mobx_codegen/CHANGELOG.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="343">
-            <caret line="23" column="35" lean-forward="true" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flutter_mobx/pubspec.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="22" column="16" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flutter_mobx/CHANGELOG.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="355">
-            <caret line="20" column="165" lean-forward="true" selection-start-line="20" selection-start-column="165" selection-end-line="20" selection-end-column="165" />
+          <first_editor relative-caret-position="423">
+            <caret line="27" column="60" lean-forward="true" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
           </first_editor>
           <second_editor />
         </state>
@@ -831,6 +753,37 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="320">
             <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1540">
+          <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2680">
+          <caret line="135" column="20" selection-start-line="135" selection-start-column="20" selection-end-line="135" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flutter_mobx/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flutter_mobx/CHANGELOG.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="120">
+            <caret line="5" column="171" selection-start-line="5" selection-start-column="171" selection-end-line="5" selection-end-column="171" />
           </first_editor>
           <second_editor />
         </state>

@@ -1,8 +1,9 @@
 # Changelog
 
-## 0.2.1+2
+## 0.2.2
 
 - CHANGELOG updates which got missed out in previous versions
+- The `Observer` does not trap exceptions occurring during the `build()` anymore. Previously, this used to be the case, which made it difficult to get proper stack traces.
 
 ## 0.2.1+1
 
