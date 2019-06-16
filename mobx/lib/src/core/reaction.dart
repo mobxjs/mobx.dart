@@ -84,7 +84,7 @@ class ReactionImpl implements Reaction {
       _context._clearObservables(this);
     }
 
-    if (_context._isCaughtException(this)) {
+    if (_context._hasCaughtException(this)) {
       _reportException(_errorValue._exception);
     }
 

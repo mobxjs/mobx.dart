@@ -8,8 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/computed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/computed.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/reaction.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/reaction.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,23 +39,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flutter_mobx/pubspec.yaml">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/context.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+            <state relative-caret-position="8124">
+              <caret line="437" lean-forward="true" selection-start-line="437" selection-end-line="437" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/flutter_mobx/CHANGELOG.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="120">
-                <caret line="5" column="171" selection-start-line="5" selection-start-column="171" selection-end-line="5" selection-end-column="171" />
-              </first_editor>
-              <second_editor />
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mobx/lib/src/core.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="520">
+              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mobx/lib/mobx.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-770">
+              <folding>
+                <element signature="e#0#2098#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="60" column="24" lean-forward="true" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -115,6 +133,7 @@
         <option value="$PROJECT_DIR$/tool/intellij/README.md" />
         <option value="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" />
         <option value="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/mobx/lib/src/core/context.dart" />
       </list>
     </option>
   </component>
@@ -166,13 +185,28 @@
             <path>
               <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
               <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
-              <item name="flutter_mobx" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
               <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
               <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mobx.dart" type="462c0819:PsiDirectoryNode" />
+              <item name="mobx" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mobx.dart" type="b2602c69:ProjectViewProjectNode" />
@@ -333,8 +367,8 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32976446" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50123054" side_tool="true" weight="0.32762313" />
       <window_info anchor="bottom" id="Flutter Performance" order="12" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.4987695" weight="0.3169165" />
-      <window_info active="true" anchor="bottom" id="Messages" order="14" visible="true" weight="0.32976446" />
+      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.4987695" visible="true" weight="0.3169165" />
+      <window_info anchor="bottom" id="Messages" order="14" weight="0.32976446" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -422,7 +456,8 @@
     <MESSAGE value="removing the assertion check in async_actions" />
     <MESSAGE value="codecov range from 80-100" />
     <MESSAGE value="minor adjustments to the notifications on list changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor adjustments to the notifications on list changes" />
+    <MESSAGE value="version update for flutter_mobx" />
+    <option name="LAST_COMMIT_MESSAGE" value="version update for flutter_mobx" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -444,51 +479,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mobx/test/store_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="42" lean-forward="true" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/lib/src/api/annotations.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/test/annotations_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/CHANGELOG.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="320">
-            <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/context.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-546">
-          <caret line="52" column="49" selection-start-line="52" selection-start-column="49" selection-end-line="52" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/observable.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
@@ -758,20 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1540">
-          <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2680">
-          <caret line="135" column="20" selection-start-line="135" selection-start-column="20" selection-end-line="135" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flutter_mobx/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -786,6 +762,64 @@
             <caret line="5" column="171" selection-start-line="5" selection-start-column="171" selection-end-line="5" selection-end-column="171" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/mobx-0.2.1/lib/src/core/context.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="399" column="7" selection-start-line="399" selection-start-column="7" selection-end-line="399" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/mobx-0.2.1/lib/src/core/reaction.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="91" column="3" lean-forward="true" selection-start-line="91" selection-start-column="3" selection-end-line="91" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="60" column="24" lean-forward="true" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/core.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/mobx.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-770">
+          <folding>
+            <element signature="e#0#2098#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/api/context.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobx/lib/src/core/context.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8124">
+          <caret line="437" lean-forward="true" selection-start-line="437" selection-end-line="437" />
         </state>
       </provider>
     </entry>

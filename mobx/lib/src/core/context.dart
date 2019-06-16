@@ -397,7 +397,8 @@ class ReactiveContext {
   }
 
   bool _isInBatch() => _state.batch > 0;
-  bool _isCaughtException(Derivation d) => d._errorValue is MobXCaughtException;
+  bool _hasCaughtException(Derivation d) =>
+      d._errorValue is MobXCaughtException;
 
   bool isComputingDerivation() => _state.trackingDerivation != null;
 
