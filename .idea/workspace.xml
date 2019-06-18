@@ -6,9 +6,11 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="fixing tests in flutter_mobx">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +81,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="dart.settings" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -102,7 +104,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter.mobx_examples">
+  <component name="RunManager" selected="Flutter Test.tests in flutter_mobx">
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/mobx" />
       <option name="scope" value="FOLDER" />
@@ -169,38 +171,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="TestHistory">
-    <history-entry file="tests_in_mobx - 2019.06.10 at 14h 41m 03s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.10 at 14h 41m 31s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.10 at 14h 42m 07s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.10 at 14h 42m 48s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.10 at 14h 43m 03s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.10 at 14h 43m 20s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.10 at 14h 45m 11s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.10 at 14h 45m 30s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.15 at 08h 38m 22s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="tests_in_mobx - 2019.06.16 at 09h 09m 49s.xml">
-      <configuration name="tests in mobx" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -266,7 +236,8 @@
     <MESSAGE value="version update for flutter_mobx" />
     <MESSAGE value="minor renaming" />
     <MESSAGE value="- adding a guide for not able to run app on iOS Simulator&#10;- example for using with ObservableStream" />
-    <option name="LAST_COMMIT_MESSAGE" value="- adding a guide for not able to run app on iOS Simulator&#10;- example for using with ObservableStream" />
+    <MESSAGE value="adding links to examples" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding links to examples" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

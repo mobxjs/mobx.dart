@@ -127,7 +127,7 @@ void main() {
 
     expect(tester.firstWidget(find.byWidget(widget)), equals(widget));
 
-    expect(exception, isInstanceOf<FlutterError>());
+    expect(exception, isInstanceOf<MobXCaughtException>());
   });
 
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
