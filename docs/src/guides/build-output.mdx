@@ -87,10 +87,10 @@ part 'color_store.g.dart';
 
 class ColorStore = _ColorStore with _$ColorStore;
 abstract class _ColorStore with Store {
-  
+
   @observable
   CustomColor selectedColor;
-  
+
   @observable
   ObservableList<CustomColor> palette;
 }
@@ -98,3 +98,22 @@ abstract class _ColorStore with Store {
 
 Anywhere you want to use an observable value that has a type from `dart:ui`, make sure to wrap it to avoid code-gen issues.
 
+## Unable to run the app in iOS Simulator (Old iOS Deployment Target)
+
+It is possible that sometimes your app would simply fail to run on the simulator. You might see a weird error message like so:
+
+```text
+info flutter.tools [ +206 ms] An error was encountered processing the command (domain=NSPOSIXErrorDomain, code=22):
+info flutter.tools            Failed to install the requested application
+info flutter.tools            The application's Info.plist does not contain CFBundleVersion.
+info flutter.tools            Ensure your bundle contains a CFBundleVersion with a valid semantic version number.
+```
+
+The real issue seems to be the fact that the `Deployment Target` has been set to **iOS 8.0**. This should be at least **12.0**. Open up the `Runner.xcworkspace` file in **XCode** and change the deployment target as below:
+
+import deploymentTarget from './deployment-target.png';
+
+<img src={deploymentTarget} width={'100%'} />
+
+- Once you make this change, be sure to _**remove the app**_ from your simulator and _**restart the simulator**_.
+- With that change, you should be back in action!

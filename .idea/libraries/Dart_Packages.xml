@@ -10,6 +10,7 @@
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/build_daemon-1.0.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/build_resolvers-1.0.5/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/build_runner-1.5.1/lib" />
+      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/build_runner-1.5.2/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/build_runner_core-3.0.6/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/build_test-0.10.8/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/built_collection-4.2.2/lib" />
@@ -26,7 +27,6 @@
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/dart_style-1.2.8/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.0.1/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/fixnum-0.10.9/lib" />
-      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_mobx-0.2.1+1/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/front_end-0.1.18/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/github-4.1.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/glob-1.1.7/lib" />
@@ -60,7 +60,7 @@
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.6.2/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.7.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pool-1.4.0/lib" />
-      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/provider-2.0.1+1/lib" />
+      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/provider-3.0.0+1/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pub_semver-1.4.2/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pubspec_parse-0.1.4/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-2.0.3/lib" />
@@ -92,6 +92,7 @@
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/watcher-0.9.7+10/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-1.0.13/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-2.1.15/lib" />
+      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-2.1.16/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/bin/cache/pkg/sky_engine/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/packages/flutter/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/packages/flutter_test/lib" />

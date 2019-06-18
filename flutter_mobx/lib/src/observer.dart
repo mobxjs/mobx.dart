@@ -59,16 +59,16 @@ class _ObserverState extends State<Observer> {
     Widget built;
 
     _reaction.track(() {
-      try {
-        built = widget.builder(context);
-      } on Object catch (_) {
-        rethrow;
-      }
+      built = widget.builder(context);
     });
 
     if (!_reaction.hasObservables) {
       widget.log(
           'There are no observables detected in the builder function for ${_reaction.name}');
+    }
+
+    if (_reaction.errorValue != null) {
+      throw _reaction.errorValue;
     }
 
     return built;

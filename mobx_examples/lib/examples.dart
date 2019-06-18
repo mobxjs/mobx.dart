@@ -5,6 +5,7 @@ import 'package:mobx_examples/form/form_widgets.dart';
 import 'package:mobx_examples/github/github_widgets.dart';
 import 'package:mobx_examples/hackernews/news_widgets.dart';
 import 'package:mobx_examples/multi_counter/multi_counter_widgets.dart';
+import 'package:mobx_examples/random_stream/random_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
 
 class Example {
@@ -33,6 +34,12 @@ final List<Example> examples = [
     description: 'Multiple Counters with a shared Store using Provider.',
     path: '/multi-counter',
     widgetBuilder: (_) => const MultiCounterExample(),
+  ),
+  Example(
+    title: 'Simple Stream Observer',
+    description: 'Observing a Stream of random numbers.',
+    path: '/random-stream',
+    widgetBuilder: (_) => const RandomNumberExample(),
   ),
   Example(
     title: 'Todos',

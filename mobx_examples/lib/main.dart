@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx_examples/examples.dart';
 import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
+import 'package:mobx_examples/random_stream/random_store.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -9,7 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
           providers: [
-            Provider<MultiCounterStore>(builder: (_) => MultiCounterStore())
+            Provider<MultiCounterStore>.value(value: MultiCounterStore()),
+            Provider<RandomStore>.value(value: RandomStore())
           ],
           child: MaterialApp(
             initialRoute: '/',

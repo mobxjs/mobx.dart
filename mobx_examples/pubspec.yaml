@@ -7,7 +7,7 @@ description: A set of examples showing effective use of MobX.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.1.0
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.2.0 <3.0.0"
@@ -20,7 +20,7 @@ dependencies:
   validators:
   hnpwa_client:
   url_launcher:
-  provider: ^2.0.0
+  provider: ^3.0.0
   flutter:
     sdk: flutter
 
@@ -31,5 +31,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+dependency_overrides:
+  flutter_mobx:
+    path: ../flutter_mobx
 flutter:
   uses-material-design: true

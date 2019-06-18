@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+
+- `Observer` is relaying the exception caught during the tracking phase. This is done using the `errorValue` field present on the `reaction` instance.
+
 ## 0.2.2
 
 - CHANGELOG updates which got missed out in previous versions
