@@ -62,7 +62,8 @@ class ReactiveConfig {
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
       disableErrorBoundaries: false,
-      enforceActions: ReactiveWritePolicy.observed);
+      enforceActions: ReactiveWritePolicy.observed,
+      enforceReactions: ReactiveReadPolicy.never);
 
   /// Whether MobX should throw exceptions instead of catching them and storing
   /// inside the [Reaction.errorValue] property of [Reaction].
@@ -72,7 +73,7 @@ class ReactiveConfig {
   final ReactiveWritePolicy enforceActions;
 
   /// Enforce the use of reactions for reading observables
-  final ReactiveWritePolicy enforceReactions;
+  final ReactiveReadPolicy enforceReactions;
 
   /// Max number of iterations before bailing out for a cyclic reaction
   final int maxIterations;
@@ -81,12 +82,14 @@ class ReactiveConfig {
 
   ReactiveConfig clone(
           {bool disableErrorBoundaries,
-          bool enforceActions,
+          ReactiveWritePolicy enforceActions,
+          ReactiveReadPolicy enforceReactions,
           int maxIterations}) =>
       ReactiveConfig(
           disableErrorBoundaries:
               disableErrorBoundaries ?? this.disableErrorBoundaries,
           enforceActions: enforceActions ?? this.enforceActions,
+          enforceReactions: enforceReactions ?? this.enforceReactions,
           maxIterations: maxIterations ?? this.maxIterations);
 }
 
@@ -144,7 +147,19 @@ class ReactiveContext {
     }
   }
 
-  void checkIfStateReadsAreAllowed(Atom atom) {}
+  void checkIfStateReadsAreAllowed(Atom atom) {
+    switch (config.enforceReactions) {
+      case ReactiveReadPolicy.always:
+        if (!_state.isWithinBatch && !_state.isWithinDerivation) {
+          throw MobXException(
+              'Observable values cannot be read outside Actions and Reactions. Make sure to wrap them inside an action or a reaction. Tried to read: ${atom.name}');
+        }
+        return;
+
+      case ReactiveReadPolicy.never:
+        return;
+    }
+  }
 
   void checkIfStateWritesAreAllowed(Atom atom) {
     // Cannot mutate observables inside a computed

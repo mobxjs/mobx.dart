@@ -86,6 +86,7 @@ void main() {
       expect(clone.disableErrorBoundaries == config.disableErrorBoundaries,
           isTrue);
       expect(clone.enforceActions == config.enforceActions, isTrue);
+      expect(clone.enforceReactions == config.enforceReactions, isTrue);
     });
 
     test('when no overrides are provided the clone reuses source values', () {
@@ -96,6 +97,7 @@ void main() {
       expect(
           clone.disableErrorBoundaries, equals(config.disableErrorBoundaries));
       expect(clone.enforceActions, equals(config.enforceActions));
+      expect(clone.enforceReactions, equals(config.enforceReactions));
     });
   });
 }

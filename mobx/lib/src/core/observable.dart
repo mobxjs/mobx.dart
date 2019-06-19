@@ -30,6 +30,8 @@ class Observable<T> extends Atom
   T _value;
 
   T get value {
+    _context.checkIfStateReadsAreAllowed(this);
+
     reportObserved();
     return _value;
   }
