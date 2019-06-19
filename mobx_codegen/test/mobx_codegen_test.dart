@@ -64,8 +64,7 @@ mixin _\$User on UserBase, Store {
 
   @override
   set firstName(String value) {
-    _\$firstNameAtom.context
-        .checkIfStateModificationsAreAllowed(_\$firstNameAtom);
+    _\$firstNameAtom.context.checkIfStateWritesAreAllowed(_\$firstNameAtom);
     super.firstName = value;
     _\$firstNameAtom.reportChanged();
   }
@@ -80,7 +79,7 @@ mixin _\$User on UserBase, Store {
 
   @override
   set lastName(String value) {
-    _\$lastNameAtom.context.checkIfStateModificationsAreAllowed(_\$lastNameAtom);
+    _\$lastNameAtom.context.checkIfStateWritesAreAllowed(_\$lastNameAtom);
     super.lastName = value;
     _\$lastNameAtom.reportChanged();
   }
@@ -187,7 +186,7 @@ mixin _\$Item<T> on _Item<T>, Store {
 
   @override
   set value(T value) {
-    _\$valueAtom.context.checkIfStateModificationsAreAllowed(_\$valueAtom);
+    _\$valueAtom.context.checkIfStateWritesAreAllowed(_\$valueAtom);
     super.value = value;
     _\$valueAtom.reportChanged();
   }

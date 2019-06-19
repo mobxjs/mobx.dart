@@ -6,11 +6,37 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="fixing tests in flutter_mobx">
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/mobx/test/reactive_policies.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/example/lib/counter.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/example/lib/counter.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/example/lib/todos.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/example/lib/todos.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/observable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/observable.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/action_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/action_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/async_action_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/async_action_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/util.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/util.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/nested_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/nested_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/counter/counter.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/counter/counter.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/github/github_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/github/github_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,22 +63,10 @@
     <expand />
     <select />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>assert</find>
-      <find>async</find>
-      <find>binary</find>
-      <find>runUnary</find>
-    </findStrings>
-    <dirStrings>
-      <dir>$PROJECT_DIR$/mobx/lib</dir>
-      <dir>$PROJECT_DIR$/mobx_examples/lib</dir>
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="rethrow-inside-observer" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -92,6 +106,11 @@
       <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
     </key>
   </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="pub:get:mobx_codegen" />
+    </option>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -104,7 +123,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in flutter_mobx">
+  <component name="RunManager" selected="Dart Test.tests in mobx">
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/mobx" />
       <option name="scope" value="FOLDER" />
@@ -123,6 +142,16 @@
       <option name="testDir" value="$PROJECT_DIR$/flutter_mobx/test/" />
       <method v="2" />
     </configuration>
+    <configuration name="gen:mobx_codegen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="gen:mobx_codegen" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="gen:mobx:example" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -138,6 +167,16 @@
       <command value="run" />
       <scripts>
         <script value="gen:mobx_examples" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="pub:get:mobx_codegen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="pub:get:mobx_codegen" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -161,13 +200,16 @@
       <item itemvalue="npm.gen:mobx_examples" />
       <item itemvalue="npm.gen:mobx:example" />
       <item itemvalue="npm.start" />
+      <item itemvalue="npm.pub:get:mobx_codegen" />
+      <item itemvalue="npm.gen:mobx_codegen" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.gen:mobx_codegen" />
+        <item itemvalue="npm.pub:get:mobx_codegen" />
+        <item itemvalue="npm.gen:mobx_examples" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.gen:mobx_examples" />
         <item itemvalue="npm.gen:mobx:example" />
-        <item itemvalue="npm.gen:mobx_examples" />
       </list>
     </recent_temporary>
   </component>
@@ -237,7 +279,8 @@
     <MESSAGE value="minor renaming" />
     <MESSAGE value="- adding a guide for not able to run app on iOS Simulator&#10;- example for using with ObservableStream" />
     <MESSAGE value="adding links to examples" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding links to examples" />
+    <MESSAGE value="fixing tests in flutter_mobx" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing tests in flutter_mobx" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

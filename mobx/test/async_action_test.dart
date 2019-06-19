@@ -5,7 +5,8 @@ Future sleep(int ms) => Future.delayed(Duration(milliseconds: ms));
 
 void main() {
   setUp(() {
-    mainContext.config = ReactiveConfig(enforceActions: EnforceActions.always);
+    mainContext.config =
+        ReactiveConfig(enforceActions: ReactiveWritePolicy.always);
   });
 
   tearDown(() {

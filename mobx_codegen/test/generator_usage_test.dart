@@ -116,10 +116,11 @@ abstract class _TestStore with Store {
 }
 
 void main() {
-  EnforceActions prevEnforceActions;
+  ReactiveWritePolicy prevEnforceActions;
   setUp(() {
     prevEnforceActions = mainContext.config.enforceActions;
-    mainContext.config = ReactiveConfig(enforceActions: EnforceActions.always);
+    mainContext.config =
+        ReactiveConfig(enforceActions: ReactiveWritePolicy.always);
   });
 
   tearDown(() {

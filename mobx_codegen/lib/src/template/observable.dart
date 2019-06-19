@@ -18,7 +18,7 @@ class ObservableTemplate {
 
   @override
   set $name($type value) {
-    $atomName.context.checkIfStateModificationsAreAllowed($atomName);
+    $atomName.context.checkIfStateWritesAreAllowed($atomName);
     super.$name = value;
     $atomName.reportChanged();
   }""";

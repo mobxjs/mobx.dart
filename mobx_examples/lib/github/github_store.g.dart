@@ -26,7 +26,7 @@ mixin _$GithubStore on _GithubStore, Store {
   @override
   set fetchReposFuture(ObservableFuture<List<Repository>> value) {
     _$fetchReposFutureAtom.context
-        .checkIfStateModificationsAreAllowed(_$fetchReposFutureAtom);
+        .checkIfStateWritesAreAllowed(_$fetchReposFutureAtom);
     super.fetchReposFuture = value;
     _$fetchReposFutureAtom.reportChanged();
   }
@@ -41,7 +41,7 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   set user(String value) {
-    _$userAtom.context.checkIfStateModificationsAreAllowed(_$userAtom);
+    _$userAtom.context.checkIfStateWritesAreAllowed(_$userAtom);
     super.user = value;
     _$userAtom.reportChanged();
   }

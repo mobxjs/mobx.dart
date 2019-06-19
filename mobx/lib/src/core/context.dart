@@ -27,34 +27,52 @@ class _ReactiveState {
 
   /// Tracks if observables can be mutated
   bool allowStateChanges = true;
+
+  /// Are we inside an action or transaction?
+  bool get isWithinBatch => batch > 0;
+
+  /// Are we inside a reaction or computed?
+  bool get isWithinDerivation =>
+      trackingDerivation != null || computationDepth > 0;
 }
 
 typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
+
+/// Defines the behavior for observables read outside actions and reactions
+///
+/// `always`: If observables are read outside actions/reactions, throw an Exception
+/// `never`: Allow unrestricted reading of observables everywhere. This is the default.
+enum ReactiveReadPolicy { always, never }
 
 /// Defines the behavior for observables mutated outside actions
 ///
 /// `observed`: If there are observers for the mutated observable, then throw. Else allow mutation outside an action.
 /// `always`: Always throw if an observable is mutated outside an action
 /// `never`: Allow mutating observables outside actions
-enum EnforceActions { observed, always, never }
+enum ReactiveWritePolicy { observed, always, never }
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
   ReactiveConfig(
       {this.disableErrorBoundaries,
       this.enforceActions,
+      this.enforceReactions,
       this.maxIterations = 100});
 
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
-      disableErrorBoundaries: false, enforceActions: EnforceActions.observed);
+      disableErrorBoundaries: false,
+      enforceActions: ReactiveWritePolicy.observed);
 
   /// Whether MobX should throw exceptions instead of catching them and storing
   /// inside the [Reaction.errorValue] property of [Reaction].
   final bool disableErrorBoundaries;
 
-  /// Should observables be mutated inside an action
-  final EnforceActions enforceActions;
+  /// Enforce mutation of observables inside an action
+  final ReactiveWritePolicy enforceActions;
+
+  /// Enforce the use of reactions for reading observables
+  final ReactiveWritePolicy enforceReactions;
 
   /// Max number of iterations before bailing out for a cyclic reaction
   final int maxIterations;
@@ -82,7 +100,8 @@ class ReactiveContext {
   ReactiveConfig get config => _config;
   set config(ReactiveConfig newValue) {
     _config = newValue;
-    _state.allowStateChanges = _config.enforceActions == EnforceActions.never;
+    _state.allowStateChanges =
+        _config.enforceActions == ReactiveWritePolicy.never;
   }
 
   _ReactiveState _state = _ReactiveState();
@@ -125,7 +144,9 @@ class ReactiveContext {
     }
   }
 
-  void checkIfStateModificationsAreAllowed(Atom atom) {
+  void checkIfStateReadsAreAllowed(Atom atom) {}
+
+  void checkIfStateWritesAreAllowed(Atom atom) {
     // Cannot mutate observables inside a computed
     if (_state.computationDepth > 0 && atom.hasObservers) {
       throw MobXException(
@@ -137,17 +158,17 @@ class ReactiveContext {
     }
 
     switch (config.enforceActions) {
-      case EnforceActions.never:
+      case ReactiveWritePolicy.never:
         return;
 
-      case EnforceActions.observed:
+      case ReactiveWritePolicy.observed:
         if (atom.hasObservers) {
           throw MobXException(
               'Side effects like changing state are not allowed at this point. Please wrap the code in an "action". Tried to modify: ${atom.name}');
         }
         break;
 
-      case EnforceActions.always:
+      case ReactiveWritePolicy.always:
         throw MobXException(
             'Since strict-mode is enabled, changing observed observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
     }
@@ -457,6 +478,6 @@ class ReactiveContext {
 
   void _resetState() {
     _state = _ReactiveState()
-      ..allowStateChanges = _config.enforceActions == EnforceActions.never;
+      ..allowStateChanges = _config.enforceActions == ReactiveWritePolicy.never;
   }
 }

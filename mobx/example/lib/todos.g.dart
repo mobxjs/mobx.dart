@@ -19,8 +19,7 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   set description(String value) {
-    _$descriptionAtom.context
-        .checkIfStateModificationsAreAllowed(_$descriptionAtom);
+    _$descriptionAtom.context.checkIfStateWritesAreAllowed(_$descriptionAtom);
     super.description = value;
     _$descriptionAtom.reportChanged();
   }
@@ -35,7 +34,7 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   set done(bool value) {
-    _$doneAtom.context.checkIfStateModificationsAreAllowed(_$doneAtom);
+    _$doneAtom.context.checkIfStateWritesAreAllowed(_$doneAtom);
     super.done = value;
     _$doneAtom.reportChanged();
   }
@@ -91,7 +90,7 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set todos(ObservableList<Todo> value) {
-    _$todosAtom.context.checkIfStateModificationsAreAllowed(_$todosAtom);
+    _$todosAtom.context.checkIfStateWritesAreAllowed(_$todosAtom);
     super.todos = value;
     _$todosAtom.reportChanged();
   }
@@ -106,7 +105,7 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set filter(VisibilityFilter value) {
-    _$filterAtom.context.checkIfStateModificationsAreAllowed(_$filterAtom);
+    _$filterAtom.context.checkIfStateWritesAreAllowed(_$filterAtom);
     super.filter = value;
     _$filterAtom.reportChanged();
   }
@@ -123,7 +122,7 @@ mixin _$TodoList on TodoListBase, Store {
   @override
   set currentDescription(String value) {
     _$currentDescriptionAtom.context
-        .checkIfStateModificationsAreAllowed(_$currentDescriptionAtom);
+        .checkIfStateWritesAreAllowed(_$currentDescriptionAtom);
     super.currentDescription = value;
     _$currentDescriptionAtom.reportChanged();
   }

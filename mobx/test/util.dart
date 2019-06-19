@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void turnOffEnforceActions() {
   setUp(() => mainContext.config =
-      ReactiveConfig(enforceActions: EnforceActions.never));
+      ReactiveConfig(enforceActions: ReactiveWritePolicy.never));
 
   tearDown(() => mainContext.config = ReactiveConfig.main);
 }

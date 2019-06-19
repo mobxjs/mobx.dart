@@ -76,7 +76,8 @@ void main() {
     });
 
     test('inside autorun should be untracked', () {
-      mainContext.config = ReactiveConfig(enforceActions: EnforceActions.never);
+      mainContext.config =
+          ReactiveConfig(enforceActions: ReactiveWritePolicy.never);
 
       final x = Observable(10);
       final y = Observable(20);
@@ -160,7 +161,7 @@ void main() {
         'on mainContext, should throw if mutating outside an action, with observers',
         () {
       mainContext.config =
-          ReactiveConfig(enforceActions: EnforceActions.observed);
+          ReactiveConfig(enforceActions: ReactiveWritePolicy.observed);
 
       final x = Observable(0);
 
@@ -182,7 +183,7 @@ void main() {
       final context = ReactiveContext(
           config: ReactiveConfig(
               disableErrorBoundaries: true,
-              enforceActions: EnforceActions.observed));
+              enforceActions: ReactiveWritePolicy.observed));
       final x = Observable(0, context: context);
 
       // Should work as there are no observers
@@ -202,7 +203,7 @@ void main() {
       final context = ReactiveContext(
           config: ReactiveConfig(
               disableErrorBoundaries: true,
-              enforceActions: EnforceActions.always));
+              enforceActions: ReactiveWritePolicy.always));
       final x = Observable(0, context: context);
 
       // Should fail even if there are no observers
@@ -245,7 +246,8 @@ void main() {
   });
 
   test('transaction works', () {
-    mainContext.config = ReactiveConfig(enforceActions: EnforceActions.never);
+    mainContext.config =
+        ReactiveConfig(enforceActions: ReactiveWritePolicy.never);
 
     final x = Observable(10);
     final y = Observable(20);
