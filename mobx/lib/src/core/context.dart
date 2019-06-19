@@ -55,25 +55,25 @@ enum ReactiveWritePolicy { observed, always, never }
 class ReactiveConfig {
   ReactiveConfig(
       {this.disableErrorBoundaries,
-      this.enforceActions,
-      this.enforceReactions,
+      this.writePolicy,
+      this.readPolicy,
       this.maxIterations = 100});
 
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
       disableErrorBoundaries: false,
-      enforceActions: ReactiveWritePolicy.observed,
-      enforceReactions: ReactiveReadPolicy.never);
+      writePolicy: ReactiveWritePolicy.observed,
+      readPolicy: ReactiveReadPolicy.never);
 
   /// Whether MobX should throw exceptions instead of catching them and storing
   /// inside the [Reaction.errorValue] property of [Reaction].
   final bool disableErrorBoundaries;
 
   /// Enforce mutation of observables inside an action
-  final ReactiveWritePolicy enforceActions;
+  final ReactiveWritePolicy writePolicy;
 
   /// Enforce the use of reactions for reading observables
-  final ReactiveReadPolicy enforceReactions;
+  final ReactiveReadPolicy readPolicy;
 
   /// Max number of iterations before bailing out for a cyclic reaction
   final int maxIterations;
@@ -82,14 +82,14 @@ class ReactiveConfig {
 
   ReactiveConfig clone(
           {bool disableErrorBoundaries,
-          ReactiveWritePolicy enforceActions,
-          ReactiveReadPolicy enforceReactions,
+          ReactiveWritePolicy writePolicy,
+          ReactiveReadPolicy readPolicy,
           int maxIterations}) =>
       ReactiveConfig(
           disableErrorBoundaries:
               disableErrorBoundaries ?? this.disableErrorBoundaries,
-          enforceActions: enforceActions ?? this.enforceActions,
-          enforceReactions: enforceReactions ?? this.enforceReactions,
+          writePolicy: writePolicy ?? this.writePolicy,
+          readPolicy: readPolicy ?? this.readPolicy,
           maxIterations: maxIterations ?? this.maxIterations);
 }
 
@@ -103,8 +103,7 @@ class ReactiveContext {
   ReactiveConfig get config => _config;
   set config(ReactiveConfig newValue) {
     _config = newValue;
-    _state.allowStateChanges =
-        _config.enforceActions == ReactiveWritePolicy.never;
+    _state.allowStateChanges = _config.writePolicy == ReactiveWritePolicy.never;
   }
 
   _ReactiveState _state = _ReactiveState();
@@ -147,8 +146,8 @@ class ReactiveContext {
     }
   }
 
-  void checkIfStateReadsAreAllowed(Atom atom) {
-    switch (config.enforceReactions) {
+  void enforceReadBehavior(Atom atom) {
+    switch (config.readPolicy) {
       case ReactiveReadPolicy.always:
         if (!_state.isWithinBatch && !_state.isWithinDerivation) {
           throw MobXException(
@@ -161,7 +160,7 @@ class ReactiveContext {
     }
   }
 
-  void checkIfStateWritesAreAllowed(Atom atom) {
+  void enforceWriteBehavior(Atom atom) {
     // Cannot mutate observables inside a computed
     if (_state.computationDepth > 0 && atom.hasObservers) {
       throw MobXException(
@@ -172,7 +171,7 @@ class ReactiveContext {
       return;
     }
 
-    switch (config.enforceActions) {
+    switch (config.writePolicy) {
       case ReactiveWritePolicy.never:
         return;
 
@@ -493,6 +492,6 @@ class ReactiveContext {
 
   void _resetState() {
     _state = _ReactiveState()
-      ..allowStateChanges = _config.enforceActions == ReactiveWritePolicy.never;
+      ..allowStateChanges = _config.writePolicy == ReactiveWritePolicy.never;
   }
 }

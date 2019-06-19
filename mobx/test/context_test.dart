@@ -85,8 +85,8 @@ void main() {
       expect(clone.maxIterations != config.maxIterations, isTrue);
       expect(clone.disableErrorBoundaries == config.disableErrorBoundaries,
           isTrue);
-      expect(clone.enforceActions == config.enforceActions, isTrue);
-      expect(clone.enforceReactions == config.enforceReactions, isTrue);
+      expect(clone.writePolicy == config.writePolicy, isTrue);
+      expect(clone.readPolicy == config.readPolicy, isTrue);
     });
 
     test('when no overrides are provided the clone reuses source values', () {
@@ -96,8 +96,8 @@ void main() {
       expect(clone.maxIterations, equals(config.maxIterations));
       expect(
           clone.disableErrorBoundaries, equals(config.disableErrorBoundaries));
-      expect(clone.enforceActions, equals(config.enforceActions));
-      expect(clone.enforceReactions, equals(config.enforceReactions));
+      expect(clone.writePolicy, equals(config.writePolicy));
+      expect(clone.readPolicy, equals(config.readPolicy));
     });
   });
 }

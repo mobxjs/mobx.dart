@@ -54,7 +54,7 @@ class ObservableSet<T>
 
   @override
   bool add(T value) {
-    _context.checkIfStateWritesAreAllowed(_atom);
+    _context.enforceWriteBehavior(_atom);
 
     final result = _set.add(value);
     if (result && _hasListeners) {
@@ -87,7 +87,7 @@ class ObservableSet<T>
 
   @override
   bool remove(Object value) {
-    _context.checkIfStateWritesAreAllowed(_atom);
+    _context.enforceWriteBehavior(_atom);
 
     final removed = _set.remove(value);
     if (removed && _hasListeners) {
@@ -99,7 +99,7 @@ class ObservableSet<T>
 
   @override
   void clear() {
-    _context.checkIfStateWritesAreAllowed(_atom);
+    _context.enforceWriteBehavior(_atom);
 
     if (_hasListeners) {
       final items = _set.toList(growable: false);

@@ -7,7 +7,7 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffEnforceActions();
+  turnOffWritePolicy();
 
   group('ObservableSet', () {
     test('linkedHashSetFrom creates a set that iterates at insertion order',

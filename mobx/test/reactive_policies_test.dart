@@ -6,8 +6,8 @@ void main() {
     Observable<int> x;
 
     setUp(() {
-      mainContext.config = ReactiveConfig.main
-          .clone(enforceReactions: ReactiveReadPolicy.always);
+      mainContext.config =
+          ReactiveConfig.main.clone(readPolicy: ReactiveReadPolicy.always);
 
       x = Observable(0);
     });
@@ -42,7 +42,7 @@ void main() {
 
     setUp(() {
       mainContext.config =
-          ReactiveConfig.main.clone(enforceReactions: ReactiveReadPolicy.never);
+          ReactiveConfig.main.clone(readPolicy: ReactiveReadPolicy.never);
 
       x = Observable(0);
     });

@@ -42,7 +42,7 @@ void stubTrack(MockReaction mock) {
 
 void main() {
   setUp(() => mainContext.config =
-      ReactiveConfig(enforceActions: EnforceReactiveWrites.never));
+      ReactiveConfig(writePolicy: EnforceReactiveWrites.never));
 
   tearDown(() => mainContext.config = ReactiveConfig.main);
 

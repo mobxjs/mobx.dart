@@ -57,7 +57,7 @@ class ObservableMap<K, V>
 
   @override
   void operator []=(K key, V value) {
-    _context.checkIfStateWritesAreAllowed(_atom);
+    _context.enforceWriteBehavior(_atom);
 
     if (_hasListeners) {
       if (_map.containsKey(key)) {
@@ -76,7 +76,7 @@ class ObservableMap<K, V>
 
   @override
   void clear() {
-    _context.checkIfStateWritesAreAllowed(_atom);
+    _context.enforceWriteBehavior(_atom);
 
     if (isEmpty) {
       return;
@@ -100,7 +100,7 @@ class ObservableMap<K, V>
 
   @override
   V remove(Object key) {
-    _context.checkIfStateWritesAreAllowed(_atom);
+    _context.enforceWriteBehavior(_atom);
 
     if (_hasListeners) {
       if (_map.containsKey(key)) {
