@@ -54,7 +54,7 @@ class ObservableList<T>
 
   @override
   set length(int value) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     _list.length = value;
     _notifyListUpdate(0, null, null);
@@ -75,7 +75,7 @@ class ObservableList<T>
 
   @override
   void operator []=(int index, T value) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final oldValue = _list[index];
 
@@ -87,7 +87,7 @@ class ObservableList<T>
 
   @override
   void add(T element) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
     final index = _list.length;
     _list.add(element);
     _notifyListUpdate(index, [element], null);
@@ -95,7 +95,7 @@ class ObservableList<T>
 
   @override
   void addAll(Iterable<T> iterable) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
     final index = _list.length;
     _list.addAll(iterable);
     _notifyListUpdate(index, iterable.toList(growable: false), null);
@@ -145,7 +145,7 @@ class ObservableList<T>
 
   @override
   set first(T value) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final oldValue = _list.first;
 
@@ -155,7 +155,7 @@ class ObservableList<T>
 
   @override
   void clear() {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final oldItems = _list.toList(growable: false);
     _list.clear();
@@ -164,7 +164,7 @@ class ObservableList<T>
 
   @override
   void fillRange(int start, int end, [T fill]) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final oldContents = _list.sublist(start, end);
 
@@ -177,7 +177,7 @@ class ObservableList<T>
 
   @override
   void insert(int index, T element) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     _list.insert(index, element);
     _notifyListUpdate(index, [element], null);
@@ -185,7 +185,7 @@ class ObservableList<T>
 
   @override
   void insertAll(int index, Iterable<T> iterable) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     _list.insertAll(index, iterable);
     _notifyListUpdate(index, iterable.toList(growable: false), null);
@@ -193,7 +193,7 @@ class ObservableList<T>
 
   @override
   bool remove(Object element) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final index = _list.indexOf(element);
     final didRemove = _list.remove(element);
@@ -207,7 +207,7 @@ class ObservableList<T>
 
   @override
   T removeAt(int index) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final value = _list.removeAt(index);
     _notifyListUpdate(index, null, value == null ? null : [value]);
@@ -216,7 +216,7 @@ class ObservableList<T>
 
   @override
   T removeLast() {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final value = _list.removeLast();
 
@@ -228,7 +228,7 @@ class ObservableList<T>
 
   @override
   void removeRange(int start, int end) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final removedItems = _list.sublist(start, end);
     _list.removeRange(start, end);
@@ -237,7 +237,7 @@ class ObservableList<T>
 
   @override
   void removeWhere(bool Function(T element) test) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final removedItems = _list.where(test).toList(growable: false);
     _list.removeWhere(test);
@@ -246,7 +246,7 @@ class ObservableList<T>
 
   @override
   void replaceRange(int start, int end, Iterable<T> newContents) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
     final oldContents = _list.sublist(start, end);
     _list.replaceRange(start, end, newContents);
     _notifyListUpdate(start, newContents, oldContents);
@@ -254,7 +254,7 @@ class ObservableList<T>
 
   @override
   void retainWhere(bool Function(T element) test) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final removedItems = _list.where((_) => !test(_)).toList(growable: false);
 
@@ -264,7 +264,7 @@ class ObservableList<T>
 
   @override
   void setAll(int index, Iterable<T> iterable) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     _list.setAll(index, iterable);
     _notifyListUpdate(index, null, null);
@@ -272,7 +272,7 @@ class ObservableList<T>
 
   @override
   void setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     _list.setRange(start, end, iterable, skipCount);
     _notifyListUpdate(start, null, null);
@@ -280,7 +280,7 @@ class ObservableList<T>
 
   @override
   void shuffle([Random random]) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     _list.shuffle(random);
     _notifyListUpdate(0, null, null);
@@ -288,7 +288,7 @@ class ObservableList<T>
 
   @override
   void sort([int Function(T a, T b) compare]) {
-    _context.enforceWriteBehavior(_atom);
+    _context.enforceWritePolicy(_atom);
 
     _list.sort(compare);
     _notifyListUpdate(0, null, null);

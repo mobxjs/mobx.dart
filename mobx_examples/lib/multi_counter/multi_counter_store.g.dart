@@ -19,7 +19,7 @@ mixin _$SingleCounter on _SingleCounter, Store {
 
   @override
   set value(int value) {
-    _$valueAtom.context.enforceWriteBehavior(_$valueAtom);
+    _$valueAtom.context.enforceWritePolicy(_$valueAtom);
     super.value = value;
     _$valueAtom.reportChanged();
   }

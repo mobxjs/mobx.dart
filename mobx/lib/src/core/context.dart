@@ -146,7 +146,7 @@ class ReactiveContext {
     }
   }
 
-  void enforceReadBehavior(Atom atom) {
+  void enforceReadPolicy(Atom atom) {
     switch (config.readPolicy) {
       case ReactiveReadPolicy.always:
         if (!_state.isWithinBatch && !_state.isWithinDerivation) {
@@ -160,7 +160,7 @@ class ReactiveContext {
     }
   }
 
-  void enforceWriteBehavior(Atom atom) {
+  void enforceWritePolicy(Atom atom) {
     // Cannot mutate observables inside a computed
     if (_state.computationDepth > 0 && atom.hasObservers) {
       throw MobXException(

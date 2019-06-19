@@ -20,13 +20,13 @@ Create a `ReactiveContext` by passing a configuration object. If no configuratio
 
 ## ReactiveConfig
 
-### `ReactiveConfig({bool disableErrorBoundaries, EnforceActions enforceActions, int maxIterations})`
+### `ReactiveConfig({bool disableErrorBoundaries, ReactiveWritePolicy writePolicy, int maxIterations})`
 
 - **`disableErrorBoundaries`**: When `true`, MobX will not guard against exceptions thrown during reactions. By default, it is `false`, which means MobX will catch unhandled exceptions and ensure the consistency of the reactive system.
-- **`enforceActions`**: This is an enumeration of the various behaviors in MobX for dealing with stray observable mutations. Stray mutations are those that are **not** wrapped in actions. By default, it is set to `observed`. This means if there is an observable which is being observed and you mutate it outside of an action, MobX will throw an exception.
+- **`writePolicy`**: This is an enumeration of the various behaviors in MobX for dealing with stray observable mutations. Stray mutations are those that are **not** wrapped in actions. By default, it is set to `observed`. This means if there is an observable which is being observed and you mutate it outside of an action, MobX will throw an exception.
 
 ```dart
-enum EnforceActions { observed, always, never }
+enum ReactiveWritePolicy { observed, always, never }
 ```
 
 - **`maxIterations`**: This is the number of iterations MobX will run through before treating the reaction as _unstable_. At this point, it will throw an exception. Unstable reactions do not settle down and keep on triggering more reactions. This is most likely due to a cyclical chain of dependencies. The default is set to `100`.

@@ -31,7 +31,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set field1(String value) {
-    _$field1Atom.context.enforceWriteBehavior(_$field1Atom);
+    _$field1Atom.context.enforceWritePolicy(_$field1Atom);
     super.field1 = value;
     _$field1Atom.reportChanged();
   }
@@ -46,7 +46,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set field2(String value) {
-    _$field2Atom.context.enforceWriteBehavior(_$field2Atom);
+    _$field2Atom.context.enforceWritePolicy(_$field2Atom);
     super.field2 = value;
     _$field2Atom.reportChanged();
   }
@@ -61,7 +61,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set stuff(String value) {
-    _$stuffAtom.context.enforceWriteBehavior(_$stuffAtom);
+    _$stuffAtom.context.enforceWritePolicy(_$stuffAtom);
     super.stuff = value;
     _$stuffAtom.reportChanged();
   }
@@ -76,7 +76,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set batchItem1(String value) {
-    _$batchItem1Atom.context.enforceWriteBehavior(_$batchItem1Atom);
+    _$batchItem1Atom.context.enforceWritePolicy(_$batchItem1Atom);
     super.batchItem1 = value;
     _$batchItem1Atom.reportChanged();
   }
@@ -91,7 +91,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set batchItem2(String value) {
-    _$batchItem2Atom.context.enforceWriteBehavior(_$batchItem2Atom);
+    _$batchItem2Atom.context.enforceWritePolicy(_$batchItem2Atom);
     super.batchItem2 = value;
     _$batchItem2Atom.reportChanged();
   }
@@ -106,7 +106,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set batchItem3(String value) {
-    _$batchItem3Atom.context.enforceWriteBehavior(_$batchItem3Atom);
+    _$batchItem3Atom.context.enforceWritePolicy(_$batchItem3Atom);
     super.batchItem3 = value;
     _$batchItem3Atom.reportChanged();
   }
@@ -121,7 +121,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set batchItem4(String value) {
-    _$batchItem4Atom.context.enforceWriteBehavior(_$batchItem4Atom);
+    _$batchItem4Atom.context.enforceWritePolicy(_$batchItem4Atom);
     super.batchItem4 = value;
     _$batchItem4Atom.reportChanged();
   }
@@ -136,7 +136,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set errorField(String value) {
-    _$errorFieldAtom.context.enforceWriteBehavior(_$errorFieldAtom);
+    _$errorFieldAtom.context.enforceWritePolicy(_$errorFieldAtom);
     super.errorField = value;
     _$errorFieldAtom.reportChanged();
   }

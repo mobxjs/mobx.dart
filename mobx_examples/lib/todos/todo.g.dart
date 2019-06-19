@@ -19,7 +19,7 @@ mixin _$Todo on _Todo, Store {
 
   @override
   set description(String value) {
-    _$descriptionAtom.context.enforceWriteBehavior(_$descriptionAtom);
+    _$descriptionAtom.context.enforceWritePolicy(_$descriptionAtom);
     super.description = value;
     _$descriptionAtom.reportChanged();
   }
@@ -34,7 +34,7 @@ mixin _$Todo on _Todo, Store {
 
   @override
   set done(bool value) {
-    _$doneAtom.context.enforceWriteBehavior(_$doneAtom);
+    _$doneAtom.context.enforceWritePolicy(_$doneAtom);
     super.done = value;
     _$doneAtom.reportChanged();
   }
