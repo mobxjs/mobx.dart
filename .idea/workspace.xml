@@ -7,21 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/observable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/observable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/nested_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/nested_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -269,7 +255,8 @@
     <MESSAGE value="Adding a policy to allow observable reads only inside reactions/actions. No stray reads." />
     <MESSAGE value="some tests to enforce read behavior" />
     <MESSAGE value="renaming fields&#10;&#10;enforceActions =&gt; writePolicy&#10;enforceReactions =&gt; readPolicy" />
-    <option name="LAST_COMMIT_MESSAGE" value="renaming fields&#10;&#10;enforceActions =&gt; writePolicy&#10;enforceReactions =&gt; readPolicy" />
+    <MESSAGE value="bringing versions in sync, adding read policy checks to collections" />
+    <option name="LAST_COMMIT_MESSAGE" value="bringing versions in sync, adding read policy checks to collections" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

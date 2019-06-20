@@ -14,7 +14,7 @@ void main() {
       final atom = MockAtom();
 
       verifyNever(atom.reportObserved());
-      expect(MapKeysIterable(['a', 'b'], atom).length, equals(2));
+      expect(MapKeysIterable(['a', 'b'], atom.context, atom).length, equals(2));
       verify(atom.reportObserved());
     });
 
@@ -22,7 +22,8 @@ void main() {
       final atom = MockAtom();
 
       verifyNever(atom.reportObserved());
-      expect(MapKeysIterable(['a', 'b'], atom).contains('a'), isTrue);
+      expect(MapKeysIterable(['a', 'b'], atom.context, atom).contains('a'),
+          isTrue);
       verify(atom.reportObserved());
     });
   });
