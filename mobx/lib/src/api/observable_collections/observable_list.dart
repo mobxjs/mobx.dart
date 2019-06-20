@@ -48,6 +48,8 @@ class ObservableList<T>
 
   @override
   int get length {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.length;
   }
@@ -62,6 +64,8 @@ class ObservableList<T>
 
   @override
   List<T> operator +(List<T> other) {
+    _context.enforceReadPolicy(_atom);
+
     final newList = _list + other;
     _atom.reportObserved();
     return newList;
@@ -69,6 +73,8 @@ class ObservableList<T>
 
   @override
   T operator [](int index) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list[index];
   }
@@ -103,30 +109,40 @@ class ObservableList<T>
 
   @override
   Iterator<T> get iterator {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.iterator;
   }
 
   @override
   int lastIndexWhere(bool Function(T element) test, [int start]) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.lastIndexWhere(test, start);
   }
 
   @override
   T lastWhere(bool Function(T element) test, {T Function() orElse}) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.lastWhere(test, orElse: orElse);
   }
 
   @override
   T get single {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.single;
   }
 
   @override
   List<T> sublist(int start, [int end]) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.sublist(start, end);
   }
@@ -139,6 +155,8 @@ class ObservableList<T>
 
   @override
   List<T> toList({bool growable = true}) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.toList(growable: growable);
   }

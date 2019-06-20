@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Adapting to the API changes in `mobx 0.3.0`
+
 ## 0.2.1+2
 
 - Removing the code in `/example` folder and instead having a simple `README.md` in it.

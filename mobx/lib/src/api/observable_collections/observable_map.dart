@@ -51,6 +51,8 @@ class ObservableMap<K, V>
 
   @override
   V operator [](Object key) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map[key];
   }
@@ -92,7 +94,7 @@ class ObservableMap<K, V>
   }
 
   @override
-  Iterable<K> get keys => MapKeysIterable(_map.keys, _atom);
+  Iterable<K> get keys => MapKeysIterable(_map.keys, _context, _atom);
 
   @override
   Map<RK, RV> cast<RK, RV>() =>
@@ -119,24 +121,32 @@ class ObservableMap<K, V>
 
   @override
   int get length {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.length;
   }
 
   @override
   bool get isNotEmpty {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.isNotEmpty;
   }
 
   @override
   bool get isEmpty {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.isEmpty;
   }
 
   @override
   bool containsKey(Object key) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.containsKey(key);
   }
@@ -199,41 +209,52 @@ class MapChange<K, V> {
 
 // ignore:prefer_mixin
 class MapKeysIterable<K> with IterableMixin<K> {
-  MapKeysIterable(this._iterable, this._atom);
+  MapKeysIterable(this._iterable, this._context, this._atom);
 
   final Iterable<K> _iterable;
   final Atom _atom;
+  final ReactiveContext _context;
 
   @override
   int get length {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterable.length;
   }
 
   @override
   bool contains(Object element) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterable.contains(element);
   }
 
   @override
-  Iterator<K> get iterator => MapKeysIterator(_iterable.iterator, _atom);
+  Iterator<K> get iterator =>
+      MapKeysIterator(_iterable.iterator, _context, _atom);
 }
 
 class MapKeysIterator<K> implements Iterator<K> {
-  MapKeysIterator(this._iterator, this._atom);
+  MapKeysIterator(this._iterator, this._context, this._atom);
 
   final Iterator<K> _iterator;
   final Atom _atom;
+  final ReactiveContext _context;
 
   @override
   K get current {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.current;
   }
 
   @override
   bool moveNext() {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.moveNext();
   }

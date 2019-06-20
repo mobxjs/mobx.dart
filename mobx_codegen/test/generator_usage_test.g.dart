@@ -25,6 +25,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get field1 {
+    _$field1Atom.context.enforceReadPolicy(_$field1Atom);
     _$field1Atom.reportObserved();
     return super.field1;
   }
@@ -40,6 +41,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get field2 {
+    _$field2Atom.context.enforceReadPolicy(_$field2Atom);
     _$field2Atom.reportObserved();
     return super.field2;
   }
@@ -55,6 +57,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get stuff {
+    _$stuffAtom.context.enforceReadPolicy(_$stuffAtom);
     _$stuffAtom.reportObserved();
     return super.stuff;
   }
@@ -70,6 +73,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get batchItem1 {
+    _$batchItem1Atom.context.enforceReadPolicy(_$batchItem1Atom);
     _$batchItem1Atom.reportObserved();
     return super.batchItem1;
   }
@@ -85,6 +89,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get batchItem2 {
+    _$batchItem2Atom.context.enforceReadPolicy(_$batchItem2Atom);
     _$batchItem2Atom.reportObserved();
     return super.batchItem2;
   }
@@ -100,6 +105,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get batchItem3 {
+    _$batchItem3Atom.context.enforceReadPolicy(_$batchItem3Atom);
     _$batchItem3Atom.reportObserved();
     return super.batchItem3;
   }
@@ -115,6 +121,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get batchItem4 {
+    _$batchItem4Atom.context.enforceReadPolicy(_$batchItem4Atom);
     _$batchItem4Atom.reportObserved();
     return super.batchItem4;
   }
@@ -130,6 +137,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get errorField {
+    _$errorFieldAtom.context.enforceReadPolicy(_$errorFieldAtom);
     _$errorFieldAtom.reportObserved();
     return super.errorField;
   }
