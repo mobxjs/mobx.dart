@@ -73,8 +73,7 @@ class ObservableSet<T>
   }
 
   @override
-  Iterator<T> get iterator =>
-      ObservableIterator(_atom, _context, _set.iterator);
+  Iterator<T> get iterator => ObservableIterator(_atom, _set.iterator);
 
   @override
   int get length {
@@ -154,15 +153,14 @@ ObservableSet<T> wrapInObservableSet<T>(Atom atom, Set<T> _set) =>
     ObservableSet._wrap(mainContext, atom, _set);
 
 class ObservableIterator<T> implements Iterator<T> {
-  ObservableIterator(this._atom, this._context, this._iterator);
+  ObservableIterator(this._atom, this._iterator);
 
-  final ReactiveContext _context;
   final Iterator<T> _iterator;
   final Atom _atom;
 
   @override
   T get current {
-    _context.enforceReadPolicy(_atom);
+    _atom.context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
     return _iterator.current;
@@ -170,7 +168,7 @@ class ObservableIterator<T> implements Iterator<T> {
 
   @override
   bool moveNext() {
-    _context.enforceReadPolicy(_atom);
+    _atom.context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
     return _iterator.moveNext();

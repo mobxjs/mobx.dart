@@ -66,7 +66,8 @@ void doAllReads() {
 
 void doObservableReads() {
   final x = Observable(0);
-  final xValue = x.value;
+  // ignore: cascade_invocations
+  x.value;
 }
 
 void doObservableListReads() {
