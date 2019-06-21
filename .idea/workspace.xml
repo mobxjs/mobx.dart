@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoTestManager">
-    <enabled-run-configurations>
-      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
-    </enabled-run-configurations>
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/reactive_policies_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/reactive_policies_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/shared_mocks.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/shared_mocks.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -256,10 +253,18 @@
     <MESSAGE value="some tests to enforce read behavior" />
     <MESSAGE value="renaming fields&#10;&#10;enforceActions =&gt; writePolicy&#10;enforceReactions =&gt; readPolicy" />
     <MESSAGE value="bringing versions in sync, adding read policy checks to collections" />
-    <option name="LAST_COMMIT_MESSAGE" value="bringing versions in sync, adding read policy checks to collections" />
+    <MESSAGE value="fixing the api call" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing the api call" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/mobx/test/reactive_policies_test.dart</url>
+          <line>26</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="dart-exception">
           <properties>
