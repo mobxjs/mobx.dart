@@ -9,7 +9,7 @@ void main() {
     });
 
     test('should throw when reads happen OUTSIDE actions or reactions', () {
-      expect(doAllReads, throwsA(const TypeMatcher<MobXException>()));
+      expect(doAllReads, throwsA(const TypeMatcher<AssertionError>()));
     });
 
     test('should NOT throw when reads happen INSIDE reactions', () {

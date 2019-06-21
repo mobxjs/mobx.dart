@@ -172,7 +172,7 @@ void main() {
       final d = autorun((_) => x.value);
 
       // Should fail now
-      expect(() => x.value = 2, throwsException);
+      expect(() => x.value = 2, throwsA(const TypeMatcher<AssertionError>()));
 
       d();
     });
@@ -193,7 +193,7 @@ void main() {
       final d = autorun((_) => x.value, context: context);
 
       // Should fail now
-      expect(() => x.value = 2, throwsException);
+      expect(() => x.value = 2, throwsA(const TypeMatcher<AssertionError>()));
 
       d();
     });
@@ -207,13 +207,13 @@ void main() {
       final x = Observable(0, context: context);
 
       // Should fail even if there are no observers
-      expect(() => x.value = 1, throwsException);
+      expect(() => x.value = 1, throwsA(const TypeMatcher<AssertionError>()));
 
       // Add observer
       final d = autorun((_) => x.value, context: context);
 
       // Should fail now as well
-      expect(() => x.value = 2, throwsException);
+      expect(() => x.value = 2, throwsA(const TypeMatcher<AssertionError>()));
 
       d();
     });

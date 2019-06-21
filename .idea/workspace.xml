@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoTestManager">
+    <enabled-run-configurations>
+      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
+    </enabled-run-configurations>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/action_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/action_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/context_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/context_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/test/reactive_policies_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/reactive_policies_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -257,7 +263,8 @@
     <MESSAGE value="bringing versions in sync, adding read policy checks to collections" />
     <MESSAGE value="fixing the api call" />
     <MESSAGE value="tests for observable reads in observable, list, set, map" />
-    <option name="LAST_COMMIT_MESSAGE" value="tests for observable reads in observable, list, set, map" />
+    <MESSAGE value="few tweaks on internal classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="few tweaks on internal classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

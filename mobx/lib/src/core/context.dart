@@ -149,10 +149,8 @@ class ReactiveContext {
   void enforceReadPolicy(Atom atom) {
     switch (config.readPolicy) {
       case ReactiveReadPolicy.always:
-        if (!_state.isWithinBatch && !_state.isWithinDerivation) {
-          throw MobXException(
-              'Observable values cannot be read outside Actions and Reactions. Make sure to wrap them inside an action or a reaction. Tried to read: ${atom.name}');
-        }
+        assert(_state.isWithinBatch || _state.isWithinDerivation,
+            'Observable values cannot be read outside Actions and Reactions. Make sure to wrap them inside an action or a reaction. Tried to read: ${atom.name}');
         return;
 
       case ReactiveReadPolicy.never:
@@ -161,14 +159,10 @@ class ReactiveContext {
   }
 
   void enforceWritePolicy(Atom atom) {
-    // Cannot mutate observables inside a computed
+    // Cannot mutate observables inside a computed. This is required to maintain the consistency of the reactive system.
     if (_state.computationDepth > 0 && atom.hasObservers) {
       throw MobXException(
           'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}');
-    }
-
-    if (_state.allowStateChanges) {
-      return;
     }
 
     switch (config.writePolicy) {
@@ -176,14 +170,16 @@ class ReactiveContext {
         return;
 
       case ReactiveWritePolicy.observed:
-        if (atom.hasObservers) {
-          throw MobXException(
-              'Side effects like changing state are not allowed at this point. Please wrap the code in an "action". Tried to modify: ${atom.name}');
+        if (atom.hasObservers == false) {
+          return;
         }
+
+        assert(_state.isWithinBatch,
+            'Side effects like changing state are not allowed at this point. Please wrap the code in an "action". Tried to modify: ${atom.name}');
         break;
 
       case ReactiveWritePolicy.always:
-        throw MobXException(
+        assert(_state.isWithinBatch,
             'Since strict-mode is enabled, changing observed observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
     }
   }
@@ -299,7 +295,7 @@ class ReactiveContext {
         // Resetting ensures we have no bad-state left
         _resetState();
 
-        throw MobXException(
+        throw MobXCyclicReactionException(
             "Reaction doesn't converge to a stable state after ${config.maxIterations} iterations. Probably there is a cycle in the reactive function: $failingReaction");
       }
 
