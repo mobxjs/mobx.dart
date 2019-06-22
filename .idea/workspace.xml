@@ -8,9 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/api/context.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/api/context.mdx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -180,10 +178,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.gen:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.gen:mobx_examples" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.gen:mobx:example" />
       </list>
     </recent_temporary>
@@ -263,7 +261,8 @@
     <MESSAGE value="tests for observable reads in observable, list, set, map" />
     <MESSAGE value="few tweaks on internal classes" />
     <MESSAGE value="switching to assertions" />
-    <option name="LAST_COMMIT_MESSAGE" value="switching to assertions" />
+    <MESSAGE value="assert wrappers" />
+    <option name="LAST_COMMIT_MESSAGE" value="assert wrappers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
