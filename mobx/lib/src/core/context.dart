@@ -147,15 +147,23 @@ class ReactiveContext {
   }
 
   void enforceReadPolicy(Atom atom) {
-    switch (config.readPolicy) {
-      case ReactiveReadPolicy.always:
-        assert(_state.isWithinBatch || _state.isWithinDerivation,
-            'Observable values cannot be read outside Actions and Reactions. Make sure to wrap them inside an action or a reaction. Tried to read: ${atom.name}');
-        return;
+    // ---
+    // We are wrapping in an assert() since we don't want this code to execute at runtime.
+    // The dart compiler removes assert() calls from the release build.
+    // ---
+    assert(() {
+      switch (config.readPolicy) {
+        case ReactiveReadPolicy.always:
+          assert(_state.isWithinBatch || _state.isWithinDerivation,
+              'Observable values cannot be read outside Actions and Reactions. Make sure to wrap them inside an action or a reaction. Tried to read: ${atom.name}');
+          break;
 
-      case ReactiveReadPolicy.never:
-        return;
-    }
+        case ReactiveReadPolicy.never:
+          break;
+      }
+
+      return true;
+    }());
   }
 
   void enforceWritePolicy(Atom atom) {
@@ -165,23 +173,31 @@ class ReactiveContext {
           'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}');
     }
 
-    switch (config.writePolicy) {
-      case ReactiveWritePolicy.never:
-        return;
+    // ---
+    // We are wrapping in an assert() since we don't want this code to execute at runtime.
+    // The dart compiler removes assert() calls from the release build.
+    // ---
+    assert(() {
+      switch (config.writePolicy) {
+        case ReactiveWritePolicy.never:
+          break;
 
-      case ReactiveWritePolicy.observed:
-        if (atom.hasObservers == false) {
-          return;
-        }
+        case ReactiveWritePolicy.observed:
+          if (atom.hasObservers == false) {
+            break;
+          }
 
-        assert(_state.isWithinBatch,
-            'Side effects like changing state are not allowed at this point. Please wrap the code in an "action". Tried to modify: ${atom.name}');
-        break;
+          assert(_state.isWithinBatch,
+              'Side effects like changing state are not allowed at this point. Please wrap the code in an "action". Tried to modify: ${atom.name}');
+          break;
 
-      case ReactiveWritePolicy.always:
-        assert(_state.isWithinBatch,
-            'Since strict-mode is enabled, changing observed observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
-    }
+        case ReactiveWritePolicy.always:
+          assert(_state.isWithinBatch,
+              'Since strict-mode is enabled, changing observed observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
+      }
+
+      return true;
+    }());
   }
 
   Derivation _startTracking(Derivation derivation) {

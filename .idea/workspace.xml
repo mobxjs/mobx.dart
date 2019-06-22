@@ -8,11 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/action_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/action_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/context_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/context_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/reactive_policies_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/reactive_policies_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +70,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -264,7 +262,8 @@
     <MESSAGE value="fixing the api call" />
     <MESSAGE value="tests for observable reads in observable, list, set, map" />
     <MESSAGE value="few tweaks on internal classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="few tweaks on internal classes" />
+    <MESSAGE value="switching to assertions" />
+    <option name="LAST_COMMIT_MESSAGE" value="switching to assertions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
