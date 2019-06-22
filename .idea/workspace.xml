@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/src/api/context.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/api/context.mdx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -262,7 +261,8 @@
     <MESSAGE value="few tweaks on internal classes" />
     <MESSAGE value="switching to assertions" />
     <MESSAGE value="assert wrappers" />
-    <option name="LAST_COMMIT_MESSAGE" value="assert wrappers" />
+    <MESSAGE value="updating documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

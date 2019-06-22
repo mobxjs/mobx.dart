@@ -44,7 +44,7 @@ enum ReactiveReadPolicy { always, never }
 This controls the behavior for reading observables. Typically these values are only read inside a reactive context like an `Action` or `Reaction`. Reading it outside has no effect as no read-notifications will be fired. This policy will be enforced in the getter for the observable value. The policy is also applied for `ObservableList`, `ObservableSet` and `ObservableMap`.
 
 - **`always`**: Always enforce the reads to happen inside a reactive context like an `Action` or `Reaction`.
-- **`never`**: Never enforce the read-policy. This allows reads to happen everywhere.
+- **`never`**: Never enforce the read-policy. This allows reads to happen everywhere. This is the **default**.
 
 ### `enum ReactiveWritePolicy { observed, always, never }`
 
@@ -52,4 +52,4 @@ The write-policy ensures there are no stray mutations of observables. These are 
 
 - **`always`**: Always enforce the writes to happen inside an `Action`.
 - **`never`**: Never enforce the write-policy. This means mutations can happen everywhere. We discourage this option as it can result in stray-writes and they lack the benefits of an `Action`.
-- **`observed`**: Enforce the mutation to happen inside an `Action`, only if the observable being mutated is being _observed_ in a `Reaction`. This is a middle ground between the `always` and `never` option. If the observable is not being observed, we allow the mutation and consider it safe.
+- **`observed`**: Enforce the mutation to happen inside an `Action`, only if the observable being mutated is being _observed_ in a `Reaction`. This is a middle ground between the `always` and `never` option. If the observable is not being observed, we allow the mutation and consider it safe. This is the **default** value.
