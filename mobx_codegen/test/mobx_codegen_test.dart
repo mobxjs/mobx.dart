@@ -1,3 +1,4 @@
+@TestOn('vm')
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:logging/logging.dart';
@@ -213,7 +214,8 @@ void main() {
     });
 
     test('generates for a class mixing Store', () async {
-      expect(await generate(validInput), endsWith(validOutput));
+      final source = await generate(validInput);
+      expect(source, endsWith(validOutput));
     });
 
     test('invalid output', () async {
@@ -231,7 +233,7 @@ final String pkgName = 'pkg';
 
 // Recreate generator for each test because we repeatedly create
 // classes with the same name in the same library, which will clash.
-Builder get builder => new PartBuilder([new StoreGenerator()], '.g.dart');
+Builder get builder => SharedPartBuilder([StoreGenerator()], 'store_generator');
 
 Future<String> generate(String source) async {
   final srcs = {

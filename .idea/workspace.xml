@@ -4,12 +4,9 @@
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +94,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in flutter_mobx">
+  <component name="RunManager" selected="Dart Test.tests in mobx_codegen">
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/mobx" />
       <option name="scope" value="FOLDER" />
@@ -179,11 +176,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.pub:upgrade:mobx_codegen" />
-        <item itemvalue="npm.pub:upgrade:mobx" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
-        <item itemvalue="npm.gen:mobx_codegen" />
+        <item itemvalue="npm.pub:upgrade:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx" />
+        <item itemvalue="npm.gen:mobx_codegen" />
+        <item itemvalue="npm.pub:upgrade:mobx" />
       </list>
     </recent_temporary>
   </component>
@@ -264,17 +261,11 @@
     <MESSAGE value="switching to assertions" />
     <MESSAGE value="assert wrappers" />
     <MESSAGE value="updating documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating documentation" />
+    <MESSAGE value="package updates to alpha to enable testing on circleCI" />
+    <option name="LAST_COMMIT_MESSAGE" value="package updates to alpha to enable testing on circleCI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart</url>
-          <line>219</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="dart-exception">
           <properties>
