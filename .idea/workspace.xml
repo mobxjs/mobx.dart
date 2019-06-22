@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoTestManager">
-    <enabled-run-configurations>
-      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
-    </enabled-run-configurations>
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/docs/src/api/context.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/api/context.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +69,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -95,7 +97,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.tests in mobx">
+  <component name="RunManager" selected="Flutter Test.tests in flutter_mobx">
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/mobx" />
       <option name="scope" value="FOLDER" />
@@ -124,21 +126,11 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="gen:mobx:example" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="pub:get:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="gen:mobx:example" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="gen:mobx_examples" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="gen:mobx_examples" />
+        <script value="pub:get:mobx" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -154,11 +146,21 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/docs/package.json" />
+    <configuration name="pub:upgrade:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="start" />
+        <script value="pub:upgrade:mobx" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="pub:upgrade:mobx_codegen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="pub:upgrade:mobx_codegen" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -169,19 +171,19 @@
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="Flutter.mobx_examples" />
       <item itemvalue="Flutter Test.tests in flutter_mobx" />
-      <item itemvalue="npm.gen:mobx_examples" />
-      <item itemvalue="npm.gen:mobx:example" />
-      <item itemvalue="npm.start" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.gen:mobx_codegen" />
+      <item itemvalue="npm.pub:get:mobx" />
+      <item itemvalue="npm.pub:upgrade:mobx" />
+      <item itemvalue="npm.pub:upgrade:mobx_codegen" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
-        <item itemvalue="npm.gen:mobx_codegen" />
+        <item itemvalue="npm.pub:upgrade:mobx_codegen" />
+        <item itemvalue="npm.pub:upgrade:mobx" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
-        <item itemvalue="npm.gen:mobx_examples" />
-        <item itemvalue="npm.gen:mobx:example" />
+        <item itemvalue="npm.gen:mobx_codegen" />
+        <item itemvalue="npm.pub:get:mobx" />
       </list>
     </recent_temporary>
   </component>
@@ -266,6 +268,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart</url>
+          <line>219</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="dart-exception">
           <properties>

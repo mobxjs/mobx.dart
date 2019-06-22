@@ -58,13 +58,14 @@ mixin _\$User on UserBase, Store {
 
   @override
   String get firstName {
+    _\$firstNameAtom.context.enforceReadPolicy(_\$firstNameAtom);
     _\$firstNameAtom.reportObserved();
     return super.firstName;
   }
 
   @override
   set firstName(String value) {
-    _\$firstNameAtom.context.checkIfStateWritesAreAllowed(_\$firstNameAtom);
+    _\$firstNameAtom.context.enforceWritePolicy(_\$firstNameAtom);
     super.firstName = value;
     _\$firstNameAtom.reportChanged();
   }
@@ -73,13 +74,14 @@ mixin _\$User on UserBase, Store {
 
   @override
   String get lastName {
+    _\$lastNameAtom.context.enforceReadPolicy(_\$lastNameAtom);
     _\$lastNameAtom.reportObserved();
     return super.lastName;
   }
 
   @override
   set lastName(String value) {
-    _\$lastNameAtom.context.checkIfStateWritesAreAllowed(_\$lastNameAtom);
+    _\$lastNameAtom.context.enforceWritePolicy(_\$lastNameAtom);
     super.lastName = value;
     _\$lastNameAtom.reportChanged();
   }
@@ -180,13 +182,14 @@ mixin _\$Item<T> on _Item<T>, Store {
 
   @override
   T get value {
+    _\$valueAtom.context.enforceReadPolicy(_\$valueAtom);
     _\$valueAtom.reportObserved();
     return super.value;
   }
 
   @override
   set value(T value) {
-    _\$valueAtom.context.checkIfStateWritesAreAllowed(_\$valueAtom);
+    _\$valueAtom.context.enforceWritePolicy(_\$valueAtom);
     super.value = value;
     _\$valueAtom.reportChanged();
   }
@@ -209,7 +212,7 @@ void main() {
       expect(await generate(source), isEmpty);
     });
 
-    test('generates for a class that mixing Store', () async {
+    test('generates for a class mixing Store', () async {
       expect(await generate(validInput), endsWith(validOutput));
     });
 
