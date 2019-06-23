@@ -4,7 +4,6 @@
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
     </list>
@@ -176,8 +175,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:upgrade:mobx_codegen" />
+        <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.gen:mobx_codegen" />
         <item itemvalue="npm.pub:upgrade:mobx" />
@@ -262,7 +261,8 @@
     <MESSAGE value="assert wrappers" />
     <MESSAGE value="updating documentation" />
     <MESSAGE value="package updates to alpha to enable testing on circleCI" />
-    <option name="LAST_COMMIT_MESSAGE" value="package updates to alpha to enable testing on circleCI" />
+    <MESSAGE value="having some failing tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="having some failing tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

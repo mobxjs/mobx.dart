@@ -237,8 +237,6 @@ Future<String> generate(String source) async {
   Builder builder = PartBuilder([StoreGenerator()], '.g.dart');
 
   final srcs = {
-    'mobx|lib/src/api/annotations.dart': fakeAnnotationsSource,
-    'mobx|lib/mobx.dart': fakeMobxSource,
     '$pkgName|lib/generator_sample.dart': source,
   };
 
@@ -261,32 +259,3 @@ Future<String> generate(String source) async {
           writer.assets[new AssetId(pkgName, 'lib/generator_sample.g.dart')] ??
               []);
 }
-
-// Just needs the annotations for the tests
-const fakeAnnotationsSource = """
-class MakeObservable {
-  const MakeObservable._();
-}
-
-const MakeObservable observable = MakeObservable._();
-
-class ComputedMethod {
-  const ComputedMethod._();
-}
-
-const ComputedMethod computed = ComputedMethod._();
-
-class MakeAction {
-  const MakeAction._();
-}
-
-const MakeAction action = MakeAction._();
-
-abstract class Store {}
-""";
-
-const fakeMobxSource = """
-library mobx;
-
-export 'package:mobx/src/api/annotations.dart';
-""";
