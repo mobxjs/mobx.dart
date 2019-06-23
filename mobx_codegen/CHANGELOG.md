@@ -1,8 +1,9 @@
 # Changelog
 
-## 0.3.0
+## 0.3.0 - 0.3.0+1
 
 - Adapting to the API changes in `mobx 0.3.0`
+- README.md updates
 
 ## 0.2.1+2
 
