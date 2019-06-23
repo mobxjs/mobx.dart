@@ -61,10 +61,13 @@ void main() {
         // cyclic-dependency!!!
         // this autorun() will keep on getting triggered as a.value keeps changing
         // every time it's invoked
-        a.value = a.value + 1;
+        runInAction(() {
+          a.value = a.value + 1;
+        });
       }, name: 'Cyclic Reaction');
 
-      expect(() => a.value = 1, throwsException);
+      expect(() => runInAction(() => a.value = 1),
+          throwsA(const TypeMatcher<MobXCyclicReactionException>()));
       d();
     });
 
@@ -85,7 +88,8 @@ void main() {
       expect(clone.maxIterations != config.maxIterations, isTrue);
       expect(clone.disableErrorBoundaries == config.disableErrorBoundaries,
           isTrue);
-      expect(clone.enforceActions == config.enforceActions, isTrue);
+      expect(clone.writePolicy == config.writePolicy, isTrue);
+      expect(clone.readPolicy == config.readPolicy, isTrue);
     });
 
     test('when no overrides are provided the clone reuses source values', () {
@@ -95,7 +99,8 @@ void main() {
       expect(clone.maxIterations, equals(config.maxIterations));
       expect(
           clone.disableErrorBoundaries, equals(config.disableErrorBoundaries));
-      expect(clone.enforceActions, equals(config.enforceActions));
+      expect(clone.writePolicy, equals(config.writePolicy));
+      expect(clone.readPolicy, equals(config.readPolicy));
     });
   });
 }

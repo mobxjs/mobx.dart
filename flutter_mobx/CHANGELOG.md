@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Adapting to the API changes in mobx
+
 ## 0.2.3+1
 
 - `Observer` is relaying the exception caught during the tracking phase. This is done using the `errorValue` field present on the `reaction` instance.

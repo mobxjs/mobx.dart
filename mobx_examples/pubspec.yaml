@@ -34,5 +34,10 @@ dev_dependencies:
 dependency_overrides:
   flutter_mobx:
     path: ../flutter_mobx
+  mobx_codegen:
+    path: ../mobx_codegen
+  mobx:
+    path: ../mobx
+
 flutter:
   uses-material-design: true

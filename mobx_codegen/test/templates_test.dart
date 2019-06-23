@@ -105,13 +105,14 @@ void main() {
 
   @override
   FieldType get fieldName {
+    _atomFieldName.context.enforceReadPolicy(_atomFieldName);
     _atomFieldName.reportObserved();
     return super.fieldName;
   }
 
   @override
   set fieldName(FieldType value) {
-    _atomFieldName.context.checkIfStateModificationsAreAllowed(_atomFieldName);
+    _atomFieldName.context.enforceWritePolicy(_atomFieldName);
     super.fieldName = value;
     _atomFieldName.reportChanged();
   }"""));

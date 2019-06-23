@@ -25,13 +25,14 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get field1 {
+    _$field1Atom.context.enforceReadPolicy(_$field1Atom);
     _$field1Atom.reportObserved();
     return super.field1;
   }
 
   @override
   set field1(String value) {
-    _$field1Atom.context.checkIfStateModificationsAreAllowed(_$field1Atom);
+    _$field1Atom.context.enforceWritePolicy(_$field1Atom);
     super.field1 = value;
     _$field1Atom.reportChanged();
   }
@@ -40,13 +41,14 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get field2 {
+    _$field2Atom.context.enforceReadPolicy(_$field2Atom);
     _$field2Atom.reportObserved();
     return super.field2;
   }
 
   @override
   set field2(String value) {
-    _$field2Atom.context.checkIfStateModificationsAreAllowed(_$field2Atom);
+    _$field2Atom.context.enforceWritePolicy(_$field2Atom);
     super.field2 = value;
     _$field2Atom.reportChanged();
   }
@@ -55,13 +57,14 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get stuff {
+    _$stuffAtom.context.enforceReadPolicy(_$stuffAtom);
     _$stuffAtom.reportObserved();
     return super.stuff;
   }
 
   @override
   set stuff(String value) {
-    _$stuffAtom.context.checkIfStateModificationsAreAllowed(_$stuffAtom);
+    _$stuffAtom.context.enforceWritePolicy(_$stuffAtom);
     super.stuff = value;
     _$stuffAtom.reportChanged();
   }
@@ -70,14 +73,14 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get batchItem1 {
+    _$batchItem1Atom.context.enforceReadPolicy(_$batchItem1Atom);
     _$batchItem1Atom.reportObserved();
     return super.batchItem1;
   }
 
   @override
   set batchItem1(String value) {
-    _$batchItem1Atom.context
-        .checkIfStateModificationsAreAllowed(_$batchItem1Atom);
+    _$batchItem1Atom.context.enforceWritePolicy(_$batchItem1Atom);
     super.batchItem1 = value;
     _$batchItem1Atom.reportChanged();
   }
@@ -86,14 +89,14 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get batchItem2 {
+    _$batchItem2Atom.context.enforceReadPolicy(_$batchItem2Atom);
     _$batchItem2Atom.reportObserved();
     return super.batchItem2;
   }
 
   @override
   set batchItem2(String value) {
-    _$batchItem2Atom.context
-        .checkIfStateModificationsAreAllowed(_$batchItem2Atom);
+    _$batchItem2Atom.context.enforceWritePolicy(_$batchItem2Atom);
     super.batchItem2 = value;
     _$batchItem2Atom.reportChanged();
   }
@@ -102,14 +105,14 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get batchItem3 {
+    _$batchItem3Atom.context.enforceReadPolicy(_$batchItem3Atom);
     _$batchItem3Atom.reportObserved();
     return super.batchItem3;
   }
 
   @override
   set batchItem3(String value) {
-    _$batchItem3Atom.context
-        .checkIfStateModificationsAreAllowed(_$batchItem3Atom);
+    _$batchItem3Atom.context.enforceWritePolicy(_$batchItem3Atom);
     super.batchItem3 = value;
     _$batchItem3Atom.reportChanged();
   }
@@ -118,14 +121,14 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get batchItem4 {
+    _$batchItem4Atom.context.enforceReadPolicy(_$batchItem4Atom);
     _$batchItem4Atom.reportObserved();
     return super.batchItem4;
   }
 
   @override
   set batchItem4(String value) {
-    _$batchItem4Atom.context
-        .checkIfStateModificationsAreAllowed(_$batchItem4Atom);
+    _$batchItem4Atom.context.enforceWritePolicy(_$batchItem4Atom);
     super.batchItem4 = value;
     _$batchItem4Atom.reportChanged();
   }
@@ -134,14 +137,14 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   String get errorField {
+    _$errorFieldAtom.context.enforceReadPolicy(_$errorFieldAtom);
     _$errorFieldAtom.reportObserved();
     return super.errorField;
   }
 
   @override
   set errorField(String value) {
-    _$errorFieldAtom.context
-        .checkIfStateModificationsAreAllowed(_$errorFieldAtom);
+    _$errorFieldAtom.context.enforceWritePolicy(_$errorFieldAtom);
     super.errorField = value;
     _$errorFieldAtom.reportChanged();
   }

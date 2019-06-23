@@ -31,7 +31,7 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set color(CustomColor value) {
-    _$colorAtom.context.checkIfStateModificationsAreAllowed(_$colorAtom);
+    _$colorAtom.context.enforceWritePolicy(_$colorAtom);
     super.color = value;
     _$colorAtom.reportChanged();
   }
@@ -46,7 +46,7 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set name(String value) {
-    _$nameAtom.context.checkIfStateModificationsAreAllowed(_$nameAtom);
+    _$nameAtom.context.enforceWritePolicy(_$nameAtom);
     super.name = value;
     _$nameAtom.reportChanged();
   }
@@ -61,7 +61,7 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set email(String value) {
-    _$emailAtom.context.checkIfStateModificationsAreAllowed(_$emailAtom);
+    _$emailAtom.context.enforceWritePolicy(_$emailAtom);
     super.email = value;
     _$emailAtom.reportChanged();
   }
@@ -76,7 +76,7 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set password(String value) {
-    _$passwordAtom.context.checkIfStateModificationsAreAllowed(_$passwordAtom);
+    _$passwordAtom.context.enforceWritePolicy(_$passwordAtom);
     super.password = value;
     _$passwordAtom.reportChanged();
   }
@@ -91,8 +91,7 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set _usernameCheck(ObservableFuture<bool> value) {
-    _$_usernameCheckAtom.context
-        .checkIfStateModificationsAreAllowed(_$_usernameCheckAtom);
+    _$_usernameCheckAtom.context.enforceWritePolicy(_$_usernameCheckAtom);
     super._usernameCheck = value;
     _$_usernameCheckAtom.reportChanged();
   }
@@ -177,7 +176,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   set username(String value) {
-    _$usernameAtom.context.checkIfStateModificationsAreAllowed(_$usernameAtom);
+    _$usernameAtom.context.enforceWritePolicy(_$usernameAtom);
     super.username = value;
     _$usernameAtom.reportChanged();
   }
@@ -192,7 +191,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   set email(String value) {
-    _$emailAtom.context.checkIfStateModificationsAreAllowed(_$emailAtom);
+    _$emailAtom.context.enforceWritePolicy(_$emailAtom);
     super.email = value;
     _$emailAtom.reportChanged();
   }
@@ -207,7 +206,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   set password(String value) {
-    _$passwordAtom.context.checkIfStateModificationsAreAllowed(_$passwordAtom);
+    _$passwordAtom.context.enforceWritePolicy(_$passwordAtom);
     super.password = value;
     _$passwordAtom.reportChanged();
   }

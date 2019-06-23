@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0
+
+- API changes introduced to the `enforceActions` setting of `ReactiveConfig`. It is now called `writePolicy` and the enum `EnforceActions` has been renamed to `ReactiveWritePolicy`.
+- Also introducing a `readPolicy` setting on `ReactiveConfig`. It is an enumeration with two values:
+
+```dart
+enum ReactiveReadPolicy { always, never }
+```
+
 ## 0.2.1+2
 
 - Improving test coverage

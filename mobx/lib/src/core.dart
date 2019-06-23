@@ -23,6 +23,12 @@ class MobXException implements Exception {
   String message;
 }
 
+class MobXCyclicReactionException implements Exception {
+  MobXCyclicReactionException(this.message);
+
+  String message;
+}
+
 class MobXCaughtException implements Exception {
   MobXCaughtException(exception) : _exception = exception;
 

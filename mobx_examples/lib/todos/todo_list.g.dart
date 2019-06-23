@@ -68,7 +68,7 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   set todos(ObservableList<Todo> value) {
-    _$todosAtom.context.checkIfStateModificationsAreAllowed(_$todosAtom);
+    _$todosAtom.context.enforceWritePolicy(_$todosAtom);
     super.todos = value;
     _$todosAtom.reportChanged();
   }
@@ -83,7 +83,7 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   set filter(VisibilityFilter value) {
-    _$filterAtom.context.checkIfStateModificationsAreAllowed(_$filterAtom);
+    _$filterAtom.context.enforceWritePolicy(_$filterAtom);
     super.filter = value;
     _$filterAtom.reportChanged();
   }
@@ -99,7 +99,7 @@ mixin _$TodoList on _TodoList, Store {
   @override
   set currentDescription(String value) {
     _$currentDescriptionAtom.context
-        .checkIfStateModificationsAreAllowed(_$currentDescriptionAtom);
+        .enforceWritePolicy(_$currentDescriptionAtom);
     super.currentDescription = value;
     _$currentDescriptionAtom.reportChanged();
   }

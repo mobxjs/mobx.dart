@@ -54,7 +54,7 @@ class ObservableSet<T>
 
   @override
   bool add(T value) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final result = _set.add(value);
     if (result && _hasListeners) {
@@ -66,6 +66,8 @@ class ObservableSet<T>
 
   @override
   bool contains(Object element) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _set.contains(element);
   }
@@ -75,19 +77,23 @@ class ObservableSet<T>
 
   @override
   int get length {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _set.length;
   }
 
   @override
   T lookup(Object element) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _set.lookup(element);
   }
 
   @override
   bool remove(Object value) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.enforceWritePolicy(_atom);
 
     final removed = _set.remove(value);
     if (removed && _hasListeners) {
@@ -99,7 +105,7 @@ class ObservableSet<T>
 
   @override
   void clear() {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.enforceWritePolicy(_atom);
 
     if (_hasListeners) {
       final items = _set.toList(growable: false);
@@ -116,6 +122,8 @@ class ObservableSet<T>
 
   @override
   Set<T> toSet() {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return Set.from(_set);
   }
@@ -152,12 +160,16 @@ class ObservableIterator<T> implements Iterator<T> {
 
   @override
   T get current {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.current;
   }
 
   @override
   bool moveNext() {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.moveNext();
   }

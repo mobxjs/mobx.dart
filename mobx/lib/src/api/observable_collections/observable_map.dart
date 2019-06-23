@@ -51,13 +51,15 @@ class ObservableMap<K, V>
 
   @override
   V operator [](Object key) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map[key];
   }
 
   @override
   void operator []=(K key, V value) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.enforceWritePolicy(_atom);
 
     if (_hasListeners) {
       if (_map.containsKey(key)) {
@@ -76,7 +78,7 @@ class ObservableMap<K, V>
 
   @override
   void clear() {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.enforceWritePolicy(_atom);
 
     if (isEmpty) {
       return;
@@ -100,7 +102,7 @@ class ObservableMap<K, V>
 
   @override
   V remove(Object key) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.enforceWritePolicy(_atom);
 
     if (_hasListeners) {
       if (_map.containsKey(key)) {
@@ -119,24 +121,32 @@ class ObservableMap<K, V>
 
   @override
   int get length {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.length;
   }
 
   @override
   bool get isNotEmpty {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.isNotEmpty;
   }
 
   @override
   bool get isEmpty {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.isEmpty;
   }
 
   @override
   bool containsKey(Object key) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.containsKey(key);
   }
@@ -206,12 +216,16 @@ class MapKeysIterable<K> with IterableMixin<K> {
 
   @override
   int get length {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterable.length;
   }
 
   @override
   bool contains(Object element) {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterable.contains(element);
   }
@@ -228,12 +242,16 @@ class MapKeysIterator<K> implements Iterator<K> {
 
   @override
   K get current {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.current;
   }
 
   @override
   bool moveNext() {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.moveNext();
   }

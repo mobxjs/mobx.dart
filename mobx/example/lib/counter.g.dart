@@ -19,7 +19,7 @@ mixin _$Counter on _Counter, Store {
 
   @override
   set value(int value) {
-    _$valueAtom.context.checkIfStateModificationsAreAllowed(_$valueAtom);
+    _$valueAtom.context.enforceWritePolicy(_$valueAtom);
     super.value = value;
     _$valueAtom.reportChanged();
   }

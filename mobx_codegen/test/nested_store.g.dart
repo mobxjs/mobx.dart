@@ -13,13 +13,14 @@ mixin _$NestedStore on _NestedStore, Store {
 
   @override
   String get name {
+    _$nameAtom.context.enforceReadPolicy(_$nameAtom);
     _$nameAtom.reportObserved();
     return super.name;
   }
 
   @override
   set name(String value) {
-    _$nameAtom.context.checkIfStateModificationsAreAllowed(_$nameAtom);
+    _$nameAtom.context.enforceWritePolicy(_$nameAtom);
     super.name = value;
     _$nameAtom.reportChanged();
   }

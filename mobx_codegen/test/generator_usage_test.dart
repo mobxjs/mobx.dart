@@ -116,14 +116,15 @@ abstract class _TestStore with Store {
 }
 
 void main() {
-  EnforceActions prevEnforceActions;
+  ReactiveWritePolicy prevWritePolicy;
   setUp(() {
-    prevEnforceActions = mainContext.config.enforceActions;
-    mainContext.config = ReactiveConfig(enforceActions: EnforceActions.always);
+    prevWritePolicy = mainContext.config.writePolicy;
+    mainContext.config =
+        ReactiveConfig(writePolicy: ReactiveWritePolicy.always);
   });
 
   tearDown(() {
-    mainContext.config = ReactiveConfig(enforceActions: prevEnforceActions);
+    mainContext.config = ReactiveConfig(writePolicy: prevWritePolicy);
   });
 
   test('setting fields with action works', () {

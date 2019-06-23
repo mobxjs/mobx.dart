@@ -1,9 +1,9 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
-void turnOffEnforceActions() {
+void turnOffWritePolicy() {
   setUp(() => mainContext.config =
-      ReactiveConfig(enforceActions: EnforceActions.never));
+      ReactiveConfig(writePolicy: ReactiveWritePolicy.never));
 
   tearDown(() => mainContext.config = ReactiveConfig.main);
 }

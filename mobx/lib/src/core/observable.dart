@@ -30,11 +30,15 @@ class Observable<T> extends Atom
   T _value;
 
   T get value {
+    _context.enforceReadPolicy(this);
+
     reportObserved();
     return _value;
   }
 
   set value(T value) {
+    _context.enforceWritePolicy(this);
+
     final oldValue = _value;
     final newValue = _prepareNewValue(value);
 
@@ -57,8 +61,6 @@ class Observable<T> extends Atom
   }
 
   dynamic _prepareNewValue(T newValue) {
-    _context.checkIfStateModificationsAreAllowed(this);
-
     var prepared = newValue;
     if (_interceptors.hasHandlers) {
       final change = _interceptors.interceptChange(WillChangeNotification(

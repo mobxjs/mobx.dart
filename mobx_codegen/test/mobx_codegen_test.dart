@@ -1,3 +1,4 @@
+@TestOn('vm')
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:logging/logging.dart';
@@ -58,14 +59,14 @@ mixin _\$User on UserBase, Store {
 
   @override
   String get firstName {
+    _\$firstNameAtom.context.enforceReadPolicy(_\$firstNameAtom);
     _\$firstNameAtom.reportObserved();
     return super.firstName;
   }
 
   @override
   set firstName(String value) {
-    _\$firstNameAtom.context
-        .checkIfStateModificationsAreAllowed(_\$firstNameAtom);
+    _\$firstNameAtom.context.enforceWritePolicy(_\$firstNameAtom);
     super.firstName = value;
     _\$firstNameAtom.reportChanged();
   }
@@ -74,13 +75,14 @@ mixin _\$User on UserBase, Store {
 
   @override
   String get lastName {
+    _\$lastNameAtom.context.enforceReadPolicy(_\$lastNameAtom);
     _\$lastNameAtom.reportObserved();
     return super.lastName;
   }
 
   @override
   set lastName(String value) {
-    _\$lastNameAtom.context.checkIfStateModificationsAreAllowed(_\$lastNameAtom);
+    _\$lastNameAtom.context.enforceWritePolicy(_\$lastNameAtom);
     super.lastName = value;
     _\$lastNameAtom.reportChanged();
   }
@@ -181,13 +183,14 @@ mixin _\$Item<T> on _Item<T>, Store {
 
   @override
   T get value {
+    _\$valueAtom.context.enforceReadPolicy(_\$valueAtom);
     _\$valueAtom.reportObserved();
     return super.value;
   }
 
   @override
   set value(T value) {
-    _\$valueAtom.context.checkIfStateModificationsAreAllowed(_\$valueAtom);
+    _\$valueAtom.context.enforceWritePolicy(_\$valueAtom);
     super.value = value;
     _\$valueAtom.reportChanged();
   }
@@ -210,8 +213,9 @@ void main() {
       expect(await generate(source), isEmpty);
     });
 
-    test('generates for a class that mixing Store', () async {
-      expect(await generate(validInput), endsWith(validOutput));
+    test('generates for a class mixing Store', () async {
+      final source = await generate(validInput);
+      expect(source, endsWith(validOutput));
     });
 
     test('invalid output', () async {
@@ -225,16 +229,14 @@ void main() {
   });
 }
 
-final String pkgName = 'pkg';
-
-// Recreate generator for each test because we repeatedly create
-// classes with the same name in the same library, which will clash.
-Builder get builder => new PartBuilder([new StoreGenerator()], '.g.dart');
+final String pkgName = 'generator_sample';
 
 Future<String> generate(String source) async {
+// Recreate generator for each test because we repeatedly create
+// classes with the same name in the same library, which will clash.
+  Builder builder = PartBuilder([StoreGenerator()], '.g.dart');
+
   final srcs = {
-    'mobx|lib/src/api/annotations.dart': fakeAnnotationsSource,
-    'mobx|lib/mobx.dart': fakeMobxSource,
     '$pkgName|lib/generator_sample.dart': source,
   };
 
@@ -247,38 +249,13 @@ Future<String> generate(String source) async {
 
   final writer = new InMemoryAssetWriter();
   await testBuilder(builder, srcs,
-      rootPackage: pkgName, writer: writer, onLog: captureError);
+      rootPackage: pkgName,
+      reader: await PackageAssetReader.currentIsolate(),
+      writer: writer,
+      onLog: captureError);
+
   return error ??
       new String.fromCharCodes(
           writer.assets[new AssetId(pkgName, 'lib/generator_sample.g.dart')] ??
               []);
 }
-
-// Just needs the annotations for the tests
-const fakeAnnotationsSource = """
-class MakeObservable {
-  const MakeObservable._();
-}
-
-const MakeObservable observable = MakeObservable._();
-
-class ComputedMethod {
-  const ComputedMethod._();
-}
-
-const ComputedMethod computed = ComputedMethod._();
-
-class MakeAction {
-  const MakeAction._();
-}
-
-const MakeAction action = MakeAction._();
-
-abstract class Store {}
-""";
-
-const fakeMobxSource = """
-library mobx;
-
-export 'package:mobx/src/api/annotations.dart';
-""";

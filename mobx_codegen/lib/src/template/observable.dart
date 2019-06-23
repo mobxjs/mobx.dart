@@ -12,13 +12,14 @@ class ObservableTemplate {
 
   @override
   $type get $name {
+    $atomName.context.enforceReadPolicy($atomName);
     $atomName.reportObserved();
     return super.$name;
   }
 
   @override
   set $name($type value) {
-    $atomName.context.checkIfStateModificationsAreAllowed($atomName);
+    $atomName.context.enforceWritePolicy($atomName);
     super.$name = value;
     $atomName.reportChanged();
   }""";
