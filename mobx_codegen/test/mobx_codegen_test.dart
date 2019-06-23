@@ -229,13 +229,13 @@ void main() {
   });
 }
 
-final String pkgName = 'pkg';
-
-// Recreate generator for each test because we repeatedly create
-// classes with the same name in the same library, which will clash.
-Builder get builder => SharedPartBuilder([StoreGenerator()], 'store_generator');
+final String pkgName = 'generator_sample';
 
 Future<String> generate(String source) async {
+// Recreate generator for each test because we repeatedly create
+// classes with the same name in the same library, which will clash.
+  Builder builder = PartBuilder([StoreGenerator()], '.g.dart');
+
   final srcs = {
     'mobx|lib/src/api/annotations.dart': fakeAnnotationsSource,
     'mobx|lib/mobx.dart': fakeMobxSource,
@@ -251,7 +251,11 @@ Future<String> generate(String source) async {
 
   final writer = new InMemoryAssetWriter();
   await testBuilder(builder, srcs,
-      rootPackage: pkgName, writer: writer, onLog: captureError);
+      rootPackage: pkgName,
+      reader: await PackageAssetReader.currentIsolate(),
+      writer: writer,
+      onLog: captureError);
+
   return error ??
       new String.fromCharCodes(
           writer.assets[new AssetId(pkgName, 'lib/generator_sample.g.dart')] ??
