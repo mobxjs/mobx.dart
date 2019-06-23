@@ -2,7 +2,7 @@
 
 ## 0.3.0
 
-- Adapting to the API changes in mobx
+- Adapting to the API changes in `mobx 0.3.0`
 
 ## 0.2.3+1
 
