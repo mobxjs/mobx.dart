@@ -193,7 +193,7 @@ class ReactiveContext {
 
         case ReactiveWritePolicy.always:
           assert(_state.isWithinBatch,
-              'Since strict-mode is enabled, changing observed observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
+              'Changing observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
       }
 
       return true;
