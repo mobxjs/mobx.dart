@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -237,7 +235,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value=".idea files to keep the project config in place" />
     <MESSAGE value="improving test coverage" />
     <MESSAGE value="removing the assertion check in async_actions" />
     <MESSAGE value="codecov range from 80-100" />
@@ -262,7 +259,8 @@
     <MESSAGE value="version upgrades to 0.3.0" />
     <MESSAGE value="version upgrades to 0.3.0+2" />
     <MESSAGE value="pubspec updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="pubspec updates" />
+    <MESSAGE value="Exception message change, version update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exception message change, version update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

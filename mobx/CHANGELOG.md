@@ -1,9 +1,10 @@
 # Changelog
 
-## 0.3.0 - 0.3.0+2
+## 0.3.0 - 0.3.0+3
 
 - API changes introduced to the `enforceActions` setting of `ReactiveConfig`. It is now called `writePolicy` and the enum `EnforceActions` has been renamed to `ReactiveWritePolicy`.
 - Also introducing a `readPolicy` setting on `ReactiveConfig`. It is an enumeration with two values:
+- Removing the "strict-mode" text in the exception message when the `ReactiveWritePolicy` is violated. This was a vestige from the `mobx.js` world.
 
 ```dart
 enum ReactiveReadPolicy { always, never }
