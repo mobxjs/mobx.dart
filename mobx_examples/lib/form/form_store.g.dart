@@ -25,75 +25,115 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   CustomColor get color {
+    _$colorAtom.context.enforceReadPolicy(_$colorAtom);
     _$colorAtom.reportObserved();
     return super.color;
   }
 
   @override
   set color(CustomColor value) {
-    _$colorAtom.context.enforceWritePolicy(_$colorAtom);
-    super.color = value;
-    _$colorAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$colorAtom.context.isWithinBatch) {
+      super.color = value;
+      _$colorAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.color = value;
+        _$colorAtom.reportChanged();
+      });
+    }
   }
 
   final _$nameAtom = Atom(name: '_FormStore.name');
 
   @override
   String get name {
+    _$nameAtom.context.enforceReadPolicy(_$nameAtom);
     _$nameAtom.reportObserved();
     return super.name;
   }
 
   @override
   set name(String value) {
-    _$nameAtom.context.enforceWritePolicy(_$nameAtom);
-    super.name = value;
-    _$nameAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$nameAtom.context.isWithinBatch) {
+      super.name = value;
+      _$nameAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.name = value;
+        _$nameAtom.reportChanged();
+      });
+    }
   }
 
   final _$emailAtom = Atom(name: '_FormStore.email');
 
   @override
   String get email {
+    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
     _$emailAtom.reportObserved();
     return super.email;
   }
 
   @override
   set email(String value) {
-    _$emailAtom.context.enforceWritePolicy(_$emailAtom);
-    super.email = value;
-    _$emailAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$emailAtom.context.isWithinBatch) {
+      super.email = value;
+      _$emailAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.email = value;
+        _$emailAtom.reportChanged();
+      });
+    }
   }
 
   final _$passwordAtom = Atom(name: '_FormStore.password');
 
   @override
   String get password {
+    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
     _$passwordAtom.reportObserved();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.enforceWritePolicy(_$passwordAtom);
-    super.password = value;
-    _$passwordAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$passwordAtom.context.isWithinBatch) {
+      super.password = value;
+      _$passwordAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.password = value;
+        _$passwordAtom.reportChanged();
+      });
+    }
   }
 
   final _$_usernameCheckAtom = Atom(name: '_FormStore._usernameCheck');
 
   @override
   ObservableFuture<bool> get _usernameCheck {
+    _$_usernameCheckAtom.context.enforceReadPolicy(_$_usernameCheckAtom);
     _$_usernameCheckAtom.reportObserved();
     return super._usernameCheck;
   }
 
   @override
   set _usernameCheck(ObservableFuture<bool> value) {
-    _$_usernameCheckAtom.context.enforceWritePolicy(_$_usernameCheckAtom);
-    super._usernameCheck = value;
-    _$_usernameCheckAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$_usernameCheckAtom.context.isWithinBatch) {
+      super._usernameCheck = value;
+      _$_usernameCheckAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super._usernameCheck = value;
+        _$_usernameCheckAtom.reportChanged();
+      });
+    }
   }
 
   final _$validateUsernameAsyncAction = AsyncAction('validateUsername');
@@ -170,44 +210,68 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   String get username {
+    _$usernameAtom.context.enforceReadPolicy(_$usernameAtom);
     _$usernameAtom.reportObserved();
     return super.username;
   }
 
   @override
   set username(String value) {
-    _$usernameAtom.context.enforceWritePolicy(_$usernameAtom);
-    super.username = value;
-    _$usernameAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$usernameAtom.context.isWithinBatch) {
+      super.username = value;
+      _$usernameAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.username = value;
+        _$usernameAtom.reportChanged();
+      });
+    }
   }
 
   final _$emailAtom = Atom(name: '_FormErrorState.email');
 
   @override
   String get email {
+    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
     _$emailAtom.reportObserved();
     return super.email;
   }
 
   @override
   set email(String value) {
-    _$emailAtom.context.enforceWritePolicy(_$emailAtom);
-    super.email = value;
-    _$emailAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$emailAtom.context.isWithinBatch) {
+      super.email = value;
+      _$emailAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.email = value;
+        _$emailAtom.reportChanged();
+      });
+    }
   }
 
   final _$passwordAtom = Atom(name: '_FormErrorState.password');
 
   @override
   String get password {
+    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
     _$passwordAtom.reportObserved();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.enforceWritePolicy(_$passwordAtom);
-    super.password = value;
-    _$passwordAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$passwordAtom.context.isWithinBatch) {
+      super.password = value;
+      _$passwordAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.password = value;
+        _$passwordAtom.reportChanged();
+      });
+    }
   }
 }

@@ -19,30 +19,46 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   ObservableFuture<List<Repository>> get fetchReposFuture {
+    _$fetchReposFutureAtom.context.enforceReadPolicy(_$fetchReposFutureAtom);
     _$fetchReposFutureAtom.reportObserved();
     return super.fetchReposFuture;
   }
 
   @override
   set fetchReposFuture(ObservableFuture<List<Repository>> value) {
-    _$fetchReposFutureAtom.context.enforceWritePolicy(_$fetchReposFutureAtom);
-    super.fetchReposFuture = value;
-    _$fetchReposFutureAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$fetchReposFutureAtom.context.isWithinBatch) {
+      super.fetchReposFuture = value;
+      _$fetchReposFutureAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.fetchReposFuture = value;
+        _$fetchReposFutureAtom.reportChanged();
+      });
+    }
   }
 
   final _$userAtom = Atom(name: '_GithubStore.user');
 
   @override
   String get user {
+    _$userAtom.context.enforceReadPolicy(_$userAtom);
     _$userAtom.reportObserved();
     return super.user;
   }
 
   @override
   set user(String value) {
-    _$userAtom.context.enforceWritePolicy(_$userAtom);
-    super.user = value;
-    _$userAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$userAtom.context.isWithinBatch) {
+      super.user = value;
+      _$userAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.user = value;
+        _$userAtom.reportChanged();
+      });
+    }
   }
 
   final _$fetchReposAsyncAction = AsyncAction('fetchRepos');

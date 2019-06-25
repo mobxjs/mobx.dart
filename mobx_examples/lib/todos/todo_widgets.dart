@@ -59,7 +59,7 @@ class TodoListView extends StatelessWidget {
                       builder: (_) => CheckboxListTile(
                             controlAffinity: ListTileControlAffinity.leading,
                             value: todo.done,
-                            onChanged: todo.markDone,
+                            onChanged: (flag) => todo.done = flag,
                             title: Row(
                               children: <Widget>[
                                 Expanded(
@@ -93,19 +93,19 @@ class ActionBar extends StatelessWidget {
                       title: const Text('All'),
                       value: VisibilityFilter.all,
                       groupValue: list.filter,
-                      onChanged: list.changeFilter),
+                      onChanged: (filter) => list.filter = filter),
                   RadioListTile(
                       dense: true,
                       title: const Text('Pending'),
                       value: VisibilityFilter.pending,
                       groupValue: list.filter,
-                      onChanged: list.changeFilter),
+                      onChanged: (filter) => list.filter = filter),
                   RadioListTile(
                       dense: true,
                       title: const Text('Completed'),
                       value: VisibilityFilter.completed,
                       groupValue: list.filter,
-                      onChanged: list.changeFilter),
+                      onChanged: (filter) => list.filter = filter),
                 ],
               ),
         ),
@@ -146,7 +146,7 @@ class AddTodo extends StatelessWidget {
       );
 
   void _onTextChanged(String newValue) {
-    list.changeDescription(newValue);
+    list.currentDescription = newValue;
   }
 
   void _onTextSubmitted(String value) {

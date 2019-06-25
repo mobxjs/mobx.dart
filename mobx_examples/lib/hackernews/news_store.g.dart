@@ -14,30 +14,46 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   ObservableFuture<List<FeedItem>> get latestItemsFuture {
+    _$latestItemsFutureAtom.context.enforceReadPolicy(_$latestItemsFutureAtom);
     _$latestItemsFutureAtom.reportObserved();
     return super.latestItemsFuture;
   }
 
   @override
   set latestItemsFuture(ObservableFuture<List<FeedItem>> value) {
-    _$latestItemsFutureAtom.context.enforceWritePolicy(_$latestItemsFutureAtom);
-    super.latestItemsFuture = value;
-    _$latestItemsFutureAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$latestItemsFutureAtom.context.isWithinBatch) {
+      super.latestItemsFuture = value;
+      _$latestItemsFutureAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.latestItemsFuture = value;
+        _$latestItemsFutureAtom.reportChanged();
+      });
+    }
   }
 
   final _$topItemsFutureAtom = Atom(name: '_HackerNewsStore.topItemsFuture');
 
   @override
   ObservableFuture<List<FeedItem>> get topItemsFuture {
+    _$topItemsFutureAtom.context.enforceReadPolicy(_$topItemsFutureAtom);
     _$topItemsFutureAtom.reportObserved();
     return super.topItemsFuture;
   }
 
   @override
   set topItemsFuture(ObservableFuture<List<FeedItem>> value) {
-    _$topItemsFutureAtom.context.enforceWritePolicy(_$topItemsFutureAtom);
-    super.topItemsFuture = value;
-    _$topItemsFutureAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$topItemsFutureAtom.context.isWithinBatch) {
+      super.topItemsFuture = value;
+      _$topItemsFutureAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.topItemsFuture = value;
+        _$topItemsFutureAtom.reportChanged();
+      });
+    }
   }
 
   final _$_HackerNewsStoreActionController =

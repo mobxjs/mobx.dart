@@ -112,9 +112,16 @@ void main() {
 
   @override
   set fieldName(FieldType value) {
-    _atomFieldName.context.enforceWritePolicy(_atomFieldName);
-    super.fieldName = value;
-    _atomFieldName.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_atomFieldName.context.isWithinBatch) {
+      super.fieldName = value;
+      _atomFieldName.reportChanged();
+    } else {
+      runInAction(() {
+        super.fieldName = value;
+        _atomFieldName.reportChanged();
+      });
+    }
   }"""));
     });
   });

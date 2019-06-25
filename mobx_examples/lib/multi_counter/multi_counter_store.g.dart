@@ -13,15 +13,23 @@ mixin _$SingleCounter on _SingleCounter, Store {
 
   @override
   int get value {
+    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
     _$valueAtom.reportObserved();
     return super.value;
   }
 
   @override
   set value(int value) {
-    _$valueAtom.context.enforceWritePolicy(_$valueAtom);
-    super.value = value;
-    _$valueAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$valueAtom.context.isWithinBatch) {
+      super.value = value;
+      _$valueAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.value = value;
+        _$valueAtom.reportChanged();
+      });
+    }
   }
 
   final _$_SingleCounterActionController =

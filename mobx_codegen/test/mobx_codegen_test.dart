@@ -66,9 +66,16 @@ mixin _\$User on UserBase, Store {
 
   @override
   set firstName(String value) {
-    _\$firstNameAtom.context.enforceWritePolicy(_\$firstNameAtom);
-    super.firstName = value;
-    _\$firstNameAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_\$firstNameAtom.context.isWithinBatch) {
+      super.firstName = value;
+      _\$firstNameAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.firstName = value;
+        _\$firstNameAtom.reportChanged();
+      });
+    }
   }
 
   final _\$lastNameAtom = Atom(name: 'UserBase.lastName');
@@ -82,9 +89,16 @@ mixin _\$User on UserBase, Store {
 
   @override
   set lastName(String value) {
-    _\$lastNameAtom.context.enforceWritePolicy(_\$lastNameAtom);
-    super.lastName = value;
-    _\$lastNameAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_\$lastNameAtom.context.isWithinBatch) {
+      super.lastName = value;
+      _\$lastNameAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.lastName = value;
+        _\$lastNameAtom.reportChanged();
+      });
+    }
   }
 
   @override
@@ -190,9 +204,16 @@ mixin _\$Item<T> on _Item<T>, Store {
 
   @override
   set value(T value) {
-    _\$valueAtom.context.enforceWritePolicy(_\$valueAtom);
-    super.value = value;
-    _\$valueAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_\$valueAtom.context.isWithinBatch) {
+      super.value = value;
+      _\$valueAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.value = value;
+        _\$valueAtom.reportChanged();
+      });
+    }
   }
 }
 """;

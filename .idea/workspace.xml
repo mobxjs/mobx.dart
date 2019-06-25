@@ -2,8 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/computed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/computed.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/counter/counter.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/counter/counter.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/github/github_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/github/github_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_widgets.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +111,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter.mobx_examples">
+  <component name="RunManager" selected="Dart Test.tests in mobx">
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/mobx" />
       <option name="scope" value="FOLDER" />
@@ -120,6 +140,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="gen:mobx_examples" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="gen:mobx_examples" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="pub:get:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -135,16 +165,6 @@
       <command value="run" />
       <scripts>
         <script value="pub:get:mobx_codegen" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="pub:upgrade:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="pub:upgrade:mobx" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -168,16 +188,16 @@
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.gen:mobx_codegen" />
       <item itemvalue="npm.pub:get:mobx" />
-      <item itemvalue="npm.pub:upgrade:mobx" />
       <item itemvalue="npm.pub:upgrade:mobx_codegen" />
+      <item itemvalue="npm.gen:mobx_examples" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.pub:get:mobx" />
-        <item itemvalue="npm.pub:upgrade:mobx_codegen" />
+        <item itemvalue="npm.gen:mobx_examples" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
+        <item itemvalue="npm.pub:upgrade:mobx_codegen" />
+        <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.gen:mobx_codegen" />
-        <item itemvalue="npm.pub:upgrade:mobx" />
       </list>
     </recent_temporary>
   </component>

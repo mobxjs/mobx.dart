@@ -116,6 +116,8 @@ class ReactiveContext {
     return '$prefix@$nextId';
   }
 
+  bool get isWithinBatch => _state.isWithinBatch;
+
   void startBatch() {
     _state.batch++;
   }
@@ -443,7 +445,6 @@ class ReactiveContext {
     return false;
   }
 
-  bool _isInBatch() => _state.batch > 0;
   bool _hasCaughtException(Derivation d) =>
       d._errorValue is MobXCaughtException;
 

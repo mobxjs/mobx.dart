@@ -1,10 +1,11 @@
 # Changelog
 
-## 0.3.0 - 0.3.0+3
+## 0.3.0 - 0.3.2
 
 - API changes introduced to the `enforceActions` setting of `ReactiveConfig`. It is now called `writePolicy` and the enum `EnforceActions` has been renamed to `ReactiveWritePolicy`.
 - Also introducing a `readPolicy` setting on `ReactiveConfig`. It is an enumeration with two values:
 - Removing the "strict-mode" text in the exception message when the `ReactiveWritePolicy` is violated. This was a vestige from the `mobx.js` world.
+- Exposing a boolean `isWithinBatch` on `ReactiveContext`, which tells if the current code is running inside a batch. This is used to conditionally apply an action-wrapper for `mobx_codegen`-generated setters.
 
 ```dart
 enum ReactiveReadPolicy { always, never }

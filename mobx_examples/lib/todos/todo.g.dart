@@ -13,41 +13,45 @@ mixin _$Todo on _Todo, Store {
 
   @override
   String get description {
+    _$descriptionAtom.context.enforceReadPolicy(_$descriptionAtom);
     _$descriptionAtom.reportObserved();
     return super.description;
   }
 
   @override
   set description(String value) {
-    _$descriptionAtom.context.enforceWritePolicy(_$descriptionAtom);
-    super.description = value;
-    _$descriptionAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$descriptionAtom.context.isWithinBatch) {
+      super.description = value;
+      _$descriptionAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.description = value;
+        _$descriptionAtom.reportChanged();
+      });
+    }
   }
 
   final _$doneAtom = Atom(name: '_Todo.done');
 
   @override
   bool get done {
+    _$doneAtom.context.enforceReadPolicy(_$doneAtom);
     _$doneAtom.reportObserved();
     return super.done;
   }
 
   @override
   set done(bool value) {
-    _$doneAtom.context.enforceWritePolicy(_$doneAtom);
-    super.done = value;
-    _$doneAtom.reportChanged();
-  }
-
-  final _$_TodoActionController = ActionController(name: '_Todo');
-
-  @override
-  void markDone(bool flag) {
-    final _$actionInfo = _$_TodoActionController.startAction();
-    try {
-      return super.markDone(flag);
-    } finally {
-      _$_TodoActionController.endAction(_$actionInfo);
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    if (_$doneAtom.context.isWithinBatch) {
+      super.done = value;
+      _$doneAtom.reportChanged();
+    } else {
+      runInAction(() {
+        super.done = value;
+        _$doneAtom.reportChanged();
+      });
     }
   }
 }

@@ -74,13 +74,6 @@ abstract class _TodoList with Store {
   }
 
   @action
-  void changeDescription(String description) =>
-      currentDescription = description;
-
-  @action
-  void changeFilter(VisibilityFilter filter) => this.filter = filter;
-
-  @action
   void removeCompleted() {
     todos.removeWhere((todo) => todo.done);
   }

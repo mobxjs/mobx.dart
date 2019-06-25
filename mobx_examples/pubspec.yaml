@@ -13,9 +13,9 @@ environment:
   sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
-  mobx: ^0.3.0
+  mobx: ^0.3.2
   flutter_mobx: ^0.3.0
-  mobx_codegen: ^0.3.0
+  mobx_codegen: ^0.3.2
   github:
   validators:
   hnpwa_client:
