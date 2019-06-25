@@ -1,8 +1,9 @@
 # Changelog
 
-## 0.3.1 - 0.3.2+2
+## 0.3.1 - 0.3.2+3
 
 - Adding a conditional action-wrapper for field setters.
+- Increasing test coverage
 
 ## 0.3.0 - 0.3.0+1
 

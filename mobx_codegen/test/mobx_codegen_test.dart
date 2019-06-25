@@ -44,6 +44,23 @@ abstract class UserBase with Store {
   Stream<T> loadStuff<T>(String arg1, {T value}) async* {
     yield value;
   }
+
+  @observable
+  Stream<String> asyncGenerator() async* {
+    yield 'item1';
+  }
+
+  @action
+  Future<void> setAsyncFirstName() async {
+    firstName = 'Async FirstName';
+  }
+
+  @action
+  @observable
+  Future<void> setAsyncFirstName2() async {
+    firstName = 'Async FirstName 2';
+  }
+
 }
 """;
 
@@ -101,6 +118,27 @@ mixin _\$User on UserBase, Store {
   ObservableStream<T> loadStuff<T>(String arg1, {T value}) {
     final _\$stream = super.loadStuff<T>(arg1, value: value);
     return ObservableStream<T>(_\$stream);
+  }
+
+  @override
+  ObservableStream<String> asyncGenerator() {
+    final _\$stream = super.asyncGenerator();
+    return ObservableStream<String>(_\$stream);
+  }
+
+  final _\$setAsyncFirstNameAsyncAction = AsyncAction('setAsyncFirstName');
+
+  @override
+  Future<void> setAsyncFirstName() {
+    return _\$setAsyncFirstNameAsyncAction.run(() => super.setAsyncFirstName());
+  }
+
+  final _\$setAsyncFirstName2AsyncAction = AsyncAction('setAsyncFirstName2');
+
+  @override
+  ObservableFuture<void> setAsyncFirstName2() {
+    return ObservableFuture<void>(
+        _\$setAsyncFirstName2AsyncAction.run(() => super.setAsyncFirstName2()));
   }
 
   final _\$UserBaseActionController = ActionController(name: 'UserBase');

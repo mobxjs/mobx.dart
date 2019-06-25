@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/example/lib/counter.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/example/lib/counter.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/example/lib/todos.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/example/lib/todos.g.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.g.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/nested_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/nested_store.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -243,7 +237,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="codecov range from 80-100" />
     <MESSAGE value="minor adjustments to the notifications on list changes" />
     <MESSAGE value="version update for flutter_mobx" />
     <MESSAGE value="minor renaming" />
@@ -268,7 +261,8 @@
     <MESSAGE value="Exception message change, version update" />
     <MESSAGE value="adding a conditional action wrapper to field setters, so that plain setters do not need manual action-wrappers. This is to improve the Developer Experience." />
     <MESSAGE value="minor API convenience to simplify the code-gen for conditional action-wrapper" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor API convenience to simplify the code-gen for conditional action-wrapper" />
+    <MESSAGE value="fixing tests in mobx_codegen" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing tests in mobx_codegen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
