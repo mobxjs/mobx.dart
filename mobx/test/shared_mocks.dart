@@ -11,3 +11,5 @@ class MockAtom extends Mock implements Atom {
   @override
   MockContext context;
 }
+
+class MockActionController extends Mock implements ActionController {}

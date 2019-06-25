@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoTestManager">
+    <enabled-run-configurations>
+      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
+    </enabled-run-configurations>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/context_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/context_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/shared_mocks.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/shared_mocks.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +100,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.tests in mobx_codegen">
+  <component name="RunManager" selected="Dart Test.tests in mobx">
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/mobx" />
       <option name="scope" value="FOLDER" />
@@ -237,7 +244,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="minor adjustments to the notifications on list changes" />
     <MESSAGE value="version update for flutter_mobx" />
     <MESSAGE value="minor renaming" />
     <MESSAGE value="- adding a guide for not able to run app on iOS Simulator&#10;- example for using with ObservableStream" />
@@ -262,7 +268,8 @@
     <MESSAGE value="adding a conditional action wrapper to field setters, so that plain setters do not need manual action-wrappers. This is to improve the Developer Experience." />
     <MESSAGE value="minor API convenience to simplify the code-gen for conditional action-wrapper" />
     <MESSAGE value="fixing tests in mobx_codegen" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing tests in mobx_codegen" />
+    <MESSAGE value="fixing tests in mobx_codegen, increasing coverage" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing tests in mobx_codegen, increasing coverage" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

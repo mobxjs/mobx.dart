@@ -1,5 +1,8 @@
 import 'package:mobx/mobx.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   group('ReactiveContext', () {
@@ -76,6 +79,41 @@ void main() {
 
       expect(() => context.nameFor(null),
           throwsA(const TypeMatcher<AssertionError>()));
+    });
+
+    group('conditionallyRunInAction', () {
+      test('when running OUTSIDE an Action, it should USE the ActionController',
+          () {
+        final controller = MockActionController();
+        final context = createContext();
+        var hasRun = false;
+
+        context.conditionallyRunInAction(() {
+          hasRun = true;
+        }, actionController: controller);
+
+        verify(controller.startAction());
+        verify(controller.endAction(any));
+        expect(hasRun, isTrue);
+      });
+
+      test(
+          'when running INSIDE an Action, it should NOT USE the ActionController',
+          () {
+        final controller = MockActionController();
+        final context = createContext();
+        var hasRun = false;
+
+        runInAction(() {
+          context.conditionallyRunInAction(() {
+            hasRun = true;
+          }, actionController: controller);
+        }, context: context);
+
+        verifyNever(controller.startAction());
+        verifyNever(controller.endAction(any));
+        expect(hasRun, isTrue);
+      });
     });
   });
 

@@ -204,12 +204,14 @@ class ReactiveContext {
 
   /// Only run within an action if outside a batch
   /// [fn] is the function to execute. Optionally provide a debug-[name].
-  void conditionallyRunInAction(void Function() fn, {String name}) {
+  void conditionallyRunInAction(void Function() fn,
+      {String name, ActionController actionController}) {
     if (isWithinBatch) {
       fn();
     } else {
-      final controller = ActionController(
-          context: this, name: name ?? nameFor('conditionallyRunInAction'));
+      final controller = actionController ??
+          ActionController(
+              context: this, name: name ?? nameFor('conditionallyRunInAction'));
       final runInfo = controller.startAction();
 
       try {
