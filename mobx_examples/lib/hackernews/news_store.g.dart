@@ -22,15 +22,10 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
   @override
   set latestItemsFuture(ObservableFuture<List<FeedItem>> value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$latestItemsFutureAtom.context.isWithinBatch) {
+    _$latestItemsFutureAtom.context.conditionallyRunInAction(() {
       super.latestItemsFuture = value;
       _$latestItemsFutureAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.latestItemsFuture = value;
-        _$latestItemsFutureAtom.reportChanged();
-      });
-    }
+    }, name: '${_$latestItemsFutureAtom.name}_set');
   }
 
   final _$topItemsFutureAtom = Atom(name: '_HackerNewsStore.topItemsFuture');
@@ -45,15 +40,10 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
   @override
   set topItemsFuture(ObservableFuture<List<FeedItem>> value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$topItemsFutureAtom.context.isWithinBatch) {
+    _$topItemsFutureAtom.context.conditionallyRunInAction(() {
       super.topItemsFuture = value;
       _$topItemsFutureAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.topItemsFuture = value;
-        _$topItemsFutureAtom.reportChanged();
-      });
-    }
+    }, name: '${_$topItemsFutureAtom.name}_set');
   }
 
   final _$_HackerNewsStoreActionController =

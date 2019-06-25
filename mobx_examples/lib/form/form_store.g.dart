@@ -33,15 +33,10 @@ mixin _$FormStore on _FormStore, Store {
   @override
   set color(CustomColor value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$colorAtom.context.isWithinBatch) {
+    _$colorAtom.context.conditionallyRunInAction(() {
       super.color = value;
       _$colorAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.color = value;
-        _$colorAtom.reportChanged();
-      });
-    }
+    }, name: '${_$colorAtom.name}_set');
   }
 
   final _$nameAtom = Atom(name: '_FormStore.name');
@@ -56,15 +51,10 @@ mixin _$FormStore on _FormStore, Store {
   @override
   set name(String value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$nameAtom.context.isWithinBatch) {
+    _$nameAtom.context.conditionallyRunInAction(() {
       super.name = value;
       _$nameAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.name = value;
-        _$nameAtom.reportChanged();
-      });
-    }
+    }, name: '${_$nameAtom.name}_set');
   }
 
   final _$emailAtom = Atom(name: '_FormStore.email');
@@ -79,15 +69,10 @@ mixin _$FormStore on _FormStore, Store {
   @override
   set email(String value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$emailAtom.context.isWithinBatch) {
+    _$emailAtom.context.conditionallyRunInAction(() {
       super.email = value;
       _$emailAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.email = value;
-        _$emailAtom.reportChanged();
-      });
-    }
+    }, name: '${_$emailAtom.name}_set');
   }
 
   final _$passwordAtom = Atom(name: '_FormStore.password');
@@ -102,15 +87,10 @@ mixin _$FormStore on _FormStore, Store {
   @override
   set password(String value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$passwordAtom.context.isWithinBatch) {
+    _$passwordAtom.context.conditionallyRunInAction(() {
       super.password = value;
       _$passwordAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.password = value;
-        _$passwordAtom.reportChanged();
-      });
-    }
+    }, name: '${_$passwordAtom.name}_set');
   }
 
   final _$_usernameCheckAtom = Atom(name: '_FormStore._usernameCheck');
@@ -125,15 +105,10 @@ mixin _$FormStore on _FormStore, Store {
   @override
   set _usernameCheck(ObservableFuture<bool> value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$_usernameCheckAtom.context.isWithinBatch) {
+    _$_usernameCheckAtom.context.conditionallyRunInAction(() {
       super._usernameCheck = value;
       _$_usernameCheckAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super._usernameCheck = value;
-        _$_usernameCheckAtom.reportChanged();
-      });
-    }
+    }, name: '${_$_usernameCheckAtom.name}_set');
   }
 
   final _$validateUsernameAsyncAction = AsyncAction('validateUsername');
@@ -218,15 +193,10 @@ mixin _$FormErrorState on _FormErrorState, Store {
   @override
   set username(String value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$usernameAtom.context.isWithinBatch) {
+    _$usernameAtom.context.conditionallyRunInAction(() {
       super.username = value;
       _$usernameAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.username = value;
-        _$usernameAtom.reportChanged();
-      });
-    }
+    }, name: '${_$usernameAtom.name}_set');
   }
 
   final _$emailAtom = Atom(name: '_FormErrorState.email');
@@ -241,15 +211,10 @@ mixin _$FormErrorState on _FormErrorState, Store {
   @override
   set email(String value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$emailAtom.context.isWithinBatch) {
+    _$emailAtom.context.conditionallyRunInAction(() {
       super.email = value;
       _$emailAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.email = value;
-        _$emailAtom.reportChanged();
-      });
-    }
+    }, name: '${_$emailAtom.name}_set');
   }
 
   final _$passwordAtom = Atom(name: '_FormErrorState.password');
@@ -264,14 +229,9 @@ mixin _$FormErrorState on _FormErrorState, Store {
   @override
   set password(String value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$passwordAtom.context.isWithinBatch) {
+    _$passwordAtom.context.conditionallyRunInAction(() {
       super.password = value;
       _$passwordAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.password = value;
-        _$passwordAtom.reportChanged();
-      });
-    }
+    }, name: '${_$passwordAtom.name}_set');
   }
 }

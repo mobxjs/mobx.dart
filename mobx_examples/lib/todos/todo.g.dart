@@ -21,15 +21,10 @@ mixin _$Todo on _Todo, Store {
   @override
   set description(String value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$descriptionAtom.context.isWithinBatch) {
+    _$descriptionAtom.context.conditionallyRunInAction(() {
       super.description = value;
       _$descriptionAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.description = value;
-        _$descriptionAtom.reportChanged();
-      });
-    }
+    }, name: '${_$descriptionAtom.name}_set');
   }
 
   final _$doneAtom = Atom(name: '_Todo.done');
@@ -44,14 +39,9 @@ mixin _$Todo on _Todo, Store {
   @override
   set done(bool value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$doneAtom.context.isWithinBatch) {
+    _$doneAtom.context.conditionallyRunInAction(() {
       super.done = value;
       _$doneAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.done = value;
-        _$doneAtom.reportChanged();
-      });
-    }
+    }, name: '${_$doneAtom.name}_set');
   }
 }

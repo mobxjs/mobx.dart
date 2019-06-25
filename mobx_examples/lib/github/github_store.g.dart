@@ -27,15 +27,10 @@ mixin _$GithubStore on _GithubStore, Store {
   @override
   set fetchReposFuture(ObservableFuture<List<Repository>> value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$fetchReposFutureAtom.context.isWithinBatch) {
+    _$fetchReposFutureAtom.context.conditionallyRunInAction(() {
       super.fetchReposFuture = value;
       _$fetchReposFutureAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.fetchReposFuture = value;
-        _$fetchReposFutureAtom.reportChanged();
-      });
-    }
+    }, name: '${_$fetchReposFutureAtom.name}_set');
   }
 
   final _$userAtom = Atom(name: '_GithubStore.user');
@@ -50,15 +45,10 @@ mixin _$GithubStore on _GithubStore, Store {
   @override
   set user(String value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$userAtom.context.isWithinBatch) {
+    _$userAtom.context.conditionallyRunInAction(() {
       super.user = value;
       _$userAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.user = value;
-        _$userAtom.reportChanged();
-      });
-    }
+    }, name: '${_$userAtom.name}_set');
   }
 
   final _$fetchReposAsyncAction = AsyncAction('fetchRepos');

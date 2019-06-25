@@ -21,15 +21,10 @@ mixin _$Counter on _Counter, Store {
   @override
   set value(int value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$valueAtom.context.isWithinBatch) {
+    _$valueAtom.context.conditionallyRunInAction(() {
       super.value = value;
       _$valueAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.value = value;
-        _$valueAtom.reportChanged();
-      });
-    }
+    }, name: '${_$valueAtom.name}_set');
   }
 
   final _$_CounterActionController = ActionController(name: '_Counter');

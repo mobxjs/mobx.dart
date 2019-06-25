@@ -20,14 +20,9 @@ class ObservableTemplate {
   @override
   set $name($type value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if ($atomName.context.isWithinBatch) {
+    $atomName.context.conditionallyRunInAction(() {
       super.$name = value;
       $atomName.reportChanged();
-    } else {
-      runInAction(() {
-        super.$name = value;
-        $atomName.reportChanged();
-      });
-    }
+    }, name: '\${$atomName.name}_set');
   }""";
 }

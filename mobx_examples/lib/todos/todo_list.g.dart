@@ -70,15 +70,10 @@ mixin _$TodoList on _TodoList, Store {
   @override
   set todos(ObservableList<Todo> value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$todosAtom.context.isWithinBatch) {
+    _$todosAtom.context.conditionallyRunInAction(() {
       super.todos = value;
       _$todosAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.todos = value;
-        _$todosAtom.reportChanged();
-      });
-    }
+    }, name: '${_$todosAtom.name}_set');
   }
 
   final _$filterAtom = Atom(name: '_TodoList.filter');
@@ -93,15 +88,10 @@ mixin _$TodoList on _TodoList, Store {
   @override
   set filter(VisibilityFilter value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$filterAtom.context.isWithinBatch) {
+    _$filterAtom.context.conditionallyRunInAction(() {
       super.filter = value;
       _$filterAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.filter = value;
-        _$filterAtom.reportChanged();
-      });
-    }
+    }, name: '${_$filterAtom.name}_set');
   }
 
   final _$currentDescriptionAtom = Atom(name: '_TodoList.currentDescription');
@@ -117,15 +107,10 @@ mixin _$TodoList on _TodoList, Store {
   @override
   set currentDescription(String value) {
     // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
-    if (_$currentDescriptionAtom.context.isWithinBatch) {
+    _$currentDescriptionAtom.context.conditionallyRunInAction(() {
       super.currentDescription = value;
       _$currentDescriptionAtom.reportChanged();
-    } else {
-      runInAction(() {
-        super.currentDescription = value;
-        _$currentDescriptionAtom.reportChanged();
-      });
-    }
+    }, name: '${_$currentDescriptionAtom.name}_set');
   }
 
   final _$_TodoListActionController = ActionController(name: '_TodoList');
