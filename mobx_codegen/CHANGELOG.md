@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.1 - 0.3.2+1
+## 0.3.1 - 0.3.2+2
 
 - Adding a conditional action-wrapper for field setters.
 

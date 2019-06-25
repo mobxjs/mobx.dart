@@ -13,15 +13,18 @@ mixin _$Counter on _Counter, Store {
 
   @override
   int get value {
+    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
     _$valueAtom.reportObserved();
     return super.value;
   }
 
   @override
   set value(int value) {
-    _$valueAtom.context.enforceWritePolicy(_$valueAtom);
-    super.value = value;
-    _$valueAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    _$valueAtom.context.conditionallyRunInAction(() {
+      super.value = value;
+      _$valueAtom.reportChanged();
+    }, name: '${_$valueAtom.name}_set');
   }
 
   final _$_CounterActionController = ActionController(name: '_Counter');

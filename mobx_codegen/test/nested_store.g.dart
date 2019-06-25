@@ -20,8 +20,10 @@ mixin _$NestedStore on _NestedStore, Store {
 
   @override
   set name(String value) {
-    _$nameAtom.context.enforceWritePolicy(_$nameAtom);
-    super.name = value;
-    _$nameAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    _$nameAtom.context.conditionallyRunInAction(() {
+      super.name = value;
+      _$nameAtom.reportChanged();
+    }, name: '${_$nameAtom.name}_set');
   }
 }

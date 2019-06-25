@@ -13,30 +13,36 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   String get description {
+    _$descriptionAtom.context.enforceReadPolicy(_$descriptionAtom);
     _$descriptionAtom.reportObserved();
     return super.description;
   }
 
   @override
   set description(String value) {
-    _$descriptionAtom.context.enforceWritePolicy(_$descriptionAtom);
-    super.description = value;
-    _$descriptionAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    _$descriptionAtom.context.conditionallyRunInAction(() {
+      super.description = value;
+      _$descriptionAtom.reportChanged();
+    }, name: '${_$descriptionAtom.name}_set');
   }
 
   final _$doneAtom = Atom(name: 'TodoBase.done');
 
   @override
   bool get done {
+    _$doneAtom.context.enforceReadPolicy(_$doneAtom);
     _$doneAtom.reportObserved();
     return super.done;
   }
 
   @override
   set done(bool value) {
-    _$doneAtom.context.enforceWritePolicy(_$doneAtom);
-    super.done = value;
-    _$doneAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    _$doneAtom.context.conditionallyRunInAction(() {
+      super.done = value;
+      _$doneAtom.reportChanged();
+    }, name: '${_$doneAtom.name}_set');
   }
 }
 
@@ -84,30 +90,36 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   ObservableList<Todo> get todos {
+    _$todosAtom.context.enforceReadPolicy(_$todosAtom);
     _$todosAtom.reportObserved();
     return super.todos;
   }
 
   @override
   set todos(ObservableList<Todo> value) {
-    _$todosAtom.context.enforceWritePolicy(_$todosAtom);
-    super.todos = value;
-    _$todosAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    _$todosAtom.context.conditionallyRunInAction(() {
+      super.todos = value;
+      _$todosAtom.reportChanged();
+    }, name: '${_$todosAtom.name}_set');
   }
 
   final _$filterAtom = Atom(name: 'TodoListBase.filter');
 
   @override
   VisibilityFilter get filter {
+    _$filterAtom.context.enforceReadPolicy(_$filterAtom);
     _$filterAtom.reportObserved();
     return super.filter;
   }
 
   @override
   set filter(VisibilityFilter value) {
-    _$filterAtom.context.enforceWritePolicy(_$filterAtom);
-    super.filter = value;
-    _$filterAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    _$filterAtom.context.conditionallyRunInAction(() {
+      super.filter = value;
+      _$filterAtom.reportChanged();
+    }, name: '${_$filterAtom.name}_set');
   }
 
   final _$currentDescriptionAtom =
@@ -115,16 +127,19 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   String get currentDescription {
+    _$currentDescriptionAtom.context
+        .enforceReadPolicy(_$currentDescriptionAtom);
     _$currentDescriptionAtom.reportObserved();
     return super.currentDescription;
   }
 
   @override
   set currentDescription(String value) {
-    _$currentDescriptionAtom.context
-        .enforceWritePolicy(_$currentDescriptionAtom);
-    super.currentDescription = value;
-    _$currentDescriptionAtom.reportChanged();
+    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
+    _$currentDescriptionAtom.context.conditionallyRunInAction(() {
+      super.currentDescription = value;
+      _$currentDescriptionAtom.reportChanged();
+    }, name: '${_$currentDescriptionAtom.name}_set');
   }
 
   final _$TodoListBaseActionController = ActionController(name: 'TodoListBase');
