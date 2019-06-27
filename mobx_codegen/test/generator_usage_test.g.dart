@@ -32,11 +32,10 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set field1(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$field1Atom.context.conditionallyRunInAction(() {
       super.field1 = value;
       _$field1Atom.reportChanged();
-    }, name: '${_$field1Atom.name}_set');
+    }, _$field1Atom, name: '${_$field1Atom.name}_set');
   }
 
   final _$field2Atom = Atom(name: '_TestStore.field2');
@@ -50,11 +49,10 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set field2(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$field2Atom.context.conditionallyRunInAction(() {
       super.field2 = value;
       _$field2Atom.reportChanged();
-    }, name: '${_$field2Atom.name}_set');
+    }, _$field2Atom, name: '${_$field2Atom.name}_set');
   }
 
   final _$stuffAtom = Atom(name: '_TestStore.stuff');
@@ -68,11 +66,10 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set stuff(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$stuffAtom.context.conditionallyRunInAction(() {
       super.stuff = value;
       _$stuffAtom.reportChanged();
-    }, name: '${_$stuffAtom.name}_set');
+    }, _$stuffAtom, name: '${_$stuffAtom.name}_set');
   }
 
   final _$batchItem1Atom = Atom(name: '_TestStore.batchItem1');
@@ -86,11 +83,10 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set batchItem1(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$batchItem1Atom.context.conditionallyRunInAction(() {
       super.batchItem1 = value;
       _$batchItem1Atom.reportChanged();
-    }, name: '${_$batchItem1Atom.name}_set');
+    }, _$batchItem1Atom, name: '${_$batchItem1Atom.name}_set');
   }
 
   final _$batchItem2Atom = Atom(name: '_TestStore.batchItem2');
@@ -104,11 +100,10 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set batchItem2(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$batchItem2Atom.context.conditionallyRunInAction(() {
       super.batchItem2 = value;
       _$batchItem2Atom.reportChanged();
-    }, name: '${_$batchItem2Atom.name}_set');
+    }, _$batchItem2Atom, name: '${_$batchItem2Atom.name}_set');
   }
 
   final _$batchItem3Atom = Atom(name: '_TestStore.batchItem3');
@@ -122,11 +117,10 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set batchItem3(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$batchItem3Atom.context.conditionallyRunInAction(() {
       super.batchItem3 = value;
       _$batchItem3Atom.reportChanged();
-    }, name: '${_$batchItem3Atom.name}_set');
+    }, _$batchItem3Atom, name: '${_$batchItem3Atom.name}_set');
   }
 
   final _$batchItem4Atom = Atom(name: '_TestStore.batchItem4');
@@ -140,11 +134,10 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set batchItem4(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$batchItem4Atom.context.conditionallyRunInAction(() {
       super.batchItem4 = value;
       _$batchItem4Atom.reportChanged();
-    }, name: '${_$batchItem4Atom.name}_set');
+    }, _$batchItem4Atom, name: '${_$batchItem4Atom.name}_set');
   }
 
   final _$errorFieldAtom = Atom(name: '_TestStore.errorField');
@@ -158,11 +151,10 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set errorField(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$errorFieldAtom.context.conditionallyRunInAction(() {
       super.errorField = value;
       _$errorFieldAtom.reportChanged();
-    }, name: '${_$errorFieldAtom.name}_set');
+    }, _$errorFieldAtom, name: '${_$errorFieldAtom.name}_set');
   }
 
   @override

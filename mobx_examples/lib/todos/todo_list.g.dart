@@ -73,7 +73,7 @@ mixin _$TodoList on _TodoList, Store {
     _$todosAtom.context.conditionallyRunInAction(() {
       super.todos = value;
       _$todosAtom.reportChanged();
-    }, name: '${_$todosAtom.name}_set');
+    }, _$todosAtom, name: '${_$todosAtom.name}_set');
   }
 
   final _$filterAtom = Atom(name: '_TodoList.filter');
@@ -91,7 +91,7 @@ mixin _$TodoList on _TodoList, Store {
     _$filterAtom.context.conditionallyRunInAction(() {
       super.filter = value;
       _$filterAtom.reportChanged();
-    }, name: '${_$filterAtom.name}_set');
+    }, _$filterAtom, name: '${_$filterAtom.name}_set');
   }
 
   final _$currentDescriptionAtom = Atom(name: '_TodoList.currentDescription');
@@ -110,7 +110,7 @@ mixin _$TodoList on _TodoList, Store {
     _$currentDescriptionAtom.context.conditionallyRunInAction(() {
       super.currentDescription = value;
       _$currentDescriptionAtom.reportChanged();
-    }, name: '${_$currentDescriptionAtom.name}_set');
+    }, _$currentDescriptionAtom, name: '${_$currentDescriptionAtom.name}_set');
   }
 
   final _$_TodoListActionController = ActionController(name: '_TodoList');

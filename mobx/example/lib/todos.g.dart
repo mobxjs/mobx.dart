@@ -20,11 +20,10 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   set description(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$descriptionAtom.context.conditionallyRunInAction(() {
       super.description = value;
       _$descriptionAtom.reportChanged();
-    }, name: '${_$descriptionAtom.name}_set');
+    }, _$descriptionAtom, name: '${_$descriptionAtom.name}_set');
   }
 
   final _$doneAtom = Atom(name: 'TodoBase.done');
@@ -38,11 +37,10 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   set done(bool value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$doneAtom.context.conditionallyRunInAction(() {
       super.done = value;
       _$doneAtom.reportChanged();
-    }, name: '${_$doneAtom.name}_set');
+    }, _$doneAtom, name: '${_$doneAtom.name}_set');
   }
 }
 
@@ -97,11 +95,10 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set todos(ObservableList<Todo> value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$todosAtom.context.conditionallyRunInAction(() {
       super.todos = value;
       _$todosAtom.reportChanged();
-    }, name: '${_$todosAtom.name}_set');
+    }, _$todosAtom, name: '${_$todosAtom.name}_set');
   }
 
   final _$filterAtom = Atom(name: 'TodoListBase.filter');
@@ -115,11 +112,10 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set filter(VisibilityFilter value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$filterAtom.context.conditionallyRunInAction(() {
       super.filter = value;
       _$filterAtom.reportChanged();
-    }, name: '${_$filterAtom.name}_set');
+    }, _$filterAtom, name: '${_$filterAtom.name}_set');
   }
 
   final _$currentDescriptionAtom =
@@ -135,11 +131,10 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   set currentDescription(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$currentDescriptionAtom.context.conditionallyRunInAction(() {
       super.currentDescription = value;
       _$currentDescriptionAtom.reportChanged();
-    }, name: '${_$currentDescriptionAtom.name}_set');
+    }, _$currentDescriptionAtom, name: '${_$currentDescriptionAtom.name}_set');
   }
 
   final _$TodoListBaseActionController = ActionController(name: 'TodoListBase');

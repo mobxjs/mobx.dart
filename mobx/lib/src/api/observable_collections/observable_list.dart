@@ -60,7 +60,7 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       _list.length = value;
       _notifyListUpdate(0, null, null);
-    });
+    }, _atom);
   }
 
   @override
@@ -89,7 +89,7 @@ class ObservableList<T>
         _list[index] = value;
         _notifyChildUpdate(index, value, oldValue);
       }
-    });
+    }, _atom);
   }
 
   @override
@@ -98,7 +98,7 @@ class ObservableList<T>
       final index = _list.length;
       _list.add(element);
       _notifyListUpdate(index, [element], null);
-    });
+    }, _atom);
   }
 
   @override
@@ -107,7 +107,7 @@ class ObservableList<T>
       final index = _list.length;
       _list.addAll(iterable);
       _notifyListUpdate(index, iterable.toList(growable: false), null);
-    });
+    }, _atom);
   }
 
   @override
@@ -171,7 +171,7 @@ class ObservableList<T>
 
       _list.first = value;
       _notifyChildUpdate(0, value, oldValue);
-    });
+    }, _atom);
   }
 
   @override
@@ -180,7 +180,7 @@ class ObservableList<T>
       final oldItems = _list.toList(growable: false);
       _list.clear();
       _notifyListUpdate(0, null, oldItems);
-    });
+    }, _atom);
   }
 
   @override
@@ -193,7 +193,7 @@ class ObservableList<T>
       final newContents = _list.sublist(start, end);
 
       _notifyListUpdate(start, newContents, oldContents);
-    });
+    }, _atom);
   }
 
   @override
@@ -201,7 +201,7 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       _list.insert(index, element);
       _notifyListUpdate(index, [element], null);
-    });
+    }, _atom);
   }
 
   @override
@@ -209,7 +209,7 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       _list.insertAll(index, iterable);
       _notifyListUpdate(index, iterable.toList(growable: false), null);
-    });
+    }, _atom);
   }
 
   @override
@@ -223,7 +223,7 @@ class ObservableList<T>
       if (didRemove) {
         _notifyListUpdate(index, null, element == null ? null : [element]);
       }
-    });
+    }, _atom);
 
     return didRemove;
   }
@@ -235,7 +235,7 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       value = _list.removeAt(index);
       _notifyListUpdate(index, null, value == null ? null : [value]);
-    });
+    }, _atom);
 
     return value;
   }
@@ -249,7 +249,7 @@ class ObservableList<T>
 
       // Index is _list.length as it points to the index before the last element is removed
       _notifyListUpdate(_list.length, null, value == null ? null : [value]);
-    });
+    }, _atom);
 
     return value;
   }
@@ -260,7 +260,7 @@ class ObservableList<T>
       final removedItems = _list.sublist(start, end);
       _list.removeRange(start, end);
       _notifyListUpdate(start, null, removedItems);
-    });
+    }, _atom);
   }
 
   @override
@@ -269,7 +269,7 @@ class ObservableList<T>
       final removedItems = _list.where(test).toList(growable: false);
       _list.removeWhere(test);
       _notifyListUpdate(0, null, removedItems);
-    });
+    }, _atom);
   }
 
   @override
@@ -278,7 +278,7 @@ class ObservableList<T>
       final oldContents = _list.sublist(start, end);
       _list.replaceRange(start, end, newContents);
       _notifyListUpdate(start, newContents, oldContents);
-    });
+    }, _atom);
   }
 
   @override
@@ -288,7 +288,7 @@ class ObservableList<T>
 
       _list.retainWhere(test);
       _notifyListUpdate(0, null, removedItems);
-    });
+    }, _atom);
   }
 
   @override
@@ -296,7 +296,7 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       _list.setAll(index, iterable);
       _notifyListUpdate(index, null, null);
-    });
+    }, _atom);
   }
 
   @override
@@ -304,7 +304,7 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       _list.setRange(start, end, iterable, skipCount);
       _notifyListUpdate(start, null, null);
-    });
+    }, _atom);
   }
 
   @override
@@ -312,7 +312,7 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       _list.shuffle(random);
       _notifyListUpdate(0, null, null);
-    });
+    }, _atom);
   }
 
   @override
@@ -320,7 +320,7 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       _list.sort(compare);
       _notifyListUpdate(0, null, null);
-    });
+    }, _atom);
   }
 
   @override

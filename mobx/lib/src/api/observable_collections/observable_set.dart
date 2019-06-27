@@ -63,7 +63,7 @@ class ObservableSet<T>
         _reportAdd(value);
       }
       _atom.reportChanged();
-    });
+    }, _atom);
 
     return result;
   }
@@ -107,7 +107,7 @@ class ObservableSet<T>
       }
 
       _atom.reportChanged();
-    });
+    }, _atom);
 
     return removed;
   }
@@ -123,7 +123,7 @@ class ObservableSet<T>
         _set.clear();
       }
       _atom.reportChanged();
-    });
+    }, _atom);
   }
 
   @override

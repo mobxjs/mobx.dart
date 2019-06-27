@@ -25,7 +25,7 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
     _$latestItemsFutureAtom.context.conditionallyRunInAction(() {
       super.latestItemsFuture = value;
       _$latestItemsFutureAtom.reportChanged();
-    }, name: '${_$latestItemsFutureAtom.name}_set');
+    }, _$latestItemsFutureAtom, name: '${_$latestItemsFutureAtom.name}_set');
   }
 
   final _$topItemsFutureAtom = Atom(name: '_HackerNewsStore.topItemsFuture');
@@ -43,7 +43,7 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
     _$topItemsFutureAtom.context.conditionallyRunInAction(() {
       super.topItemsFuture = value;
       _$topItemsFutureAtom.reportChanged();
-    }, name: '${_$topItemsFutureAtom.name}_set');
+    }, _$topItemsFutureAtom, name: '${_$topItemsFutureAtom.name}_set');
   }
 
   final _$_HackerNewsStoreActionController =

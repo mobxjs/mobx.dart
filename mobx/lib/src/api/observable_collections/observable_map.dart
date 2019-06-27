@@ -73,7 +73,7 @@ class ObservableMap<K, V>
         _map[key] = value;
       }
       _atom.reportChanged();
-    });
+    }, _atom);
   }
 
   @override
@@ -90,7 +90,7 @@ class ObservableMap<K, V>
         _map.clear();
       }
       _atom.reportChanged();
-    });
+    }, _atom);
   }
 
   @override
@@ -118,7 +118,7 @@ class ObservableMap<K, V>
 
       value = _map.remove(key);
       _atom.reportChanged();
-    });
+    }, _atom);
 
     return value;
   }

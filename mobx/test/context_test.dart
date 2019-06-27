@@ -87,10 +87,11 @@ void main() {
         final controller = MockActionController();
         final context = createContext();
         var hasRun = false;
+        final o = Observable(0);
 
         context.conditionallyRunInAction(() {
           hasRun = true;
-        }, actionController: controller);
+        }, o, actionController: controller);
 
         verify(controller.startAction());
         verify(controller.endAction(any));
@@ -102,10 +103,11 @@ void main() {
           () {
         final context = createContext();
         var hasRun = false;
+        final o = Observable(0);
 
         context.conditionallyRunInAction(() {
           hasRun = true;
-        });
+        }, o);
 
         expect(hasRun, isTrue);
       });
@@ -115,12 +117,14 @@ void main() {
           () {
         final controller = MockActionController();
         final context = createContext();
+        final o = Observable(0);
+
         var hasRun = false;
 
         runInAction(() {
           context.conditionallyRunInAction(() {
             hasRun = true;
-          }, actionController: controller);
+          }, o, actionController: controller);
         }, context: context);
 
         verifyNever(controller.startAction());

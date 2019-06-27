@@ -36,7 +36,7 @@ mixin _$FormStore on _FormStore, Store {
     _$colorAtom.context.conditionallyRunInAction(() {
       super.color = value;
       _$colorAtom.reportChanged();
-    }, name: '${_$colorAtom.name}_set');
+    }, _$colorAtom, name: '${_$colorAtom.name}_set');
   }
 
   final _$nameAtom = Atom(name: '_FormStore.name');
@@ -54,7 +54,7 @@ mixin _$FormStore on _FormStore, Store {
     _$nameAtom.context.conditionallyRunInAction(() {
       super.name = value;
       _$nameAtom.reportChanged();
-    }, name: '${_$nameAtom.name}_set');
+    }, _$nameAtom, name: '${_$nameAtom.name}_set');
   }
 
   final _$emailAtom = Atom(name: '_FormStore.email');
@@ -72,7 +72,7 @@ mixin _$FormStore on _FormStore, Store {
     _$emailAtom.context.conditionallyRunInAction(() {
       super.email = value;
       _$emailAtom.reportChanged();
-    }, name: '${_$emailAtom.name}_set');
+    }, _$emailAtom, name: '${_$emailAtom.name}_set');
   }
 
   final _$passwordAtom = Atom(name: '_FormStore.password');
@@ -90,7 +90,7 @@ mixin _$FormStore on _FormStore, Store {
     _$passwordAtom.context.conditionallyRunInAction(() {
       super.password = value;
       _$passwordAtom.reportChanged();
-    }, name: '${_$passwordAtom.name}_set');
+    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
   final _$_usernameCheckAtom = Atom(name: '_FormStore._usernameCheck');
@@ -108,7 +108,7 @@ mixin _$FormStore on _FormStore, Store {
     _$_usernameCheckAtom.context.conditionallyRunInAction(() {
       super._usernameCheck = value;
       _$_usernameCheckAtom.reportChanged();
-    }, name: '${_$_usernameCheckAtom.name}_set');
+    }, _$_usernameCheckAtom, name: '${_$_usernameCheckAtom.name}_set');
   }
 
   final _$validateUsernameAsyncAction = AsyncAction('validateUsername');
@@ -166,7 +166,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     _$usernameAtom.context.conditionallyRunInAction(() {
       super.username = value;
       _$usernameAtom.reportChanged();
-    }, name: '${_$usernameAtom.name}_set');
+    }, _$usernameAtom, name: '${_$usernameAtom.name}_set');
   }
 
   final _$emailAtom = Atom(name: '_FormErrorState.email');
@@ -184,7 +184,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     _$emailAtom.context.conditionallyRunInAction(() {
       super.email = value;
       _$emailAtom.reportChanged();
-    }, name: '${_$emailAtom.name}_set');
+    }, _$emailAtom, name: '${_$emailAtom.name}_set');
   }
 
   final _$passwordAtom = Atom(name: '_FormErrorState.password');
@@ -202,6 +202,6 @@ mixin _$FormErrorState on _FormErrorState, Store {
     _$passwordAtom.context.conditionallyRunInAction(() {
       super.password = value;
       _$passwordAtom.reportChanged();
-    }, name: '${_$passwordAtom.name}_set');
+    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 }

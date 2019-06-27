@@ -20,11 +20,10 @@ mixin _$Counter on _Counter, Store {
 
   @override
   set value(int value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$valueAtom.context.conditionallyRunInAction(() {
       super.value = value;
       _$valueAtom.reportChanged();
-    }, name: '${_$valueAtom.name}_set');
+    }, _$valueAtom, name: '${_$valueAtom.name}_set');
   }
 
   final _$_CounterActionController = ActionController(name: '_Counter');
