@@ -122,36 +122,6 @@ mixin _$FormStore on _FormStore, Store {
   final _$_FormStoreActionController = ActionController(name: '_FormStore');
 
   @override
-  void setUsername(String value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
-    try {
-      return super.setUsername(value);
-    } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setEmail(String value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
-    try {
-      return super.setEmail(value);
-    } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setPassword(String value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
-    try {
-      return super.setPassword(value);
-    } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void validatePassword(String value) {
     final _$actionInfo = _$_FormStoreActionController.startAction();
     try {
