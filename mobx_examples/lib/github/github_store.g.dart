@@ -30,7 +30,7 @@ mixin _$GithubStore on _GithubStore, Store {
     _$fetchReposFutureAtom.context.conditionallyRunInAction(() {
       super.fetchReposFuture = value;
       _$fetchReposFutureAtom.reportChanged();
-    }, name: '${_$fetchReposFutureAtom.name}_set');
+    }, _$fetchReposFutureAtom, name: '${_$fetchReposFutureAtom.name}_set');
   }
 
   final _$userAtom = Atom(name: '_GithubStore.user');
@@ -48,7 +48,7 @@ mixin _$GithubStore on _GithubStore, Store {
     _$userAtom.context.conditionallyRunInAction(() {
       super.user = value;
       _$userAtom.reportChanged();
-    }, name: '${_$userAtom.name}_set');
+    }, _$userAtom, name: '${_$userAtom.name}_set');
   }
 
   final _$fetchReposAsyncAction = AsyncAction('fetchRepos');

@@ -6,14 +6,14 @@ enum FutureStatus { pending, rejected, fulfilled }
 class FutureResult<T> {
   FutureResult(ReactiveContext context, Future<T> _future, initialResult,
       FutureStatus initialStatus)
-      : _actions = ActionController(
+      : _axnController = ActionController(
             context: context, name: context.nameFor('ObservableFuture<$T>')),
         _status = Observable(initialStatus),
         _result = Observable(initialResult) {
     _future.then(_fulfill, onError: _reject);
   }
 
-  final ActionController _actions;
+  final ActionController _axnController;
 
   final Observable<FutureStatus> _status;
   FutureStatus get status => _status.value;
@@ -22,22 +22,22 @@ class FutureResult<T> {
   dynamic get result => _result.value;
 
   void _fulfill(T value) {
-    final prevDerivation = _actions.startAction();
+    final prevDerivation = _axnController.startAction();
     try {
       _status.value = FutureStatus.fulfilled;
       _result.value = value;
     } finally {
-      _actions.endAction(prevDerivation);
+      _axnController.endAction(prevDerivation);
     }
   }
 
   void _reject(error) {
-    final prevDerivation = _actions.startAction();
+    final prevDerivation = _axnController.startAction();
     try {
       _status.value = FutureStatus.rejected;
       _result.value = error;
     } finally {
-      _actions.endAction(prevDerivation);
+      _axnController.endAction(prevDerivation);
     }
   }
 }

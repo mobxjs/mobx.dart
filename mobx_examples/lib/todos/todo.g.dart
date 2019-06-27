@@ -24,7 +24,7 @@ mixin _$Todo on _Todo, Store {
     _$descriptionAtom.context.conditionallyRunInAction(() {
       super.description = value;
       _$descriptionAtom.reportChanged();
-    }, name: '${_$descriptionAtom.name}_set');
+    }, _$descriptionAtom, name: '${_$descriptionAtom.name}_set');
   }
 
   final _$doneAtom = Atom(name: '_Todo.done');
@@ -42,6 +42,6 @@ mixin _$Todo on _Todo, Store {
     _$doneAtom.context.conditionallyRunInAction(() {
       super.done = value;
       _$doneAtom.reportChanged();
-    }, name: '${_$doneAtom.name}_set');
+    }, _$doneAtom, name: '${_$doneAtom.name}_set');
   }
 }

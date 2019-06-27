@@ -83,11 +83,10 @@ mixin _\$User on UserBase, Store {
 
   @override
   set firstName(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _\$firstNameAtom.context.conditionallyRunInAction(() {
       super.firstName = value;
       _\$firstNameAtom.reportChanged();
-    }, name: '\${_\$firstNameAtom.name}_set');
+    }, _\$firstNameAtom, name: '\${_\$firstNameAtom.name}_set');
   }
 
   final _\$lastNameAtom = Atom(name: 'UserBase.lastName');
@@ -101,11 +100,10 @@ mixin _\$User on UserBase, Store {
 
   @override
   set lastName(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _\$lastNameAtom.context.conditionallyRunInAction(() {
       super.lastName = value;
       _\$lastNameAtom.reportChanged();
-    }, name: '\${_\$lastNameAtom.name}_set');
+    }, _\$lastNameAtom, name: '\${_\$lastNameAtom.name}_set');
   }
 
   @override
@@ -232,11 +230,10 @@ mixin _\$Item<T> on _Item<T>, Store {
 
   @override
   set value(T value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _\$valueAtom.context.conditionallyRunInAction(() {
       super.value = value;
       _\$valueAtom.reportChanged();
-    }, name: '\${_\$valueAtom.name}_set');
+    }, _\$valueAtom, name: '\${_\$valueAtom.name}_set');
   }
 }
 """;

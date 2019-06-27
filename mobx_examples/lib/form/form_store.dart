@@ -37,21 +37,6 @@ abstract class _FormStore with Store {
 
   List<ReactionDisposer> _disposers;
 
-  @action
-  void setUsername(String value) {
-    name = value;
-  }
-
-  @action
-  void setEmail(String value) {
-    email = value;
-  }
-
-  @action
-  void setPassword(String value) {
-    password = value;
-  }
-
   void setupValidations() {
     _disposers = [
       reaction((_) => name, validateUsername),

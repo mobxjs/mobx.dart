@@ -54,13 +54,17 @@ class ObservableSet<T>
 
   @override
   bool add(T value) {
-    _context.enforceWritePolicy(_atom);
+    var result = false;
 
-    final result = _set.add(value);
-    if (result && _hasListeners) {
-      _reportAdd(value);
-    }
-    _atom.reportChanged();
+    _context.conditionallyRunInAction(() {
+      result = _set.add(value);
+
+      if (result && _hasListeners) {
+        _reportAdd(value);
+      }
+      _atom.reportChanged();
+    }, _atom);
+
     return result;
   }
 
@@ -93,28 +97,33 @@ class ObservableSet<T>
 
   @override
   bool remove(Object value) {
-    _context.enforceWritePolicy(_atom);
+    var removed = false;
 
-    final removed = _set.remove(value);
-    if (removed && _hasListeners) {
-      _reportRemove(value);
-    }
-    _atom.reportChanged();
+    _context.conditionallyRunInAction(() {
+      removed = _set.remove(value);
+
+      if (removed && _hasListeners) {
+        _reportRemove(value);
+      }
+
+      _atom.reportChanged();
+    }, _atom);
+
     return removed;
   }
 
   @override
   void clear() {
-    _context.enforceWritePolicy(_atom);
-
-    if (_hasListeners) {
-      final items = _set.toList(growable: false);
-      _set.clear();
-      items.forEach(_reportRemove);
-    } else {
-      _set.clear();
-    }
-    _atom.reportChanged();
+    _context.conditionallyRunInAction(() {
+      if (_hasListeners) {
+        final items = _set.toList(growable: false);
+        _set.clear();
+        items.forEach(_reportRemove);
+      } else {
+        _set.clear();
+      }
+      _atom.reportChanged();
+    }, _atom);
   }
 
   @override

@@ -36,7 +36,7 @@ class _FormExampleState extends State<FormExample> {
             children: <Widget>[
               Observer(
                 builder: (_) => TextField(
-                      onChanged: store.setUsername,
+                      onChanged: (value) => store.name = value,
                       decoration: InputDecoration(
                           labelText: 'Username',
                           hintText: 'Pick a username',
@@ -50,7 +50,7 @@ class _FormExampleState extends State<FormExample> {
                       opacity: store.isUserCheckPending ? 1 : 0)),
               Observer(
                 builder: (_) => TextField(
-                      onChanged: store.setEmail,
+                      onChanged: (value) => store.email = value,
                       decoration: InputDecoration(
                           labelText: 'Email',
                           hintText: 'Enter your email address',
@@ -59,7 +59,7 @@ class _FormExampleState extends State<FormExample> {
               ),
               Observer(
                 builder: (_) => TextField(
-                      onChanged: store.setPassword,
+                      onChanged: (value) => store.password = value,
                       decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Set a password',

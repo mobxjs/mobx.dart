@@ -87,13 +87,28 @@ void main() {
         final controller = MockActionController();
         final context = createContext();
         var hasRun = false;
+        final o = Observable(0);
 
         context.conditionallyRunInAction(() {
           hasRun = true;
-        }, actionController: controller);
+        }, o, actionController: controller);
 
         verify(controller.startAction());
         verify(controller.endAction(any));
+        expect(hasRun, isTrue);
+      });
+
+      test(
+          'when no ActionController is provided, it should create an ad-hoc ActionController',
+          () {
+        final context = createContext();
+        var hasRun = false;
+        final o = Observable(0);
+
+        context.conditionallyRunInAction(() {
+          hasRun = true;
+        }, o);
+
         expect(hasRun, isTrue);
       });
 
@@ -102,12 +117,14 @@ void main() {
           () {
         final controller = MockActionController();
         final context = createContext();
+        final o = Observable(0);
+
         var hasRun = false;
 
         runInAction(() {
           context.conditionallyRunInAction(() {
             hasRun = true;
-          }, actionController: controller);
+          }, o, actionController: controller);
         }, context: context);
 
         verifyNever(controller.startAction());

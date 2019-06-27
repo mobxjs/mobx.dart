@@ -59,38 +59,38 @@ class ObservableMap<K, V>
 
   @override
   void operator []=(K key, V value) {
-    _context.enforceWritePolicy(_atom);
-
-    if (_hasListeners) {
-      if (_map.containsKey(key)) {
-        final oldValue = _map[key];
-        _map[key] = value;
-        _reportUpdate(key, value, oldValue);
+    _context.conditionallyRunInAction(() {
+      if (_hasListeners) {
+        if (_map.containsKey(key)) {
+          final oldValue = _map[key];
+          _map[key] = value;
+          _reportUpdate(key, value, oldValue);
+        } else {
+          _map[key] = value;
+          _reportAdd(key, value);
+        }
       } else {
         _map[key] = value;
-        _reportAdd(key, value);
       }
-    } else {
-      _map[key] = value;
-    }
-    _atom.reportChanged();
+      _atom.reportChanged();
+    }, _atom);
   }
 
   @override
   void clear() {
-    _context.enforceWritePolicy(_atom);
-
-    if (isEmpty) {
-      return;
-    }
-    if (_hasListeners) {
-      final removed = Map<K, V>.from(_map);
-      _map.clear();
-      removed.forEach(_reportRemove);
-    } else {
-      _map.clear();
-    }
-    _atom.reportChanged();
+    _context.conditionallyRunInAction(() {
+      if (isEmpty) {
+        return;
+      }
+      if (_hasListeners) {
+        final removed = Map<K, V>.from(_map);
+        _map.clear();
+        removed.forEach(_reportRemove);
+      } else {
+        _map.clear();
+      }
+      _atom.reportChanged();
+    }, _atom);
   }
 
   @override
@@ -102,20 +102,24 @@ class ObservableMap<K, V>
 
   @override
   V remove(Object key) {
-    _context.enforceWritePolicy(_atom);
+    V value;
 
-    if (_hasListeners) {
-      if (_map.containsKey(key)) {
-        final value = _map.remove(key);
-        _reportRemove(key, value);
-        _atom.reportChanged();
-        return value;
+    _context.conditionallyRunInAction(() {
+      if (_hasListeners) {
+        if (_map.containsKey(key)) {
+          value = _map.remove(key);
+          _reportRemove(key, value);
+          _atom.reportChanged();
+          return;
+        }
+
+        value = null;
       }
-      return null;
-    }
 
-    final value = _map.remove(key);
-    _atom.reportChanged();
+      value = _map.remove(key);
+      _atom.reportChanged();
+    }, _atom);
+
     return value;
   }
 

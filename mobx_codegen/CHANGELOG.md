@@ -1,9 +1,10 @@
 # Changelog
 
-## 0.3.1 - 0.3.2+3
+## 0.3.1 - 0.3.3
 
 - Adding a conditional action-wrapper for field setters.
 - Increasing test coverage
+- Adapting to the API change in `mobx 0.3.3`
 
 ## 0.3.0 - 0.3.0+1
 
