@@ -98,6 +98,19 @@ void main() {
       });
 
       test(
+          'when no ActionController is provided, it should create an ad-hoc ActionController',
+          () {
+        final context = createContext();
+        var hasRun = false;
+
+        context.conditionallyRunInAction(() {
+          hasRun = true;
+        });
+
+        expect(hasRun, isTrue);
+      });
+
+      test(
           'when running INSIDE an Action, it should NOT USE the ActionController',
           () {
         final controller = MockActionController();

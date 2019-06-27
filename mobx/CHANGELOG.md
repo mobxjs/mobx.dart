@@ -1,12 +1,17 @@
 # Changelog
 
-## 0.3.0 - 0.3.2+2
+## 0.3.3
+
+- Wrapping all collection setters in conditional action wrappers. This removes the need to wrap collection mutating methods in explicit actions.
+
+## 0.3.0 - 0.3.2+3
 
 - API changes introduced to the `enforceActions` setting of `ReactiveConfig`. It is now called `writePolicy` and the enum `EnforceActions` has been renamed to `ReactiveWritePolicy`.
 - Also introducing a `readPolicy` setting on `ReactiveConfig`. It is an enumeration with two values:
 - Removing the "strict-mode" text in the exception message when the `ReactiveWritePolicy` is violated. This was a vestige from the `mobx.js` world.
 - Exposing a boolean `isWithinBatch` on `ReactiveContext`, which tells if the current code is running inside a batch. This is used to conditionally apply an action-wrapper for `mobx_codegen`-generated setters.
 - Introduced an action-wrapper called `conditionallyRunInAction()` that runs the given function in an action only when outside a batch.
+- Increasing test coverage
 
 ```dart
 enum ReactiveReadPolicy { always, never }
