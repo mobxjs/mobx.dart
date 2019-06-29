@@ -7,12 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/src/examples/random-number.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/src/examples/random-stream.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/examples/random-number.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/examples/random-stream/random-number.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/examples/random-stream.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/examples/random-stream/index.mdx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/src/examples/todos/index.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/examples/todos/index.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/random_stream/random_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/random_stream/random_widgets.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,6 +76,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
       <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -246,7 +245,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="renaming fields&#10;&#10;enforceActions =&gt; writePolicy&#10;enforceReactions =&gt; readPolicy" />
     <MESSAGE value="bringing versions in sync, adding read policy checks to collections" />
     <MESSAGE value="fixing the api call" />
     <MESSAGE value="tests for observable reads in observable, list, set, map" />
@@ -271,7 +269,8 @@
     <MESSAGE value="added link to a new article" />
     <MESSAGE value="added testimonials" />
     <MESSAGE value="using Provider for todos" />
-    <option name="LAST_COMMIT_MESSAGE" value="using Provider for todos" />
+    <MESSAGE value="a quick writeup on the random stream using the ObservableStream&lt;T&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="a quick writeup on the random stream using the ObservableStream&lt;T&gt;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
