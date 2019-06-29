@@ -8,7 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/examples/todos/index.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/examples/todos/index.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/components/testimonial.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/components/testimonial.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/home.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/home.mdx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -243,7 +244,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing the api call" />
     <MESSAGE value="tests for observable reads in observable, list, set, map" />
     <MESSAGE value="few tweaks on internal classes" />
     <MESSAGE value="switching to assertions" />
@@ -268,7 +268,8 @@
     <MESSAGE value="using Provider for todos" />
     <MESSAGE value="a quick writeup on the random stream using the ObservableStream&lt;T&gt;" />
     <MESSAGE value="adding a short note on provider" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding a short note on provider" />
+    <MESSAGE value="typo fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="typo fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

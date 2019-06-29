@@ -18,7 +18,7 @@ const Message = styled.div`
 
   &:before,
   &:after {
-    font-size: 30px;
+    font-size: 24px;
     font-family: 'Georgia', serif;
     color: ${primaryColor};
   }
@@ -118,6 +118,16 @@ const list = [
       'https://pbs.twimg.com/profile_images/1087336663666151424/NpYnCmzC_400x400.jpg',
     message:
       'We at GeekyAnts have used MobX.dart in many Flutter projects. We have chosen it as the default state-management library for the internal frameworks built for Flutter.'
+  },
+
+  {
+    author: 'Chris Sells',
+    twitter: 'https://twitter.com/csells',
+    title:
+      'Google Product Manager on the Flutter Development Experience. Enjoys long walks on the beach and various technologies.',
+    photoUrl:
+      'https://pbs.twimg.com/profile_images/1660905119/vikingme128x128_400x400.jpg',
+    message: `If you haven\'t seen MobX.dart @ https://mobx.pub, check it out. In combination with Provider, it\'s PFM (Pure Flutter Magic). I use it when I build anything real. #recommended #Flutter`
   }
 ];
 
