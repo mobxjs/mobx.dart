@@ -3,33 +3,45 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_examples/random_stream/random_store.dart';
 import 'package:provider/provider.dart';
 
-class RandomNumberExample extends StatelessWidget {
+class RandomNumberExample extends StatefulWidget {
   const RandomNumberExample();
 
   @override
-  Widget build(BuildContext context) {
-    final store = Provider.of<RandomStore>(context);
+  _RandomNumberExampleState createState() => _RandomNumberExampleState();
+}
 
-    return Observer(
-        builder: (_) => Scaffold(
-              appBar: AppBar(
-                title: const Text('Random Number Generator'),
-              ),
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Random number',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    Text(
-                      '${store.randomStream.value}',
-                      style: TextStyle(fontSize: 96),
-                    ),
-                  ],
-                ),
-              ),
-            ));
+class _RandomNumberExampleState extends State<RandomNumberExample> {
+  final RandomStore store = RandomStore();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: const Text('Random Number Generator'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Random number',
+              style: TextStyle(color: Colors.grey),
+            ),
+            Observer(
+              builder: (_) {
+                final value = store.randomStream.value;
+
+                return Text(
+                  '${value == null ? '---' : value}',
+                  style: TextStyle(fontSize: 96),
+                );
+              },
+            ),
+          ],
+        ),
+      ));
+
+  @override
+  void dispose() {
+    store.dispose();
   }
 }

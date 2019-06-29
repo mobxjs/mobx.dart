@@ -45,7 +45,7 @@ final List<Example> examples = [
     title: 'Todos',
     description: 'Managing a list of Todos, the TodoMVC way.',
     path: '/todos',
-    widgetBuilder: (_) => const TodoExample(),
+    widgetBuilder: (_) => TodoExample(),
   ),
   Example(
     title: 'Github Repos',

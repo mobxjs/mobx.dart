@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:mobx/mobx.dart';
@@ -8,15 +9,26 @@ class RandomStore = _RandomStore with _$RandomStore;
 
 abstract class _RandomStore with Store {
   _RandomStore() {
-    _stream = Stream<int>.periodic(Duration(seconds: 1))
-        .map((x) => _random.nextInt(100));
+    _streamController = StreamController<int>();
 
-    randomStream = ObservableStream(_stream, initialValue: 0);
+    _timer = Timer.periodic(Duration(seconds: 1),
+        (_) => _streamController.add(_random.nextInt(100)));
+
+    randomStream = ObservableStream(_streamController.stream);
   }
+
+  Timer _timer;
 
   final _random = Random();
 
-  Stream<int> _stream;
+  StreamController<int> _streamController;
 
   ObservableStream<int> randomStream;
+
+  @override
+  // ignore: avoid_void_async
+  void dispose() async {
+    _timer.cancel();
+    await _streamController.close();
+  }
 }

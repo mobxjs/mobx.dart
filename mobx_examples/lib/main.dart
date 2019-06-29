@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobx_examples/examples.dart';
 import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
-import 'package:mobx_examples/random_stream/random_store.dart';
 import 'package:provider/provider.dart';
+
+import 'counter/counter.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MultiProvider(
           providers: [
             Provider<MultiCounterStore>.value(value: MultiCounterStore()),
-            Provider<RandomStore>.value(value: RandomStore())
+            Provider<Counter>.value(value: Counter()),
           ],
           child: MaterialApp(
             initialRoute: '/',
