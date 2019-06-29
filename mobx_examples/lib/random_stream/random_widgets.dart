@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_examples/random_stream/random_store.dart';
-import 'package:provider/provider.dart';
 
 class RandomNumberExample extends StatefulWidget {
   const RandomNumberExample();
