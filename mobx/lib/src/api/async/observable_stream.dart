@@ -1,9 +1,7 @@
 part of '../async.dart';
 
-@experimental
 enum StreamStatus { waiting, active, done }
 
-@experimental
 class ObservableStream<T> implements Stream<T> {
   ObservableStream(Stream<T> stream,
       {T initialValue, bool cancelOnError = false, ReactiveContext context})

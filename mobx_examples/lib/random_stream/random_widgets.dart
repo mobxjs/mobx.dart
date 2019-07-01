@@ -42,5 +42,6 @@ class _RandomNumberExampleState extends State<RandomNumberExample> {
   @override
   void dispose() {
     store.dispose();
+    super.dispose();
   }
 }

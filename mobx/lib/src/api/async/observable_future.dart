@@ -1,6 +1,5 @@
 part of '../async.dart';
 
-@experimental
 enum FutureStatus { pending, rejected, fulfilled }
 
 class FutureResult<T> {
@@ -42,7 +41,6 @@ class FutureResult<T> {
   }
 }
 
-@experimental
 class ObservableFuture<T> implements Future<T> {
   /// Create a new observable future that tracks the state of the provided future.
   ObservableFuture(Future<T> future, {ReactiveContext context})

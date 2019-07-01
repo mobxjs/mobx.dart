@@ -4,7 +4,7 @@ menu: API Overview
 route: /api/observable
 ---
 
-import coreDerivedStateImage from "../images/core-derived-state.png";
+import coreDerivedStateImage from '../images/core-derived-state.png';
 
 # Observables
 
@@ -22,9 +22,9 @@ The derived state can be much bigger than the core-state. This is understandable
 
 ### `Observable(T initialValue, {String name, ReactiveContext context})`
 
-- `T initialValue`: the initial value for the `Observable` or `null` otherwise.
-- `String name`: a name to identify during debugging
-- `ReactiveContext context`: the context to which this observable is bound. By default, all observables are bound to the singleton `mainContext` of the application.
+- **`T initialValue`**: the initial value for the `Observable` or `null` otherwise.
+- **`String name`**: a name to identify during debugging
+- **`ReactiveContext context`**: the context to which this observable is bound. By default, all observables are bound to the singleton `mainContext` of the application.
 
 An `Observable` is used to track a single value, either primitive or complex. Whenever it changes value, it will fire a notification so that all connected reactions will re-execute.
 
@@ -63,9 +63,9 @@ abstract class _Todo with Store {
 
 ### `Computed(T Function() fn, {String name, ReactiveContext context})`
 
-- `T Function() fn`: the function which relies on observables to compute its value.
-- `String name`: a name to identify during debugging
-- `ReactiveContext context`: the context to which this computed is bound. By default, all computeds are bound to the singleton `mainContext` of the application.
+- **`T Function() fn`**: the function which relies on observables to compute its value.
+- **`String name`**: a name to identify during debugging
+- **`ReactiveContext context`**: the context to which this computed is bound. By default, all computeds are bound to the singleton `mainContext` of the application.
 
 **Computeds** form the derived state of your application. They depend on other observables or computeds for their value. Any time the depending observables change, they will recompute their new value. Computeds are also smart and **cache** their previous value. Only when the computed-value is different than the cached-value, will they fire notifications. This behavior is key to ensure the connected reactions don't execute unnecessarily.
 
@@ -106,11 +106,15 @@ abstract class _Contact with Store {
 
 ### `ObservableList({ReactiveContext context})`
 
+- **`ReactiveContext context`**: the context to which this list is bound. By default, all `ObservableList`s are bound to the singleton `mainContext` of the application.
+
 An `ObservableList` gives you a deeper level of observability on a list of values. It tracks when items are added, removed or modified and notifies the observers. Use an `ObservableList` when a change in the list matters. You can couple this with the `@observable` annotation to also track when the list reference changes, eg: going from `null` to a list with values.
 
 ## ObservableMap
 
 ### `ObservableMap({ReactiveContext context})`
+
+- **`ReactiveContext context`**: the context to which this map is bound. By default, all `ObservableMap`s are bound to the singleton `mainContext` of the application.
 
 An `ObservableMap` gives you a deeper level of observability on a map of values. It tracks when keys are added, removed or modified and notifies the observers. Use an `ObservableMap` when a change in the map matters. You can couple this with the `@observable` annotation to also track when the map reference changes, eg: going from `null` to a map with values.
 
@@ -118,9 +122,16 @@ An `ObservableMap` gives you a deeper level of observability on a map of values.
 
 ### `ObservableSet({ReactiveContext context})`
 
-An `ObservableSet` gives you a deeper level of observability on a set of values. It tracks when keys are added, removed or modified and notifies the observers. Use an `ObservableSet` when a change in the set matters. You can couple this with the `@observable` annotation to also track when the set reference changes, eg: going from `null` to a set with values.
+- **`ReactiveContext context`**: the context to which this set is bound. By default, all `ObservableSet`s are bound to the singleton `mainContext` of the application.
+
+An `ObservableSet` gives you a deeper level of observability on a set of values. It tracks when values are added, removed or modified and notifies the observers. Use an `ObservableSet` when a change in the set matters. You can couple this with the `@observable` annotation to also track when the set reference changes, eg: going from `null` to a set with values.
 
 ## ObservableFuture
+
+### `ObservableFuture(Future<T> future, {ReactiveContext context})`
+
+- **`Future<T> future`**: The future that is tracked for status changes.
+- **`ReactiveContext context`**: the context to which this observable-future is bound. By default, all `ObservableFuture`s are bound to the singleton `mainContext` of the application.
 
 The `ObservableFuture` is the reactive wrapper around a `Future`. You can use it to show the UI under various states of a `Future`, from `pending` to `fulfilled` or `rejected`. The `status`, `result` and `error` fields of an `ObservableFuture` are observable and can be consumed on the UI.
 
@@ -162,6 +173,13 @@ class LoadingIndicator extends StatelessWidget {
 ```
 
 ## ObservableStream
+
+### `ObservableStream(Stream<T> stream, {T initialValue, bool cancelOnError, ReactiveContext context})`
+
+- **`Stream<T> stream`**: The stream that is tracked for `status` and `value` changes.
+- **`T initialValue`**: The starting value of the stream.
+- **`bool cancelOnError`**: Should the stream be cancelled on error. Default is set to `false`.
+- **`ReactiveContext context`**: the context to which this observable-stream is bound. By default, all `ObservableStream`s are bound to the singleton `mainContext` of the application.
 
 Similar to `ObservableFuture`, an **`ObservableStream`** provides a reactive wrapper around a `Stream`. This gives an easy way to observe and re-render whenever there is new `data`, or `error` or a `status` change on the `ObservableStream`.
 

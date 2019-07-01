@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:meta/meta.dart';
 import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/core.dart';
 

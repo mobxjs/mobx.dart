@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.3+1
+
+- Removed the `@experimental` annotations for `Observable{Future,Stream}` and `reaction`.
+- Removed the dependency on the `meta` package.
+
 ## 0.3.3
 
 - Wrapping all collection setters in conditional action wrappers. This removes the need to wrap collection mutating methods in explicit actions.
