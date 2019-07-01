@@ -128,6 +128,15 @@ const list = [
     photoUrl:
       'https://pbs.twimg.com/profile_images/1660905119/vikingme128x128_400x400.jpg',
     message: `If you haven\'t seen MobX.dart @ https://mobx.pub, check it out. In combination with Provider, it\'s PFM (Pure Flutter Magic). I use it when I build anything real. #recommended #Flutter`
+  },
+  {
+    author: 'Michael Bui',
+    twitter: 'https://twitter.com/MaikuB84',
+    title:
+      'Flutter Enthusiast and maintainer of flutter_local_notifications and flutter_appauth packages.',
+    photoUrl:
+      'https://pbs.twimg.com/profile_images/989477066566320129/zCN6USCc_400x400.jpg',
+    message: `MobX's concepts of Observables, Actions and Reactions make it intuitive to figure out how to model the state of an application. I would highly recommend it as a solution for managing the application's state.`
   }
 ];
 
