@@ -1,6 +1,7 @@
 ---
+menu: Developer
 name: Blueprint
-route: /blueprint
+route: /developer/blueprint
 ---
 
 # Blueprint (WIP)

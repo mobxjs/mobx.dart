@@ -7,16 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/src/guides/developer-guidelines.mdx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_examples/test/todos_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/src/components/circle-bullet.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/src/development/release.mdx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/doczrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/doczrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/blueprint.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/development/blueprint.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,6 +77,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/src/development" />
       <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
       <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
     </key>
@@ -183,9 +179,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="Flutter Test.tests in todos_test.dart" />
         <item itemvalue="npm.pub:get:mobx" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:upgrade:mobx" />
       </list>
@@ -245,7 +241,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="assert wrappers" />
     <MESSAGE value="updating documentation" />
     <MESSAGE value="package updates to alpha to enable testing on circleCI" />
     <MESSAGE value="having some failing tests" />
@@ -270,7 +265,8 @@
     <MESSAGE value="adding testimonials" />
     <MESSAGE value="testimonials" />
     <MESSAGE value="- removing the @experimental annotations for Observable{Future,Stream} and reaction. Also removed the dependency on the `meta` package.&#10;- updating the API section on docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="- removing the @experimental annotations for Observable{Future,Stream} and reaction. Also removed the dependency on the `meta` package.&#10;- updating the API section on docs" />
+    <MESSAGE value="- formatting changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="- formatting changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

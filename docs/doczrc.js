@@ -31,6 +31,7 @@ export default {
         "Examples",
         "Guides",
         "Community",
-        "API Overview"
+        "API Overview",
+        "Developer"
     ]
 };
