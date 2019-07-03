@@ -20,7 +20,6 @@
   - [Computed Observables](#computed-observables)
   - [Actions](#actions)
   - [Reactions](#reactions)
-- **[Roadmap](#roadmap)**
 - **[Contributing](#contributing)**
 
 ## Introduction
@@ -196,7 +195,7 @@ abstract class CounterBase with Store {
 
 #### Asynchronous Actions
 
-MobX.dart handles asynchronous actions automatically and does not require wrapping the code with [`runInAction`](https://mobx.pub/api/action#runinaction). 
+MobX.dart handles asynchronous actions automatically and does not require wrapping the code with [`runInAction`](https://mobx.pub/api/action#runinaction).
 
 ```dart
 @observable
@@ -212,7 +211,6 @@ Future<void> loadStuff() async {
   loading = false; //This also notifies observers
 }
 ```
-  
 
 ### Reactions
 
@@ -367,76 +365,6 @@ class _CounterExampleState extends State<CounterExample> {
       );
 }
 ```
-
----
-
-## Roadmap
-
-### Observables
-
-- [x] Create `Observable<T>` via `Observable<T>()`
-- [x] Create `ObservableList<T>`
-  - [x] observe hook
-  - [ ] intercept hook
-- [x] Create `ObservableMap<K, T>`
-  - [x] observe hook
-  - [ ] intercept hook
-- [x] Create `ObservableSet<T>`
-  - [x] observe hook
-  - [ ] intercept hook
-- [x] Create `ObservableFuture<T>`
-- [x] Atoms with `createAtom()`
-
-### Computed Observables
-
-- [x] Create `Computed<T>` via `Computed<T>()`
-- [x] 2-phase change propagation
-
-### Reactions
-
-- [x] Create `Reaction` with `autorun()`
-  - [x] with `delay`
-- [x] Create `Reaction` with `reaction()`
-  - [x] with `delay`
-  - [x] with `fireImmediately`
-- [x] Create `Reaction` with `when()`
-  - [x] with `timeout`
-- [x] Create `Reaction` with `asyncWhen()` returning `Future<T>`
-  - [x] with `timeout`
-
-### Actions
-
-- [x] Create `Action`
-- [x] Create untracked-action with `untracked<T>()`
-- [x] Create transaction with `transaction<T>()`
-
-### Cross cutting features
-
-- [x] Use of a `ReactiveContext` and `ReactiveConfig` to isolate the reactivity. This is an _advanced_ feature and useful in
-      case you are running multiple independent reactive systems without causing any interference between them. This is
-      possible if a library chooses to use MobX internally and the library gets consumed by an app that also uses MobX. In that
-      scenario, you want the reactivity of the library NOT to interfere with the reactivity within the app. For most cases, you don't
-      have to worry about this. MobX will default to using the singleton `mainContext`, which is at the app level.
-- [x] Observability API for `Observable` and `Computed`
-  - [x] `observe`
-  - [x] `intercept`
-  - [x] `onBecomeObserved`
-  - [x] `onBecomeUnobserved`
-- [ ] Spying and Tracing
-- [x] Global configuration
-- [x] Exception handling and Error recovery
-  - [x] Error boundary
-  - [x] `onError` handler for `autorun`, `reaction`, `when`
-  - [x] Disabling Error boundary in global config
-- [ ] Debuggability
-
-### Public facing
-
-- [x] Logo
-- [ ] Documentation
-- [x] Website (published on [mobx-dart.netlify.com](https://mobx-dart.netlify.com/getting-started))
-
----
 
 ## Contributing
 

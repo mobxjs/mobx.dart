@@ -1,8 +1,7 @@
-# Changelog
-
-## 0.3.0
+## 0.3.0 - 0.3.0+1
 
 - Adapting to the API changes in `mobx 0.3.0`
+- Formatting changes
 
 ## 0.2.3+1
 
