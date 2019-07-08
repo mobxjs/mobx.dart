@@ -8,7 +8,7 @@ name: When does MobX react?
 
 MobX is a reactive system that waits for an observable to change. Every observable has the basic capability of notifying whenever its value changes. Interestingly, this is only half the story in the world of MobX. To make the system truly reactive, there needs to be two sides to this reactive-equation.
 
-import reactiveEquation from "./reactive-equation.png";
+import reactiveEquation from './reactive-equation.png';
 
 <img src={reactiveEquation} />
 
@@ -76,3 +76,5 @@ Notice that we are reading the `value` inside the reaction's _tracker-function_.
 The `List<T>` interface from Dart has no notion of observability. It is inert from the perspective of MobX. When you add an item to the list, remove an item or modify an item at some index, `List<T>` will not notify MobX. To get the reactive behavior, you have to use the `ObservableList<T>`. Now when you add, remove, modify items, MobX will know about the changes and notify all associated reactions.
 
 By the same token, use the `ObservableMap<K, V>` or `ObservableSet<T>` when you want to MobX to track changes to these data structures.
+
+Similarly, `ObservableFuture<T>` and `ObservableStream<T>` are wrappers around the standard `Future<T>` and `Stream<T>`, which will give you the reactive behavior for futures and streams.

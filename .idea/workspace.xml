@@ -8,7 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/test/todos_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/test/todos_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/guides/when-does-mobx-react.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/guides/when-does-mobx-react.mdx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -176,8 +178,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter Test.tests in todos_test.dart" />
         <item itemvalue="npm.start" />
+        <item itemvalue="Flutter Test.tests in todos_test.dart" />
         <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:upgrade:mobx" />
@@ -238,7 +240,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="package updates to alpha to enable testing on circleCI" />
     <MESSAGE value="having some failing tests" />
     <MESSAGE value="version upgrades to 0.3.0" />
     <MESSAGE value="version upgrades to 0.3.0+2" />
@@ -263,7 +264,8 @@
     <MESSAGE value="- removing the @experimental annotations for Observable{Future,Stream} and reaction. Also removed the dependency on the `meta` package.&#10;- updating the API section on docs" />
     <MESSAGE value="- formatting changes" />
     <MESSAGE value="added release guidelines" />
-    <option name="LAST_COMMIT_MESSAGE" value="added release guidelines" />
+    <MESSAGE value="adding some mobx specific tests for todos" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding some mobx specific tests for todos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

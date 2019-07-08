@@ -16,7 +16,7 @@
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
-    "@types/react": "^16.8.22"
+    "@types/react": "^16.8.23"
   },
   "bugs": {
     "url": "https://github.com/mobxjs/mobx.dart/issues"
