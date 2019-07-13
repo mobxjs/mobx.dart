@@ -7,7 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/src/guides/json-serialization.mdx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.dart" afterDir="false" />
     </list>
@@ -53,7 +53,7 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="11.14.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/docs/src/examples" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/docs/src/guides" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -74,14 +74,14 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/src/guides" />
+      <recent name="$PROJECT_DIR$/docs/src/examples" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/docs/src/development" />
       <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
       <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/docs/src/examples" />
-      <recent name="$PROJECT_DIR$/docs/src/guides" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -177,8 +177,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.gen:mobx_examples" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.gen:mobx_examples" />
         <item itemvalue="Flutter Test.tests in todos_test.dart" />
         <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.pub:get:mobx_codegen" />

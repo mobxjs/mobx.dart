@@ -3,7 +3,7 @@ import 'package:mobx/mobx.dart';
 
 part 'todo.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class Todo extends _Todo with _$Todo {
   Todo(String description) : super(description);
 
