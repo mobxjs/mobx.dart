@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_examples/todos/todo.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'todo_list.g.dart';
 
