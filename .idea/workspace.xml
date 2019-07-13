@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/community.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/community.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +101,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in todos_test.dart">
+  <component name="RunManager" selected="Flutter.mobx_examples">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
@@ -123,6 +124,16 @@
       <option name="testFile" value="$PROJECT_DIR$/mobx_examples/test/todos_test.dart" />
       <method v="2" />
     </configuration>
+    <configuration name="gen:mobx_examples" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="gen:mobx_examples" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="pub:get:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -138,16 +149,6 @@
       <command value="run" />
       <scripts>
         <script value="pub:get:mobx_codegen" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="pub:upgrade:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="pub:upgrade:mobx" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -171,16 +172,16 @@
       <item itemvalue="Flutter Test.tests in todos_test.dart" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.pub:get:mobx" />
-      <item itemvalue="npm.pub:upgrade:mobx" />
       <item itemvalue="npm.start" />
+      <item itemvalue="npm.gen:mobx_examples" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.gen:mobx_examples" />
         <item itemvalue="npm.start" />
         <item itemvalue="Flutter Test.tests in todos_test.dart" />
         <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
-        <item itemvalue="npm.pub:upgrade:mobx" />
       </list>
     </recent_temporary>
   </component>
@@ -238,9 +239,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="version upgrades to 0.3.0" />
-    <MESSAGE value="version upgrades to 0.3.0+2" />
-    <MESSAGE value="pubspec updates" />
     <MESSAGE value="Exception message change, version update" />
     <MESSAGE value="adding a conditional action wrapper to field setters, so that plain setters do not need manual action-wrappers. This is to improve the Developer Experience." />
     <MESSAGE value="minor API convenience to simplify the code-gen for conditional action-wrapper" />
@@ -263,7 +261,10 @@
     <MESSAGE value="added release guidelines" />
     <MESSAGE value="adding some mobx specific tests for todos" />
     <MESSAGE value="minor edits in the docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor edits in the docs" />
+    <MESSAGE value="added a link to article" />
+    <MESSAGE value="simpler call to remove the observer" />
+    <MESSAGE value="Adding an example for json_serializable with ObservableList&lt;T&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding an example for json_serializable with ObservableList&lt;T&gt;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
