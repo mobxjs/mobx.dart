@@ -3,6 +3,19 @@
 part of 'todo.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Todo _$TodoFromJson(Map<String, dynamic> json) {
+  return Todo(json['description'] as String)..done = json['done'] as bool;
+}
+
+Map<String, dynamic> _$TodoToJson(Todo instance) => <String, dynamic>{
+      'description': instance.description,
+      'done': instance.done
+    };
+
+// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 
@@ -20,7 +33,6 @@ mixin _$Todo on _Todo, Store {
 
   @override
   set description(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$descriptionAtom.context.conditionallyRunInAction(() {
       super.description = value;
       _$descriptionAtom.reportChanged();
@@ -38,7 +50,6 @@ mixin _$Todo on _Todo, Store {
 
   @override
   set done(bool value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$doneAtom.context.conditionallyRunInAction(() {
       super.done = value;
       _$doneAtom.reportChanged();

@@ -26,7 +26,6 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   set fetchReposFuture(ObservableFuture<List<Repository>> value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$fetchReposFutureAtom.context.conditionallyRunInAction(() {
       super.fetchReposFuture = value;
       _$fetchReposFutureAtom.reportChanged();
@@ -44,7 +43,6 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   set user(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$userAtom.context.conditionallyRunInAction(() {
       super.user = value;
       _$userAtom.reportChanged();

@@ -21,6 +21,7 @@ dependencies:
   hnpwa_client:
   url_launcher:
   provider: ^3.0.0
+  json_serializable: ^3.0.0
   flutter:
     sdk: flutter
 

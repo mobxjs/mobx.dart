@@ -3,6 +3,50 @@
 part of 'todo_list.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+TodoList _$TodoListFromJson(Map<String, dynamic> json) {
+  return TodoList()
+    ..todos = const _ObservableListConverter()
+        .fromJson(json['todos'] as List<Map<String, dynamic>>)
+    ..filter = _$enumDecodeNullable(_$VisibilityFilterEnumMap, json['filter'])
+    ..currentDescription = json['currentDescription'] as String;
+}
+
+Map<String, dynamic> _$TodoListToJson(TodoList instance) => <String, dynamic>{
+      'todos': const _ObservableListConverter().toJson(instance.todos),
+      'filter': _$VisibilityFilterEnumMap[instance.filter],
+      'currentDescription': instance.currentDescription
+    };
+
+T _$enumDecode<T>(Map<T, dynamic> enumValues, dynamic source) {
+  if (source == null) {
+    throw ArgumentError('A value must be provided. Supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+  return enumValues.entries
+      .singleWhere((e) => e.value == source,
+          orElse: () => throw ArgumentError(
+              '`$source` is not one of the supported values: '
+              '${enumValues.values.join(', ')}'))
+      .key;
+}
+
+T _$enumDecodeNullable<T>(Map<T, dynamic> enumValues, dynamic source) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<T>(enumValues, source);
+}
+
+const _$VisibilityFilterEnumMap = <VisibilityFilter, dynamic>{
+  VisibilityFilter.all: 'all',
+  VisibilityFilter.pending: 'pending',
+  VisibilityFilter.completed: 'completed'
+};
+
+// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 
@@ -69,7 +113,6 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   set todos(ObservableList<Todo> value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$todosAtom.context.conditionallyRunInAction(() {
       super.todos = value;
       _$todosAtom.reportChanged();
@@ -87,7 +130,6 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   set filter(VisibilityFilter value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$filterAtom.context.conditionallyRunInAction(() {
       super.filter = value;
       _$filterAtom.reportChanged();
@@ -106,7 +148,6 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   set currentDescription(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$currentDescriptionAtom.context.conditionallyRunInAction(() {
       super.currentDescription = value;
       _$currentDescriptionAtom.reportChanged();

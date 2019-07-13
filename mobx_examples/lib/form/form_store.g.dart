@@ -32,7 +32,6 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set color(CustomColor value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$colorAtom.context.conditionallyRunInAction(() {
       super.color = value;
       _$colorAtom.reportChanged();
@@ -50,7 +49,6 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set name(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$nameAtom.context.conditionallyRunInAction(() {
       super.name = value;
       _$nameAtom.reportChanged();
@@ -68,7 +66,6 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set email(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$emailAtom.context.conditionallyRunInAction(() {
       super.email = value;
       _$emailAtom.reportChanged();
@@ -86,7 +83,6 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set password(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$passwordAtom.context.conditionallyRunInAction(() {
       super.password = value;
       _$passwordAtom.reportChanged();
@@ -104,7 +100,6 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   set _usernameCheck(ObservableFuture<bool> value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$_usernameCheckAtom.context.conditionallyRunInAction(() {
       super._usernameCheck = value;
       _$_usernameCheckAtom.reportChanged();
@@ -162,7 +157,6 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   set username(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$usernameAtom.context.conditionallyRunInAction(() {
       super.username = value;
       _$usernameAtom.reportChanged();
@@ -180,7 +174,6 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   set email(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$emailAtom.context.conditionallyRunInAction(() {
       super.email = value;
       _$emailAtom.reportChanged();
@@ -198,7 +191,6 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   set password(String value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$passwordAtom.context.conditionallyRunInAction(() {
       super.password = value;
       _$passwordAtom.reportChanged();

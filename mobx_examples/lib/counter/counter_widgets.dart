@@ -15,6 +15,7 @@ class CounterExampleState extends State<CounterExample> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue,
           title: const Text('MobX Counter'),
         ),
         body: Center(
@@ -27,7 +28,7 @@ class CounterExampleState extends State<CounterExample> {
               Observer(
                   builder: (_) => Text(
                         '${counter.value}',
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 40),
                       )),
             ],
           ),

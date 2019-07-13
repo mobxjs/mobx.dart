@@ -21,7 +21,6 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   set latestItemsFuture(ObservableFuture<List<FeedItem>> value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$latestItemsFutureAtom.context.conditionallyRunInAction(() {
       super.latestItemsFuture = value;
       _$latestItemsFutureAtom.reportChanged();
@@ -39,7 +38,6 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   set topItemsFuture(ObservableFuture<List<FeedItem>> value) {
-    // Since we are conditionally wrapping within an Action, there is no need to enforceWritePolicy
     _$topItemsFutureAtom.context.conditionallyRunInAction(() {
       super.topItemsFuture = value;
       _$topItemsFutureAtom.reportChanged();
