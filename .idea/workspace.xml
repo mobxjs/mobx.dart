@@ -6,10 +6,9 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="fixed typos">
-      <change afterPath="$PROJECT_DIR$/docs/src/images/mobx.svg" afterDir="false" />
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/design/mobx.afdesign" beforeDir="false" afterPath="$PROJECT_DIR$/docs/design/mobx.afdesign" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -240,7 +239,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing tests in mobx_codegen, increasing coverage" />
     <MESSAGE value="increasing coverage for mobx" />
     <MESSAGE value="Adding conditional action wrappers for collection mutating methods" />
     <MESSAGE value="removing a few action methods which are plain setters" />
@@ -265,7 +263,8 @@
     <MESSAGE value="added link to code" />
     <MESSAGE value="better naming" />
     <MESSAGE value="fixed typos" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed typos" />
+    <MESSAGE value="adding svg version of logo" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding svg version of logo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
