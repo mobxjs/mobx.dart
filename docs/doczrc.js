@@ -6,6 +6,9 @@ export default {
     files: "**/*.{md,markdown,mdx}",
     repository: "https://github.com/mobxjs/mobx.dart",
     indexHtml: "src/index.html",
+    htmlContext: {
+        favicon: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/mobx.png'
+    },
     themeConfig: {
         logo: {
             src:
