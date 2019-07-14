@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/src/images/mobx@2x.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/design/mobx.afdesign" beforeDir="false" afterPath="$PROJECT_DIR$/docs/design/mobx.afdesign" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -239,7 +240,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="increasing coverage for mobx" />
     <MESSAGE value="Adding conditional action wrappers for collection mutating methods" />
     <MESSAGE value="removing a few action methods which are plain setters" />
     <MESSAGE value="enforcement is now inside the conditional wrapper" />
@@ -264,7 +264,8 @@
     <MESSAGE value="better naming" />
     <MESSAGE value="fixed typos" />
     <MESSAGE value="adding svg version of logo" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding svg version of logo" />
+    <MESSAGE value="adding favicon" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding favicon" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
