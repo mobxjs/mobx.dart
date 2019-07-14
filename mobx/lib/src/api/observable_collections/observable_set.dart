@@ -62,7 +62,10 @@ class ObservableSet<T>
       if (result && _hasListeners) {
         _reportAdd(value);
       }
-      _atom.reportChanged();
+
+      if (result) {
+        _atom.reportChanged();
+      }
     }, _atom);
 
     return result;
@@ -106,7 +109,9 @@ class ObservableSet<T>
         _reportRemove(value);
       }
 
-      _atom.reportChanged();
+      if (removed) {
+        _atom.reportChanged();
+      }
     }, _atom);
 
     return removed;

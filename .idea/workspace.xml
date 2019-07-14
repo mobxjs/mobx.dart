@@ -8,8 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/doczrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/doczrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +101,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter.mobx_examples">
+  <component name="RunManager" selected="Dart Test.tests in mobx">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
