@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/src/guides/json-serialization.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/guides/json-serialization.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.g.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -241,7 +238,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="minor API convenience to simplify the code-gen for conditional action-wrapper" />
     <MESSAGE value="fixing tests in mobx_codegen" />
     <MESSAGE value="fixing tests in mobx_codegen, increasing coverage" />
     <MESSAGE value="increasing coverage for mobx" />
@@ -266,7 +262,8 @@
     <MESSAGE value="Adding an example for json_serializable with ObservableList&lt;T&gt;" />
     <MESSAGE value="Adding a detailed guide about json serialization." />
     <MESSAGE value="added link to code" />
-    <option name="LAST_COMMIT_MESSAGE" value="added link to code" />
+    <MESSAGE value="better naming" />
+    <option name="LAST_COMMIT_MESSAGE" value="better naming" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
