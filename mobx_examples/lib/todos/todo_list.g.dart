@@ -8,14 +8,14 @@ part of 'todo_list.dart';
 
 TodoList _$TodoListFromJson(Map<String, dynamic> json) {
   return TodoList()
-    ..todos = const _ObservableListConverter()
+    ..todos = const _ObservableListJsonConverter()
         .fromJson(json['todos'] as List<Map<String, dynamic>>)
     ..filter = _$enumDecodeNullable(_$VisibilityFilterEnumMap, json['filter'])
     ..currentDescription = json['currentDescription'] as String;
 }
 
 Map<String, dynamic> _$TodoListToJson(TodoList instance) => <String, dynamic>{
-      'todos': const _ObservableListConverter().toJson(instance.todos),
+      'todos': const _ObservableListJsonConverter().toJson(instance.todos),
       'filter': _$VisibilityFilterEnumMap[instance.filter],
       'currentDescription': instance.currentDescription
     };

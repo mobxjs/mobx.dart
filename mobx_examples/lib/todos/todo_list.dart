@@ -11,7 +11,7 @@ class TodoList = _TodoList with _$TodoList;
 
 abstract class _TodoList with Store {
   @observable
-  @_ObservableListConverter()
+  @_ObservableListJsonConverter()
   ObservableList<Todo> todos = ObservableList<Todo>();
 
   @observable
@@ -94,9 +94,9 @@ abstract class _TodoList with Store {
   }
 }
 
-class _ObservableListConverter
+class _ObservableListJsonConverter
     implements JsonConverter<ObservableList<Todo>, List<Map<String, dynamic>>> {
-  const _ObservableListConverter();
+  const _ObservableListJsonConverter();
 
   @override
   ObservableList<Todo> fromJson(List<Map<String, dynamic>> json) =>
