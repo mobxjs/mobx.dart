@@ -1,8 +1,9 @@
-## 0.3.3+1 - 0.3.3+2
+## 0.3.3+1 - 0.3.4
 
 - Removed the `@experimental` annotations for `Observable{Future,Stream}` and `reaction`.
 - Removed the dependency on the `meta` package.
 - Some formatting changes
+- Reporting update or change only when the new value is different than the old value. This is mostly for observable collections like list, set, map.
 
 ## 0.3.3
 
