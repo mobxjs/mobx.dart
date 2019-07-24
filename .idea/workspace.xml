@@ -9,7 +9,9 @@
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/async/observable_future.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/async/observable_future.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/observable_future_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_future_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +104,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.tests in mobx">
+  <component name="RunManager" selected="Dart Test.tests in observable_future_test.dart">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
@@ -115,6 +117,10 @@
     <configuration name="tests in mobx_codegen" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx_codegen" />
       <option name="scope" value="FOLDER" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tests in observable_future_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/mobx/test/observable_future_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="mobx_examples" type="FlutterRunConfigurationType" factoryName="Flutter" singleton="false">
@@ -169,6 +175,7 @@
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="Dart Test.mobx bug tests" />
+      <item itemvalue="Dart Test.tests in observable_future_test.dart" />
       <item itemvalue="Flutter.mobx_examples" />
       <item itemvalue="Flutter Test.tests in todos_test.dart" />
       <item itemvalue="npm.pub:get:mobx" />
@@ -240,7 +247,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="enforcement is now inside the conditional wrapper" />
     <MESSAGE value="added link to a new article" />
     <MESSAGE value="added testimonials" />
     <MESSAGE value="using Provider for todos" />
@@ -265,7 +271,8 @@
     <MESSAGE value="adding favicon" />
     <MESSAGE value="reporting only when there is a change in set" />
     <MESSAGE value="reporting only when there is a change in map" />
-    <option name="LAST_COMMIT_MESSAGE" value="reporting only when there is a change in map" />
+    <MESSAGE value="version update to 0.3.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="version update to 0.3.4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

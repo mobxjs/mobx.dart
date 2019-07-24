@@ -63,7 +63,9 @@ class ObservableFuture<T> implements Future<T> {
   ObservableFuture._(
       this._context, this._future, this._initialStatus, this._initialResult)
       : assert(_context != null),
-        assert(_future != null);
+        assert(_future != null) {
+    _result; // create the result up-front instead of being lazy
+  }
 
   final ReactiveContext _context;
   Future<T> _future;
@@ -79,6 +81,7 @@ class ObservableFuture<T> implements Future<T> {
       _initialResult = null;
       _initialStatus = null;
     }
+
     return _resultField;
   }
 

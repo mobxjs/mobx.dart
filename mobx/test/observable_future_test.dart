@@ -10,13 +10,18 @@ void main() {
       expect(future.value, equals('success'));
     });
 
-    test('status should be pending while running and fulfilled when completed',
-        () async {
+    test('status should be pending with no value initially', () async {
       final completer = Completer<String>();
       final future = ObservableFuture(completer.future);
       expect(future.status, equals(FutureStatus.pending));
       expect(future.value, isNull);
       expect(future.error, isNull);
+    });
+
+    test('status should be pending while running and fulfilled when completed',
+        () async {
+      final completer = Completer<String>();
+      final future = ObservableFuture(completer.future);
       completer.complete('FULFILLED');
       await future;
       expect(future.status, equals(FutureStatus.fulfilled));
