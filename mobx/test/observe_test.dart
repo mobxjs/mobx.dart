@@ -36,6 +36,60 @@ void main() {
       dispose();
     });
 
+    group('equality override', () {
+      test('yields a new value', () {
+        final x = Observable(
+          10,
+          equals: (_, __) => false,
+        );
+
+        var executed = false;
+
+        final dispose = x.observe((change) {
+          expect(change.newValue, equals(10));
+          executed = true;
+        }, fireImmediately: true);
+
+        expect(executed, isTrue);
+        executed = false;
+
+        x.value = 10;
+        expect(executed, isTrue);
+        executed = false;
+
+        x.value = 10;
+        expect(executed, isTrue);
+        executed = false;
+
+        dispose();
+      });
+
+      test('does not yield a new value', () {
+        final x = Observable(
+          10,
+          equals: (_, __) => true,
+        );
+
+        var executed = false;
+
+        final dispose = x.observe((change) {
+          expect(change.newValue, equals(10));
+          executed = true;
+        }, fireImmediately: true);
+
+        expect(executed, isTrue);
+        executed = false;
+
+        x.value = 10;
+        expect(executed, isFalse);
+
+        x.value = 11;
+        expect(executed, isFalse);
+
+        dispose();
+      });
+    });
+
     test('can be disposed', () {
       final x = Observable(10);
       var executed = false;
