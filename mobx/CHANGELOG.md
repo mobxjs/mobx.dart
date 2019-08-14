@@ -1,6 +1,7 @@
-## 0.3.5
+## 0.3.5 - 0.3.5+1
 
 - Fixed a bug where the `ObservableFuture<T>` would not show the correct status. This was happening because of the lazy evaluation strategy. We are now being eager in creating the status and monitoring the inner `Future<T>` immediately.
+- Upgraded `test_coverage`
 
 ## 0.3.3+1 - 0.3.4
 
