@@ -7,19 +7,21 @@ part of 'todo.dart';
 // **************************************************************************
 
 Todo _$TodoFromJson(Map<String, dynamic> json) {
-  return Todo(json['description'] as String)..done = json['done'] as bool;
+  return Todo(
+    json['description'] as String,
+  )..done = json['done'] as bool;
 }
 
 Map<String, dynamic> _$TodoToJson(Todo instance) => <String, dynamic>{
       'description': instance.description,
-      'done': instance.done
+      'done': instance.done,
     };
 
 // **************************************************************************
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Todo on _Todo, Store {
   final _$descriptionAtom = Atom(name: '_Todo.description');

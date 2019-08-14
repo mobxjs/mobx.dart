@@ -9,11 +9,11 @@ class TestFieldErrors extends PropertyErrors {
 void main() {
   group('Pluralize', () {
     test('Pluralize.call returns single string when count is 1', () {
-      expect(Pluralize('the item', 'items').call(1), 'the item');
+      expect(const Pluralize('the item', 'items').call(1), 'the item');
     });
 
     test('Pluralize.call returns multiple string when count is not 1', () {
-      expect(Pluralize('the item', 'items').call(2), 'items');
+      expect(const Pluralize('the item', 'items').call(2), 'items');
     });
   });
 
@@ -64,42 +64,40 @@ void main() {
     test(
         'returns a formatted message when a field is added and the condition is true',
         () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField');
+      final errors = TestFieldErrors()..addIf(true, 'testField');
       expect(errors.message, equals('test the field "testField"'));
     });
 
     test(
         'returns a formatted message when multiple fields are added and the condition is true',
         () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField1');
-      errors.addIf(true, 'testField2');
+      final errors = TestFieldErrors()
+        ..addIf(true, 'testField1')
+        ..addIf(true, 'testField2');
       expect(
           errors.message, equals('test fields "testField1" and "testField2"'));
     });
 
     test('does not add field if condition is false', () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField1');
-      errors.addIf(false, 'testField2');
+      final errors = TestFieldErrors()
+        ..addIf(true, 'testField1')
+        ..addIf(false, 'testField2');
       expect(errors.message, equals('test the field "testField1"'));
     });
 
     test(
         ".property returns singular property string if there's only one item added",
         () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField');
+      final errors = TestFieldErrors()..addIf(true, 'testField');
       expect(errors.property, equals('the field'));
     });
 
     test(
         ".property returns plural property string if there's more than one item added",
         () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField1');
-      errors.addIf(true, 'testField2');
+      final errors = TestFieldErrors()
+        ..addIf(true, 'testField1')
+        ..addIf(true, 'testField2');
       expect(errors.property, equals('fields'));
     });
   });

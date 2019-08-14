@@ -8,6 +8,7 @@ class MethodOverrideTemplate {
   MethodOverrideTemplate();
 
   MethodOverrideTemplate.fromElement(MethodElement method) {
+    // ignore: prefer_function_declarations_over_variables
     final param = (ParameterElement elem) => ParamTemplate()
       ..name = elem.name
       ..type = elem.type.displayName
@@ -53,22 +54,26 @@ class MethodOverrideTemplate {
   CommaList<String> _optionalArgs;
   CommaList<NamedArgTemplate> _namedArgs;
 
+  // ignore: always_declare_return_types, type_annotate_public_apis
   setTypeParams(Iterable<TypeParamTemplate> params) {
     _typeParams = SurroundedCommaList('<', '>', params.toList());
     _typeArgs =
         SurroundedCommaList('<', '>', params.map((p) => p.asArgument).toList());
   }
 
+  // ignore: avoid_setters_without_getters
   set positionalParams(Iterable<ParamTemplate> params) {
     _positionalParams = CommaList(params.toList());
     _positionalArgs = CommaList(params.map((p) => p.asArgument).toList());
   }
 
+  // ignore: avoid_setters_without_getters
   set optionalParams(Iterable<ParamTemplate> params) {
     _optionalParams = SurroundedCommaList('[', ']', params.toList());
     _optionalArgs = CommaList(params.map((p) => p.asArgument).toList());
   }
 
+  // ignore: avoid_setters_without_getters
   set namedParams(Iterable<ParamTemplate> params) {
     _namedParams = SurroundedCommaList('{', '}', params.toList());
     _namedArgs = CommaList(params.map((p) => p.asNamedArgument).toList());

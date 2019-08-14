@@ -17,7 +17,7 @@ TodoList _$TodoListFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$TodoListToJson(TodoList instance) => <String, dynamic>{
       'todos': const _ObservableListJsonConverter().toJson(instance.todos),
       'filter': _$VisibilityFilterEnumMap[instance.filter],
-      'currentDescription': instance.currentDescription
+      'currentDescription': instance.currentDescription,
     };
 
 T _$enumDecode<T>(Map<T, dynamic> enumValues, dynamic source) {
@@ -50,7 +50,7 @@ const _$VisibilityFilterEnumMap = <VisibilityFilter, dynamic>{
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TodoList on _TodoList, Store {
   Computed<ObservableList<Todo>> _$pendingTodosComputed;

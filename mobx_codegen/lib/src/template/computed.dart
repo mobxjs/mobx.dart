@@ -3,6 +3,8 @@ class ComputedTemplate {
   String type;
   String name;
 
+  @override
+  // ignore: prefer_single_quotes
   String toString() => """
   Computed<$type> $computedName;
 

@@ -4,6 +4,7 @@ class ObservableStreamTemplate {
   MethodOverrideTemplate method;
 
   @override
+  // ignore: prefer_single_quotes
   String toString() => """
   @override
   ObservableStream${method.returnTypeArgs} ${method.name}${method.typeParams}(${method.params}) {

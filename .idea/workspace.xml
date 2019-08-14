@@ -2,30 +2,41 @@
 <project version="4">
   <component name="AutoTestManager">
     <enabled-run-configurations>
+      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
       <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_annotation.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_input.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_observable_annotation.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_observable_output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/valid_generic_store_input.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/valid_generic_store_output.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/valid_input.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/valid_output.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/invalid_annotations_test.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/test_utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="fixing dart analyzer issues">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/analysis_options.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/errors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/errors.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/action.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/async_action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/async_action.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/computed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/computed.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/method_override.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/method_override.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable_future.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable_future.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable_stream.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/observable_stream.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/store.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/util.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/util.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/errors_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/errors_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/templates_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/test_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/test_utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/counter/counter.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/counter/counter.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/github/github_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/github/github_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/random_stream/random_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/random_stream/random_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/random_stream/random_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/random_stream/random_widgets.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_list.g.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -198,10 +209,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.gen:mobx_examples" />
         <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.gen:mobx_examples" />
       </list>
     </recent_temporary>
   </component>
@@ -259,7 +270,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added testimonials" />
     <MESSAGE value="using Provider for todos" />
     <MESSAGE value="a quick writeup on the random stream using the ObservableStream&lt;T&gt;" />
     <MESSAGE value="adding a short note on provider" />
@@ -284,7 +294,8 @@
     <MESSAGE value="reporting only when there is a change in map" />
     <MESSAGE value="version update to 0.3.4" />
     <MESSAGE value="bug fix for #238, version update to 0.3.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fix for #238, version update to 0.3.5" />
+    <MESSAGE value="refactored tests to be file driven rather than putting as strings in test files" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored tests to be file driven rather than putting as strings in test files" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
@@ -295,6 +306,8 @@
     <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1920.1080/3840.2160/3360.2100" />
     <state x="713" y="250" key="#xdebugger.evaluate" />
     <state x="713" y="250" key="#xdebugger.evaluate/1920.1080/3840.2160/3360.2100" />
+    <state x="351" y="147" key="CommitChangelistDialog2" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" />
     <state width="1189" height="312" key="GridCell.Tab.0.bottom" />
     <state width="1189" height="312" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" />
     <state width="1189" height="312" key="GridCell.Tab.0.center" />
@@ -303,8 +316,12 @@
     <state width="1189" height="312" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" />
     <state width="1189" height="312" key="GridCell.Tab.0.right" />
     <state width="1189" height="312" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" />
+    <state x="468" y="248" key="RollbackChangesDialog" />
+    <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" />
     <state x="334" y="187" key="SettingsEditor" />
     <state x="334" y="187" key="SettingsEditor/1920.1080/3840.2160/3360.2100" />
+    <state x="524" y="262" key="Vcs.Push.Dialog" />
+    <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" />
     <state width="840" height="513" key="XDebugger.FullValuePopup/1920.1080/3840.2160/3360.2100" />
     <state x="320" y="229" width="939" height="615" key="find.popup" />

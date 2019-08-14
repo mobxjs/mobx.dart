@@ -19,15 +19,15 @@ void main() {
     });
 
     createTests([
-      TestInfo(
+      const TestInfo(
           description: 'generates for a class mixing Store',
           source: './data/valid_input.dart',
           output: './data/valid_output.dart'),
-      TestInfo(
+      const TestInfo(
           description: 'invalid output is handled',
           source: './data/invalid_input.dart',
           output: './data/invalid_output.txt'),
-      TestInfo(
+      const TestInfo(
           description: 'generates for a generic class mixing Store',
           source: './data/valid_generic_store_input.dart',
           output: './data/valid_generic_store_output.dart')

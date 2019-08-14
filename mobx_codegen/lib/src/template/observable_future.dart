@@ -4,6 +4,7 @@ class ObservableFutureTemplate {
   MethodOverrideTemplate method;
 
   @override
+  // ignore: prefer_single_quotes
   String toString() => """
   @override
   ObservableFuture${method.returnTypeArgs} ${method.name}${method.typeParams}(${method.params}) {
