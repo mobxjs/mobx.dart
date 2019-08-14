@@ -9,11 +9,13 @@ abstract class CodegenError {
 class StoreClassCodegenErrors implements CodegenError {
   StoreClassCodegenErrors(this.name) {
     _errorCategories = [
+      wronglyAnnotatedComputedFields,
+      wronglyAnnotatedObservableFields,
       staticObservables,
       staticMethods,
       finalObservables,
       asyncGeneratorActions,
-      nonAsyncMethods
+      nonAsyncMethods,
     ];
   }
 
@@ -24,6 +26,10 @@ class StoreClassCodegenErrors implements CodegenError {
   final PropertyErrors staticMethods = InvalidStaticMethods();
   final PropertyErrors asyncGeneratorActions = AsyncGeneratorActionMethods();
   final PropertyErrors nonAsyncMethods = NonAsyncMethods();
+  final PropertyErrors wronglyAnnotatedComputedFields =
+      WronglyAnnotatedComputedFields();
+  final PropertyErrors wronglyAnnotatedObservableFields =
+      WronglyAnnotatedObservableFields();
 
   List<CodegenError> _errorCategories;
 
@@ -39,6 +45,10 @@ class StoreClassCodegenErrors implements CodegenError {
   bool get hasErrors => _errorCategories.any((category) => category.hasErrors);
 }
 
+final FIELD_PLURALIZER = const Pluralize('the field', 'fields');
+final METHOD_PLURALIZER = const Pluralize('the method', 'methods');
+final GETTER_PLURALIZER = const Pluralize('the getter', 'getters');
+
 abstract class PropertyErrors implements CodegenError {
   final NameList _properties = NameList();
 
@@ -51,7 +61,7 @@ abstract class PropertyErrors implements CodegenError {
 
   String get propertyList => _properties.toString();
 
-  Pluralize propertyPlural = const Pluralize('the field', 'fields');
+  Pluralize propertyPlural = FIELD_PLURALIZER;
 
   String get property => propertyPlural(_properties.length);
 
@@ -61,38 +71,53 @@ abstract class PropertyErrors implements CodegenError {
 
 class FinalObservableFields extends PropertyErrors {
   @override
-  String get message => 'Remove final modifier from $property $propertyList';
+  String get message => 'Remove final modifier from $property $propertyList.';
 }
 
 class StaticObservableFields extends PropertyErrors {
   @override
-  String get message => 'Remove static modifier from $property $propertyList';
+  String get message => 'Remove static modifier from $property $propertyList.';
 }
 
 class AsyncGeneratorActionMethods extends PropertyErrors {
   @override
-  Pluralize propertyPlural = const Pluralize('the method', 'methods');
+  Pluralize propertyPlural = METHOD_PLURALIZER;
 
   @override
   String get message =>
-      'Replace async* modifier with async from $property $propertyList';
+      'Replace async* modifier with async from $property $propertyList.';
 }
 
 class NonAsyncMethods extends PropertyErrors {
   @override
-  Pluralize propertyPlural = const Pluralize('the method', 'methods');
+  Pluralize propertyPlural = METHOD_PLURALIZER;
 
   @override
   String get message =>
-      'Return a Future or a Stream from $property $propertyList';
+      'Return a Future or a Stream from $property $propertyList.';
+}
+
+class WronglyAnnotatedComputedFields extends PropertyErrors {
+  @override
+  String get message =>
+      'Remove @computed annotation for $property $propertyList. They only apply to property-getters.';
+}
+
+class WronglyAnnotatedObservableFields extends PropertyErrors {
+  @override
+  Pluralize propertyPlural = GETTER_PLURALIZER;
+
+  @override
+  String get message =>
+      'Remove @observable annotation for $property $propertyList. They only apply to fields.';
 }
 
 class InvalidStaticMethods extends PropertyErrors {
   @override
-  Pluralize propertyPlural = const Pluralize('the method', 'methods');
+  Pluralize propertyPlural = METHOD_PLURALIZER;
 
   @override
-  String get message => 'Remove static modifier from $property $propertyList';
+  String get message => 'Remove static modifier from $property $propertyList.';
 }
 
 class NameList {

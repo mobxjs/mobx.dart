@@ -108,7 +108,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = FinalObservableFields()..addIf(true, 'testField');
       expect(
-          fields.message, 'Remove final modifier from the field "testField"');
+          fields.message, 'Remove final modifier from the field "testField".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -116,7 +116,7 @@ void main() {
         ..addIf(true, 'testField1')
         ..addIf(true, 'testField2');
       expect(fields.message,
-          'Remove final modifier from fields "testField1" and "testField2"');
+          'Remove final modifier from fields "testField1" and "testField2".');
     });
   });
 
@@ -124,7 +124,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = StaticObservableFields()..addIf(true, 'testField');
       expect(
-          fields.message, 'Remove static modifier from the field "testField"');
+          fields.message, 'Remove static modifier from the field "testField".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -132,7 +132,7 @@ void main() {
         ..addIf(true, 'testField1')
         ..addIf(true, 'testField2');
       expect(fields.message,
-          'Remove static modifier from fields "testField1" and "testField2"');
+          'Remove static modifier from fields "testField1" and "testField2".');
     });
   });
 
@@ -140,7 +140,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = AsyncGeneratorActionMethods()..addIf(true, 'testMethod');
       expect(fields.message,
-          'Replace async* modifier with async from the method "testMethod"');
+          'Replace async* modifier with async from the method "testMethod".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -148,7 +148,7 @@ void main() {
         ..addIf(true, 'testMethod1')
         ..addIf(true, 'testMethod2');
       expect(fields.message,
-          'Replace async* modifier with async from methods "testMethod1" and "testMethod2"');
+          'Replace async* modifier with async from methods "testMethod1" and "testMethod2".');
     });
   });
 
@@ -156,7 +156,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = InvalidStaticMethods()..addIf(true, 'testMethod');
       expect(fields.message,
-          'Remove static modifier from the method "testMethod"');
+          'Remove static modifier from the method "testMethod".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -164,7 +164,7 @@ void main() {
         ..addIf(true, 'testMethod1')
         ..addIf(true, 'testMethod2');
       expect(fields.message,
-          'Remove static modifier from methods "testMethod1" and "testMethod2"');
+          'Remove static modifier from methods "testMethod1" and "testMethod2".');
     });
   });
 
@@ -172,7 +172,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = NonAsyncMethods()..addIf(true, 'testMethod');
       expect(fields.message,
-          'Return a Future or a Stream from the method "testMethod"');
+          'Return a Future or a Stream from the method "testMethod".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -180,7 +180,7 @@ void main() {
         ..addIf(true, 'testMethod1')
         ..addIf(true, 'testMethod2');
       expect(fields.message,
-          'Return a Future or a Stream from methods "testMethod1" and "testMethod2"');
+          'Return a Future or a Stream from methods "testMethod1" and "testMethod2".');
     });
   });
 }

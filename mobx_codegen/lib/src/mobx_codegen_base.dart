@@ -35,14 +35,17 @@ class StoreGenerator extends Generator {
         }
         return c.supertype == baseClass.type;
       }, orElse: () => null);
+
       if (mixedClass != null) {
         yield generateStoreClassCode(library, baseClass, mixedClass);
       }
     }
 
+    final isValidStoreClass = (ClassElement c) =>
+        c.isAbstract && c.mixins.any(_storeChecker.isExactlyType);
+
     return library.classes
-        .where((c) => c.isAbstract)
-        .where((c) => c.mixins.any(_storeChecker.isExactlyType))
+        .where(isValidStoreClass)
         .expand(generate)
         .toSet()
         .join('\n\n');
@@ -90,6 +93,11 @@ class StoreMixinVisitor extends SimpleElementVisitor {
 
   @override
   visitFieldElement(FieldElement element) async {
+    if (_computedChecker.hasAnnotationOfExact(element)) {
+      _errors.wronglyAnnotatedComputedFields.addIf(true, element.name);
+      return null;
+    }
+
     if (!_observableChecker.hasAnnotationOfExact(element)) {
       return null;
     }
@@ -115,6 +123,11 @@ class StoreMixinVisitor extends SimpleElementVisitor {
 
   @override
   visitPropertyAccessorElement(PropertyAccessorElement element) {
+    if (_observableChecker.hasAnnotationOfExact(element)) {
+      _errors.wronglyAnnotatedObservableFields.addIf(true, element.name);
+      return null;
+    }
+
     if (!element.isGetter || !_computedChecker.hasAnnotationOfExact(element)) {
       return null;
     }
@@ -134,6 +147,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       if (_actionIsNotValid(element)) {
         return null;
       }
+
       if (element.isAsynchronous) {
         final template = AsyncActionTemplate()
           ..isObservable = _observableChecker.hasAnnotationOfExact(element)
