@@ -24,34 +24,41 @@ class StoreGenerator extends Generator {
 
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
-    Iterable<String> generate(ClassElement baseClass) sync* {
-      final mixedClass =
-          library.classes.where((c) => c != baseClass).firstWhere((c) {
-        if (c.supertype.typeArguments.isNotEmpty &&
-            baseClass.typeParameters.length ==
-                c.supertype.typeArguments.length) {
-          final t = baseClass.type.instantiate(c.supertype.typeArguments);
-          return t.isSupertypeOf(c.type);
-        }
-        return c.supertype == baseClass.type;
-      }, orElse: () => null);
-
-      if (mixedClass != null) {
-        yield generateStoreClassCode(library, baseClass, mixedClass);
-      }
-    }
-
     return library.classes
         .where(isValidStoreClass)
-        .expand(generate)
+        .expand((c) => expandToMixinCode(library, c))
         .toSet()
         .join('\n\n');
+  }
+
+  Iterable<String> expandToMixinCode(
+    LibraryReader library,
+    ClassElement baseClass,
+  ) sync* {
+    final otherClasses = library.classes.where((c) => c != baseClass);
+    final mixedClass = otherClasses.firstWhere((c) {
+      // If our base class has different type parameterization requirements than
+      // the class we're evaluating provides, we know it's not a subclass.
+      if (baseClass.typeParameters.length != c.supertype.typeArguments.length) {
+        return false;
+      }
+
+      // Apply the subclass' type arguments to the base type (if there are none
+      // this has no impact), and perform a supertype check.
+      return baseClass.type
+          .instantiate(c.supertype.typeArguments)
+          .isSupertypeOf(c.type);
+    }, orElse: () => null);
+
+    if (mixedClass != null) {
+      yield generateStoreMixinCode(library, baseClass, mixedClass);
+    }
   }
 
   bool isValidStoreClass(ClassElement c) =>
       c.isAbstract && c.mixins.any(_storeChecker.isExactlyType);
 
-  String generateStoreClassCode(
+  String generateStoreMixinCode(
       LibraryReader library, ClassElement baseClass, ClassElement mixedClass) {
     final visitor = StoreMixinVisitor(baseClass, mixedClass.name);
     baseClass.visitChildren(visitor);
