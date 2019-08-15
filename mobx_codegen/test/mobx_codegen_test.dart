@@ -20,11 +20,7 @@ void main() {
 
     test('ignores when there is no class other than the abstract Store',
         () async {
-      const source = """
-        abstract class MyClass with Store {
-          void foobar() => 'Hello';
-        }
-      """;
+      final source = await readFile('./data/only_abstract_store.dart');
 
       expect(await generate(source), isEmpty);
     });
