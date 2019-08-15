@@ -18,6 +18,17 @@ void main() {
       expect(await generate(source), isEmpty);
     });
 
+    test('ignores when there is no class other than the abstract Store',
+        () async {
+      const source = """
+        abstract class MyClass with Store {
+          void foobar() => 'Hello';
+        }
+      """;
+
+      expect(await generate(source), isEmpty);
+    });
+
     createTests([
       const TestInfo(
           description: 'generates for a class mixing Store',
