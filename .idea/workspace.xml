@@ -2,18 +2,26 @@
 <project version="4">
   <component name="AutoTestManager">
     <enabled-run-configurations>
-      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
       <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_action_multiple_output.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_multiple.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_single.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_single_output.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_observable_single.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_observable_single_output.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/errors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/errors.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_annotation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_action_multiple.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_multiple_output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_observable_annotation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_observable_multiple.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_observable_output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_observable_multiple_output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/invalid_annotations_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/invalid_annotations_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +74,7 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="11.14.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/mobx_codegen/test/samples" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/mobx_codegen/test/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -94,6 +102,7 @@
       <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/data" />
       <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
       <recent name="$PROJECT_DIR$/docs/src/guides" />
       <recent name="$PROJECT_DIR$/docs/src/examples" />
@@ -259,7 +268,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="a quick writeup on the random stream using the ObservableStream&lt;T&gt;" />
     <MESSAGE value="adding a short note on provider" />
     <MESSAGE value="typo fix" />
     <MESSAGE value="adding testimonials" />
@@ -284,7 +292,8 @@
     <MESSAGE value="bug fix for #238, version update to 0.3.5" />
     <MESSAGE value="refactored tests to be file driven rather than putting as strings in test files" />
     <MESSAGE value="fixing dart analyzer issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing dart analyzer issues" />
+    <MESSAGE value="upgrading test_coverage" />
+    <option name="LAST_COMMIT_MESSAGE" value="upgrading test_coverage" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />

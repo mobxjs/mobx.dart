@@ -94,7 +94,12 @@ class StoreMixinVisitor extends SimpleElementVisitor {
   @override
   void visitFieldElement(FieldElement element) {
     if (_computedChecker.hasAnnotationOfExact(element)) {
-      _errors.wronglyAnnotatedComputedFields.addIf(true, element.name);
+      _errors.invalidComputedAnnotations.addIf(true, element.name);
+      return;
+    }
+
+    if (_actionChecker.hasAnnotationOfExact(element)) {
+      _errors.invalidActionAnnotations.addIf(true, element.name);
       return;
     }
 
@@ -124,7 +129,12 @@ class StoreMixinVisitor extends SimpleElementVisitor {
   @override
   void visitPropertyAccessorElement(PropertyAccessorElement element) {
     if (_observableChecker.hasAnnotationOfExact(element)) {
-      _errors.wronglyAnnotatedObservableFields.addIf(true, element.name);
+      _errors.invalidObservableAnnotations.addIf(true, element.name);
+      return;
+    }
+
+    if (_actionChecker.hasAnnotationOfExact(element)) {
+      _errors.invalidActionAnnotations.addIf(true, element.name);
       return;
     }
 
@@ -143,6 +153,11 @@ class StoreMixinVisitor extends SimpleElementVisitor {
 
   @override
   void visitMethodElement(MethodElement element) {
+    if (_computedChecker.hasAnnotationOfExact(element)) {
+      _errors.invalidComputedAnnotations.addIf(true, element.name);
+      return;
+    }
+
     if (_actionChecker.hasAnnotationOfExact(element)) {
       if (_actionIsNotValid(element)) {
         return;

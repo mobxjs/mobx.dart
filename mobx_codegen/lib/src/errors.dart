@@ -6,8 +6,9 @@ abstract class CodegenError {
 class StoreClassCodegenErrors implements CodegenError {
   StoreClassCodegenErrors(this.name) {
     _errorCategories = [
-      wronglyAnnotatedComputedFields,
-      wronglyAnnotatedObservableFields,
+      invalidComputedAnnotations,
+      invalidObservableAnnotations,
+      invalidActionAnnotations,
       staticObservables,
       staticMethods,
       finalObservables,
@@ -23,10 +24,11 @@ class StoreClassCodegenErrors implements CodegenError {
   final PropertyErrors staticMethods = InvalidStaticMethods();
   final PropertyErrors asyncGeneratorActions = AsyncGeneratorActionMethods();
   final PropertyErrors nonAsyncMethods = NonAsyncMethods();
-  final PropertyErrors wronglyAnnotatedComputedFields =
-      WronglyAnnotatedComputedFields();
-  final PropertyErrors wronglyAnnotatedObservableFields =
-      WronglyAnnotatedObservableFields();
+  final PropertyErrors invalidComputedAnnotations =
+      InvalidComputedAnnotations();
+  final PropertyErrors invalidObservableAnnotations =
+      InvalidObservableAnnotations();
+  final PropertyErrors invalidActionAnnotations = InvalidActionAnnotations();
 
   List<CodegenError> _errorCategories;
 
@@ -50,6 +52,7 @@ class StoreClassCodegenErrors implements CodegenError {
 const fieldPluralizer = Pluralize('the field', 'fields');
 const methodPluralizer = Pluralize('the method', 'methods');
 const getterPluralizer = Pluralize('the getter', 'getters');
+const memberPluralizer = Pluralize('the member', 'members');
 
 abstract class PropertyErrors implements CodegenError {
   final NameList _properties = NameList();
@@ -102,20 +105,34 @@ class NonAsyncMethods extends PropertyErrors {
       'Return a Future or a Stream from $property $propertyList.';
 }
 
-class WronglyAnnotatedComputedFields extends PropertyErrors {
+class InvalidComputedAnnotations extends PropertyErrors {
+  @override
+  // ignore: overridden_fields
+  Pluralize propertyPlural = memberPluralizer;
+
   @override
   String get message =>
       'Remove @computed annotation for $property $propertyList. They only apply to property-getters.';
 }
 
-class WronglyAnnotatedObservableFields extends PropertyErrors {
+class InvalidObservableAnnotations extends PropertyErrors {
   @override
   // ignore: overridden_fields
-  Pluralize propertyPlural = getterPluralizer;
+  Pluralize propertyPlural = memberPluralizer;
 
   @override
   String get message =>
       'Remove @observable annotation for $property $propertyList. They only apply to fields.';
+}
+
+class InvalidActionAnnotations extends PropertyErrors {
+  @override
+  // ignore: overridden_fields
+  Pluralize propertyPlural = memberPluralizer;
+
+  @override
+  String get message =>
+      'Remove @action annotation for $property $propertyList. They only apply to methods.';
 }
 
 class InvalidStaticMethods extends PropertyErrors {
