@@ -1,0 +1,2 @@
+Could not make class "Test" observable. Changes needed:
+  1. Remove @observable annotation for members "fullName" and "fullNameUppercased". They only apply to fields.

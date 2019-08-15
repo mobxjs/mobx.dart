@@ -1,242 +1,6 @@
-@TestOn('vm')
-import 'package:build/build.dart';
-import 'package:build_test/build_test.dart';
-import 'package:logging/logging.dart';
-import 'package:mobx_codegen/mobx_codegen.dart';
-import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
-const validInput = """
-library generator_sample;
-
-import 'package:mobx/mobx.dart';
-
-part 'generator_sample.g.dart';
-
-class User = UserBase with _\$User;
-
-abstract class UserBase with Store {
-  UserBase(this.id);
-
-  final int id;
-
-  @observable
-  String firstName = 'Jane';
-
-  @observable
-  String lastName = 'Doe';
-
-  @computed
-  String get fullName => '\$firstName \$lastName';
-
-  @action
-  void updateNames({String firstName, String lastName}) {
-    if (firstName != null) this.firstName = firstName;
-    if (lastName != null) this.lastName = firstName;
-  }
-
-  @observable
-  Future<String> foobar() async {
-    return 'foobar';
-  }
-
-  @observable
-  Stream<T> loadStuff<T>(String arg1, {T value}) async* {
-    yield value;
-  }
-
-  @observable
-  Stream<String> asyncGenerator() async* {
-    yield 'item1';
-  }
-
-  @action
-  Future<void> setAsyncFirstName() async {
-    firstName = 'Async FirstName';
-  }
-
-  @action
-  @observable
-  Future<void> setAsyncFirstName2() async {
-    firstName = 'Async FirstName 2';
-  }
-
-}
-""";
-
-const validOutput = """
-mixin _\$User on UserBase, Store {
-  Computed<String> _\$fullNameComputed;
-
-  @override
-  String get fullName =>
-      (_\$fullNameComputed ??= Computed<String>(() => super.fullName)).value;
-
-  final _\$firstNameAtom = Atom(name: 'UserBase.firstName');
-
-  @override
-  String get firstName {
-    _\$firstNameAtom.context.enforceReadPolicy(_\$firstNameAtom);
-    _\$firstNameAtom.reportObserved();
-    return super.firstName;
-  }
-
-  @override
-  set firstName(String value) {
-    _\$firstNameAtom.context.conditionallyRunInAction(() {
-      super.firstName = value;
-      _\$firstNameAtom.reportChanged();
-    }, _\$firstNameAtom, name: '\${_\$firstNameAtom.name}_set');
-  }
-
-  final _\$lastNameAtom = Atom(name: 'UserBase.lastName');
-
-  @override
-  String get lastName {
-    _\$lastNameAtom.context.enforceReadPolicy(_\$lastNameAtom);
-    _\$lastNameAtom.reportObserved();
-    return super.lastName;
-  }
-
-  @override
-  set lastName(String value) {
-    _\$lastNameAtom.context.conditionallyRunInAction(() {
-      super.lastName = value;
-      _\$lastNameAtom.reportChanged();
-    }, _\$lastNameAtom, name: '\${_\$lastNameAtom.name}_set');
-  }
-
-  @override
-  ObservableFuture<String> foobar() {
-    final _\$future = super.foobar();
-    return ObservableFuture<String>(_\$future);
-  }
-
-  @override
-  ObservableStream<T> loadStuff<T>(String arg1, {T value}) {
-    final _\$stream = super.loadStuff<T>(arg1, value: value);
-    return ObservableStream<T>(_\$stream);
-  }
-
-  @override
-  ObservableStream<String> asyncGenerator() {
-    final _\$stream = super.asyncGenerator();
-    return ObservableStream<String>(_\$stream);
-  }
-
-  final _\$setAsyncFirstNameAsyncAction = AsyncAction('setAsyncFirstName');
-
-  @override
-  Future<void> setAsyncFirstName() {
-    return _\$setAsyncFirstNameAsyncAction.run(() => super.setAsyncFirstName());
-  }
-
-  final _\$setAsyncFirstName2AsyncAction = AsyncAction('setAsyncFirstName2');
-
-  @override
-  ObservableFuture<void> setAsyncFirstName2() {
-    return ObservableFuture<void>(
-        _\$setAsyncFirstName2AsyncAction.run(() => super.setAsyncFirstName2()));
-  }
-
-  final _\$UserBaseActionController = ActionController(name: 'UserBase');
-
-  @override
-  void updateNames({String firstName, String lastName}) {
-    final _\$actionInfo = _\$UserBaseActionController.startAction();
-    try {
-      return super.updateNames(firstName: firstName, lastName: lastName);
-    } finally {
-      _\$UserBaseActionController.endAction(_\$actionInfo);
-    }
-  }
-}
-""";
-
-const invalidInput = """
-library generator_sample;
-
-import 'package:mobx/mobx.dart';
-
-part 'generator_sample.g.dart';
-
-class User = UserBase with _\$User;
-
-abstract class UserBase with Store {
-  UserBase(this.id);
-
-  @observable
-  final int id;
-
-  @observable
-  final String firstName = 'Jane';
-
-  @observable
-  String lastName = 'Doe';
-
-  @computed
-  String get fullName => '\$firstName \$lastName';
-
-  @observable
-  static int foobar = 123;
-
-  @action
-  void updateNames({String firstName, String lastName}) {
-    if (firstName != null) this.firstName = firstName;
-    if (lastName != null) this.lastName = firstName;
-  }
-
-  @action
-  static UserBase getUser(int id) async {}
-
-  @observable
-  String nonAsyncObservableMethod() {
-    return 'nonAsyncObservableMethod';
-  }
-}
-""";
-
-const invalidOutput = """
-Could not make class "User" observable. Changes needed:
-  1. Remove static modifier from the field "foobar"
-  2. Remove static modifier from the method "getUser"
-  3. Remove final modifier from fields "id" and "firstName"
-  4. Return a Future or a Stream from the method "nonAsyncObservableMethod\"""";
-
-const validGenericStoreInput = """
-library generator_sample;
-
-import 'package:mobx/mobx.dart';
-
-part 'generator_sample.g.dart';
-
-class Item<A> = _Item<A> with _\$Item<A>;
-
-abstract class _Item<T> with Store {
-  @observable
-  T value;
-}""";
-
-const validGenericStoreOutput = """
-mixin _\$Item<T> on _Item<T>, Store {
-  final _\$valueAtom = Atom(name: '_Item.value');
-
-  @override
-  T get value {
-    _\$valueAtom.context.enforceReadPolicy(_\$valueAtom);
-    _\$valueAtom.reportObserved();
-    return super.value;
-  }
-
-  @override
-  set value(T value) {
-    _\$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _\$valueAtom.reportChanged();
-    }, _\$valueAtom, name: '\${_\$valueAtom.name}_set');
-  }
-}
-""";
+import 'test_utils.dart';
 
 void main() {
   group('generator', () {
@@ -254,49 +18,26 @@ void main() {
       expect(await generate(source), isEmpty);
     });
 
-    test('generates for a class mixing Store', () async {
-      final source = await generate(validInput);
-      expect(source, endsWith(validOutput));
+    test('ignores when there is no class other than the abstract Store',
+        () async {
+      final source = await readFile('./data/only_abstract_store.dart');
+
+      expect(await generate(source), isEmpty);
     });
 
-    test('invalid output', () async {
-      expect(await generate(invalidInput), endsWith(invalidOutput));
-    });
-
-    test('generates for a generic class mixing Store', () async {
-      expect(await generate(validGenericStoreInput),
-          endsWith(validGenericStoreOutput));
-    });
+    createTests([
+      const TestInfo(
+          description: 'generates for a class mixing Store',
+          source: './data/valid_input.dart',
+          output: './data/valid_output.dart'),
+      const TestInfo(
+          description: 'invalid output is handled',
+          source: './data/invalid_input.dart',
+          output: './data/invalid_output.txt'),
+      const TestInfo(
+          description: 'generates for a generic class mixing Store',
+          source: './data/valid_generic_store_input.dart',
+          output: './data/valid_generic_store_output.dart')
+    ]);
   });
-}
-
-final String pkgName = 'generator_sample';
-
-Future<String> generate(String source) async {
-// Recreate generator for each test because we repeatedly create
-// classes with the same name in the same library, which will clash.
-  Builder builder = PartBuilder([StoreGenerator()], '.g.dart');
-
-  final srcs = {
-    '$pkgName|lib/generator_sample.dart': source,
-  };
-
-  String error;
-  void captureError(LogRecord logRecord) {
-    if (logRecord.level == Level.SEVERE) {
-      error = logRecord.message;
-    }
-  }
-
-  final writer = new InMemoryAssetWriter();
-  await testBuilder(builder, srcs,
-      rootPackage: pkgName,
-      reader: await PackageAssetReader.currentIsolate(),
-      writer: writer,
-      onLog: captureError);
-
-  return error ??
-      new String.fromCharCodes(
-          writer.assets[new AssetId(pkgName, 'lib/generator_sample.g.dart')] ??
-              []);
 }

@@ -1,3 +1,10 @@
+## 0.3.4
+
+- Refactored some tests that rely on `source-text` to not be based on hard-coded strings. These have been moved to a separate file for easier maintenance. The outputs resulting from the generator are also in a separate file. This allows scaling to more variations of `source-text` in the future.
+- Added checks to ensure `@observable` and `@computed` are used for the correct members of the class. These are reported as errors during the codegen process.
+- Upgraded `test_coverage`
+- Fixed a bunch of analyzer errors
+
 ## 0.3.1 - 0.3.3+1
 
 - Adding a conditional action-wrapper for field setters.

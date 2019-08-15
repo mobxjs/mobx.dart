@@ -1,6 +1,3 @@
-R Function(T) withIndex<R, T>(R Function(T, int) action, {int start = 0}) =>
-    (T value) => action(value, start++);
-
 abstract class CodegenError {
   bool get hasErrors;
   String get message;
@@ -9,11 +6,14 @@ abstract class CodegenError {
 class StoreClassCodegenErrors implements CodegenError {
   StoreClassCodegenErrors(this.name) {
     _errorCategories = [
+      invalidComputedAnnotations,
+      invalidObservableAnnotations,
+      invalidActionAnnotations,
       staticObservables,
       staticMethods,
       finalObservables,
       asyncGeneratorActions,
-      nonAsyncMethods
+      nonAsyncMethods,
     ];
   }
 
@@ -24,24 +24,39 @@ class StoreClassCodegenErrors implements CodegenError {
   final PropertyErrors staticMethods = InvalidStaticMethods();
   final PropertyErrors asyncGeneratorActions = AsyncGeneratorActionMethods();
   final PropertyErrors nonAsyncMethods = NonAsyncMethods();
+  final PropertyErrors invalidComputedAnnotations =
+      InvalidComputedAnnotations();
+  final PropertyErrors invalidObservableAnnotations =
+      InvalidObservableAnnotations();
+  final PropertyErrors invalidActionAnnotations = InvalidActionAnnotations();
 
   List<CodegenError> _errorCategories;
 
+  @override
   String get message {
     final errors = _errorCategories
         .where((category) => category.hasErrors)
-        .map(withIndex((category, i) => '  $i. ${category.message}', start: 1))
+        .toList(growable: false)
+        .asMap()
+        .map((i, category) => MapEntry(i, '  ${i + 1}. ${category.message}'))
+        .values
         .join('\n');
 
     return 'Could not make class "$name" observable. Changes needed:\n$errors';
   }
 
+  @override
   bool get hasErrors => _errorCategories.any((category) => category.hasErrors);
 }
+
+const fieldPluralizer = Pluralize('the field', 'fields');
+const methodPluralizer = Pluralize('the method', 'methods');
+const memberPluralizer = Pluralize('the member', 'members');
 
 abstract class PropertyErrors implements CodegenError {
   final NameList _properties = NameList();
 
+  // ignore: avoid_positional_boolean_parameters
   bool addIf(bool condition, String propertyName) {
     if (condition) {
       _properties.add(propertyName);
@@ -51,7 +66,7 @@ abstract class PropertyErrors implements CodegenError {
 
   String get propertyList => _properties.toString();
 
-  Pluralize propertyPlural = const Pluralize('the field', 'fields');
+  Pluralize propertyPlural = fieldPluralizer;
 
   String get property => propertyPlural(_properties.length);
 
@@ -61,38 +76,71 @@ abstract class PropertyErrors implements CodegenError {
 
 class FinalObservableFields extends PropertyErrors {
   @override
-  String get message => 'Remove final modifier from $property $propertyList';
+  String get message => 'Remove final modifier from $property $propertyList.';
 }
 
 class StaticObservableFields extends PropertyErrors {
   @override
-  String get message => 'Remove static modifier from $property $propertyList';
+  String get message => 'Remove static modifier from $property $propertyList.';
 }
 
 class AsyncGeneratorActionMethods extends PropertyErrors {
   @override
-  Pluralize propertyPlural = const Pluralize('the method', 'methods');
+  // ignore: overridden_fields
+  Pluralize propertyPlural = methodPluralizer;
 
   @override
   String get message =>
-      'Replace async* modifier with async from $property $propertyList';
+      'Replace async* modifier with async from $property $propertyList.';
 }
 
 class NonAsyncMethods extends PropertyErrors {
   @override
-  Pluralize propertyPlural = const Pluralize('the method', 'methods');
+  // ignore: overridden_fields
+  Pluralize propertyPlural = methodPluralizer;
 
   @override
   String get message =>
-      'Return a Future or a Stream from $property $propertyList';
+      'Return a Future or a Stream from $property $propertyList.';
+}
+
+class InvalidComputedAnnotations extends PropertyErrors {
+  @override
+  // ignore: overridden_fields
+  Pluralize propertyPlural = memberPluralizer;
+
+  @override
+  String get message =>
+      'Remove @computed annotation for $property $propertyList. They only apply to property-getters.';
+}
+
+class InvalidObservableAnnotations extends PropertyErrors {
+  @override
+  // ignore: overridden_fields
+  Pluralize propertyPlural = memberPluralizer;
+
+  @override
+  String get message =>
+      'Remove @observable annotation for $property $propertyList. They only apply to fields.';
+}
+
+class InvalidActionAnnotations extends PropertyErrors {
+  @override
+  // ignore: overridden_fields
+  Pluralize propertyPlural = memberPluralizer;
+
+  @override
+  String get message =>
+      'Remove @action annotation for $property $propertyList. They only apply to methods.';
 }
 
 class InvalidStaticMethods extends PropertyErrors {
   @override
-  Pluralize propertyPlural = const Pluralize('the method', 'methods');
+  // ignore: overridden_fields
+  Pluralize propertyPlural = methodPluralizer;
 
   @override
-  String get message => 'Remove static modifier from $property $propertyList';
+  String get message => 'Remove static modifier from $property $propertyList.';
 }
 
 class NameList {
@@ -111,7 +159,7 @@ class NameList {
     }
 
     final buf = StringBuffer();
-    for (int i = 0; i < _names.length; i++) {
+    for (var i = 0; i < _names.length; i++) {
       final name = _names[i];
       buf.write('"$name"');
       if (i < _names.length - 2) {

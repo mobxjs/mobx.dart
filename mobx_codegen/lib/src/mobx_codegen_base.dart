@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
-import 'package:build/src/builder/build_step.dart';
 import 'package:mobx/mobx.dart' show Store;
+// ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
     show ComputedMethod, MakeAction, MakeObservable;
 import 'package:mobx_codegen/src/errors.dart';
@@ -20,7 +20,7 @@ import 'package:mobx_codegen/src/template/util.dart';
 import 'package:source_gen/source_gen.dart';
 
 class StoreGenerator extends Generator {
-  final _storeChecker = TypeChecker.fromRuntime(Store);
+  final _storeChecker = const TypeChecker.fromRuntime(Store);
 
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
@@ -35,22 +35,25 @@ class StoreGenerator extends Generator {
         }
         return c.supertype == baseClass.type;
       }, orElse: () => null);
+
       if (mixedClass != null) {
         yield generateStoreClassCode(library, baseClass, mixedClass);
       }
     }
 
     return library.classes
-        .where((c) => c.isAbstract)
-        .where((c) => c.mixins.any(_storeChecker.isExactlyType))
+        .where(isValidStoreClass)
         .expand(generate)
         .toSet()
         .join('\n\n');
   }
 
+  bool isValidStoreClass(ClassElement c) =>
+      c.isAbstract && c.mixins.any(_storeChecker.isExactlyType);
+
   String generateStoreClassCode(
       LibraryReader library, ClassElement baseClass, ClassElement mixedClass) {
-    final visitor = new StoreMixinVisitor(baseClass, mixedClass.name);
+    final visitor = StoreMixinVisitor(baseClass, mixedClass.name);
     baseClass.visitChildren(visitor);
     return visitor.source;
   }
@@ -68,11 +71,11 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       ..mixinName = '_\$$name';
   }
 
-  final _observableChecker = TypeChecker.fromRuntime(MakeObservable);
+  final _observableChecker = const TypeChecker.fromRuntime(MakeObservable);
 
-  final _computedChecker = TypeChecker.fromRuntime(ComputedMethod);
+  final _computedChecker = const TypeChecker.fromRuntime(ComputedMethod);
 
-  final _actionChecker = TypeChecker.fromRuntime(MakeAction);
+  final _actionChecker = const TypeChecker.fromRuntime(MakeAction);
 
   final _asyncChecker = AsyncMethodChecker();
 
@@ -89,13 +92,23 @@ class StoreMixinVisitor extends SimpleElementVisitor {
   }
 
   @override
-  visitFieldElement(FieldElement element) async {
+  void visitFieldElement(FieldElement element) {
+    if (_computedChecker.hasAnnotationOfExact(element)) {
+      _errors.invalidComputedAnnotations.addIf(true, element.name);
+      return;
+    }
+
+    if (_actionChecker.hasAnnotationOfExact(element)) {
+      _errors.invalidActionAnnotations.addIf(true, element.name);
+      return;
+    }
+
     if (!_observableChecker.hasAnnotationOfExact(element)) {
-      return null;
+      return;
     }
 
     if (_fieldIsNotValid(element)) {
-      return null;
+      return;
     }
 
     final template = ObservableTemplate()
@@ -105,7 +118,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       ..name = element.name;
 
     _storeTemplate.observables.add(template);
-    return null;
+    return;
   }
 
   bool _fieldIsNotValid(FieldElement element) => any([
@@ -114,9 +127,19 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       ]);
 
   @override
-  visitPropertyAccessorElement(PropertyAccessorElement element) {
+  void visitPropertyAccessorElement(PropertyAccessorElement element) {
+    if (_observableChecker.hasAnnotationOfExact(element)) {
+      _errors.invalidObservableAnnotations.addIf(true, element.name);
+      return;
+    }
+
+    if (_actionChecker.hasAnnotationOfExact(element)) {
+      _errors.invalidActionAnnotations.addIf(true, element.name);
+      return;
+    }
+
     if (!element.isGetter || !_computedChecker.hasAnnotationOfExact(element)) {
-      return null;
+      return;
     }
 
     final template = ComputedTemplate()
@@ -125,15 +148,21 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       ..type = element.returnType.displayName;
     _storeTemplate.computeds.add(template);
 
-    return null;
+    return;
   }
 
   @override
-  visitMethodElement(MethodElement element) {
+  void visitMethodElement(MethodElement element) {
+    if (_computedChecker.hasAnnotationOfExact(element)) {
+      _errors.invalidComputedAnnotations.addIf(true, element.name);
+      return;
+    }
+
     if (_actionChecker.hasAnnotationOfExact(element)) {
       if (_actionIsNotValid(element)) {
-        return null;
+        return;
       }
+
       if (element.isAsynchronous) {
         final template = AsyncActionTemplate()
           ..isObservable = _observableChecker.hasAnnotationOfExact(element)
@@ -149,7 +178,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       }
     } else if (_observableChecker.hasAnnotationOfExact(element)) {
       if (_asyncObservableIsNotValid(element)) {
-        return null;
+        return;
       }
 
       if (_asyncChecker.returnsFuture(element)) {
@@ -165,7 +194,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       }
     }
 
-    return null;
+    return;
   }
 
   bool _asyncObservableIsNotValid(MethodElement method) => any([

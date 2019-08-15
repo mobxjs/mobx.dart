@@ -31,7 +31,7 @@ class _RandomNumberExampleState extends State<RandomNumberExample> {
 
                 return Text(
                   '${value == null ? '---' : value}',
-                  style: TextStyle(fontSize: 96),
+                  style: const TextStyle(fontSize: 96),
                 );
               },
             ),

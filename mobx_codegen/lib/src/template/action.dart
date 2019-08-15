@@ -6,6 +6,7 @@ class ActionTemplate {
   MethodOverrideTemplate method;
 
   @override
+  // ignore: prefer_single_quotes
   String toString() => """
     @override
     ${method.returnType} ${method.name}${method.typeParams}(${method.params}) {
