@@ -7,6 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_multiple.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_multiple.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_multiple_output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/invalid_computed_multiple_output.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/invalid_annotations_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/invalid_annotations_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -254,7 +257,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="typo fix" />
     <MESSAGE value="adding testimonials" />
     <MESSAGE value="testimonials" />
     <MESSAGE value="- removing the @experimental annotations for Observable{Future,Stream} and reaction. Also removed the dependency on the `meta` package.&#10;- updating the API section on docs" />
@@ -279,7 +281,8 @@
     <MESSAGE value="fixing dart analyzer issues" />
     <MESSAGE value="upgrading test_coverage" />
     <MESSAGE value="invalid @action checks" />
-    <option name="LAST_COMMIT_MESSAGE" value="invalid @action checks" />
+    <MESSAGE value="fixing analyzer issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing analyzer issues" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />

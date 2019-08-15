@@ -9,4 +9,9 @@ abstract class _Test with Store {
 
   @computed
   String lastName = 'Podila';
+
+  @computed
+  void changeName(String name) {
+    firstName = name;
+  }
 }
