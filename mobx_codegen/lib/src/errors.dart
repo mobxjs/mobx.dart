@@ -51,7 +51,6 @@ class StoreClassCodegenErrors implements CodegenError {
 
 const fieldPluralizer = Pluralize('the field', 'fields');
 const methodPluralizer = Pluralize('the method', 'methods');
-const getterPluralizer = Pluralize('the getter', 'getters');
 const memberPluralizer = Pluralize('the member', 'members');
 
 abstract class PropertyErrors implements CodegenError {
