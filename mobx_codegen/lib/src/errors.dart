@@ -6,6 +6,7 @@ abstract class CodegenError {
 class StoreClassCodegenErrors implements CodegenError {
   StoreClassCodegenErrors(this.name) {
     _errorCategories = [
+      invalidStoreDeclaration,
       invalidComputedAnnotations,
       invalidObservableAnnotations,
       invalidActionAnnotations,
@@ -19,6 +20,8 @@ class StoreClassCodegenErrors implements CodegenError {
 
   final String name;
 
+  final InvalidStoreDeclarations invalidStoreDeclaration =
+      InvalidStoreDeclarations();
   final PropertyErrors finalObservables = FinalObservableFields();
   final PropertyErrors staticObservables = StaticObservableFields();
   final PropertyErrors staticMethods = InvalidStaticMethods();
@@ -52,6 +55,26 @@ class StoreClassCodegenErrors implements CodegenError {
 const fieldPluralizer = Pluralize('the field', 'fields');
 const methodPluralizer = Pluralize('the method', 'methods');
 const memberPluralizer = Pluralize('the member', 'members');
+
+class InvalidStoreDeclarations implements CodegenError {
+  final NameList _classNames = NameList();
+
+  // ignore: avoid_positional_boolean_parameters
+  bool addIf(bool condition, String className) {
+    if (condition) {
+      _classNames.add(className);
+    }
+    return condition;
+  }
+
+  @override
+  bool get hasErrors => _classNames.isNotEmpty;
+
+  @override
+  String get message => 'Store classes cannot be defined with both the @store '
+      'annotation and Store mixin. Please choose one method or another. '
+      '$_classNames';
+}
 
 abstract class PropertyErrors implements CodegenError {
   final NameList _properties = NameList();
