@@ -8,13 +8,39 @@ import 'package:mobx_codegen/src/template/observable_stream.dart';
 import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/template/rows.dart';
 
-class StoreTemplate {
+class SubclassStoreTemplate extends StoreTemplate {
+  String get typeName => publicTypeName;
+
+  @override
+  String toString() => '''
+  ${StoreTemplate.analyzerIgnores}
+
+  class $typeName$typeParams extends $parentTypeName$typeArgs {
+    $storeBody
+  }''';
+}
+
+class MixinStoreTemplate extends StoreTemplate {
+  String get typeName => '_\$$publicTypeName';
+
+  @override
+  String toString() => '''
+  ${StoreTemplate.analyzerIgnores}
+
+  mixin $typeName$typeParams on $parentTypeName$typeArgs, Store {
+    $storeBody
+  }''';
+}
+
+abstract class StoreTemplate {
+  static const analyzerIgnores = '// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic';
+
   final SurroundedCommaList<TypeParamTemplate> typeParams =
       SurroundedCommaList('<', '>', []);
   final SurroundedCommaList<String> typeArgs =
       SurroundedCommaList('<', '>', []);
-  String mixinName;
-  String parentName;
+  String publicTypeName;
+  String parentTypeName;
 
   final Rows<ObservableTemplate> observables = Rows();
   final Rows<ComputedTemplate> computeds = Rows();
@@ -25,30 +51,27 @@ class StoreTemplate {
 
   String _actionControllerName;
   String get actionControllerName =>
-      _actionControllerName ??= '_\$${parentName}ActionController';
+      _actionControllerName ??= '_\$${parentTypeName}ActionController';
 
-  String get _actionControllerField => actions.isEmpty
+  String get actionControllerField => actions.isEmpty
       ? ''
-      : "final $actionControllerName = ActionController(name: '$parentName');";
+      : "final $actionControllerName = ActionController(name: '$parentTypeName');";
+
+  String get storeBody => '''
+  $computeds
+
+  $observables
+
+  $observableFutures
+
+  $observableStreams
+
+  $asyncActions
+
+  $actionControllerField
+
+  $actions''';
 
   @override
-  // ignore: prefer_single_quotes
-  String toString() => """
-  // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
-
-  mixin $mixinName$typeParams on $parentName$typeArgs, Store {
-    $computeds
-
-    $observables
-
-    $observableFutures
-
-    $observableStreams
-
-    $asyncActions
-
-    $_actionControllerField
-
-    $actions
-  }""";
+  String toString();
 }
