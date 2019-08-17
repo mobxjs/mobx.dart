@@ -7,9 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/annotations_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/annotations_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -233,7 +231,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- removing the @experimental annotations for Observable{Future,Stream} and reaction. Also removed the dependency on the `meta` package.&#10;- updating the API section on docs" />
     <MESSAGE value="- formatting changes" />
     <MESSAGE value="added release guidelines" />
     <MESSAGE value="adding some mobx specific tests for todos" />
@@ -258,7 +255,8 @@
     <MESSAGE value="fixing analyzer issues" />
     <MESSAGE value="fixing tests" />
     <MESSAGE value="increasing coverage" />
-    <option name="LAST_COMMIT_MESSAGE" value="increasing coverage" />
+    <MESSAGE value="0.3.6-alpha" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.3.6-alpha" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
