@@ -41,17 +41,21 @@ ReactionDisposer autorun(Function(Reaction) fn,
 ///
 /// You can also pass in an optional [name], a debouncing [delay] in milliseconds. Use
 /// [fireImmediately] if you want to invoke the effect immediately without waiting for
-/// the [predicate] to change its value.
+/// the [predicate] to change its value. It is possible to define a custom [equals] function
+/// to override the default comparison for the value returned by [predicate], to have fined
+/// grained control over when the reactions should run.
 ReactionDisposer reaction<T>(
         T Function(Reaction) predicate, void Function(T) effect,
         {String name,
         int delay,
         bool fireImmediately,
+        EqualityComparator<T> equals,
         ReactiveContext context,
         void Function(Object, Reaction) onError}) =>
     createReaction(context ?? mainContext, predicate, effect,
         name: name,
         delay: delay,
+        equals: equals,
         fireImmediately: fireImmediately,
         onError: onError);
 

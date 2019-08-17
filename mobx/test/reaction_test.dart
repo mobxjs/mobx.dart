@@ -35,6 +35,40 @@ void main() {
           executed, isFalse); // reaction has been disposed, so no more effects
     });
 
+    group('equals override', () {
+      test('basics work', () {
+        var executed = false;
+
+        bool equals(_, __) => false;
+
+        final x = Observable(10, equals: equals);
+        final d = reaction(
+          (_) => x.value,
+          (_) {
+            executed = true;
+          },
+          name: 'Basic Reaction',
+          equals: equals,
+        );
+
+        expect(executed, isFalse);
+
+        x.value = 11;
+        expect(executed, isTrue);
+        executed = false;
+
+        x.value = 11;
+        expect(executed, isTrue);
+        executed = false;
+
+        d();
+
+        x.value = 11;
+        expect(executed,
+            isFalse); // reaction has been disposed, so no more effects
+      });
+    });
+
     test('crashes if asserts are ommited', () {
       expect(() => ReactionImpl(null, () {}),
           throwsA(const TypeMatcher<AssertionError>()));
