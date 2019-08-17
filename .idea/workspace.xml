@@ -7,9 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mobx_codegen/test/data/only_abstract_store.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,17 +83,17 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
-      <recent name="$PROJECT_DIR$/docs/src/development" />
-      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
-      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/mobx_codegen/test/data" />
       <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
       <recent name="$PROJECT_DIR$/docs/src/guides" />
       <recent name="$PROJECT_DIR$/docs/src/examples" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
+      <recent name="$PROJECT_DIR$/docs/src/development" />
+      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
+      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -173,8 +173,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
+        <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.gen:mobx_examples" />
       </list>
     </recent_temporary>

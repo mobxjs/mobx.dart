@@ -1,3 +1,7 @@
+## 0.3.6-alpha
+
+- Experimenting with the `@store` annotation for simplified Store creation
+
 ## 0.3.5 - 0.3.5+1
 
 - Fixed a bug where the `ObservableFuture<T>` would not show the correct status. This was happening because of the lazy evaluation strategy. We are now being eager in creating the status and monitoring the inner `Future<T>` immediately.
