@@ -7,7 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mobx/test/annotations_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/annotations_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/reaction_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/reaction_helper.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +113,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.mobx bug tests">
+  <component name="RunManager" selected="Dart Test.tests in mobx">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
@@ -171,8 +173,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx" />
+        <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.gen:mobx_examples" />
       </list>
     </recent_temporary>
@@ -231,7 +233,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- formatting changes" />
     <MESSAGE value="added release guidelines" />
     <MESSAGE value="adding some mobx specific tests for todos" />
     <MESSAGE value="minor edits in the docs" />
@@ -256,7 +257,8 @@
     <MESSAGE value="fixing tests" />
     <MESSAGE value="increasing coverage" />
     <MESSAGE value="0.3.6-alpha" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.3.6-alpha" />
+    <MESSAGE value="adding a small test for increasing coverage" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding a small test for increasing coverage" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />

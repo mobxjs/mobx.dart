@@ -92,11 +92,12 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
 
     rxn.track(() {
       final nextValue = predicate(rxn);
-      if (equals != null) {
-        changed = firstTime || !equals(nextValue, value);
-      } else {
-        changed = firstTime || nextValue != value;
-      }
+
+      // Use the equality-comparator if provided
+      final isEqual =
+          equals != null ? equals(nextValue, value) : (nextValue == value);
+
+      changed = firstTime || !isEqual;
       value = nextValue;
     });
 
