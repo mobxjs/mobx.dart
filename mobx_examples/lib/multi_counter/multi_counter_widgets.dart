@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
 import 'package:provider/provider.dart';
+
+import 'multi_counter_store.dart';
 
 class MultiCounterExample extends StatefulWidget {
   const MultiCounterExample();

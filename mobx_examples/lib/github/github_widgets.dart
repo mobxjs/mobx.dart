@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx_examples/github/github_store.dart';
+
+import 'github_store.dart';
 
 class GithubExample extends StatefulWidget {
   const GithubExample();
