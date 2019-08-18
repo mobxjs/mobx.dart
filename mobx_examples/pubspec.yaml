@@ -20,12 +20,14 @@ dependencies:
   validators:
   hnpwa_client:
   url_launcher:
+  shared_preferences:
   provider: ^3.0.0
   json_serializable: ^3.0.0
   flutter:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
+  mockito:
 
 dev_dependencies:
   build_runner:

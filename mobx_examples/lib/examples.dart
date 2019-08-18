@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mobx_examples/clock/clock_widgets.dart';
-import 'package:mobx_examples/counter/counter_widgets.dart';
-import 'package:mobx_examples/form/form_widgets.dart';
-import 'package:mobx_examples/github/github_widgets.dart';
-import 'package:mobx_examples/hackernews/news_widgets.dart';
-import 'package:mobx_examples/multi_counter/multi_counter_widgets.dart';
-import 'package:mobx_examples/random_stream/random_widgets.dart';
-import 'package:mobx_examples/todos/todo_widgets.dart';
+import 'package:provider/provider.dart';
+
+import 'clock/clock_widgets.dart';
+import 'counter/counter_widgets.dart';
+import 'form/form_widgets.dart';
+import 'github/github_widgets.dart';
+import 'hackernews/news_widgets.dart';
+import 'multi_counter/multi_counter_widgets.dart';
+import 'random_stream/random_widgets.dart';
+import 'settings/settings_store.dart';
+import 'settings/settings_widgets.dart';
+import 'todos/todo_widgets.dart';
 
 class Example {
   Example(
@@ -71,4 +75,12 @@ final List<Example> examples = [
     path: '/hn',
     widgetBuilder: (_) => const HackerNewsExample(),
   ),
+  Example(
+    title: 'Settings',
+    description: 'Settings for toggling dark mode',
+    path: '/settings',
+    widgetBuilder: (_) => Consumer<SettingsStore>(
+      builder: (_, store, __) => SettingsExample(store),
+    ),
+  )
 ];

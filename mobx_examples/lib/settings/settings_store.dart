@@ -1,0 +1,22 @@
+import 'package:flutter/foundation.dart';
+import 'package:mobx/mobx.dart';
+import 'preferences_service.dart';
+
+part 'settings_store.g.dart';
+
+class SettingsStore = _SettingsStore with _$SettingsStore;
+
+abstract class _SettingsStore with Store {
+  _SettingsStore(this._preferencesService);
+
+  PreferencesService _preferencesService;
+
+  @observable
+  bool useDarkMode = false;
+
+  @action
+  void setDarkMode({@required bool value}) {
+    _preferencesService.useDarkMode = value;
+    useDarkMode = value;
+  }
+}
