@@ -13,8 +13,7 @@ class AsyncAction {
   Zone _zoneField;
   Zone get _zone {
     if (_zoneField == null) {
-      final spec = ZoneSpecification(
-          run: _run, runUnary: _runUnary, runBinary: _runBinary);
+      final spec = ZoneSpecification(run: _run, runUnary: _runUnary);
       _zoneField = Zone.current.fork(specification: spec);
     }
     return _zoneField;
@@ -34,8 +33,6 @@ class AsyncAction {
 
   static dynamic _noOp() => null;
 
-  // Will be invoked for a catch clause that has a single argument: exception or
-  // when a result is produced
   R _run<R>(Zone self, ZoneDelegate parent, Zone zone, R Function() f) {
     final actionInfo = _actions.startAction();
     try {
@@ -46,6 +43,8 @@ class AsyncAction {
     }
   }
 
+  // Will be invoked for a catch clause that has a single argument: exception or
+  // when a result is produced
   R _runUnary<R, A>(
       Zone self, ZoneDelegate parent, Zone zone, R Function(A a) f, A a) {
     final actionInfo = _actions.startAction();
@@ -58,14 +57,14 @@ class AsyncAction {
   }
 
   // Will be invoked for a catch clause that has two arguments: exception and stacktrace
-  R _runBinary<R, A, B>(Zone self, ZoneDelegate parent, Zone zone,
-      R Function(A a, B b) f, A a, B b) {
-    final actionInfo = _actions.startAction();
-    try {
-      final result = parent.runBinary(zone, f, a, b);
-      return result;
-    } finally {
-      _actions.endAction(actionInfo);
-    }
-  }
+//  R _runBinary<R, A, B>(Zone self, ZoneDelegate parent, Zone zone,
+//      R Function(A a, B b) f, A a, B b) {
+//    final actionInfo = _actions.startAction();
+//    try {
+//      final result = parent.runBinary(zone, f, a, b);
+//      return result;
+//    } finally {
+//      _actions.endAction(actionInfo);
+//    }
+//  }
 }
