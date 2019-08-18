@@ -8,7 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/core-concepts.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/core-concepts.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/home.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/home.mdx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -161,6 +163,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/docs/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
@@ -169,9 +181,11 @@
       <item itemvalue="npm.gen:mobx_examples" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.pub:get:mobx" />
+      <item itemvalue="npm.start" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.gen:mobx_examples" />
@@ -232,7 +246,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="minor edits in the docs" />
     <MESSAGE value="added a link to article" />
     <MESSAGE value="simpler call to remove the observer" />
     <MESSAGE value="Adding an example for json_serializable with ObservableList&lt;T&gt;" />
@@ -257,7 +270,8 @@
     <MESSAGE value="adding a small test for increasing coverage" />
     <MESSAGE value="updated changelog" />
     <MESSAGE value="fixing analyzer lint error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing analyzer lint error" />
+    <MESSAGE value="minor tweaks to the docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor tweaks to the docs" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
