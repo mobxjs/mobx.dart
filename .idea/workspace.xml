@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/core-concepts.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/core-concepts.mdx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -232,7 +232,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="adding some mobx specific tests for todos" />
     <MESSAGE value="minor edits in the docs" />
     <MESSAGE value="added a link to article" />
     <MESSAGE value="simpler call to remove the observer" />
@@ -257,7 +256,8 @@
     <MESSAGE value="0.3.6-alpha" />
     <MESSAGE value="adding a small test for increasing coverage" />
     <MESSAGE value="updated changelog" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated changelog" />
+    <MESSAGE value="fixing analyzer lint error" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing analyzer lint error" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />

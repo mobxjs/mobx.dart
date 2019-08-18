@@ -11,7 +11,6 @@ import mobxTriad from './images/mobx-triad.png';
 
 At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
 
-
 ## Observables
 
 Observables represent the reactive-state of your application. They can be simple scalars to complex object trees. By
@@ -75,8 +74,8 @@ will fade away and you will mostly focus on the code within the braces.
 
 The above code is part of the [**Counter Example**](/examples/counter).
 
-For those who have experience with the JavaScript version of MobX, it's important to note that deep observability doesn't apply in the Dart version of MobX. This is because Dart is a statically typed language and there's no support for reflection in Flutter applications. Therefore, if a complex object is marked as observable then
-MobX will not be able to automatically track changes to the object's properties. Should you need change tracking at the field level, its better to mark them with the `@observable` annotation.
+> For those who have experience with the JavaScript version of MobX, it's important to note that deep observability doesn't apply in the Dart version of MobX. This is because Dart is a statically typed language and there's no support for reflection (no `dart:mirrors`) in Flutter applications. Therefore, if a complex object is marked as `@observable` then
+> MobX will not be able to automatically track changes to the object's fields. Should you need change tracking at the field level, it's better to mark them individually with the `@observable` annotation.
 
 ## Computed Observables
 
