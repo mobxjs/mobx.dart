@@ -23,13 +23,12 @@ class StoreGenerator extends Generator {
   final _storeChecker = const TypeChecker.fromRuntime(Store);
 
   @override
-  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
-    return library.classes
-        .where(isValidStoreClass)
-        .expand((c) => expandToMixinCode(library, c))
-        .toSet()
-        .join('\n\n');
-  }
+  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) =>
+      library.classes
+          .where(isValidStoreClass)
+          .expand((c) => expandToMixinCode(library, c))
+          .toSet()
+          .join('\n\n');
 
   Iterable<String> expandToMixinCode(
     LibraryReader library,
