@@ -14,7 +14,7 @@ route: /community
 
 ## Videos
 
-- [Introducing the Port of MobX to Dart & Flutter](https://www.youtube.com/watch?v=p0WJB5SN0g8).
+- [Introducing the Port of MobX to Dart & Flutter](https://www.youtube.com/watch?v=p0WJB5SN0g8)
 - [Flutter State Management with MobX](https://www.youtube.com/watch?v=p-MUBLOEkCs) - [Paul Halliday](https://twitter.com/paulhalliday_io)
 
 ## Podcasts
