@@ -7,12 +7,14 @@ part 'settings_store.g.dart';
 class SettingsStore = _SettingsStore with _$SettingsStore;
 
 abstract class _SettingsStore with Store {
-  _SettingsStore(this._preferencesService);
+  _SettingsStore(this._preferencesService) {
+    useDarkMode = _preferencesService.useDarkMode;
+  }
 
   PreferencesService _preferencesService;
 
   @observable
-  bool useDarkMode = false;
+  bool useDarkMode;
 
   @action
   void setDarkMode({@required bool value}) {
