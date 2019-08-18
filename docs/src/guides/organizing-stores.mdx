@@ -214,7 +214,7 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-Here, the `ProxyProvider` API allows us to declare that `SettingsStore` depends on an instance of the `PreferencesService` class. When the `SettingsStore` instance is retrieved, it will ensure that its dependencies have been constructed.
+Here, the `ProxyProvider` API allows us to declare that `SettingsStore` depends on an instance of the `PreferencesService` class and will ensure the objects are constructed in the appropriate order based on the chain of dependencies.
 Note that in this particular example, we have used the `Consumer` widget that is an alternative to using `Provider.of<T>` for retrieving a value. Whilst this adds an additional level of indentation, some may prefer this approach as it's
 declarative and assists in building a mental model where a value provided so that can be consumed further down in the widget tree. Furthermore, it facilitates in writing code where dependencies can be more explicit. The following is a widget
 that depends on the `SettingsStore`
