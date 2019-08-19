@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hnpwa_client/hnpwa_client.dart';
 import 'package:mobx/mobx.dart';
 
-import 'news_store.dart';
+import 'package:mobx_examples/hackernews/news_store.dart';
 
 class HackerNewsExample extends StatefulWidget {
   const HackerNewsExample();
