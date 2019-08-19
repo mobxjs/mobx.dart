@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/async/async_action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/async/async_action.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/community.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/community.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -244,7 +244,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added a link to article" />
     <MESSAGE value="simpler call to remove the observer" />
     <MESSAGE value="Adding an example for json_serializable with ObservableList&lt;T&gt;" />
     <MESSAGE value="Adding a detailed guide about json serialization." />
@@ -269,7 +268,8 @@
     <MESSAGE value="updated changelog" />
     <MESSAGE value="fixing analyzer lint error" />
     <MESSAGE value="minor tweaks to the docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor tweaks to the docs" />
+    <MESSAGE value="runBinary in a zone is not being used for AsyncActions, so commenting it out for now" />
+    <option name="LAST_COMMIT_MESSAGE" value="runBinary in a zone is not being used for AsyncActions, so commenting it out for now" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
@@ -317,16 +317,6 @@
           <url>file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/core/iterable.dart</url>
           <line>570</line>
           <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/mobx/test/async_action_test.dart</url>
-          <line>52</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/mobx/lib/src/api/async/async_action.dart</url>
-          <line>23</line>
-          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
