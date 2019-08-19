@@ -16,7 +16,8 @@ route: /community
 
 - [Introducing the Port of MobX to Dart & Flutter](https://www.youtube.com/watch?v=p0WJB5SN0g8)
 - [Flutter State Management with MobX](https://www.youtube.com/watch?v=p-MUBLOEkCs) - [Paul Halliday](https://twitter.com/paulhalliday_io)
-
+- [Flutter Learning MobX Stream Part 1](https://www.youtube.com/watch?v=jpHvu3Y1brA) - [Robert Brunhage](https://twitter.com/RobertBrunhage)
+- [Flutter Learning MobX Stream Part 2](https://www.youtube.com/watch?v=qfAJ-d1tzzI) - [Robert Brunhage](https://twitter.com/RobertBrunhage)
 ## Podcasts
 
 - [Chat with Hillel Coren on It's All Widgets!](https://itsallwidgets.com/podcast/episodes/21/pavan-podila)
