@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
-import 'preferences_service.dart';
+import 'package:mobx_examples/settings/preferences_service.dart';
 
 part 'settings_store.g.dart';
 
