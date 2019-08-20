@@ -50,7 +50,7 @@ class ObservableMap<K, V>
       _listenersField != null && _listenersField.hasHandlers;
 
   @override
-  V operator [](Object key) {
+  V operator [](K key) {
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
