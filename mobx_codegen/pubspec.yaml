@@ -15,7 +15,7 @@ environment:
 dependencies:
   path: ^1.6.2
   source_gen: ^0.9.4
-  mobx: 0.3.6
+  mobx: ^0.3.6
   build: ^1.1.4
   analyzer: ^0.36.3
 
