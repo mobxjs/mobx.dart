@@ -16,11 +16,9 @@ abstract class _FormField<T> with Store {
       this.value,
       this.validator,
       this.asyncValidator,
-      this.validationPolicy = ValidationPolicy.manual}) {
-    // ignore: prefer_asserts_in_initializer_lists
-    assert(validator != null && asyncValidator != null,
-        'Only one of validator or asyncValidator can be specified');
-  }
+      this.validationPolicy = ValidationPolicy.manual})
+      : assert(validator != null && asyncValidator != null,
+            'Only one of validator or asyncValidator can be specified');
 
   ValidationPolicy validationPolicy;
 
