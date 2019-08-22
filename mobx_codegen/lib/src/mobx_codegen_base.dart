@@ -11,6 +11,7 @@ import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
+import 'package:mobx_codegen/src/template/constructor_override.dart';
 import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/observable_future.dart';
@@ -21,8 +22,11 @@ import 'package:source_gen/source_gen.dart';
 
 class StoreGenerator extends Generator {
   @override
-  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) =>
-      _generateCodeForLibrary(library).toSet().join('\n\n');
+  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
+    final code = _generateCodeForLibrary(library).toSet().join('\n\n');
+    print(code);
+    return code;
+  }
 
   Iterable<String> _generateCodeForLibrary(LibraryReader library) sync* {
     for (final classElement in library.classes) {
@@ -135,6 +139,17 @@ class StoreMixinVisitor extends SimpleElementVisitor {
         isValidMixinStoreClass(element)) {
       _errors.invalidStoreDeclaration.addIf(true, element.name);
     }
+  }
+
+  @override
+  void visitConstructorElement(ConstructorElement element) {
+    // Note that these constructor templates are only used for annotation stye
+    // store definition. They're ignored otherwise.
+    final template = ConstructorOverrideTemplate()
+      ..store = _storeTemplate
+      ..constructor = MethodOverrideTemplate.fromElement(element);
+
+    _storeTemplate.constructors.add(template);
   }
 
   @override

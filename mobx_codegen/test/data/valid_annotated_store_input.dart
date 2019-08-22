@@ -7,6 +7,7 @@ part 'generator_sample.g.dart';
 @store
 class _User {
   _User(this.id);
+  _User.withNames({this.firstName = 'Scott', this.lastName}) : id = 0;
 
   final int id;
 

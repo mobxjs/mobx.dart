@@ -1,4 +1,7 @@
 class Item<T> extends _Item<T> {
+  Item(T aThing, [T value, T anotherThing])
+      : super(aThing, value, anotherThing);
+
   final _$valueAtom = Atom(name: '_Item.value');
 
   @override

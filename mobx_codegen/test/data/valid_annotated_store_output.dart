@@ -1,4 +1,9 @@
 class User extends _User {
+  User(int id) : super(id);
+
+  User.withNames({String firstName = 'Scott', String lastName})
+      : super(firstName: firstName, lastName: lastName);
+
   Computed<String> _$fullNameComputed;
 
   @override
