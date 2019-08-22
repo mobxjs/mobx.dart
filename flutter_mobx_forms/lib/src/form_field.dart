@@ -49,6 +49,7 @@ abstract class _FormField<T> with Store {
   final AsyncFieldValidator<T> asyncValidator;
 
   void validate() {
+    assert(!_isValidating);
     if (validator != null) {
       _syncValidate();
       return;
