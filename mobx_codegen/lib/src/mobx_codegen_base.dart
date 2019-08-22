@@ -22,11 +22,8 @@ import 'package:source_gen/source_gen.dart';
 
 class StoreGenerator extends Generator {
   @override
-  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
-    final code = _generateCodeForLibrary(library).toSet().join('\n\n');
-    print(code);
-    return code;
-  }
+  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) =>
+      _generateCodeForLibrary(library).toSet().join('\n\n');
 
   Iterable<String> _generateCodeForLibrary(LibraryReader library) sync* {
     for (final classElement in library.classes) {
