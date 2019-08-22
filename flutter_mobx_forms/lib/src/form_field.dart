@@ -11,7 +11,18 @@ class FormField<T> = _FormField<T> with _$FormField;
 
 abstract class _FormField<T> with Store {
   _FormField(
-      {this.name, this.label, this.value, this.validator, this.asyncValidator});
+      {this.name,
+      this.label,
+      this.value,
+      this.validator,
+      this.asyncValidator,
+      this.validationPolicy = ValidationPolicy.manual}) {
+    // ignore: prefer_asserts_in_initializer_lists
+    assert(validator != null && asyncValidator != null,
+        'Only one of validator or asyncValidator can be specified');
+  }
+
+  ValidationPolicy validationPolicy;
 
   final String name;
 
@@ -36,15 +47,10 @@ abstract class _FormField<T> with Store {
   @computed
   bool get isValid => errors == null;
 
-  SyncFieldValidator<T> validator;
-  AsyncFieldValidator<T> asyncValidator;
+  final SyncFieldValidator<T> validator;
+  final AsyncFieldValidator<T> asyncValidator;
 
   void validate() {
-    if (validator != null && asyncValidator != null) {
-      throw ArgumentError(
-          'Only one of validator or asyncValidator can be specified');
-    }
-
     if (validator != null) {
       _syncValidate();
       return;
