@@ -7,16 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/flutter_mobx_forms/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter_mobx_forms/lib/src/form_field.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter_mobx_forms/lib/src/form_field.g.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter_mobx_forms/test/flutter_mobx_forms_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mobx.dart.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mobx.dart.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx_forms/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx_forms/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx_forms/test/widget_test.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +45,7 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="flutter_mobx_forms" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -91,18 +82,18 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
-      <recent name="$PROJECT_DIR$/docs/src/development" />
-      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
-      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/flutter_mobx_forms" />
       <recent name="$PROJECT_DIR$/mobx_codegen/test/data" />
       <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
       <recent name="$PROJECT_DIR$/docs/src/guides" />
       <recent name="$PROJECT_DIR$/docs/src/examples" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
+      <recent name="$PROJECT_DIR$/docs/src/development" />
+      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
+      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -204,10 +195,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.pub:get:mobx_codegen" />
+        <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.gen:flutter_mobx_forms" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.pub:get:mobx" />
-        <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.gen:mobx_examples" />
       </list>
     </recent_temporary>
@@ -266,7 +257,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Adding a detailed guide about json serialization." />
     <MESSAGE value="added link to code" />
     <MESSAGE value="better naming" />
     <MESSAGE value="fixed typos" />
@@ -291,7 +281,8 @@
     <MESSAGE value="runBinary in a zone is not being used for AsyncActions, so commenting it out for now" />
     <MESSAGE value="minor tweaks to the community.md file" />
     <MESSAGE value="adding a new package flutter_mobx_forms" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding a new package flutter_mobx_forms" />
+    <MESSAGE value="package updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="package updates" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
@@ -332,7 +323,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart</url>
-          <line>24</line>
+          <line>35</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
@@ -349,89 +340,5 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>dart|mobx</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

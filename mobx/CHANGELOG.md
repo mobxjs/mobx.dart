@@ -1,6 +1,6 @@
-## 0.3.6-alpha
+## 0.3.6
 
-- Experimenting with the `@store` annotation for simplified Store creation
+- Added new way to create `Store` classes using the `@store` annotation. This will exist as an alternative to the mixin based approach we already have.
 - Includes a new option for `reaction` for using a custom `EqualityComparator<T, T>`. This is useful when you want to avoid expensive reactions by plugging in a custom comparison function for the _previous_ and _next_ values of the predicate.
 
 ## 0.3.5 - 0.3.5+1
