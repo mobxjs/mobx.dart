@@ -30,7 +30,8 @@ abstract class _FormField<T> with Store {
   bool get isValidating => _isValidating;
 
   @computed
-  String get error => errors == null ? null : errors[0];
+  String get error =>
+      errors == null ? null : (errors.isEmpty ? null : errors[0]);
 
   @computed
   bool get isValid => errors == null;
