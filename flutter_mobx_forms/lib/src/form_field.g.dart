@@ -26,21 +26,21 @@ mixin _$FormField<T> on _FormField<T>, Store {
   bool get isValid =>
       (_$isValidComputed ??= Computed<bool>(() => super.isValid)).value;
 
-  final _$errorsAtom = Atom(name: '_FormField.errors');
+  final _$_errorsAtom = Atom(name: '_FormField._errors');
 
   @override
-  List<String> get errors {
-    _$errorsAtom.context.enforceReadPolicy(_$errorsAtom);
-    _$errorsAtom.reportObserved();
-    return super.errors;
+  List<String> get _errors {
+    _$_errorsAtom.context.enforceReadPolicy(_$_errorsAtom);
+    _$_errorsAtom.reportObserved();
+    return super._errors;
   }
 
   @override
-  set errors(List<String> value) {
-    _$errorsAtom.context.conditionallyRunInAction(() {
-      super.errors = value;
-      _$errorsAtom.reportChanged();
-    }, _$errorsAtom, name: '${_$errorsAtom.name}_set');
+  set _errors(List<String> value) {
+    _$_errorsAtom.context.conditionallyRunInAction(() {
+      super._errors = value;
+      _$_errorsAtom.reportChanged();
+    }, _$_errorsAtom, name: '${_$_errorsAtom.name}_set');
   }
 
   final _$valueAtom = Atom(name: '_FormField.value');

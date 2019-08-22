@@ -10,8 +10,6 @@ enum ValidationPolicy { onChange, always, manual }
 class FormField<T> = _FormField<T> with _$FormField;
 
 abstract class _FormField<T> with Store {
-  ReactionDisposer _disposer;
-
   _FormField(
       {this.name,
       this.label,
@@ -24,6 +22,8 @@ abstract class _FormField<T> with Store {
     _setupValidation();
   }
 
+  ReactionDisposer _disposer;
+
   final ValidationPolicy validationPolicy;
 
   final String name;
@@ -31,7 +31,7 @@ abstract class _FormField<T> with Store {
   final String label;
 
   @observable
-  List<String> errors;
+  List<String> _errors;
 
   @observable
   T value;
@@ -43,11 +43,10 @@ abstract class _FormField<T> with Store {
   bool get isValidating => _isValidating;
 
   @computed
-  String get error =>
-      errors == null ? null : (errors.isEmpty ? null : errors[0]);
+  String get error => isValid ? null : _errors.first;
 
   @computed
-  bool get isValid => errors == null;
+  bool get isValid => _errors == null || _errors.isEmpty;
 
   final SyncFieldValidator<T> validator;
   final AsyncFieldValidator<T> asyncValidator;
