@@ -5,6 +5,7 @@ import 'package:mobx/mobx.dart';
 part 'generator_sample.g.dart';
 
 @store
+// ignore: unused_element
 class _User {
   _User(this.id);
   _User.withNames({this.firstName = 'Scott', this.lastName}) : id = 0;
@@ -22,14 +23,17 @@ class _User {
 
   @action
   void updateNames({String firstName, String lastName}) {
-    if (firstName != null) this.firstName = firstName;
-    if (lastName != null) this.lastName = firstName;
+    if (firstName != null) {
+      this.firstName = firstName;
+    }
+
+    if (lastName != null) {
+      this.lastName = firstName;
+    }
   }
 
   @observable
-  Future<String> foobar() async {
-    return 'foobar';
-  }
+  Future<String> foobar() async => 'foobar';
 
   @observable
   Stream<T> loadStuff<T>(String arg1, {T value}) async* {
