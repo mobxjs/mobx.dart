@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:mobx_codegen/src/template/params.dart';
+import 'package:mobx_codegen/src/type_names.dart';
 import 'package:source_gen/source_gen.dart';
 
 // ignore: avoid_annotating_with_dynamic
@@ -33,4 +34,5 @@ class AsyncMethodChecker {
 TypeParamTemplate typeParamTemplate(TypeParameterElement param) =>
     TypeParamTemplate()
       ..name = param.name
-      ..bound = param.bound?.displayName;
+      ..bound =
+          param.bound != null ? findTypeParameterBoundsTypeName(param) : null;
