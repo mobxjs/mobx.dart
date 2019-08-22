@@ -4,10 +4,11 @@ import 'package:mobx_codegen/src/template/comma_list.dart';
 import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 
+/// Stores templating information about constructors and methods.
 class MethodOverrideTemplate {
   MethodOverrideTemplate();
 
-  MethodOverrideTemplate.fromElement(MethodElement method) {
+  MethodOverrideTemplate.fromElement(ExecutableElement method) {
     // ignore: prefer_function_declarations_over_variables
     final param = (ParameterElement elem) => ParamTemplate()
       ..name = elem.name

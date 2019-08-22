@@ -8,7 +8,7 @@ class ObservableTemplate {
 
   @override
   String toString() => """
-  final $atomName = Atom(name: '${storeTemplate.parentName}.$name');
+  final $atomName = Atom(name: '${storeTemplate.parentTypeName}.$name');
 
   @override
   $type get $name {
