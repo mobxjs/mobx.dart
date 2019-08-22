@@ -18,7 +18,9 @@ abstract class _FormField<T> with Store {
       this.asyncValidator,
       this.validationPolicy = ValidationPolicy.manual})
       : assert(validator != null && asyncValidator != null,
-            'Only one of validator or asyncValidator can be specified');
+            'Only one of validator or asyncValidator can be specified') {
+    _setupValidation();
+  }
 
   ValidationPolicy validationPolicy;
 
@@ -50,6 +52,7 @@ abstract class _FormField<T> with Store {
 
   void validate() {
     assert(!_isValidating);
+
     if (validator != null) {
       _syncValidate();
       return;
@@ -67,8 +70,6 @@ abstract class _FormField<T> with Store {
 
       final errors = validator(value);
       this.errors = errors == null ? null : errors.toList(growable: false);
-    } on Object catch (_) {
-      rethrow;
     } finally {
       _isValidating = false;
     }
@@ -82,10 +83,10 @@ abstract class _FormField<T> with Store {
 
       final errors = await asyncValidator(value).toList();
       this.errors = errors;
-    } on Object catch (_) {
-      rethrow;
     } finally {
       _isValidating = false;
     }
   }
+
+  void _setupValidation() {}
 }
