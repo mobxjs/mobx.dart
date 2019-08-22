@@ -10,6 +10,8 @@ enum ValidationPolicy { onChange, always, manual }
 class FormField<T> = _FormField<T> with _$FormField;
 
 abstract class _FormField<T> with Store {
+  ReactionDisposer _disposer;
+
   _FormField(
       {this.name,
       this.label,
@@ -22,7 +24,7 @@ abstract class _FormField<T> with Store {
     _setupValidation();
   }
 
-  ValidationPolicy validationPolicy;
+  final ValidationPolicy validationPolicy;
 
   final String name;
 
@@ -63,6 +65,13 @@ abstract class _FormField<T> with Store {
     }
   }
 
+  @override
+  void dispose() {
+    if (_disposer != null) {
+      _disposer();
+    }
+  }
+
   @action
   void _syncValidate() {
     try {
@@ -88,5 +97,20 @@ abstract class _FormField<T> with Store {
     }
   }
 
-  void _setupValidation() {}
+  void _setupValidation() {
+    switch (validationPolicy) {
+      case ValidationPolicy.manual:
+        break;
+      case ValidationPolicy.always:
+        _disposer = autorun((_) {
+          validate();
+        });
+        break;
+      case ValidationPolicy.onChange:
+        _disposer = reaction((_) => value, (_) {
+          validate();
+        });
+        break;
+    }
+  }
 }
