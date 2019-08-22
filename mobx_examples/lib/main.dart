@@ -9,8 +9,7 @@ import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
 import 'package:mobx_examples/settings/preferences_service.dart';
 import 'package:mobx_examples/settings/settings_store.dart';
 
-// ignore: avoid_void_async
-void main() async {
+Future<void> main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(MyApp(sharedPreferences));
 }
