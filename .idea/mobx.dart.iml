@@ -3,6 +3,9 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/flutter_mobx_forms/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_mobx_forms/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_mobx_forms/build" />
       <excludeFolder url="file://$MODULE_DIR$/mobx/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/mobx/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/mobx/build" />
