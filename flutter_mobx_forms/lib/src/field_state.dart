@@ -1,7 +1,7 @@
 import 'package:flutter_mobx_forms/src/error_context.dart';
 import 'package:mobx/mobx.dart';
 
-part 'form_field.g.dart';
+part 'field_state.g.dart';
 
 typedef SyncFieldValidator<T> = void Function(T value, ErrorContext errors);
 typedef AsyncFieldValidator<T> = Future<void> Function(
@@ -9,10 +9,10 @@ typedef AsyncFieldValidator<T> = Future<void> Function(
 
 enum ValidationPolicy { onChange, always, manual }
 
-class MobxFormField<T> = _MobxFormField<T> with _$MobxFormField<T>;
+class FieldState<T> = _FieldState<T> with _$FieldState<T>;
 
-abstract class _MobxFormField<T> with Store {
-  _MobxFormField(
+abstract class _FieldState<T> with Store {
+  _FieldState(
       {this.name,
       this.label,
       this.value,

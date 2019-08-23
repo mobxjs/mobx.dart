@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'form_field.dart';
+part of 'field_state.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,7 +8,7 @@ part of 'form_field.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$MobxFormField<T> on _MobxFormField<T>, Store {
+mixin _$FieldState<T> on _FieldState<T>, Store {
   Computed<bool> _$isValidatingComputed;
 
   @override
@@ -21,7 +21,7 @@ mixin _$MobxFormField<T> on _MobxFormField<T>, Store {
   bool get isValid =>
       (_$isValidComputed ??= Computed<bool>(() => super.isValid)).value;
 
-  final _$valueAtom = Atom(name: '_MobxFormField.value');
+  final _$valueAtom = Atom(name: '_FieldState.value');
 
   @override
   T get value {
@@ -38,7 +38,7 @@ mixin _$MobxFormField<T> on _MobxFormField<T>, Store {
     }, _$valueAtom, name: '${_$valueAtom.name}_set');
   }
 
-  final _$_isValidatingAtom = Atom(name: '_MobxFormField._isValidating');
+  final _$_isValidatingAtom = Atom(name: '_FieldState._isValidating');
 
   @override
   bool get _isValidating {
@@ -62,16 +62,15 @@ mixin _$MobxFormField<T> on _MobxFormField<T>, Store {
     return _$_asyncValidateAsyncAction.run(() => super._asyncValidate());
   }
 
-  final _$_MobxFormFieldActionController =
-      ActionController(name: '_MobxFormField');
+  final _$_FieldStateActionController = ActionController(name: '_FieldState');
 
   @override
   void _syncValidate() {
-    final _$actionInfo = _$_MobxFormFieldActionController.startAction();
+    final _$actionInfo = _$_FieldStateActionController.startAction();
     try {
       return super._syncValidate();
     } finally {
-      _$_MobxFormFieldActionController.endAction(_$actionInfo);
+      _$_FieldStateActionController.endAction(_$actionInfo);
     }
   }
 }
