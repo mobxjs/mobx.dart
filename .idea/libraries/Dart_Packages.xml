@@ -4,7 +4,6 @@
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-0.36.3/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-0.36.4/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/args-1.5.2/lib" />
-      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.1.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.2.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.3.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-1.0.4/lib" />
@@ -77,7 +76,6 @@
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/package_resolver-1.0.10/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.6.2/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.6.4/lib" />
-      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.5.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.7.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.8.0+1/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pool-1.4.0/lib" />
@@ -85,7 +83,6 @@
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pub_semver-1.4.2/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pubspec_parse-0.1.4/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/pubspec_parse-0.1.5/lib" />
-      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-2.0.2/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-2.0.3/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-2.0.5/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.3+4/lib" />
@@ -106,7 +103,6 @@
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.1.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/test-1.6.4/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/test-1.6.5/lib" />
-      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.2.4/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.2.5/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.2.6/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/test_core-0.2.6/lib" />

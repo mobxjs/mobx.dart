@@ -28,8 +28,21 @@ class Observer extends StatefulWidget {
   @visibleForTesting
   Reaction createReaction(Function() onInvalidate) {
     final ctx = context ?? mainContext;
-    return ReactionImpl(ctx, onInvalidate,
-        name: name ?? 'Observer@${ctx.nextId}');
+
+    var name = this.name;
+
+    // This will run only in debug mode
+    assert(() {
+      // Use the location of the source as a way to identify which Observer we are looking at.
+      // Best way to get it is with StackTrace.current
+      name ??= 'Observer\n${StackTrace.current.toString().split('\n')[2]}';
+      return true;
+    }());
+
+    // This will be used in release mode
+    name ??= ctx.nameFor('Observer');
+
+    return ReactionImpl(ctx, onInvalidate, name: name);
   }
 
   @override
