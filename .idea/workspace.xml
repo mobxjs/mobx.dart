@@ -7,6 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/flutter_mobx_forms/lib/src/error_context.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_mobx_forms/lib/src/form_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx_forms/lib/src/form_field.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_mobx_forms/lib/src/form_field.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx_forms/lib/src/form_field.g.dart" afterDir="false" />
@@ -259,7 +260,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="adding favicon" />
     <MESSAGE value="reporting only when there is a change in set" />
     <MESSAGE value="reporting only when there is a change in map" />
     <MESSAGE value="version update to 0.3.4" />
@@ -284,7 +284,8 @@
     <MESSAGE value="asserts for validation and added the ValidationPolicy" />
     <MESSAGE value="removed some redundant code around try-catch-finally block" />
     <MESSAGE value="still feeling the API. Added validation support with ValidationPolicy" />
-    <option name="LAST_COMMIT_MESSAGE" value="still feeling the API. Added validation support with ValidationPolicy" />
+    <MESSAGE value="simplified error field" />
+    <option name="LAST_COMMIT_MESSAGE" value="simplified error field" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />

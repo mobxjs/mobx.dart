@@ -1,16 +1,18 @@
+import 'package:flutter_mobx_forms/src/error_context.dart';
 import 'package:mobx/mobx.dart';
 
 part 'form_field.g.dart';
 
-typedef SyncFieldValidator<T> = Iterable<String> Function(T value);
-typedef AsyncFieldValidator<T> = Stream<String> Function(T value);
+typedef SyncFieldValidator<T> = void Function(T value, ErrorContext errors);
+typedef AsyncFieldValidator<T> = Future<void> Function(
+    T value, ErrorContext errors);
 
 enum ValidationPolicy { onChange, always, manual }
 
-class FormField<T> = _FormField<T> with _$FormField;
+class MobxFormField<T> = _MobxFormField<T> with _$MobxFormField<T>;
 
-abstract class _FormField<T> with Store {
-  _FormField(
+abstract class _MobxFormField<T> with Store {
+  _MobxFormField(
       {this.name,
       this.label,
       this.value,
@@ -31,22 +33,18 @@ abstract class _FormField<T> with Store {
   final String label;
 
   @observable
-  List<String> _errors;
-
-  @observable
   T value;
 
   @observable
   bool _isValidating;
 
+  final ErrorContext errorContext = ErrorContext();
+
   @computed
   bool get isValidating => _isValidating;
 
   @computed
-  String get error => isValid ? null : _errors.first;
-
-  @computed
-  bool get isValid => _errors == null || _errors.isEmpty;
+  bool get isValid => errorContext.isEmpty;
 
   final SyncFieldValidator<T> validator;
   final AsyncFieldValidator<T> asyncValidator;
@@ -74,10 +72,9 @@ abstract class _FormField<T> with Store {
   @action
   void _syncValidate() {
     try {
-      _isValidating = false;
+      _isValidating = true;
 
-      final errors = validator(value);
-      this.errors = errors == null ? null : errors.toList(growable: false);
+      validator(value, errorContext);
     } finally {
       _isValidating = false;
     }
@@ -87,10 +84,9 @@ abstract class _FormField<T> with Store {
   // ignore: avoid_void_async
   Future<void> _asyncValidate() async {
     try {
-      _isValidating = false;
+      _isValidating = true;
 
-      final errors = await asyncValidator(value).toList();
-      this.errors = errors;
+      await asyncValidator(value, errorContext);
     } finally {
       _isValidating = false;
     }
