@@ -11,6 +11,7 @@ import 'package:mobx/src/core.dart' show ReactionImpl;
 ///
 /// Internally, [Observer] uses a `Reaction` around the `builder` function. If your `builder` function does not contain
 /// any observables, [Observer] will print a warning on the console. This is a debug-time hint to let you know that you are not observing any observables.
+// ignore: must_be_immutable
 class Observer extends StatefulWidget {
   /// Returns a widget that rebuilds every time an observable referenced in the
   /// [builder] function is altered.

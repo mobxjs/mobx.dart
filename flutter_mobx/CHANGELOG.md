@@ -2,7 +2,7 @@
 
 - Adapting to the API changes in `mobx 0.3.0`
 - Formatting changes
-- Using `StackTrace.current` as the name for an `Observer`, when not provided. This helps in quickly jumping to correct `Observer`-instance during debugging.
+- Using `StackTrace.current` as the name for an `Observer`, when not provided. This helps in quickly jumping to the location of the `Observer`-usage during debugging.
 
 ## 0.2.3+1
 
