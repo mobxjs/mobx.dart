@@ -10,8 +10,11 @@ class ConstructorOverrideTemplate {
       ? store.publicTypeName
       : '${store.publicTypeName}.${constructor.name}';
 
+  String get superConstructorName =>
+      constructor.name == '' ? 'super' : 'super.${constructor.name}';
+
   @override
   String toString() => '''
-    $constructorName(${constructor.params}) : super(${constructor.args});
+    $constructorName(${constructor.params}) : $superConstructorName(${constructor.args});
   ''';
 }
