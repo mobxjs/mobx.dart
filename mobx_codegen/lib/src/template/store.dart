@@ -13,13 +13,11 @@ class SubclassStoreTemplate extends StoreTemplate {
   String get typeName => publicTypeName;
 
   @override
-  String get storeBody {
-    return '''
-      $constructors
+  String get storeBody => '''
+  $constructors
 
-      ${super.storeBody}
-    ''';
-  }
+  ${super.storeBody}
+  ''';
 
   @override
   String toString() => '''
