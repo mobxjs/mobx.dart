@@ -10,37 +10,26 @@ import 'package:mobx/src/core.dart' show ReactionImpl;
 /// the required observables.
 ///
 /// Internally, [Observer] uses a `Reaction` around the `builder` function. If your `builder` function does not contain
-/// any observables, [Observer] will throw an [AssertionError]. This is a debug-time hint to let you know that you are not observing any observables.
+/// any observables, [Observer] will print a warning on the console. This is a debug-time hint to let you know that you are not observing any observables.
 class Observer extends StatefulWidget {
   /// Returns a widget that rebuilds every time an observable referenced in the
   /// [builder] function is altered.
   ///
   /// The [builder] argument must not be null. Use the [context] to specify a ReactiveContext other than the `mainContext`.
   /// Normally there is no need to change this. [name] can be used to give a debug-friendly identifier.
-  const Observer({@required this.builder, Key key, this.context, this.name})
+  Observer({@required this.builder, Key key, this.context, name})
       : assert(builder != null),
-        super(key: key);
+        super(key: key) {
+    this.name = name ?? _defaultObserverName(context ?? mainContext);
+  }
 
-  final String name;
+  String name;
   final ReactiveContext context;
   final WidgetBuilder builder;
 
   @visibleForTesting
   Reaction createReaction(Function() onInvalidate) {
     final ctx = context ?? mainContext;
-
-    var name = this.name;
-
-    // This will run only in debug mode
-    assert(() {
-      // Use the location of the source as a way to identify which Observer we are looking at.
-      // Best way to get it is with StackTrace.current
-      name ??= 'Observer\n${StackTrace.current.toString().split('\n')[2]}';
-      return true;
-    }());
-
-    // This will be used in release mode
-    name ??= ctx.nameFor('Observer');
 
     return ReactionImpl(ctx, onInvalidate, name: name);
   }
@@ -92,4 +81,15 @@ class _ObserverState extends State<Observer> {
     _reaction.dispose();
     super.dispose();
   }
+}
+
+String _defaultObserverName(ReactiveContext context) {
+  String name;
+
+  assert(() {
+    name = 'Observer\n${StackTrace.current.toString().split('\n')[3]}';
+    return true;
+  }());
+
+  return name ?? context.nameFor('Observer');
 }

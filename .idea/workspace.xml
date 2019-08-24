@@ -7,7 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +115,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.tests in mobx">
+  <component name="RunManager" selected="Flutter.mobx_examples">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
@@ -132,21 +134,15 @@
       <option name="filePath" value="$PROJECT_DIR$/mobx_examples/lib/main.dart" />
       <method v="2" />
     </configuration>
+    <configuration name="flutter_mobx tests" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true">
+      <option name="testDir" value="$PROJECT_DIR$/flutter_mobx/test/" />
+      <method v="2" />
+    </configuration>
     <configuration name="gen:flutter_mobx_forms" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="gen:flutter_mobx_forms" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="gen:mobx_examples" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="gen:mobx_examples" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -187,7 +183,7 @@
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="Dart Test.mobx bug tests" />
       <item itemvalue="Flutter.mobx_examples" />
-      <item itemvalue="npm.gen:mobx_examples" />
+      <item itemvalue="Flutter Test.flutter_mobx tests" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.pub:get:mobx" />
       <item itemvalue="npm.start" />
@@ -195,11 +191,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.flutter_mobx tests" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.gen:flutter_mobx_forms" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.gen:mobx_examples" />
       </list>
     </recent_temporary>
   </component>
@@ -257,7 +253,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added link to code" />
     <MESSAGE value="better naming" />
     <MESSAGE value="fixed typos" />
     <MESSAGE value="adding svg version of logo" />
@@ -282,7 +277,8 @@
     <MESSAGE value="minor tweaks to the community.md file" />
     <MESSAGE value="adding a new package flutter_mobx_forms" />
     <MESSAGE value="package updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="package updates" />
+    <MESSAGE value="using the location of the file as the default name of the Observer, when not provided" />
+    <option name="LAST_COMMIT_MESSAGE" value="using the location of the file as the default name of the Observer, when not provided" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
@@ -340,5 +336,8 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/mobx_dart$flutter_mobx_test_dart.json" NAME="flutter_mobx_test.dart Coverage Results" MODIFIED="1566611968510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="DartCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" CONTEXT_FILE_PATH="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" />
   </component>
 </project>
