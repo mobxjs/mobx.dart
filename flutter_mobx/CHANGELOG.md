@@ -1,8 +1,9 @@
-## 0.3.0 - 0.3.1
+## 0.3.0 - 0.3.1+1
 
 - Adapting to the API changes in `mobx 0.3.0`
 - Formatting changes
 - Using `StackTrace.current` as the name for an `Observer`, when not provided. This helps in quickly jumping to the location of the `Observer`-usage during debugging.
+- Docs update
 
 ## 0.2.3+1
 
