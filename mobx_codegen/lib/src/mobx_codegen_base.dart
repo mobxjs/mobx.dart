@@ -17,13 +17,17 @@ import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/observable_future.dart';
 import 'package:mobx_codegen/src/template/observable_stream.dart';
 import 'package:mobx_codegen/src/template/store.dart';
+import 'package:mobx_codegen/src/template/store_file.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 import 'package:source_gen/source_gen.dart';
 
 class StoreGenerator extends Generator {
   @override
-  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) =>
-      _generateCodeForLibrary(library).toSet().join('\n\n');
+  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
+    final file = StoreFileTemplate()
+      ..storeSources = _generateCodeForLibrary(library).toSet();
+    return file.toString();
+  }
 
   Iterable<String> _generateCodeForLibrary(LibraryReader library) sync* {
     for (final classElement in library.classes) {
