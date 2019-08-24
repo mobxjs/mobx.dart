@@ -19,7 +19,7 @@ abstract class _FieldState<T> with Store {
       this.validator,
       this.asyncValidator,
       this.validationPolicy = ValidationPolicy.manual})
-      : assert(validator != null && asyncValidator != null,
+      : assert(validator == null || asyncValidator == null,
             'Only one of validator or asyncValidator can be specified') {
     _setupValidation();
   }
