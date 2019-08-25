@@ -1,6 +1,13 @@
 class Car extends _Car {
   Car(Engine engine) : super(engine);
 
+  Computed<Set<Tire>> _$flatTiresComputed;
+
+  @override
+  Set<Tire> get flatTires =>
+      (_$flatTiresComputed ??= Computed<Set<Tire>>(() => super.flatTires))
+          .value;
+
   final _$paintColorAtom = Atom(name: '_Car.paintColor');
 
   @override
@@ -18,21 +25,21 @@ class Car extends _Car {
     }, _$paintColorAtom, name: '${_$paintColorAtom.name}_set');
   }
 
-  final _$engineAtom = Atom(name: '_Car.engine');
+  final _$_engineAtom = Atom(name: '_Car._engine');
 
   @override
-  Engine get engine {
-    _$engineAtom.context.enforceReadPolicy(_$engineAtom);
-    _$engineAtom.reportObserved();
-    return super.engine;
+  Engine get _engine {
+    _$_engineAtom.context.enforceReadPolicy(_$_engineAtom);
+    _$_engineAtom.reportObserved();
+    return super._engine;
   }
 
   @override
-  set engine(Engine value) {
-    _$engineAtom.context.conditionallyRunInAction(() {
-      super.engine = value;
-      _$engineAtom.reportChanged();
-    }, _$engineAtom, name: '${_$engineAtom.name}_set');
+  set _engine(Engine value) {
+    _$_engineAtom.context.conditionallyRunInAction(() {
+      super._engine = value;
+      _$_engineAtom.reportChanged();
+    }, _$_engineAtom, name: '${_$_engineAtom.name}_set');
   }
 
   final _$tiresAtom = Atom(name: '_Car.tires');
@@ -94,6 +101,18 @@ class CarPart extends _CarPart {
 
 class Engine extends _Engine {
   Engine() : super();
+
+  final _$_EngineActionController = ActionController(name: '_Engine');
+
+  @override
+  dynamic swapInParts({dynamic from}) {
+    final _$actionInfo = _$_EngineActionController.startAction();
+    try {
+      return super.swapInParts(from: from);
+    } finally {
+      _$_EngineActionController.endAction(_$actionInfo);
+    }
+  }
 }
 
 class Tire extends _Tire {
@@ -112,4 +131,16 @@ class Windshield extends _Windshield {
 
 class Bug extends _Bug {
   Bug() : super();
+
+  final _$_BugActionController = ActionController(name: '_Bug');
+
+  @override
+  T sizeInMillimeters<T extends num>() {
+    final _$actionInfo = _$_BugActionController.startAction();
+    try {
+      return super.sizeInMillimeters<T>();
+    } finally {
+      _$_BugActionController.endAction(_$actionInfo);
+    }
+  }
 }

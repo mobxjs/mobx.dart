@@ -24,8 +24,8 @@ class _Car {
   @observable
   Windshield windshield = Windshield();
 
-  @observable
-  Set<Tire> flatTires => {};
+  @computed
+  Set<Tire> get flatTires() => {};
 
   @action
   Future<List<Tire>> changeTiresIfRequired() async => [];
@@ -56,6 +56,6 @@ class _Windshield extends CarPart {
 
 @store
 class _Bug {
-  @computed
+  @action
   T sizeInMillimeters<T extends num>() => null;
 }

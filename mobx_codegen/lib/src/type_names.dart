@@ -44,12 +44,12 @@ String _findInitializingParameterTypeName(ParameterElement parameter) {
   final ClassElement classElement = parameter.enclosingElement.enclosingElement;
 
   final correspondingField = classElement.getField(parameter.name);
-  if (correspondingField != null) {
+  if (correspondingField != null && !correspondingField.isSynthetic) {
     return findVariableTypeName(correspondingField);
   }
 
   final correspondingSetter = classElement.getSetter(parameter.name);
-  if (correspondingSetter != null) {
+  if (correspondingSetter != null && !correspondingSetter.isSynthetic) {
     return findSetterTypeName(correspondingSetter);
   }
 
