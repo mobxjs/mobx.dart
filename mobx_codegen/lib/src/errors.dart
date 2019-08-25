@@ -83,25 +83,25 @@ abstract class _InvalidStoreDeclarations implements CodegenError {
   bool get hasErrors => _classNames.isNotEmpty;
 
   @override
-  String get message => 'Invalid Store classes: ${_classNames}.';
+  String get message => 'Invalid Store classes: $_classNames.';
 }
 
 class StoreMixinPlusAnnotationDeclarations extends _InvalidStoreDeclarations {
   @override
   String get message =>
-      'Store classes cannot be defined with both the @store annotation and Store mixin. Please choose only one of the options for ${_classNames}.';
+      'Store classes cannot be defined with both the @store annotation and Store mixin. Please choose only one of the options for $_classNames.';
 }
 
 class NonAbstractStoreMixinDeclarations extends _InvalidStoreDeclarations {
   @override
   String get message =>
-      'Classes that use the Store mixin must be marked abstract. Affected classes: ${_classNames}.';
+      'Classes that use the Store mixin must be marked abstract. Affected classes: $_classNames.';
 }
 
 class NonPrivateStoreAnnotationDeclarations extends _InvalidStoreDeclarations {
   @override
   String get message =>
-      'Classes that use the @store annotation must be marked private. Affected classes: ${_classNames}.';
+      'Classes that use the @store annotation must be marked private. Affected classes: $_classNames.';
 }
 
 abstract class PropertyErrors implements CodegenError {
