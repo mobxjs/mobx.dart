@@ -68,6 +68,25 @@ void main() {
       expect(changes[1].value, equals(2));
     });
 
+    test('SetChange asserts non-null parameters', () {
+      expect(
+        () => SetChange(
+          object: null, //!
+          type: OperationType.add,
+          value: 1,
+        ),
+        throwsA(anything),
+      );
+      expect(
+        () => SetChange(
+          object: ObservableSet(),
+          type: null, //!
+          value: 1,
+        ),
+        throwsA(anything),
+      );
+    });
+
     group('fires reportObserved() for read methods', () {
       <String, void Function(ObservableSet<int>)>{
         'union': (m) => m.union({2, 5, 6}),
