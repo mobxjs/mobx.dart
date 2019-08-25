@@ -19,6 +19,7 @@ import 'package:mobx_codegen/src/template/observable_stream.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/template/store_file.dart';
 import 'package:mobx_codegen/src/template/util.dart';
+import 'package:mobx_codegen/src/type_names.dart';
 import 'package:source_gen/source_gen.dart';
 
 class StoreGenerator extends Generator {
@@ -176,7 +177,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
     final template = ObservableTemplate()
       ..storeTemplate = _storeTemplate
       ..atomName = '_\$${element.name}Atom'
-      ..type = element.type.displayName
+      ..type = findVariableTypeName(element)
       ..name = element.name;
 
     _storeTemplate.observables.add(template);
@@ -207,7 +208,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
     final template = ComputedTemplate()
       ..computedName = '_\$${element.name}Computed'
       ..name = element.name
-      ..type = element.returnType.displayName;
+      ..type = findGetterTypeName(element);
     _storeTemplate.computeds.add(template);
 
     return;

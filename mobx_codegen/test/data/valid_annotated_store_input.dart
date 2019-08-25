@@ -9,6 +9,9 @@ part 'generator_sample.g.dart';
 class _User {
   _User(this.id);
   _User.withNames({this.firstName = 'Scott', this.lastName}) : id = 0;
+  _User.withGenericList(List<int> ints) : id = 0 {
+    print(ints);
+  }
 
   final int id;
 

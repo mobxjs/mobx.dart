@@ -4,6 +4,8 @@ class User extends _User {
   User.withNames({String firstName = 'Scott', String lastName})
       : super.withNames(firstName: firstName, lastName: lastName);
 
+  User.withGenericList(List<int> ints) : super.withGenericList(ints);
+
   Computed<String> _$fullNameComputed;
 
   @override

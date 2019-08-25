@@ -1,8 +1,8 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
 import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/template/util.dart';
+import 'package:mobx_codegen/src/type_names.dart';
 
 /// Stores templating information about constructors and methods.
 class MethodOverrideTemplate {
@@ -12,7 +12,7 @@ class MethodOverrideTemplate {
     // ignore: prefer_function_declarations_over_variables
     final param = (ParameterElement elem) => ParamTemplate()
       ..name = elem.name
-      ..type = elem.type.displayName
+      ..type = findParameterTypeName(elem)
       ..defaultValue = elem.defaultValueCode;
 
     final positionalParams = method.parameters
@@ -25,19 +25,15 @@ class MethodOverrideTemplate {
     final namedParams =
         method.parameters.where((param) => param.isNamed).toList();
 
-    final returnType = method.returnType;
-    final returnTypeArgs = returnType is ParameterizedType
-        ? returnType.typeArguments.map((p) => p.displayName).toList()
-        : <String>[];
-
     this
       ..name = method.name
-      ..returnType = method.returnType.displayName
+      ..returnType = findReturnTypeName(method)
       ..setTypeParams(method.typeParameters.map(typeParamTemplate))
       ..positionalParams = positionalParams.map(param)
       ..optionalParams = optionalParams.map(param)
       ..namedParams = namedParams.map(param)
-      ..returnTypeArgs = SurroundedCommaList('<', '>', returnTypeArgs);
+      ..returnTypeArgs = SurroundedCommaList(
+          '<', '>', findReturnTypeArgumentTypeNames(method));
   }
 
   String name;
