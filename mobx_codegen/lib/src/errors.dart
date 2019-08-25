@@ -81,9 +81,6 @@ abstract class _InvalidStoreDeclarations implements CodegenError {
 
   @override
   bool get hasErrors => _classNames.isNotEmpty;
-
-  @override
-  String get message => 'Invalid Store classes: $_classNames.';
 }
 
 class StoreMixinPlusAnnotationDeclarations extends _InvalidStoreDeclarations {
