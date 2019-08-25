@@ -152,13 +152,19 @@ class ObservableSet<T>
   }
 
   void _reportAdd(T value) {
-    _listeners
-        .notifyListeners(SetChange(type: OperationType.add, value: value));
+    _listeners.notifyListeners(SetChange(
+      object: this,
+      type: OperationType.add,
+      value: value,
+    ));
   }
 
   void _reportRemove(T value) {
-    _listeners
-        .notifyListeners(SetChange(type: OperationType.remove, value: value));
+    _listeners.notifyListeners(SetChange(
+      object: this,
+      type: OperationType.remove,
+      value: value,
+    ));
   }
 }
 
@@ -192,8 +198,14 @@ class ObservableIterator<T> implements Iterator<T> {
 typedef SetChangeListener<T> = void Function(SetChange<T>);
 
 class SetChange<T> {
-  SetChange({@required this.type, this.value}) : assert(type != null);
+  SetChange({
+    @required this.object,
+    @required this.type,
+    @required this.value,
+  })  : assert(object != null),
+        assert(type != null);
 
+  final ObservableSet<T> object;
   final OperationType type;
   final T value;
 }
