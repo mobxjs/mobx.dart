@@ -1,3 +1,10 @@
+## 0.3.6
+
+- Fixes the type resolution bug that prevented using types from packages like `dart:ui`
+- Fixes the type resolution of other public `Store` classes referenced in the `@store` based generation
+
+Thanks to [@shyndman](https://github.com/shyndman) for the tremendous work on this release.
+
 ## 0.3.5
 
 - Added the ability to create `Store` classes using the `@store` annotation. It can be added to a private class, which will result in a public generated class.

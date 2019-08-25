@@ -92,5 +92,6 @@ String _defaultObserverName(ReactiveContext context) {
     return true;
   }());
 
+  // this will be applicable for release builds where there are no asserts
   return name ?? context.nameFor('Observer');
 }

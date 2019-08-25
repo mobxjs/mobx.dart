@@ -8,9 +8,11 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -254,7 +256,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed typos" />
     <MESSAGE value="adding svg version of logo" />
     <MESSAGE value="adding favicon" />
     <MESSAGE value="reporting only when there is a change in set" />
@@ -279,7 +280,8 @@
     <MESSAGE value="package updates" />
     <MESSAGE value="using the location of the file as the default name of the Observer, when not provided" />
     <MESSAGE value="fixing analyzer issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing analyzer issue" />
+    <MESSAGE value="docs update" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs update" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
