@@ -14,13 +14,18 @@ class _Car {
   ui.Color paintColor;
 
   @observable
-  Engine engine;
+  Engine _engine;
+  Engine get engine => _engine;
+  set engine(Engine value) => _engine = engine;
 
   @observable
   ObservableList<Tire> tires = ObservableList<Tire>();
 
   @observable
   Windshield windshield = Windshield();
+
+  @observable
+  Set<Tire> flatTires => {};
 
   @action
   Future<List<Tire>> changeTiresIfRequired() async => [];
@@ -33,7 +38,10 @@ class _Car {
 class _CarPart {}
 
 @store
-class _Engine extends CarPart {}
+class _Engine extends CarPart {
+  @action
+  swapInParts({Engine from}) {}
+}
 
 @store
 class _Tire extends CarPart {}
@@ -47,4 +55,7 @@ class _Windshield extends CarPart {
 }
 
 @store
-class _Bug {}
+class _Bug {
+  @computed
+  T sizeInMillimeters<T extends num>() => null;
+}
