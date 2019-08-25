@@ -6,7 +6,7 @@ import 'package:build/build.dart';
 import 'package:mobx/mobx.dart' show Store;
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
-    show ComputedMethod, MakeAction, MakeObservable, MakeStore;
+    show ComputedMethod, MakeAction, MakeObservable, MakePanoptic, MakeStore;
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
@@ -114,6 +114,8 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       ..parentTypeName = userClass.name
       ..publicTypeName = publicTypeName;
   }
+
+  final _panopticChecker = const TypeChecker.fromRuntime(MakePanoptic);
 
   final _observableChecker = const TypeChecker.fromRuntime(MakeObservable);
 

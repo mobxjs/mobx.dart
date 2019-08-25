@@ -27,3 +27,7 @@ dev_dependencies:
   mockito: ^4.0.0
   test_coverage: ^0.3.0
   test: ^1.6.3
+
+dependency_overrides:
+  mobx:
+    path: ../mobx

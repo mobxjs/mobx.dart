@@ -13,6 +13,17 @@ class MakeObservable {
 /// documentation
 const MakeObservable observable = MakeObservable._();
 
+class MakePanoptic {
+  const MakePanoptic._();
+}
+
+/// Declares a class field as an _actual_ observable.
+///
+/// Fields decorated with this annotation will report the details of the change,
+/// not just that a change has occurred. See the `Observable` class for full
+/// documentation
+const MakePanoptic panoptic = MakePanoptic._();
+
 class ComputedMethod {
   const ComputedMethod._();
 }
