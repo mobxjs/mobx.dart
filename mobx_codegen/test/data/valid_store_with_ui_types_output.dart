@@ -35,7 +35,11 @@ mixin _$CircleModel on _CircleModel, Store {
 }
 
 class BoxModel extends _BoxModel {
-  BoxModel({Rect boundingRect, Size padding, Size margin, Color color})
+  BoxModel(
+      {@required Rect boundingRect,
+      Size padding = Size.zero,
+      Size margin = Size.zero,
+      Color color})
       : super(
             boundingRect: boundingRect,
             padding: padding,

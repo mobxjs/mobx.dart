@@ -1,5 +1,6 @@
 library generator_sample;
 
+import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
 
 part 'generator_sample.g.dart';
@@ -21,7 +22,7 @@ abstract class UserBase with Store {
   String get fullName => '$firstName $lastName';
 
   @action
-  void updateNames({String firstName, String lastName}) {
+  void updateNames({@required String firstName, String lastName}) {
     if (firstName != null) this.firstName = firstName;
     if (lastName != null) this.lastName = firstName;
   }

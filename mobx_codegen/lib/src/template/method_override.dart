@@ -10,10 +10,11 @@ class MethodOverrideTemplate {
 
   MethodOverrideTemplate.fromElement(ExecutableElement method) {
     // ignore: prefer_function_declarations_over_variables
-    final param = (ParameterElement elem) => ParamTemplate()
-      ..name = elem.name
-      ..type = findParameterTypeName(elem)
-      ..defaultValue = elem.defaultValueCode;
+    final param = (ParameterElement element) => ParamTemplate()
+      ..name = element.name
+      ..type = findParameterTypeName(element)
+      ..defaultValue = element.defaultValueCode
+      ..hasRequiredAnnotation = element.hasRequired;
 
     final positionalParams = method.parameters
         .where((param) => param.isPositional && !param.isOptionalPositional)

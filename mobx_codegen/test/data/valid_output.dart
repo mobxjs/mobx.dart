@@ -75,7 +75,7 @@ mixin _$User on UserBase, Store {
   final _$UserBaseActionController = ActionController(name: 'UserBase');
 
   @override
-  void updateNames({String firstName, String lastName}) {
+  void updateNames({@required String firstName, String lastName}) {
     final _$actionInfo = _$UserBaseActionController.startAction();
     try {
       return super.updateNames(firstName: firstName, lastName: lastName);

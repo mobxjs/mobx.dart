@@ -2,14 +2,19 @@ class ParamTemplate {
   String name;
   String type;
   String defaultValue;
+  bool hasRequiredAnnotation = false;
 
   String get asArgument => name;
 
-  NamedArgTemplate get asNamedArgument => NamedArgTemplate()..name = name;
+  NamedArgTemplate get asNamedArgument => NamedArgTemplate()
+    ..name = name;
+
+  String get metadata => hasRequiredAnnotation ? '@required ' : '';
 
   @override
-  String toString() =>
-      defaultValue == null ? '$type $name' : '$type $name = $defaultValue';
+  String toString() => defaultValue == null
+      ? '$metadata$type $name'
+      : '$type $name = $defaultValue';
 }
 
 class TypeParamTemplate {
