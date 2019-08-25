@@ -2,6 +2,7 @@ library generator_sample;
 
 import 'dart:ui';
 
+import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
 
 part 'generator_sample.g.dart';
@@ -20,7 +21,12 @@ abstract class _CircleModel with Store {
 
 @store
 class _BoxModel {
-  _BoxModel({this.boundingRect, this.padding, this.margin, this.color});
+  _BoxModel({
+    @required this.boundingRect,
+    this.padding = Size.zero,
+    this.margin = Size.zero,
+    this.color,
+  });
 
   @observable
   Rect boundingRect;
