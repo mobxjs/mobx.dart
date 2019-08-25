@@ -1,3 +1,14 @@
+## 0.3.6
+
+- Fixes the type resolution bug that prevented using types from packages like `dart:ui`
+- Fixes the type resolution of other public `Store` classes referenced in the `@store` based generation
+
+Thanks to [@shyndman](https://github.com/shyndman) for the tremendous work on this release.
+
+## 0.3.5
+
+- Added the ability to create `Store` classes using the `@store` annotation. It can be added to a private class, which will result in a public generated class.
+
 ## 0.3.4
 
 - Refactored some tests that rely on `source-text` to not be based on hard-coded strings. These have been moved to a separate file for easier maintenance. The outputs resulting from the generator are also in a separate file. This allows scaling to more variations of `source-text` in the future.

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-import 'todo_list.dart';
+import 'package:mobx_examples/todos/todo_list.dart';
 
 class TodoExample extends StatelessWidget {
   @override
@@ -80,27 +80,27 @@ class ActionBar extends StatelessWidget {
     return Column(children: <Widget>[
       Observer(
         builder: (_) => Column(
-              children: <Widget>[
-                RadioListTile(
-                    dense: true,
-                    title: const Text('All'),
-                    value: VisibilityFilter.all,
-                    groupValue: list.filter,
-                    onChanged: (filter) => list.filter = filter),
-                RadioListTile(
-                    dense: true,
-                    title: const Text('Pending'),
-                    value: VisibilityFilter.pending,
-                    groupValue: list.filter,
-                    onChanged: (filter) => list.filter = filter),
-                RadioListTile(
-                    dense: true,
-                    title: const Text('Completed'),
-                    value: VisibilityFilter.completed,
-                    groupValue: list.filter,
-                    onChanged: (filter) => list.filter = filter),
-              ],
-            ),
+          children: <Widget>[
+            RadioListTile(
+                dense: true,
+                title: const Text('All'),
+                value: VisibilityFilter.all,
+                groupValue: list.filter,
+                onChanged: (filter) => list.filter = filter),
+            RadioListTile(
+                dense: true,
+                title: const Text('Pending'),
+                value: VisibilityFilter.pending,
+                groupValue: list.filter,
+                onChanged: (filter) => list.filter = filter),
+            RadioListTile(
+                dense: true,
+                title: const Text('Completed'),
+                value: VisibilityFilter.completed,
+                groupValue: list.filter,
+                onChanged: (filter) => list.filter = filter),
+          ],
+        ),
       ),
       Observer(
           builder: (_) => ButtonBar(

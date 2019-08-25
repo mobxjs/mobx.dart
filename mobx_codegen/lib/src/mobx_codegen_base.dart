@@ -6,69 +6,113 @@ import 'package:build/build.dart';
 import 'package:mobx/mobx.dart' show Store;
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
-    show ComputedMethod, MakeAction, MakeObservable;
+    show ComputedMethod, MakeAction, MakeObservable, MakeStore;
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
+import 'package:mobx_codegen/src/template/constructor_override.dart';
 import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/observable_future.dart';
 import 'package:mobx_codegen/src/template/observable_stream.dart';
 import 'package:mobx_codegen/src/template/store.dart';
+import 'package:mobx_codegen/src/template/store_file.dart';
 import 'package:mobx_codegen/src/template/util.dart';
+import 'package:mobx_codegen/src/type_names.dart';
 import 'package:source_gen/source_gen.dart';
 
 class StoreGenerator extends Generator {
-  final _storeChecker = const TypeChecker.fromRuntime(Store);
-
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
-    Iterable<String> generate(ClassElement baseClass) sync* {
-      final mixedClass =
-          library.classes.where((c) => c != baseClass).firstWhere((c) {
-        if (c.supertype.typeArguments.isNotEmpty &&
-            baseClass.typeParameters.length ==
-                c.supertype.typeArguments.length) {
-          final t = baseClass.type.instantiate(c.supertype.typeArguments);
-          return t.isSupertypeOf(c.type);
-        }
-        return c.supertype == baseClass.type;
-      }, orElse: () => null);
-
-      if (mixedClass != null) {
-        yield generateStoreClassCode(library, baseClass, mixedClass);
-      }
-    }
-
-    return library.classes
-        .where(isValidStoreClass)
-        .expand(generate)
-        .toSet()
-        .join('\n\n');
+    final file = StoreFileTemplate()
+      ..storeSources = _generateCodeForLibrary(library).toSet();
+    return file.toString();
   }
 
-  bool isValidStoreClass(ClassElement c) =>
-      c.isAbstract && c.mixins.any(_storeChecker.isExactlyType);
+  Iterable<String> _generateCodeForLibrary(LibraryReader library) sync* {
+    for (final classElement in library.classes) {
+      if (isValidMixinStoreClass(classElement)) {
+        yield* _generateCodeForMixinStore(library, classElement);
+      } else if (isValidAnnotatedStoreClass(classElement)) {
+        yield* _generateCodeForAnnotatedStore(library, classElement);
+      }
+    }
+  }
 
-  String generateStoreClassCode(
-      LibraryReader library, ClassElement baseClass, ClassElement mixedClass) {
-    final visitor = StoreMixinVisitor(baseClass, mixedClass.name);
-    baseClass.visitChildren(visitor);
+  Iterable<String> _generateCodeForMixinStore(
+    LibraryReader library,
+    ClassElement baseClass,
+  ) sync* {
+    final otherClasses = library.classes.where((c) => c != baseClass);
+    final mixedClass = otherClasses.firstWhere((c) {
+      // If our base class has different type parameterization requirements than
+      // the class we're evaluating provides, we know it's not a subclass.
+      if (baseClass.typeParameters.length != c.supertype.typeArguments.length) {
+        return false;
+      }
+
+      // Apply the subclass' type arguments to the base type (if there are none
+      // this has no impact), and perform a supertype check.
+      return baseClass.type
+          .instantiate(c.supertype.typeArguments)
+          .isSupertypeOf(c.type);
+    }, orElse: () => null);
+
+    if (mixedClass != null) {
+      yield _generateCodeFromTemplate(
+          mixedClass.name, baseClass, MixinStoreTemplate());
+    }
+  }
+
+  Iterable<String> _generateCodeForAnnotatedStore(
+    LibraryReader reader,
+    ClassElement baseClass,
+  ) sync* {
+    assert(baseClass.isPrivate);
+    // Strip off leading underscore
+    final publicTypeName = baseClass.name.substring(1);
+    yield _generateCodeFromTemplate(
+        publicTypeName, baseClass, SubclassStoreTemplate());
+  }
+
+  String _generateCodeFromTemplate(
+    String publicTypeName,
+    ClassElement userStoreClass,
+    StoreTemplate template,
+  ) {
+    final visitor = StoreMixinVisitor(publicTypeName, userStoreClass, template);
+    userStoreClass
+      ..accept(visitor)
+      ..visitChildren(visitor);
     return visitor.source;
   }
 }
 
+const _storeMixinChecker = TypeChecker.fromRuntime(Store);
+const _storeAnnotationChecker = TypeChecker.fromRuntime(MakeStore);
+
+bool isValidMixinStoreClass(ClassElement classElement) =>
+    classElement.isAbstract &&
+    classElement.mixins.any(_storeMixinChecker.isExactlyType);
+
+bool isValidAnnotatedStoreClass(ClassElement classElement) =>
+    classElement.isPrivate &&
+    _storeAnnotationChecker.hasAnnotationOfExact(classElement);
+
 class StoreMixinVisitor extends SimpleElementVisitor {
-  StoreMixinVisitor(ClassElement parentClass, String name)
-      : _errors = StoreClassCodegenErrors(name) {
-    _storeTemplate = StoreTemplate()
+  StoreMixinVisitor(
+    String publicTypeName,
+    ClassElement userClass,
+    StoreTemplate template,
+  ) : _errors = StoreClassCodegenErrors(publicTypeName) {
+    _storeTemplate = template
       ..typeParams
           .templates
-          .addAll(parentClass.typeParameters.map(typeParamTemplate))
-      ..typeArgs.templates.addAll(parentClass.typeParameters.map((t) => t.name))
-      ..parentName = parentClass.name
-      ..mixinName = '_\$$name';
+          .addAll(userClass.typeParameters.map(typeParamTemplate))
+      ..typeArgs.templates.addAll(userClass.typeParameters.map((t) => t.name))
+      ..parentTypeName = userClass.name
+      ..publicTypeName = publicTypeName;
   }
 
   final _observableChecker = const TypeChecker.fromRuntime(MakeObservable);
@@ -89,6 +133,25 @@ class StoreMixinVisitor extends SimpleElementVisitor {
       return '';
     }
     return _storeTemplate.toString();
+  }
+
+  @override
+  void visitClassElement(ClassElement element) {
+    if (isValidAnnotatedStoreClass(element) &&
+        isValidMixinStoreClass(element)) {
+      _errors.invalidStoreDeclaration.addIf(true, element.name);
+    }
+  }
+
+  @override
+  void visitConstructorElement(ConstructorElement element) {
+    // Note that these constructor templates are only used for annotation stye
+    // store definition. They're ignored otherwise.
+    final template = ConstructorOverrideTemplate()
+      ..store = _storeTemplate
+      ..constructor = MethodOverrideTemplate.fromElement(element);
+
+    _storeTemplate.constructors.add(template);
   }
 
   @override
@@ -114,7 +177,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
     final template = ObservableTemplate()
       ..storeTemplate = _storeTemplate
       ..atomName = '_\$${element.name}Atom'
-      ..type = element.type.displayName
+      ..type = findVariableTypeName(element)
       ..name = element.name;
 
     _storeTemplate.observables.add(template);
@@ -145,7 +208,7 @@ class StoreMixinVisitor extends SimpleElementVisitor {
     final template = ComputedTemplate()
       ..computedName = '_\$${element.name}Computed'
       ..name = element.name
-      ..type = element.returnType.displayName;
+      ..type = findGetterTypeName(element);
     _storeTemplate.computeds.add(template);
 
     return;

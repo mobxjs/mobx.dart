@@ -7,8 +7,9 @@ import 'package:mockito/mockito.dart';
 
 class MockReaction extends Mock implements ReactionImpl {}
 
+// ignore: must_be_immutable
 class TestObserver extends Observer {
-  const TestObserver(this.reaction, {WidgetBuilder builder})
+  TestObserver(this.reaction, {WidgetBuilder builder})
       : super(builder: builder);
 
   final Reaction reaction;

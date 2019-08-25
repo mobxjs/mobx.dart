@@ -1,18 +1,20 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
 import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/template/util.dart';
+import 'package:mobx_codegen/src/type_names.dart';
 
+/// Stores templating information about constructors and methods.
 class MethodOverrideTemplate {
   MethodOverrideTemplate();
 
-  MethodOverrideTemplate.fromElement(MethodElement method) {
+  MethodOverrideTemplate.fromElement(ExecutableElement method) {
     // ignore: prefer_function_declarations_over_variables
-    final param = (ParameterElement elem) => ParamTemplate()
-      ..name = elem.name
-      ..type = elem.type.displayName
-      ..defaultValue = elem.defaultValueCode;
+    final param = (ParameterElement element) => ParamTemplate()
+      ..name = element.name
+      ..type = findParameterTypeName(element)
+      ..defaultValue = element.defaultValueCode
+      ..hasRequiredAnnotation = element.hasRequired;
 
     final positionalParams = method.parameters
         .where((param) => param.isPositional && !param.isOptionalPositional)
@@ -24,19 +26,15 @@ class MethodOverrideTemplate {
     final namedParams =
         method.parameters.where((param) => param.isNamed).toList();
 
-    final returnType = method.returnType;
-    final returnTypeArgs = returnType is ParameterizedType
-        ? returnType.typeArguments.map((p) => p.displayName).toList()
-        : <String>[];
-
     this
       ..name = method.name
-      ..returnType = method.returnType.displayName
+      ..returnType = findReturnTypeName(method)
       ..setTypeParams(method.typeParameters.map(typeParamTemplate))
       ..positionalParams = positionalParams.map(param)
       ..optionalParams = optionalParams.map(param)
       ..namedParams = namedParams.map(param)
-      ..returnTypeArgs = SurroundedCommaList('<', '>', returnTypeArgs);
+      ..returnTypeArgs = SurroundedCommaList(
+          '<', '>', findReturnTypeArgumentTypeNames(method));
   }
 
   String name;

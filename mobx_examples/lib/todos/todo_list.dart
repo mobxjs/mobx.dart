@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx_examples/todos/todo.dart';
+
+import 'todo.dart';
 
 part 'todo_list.g.dart';
 

@@ -60,12 +60,11 @@ class ObservableMap<K, V>
   @override
   void operator []=(K key, V value) {
     _context.conditionallyRunInAction(() {
-      V oldValue;
+      final oldValue = _map[key];
       var type = 'set';
 
       if (_hasListeners) {
         if (_map.containsKey(key)) {
-          oldValue = _map[key];
           type = 'update';
         } else {
           type = 'add';

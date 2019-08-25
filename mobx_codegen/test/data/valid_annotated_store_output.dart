@@ -1,11 +1,18 @@
-mixin _$User on UserBase, Store {
+class User extends _User {
+  User(int id) : super(id);
+
+  User.withNames({String firstName = 'Scott', String lastName})
+      : super.withNames(firstName: firstName, lastName: lastName);
+
+  User.withGenericList(List<int> ints) : super.withGenericList(ints);
+
   Computed<String> _$fullNameComputed;
 
   @override
   String get fullName =>
       (_$fullNameComputed ??= Computed<String>(() => super.fullName)).value;
 
-  final _$firstNameAtom = Atom(name: 'UserBase.firstName');
+  final _$firstNameAtom = Atom(name: '_User.firstName');
 
   @override
   String get firstName {
@@ -22,7 +29,7 @@ mixin _$User on UserBase, Store {
     }, _$firstNameAtom, name: '${_$firstNameAtom.name}_set');
   }
 
-  final _$lastNameAtom = Atom(name: 'UserBase.lastName');
+  final _$lastNameAtom = Atom(name: '_User.lastName');
 
   @override
   String get lastName {
@@ -72,15 +79,15 @@ mixin _$User on UserBase, Store {
         _$setAsyncFirstName2AsyncAction.run(() => super.setAsyncFirstName2()));
   }
 
-  final _$UserBaseActionController = ActionController(name: 'UserBase');
+  final _$_UserActionController = ActionController(name: '_User');
 
   @override
-  void updateNames({@required String firstName, String lastName}) {
-    final _$actionInfo = _$UserBaseActionController.startAction();
+  void updateNames({String firstName, String lastName}) {
+    final _$actionInfo = _$_UserActionController.startAction();
     try {
       return super.updateNames(firstName: firstName, lastName: lastName);
     } finally {
-      _$UserBaseActionController.endAction(_$actionInfo);
+      _$_UserActionController.endAction(_$actionInfo);
     }
   }
 }

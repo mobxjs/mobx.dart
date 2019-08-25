@@ -1,3 +1,10 @@
+class MakeStore {
+  const MakeStore._();
+}
+
+/// Declares a class as a store.
+const MakeStore store = MakeStore._();
+
 class MakeObservable {
   const MakeObservable._();
 }

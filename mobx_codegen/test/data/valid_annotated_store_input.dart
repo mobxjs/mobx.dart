@@ -1,14 +1,17 @@
 library generator_sample;
 
-import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
 
 part 'generator_sample.g.dart';
 
-class User = UserBase with _$User;
-
-abstract class UserBase with Store {
-  UserBase(this.id);
+@store
+// ignore: unused_element
+class _User {
+  _User(this.id);
+  _User.withNames({this.firstName = 'Scott', this.lastName}) : id = 0;
+  _User.withGenericList(List<int> ints) : id = 0 {
+    print(ints);
+  }
 
   final int id;
 
@@ -22,15 +25,18 @@ abstract class UserBase with Store {
   String get fullName => '$firstName $lastName';
 
   @action
-  void updateNames({@required String firstName, String lastName}) {
-    if (firstName != null) this.firstName = firstName;
-    if (lastName != null) this.lastName = firstName;
+  void updateNames({String firstName, String lastName}) {
+    if (firstName != null) {
+      this.firstName = firstName;
+    }
+
+    if (lastName != null) {
+      this.lastName = firstName;
+    }
   }
 
   @observable
-  Future<String> foobar() async {
-    return 'foobar';
-  }
+  Future<String> foobar() async => 'foobar';
 
   @observable
   Stream<T> loadStuff<T>(String arg1, {T value}) async* {

@@ -100,7 +100,7 @@ void main() {
   group('ObservableTemplate', () {
     test('renders template based on template data', () {
       final template = ObservableTemplate()
-        ..storeTemplate = (StoreTemplate()..parentName = 'ParentName')
+        ..storeTemplate = (MixinStoreTemplate()..parentTypeName = 'ParentName')
         ..atomName = '_atomFieldName'
         ..type = 'FieldType'
         ..name = 'fieldName';
@@ -197,7 +197,7 @@ void main() {
   group('ActionTemplate', () {
     test('renders properly', () {
       final template = ActionTemplate()
-        ..storeTemplate = (StoreTemplate()..parentName = 'ParentClass')
+        ..storeTemplate = (MixinStoreTemplate()..parentTypeName = 'ParentClass')
         ..method = (MethodOverrideTemplate()
           ..name = 'myAction'
           ..returnType = 'ReturnType'

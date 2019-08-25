@@ -1,3 +1,15 @@
+## 0.3.7
+
+- Fixes the type resolution bug that prevented using types from packages like `dart:ui`
+- Fixes the type resolution of other public `Store` classes referenced in the `@store` based generation
+
+Thanks to [@shyndman](https://github.com/shyndman) for the tremendous work on this release.
+
+## 0.3.6
+
+- Added new way to create `Store` classes using the `@store` annotation. This will exist as an alternative to the mixin based approach we already have.
+- Includes a new option for `reaction` for using a custom `EqualityComparator<T, T>`. This is useful when you want to avoid expensive reactions by plugging in a custom comparison function for the _previous_ and _next_ values of the predicate.
+
 ## 0.3.5 - 0.3.5+1
 
 - Fixed a bug where the `ObservableFuture<T>` would not show the correct status. This was happening because of the lazy evaluation strategy. We are now being eager in creating the status and monitoring the inner `Future<T>` immediately.

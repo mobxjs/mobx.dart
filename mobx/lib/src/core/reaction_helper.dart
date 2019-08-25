@@ -68,6 +68,7 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
     {String name,
     int delay,
     bool fireImmediately,
+    EqualityComparator equals,
     void Function(Object, Reaction) onError}) {
   ReactionImpl rxn;
 
@@ -91,12 +92,18 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
 
     rxn.track(() {
       final nextValue = predicate(rxn);
-      changed = firstTime || (nextValue != value);
+
+      // Use the equality-comparator if provided
+      final isEqual =
+          equals != null ? equals(nextValue, value) : (nextValue == value);
+
+      changed = firstTime || !isEqual;
       value = nextValue;
     });
 
     final canInvokeEffect =
         (firstTime && fireImmediately == true) || (!firstTime && changed);
+
     if (canInvokeEffect) {
       effectAction([value]);
     }
