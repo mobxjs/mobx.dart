@@ -6,9 +6,11 @@ class StoreFileTemplate {
   Iterable<String> storeSources;
 
   @override
-  String toString() => '''
-    $_analyzerIgnores
+  String toString() => storeSources.isEmpty
+      ? ''
+      : '''
+        $_analyzerIgnores
 
-    ${storeSources.join('\n\n')}
-  ''';
+        ${storeSources.join('\n\n')}
+        ''';
 }
