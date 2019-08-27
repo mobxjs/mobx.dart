@@ -36,7 +36,7 @@ abstract class _FieldState<T> with Store {
   T value;
 
   @observable
-  bool _isValidating;
+  bool _isValidating = false;
 
   final ErrorContext errorContext = ErrorContext();
 
