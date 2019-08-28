@@ -244,7 +244,7 @@ class SettingsExample extends StatelessWidget {
 }
 ```
 
-Using a non-default constructor here allows us to explicit declare that the `SettingsExample` class depends on the `SettingsStore` for it to function. Some developers may already be familiar with structuring code this way
+Using a non-default constructor here allows us to explicitly declare that the `SettingsExample` class depends on the `SettingsStore` for it to function. Some developers may already be familiar with structuring code this way
 when working with applications/frameworks that support constructor injection. An instance of the `SettingsStore` is passed through the `Consumer` widget as per the example code below
 
 ```dart
@@ -260,7 +260,7 @@ Example(
 ...
 ```
 
-A side effect of this is that writing widget tests become easier as well as we'd know what dependencies a widget has. We could then pass, say, mocks (e.g. using the [mockito][2] package] of said dependencies can be passed if required.
+A side effect of this is that writing widget tests become easier as well. Since the widget's dependencies have been made explicit, we could pass mocks (e.g. using the [mockito][2] package) of said dependencies if required.
 
 ### A variety of providers
 
