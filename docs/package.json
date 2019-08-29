@@ -11,12 +11,15 @@
     "build": "docz build --typescript"
   },
   "dependencies": {
-    "docz": "^1.2.0",
-    "docz-theme-default": "^1.2.0",
-    "styled-components": "^4.3.2"
+    "docz": "^2.0.0-rc.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "styled-components": "^4.3.2",
+    "typescript": "^3.6.2"
   },
   "devDependencies": {
-    "@types/react": "^16.9.2"
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0"
   },
   "bugs": {
     "url": "https://github.com/mobxjs/mobx.dart/issues"
