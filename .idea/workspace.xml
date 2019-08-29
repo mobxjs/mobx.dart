@@ -8,7 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/errors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/errors.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +47,7 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="flutter_mobx_forms" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -114,7 +115,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.tests in invalid_annotations_test.dart">
+  <component name="RunManager" selected="Dart Test.tests in mobx_codegen">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
@@ -176,12 +177,12 @@
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="Dart Test.mobx bug tests" />
+      <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
       <item itemvalue="Flutter.mobx_examples" />
       <item itemvalue="Flutter Test.flutter_mobx tests" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.pub:get:mobx" />
       <item itemvalue="npm.gen:flutter_mobx_forms" />
-      <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
     </list>
     <recent_temporary>
       <list>

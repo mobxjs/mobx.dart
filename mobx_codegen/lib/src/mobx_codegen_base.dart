@@ -55,7 +55,7 @@ class StoreGenerator extends Generator {
     ClassElement baseClass,
   ) sync* {
     // Strip off leading underscore
-    final publicTypeName = baseClass.name.replaceFirst(RegExp('_'), '');
+    final publicTypeName = baseClass.name.replaceFirst(RegExp('^_'), '');
     yield _generateCodeFromTemplate(
         publicTypeName, baseClass, SubclassStoreTemplate());
   }
