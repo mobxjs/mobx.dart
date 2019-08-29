@@ -29,10 +29,13 @@ class Observer extends StatefulWidget {
   final WidgetBuilder builder;
 
   @visibleForTesting
-  Reaction createReaction(Function() onInvalidate) {
+  Reaction createReaction(
+    Function() onInvalidate, {
+    Function(Object, Reaction) onError,
+  }) {
     final ctx = context ?? mainContext;
 
-    return ReactionImpl(ctx, onInvalidate, name: name);
+    return ReactionImpl(ctx, onInvalidate, name: name, onError: onError);
   }
 
   @override
@@ -50,7 +53,13 @@ class _ObserverState extends State<Observer> {
   void initState() {
     super.initState();
 
-    _reaction = widget.createReaction(_invalidate);
+    _reaction = widget.createReaction(_invalidate, onError: (e, _) {
+      // If we're receiving an error here, it's occurring internally in the
+      // setState() call, and e is a FlutterError instance (which preserves the
+      // stack). As such, we throw the exception so that it can be routed
+      // through Flutter's error handling machinery.
+      throw e;
+    });
   }
 
   void _invalidate() => setState(noOp);
