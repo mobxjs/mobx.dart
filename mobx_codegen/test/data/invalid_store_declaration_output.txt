@@ -1,2 +1,2 @@
 Could not make class "User" observable. Changes needed:
-  1. Store classes cannot be defined with both the @store annotation and Store mixin. Please choose one method or another. "_User"
+  1. Store classes cannot be defined with both the @store annotation and Store mixin. Please choose only one of the options for "_User".

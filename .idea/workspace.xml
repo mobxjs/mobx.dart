@@ -2,17 +2,14 @@
 <project version="4">
   <component name="AutoTestManager">
     <enabled-run-configurations>
+      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
       <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +47,7 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="flutter_mobx_forms" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,7 +63,7 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="11.14.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/flutter_mobx_forms" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/mobx_codegen/test/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -87,18 +84,18 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/flutter_mobx_forms" />
-      <recent name="$PROJECT_DIR$/mobx_codegen/test/data" />
-      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
-      <recent name="$PROJECT_DIR$/docs/src/guides" />
-      <recent name="$PROJECT_DIR$/docs/src/examples" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
       <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
       <recent name="$PROJECT_DIR$/docs/src/development" />
       <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
-      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/data" />
+      <recent name="$PROJECT_DIR$/flutter_mobx_forms" />
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
+      <recent name="$PROJECT_DIR$/docs/src/guides" />
+      <recent name="$PROJECT_DIR$/docs/src/examples" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -118,9 +115,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter.mobx_examples">
+  <component name="RunManager" selected="Dart Test.tests in mobx_codegen">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tests in invalid_annotations_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/mobx_codegen/test/invalid_annotations_test.dart" />
+      <option name="testName" value="invalid_annotations_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
@@ -171,34 +173,24 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/docs/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="Dart Test.mobx bug tests" />
+      <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
       <item itemvalue="Flutter.mobx_examples" />
       <item itemvalue="Flutter Test.flutter_mobx tests" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.pub:get:mobx" />
-      <item itemvalue="npm.start" />
       <item itemvalue="npm.gen:flutter_mobx_forms" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
         <item itemvalue="Flutter Test.flutter_mobx tests" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.gen:flutter_mobx_forms" />
-        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
@@ -256,9 +248,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="adding svg version of logo" />
-    <MESSAGE value="adding favicon" />
-    <MESSAGE value="reporting only when there is a change in set" />
     <MESSAGE value="reporting only when there is a change in map" />
     <MESSAGE value="version update to 0.3.4" />
     <MESSAGE value="bug fix for #238, version update to 0.3.5" />
@@ -281,7 +270,10 @@
     <MESSAGE value="using the location of the file as the default name of the Observer, when not provided" />
     <MESSAGE value="fixing analyzer issue" />
     <MESSAGE value="docs update" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs update" />
+    <MESSAGE value="Merge branch 'master' into codegen-checks&#10;&#10;# Conflicts:&#10;#&#9;.idea/libraries/Dart_Packages.xml&#10;#&#9;.idea/libraries/Flutter_Plugins.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;mobx/CHANGELOG.md&#10;#&#9;mobx/pubspec.yaml&#10;#&#9;mobx_codegen/CHANGELOG.md&#10;#&#9;mobx_codegen/lib/src/errors.dart&#10;#&#9;mobx_codegen/lib/src/mobx_codegen_base.dart&#10;#&#9;mobx_codegen/lib/src/template/method_override.dart&#10;#&#9;mobx_codegen/lib/src/template/store.dart&#10;#&#9;mobx_codegen/pubspec.yaml&#10;#&#9;mobx_codegen/test/data/valid_input.dart&#10;#&#9;mobx_codegen/test/data/valid_output.dart&#10;#&#9;mobx_codegen/test/invalid_annotations_test.dart&#10;#&#9;mobx_codegen/test/mobx_codegen_test.dart" />
+    <MESSAGE value="adding more error reporting" />
+    <MESSAGE value="fixing lint errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing lint errors" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
@@ -320,11 +312,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart</url>
-          <line>35</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/core/iterable.dart</url>
           <line>570</line>

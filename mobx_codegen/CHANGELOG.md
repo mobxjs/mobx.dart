@@ -1,3 +1,10 @@
+## 0.3.7
+
+- This is mostly about providing better error reporting on classes that don't meet the necessary constraints.
+  - A class using the Store mixin, must be marked abstract. This will be reported if not the case.
+  - A class using the @store annotation, must be marked private. This will be reported if not the case.
+- Bit of refactoring to separate things out a bit.
+
 ## 0.3.6
 
 - Fixes the type resolution bug that prevented using types from packages like `dart:ui`

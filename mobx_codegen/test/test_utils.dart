@@ -27,10 +27,10 @@ Future<String> generate(String source) async {
     '$pkgName|lib/generator_sample.dart': source,
   };
 
-  String error;
+  final errors = <String>[];
   void captureError(LogRecord logRecord) {
     if (logRecord.level == Level.SEVERE) {
-      error = logRecord.message;
+      errors.add(logRecord.message);
     }
   }
 
@@ -41,8 +41,9 @@ Future<String> generate(String source) async {
       writer: writer,
       onLog: captureError);
 
-  return error ??
-      String.fromCharCodes(
+  return errors.isNotEmpty
+      ? errors.join('\n')
+      : String.fromCharCodes(
           writer.assets[AssetId(pkgName, 'lib/generator_sample.g.dart')] ?? []);
 }
 

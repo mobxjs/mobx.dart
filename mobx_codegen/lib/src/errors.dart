@@ -6,7 +6,9 @@ abstract class CodegenError {
 class StoreClassCodegenErrors implements CodegenError {
   StoreClassCodegenErrors(this.name) {
     _errorCategories = [
-      invalidStoreDeclaration,
+      storeMixinPlusAnnotationDeclarations,
+      nonAbstractStoreMixinDeclarations,
+      nonPrivateStoreAnnotationDeclarations,
       invalidComputedAnnotations,
       invalidObservableAnnotations,
       invalidActionAnnotations,
@@ -20,17 +22,26 @@ class StoreClassCodegenErrors implements CodegenError {
 
   final String name;
 
-  final InvalidStoreDeclarations invalidStoreDeclaration =
-      InvalidStoreDeclarations();
+  final StoreMixinPlusAnnotationDeclarations
+      storeMixinPlusAnnotationDeclarations =
+      StoreMixinPlusAnnotationDeclarations();
+  final NonAbstractStoreMixinDeclarations nonAbstractStoreMixinDeclarations =
+      NonAbstractStoreMixinDeclarations();
+  final NonPrivateStoreAnnotationDeclarations
+      nonPrivateStoreAnnotationDeclarations =
+      NonPrivateStoreAnnotationDeclarations();
+
   final PropertyErrors finalObservables = FinalObservableFields();
   final PropertyErrors staticObservables = StaticObservableFields();
+  final PropertyErrors invalidObservableAnnotations =
+      InvalidObservableAnnotations();
+
+  final PropertyErrors invalidComputedAnnotations =
+      InvalidComputedAnnotations();
+
   final PropertyErrors staticMethods = InvalidStaticMethods();
   final PropertyErrors asyncGeneratorActions = AsyncGeneratorActionMethods();
   final PropertyErrors nonAsyncMethods = NonAsyncMethods();
-  final PropertyErrors invalidComputedAnnotations =
-      InvalidComputedAnnotations();
-  final PropertyErrors invalidObservableAnnotations =
-      InvalidObservableAnnotations();
   final PropertyErrors invalidActionAnnotations = InvalidActionAnnotations();
 
   List<CodegenError> _errorCategories;
@@ -56,7 +67,7 @@ const fieldPluralizer = Pluralize('the field', 'fields');
 const methodPluralizer = Pluralize('the method', 'methods');
 const memberPluralizer = Pluralize('the member', 'members');
 
-class InvalidStoreDeclarations implements CodegenError {
+abstract class _InvalidStoreDeclarations implements CodegenError {
   final NameList _classNames = NameList();
 
   // ignore: avoid_positional_boolean_parameters
@@ -64,16 +75,30 @@ class InvalidStoreDeclarations implements CodegenError {
     if (condition) {
       _classNames.add(className);
     }
+
     return condition;
   }
 
   @override
   bool get hasErrors => _classNames.isNotEmpty;
+}
 
+class StoreMixinPlusAnnotationDeclarations extends _InvalidStoreDeclarations {
   @override
-  String get message => 'Store classes cannot be defined with both the @store '
-      'annotation and Store mixin. Please choose one method or another. '
-      '$_classNames';
+  String get message =>
+      'Store classes cannot be defined with both the @store annotation and Store mixin. Please choose only one of the options for $_classNames.';
+}
+
+class NonAbstractStoreMixinDeclarations extends _InvalidStoreDeclarations {
+  @override
+  String get message =>
+      'Classes that use the Store mixin must be marked abstract. Affected classes: $_classNames.';
+}
+
+class NonPrivateStoreAnnotationDeclarations extends _InvalidStoreDeclarations {
+  @override
+  String get message =>
+      'Classes that use the @store annotation must be marked private. Affected classes: $_classNames.';
 }
 
 abstract class PropertyErrors implements CodegenError {
