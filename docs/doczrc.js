@@ -1,7 +1,7 @@
 export default {
     title: "MobX.dart",
     description:
-        "The MobX state-management library for building Dart and Flutter Apps.",
+        "Hassle free state-management for your Dart and Flutter Apps, using the power of Observables, Actions and Reactions.",
     src: "./src",
     files: "**/*.{md,markdown,mdx}",
     repository: "https://github.com/mobxjs/mobx.dart",
