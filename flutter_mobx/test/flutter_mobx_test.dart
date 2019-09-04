@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_mobx/src/observer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when;
 import 'package:mobx/src/core.dart';
@@ -15,7 +15,11 @@ class TestObserver extends Observer {
   final Reaction reaction;
 
   @override
-  Reaction createReaction(Function() onInvalidate) => reaction;
+  Reaction createReaction(
+    Function() onInvalidate, {
+    Function(Object, Reaction) onError,
+  }) =>
+      reaction;
 }
 
 // ignore: must_be_immutable
@@ -33,6 +37,28 @@ class LoggingObserver extends Observer {
     previousLog = msg;
     return super.log(msg);
   }
+}
+
+// ignore: must_be_immutable
+class FlutterErrorThrowingObserver extends Observer {
+  // ignore: prefer_const_constructors_in_immutables
+  FlutterErrorThrowingObserver({
+    @required WidgetBuilder builder,
+    @required this.errorToThrow,
+    Key key,
+  }) : super(key: key, builder: builder);
+
+  final Object errorToThrow;
+
+  @override
+  State<Observer> createState() => FlutterErrorThrowingObserverState();
+}
+
+class FlutterErrorThrowingObserverState extends ObserverState {
+  @override
+  void invalidate() =>
+      // ignore: avoid_as, only_throw_errors
+      throw (widget as FlutterErrorThrowingObserver).errorToThrow;
 }
 
 void stubTrack(MockReaction mock) {
@@ -131,6 +157,35 @@ void main() {
     expect(exception, isInstanceOf<MobXCaughtException>());
   });
 
+  testWidgets('Observer should report Flutter errors during invalidation',
+      (tester) async {
+    final exception = await _testThrowingObserver(
+      tester,
+      FlutterError('setState() failed!'),
+    );
+    expect(exception, isInstanceOf<FlutterError>());
+    // ignore: avoid_as
+    expect((exception as FlutterError).stackTrace, isNotNull);
+  });
+
+  testWidgets('Observer should report non-Flutter errors during invalidation',
+      (tester) async {
+    final exception = await _testThrowingObserver(
+      tester,
+      StateError('Something else happened'),
+    );
+    expect(exception, isInstanceOf<StateError>());
+  });
+
+  testWidgets('Observer should report exceptions during invalidation',
+      (tester) async {
+    final exception = await _testThrowingObserver(
+      tester,
+      Exception('Some exception'),
+    );
+    expect(exception, isInstanceOf<Exception>());
+  });
+
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
     final mock = MockReaction();
     stubTrack(mock);
@@ -171,4 +226,25 @@ void main() {
 
     expect(observer.previousLog, isNull);
   });
+}
+
+Future<Object> _testThrowingObserver(
+  WidgetTester tester,
+  Object errorToThrow,
+) async {
+  Object exception;
+  final prevOnError = FlutterError.onError;
+  FlutterError.onError = (details) => exception = details.exception;
+
+  try {
+    final count = Observable(0);
+    await tester.pumpWidget(FlutterErrorThrowingObserver(
+      errorToThrow: errorToThrow,
+      builder: (context) => Text(count.value.toString()),
+    ));
+    count.value++;
+    return exception;
+  } finally {
+    FlutterError.onError = prevOnError;
+  }
 }

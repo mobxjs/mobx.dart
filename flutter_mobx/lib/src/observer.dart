@@ -29,31 +29,41 @@ class Observer extends StatefulWidget {
   final WidgetBuilder builder;
 
   @visibleForTesting
-  Reaction createReaction(Function() onInvalidate) {
+  Reaction createReaction(
+    Function() onInvalidate, {
+    Function(Object, Reaction) onError,
+  }) {
     final ctx = context ?? mainContext;
 
-    return ReactionImpl(ctx, onInvalidate, name: name);
+    return ReactionImpl(ctx, onInvalidate, name: name, onError: onError);
   }
 
   @override
-  State<Observer> createState() => _ObserverState();
+  State<Observer> createState() => ObserverState();
 
   void log(String msg) {
     debugPrint(msg);
   }
 }
 
-class _ObserverState extends State<Observer> {
+@visibleForTesting
+class ObserverState extends State<Observer> {
   ReactionImpl _reaction;
 
   @override
   void initState() {
     super.initState();
 
-    _reaction = widget.createReaction(_invalidate);
+    _reaction = widget.createReaction(invalidate, onError: (e, _) {
+      FlutterError.reportError(FlutterErrorDetails(
+        library: 'flutter_mobx',
+        exception: e,
+        stack: e is FlutterError ? e.stackTrace : null,
+      ));
+    });
   }
 
-  void _invalidate() => setState(noOp);
+  void invalidate() => setState(noOp);
 
   static void noOp() {}
 
