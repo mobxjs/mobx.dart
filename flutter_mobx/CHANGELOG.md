@@ -1,3 +1,7 @@
+## 0.3.2
+
+- Errors that occur internal to the `setState()` call are now reported via `FlutterError.reportError` so they don't go unnoticed by the user.
+
 ## 0.3.0 - 0.3.1+1
 
 - Adapting to the API changes in `mobx 0.3.0`

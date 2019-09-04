@@ -2,14 +2,15 @@
 <project version="4">
   <component name="AutoTestManager">
     <enabled-run-configurations>
-      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
       <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
+      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/mobx_codegen_base.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +48,7 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="upgrade-docz" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -186,11 +187,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
-        <item itemvalue="Flutter Test.flutter_mobx tests" />
-        <item itemvalue="npm.pub:get:mobx_codegen" />
-        <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.gen:flutter_mobx_forms" />
+        <item itemvalue="npm.pub:get:mobx" />
+        <item itemvalue="npm.pub:get:mobx_codegen" />
+        <item itemvalue="Flutter Test.flutter_mobx tests" />
+        <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -248,7 +249,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="reporting only when there is a change in map" />
     <MESSAGE value="version update to 0.3.4" />
     <MESSAGE value="bug fix for #238, version update to 0.3.5" />
     <MESSAGE value="refactored tests to be file driven rather than putting as strings in test files" />
@@ -273,7 +273,8 @@
     <MESSAGE value="Merge branch 'master' into codegen-checks&#10;&#10;# Conflicts:&#10;#&#9;.idea/libraries/Dart_Packages.xml&#10;#&#9;.idea/libraries/Flutter_Plugins.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;mobx/CHANGELOG.md&#10;#&#9;mobx/pubspec.yaml&#10;#&#9;mobx_codegen/CHANGELOG.md&#10;#&#9;mobx_codegen/lib/src/errors.dart&#10;#&#9;mobx_codegen/lib/src/mobx_codegen_base.dart&#10;#&#9;mobx_codegen/lib/src/template/method_override.dart&#10;#&#9;mobx_codegen/lib/src/template/store.dart&#10;#&#9;mobx_codegen/pubspec.yaml&#10;#&#9;mobx_codegen/test/data/valid_input.dart&#10;#&#9;mobx_codegen/test/data/valid_output.dart&#10;#&#9;mobx_codegen/test/invalid_annotations_test.dart&#10;#&#9;mobx_codegen/test/mobx_codegen_test.dart" />
     <MESSAGE value="adding more error reporting" />
     <MESSAGE value="fixing lint errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing lint errors" />
+    <MESSAGE value="changed description" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed description" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
