@@ -105,7 +105,7 @@ class Engine extends _Engine {
   final _$_EngineActionController = ActionController(name: '_Engine');
 
   @override
-  dynamic swapInParts({dynamic from}) {
+  void swapInParts({Engine from}) {
     final _$actionInfo = _$_EngineActionController.startAction();
     try {
       return super.swapInParts(from: from);

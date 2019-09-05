@@ -32,7 +32,9 @@ String findParameterTypeName(ParameterElement parameter) {
     return _findInitializingParameterTypeName(parameter);
   }
 
-  final node = _findElementNode<NormalFormalParameter>(parameter);
+  final node =
+      _findElementNode<DefaultFormalParameter>(parameter)?.parameter ??
+      _findElementNode<NormalFormalParameter>(parameter);
   if (node is SimpleFormalParameter) {
     return node.type.toString();
   } else {
