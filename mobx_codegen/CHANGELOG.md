@@ -1,3 +1,7 @@
+## 0.3.8
+
+- Fixes a minor issue where types in generated code would appear as dynamic when they shouldn't.
+
 ## 0.3.7
 
 - This is mostly about providing better error reporting on classes that don't meet the necessary constraints.
