@@ -26,6 +26,7 @@ class _BoxModel {
     this.padding = Size.zero,
     this.margin = Size.zero,
     this.color,
+    Paragraph paragraph,
   });
 
   @observable
