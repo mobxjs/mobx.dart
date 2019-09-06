@@ -8,9 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/getting-started/index.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/getting-started/index.mdx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +84,7 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/docs/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -144,16 +146,6 @@
       <option name="testDir" value="$PROJECT_DIR$/flutter_mobx/test/" />
       <method v="2" />
     </configuration>
-    <configuration name="gen:flutter_mobx_forms" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="gen:flutter_mobx_forms" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="pub:get:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -174,6 +166,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/docs/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
@@ -183,15 +185,15 @@
       <item itemvalue="Flutter Test.flutter_mobx tests" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.pub:get:mobx" />
-      <item itemvalue="npm.gen:flutter_mobx_forms" />
+      <item itemvalue="npm.start" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
         <item itemvalue="Flutter Test.flutter_mobx tests" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx" />
-        <item itemvalue="npm.gen:flutter_mobx_forms" />
       </list>
     </recent_temporary>
   </component>
