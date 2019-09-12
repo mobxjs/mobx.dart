@@ -109,7 +109,7 @@ mixin _$FormStore on _FormStore, Store {
   final _$validateUsernameAsyncAction = AsyncAction('validateUsername');
 
   @override
-  Future<dynamic> validateUsername(String value) {
+  Future validateUsername(String value) {
     return _$validateUsernameAsyncAction
         .run(() => super.validateUsername(value));
   }
@@ -136,8 +136,6 @@ mixin _$FormStore on _FormStore, Store {
     }
   }
 }
-
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$FormErrorState on _FormErrorState, Store {
   Computed<bool> _$hasErrorsComputed;

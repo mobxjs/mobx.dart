@@ -8,12 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/settings/preferences_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/settings/preferences_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/settings/settings_store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/settings/settings_store.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/settings/settings_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/settings/settings_store.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/test/widget_test.dart" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,18 +89,18 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
-      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
-      <recent name="$PROJECT_DIR$/docs/src/development" />
-      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/mobx_codegen/test/data" />
       <recent name="$PROJECT_DIR$/flutter_mobx_forms" />
       <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
       <recent name="$PROJECT_DIR$/docs/src/guides" />
       <recent name="$PROJECT_DIR$/docs/src/examples" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
+      <recent name="$PROJECT_DIR$/docs/src/development" />
+      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -117,7 +120,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.tests in mobx_codegen">
+  <component name="RunManager" selected="Flutter.mobx_examples">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
@@ -136,15 +139,21 @@
       <option name="filePath" value="$PROJECT_DIR$/mobx_examples/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="flutter_mobx tests" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true">
-      <option name="testDir" value="$PROJECT_DIR$/flutter_mobx/test/" />
-      <method v="2" />
-    </configuration>
     <configuration name="gen:flutter_mobx_forms" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="gen:flutter_mobx_forms" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="gen:mobx_examples" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="gen:mobx_examples" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -185,19 +194,19 @@
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="Dart Test.mobx bug tests" />
       <item itemvalue="Flutter.mobx_examples" />
-      <item itemvalue="Flutter Test.flutter_mobx tests" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.pub:get:mobx" />
       <item itemvalue="npm.gen:flutter_mobx_forms" />
       <item itemvalue="npm.start" />
+      <item itemvalue="npm.gen:mobx_examples" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.gen:mobx_examples" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.gen:flutter_mobx_forms" />
         <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
-        <item itemvalue="Flutter Test.flutter_mobx tests" />
       </list>
     </recent_temporary>
   </component>
@@ -295,14 +304,18 @@
     <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" />
     <state width="444" height="466" key="DebuggerActiveHint" />
     <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" />
-    <state width="1189" height="333" key="GridCell.Tab.0.bottom" />
+    <state width="1109" height="312" key="GridCell.Tab.0.bottom" />
     <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" />
-    <state width="1189" height="333" key="GridCell.Tab.0.center" />
+    <state width="1109" height="312" key="GridCell.Tab.0.bottom/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.center" />
     <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" />
-    <state width="1189" height="333" key="GridCell.Tab.0.left" />
+    <state width="1109" height="312" key="GridCell.Tab.0.center/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.left" />
     <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" />
-    <state width="1189" height="333" key="GridCell.Tab.0.right" />
+    <state width="1109" height="312" key="GridCell.Tab.0.left/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.right" />
     <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.right/3360.2100" />
     <state x="468" y="248" key="RollbackChangesDialog" />
     <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" />
     <state x="334" y="187" key="SettingsEditor" />

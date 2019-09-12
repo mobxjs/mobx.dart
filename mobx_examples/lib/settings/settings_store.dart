@@ -8,17 +8,23 @@ class SettingsStore = _SettingsStore with _$SettingsStore;
 
 abstract class _SettingsStore with Store {
   _SettingsStore(this._preferencesService) {
-    useDarkMode = _preferencesService.useDarkMode;
+    _setup();
   }
 
   PreferencesService _preferencesService;
 
   @observable
-  bool useDarkMode;
+  bool useDarkMode = false;
 
   @action
-  void setDarkMode({@required bool value}) {
+  Future<void> setDarkMode({@required bool value}) async {
+    await _preferencesService.loaded;
     _preferencesService.useDarkMode = value;
     useDarkMode = value;
+  }
+
+  Future<void> _setup() async {
+    await _preferencesService.loaded;
+    useDarkMode = _preferencesService.useDarkMode;
   }
 }
