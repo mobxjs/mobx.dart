@@ -130,6 +130,19 @@ void main() {
       expect(change.newValue, 1);
     });
 
+    test('[]= reports an add change when there is a reaction', () {
+      MapChange change;
+      final map = ObservableMap<String, String>.of({});
+      var observed = false;
+
+      final d = reaction((_) => map['data'], (_) => observed = true);
+
+      expect(observed, isFalse);
+      map['data'] = 'hello';
+      expect(observed, isTrue);
+      d();
+    });
+
     test('[]= reports an update when there are listeners', () {
       MapChange change;
       final map = ObservableMap.of({'a': 0})..observe((c) => change = c);
