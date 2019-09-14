@@ -6,5 +6,6 @@ void main() {
     expect(observable, isNotNull);
     expect(computed, isNotNull);
     expect(action, isNotNull);
+    expect(store, isNotNull);
   });
 }

@@ -71,7 +71,7 @@ class Atom {
   }
 
   void _removeObserver(Derivation d) {
-    _observers.removeWhere((ob) => ob == d);
+    _observers.remove(d);
     if (_observers.isEmpty) {
       _context._enqueueForUnobservation(this);
     }

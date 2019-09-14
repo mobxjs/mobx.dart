@@ -1,0 +1,44 @@
+---
+menu: Developer
+route: /developer/release
+name: Release Guidelines
+---
+
+# Release Guidelines
+
+If you are a developer on the MobX project, here are few guidelines that will help in your journey. These apply to all the packages: `mobx`, `mobx_codegen`, `flutter_mobx`.
+
+### 1. `pubspec.yaml`
+
+- Use the [semantic versioning policy](https://dart.dev/tools/pub/versioning) to update the version in `pubspec.yaml`.
+- Say you are updating from `0.1.0` to `0.2.0`, then update the `version` field in `pubspec.yaml`:
+
+```yaml
+version: 0.2.0
+```
+
+### 2. Changelog
+
+- Update the `CHANGELOG.md` file to include the changes introduced in the new version. Normally you would do this by adding a new bullet point for the version and follow the template from earlier versions.
+- If the changes are minimal, you can also append the change to an earlier bullet point but include the new version as a range. For example, the changes in `0.3.2+3` were minimal, so we added it as a range from the earlier version.
+
+```markdown
+## 0.3.0 - 0.3.2+3
+```
+
+### 3. Publish
+
+Run the command `flutter packages pub publish` in the package folder. Assuming you have done all of the earlier steps, this should be just a matter of hitting the `y` key and publishing.
+
+```
+$> flutter packages pub publish
+Publishing mobx 0.3.3+2 to https://pub.dartlang.org:
+...
+...
+...
+...
+Looks great! Are you ready to upload your package (y/n)? y
+Uploading...
+Successfully uploaded package.
+
+```

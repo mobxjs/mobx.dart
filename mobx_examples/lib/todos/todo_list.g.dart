@@ -3,10 +3,54 @@
 part of 'todo_list.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+TodoList _$TodoListFromJson(Map<String, dynamic> json) {
+  return TodoList()
+    ..todos = const _ObservableListJsonConverter()
+        .fromJson(json['todos'] as List<Map<String, dynamic>>)
+    ..filter = _$enumDecodeNullable(_$VisibilityFilterEnumMap, json['filter'])
+    ..currentDescription = json['currentDescription'] as String;
+}
+
+Map<String, dynamic> _$TodoListToJson(TodoList instance) => <String, dynamic>{
+      'todos': const _ObservableListJsonConverter().toJson(instance.todos),
+      'filter': _$VisibilityFilterEnumMap[instance.filter],
+      'currentDescription': instance.currentDescription,
+    };
+
+T _$enumDecode<T>(Map<T, dynamic> enumValues, dynamic source) {
+  if (source == null) {
+    throw ArgumentError('A value must be provided. Supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+  return enumValues.entries
+      .singleWhere((e) => e.value == source,
+          orElse: () => throw ArgumentError(
+              '`$source` is not one of the supported values: '
+              '${enumValues.values.join(', ')}'))
+      .key;
+}
+
+T _$enumDecodeNullable<T>(Map<T, dynamic> enumValues, dynamic source) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<T>(enumValues, source);
+}
+
+const _$VisibilityFilterEnumMap = <VisibilityFilter, dynamic>{
+  VisibilityFilter.all: 'all',
+  VisibilityFilter.pending: 'pending',
+  VisibilityFilter.completed: 'completed'
+};
+
+// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TodoList on _TodoList, Store {
   Computed<ObservableList<Todo>> _$pendingTodosComputed;
@@ -62,46 +106,52 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   ObservableList<Todo> get todos {
+    _$todosAtom.context.enforceReadPolicy(_$todosAtom);
     _$todosAtom.reportObserved();
     return super.todos;
   }
 
   @override
   set todos(ObservableList<Todo> value) {
-    _$todosAtom.context.checkIfStateModificationsAreAllowed(_$todosAtom);
-    super.todos = value;
-    _$todosAtom.reportChanged();
+    _$todosAtom.context.conditionallyRunInAction(() {
+      super.todos = value;
+      _$todosAtom.reportChanged();
+    }, _$todosAtom, name: '${_$todosAtom.name}_set');
   }
 
   final _$filterAtom = Atom(name: '_TodoList.filter');
 
   @override
   VisibilityFilter get filter {
+    _$filterAtom.context.enforceReadPolicy(_$filterAtom);
     _$filterAtom.reportObserved();
     return super.filter;
   }
 
   @override
   set filter(VisibilityFilter value) {
-    _$filterAtom.context.checkIfStateModificationsAreAllowed(_$filterAtom);
-    super.filter = value;
-    _$filterAtom.reportChanged();
+    _$filterAtom.context.conditionallyRunInAction(() {
+      super.filter = value;
+      _$filterAtom.reportChanged();
+    }, _$filterAtom, name: '${_$filterAtom.name}_set');
   }
 
   final _$currentDescriptionAtom = Atom(name: '_TodoList.currentDescription');
 
   @override
   String get currentDescription {
+    _$currentDescriptionAtom.context
+        .enforceReadPolicy(_$currentDescriptionAtom);
     _$currentDescriptionAtom.reportObserved();
     return super.currentDescription;
   }
 
   @override
   set currentDescription(String value) {
-    _$currentDescriptionAtom.context
-        .checkIfStateModificationsAreAllowed(_$currentDescriptionAtom);
-    super.currentDescription = value;
-    _$currentDescriptionAtom.reportChanged();
+    _$currentDescriptionAtom.context.conditionallyRunInAction(() {
+      super.currentDescription = value;
+      _$currentDescriptionAtom.reportChanged();
+    }, _$currentDescriptionAtom, name: '${_$currentDescriptionAtom.name}_set');
   }
 
   final _$_TodoListActionController = ActionController(name: '_TodoList');
@@ -121,26 +171,6 @@ mixin _$TodoList on _TodoList, Store {
     final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.removeTodo(todo);
-    } finally {
-      _$_TodoListActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void changeDescription(String description) {
-    final _$actionInfo = _$_TodoListActionController.startAction();
-    try {
-      return super.changeDescription(description);
-    } finally {
-      _$_TodoListActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void changeFilter(VisibilityFilter filter) {
-    final _$actionInfo = _$_TodoListActionController.startAction();
-    try {
-      return super.changeFilter(filter);
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
     }

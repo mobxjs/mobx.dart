@@ -13,31 +13,34 @@ mixin _$Todo on TodoBase, Store {
 
   @override
   String get description {
+    _$descriptionAtom.context.enforceReadPolicy(_$descriptionAtom);
     _$descriptionAtom.reportObserved();
     return super.description;
   }
 
   @override
   set description(String value) {
-    _$descriptionAtom.context
-        .checkIfStateModificationsAreAllowed(_$descriptionAtom);
-    super.description = value;
-    _$descriptionAtom.reportChanged();
+    _$descriptionAtom.context.conditionallyRunInAction(() {
+      super.description = value;
+      _$descriptionAtom.reportChanged();
+    }, _$descriptionAtom, name: '${_$descriptionAtom.name}_set');
   }
 
   final _$doneAtom = Atom(name: 'TodoBase.done');
 
   @override
   bool get done {
+    _$doneAtom.context.enforceReadPolicy(_$doneAtom);
     _$doneAtom.reportObserved();
     return super.done;
   }
 
   @override
   set done(bool value) {
-    _$doneAtom.context.checkIfStateModificationsAreAllowed(_$doneAtom);
-    super.done = value;
-    _$doneAtom.reportChanged();
+    _$doneAtom.context.conditionallyRunInAction(() {
+      super.done = value;
+      _$doneAtom.reportChanged();
+    }, _$doneAtom, name: '${_$doneAtom.name}_set');
   }
 }
 
@@ -85,30 +88,34 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   ObservableList<Todo> get todos {
+    _$todosAtom.context.enforceReadPolicy(_$todosAtom);
     _$todosAtom.reportObserved();
     return super.todos;
   }
 
   @override
   set todos(ObservableList<Todo> value) {
-    _$todosAtom.context.checkIfStateModificationsAreAllowed(_$todosAtom);
-    super.todos = value;
-    _$todosAtom.reportChanged();
+    _$todosAtom.context.conditionallyRunInAction(() {
+      super.todos = value;
+      _$todosAtom.reportChanged();
+    }, _$todosAtom, name: '${_$todosAtom.name}_set');
   }
 
   final _$filterAtom = Atom(name: 'TodoListBase.filter');
 
   @override
   VisibilityFilter get filter {
+    _$filterAtom.context.enforceReadPolicy(_$filterAtom);
     _$filterAtom.reportObserved();
     return super.filter;
   }
 
   @override
   set filter(VisibilityFilter value) {
-    _$filterAtom.context.checkIfStateModificationsAreAllowed(_$filterAtom);
-    super.filter = value;
-    _$filterAtom.reportChanged();
+    _$filterAtom.context.conditionallyRunInAction(() {
+      super.filter = value;
+      _$filterAtom.reportChanged();
+    }, _$filterAtom, name: '${_$filterAtom.name}_set');
   }
 
   final _$currentDescriptionAtom =
@@ -116,16 +123,18 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   String get currentDescription {
+    _$currentDescriptionAtom.context
+        .enforceReadPolicy(_$currentDescriptionAtom);
     _$currentDescriptionAtom.reportObserved();
     return super.currentDescription;
   }
 
   @override
   set currentDescription(String value) {
-    _$currentDescriptionAtom.context
-        .checkIfStateModificationsAreAllowed(_$currentDescriptionAtom);
-    super.currentDescription = value;
-    _$currentDescriptionAtom.reportChanged();
+    _$currentDescriptionAtom.context.conditionallyRunInAction(() {
+      super.currentDescription = value;
+      _$currentDescriptionAtom.reportChanged();
+    }, _$currentDescriptionAtom, name: '${_$currentDescriptionAtom.name}_set');
   }
 
   final _$TodoListBaseActionController = ActionController(name: 'TodoListBase');

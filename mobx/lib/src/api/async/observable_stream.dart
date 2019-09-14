@@ -1,9 +1,7 @@
 part of '../async.dart';
 
-@experimental
 enum StreamStatus { waiting, active, done }
 
-@experimental
 class ObservableStream<T> implements Stream<T> {
   ObservableStream(Stream<T> stream,
       {T initialValue, bool cancelOnError = false, ReactiveContext context})
@@ -276,13 +274,13 @@ class _ObservableStreamController<T> {
 
   final ActionController _actions;
 
-  Observable<_ValueType> _valueType;
+  final Observable<_ValueType> _valueType;
   _ValueType get valueType => _valueType.value;
 
-  Observable _data;
+  final Observable _data;
   dynamic get data => _data.value;
 
-  Observable<StreamStatus> _status;
+  final Observable<StreamStatus> _status;
   StreamStatus get status => _status.value;
 
   int _listenCount = 0;

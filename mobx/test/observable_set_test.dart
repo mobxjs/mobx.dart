@@ -7,7 +7,7 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffEnforceActions();
+  turnOffWritePolicy();
 
   group('ObservableSet', () {
     test('linkedHashSetFrom creates a set that iterates at insertion order',
@@ -66,6 +66,25 @@ void main() {
       expect(changes[0].value, equals(1));
       expect(changes[1].type, equals(OperationType.add));
       expect(changes[1].value, equals(2));
+    });
+
+    test('SetChange asserts non-null parameters', () {
+      expect(
+        () => SetChange(
+          object: null, //!
+          type: OperationType.add,
+          value: 1,
+        ),
+        throwsA(anything),
+      );
+      expect(
+        () => SetChange(
+          object: ObservableSet(),
+          type: null, //!
+          value: 1,
+        ),
+        throwsA(anything),
+      );
     });
 
     group('fires reportObserved() for read methods', () {

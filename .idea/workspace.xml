@@ -3,16 +3,14 @@
   <component name="AutoTestManager">
     <enabled-run-configurations>
       <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
+      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mobx.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/design/mobx.afdesign" beforeDir="false" afterPath="$PROJECT_DIR$/docs/design/mobx.afdesign" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/async/observable_stream.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/async/observable_stream.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,32 +36,34 @@
     <expand />
     <select />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>assert</find>
-      <find>async</find>
-      <find>binary</find>
-      <find>runUnary</find>
-    </findStrings>
-    <dirStrings>
-      <dir>$PROJECT_DIR$/mobx/lib</dir>
-      <dir>$PROJECT_DIR$/mobx_examples/lib</dir>
-    </dirStrings>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="upgrade-docz" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1QoGq0elLnt3qPB4zSPbN6lejEo" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
-    <option name="showLibraryContents" value="true" />
+  <component name="ProjectId" id="1MoOcfJsK6jtaCzz6uiT3f51UhF" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Dart" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="javascript.nodejs.core.library.configured.version" value="10.10.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="11.14.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/mobx_codegen/test/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -78,13 +78,30 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/data" />
+      <recent name="$PROJECT_DIR$/flutter_mobx_forms" />
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
+      <recent name="$PROJECT_DIR$/docs/src/guides" />
+      <recent name="$PROJECT_DIR$/docs/src/examples" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
+      <recent name="$PROJECT_DIR$/docs/src/development" />
+      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="pub:get:mobx_codegen" />
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -99,6 +116,10 @@
     </option>
   </component>
   <component name="RunManager" selected="Dart Test.tests in mobx">
+    <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/mobx" />
       <option name="scope" value="FOLDER" />
@@ -113,8 +134,14 @@
       <option name="filePath" value="$PROJECT_DIR$/mobx_examples/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in flutter_mobx" type="FlutterTestConfigType" factoryName="Flutter Test">
-      <option name="testDir" value="$PROJECT_DIR$/flutter_mobx/test/" />
+    <configuration name="gen:flutter_mobx_forms" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="gen:flutter_mobx_forms" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="gen:mobx_examples" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -127,25 +154,98 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="pub:get:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="pub:get:mobx" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="pub:get:mobx_codegen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="pub:get:mobx_codegen" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/docs/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
+      <item itemvalue="Dart Test.mobx bug tests" />
       <item itemvalue="Flutter.mobx_examples" />
-      <item itemvalue="Flutter Test.tests in flutter_mobx" />
+      <item itemvalue="npm.pub:get:mobx_codegen" />
+      <item itemvalue="npm.pub:get:mobx" />
+      <item itemvalue="npm.gen:flutter_mobx_forms" />
+      <item itemvalue="npm.start" />
       <item itemvalue="npm.gen:mobx_examples" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="npm.gen:mobx_examples" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.gen:flutter_mobx_forms" />
+        <item itemvalue="npm.pub:get:mobx" />
+        <item itemvalue="npm.pub:get:mobx_codegen" />
       </list>
     </recent_temporary>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/Users/pavpodil/Projects/github/mobx.dart/flutter_mobx" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -159,118 +259,92 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="updating readmes, removing the example code in mobx_codegen, fixing the flag in codecov.yml" />
-    <MESSAGE value="removing the code coverage for mobx_codegen/example" />
-    <MESSAGE value="tightening the coverage range in codecov" />
-    <MESSAGE value=".idea files to keep the project config in place" />
-    <MESSAGE value="improving test coverage" />
-    <MESSAGE value="removing the assertion check in async_actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="removing the assertion check in async_actions" />
+    <MESSAGE value="refactored tests to be file driven rather than putting as strings in test files" />
+    <MESSAGE value="fixing dart analyzer issues" />
+    <MESSAGE value="upgrading test_coverage" />
+    <MESSAGE value="invalid @action checks" />
+    <MESSAGE value="fixing analyzer issues" />
+    <MESSAGE value="fixing tests" />
+    <MESSAGE value="increasing coverage" />
+    <MESSAGE value="0.3.6-alpha" />
+    <MESSAGE value="adding a small test for increasing coverage" />
+    <MESSAGE value="updated changelog" />
+    <MESSAGE value="fixing analyzer lint error" />
+    <MESSAGE value="minor tweaks to the docs" />
+    <MESSAGE value="runBinary in a zone is not being used for AsyncActions, so commenting it out for now" />
+    <MESSAGE value="minor tweaks to the community.md file" />
+    <MESSAGE value="adding a new package flutter_mobx_forms" />
+    <MESSAGE value="package updates" />
+    <MESSAGE value="using the location of the file as the default name of the Observer, when not provided" />
+    <MESSAGE value="fixing analyzer issue" />
+    <MESSAGE value="docs update" />
+    <MESSAGE value="Merge branch 'master' into codegen-checks&#10;&#10;# Conflicts:&#10;#&#9;.idea/libraries/Dart_Packages.xml&#10;#&#9;.idea/libraries/Flutter_Plugins.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;mobx/CHANGELOG.md&#10;#&#9;mobx/pubspec.yaml&#10;#&#9;mobx_codegen/CHANGELOG.md&#10;#&#9;mobx_codegen/lib/src/errors.dart&#10;#&#9;mobx_codegen/lib/src/mobx_codegen_base.dart&#10;#&#9;mobx_codegen/lib/src/template/method_override.dart&#10;#&#9;mobx_codegen/lib/src/template/store.dart&#10;#&#9;mobx_codegen/pubspec.yaml&#10;#&#9;mobx_codegen/test/data/valid_input.dart&#10;#&#9;mobx_codegen/test/data/valid_output.dart&#10;#&#9;mobx_codegen/test/invalid_annotations_test.dart&#10;#&#9;mobx_codegen/test/mobx_codegen_test.dart" />
+    <MESSAGE value="adding more error reporting" />
+    <MESSAGE value="fixing lint errors" />
+    <MESSAGE value="changed description" />
+    <MESSAGE value="flutter_mobx updated to 0.3.2" />
+    <MESSAGE value="updating with some changes with initial load of preferences" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating with some changes with initial load of preferences" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="648" y="296" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" />
-    <state x="648" y="296" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1920.1080/3840.2160" />
-    <state width="1519" height="356" key="GridCell.Tab.0.bottom" />
-    <state width="1519" height="356" key="GridCell.Tab.0.bottom/1920.1080/3840.2160" />
-    <state width="1519" height="356" key="GridCell.Tab.0.center" />
-    <state width="1519" height="356" key="GridCell.Tab.0.center/1920.1080/3840.2160" />
-    <state width="1519" height="356" key="GridCell.Tab.0.left" />
-    <state width="1519" height="356" key="GridCell.Tab.0.left/1920.1080/3840.2160" />
-    <state width="1519" height="356" key="GridCell.Tab.0.right" />
-    <state width="1519" height="356" key="GridCell.Tab.0.right/1920.1080/3840.2160" />
-    <state width="1519" height="356" key="GridCell.Tab.1.bottom" />
-    <state width="1519" height="356" key="GridCell.Tab.1.bottom/1920.1080/3840.2160" />
-    <state width="1519" height="356" key="GridCell.Tab.1.center" />
-    <state width="1519" height="356" key="GridCell.Tab.1.center/1920.1080/3840.2160" />
-    <state width="1519" height="356" key="GridCell.Tab.1.left" />
-    <state width="1519" height="356" key="GridCell.Tab.1.left/1920.1080/3840.2160" />
-    <state width="1519" height="356" key="GridCell.Tab.1.right" />
-    <state width="1519" height="356" key="GridCell.Tab.1.right/1920.1080/3840.2160" />
-    <state width="500" height="445" key="SwitcherDM" />
-    <state width="500" height="445" key="SwitcherDM/1920.1080/3840.2160" />
+    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
+    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.1080/3840.2160/3360.2100" />
+    <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser" />
+    <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser/1920.1080/3840.2160/3360.2100" />
+    <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" />
+    <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1920.1080/3840.2160/3360.2100" />
+    <state x="713" y="250" key="#xdebugger.evaluate" />
+    <state x="713" y="250" key="#xdebugger.evaluate/1920.1080/3840.2160/3360.2100" />
+    <state x="351" y="147" key="CommitChangelistDialog2" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" />
+    <state width="444" height="466" key="DebuggerActiveHint" />
+    <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.bottom" />
+    <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.bottom/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.center" />
+    <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.center/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.left" />
+    <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.left/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.right" />
+    <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.right/3360.2100" />
+    <state x="468" y="248" key="RollbackChangesDialog" />
+    <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" />
+    <state x="334" y="187" key="SettingsEditor" />
+    <state x="334" y="187" key="SettingsEditor/1920.1080/3840.2160/3360.2100" />
+    <state x="524" y="262" key="Vcs.Push.Dialog" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" />
+    <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" />
+    <state width="840" height="513" key="XDebugger.FullValuePopup" />
+    <state width="840" height="513" key="XDebugger.FullValuePopup/1920.1080/3840.2160/3360.2100" />
+    <state x="320" y="229" width="939" height="615" key="find.popup" />
+    <state x="320" y="229" width="939" height="615" key="find.popup/1920.1080/3840.2160/3360.2100" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1920.1080/3840.2160/3360.2100" />
   </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>dart|mobx</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/core/iterable.dart</url>
+          <line>570</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="dart-exception">
+          <properties>
+            <option name="breakOnAllExceptions" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/mobx_dart$flutter_mobx_test_dart.json" NAME="flutter_mobx_test.dart Coverage Results" MODIFIED="1566611968510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="DartCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" CONTEXT_FILE_PATH="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" />
   </component>
 </project>

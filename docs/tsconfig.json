@@ -4,6 +4,7 @@
     "target": "es5",
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "jsx": "react"
   },
   "exclude": [

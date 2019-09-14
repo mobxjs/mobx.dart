@@ -9,11 +9,11 @@ class TestFieldErrors extends PropertyErrors {
 void main() {
   group('Pluralize', () {
     test('Pluralize.call returns single string when count is 1', () {
-      expect(Pluralize('the item', 'items').call(1), 'the item');
+      expect(const Pluralize('the item', 'items').call(1), 'the item');
     });
 
     test('Pluralize.call returns multiple string when count is not 1', () {
-      expect(Pluralize('the item', 'items').call(2), 'items');
+      expect(const Pluralize('the item', 'items').call(2), 'items');
     });
   });
 
@@ -64,42 +64,40 @@ void main() {
     test(
         'returns a formatted message when a field is added and the condition is true',
         () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField');
+      final errors = TestFieldErrors()..addIf(true, 'testField');
       expect(errors.message, equals('test the field "testField"'));
     });
 
     test(
         'returns a formatted message when multiple fields are added and the condition is true',
         () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField1');
-      errors.addIf(true, 'testField2');
+      final errors = TestFieldErrors()
+        ..addIf(true, 'testField1')
+        ..addIf(true, 'testField2');
       expect(
           errors.message, equals('test fields "testField1" and "testField2"'));
     });
 
     test('does not add field if condition is false', () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField1');
-      errors.addIf(false, 'testField2');
+      final errors = TestFieldErrors()
+        ..addIf(true, 'testField1')
+        ..addIf(false, 'testField2');
       expect(errors.message, equals('test the field "testField1"'));
     });
 
     test(
         ".property returns singular property string if there's only one item added",
         () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField');
+      final errors = TestFieldErrors()..addIf(true, 'testField');
       expect(errors.property, equals('the field'));
     });
 
     test(
         ".property returns plural property string if there's more than one item added",
         () {
-      final errors = TestFieldErrors();
-      errors.addIf(true, 'testField1');
-      errors.addIf(true, 'testField2');
+      final errors = TestFieldErrors()
+        ..addIf(true, 'testField1')
+        ..addIf(true, 'testField2');
       expect(errors.property, equals('fields'));
     });
   });
@@ -108,7 +106,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = FinalObservableFields()..addIf(true, 'testField');
       expect(
-          fields.message, 'Remove final modifier from the field "testField"');
+          fields.message, 'Remove final modifier from the field "testField".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -116,7 +114,7 @@ void main() {
         ..addIf(true, 'testField1')
         ..addIf(true, 'testField2');
       expect(fields.message,
-          'Remove final modifier from fields "testField1" and "testField2"');
+          'Remove final modifier from fields "testField1" and "testField2".');
     });
   });
 
@@ -124,7 +122,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = StaticObservableFields()..addIf(true, 'testField');
       expect(
-          fields.message, 'Remove static modifier from the field "testField"');
+          fields.message, 'Remove static modifier from the field "testField".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -132,7 +130,7 @@ void main() {
         ..addIf(true, 'testField1')
         ..addIf(true, 'testField2');
       expect(fields.message,
-          'Remove static modifier from fields "testField1" and "testField2"');
+          'Remove static modifier from fields "testField1" and "testField2".');
     });
   });
 
@@ -140,7 +138,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = AsyncGeneratorActionMethods()..addIf(true, 'testMethod');
       expect(fields.message,
-          'Replace async* modifier with async from the method "testMethod"');
+          'Replace async* modifier with async from the method "testMethod".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -148,7 +146,7 @@ void main() {
         ..addIf(true, 'testMethod1')
         ..addIf(true, 'testMethod2');
       expect(fields.message,
-          'Replace async* modifier with async from methods "testMethod1" and "testMethod2"');
+          'Replace async* modifier with async from methods "testMethod1" and "testMethod2".');
     });
   });
 
@@ -156,7 +154,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = InvalidStaticMethods()..addIf(true, 'testMethod');
       expect(fields.message,
-          'Remove static modifier from the method "testMethod"');
+          'Remove static modifier from the method "testMethod".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -164,7 +162,7 @@ void main() {
         ..addIf(true, 'testMethod1')
         ..addIf(true, 'testMethod2');
       expect(fields.message,
-          'Remove static modifier from methods "testMethod1" and "testMethod2"');
+          'Remove static modifier from methods "testMethod1" and "testMethod2".');
     });
   });
 
@@ -172,7 +170,7 @@ void main() {
     test('message returns singular message with one field added', () {
       final fields = NonAsyncMethods()..addIf(true, 'testMethod');
       expect(fields.message,
-          'Return a Future or a Stream from the method "testMethod"');
+          'Return a Future or a Stream from the method "testMethod".');
     });
 
     test('message returns plural message with multiple fields added', () {
@@ -180,7 +178,7 @@ void main() {
         ..addIf(true, 'testMethod1')
         ..addIf(true, 'testMethod2');
       expect(fields.message,
-          'Return a Future or a Stream from methods "testMethod1" and "testMethod2"');
+          'Return a Future or a Stream from methods "testMethod1" and "testMethod2".');
     });
   });
 }

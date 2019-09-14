@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/utils.dart';
 
@@ -23,6 +22,12 @@ class MobXException implements Exception {
   String message;
 }
 
+class MobXCyclicReactionException implements Exception {
+  MobXCyclicReactionException(this.message);
+
+  String message;
+}
+
 class MobXCaughtException implements Exception {
   MobXCaughtException(exception) : _exception = exception;
 
@@ -34,3 +39,4 @@ class MobXCaughtException implements Exception {
 }
 
 typedef Dispose = void Function();
+typedef EqualityComparator<T> = bool Function(T, T);

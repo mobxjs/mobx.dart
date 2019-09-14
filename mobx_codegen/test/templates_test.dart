@@ -52,6 +52,7 @@ void main() {
     });
 
     test('constructor throws if templates list is null', () {
+      // ignore: unnecessary_lambdas
       expect(() => CommaList(null).toString(), throwsA(anything));
     });
   });
@@ -68,10 +69,13 @@ void main() {
     });
 
     test('constructor throws if any argument is null', () {
+      // ignore: unnecessary_lambdas
       expect(() => SurroundedCommaList(null, ')', ['A']).toString(),
           throwsA(anything));
+      // ignore: unnecessary_lambdas
       expect(() => SurroundedCommaList('(', null, ['B']).toString(),
           throwsA(anything));
+      // ignore: unnecessary_lambdas
       expect(() => SurroundedCommaList('(', ')', null).toString(),
           throwsA(anything));
     });
@@ -84,6 +88,7 @@ void main() {
         ..type = 'ReturnType'
         ..name = 'computedField';
 
+      // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
   Computed<ReturnType> computedName;
 
@@ -95,7 +100,7 @@ void main() {
   group('ObservableTemplate', () {
     test('renders template based on template data', () {
       final template = ObservableTemplate()
-        ..storeTemplate = (StoreTemplate()..parentName = 'ParentName')
+        ..storeTemplate = (MixinStoreTemplate()..parentTypeName = 'ParentName')
         ..atomName = '_atomFieldName'
         ..type = 'FieldType'
         ..name = 'fieldName';
@@ -105,15 +110,17 @@ void main() {
 
   @override
   FieldType get fieldName {
+    _atomFieldName.context.enforceReadPolicy(_atomFieldName);
     _atomFieldName.reportObserved();
     return super.fieldName;
   }
 
   @override
   set fieldName(FieldType value) {
-    _atomFieldName.context.checkIfStateModificationsAreAllowed(_atomFieldName);
-    super.fieldName = value;
-    _atomFieldName.reportChanged();
+    _atomFieldName.context.conditionallyRunInAction(() {
+      super.fieldName = value;
+      _atomFieldName.reportChanged();
+    }, _atomFieldName, name: '\${_atomFieldName.name}_set');
   }"""));
     });
   });
@@ -190,7 +197,7 @@ void main() {
   group('ActionTemplate', () {
     test('renders properly', () {
       final template = ActionTemplate()
-        ..storeTemplate = (StoreTemplate()..parentName = 'ParentClass')
+        ..storeTemplate = (MixinStoreTemplate()..parentTypeName = 'ParentClass')
         ..method = (MethodOverrideTemplate()
           ..name = 'myAction'
           ..returnType = 'ReturnType'
@@ -225,6 +232,7 @@ void main() {
               ..defaultValue = '3'
           ]);
 
+      // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
     @override
     ReturnType myAction<T, S extends String>(T arg1, [S arg2 = "arg2value", String arg3], {String namedArg1 = "default", int namedArg2 = 3}) {
@@ -276,6 +284,7 @@ void main() {
               ..defaultValue = '3'
           ]);
 
+      // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
   @override
   ObservableFuture<T> fetchData<T, S extends String>(T arg1, [S arg2 = "arg2value", String arg3], {String namedArg1 = "default", int namedArg2 = 3}) {

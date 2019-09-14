@@ -48,20 +48,25 @@ class ObservableList<T>
 
   @override
   int get length {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.length;
   }
 
   @override
   set length(int value) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.length = value;
-    _notifyListUpdate(0, null, null);
+    /// There is no need to enforceWritePolicy since we are conditionally wrapping in an Action.
+    _context.conditionallyRunInAction(() {
+      _list.length = value;
+      _notifyListUpdate(0, null, null);
+    }, _atom);
   }
 
   @override
   List<T> operator +(List<T> other) {
+    _context.enforceReadPolicy(_atom);
+
     final newList = _list + other;
     _atom.reportObserved();
     return newList;
@@ -69,64 +74,78 @@ class ObservableList<T>
 
   @override
   T operator [](int index) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list[index];
   }
 
   @override
   void operator []=(int index, T value) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.conditionallyRunInAction(() {
+      final oldValue = _list[index];
 
-    final oldValue = _list[index];
-
-    if (oldValue != value) {
-      _list[index] = value;
-      _notifyChildUpdate(index, value, oldValue);
-    }
+      if (oldValue != value) {
+        _list[index] = value;
+        _notifyChildUpdate(index, value, oldValue);
+      }
+    }, _atom);
   }
 
   @override
   void add(T element) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.add(element);
-    _notifyListUpdate(_list.length, [element], null);
+    _context.conditionallyRunInAction(() {
+      final index = _list.length;
+      _list.add(element);
+      _notifyListUpdate(index, [element], null);
+    }, _atom);
   }
 
   @override
   void addAll(Iterable<T> iterable) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.addAll(iterable);
-    _notifyListUpdate(0, iterable.toList(growable: false), null);
+    _context.conditionallyRunInAction(() {
+      final index = _list.length;
+      _list.addAll(iterable);
+      _notifyListUpdate(index, iterable.toList(growable: false), null);
+    }, _atom);
   }
 
   @override
   Iterator<T> get iterator {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.iterator;
   }
 
   @override
   int lastIndexWhere(bool Function(T element) test, [int start]) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.lastIndexWhere(test, start);
   }
 
   @override
   T lastWhere(bool Function(T element) test, {T Function() orElse}) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.lastWhere(test, orElse: orElse);
   }
 
   @override
   T get single {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.single;
   }
 
   @override
   List<T> sublist(int start, [int end]) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.sublist(start, end);
   }
@@ -139,154 +158,169 @@ class ObservableList<T>
 
   @override
   List<T> toList({bool growable = true}) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _list.toList(growable: growable);
   }
 
   @override
   set first(T value) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.conditionallyRunInAction(() {
+      final oldValue = _list.first;
 
-    final oldValue = _list.first;
-
-    _list.first = value;
-    _notifyChildUpdate(0, value, oldValue);
+      _list.first = value;
+      _notifyChildUpdate(0, value, oldValue);
+    }, _atom);
   }
 
   @override
   void clear() {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    final oldItems = _list.toList(growable: false);
-    _list.clear();
-    _notifyListUpdate(0, null, oldItems);
+    _context.conditionallyRunInAction(() {
+      final oldItems = _list.toList(growable: false);
+      _list.clear();
+      _notifyListUpdate(0, null, oldItems);
+    }, _atom);
   }
 
   @override
   void fillRange(int start, int end, [T fill]) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.conditionallyRunInAction(() {
+      final oldContents = _list.sublist(start, end);
 
-    _list.fillRange(start, end, fill);
-    _notifyListUpdate(start, null, null);
+      _list.fillRange(start, end, fill);
+
+      final newContents = _list.sublist(start, end);
+
+      _notifyListUpdate(start, newContents, oldContents);
+    }, _atom);
   }
 
   @override
   void insert(int index, T element) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.insert(index, element);
-    _notifyListUpdate(index, [element], null);
+    _context.conditionallyRunInAction(() {
+      _list.insert(index, element);
+      _notifyListUpdate(index, [element], null);
+    }, _atom);
   }
 
   @override
   void insertAll(int index, Iterable<T> iterable) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.insertAll(index, iterable);
-    _notifyListUpdate(index, iterable.toList(growable: false), null);
+    _context.conditionallyRunInAction(() {
+      _list.insertAll(index, iterable);
+      _notifyListUpdate(index, iterable.toList(growable: false), null);
+    }, _atom);
   }
 
   @override
   bool remove(Object element) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    var didRemove = false;
 
-    final index = _list.indexOf(element);
-    final didRemove = _list.remove(element);
+    _context.conditionallyRunInAction(() {
+      final index = _list.indexOf(element);
+      didRemove = _list.remove(element);
 
-    if (didRemove) {
-      _notifyListUpdate(index, null, element == null ? null : [element]);
-    }
+      if (didRemove) {
+        _notifyListUpdate(index, null, element == null ? null : [element]);
+      }
+    }, _atom);
 
     return didRemove;
   }
 
   @override
   T removeAt(int index) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    T value;
 
-    final value = _list.removeAt(index);
-    _notifyListUpdate(index, null, value == null ? null : [value]);
+    _context.conditionallyRunInAction(() {
+      value = _list.removeAt(index);
+      _notifyListUpdate(index, null, value == null ? null : [value]);
+    }, _atom);
+
     return value;
   }
 
   @override
   T removeLast() {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    T value;
 
-    final value = _list.removeLast();
+    _context.conditionallyRunInAction(() {
+      value = _list.removeLast();
 
-    // Index is _list.length as it points to the index before the last element is removed
-    _notifyListUpdate(_list.length, null, value == null ? null : [value]);
+      // Index is _list.length as it points to the index before the last element is removed
+      _notifyListUpdate(_list.length, null, value == null ? null : [value]);
+    }, _atom);
 
     return value;
   }
 
   @override
   void removeRange(int start, int end) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    final removedItems = _list.sublist(start, end);
-    _list.removeRange(start, end);
-    _notifyListUpdate(start, null, removedItems);
+    _context.conditionallyRunInAction(() {
+      final removedItems = _list.sublist(start, end);
+      _list.removeRange(start, end);
+      _notifyListUpdate(start, null, removedItems);
+    }, _atom);
   }
 
   @override
   void removeWhere(bool Function(T element) test) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    final removedItems = _list.where(test).toList(growable: false);
-    _list.removeWhere(test);
-    _notifyListUpdate(0, null, removedItems);
+    _context.conditionallyRunInAction(() {
+      final removedItems = _list.where(test).toList(growable: false);
+      _list.removeWhere(test);
+      _notifyListUpdate(0, null, removedItems);
+    }, _atom);
   }
 
   @override
   void replaceRange(int start, int end, Iterable<T> newContents) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.replaceRange(start, end, newContents);
-    _notifyListUpdate(start, null, null);
+    _context.conditionallyRunInAction(() {
+      final oldContents = _list.sublist(start, end);
+      _list.replaceRange(start, end, newContents);
+      _notifyListUpdate(start, newContents, oldContents);
+    }, _atom);
   }
 
   @override
   void retainWhere(bool Function(T element) test) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.conditionallyRunInAction(() {
+      final removedItems = _list.where((_) => !test(_)).toList(growable: false);
 
-    final removedItems = _list.where((_) => !test(_)).toList(growable: false);
-
-    _list.retainWhere(test);
-    _notifyListUpdate(0, null, removedItems);
+      _list.retainWhere(test);
+      _notifyListUpdate(0, null, removedItems);
+    }, _atom);
   }
 
   @override
   void setAll(int index, Iterable<T> iterable) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.setAll(index, iterable);
-    _notifyListUpdate(index, null, null);
+    _context.conditionallyRunInAction(() {
+      _list.setAll(index, iterable);
+      _notifyListUpdate(index, null, null);
+    }, _atom);
   }
 
   @override
   void setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.setRange(start, end, iterable, skipCount);
-    _notifyListUpdate(start, null, null);
+    _context.conditionallyRunInAction(() {
+      _list.setRange(start, end, iterable, skipCount);
+      _notifyListUpdate(start, null, null);
+    }, _atom);
   }
 
   @override
   void shuffle([Random random]) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.shuffle(random);
-    _notifyListUpdate(0, null, null);
+    _context.conditionallyRunInAction(() {
+      _list.shuffle(random);
+      _notifyListUpdate(0, null, null);
+    }, _atom);
   }
 
   @override
   void sort([int Function(T a, T b) compare]) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    _list.sort(compare);
-    _notifyListUpdate(0, null, null);
+    _context.conditionallyRunInAction(() {
+      _list.sort(compare);
+      _notifyListUpdate(0, null, null);
+    }, _atom);
   }
 
   @override

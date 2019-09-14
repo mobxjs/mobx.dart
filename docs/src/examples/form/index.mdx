@@ -128,6 +128,11 @@ abstract class _FormErrorState with Store {
 
 ```
 
+
+
+> See the full list of validators in the &nbsp; [![validator package](https://img.shields.io/pub/v/validator.svg?label=validator&color=blue)](https://pub.dartlang.org/packages/validators) package;
+
+
 ### Async validations
 
 The validations above are purely synchronous and run entirely on the client. What if you want to check that the username is not colliding with an existing one? This can only be done by looking at the complete list of usernames on the server-side. We can simulate this with a fake async call and use the result to determine if the username is valid.

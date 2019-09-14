@@ -54,18 +54,27 @@ class ObservableSet<T>
 
   @override
   bool add(T value) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    var result = false;
 
-    final result = _set.add(value);
-    if (result && _hasListeners) {
-      _reportAdd(value);
-    }
-    _atom.reportChanged();
+    _context.conditionallyRunInAction(() {
+      result = _set.add(value);
+
+      if (result && _hasListeners) {
+        _reportAdd(value);
+      }
+
+      if (result) {
+        _atom.reportChanged();
+      }
+    }, _atom);
+
     return result;
   }
 
   @override
   bool contains(Object element) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _set.contains(element);
   }
@@ -75,40 +84,51 @@ class ObservableSet<T>
 
   @override
   int get length {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _set.length;
   }
 
   @override
   T lookup(Object element) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _set.lookup(element);
   }
 
   @override
   bool remove(Object value) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    var removed = false;
 
-    final removed = _set.remove(value);
-    if (removed && _hasListeners) {
-      _reportRemove(value);
-    }
-    _atom.reportChanged();
+    _context.conditionallyRunInAction(() {
+      removed = _set.remove(value);
+
+      if (removed && _hasListeners) {
+        _reportRemove(value);
+      }
+
+      if (removed) {
+        _atom.reportChanged();
+      }
+    }, _atom);
+
     return removed;
   }
 
   @override
   void clear() {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    if (_hasListeners) {
-      final items = _set.toList(growable: false);
-      _set.clear();
-      items.forEach(_reportRemove);
-    } else {
-      _set.clear();
-    }
-    _atom.reportChanged();
+    _context.conditionallyRunInAction(() {
+      if (_hasListeners) {
+        final items = _set.toList(growable: false);
+        _set.clear();
+        items.forEach(_reportRemove);
+      } else {
+        _set.clear();
+      }
+      _atom.reportChanged();
+    }, _atom);
   }
 
   @override
@@ -116,6 +136,8 @@ class ObservableSet<T>
 
   @override
   Set<T> toSet() {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return Set.from(_set);
   }
@@ -130,13 +152,19 @@ class ObservableSet<T>
   }
 
   void _reportAdd(T value) {
-    _listeners
-        .notifyListeners(SetChange(type: OperationType.add, value: value));
+    _listeners.notifyListeners(SetChange(
+      object: this,
+      type: OperationType.add,
+      value: value,
+    ));
   }
 
   void _reportRemove(T value) {
-    _listeners
-        .notifyListeners(SetChange(type: OperationType.remove, value: value));
+    _listeners.notifyListeners(SetChange(
+      object: this,
+      type: OperationType.remove,
+      value: value,
+    ));
   }
 }
 
@@ -152,12 +180,16 @@ class ObservableIterator<T> implements Iterator<T> {
 
   @override
   T get current {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.current;
   }
 
   @override
   bool moveNext() {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.moveNext();
   }
@@ -166,8 +198,14 @@ class ObservableIterator<T> implements Iterator<T> {
 typedef SetChangeListener<T> = void Function(SetChange<T>);
 
 class SetChange<T> {
-  SetChange({@required this.type, this.value}) : assert(type != null);
+  SetChange({
+    @required this.object,
+    @required this.type,
+    @required this.value,
+  })  : assert(object != null),
+        assert(type != null);
 
+  final ObservableSet<T> object;
   final OperationType type;
   final T value;
 }

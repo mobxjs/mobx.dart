@@ -13,15 +13,17 @@ mixin _$Counter on _Counter, Store {
 
   @override
   int get value {
+    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
     _$valueAtom.reportObserved();
     return super.value;
   }
 
   @override
   set value(int value) {
-    _$valueAtom.context.checkIfStateModificationsAreAllowed(_$valueAtom);
-    super.value = value;
-    _$valueAtom.reportChanged();
+    _$valueAtom.context.conditionallyRunInAction(() {
+      super.value = value;
+      _$valueAtom.reportChanged();
+    }, _$valueAtom, name: '${_$valueAtom.name}_set');
   }
 
   final _$_CounterActionController = ActionController(name: '_Counter');

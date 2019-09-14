@@ -1,0 +1,2 @@
+Could not make class "Test" observable. Changes needed:
+  1. Remove @action annotation for members "lastName" and "firstName". They only apply to methods.

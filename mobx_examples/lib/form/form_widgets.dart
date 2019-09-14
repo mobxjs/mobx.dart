@@ -36,12 +36,12 @@ class _FormExampleState extends State<FormExample> {
             children: <Widget>[
               Observer(
                 builder: (_) => TextField(
-                      onChanged: store.setUsername,
-                      decoration: InputDecoration(
-                          labelText: 'Username',
-                          hintText: 'Pick a username',
-                          errorText: store.error.username),
-                    ),
+                  onChanged: (value) => store.name = value,
+                  decoration: InputDecoration(
+                      labelText: 'Username',
+                      hintText: 'Pick a username',
+                      errorText: store.error.username),
+                ),
               ),
               Observer(
                   builder: (_) => AnimatedOpacity(
@@ -50,21 +50,21 @@ class _FormExampleState extends State<FormExample> {
                       opacity: store.isUserCheckPending ? 1 : 0)),
               Observer(
                 builder: (_) => TextField(
-                      onChanged: store.setEmail,
-                      decoration: InputDecoration(
-                          labelText: 'Email',
-                          hintText: 'Enter your email address',
-                          errorText: store.error.email),
-                    ),
+                  onChanged: (value) => store.email = value,
+                  decoration: InputDecoration(
+                      labelText: 'Email',
+                      hintText: 'Enter your email address',
+                      errorText: store.error.email),
+                ),
               ),
               Observer(
                 builder: (_) => TextField(
-                      onChanged: store.setPassword,
-                      decoration: InputDecoration(
-                          labelText: 'Password',
-                          hintText: 'Set a password',
-                          errorText: store.error.password),
-                    ),
+                  onChanged: (value) => store.password = value,
+                  decoration: InputDecoration(
+                      labelText: 'Password',
+                      hintText: 'Set a password',
+                      errorText: store.error.password),
+                ),
               ),
               RaisedButton(
                 child: const Text('Sign up'),

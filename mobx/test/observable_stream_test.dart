@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 import 'util.dart';
 
 void main() {
-  turnOffEnforceActions();
+  turnOffWritePolicy();
 
   group('ObservableStream', () {
     test('match works', () async {

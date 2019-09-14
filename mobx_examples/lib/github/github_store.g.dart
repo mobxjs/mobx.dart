@@ -6,7 +6,7 @@ part of 'github_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GithubStore on _GithubStore, Store {
   Computed<bool> _$hasResultsComputed;
@@ -19,31 +19,34 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   ObservableFuture<List<Repository>> get fetchReposFuture {
+    _$fetchReposFutureAtom.context.enforceReadPolicy(_$fetchReposFutureAtom);
     _$fetchReposFutureAtom.reportObserved();
     return super.fetchReposFuture;
   }
 
   @override
   set fetchReposFuture(ObservableFuture<List<Repository>> value) {
-    _$fetchReposFutureAtom.context
-        .checkIfStateModificationsAreAllowed(_$fetchReposFutureAtom);
-    super.fetchReposFuture = value;
-    _$fetchReposFutureAtom.reportChanged();
+    _$fetchReposFutureAtom.context.conditionallyRunInAction(() {
+      super.fetchReposFuture = value;
+      _$fetchReposFutureAtom.reportChanged();
+    }, _$fetchReposFutureAtom, name: '${_$fetchReposFutureAtom.name}_set');
   }
 
   final _$userAtom = Atom(name: '_GithubStore.user');
 
   @override
   String get user {
+    _$userAtom.context.enforceReadPolicy(_$userAtom);
     _$userAtom.reportObserved();
     return super.user;
   }
 
   @override
   set user(String value) {
-    _$userAtom.context.checkIfStateModificationsAreAllowed(_$userAtom);
-    super.user = value;
-    _$userAtom.reportChanged();
+    _$userAtom.context.conditionallyRunInAction(() {
+      super.user = value;
+      _$userAtom.reportChanged();
+    }, _$userAtom, name: '${_$userAtom.name}_set');
   }
 
   final _$fetchReposAsyncAction = AsyncAction('fetchRepos');

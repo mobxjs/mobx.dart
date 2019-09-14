@@ -1,0 +1,4 @@
+Could not make class "PublicUser1" observable. Changes needed:
+  1. Classes that use the @store annotation must be marked private. Affected classes: "PublicUser1".
+Could not make class "PublicUser2" observable. Changes needed:
+  1. Classes that use the @store annotation must be marked private. Affected classes: "PublicUser2".

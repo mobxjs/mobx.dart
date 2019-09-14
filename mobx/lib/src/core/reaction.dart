@@ -54,14 +54,12 @@ class ReactionImpl implements Reaction {
     schedule();
   }
 
-  @experimental
   Derivation startTracking() {
     _context.startBatch();
     _isRunning = true;
     return _context._startTracking(this);
   }
 
-  @experimental
   void endTracking(Derivation previous) {
     _context._endTracking(this, previous);
     _isRunning = false;
@@ -84,7 +82,7 @@ class ReactionImpl implements Reaction {
       _context._clearObservables(this);
     }
 
-    if (_context._isCaughtException(this)) {
+    if (_context._hasCaughtException(this)) {
       _reportException(_errorValue._exception);
     }
 

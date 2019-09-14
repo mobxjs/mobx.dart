@@ -51,44 +51,53 @@ class ObservableMap<K, V>
 
   @override
   V operator [](Object key) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map[key];
   }
 
   @override
   void operator []=(K key, V value) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    _context.conditionallyRunInAction(() {
+      final oldValue = _map[key];
+      var type = 'set';
 
-    if (_hasListeners) {
-      if (_map.containsKey(key)) {
-        final oldValue = _map[key];
-        _map[key] = value;
-        _reportUpdate(key, value, oldValue);
-      } else {
-        _map[key] = value;
-        _reportAdd(key, value);
+      if (_hasListeners) {
+        if (_map.containsKey(key)) {
+          type = 'update';
+        } else {
+          type = 'add';
+        }
       }
-    } else {
-      _map[key] = value;
-    }
-    _atom.reportChanged();
+
+      if (value != oldValue) {
+        _map[key] = value;
+        if (type == 'update') {
+          _reportUpdate(key, value, oldValue);
+        } else if (type == 'add') {
+          _reportAdd(key, value);
+        }
+        _atom.reportChanged();
+      }
+    }, _atom);
   }
 
   @override
   void clear() {
-    _context.checkIfStateModificationsAreAllowed(_atom);
-
-    if (isEmpty) {
-      return;
-    }
-    if (_hasListeners) {
-      final removed = Map<K, V>.from(_map);
-      _map.clear();
-      removed.forEach(_reportRemove);
-    } else {
-      _map.clear();
-    }
-    _atom.reportChanged();
+    _context.conditionallyRunInAction(() {
+      if (isEmpty) {
+        return;
+      }
+      if (_hasListeners) {
+        final removed = Map<K, V>.from(_map);
+        _map.clear();
+        removed.forEach(_reportRemove);
+      } else {
+        _map.clear();
+      }
+      _atom.reportChanged();
+    }, _atom);
   }
 
   @override
@@ -100,43 +109,55 @@ class ObservableMap<K, V>
 
   @override
   V remove(Object key) {
-    _context.checkIfStateModificationsAreAllowed(_atom);
+    V value;
 
-    if (_hasListeners) {
-      if (_map.containsKey(key)) {
-        final value = _map.remove(key);
-        _reportRemove(key, value);
-        _atom.reportChanged();
-        return value;
+    _context.conditionallyRunInAction(() {
+      if (_hasListeners) {
+        if (_map.containsKey(key)) {
+          value = _map.remove(key);
+          _reportRemove(key, value);
+          _atom.reportChanged();
+          return;
+        }
+
+        value = null;
       }
-      return null;
-    }
 
-    final value = _map.remove(key);
-    _atom.reportChanged();
+      value = _map.remove(key);
+      _atom.reportChanged();
+    }, _atom);
+
     return value;
   }
 
   @override
   int get length {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.length;
   }
 
   @override
   bool get isNotEmpty {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.isNotEmpty;
   }
 
   @override
   bool get isEmpty {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.isEmpty;
   }
 
   @override
   bool containsKey(Object key) {
+    _context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _map.containsKey(key);
   }
@@ -206,12 +227,16 @@ class MapKeysIterable<K> with IterableMixin<K> {
 
   @override
   int get length {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterable.length;
   }
 
   @override
   bool contains(Object element) {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterable.contains(element);
   }
@@ -228,12 +253,16 @@ class MapKeysIterator<K> implements Iterator<K> {
 
   @override
   K get current {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.current;
   }
 
   @override
   bool moveNext() {
+    _atom.context.enforceReadPolicy(_atom);
+
     _atom.reportObserved();
     return _iterator.moveNext();
   }

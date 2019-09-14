@@ -10,7 +10,7 @@ super simple to use MobX.
 
 > Note that these annotations only work inside store-classes.
 
-**store-classes** are abstract and implement the **`Store`** interface. When you run the `build_runner`, it will automatically generate the `*.g.dart file` that must be imported in your file.
+**store-classes** are abstract and use the **`Store`** mixin. When you run the `build_runner`, it will automatically generate the `*.g.dart file` that must be imported in your file.
 
 ```
 $> cd $YOUR_PROJECT_DIR

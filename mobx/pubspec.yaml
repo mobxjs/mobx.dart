@@ -1,7 +1,6 @@
 name: mobx
-version: 0.2.1+1
-description: "MobX is a library for reactively managing the state of your applications. Use the power of observables, actions, and reactions
-to supercharge your Dart and Flutter apps."
+version: 0.3.7
+description: "MobX is a library for reactively managing the state of your applications. Use the power of observables, actions, and reactions to supercharge your Dart and Flutter apps."
 authors:
   - Pavan Podila <pavan@pixelingene.com>
   - Joni Katajamäki <joni.katajamaki@gmail.com>
@@ -13,11 +12,11 @@ environment:
   sdk: '>=2.2.0 <3.0.0'
 
 dependencies:
-  # Flutter uses 1.1.6, so we cannot use 1.1.7 yet
+  # flutter_test uses 1.1.6, so we cannot use 1.1.7 yet
   meta: ^1.1.6
 
 dev_dependencies:
   test: ^1.6.3
   fake_async: ^1.0.1
   mockito: ^4.0.0
-  test_coverage: ^0.2.3
+  test_coverage: ^0.3.0

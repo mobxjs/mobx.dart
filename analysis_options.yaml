@@ -127,3 +127,4 @@ linter:
 analyzer:
   exclude:
     - mobx_examples/lib/**/*.g.dart
+    - mobx_codegen/test/data/**.dart

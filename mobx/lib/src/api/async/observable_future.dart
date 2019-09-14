@@ -1,19 +1,18 @@
 part of '../async.dart';
 
-@experimental
 enum FutureStatus { pending, rejected, fulfilled }
 
 class FutureResult<T> {
   FutureResult(ReactiveContext context, Future<T> _future, initialResult,
       FutureStatus initialStatus)
-      : _actions = ActionController(
+      : _axnController = ActionController(
             context: context, name: context.nameFor('ObservableFuture<$T>')),
         _status = Observable(initialStatus),
         _result = Observable(initialResult) {
     _future.then(_fulfill, onError: _reject);
   }
 
-  final ActionController _actions;
+  final ActionController _axnController;
 
   final Observable<FutureStatus> _status;
   FutureStatus get status => _status.value;
@@ -22,27 +21,26 @@ class FutureResult<T> {
   dynamic get result => _result.value;
 
   void _fulfill(T value) {
-    final prevDerivation = _actions.startAction();
+    final prevDerivation = _axnController.startAction();
     try {
       _status.value = FutureStatus.fulfilled;
       _result.value = value;
     } finally {
-      _actions.endAction(prevDerivation);
+      _axnController.endAction(prevDerivation);
     }
   }
 
   void _reject(error) {
-    final prevDerivation = _actions.startAction();
+    final prevDerivation = _axnController.startAction();
     try {
       _status.value = FutureStatus.rejected;
       _result.value = error;
     } finally {
-      _actions.endAction(prevDerivation);
+      _axnController.endAction(prevDerivation);
     }
   }
 }
 
-@experimental
 class ObservableFuture<T> implements Future<T> {
   /// Create a new observable future that tracks the state of the provided future.
   ObservableFuture(Future<T> future, {ReactiveContext context})
@@ -65,7 +63,9 @@ class ObservableFuture<T> implements Future<T> {
   ObservableFuture._(
       this._context, this._future, this._initialStatus, this._initialResult)
       : assert(_context != null),
-        assert(_future != null);
+        assert(_future != null) {
+    _result; // create the result up-front instead of being lazy
+  }
 
   final ReactiveContext _context;
   Future<T> _future;
@@ -81,6 +81,7 @@ class ObservableFuture<T> implements Future<T> {
       _initialResult = null;
       _initialStatus = null;
     }
+
     return _resultField;
   }
 

@@ -62,7 +62,7 @@ abstract class _TestStore with Store {
 
   @observable
   Stream<String> stream() {
-    int i = 1;
+    var i = 1;
     return Stream.periodic(Duration(milliseconds: 10))
         .take(3)
         .map((_) => 'item${i++}');
@@ -111,19 +111,21 @@ abstract class _TestStore with Store {
     errorField = 'field1';
     await Future.delayed(Duration(milliseconds: 10));
     errorField = 'field2';
+    // ignore: only_throw_errors
     throw 'TEST ERROR';
   }
 }
 
 void main() {
-  EnforceActions prevEnforceActions;
+  ReactiveWritePolicy prevWritePolicy;
   setUp(() {
-    prevEnforceActions = mainContext.config.enforceActions;
-    mainContext.config = ReactiveConfig(enforceActions: EnforceActions.always);
+    prevWritePolicy = mainContext.config.writePolicy;
+    mainContext.config =
+        ReactiveConfig(writePolicy: ReactiveWritePolicy.always);
   });
 
   tearDown(() {
-    mainContext.config = ReactiveConfig(enforceActions: prevEnforceActions);
+    mainContext.config = ReactiveConfig(writePolicy: prevWritePolicy);
   });
 
   test('setting fields with action works', () {
@@ -132,6 +134,7 @@ void main() {
     final fields = <String>[];
     autorun((_) {
       fields.add(store.field1);
+      // ignore: cascade_invocations
       fields.add(store.field2);
     });
     store.setFields('field1++', 'field2++');
@@ -262,7 +265,7 @@ void main() {
 
     try {
       await future;
-    } catch (_) {}
+    } on Object catch (_) {}
 
     expect(values, equals(['', 'field1', 'field2']));
   });

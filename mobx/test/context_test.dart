@@ -1,5 +1,8 @@
 import 'package:mobx/mobx.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'shared_mocks.dart';
 
 void main() {
   group('ReactiveContext', () {
@@ -61,10 +64,13 @@ void main() {
         // cyclic-dependency!!!
         // this autorun() will keep on getting triggered as a.value keeps changing
         // every time it's invoked
-        a.value = a.value + 1;
+        runInAction(() {
+          a.value = a.value + 1;
+        });
       }, name: 'Cyclic Reaction');
 
-      expect(() => a.value = 1, throwsException);
+      expect(() => runInAction(() => a.value = 1),
+          throwsA(const TypeMatcher<MobXCyclicReactionException>()));
       d();
     });
 
@@ -73,6 +79,58 @@ void main() {
 
       expect(() => context.nameFor(null),
           throwsA(const TypeMatcher<AssertionError>()));
+    });
+
+    group('conditionallyRunInAction', () {
+      test('when running OUTSIDE an Action, it should USE the ActionController',
+          () {
+        final controller = MockActionController();
+        final context = createContext();
+        var hasRun = false;
+        final o = Observable(0);
+
+        context.conditionallyRunInAction(() {
+          hasRun = true;
+        }, o, actionController: controller);
+
+        verify(controller.startAction());
+        verify(controller.endAction(any));
+        expect(hasRun, isTrue);
+      });
+
+      test(
+          'when no ActionController is provided, it should create an ad-hoc ActionController',
+          () {
+        final context = createContext();
+        var hasRun = false;
+        final o = Observable(0);
+
+        context.conditionallyRunInAction(() {
+          hasRun = true;
+        }, o);
+
+        expect(hasRun, isTrue);
+      });
+
+      test(
+          'when running INSIDE an Action, it should NOT USE the ActionController',
+          () {
+        final controller = MockActionController();
+        final context = createContext();
+        final o = Observable(0);
+
+        var hasRun = false;
+
+        runInAction(() {
+          context.conditionallyRunInAction(() {
+            hasRun = true;
+          }, o, actionController: controller);
+        }, context: context);
+
+        verifyNever(controller.startAction());
+        verifyNever(controller.endAction(any));
+        expect(hasRun, isTrue);
+      });
     });
   });
 
@@ -85,7 +143,8 @@ void main() {
       expect(clone.maxIterations != config.maxIterations, isTrue);
       expect(clone.disableErrorBoundaries == config.disableErrorBoundaries,
           isTrue);
-      expect(clone.enforceActions == config.enforceActions, isTrue);
+      expect(clone.writePolicy == config.writePolicy, isTrue);
+      expect(clone.readPolicy == config.readPolicy, isTrue);
     });
 
     test('when no overrides are provided the clone reuses source values', () {
@@ -95,7 +154,8 @@ void main() {
       expect(clone.maxIterations, equals(config.maxIterations));
       expect(
           clone.disableErrorBoundaries, equals(config.disableErrorBoundaries));
-      expect(clone.enforceActions, equals(config.enforceActions));
+      expect(clone.writePolicy, equals(config.writePolicy));
+      expect(clone.readPolicy, equals(config.readPolicy));
     });
   });
 }

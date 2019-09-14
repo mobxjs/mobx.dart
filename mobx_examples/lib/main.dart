@@ -1,25 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:mobx_examples/counter/counter.dart';
 import 'package:mobx_examples/examples.dart';
 import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
-import 'package:provider/provider.dart';
+import 'package:mobx_examples/settings/preferences_service.dart';
+import 'package:mobx_examples/settings/settings_store.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp();
+
   @override
   Widget build(BuildContext context) => MultiProvider(
           providers: [
-            Provider<MultiCounterStore>(builder: (_) => MultiCounterStore())
-          ],
-          child: MaterialApp(
-            initialRoute: '/',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
+            Provider<MultiCounterStore>(builder: (_) => MultiCounterStore()),
+            Provider<Counter>(builder: (_) => Counter()),
+            Provider<PreferencesService>(
+              builder: (_) => PreferencesService(),
             ),
-            routes: {
-              '/': (_) => ExampleList(),
-            }..addEntries(
-                examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
+            ProxyProvider<PreferencesService, SettingsStore>(
+                builder: (_, preferencesService, __) =>
+                    SettingsStore(preferencesService)),
+          ],
+          child: Consumer<SettingsStore>(
+            builder: (_, store, __) => Observer(
+              builder: (_) => MaterialApp(
+                initialRoute: '/',
+                theme: ThemeData(
+                  primarySwatch: Colors.blue,
+                  brightness:
+                      store.useDarkMode ? Brightness.dark : Brightness.light,
+                ),
+                routes: {
+                  '/': (_) => ExampleList(),
+                }..addEntries(
+                    examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
+              ),
+            ),
           ));
 }
 

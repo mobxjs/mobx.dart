@@ -1,8 +1,15 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 
 part 'todo.g.dart';
 
-class Todo = _Todo with _$Todo;
+@JsonSerializable()
+class Todo extends _Todo with _$Todo {
+  Todo(String description) : super(description);
+
+  static Todo fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
+  static Map<String, dynamic> toJson(Todo todo) => _$TodoToJson(todo);
+}
 
 abstract class _Todo with Store {
   _Todo(this.description);
@@ -12,10 +19,4 @@ abstract class _Todo with Store {
 
   @observable
   bool done = false;
-
-  @action
-  // ignore: avoid_positional_boolean_parameters
-  void markDone(bool flag) {
-    done = flag;
-  }
 }

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:mobx_examples/clock/clock_widgets.dart';
 import 'package:mobx_examples/counter/counter_widgets.dart';
 import 'package:mobx_examples/form/form_widgets.dart';
 import 'package:mobx_examples/github/github_widgets.dart';
 import 'package:mobx_examples/hackernews/news_widgets.dart';
 import 'package:mobx_examples/multi_counter/multi_counter_widgets.dart';
+import 'package:mobx_examples/random_stream/random_widgets.dart';
+import 'package:mobx_examples/settings/settings_store.dart';
+import 'package:mobx_examples/settings/settings_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
 
 class Example {
@@ -35,10 +40,16 @@ final List<Example> examples = [
     widgetBuilder: (_) => const MultiCounterExample(),
   ),
   Example(
+    title: 'Simple Stream Observer',
+    description: 'Observing a Stream of random numbers.',
+    path: '/random-stream',
+    widgetBuilder: (_) => const RandomNumberExample(),
+  ),
+  Example(
     title: 'Todos',
     description: 'Managing a list of Todos, the TodoMVC way.',
     path: '/todos',
-    widgetBuilder: (_) => const TodoExample(),
+    widgetBuilder: (_) => TodoExample(),
   ),
   Example(
     title: 'Github Repos',
@@ -64,4 +75,12 @@ final List<Example> examples = [
     path: '/hn',
     widgetBuilder: (_) => const HackerNewsExample(),
   ),
+  Example(
+    title: 'Settings',
+    description: 'Settings for toggling dark mode',
+    path: '/settings',
+    widgetBuilder: (_) => Consumer<SettingsStore>(
+      builder: (_, store, __) => SettingsExample(store),
+    ),
+  )
 ];

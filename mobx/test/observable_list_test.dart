@@ -7,7 +7,7 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffEnforceActions();
+  turnOffWritePolicy();
 
   group('ObservableList', () {
     test('basics work', () {
@@ -71,6 +71,126 @@ void main() {
         ..add(1);
 
       expect(count, equals(1));
+    });
+
+    test('observe insert item works', () {
+      final list = ObservableList.of([1]);
+
+      var index = -1;
+      var addedValues = <int>[];
+      var removedValues = <int>[];
+
+      list
+        ..observe((change) {
+          index = change.index;
+          addedValues = change.added;
+          removedValues = change.removed;
+        })
+        ..insert(0, 0);
+      expect(index, equals(0));
+      expect(addedValues, equals([0]));
+      expect(removedValues, equals(null));
+    });
+
+    test('observe add item works', () {
+      final list = ObservableList.of([0]);
+
+      var index = -1;
+      var addedValues = <int>[];
+      var removedValues = <int>[];
+
+      list
+        ..observe((change) {
+          index = change.index;
+          addedValues = change.added;
+          removedValues = change.removed;
+        })
+        ..add(1);
+
+      expect(index, equals(1));
+      expect(addedValues, equals([1]));
+      expect(removedValues, equals(null));
+    });
+
+    test('observe addAll items works', () {
+      final list = ObservableList.of([0]);
+
+      var index = -1;
+      var addedValues = <int>[];
+      var removedValues = <int>[];
+
+      list
+        ..observe((change) {
+          index = change.index;
+          addedValues = change.added;
+          removedValues = change.removed;
+        })
+        ..addAll([1, 2]);
+
+      expect(index, equals(1));
+      expect(addedValues, equals([1, 2]));
+      expect(removedValues, equals(null));
+      print('final size ${list.length}');
+    });
+
+    test('observe remove works', () {
+      final list = ObservableList.of([0, 1]);
+
+      var index = -1;
+      var addedValues = <int>[];
+      var removedValues = <int>[];
+
+      list
+        ..observe((change) {
+          index = change.index;
+          addedValues = change.added;
+          removedValues = change.removed;
+        })
+        ..remove(1);
+
+      expect(index, equals(1));
+      expect(addedValues, equals(null));
+      expect(removedValues, equals([1]));
+    });
+
+    test('observe removeAt works', () {
+      final list = ObservableList.of([0, 1]);
+
+      var index = -1;
+      var addedValues = <int>[];
+      var removedValues = <int>[];
+
+      list
+        ..observe((change) {
+          index = change.index;
+          addedValues = change.added;
+          removedValues = change.removed;
+        })
+        ..removeAt(0);
+
+      expect(index, equals(0));
+      expect(addedValues, equals(null));
+      expect(removedValues, equals([0]));
+    });
+    test('observe replaceRange works', () {
+      final list = ObservableList<int>.of([0, -1, -2, 3]);
+
+      var index = -1;
+      var addedValues = <int>[];
+      var removedValues = <int>[];
+      final replacement = [1, 2];
+
+      list
+        ..observe((change) {
+          index = change.index;
+          addedValues = change.added;
+          removedValues = change.removed;
+        })
+        ..replaceRange(1, 3, replacement);
+
+      expect(index, equals(1));
+      expect(addedValues, equals(replacement));
+      expect(removedValues, equals([-1, -2]));
     });
 
     test('asMap returns an observable and unmodifiable view to the list', () {

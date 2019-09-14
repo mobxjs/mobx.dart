@@ -10,31 +10,42 @@ class Observable<T> extends Atom
   ///
   /// An Observable's value is read with the `value` property.
   ///
+  /// It is possible to override equality comparison of new values with [equals].
+  ///
   /// ```
   /// var x = Observable(10);
   /// var message = Observable('hello');
   ///
   /// print('x = ${x.value}'); // read an Observable's value
   /// ```
-  factory Observable(T initialValue, {String name, ReactiveContext context}) =>
-      Observable._(context ?? mainContext, initialValue, name: name);
+  factory Observable(T initialValue,
+          {String name,
+          ReactiveContext context,
+          EqualityComparator<T> equals}) =>
+      Observable._(context ?? mainContext, initialValue,
+          name: name, equals: equals);
 
-  Observable._(ReactiveContext context, this._value, {String name})
+  Observable._(ReactiveContext context, this._value, {String name, this.equals})
       : _interceptors = Interceptors(context),
         _listeners = Listeners(context),
         super._(context, name: name ?? context.nameFor('Observable'));
 
   final Interceptors<T> _interceptors;
   final Listeners<ChangeNotification<T>> _listeners;
+  final EqualityComparator<T> equals;
 
   T _value;
 
   T get value {
+    _context.enforceReadPolicy(this);
+
     reportObserved();
     return _value;
   }
 
   set value(T value) {
+    _context.enforceWritePolicy(this);
+
     final oldValue = _value;
     final newValue = _prepareNewValue(value);
 
@@ -57,8 +68,6 @@ class Observable<T> extends Atom
   }
 
   dynamic _prepareNewValue(T newValue) {
-    _context.checkIfStateModificationsAreAllowed(this);
-
     var prepared = newValue;
     if (_interceptors.hasHandlers) {
       final change = _interceptors.interceptChange(WillChangeNotification(
@@ -71,7 +80,10 @@ class Observable<T> extends Atom
       prepared = change.newValue;
     }
 
-    return (prepared != _value) ? prepared : WillChangeNotification.unchanged;
+    final areEqual =
+        equals == null ? prepared == value : equals(prepared, _value);
+
+    return (!areEqual) ? prepared : WillChangeNotification.unchanged;
   }
 
   @override

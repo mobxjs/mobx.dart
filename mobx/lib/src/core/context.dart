@@ -27,34 +27,53 @@ class _ReactiveState {
 
   /// Tracks if observables can be mutated
   bool allowStateChanges = true;
+
+  /// Are we inside an action or transaction?
+  bool get isWithinBatch => batch > 0;
+
+  /// Are we inside a reaction or computed?
+  bool get isWithinDerivation =>
+      trackingDerivation != null || computationDepth > 0;
 }
 
 typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
+
+/// Defines the behavior for observables read outside actions and reactions
+///
+/// `always`: If observables are read outside actions/reactions, throw an Exception
+/// `never`: Allow unrestricted reading of observables everywhere. This is the default.
+enum ReactiveReadPolicy { always, never }
 
 /// Defines the behavior for observables mutated outside actions
 ///
 /// `observed`: If there are observers for the mutated observable, then throw. Else allow mutation outside an action.
 /// `always`: Always throw if an observable is mutated outside an action
 /// `never`: Allow mutating observables outside actions
-enum EnforceActions { observed, always, never }
+enum ReactiveWritePolicy { observed, always, never }
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
   ReactiveConfig(
       {this.disableErrorBoundaries,
-      this.enforceActions,
+      this.writePolicy,
+      this.readPolicy,
       this.maxIterations = 100});
 
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
-      disableErrorBoundaries: false, enforceActions: EnforceActions.observed);
+      disableErrorBoundaries: false,
+      writePolicy: ReactiveWritePolicy.observed,
+      readPolicy: ReactiveReadPolicy.never);
 
   /// Whether MobX should throw exceptions instead of catching them and storing
   /// inside the [Reaction.errorValue] property of [Reaction].
   final bool disableErrorBoundaries;
 
-  /// Should observables be mutated inside an action
-  final EnforceActions enforceActions;
+  /// Enforce mutation of observables inside an action
+  final ReactiveWritePolicy writePolicy;
+
+  /// Enforce the use of reactions for reading observables
+  final ReactiveReadPolicy readPolicy;
 
   /// Max number of iterations before bailing out for a cyclic reaction
   final int maxIterations;
@@ -63,12 +82,14 @@ class ReactiveConfig {
 
   ReactiveConfig clone(
           {bool disableErrorBoundaries,
-          bool enforceActions,
+          ReactiveWritePolicy writePolicy,
+          ReactiveReadPolicy readPolicy,
           int maxIterations}) =>
       ReactiveConfig(
           disableErrorBoundaries:
               disableErrorBoundaries ?? this.disableErrorBoundaries,
-          enforceActions: enforceActions ?? this.enforceActions,
+          writePolicy: writePolicy ?? this.writePolicy,
+          readPolicy: readPolicy ?? this.readPolicy,
           maxIterations: maxIterations ?? this.maxIterations);
 }
 
@@ -82,7 +103,7 @@ class ReactiveContext {
   ReactiveConfig get config => _config;
   set config(ReactiveConfig newValue) {
     _config = newValue;
-    _state.allowStateChanges = _config.enforceActions == EnforceActions.never;
+    _state.allowStateChanges = _config.writePolicy == ReactiveWritePolicy.never;
   }
 
   _ReactiveState _state = _ReactiveState();
@@ -94,6 +115,8 @@ class ReactiveContext {
     assert(prefix.isNotEmpty);
     return '$prefix@$nextId';
   }
+
+  bool get isWithinBatch => _state.isWithinBatch;
 
   void startBatch() {
     _state.batch++;
@@ -125,31 +148,79 @@ class ReactiveContext {
     }
   }
 
-  void checkIfStateModificationsAreAllowed(Atom atom) {
-    // Cannot mutate observables inside a computed
+  void enforceReadPolicy(Atom atom) {
+    // ---
+    // We are wrapping in an assert() since we don't want this code to execute at runtime.
+    // The dart compiler removes assert() calls from the release build.
+    // ---
+    assert(() {
+      switch (config.readPolicy) {
+        case ReactiveReadPolicy.always:
+          assert(_state.isWithinBatch || _state.isWithinDerivation,
+              'Observable values cannot be read outside Actions and Reactions. Make sure to wrap them inside an action or a reaction. Tried to read: ${atom.name}');
+          break;
+
+        case ReactiveReadPolicy.never:
+          break;
+      }
+
+      return true;
+    }());
+  }
+
+  void enforceWritePolicy(Atom atom) {
+    // Cannot mutate observables inside a computed. This is required to maintain the consistency of the reactive system.
     if (_state.computationDepth > 0 && atom.hasObservers) {
       throw MobXException(
           'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}');
     }
 
-    if (_state.allowStateChanges) {
-      return;
-    }
+    // ---
+    // We are wrapping in an assert() since we don't want this code to execute at runtime.
+    // The dart compiler removes assert() calls from the release build.
+    // ---
+    assert(() {
+      switch (config.writePolicy) {
+        case ReactiveWritePolicy.never:
+          break;
 
-    switch (config.enforceActions) {
-      case EnforceActions.never:
-        return;
+        case ReactiveWritePolicy.observed:
+          if (atom.hasObservers == false) {
+            break;
+          }
 
-      case EnforceActions.observed:
-        if (atom.hasObservers) {
-          throw MobXException(
+          assert(_state.isWithinBatch,
               'Side effects like changing state are not allowed at this point. Please wrap the code in an "action". Tried to modify: ${atom.name}');
-        }
-        break;
+          break;
 
-      case EnforceActions.always:
-        throw MobXException(
-            'Since strict-mode is enabled, changing observed observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
+        case ReactiveWritePolicy.always:
+          assert(_state.isWithinBatch,
+              'Changing observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
+      }
+
+      return true;
+    }());
+  }
+
+  /// Only run within an action if outside a batch
+  /// [fn] is the function to execute. Optionally provide a debug-[name].
+  void conditionallyRunInAction(void Function() fn, Atom atom,
+      {String name, ActionController actionController}) {
+    if (isWithinBatch) {
+      enforceWritePolicy(atom);
+      fn();
+    } else {
+      final controller = actionController ??
+          ActionController(
+              context: this, name: name ?? nameFor('conditionallyRunInAction'));
+      final runInfo = controller.startAction();
+
+      try {
+        enforceWritePolicy(atom);
+        fn();
+      } finally {
+        controller.endAction(runInfo);
+      }
     }
   }
 
@@ -264,7 +335,7 @@ class ReactiveContext {
         // Resetting ensures we have no bad-state left
         _resetState();
 
-        throw MobXException(
+        throw MobXCyclicReactionException(
             "Reaction doesn't converge to a stable state after ${config.maxIterations} iterations. Probably there is a cycle in the reactive function: $failingReaction");
       }
 
@@ -396,8 +467,8 @@ class ReactiveContext {
     return false;
   }
 
-  bool _isInBatch() => _state.batch > 0;
-  bool _isCaughtException(Derivation d) => d._errorValue is MobXCaughtException;
+  bool _hasCaughtException(Derivation d) =>
+      d._errorValue is MobXCaughtException;
 
   bool isComputingDerivation() => _state.trackingDerivation != null;
 
@@ -456,6 +527,6 @@ class ReactiveContext {
 
   void _resetState() {
     _state = _ReactiveState()
-      ..allowStateChanges = _config.enforceActions == EnforceActions.never;
+      ..allowStateChanges = _config.writePolicy == ReactiveWritePolicy.never;
   }
 }

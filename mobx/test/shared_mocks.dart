@@ -3,4 +3,13 @@ import 'package:mockito/mockito.dart';
 
 class MockContext extends Mock implements ReactiveContext {}
 
-class MockAtom extends Mock implements Atom {}
+class MockAtom extends Mock implements Atom {
+  MockAtom() {
+    context = MockContext();
+  }
+
+  @override
+  MockContext context;
+}
+
+class MockActionController extends Mock implements ActionController {}
