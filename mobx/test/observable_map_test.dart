@@ -131,7 +131,6 @@ void main() {
     });
 
     test('[]= reports an add change when there is a reaction', () {
-      MapChange change;
       final map = ObservableMap<String, String>.of({});
       var observed = false;
 
