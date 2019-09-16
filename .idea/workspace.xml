@@ -2,19 +2,16 @@
 <project version="4">
   <component name="AutoTestManager">
     <enabled-run-configurations>
-      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
       <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
+      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/getting-started/index.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/getting-started/index.mdx" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,21 +81,21 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/docs/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
-      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
-      <recent name="$PROJECT_DIR$/docs/src/development" />
-      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/mobx_codegen/test/data" />
       <recent name="$PROJECT_DIR$/flutter_mobx_forms" />
       <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
       <recent name="$PROJECT_DIR$/docs/src/guides" />
       <recent name="$PROJECT_DIR$/docs/src/examples" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mobx_codegen/lib/src" />
+      <recent name="$PROJECT_DIR$/mobx_codegen/test/samples" />
+      <recent name="$PROJECT_DIR$/docs/src/development" />
+      <recent name="$PROJECT_DIR$/docs/src/examples/random-stream" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -180,8 +177,8 @@
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="Dart Test.mobx bug tests" />
-      <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
       <item itemvalue="Flutter.mobx_examples" />
+      <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
       <item itemvalue="Flutter Test.flutter_mobx tests" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.pub:get:mobx" />
@@ -190,10 +187,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.start" />
-        <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
-        <item itemvalue="Flutter Test.flutter_mobx tests" />
-        <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx" />
+        <item itemvalue="npm.pub:get:mobx_codegen" />
+        <item itemvalue="Flutter Test.flutter_mobx tests" />
+        <item itemvalue="Dart Test.tests in invalid_annotations_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -251,14 +248,10 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="reporting only when there is a change in map" />
-    <MESSAGE value="version update to 0.3.4" />
-    <MESSAGE value="bug fix for #238, version update to 0.3.5" />
     <MESSAGE value="refactored tests to be file driven rather than putting as strings in test files" />
     <MESSAGE value="fixing dart analyzer issues" />
     <MESSAGE value="upgrading test_coverage" />
     <MESSAGE value="invalid @action checks" />
-    <MESSAGE value="fixing analyzer issues" />
     <MESSAGE value="fixing tests" />
     <MESSAGE value="increasing coverage" />
     <MESSAGE value="0.3.6-alpha" />
@@ -276,7 +269,11 @@
     <MESSAGE value="Merge branch 'master' into codegen-checks&#10;&#10;# Conflicts:&#10;#&#9;.idea/libraries/Dart_Packages.xml&#10;#&#9;.idea/libraries/Flutter_Plugins.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;mobx/CHANGELOG.md&#10;#&#9;mobx/pubspec.yaml&#10;#&#9;mobx_codegen/CHANGELOG.md&#10;#&#9;mobx_codegen/lib/src/errors.dart&#10;#&#9;mobx_codegen/lib/src/mobx_codegen_base.dart&#10;#&#9;mobx_codegen/lib/src/template/method_override.dart&#10;#&#9;mobx_codegen/lib/src/template/store.dart&#10;#&#9;mobx_codegen/pubspec.yaml&#10;#&#9;mobx_codegen/test/data/valid_input.dart&#10;#&#9;mobx_codegen/test/data/valid_output.dart&#10;#&#9;mobx_codegen/test/invalid_annotations_test.dart&#10;#&#9;mobx_codegen/test/mobx_codegen_test.dart" />
     <MESSAGE value="adding more error reporting" />
     <MESSAGE value="fixing lint errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing lint errors" />
+    <MESSAGE value="changed description" />
+    <MESSAGE value="flutter_mobx updated to 0.3.2" />
+    <MESSAGE value="updating with some changes with initial load of preferences" />
+    <MESSAGE value="fixing analyzer issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing analyzer issues" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
@@ -291,24 +288,36 @@
     <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" />
     <state width="444" height="466" key="DebuggerActiveHint" />
     <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" />
-    <state width="1189" height="333" key="GridCell.Tab.0.bottom" />
+    <state width="1109" height="312" key="GridCell.Tab.0.bottom" />
     <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" />
-    <state width="1189" height="333" key="GridCell.Tab.0.center" />
+    <state width="1109" height="312" key="GridCell.Tab.0.bottom/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.center" />
     <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" />
-    <state width="1189" height="333" key="GridCell.Tab.0.left" />
+    <state width="1109" height="312" key="GridCell.Tab.0.center/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.left" />
     <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" />
-    <state width="1189" height="333" key="GridCell.Tab.0.right" />
+    <state width="1109" height="312" key="GridCell.Tab.0.left/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.right" />
     <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" />
+    <state width="1109" height="312" key="GridCell.Tab.0.right/3360.2100" />
+    <state x="553" y="264" key="MultipleFileMergeDialog" />
+    <state x="553" y="264" key="MultipleFileMergeDialog/3360.2100" />
     <state x="468" y="248" key="RollbackChangesDialog" />
     <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" />
     <state x="334" y="187" key="SettingsEditor" />
     <state x="334" y="187" key="SettingsEditor/1920.1080/3840.2160/3360.2100" />
+    <state width="515" height="445" key="SwitcherDM" />
+    <state width="515" height="445" key="SwitcherDM/3360.2100" />
     <state x="524" y="262" key="Vcs.Push.Dialog" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" />
     <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" />
     <state width="840" height="513" key="XDebugger.FullValuePopup/1920.1080/3840.2160/3360.2100" />
     <state x="320" y="229" width="939" height="615" key="find.popup" />
     <state x="320" y="229" width="939" height="615" key="find.popup/1920.1080/3840.2160/3360.2100" />
+    <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog" />
+    <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog/3360.2100" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1920.1080/3840.2160/3360.2100" />
   </component>
