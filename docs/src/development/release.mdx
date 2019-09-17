@@ -25,6 +25,12 @@ version: 0.2.0
 ./tool/expose_version.dart <package_name>
 ```
 
+There is handy _npm-script_ called **`set:versions`** inside the root-level `package.json` file. You could run that to add the version to all packages in one go. Note that you do need [Node.js](https://nodejs.org) for this.
+
+```shell script
+npm run set:versions
+```
+
 ### 3. Changelog
 
 - Update the `CHANGELOG.md` file to include the changes introduced in the new version. Normally you would do this by adding a new bullet point for the version and follow the template from earlier versions.
