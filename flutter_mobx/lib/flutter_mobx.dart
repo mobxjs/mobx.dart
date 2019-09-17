@@ -3,4 +3,4 @@ library flutter_mobx;
 
 export 'package:flutter_mobx/src/observer.dart' show Observer;
 
-const version = '0.3.2';
+const version = '0.3.3';

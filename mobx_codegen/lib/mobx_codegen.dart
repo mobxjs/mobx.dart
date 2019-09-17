@@ -2,4 +2,4 @@ library mobx_codegen;
 
 export 'src/mobx_codegen_base.dart';
 
-const version = '0.3.8';
+const version = '0.3.9';
