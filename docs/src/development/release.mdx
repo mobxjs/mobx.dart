@@ -17,7 +17,15 @@ If you are a developer on the MobX project, here are few guidelines that will he
 version: 0.2.0
 ```
 
-### 2. Changelog
+### 2. Expose version
+
+- Expose the updated version of `pubspec.yaml` to the library `.dart` file by running the appropriate command:
+
+```bash
+./tool/expose_version.dart <package_name>
+```
+
+### 3. Changelog
 
 - Update the `CHANGELOG.md` file to include the changes introduced in the new version. Normally you would do this by adding a new bullet point for the version and follow the template from earlier versions.
 - If the changes are minimal, you can also append the change to an earlier bullet point but include the new version as a range. For example, the changes in `0.3.2+3` were minimal, so we added it as a range from the earlier version.
@@ -26,7 +34,7 @@ version: 0.2.0
 ## 0.3.0 - 0.3.2+3
 ```
 
-### 3. Publish
+### 4. Publish
 
 Run the command `flutter packages pub publish` in the package folder. Assuming you have done all of the earlier steps, this should be just a matter of hitting the `y` key and publishing.
 
