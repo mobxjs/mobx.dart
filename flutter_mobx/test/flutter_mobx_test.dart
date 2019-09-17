@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_mobx/src/observer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when;
@@ -72,6 +73,10 @@ void main() {
       ReactiveConfig(writePolicy: ReactiveWritePolicy.never));
 
   tearDown(() => mainContext.config = ReactiveConfig.main);
+
+  test('Should expose the library\'s version', () {
+    expect(version, isNotNull);
+  });
 
   testWidgets('Observer re-renders when observed state changes',
       (tester) async {

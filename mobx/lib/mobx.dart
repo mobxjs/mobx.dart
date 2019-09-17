@@ -61,3 +61,5 @@ export 'package:mobx/src/core.dart'
         NotificationHandlers,
         ReactionImpl,
         DerivationState;
+
+const version = '0.3.7';

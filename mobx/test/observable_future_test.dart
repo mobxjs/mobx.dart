@@ -184,7 +184,7 @@ void main() {
     });
 
     test('catchError works', () async {
-      final future = ObservableFuture(Future(() {
+      final future = ObservableFuture(Future<int>(() {
         // ignore:only_throw_errors
         throw 'Error';
       })).catchError((error) => 1);

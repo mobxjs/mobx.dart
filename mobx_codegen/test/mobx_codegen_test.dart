@@ -1,8 +1,13 @@
+import 'package:mobx_codegen/mobx_codegen.dart';
 import 'package:test/test.dart';
 
 import 'test_utils.dart';
 
 void main() {
+  test('Should expose the library\'s version', () {
+    expect(version, isNotNull);
+  });
+
   group('generator', () {
     test('ignores empty library', () async {
       expect(await generate(''), isEmpty);
