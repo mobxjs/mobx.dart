@@ -1,4 +1,4 @@
-## 0.3.2 - 0.3.3
+## 0.3.2 - 0.3.3+1
 
 - Errors that occur internal to the `setState()` call are now reported via `FlutterError.reportError` so they don't go unnoticed by the user.
 - Added a version constant that matches the `pubspec.yaml`

@@ -10,19 +10,12 @@
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/autorun_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/autorun_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/observable_future_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_future_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/reaction_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/reaction_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/when_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/when_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/clock/clock.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/clock/clock.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/form/form_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/form/form_widgets.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/random_stream/random_store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/random_stream/random_store.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/settings/preferences_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/settings/preferences_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/settings/settings_store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/settings/settings_store.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/test/widget_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +281,6 @@
     <MESSAGE value="docs update" />
     <MESSAGE value="Merge branch 'master' into codegen-checks&#10;&#10;# Conflicts:&#10;#&#9;.idea/libraries/Dart_Packages.xml&#10;#&#9;.idea/libraries/Flutter_Plugins.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;mobx/CHANGELOG.md&#10;#&#9;mobx/pubspec.yaml&#10;#&#9;mobx_codegen/CHANGELOG.md&#10;#&#9;mobx_codegen/lib/src/errors.dart&#10;#&#9;mobx_codegen/lib/src/mobx_codegen_base.dart&#10;#&#9;mobx_codegen/lib/src/template/method_override.dart&#10;#&#9;mobx_codegen/lib/src/template/store.dart&#10;#&#9;mobx_codegen/pubspec.yaml&#10;#&#9;mobx_codegen/test/data/valid_input.dart&#10;#&#9;mobx_codegen/test/data/valid_output.dart&#10;#&#9;mobx_codegen/test/invalid_annotations_test.dart&#10;#&#9;mobx_codegen/test/mobx_codegen_test.dart" />
     <MESSAGE value="adding more error reporting" />
-    <MESSAGE value="fixing lint errors" />
     <MESSAGE value="changed description" />
     <MESSAGE value="flutter_mobx updated to 0.3.2" />
     <MESSAGE value="updating with some changes with initial load of preferences" />
@@ -296,7 +288,8 @@
     <MESSAGE value="updated docs for release to include the npm script" />
     <MESSAGE value="update docs" />
     <MESSAGE value="updated changelogs" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated changelogs" />
+    <MESSAGE value="fixing lint errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing lint errors" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
