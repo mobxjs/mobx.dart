@@ -194,8 +194,8 @@ void main() {
 
     test('timeout works', () async {
       final completer = Completer<int>();
-      final future =
-          ObservableFuture(completer.future).timeout(Duration(milliseconds: 1));
+      final future = ObservableFuture(completer.future)
+          .timeout(const Duration(milliseconds: 1));
 
       expect(() async => await future,
           throwsA(const TypeMatcher<TimeoutException>()));

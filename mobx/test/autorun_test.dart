@@ -81,18 +81,18 @@ void main() {
           value = x.value + 1;
         }, delay: delayMs);
 
-        async.elapse(Duration(milliseconds: 2500));
+        async.elapse(const Duration(milliseconds: 2500));
 
         expect(value, 0); // autorun() should not have executed at this time
 
-        async.elapse(Duration(milliseconds: 2500));
+        async.elapse(const Duration(milliseconds: 2500));
 
         expect(value, 11); // autorun() should have executed
 
         x.value = 100;
 
         expect(value, 11); // should still retain the last value
-        async.elapse(Duration(milliseconds: delayMs));
+        async.elapse(const Duration(milliseconds: delayMs));
         expect(value, 101); // should change now
       });
 
@@ -156,11 +156,11 @@ void main() {
           }
         }, delay: 1000);
 
-        async.elapse(Duration(milliseconds: 1000));
+        async.elapse(const Duration(milliseconds: 1000));
 
         x.value = 11;
 
-        async.elapse(Duration(milliseconds: 1000));
+        async.elapse(const Duration(milliseconds: 1000));
 
         expect(dispose.reaction.isDisposed, isTrue);
       });

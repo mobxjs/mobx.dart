@@ -11,7 +11,7 @@ abstract class _RandomStore with Store {
   _RandomStore() {
     _streamController = StreamController<int>();
 
-    _timer = Timer.periodic(Duration(seconds: 1),
+    _timer = Timer.periodic(const Duration(seconds: 1),
         (_) => _streamController.add(_random.nextInt(100)));
 
     randomStream = ObservableStream(_streamController.stream);

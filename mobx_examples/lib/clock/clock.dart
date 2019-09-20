@@ -23,7 +23,7 @@ class Clock {
       _timer.cancel();
     }
 
-    _timer = Timer.periodic(Duration(seconds: 1), _onTick);
+    _timer = Timer.periodic(const Duration(seconds: 1), _onTick);
   }
 
   void _stopTimer() {

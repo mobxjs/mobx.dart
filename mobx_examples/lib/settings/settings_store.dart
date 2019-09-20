@@ -11,7 +11,7 @@ abstract class _SettingsStore with Store {
     _setup();
   }
 
-  PreferencesService _preferencesService;
+  final PreferencesService _preferencesService;
 
   @observable
   bool useDarkMode = false;

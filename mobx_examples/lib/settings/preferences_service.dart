@@ -1,11 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesService {
-  Future<void> loaded;
-
   PreferencesService() {
     loaded = _loadPreferences();
   }
+
+  Future<void> loaded;
 
   static const String _useDarkModeKey = 'useDarkMode';
   SharedPreferences _sharedPreferences;
