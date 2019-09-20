@@ -1,9 +1,11 @@
-## 0.3.7
+## 0.3.7 - 0.3.8
 
 - Fixes the type resolution bug that prevented using types from packages like `dart:ui`
 - Fixes the type resolution of other public `Store` classes referenced in the `@store` based generation
 
 Thanks to [@shyndman](https://github.com/shyndman) for the tremendous work on this release.
+
+- Added a version constant that matches the `pubspec.yaml`
 
 ## 0.3.6
 

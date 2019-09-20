@@ -1,6 +1,7 @@
-## 0.3.8
+## 0.3.8 - 0.3.9
 
 - Fixes a minor issue where types in generated code would appear as dynamic when they shouldn't.
+- Added a version constant that matches the `pubspec.yaml`
 
 ## 0.3.7
 
