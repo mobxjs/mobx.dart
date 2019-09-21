@@ -8,14 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_widgets.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,7 +269,6 @@
     <MESSAGE value="runBinary in a zone is not being used for AsyncActions, so commenting it out for now" />
     <MESSAGE value="minor tweaks to the community.md file" />
     <MESSAGE value="adding a new package flutter_mobx_forms" />
-    <MESSAGE value="package updates" />
     <MESSAGE value="using the location of the file as the default name of the Observer, when not provided" />
     <MESSAGE value="fixing analyzer issue" />
     <MESSAGE value="docs update" />
@@ -289,7 +282,8 @@
     <MESSAGE value="update docs" />
     <MESSAGE value="updated changelogs" />
     <MESSAGE value="fixing lint errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing lint errors" />
+    <MESSAGE value="package updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="package updates" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
@@ -336,6 +330,7 @@
     <state x="320" y="229" width="939" height="615" key="find.popup/1920.1080/3840.2160/3360.2100" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1920.1080/3840.2160/3360.2100" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/3360.2100" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
