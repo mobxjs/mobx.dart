@@ -35,7 +35,7 @@ String findParameterTypeName(ParameterElement parameter) {
   final node =
       _findElementNode<DefaultFormalParameter>(parameter)?.parameter ??
       _findElementNode<NormalFormalParameter>(parameter);
-  if (node is SimpleFormalParameter) {
+  if (node is SimpleFormalParameter && node.type != null) {
     return node.type.toString();
   } else {
     return 'dynamic';
