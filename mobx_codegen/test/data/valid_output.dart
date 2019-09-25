@@ -83,4 +83,14 @@ mixin _$User on UserBase, Store {
       _$UserBaseActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  void setBlob(dynamic blob) {
+    final _$actionInfo = _$UserBaseActionController.startAction();
+    try {
+      return super.setBlob(blob);
+    } finally {
+      _$UserBaseActionController.endAction(_$actionInfo);
+    }
+  }
 }
