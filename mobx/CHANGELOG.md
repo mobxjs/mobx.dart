@@ -1,3 +1,7 @@
+## 0.3.9
+
+- Added `toString` override for `MobXException`
+
 ## 0.3.7 - 0.3.8+1
 
 - Fixes the type resolution bug that prevented using types from packages like `dart:ui`

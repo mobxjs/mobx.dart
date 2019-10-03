@@ -8,9 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +265,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
-    <MESSAGE value="adding a small test for increasing coverage" />
     <MESSAGE value="updated changelog" />
     <MESSAGE value="fixing analyzer lint error" />
     <MESSAGE value="minor tweaks to the docs" />
@@ -290,7 +289,8 @@
     <MESSAGE value="change: refactoring" />
     <MESSAGE value="change: package updates and the pages are working now. Need to fix formatting and syntax-highlighting of code blocks" />
     <MESSAGE value="change: toString override for MobXException" />
-    <option name="LAST_COMMIT_MESSAGE" value="change: toString override for MobXException" />
+    <MESSAGE value="change: adding toString to MobXException" />
+    <option name="LAST_COMMIT_MESSAGE" value="change: adding toString to MobXException" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -353,10 +353,10 @@
     </state>
     <state x="692" y="461" key="VCS.ChangelistChooser/0.23.1680.1027@0.23.1680.1027" timestamp="1570104065472" />
     <state x="524" y="262" key="Vcs.Push.Dialog" timestamp="1569763014444" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1570103978331">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1570104486644">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1570103978331" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1570104486644" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" timestamp="1569763014444" />
     <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1569763014444" />
