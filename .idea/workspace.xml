@@ -2,14 +2,15 @@
 <project version="4">
   <component name="AutoTestManager">
     <enabled-run-configurations>
-      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
       <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
+      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/todos/todo_widgets.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +57,11 @@
     <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Dart" />
@@ -78,7 +84,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="dart.settings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
@@ -189,8 +195,8 @@
       <item itemvalue="Dart Test.mobx bug tests" />
       <item itemvalue="Flutter.mobx_examples" />
       <item itemvalue="npm.pub:get:mobx" />
-      <item itemvalue="npm.gen:flutter_mobx_forms" />
       <item itemvalue="npm.start" />
+      <item itemvalue="npm.gen:flutter_mobx_forms" />
       <item itemvalue="npm.gen:mobx_examples" />
       <item itemvalue="npm.set:versions" />
     </list>
@@ -258,10 +264,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing analyzer issues" />
-    <MESSAGE value="fixing tests" />
-    <MESSAGE value="increasing coverage" />
-    <MESSAGE value="0.3.6-alpha" />
+    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
     <MESSAGE value="adding a small test for increasing coverage" />
     <MESSAGE value="updated changelog" />
     <MESSAGE value="fixing analyzer lint error" />
@@ -283,54 +286,93 @@
     <MESSAGE value="updated changelogs" />
     <MESSAGE value="fixing lint errors" />
     <MESSAGE value="package updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="package updates" />
+    <MESSAGE value="using the new ToggleButtons in 1.9" />
+    <MESSAGE value="change: refactoring" />
+    <MESSAGE value="change: package updates and the pages are working now. Need to fix formatting and syntax-highlighting of code blocks" />
+    <MESSAGE value="change: toString override for MobXException" />
+    <option name="LAST_COMMIT_MESSAGE" value="change: toString override for MobXException" />
+    <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
-    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.1080/3840.2160/3360.2100" />
-    <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser" />
-    <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser/1920.1080/3840.2160/3360.2100" />
-    <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" />
-    <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1920.1080/3840.2160/3360.2100" />
-    <state x="713" y="250" key="#xdebugger.evaluate" />
-    <state x="713" y="250" key="#xdebugger.evaluate/1920.1080/3840.2160/3360.2100" />
-    <state x="351" y="147" key="CommitChangelistDialog2" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" />
-    <state width="444" height="466" key="DebuggerActiveHint" />
-    <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" />
-    <state width="1109" height="312" key="GridCell.Tab.0.bottom" />
-    <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" />
-    <state width="1109" height="312" key="GridCell.Tab.0.bottom/3360.2100" />
-    <state width="1109" height="312" key="GridCell.Tab.0.center" />
-    <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" />
-    <state width="1109" height="312" key="GridCell.Tab.0.center/3360.2100" />
-    <state width="1109" height="312" key="GridCell.Tab.0.left" />
-    <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" />
-    <state width="1109" height="312" key="GridCell.Tab.0.left/3360.2100" />
-    <state width="1109" height="312" key="GridCell.Tab.0.right" />
-    <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" />
-    <state width="1109" height="312" key="GridCell.Tab.0.right/3360.2100" />
-    <state x="553" y="264" key="MultipleFileMergeDialog" />
-    <state x="553" y="264" key="MultipleFileMergeDialog/3360.2100" />
-    <state x="468" y="248" key="RollbackChangesDialog" />
-    <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" />
-    <state x="334" y="187" key="SettingsEditor" />
-    <state x="334" y="187" key="SettingsEditor/1920.1080/3840.2160/3360.2100" />
-    <state width="515" height="445" key="SwitcherDM" />
-    <state width="515" height="445" key="SwitcherDM/3360.2100" />
-    <state x="602" y="261" key="VCS.ChangeListViewerDialog" />
-    <state x="602" y="261" key="VCS.ChangeListViewerDialog/3360.2100" />
-    <state x="524" y="262" key="Vcs.Push.Dialog" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" />
-    <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" />
-    <state width="840" height="513" key="XDebugger.FullValuePopup" />
-    <state width="840" height="513" key="XDebugger.FullValuePopup/1920.1080/3840.2160/3360.2100" />
-    <state x="320" y="229" width="939" height="615" key="find.popup" />
-    <state x="320" y="229" width="939" height="615" key="find.popup/1920.1080/3840.2160/3360.2100" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1920.1080/3840.2160/3360.2100" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/3360.2100" />
+    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1569763014444" />
+    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1569763014444" />
+    <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1570104352430">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1570104352430" />
+    <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="713" y="250" key="#xdebugger.evaluate" timestamp="1569763014444" />
+    <state x="713" y="250" key="#xdebugger.evaluate/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1569763014444" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state width="444" height="466" key="DebuggerActiveHint" timestamp="1569763014444" />
+    <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state width="1229" height="280" key="GridCell.Tab.0.bottom" timestamp="1570104356103">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1229" height="280" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1570104356103" />
+    <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state width="1308" height="312" key="GridCell.Tab.0.bottom/3360.2100" timestamp="1569763014444" />
+    <state width="1229" height="280" key="GridCell.Tab.0.center" timestamp="1570104356102">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1229" height="280" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1570104356102" />
+    <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state width="1308" height="312" key="GridCell.Tab.0.center/3360.2100" timestamp="1569763014444" />
+    <state width="1229" height="280" key="GridCell.Tab.0.left" timestamp="1570104356102">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1229" height="280" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1570104356102" />
+    <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state width="1308" height="312" key="GridCell.Tab.0.left/3360.2100" timestamp="1569763014444" />
+    <state width="1229" height="280" key="GridCell.Tab.0.right" timestamp="1570104356103">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1229" height="280" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1570104356103" />
+    <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state width="1308" height="312" key="GridCell.Tab.0.right/3360.2100" timestamp="1569763014444" />
+    <state x="553" y="264" key="MultipleFileMergeDialog" timestamp="1570104102791">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="553" y="264" key="MultipleFileMergeDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1570104102791" />
+    <state x="553" y="264" key="MultipleFileMergeDialog/3360.2100" timestamp="1569763014444" />
+    <state x="468" y="248" key="RollbackChangesDialog" timestamp="1569763014444" />
+    <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="334" y="187" key="SettingsEditor" timestamp="1569763014444" />
+    <state x="334" y="187" key="SettingsEditor/1920.1080" timestamp="1569763014444" />
+    <state x="334" y="187" key="SettingsEditor/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="334" y="187" key="SettingsEditor/3360.2100" timestamp="1569763014444" />
+    <state width="515" height="445" key="SwitcherDM" timestamp="1569763014444" />
+    <state width="515" height="445" key="SwitcherDM/3360.2100" timestamp="1569763014444" />
+    <state x="602" y="261" key="VCS.ChangeListViewerDialog" timestamp="1569763014444" />
+    <state x="602" y="261" key="VCS.ChangeListViewerDialog/3360.2100" timestamp="1569763014444" />
+    <state x="692" y="461" key="VCS.ChangelistChooser" timestamp="1570104065472">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="692" y="461" key="VCS.ChangelistChooser/0.23.1680.1027@0.23.1680.1027" timestamp="1570104065472" />
+    <state x="524" y="262" key="Vcs.Push.Dialog" timestamp="1569763014444" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1570103978331">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1570103978331" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" timestamp="1569763014444" />
+    <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1569763014444" />
+    <state width="840" height="513" key="XDebugger.FullValuePopup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1570103671586">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1570103671586" />
+    <state x="320" y="229" width="939" height="615" key="find.popup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog" timestamp="1570104098282">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1570104098282" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1569763014444" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/3360.2100" timestamp="1569763014444" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
