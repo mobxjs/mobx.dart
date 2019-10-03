@@ -20,6 +20,9 @@ class MobXException implements Exception {
   MobXException(this.message);
 
   String message;
+
+  @override
+  String toString() => message;
 }
 
 class MobXCyclicReactionException implements Exception {

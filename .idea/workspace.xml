@@ -8,10 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +253,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
-    <MESSAGE value="increasing coverage" />
     <MESSAGE value="0.3.6-alpha" />
     <MESSAGE value="adding a small test for increasing coverage" />
     <MESSAGE value="updated changelog" />
@@ -280,7 +277,8 @@
     <MESSAGE value="package updates" />
     <MESSAGE value="using the new ToggleButtons in 1.9" />
     <MESSAGE value="change: refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="change: refactoring" />
+    <MESSAGE value="change: package updates and the pages are working now. Need to fix formatting and syntax-highlighting of code blocks" />
+    <option name="LAST_COMMIT_MESSAGE" value="change: package updates and the pages are working now. Need to fix formatting and syntax-highlighting of code blocks" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1569763014444" />
@@ -295,16 +293,28 @@
     <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state width="1308" height="312" key="GridCell.Tab.0.bottom" timestamp="1569763014444" />
+    <state width="1229" height="280" key="GridCell.Tab.0.bottom" timestamp="1569903684981">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1229" height="280" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1569903684981" />
     <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.bottom/3360.2100" timestamp="1569763014444" />
-    <state width="1308" height="312" key="GridCell.Tab.0.center" timestamp="1569763014444" />
+    <state width="1229" height="280" key="GridCell.Tab.0.center" timestamp="1569903684980">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1229" height="280" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1569903684980" />
     <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.center/3360.2100" timestamp="1569763014444" />
-    <state width="1308" height="312" key="GridCell.Tab.0.left" timestamp="1569763014444" />
+    <state width="1229" height="280" key="GridCell.Tab.0.left" timestamp="1569903684979">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1229" height="280" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1569903684979" />
     <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.left/3360.2100" timestamp="1569763014444" />
-    <state width="1308" height="312" key="GridCell.Tab.0.right" timestamp="1569763014444" />
+    <state width="1229" height="280" key="GridCell.Tab.0.right" timestamp="1569903684981">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1229" height="280" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1569903684981" />
     <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.right/3360.2100" timestamp="1569763014444" />
     <state x="553" y="264" key="MultipleFileMergeDialog" timestamp="1569763079308">
@@ -323,15 +333,18 @@
     <state x="602" y="261" key="VCS.ChangeListViewerDialog" timestamp="1569763014444" />
     <state x="602" y="261" key="VCS.ChangeListViewerDialog/3360.2100" timestamp="1569763014444" />
     <state x="524" y="262" key="Vcs.Push.Dialog" timestamp="1569763014444" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1569763015245">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1569903748930">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1569763015245" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1569903748930" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" timestamp="1569763014444" />
     <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1569763014444" />
     <state width="840" height="513" key="XDebugger.FullValuePopup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1569763014444" />
+    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1570103671586">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1570103671586" />
     <state x="320" y="229" width="939" height="615" key="find.popup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog" timestamp="1569763066159">
       <screen x="0" y="23" width="1680" height="1027" />
