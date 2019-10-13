@@ -2,7 +2,7 @@ part of '../async.dart';
 
 enum StreamStatus { waiting, active, done }
 
-class ObservableStream<T> implements Stream<T> {
+class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
   ObservableStream(Stream<T> stream,
       {T initialValue, bool cancelOnError = false, ReactiveContext context})
       : this._(context ?? mainContext, stream, initialValue, cancelOnError);
@@ -31,6 +31,7 @@ class ObservableStream<T> implements Stream<T> {
   dynamic get data => _controller.data;
 
   /// Current value or null if waiting and no initialValue, or null if data is an error.
+  @override
   T get value =>
       _controller.valueType == _ValueType.value ? _controller.data : null;
 

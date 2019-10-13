@@ -11,6 +11,7 @@ part 'core/context.dart';
 part 'core/derivation.dart';
 part 'core/notification_handlers.dart';
 part 'core/observable.dart';
+part 'core/observable_value.dart';
 part 'core/reaction.dart';
 part 'core/reaction_helper.dart';
 part 'interceptable.dart';
