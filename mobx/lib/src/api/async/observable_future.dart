@@ -41,7 +41,7 @@ class FutureResult<T> {
   }
 }
 
-class ObservableFuture<T> implements Future<T> {
+class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
   /// Create a new observable future that tracks the state of the provided future.
   ObservableFuture(Future<T> future, {ReactiveContext context})
       : this._(context ?? mainContext, future, FutureStatus.pending, null);
@@ -91,6 +91,7 @@ class ObservableFuture<T> implements Future<T> {
   /// Value if this completed with a value.
   ///
   /// Null otherwise.
+  @override
   T get value => status == FutureStatus.fulfilled ? _result.result : null;
 
   /// Error value if this completed with an error
