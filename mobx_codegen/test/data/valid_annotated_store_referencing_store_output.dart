@@ -11,14 +11,14 @@ class Car extends _Car {
   final _$paintColorAtom = Atom(name: '_Car.paintColor');
 
   @override
-  ui.Color get paintColor {
+  Color get paintColor {
     _$paintColorAtom.context.enforceReadPolicy(_$paintColorAtom);
     _$paintColorAtom.reportObserved();
     return super.paintColor;
   }
 
   @override
-  set paintColor(ui.Color value) {
+  set paintColor(Color value) {
     _$paintColorAtom.context.conditionallyRunInAction(() {
       super.paintColor = value;
       _$paintColorAtom.reportChanged();
