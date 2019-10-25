@@ -62,4 +62,4 @@ export 'package:mobx/src/core.dart'
         ReactionImpl,
         DerivationState;
 
-const version = '0.3.8+1';
+const version = '0.3.9';

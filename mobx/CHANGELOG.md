@@ -1,6 +1,7 @@
 ## 0.3.9
 
 - Added `toString` override for `MobXException`
+- Added an interface `ObservableValue` that is a common interface for all observables: `Observable`, `Computed`, `ObservableFuture`, `ObservableStream`. Thanks to [@t-artikov](https://github.com/t-artikov)
 
 ## 0.3.7 - 0.3.8+1
 
