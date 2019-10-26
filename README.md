@@ -379,4 +379,4 @@ the growing community of `MobX.dart`.
 - Write and improve some **documentation**. Documentation is super critical and its importance
   cannot be overstated!
 - Send in a Pull Request :-)
-- Chime in and [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/discord/637471236116447233)](https://discord.gg/dNHY52k)
+- Chime in and [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
