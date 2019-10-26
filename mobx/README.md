@@ -412,4 +412,4 @@ the growing community of `MobX.dart`.
 - Write and improve some **documentation**. Documentation is super critical and its importance
   cannot be overstated!
 - Send in a Pull Request :-)
-- Chime in and [![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+- Chime in and [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
