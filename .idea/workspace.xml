@@ -7,16 +7,9 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="change: using discord for chat">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mobx.dart.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mobx.dart.iml" afterDir="false" />
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/flutter_mobx.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/flutter_mobx.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/mobx.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/mobx.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/mobx_codegen.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/mobx_codegen.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/community.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/community.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +92,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
@@ -236,8 +229,17 @@
       <option name="presentableId" value="Default" />
       <updated>1572066588870</updated>
       <workItem from="1572066590297" duration="112000" />
-      <workItem from="1572066718921" duration="1542000" />
+      <workItem from="1572066718921" duration="2184000" />
+      <workItem from="1572081964662" duration="230000" />
     </task>
+    <task id="LOCAL-00001" summary="workspace updates">
+      <created>1572068490692</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1572068490692</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +296,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing analyzer lint error" />
     <MESSAGE value="minor tweaks to the docs" />
     <MESSAGE value="runBinary in a zone is not being used for AsyncActions, so commenting it out for now" />
     <MESSAGE value="minor tweaks to the community.md file" />
@@ -319,7 +320,8 @@
     <MESSAGE value="change: toString override for MobXException" />
     <MESSAGE value="change: adding toString to MobXException" />
     <MESSAGE value="change: using discord for chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="change: using discord for chat" />
+    <MESSAGE value="workspace updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace updates" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
