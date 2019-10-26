@@ -1,7 +1,8 @@
-## 0.3.9
+## 0.3.9 - 0.3.9+1
 
 - Added `toString` override for `MobXException`
 - Added an interface `ObservableValue` that is a common interface for all observables: `Observable`, `Computed`, `ObservableFuture`, `ObservableStream`. Thanks to [@t-artikov](https://github.com/t-artikov)
+- Added chat link to Discord. It is now: [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
 
 ## 0.3.7 - 0.3.8+1
 
