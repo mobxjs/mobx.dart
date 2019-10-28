@@ -1,5 +1,6 @@
 library generator_sample;
 
+import 'dart:core' as c;
 import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,40 +11,40 @@ class User = UserBase with _$User;
 abstract class UserBase with Store {
   UserBase(this.id);
 
-  final int id;
+  final c.int id;
 
   @observable
-  String firstName = 'Jane';
+  c.String firstName = 'Jane';
 
   @observable
-  String lastName = 'Doe';
+  c.String lastName = 'Doe';
 
   @computed
-  String get fullName => '$firstName $lastName';
+  c.String get fullName => '$firstName $lastName';
 
   @action
-  void updateNames({@required String firstName, String lastName}) {
+  void updateNames({@required c.String firstName, c.String lastName}) {
     if (firstName != null) this.firstName = firstName;
     if (lastName != null) this.lastName = firstName;
   }
 
   @observable
-  Future<String> foobar() async {
+  c.Future<c.String> foobar() async {
     return 'foobar';
   }
 
   @observable
-  Stream<T> loadStuff<T>(String arg1, {T value}) async* {
+  c.Stream<T> loadStuff<T>(c.String arg1, {T value}) async* {
     yield value;
   }
 
   @observable
-  Stream<String> asyncGenerator() async* {
+  c.Stream<c.String> asyncGenerator() async* {
     yield 'item1';
   }
 
   @action
-  Future<void> setAsyncFirstName() async {
+  c.Future<void> setAsyncFirstName() async {
     firstName = 'Async FirstName';
   }
 
