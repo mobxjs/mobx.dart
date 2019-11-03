@@ -69,6 +69,10 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
   @override
   void visitConstructorElement(ConstructorElement element) {
+    if (element.isSynthetic) {
+      return;
+    }
+
     // Note that these constructor templates are only used for annotation stye
     // store definition. They're ignored otherwise.
     final template = ConstructorOverrideTemplate()

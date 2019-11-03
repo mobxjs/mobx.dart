@@ -11,14 +11,14 @@ class Car extends _Car {
   final _$paintColorAtom = Atom(name: '_Car.paintColor');
 
   @override
-  ui.Color get paintColor {
+  Color get paintColor {
     _$paintColorAtom.context.enforceReadPolicy(_$paintColorAtom);
     _$paintColorAtom.reportObserved();
     return super.paintColor;
   }
 
   @override
-  set paintColor(ui.Color value) {
+  set paintColor(Color value) {
     _$paintColorAtom.context.conditionallyRunInAction(() {
       super.paintColor = value;
       _$paintColorAtom.reportChanged();
@@ -95,13 +95,9 @@ class Car extends _Car {
   }
 }
 
-class CarPart extends _CarPart {
-  CarPart() : super();
-}
+class CarPart extends _CarPart {}
 
 class Engine extends _Engine {
-  Engine() : super();
-
   final _$_EngineActionController = ActionController(name: '_Engine');
 
   @override
@@ -115,13 +111,9 @@ class Engine extends _Engine {
   }
 }
 
-class Tire extends _Tire {
-  Tire() : super();
-}
+class Tire extends _Tire {}
 
 class Windshield extends _Windshield {
-  Windshield() : super();
-
   @override
   ObservableStream<List<Bug>> squashedBugs() {
     final _$stream = super.squashedBugs();
@@ -130,8 +122,6 @@ class Windshield extends _Windshield {
 }
 
 class Bug extends _Bug {
-  Bug() : super();
-
   final _$_BugActionController = ActionController(name: '_Bug');
 
   @override

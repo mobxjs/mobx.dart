@@ -1,6 +1,6 @@
 name: mobx_codegen
 description: Code generator for MobX that adds support for annotating your code with @observable, @computed, @action and also creating Store classes. Stores can be created with a mixin or @store.
-version: 0.3.9+1
+version: 0.3.10
 authors:
   - Joni Katajamäki <joni.katajamaki@gmail.com>
   - Pavan Podila <pavan@pixelingene.com>
@@ -13,7 +13,7 @@ environment:
   sdk: '>=2.2.0 <3.0.0'
 
 dependencies:
-  analyzer: ^0.36.3
+  analyzer: '>=0.36.3 <0.39.0'
   build: ^1.1.4
   meta: ^1.1.0
   mobx: ^0.3.6

@@ -60,6 +60,10 @@ void main() {
           description: 'generates dart:ui types correctly',
           source: './data/valid_store_with_ui_types_input.dart',
           output: './data/valid_store_with_ui_types_output.dart'),
+      const TestInfo(
+          description: 'generates types with import prefixes correctly',
+          source: './data/valid_import_prefixed_input.dart',
+          output: './data/valid_import_prefixed_output.dart'),
     ]);
   });
 }
