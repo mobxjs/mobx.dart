@@ -8,7 +8,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="change: using discord for chat">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/mobx.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/mobx.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/action.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/annotations.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/annotations.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/context.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/store.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,10 +77,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Dart" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="javascript.nodejs.core.library.configured.version" value="11.14.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.0.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/mobx_codegen/test/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -88,7 +99,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
@@ -202,6 +213,33 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="change: using discord for chat" />
+      <created>1573230978204</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573230978204</updated>
+      <workItem from="1573230979468" duration="706000" />
+      <workItem from="1573231820318" duration="7465000" />
+    </task>
+    <servers />
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -256,7 +294,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
     <MESSAGE value="fixing analyzer lint error" />
     <MESSAGE value="minor tweaks to the docs" />
     <MESSAGE value="runBinary in a zone is not being used for AsyncActions, so commenting it out for now" />
@@ -305,28 +342,32 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1572747205075" />
-    <state width="1209" height="280" key="GridCell.Tab.0.bottom" timestamp="1572747176003">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1878" height="289" key="GridCell.Tab.0.bottom" timestamp="1573232190830">
+      <screen x="-240" y="-1057" width="1920" height="1057" />
     </state>
     <state width="1209" height="280" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1572747176003" />
+    <state width="1878" height="289" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573232190830" />
     <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.bottom/3360.2100" timestamp="1569763014444" />
-    <state width="1209" height="280" key="GridCell.Tab.0.center" timestamp="1572747176002">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1878" height="289" key="GridCell.Tab.0.center" timestamp="1573232190828">
+      <screen x="-240" y="-1057" width="1920" height="1057" />
     </state>
     <state width="1209" height="280" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1572747176002" />
+    <state width="1878" height="289" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573232190828" />
     <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.center/3360.2100" timestamp="1569763014444" />
-    <state width="1209" height="280" key="GridCell.Tab.0.left" timestamp="1572747176002">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1878" height="289" key="GridCell.Tab.0.left" timestamp="1573232190827">
+      <screen x="-240" y="-1057" width="1920" height="1057" />
     </state>
     <state width="1209" height="280" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1572747176002" />
+    <state width="1878" height="289" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573232190827" />
     <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.left/3360.2100" timestamp="1569763014444" />
-    <state width="1209" height="280" key="GridCell.Tab.0.right" timestamp="1572747176003">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1878" height="289" key="GridCell.Tab.0.right" timestamp="1573232190829">
+      <screen x="-240" y="-1057" width="1920" height="1057" />
     </state>
     <state width="1209" height="280" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1572747176003" />
+    <state width="1878" height="289" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573232190829" />
     <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.right/3360.2100" timestamp="1569763014444" />
     <state x="553" y="264" key="MultipleFileMergeDialog" timestamp="1572747160174">
@@ -336,7 +377,10 @@
     <state x="553" y="264" key="MultipleFileMergeDialog/3360.2100" timestamp="1569763014444" />
     <state x="468" y="248" key="RollbackChangesDialog" timestamp="1569763014444" />
     <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="334" y="187" key="SettingsEditor" timestamp="1569763014444" />
+    <state x="334" y="187" key="SettingsEditor" timestamp="1573277906343">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="334" y="187" key="SettingsEditor/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573277906343" />
     <state x="334" y="187" key="SettingsEditor/1920.1080" timestamp="1569763014444" />
     <state x="334" y="187" key="SettingsEditor/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state x="334" y="187" key="SettingsEditor/3360.2100" timestamp="1569763014444" />
@@ -369,10 +413,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1570104098282" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1571591445007">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state x="337" y="-823" width="766" height="696" key="search.everywhere.popup" timestamp="1573281138898">
+      <screen x="-240" y="-1057" width="1920" height="1057" />
     </state>
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1571591445007" />
+    <state x="337" y="-823" width="766" height="696" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573281138898" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/3360.2100" timestamp="1569763014444" />
   </component>
