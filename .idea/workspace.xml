@@ -9,15 +9,11 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="change: using discord for chat">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/mobx.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/mobx.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/action.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/annotations.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/annotations.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/context.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_map.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/store.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +78,7 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Dart" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="javascript.nodejs.core.library.configured.version" value="10.0.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="8.16.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/mobx_codegen/test/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -99,7 +95,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
@@ -377,9 +373,10 @@
     <state x="553" y="264" key="MultipleFileMergeDialog/3360.2100" timestamp="1569763014444" />
     <state x="468" y="248" key="RollbackChangesDialog" timestamp="1569763014444" />
     <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="334" y="187" key="SettingsEditor" timestamp="1573277906343">
+    <state x="334" y="187" key="SettingsEditor" timestamp="1573351081466">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
+    <state x="334" y="187" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1573351081466" />
     <state x="334" y="187" key="SettingsEditor/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573277906343" />
     <state x="334" y="187" key="SettingsEditor/1920.1080" timestamp="1569763014444" />
     <state x="334" y="187" key="SettingsEditor/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
@@ -413,10 +410,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1570104098282" />
-    <state x="337" y="-823" width="766" height="696" key="search.everywhere.popup" timestamp="1573281138898">
-      <screen x="-240" y="-1057" width="1920" height="1057" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1573355788548">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1571591445007" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1573355788548" />
     <state x="337" y="-823" width="766" height="696" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573281138898" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/3360.2100" timestamp="1569763014444" />
