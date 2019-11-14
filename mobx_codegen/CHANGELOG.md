@@ -1,3 +1,7 @@
+## 0.3.10+1
+
+- Package updates
+
 ## 0.3.9+1 - 0.3.10
 
 - Alters the analyzer dependency to support a range — from the previously supported version

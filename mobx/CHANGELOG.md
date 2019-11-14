@@ -1,3 +1,8 @@
+## 0.3.9+2
+
+- Documentation comments for many of the public methods and classes
+- Package updates
+
 ## 0.3.9 - 0.3.9+1
 
 - Added `toString` override for `MobXException`
