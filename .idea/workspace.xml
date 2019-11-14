@@ -7,13 +7,14 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="change: using discord for chat">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/context.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/generator_usage_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/async/async_action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/async/async_action.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/observable_collections/observable_set.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/core/reaction_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/core/reaction_helper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/interceptable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/interceptable.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/listenable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/listenable.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +26,7 @@
       <option value="directory" />
     </option>
   </component>
+  <component name="DartProblemsView" scoped-analysis-mode="DartPackage" />
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
     <option name="GROUP_DATA_SOURCES" value="true" />
@@ -290,7 +292,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing analyzer lint error" />
     <MESSAGE value="minor tweaks to the docs" />
     <MESSAGE value="runBinary in a zone is not being used for AsyncActions, so commenting it out for now" />
     <MESSAGE value="minor tweaks to the community.md file" />
@@ -315,7 +316,8 @@
     <MESSAGE value="change: toString override for MobXException" />
     <MESSAGE value="change: adding toString to MobXException" />
     <MESSAGE value="change: using discord for chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="change: using discord for chat" />
+    <MESSAGE value="fixing lints" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing lints" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -330,7 +332,10 @@
     <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state x="713" y="250" key="#xdebugger.evaluate" timestamp="1569763014444" />
     <state x="713" y="250" key="#xdebugger.evaluate/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1569763014444" />
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1573355886121">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1573355886121" />
     <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
@@ -393,27 +398,27 @@
     </state>
     <state x="692" y="461" key="VCS.ChangelistChooser/0.23.1680.1027@0.23.1680.1027" timestamp="1570104065472" />
     <state x="524" y="262" key="Vcs.Push.Dialog" timestamp="1569763014444" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1572059820700">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1573355888337">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1572059820700" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1573355888337" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" timestamp="1569763014444" />
     <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1569763014444" />
     <state width="840" height="513" key="XDebugger.FullValuePopup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1572057858828">
+    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1573368634003">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1572057858828" />
+    <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1573368634003" />
     <state x="320" y="229" width="939" height="615" key="find.popup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog" timestamp="1570104098282">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1570104098282" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1573355788548">
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1573701228413">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1573355788548" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1573701228413" />
     <state x="337" y="-823" width="766" height="696" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573281138898" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/3360.2100" timestamp="1569763014444" />

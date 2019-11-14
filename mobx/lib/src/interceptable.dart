@@ -8,6 +8,11 @@ abstract class Interceptable<T> {
   Dispose intercept(Interceptor<T> interceptor);
 }
 
+/// Stores the intercept-handlers that have been attached to a specific Observable.
+///
+/// When `observableInstance.intercept(handler)` is invoked, the passed-in handler
+/// is stored inside the `Interceptors<T>`.
+/// This is an internal class and should not be used directly.
 class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>> {
   Interceptors(ReactiveContext context) : super(context);
 

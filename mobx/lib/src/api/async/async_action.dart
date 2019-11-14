@@ -1,5 +1,10 @@
 part of '../async.dart';
 
+/// AsyncAction uses a [Zone] to keep track of async operations like [Future], timers and other
+/// kinds of micro-tasks.
+///
+/// You would rarely need to use this class directly. Instead, use the `@action` annotation along with
+/// the `mobx_codegen` package.
 class AsyncAction {
   AsyncAction(String name, {ReactiveContext context})
       : this._(context ?? mainContext, name);

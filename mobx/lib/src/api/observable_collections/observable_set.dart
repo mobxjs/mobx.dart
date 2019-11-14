@@ -1,5 +1,17 @@
 part of '../observable_collections.dart';
 
+/// ObservbableSet provides a reactive set that notifies changes when a member is added or removed.
+///
+/// ```dart
+/// final set = ObservableSet.of([1, 2, 3]);
+///
+/// const disposer = autorun((_){
+///   print(set);
+/// });
+///
+/// set.add(4); // prints {1, 2, 3, 4}
+///
+/// ```
 class ObservableSet<T>
     with
         // ignore:prefer_mixin
@@ -142,6 +154,8 @@ class ObservableSet<T>
     return Set.from(_set);
   }
 
+  /// Attaches a listener to changes happening in the [ObservableSet]. You have
+  /// the option to be notified immediately ([fireImmediately]) or wait for until the first change.
   @override
   Dispose observe(SetChangeListener<T> listener, {bool fireImmediately}) {
     final dispose = _listeners.add(listener);
@@ -168,10 +182,17 @@ class ObservableSet<T>
   }
 }
 
+/// A convenience method used during unit testing. It creates an [ObservableSet] with a custom instance
+/// of an [Atom]
 @visibleForTesting
 ObservableSet<T> wrapInObservableSet<T>(Atom atom, Set<T> _set) =>
     ObservableSet._wrap(mainContext, atom, _set);
 
+/// An internal iterator used to ensure that every read is tracked as part of the
+/// MobX reactivity system.
+///
+/// It does this be keeping an instance of an [Atom] and calling the [Atom.reportObserved]
+/// method for every read.
 class ObservableIterator<T> implements Iterator<T> {
   ObservableIterator(this._atom, this._iterator);
 
@@ -197,6 +218,8 @@ class ObservableIterator<T> implements Iterator<T> {
 
 typedef SetChangeListener<T> = void Function(SetChange<T>);
 
+/// Capture the change related information for an [ ObservableSet]. This is used
+/// as the notification instance.
 class SetChange<T> {
   SetChange({
     @required this.object,

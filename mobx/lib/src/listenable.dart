@@ -7,6 +7,8 @@ abstract class Listenable<TNotification> {
   Dispose observe(Listener<TNotification> listener, {bool fireImmediately});
 }
 
+/// Stores the handler functions that have been attached via [Observable.observe] method
+/// This is an internal class and should not be used directly.
 class Listeners<TNotification> extends NotificationHandlers<TNotification> {
   Listeners(ReactiveContext context) : super(context);
 
