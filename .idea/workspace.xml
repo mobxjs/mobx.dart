@@ -2,18 +2,20 @@
 <project version="4">
   <component name="AutoTestManager">
     <enabled-run-configurations>
-      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
       <run-configuration type="DartTestRunConfigurationType" name="tests in mobx_codegen" />
+      <run-configuration type="DartTestRunConfigurationType" name="tests in mobx" />
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="more documentation comments and package updates">
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_mobx/lib/flutter_mobx.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/lib/flutter_mobx.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/mobx.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/mobx.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/mobx_codegen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/mobx_codegen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +122,7 @@
       <command value="pub:get:mobx_codegen" />
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.flutter_mobx tests">
+  <component name="RunManager" selected="Dart Test.tests in mobx">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
@@ -207,11 +209,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.set:versions" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx" />
         <item itemvalue="npm.pub:upgrade:mobx" />
         <item itemvalue="npm.pub:upgrade:mobx_codegen" />
-        <item itemvalue="npm.set:versions" />
       </list>
     </recent_temporary>
   </component>
@@ -340,10 +342,10 @@
     <state x="529" y="280" key="#tests_in_flutter_mobx_test.dart/0.23.1680.1027@0.23.1680.1027" timestamp="1573870511300" />
     <state x="713" y="250" key="#xdebugger.evaluate" timestamp="1569763014444" />
     <state x="713" y="250" key="#xdebugger.evaluate/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1573872570150">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1573872678122">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1573872570150" />
+    <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1573872678122" />
     <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
@@ -351,31 +353,31 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1573825115025" />
-    <state width="1204" height="280" key="GridCell.Tab.0.bottom" timestamp="1573872508806">
+    <state width="1204" height="280" key="GridCell.Tab.0.bottom" timestamp="1573874138151">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1204" height="280" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1573872508806" />
+    <state width="1204" height="280" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1573874138151" />
     <state width="1878" height="289" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573232190830" />
     <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.bottom/3360.2100" timestamp="1569763014444" />
-    <state width="1204" height="280" key="GridCell.Tab.0.center" timestamp="1573872508805">
+    <state width="1204" height="280" key="GridCell.Tab.0.center" timestamp="1573874138150">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1204" height="280" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1573872508805" />
+    <state width="1204" height="280" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1573874138150" />
     <state width="1878" height="289" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573232190828" />
     <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.center/3360.2100" timestamp="1569763014444" />
-    <state width="1204" height="280" key="GridCell.Tab.0.left" timestamp="1573872508805">
+    <state width="1204" height="280" key="GridCell.Tab.0.left" timestamp="1573874138149">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1204" height="280" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1573872508805" />
+    <state width="1204" height="280" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1573874138149" />
     <state width="1878" height="289" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573232190827" />
     <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.left/3360.2100" timestamp="1569763014444" />
-    <state width="1204" height="280" key="GridCell.Tab.0.right" timestamp="1573872508806">
+    <state width="1204" height="280" key="GridCell.Tab.0.right" timestamp="1573874138151">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1204" height="280" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1573872508806" />
+    <state width="1204" height="280" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1573874138151" />
     <state width="1878" height="289" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573232190829" />
     <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.right/3360.2100" timestamp="1569763014444" />
@@ -406,10 +408,10 @@
     </state>
     <state x="692" y="461" key="VCS.ChangelistChooser/0.23.1680.1027@0.23.1680.1027" timestamp="1570104065472" />
     <state x="524" y="262" key="Vcs.Push.Dialog" timestamp="1569763014444" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1573825159078">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1573873503897">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1573825159078" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1573873503897" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" timestamp="1569763014444" />
     <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1569763014444" />
