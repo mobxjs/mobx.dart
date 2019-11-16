@@ -30,6 +30,7 @@
           <value>
             <list>
               <option value="$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/archive-2.0.10/lib" />
+              <option value="$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/archive-2.0.11/lib" />
             </list>
           </value>
         </entry>
@@ -744,6 +745,7 @@
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-0.39.1/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer_plugin-0.2.1/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/archive-2.0.10/lib" />
+      <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/archive-2.0.11/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/args-1.5.2/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.2.0/lib" />
       <root url="file://$USER_HOME$/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.3.0/lib" />

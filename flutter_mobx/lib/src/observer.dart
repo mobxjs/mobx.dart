@@ -22,10 +22,19 @@ class Observer extends StatefulWidget {
     this.name = name ?? _defaultObserverName(context ?? mainContext);
   }
 
+  /// An identifiable name used for debugging
   String name;
+
+  /// The context within which its reaction should be run.
+  /// It is the [mainContext] in most cases
   final ReactiveContext context;
+
+  /// The function that generates the [Widget] as part of the [Observer].
+  /// This method is wrapped in a reaction for tracking and automatically discovering the
+  /// used Observables. When the Observables change, this [builder] method is invoked again.
   final WidgetBuilder builder;
 
+  /// A convenience method used for testing.
   @visibleForTesting
   Reaction createReaction(
     Function() onInvalidate, {
@@ -39,11 +48,14 @@ class Observer extends StatefulWidget {
   @override
   State<Observer> createState() => ObserverState();
 
+  /// Convenience method to output console messages as debugging output.
+  /// Logging usually happens when some internal error needs to be surfaced to the user.
   void log(String msg) {
     debugPrint(msg);
   }
 }
 
+/// Internal class used to track and execute the parent [Observer.builder] method
 @visibleForTesting
 class ObserverState extends State<Observer> {
   ReactionImpl _reaction;
