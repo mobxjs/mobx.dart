@@ -1,4 +1,4 @@
-## 0.3.9+2
+## 0.3.9+3
 
 - Documentation comments for many of the public methods and classes
 - Package updates
