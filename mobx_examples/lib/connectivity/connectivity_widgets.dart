@@ -21,7 +21,7 @@ class _ConnectivityExampleState extends State<ConnectivityExample> {
   @override
   void initState() {
     super.initState();
-    // a delay is used to avoiding showing the snackbar too much when the connection drops in and out repeatedly
+    // a delay is used to avoid showing the snackbar too much when the connection drops in and out repeatedly
     _disposer = reaction(
         (_) => widget.store.connectivityStream.value,
         (result) => _scaffoldKey.currentState.showSnackBar(SnackBar(
