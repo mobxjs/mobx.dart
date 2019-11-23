@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobx_examples/connectivity/connectivity_store.dart';
+import 'package:mobx_examples/connectivity/connectivity_widgets.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mobx_examples/clock/clock_widgets.dart';
@@ -81,6 +83,14 @@ final List<Example> examples = [
     path: '/settings',
     widgetBuilder: (_) => Consumer<SettingsStore>(
       builder: (_, store, __) => SettingsExample(store),
+    ),
+  ),
+  Example(
+    title: 'Connectivity',
+    description: 'Responding to changes in connection status',
+    path: '/connectivity',
+    widgetBuilder: (_) => Consumer<ConnectivityStore>(
+      builder: (_, store, __) => ConnectivityExample(store),
     ),
   )
 ];

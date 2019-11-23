@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx_examples/connectivity/connectivity_store.dart';
 import 'package:mobx_examples/counter/counter.dart';
 import 'package:mobx_examples/examples.dart';
 import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
@@ -25,6 +26,10 @@ class MyApp extends StatelessWidget {
             ProxyProvider<PreferencesService, SettingsStore>(
                 builder: (_, preferencesService, __) =>
                     SettingsStore(preferencesService)),
+            Provider<ConnectivityStore>(
+              builder: (_) => ConnectivityStore(),
+              dispose: (_, store) => store.dispose(),
+            )
           ],
           child: Consumer<SettingsStore>(
             builder: (_, store, __) => Observer(
