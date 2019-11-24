@@ -1,0 +1,127 @@
+---
+name: Connectivity
+menu: Examples
+route: /examples/connectivity
+---
+
+# Connectivity
+
+Applications require notifying users when the state of their connection changes. One way of doing so is to make use of snackbars to inform users as shown in [this article](https://developers.google.com/web/fundamentals/instant-and-offline/offline-ux#inform_users_of_their_current_state_and_change_of_state).
+In this example, we see how this can be accomplished by making use of reactions.
+
+## Install the connectivity plugin
+
+The first step is to install the [`connectivity` plugin](https://pub.dev/packages/connectivity) available from [pub](https://pub.dev). Your application's `pubspec.yaml` file will look similar to the following
+
+```
+dependencies:
+  connectivity:
+```
+
+## The `ConnectivityStore`
+
+We now need to define our `Store` to hold our reactive state that represents the connection status of the device being used to run the application.
+
+```dart
+import 'package:mobx/mobx.dart';
+import 'package:connectivity/connectivity.dart';
+
+part 'connectivity_store.g.dart';
+
+class ConnectivityStore = _ConnectivityStore with _$ConnectivityStore;
+
+abstract class _ConnectivityStore with Store {
+  _ConnectivityStore() {
+    connectivityStream = ObservableStream(Connectivity().onConnectivityChanged);
+  }
+
+  @observable
+  ObservableStream<ConnectivityResult> connectivityStream;
+}
+```
+
+The `ConnectivityStore` has a field named `connectivityStream`. It is an `ObservableStream` that wraps around a stream provided by the `connectivity` plugin that can be used to listen for changes in connection state.
+By doing so, we can make use of reactions to respond to changes as we shall soon see. Without MobX, this would generally have been done by [listening to the stream](https://api.dart.dev/stable/dart-async/Stream/listen.html).
+
+## Setting up the reaction
+
+To have our user interface inform users of changes about the state of their connection, we'll need to configure a reaction.
+We'll need to use a `StatefulWidget` so that the reaction can be configured within the `initState` method. The reaction will also need to be disposed when the state is going to be disposed. The complete code is as follows
+
+
+```dart
+import 'package:connectivity/connectivity.dart';
+import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/connectivity/connectivity_store.dart';
+
+class ConnectivityExample extends StatefulWidget {
+  const ConnectivityExample(this.store, {Key key}) : super(key: key);
+
+  final ConnectivityStore store;
+
+  @override
+  _ConnectivityExampleState createState() => _ConnectivityExampleState();
+}
+
+class _ConnectivityExampleState extends State<ConnectivityExample> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  ReactionDisposer _disposer;
+  @override
+  void initState() {
+    super.initState();
+    // a delay is used to avoid showing the snackbar too much when the connection drops in and out repeatedly
+    _disposer = reaction(
+        (_) => widget.store.connectivityStream.value,
+        (result) => _scaffoldKey.currentState.showSnackBar(SnackBar(
+            content: Text(result == ConnectivityResult.none
+                ? 'You\'re offline'
+                : 'You\'re online'))),
+        delay: 4000);
+  }
+
+  @override
+  void dispose() {
+    _disposer();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          title: const Text('Settings'),
+        ),
+        body: const Padding(
+          padding: EdgeInsets.all(16),
+          child: Text(
+              'Turn your connection on/off for approximately 4 seconds to see the app respond to changes in your connection status.'),
+        ),
+      );
+}
+```
+
+The `ConnectivityStore` is passed to the `ConnectivityExample` widget, which can be done through the `provider` package (refer to the documentation on [organizing stores](https://mobx.pub/guides/stores)).
+
+A [`reaction`](https://mobx.pub/api/reaction#reaction) is used here as we are only interested in letting users know when the connection state changes.
+The value passed as the first argument to the `reaction` function represents reactive state that needs to be tracked i.e. the status of the user's connection.
+The second argument represents the code that we want executed whenever the reactive state changes. In this example, we want a snackbar to displayed to notify users about updates to their connection status.
+In areas where connections can repeatedly drop in and out, it may be desirable to avoid showing too many messages that would otherwise degrade the user experience.
+To solve this problem, the `reaction` function allows specifying a `delay` in milliseconds. In this scenario, we have specified a delay of 4000 milliseconds (i.e. 4 seconds).
+The effect of this is that the snackbar will only be shown if 4 seconds have passed since the status of the user's connection has changed.
+
+The end result looks like this
+
+import connectivityGif from './connectivity.gif';
+
+<img src={connectivityGif} />
+
+## Summary
+
+This example demonstrates how we can make use of reactions. Most of the time, developers will be making use of the `Observer` widget.
+However, some scenarios require displaying brief messages where the user interface elements aren't actually returned by a widget's `build` method.
+MobX provides functions such as `reaction` that are suitable for these scenarios that are simple to setup but also provide powerful features such as
+the ability to apply a debounce delay.
+
+> The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/connectivity)
