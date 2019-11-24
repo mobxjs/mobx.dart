@@ -13,7 +13,7 @@ environment:
   sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
-  mobx: ^0.3.7
+  mobx: ^0.3.9
   flutter_mobx: ^0.3.0
   mobx_codegen: ^0.3.10
   github:
@@ -28,6 +28,7 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   mockito:
+  connectivity:
 
 dev_dependencies:
   build_runner:
