@@ -8,7 +8,10 @@ import 'package:mobx_examples/settings/preferences_service.dart';
 import 'package:mobx_examples/settings/settings_store.dart';
 import 'package:provider/provider.dart';
 
+import 'main.reflectable.dart';
+
 void main() {
+  initializeReflectable();
   runApp(const MyApp());
 }
 

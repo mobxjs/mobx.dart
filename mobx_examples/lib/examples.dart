@@ -13,6 +13,7 @@ import 'package:mobx_examples/random_stream/random_widgets.dart';
 import 'package:mobx_examples/settings/settings_store.dart';
 import 'package:mobx_examples/settings/settings_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
+import 'package:mobx_examples/todos_json_mapper/todo_json_mapper_widgets.dart';
 
 class Example {
   Example(
@@ -52,6 +53,12 @@ final List<Example> examples = [
     description: 'Managing a list of Todos, the TodoMVC way.',
     path: '/todos',
     widgetBuilder: (_) => TodoExample(),
+  ),
+  Example(
+    title: 'Todos Json Mapper',
+    description: 'Managing a list of Todos, the TodoMVC way, with dart_json_mapper.',
+    path: '/todos_json_mapper',
+    widgetBuilder: (_) => TodoJsonMapperExample(),
   ),
   Example(
     title: 'Github Repos',

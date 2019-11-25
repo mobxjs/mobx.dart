@@ -1,0 +1,158 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
+
+import 'package:mobx_examples/todos_json_mapper/todo_json_mapper_list.dart';
+
+class TodoJsonMapperExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Provider<TodoJsonMapperList>(
+      builder: (_) => TodoJsonMapperList(),
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Todos'),
+          ),
+          body: Column(
+            children: <Widget>[
+              AddTodo(),
+              ActionBar(),
+              Description(),
+              TodoListView()
+            ],
+          )));
+}
+
+class Description extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final list = Provider.of<TodoJsonMapperList>(context);
+
+    return Observer(
+        builder: (_) => Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              list.itemsDescription,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            )));
+  }
+}
+
+class TodoListView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final list = Provider.of<TodoJsonMapperList>(context);
+
+    return Observer(
+        builder: (_) => Flexible(
+              child: ListView.builder(
+                  itemCount: list.visibleTodos.length,
+                  itemBuilder: (_, index) {
+                    final todo = list.visibleTodos[index];
+                    return Observer(
+                        builder: (_) => CheckboxListTile(
+                              controlAffinity: ListTileControlAffinity.leading,
+                              value: todo.done,
+                              onChanged: (flag) => todo.done = flag,
+                              title: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                      child: Text(
+                                    todo.description,
+                                    overflow: TextOverflow.ellipsis,
+                                  )),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () => list.removeTodo(todo),
+                                  )
+                                ],
+                              ),
+                            ));
+                  }),
+            ));
+  }
+}
+
+class ActionBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final list = Provider.of<TodoJsonMapperList>(context);
+
+    return Column(children: <Widget>[
+      Observer(
+        builder: (_) {
+          final selections = VisibilityFilter.values
+              .map((f) => f == list.filter)
+              .toList(growable: false);
+          return Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: ToggleButtons(
+                  borderRadius: BorderRadius.circular(8),
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5, right: 5),
+                      child: const Text('All'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5, right: 5),
+                      child: const Text('Pending'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5, right: 5),
+                      child: const Text('Completed'),
+                    )
+                  ],
+                  onPressed: (index) {
+                    list.filter = VisibilityFilter.values[index];
+                  },
+                  isSelected: selections,
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+      Observer(
+          builder: (_) => ButtonBar(
+                children: <Widget>[
+                  RaisedButton(
+                    child: const Text('Remove Completed'),
+                    onPressed: list.canRemoveAllCompleted
+                        ? list.removeCompleted
+                        : null,
+                  ),
+                  RaisedButton(
+                    child: const Text('Mark All Completed'),
+                    onPressed: list.canMarkAllCompleted
+                        ? list.markAllAsCompleted
+                        : null,
+                  )
+                ],
+              ))
+    ]);
+  }
+}
+
+class AddTodo extends StatelessWidget {
+  final _textController = TextEditingController(text: '');
+
+  @override
+  Widget build(BuildContext context) {
+    final list = Provider.of<TodoJsonMapperList>(context);
+
+    return TextField(
+      autofocus: true,
+      decoration: const InputDecoration(
+          labelText: 'Add a Todo', contentPadding: EdgeInsets.all(8)),
+      controller: _textController,
+      onChanged: (String newValue) {
+        list.currentDescription = newValue;
+      },
+      onSubmitted: (String value) {
+        list.addTodo(value);
+        _textController.clear();
+      },
+    );
+  }
+}

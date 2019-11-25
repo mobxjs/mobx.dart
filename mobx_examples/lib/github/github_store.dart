@@ -1,4 +1,4 @@
-import 'package:github/server.dart';
+import 'package:github/github.dart';
 import 'package:mobx/mobx.dart';
 
 part 'github_store.g.dart';
@@ -6,7 +6,7 @@ part 'github_store.g.dart';
 class GithubStore = _GithubStore with _$GithubStore;
 
 abstract class _GithubStore with Store {
-  final GitHub client = createGitHubClient();
+  final GitHub client = GitHub();
 
   // No need to observe this as we are relying on the fetchReposFuture.status
   List<Repository> repositories = [];

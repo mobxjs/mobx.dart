@@ -16,13 +16,15 @@ dependencies:
   mobx: ^0.3.9
   flutter_mobx: ^0.3.0
   mobx_codegen: ^0.3.10
-  github:
+  github: any
   validators:
   hnpwa_client:
   url_launcher:
   shared_preferences:
   provider: ^3.0.0
   json_serializable: ^3.0.0
+  dart_json_mapper: ^1.2.0
+  json_annotation: any
   flutter:
     sdk: flutter
 
@@ -35,13 +37,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-  flutter_mobx:
-    path: ../flutter_mobx
-  mobx_codegen:
-    path: ../mobx_codegen
-  mobx:
-    path: ../mobx
+# dependency_overrides:
+#   flutter_mobx:
+#     path: ../flutter_mobx
+#   mobx_codegen:
+#     path: ../mobx_codegen
+#   mobx:
+#     path: ../mobx
 
 flutter:
   uses-material-design: true
