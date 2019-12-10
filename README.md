@@ -1,5 +1,6 @@
 # mobx.dart
 
+<a href="https://flutter.dev/docs/development/packages-and-plugins/favorites"><img align="right" src="https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/flutter-favorite.png"></a>
 [![pub package](https://img.shields.io/pub/v/mobx.svg?label=mobx&color=blue)](https://pub.dartlang.org/packages/mobx)
 [![pub package](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
 [![pub package](https://img.shields.io/pub/v/mobx_codegen.svg?label=mobx_codegen&color=blue)](https://pub.dartlang.org/packages/mobx_codegen)
