@@ -7,9 +7,9 @@
 [![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
+<a href="https://flutter.dev/docs/development/packages-and-plugins/favorites"><img align="right" src="https://user-images.githubusercontent.com/156846/70500845-7dc3d900-1b42-11ea-96ee-bbcc6e45fe70.png"></a>
 
 ![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx.png)
-[Flutter Favorite](https://user-images.githubusercontent.com/156846/70500845-7dc3d900-1b42-11ea-96ee-bbcc6e45fe70.png)
 
 [MobX](https://github.com/mobxjs/mobx) for the Dart language.
 
