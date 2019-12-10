@@ -68,7 +68,7 @@ class ObserverState extends State<Observer> {
       FlutterError.reportError(FlutterErrorDetails(
         library: 'flutter_mobx',
         exception: e,
-        stack: e is FlutterError ? e.stackTrace : null,
+        stack: e is Error ? e.stackTrace : null,
       ));
     });
   }
