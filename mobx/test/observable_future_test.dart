@@ -184,7 +184,7 @@ void main() {
     });
 
     test('catchError works', () async {
-      final future = ObservableFuture(Future(() {
+      final future = ObservableFuture(Future<int>(() {
         // ignore:only_throw_errors
         throw 'Error';
       })).catchError((error) => 1);
@@ -194,8 +194,8 @@ void main() {
 
     test('timeout works', () async {
       final completer = Completer<int>();
-      final future =
-          ObservableFuture(completer.future).timeout(Duration(milliseconds: 1));
+      final future = ObservableFuture(completer.future)
+          .timeout(const Duration(milliseconds: 1));
 
       expect(() async => await future,
           throwsA(const TypeMatcher<TimeoutException>()));

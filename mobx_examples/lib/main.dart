@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:mobx_examples/connectivity/connectivity_store.dart';
 import 'package:mobx_examples/counter/counter.dart';
 import 'package:mobx_examples/examples.dart';
 import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
 import 'package:mobx_examples/settings/preferences_service.dart';
 import 'package:mobx_examples/settings/settings_store.dart';
+import 'package:provider/provider.dart';
 
-Future<void> main() async {
-  final sharedPreferences = await SharedPreferences.getInstance();
-  runApp(MyApp(sharedPreferences));
+void main() {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp(this._sharedPreferences);
-
-  final SharedPreferences _sharedPreferences;
+  const MyApp();
 
   @override
   Widget build(BuildContext context) => MultiProvider(
@@ -25,11 +21,15 @@ class MyApp extends StatelessWidget {
             Provider<MultiCounterStore>(builder: (_) => MultiCounterStore()),
             Provider<Counter>(builder: (_) => Counter()),
             Provider<PreferencesService>(
-              builder: (_) => PreferencesService(_sharedPreferences),
+              builder: (_) => PreferencesService(),
             ),
             ProxyProvider<PreferencesService, SettingsStore>(
                 builder: (_, preferencesService, __) =>
                     SettingsStore(preferencesService)),
+            Provider<ConnectivityStore>(
+              builder: (_) => ConnectivityStore(),
+              dispose: (_, store) => store.dispose(),
+            )
           ],
           child: Consumer<SettingsStore>(
             builder: (_, store, __) => Observer(

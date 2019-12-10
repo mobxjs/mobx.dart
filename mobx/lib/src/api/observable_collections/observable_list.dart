@@ -5,10 +5,10 @@ Atom _listAtom<T>(ReactiveContext context) {
   return Atom(name: ctx.nameFor('ObservableList<$T>'), context: ctx);
 }
 
-/// Create a list of [T].
-///
 /// The ObservableList tracks the various read-methods (eg: [List.first], [List.last]) and
 /// write-methods (eg: [List.add], [List.insert]) making it easier to use it inside reactions.
+///
+/// As the name suggests, this is the Observable-counterpart to the standard Dart `List<T>`.
 ///
 /// ```dart
 /// final list = ObservableList<int>.of([1]);
@@ -44,6 +44,7 @@ class ObservableList<T>
   Listeners<ListChange<T>> get _listeners =>
       _listenersField ??= Listeners(_context);
 
+  /// The name used to identify for debugging purposes
   String get name => _atom.name;
 
   @override
@@ -323,6 +324,10 @@ class ObservableList<T>
     }, _atom);
   }
 
+  /// Attach a [listener] to the changes happening in the list.
+  ///
+  /// You can choose to receive the change notification immediately (with [fireImmediately])
+  /// or on the first change
   @override
   Dispose observe(Listener<ListChange<T>> listener, {bool fireImmediately}) {
     if (fireImmediately == true) {
@@ -371,6 +376,7 @@ class ObservableList<T>
 typedef ListChangeListener<TNotification> = void Function(
     ListChange<TNotification>);
 
+/// Stores the change related information when a list-item is modified, added or removed
 class ListChange<T> {
   ListChange(
       {this.index,
@@ -393,6 +399,8 @@ class ListChange<T> {
   final ObservableList<T> object;
 }
 
+
+/// Used during testing for wrapping a regular `List<T>` as an `ObservableList<T>`
 @visibleForTesting
 ObservableList<T> wrapInObservableList<T>(Atom atom, List<T> list) =>
     ObservableList._wrap(mainContext, atom, list);

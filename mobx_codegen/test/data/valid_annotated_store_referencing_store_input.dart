@@ -1,8 +1,8 @@
 library generator_sample;
 
-import 'dart:ui' as ui;
-
 import 'package:mobx/mobx.dart';
+
+import 'dart:ui';
 
 part 'generator_sample.g.dart';
 
@@ -11,7 +11,7 @@ class _Car {
   _Car(this.engine);
 
   @observable
-  ui.Color paintColor;
+  Color paintColor;
 
   @observable
   Engine _engine;
@@ -40,7 +40,7 @@ class _CarPart {}
 @store
 class _Engine extends CarPart {
   @action
-  swapInParts({Engine from}) {}
+  void swapInParts({Engine from}) {}
 }
 
 @store

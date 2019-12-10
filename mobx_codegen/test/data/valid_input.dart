@@ -52,4 +52,7 @@ abstract class UserBase with Store {
   Future<void> setAsyncFirstName2() async {
     firstName = 'Async FirstName 2';
   }
+
+  @action
+  void setBlob(blob) {} // ignore: type_annotate_public_apis
 }

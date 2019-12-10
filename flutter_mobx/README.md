@@ -1,5 +1,10 @@
 # flutter_mobx
 
+<a href="https://flutter.dev/docs/development/packages-and-plugins/favorites">
+<img height="128" src="https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/flutter-favorite.png">
+</a>
+<br><br>
+
 [![pub package](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
 [![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
 

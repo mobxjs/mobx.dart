@@ -1,9 +1,22 @@
-## 0.3.7
+## 0.3.9+3
+
+- Documentation comments for many of the public methods and classes
+- Package updates
+
+## 0.3.9 - 0.3.9+1
+
+- Added `toString` override for `MobXException`
+- Added an interface `ObservableValue` that is a common interface for all observables: `Observable`, `Computed`, `ObservableFuture`, `ObservableStream`. Thanks to [@t-artikov](https://github.com/t-artikov)
+- Added chat link to Discord. It is now: [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
+
+## 0.3.7 - 0.3.8+1
 
 - Fixes the type resolution bug that prevented using types from packages like `dart:ui`
 - Fixes the type resolution of other public `Store` classes referenced in the `@store` based generation
 
 Thanks to [@shyndman](https://github.com/shyndman) for the tremendous work on this release.
+
+- Added a version constant that matches the `pubspec.yaml`
 
 ## 0.3.6
 

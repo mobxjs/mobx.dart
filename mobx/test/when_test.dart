@@ -88,7 +88,7 @@ void main() {
           thrown = true;
         });
 
-        async.elapse(Duration(milliseconds: 1000)); // cause a timeout
+        async.elapse(const Duration(milliseconds: 1000)); // cause a timeout
         expect(thrown, isTrue);
         expect(d.reaction.isDisposed, isTrue);
 
@@ -103,7 +103,7 @@ void main() {
 
         x.value = 11;
         expect(() {
-          async.elapse(Duration(milliseconds: 1000));
+          async.elapse(const Duration(milliseconds: 1000));
         }, returnsNormally);
         expect(d.reaction.isDisposed, isTrue);
 

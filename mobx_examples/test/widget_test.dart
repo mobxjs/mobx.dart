@@ -7,17 +7,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:mobx_examples/main.dart';
-import 'package:mockito/mockito.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(MockSharedPreferences()));
+    await tester.pumpWidget(const MyApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

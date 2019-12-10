@@ -26,16 +26,10 @@ mixin _$SettingsStore on _SettingsStore, Store {
     }, _$useDarkModeAtom, name: '${_$useDarkModeAtom.name}_set');
   }
 
-  final _$_SettingsStoreActionController =
-      ActionController(name: '_SettingsStore');
+  final _$setDarkModeAsyncAction = AsyncAction('setDarkMode');
 
   @override
-  void setDarkMode({bool value}) {
-    final _$actionInfo = _$_SettingsStoreActionController.startAction();
-    try {
-      return super.setDarkMode(value: value);
-    } finally {
-      _$_SettingsStoreActionController.endAction(_$actionInfo);
-    }
+  Future<void> setDarkMode({@required bool value}) {
+    return _$setDarkModeAsyncAction.run(() => super.setDarkMode(value: value));
   }
 }

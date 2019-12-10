@@ -89,11 +89,12 @@ void main() {
 
         // Even though predicate has changed, effect should not be executed
         expect(executed, isFalse);
-        async.elapse(Duration(milliseconds: 500));
+        async.elapse(const Duration(milliseconds: 500));
         expect(
             executed, isFalse); // should still be false as 1s has not elapsed
 
-        async.elapse(Duration(milliseconds: 500)); // should now trigger effect
+        async.elapse(
+            const Duration(milliseconds: 500)); // should now trigger effect
         expect(executed, isTrue);
 
         d();
@@ -127,11 +128,12 @@ void main() {
         x.value = 11; // predicate goes from false -> true
 
         executed = false;
-        async.elapse(Duration(milliseconds: 500));
+        async.elapse(const Duration(milliseconds: 500));
         expect(
             executed, isFalse); // should still be false as 1s has not elapsed
 
-        async.elapse(Duration(milliseconds: 500)); // should now trigger effect
+        async.elapse(
+            const Duration(milliseconds: 500)); // should now trigger effect
         expect(executed, isTrue);
 
         executed = false;
@@ -139,7 +141,8 @@ void main() {
         x.value = 9;
 
         expect(executed, isFalse);
-        async.elapse(Duration(milliseconds: 1000)); // should now trigger effect
+        async.elapse(
+            const Duration(milliseconds: 1000)); // should now trigger effect
         expect(executed, isTrue);
 
         d();

@@ -20,6 +20,7 @@ class ReactionDisposer {
   void call() => reaction.dispose();
 }
 
+/// An internal helper function to create a [autorun]
 ReactionDisposer createAutorun(
     ReactiveContext context, Function(Reaction) trackingFn,
     {String name, int delay, void Function(Object, Reaction) onError}) {
@@ -63,6 +64,7 @@ ReactionDisposer createAutorun(
   return ReactionDisposer(rxn);
 }
 
+/// An internal helper function to create a [reaction]
 ReactionDisposer createReaction<T>(ReactiveContext context,
     T Function(Reaction) predicate, void Function(T) effect,
     {String name,
@@ -143,6 +145,7 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
   return ReactionDisposer(rxn);
 }
 
+/// An internal helper function to create a [when]
 ReactionDisposer createWhenReaction(ReactiveContext context,
     bool Function(Reaction) predicate, void Function() effect,
     {String name, int timeout, void Function(Object, Reaction) onError}) {
@@ -182,6 +185,7 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
   }, name: rxnName, onError: onError);
 }
 
+/// An internal helper function to create an [asyncWhen]
 Future<void> createAsyncWhenReaction(
     ReactiveContext context, bool Function(Reaction) predicate,
     {String name, int timeout}) {

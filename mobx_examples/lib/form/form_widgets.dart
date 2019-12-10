@@ -46,7 +46,7 @@ class _FormExampleState extends State<FormExample> {
               Observer(
                   builder: (_) => AnimatedOpacity(
                       child: const LinearProgressIndicator(),
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       opacity: store.isUserCheckPending ? 1 : 0)),
               Observer(
                 builder: (_) => TextField(

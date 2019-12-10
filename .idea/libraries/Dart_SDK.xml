@@ -18,6 +18,7 @@
       <root url="file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/mirrors" />
       <root url="file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/svg" />
       <root url="file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/typed_data" />
+      <root url="file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/wasm" />
       <root url="file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/web_audio" />
       <root url="file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/web_gl" />
       <root url="file://$USER_HOME$/sdks/flutter/bin/cache/dart-sdk/lib/web_sql" />

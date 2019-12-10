@@ -11,8 +11,8 @@ enum VisibilityFilter { all, pending, completed }
 class TodoList = _TodoList with _$TodoList;
 
 abstract class _TodoList with Store {
-  @observable
   @_ObservableListJsonConverter()
+  @observable
   ObservableList<Todo> todos = ObservableList<Todo>();
 
   @observable

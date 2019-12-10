@@ -1,7 +1,10 @@
 part of '../core.dart';
 
 class Observable<T> extends Atom
-    implements Interceptable<T>, Listenable<ChangeNotification<T>> {
+    implements
+        Interceptable<T>,
+        Listenable<ChangeNotification<T>>,
+        ObservableValue<T> {
   /// Create an observable value with an [initialValue] and an optional [name]
   ///
   /// Observable values are tracked inside MobX. When a reaction uses them
@@ -36,6 +39,7 @@ class Observable<T> extends Atom
 
   T _value;
 
+  @override
   T get value {
     _context.enforceReadPolicy(this);
 

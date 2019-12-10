@@ -1,5 +1,3 @@
-library flutter_mobx;
-
 // ignore_for_file:implementation_imports
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
@@ -24,36 +22,58 @@ class Observer extends StatefulWidget {
     this.name = name ?? _defaultObserverName(context ?? mainContext);
   }
 
+  /// An identifiable name used for debugging
   String name;
+
+  /// The context within which its reaction should be run.
+  /// It is the [mainContext] in most cases
   final ReactiveContext context;
+
+  /// The function that generates the [Widget] as part of the [Observer].
+  /// This method is wrapped in a reaction for tracking and automatically discovering the
+  /// used Observables. When the Observables change, this [builder] method is invoked again.
   final WidgetBuilder builder;
 
+  /// A convenience method used for testing.
   @visibleForTesting
-  Reaction createReaction(Function() onInvalidate) {
+  Reaction createReaction(
+    Function() onInvalidate, {
+    Function(Object, Reaction) onError,
+  }) {
     final ctx = context ?? mainContext;
 
-    return ReactionImpl(ctx, onInvalidate, name: name);
+    return ReactionImpl(ctx, onInvalidate, name: name, onError: onError);
   }
 
   @override
-  State<Observer> createState() => _ObserverState();
+  State<Observer> createState() => ObserverState();
 
+  /// Convenience method to output console messages as debugging output.
+  /// Logging usually happens when some internal error needs to be surfaced to the user.
   void log(String msg) {
     debugPrint(msg);
   }
 }
 
-class _ObserverState extends State<Observer> {
+/// Internal class used to track and execute the parent [Observer.builder] method
+@visibleForTesting
+class ObserverState extends State<Observer> {
   ReactionImpl _reaction;
 
   @override
   void initState() {
     super.initState();
 
-    _reaction = widget.createReaction(_invalidate);
+    _reaction = widget.createReaction(invalidate, onError: (e, _) {
+      FlutterError.reportError(FlutterErrorDetails(
+        library: 'flutter_mobx',
+        exception: e,
+        stack: e is FlutterError ? e.stackTrace : null,
+      ));
+    });
   }
 
-  void _invalidate() => setState(noOp);
+  void invalidate() => setState(noOp);
 
   static void noOp() {}
 

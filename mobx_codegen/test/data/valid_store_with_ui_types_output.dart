@@ -39,12 +39,14 @@ class BoxModel extends _BoxModel {
       {@required Rect boundingRect,
       Size padding = Size.zero,
       Size margin = Size.zero,
-      Color color})
+      Color color,
+      Paragraph paragraph})
       : super(
             boundingRect: boundingRect,
             padding: padding,
             margin: margin,
-            color: color);
+            color: color,
+            paragraph: paragraph);
 
   final _$boundingRectAtom = Atom(name: '_BoxModel.boundingRect');
 

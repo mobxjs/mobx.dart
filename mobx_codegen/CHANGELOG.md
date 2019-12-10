@@ -1,3 +1,19 @@
+## 0.3.10+1
+
+- Package updates
+
+## 0.3.9+1 - 0.3.10
+
+- Alters the analyzer dependency to support a range — from the previously supported version
+  (0.36.3), up to latest (0.39.0).
+- Adds support for library prefixes in all situations (`import 'package:foo' as foo`),
+  so type names are prefixed in generated part files.
+
+## 0.3.8 - 0.3.9+1
+
+- Fixes a minor issue where types in generated code would appear as dynamic when they shouldn't.
+- Added a version constant that matches the `pubspec.yaml`
+
 ## 0.3.7
 
 - This is mostly about providing better error reporting on classes that don't meet the necessary constraints.

@@ -1,10 +1,17 @@
+/// Internal class only used for code-generation with `mobx_codegen`.
+///
+/// During code-generation, this type is detected to identify a MobX Store class
 class MakeStore {
   const MakeStore._();
 }
 
-/// Declares a class as a store.
+/// Declares the annotation identifier for a Store class.
 const MakeStore store = MakeStore._();
 
+
+/// Internal class only used for code-generation with `mobx_codegen`.
+///
+/// During code-generation, this type is detected to identify an `Observable`
 class MakeObservable {
   const MakeObservable._();
 }
@@ -13,6 +20,9 @@ class MakeObservable {
 /// documentation
 const MakeObservable observable = MakeObservable._();
 
+/// Internal class only used for code-generation with `mobx_codegen`.
+///
+/// During code-generation, this type is detected to identify a `Computed`
 class ComputedMethod {
   const ComputedMethod._();
 }
@@ -21,6 +31,9 @@ class ComputedMethod {
 /// documentation.
 const ComputedMethod computed = ComputedMethod._();
 
+/// Internal class only used for code-generation with `mobx_codegen`.
+///
+/// During code-generation, this type is detected to identify an `Action`
 class MakeAction {
   const MakeAction._();
 }

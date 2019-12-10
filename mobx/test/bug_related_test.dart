@@ -19,4 +19,8 @@ void main() {
 
     expect(count, equals(1));
   });
+
+  test('Should expose the library\'s version. Github Issue #213', () {
+    expect(version, isNotNull);
+  });
 }

@@ -29,52 +29,52 @@ abstract class _TestStore with Store {
   @action
   Future<void> loadStuff() async {
     stuff = 'stuff0';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     stuff = 'stuff1';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     stuff = 'stuff2';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     stuff = 'stuff3';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
   }
 
   @action
   @observable
   Future<void> loadStuff2() async {
     stuff = 'stuff0';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     stuff = 'stuff1';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     stuff = 'stuff2';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     stuff = 'stuff3';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
   }
 
   @observable
   Stream<String> asyncGenerator() async* {
     yield 'item1';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     yield 'item2';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     yield 'item3';
   }
 
   @observable
   Stream<String> stream() {
     var i = 1;
-    return Stream.periodic(Duration(milliseconds: 10))
+    return Stream.periodic(const Duration(milliseconds: 10))
         .take(3)
         .map((_) => 'item${i++}');
   }
 
   @observable
   Future<String> future() =>
-      Future.delayed(Duration(milliseconds: 10)).then((_) => 'item');
+      Future.delayed(const Duration(milliseconds: 10)).then((_) => 'item');
 
   @observable
   Future<String> asyncMethod() async {
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     return 'item';
   }
 
@@ -96,10 +96,10 @@ abstract class _TestStore with Store {
   @action
   Future<void> batchedChanges() async {
     batchItem1 = 'item1';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     batchItem2 = 'item2';
     batchItem3 = 'item3';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     batchItem4 = 'item4';
   }
 
@@ -109,7 +109,7 @@ abstract class _TestStore with Store {
   @action
   Future<void> throwsError() async {
     errorField = 'field1';
-    await Future.delayed(Duration(milliseconds: 10));
+    await Future.delayed(const Duration(milliseconds: 10));
     errorField = 'field2';
     // ignore: only_throw_errors
     throw 'TEST ERROR';
@@ -178,7 +178,7 @@ void main() {
     final future = store.loadStuff2();
 
     await asyncWhen((_) => future.status == FutureStatus.fulfilled)
-        .timeout(Duration(seconds: 1));
+        .timeout(const Duration(seconds: 1));
 
     expect(stuff, equals(['stuff', 'stuff0', 'stuff1', 'stuff2', 'stuff3']));
   });

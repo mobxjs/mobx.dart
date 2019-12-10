@@ -5,6 +5,21 @@ Atom _observableMapAtom<K, V>(ReactiveContext context) {
   return Atom(name: ctx.nameFor('ObservableMap<$K, $V>'), context: ctx);
 }
 
+/// The ObservableMap tracks the various read-methods (eg: [Map.length], [Map.isEmpty]) and
+/// write-methods (eg: [Map.[]=], [Map.clear]) making it easier to use it inside reactions.
+///
+/// As the name suggests, this is the Observable-counterpart to the standard Dart `List<T>`.
+///
+/// ```dart
+/// final map = ObservableMap<String, int>.of({'first': 1});
+///
+/// autorun((_) {
+///   print(map['first']);
+/// }) // prints 1
+///
+/// map['first'] = 100; // autorun prints 100
+/// ```
+
 class ObservableMap<K, V>
     with
         // ignore:prefer_mixin
@@ -190,6 +205,9 @@ class ObservableMap<K, V>
     ));
   }
 
+  /// Used to attach a listener for getting notified on changes happening to the map
+  ///
+  /// You can also choose to receive the notifications immediately (with [fireImmediately])
   @override
   Dispose observe(MapChangeListener<K, V> listener, {bool fireImmediately}) {
     final dispose = _listeners.add(listener);
@@ -200,12 +218,16 @@ class ObservableMap<K, V>
   }
 }
 
+/// A convenience method to wrap the standard `Map<K,V>` in an `ObservableMap<K,V>`.
+/// This is mostly to aid in testing.
 @visibleForTesting
 ObservableMap<K, V> wrapInObservableMap<K, V>(Atom atom, Map<K, V> map) =>
     ObservableMap._wrap(mainContext, map, atom);
 
 typedef MapChangeListener<K, V> = void Function(MapChange<K, V>);
 
+/// Stores the information related to changes happening in an [ObservableMap]. This is
+/// used when firing the change notifications to all the listeners
 class MapChange<K, V> {
   MapChange({this.type, this.key, this.newValue, this.oldValue, this.object});
 
@@ -218,6 +240,9 @@ class MapChange<K, V> {
   final ObservableMap<K, V> object;
 }
 
+/// An iterable class that is used to iterate over all the keys of the [ObservableMap].
+///
+/// We need this wrapper class in order to report the read operations to MobX.
 // ignore:prefer_mixin
 class MapKeysIterable<K> with IterableMixin<K> {
   MapKeysIterable(this._iterable, this._atom);
@@ -245,6 +270,8 @@ class MapKeysIterable<K> with IterableMixin<K> {
   Iterator<K> get iterator => MapKeysIterator(_iterable.iterator, _atom);
 }
 
+/// An iterator used internally by the ObservableMap to ensure the
+/// read operations are reported to MobX correctly
 class MapKeysIterator<K> implements Iterator<K> {
   MapKeysIterator(this._iterator, this._atom);
 

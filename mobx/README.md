@@ -1,4 +1,8 @@
 # mobx.dart
+<a href="https://flutter.dev/docs/development/packages-and-plugins/favorites">
+<img height="128" src="https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/flutter-favorite.png">
+</a>
+<br><br>
 
 [![pub package](https://img.shields.io/pub/v/mobx.svg?label=mobx&color=blue)](https://pub.dartlang.org/packages/mobx)
 [![CircleCI](https://circleci.com/gh/mobxjs/mobx.dart.svg?style=svg)](https://circleci.com/gh/mobxjs/mobx.dart)
@@ -335,70 +339,6 @@ class _CounterExampleState extends State<CounterExample> {
 
 ---
 
-## Roadmap
-
-### Observables
-
-- [x] Create `Observable<T>` via `Observable<T>()`
-- [x] Create `ObservableList<T>`
-  - [x] observe hook
-  - [ ] intercept hook
-- [ ] Create `ObservableMap<K, T>`
-  - [ ] observe hook
-  - [ ] intercept hook
-- [ ] Create `ObservableSet<T>`
-  - [ ] observe hook
-  - [ ] intercept hook
-- [x] Atoms with `createAtom()`
-
-### Computed Observables
-
-- [x] Create `Computed<T>` via `Computed<T>()`
-- [x] 2-phase change propagation
-
-### Reactions
-
-- [x] Create `Reaction` with `autorun()`
-  - [x] with `delay`
-- [x] Create `Reaction` with `reaction()`
-  - [x] with `delay`
-  - [x] with `fireImmediately`
-- [x] Create `Reaction` with `when()`
-- [x] Create `Reaction` with `asyncWhen()` returning `Future<T>`
-
-### Actions
-
-- [x] Create `Action`
-- [x] Create untracked-action with `untracked<T>()`
-- [x] Create transaction with `transaction<T>()`
-
-### Cross cutting features
-
-- [x] Use of a `ReactiveContext` and `ReactiveConfig` to isolate the reactivity. This is an _advanced_ feature and useful in
-      case you are running multiple independent reactive systems without causing any interference between them. This is
-      possible if a library chooses to use MobX internally and the library gets consumed by an app that also uses MobX. In that
-      scenario, you want the reactivity of the library NOT to interfere with the reactivity within the app. For most cases, you don't
-      have to worry about this. MobX will default to using the singleton `mainContext`, which is at the app level.
-- [x] Observability API for `Observable` and `Computed`
-  - [x] `observe`
-  - [x] `intercept`
-  - [x] `onBecomeObserved`
-  - [x] `onBecomeUnobserved`
-- [ ] Spying and Tracing
-- [x] Global configuration
-- [x] Exception handling and Error recovery
-  - [x] Error boundary
-  - [x] Disabling Error boundary in global config
-- [ ] Debuggability
-
-### Public facing
-
-- [x] Logo
-- [ ] Documentation
-- [ ] Website (published on github.io)
-
----
-
 ## Contributing
 
 If you have read up till here, then 🎉🎉🎉. There are couple of ways in which you can contribute to
@@ -412,4 +352,4 @@ the growing community of `MobX.dart`.
 - Write and improve some **documentation**. Documentation is super critical and its importance
   cannot be overstated!
 - Send in a Pull Request :-)
-- Chime in and [![Join the chat at https://gitter.im/mobxjs/mobx.dart](https://badges.gitter.im/mobxjs/mobx.dart.svg)](https://gitter.im/mobxjs/mobx.dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+- Chime in and [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
