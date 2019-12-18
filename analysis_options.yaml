@@ -1,12 +1,23 @@
+analyzer:
+  exclude:
+    - mobx_examples/lib/**/*.g.dart
+    - mobx_codegen/test/data/**.dart
+  # TODO: migrate mobx to enable these
+  # strong-mode:
+  #   implicit-casts: false
+  #   implicit-dynamic: false
 linter:
   rules:
     - always_declare_return_types
     - always_put_control_body_on_new_line
-    - always_put_required_named_parameters_first
+    # conflicts with the Flutter convention of putting {Key key} first and {Widget child} last
+    # - always_put_required_named_parameters_first
     - always_require_non_null_named_parameters
     - annotate_overrides
-    - avoid_annotating_with_dynamic
-    - avoid_as
+    # conflicts with type_annotate_public_apis and implicit-dynamic:false
+    # - avoid_annotating_with_dynamic
+    # conflicts with `implicit-dynamic: false`
+    #- avoid_as
     - avoid_bool_literals_in_conditional_expressions
     - avoid_catches_without_on_clauses
     - avoid_catching_errors
@@ -124,7 +135,3 @@ linter:
     - valid_regexps
     - void_checks
 
-analyzer:
-  exclude:
-    - mobx_examples/lib/**/*.g.dart
-    - mobx_codegen/test/data/**.dart

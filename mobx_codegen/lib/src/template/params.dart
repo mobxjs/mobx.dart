@@ -6,8 +6,7 @@ class ParamTemplate {
 
   String get asArgument => name;
 
-  NamedArgTemplate get asNamedArgument => NamedArgTemplate()
-    ..name = name;
+  NamedArgTemplate get asNamedArgument => NamedArgTemplate()..name = name;
 
   String get metadata => hasRequiredAnnotation ? '@required ' : '';
 

@@ -25,7 +25,7 @@ class _Car {
   Windshield windshield = Windshield();
 
   @computed
-  Set<Tire> get flatTires() => {};
+  Set<Tire> get flatTires => {};
 
   @action
   Future<List<Tire>> changeTiresIfRequired() async => [];

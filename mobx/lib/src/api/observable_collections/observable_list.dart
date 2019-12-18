@@ -399,7 +399,6 @@ class ListChange<T> {
   final ObservableList<T> object;
 }
 
-
 /// Used during testing for wrapping a regular `List<T>` as an `ObservableList<T>`
 @visibleForTesting
 ObservableList<T> wrapInObservableList<T>(Atom atom, List<T> list) =>

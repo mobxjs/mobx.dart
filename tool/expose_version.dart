@@ -20,9 +20,7 @@ String createVersionVariable(String versionNumber) =>
     "const version = '$versionNumber';";
 
 String resolveVersion(String projectData) =>
-    RegExp('version: (.*)')
-        .firstMatch(projectData)
-        .group(1);
+    RegExp('version: (.*)').firstMatch(projectData).group(1);
 
-String stripVersion(String content) => content.replaceAll(
-    RegExp("\nconst version = '.*';\n"), '');
+String stripVersion(String content) =>
+    content.replaceAll(RegExp("\nconst version = '.*';\n"), '');
