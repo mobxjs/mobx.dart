@@ -283,7 +283,7 @@ void main() {
     expect(find.byType(Container), findsOneWidget);
   });
   testWidgets('StatefulObserverWidget can be subclassed', (tester) async {
-    await tester.pumpWidget(const ConstObserver());
+    await tester.pumpWidget(const ConstStatefulObserver());
 
     expect(find.byType(Container), findsOneWidget);
   });
