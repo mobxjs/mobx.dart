@@ -2,6 +2,7 @@ part of '../core.dart';
 
 abstract class Reaction implements Derivation {
   bool get isDisposed;
+
   void dispose();
 
   void _run();
@@ -142,6 +143,7 @@ class ReactionImpl implements Reaction {
   }
 
   @override
+  // ignore: unused_element
   void _suspend() {
     // Not applicable right now
   }
