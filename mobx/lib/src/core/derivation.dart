@@ -34,5 +34,7 @@ abstract class Derivation {
   DerivationState _dependenciesState;
 
   void _onBecomeStale();
+
+  // ignore: unused_element
   void _suspend();
 }
