@@ -8,9 +8,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="few changes and upgrade to docz">
+      <change afterPath="$PROJECT_DIR$/docs/src/gatsby-theme-docz/components/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mobx.dart.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mobx.dart.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/doczrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/doczrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/gatsby-config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,9 +97,9 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.migrate.to.gradle.popup" value="false" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/docs/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -364,35 +368,36 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1572747205075" />
-    <state x="442" y="-737" width="835" height="605" key="EditFileWatcherDialog" timestamp="1575998280121">
-      <screen x="-240" y="-1057" width="1920" height="1057" />
+    <state x="597" y="334" width="773" height="605" key="EditFileWatcherDialog" timestamp="1576727798507">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
+    <state x="597" y="334" width="773" height="605" key="EditFileWatcherDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576727798507" />
     <state x="442" y="-737" width="835" height="605" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1575998280121" />
-    <state width="1878" height="288" key="GridCell.Tab.0.bottom" timestamp="1575999346461">
-      <screen x="-240" y="-1057" width="1920" height="1057" />
+    <state width="1638" height="278" key="GridCell.Tab.0.bottom" timestamp="1576730136266">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="279" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575614621706" />
+    <state width="1638" height="278" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1576730136266" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1575999346461" />
     <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.bottom/3360.2100" timestamp="1569763014444" />
-    <state width="1878" height="288" key="GridCell.Tab.0.center" timestamp="1575999346459">
-      <screen x="-240" y="-1057" width="1920" height="1057" />
+    <state width="1638" height="278" key="GridCell.Tab.0.center" timestamp="1576730136266">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="279" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575614621705" />
+    <state width="1638" height="278" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1576730136266" />
     <state width="1878" height="288" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1575999346459" />
     <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.center/3360.2100" timestamp="1569763014444" />
-    <state width="1878" height="288" key="GridCell.Tab.0.left" timestamp="1575999346459">
-      <screen x="-240" y="-1057" width="1920" height="1057" />
+    <state width="1638" height="278" key="GridCell.Tab.0.left" timestamp="1576730136265">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="279" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575614621705" />
+    <state width="1638" height="278" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1576730136265" />
     <state width="1878" height="288" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1575999346459" />
     <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.left/3360.2100" timestamp="1569763014444" />
-    <state width="1878" height="288" key="GridCell.Tab.0.right" timestamp="1575999346460">
-      <screen x="-240" y="-1057" width="1920" height="1057" />
+    <state width="1638" height="278" key="GridCell.Tab.0.right" timestamp="1576730136266">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="279" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575614621706" />
+    <state width="1638" height="278" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1576730136266" />
     <state width="1878" height="288" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1575999346460" />
     <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.right/3360.2100" timestamp="1569763014444" />
@@ -402,11 +407,15 @@
     <state x="553" y="264" key="MultipleFileMergeDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1572747160174" />
     <state x="392" y="-809" key="MultipleFileMergeDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1575998509076" />
     <state x="553" y="264" key="MultipleFileMergeDialog/3360.2100" timestamp="1569763014444" />
-    <state x="468" y="248" key="RollbackChangesDialog" timestamp="1569763014444" />
-    <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="361" y="-893" key="SettingsEditor" timestamp="1575998285235">
-      <screen x="-240" y="-1057" width="1920" height="1057" />
+    <state x="468" y="248" key="RollbackChangesDialog" timestamp="1576728906014">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
+    <state x="468" y="248" key="RollbackChangesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576728906014" />
+    <state x="468" y="248" key="RollbackChangesDialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
+    <state x="526" y="182" key="SettingsEditor" timestamp="1576729970218">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="526" y="182" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1576729970218" />
     <state x="361" y="-893" key="SettingsEditor/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1575998285235" />
     <state x="334" y="187" key="SettingsEditor/1920.1080" timestamp="1569763014444" />
     <state x="334" y="187" key="SettingsEditor/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
@@ -442,10 +451,10 @@
     </state>
     <state x="594" y="258" key="git4idea.branch.GitSmartOperationDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1570104098282" />
     <state x="439" y="-815" key="git4idea.branch.GitSmartOperationDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1575996534833" />
-    <state x="337" y="-823" width="766" height="696" key="search.everywhere.popup" timestamp="1573281138898">
-      <screen x="-240" y="-1057" width="1920" height="1057" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1576727709649">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1571591445007" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1576727709649" />
     <state x="337" y="-823" width="766" height="696" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573281138898" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/3360.2100" timestamp="1569763014444" />
