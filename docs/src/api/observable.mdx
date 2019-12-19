@@ -202,7 +202,7 @@ Here is a simple clock that relies on an `Atom` to notify every second.
 - In each tick of the timer, we call `_atom.reportChanged()`. This notifies the MobX reactive system that the atom has changed value and all connected reactions should be re-executed.
 - When the `now` property is read the first time, the clock gets observed and starts ticking. It also fires the `_atom.reportObserved()` to make MobX start tracking this atom.
 
-```dar
+```dart
 import 'dart:async';
 
 import 'package:mobx/mobx.dart';

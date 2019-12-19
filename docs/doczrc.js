@@ -25,6 +25,7 @@ export default {
     }
   ],
   themeConfig: {
+    showDarkModeSwitch: false,
     logo: {
       src:
         'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/mobx.png'
@@ -37,9 +38,12 @@ export default {
     },
     styles: {
       code: `
-            font-size: 1em;
-            padding: 0.1rem 0.5rem;
-            `
+        font-size: 1em;
+        padding: 0.1rem 0.5rem;
+      `,
+      img: `
+        margin-bottom: 0
+      `
     }
   },
   menu: [

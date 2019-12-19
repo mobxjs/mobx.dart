@@ -12,7 +12,7 @@ The primary purpose of **MobX** is to simplify the management of _Reactive State
 
 When you look at the UI on the screen, all you see is a flattened graphic. But what escapes your eye is the _Object Model_ that brought it to life on the screen. That _Object Model_ is a tree of `Widgets`, a hierarchy. Just like the UI, think of the Reactive State of your application as a hierarchy of `Stores`.
 
-import storeHierarchy from "./store-hierarchy.png";
+import storeHierarchy from './store-hierarchy.png';
 
 <img src={storeHierarchy} />
 
@@ -111,7 +111,7 @@ The responsibilities of State management can be clearly demarcated across three 
 
 The dependency order is always top-down from the **Widget**, through the **Store**, down to the **Service**.
 
-import dependencyOrder from "./dependency-order.png";
+import dependencyOrder from './dependency-order.png';
 
 <img src={dependencyOrder} />
 
@@ -129,7 +129,7 @@ In short, we have taken cues from the [SOLID](https://en.wikipedia.org/wiki/SOLI
 
 The provider-pattern has become a standard way of making the top level stores available across the entire app. It avoids creating a singleton-`Store`, making it easier to use the `Store` as a plain class instance.
 
-Using the [provider][1] package on pub, you can setup a repository of stores at the App level. Then using the `Provider.of<T>()` API, you can read this value inside your `Widget.build()` methods.
+Using the [![pub package](https://img.shields.io/pub/v/provider.svg?label=provider&color=blue)](https://pub.dartlang.org/packages/mobx) package on pub, you can setup a repository of stores at the App level. Then using the `Provider.of<T>()` API, you can read this value inside your `Widget.build()` methods.
 
 In the example below, we are setting up a store at the app-level:
 
