@@ -8,7 +8,6 @@ class MakeStore {
 /// Declares the annotation identifier for a Store class.
 const MakeStore store = MakeStore._();
 
-
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///
 /// During code-generation, this type is detected to identify an `Observable`

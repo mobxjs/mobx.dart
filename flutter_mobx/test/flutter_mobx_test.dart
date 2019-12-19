@@ -36,7 +36,6 @@ class LoggingObserver extends Observer {
   @override
   void log(String msg) {
     previousLog = msg;
-    return super.log(msg);
   }
 }
 
@@ -52,14 +51,24 @@ class FlutterErrorThrowingObserver extends Observer {
   final Object errorToThrow;
 
   @override
-  State<Observer> createState() => FlutterErrorThrowingObserverState();
+  FlutterErrorThrowingObserverElement createElement() =>
+      FlutterErrorThrowingObserverElement(this);
 }
 
-class FlutterErrorThrowingObserverState extends ObserverState {
+class FlutterErrorThrowingObserverElement extends StatelessObserverElement {
+  FlutterErrorThrowingObserverElement(StatelessObserverWidget widget)
+      : super(widget);
+
   @override
-  void invalidate() =>
-      // ignore: avoid_as, only_throw_errors
-      throw (widget as FlutterErrorThrowingObserver).errorToThrow;
+  FlutterErrorThrowingObserver get widget =>
+      // ignore: avoid_as, this is the official way to use Element.widget
+      super.widget as FlutterErrorThrowingObserver;
+
+  @override
+  void invalidate() {
+    // ignore: only_throw_errors
+    throw widget.errorToThrow;
+  }
 }
 
 void stubTrack(MockReaction mock) {
@@ -205,8 +214,44 @@ void main() {
   });
 
   test('Observer builder must not be null', () {
-    // ignore:missing_required_param,prefer_const_constructors
-    expect(() => Observer(), throwsA(isInstanceOf<AssertionError>()));
+    expect(
+      () => Observer(builder: null),
+      throwsA(isInstanceOf<AssertionError>()),
+    );
+  });
+
+  testWidgets("Release mode, the reaction's default name is widget.toString()",
+      (tester) async {
+    debugAddStrackTraceInObserverName = false;
+    addTearDown(() => debugAddStrackTraceInObserverName = true);
+
+    final observer = LoggingObserver(
+      builder: (_) => Container(),
+    );
+
+    await tester.pumpWidget(observer);
+
+    final element =
+        // ignore: avoid_as
+        tester.element(find.byWidget(observer)) as ObserverElementMixin;
+
+    expect(element.reaction.name, equals('$observer'));
+  });
+
+  testWidgets("Debug mode inserts stacktrace in the reaction's name",
+      (tester) async {
+    final observer = LoggingObserver(
+      builder: (_) => Container(),
+    );
+
+    await tester.pumpWidget(observer);
+
+    final element =
+        // ignore: avoid_as
+        tester.element(find.byWidget(observer)) as ObserverElementMixin;
+
+    expect(element.reaction.name, startsWith('$observer\n'));
+    expect(element.reaction.name, contains('createReaction'));
   });
 
   testWidgets('Observer should log when there are no observables in builder',
@@ -231,6 +276,17 @@ void main() {
 
     expect(observer.previousLog, isNull);
   });
+
+  testWidgets('StatelessObserverWidget can be subclassed', (tester) async {
+    await tester.pumpWidget(const ConstObserver());
+
+    expect(find.byType(Container), findsOneWidget);
+  });
+  testWidgets('StatefulObserverWidget can be subclassed', (tester) async {
+    await tester.pumpWidget(const ConstStatefulObserver());
+
+    expect(find.byType(Container), findsOneWidget);
+  });
 }
 
 Future<Object> _testThrowingObserver(
@@ -252,4 +308,28 @@ Future<Object> _testThrowingObserver(
   } finally {
     FlutterError.onError = prevOnError;
   }
+}
+
+class ConstObserver extends StatelessObserverWidget {
+  // const keyword compiles
+  const ConstObserver({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Container();
+
+  @override
+  void log(String msg) {}
+}
+
+class ConstStatefulObserver extends StatefulObserverWidget {
+  // const keyword compiles
+  const ConstStatefulObserver({Key key}) : super(key: key);
+
+  @override
+  _ConstStatefulObserverState createState() => _ConstStatefulObserverState();
+}
+
+class _ConstStatefulObserverState extends State<ConstStatefulObserver> {
+  @override
+  Widget build(BuildContext context) => Container();
 }

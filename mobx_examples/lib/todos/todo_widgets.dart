@@ -89,18 +89,18 @@ class ActionBar extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8),
                 child: ToggleButtons(
                   borderRadius: BorderRadius.circular(8),
-                  children: <Widget>[
+                  children: const <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 5),
-                      child: const Text('All'),
+                      padding: EdgeInsets.only(left: 5, right: 5),
+                      child: Text('All'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 5),
-                      child: const Text('Pending'),
+                      padding: EdgeInsets.only(left: 5, right: 5),
+                      child: Text('Pending'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 5),
-                      child: const Text('Completed'),
+                      padding: EdgeInsets.only(left: 5, right: 5),
+                      child: Text('Completed'),
                     )
                   ],
                   onPressed: (index) {
