@@ -15,6 +15,7 @@
       <excludeFolder url="file://$MODULE_DIR$/mobx_codegen/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/mobx_codegen/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/mobx_codegen/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mobx_examples/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/mobx_examples/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/mobx_examples/build" />
     </content>

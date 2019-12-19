@@ -1,3 +1,5 @@
+const path = require('path');
+
 export default {
   title: 'MobX.dart',
   description: 'Hassle free state-management for your Dart and Flutter Apps',
@@ -12,6 +14,10 @@ export default {
       resolve: 'gatsby-remark-vscode',
       // OPTIONAL
       options: {
+        extensionDataDirectory: path.resolve(
+          __dirname,
+          'gatsby-remark-vscode-extensions'
+        ),
         extensions: [
           {
             identifier: 'oscarcs.dart-syntax-highlighting-only',
