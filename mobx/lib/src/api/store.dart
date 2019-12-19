@@ -5,7 +5,4 @@
 /// weaves the code needed to simplify the usage of MobX. It will detect annotations like
 /// `@observables`, `@computed` and `@action` and generate the code needed to support these behaviors.
 mixin Store {
-
-  /// Override this method to do any cleanups when a `Store` instance is disposed
-  void dispose() {}
 }
