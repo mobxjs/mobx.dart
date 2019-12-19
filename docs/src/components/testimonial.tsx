@@ -115,7 +115,7 @@ const list = [
     title:
       'Founder of GeekyAnts • Creator of BuilderXio, NativeBaseIO & VueNativeIO • Speaker • Loves tea • Strums guitar',
     photoUrl:
-      'https://pbs.twimg.com/profile_images/1087336663666151424/NpYnCmzC_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1188747996843761665/8CiUdKZW_400x400.jpg',
     message:
       'We at GeekyAnts have used MobX.dart in many Flutter projects. We have chosen it as the default state-management library for the internal frameworks built for Flutter.'
   },
