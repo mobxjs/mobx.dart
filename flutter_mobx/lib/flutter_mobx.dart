@@ -5,4 +5,4 @@ library flutter_mobx;
 export 'package:flutter_mobx/src/observer.dart'
     hide debugAddStrackTraceInObserverName;
 
-const version = '0.3.4';
+const version = '0.3.4+1';
