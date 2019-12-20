@@ -4,7 +4,7 @@ menu: API Overview
 route: /api/reaction
 ---
 
-import mobxTriad from "../images/mobx-triad.png";
+import mobxTriad from '../images/mobx-triad.png';
 
 # Reactions
 
@@ -109,7 +109,9 @@ void waitForCompletion() async {
 
 ### `Observer({@required Widget Function(BuildContext context) builder})`
 
-One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
+One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the
+[![pub package for flutter_mobx](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
+package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
 
 Below is the _Counter_ example in its entirety.
 

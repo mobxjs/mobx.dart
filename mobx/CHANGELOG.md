@@ -1,3 +1,8 @@
+## 0.3.10
+
+- Removed `Store.dispose`
+- Fixed some analyzer errors related to `unused_element`
+
 ## 0.3.9+3
 
 - Documentation comments for many of the public methods and classes

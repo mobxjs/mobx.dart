@@ -63,4 +63,4 @@ export 'package:mobx/src/core.dart'
         DerivationState;
 
 /// The current version as per `pubspec.yaml`
-const version = '0.3.9+3';
+const version = '0.3.10';

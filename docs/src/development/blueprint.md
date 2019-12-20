@@ -43,6 +43,10 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 
 ### Action
 
+- Provides an atomic way to mutate observables
+- Fires notifications only upon the completion of the action
+- Handles any level of nesting and ensures notifications are fired only when the outermost action has completed
+
 ## API
 
 - Convenience layer to provide programmer friendly interface to the Core Actors and behaviors
