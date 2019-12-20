@@ -137,6 +137,16 @@ const list = [
     photoUrl:
       'https://pbs.twimg.com/profile_images/989477066566320129/zCN6USCc_400x400.jpg',
     message: `MobX's concepts of Observables, Actions and Reactions make it intuitive to figure out how to model the state of an application. I would highly recommend it as a solution for managing the application's state.`
+  },
+  {
+    author: 'Robert Felker',
+    twitter: 'https://twitter.com/BlueAquilae',
+    title: '#Minimalism | #flutter artist | github Awesome #flutter',
+    photoUrl:
+      'https://pbs.twimg.com/profile_images/948652731115429889/sQnk1F3m_400x400.jpg',
+    message: `On Professional projects, MobX helps me manage hundreds of forms and thousands of fields with transparency.
+When working on Generative Art, it helps me create highly configurable widgets without complexity. 
+MobX supports me on all of my projects.`
   }
 ];
 
