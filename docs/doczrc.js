@@ -40,13 +40,9 @@ export default {
       blockquoteColor: '#00579b'
     },
     styles: {
-      code: `
-        font-size: 1em;
-        padding: 0.1rem 0.5rem;
-      `,
-      img: `
-        margin-bottom: 0
-      `
+      code: {
+        fontSize: '1.1rem'
+      }
     }
   },
   menu: [

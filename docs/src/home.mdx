@@ -2,8 +2,6 @@
 route: '/'
 ---
 
-import publicisSapientLogo from './images/publicis-sapient-sponsor.png';
-import wunderdogLogo from './images/wunderdog-sponsor.png';
 import book from './images/book.png';
 import flutterFavorite from './images/flutter-favorite.png';
 
@@ -23,15 +21,16 @@ import flutterFavorite from './images/flutter-favorite.png';
 [![Netlify Status](https://api.netlify.com/api/v1/badges/05330d31-0411-4aac-a278-76615bcaff9e/deploy-status)](https://app.netlify.com/sites/mobx-dart/deploys)&nbsp;
 
 <a href="https://flutter.dev/docs/development/packages-and-plugins/favorites">
-<img src={flutterFavorite} height={128} />
+  <img src={flutterFavorite} height={128} />
 </a>
 
 ## Sponsors
 
 We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program.
 
-- [<img src={publicisSapientLogo} height={64} />](https://publicis.sapient.com)
-- [<img src={wunderdogLogo} height={64} />](https://wunderdog.fi)
+import { SponsorList } from './components/Sponsor';
+
+<SponsorList />
 
 ## Introduction
 
@@ -51,7 +50,7 @@ console log, a network call to re-rendering the UI.
 
 ## Tried, tested and said...
 
-import { TestimonialList } from './components/testimonial';
+import { TestimonialList } from './components/Testimonial';
 
 <TestimonialList />
 
