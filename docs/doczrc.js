@@ -42,6 +42,9 @@ export default {
     styles: {
       code: {
         fontSize: '1.1rem'
+      },
+      img: {
+        marginBottom: 0
       }
     }
   },
