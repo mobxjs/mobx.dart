@@ -3,6 +3,8 @@
 - Added two new `Observer`-widgets: `StatelessObserverWidget` and `StatefulObserverWidget`
 - Improved the reporting of Flutter errors inside `Observer` widgets.
 
+Thanks to [Scott Hyndman](https://github.com/shyndman) and [Remi Rousselet](https://github.com/rrousselGit) for the work done in this release!
+
 ## 0.3.3+3
 
 - More documentation comments
