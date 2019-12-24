@@ -20,9 +20,9 @@ class ObserverProvider<T extends MobxBase> extends StatelessObserverWidget {
 ///This is like the [Observer Provider] but it contains [Stateful widget]
 ///instead of [Stateless Widget], this allows you to call a function [initFunction]
 /// that you want to be invoced in the [init State]
-/// it also preserve the [state] of the [viewmodel (the store)] in hot reload
+/// it also preserve the [state of the [viewmodel (the store)] in hot reload
 /// if you press hot reload with the default [observer Provider] it'll lose its state
-/// when the [View] is removed from the widget tree the [StatefulObserverProvider] will
+/// when the [current widget] is removed from the widget tree the [StatefulObserverProvider] will
 /// call [disopse function] for the [viewmodel  (the state)]
 /// this pattern is inspired from [Filled Stacks] package [view model provider]
 class StatefulObserverProvider<T extends MobxBase>
