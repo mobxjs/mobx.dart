@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx_examples/connectivity/connectivity_store.dart';
 import 'package:mobx_examples/connectivity/connectivity_widgets.dart';
+import 'package:mobx_examples/counter_store/counter_store_widget.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mobx_examples/clock/clock_widgets.dart';
@@ -30,6 +31,12 @@ class Example {
 
 final List<Example> examples = [
   Example(
+    path: 'counterStore',
+    description: 'a new counter example with observer provider widget',
+    title: 'new counter example',
+    widgetBuilder: (_) => const CounterStoreStatefulView(),
+  ),
+  Example(
     title: 'Counter',
     description: 'The classic Counter that can be incremented.',
     path: '/counter',
@@ -53,12 +60,12 @@ final List<Example> examples = [
     path: '/todos',
     widgetBuilder: (_) => TodoExample(),
   ),
-  Example(
-    title: 'Github Repos',
-    description: 'Get a list of repos for a user',
-    path: '/github',
-    widgetBuilder: (_) => const GithubExample(),
-  ),
+  // Example(
+  //   title: 'Github Repos',
+  //   description: 'Get a list of repos for a user',
+  //   path: '/github',
+  //   widgetBuilder: (_) => const GithubExample(),
+  // ),
   Example(
     title: 'Clock',
     description: 'A simple ticking Clock, made with an Atom',
