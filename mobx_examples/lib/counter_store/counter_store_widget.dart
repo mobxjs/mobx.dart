@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_examples/counter_store/counter_store.dart';
 
-import 'locator.dart';
-
 class CounterStoreView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ObserverProvider<CounterStore>(
-        viewModel: locator<CounterStore>(),
+        viewModel: CounterStore(),
         builder: (context, model) => Scaffold(
           appBar: AppBar(),
           body: Column(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_examples/connectivity/connectivity_store.dart';
 import 'package:mobx_examples/counter/counter.dart';
-import 'package:mobx_examples/counter_store/locator.dart';
 import 'package:mobx_examples/examples.dart';
 import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
 import 'package:mobx_examples/settings/preferences_service.dart';
@@ -10,7 +9,6 @@ import 'package:mobx_examples/settings/settings_store.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  setUpLocator();
   runApp(const MyApp());
 }
 
