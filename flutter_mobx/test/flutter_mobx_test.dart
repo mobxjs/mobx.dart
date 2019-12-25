@@ -222,8 +222,8 @@ void main() {
 
   testWidgets("Release mode, the reaction's default name is widget.toString()",
       (tester) async {
-    debugAddStrackTraceInObserverName = false;
-    addTearDown(() => debugAddStrackTraceInObserverName = true);
+    debugAddStackTraceInObserverName = false;
+    addTearDown(() => debugAddStackTraceInObserverName = true);
 
     final observer = LoggingObserver(
       builder: (_) => Container(),

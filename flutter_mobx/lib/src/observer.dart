@@ -120,7 +120,7 @@ mixin ObserverWidgetMixin on Widget {
     String name;
 
     assert(() {
-      if (debugAddStrackTraceInObserverName) {
+      if (debugAddStackTraceInObserverName) {
         name = '$this\n${StackTrace.current.toString().split('\n')[3]}';
       }
       return true;
@@ -208,5 +208,6 @@ mixin ObserverElementMixin on ComponentElement {
   }
 }
 
-@visibleForTesting
-bool debugAddStrackTraceInObserverName = true;
+/// Should the StackTrace be included in the name of the Observer. This is useful during
+/// debugging to identify the location where the exception is thrown.
+bool debugAddStackTraceInObserverName = true;
