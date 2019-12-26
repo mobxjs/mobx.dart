@@ -32,74 +32,8 @@ mixin _$CircleModel on _CircleModel, Store {
       _$radiusAtom.reportChanged();
     }, _$radiusAtom, name: '${_$radiusAtom.name}_set');
   }
-}
 
-class BoxModel extends _BoxModel {
-  BoxModel(
-      {@required Rect boundingRect,
-      Size padding = Size.zero,
-      Size margin = Size.zero,
-      Color color,
-      Paragraph paragraph})
-      : super(
-            boundingRect: boundingRect,
-            padding: padding,
-            margin: margin,
-            color: color,
-            paragraph: paragraph);
-
-  final _$boundingRectAtom = Atom(name: '_BoxModel.boundingRect');
-
-  @override
-  Rect get boundingRect {
-    _$boundingRectAtom.context.enforceReadPolicy(_$boundingRectAtom);
-    _$boundingRectAtom.reportObserved();
-    return super.boundingRect;
-  }
-
-  @override
-  set boundingRect(Rect value) {
-    _$boundingRectAtom.context.conditionallyRunInAction(() {
-      super.boundingRect = value;
-      _$boundingRectAtom.reportChanged();
-    }, _$boundingRectAtom, name: '${_$boundingRectAtom.name}_set');
-  }
-
-  final _$paddingAtom = Atom(name: '_BoxModel.padding');
-
-  @override
-  Size get padding {
-    _$paddingAtom.context.enforceReadPolicy(_$paddingAtom);
-    _$paddingAtom.reportObserved();
-    return super.padding;
-  }
-
-  @override
-  set padding(Size value) {
-    _$paddingAtom.context.conditionallyRunInAction(() {
-      super.padding = value;
-      _$paddingAtom.reportChanged();
-    }, _$paddingAtom, name: '${_$paddingAtom.name}_set');
-  }
-
-  final _$marginAtom = Atom(name: '_BoxModel.margin');
-
-  @override
-  Size get margin {
-    _$marginAtom.context.enforceReadPolicy(_$marginAtom);
-    _$marginAtom.reportObserved();
-    return super.margin;
-  }
-
-  @override
-  set margin(Size value) {
-    _$marginAtom.context.conditionallyRunInAction(() {
-      super.margin = value;
-      _$marginAtom.reportChanged();
-    }, _$marginAtom, name: '${_$marginAtom.name}_set');
-  }
-
-  final _$colorAtom = Atom(name: '_BoxModel.color');
+  final _$colorAtom = Atom(name: '_CircleModel.color');
 
   @override
   Color get color {

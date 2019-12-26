@@ -6,9 +6,7 @@ abstract class CodegenError {
 class StoreClassCodegenErrors implements CodegenError {
   StoreClassCodegenErrors(this.name) {
     _errorCategories = [
-      storeMixinPlusAnnotationDeclarations,
       nonAbstractStoreMixinDeclarations,
-      nonPrivateStoreAnnotationDeclarations,
       invalidComputedAnnotations,
       invalidObservableAnnotations,
       invalidActionAnnotations,
@@ -22,14 +20,8 @@ class StoreClassCodegenErrors implements CodegenError {
 
   final String name;
 
-  final StoreMixinPlusAnnotationDeclarations
-      storeMixinPlusAnnotationDeclarations =
-      StoreMixinPlusAnnotationDeclarations();
   final NonAbstractStoreMixinDeclarations nonAbstractStoreMixinDeclarations =
       NonAbstractStoreMixinDeclarations();
-  final NonPrivateStoreAnnotationDeclarations
-      nonPrivateStoreAnnotationDeclarations =
-      NonPrivateStoreAnnotationDeclarations();
 
   final PropertyErrors finalObservables = FinalObservableFields();
   final PropertyErrors staticObservables = StaticObservableFields();
@@ -83,22 +75,10 @@ abstract class _InvalidStoreDeclarations implements CodegenError {
   bool get hasErrors => _classNames.isNotEmpty;
 }
 
-class StoreMixinPlusAnnotationDeclarations extends _InvalidStoreDeclarations {
-  @override
-  String get message =>
-      'Store classes cannot be defined with both the @store annotation and Store mixin. Please choose only one of the options for $_classNames.';
-}
-
 class NonAbstractStoreMixinDeclarations extends _InvalidStoreDeclarations {
   @override
   String get message =>
       'Classes that use the Store mixin must be marked abstract. Affected classes: $_classNames.';
-}
-
-class NonPrivateStoreAnnotationDeclarations extends _InvalidStoreDeclarations {
-  @override
-  String get message =>
-      'Classes that use the @store annotation must be marked private. Affected classes: $_classNames.';
 }
 
 abstract class PropertyErrors implements CodegenError {
