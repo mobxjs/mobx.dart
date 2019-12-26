@@ -23,11 +23,11 @@ class StoreClassVisitor extends SimpleElementVisitor {
     String publicTypeName,
     ClassElement userClass,
     StoreTemplate template,
+    this.typeNameFinder,
   ) : _errors = StoreClassCodegenErrors(publicTypeName) {
     _storeTemplate = template
-      ..typeParams
-          .templates
-          .addAll(userClass.typeParameters.map(typeParamTemplate))
+      ..typeParams.templates.addAll(userClass.typeParameters
+          .map((type) => typeParamTemplate(type, typeNameFinder)))
       ..typeArgs.templates.addAll(userClass.typeParameters.map((t) => t.name))
       ..parentTypeName = userClass.name
       ..publicTypeName = publicTypeName;
@@ -42,6 +42,8 @@ class StoreClassVisitor extends SimpleElementVisitor {
   final _asyncChecker = AsyncMethodChecker();
 
   StoreTemplate _storeTemplate;
+
+  LibraryScopedNameFinder typeNameFinder;
 
   final StoreClassCodegenErrors _errors;
 
@@ -84,7 +86,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
     final template = ObservableTemplate()
       ..storeTemplate = _storeTemplate
       ..atomName = '_\$${element.name}Atom'
-      ..type = findVariableTypeName(element)
+      ..type = typeNameFinder.findVariableTypeName(element)
       ..name = element.name;
 
     _storeTemplate.observables.add(template);
@@ -115,7 +117,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
     final template = ComputedTemplate()
       ..computedName = '_\$${element.name}Computed'
       ..name = element.name
-      ..type = findGetterTypeName(element);
+      ..type = typeNameFinder.findGetterTypeName(element);
     _storeTemplate.computeds.add(template);
 
     return;
@@ -136,13 +138,15 @@ class StoreClassVisitor extends SimpleElementVisitor {
       if (element.isAsynchronous) {
         final template = AsyncActionTemplate()
           ..isObservable = _observableChecker.hasAnnotationOfExact(element)
-          ..method = MethodOverrideTemplate.fromElement(element);
+          ..method =
+              MethodOverrideTemplate.fromElement(element, typeNameFinder);
 
         _storeTemplate.asyncActions.add(template);
       } else {
         final template = ActionTemplate()
           ..storeTemplate = _storeTemplate
-          ..method = MethodOverrideTemplate.fromElement(element);
+          ..method =
+              MethodOverrideTemplate.fromElement(element, typeNameFinder);
 
         _storeTemplate.actions.add(template);
       }
@@ -153,12 +157,14 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
       if (_asyncChecker.returnsFuture(element)) {
         final template = ObservableFutureTemplate()
-          ..method = MethodOverrideTemplate.fromElement(element);
+          ..method =
+              MethodOverrideTemplate.fromElement(element, typeNameFinder);
 
         _storeTemplate.observableFutures.add(template);
       } else if (_asyncChecker.returnsStream(element)) {
         final template = ObservableStreamTemplate()
-          ..method = MethodOverrideTemplate.fromElement(element);
+          ..method =
+              MethodOverrideTemplate.fromElement(element, typeNameFinder);
 
         _storeTemplate.observableStreams.add(template);
       }

@@ -8,11 +8,14 @@ import 'package:mobx_codegen/src/type_names.dart';
 class MethodOverrideTemplate {
   MethodOverrideTemplate();
 
-  MethodOverrideTemplate.fromElement(ExecutableElement method) {
+  MethodOverrideTemplate.fromElement(
+    ExecutableElement method,
+    LibraryScopedNameFinder typeNameFinder,
+  ) {
     // ignore: prefer_function_declarations_over_variables
     final param = (ParameterElement element) => ParamTemplate()
       ..name = element.name
-      ..type = findParameterTypeName(element)
+      ..type = typeNameFinder.findParameterTypeName(element)
       ..defaultValue = element.defaultValueCode
       ..hasRequiredAnnotation = element.hasRequired;
 
@@ -28,13 +31,14 @@ class MethodOverrideTemplate {
 
     this
       ..name = method.name
-      ..returnType = findReturnTypeName(method)
-      ..setTypeParams(method.typeParameters.map(typeParamTemplate))
+      ..returnType = typeNameFinder.findReturnTypeName(method)
+      ..setTypeParams(method.typeParameters
+          .map((type) => typeParamTemplate(type, typeNameFinder)))
       ..positionalParams = positionalParams.map(param)
       ..optionalParams = optionalParams.map(param)
       ..namedParams = namedParams.map(param)
       ..returnTypeArgs = SurroundedCommaList(
-          '<', '>', findReturnTypeArgumentTypeNames(method));
+          '<', '>', typeNameFinder.findReturnTypeArgumentTypeNames(method));
   }
 
   String name;

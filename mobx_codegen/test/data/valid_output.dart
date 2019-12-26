@@ -22,6 +22,23 @@ mixin _$User on UserBase, Store {
     }, _$firstNameAtom, name: '${_$firstNameAtom.name}_set');
   }
 
+  final _$middleNameAtom = Atom(name: 'UserBase.middleName');
+
+  @override
+  String get middleName {
+    _$middleNameAtom.context.enforceReadPolicy(_$middleNameAtom);
+    _$middleNameAtom.reportObserved();
+    return super.middleName;
+  }
+
+  @override
+  set middleName(String value) {
+    _$middleNameAtom.context.conditionallyRunInAction(() {
+      super.middleName = value;
+      _$middleNameAtom.reportChanged();
+    }, _$middleNameAtom, name: '${_$middleNameAtom.name}_set');
+  }
+
   final _$lastNameAtom = Atom(name: 'UserBase.lastName');
 
   @override
@@ -37,6 +54,57 @@ mixin _$User on UserBase, Store {
       super.lastName = value;
       _$lastNameAtom.reportChanged();
     }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
+  }
+
+  final _$friendAtom = Atom(name: 'UserBase.friend');
+
+  @override
+  User get friend {
+    _$friendAtom.context.enforceReadPolicy(_$friendAtom);
+    _$friendAtom.reportObserved();
+    return super.friend;
+  }
+
+  @override
+  set friend(User value) {
+    _$friendAtom.context.conditionallyRunInAction(() {
+      super.friend = value;
+      _$friendAtom.reportChanged();
+    }, _$friendAtom, name: '${_$friendAtom.name}_set');
+  }
+
+  final _$callbackAtom = Atom(name: 'UserBase.callback');
+
+  @override
+  void Function() get callback {
+    _$callbackAtom.context.enforceReadPolicy(_$callbackAtom);
+    _$callbackAtom.reportObserved();
+    return super.callback;
+  }
+
+  @override
+  set callback(void Function() value) {
+    _$callbackAtom.context.conditionallyRunInAction(() {
+      super.callback = value;
+      _$callbackAtom.reportChanged();
+    }, _$callbackAtom, name: '${_$callbackAtom.name}_set');
+  }
+
+  final _$callback2Atom = Atom(name: 'UserBase.callback2');
+
+  @override
+  VoidCallback get callback2 {
+    _$callback2Atom.context.enforceReadPolicy(_$callback2Atom);
+    _$callback2Atom.reportObserved();
+    return super.callback2;
+  }
+
+  @override
+  set callback2(VoidCallback value) {
+    _$callback2Atom.context.conditionallyRunInAction(() {
+      super.callback2 = value;
+      _$callback2Atom.reportChanged();
+    }, _$callback2Atom, name: '${_$callback2Atom.name}_set');
   }
 
   @override
