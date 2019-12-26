@@ -9,7 +9,7 @@ authors:
 homepage: https://github.com/mobxjs/mobx.dart
 
 environment:
-  sdk: '>=2.2.0 <3.0.0'
+  sdk: '>=2.7.0 <3.0.0'
 
 dependencies:
   # flutter_test uses 1.1.6, so we cannot use 1.1.7 yet
