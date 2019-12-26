@@ -5,6 +5,8 @@ import 'package:mobx/mobx.dart';
 
 part 'generator_sample.g.dart';
 
+typedef VoidCallback = void Function();
+
 class User = UserBase with _$User;
 
 abstract class UserBase with Store {
@@ -15,11 +17,24 @@ abstract class UserBase with Store {
   @observable
   String firstName = 'Jane';
 
+  // Ensures that we pick up on type being inferred to string
+  @observable
+  var middleName = 'Mary'; // ignore: type_annotate_public_apis
+
   @observable
   String lastName = 'Doe';
 
+  @observable
+  User friend;
+
+  @observable
+  void Function() callback;
+
+  @observable
+  VoidCallback callback2;
+
   @computed
-  String get fullName => '$firstName $lastName';
+  String get fullName => '$firstName $middleName $lastName';
 
   @action
   void updateNames({@required String firstName, String lastName}) {

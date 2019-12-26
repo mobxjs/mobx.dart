@@ -55,9 +55,9 @@ class StoreClassCodegenErrors implements CodegenError {
   bool get hasErrors => _errorCategories.any((category) => category.hasErrors);
 }
 
-const fieldPluralizer = Pluralize('the field', 'fields');
-const methodPluralizer = Pluralize('the method', 'methods');
-const memberPluralizer = Pluralize('the member', 'members');
+final _fieldPluralizer = Pluralize('the field', 'fields');
+final _methodPluralizer = Pluralize('the method', 'methods');
+final _memberPluralizer = Pluralize('the member', 'members');
 
 abstract class _InvalidStoreDeclarations implements CodegenError {
   final NameList _classNames = NameList();
@@ -94,7 +94,7 @@ abstract class PropertyErrors implements CodegenError {
 
   String get propertyList => _properties.toString();
 
-  Pluralize propertyPlural = fieldPluralizer;
+  Pluralize propertyPlural = _fieldPluralizer;
 
   String get property => propertyPlural(_properties.length);
 
@@ -115,7 +115,7 @@ class StaticObservableFields extends PropertyErrors {
 class AsyncGeneratorActionMethods extends PropertyErrors {
   @override
   // ignore: overridden_fields
-  Pluralize propertyPlural = methodPluralizer;
+  Pluralize propertyPlural = _methodPluralizer;
 
   @override
   String get message =>
@@ -125,7 +125,7 @@ class AsyncGeneratorActionMethods extends PropertyErrors {
 class NonAsyncMethods extends PropertyErrors {
   @override
   // ignore: overridden_fields
-  Pluralize propertyPlural = methodPluralizer;
+  Pluralize propertyPlural = _methodPluralizer;
 
   @override
   String get message =>
@@ -135,7 +135,7 @@ class NonAsyncMethods extends PropertyErrors {
 class InvalidComputedAnnotations extends PropertyErrors {
   @override
   // ignore: overridden_fields
-  Pluralize propertyPlural = memberPluralizer;
+  Pluralize propertyPlural = _memberPluralizer;
 
   @override
   String get message =>
@@ -145,7 +145,7 @@ class InvalidComputedAnnotations extends PropertyErrors {
 class InvalidObservableAnnotations extends PropertyErrors {
   @override
   // ignore: overridden_fields
-  Pluralize propertyPlural = memberPluralizer;
+  Pluralize propertyPlural = _memberPluralizer;
 
   @override
   String get message =>
@@ -155,7 +155,7 @@ class InvalidObservableAnnotations extends PropertyErrors {
 class InvalidActionAnnotations extends PropertyErrors {
   @override
   // ignore: overridden_fields
-  Pluralize propertyPlural = memberPluralizer;
+  Pluralize propertyPlural = _memberPluralizer;
 
   @override
   String get message =>
@@ -165,7 +165,7 @@ class InvalidActionAnnotations extends PropertyErrors {
 class InvalidStaticMethods extends PropertyErrors {
   @override
   // ignore: overridden_fields
-  Pluralize propertyPlural = methodPluralizer;
+  Pluralize propertyPlural = _methodPluralizer;
 
   @override
   String get message => 'Remove static modifier from $property $propertyList.';
@@ -201,7 +201,7 @@ class NameList {
 }
 
 class Pluralize {
-  const Pluralize(this._single, this._multiple);
+  Pluralize(this._single, this._multiple);
 
   final String _single;
   final String _multiple;

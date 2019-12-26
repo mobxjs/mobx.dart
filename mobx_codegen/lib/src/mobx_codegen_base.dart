@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type_system.dart';
 import 'package:build/build.dart';
-import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/store_class_visitor.dart';
 import 'package:mobx_codegen/src/template/store_file.dart';
+import 'package:mobx_codegen/src/template/store.dart';
+import 'package:mobx_codegen/src/type_names.dart';
 import 'package:source_gen/source_gen.dart';
 
 class StoreGenerator extends Generator {
@@ -41,6 +42,7 @@ class StoreGenerator extends Generator {
     ClassElement baseClass,
     TypeSystem typeSystem,
   ) sync* {
+    final typeNameFinder = LibraryScopedNameFinder(library.element);
     final otherClasses = library.classes.where((c) => c != baseClass);
     final mixedClass = otherClasses.firstWhere((c) {
       // If our base class has different type parameterization requirements than
@@ -61,7 +63,7 @@ class StoreGenerator extends Generator {
 
     if (mixedClass != null) {
       yield _generateCodeFromTemplate(
-          mixedClass.name, baseClass, MixinStoreTemplate());
+          mixedClass.name, baseClass, MixinStoreTemplate(), typeNameFinder);
     }
   }
 
@@ -69,8 +71,10 @@ class StoreGenerator extends Generator {
     String publicTypeName,
     ClassElement userStoreClass,
     StoreTemplate template,
+    LibraryScopedNameFinder typeNameFinder,
   ) {
-    final visitor = StoreClassVisitor(publicTypeName, userStoreClass, template);
+    final visitor = StoreClassVisitor(
+        publicTypeName, userStoreClass, template, typeNameFinder);
     userStoreClass
       ..accept(visitor)
       ..visitChildren(visitor);
