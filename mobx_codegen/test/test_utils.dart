@@ -30,6 +30,8 @@ Future<String> generate(String source) async {
   final errors = <String>[];
   void captureError(LogRecord logRecord) {
     if (logRecord.level == Level.SEVERE) {
+      stderr.writeln(
+          '${logRecord.message}\n${logRecord.error}${logRecord.stackTrace}');
       errors.add(logRecord.message);
     }
   }
