@@ -13,4 +13,6 @@ abstract class _ConnectivityStore with Store {
 
   @observable
   ObservableStream<ConnectivityResult> connectivityStream;
+
+  void dispose() {}
 }
