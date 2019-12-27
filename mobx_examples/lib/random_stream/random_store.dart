@@ -25,7 +25,6 @@ abstract class _RandomStore with Store {
 
   ObservableStream<int> randomStream;
 
-  @override
   // ignore: avoid_void_async
   void dispose() async {
     _timer.cancel();

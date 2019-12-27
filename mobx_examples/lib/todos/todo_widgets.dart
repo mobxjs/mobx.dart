@@ -7,7 +7,7 @@ import 'package:mobx_examples/todos/todo_list.dart';
 class TodoExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Provider<TodoList>(
-      builder: (_) => TodoList(),
+      create: (_) => TodoList(),
       child: Scaffold(
           appBar: AppBar(
             title: const Text('Todos'),

@@ -18,16 +18,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
           providers: [
-            Provider<MultiCounterStore>(builder: (_) => MultiCounterStore()),
-            Provider<Counter>(builder: (_) => Counter()),
+            Provider<MultiCounterStore>(create: (_) => MultiCounterStore()),
+            Provider<Counter>(create: (_) => Counter()),
             Provider<PreferencesService>(
-              builder: (_) => PreferencesService(),
+              create: (_) => PreferencesService(),
             ),
             ProxyProvider<PreferencesService, SettingsStore>(
-                builder: (_, preferencesService, __) =>
+                update: (_, preferencesService, __) =>
                     SettingsStore(preferencesService)),
             Provider<ConnectivityStore>(
-              builder: (_) => ConnectivityStore(),
+              create: (_) => ConnectivityStore(),
               dispose: (_, store) => store.dispose(),
             )
           ],
