@@ -18,7 +18,7 @@ dependencies:
   connectivity:
 ```
 
-## The `ConnectivityStore`
+## The ConnectivityStore
 
 We now need to define our `Store` to hold our reactive state that represents the connection status of the device being used to run the application.
 
@@ -47,7 +47,6 @@ By doing so, we can make use of reactions to respond to changes as we shall soon
 
 To have our user interface inform users of changes about the state of their connection, we'll need to configure a reaction.
 We'll need to use a `StatefulWidget` so that the reaction can be configured within the `initState` method. The reaction will also need to be disposed when the state is going to be disposed. The complete code is as follows
-
 
 ```dart
 import 'package:connectivity/connectivity.dart';

@@ -98,6 +98,8 @@ export const Testimonial: FunctionComponent<Props> = ({
   );
 };
 
+const TestimonialContainer = styled.div``;
+
 const list = [
   {
     author: 'Remi Rousselet',
@@ -152,10 +154,10 @@ MobX supports me on all of my projects.`
 
 export const TestimonialList: FunctionComponent = () => {
   return (
-    <Fragment>
+    <TestimonialContainer>
       {list.map((item) => (
         <Testimonial {...item} key={item.author} />
       ))}
-    </Fragment>
+    </TestimonialContainer>
   );
 };

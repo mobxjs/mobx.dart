@@ -2,6 +2,7 @@ import React from 'react';
 import { useConfig } from 'docz';
 import { media } from 'gatsby-theme-docz/src/theme/breakpoints';
 import styled from 'styled-components';
+import logoImage from './mobx.png';
 
 const LogoTitleContainer = styled.div`
   display: flex;
@@ -14,11 +15,7 @@ const LogoTitleContainer = styled.div`
 `;
 
 export function Logo() {
-  const {
-    title,
-    description,
-    themeConfig: { logo }
-  } = useConfig();
+  const { title, description } = useConfig();
 
   return (
     <a
@@ -29,7 +26,7 @@ export function Logo() {
         textDecoration: 'none'
       }}
     >
-      <img src={logo.src} alt="MobX Logo" height={64} />
+      <img src={logoImage} alt="MobX Logo" height={64} />
       <LogoTitleContainer>
         <span style={{ display: 'inline-block', fontSize: '2rem' }}>
           {title}

@@ -29,9 +29,10 @@ export default {
   ],
   themeConfig: {
     showDarkModeSwitch: false,
-    logo: {
-      src:
-        'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/mobx.png'
+    fonts: {
+      monospace: 'PT Mono',
+      body: 'Montserrat',
+      main: 'Montserrat'
     },
     mode: 'light',
     colors: {
@@ -40,6 +41,9 @@ export default {
       blockquoteColor: '#00579b'
     },
     styles: {
+      h1: {
+        fontFamily: 'Montserrat, sans-serif'
+      },
       code: {
         fontSize: '1.1rem'
       },

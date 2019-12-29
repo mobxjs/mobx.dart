@@ -22,7 +22,10 @@ export const SponsorList = () => {
   return (
     <ul style={{ listStyle: 'none', padding: 0 }}>
       {sponsors.map((s) => (
-        <li style={{ display: 'inline-block', marginRight: 40, marginTop: 20 }}>
+        <li
+          style={{ display: 'inline-block', marginRight: 40, marginTop: 20 }}
+          key={s.url}
+        >
           <Sponsor logo={s.logo} url={s.url} />
         </li>
       ))}
