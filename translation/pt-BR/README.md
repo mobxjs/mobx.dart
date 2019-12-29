@@ -1,3 +1,5 @@
+Language: [English](../../README.md) | [Português](README.md)
+
 # mobx.dart
 
 <a href="https://flutter.dev/docs/development/packages-and-plugins/favorites">
@@ -15,9 +17,9 @@
 
 ![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx.png)
 
-[MobX](https://github.com/mobxjs/mobx) for the Dart language.
+[MobX](https://github.com/mobxjs/mobx) para a Linguagem Dart.
 
-> Supercharge the state-management in your Dart apps with Transparent Functional Reactive Programming (TFRP)
+> Evolua a sua Gerência de Estado em seus App Dart com o Transparent Functional Reactive Programming (TFRP)
 
 - **[Introdução](#introdução)**
 - **[Conceitos Principais](#conceitos-principais)**
@@ -25,7 +27,7 @@
   - [Computed Observables](#computed-observables)
   - [Actions](#actions)
   - [Reactions](#reactions)
-- **[Contributing](#contributing)**
+- **[Contribuição](#contribuição)**
 
 ## Introdução
 
@@ -63,11 +65,9 @@ At the heart of MobX are three important concepts: **Observables**, **Actions** 
 
 ### Observables
 
-Observables represent the reactive-state of your application. They can be simple scalars to complex object trees. By
-defining the state of the application as a tree of observables, you can expose a _reactive-state-tree_ that the UI
-(or other observers in the app) consume.
+Observables representa o reactive-state de sua aplicação. Eles são simples e escalares mesmo em uma árvore de objetos complexa. Você pode expor sua árvore de obersáveis que podem ser consumidos por outros Observables ou pela UI.
 
-A simple reactive-counter is represented by the following observable:
+Um "contador reativo" pode ser representado pelo seguinte Observable
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -75,7 +75,7 @@ import 'package:mobx/mobx.dart';
 final counter = Observable(0);
 ```
 
-More complex observables, such as classes, can be created as well.
+Também podem ser criados observable mais complexos usando Classes(Orientação a objetos):
 
 ```dart
 class Counter {
@@ -85,18 +85,15 @@ class Counter {
 
   final _value = Observable(0);
   int get value => _value.value;
-
   set value(int newValue) => _value.value = newValue;
+  
   Action increment;
-
   void _increment() {
     _value.value++;
   }
 }
 ```
-
-On first sight, this does look like some boilerplate code which can quickly go out of hand!
-This is why we added **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** to the mix that allows you to replace the above code with the following:
+A primeira vista pode parecer algo verboso, por isso criamos **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** que permite substituir o código acima pelo seguinte:
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -116,21 +113,19 @@ abstract class CounterBase with Store {
 }
 ```
 
-Note the use of annotations to mark the observable properties of the class. Yes, there is some header boilerplate here
-but its fixed for any class. As you build more complex classes this boilerplate
-will fade away and you will mostly focus on the code within the braces.
+Agora, basta usar a annotation @Obsevable em uma propriedade da Classe, e sim! temos outros metadados para serem usados como cabeçalho neste boilerplate, porém eles são fixos e funcionam em qualquer tipo de classe. A medida que for criando classes mais complexa, esse boilerplate parecerar não existir, e você dará mais foco no escopo de sua regra.
 
-**Note**: Annotations are available via the **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** package.
+**Nota**: Essas Annotations estão disponíveis no packote **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)**.
 
 ### Computed Observables
 
-> What can be derived, should be derived. Automatically.
+> O que pode ser derivado, deve ser derivado. Automaticamente.
 
-The state of your application consists of _**core-state**_ and _**derived-state**_. The _core-state_ is state inherent to the domain you are dealing with. For example, if you have a `Contact` entity, the `firstName` and `lastName` form the _core-state_ of `Contact`. However, `fullName` is _derived-state_, obtained by combining `firstName` and `lastName`.
+O estado de sua aplicação consiste em _**core-state**_ e _**derived-state**_. O _core-state_ é o estado referente ao dominio ao qual você está lidando. Por exemplo, se você tiver uma entidade chamada `Contact` , as propriedades `firstName` e `lastName` formam o _core-state_ do `Contact`. No entanto, `fullName` é um _derived-state_, obtido pela combinação do `firstName` e do `lastName`.
 
-Such _derived state_, that depends on _core-state_ or _other derived-state_ is called a **Computed Observable**. It is automatically kept in sync when its underlying observables change.
+Esse _derived state_ que depende do _core-state_ ou de outro _derived-state_ é chamado de  **Computed Observable**. Ele automaticamente muda quando seus Observables são alterados.
 
-> State in MobX = Core-State + Derived-State
+> Estado no MobX = Core-State + Derived-State
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -152,18 +147,14 @@ abstract class ContactBase with Store {
 }
 ```
 
-In the example above **`fullName`** is automatically kept in sync if either `firstName` and/or `lastName` changes.
+No exemplo acima, **`fullName`** é automaticamente sincronizado quando há uma alteração no `firstName` e/ou `lastName`.
 
 ### Actions
 
-Actions are how you mutate the observables. Rather than mutating them directly, actions
-add a semantic meaning to the mutations. For example, instead of just doing `value++`,
-firing an `increment()` action carries more meaning. Besides, actions also batch up
-all the notifications and ensure the changes are notified only after they complete.
-Thus the observers are notified only upon the atomic completion of the action.
+Actions deve ser a forma como mudamos os nossos observables. Em vez de modifica-los diretamente, as actions
+adiciona mais `significado semântico` nas mudanças. Por exemplo, em vez de simplesmente chamar `value++` apenas, seria melhor chamar um Action `increment()` pois carrega mais significado. Além disso, actions Além disso, as ações também agrupam todas as notificações e garantem que as alterações sejam notificadas somente após a conclusão. Assim, os observadores são notificados somente após a conclusão atômica da ação.
 
-Note that actions can also be nested, in which case the notifications go out
-when the top-most action has completed.
+Observe que as ações também podem ser aninhadas; nesse caso, as notificações são enviadas quando a ação mais avançada é concluída.
 
 ```dart
 final counter = Observable(0);
@@ -173,7 +164,7 @@ final increment = Action((){
 });
 ```
 
-When creating actions inside a class, you can take advantage of annotations!
+Use a annotations @action para criar uma Ação na sua classe!
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -195,7 +186,7 @@ abstract class CounterBase with Store {
 
 #### Asynchronous Actions
 
-MobX.dart handles asynchronous actions automatically and does not require wrapping the code with [`runInAction`](https://mobx.pub/api/action#runinaction).
+MobX.dart já lida automaticamente com métodos asincrono sem a necessidade de alguma outra ferramenta. [`runInAction`](https://mobx.pub/api/action#runinaction).
 
 ```dart
 @observable
@@ -214,19 +205,16 @@ Future<void> loadStuff() async {
 
 ### Reactions
 
-Reactions complete the _MobX triad_ of **observables**, **actions** and **reactions**. They are
-the observers of the reactive-system and get notified whenever an observable they
-track is changed. Reactions come in few flavors as listed below. All of them
-return a `ReactionDisposer`, a function that can be called to dispose the reaction.
+Reactions completa a _Tríade do MobX_ (**observables**, **actions** and **reactions**). 
+Eles são os observadores do nosso sistema reativo e notificam qualquer observable rastreado que tenha mudado. Reaction tem alguns métodos para seu uso,conforme será listado abaixo, Todos eles retornam a `ReactionDisposer`, uma função que pode ser chamada para eliminar a reação.
 
-One _striking feature_ of reactions is that they _automatically track_ all the observables without any explicit wiring. The act of _reading an observable_ within a reaction is enough to track it!
+Uma das melhores caracteristicas das reactions é que ele _rastreia automaticamente_ qualquer observável sem precisar declará nada. Apenas ter um observável dentro do escopo de uma Reaction e o suficiente para rastrea-lo.
 
-> The code you write with MobX appears to be literally ceremony-free!
+> O código que você escreve com o MobX parece literalmente sem cerimônia!
 
 **`ReactionDisposer autorun(Function(Reaction) fn)`**
 
-Runs the reaction immediately and also on any change in the observables used inside
-`fn`.
+Executa uma Reaction na hora em que é rastreada na função anônima `fn`.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -250,8 +238,7 @@ dispose();
 
 **`ReactionDisposer reaction<T>(T Function(Reaction) predicate, void Function(T) effect)`**
 
-Monitors the observables used inside the `predicate()` function and runs the `effect()` when
-the predicate returns a different value. Only the observables inside `predicate()` are tracked.
+Monitora um observável dentro de uma função de `predicate()` e executa o `effect()`. Quando o prédicado retornar um valor diferente do anterior. Apenas variáveis dentro do `predicate()` são rastreados.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -272,7 +259,7 @@ dispose();
 
 **`ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`**
 
-Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
+Monitora um observável dentro de uma função de `predicate()` e executa o `effect()` quando _when_ é `true`. Após executar o `effect()`, `when` chama o dispose automaticamente. Você pode pensar no _when_ quando quiser executar a `reaction` apenas uma vez. Você também não precisará se preocupar com o dipose quando estiver usando o `when()`.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -290,7 +277,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 **`Future<void> asyncWhen(bool Function(Reaction) predicate)`**
 
-Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
+Similar ao `when` porém retorna um `Future`, que é completado quando o `predicate()` retorna _true_. Essa é uma maneira conveniente de esperar um `predicate()` se tornar `true`.
 
 ```dart
 final completed = Observable(false);
@@ -304,9 +291,9 @@ void waitForCompletion() async {
 
 **Observer**
 
-One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
+O **Observer** é um widget (que é parte do pacote **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)**), nos prover uma observação dos observers por meio de uma função de `builder`. Toda vez que o  observables mudar, o `Observer` renderizará novamente na view.
 
-Below is the _Counter_ example in its entirety.
+Abaixo temos um exemplo do _Counter_ em sua totalidade.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -366,17 +353,15 @@ class _CounterExampleState extends State<CounterExample> {
 }
 ```
 
-## Contributing
+## Contribuição
 
-If you have read up till here, then 🎉🎉🎉. There are couple of ways in which you can contribute to
-the growing community of `MobX.dart`.
+Se você leu até aqui, então 🎉🎉🎉. Existem algumas maneiras pelas quais você pode contribuir para a crescente comunidade do `MobX.dart`.
 
-- Pick up any issue marked with ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
-- Propose any feature, enhancement
-- Report a bug
-- Fix a bug
-- Participate in a discussion and help in decision making
-- Write and improve some **documentation**. Documentation is super critical and its importance
-  cannot be overstated!
-- Send in a Pull Request :-)
-- Chime in and [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
+- Escolha qualquer problema marcado com ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+- Propor qualquer recurso ou aprimoramento
+- Reportar um erro
+- Corrigir um bug
+- Participe de uma discussão e ajude na tomada de decisão
+- Melhore a documentação **documentation**. A Documentação é de suma importância e de grande prioridade para a comunidade.
+- Enviar uma solicitação pull :-)
+- Entre na comunidade [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
