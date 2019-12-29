@@ -61,7 +61,7 @@ Para uma visão mais profunda do MobX, veja o [MobX Quick Start Guide](https://w
 
 ![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx-triad.png)
 
-At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
+Temos 3 principais conceitos no MobX: **Observables**, **Actions** e **Reactions**.
 
 ### Observables
 
