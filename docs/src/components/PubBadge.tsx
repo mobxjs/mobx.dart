@@ -1,3 +1,17 @@
 import React, { FunctionComponent } from 'react';
 
-export const PubBadge: FunctionComponent = () => <span>"Pub Badge"</span>;
+interface Props {
+  name: string;
+}
+export const PubBadge: FunctionComponent = (props: Props) => {
+  const { name } = props;
+
+  return (
+    <a href={`https://pub.dartlang.org/packages/${name}`}>
+      <img
+        alt="pub"
+        src={`https://img.shields.io/pub/v/${name}.svg?label=${name}&color=blue`}
+      />
+    </a>
+  );
+};

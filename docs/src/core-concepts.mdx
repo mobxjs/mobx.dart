@@ -3,11 +3,15 @@ name: Core Concepts
 route: /concepts
 ---
 
-import mobxTriad from './images/mobx-triad.png';
-
 # Core Concepts
 
-<img src={mobxTriad} />
+import { PubBadge } from './components/PubBadge';
+import mobxTriad from './images/mobx-triad.png';
+
+<img
+  src={mobxTriad}
+  alt="The Triad of MobX, consisting of Observable, Actions and Reactions"
+/>
 
 At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
 
@@ -16,6 +20,9 @@ At the heart of MobX are three important concepts: **Observables**, **Actions** 
 Observables represent the reactive-state of your application. They can be simple scalars to complex object trees. By
 defining the state of the application as a tree of observables, you can expose a _reactive-state-tree_ that the UI
 (or other observers in the app) consume.
+
+> The term `reactive data` means that a change to data causes a notification to be fired to every interested observer. It is the
+> application of the classic **Observer** Design Pattern.
 
 A simple reactive-counter is represented by the following observable:
 
@@ -46,7 +53,7 @@ class Counter {
 ```
 
 On first sight, this does look like some boilerplate code which can quickly go out of hand!
-This is why we added **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** to the mix that allows you to replace the above code with the following:
+This is why we added <PubBadge name="mobx_codegen" /> to the mix that allows you to replace the above code with the following:
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -70,7 +77,7 @@ Note the use of annotations to mark the observable properties of the class. Yes,
 but its fixed for any class. As you build more complex classes this boilerplate
 will fade away and you will mostly focus on the code within the braces.
 
-**Note**: Annotations are available via the **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** package.
+**Note**: Annotations are available via the <PubBadge name="mobx_codegen"/> package.
 
 The above code is part of the [**Counter Example**](/examples/counter).
 

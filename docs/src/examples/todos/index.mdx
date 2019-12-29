@@ -4,6 +4,8 @@ menu: Examples
 route: /examples/todos
 ---
 
+import { PubBadge } from '../../components/PubBadge';
+
 # Todos
 
 In this example, we will build the classic [TodoMVC](http://todomvc.com/), which has become the default way of showcasing the capabilities of a state-management library.
@@ -308,11 +310,11 @@ class TodoExample extends StatelessWidget {
 
 ```
 
-We are supplying the state using a `Provider<T>`. This comes from the [provider](https://pub.dev/packages/provider) package and makes it easier to access the store in all of the children. Since the state is kept outside of the `Widget`, this is also called _**"Lifting the State"**_, which makes the root Widget a `StatelessWidget`. **_Line#1_** lifts the state with the `Provider<TodoList>`. Each child accesses the store (aka state) using the `Provider.of<TodoList>()` passing the `BuildContext` as argument.
+We are supplying the state using a `Provider<T>`. This comes from the <PubBadge name="provider" /> package and makes it easier to access the store in all of the children. Since the state is kept outside of the `Widget`, this is also called _**"Lifting the State"**_, which makes the root Widget a `StatelessWidget`. **_Line#1_** lifts the state with the `Provider<TodoList>`. Each child accesses the store (aka state) using the `Provider.of<TodoList>()` passing the `BuildContext` as argument.
 
-> [![pub package](https://img.shields.io/pub/v/provider.svg?label=provider&color=blue)](https://pub.dartlang.org/packages/provider)
+> **The <PubBadge name="provider" /> package**
 >
-> We strongly recommend the use of `Provider<T>` to supply the state of your `Widget` and also for the application. Lifting the state via a `Provider` makes it convenient and avoids using globals to track your store. It also comes with several conveniences that makes it noteworthy. This is part of the [provider](https://pub.dev/packages/provider) package and definitely worth using in your apps.
+> We strongly recommend the use of `Provider<T>` to supply the state of your `Widget` and also for the application. Lifting the state via a `Provider` makes it convenient and avoids using globals to track your store. It also comes with several conveniences that makes it noteworthy. This is part of the <PubBadge name="provider" /> package and definitely worth using in your apps.
 
 Each of the children in the root-Widget is an `Observer`. Let's take the simplest of all the children: `Description`.
 
@@ -474,6 +476,6 @@ import todosGif from './todos.gif';
 
 <img src={todosGif} />
 
-Hope you can see the clarity of expressing the observable-state with `@observable`, `@computed`, and `@action`. Using the `Observer` widget, you get an automatically-updating Widget that renders the observable-state. To pass around the state, we rely on the `Provider<T>` from the [provider](https://pub.dev/packages/provider) package.
+Hope you can see the clarity of expressing the observable-state with `@observable`, `@computed`, and `@action`. Using the `Observer` widget, you get an automatically-updating Widget that renders the observable-state. To pass around the state, we rely on the `Provider<T>` from the <PubBadge name="provider" /> package.
 
 > See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).

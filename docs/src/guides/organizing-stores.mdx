@@ -4,6 +4,8 @@ route: /guides/stores
 name: Organizing Stores
 ---
 
+import { PubBadge } from '../components/PubBadge';
+
 # Organizing Stores
 
 The primary purpose of **MobX** is to simplify the management of _Reactive State_ in your application. As your application scales, the amount of state you manage will also increase. This requires some techniques to break down your application state and divvy it up across a set of stores. Of course, putting everything in one `Store` is not prudent, so we apply _divide-and-conquer_ instead.
@@ -129,7 +131,7 @@ In short, we have taken cues from the [SOLID](https://en.wikipedia.org/wiki/SOLI
 
 The provider-pattern has become a standard way of making the top level stores available across the entire app. It avoids creating a singleton-`Store`, making it easier to use the `Store` as a plain class instance.
 
-Using the [![pub package](https://img.shields.io/pub/v/provider.svg?label=provider&color=blue)](https://pub.dartlang.org/packages/mobx) package on pub, you can setup a repository of stores at the App level. Then using the `Provider.of<T>()` API, you can read this value inside your `Widget.build()` methods.
+Using the <PubBadge name="provider" /> package on pub, you can setup a repository of stores at the App level. Then using the `Provider.of<T>()` API, you can read this value inside your `Widget.build()` methods.
 
 In the example below, we are setting up a store at the app-level:
 
@@ -260,11 +262,11 @@ Example(
 ...
 ```
 
-A side effect of this is that writing widget tests become easier as well. Since the widget's dependencies have been made explicit, we could pass mocks (e.g. using the [mockito][2] package) of said dependencies if required.
+A side effect of this is that writing widget tests become easier as well. Since the widget's dependencies have been made explicit, we could pass mocks (e.g. using the <PubBadge name="mockito" /> package) of said dependencies if required.
 
 ### A variety of providers
 
-There are multiple types of `Providers` available in the [![pub package](https://img.shields.io/pub/v/provider.svg?label=provider&color=blue)](https://pub.dartlang.org/packages/mobx)
+There are multiple types of `Providers` available in the <PubBadge name="provider" />
 package. The ones most relevant and useful to MobX are:
 
 - `Provider` for constructing and disposing objects on the fly. This is good when the object has a fixed lifetime.
