@@ -44,19 +44,6 @@ void main() {
           source: './data/valid_generic_store_input.dart',
           output: './data/valid_generic_store_output.dart'),
       const TestInfo(
-          description: 'generates for a class annotated with @store',
-          source: './data/valid_annotated_store_input.dart',
-          output: './data/valid_annotated_store_output.dart'),
-      const TestInfo(
-          description: 'generates for a generic class annotated with @store',
-          source: './data/valid_generic_annotated_store_input.dart',
-          output: './data/valid_generic_annotated_store_output.dart'),
-      const TestInfo(
-          description:
-              'generates correct types for a @store referencing another @store',
-          source: './data/valid_annotated_store_referencing_store_input.dart',
-          output: './data/valid_annotated_store_referencing_store_output.dart'),
-      const TestInfo(
           description: 'generates dart:ui types correctly',
           source: './data/valid_store_with_ui_types_input.dart',
           output: './data/valid_store_with_ui_types_output.dart'),

@@ -1,4 +1,4 @@
-mixin _$Item<T> on _Item<T>, Store {
+mixin _$Item<T extends num> on _Item<T>, Store {
   final _$valueAtom = Atom(name: '_Item.value');
 
   @override

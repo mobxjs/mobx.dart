@@ -10,18 +10,7 @@ String findGetterTypeName(PropertyAccessorElement getter) {
   return findReturnTypeName(getter);
 }
 
-String findSetterTypeName(PropertyAccessorElement setter) {
-  assert(setter.isSetter);
-  return findParameterTypeName(setter.parameters.first);
-}
-
 String findParameterTypeName(ParameterElement parameter) {
-  // If we're dealing with a parameter of the format `this.field`, let's look
-  // up the corresponding field or property element, and grab its type.
-  if (parameter.isInitializingFormal) {
-    return _findInitializingParameterTypeName(parameter);
-  }
-
   final node = _findElementNode<DefaultFormalParameter>(parameter)?.parameter ??
       _findElementNode<NormalFormalParameter>(parameter);
   if (node is SimpleFormalParameter && node.type != null) {
@@ -29,22 +18,6 @@ String findParameterTypeName(ParameterElement parameter) {
   } else {
     return 'dynamic';
   }
-}
-
-String _findInitializingParameterTypeName(ParameterElement parameter) {
-  final ClassElement classElement = parameter.enclosingElement.enclosingElement;
-
-  final correspondingField = classElement.getField(parameter.name);
-  if (correspondingField != null && !correspondingField.isSynthetic) {
-    return findVariableTypeName(correspondingField);
-  }
-
-  final correspondingSetter = classElement.getSetter(parameter.name);
-  if (correspondingSetter != null && !correspondingSetter.isSynthetic) {
-    return findSetterTypeName(correspondingSetter);
-  }
-
-  return 'dynamic';
 }
 
 String findReturnTypeName(ExecutableElement executable) =>

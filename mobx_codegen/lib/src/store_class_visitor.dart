@@ -4,12 +4,11 @@ import 'package:build/build.dart';
 import 'package:mobx/mobx.dart';
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
-    show ComputedMethod, MakeAction, MakeObservable, MakeStore;
+    show ComputedMethod, MakeAction, MakeObservable;
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
-import 'package:mobx_codegen/src/template/constructor_override.dart';
 import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/observable_future.dart';
@@ -56,30 +55,10 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
   @override
   void visitClassElement(ClassElement element) {
-    if (isAnnotatedStoreClass(element) && isMixinStoreClass(element)) {
-      _errors.storeMixinPlusAnnotationDeclarations.addIf(true, element.name);
-    } else if (isMixinStoreClass(element)) {
+    if (isMixinStoreClass(element)) {
       _errors.nonAbstractStoreMixinDeclarations
           .addIf(!element.isAbstract, element.name);
-    } else if (isAnnotatedStoreClass(element)) {
-      _errors.nonPrivateStoreAnnotationDeclarations
-          .addIf(!element.isPrivate, element.name);
     }
-  }
-
-  @override
-  void visitConstructorElement(ConstructorElement element) {
-    if (element.isSynthetic) {
-      return;
-    }
-
-    // Note that these constructor templates are only used for annotation stye
-    // store definition. They're ignored otherwise.
-    final template = ConstructorOverrideTemplate()
-      ..store = _storeTemplate
-      ..constructor = MethodOverrideTemplate.fromElement(element);
-
-    _storeTemplate.constructors.add(template);
   }
 
   @override
@@ -204,13 +183,9 @@ class StoreClassVisitor extends SimpleElementVisitor {
 }
 
 const _storeMixinChecker = TypeChecker.fromRuntime(Store);
-const _storeAnnotationChecker = TypeChecker.fromRuntime(MakeStore);
 
 bool isMixinStoreClass(ClassElement classElement) =>
     classElement.mixins.any(_storeMixinChecker.isExactlyType);
-
-bool isAnnotatedStoreClass(ClassElement classElement) =>
-    _storeAnnotationChecker.hasAnnotationOfExact(classElement);
 
 bool _any(List<bool> list) => list.any(_identity);
 
