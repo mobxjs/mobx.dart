@@ -1,6 +1,7 @@
-## 0.3.10+1
+## 0.3.10+1 - 0.3.11
 
 - Package updates
+- Upgraded dependency version for the `analyzer` package
 
 ## 0.3.9+1 - 0.3.10
 

@@ -1,8 +1,9 @@
-## 0.3.4 - 0.3.4+2
+## 0.3.4 - 0.3.4+3
 
 - Added two new `Observer`-widgets: `StatelessObserverWidget` and `StatefulObserverWidget`
 - Improved the reporting of Flutter errors inside `Observer` widgets.
 - Exposing the `debugAddStackTraceInObserverName` field
+- Removing the deprecated `authors` field from `pubspec.yaml`
 
 Thanks to [Scott Hyndman](https://github.com/shyndman) and [Remi Rousselet](https://github.com/rrousselGit) for the work done in this release!
 
