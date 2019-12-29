@@ -238,7 +238,8 @@ void main() {
     expect(element.reaction.name, equals('$observer'));
   });
 
-  testWidgets("Debug mode inserts stacktrace in the reaction's name",
+  testWidgets(
+      "Debug mode inserts the caller's stack frame in the reaction's name",
       (tester) async {
     final observer = LoggingObserver(
       builder: (_) => Container(),
@@ -251,7 +252,37 @@ void main() {
         tester.element(find.byWidget(observer)) as ObserverElementMixin;
 
     expect(element.reaction.name, startsWith('$observer\n'));
-    expect(element.reaction.name, contains('createReaction'));
+    // Note that is the stack frame representation of this testWidgets()
+    // anonymous function.
+    expect(element.reaction.name, contains(' main.<anonymous closure>'));
+  });
+
+  testWidgets(
+      "Debug mode inserts the caller's stack frame in the reaction's name",
+      (tester) async {
+    final observer = LoggingObserver(
+      builder: (_) => Container(),
+    );
+
+    await tester.pumpWidget(observer);
+
+    final element =
+        // ignore: avoid_as
+        tester.element(find.byWidget(observer)) as ObserverElementMixin;
+
+    expect(element.reaction.name, startsWith('$observer\n'));
+    // Note that is the stack frame representation of this testWidgets()
+    // anonymous function.
+    expect(element.reaction.name, contains(' main.<anonymous closure>'));
+  });
+
+  testWidgets("Observer fails gracefully if caller's stack frame is not found",
+      (tester) async {
+    expect(
+      // Provide an empty stack trace, which will not match
+      Observer.debugFindConstructingStackFrame(StackTrace.fromString('')),
+      null,
+    );
   });
 
   testWidgets('Observer should log when there are no observables in builder',
