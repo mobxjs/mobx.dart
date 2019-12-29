@@ -1,6 +1,6 @@
 library generator_sample;
 
-import 'dart:core' as c;
+import 'dart:io' as io;
 
 import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
@@ -10,51 +10,34 @@ part 'generator_sample.g.dart';
 class User = UserBase with _$User;
 
 abstract class UserBase with Store {
-  UserBase(this.id);
-
-  final c.int id;
+  UserBase();
 
   @observable
-  c.String firstName = 'Jane';
+  io.File biography;
 
   @observable
-  c.String lastName = 'Doe';
+  User friend;
+
+  @observable
+  void Function(io.File, {io.File another}) callback;
+
+  @observable
+  io.File Function(String, [int, io.File]) callback2;
 
   @computed
-  c.String get fullName => '$firstName $lastName';
+  io.File get biographyNotes => io.File('${biography.path}.notes');
 
   @action
-  void updateNames({@required c.String firstName, c.String lastName}) {
-    if (firstName != null) this.firstName = firstName;
-    if (lastName != null) this.lastName = firstName;
+  void updateBiography(io.File newBiography) {
+    biography = newBiography;
   }
 
   @observable
-  c.Future<c.String> foobar() async {
-    return 'foobar';
-  }
+  Future<io.File> futureBiography() async => biography;
 
   @observable
-  c.Stream<T> loadStuff<T>(c.String arg1, {T value}) async* {
-    yield value;
+  Stream<T> loadDirectory<T extends io.Directory>(String arg1,
+      {T directory}) async* {
+    yield directory;
   }
-
-  @observable
-  c.Stream<c.String> asyncGenerator() async* {
-    yield 'item1';
-  }
-
-  @action
-  c.Future<void> setAsyncFirstName() async {
-    firstName = 'Async FirstName';
-  }
-
-  @action
-  @observable
-  c.Future<void> setAsyncFirstName2() async {
-    firstName = 'Async FirstName 2';
-  }
-
-  @action
-  void setBlob(blob) {} // ignore: type_annotate_public_apis
 }

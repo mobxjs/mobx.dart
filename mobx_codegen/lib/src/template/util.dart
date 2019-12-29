@@ -31,8 +31,12 @@ class AsyncMethodChecker {
           method.returnType.isDynamic);
 }
 
-TypeParamTemplate typeParamTemplate(TypeParameterElement param) =>
+TypeParamTemplate typeParamTemplate(
+  TypeParameterElement param,
+  LibraryScopedNameFinder typeNameFinder,
+) =>
     TypeParamTemplate()
       ..name = param.name
-      ..bound =
-          param.bound != null ? findTypeParameterBoundsTypeName(param) : null;
+      ..bound = param.bound != null
+          ? typeNameFinder.findTypeParameterBoundsTypeName(param)
+          : null;

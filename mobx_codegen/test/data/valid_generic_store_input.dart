@@ -4,9 +4,9 @@ import 'package:mobx/mobx.dart';
 
 part 'generator_sample.g.dart';
 
-class Item<A> = _Item<A> with _$Item<A>;
+class Item<A extends num> = _Item<A> with _$Item<A>;
 
-abstract class _Item<T> with Store {
+abstract class _Item<T extends num> with Store {
   @observable
   T value;
 }

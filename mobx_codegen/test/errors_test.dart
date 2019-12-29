@@ -9,11 +9,11 @@ class TestFieldErrors extends PropertyErrors {
 void main() {
   group('Pluralize', () {
     test('Pluralize.call returns single string when count is 1', () {
-      expect(const Pluralize('the item', 'items').call(1), 'the item');
+      expect(Pluralize('the item', 'items').call(1), 'the item');
     });
 
     test('Pluralize.call returns multiple string when count is not 1', () {
-      expect(const Pluralize('the item', 'items').call(2), 'items');
+      expect(Pluralize('the item', 'items').call(2), 'items');
     });
   });
 

@@ -4,12 +4,11 @@ import 'package:build/build.dart';
 import 'package:mobx/mobx.dart';
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
-    show ComputedMethod, MakeAction, MakeObservable, MakeStore;
+    show ComputedMethod, MakeAction, MakeObservable;
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
 import 'package:mobx_codegen/src/template/computed.dart';
-import 'package:mobx_codegen/src/template/constructor_override.dart';
 import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
 import 'package:mobx_codegen/src/template/observable_future.dart';
@@ -24,11 +23,11 @@ class StoreClassVisitor extends SimpleElementVisitor {
     String publicTypeName,
     ClassElement userClass,
     StoreTemplate template,
+    this.typeNameFinder,
   ) : _errors = StoreClassCodegenErrors(publicTypeName) {
     _storeTemplate = template
-      ..typeParams
-          .templates
-          .addAll(userClass.typeParameters.map(typeParamTemplate))
+      ..typeParams.templates.addAll(userClass.typeParameters
+          .map((type) => typeParamTemplate(type, typeNameFinder)))
       ..typeArgs.templates.addAll(userClass.typeParameters.map((t) => t.name))
       ..parentTypeName = userClass.name
       ..publicTypeName = publicTypeName;
@@ -44,6 +43,8 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
   StoreTemplate _storeTemplate;
 
+  LibraryScopedNameFinder typeNameFinder;
+
   final StoreClassCodegenErrors _errors;
 
   String get source {
@@ -56,30 +57,10 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
   @override
   void visitClassElement(ClassElement element) {
-    if (isAnnotatedStoreClass(element) && isMixinStoreClass(element)) {
-      _errors.storeMixinPlusAnnotationDeclarations.addIf(true, element.name);
-    } else if (isMixinStoreClass(element)) {
+    if (isMixinStoreClass(element)) {
       _errors.nonAbstractStoreMixinDeclarations
           .addIf(!element.isAbstract, element.name);
-    } else if (isAnnotatedStoreClass(element)) {
-      _errors.nonPrivateStoreAnnotationDeclarations
-          .addIf(!element.isPrivate, element.name);
     }
-  }
-
-  @override
-  void visitConstructorElement(ConstructorElement element) {
-    if (element.isSynthetic) {
-      return;
-    }
-
-    // Note that these constructor templates are only used for annotation stye
-    // store definition. They're ignored otherwise.
-    final template = ConstructorOverrideTemplate()
-      ..store = _storeTemplate
-      ..constructor = MethodOverrideTemplate.fromElement(element);
-
-    _storeTemplate.constructors.add(template);
   }
 
   @override
@@ -105,7 +86,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
     final template = ObservableTemplate()
       ..storeTemplate = _storeTemplate
       ..atomName = '_\$${element.name}Atom'
-      ..type = findVariableTypeName(element)
+      ..type = typeNameFinder.findVariableTypeName(element)
       ..name = element.name;
 
     _storeTemplate.observables.add(template);
@@ -136,7 +117,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
     final template = ComputedTemplate()
       ..computedName = '_\$${element.name}Computed'
       ..name = element.name
-      ..type = findGetterTypeName(element);
+      ..type = typeNameFinder.findGetterTypeName(element);
     _storeTemplate.computeds.add(template);
 
     return;
@@ -157,13 +138,15 @@ class StoreClassVisitor extends SimpleElementVisitor {
       if (element.isAsynchronous) {
         final template = AsyncActionTemplate()
           ..isObservable = _observableChecker.hasAnnotationOfExact(element)
-          ..method = MethodOverrideTemplate.fromElement(element);
+          ..method =
+              MethodOverrideTemplate.fromElement(element, typeNameFinder);
 
         _storeTemplate.asyncActions.add(template);
       } else {
         final template = ActionTemplate()
           ..storeTemplate = _storeTemplate
-          ..method = MethodOverrideTemplate.fromElement(element);
+          ..method =
+              MethodOverrideTemplate.fromElement(element, typeNameFinder);
 
         _storeTemplate.actions.add(template);
       }
@@ -174,12 +157,14 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
       if (_asyncChecker.returnsFuture(element)) {
         final template = ObservableFutureTemplate()
-          ..method = MethodOverrideTemplate.fromElement(element);
+          ..method =
+              MethodOverrideTemplate.fromElement(element, typeNameFinder);
 
         _storeTemplate.observableFutures.add(template);
       } else if (_asyncChecker.returnsStream(element)) {
         final template = ObservableStreamTemplate()
-          ..method = MethodOverrideTemplate.fromElement(element);
+          ..method =
+              MethodOverrideTemplate.fromElement(element, typeNameFinder);
 
         _storeTemplate.observableStreams.add(template);
       }
@@ -204,13 +189,9 @@ class StoreClassVisitor extends SimpleElementVisitor {
 }
 
 const _storeMixinChecker = TypeChecker.fromRuntime(Store);
-const _storeAnnotationChecker = TypeChecker.fromRuntime(MakeStore);
 
 bool isMixinStoreClass(ClassElement classElement) =>
     classElement.mixins.any(_storeMixinChecker.isExactlyType);
-
-bool isAnnotatedStoreClass(ClassElement classElement) =>
-    _storeAnnotationChecker.hasAnnotationOfExact(classElement);
 
 bool _any(List<bool> list) => list.any(_identity);
 
