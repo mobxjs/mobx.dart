@@ -4,6 +4,8 @@ name: Hacker News
 route: /examples/hacker-news
 ---
 
+import { PubBadge } from '../../components/PubBadge';
+
 # Hacker News
 
 In this example we will rely on the `ObservableFuture` to keep track of the fetch calls to the HackerNews API. The entire state of the application will be defined in terms of the `ObservableFuture`.
@@ -12,7 +14,7 @@ In this example we will rely on the `ObservableFuture` to keep track of the fetc
 
 ## Observable State
 
-Rather than writing our own HTTP layer to talk to the hacker-news API, we will rely on a package: [**hnpwa_client**](https://pub.dartlang.org/packages/hnpwa_client), available on Pub. Here we will take a different perspective on defining the observable state.
+Rather than writing our own HTTP layer to talk to the hacker-news API, we will rely on a package: <PubBadge name="hnpwa_client" />, available on Pub. Here we will take a different perspective on defining the observable state.
 
 The hacker-news client essentially shows a list of items for the latest and the top news items submitted on the [HackerNews website](https://news.ycombinator.com/). Instead of defining the observable state as two separate lists of items, we will just create two separate `ObservableFuture`s. The `result` field of an `ObservableFuture` will point to the `List<FeedItem>`, which is the first page of the latest and top news feed.
 
@@ -122,7 +124,7 @@ The most interesting `Widget` above is the **`FeedItemsView`**, an _Observer-Wid
 
 `FeedItemsView` tracks the specific _observable-future_ depending on the `FeedType`. An `ObservableFuture` has three distinct states:
 
-import observableFuture from "./mobx-ObservableFuture.png";
+import observableFuture from './mobx-ObservableFuture.png';
 
 <img src={observableFuture} />
 
@@ -202,7 +204,7 @@ class FeedItemsView extends StatelessWidget {
 
 We have also added the _Pull to Refresh_ behavior for fetching the latest updates to the news. This can be seen with the use of `RefreshIndicator`.
 
-import hnGif from "./hn.gif";
+import hnGif from './hn.gif';
 
 <img src={hnGif} />
 

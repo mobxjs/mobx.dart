@@ -1,3 +1,9 @@
+## 0.3.12
+
+- Removed the experimental use of `@store` annotation. It fails for some cases and has now been removed. We will explore
+  other use cases with this annotation in future PRs.
+- Package updates
+
 ## 0.3.10+1 - 0.3.11
 
 - Package updates

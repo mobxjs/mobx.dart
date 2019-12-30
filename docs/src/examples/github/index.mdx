@@ -4,9 +4,11 @@ menu: Examples
 route: /examples/github-repos
 ---
 
+import { PubBadge } from '../../components/PubBadge';
+
 # Github Repos
 
-In this example, we will use the [**github-client**](https://pub.dartlang.org/packages/github) to fetch the repositories for a user. This will also show the use of an `ObservableFuture` with an `Observer`.
+In this example, we will use the <PubBadge name="github" /> package to fetch the repositories for a user. This will also show the use of an `ObservableFuture` with an `Observer`.
 
 > The full source code can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/github)
 
@@ -14,7 +16,7 @@ In this example, we will use the [**github-client**](https://pub.dartlang.org/pa
 
 The first step is to define the reactive (aka _observable_) state of your UI. This gives you a good grounding on what is to be expected eventually on the UI itself.
 
-In this case, we want a simple UI where we accept the _github-ID_ as input. We use that to fetch the user's repositories. This call will be made using the [github](https://pub.dartlang.org/packages/github) package, the results for which are stored as a `List<Repository>`. The `GithubStore` class so far looks like so:
+In this case, we want a simple UI where we accept the _github-ID_ as input. We use that to fetch the user's repositories. This call will be made using the <PubBadge name="github" /> package, the results for which are stored as a `List<Repository>`. The `GithubStore` class so far looks like so:
 
 ```dart
 import 'package:github/server.dart';
@@ -139,7 +141,7 @@ class GithubExampleState extends State<GithubExample> {
 
 ```
 
-Most of the widgets in the `Column` should be self-explanatory. The simplest of these is the `LoadingIndicator`, a `StatelessWidget`, that tracks when the fetch operation is in progress. The `Observer` is from the [**flutter_mobx**](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx) package that tracks the use of _observables_ within its _builder-function_ and rebuilds on change. Notice we rely on the `fetchReposFuture` field, an `ObservableFuture`, to show the loading indicator when the `status` is _pending_.
+Most of the widgets in the `Column` should be self-explanatory. The simplest of these is the `LoadingIndicator`, a `StatelessWidget`, that tracks when the fetch operation is in progress. The `Observer` is from the <PubBadge name="flutter_mobx" /> package that tracks the use of _observables_ within its _builder-function_ and rebuilds on change. Notice we rely on the `fetchReposFuture` field, an `ObservableFuture`, to show the loading indicator when the `status` is _pending_.
 
 ### LoadingIndicator
 
@@ -217,7 +219,7 @@ class RepositoryListView extends StatelessWidget {
 
 Below you can see the example working for various use cases.
 
-import githubRepos from "./github-repos.gif";
+import githubRepos from './github-repos.gif';
 
 <img src={githubRepos} />
 
