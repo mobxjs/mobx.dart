@@ -69,6 +69,10 @@ abstract class _Todo with Store {
 
 **Computeds** form the derived state of your application. They depend on other observables or computeds for their value. Any time the depending observables change, they will recompute their new value. Computeds are also smart and **cache** their previous value. Only when the computed-value is different than the cached-value, will they fire notifications. This behavior is key to ensure the connected reactions don't execute unnecessarily.
 
+> #### Caching
+>
+> The caching behavior is only for _notifications_ and **not** for the _value_. Calling a computed property will always evaluate and return the value. There is no caching on the computation itself. However, notifications fire only when the computed value is different from the previous one. This is where the caching behavior applies.
+
 ```dart
 final first = Observable('Pavan');
 final last = Observable('Podila');

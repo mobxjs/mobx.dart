@@ -17,6 +17,7 @@ route: /community
 - [Introducing the Port of MobX to Dart & Flutter](https://www.youtube.com/watch?v=p0WJB5SN0g8)
 - [Flutter State Management with MobX](https://www.youtube.com/watch?v=p-MUBLOEkCs) - [Paul Halliday](https://twitter.com/paulhalliday_io)
 - Flutter Learning MobX Stream ([Part 1](https://www.youtube.com/watch?v=jpHvu3Y1brA), [Part 2](https://www.youtube.com/watch?v=qfAJ-d1tzzI)) - [Robert Brunhage](https://twitter.com/RobertBrunhage)
+- [Flutter MobX Tutorial - Transparent Reactive State Management](https://www.youtube.com/watch?v=8j7W91ZJuV0) - [Reso Coder](https://www.youtube.com/channel/UCSIvrn68cUk8CS8MbtBmBkA)
 
 ## Podcasts
 

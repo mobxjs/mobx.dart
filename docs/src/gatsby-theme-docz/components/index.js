@@ -10,6 +10,7 @@ const InlineCode = styled.code`
   display: inline-block;
   color: rgb(250, 96, 0);
   padding: 0 0.25rem;
+  background: rgb(245, 246, 247);
 `;
 
 const BlockQuote = styled.blockquote`

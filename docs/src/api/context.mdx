@@ -29,13 +29,13 @@ Create a `ReactiveContext` by passing a configuration object. If no configuratio
 enum ReactiveWritePolicy { observed, always, never }
 ```
 
-- **`readPolicy`**: This controls the behavior for reading observable values. Typically these values are only read in a reactive context like an `action` or `reaction`. Reading it outside doesn't result in any notifications getting fired. Use the `ReactiveReadPolicy` to control this. By default we have turned off reactive-reads, which means you can read observables wherever you like.
+- **`readPolicy`**: This controls the behavior for reading observable values. Typically these values are only read in a reactive context like an `action` or `reaction`. Reading it outside doesn't result in any notifications getting fired. Use the `ReactiveReadPolicy` to control this. By **default** we have turned off reactive-reads, which means you can read observables wherever you like.
 
 ```dart
 enum ReactiveReadPolicy { always, never }
 ```
 
-- **`maxIterations`**: This is the number of iterations MobX will run through before treating the reaction as _unstable_. At this point, it will throw an exception. Unstable reactions do not settle down and keep on triggering more reactions. This is most likely due to a cyclical chain of dependencies. The default is set to `100`.
+- **`maxIterations`**: This is the number of iterations MobX will run through before treating the reaction as _unstable_. At this point, it will throw an exception. Unstable reactions do not settle down and keep on triggering more reactions. This is most likely due to a cyclical chain of dependencies. The **default** is set to `100`.
 
 ## Reactive Policies
 
