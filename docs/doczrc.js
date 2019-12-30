@@ -36,7 +36,7 @@ export default {
     },
     mode: 'light',
     colors: {
-      primary: '#29b6f6',
+      primary: '#1389FD',
       codeColor: '#fa6000',
       blockquoteColor: '#00579b'
     },

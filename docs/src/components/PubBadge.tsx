@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 interface Props {
   name: string;
 }
-export const PubBadge: FunctionComponent = (props: Props) => {
+export const PubBadge: FunctionComponent<Props> = (props) => {
   const { name } = props;
 
   return (

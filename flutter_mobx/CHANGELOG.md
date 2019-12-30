@@ -1,10 +1,16 @@
+## 0.3.5
+
+- Updated `mobx` dependency version to **0.4.0** in `flutter_mobx` `pubspec.yaml`
+- Improved naming of `Observer` in debug-mode with the correct line in StackTrace.
+
+Thanks to [Scott Hyndman](https://github.com/shyndman) for all the contributions in this release.
+
 ## 0.3.4 - 0.3.4+4
 
 - Added two new `Observer`-widgets: `StatelessObserverWidget` and `StatefulObserverWidget`
 - Improved the reporting of Flutter errors inside `Observer` widgets.
 - Exposing the `debugAddStackTraceInObserverName` field
 - Removing the deprecated `authors` field from `pubspec.yaml`
-- Updated Mobx dependency version to 0.4.0 in flutter_mobx pubspec.yaml
 
 Thanks to [Scott Hyndman](https://github.com/shyndman) and [Remi Rousselet](https://github.com/rrousselGit) for the work done in this release!
 
