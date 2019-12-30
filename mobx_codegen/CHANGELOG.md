@@ -1,7 +1,8 @@
-## 0.3.10+1 - 0.3.11
+## 0.3.10+1 - 0.3.12
 
 - Package updates
 - Upgraded dependency version for the `analyzer` package
+- Updated version on mobx_codegen.dart
 
 ## 0.3.9+1 - 0.3.10
 
