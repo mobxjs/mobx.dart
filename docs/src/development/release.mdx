@@ -44,7 +44,20 @@ npm run set:versions
 
 The versions of packages mentioned in the [Getting Started Guide](/getting-started) should match the `pubspec.yaml` files of each package.
 
-### 5. Publish
+### 5. Push release tags to Github
+
+Before we can publish to **pub.dev**, it is necessary to push the version tags marking the point in code that corresponds to the version of
+the package. You can set the tag using the following git command. This applies to all our packages: `mobx`, `flutter_mobx` and `mobx_codegen`
+
+```shell
+git tag mobx-0.4.0
+```
+
+Note that the tag-format should be:
+
+**`<name-of-package>-<pubspec-version>`**
+
+### 6. Publish
 
 Run the command `flutter packages pub publish` in the package folder. Assuming you have done all of the earlier steps, this should be just a matter of hitting the `y` key and publishing.
 
