@@ -1,4 +1,6 @@
-# mobx.dart
+Language: [English](README.md) | [Português](../translation/pt-BR/README.md)
+
+# mobx.dart en
 <a href="https://flutter.dev/docs/development/packages-and-plugins/favorites">
 <img height="128" src="https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/flutter-favorite.png">
 </a>
