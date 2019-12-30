@@ -149,6 +149,19 @@ const list = [
     message: `On Professional projects, MobX helps me manage hundreds of forms and thousands of fields with transparency.
 When working on Generative Art, it helps me create highly configurable widgets without complexity. 
 MobX supports me on all of my projects.`
+  },
+  {
+    author: 'Jacob Moura',
+    twitter: 'https://twitter.com/jacob_moura',
+    title:
+      'Founded the Brazilian community Flutterando. Creator of bloc_pattern, Slidy and flutter_modular packages.',
+    photoUrl:
+      'https://pbs.twimg.com/profile_images/1207420946056990720/77G9XtUp_400x400.jpg',
+    message: `MobX feels so robust and leverages the Dart language very well.
+
+Brazil's community was previously attached to BLoC. With MobX, they have found a great replacement.
+
+Several people here in Brazil are building Flutter apps quickly, thanks to MobX.`
   }
 ];
 
