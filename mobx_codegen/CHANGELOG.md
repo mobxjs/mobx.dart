@@ -1,8 +1,13 @@
-## 0.3.10+1 - 0.3.12
+## 0.3.12
+
+- Removed the experimental use of `@store` annotation. It fails for some cases and has now been removed. We will explore
+  other use cases with this annotation in future PRs.
+- Package updates
+
+## 0.3.10+1 - 0.3.11
 
 - Package updates
 - Upgraded dependency version for the `analyzer` package
-- Updated version on mobx_codegen.dart
 
 ## 0.3.9+1 - 0.3.10
 

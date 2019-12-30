@@ -9,10 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/doczrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/doczrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/components/PubBadge.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/components/PubBadge.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,7 +235,7 @@
       <workItem from="1577381913648" duration="7451000" />
       <workItem from="1577469399206" duration="1984000" />
       <workItem from="1577512880162" duration="3000" />
-      <workItem from="1577590624628" duration="24662000" />
+      <workItem from="1577590624628" duration="25027000" />
     </task>
     <task id="LOCAL-00001" summary="adding documentation to the public methods...WIP">
       <created>1573311043900</created>
@@ -359,7 +356,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577644106355</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="changelog updates">
+      <created>1577677131217</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1577677131217</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,7 +425,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="updated docs for release to include the npm script" />
     <MESSAGE value="update docs" />
     <MESSAGE value="updated changelogs" />
     <MESSAGE value="fixing lint errors" />
@@ -446,7 +449,8 @@
     <MESSAGE value="package upgrades" />
     <MESSAGE value="better fonts :-)" />
     <MESSAGE value="style updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="style updates" />
+    <MESSAGE value="changelog updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="changelog updates" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -473,20 +477,20 @@
     <state x="413" y="-803" key="#tests_in_mobx_codegen/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576165270995" />
     <state x="713" y="250" key="#xdebugger.evaluate" timestamp="1569763014444" />
     <state x="713" y="250" key="#xdebugger.evaluate/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1577644106075">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1577677131040">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1577591843148" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311043628" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577644106075" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577677131040" />
     <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="100" y="123" width="1480" height="827" key="DiffContextDialog" timestamp="1577676658962">
+    <state x="100" y="123" width="1480" height="827" key="DiffContextDialog" timestamp="1577677282325">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576820922025" />
-    <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577676658962" />
+    <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577677282325" />
     <state x="446" y="343" key="EditFileWatcherDialog" timestamp="1576815875205">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
