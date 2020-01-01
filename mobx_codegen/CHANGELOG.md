@@ -1,8 +1,9 @@
-## 0.3.12
+## 0.3.12 - 0.3.12+1
 
 - Removed the experimental use of `@store` annotation. It fails for some cases and has now been removed. We will explore
   other use cases with this annotation in future PRs.
 - Package updates
+- Added the Flutter Favorite logo
 
 ## 0.3.10+1 - 0.3.11
 
