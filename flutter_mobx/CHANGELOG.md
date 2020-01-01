@@ -1,4 +1,4 @@
-## 0.3.5
+## 0.3.5 - 0.3.6
 
 - Updated `mobx` dependency version to **0.4.0** in `flutter_mobx` `pubspec.yaml`
 - Improved naming of `Observer` in debug-mode with the correct line in StackTrace.

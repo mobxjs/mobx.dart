@@ -5,4 +5,4 @@ library flutter_mobx;
 export 'package:flutter_mobx/src/observer.dart';
 
 /// The version as per `pubspec.yaml`
-const version = '0.3.5';
+const version = '0.3.6';

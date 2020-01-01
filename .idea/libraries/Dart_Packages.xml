@@ -387,7 +387,6 @@
         <entry key="mobx">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../sdks/flutter/.pub-cache/hosted/pub.dartlang.org/mobx-0.3.9+1/lib" />
               <option value="$PROJECT_DIR$/../sdks/flutter/.pub-cache/hosted/pub.dartlang.org/mobx-0.4.0+1/lib" />
             </list>
           </value>
@@ -825,7 +824,6 @@
       <root url="file://$PROJECT_DIR$/../sdks/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.1.7/lib" />
       <root url="file://$PROJECT_DIR$/../sdks/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.1.8/lib" />
       <root url="file://$PROJECT_DIR$/../sdks/flutter/.pub-cache/hosted/pub.dartlang.org/mime-0.9.6+3/lib" />
-      <root url="file://$PROJECT_DIR$/../sdks/flutter/.pub-cache/hosted/pub.dartlang.org/mobx-0.3.9+1/lib" />
       <root url="file://$PROJECT_DIR$/../sdks/flutter/.pub-cache/hosted/pub.dartlang.org/mobx-0.4.0+1/lib" />
       <root url="file://$PROJECT_DIR$/../sdks/flutter/.pub-cache/hosted/pub.dartlang.org/mockito-4.1.1/lib" />
       <root url="file://$PROJECT_DIR$/../sdks/flutter/.pub-cache/hosted/pub.dartlang.org/multi_server_socket-1.0.2/lib" />
