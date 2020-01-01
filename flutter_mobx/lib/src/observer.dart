@@ -1,7 +1,16 @@
 // ignore_for_file:implementation_imports
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core.dart' show ReactionImpl;
+
+/// `true` if a stack frame indicating where an [Observer] was created should be
+/// included in its name. This is useful during debugging to identify the source
+/// of warnings or errors.
+///
+/// Note that stack frames are only included in debug builds.
+bool debugAddStackTraceInObserverName = true;
 
 /// A [StatelessObserverWidget] that delegate its [build] method to [builder].
 ///
@@ -13,15 +22,60 @@ class Observer extends StatelessObserverWidget
     implements
         Builder {
   // ignore: prefer_const_constructors_in_immutables
-  Observer({Key key, @required this.builder})
+  Observer({Key key, @required this.builder, String name})
       : assert(builder != null),
-        super(key: key);
+        debugConstructingStackFrame = debugFindConstructingStackFrame(),
+        super(key: key, name: name);
 
   @override
   final WidgetBuilder builder;
 
+  /// The stack frame pointing to the source that constructed this instance.
+  final String debugConstructingStackFrame;
+
+  @override
+  String getName() =>
+      super.getName() +
+      (debugConstructingStackFrame != null
+          ? '\n$debugConstructingStackFrame'
+          : '');
+
   @override
   Widget build(BuildContext context) => builder(context);
+
+  /// Matches constructor stack frames, in both VM and web environments.
+  static final _constructorStackFramePattern = RegExp(r'\bnew\b');
+
+  /// Finds the first non-constructor frame in the stack trace.
+  ///
+  /// [stackTrace] defaults to [StackTrace.current].
+  @visibleForTesting
+  static String debugFindConstructingStackFrame([StackTrace stackTrace]) {
+    String stackFrame;
+
+    assert(() {
+      if (debugAddStackTraceInObserverName) {
+        final stackTraceString = (stackTrace ?? StackTrace.current).toString();
+        stackFrame = LineSplitter.split(stackTraceString)
+            // We are skipping frames representing:
+            // 1. The anonymous function in the assert
+            // 2. The debugFindConstructingStackFrame method
+            // 3. The constructor invoking debugFindConstructingStackFrame
+            //
+            // The 4th frame is either user source (which is what we want), or
+            // an Observer subclass' constructor (which we skip past with the
+            // regex)
+            .skip(3)
+            // Search for the first non-constructor frame
+            .firstWhere(
+                (frame) => !_constructorStackFramePattern.hasMatch(frame),
+                orElse: () => null);
+      }
+      return true;
+    }());
+
+    return stackFrame;
+  }
 }
 
 /// A [StatelessWidget] that rebuilds when an [Observable] used inside [build]
@@ -44,7 +98,7 @@ abstract class StatelessObserverWidget extends StatelessWidget
   final ReactiveContext _context;
 
   @override
-  String getName() => _name ?? super.getName();
+  String getName() => _name ?? '$this';
 
   @override
   ReactiveContext getContext() => _context ?? super.getContext();
@@ -83,7 +137,7 @@ abstract class StatefulObserverWidget extends StatefulWidget
   final ReactiveContext _context;
 
   @override
-  String getName() => _name ?? super.getName();
+  String getName() => _name ?? '$this';
 
   @override
   ReactiveContext getContext() => _context ?? super.getContext();
@@ -114,22 +168,7 @@ class StatefulObserverElement extends StatefulElement
 /// debug-time hint to let you know that you are not observing any observables.
 mixin ObserverWidgetMixin on Widget {
   /// An identifiable name that can be overriden for debugging.
-  ///
-  /// Defaults to `widget.toString()`, and if in debug mode, a part of the
-  /// stacktrace is also added.
-  String getName() {
-    String name;
-
-    assert(() {
-      if (debugAddStackTraceInObserverName) {
-        name = '$this\n${StackTrace.current.toString().split('\n')[3]}';
-      }
-      return true;
-    }());
-
-    // this will be applicable for release builds where there are no asserts
-    return name ?? '$this';
-  }
+  String getName();
 
   /// The context within which its reaction should be run. It is the
   /// [mainContext] in most cases.
@@ -209,8 +248,3 @@ mixin ObserverElementMixin on ComponentElement {
     super.unmount();
   }
 }
-
-/// `true` if the StackTrace be included in the name of the Observer. This is
-/// useful during debugging to identify the location where the exception is
-/// thrown.
-bool debugAddStackTraceInObserverName = true;
