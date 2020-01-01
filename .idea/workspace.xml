@@ -9,7 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/guides/build-output.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/guides/build-output.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/community.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/community.mdx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +237,7 @@
       <workItem from="1577512880162" duration="3000" />
       <workItem from="1577590624628" duration="31377000" />
       <workItem from="1577728718579" duration="1852000" />
-      <workItem from="1577768322052" duration="2704000" />
+      <workItem from="1577768322052" duration="2770000" />
     </task>
     <task id="LOCAL-00001" summary="adding documentation to the public methods...WIP">
       <created>1573311043900</created>
@@ -407,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577860971946</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="removing unneeded sections">
+      <created>1577861224807</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1577861224807</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,7 +476,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="using the new ToggleButtons in 1.9" />
     <MESSAGE value="change: refactoring" />
     <MESSAGE value="change: package updates and the pages are working now. Need to fix formatting and syntax-highlighting of code blocks" />
     <MESSAGE value="change: toString override for MobXException" />
@@ -494,7 +500,8 @@
     <MESSAGE value="doc updates" />
     <MESSAGE value="added testimonial from Jacob" />
     <MESSAGE value="adding the generative logo" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding the generative logo" />
+    <MESSAGE value="removing unneeded sections" />
+    <option name="LAST_COMMIT_MESSAGE" value="removing unneeded sections" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -521,12 +528,12 @@
     <state x="413" y="-803" key="#tests_in_mobx_codegen/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576165270995" />
     <state x="713" y="250" key="#xdebugger.evaluate" timestamp="1569763014444" />
     <state x="713" y="250" key="#xdebugger.evaluate/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1577860971634">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1577861224682">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1577591843148" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311043628" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577860971634" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577861224682" />
     <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
@@ -589,11 +596,11 @@
     <state x="334" y="187" key="SettingsEditor/1920.1080" timestamp="1569763014444" />
     <state x="334" y="187" key="SettingsEditor/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state x="334" y="187" key="SettingsEditor/3360.2100" timestamp="1569763014444" />
-    <state width="515" height="445" key="SwitcherDM" timestamp="1577727613670">
+    <state width="515" height="445" key="SwitcherDM" timestamp="1577861270295">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
-    <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577727613670" />
+    <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577861270295" />
     <state width="515" height="445" key="SwitcherDM/3360.2100" timestamp="1569763014444" />
     <state x="602" y="261" key="VCS.ChangeListViewerDialog" timestamp="1569763014444" />
     <state x="602" y="261" key="VCS.ChangeListViewerDialog/3360.2100" timestamp="1569763014444" />
@@ -602,12 +609,12 @@
     </state>
     <state x="692" y="461" key="VCS.ChangelistChooser/0.23.1680.1027@0.23.1680.1027" timestamp="1570104065472" />
     <state x="524" y="262" key="Vcs.Push.Dialog" timestamp="1569763014444" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1577860973989">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1577861226395">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1577591905835" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577860973989" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577861226395" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" timestamp="1569763014444" />
     <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1569763014444" />
