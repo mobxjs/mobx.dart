@@ -1,3 +1,8 @@
+## 0.3.13
+
+- Fixes the extraction of generic return-types which have nested generic type arguments, eg: `Future<List<User>>`
+- Also fixes the issue reported in #367
+
 ## 0.3.12 - 0.3.12+1
 
 - Removed the experimental use of `@store` annotation. It fails for some cases and has now been removed. We will explore
