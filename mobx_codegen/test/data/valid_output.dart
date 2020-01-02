@@ -107,6 +107,23 @@ mixin _$User on UserBase, Store {
     }, _$callback2Atom, name: '${_$callback2Atom.name}_set');
   }
 
+  final _$_testUsersAtom = Atom(name: 'UserBase._testUsers');
+
+  @override
+  List<User> get _testUsers {
+    _$_testUsersAtom.context.enforceReadPolicy(_$_testUsersAtom);
+    _$_testUsersAtom.reportObserved();
+    return super._testUsers;
+  }
+
+  @override
+  set _testUsers(List<User> value) {
+    _$_testUsersAtom.context.conditionallyRunInAction(() {
+      super._testUsers = value;
+      _$_testUsersAtom.reportChanged();
+    }, _$_testUsersAtom, name: '${_$_testUsersAtom.name}_set');
+  }
+
   @override
   ObservableFuture<String> foobar() {
     final _$future = super.foobar();

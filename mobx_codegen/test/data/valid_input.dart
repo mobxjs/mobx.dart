@@ -33,6 +33,9 @@ abstract class UserBase with Store {
   @observable
   VoidCallback callback2;
 
+  @observable
+  List<User> _testUsers = <User>[];
+
   @computed
   String get fullName => '$firstName $middleName $lastName';
 

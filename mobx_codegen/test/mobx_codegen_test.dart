@@ -30,8 +30,8 @@ void main() {
       expect(await generate(source), isEmpty);
     });
 
-    test('generates for a class mixing Store', () {
-      compareFiles('./data/valid_input.dart', './data/valid_output.dart');
+    test('generates for a class mixing Store', () async {
+      await compareFiles('./data/valid_input.dart', './data/valid_output.dart');
     });
 
     createTests([

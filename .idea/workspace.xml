@@ -8,17 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/async_action.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/async_action.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/type_names.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/type_names.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/valid_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/valid_input.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/valid_output.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/valid_output.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobx_codegen/test/test_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/test_utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/form/form_store.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_store.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/hackernews/news_store.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +119,7 @@
       <command value="pub:get:mobx_codegen" />
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.tests in mobx_codegen">
+  <component name="RunManager" selected="Dart Test.generates for a class mixing Store in mobx_codegen_test.dart">
     <configuration name="generates for a class mixing Store in mobx_codegen_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" />
       <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
@@ -263,7 +257,7 @@
       <workItem from="1577768322052" duration="3419000" />
       <workItem from="1577872521239" duration="1191000" />
       <workItem from="1577939594973" duration="1208000" />
-      <workItem from="1577963190690" duration="8468000" />
+      <workItem from="1577963190690" duration="9303000" />
     </task>
     <task id="LOCAL-00001" summary="adding documentation to the public methods...WIP">
       <created>1573311043900</created>
@@ -468,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577894770455</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix for the return-type when it is generic with type-arguments">
+      <created>1578007098596</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1578007098596</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +531,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="change: adding toString to MobXException" />
     <MESSAGE value="change: using discord for chat" />
     <MESSAGE value="adding documentation to the public methods...WIP" />
     <MESSAGE value="cached output of vscode extension to avoid errors on CI" />
@@ -555,7 +555,8 @@
     <MESSAGE value="removing link to logo" />
     <MESSAGE value="publishing flutter_mobx" />
     <MESSAGE value="adding flutter-fav logo to mobx_codegen" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding flutter-fav logo to mobx_codegen" />
+    <MESSAGE value="fix for the return-type when it is generic with type-arguments" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix for the return-type when it is generic with type-arguments" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -585,12 +586,12 @@
     </state>
     <state x="1118" y="404" key="#xdebugger.evaluate/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577977075071" />
     <state x="713" y="250" key="#xdebugger.evaluate/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1577894770324">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1578007098426">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1577591843148" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311043628" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577894770324" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007098426" />
     <state x="351" y="147" key="CommitChangelistDialog2/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint" timestamp="1569763014444" />
     <state width="444" height="466" key="DebuggerActiveHint/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
@@ -604,54 +605,54 @@
     </state>
     <state x="446" y="343" key="EditFileWatcherDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576815875205" />
     <state x="446" y="343" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577761297729" />
-    <state width="1638" height="345" key="GridCell.Tab.0.bottom" timestamp="1578006894953">
+    <state width="1638" height="345" key="GridCell.Tab.0.bottom" timestamp="1578007759931">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1638" height="278" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1577967010962" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1638" height="345" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578006894953" />
+    <state width="1638" height="345" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007759931" />
     <state width="1189" height="333" key="GridCell.Tab.0.bottom/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.bottom/3360.2100" timestamp="1569763014444" />
-    <state width="1638" height="345" key="GridCell.Tab.0.center" timestamp="1578006894952">
+    <state width="1638" height="345" key="GridCell.Tab.0.center" timestamp="1578007759930">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1638" height="278" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1577967010961" />
     <state width="1878" height="288" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795303" />
-    <state width="1638" height="345" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578006894952" />
+    <state width="1638" height="345" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007759930" />
     <state width="1189" height="333" key="GridCell.Tab.0.center/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.center/3360.2100" timestamp="1569763014444" />
-    <state width="1638" height="345" key="GridCell.Tab.0.left" timestamp="1578006894952">
+    <state width="1638" height="345" key="GridCell.Tab.0.left" timestamp="1578007759929">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1638" height="278" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1577967010961" />
     <state width="1878" height="288" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795302" />
-    <state width="1638" height="345" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578006894952" />
+    <state width="1638" height="345" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007759929" />
     <state width="1189" height="333" key="GridCell.Tab.0.left/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.left/3360.2100" timestamp="1569763014444" />
-    <state width="1638" height="345" key="GridCell.Tab.0.right" timestamp="1578006894953">
+    <state width="1638" height="345" key="GridCell.Tab.0.right" timestamp="1578007759930">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1638" height="278" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1577967010962" />
     <state width="1878" height="288" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1638" height="345" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578006894953" />
+    <state width="1638" height="345" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007759930" />
     <state width="1189" height="333" key="GridCell.Tab.0.right/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="1308" height="312" key="GridCell.Tab.0.right/3360.2100" timestamp="1569763014444" />
-    <state width="1638" height="345" key="GridCell.Tab.1.bottom" timestamp="1578006894955">
+    <state width="1638" height="345" key="GridCell.Tab.1.bottom" timestamp="1578007759879">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="345" key="GridCell.Tab.1.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578006894955" />
-    <state width="1638" height="345" key="GridCell.Tab.1.center" timestamp="1578006894954">
+    <state width="1638" height="345" key="GridCell.Tab.1.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007759879" />
+    <state width="1638" height="345" key="GridCell.Tab.1.center" timestamp="1578007759878">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="345" key="GridCell.Tab.1.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578006894954" />
-    <state width="1638" height="345" key="GridCell.Tab.1.left" timestamp="1578006894953">
+    <state width="1638" height="345" key="GridCell.Tab.1.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007759878" />
+    <state width="1638" height="345" key="GridCell.Tab.1.left" timestamp="1578007759877">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="345" key="GridCell.Tab.1.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578006894953" />
-    <state width="1638" height="345" key="GridCell.Tab.1.right" timestamp="1578006894954">
+    <state width="1638" height="345" key="GridCell.Tab.1.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007759877" />
+    <state width="1638" height="345" key="GridCell.Tab.1.right" timestamp="1578007759879">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="345" key="GridCell.Tab.1.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578006894954" />
+    <state width="1638" height="345" key="GridCell.Tab.1.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007759879" />
     <state width="1638" height="345" key="GridCell.Tab.2.bottom" timestamp="1577977142342">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -698,12 +699,12 @@
     </state>
     <state x="692" y="461" key="VCS.ChangelistChooser/0.23.1680.1027@0.23.1680.1027" timestamp="1570104065472" />
     <state x="524" y="262" key="Vcs.Push.Dialog" timestamp="1569763014444" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1577894794656">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1578007101436">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1577591905835" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577894794656" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578007101436" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/3360.2100" timestamp="1569763014444" />
     <state x="524" y="262" key="Vcs.Push.Dialog/1920.1080/3840.2160/3360.2100" timestamp="1569763014444" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">

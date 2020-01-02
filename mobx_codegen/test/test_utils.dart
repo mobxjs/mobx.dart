@@ -73,8 +73,8 @@ Future<String> readFile(String filename) {
 void createTests(List<TestInfo> tests) {
   // ignore: avoid_function_literals_in_foreach_calls
   tests.forEach((t) {
-    test(t.description, () {
-      compareFiles(t.source, t.output);
+    test(t.description, () async {
+      await compareFiles(t.source, t.output);
     });
   });
 }
