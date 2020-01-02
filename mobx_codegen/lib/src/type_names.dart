@@ -64,9 +64,7 @@ class LibraryScopedNameFinder {
   List<String> findReturnTypeArgumentTypeNames(ExecutableElement executable) {
     final returnType = executable.returnType;
     return returnType is ParameterizedType
-        ? returnType.typeArguments
-            .map((type) => _getTypeName(type, includeTypeArguments: false))
-            .toList()
+        ? returnType.typeArguments.map(_getTypeName).toList()
         : [];
   }
 
@@ -75,19 +73,11 @@ class LibraryScopedNameFinder {
     return _getTypeName(typeParameter.bound);
   }
 
-  /// Calculates a type name, including its type arguments if
-  /// [includeTypeArguments] is `true`.
+  /// Calculates a type name, including its type arguments
   ///
   /// The returned string will include import prefixes on all applicable types.
-  String _getTypeName(DartType type, {bool includeTypeArguments = false}) {
+  String _getTypeName(DartType type) {
     final sb = StringBuffer()..write(_findUnparameterizedTypeName(type));
-
-    if (type is ParameterizedType && includeTypeArguments) {
-      final typeArgNames = type.typeArguments
-          .map((typeArg) => _getTypeName(typeArg, includeTypeArguments: true))
-          .toList();
-      sb.write(SurroundedCommaList('<', '>', typeArgNames));
-    }
 
     return sb.toString();
   }
