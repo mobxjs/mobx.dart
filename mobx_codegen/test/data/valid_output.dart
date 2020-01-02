@@ -125,6 +125,13 @@ mixin _$User on UserBase, Store {
     return ObservableStream<String>(_$stream);
   }
 
+  final _$fetchUsersAsyncAction = AsyncAction('fetchUsers');
+
+  @override
+  Future<List<User>> fetchUsers() {
+    return _$fetchUsersAsyncAction.run(() => super.fetchUsers());
+  }
+
   final _$setAsyncFirstNameAsyncAction = AsyncAction('setAsyncFirstName');
 
   @override

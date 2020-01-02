@@ -48,7 +48,7 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
       ActionController(name: '_HackerNewsStore');
 
   @override
-  Future fetchLatest() {
+  Future<dynamic> fetchLatest() {
     final _$actionInfo = _$_HackerNewsStoreActionController.startAction();
     try {
       return super.fetchLatest();
@@ -58,7 +58,7 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
   }
 
   @override
-  Future fetchTop() {
+  Future<dynamic> fetchTop() {
     final _$actionInfo = _$_HackerNewsStoreActionController.startAction();
     try {
       return super.fetchTop();

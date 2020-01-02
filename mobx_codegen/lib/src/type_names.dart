@@ -65,7 +65,7 @@ class LibraryScopedNameFinder {
     final returnType = executable.returnType;
     return returnType is ParameterizedType
         ? returnType.typeArguments
-            .map((type) => _getTypeName(type, includeTypeArguments: true))
+            .map((type) => _getTypeName(type, includeTypeArguments: false))
             .toList()
         : [];
   }

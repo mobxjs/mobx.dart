@@ -18,10 +18,10 @@ class AsyncActionTemplate {
 
   @override
   String toString() => """
-    final $_actionField = AsyncAction('${method.name}');
+  final $_actionField = AsyncAction('${method.name}');
 
-    @override
-    $_futureType${method.returnTypeArgs} ${method.name}${method.typeParams}(${method.params}) {
-      return $_wrappedMethodCall;
-    }""";
+  @override
+  $_futureType${method.returnTypeArgs} ${method.name}${method.typeParams}(${method.params}) {
+    return $_wrappedMethodCall;
+  }""";
 }

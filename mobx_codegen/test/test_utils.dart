@@ -73,12 +73,16 @@ Future<String> readFile(String filename) {
 void createTests(List<TestInfo> tests) {
   // ignore: avoid_function_literals_in_foreach_calls
   tests.forEach((t) {
-    test(t.description, () async {
-      final source = await readFile(t.source);
-      final generatedOutput = await generate(source);
-      final output = await readFile(t.output);
-
-      expect(generatedOutput.trim(), endsWith(output.trim()));
+    test(t.description, () {
+      compareFiles(t.source, t.output);
     });
   });
+}
+
+Future<void> compareFiles(String sourceFile, String outputFile) async {
+  final source = await readFile(sourceFile);
+  final generatedOutput = await generate(source);
+  final output = await readFile(outputFile);
+
+  expect(generatedOutput.trim(), endsWith(output.trim()));
 }

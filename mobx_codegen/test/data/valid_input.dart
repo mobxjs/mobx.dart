@@ -37,6 +37,9 @@ abstract class UserBase with Store {
   String get fullName => '$firstName $middleName $lastName';
 
   @action
+  Future<List<User>> fetchUsers() async => Future.value([]);
+
+  @action
   void updateNames({@required String firstName, String lastName}) {
     if (firstName != null) this.firstName = firstName;
     if (lastName != null) this.lastName = firstName;
