@@ -152,7 +152,7 @@ No exemplo acima, **`fullName`** é automaticamente sincronizado quando há uma 
 ### Actions
 
 Actions deve ser a forma como mudamos os nossos observables. Em vez de modifica-los diretamente, as actions
-adiciona mais `significado semântico` nas mudanças. Por exemplo, em vez de simplesmente chamar `value++` apenas, seria melhor chamar um Action `increment()` pois carrega mais significado. Além disso, as ações também agrupam todas as notificações e garantem que as alterações sejam notificadas somente após a conclusão. Assim, os observadores são notificados somente após a conclusão atômica da ação.
+adiciona mais `significado semântico` nas mudanças. Por exemplo, em vez de simplesmente chamar `value++` apenas, seria melhor chamar um Action `increment()` pois carrega mais significado. Além disso, actions Além disso, as ações também agrupam todas as notificações e garantem que as alterações sejam notificadas somente após a conclusão. Assim, os observadores são notificados somente após a conclusão atômica da ação.
 
 Observe que as ações também podem ser aninhadas; nesse caso, as notificações são enviadas quando a ação mais avançada é concluída.
 
@@ -208,7 +208,7 @@ Future<void> loadStuff() async {
 Reactions completa a _Tríade do MobX_ (**observables**, **actions** and **reactions**). 
 Eles são os observadores do nosso sistema reativo e notificam qualquer observable rastreado que tenha mudado. Reaction tem alguns métodos para seu uso,conforme será listado abaixo, Todos eles retornam a `ReactionDisposer`, uma função que pode ser chamada para eliminar a reação.
 
-Uma das melhores caracteristicas das reactions é que ele _rastreia automaticamente_ qualquer observável sem precisar declará nada. Apenas ter um observável dentro do escopo de uma Reaction e o suficiente para rastrea-lo.
+Uma das melhores caracteristicas das reactions é que ele _rastreia automaticamente_ qualquer observável sem precisar declarar nada. Apenas ter um observável dentro do escopo de uma Reaction é o suficiente para rastreá-lo.
 
 > O código que você escreve com o MobX parece literalmente sem cerimônia!
 
