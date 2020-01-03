@@ -33,8 +33,14 @@ abstract class UserBase with Store {
   @observable
   VoidCallback callback2;
 
+  @observable
+  List<User> _testUsers = <User>[];
+
   @computed
   String get fullName => '$firstName $middleName $lastName';
+
+  @action
+  Future<List<User>> fetchUsers() async => Future.value([]);
 
   @action
   void updateNames({@required String firstName, String lastName}) {
