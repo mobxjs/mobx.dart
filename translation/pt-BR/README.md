@@ -38,7 +38,7 @@ e as (**reactions**) os rastreia automaticamente para você. quando o _observabl
 muda, todas as _reactions_ são chamadas. O interessante é que as _reactions_ podem ser qualquer coisa, desde um simples log do console, uma chamada de rede ou até mesmo rendenrizar a interface do usuário.
 
 > MobX tem sido uma uma biblioteca muito eficiente para o javascript
-> esse port visa trazer essa mesma produtividade para os app baseados em Dart
+> Esse port visa trazer essa mesma produtividade para os app baseados em Dart
 
 ### Patriocinadores
 
@@ -113,7 +113,7 @@ abstract class CounterBase with Store {
 }
 ```
 
-Agora, basta usar a annotation @Observable em uma propriedade da Classe, e sim! temos outros metadados para serem usados como cabeçalho neste boilerplate, porém eles são fixos e funcionam em qualquer tipo de classe. A medida que for criando classes mais complexa, esse boilerplate parecerá não existir, e você dará mais foco no escopo de sua regra.
+Agora, basta usar a annotation @observable em uma propriedade da Classe, e sim! temos outros metadados para serem usados como cabeçalho neste boilerplate, porém eles são fixos e funcionam em qualquer tipo de classe. A medida que for criando classes mais complexa, esse boilerplate parecerá não existir, e você dará mais foco no escopo de sua regra.
 
 **Nota**: Essas Annotations estão disponíveis no pacote **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)**.
 
@@ -186,7 +186,7 @@ abstract class CounterBase with Store {
 
 #### Asynchronous Actions
 
-MobX.dart já lida automaticamente com métodos asincrono sem a necessidade de alguma outra ferramenta. [`runInAction`](https://mobx.pub/api/action#runinaction).
+MobX.dart já lida automaticamente com métodos assíncronos sem a necessidade de alguma outra ferramenta. [`runInAction`](https://mobx.pub/api/action#runinaction).
 
 ```dart
 @observable
