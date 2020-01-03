@@ -113,9 +113,9 @@ abstract class CounterBase with Store {
 }
 ```
 
-Agora, basta usar a annotation @Obsevable em uma propriedade da Classe, e sim! temos outros metadados para serem usados como cabeçalho neste boilerplate, porém eles são fixos e funcionam em qualquer tipo de classe. A medida que for criando classes mais complexa, esse boilerplate parecerar não existir, e você dará mais foco no escopo de sua regra.
+Agora, basta usar a annotation @Observable em uma propriedade da Classe, e sim! temos outros metadados para serem usados como cabeçalho neste boilerplate, porém eles são fixos e funcionam em qualquer tipo de classe. A medida que for criando classes mais complexa, esse boilerplate parecerá não existir, e você dará mais foco no escopo de sua regra.
 
-**Nota**: Essas Annotations estão disponíveis no packote **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)**.
+**Nota**: Essas Annotations estão disponíveis no pacote **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)**.
 
 ### Computed Observables
 
