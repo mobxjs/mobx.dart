@@ -77,15 +77,6 @@ class LibraryScopedNameFinder {
   ///
   /// The returned string will include import prefixes on all applicable types.
   String _getTypeName(DartType type) {
-    final sb = StringBuffer()..write(_findUnparameterizedTypeName(type));
-
-    return sb.toString();
-  }
-
-  /// Finds the name of [type], without any type parameters.
-  ///
-  /// The returned string will include an import prefix if necessary.
-  String _findUnparameterizedTypeName(DartType type) {
     final typeElement = type.element;
     if (type is FunctionType) {
       // A type with a typedef should be written as is
