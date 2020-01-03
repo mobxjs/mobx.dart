@@ -152,7 +152,7 @@ No exemplo acima, **`fullName`** é automaticamente sincronizado quando há uma 
 ### Actions
 
 Actions deve ser a forma como mudamos os nossos observables. Em vez de modifica-los diretamente, as actions
-adiciona mais `significado semântico` nas mudanças. Por exemplo, em vez de simplesmente chamar `value++` apenas, seria melhor chamar um Action `increment()` pois carrega mais significado. Além disso, actions Além disso, as ações também agrupam todas as notificações e garantem que as alterações sejam notificadas somente após a conclusão. Assim, os observadores são notificados somente após a conclusão atômica da ação.
+adiciona mais `significado semântico` nas mudanças. Por exemplo, em vez de simplesmente chamar `value++` apenas, seria melhor chamar um Action `increment()` pois carrega mais significado. Além disso, as ações também agrupam todas as notificações e garantem que as alterações sejam notificadas somente após a conclusão. Assim, os observadores são notificados somente após a conclusão atômica da ação.
 
 Observe que as ações também podem ser aninhadas; nesse caso, as notificações são enviadas quando a ação mais avançada é concluída.
 
