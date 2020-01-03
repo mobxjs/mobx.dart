@@ -35,10 +35,10 @@ O MobX é uma biblioteca de gerenciamento de estado que simplifica a conexão do
 
 Não trabalhamos com "magia", apenas temos objetos inteligentes que se preparam para serem consumidos (**observables**),
 e as (**reactions**) os rastreia automaticamente para você. quando o _observables_
-muda, todas as _reactions_ são chamadas. O interessante é que as _reactions_ podem ser qualquer coisa, desde um simples log do console, uma chamada de rede ou até mesmo rendenrizar a interface do usuário.
+muda, todas as _reactions_ são chamadas. O interessante é que as _reactions_ podem ser qualquer coisa, desde um simples log do console, uma chamada de rede ou até mesmo renderizar a interface do usuário.
 
 > MobX tem sido uma uma biblioteca muito eficiente para o javascript
-> esse port visa trazer essa mesma produtividade para os app baseados em Dart
+> esse porte visa trazer essa mesma produtividade para os apps baseados em Dart
 
 ### Patriocinadores
 
@@ -113,9 +113,9 @@ abstract class CounterBase with Store {
 }
 ```
 
-Agora, basta usar a annotation @Obsevable em uma propriedade da Classe, e sim! temos outros metadados para serem usados como cabeçalho neste boilerplate, porém eles são fixos e funcionam em qualquer tipo de classe. A medida que for criando classes mais complexa, esse boilerplate parecerar não existir, e você dará mais foco no escopo de sua regra.
+Agora, basta usar a annotation @Obsevable em uma propriedade da Classe, e sim! temos outros metadados para serem usados como cabeçalho neste boilerplate, porém eles são fixos e funcionam em qualquer tipo de classe. A medida que for criando classes mais complexa, esse boilerplate parecera não existir, e você dará mais foco no escopo de sua regra.
 
-**Nota**: Essas Annotations estão disponíveis no packote **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)**.
+**Nota**: Essas Anotações estão disponíveis no pacote **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)**.
 
 ### Computed Observables
 
@@ -197,18 +197,18 @@ loading = false;
 
 @action
 Future<void> loadStuff() async {
-  loading = true; //This notifies observers
+  loading = true; // Isso notifica os observadores
   stuff = await fetchStuff();
-  loading = false; //This also notifies observers
+  loading = false; //Isso também notifica os observadores
 }
 ```
 
 ### Reactions
 
 Reactions completa a _Tríade do MobX_ (**observables**, **actions** and **reactions**). 
-Eles são os observadores do nosso sistema reativo e notificam qualquer observable rastreado que tenha mudado. Reaction tem alguns métodos para seu uso,conforme será listado abaixo, Todos eles retornam a `ReactionDisposer`, uma função que pode ser chamada para eliminar a reação.
+Eles são os observadores do nosso sistema reativo e notificam qualquer observable rastreado que tenha mudado. Reaction tem alguns métodos para seu uso, conforme será listado abaixo, Todos eles retornam a `ReactionDisposer`, uma função que pode ser chamada para eliminar a reação.
 
-Uma das melhores caracteristicas das reactions é que ele _rastreia automaticamente_ qualquer observável sem precisar declará nada. Apenas ter um observável dentro do escopo de uma Reaction e o suficiente para rastrea-lo.
+Uma das melhores caracteristicas das reactions é que ele _rastreia automaticamente_ qualquer observável sem precisar declarar nada. Apenas ter um observável dentro do escopo de uma Reaction é o suficiente para rastrea-lo.
 
 > O código que você escreve com o MobX parece literalmente sem cerimônia!
 
@@ -291,7 +291,7 @@ void waitForCompletion() async {
 
 **Observer**
 
-O **Observer** é um widget (que é parte do pacote **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)**), nos prover uma observação dos observers por meio de uma função de `builder`. Toda vez que o  observables mudar, o `Observer` renderizará novamente na view.
+O **Observer** é um widget (que é parte do pacote **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)**), nos prover uma observação dos observers por meio de uma função de `builder`. Toda vez que o  observable mudar, o `Observer` renderizará novamente na view.
 
 Abaixo temos um exemplo do _Counter_ em sua totalidade.
 
