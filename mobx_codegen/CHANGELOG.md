@@ -1,3 +1,8 @@
+## 0.4.0
+
+- Upgraded our `analyzer` dependency's minimum version to **0.38.5** in order to
+  workaround a bug where collection types would resolve to dynamic
+
 ## 0.3.13
 
 - Fixes the extraction of generic return-types which have nested generic type arguments, eg: `Future<List<User>>`
