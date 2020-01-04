@@ -1,7 +1,8 @@
-## 0.4.0
+## 0.4.0 - 0.4.0+1
 
 - Upgraded our `analyzer` dependency's minimum version to **0.38.5** in order to
   workaround a bug where collection types would resolve to dynamic
+- Updated `pubspec.yaml` to not include the reference to the `@store` annotation. It has been removed.
 
 ## 0.3.13
 
