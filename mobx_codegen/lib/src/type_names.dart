@@ -96,6 +96,10 @@ class LibraryScopedNameFinder {
             type is TypeParameterType ||
             // If the type lives in this library, no prefix necessary
             typeElement.library == library) {
+      // TODO(shyndman): This ignored deprecation can be removed when we
+      // increase the analyzer dependency's lower bound to 0.39.2, and
+      // migrate to using `DartType.getDisplayString`.
+      // ignore: deprecated_member_use
       return type.displayName;
     }
 
