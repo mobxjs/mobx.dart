@@ -11,7 +11,7 @@ In this example, we will build a fun dice app. You can make the dice roll at the
 
 > See the complete code [here](https://github.com/giri-jeedigunta/dice-with-flutter-mobx).
 
-import diceJpg from './dice.jpg';
+import diceJpg from './dice.gif';
 
 <img src={diceJpg} />
 
@@ -47,11 +47,11 @@ abstract class _DiceCounter with Store {
 
 ```
 
-- In the above store `left` and `right` are the dice countes defined as observable values with `@observable` annotation and are initialised with a random number ranging from 1 - 6. 
-- The action-method roll() is used to update the dice counts defined with `@action` annotation.
-- `total` is a computed observable annotated with `@computed` this is my favourite feature in Mobx. Computed observables are in-sync everytime left or right count is updated. It is incredibly useful as I can access this value right away as part of the initial state when the instance of the store is created.
+- In the above store `left` and `right` are the dice counts defined with `@observable` annotation and are initialised with a random number ranging from 1 - 6. 
+- The action-method roll() defined with `@action` annotation is used to updates the dice counts every time user taps on the dice.
+- `total` is a computed observable annotated with `@computed` this is my favourite feature in Mobx. Computed observables are in-sync everytime left or right count is updated. It is incredibly useful as I can access this value as part of the initial state when the instance of the store is created without any 
 
-## Adding the Store
+## Connecting the Store with the View
 
 Now that the `DiceCounter` store is ready, It's time to add it to the `Widget` see the magic happen. Let's create an instance of our store:
 
@@ -64,9 +64,8 @@ import 'dice_counter.dart';
 final diceCounter = DiceCounter();
 
 ```
-## Using the store
 
-The observables and actions from the store can be accessed via newly created instace `diceCounter` along with the `Observer` widget.
+The observables and actions from the store can be accessed via newly created instace `diceCounter` along with the `Observer` widget as shown below: 
 
 ```dart
 class DiceView extends StatelessWidget {
