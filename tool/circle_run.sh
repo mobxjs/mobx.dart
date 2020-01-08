@@ -6,8 +6,12 @@ set -o xtrace
 
 cd $PACKAGE
 
+# Print the dart version, in case we need it for bug reports
+dart --version
+
 if [[ "${FLUTTER}" = true ]]
 then
+  flutter --version
   flutter packages get
   flutter analyze
   flutter test --coverage --coverage-path coverage/lcov.info
