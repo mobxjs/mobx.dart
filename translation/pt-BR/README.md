@@ -37,12 +37,12 @@ Não fazemos "mágica", apenas temos objetos inteligentes que se preparam para s
 e as (**reactions**) os rastreia automaticamente para você. quando o _observables_
 mudam, todas as _reactions_ são chamadas. O interessante é que as _reactions_ podem ser qualquer coisa, desde um simples log do console, uma chamada de rede ou até mesmo uma renderização  da interface do usuário.
 
-> MobX tem sido uma uma biblioteca muito eficiente para o javascript
+> MobX tem sido uma biblioteca muito eficiente para o javascript
 > esse porte visa trazer essa mesma produtividade para os apps baseados em Dart
 
 ### Patrocinadores
 
-Somos muito gratos aos nossos patrocinadores por nos fazer parte do programa _Open Source Software (OSS)_.
+Somos muito gratos aos nossos patrocinadores por nos tornar parte do programa _Open Source Software (OSS)_.
 
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/publicis-sapient-sponsor.png" height="64">](https://publicis.sapient.com)
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/wunderdog-sponsor.png" height="64">](https://wunderdog.fi)
@@ -151,7 +151,7 @@ No exemplo acima, **`fullName`** é sincronizado automaticamente quando há uma 
 
 ### Actions
 
-Actions é a forma como mudamos os nossos observables. Em vez de modificá-los diretamente, as actions adicionam mais `significado semântico` nas mudanças. Por exemplo, em vez de simplesmente chamar `value++` apenas, seria melhor chamar um Action `increment()` pois faz mais sentido. Além disso, as actions também agrupam todas as notificações e garantem que as alterações sejam notificadas somente após a conclusão. Assim, os observables são notificados somente após a conclusão atômica da ação.
+Actions é a forma como mudamos os nossos observables. Em vez de modificá-los diretamente, as actions adicionam mais `significado semântico` nas mudanças. Por exemplo, em vez de simplesmente chamar `value++`, seria melhor chamar um Action `increment()` pois faz mais sentido. Além disso, as actions também agrupam todas as notificações e garantem que as alterações sejam notificadas somente após a conclusão. Assim, os observables são notificados somente após a conclusão atômica da ação.
 
 Observe que as ações também podem ser aninhadas; nesse caso, as notificações são enviadas quando a ação mais avançada é concluída.
 
@@ -290,7 +290,7 @@ void waitForCompletion() async {
 
 **Observer**
 
-O **Observer** é um widget (que é parte do pacote **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)**), nos prover uma observação dos observers por meio de uma função de `builder`. Toda vez que o  observable mudar, o `Observer` renderizará novamente na view.
+O **Observer** é um widget (que é parte do pacote **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)**), e nos provê uma observação dos observers por meio de uma função de `builder`. Toda vez que o  observable mudar, o `Observer` renderizará novamente na view.
 
 Abaixo temos um exemplo do _Counter_ em sua totalidade.
 
