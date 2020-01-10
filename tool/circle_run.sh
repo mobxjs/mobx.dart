@@ -4,6 +4,9 @@ set -o errexit
 set -o nounset
 set -o xtrace
 
+# Setup PATH for this subshell
+echo "import 'dart:io'; void main() { print(Platform.version); }" >> version.dart && dart version.dart
+
 cd $PACKAGE
 
 # Print the dart version, in case we need it for bug reports

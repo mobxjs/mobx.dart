@@ -19,7 +19,7 @@ jobs:
       - run: tool/circle_run.sh
 
   build_mobx_codegen:
-    executor: dart_sdk_image
+    executor: flutter_sdk_image
     environment:
       - FLUTTER: false
       - PACKAGE: mobx_codegen
