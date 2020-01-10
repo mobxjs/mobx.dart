@@ -75,7 +75,7 @@ abstract class _FormStore with Store {
 
 Validations on the fields is not an explicit action that is invoked on the `FormStore`. Instead, it is considered a side-effect of a change in one of the fields. In MobX, we can model such side-effects with **`reactions`**.
 
-Reactions come in a few flavors but we are going to focus on the aptly named [`reaction(selector, effect)`](http://localhost:3000/api/reaction#reaction) that takes in two arguments. The first one is a _selector-function_ that monitors the observables used within it. It is supposed to return a value that is compared with a previously returned value. When it changes, it will invoke the _effect-function_ (the second argument).
+Reactions come in a few flavors but we are going to focus on the aptly named [`reaction(selector, effect)`](/api/reaction#reaction) that takes in two arguments. The first one is a _selector-function_ that monitors the observables used within it. It is supposed to return a value that is compared with a previously returned value. When it changes, it will invoke the _effect-function_ (the second argument).
 
 For the form-validation use case, we want to monitor when any of the fields change value. At that point, we will invoke the side-effect to validate the field. This can be done with three separate reactions, one for each field. You can also observe that these functions are annotated with `@action`. This is because they are modifying the observable field `error`, of type `FormErrorState` and as a principle we never want to do any stray mutations in MobX. Hence the `@action` annotation.
 
