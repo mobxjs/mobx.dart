@@ -30,11 +30,11 @@ void main() {
       expect(await generate(source), isEmpty);
     });
 
+    test('generates for a class mixing Store', () async {
+      await compareFiles('./data/valid_input.dart', './data/valid_output.dart');
+    });
+
     createTests([
-      const TestInfo(
-          description: 'generates for a class mixing Store',
-          source: './data/valid_input.dart',
-          output: './data/valid_output.dart'),
       const TestInfo(
           description: 'invalid output is handled',
           source: './data/invalid_input.dart',

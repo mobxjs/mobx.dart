@@ -2,6 +2,7 @@ library generator_sample;
 
 import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
+//import 'package:flutter/material.dart';
 
 part 'generator_sample.g.dart';
 
@@ -33,8 +34,17 @@ abstract class UserBase with Store {
   @observable
   VoidCallback callback2;
 
+  @observable
+  List<User> _testUsers = <User>[];
+
+//  @observable
+//  List<Color> backColor = List.generate(60, (i) => Colors.transparent);
+
   @computed
   String get fullName => '$firstName $middleName $lastName';
+
+  @action
+  Future<List<User>> fetchUsers() async => Future.value([]);
 
   @action
   void updateNames({@required String firstName, String lastName}) {

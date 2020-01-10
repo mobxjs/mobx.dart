@@ -1,6 +1,7 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import styled from 'styled-components';
 import config from '../../doczrc';
+import { testimonials } from './testimonials';
 
 const primaryColor = config.themeConfig.colors.primary;
 
@@ -68,7 +69,7 @@ const Profile = styled.div`
   }
 `;
 
-export const Testimonial: FunctionComponent<Props> = ({
+const Testimonial: FunctionComponent<Props> = ({
   author,
   title,
   message,
@@ -100,62 +101,10 @@ export const Testimonial: FunctionComponent<Props> = ({
 
 const TestimonialContainer = styled.div``;
 
-const list = [
-  {
-    author: 'Remi Rousselet',
-    twitter: 'https://twitter.com/remi_rousselet',
-    title:
-      'Flutter enthusiast, creator of the flutter_hooks, provider packages.',
-    photoUrl:
-      'https://pbs.twimg.com/profile_images/1072447244719284225/AVEGksps_400x400.jpg',
-    message: "It's like BLoC, but actually works."
-  },
-
-  {
-    author: 'Sanket Sahu',
-    twitter: 'https://twitter.com/sanketsahu',
-    title:
-      'Founder of GeekyAnts • Creator of BuilderXio, NativeBaseIO & VueNativeIO • Speaker • Loves tea • Strums guitar',
-    photoUrl:
-      'https://pbs.twimg.com/profile_images/1188747996843761665/8CiUdKZW_400x400.jpg',
-    message:
-      'We at GeekyAnts have used MobX.dart in many Flutter projects. We have chosen it as the default state-management library for the internal frameworks built for Flutter.'
-  },
-
-  {
-    author: 'Chris Sells',
-    twitter: 'https://twitter.com/csells',
-    title:
-      'Google Product Manager on the Flutter Development Experience. Enjoys long walks on the beach and various technologies.',
-    photoUrl:
-      'https://pbs.twimg.com/profile_images/1660905119/vikingme128x128_400x400.jpg',
-    message: `If you haven\'t seen MobX.dart @ https://mobx.pub, check it out. In combination with Provider, it\'s PFM (Pure Flutter Magic). I use it when I build anything real. #recommended #Flutter`
-  },
-  {
-    author: 'Michael Bui',
-    twitter: 'https://twitter.com/MaikuB84',
-    title:
-      'Flutter Enthusiast and maintainer of flutter_local_notifications and flutter_appauth packages.',
-    photoUrl:
-      'https://pbs.twimg.com/profile_images/989477066566320129/zCN6USCc_400x400.jpg',
-    message: `MobX's concepts of Observables, Actions and Reactions make it intuitive to figure out how to model the state of an application. I would highly recommend it as a solution for managing the application's state.`
-  },
-  {
-    author: 'Robert Felker',
-    twitter: 'https://twitter.com/BlueAquilae',
-    title: '#Minimalism | #flutter artist | github Awesome #flutter',
-    photoUrl:
-      'https://pbs.twimg.com/profile_images/948652731115429889/sQnk1F3m_400x400.jpg',
-    message: `On Professional projects, MobX helps me manage hundreds of forms and thousands of fields with transparency.
-When working on Generative Art, it helps me create highly configurable widgets without complexity. 
-MobX supports me on all of my projects.`
-  }
-];
-
 export const TestimonialList: FunctionComponent = () => {
   return (
     <TestimonialContainer>
-      {list.map((item) => (
+      {testimonials.map((item) => (
         <Testimonial {...item} key={item.author} />
       ))}
     </TestimonialContainer>

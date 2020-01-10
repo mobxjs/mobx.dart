@@ -42,62 +42,6 @@ flutter packages pub run build_runner clean
 flutter packages pub run build_runner watch --delete-conflicting-outputs
 ```
 
-## DO NOT use import aliases inside `Store` classes
-
-Inside your `Store` files, **avoid** using types with **import aliases**. This is due to a limitation with `build_runner` that does not pick the aliases for the imports.
-
-For example, if you have a `simple_store.dart` file, where an `@observable` field _(lines 9-10)_ is using the aliased import, `build_runner` will not generate correctly and cause compile errors.
-
-```dart
-import 'package:mobx/mobx.dart';
-import 'package:example_flutter/models/event.dart' as model;
-
-part 'simple_store.g.dart';
-
-class SimpleStore = _SimpleStore with _$SimpleStore;
-
-abstract class _SimpleStore with Store {
-  @observable
-  List<model.Event> events = List();
-}
-```
-
-It's best to avoid import aliases inside the `Store` class. Possibly in a future version, this will be fixed.
-
-## Wrap `dart:ui` types to avoid code-gen issues
-
-Types from `dart:ui` are not resolved by the `source_gen` package, which is internally used by `mobx_codegen`. This causes compile issues when working with those types. But worry not, there is a workaround. If you are curious, why this glitch?, there is an esoteric reason for it:
-
-> Code-generators do not use Dart from the Flutter SDK. They use Dart from the Server SDK. The one with `dart:mirror` but no `dart:ui`. So any type from `dart:ui` won't resolve.
-
-To circumvent this issue, there is a workaround. Just wrap the `dart:ui` type with `CustomXXX` type. The classic example is when `mobx_codegen` fails for the `Color` type from `dart:ui`. We can work around this issue with the following wrapper type:
-
-```dart
-class CustomColor extends Color {
-  CustomColor(int value) : super(value);
-}
-```
-
-Yes, we need a constructor here since `Color` does not have an arg-less constructor.
-
-We can now use this type with our observable values, like below. With this change, code-gen will produce the correct code in `*.g.dart` file.
-
-```dart
-part 'color_store.g.dart';
-
-class ColorStore = _ColorStore with _$ColorStore;
-abstract class _ColorStore with Store {
-
-  @observable
-  CustomColor selectedColor;
-
-  @observable
-  ObservableList<CustomColor> palette;
-}
-```
-
-Anywhere you want to use an observable value that has a type from `dart:ui`, make sure to wrap it to avoid code-gen issues.
-
 ## Unable to run the app in iOS Simulator (Old iOS Deployment Target)
 
 It is possible that sometimes your app would simply fail to run on the simulator. You might see a weird error message like so:

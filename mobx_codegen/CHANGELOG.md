@@ -1,3 +1,21 @@
+## 0.4.0 - 0.4.0+1
+
+- Upgraded our `analyzer` dependency's minimum version to **0.38.5** in order to
+  workaround a bug where collection types would resolve to dynamic
+- Updated `pubspec.yaml` to not include the reference to the `@store` annotation. It has been removed.
+
+## 0.3.13
+
+- Fixes the extraction of generic return-types which have nested generic type arguments, eg: `Future<List<User>>`
+- Also fixes the issue reported in #367
+
+## 0.3.12 - 0.3.12+1
+
+- Removed the experimental use of `@store` annotation. It fails for some cases and has now been removed. We will explore
+  other use cases with this annotation in future PRs.
+- Package updates
+- Added the Flutter Favorite logo
+
 ## 0.3.10+1 - 0.3.11
 
 - Package updates

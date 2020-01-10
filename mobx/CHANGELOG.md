@@ -1,8 +1,9 @@
-## 0.4.0
+## 0.4.0 - 0.4.0+1
 
 - Removing the deprecated `authors` field from `pubspec.yaml`
 - Added extension methods to create an Observable{List,Set,Map,Future,Stream} from a regular List, Set, Map, Future, Stream. Thanks
   to the work done by [Jacob Moura](https://github.com/jacobaraujo7)
+- `README.md` translated to Portuguese, thanks to [Jacob Moura](https://github.com/jacobaraujo7)
 
 ## 0.3.10
 

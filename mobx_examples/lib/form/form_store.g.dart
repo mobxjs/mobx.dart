@@ -109,7 +109,7 @@ mixin _$FormStore on _FormStore, Store {
   final _$validateUsernameAsyncAction = AsyncAction('validateUsername');
 
   @override
-  Future validateUsername(String value) {
+  Future<dynamic> validateUsername(String value) {
     return _$validateUsernameAsyncAction
         .run(() => super.validateUsername(value));
   }

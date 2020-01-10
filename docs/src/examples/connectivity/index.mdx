@@ -4,6 +4,8 @@ menu: Examples
 route: /examples/connectivity
 ---
 
+import { PubBadge } from '../../components/PubBadge';
+
 # Connectivity
 
 Applications require notifying users when the state of their connection changes. One way of doing so is to make use of snackbars to inform users as shown in [this article](https://developers.google.com/web/fundamentals/instant-and-offline/offline-ux#inform_users_of_their_current_state_and_change_of_state).
@@ -11,7 +13,7 @@ In this example, we see how this can be accomplished by making use of reactions.
 
 ## Install the connectivity plugin
 
-The first step is to install the [`connectivity` plugin](https://pub.dev/packages/connectivity) available from [pub](https://pub.dev). Your application's `pubspec.yaml` file will look similar to the following
+The first step is to install the `connectivity` plugin: <PubBadge name="connectivity" />. Your application's `pubspec.yaml` file will look similar to the following
 
 ```
 dependencies:
