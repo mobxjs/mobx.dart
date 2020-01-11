@@ -15,6 +15,10 @@ dependencies:
   path: ^1.6.2
   source_gen: ^0.9.4
 
+dependency_overrides:
+  mobx:
+    path: ../mobx
+
 dev_dependencies:
 #  flutter:
 #    sdk: flutter

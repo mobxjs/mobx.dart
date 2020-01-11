@@ -4,7 +4,7 @@ import 'package:build/build.dart';
 import 'package:mobx/mobx.dart';
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
-    show ComputedMethod, MakeAction, MakeObservable;
+    show ComputedMethod, MakeAction, MakeObservable, MakeStore;
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
@@ -61,6 +61,8 @@ class StoreClassVisitor extends SimpleElementVisitor {
       _errors.nonAbstractStoreMixinDeclarations
           .addIf(!element.isAbstract, element.name);
     }
+    _storeTemplate.generateToString = isGenerateToStringTrue(element);
+//    _storeTemplate.generateToString = false;
   }
 
   @override
@@ -90,6 +92,9 @@ class StoreClassVisitor extends SimpleElementVisitor {
       ..name = element.name;
 
     _storeTemplate.observables.add(template);
+    if(_storeTemplate.generateToString) {
+      _storeTemplate.toStringList.add('${element.name}: \${${element.name}.toString()}');
+    }
     return;
   }
 
@@ -119,6 +124,10 @@ class StoreClassVisitor extends SimpleElementVisitor {
       ..name = element.name
       ..type = typeNameFinder.findGetterTypeName(element);
     _storeTemplate.computeds.add(template);
+
+    if(_storeTemplate.generateToString) {
+      _storeTemplate.toStringList.add('${element.name}: \${${element.name}.toString()}');
+    }
 
     return;
   }
@@ -189,9 +198,20 @@ class StoreClassVisitor extends SimpleElementVisitor {
 }
 
 const _storeMixinChecker = TypeChecker.fromRuntime(Store);
+const _storeAnnotationChecker = TypeChecker.fromRuntime(MakeStore);
 
 bool isMixinStoreClass(ClassElement classElement) =>
     classElement.mixins.any(_storeMixinChecker.isExactlyType);
+
+bool isAnnotatedStoreClass(ClassElement classElement) => _storeAnnotationChecker.hasAnnotationOfExact(classElement);
+
+bool isGenerateToStringTrue(ClassElement classElement) {
+  if(isAnnotatedStoreClass(classElement)) {
+    final annotation = _storeAnnotationChecker.firstAnnotationOfExact(classElement);
+    return annotation.getField('generateToString').toBoolValue();
+  }
+  return false;
+}
 
 bool _any(List<bool> list) => list.any(_identity);
 

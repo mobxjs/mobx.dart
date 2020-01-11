@@ -2,7 +2,10 @@
 ///
 /// During code-generation, this type is detected to identify a MobX Store class
 class MakeStore {
-  const MakeStore._();
+//  unnamed constructor to allow parameters in Store annotation and prevent useless code refactoring for mobx users
+  const MakeStore({this.generateToString = false});
+  const MakeStore._({this.generateToString = false});
+  final bool generateToString;
 }
 
 /// Declares the annotation identifier for a Store class.

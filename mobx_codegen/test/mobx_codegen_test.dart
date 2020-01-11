@@ -34,6 +34,14 @@ void main() {
       await compareFiles('./data/valid_input.dart', './data/valid_output.dart');
     });
 
+    test('generates for a class mixing Store with annotation @MakeStore(generateToString: true)', () async {
+      await compareFiles('./data/valid_input_to_string_true.dart', './data/valid_output_to_string_true.dart');
+    });
+
+    test('generates for a class mixing Store with @MakeStore(generateToString: false)', () async {
+      await compareFiles('./data/valid_input_to_string_false.dart', './data/valid_output_to_string_false.dart');
+    });
+
     createTests([
       const TestInfo(
           description: 'invalid output is handled',
