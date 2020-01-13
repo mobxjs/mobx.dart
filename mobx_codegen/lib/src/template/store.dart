@@ -61,6 +61,16 @@ abstract class StoreTemplate {
   $actions''';
 
     if (generateToString) {
+      for(var i = 0; i < observables.templates.length; i++){
+        final ObservableTemplate current =  observables.templates[i];
+        toStringList.add('${current.name}: \${${current.name}.toString()}');
+      }
+
+      for(var i = 0; i < computeds.templates.length; i++){
+        final ObservableTemplate current =  computeds.templates[i];
+        toStringList.add('${current.name}: \${${current.name}.toString()}');
+      }
+
       toStringMethod = '''
   @override
   String toString() {
@@ -70,6 +80,7 @@ abstract class StoreTemplate {
   }
   ''';
     }
+
     return baseBody + toStringMethod;
   }
 

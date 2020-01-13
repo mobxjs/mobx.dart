@@ -33,8 +33,6 @@ class StoreGenerator extends Generator {
     for (final classElement in library.classes) {
       if (isMixinStoreClass(classElement)) {
         yield* _generateCodeForMixinStore(library, classElement, typeSystem);
-      } else if (isAnnotatedStoreClass(classElement)) {
-        yield* _generateCodeForAnnotatedStore(library, classElement);
       }
     }
   }
@@ -67,18 +65,6 @@ class StoreGenerator extends Generator {
       yield _generateCodeFromTemplate(
           mixedClass.name, baseClass, MixinStoreTemplate(), typeNameFinder);
     }
-  }
-
-  Iterable<String> _generateCodeForAnnotatedStore(
-    LibraryReader reader,
-    ClassElement baseClass,
-  ) sync* {
-    final typeNameFinder = LibraryScopedNameFinder(reader.element);
-
-    // Strip off leading underscore
-    final publicTypeName = baseClass.name.replaceFirst(RegExp('^_'), '');
-    yield _generateCodeFromTemplate(
-        publicTypeName, baseClass, MixinStoreTemplate(), typeNameFinder);
   }
 
   String _generateCodeFromTemplate(
