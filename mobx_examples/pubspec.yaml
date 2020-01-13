@@ -15,7 +15,7 @@ environment:
 dependencies:
   mobx: ^0.4.0
   flutter_mobx: ^0.3.6
-  mobx_codegen: ^0.3.12
+  mobx_codegen: ^0.4.0
   github: ^6.0.0
   validators:
   hnpwa_client:
