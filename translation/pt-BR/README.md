@@ -19,7 +19,7 @@ Language: [English](../../README.md) | [Português](README.md)
 
 [MobX](https://github.com/mobxjs/mobx) para a Linguagem Dart.
 
-> Evolua a sua Gerência de Estado em seus App Dart com o Transparent Functional Reactive Programming (TFRP)
+> Evolua a Gerência de Estado dos seus App Dart com o Transparent Functional Reactive Programming (TFRP)
 
 - **[Introdução](#introdução)**
 - **[Conceitos Principais](#conceitos-principais)**
