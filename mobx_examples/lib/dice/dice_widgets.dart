@@ -8,8 +8,7 @@ class DiceExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Provider<DiceCounter>(
     create: (_) => DiceCounter(),
-    child: MaterialApp(
-      home: Scaffold(
+    child: Scaffold(
         backgroundColor: Colors.amber,
         appBar: AppBar(
           backgroundColor: Colors.amberAccent,
@@ -26,7 +25,6 @@ class DiceExample extends StatelessWidget {
           child: DiceView(),
         ),
       ),
-    )
   );
 }
 
