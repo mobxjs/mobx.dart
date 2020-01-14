@@ -43,8 +43,9 @@ const Container = styled.div`
   box-shadow: 1px 1px 5px #ddd;
 `;
 
-const Profile = styled.div`
+const ProfileContainer = styled.div`
   display: flex;
+  align-items: center;
 
   .name {
     font-size: 18px;
@@ -69,6 +70,34 @@ const Profile = styled.div`
   }
 `;
 
+export const Profile: FunctionComponent<{
+  photo: string;
+  author: string;
+  title: string;
+  twitter: string;
+  size?: number;
+  style?: CSSStyleDeclaration;
+}> = ({ photo, author, title, twitter, size = 64, style }) => {
+  return (
+    <ProfileContainer style={style}>
+      <img src={photo} width={size} height={size} />
+      <div
+        style={{
+          marginLeft: 10,
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <div className={'name'}>
+          <a href={twitter}>{author}</a>
+        </div>
+        <div className={'title'}>{title}</div>
+      </div>
+    </ProfileContainer>
+  );
+};
+
 const Testimonial: FunctionComponent<Props> = ({
   author,
   title,
@@ -79,22 +108,12 @@ const Testimonial: FunctionComponent<Props> = ({
   return (
     <Container>
       <Message>{message}</Message>
-      <Profile>
-        <img src={photoUrl} width={64} height={64} />
-        <div
-          style={{
-            marginLeft: 10,
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column'
-          }}
-        >
-          <div className={'name'}>
-            <a href={twitter}>{author}</a>
-          </div>
-          <div className={'title'}>{title}</div>
-        </div>
-      </Profile>
+      <Profile
+        photo={photoUrl}
+        twitter={twitter}
+        author={author}
+        title={title}
+      />
     </Container>
   );
 };
