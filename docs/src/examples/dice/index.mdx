@@ -29,7 +29,7 @@ import diceJpg from './dice.gif';
 
 The `DiceCounter` store is quite simple. It keeps a track of dice values and the total count. Below is how it looks:
 
-- Generate `dice_counter.g.dart` file using `build_runner` and this must be imported into the store. Read more about `build_runner` in the [MobX Code Generation library](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen).
+- Generate `dice_counter.g.dart` file using `build_runner` and this must be imported into the store. Read more about `build_runner` in the _MobX Code Generation library_, <PubBadge name="mobx_codegen" />.
 
 ```dart
 import 'dart:math';
@@ -65,9 +65,10 @@ abstract class _DiceCounter with Store {
 
 With the above implementation I was able to keep a track of the left, right and total counts with every user interaction as expected or so I thought 🤔.
 
+> #### Discovering `@computed`
+>
 > I ran into an issue... The `total` count was `null` for the very first time. It gets updated only when the action-method `roll()` is called.
-
-In search of the solution I went through the documentation and few examples and realised there is an insanely easy way to get around this issue. `@computed` BOOM! my issue is solved.
+> In search of the solution I went through the documentation and few examples and realised there is an insanely easy way to get around this issue. `@computed` BOOM! my issue is solved.
 
 I have modified the above `DiceCounter` implementation using `@computed`.
 
