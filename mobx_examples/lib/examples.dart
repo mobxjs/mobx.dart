@@ -13,6 +13,7 @@ import 'package:mobx_examples/random_stream/random_widgets.dart';
 import 'package:mobx_examples/settings/settings_store.dart';
 import 'package:mobx_examples/settings/settings_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
+import 'package:mobx_examples/dice/dice_widgets.dart';
 
 class Example {
   Example(
@@ -92,5 +93,11 @@ final List<Example> examples = [
     widgetBuilder: (_) => Consumer<ConnectivityStore>(
       builder: (_, store, __) => ConnectivityExample(store),
     ),
-  )
+  ),
+  Example(
+    title: 'Dice',
+    description: 'A Fun Dice app.',
+    path: '/dice',
+    widgetBuilder: (_) => DiceExample(),
+  ),  
 ];
