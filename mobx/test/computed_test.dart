@@ -4,9 +4,12 @@ import 'package:mobx/mobx.dart' hide when;
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
   group('Computed', () {
+    turnOffWritePolicy();
+
     test('basics work', () {
       final x = Observable(20);
       final y = Observable(10);
