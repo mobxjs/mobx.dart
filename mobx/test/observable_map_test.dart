@@ -7,9 +7,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
-
   group('MapKeysIterable', () {
+    turnOffWritePolicy();
+
     test('length reports observed', () {
       final atom = MockAtom();
 

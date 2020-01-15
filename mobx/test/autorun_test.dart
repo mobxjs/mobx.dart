@@ -8,9 +8,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
-
   group('autorun()', () {
+    turnOffWritePolicy();
+
     test('basics work', () {
       final c = Observable(0);
       int nextValue;
