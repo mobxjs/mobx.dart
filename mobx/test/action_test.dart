@@ -6,8 +6,6 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
-
   group('Action', () {
     turnOffWritePolicy();
 
@@ -219,102 +217,107 @@ void main() {
     });
   });
 
-  test('runInAction works', () {
-    final x = Observable(10);
-    final y = Observable(20);
+  group('Action utility functions', () {
+    turnOffWritePolicy();
 
-    var executionCount = 0;
-    var total = 0;
+    test('runInAction works', () {
+      final x = Observable(10);
+      final y = Observable(20);
 
-    final d = autorun((_) {
-      total = x.value + y.value;
-      executionCount++;
-    });
+      var executionCount = 0;
+      var total = 0;
 
-    runInAction(() {
-      x.value = 100;
-      y.value = 200;
-
-      expect(executionCount, equals(1)); // No notifications are fired
-    });
-
-    // Notifications are fired now
-    expect(executionCount, equals(2));
-    expect(total, equals(300));
-
-    d();
-  });
-
-  test('transaction works', () {
-    mainContext.config = ReactiveConfig(writePolicy: ReactiveWritePolicy.never);
-
-    final x = Observable(10);
-    final y = Observable(20);
-
-    var total = 0;
-
-    final d = autorun((_) {
-      total = x.value + y.value;
-    });
-
-    transaction(() {
-      x.value = 100;
-      y.value = 200;
-
-      // within a transaction(), there are no notifications fired, so the total should not change
-      expect(total, equals(30));
-    });
-
-    // Notifications fire now, causing autorun() to execute
-    expect(total, equals(300));
-
-    d();
-
-    mainContext.config = ReactiveConfig.main;
-  });
-
-  test('untracked works', () {
-    final x = Observable(0);
-    var count = 0;
-
-    final d = autorun((_) {
-      // No tracking should be performed since we are reading inside untracked()
-      untracked(() {
-        x.value;
+      final d = autorun((_) {
+        total = x.value + y.value;
+        executionCount++;
       });
 
-      count++;
+      runInAction(() {
+        x.value = 100;
+        y.value = 200;
+
+        expect(executionCount, equals(1)); // No notifications are fired
+      });
+
+      // Notifications are fired now
+      expect(executionCount, equals(2));
+      expect(total, equals(300));
+
+      d();
     });
 
-    expect(count, equals(1));
+    test('transaction works', () {
+      mainContext.config =
+          ReactiveConfig(writePolicy: ReactiveWritePolicy.never);
 
-    x.value = 100;
+      final x = Observable(10);
+      final y = Observable(20);
 
-    // Should be no change in count
-    expect(count, equals(1));
+      var total = 0;
 
-    d();
-  });
+      final d = autorun((_) {
+        total = x.value + y.value;
+      });
 
-  test('runInAction return type', () {
-    final x = Observable(10);
+      transaction(() {
+        x.value = 100;
+        y.value = 200;
 
-    var executionCount = 0;
-    var total = 0;
+        // within a transaction(), there are no notifications fired, so the total should not change
+        expect(total, equals(30));
+      });
 
-    final d = autorun((_) {
-      total = x.value;
-      executionCount++;
+      // Notifications fire now, causing autorun() to execute
+      expect(total, equals(300));
+
+      d();
+
+      mainContext.config = ReactiveConfig.main;
     });
 
-    final value = runInAction(() => x.value = 100);
+    test('untracked works', () {
+      final x = Observable(0);
+      var count = 0;
 
-    expect(value, equals(100));
+      final d = autorun((_) {
+        // No tracking should be performed since we are reading inside untracked()
+        untracked(() {
+          x.value;
+        });
 
-    // Notifications are fired now
-    expect(executionCount, equals(2));
-    expect(total, equals(100));
+        count++;
+      });
 
-    d();
+      expect(count, equals(1));
+
+      x.value = 100;
+
+      // Should be no change in count
+      expect(count, equals(1));
+
+      d();
+    });
+
+    test('runInAction return type', () {
+      final x = Observable(10);
+
+      var executionCount = 0;
+      var total = 0;
+
+      final d = autorun((_) {
+        total = x.value;
+        executionCount++;
+      });
+
+      final value = runInAction(() => x.value = 100);
+
+      expect(value, equals(100));
+
+      // Notifications are fired now
+      expect(executionCount, equals(2));
+      expect(total, equals(100));
+
+      d();
+    });
   });
 }
