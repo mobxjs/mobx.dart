@@ -36,6 +36,8 @@ void main() {
     });
 
     group('equals override', () {
+      turnOffWritePolicy();
+
       test('basics work', () {
         var executed = false;
 
@@ -233,6 +235,8 @@ void main() {
     });
 
     group('start/endTracking', () {
+      turnOffWritePolicy();
+
       test('reacts to changes to reactive values between begin and end', () {
         var i = 0;
 

@@ -1,6 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 Future sleep(int ms) => Future.delayed(Duration(milliseconds: ms));
 
 void main() {
@@ -14,6 +16,8 @@ void main() {
   });
 
   group('AsyncAction', () {
+    turnOffWritePolicy();
+
     test('null name throws', () {
       expect(() => AsyncAction(null), throwsA(anything));
     });

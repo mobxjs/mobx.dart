@@ -209,6 +209,8 @@ void main() {
     });
 
     group('fires reportObserved() for read-methods', () {
+      turnOffWritePolicy();
+
       <String, Function(ObservableList<int>)>{
         'isEmpty': (_) => _.isEmpty,
         'isNotEmpty': (_) => _.isNotEmpty,

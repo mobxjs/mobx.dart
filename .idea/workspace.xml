@@ -9,8 +9,25 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/computed_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/computed_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/test/observable_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/action_controller_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/action_controller_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/action_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/action_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/async_action_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/async_action_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/context_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/context_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/extensions/observable_future_extension_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/extensions/observable_future_extension_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/extensions/observable_list_extension_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/extensions/observable_list_extension_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/extensions/observable_map_extension_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/extensions/observable_map_extension_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/extensions/observable_set_extension_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/extensions/observable_set_extension_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/extensions/observable_stream_extension_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/extensions/observable_stream_extension_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/intercept_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/intercept_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/listenable_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/listenable_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/observable_future_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_future_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/observable_list_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_list_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_map_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/observable_set_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_set_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/observable_value_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observable_value_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/observe_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/observe_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/reaction_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/reaction_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/test/reactive_policies_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/test/reactive_policies_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +275,7 @@
       <workItem from="1578880952636" duration="1815000" />
       <workItem from="1578935064823" duration="13000" />
       <workItem from="1578935091427" duration="986000" />
-      <workItem from="1579017372100" duration="3134000" />
+      <workItem from="1579017372100" duration="3626000" />
     </task>
     <task id="LOCAL-00001" summary="adding documentation to the public methods...WIP">
       <created>1573311043900</created>
@@ -568,7 +585,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579086391532</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="moving write policy inside the group...test!">
+      <created>1579086846498</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1579086846499</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -684,12 +708,12 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="1118" y="404" key="#xdebugger.evaluate/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577977075071" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579086391388">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579086846352">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1577591843148" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311043628" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579086391388" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579086846352" />
     <state width="481" height="466" key="DebuggerActiveHint" timestamp="1578496148462">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -704,30 +728,30 @@
     </state>
     <state x="446" y="343" key="EditFileWatcherDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576815875205" />
     <state x="446" y="343" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577761297729" />
-    <state width="1270" height="278" key="GridCell.Tab.0.bottom" timestamp="1579086769631">
+    <state width="1270" height="278" key="GridCell.Tab.0.bottom" timestamp="1579087048483">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1140" height="278" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1578627200696" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1270" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579086769631" />
-    <state width="1270" height="278" key="GridCell.Tab.0.center" timestamp="1579086769629">
+    <state width="1270" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579087048483" />
+    <state width="1270" height="278" key="GridCell.Tab.0.center" timestamp="1579087048481">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1140" height="278" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1578627200695" />
     <state width="1878" height="288" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795303" />
-    <state width="1270" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579086769629" />
-    <state width="1270" height="278" key="GridCell.Tab.0.left" timestamp="1579086769628">
+    <state width="1270" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579087048481" />
+    <state width="1270" height="278" key="GridCell.Tab.0.left" timestamp="1579087048481">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1140" height="278" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1578627200695" />
     <state width="1878" height="288" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795302" />
-    <state width="1270" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579086769628" />
-    <state width="1270" height="278" key="GridCell.Tab.0.right" timestamp="1579086769630">
+    <state width="1270" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579087048481" />
+    <state width="1270" height="278" key="GridCell.Tab.0.right" timestamp="1579087048482">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1140" height="278" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1578627200695" />
     <state width="1878" height="288" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1270" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579086769630" />
+    <state width="1270" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579087048482" />
     <state width="1152" height="345" key="GridCell.Tab.1.bottom" timestamp="1578502180992">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -781,12 +805,12 @@
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579086394309">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579086848100">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1577591905835" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579086394309" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579086848100" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -795,11 +819,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577681183195" />
-    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1579086323625">
+    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1579087017311">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1577965375220" />
-    <state x="320" y="229" width="939" height="615" key="find.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579086323625" />
+    <state x="320" y="229" width="939" height="615" key="find.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579087017311" />
     <state x="438" y="372" key="git4idea.ui.GitUnstashDialog" timestamp="1576738706671">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>

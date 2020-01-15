@@ -1,8 +1,12 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
   group('when reactive-reads are enforced', () {
+    turnOffWritePolicy();
+
     setUp(() {
       mainContext.config =
           ReactiveConfig.main.clone(readPolicy: ReactiveReadPolicy.always);
@@ -30,6 +34,8 @@ void main() {
   });
 
   group('when reactive-reads are NOT enforced', () {
+    turnOffWritePolicy();
+
     setUp(() {
       mainContext.config =
           ReactiveConfig.main.clone(readPolicy: ReactiveReadPolicy.never);

@@ -3,14 +3,12 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
-  setUp(() {
-    // Ensure we are starting with clean slate each time
-    mainContext.config = ReactiveConfig.main;
-  });
-
   group('Action', () {
+    turnOffWritePolicy();
+
     test('basics work', () {
       final a = Action((String name, String value) {
         expect(name, equals('name'));

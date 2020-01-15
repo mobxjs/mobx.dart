@@ -1,8 +1,12 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
   group('observe', () {
+    turnOffWritePolicy();
+
     test('works', () {
       final x = Observable(10);
       var executed = false;
@@ -37,6 +41,8 @@ void main() {
     });
 
     group('equality override', () {
+      turnOffWritePolicy();
+
       test('yields a new value', () {
         final x = Observable(
           10,
@@ -136,6 +142,8 @@ void main() {
   });
 
   group('onBecomeObserved / onBecomeUnobserved', () {
+    turnOffWritePolicy();
+
     test('works for observables', () {
       final x = Observable(10);
       var executionCount = 0;

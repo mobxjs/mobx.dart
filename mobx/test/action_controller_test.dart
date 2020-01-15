@@ -3,11 +3,14 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 class MockDerivation extends Mock implements Derivation {}
 
 void main() {
   group('ActionController', () {
+    turnOffWritePolicy();
+
     test('can be created with both null context and name', () {
       ActionController();
     });

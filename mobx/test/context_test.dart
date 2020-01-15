@@ -3,9 +3,12 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
   group('ReactiveContext', () {
+    turnOffWritePolicy();
+
     test('comes with default config', () {
       final ctx = ReactiveContext();
 
@@ -82,6 +85,8 @@ void main() {
     });
 
     group('conditionallyRunInAction', () {
+      turnOffWritePolicy();
+
       test('when running OUTSIDE an Action, it should USE the ActionController',
           () {
         final controller = MockActionController();
@@ -135,6 +140,8 @@ void main() {
   });
 
   group('ReactiveConfig', () {
+    turnOffWritePolicy();
+
     test('clone works', () {
       final config = ReactiveConfig.main;
       final clone = config.clone(maxIterations: 10);

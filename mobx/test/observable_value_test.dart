@@ -3,8 +3,12 @@ import 'dart:async';
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
   group('ObservableValue', () {
+    turnOffWritePolicy();
+
     test('basics work', () {
       final ObservableValue<int> x1 = Observable(1);
       final ObservableValue<int> x2 = Computed(() => x1.value * 2);
