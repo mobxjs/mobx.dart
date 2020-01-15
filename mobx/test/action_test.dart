@@ -6,6 +6,8 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
+  turnOffWritePolicy();
+
   group('Action', () {
     turnOffWritePolicy();
 
