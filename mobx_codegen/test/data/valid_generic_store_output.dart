@@ -15,4 +15,21 @@ mixin _$Item<T extends num> on _Item<T>, Store {
       _$valueAtom.reportChanged();
     }, _$valueAtom, name: '${_$valueAtom.name}_set');
   }
+
+  final _$valuesAtom = Atom(name: '_Item.values');
+
+  @override
+  List<T> get values {
+    _$valuesAtom.context.enforceReadPolicy(_$valuesAtom);
+    _$valuesAtom.reportObserved();
+    return super.values;
+  }
+
+  @override
+  set values(List<T> value) {
+    _$valuesAtom.context.conditionallyRunInAction(() {
+      super.values = value;
+      _$valuesAtom.reportChanged();
+    }, _$valuesAtom, name: '${_$valuesAtom.name}_set');
+  }
 }

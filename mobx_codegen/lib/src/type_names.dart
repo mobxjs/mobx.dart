@@ -1,7 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-// ignore: implementation_imports
-import 'package:analyzer/src/dart/resolver/scope.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
 
 /// Determines the names of types within the context of a library, determining
@@ -29,17 +27,20 @@ class LibraryScopedNameFinder {
       return _namesByElement;
     }
 
-    // Reverse each import's export namespace, so that we can easily map
-    // Elements to names.
     _namesByElement = {};
-    final namespaceBuilder = NamespaceBuilder();
-    for (final import in library.imports) {
-      // Build a namespace so that combinators (show/hide) can be computed
-      final namespace =
-          namespaceBuilder.createImportNamespaceForDirective(import);
 
-      // Record each element by name
-      for (final entry in namespace.definedNames.entries) {
+    // Add all of this library's type-defining elements to the name map
+    final libraryElements =
+        library.topLevelElements.whereType<TypeDefiningElement>();
+    for (final element in libraryElements) {
+      _namesByElement[element] = element.name;
+    }
+
+    // Reverse each import's export namespace so we can map elements to their
+    // library-local names. Note that the definedNames include a prefix if there
+    // is one.
+    for (final import in library.imports) {
+      for (final entry in import.namespace.definedNames.entries) {
         _namesByElement[entry.value] = entry.key;
       }
     }
@@ -48,7 +49,7 @@ class LibraryScopedNameFinder {
   }
 
   String findVariableTypeName(VariableElement variable) =>
-      _getTypeName(variable.type);
+      _getDartTypeName(variable.type);
 
   String findGetterTypeName(PropertyAccessorElement getter) {
     assert(getter.isGetter);
@@ -56,46 +57,41 @@ class LibraryScopedNameFinder {
   }
 
   String findParameterTypeName(ParameterElement parameter) =>
-      _getTypeName(parameter.type);
+      _getDartTypeName(parameter.type);
 
   String findReturnTypeName(FunctionTypedElement executable) =>
-      _getTypeName(executable.returnType);
+      _getDartTypeName(executable.returnType);
 
   List<String> findReturnTypeArgumentTypeNames(ExecutableElement executable) {
     final returnType = executable.returnType;
     return returnType is ParameterizedType
-        ? returnType.typeArguments.map(_getTypeName).toList()
+        ? returnType.typeArguments.map(_getDartTypeName).toList()
         : [];
   }
 
   String findTypeParameterBoundsTypeName(TypeParameterElement typeParameter) {
     assert(typeParameter.bound != null);
-    return _getTypeName(typeParameter.bound);
+    return _getDartTypeName(typeParameter.bound);
   }
 
   /// Calculates a type name, including its type arguments
   ///
   /// The returned string will include import prefixes on all applicable types.
-  String _getTypeName(DartType type) {
-    final typeElement = type.element;
+  String _getDartTypeName(DartType type) {
+    var typeElement = type.element;
     if (type is FunctionType) {
-      // A type with a typedef should be written as is
-      if (typeElement is GenericFunctionTypeElement &&
-          typeElement.enclosingElement is GenericTypeAliasElement) {
-        return typeElement.enclosingElement.displayName;
+      // If we're dealing with a typedef, we let it undergo the standard name
+      // lookup. Otherwise, we special case the function naming.
+      if (typeElement?.enclosingElement is GenericTypeAliasElement) {
+        typeElement = typeElement.enclosingElement;
+      } else {
+        return _getFunctionTypeName(type);
       }
-
-      return _findFunctionTypeName(type);
     } else if (
-        // If the library has no named imports, we don't need to worry about
-        // prefixes
-        library.prefixes.isEmpty ||
-            // Some types don't have associated elements, like void
-            typeElement == null ||
+        // Some types don't have associated elements, like void
+        typeElement == null ||
             // This is a bare type param, like "T"
-            type is TypeParameterType ||
-            // If the type lives in this library, no prefix necessary
-            typeElement.library == library) {
+            type is TypeParameterType) {
       // TODO(shyndman): This ignored deprecation can be removed when we
       // increase the analyzer dependency's lower bound to 0.39.2, and
       // migrate to using `DartType.getDisplayString`.
@@ -103,19 +99,18 @@ class LibraryScopedNameFinder {
       return type.displayName;
     }
 
-    assert(namesByElement.containsKey(typeElement));
-    return namesByElement[typeElement];
+    return _getNamedElementTypeName(typeElement, type);
   }
 
-  String _findFunctionTypeName(FunctionType type) {
-    final returnTypeName = _getTypeName(type.returnType);
+  String _getFunctionTypeName(FunctionType type) {
+    final returnTypeName = _getDartTypeName(type.returnType);
 
     final normalParameterTypeNames =
-        CommaList(type.normalParameterTypes.map(_getTypeName).toList());
+        CommaList(type.normalParameterTypes.map(_getDartTypeName).toList());
     final optionalParameterTypeNames = SurroundedCommaList(
-        '[', ']', type.optionalParameterTypes.map(_getTypeName).toList());
+        '[', ']', type.optionalParameterTypes.map(_getDartTypeName).toList());
     final namedParameterPairs = type.namedParameterTypes.entries
-        .map((entry) => '${_getTypeName(entry.value)} ${entry.key}')
+        .map((entry) => '${_getDartTypeName(entry.value)} ${entry.key}')
         .toList();
     final namedParameterTypeNames =
         SurroundedCommaList('{', '}', namedParameterPairs);
@@ -127,5 +122,19 @@ class LibraryScopedNameFinder {
     ]);
 
     return '$returnTypeName Function($parameterTypeNames)';
+  }
+
+  String _getNamedElementTypeName(Element typeElement, DartType type) {
+    // Determine the name of the type, without type arguments.
+    assert(namesByElement.containsKey(typeElement));
+
+    // If the type is parameterized, we recursively name its type arguments
+    if (type is ParameterizedType && type.typeArguments.isNotEmpty) {
+      final typeArgNames = SurroundedCommaList(
+          '<', '>', type.typeArguments.map(_getDartTypeName).toList());
+      return '${namesByElement[typeElement]}$typeArgNames';
+    }
+
+    return namesByElement[typeElement];
   }
 }

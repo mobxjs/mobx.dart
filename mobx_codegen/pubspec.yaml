@@ -16,8 +16,6 @@ dependencies:
   source_gen: ^0.9.4
 
 dev_dependencies:
-#  flutter:
-#    sdk: flutter
   build_runner: ^1.7.2
   build_test: ^0.10.9
   logging: ^0.11.3
@@ -25,6 +23,3 @@ dev_dependencies:
   test: ^1.9.4
   test_coverage:
     git: https://github.com/shyndman/test-coverage
-
-#flutter:
-#  uses-material-design: true
