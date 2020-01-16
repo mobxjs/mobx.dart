@@ -65,8 +65,8 @@ ReactionDisposer createAutorun(
 }
 
 /// An internal helper function to create a [reaction]
-ReactionDisposer createReaction<T>(ReactiveContext context,
-    T Function(Reaction) predicate, void Function(T) effect,
+ReactionDisposer createReaction<T>(
+    ReactiveContext context, T Function(Reaction) fn, void Function(T) effect,
     {String name,
     int delay,
     bool fireImmediately,
@@ -93,7 +93,7 @@ ReactionDisposer createReaction<T>(ReactiveContext context,
     var changed = false;
 
     rxn.track(() {
-      final nextValue = predicate(rxn);
+      final nextValue = fn(rxn);
 
       // Use the equality-comparator if provided
       final isEqual =
