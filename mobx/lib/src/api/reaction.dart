@@ -31,28 +31,27 @@ ReactionDisposer autorun(Function(Reaction) fn,
     createAutorun(context ?? mainContext, fn,
         name: name, delay: delay, onError: onError);
 
-/// Executes the [predicate] function and tracks the observables used in it. Returns
+/// Executes the [fn] function and tracks the observables used in it. Returns
 /// a function to dispose the reaction.
 ///
-/// The [predicate] is supposed to return a value of type T. When it changes, the
+/// The [fn] is supposed to return a value of type T. When it changes, the
 /// [effect] function is executed.
 ///
-/// *Note*: Only the [predicate] function is tracked and not the [effect].
+/// *Note*: Only the [fn] function is tracked and not the [effect].
 ///
 /// You can also pass in an optional [name], a debouncing [delay] in milliseconds. Use
 /// [fireImmediately] if you want to invoke the effect immediately without waiting for
-/// the [predicate] to change its value. It is possible to define a custom [equals] function
-/// to override the default comparison for the value returned by [predicate], to have fined
+/// the [fn] to change its value. It is possible to define a custom [equals] function
+/// to override the default comparison for the value returned by [fn], to have fined
 /// grained control over when the reactions should run.
-ReactionDisposer reaction<T>(
-        T Function(Reaction) predicate, void Function(T) effect,
+ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect,
         {String name,
         int delay,
         bool fireImmediately,
         EqualityComparator<T> equals,
         ReactiveContext context,
         void Function(Object, Reaction) onError}) =>
-    createReaction(context ?? mainContext, predicate, effect,
+    createReaction(context ?? mainContext, fn, effect,
         name: name,
         delay: delay,
         equals: equals,

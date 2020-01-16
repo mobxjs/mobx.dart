@@ -221,10 +221,10 @@ dispose();
 // Hello MobX
 ```
 
-**`ReactionDisposer reaction<T>(T Function(Reaction) predicate, void Function(T) effect)`**
+**`ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect)`**
 
-Monitors the observables used inside the `predicate()` function and runs the `effect()` when
-the predicate returns a different value. Only the observables inside `predicate()` are tracked.
+Monitors the observables used inside the `fn()` function and runs the `effect()` when
+the `fn()` function returns a different value. Only the observables inside `fn()` are tracked.
 
 ```dart
 import 'package:mobx/mobx.dart';
