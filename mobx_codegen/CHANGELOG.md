@@ -1,3 +1,14 @@
+## 0.4.1
+
+There were a number of bugs with the previous implementation of the `LibraryScopedNameFinder`. This resolves them, as well as ensures that a single code path is followed whether or not the analyzed source code contains named imports, reducing the potential for future bugs.
+
+The following bugs have been corrected when using named imports:
+
+- Missing type arguments on classes
+- Missing type arguments on function typedefs
+- Missing prefixes from imported typedefs
+- Missing prefixes from implicit type argument bounds
+
 ## 0.4.0 - 0.4.0+1
 
 - Upgraded our `analyzer` dependency's minimum version to **0.38.5** in order to
