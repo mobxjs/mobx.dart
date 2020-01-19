@@ -1,0 +1,112 @@
+---
+menu: Guides
+route: /guides/cheat-sheet
+name: MobX Cheat Sheet 🚀
+---
+
+# MobX Cheat Sheet 🚀
+
+import { PubBadge } from '../components/PubBadge';
+
+## Required Packages
+
+Make sure to have the following packages installed for working effectively with `MobX` and `Flutter`:
+
+1. <PubBadge name={'mobx'} />
+
+The main MobX package that includes `Observables`, `Actions`, and `Reactions`
+
+2. <PubBadge name={'flutter_mobx'} />
+
+Provides the `Observer` widget that auto-renders when the tracked observables change.
+
+3. <PubBadge name={'mobx_codegen'} />
+
+A powerful code-generator that greatly improves the developer experience with MobX. It provides annotations like
+`@observable`, `@computed`, `@action` which hides all the boilerplate in a separately generated file, `*.g.dart`.
+
+These packages should appear in your `pubspec.yaml` like below.
+
+```yaml
+dependencies:
+  mobx: ^0.4.0
+  flutter_mobx: ^0.3.6
+  mobx_codegen: ^0.4.1
+```
+
+## Declaring a Store class
+
+Every store in MobX should be declared with the following boilerplate. This is probably the only boilerplate that
+gets repeated. You could make this into a code-snippet in your IDE. Below we are declaring a `Todo` store.
+
+```dart
+// todo.dart
+import 'package:mobx/mobx.dart';
+
+part 'todo.g.dart';
+
+class Todo = _Todo with _$Todo;
+
+abstract class _Todo with Store {
+  /* rest of the class*/
+}
+```
+
+> Note that the basename of the part-file must match the containing file exactly! In the above case, the part file is
+> called
+
+## Adding `@observable`, `@computed`, `@action`
+
+_Observables_ are the reactive state of your store and _Actions_ are semantic operations that mutate them. _Computed
+Observables_ are read-only properties that depend on other observables and auto-update when any of the dependent
+observables change.
+
+```dart
+// contact.dart
+import 'package:mobx/mobx.dart';
+
+part 'contact.g.dart';
+
+class Contact = _Contact with _$Contact;
+
+abstract class _Contact with Store {
+  // highlight-next-line
+  @observable
+  String firstName;
+
+  // highlight-next-line
+  @observable
+  String lastName;
+
+  // highlight-next-line
+  @computed
+  String get fullName() => '$firstName, $lastName';
+
+  ObservableList<String> phoneNumbers = ObservableList.of([]);
+
+  // highlight-next-line
+  @action
+  void addPhone(String phone) {
+    phoneNumbers.add(phone);
+  }
+
+  // async action
+  // highlight-next-line
+  @action
+  Future<void> fetchPhoneNumbers() async {
+    final numbers = await contactService.fetchFor(firstName, lastName);
+    phoneNumbers = ObservableList.of(numbers);
+  }
+}
+
+```
+
+## Reactive wrappers
+
+MobX also comes with a set of wrapper-classes that add the reactive behavior. These include:
+
+- `ObservableList<T>`
+- `ObservableSet<T>`
+- `ObservableMap<K,V>`
+- `ObservableFuture<T>`
+- `ObservableStream<T>`
