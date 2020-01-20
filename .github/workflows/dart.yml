@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: cirrusci/flutter:${{ matrix.version }}
+      image: google/dart:${{ matrix.version }}
 
     strategy:
       matrix:
@@ -29,4 +29,5 @@ jobs:
       - name: Run tests for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
+          pub run test # have to run this explicitly as test_coverage is NOT showing exceptions correctly
           pub run test_coverage
