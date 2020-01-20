@@ -17,6 +17,6 @@ jobs:
         cd mobx
         pub get
     - name: Run tests
-      run: 
+      run: |
         cd mobx
         pub run test
