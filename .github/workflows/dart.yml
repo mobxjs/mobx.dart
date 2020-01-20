@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: google/dart:${{ matrix.version }}
+      image: cirrusci/flutter:${{ matrix.version }}
 
     strategy:
       matrix:
@@ -22,7 +22,11 @@ jobs:
         working-directory: ${{ matrix.package }}
         run: |
           pub get
+      - name: Analyze ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: |
+          dartanalyzer --fatal-infos --fatal-warnings .
       - name: Run tests for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          pub run test
+          pub run test_coverage
