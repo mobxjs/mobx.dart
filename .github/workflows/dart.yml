@@ -33,7 +33,7 @@ jobs:
       - name: Upload coverage for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          bash <(curl -s https://codecov.io/bash) -c -F $PACKAGE
+          bash <(curl -s https://codecov.io/bash) -c -F ${{ matrix.package }}
 
   build_flutter_packages:
     runs-on: ubuntu-latest
@@ -68,4 +68,4 @@ jobs:
       - name: Upload coverage for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          bash <(curl -s https://codecov.io/bash) -c -F $PACKAGE
+          bash <(curl -s https://codecov.io/bash) -c -F ${{ matrix.package }}
