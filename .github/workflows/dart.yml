@@ -4,23 +4,25 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     container:
-      image:  google/dart:latest
+      image: google/dart:${{ matrix.version }}
 
     strategy:
       matrix:
-        package: ['mobx', 'mobx_codegen']
+        package: ["mobx", "mobx_codegen"]
+        version: ["latest", "dev"]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Install dependencies for ${{ matrix.package }}
-      working-directory: ${{ matrix.package }}
-      run: |
-        pub get
-    - name: Run tests for ${{ matrix.package }}
-      working-directory: ${{ matrix.package }}
-      run: |
-        pub run test
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Install dependencies for ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: |
+          pub get
+      - name: Run tests for ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: |
+          pub run test
