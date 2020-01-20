@@ -3,7 +3,7 @@ name: Dart CI
 on: [push]
 
 jobs:
-  build:
+  build_dart_packages:
     runs-on: ubuntu-latest
 
     container:
@@ -29,5 +29,43 @@ jobs:
       - name: Run tests for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          pub run test # have to run this explicitly as test_coverage is NOT showing exceptions correctly
           pub run test_coverage
+      - name: Upload coverage for ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: |
+          bash <(curl -s https://codecov.io/bash) -c -F $PACKAGE
+
+  build_flutter_packages:
+    runs-on: ubuntu-latest
+
+    container:
+      image: cirrusci/flutter:${{ matrix.version }}
+
+    strategy:
+      matrix:
+        package: ["flutter_mobx"]
+        version: ["latest", "stable", "beta", "dev"]
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Print Flutter version
+        run: |
+          flutter --version
+      - name: Install dependencies for ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: |
+          flutter packages get
+      - name: Analyze ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: |
+          flutter analyze
+      - name: Run tests for ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: |
+          flutter test --coverage --coverage-path coverage/lcov.info
+      - name: Upload coverage for ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: |
+          bash <(curl -s https://codecov.io/bash) -c -F $PACKAGE
