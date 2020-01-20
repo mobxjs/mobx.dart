@@ -37,7 +37,7 @@ dependencies:
 ## Declaring a Store class
 
 Every store in MobX should be declared with the following boilerplate. This is probably the only boilerplate that
-gets repeated. You could make this into a code-snippet in your IDE. Below we are declaring a `Todo` store.
+gets repeated. You could make this into a code-snippet in your IDE. Below, we are declaring a `Todo` store.
 
 ```dart
 // todo.dart
@@ -53,9 +53,14 @@ abstract class _Todo with Store {
 ```
 
 > Note that the basename of the _part-file_ must match the _containing-file_ exactly! In the above case, the part
-> file is called `todo.g.dart`, which matches the `todo.dart` file in which it is contained.
+> file is called `todo.g.dart`, which matches the `todo.dart` file in which it is contained. To generate the _part-file_,
+> you have to run the following command:
+>
+> ```
+> flutter packages pub run build_runner watch --delete-conflicting-outputs
+> ```
 
-## Adding `@observable`, `@computed`, `@action`
+## Adding @observable, @computed, @action
 
 _Observables_ are the reactive state of your store and _Actions_ are semantic operations that mutate them. _Computed
 Observables_ are read-only properties that depend on other observables and auto-update when any of the dependent
@@ -110,3 +115,79 @@ MobX also comes with a set of wrapper-classes that add the reactive behavior. Th
 - `ObservableMap<K,V>`
 - `ObservableFuture<T>`
 - `ObservableStream<T>`
+
+> ### Reactive Extensions
+>
+> You can convert plain `List`, `Map`, `Set`, `Future` and `Stream` instances into an observable version with the `asObservable()` extension method.
+> For example, in the code-snippet above, you could do:
+>
+> ```dart
+> ObservableList<String> phoneNumbers = [].asObservable();
+> ```
+
+## Don't underestimate the @computed
+
+Although `@computed` looks like a simple, readonly observable, it can easily be your most powerful tool.
+By creating `@computed` properties that depend on other observables, you can dramatically simplify the UI code and
+eliminate most of the business logic inside your Widgets. It is most often used for hiding conditional logic and
+calculating some derived information.
+
+For example, rather than checking if some data is loaded successfully inside a Widget...
+
+```dart
+Widget build(BuildContext context) {
+  final store = Provider.of<Contact>(context);
+
+  return Observer(
+      builder: (_) {
+  // highlight-start
+        if (store.loadOperation != null &&
+            store.loadOperation.status == FutureStatus.fulfilled) {
+  // highlight-end
+          return ContactView(store);
+        }
+
+        return Container();
+      }
+  );
+}
+```
+
+...you can create a `@computed` property called `hasResults`...
+
+```dart
+class _Contact with Store {
+  /* rest of the class */
+
+  @observable ObservableFuture<void> loadOperation = null;
+
+  @computed
+  // highlight-start
+  bool get hasResults =>
+      loadOperation != null &&
+      loadOperation.status == FutureStatus.fulfilled;
+  // highlight-end
+}
+```
+
+...and simplify your widget logic...
+
+```dart
+Widget build(BuildContext context) {
+  final store = Provider.of<Contact>(context);
+
+  return Observer(
+      builder: (_) {
+  // highlight-next-line
+        if (store.hasResults) {
+          return ContactView(store);
+        }
+
+        return Container();
+      }
+  );
+}
+
+```
+
+...Since a `@computed` property is an observable, the `Observer` will automatically render when it changes!
