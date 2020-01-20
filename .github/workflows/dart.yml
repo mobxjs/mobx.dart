@@ -10,13 +10,17 @@ jobs:
     container:
       image:  google/dart:latest
 
+    strategy:
+      matrix:
+        package: ['mobx', 'mobx_codegen']
+
     steps:
     - uses: actions/checkout@v1
-    - name: Install dependencies
+    - name: Install dependencies for ${{ matrix.package }}
       run: |
-        cd mobx
+        cd ${{ matrix.package }}
         pub get
-    - name: Run tests
+    - name: Run tests for ${{ matrix.package }}
       run: |
-        cd mobx
+        cd ${{ matrix.package }}
         pub run test
