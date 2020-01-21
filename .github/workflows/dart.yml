@@ -40,35 +40,37 @@ jobs:
   build_flutter_packages:
     runs-on: ubuntu-latest
 
-    container:
-      image: cirrusci/flutter:${{ matrix.version }} # cirrusci/flutter image requires sudo
-
     strategy:
       matrix:
         package: ["flutter_mobx"]
-        version: ["stable", "beta"]
+        channel: ["stable", "beta"]
 
-    env:
-      FLUTTER_CMD: "/home/cirrus/sdks/flutter/bin/flutter"
     steps:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - name: Print Flutter version
-        run: |
-          sudo $FLUTTER_CMD --version
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: ${{ matrix.channel }}
+        run: flutter --version
       - name: Install dependencies
+        uses: subosito/flutter-action@v1
+        with:
+          channel: ${{ matrix.channel }}
         working-directory: ${{ matrix.package }}
-        run: |
-          sudo $FLUTTER_CMD packages get
+        run: flutter packages get
       - name: Run Analyzer
+        uses: subosito/flutter-action@v1
+        with:
+          channel: ${{ matrix.channel }}
         working-directory: ${{ matrix.package }}
-        run: |
-          sudo $FLUTTER_CMD analyze
+        run: flutter analyze
       - name: Run tests
+        uses: subosito/flutter-action@v1
+        with:
+          channel: ${{ matrix.channel }}
         working-directory: ${{ matrix.package }}
-        run: |
-          sudo $FLUTTER_CMD test --coverage --coverage-path coverage/lcov.info
+        run: flutter test --coverage --coverage-path coverage/lcov.info
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v1
         with:
