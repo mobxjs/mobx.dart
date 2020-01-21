@@ -15,7 +15,7 @@ jobs:
         version: ["latest", "dev"]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - name: Install dependencies
@@ -46,7 +46,7 @@ jobs:
         channel: ["stable", "beta"]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - uses: subosito/flutter-action@v1
