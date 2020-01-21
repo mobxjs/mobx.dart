@@ -41,12 +41,12 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: cirrusci/flutter:${{ matrix.version }}
+      image: cirrusci/flutter:${{ matrix.version }} # cirrusci/flutter image requires sudo
 
     strategy:
       matrix:
         package: ["flutter_mobx"]
-        version: ["stable"]
+        version: ["stable", "beta"]
 
     steps:
       - uses: actions/checkout@v1
@@ -54,16 +54,16 @@ jobs:
           fetch-depth: 1
       - name: Print Flutter version
         run: |
-          flutter --version
+          sudo flutter --version
       - name: Install dependencies for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          flutter packages get
+          sudo flutter packages get
       - name: Analyze ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          flutter analyze
+          sudo flutter analyze
       - name: Run tests for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          flutter test --coverage --coverage-path coverage/lcov.info
+          sudo flutter test --coverage --coverage-path coverage/lcov.info
