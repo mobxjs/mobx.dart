@@ -16,8 +16,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
       - name: Install dependencies
         working-directory: ${{ matrix.package }}
         run: |
@@ -47,8 +45,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
       - uses: subosito/flutter-action@v1
         with:
           channel: ${{ matrix.channel }}
