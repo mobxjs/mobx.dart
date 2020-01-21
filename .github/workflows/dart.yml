@@ -52,9 +52,7 @@ jobs:
 
       - name: Print Flutter version
         run: |
-          flutter --version
-          echo $PATH
-
+          set
       - name: Install dependencies
         run: flutter packages get
         working-directory: ${{ matrix.package }}
