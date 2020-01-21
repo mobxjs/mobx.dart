@@ -16,18 +16,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Install dependencies
         working-directory: ${{ matrix.package }}
-        run: |
-          pub get
+        run: pub get
+
       - name: Analyze
         working-directory: ${{ matrix.package }}
-        run: |
-          dartanalyzer --fatal-infos --fatal-warnings .
+        run: dartanalyzer --fatal-infos --fatal-warnings .
+
       - name: Run tests
         working-directory: ${{ matrix.package }}
-        run: |
-          pub run test_coverage
+        run: pub run test_coverage
+
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v1
         with:
@@ -50,7 +51,9 @@ jobs:
           channel: ${{ matrix.channel }}
 
       - name: Print Flutter version
-        run: flutter --version
+        run: |
+          flutter --version
+          echo $PATH
 
       - name: Install dependencies
         run: flutter packages get
