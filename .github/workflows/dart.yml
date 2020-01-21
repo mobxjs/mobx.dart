@@ -1,0 +1,73 @@
+name: Dart CI
+
+on: [push]
+
+jobs:
+  build_dart_packages:
+    runs-on: ubuntu-latest
+
+    container:
+      image: google/dart:${{ matrix.version }}
+
+    strategy:
+      matrix:
+        package: ["mobx", "mobx_codegen"]
+        version: ["latest", "dev"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        working-directory: ${{ matrix.package }}
+        run: pub get
+
+      - name: Analyze
+        working-directory: ${{ matrix.package }}
+        run: dartanalyzer --fatal-infos --fatal-warnings .
+
+      - name: Run tests
+        working-directory: ${{ matrix.package }}
+        run: pub run test_coverage
+
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: ${{ matrix.package }}
+          file: ./${{ matrix.package }}/coverage/lcov.info
+
+  build_flutter_packages:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        package: ["flutter_mobx"]
+        channel: ["stable", "beta"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: ${{ matrix.channel }}
+
+      - name: Print Flutter version
+        run: |
+          set
+      - name: Install dependencies
+        run: flutter packages get
+        working-directory: ${{ matrix.package }}
+
+      - name: Analyze
+        run: flutter analyze
+        working-directory: ${{ matrix.package }}
+
+      - name: Run tests
+        run: flutter test --coverage --coverage-path coverage/lcov.info
+        working-directory: ${{ matrix.package }}
+
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: ${{ matrix.package }}
+          file: ./${{ matrix.package }}/coverage/lcov.info

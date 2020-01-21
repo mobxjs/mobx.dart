@@ -8,8 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/dart.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/dart.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/guides/cheat-sheet.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/guides/cheat-sheet.mdx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +92,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Markdown" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/docs/node_modules/typescript/lib" />
   </component>
@@ -116,7 +116,7 @@
       <command value="pub:get:mobx_codegen" />
     </option>
   </component>
-  <component name="RunManager" selected="Flutter.mobx_examples">
+  <component name="RunManager" selected="Flutter Test.tests in flutter_mobx_test.dart">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
@@ -145,21 +145,15 @@
         </option>
       </method>
     </configuration>
+    <configuration name="tests in flutter_mobx_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="gen:mobx_examples" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="gen:mobx_examples" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="pub:get:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="pub:get:mobx" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -200,19 +194,19 @@
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="Flutter.mobx_examples" />
+      <item itemvalue="Flutter Test.tests in flutter_mobx_test.dart" />
       <item itemvalue="npm.start" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
-      <item itemvalue="npm.pub:get:mobx" />
       <item itemvalue="npm.set:versions" />
       <item itemvalue="npm.gen:mobx_examples" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.gen:mobx_examples" />
-        <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="npm.set:versions" />
-        <item itemvalue="npm.pub:get:mobx" />
+        <item itemvalue="npm.pub:get:mobx_codegen" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="Flutter Test.tests in flutter_mobx_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -274,154 +268,7 @@
       <workItem from="1579234206767" duration="2631000" />
       <workItem from="1579436162519" duration="1416000" />
       <workItem from="1579439150120" duration="148000" />
-      <workItem from="1579439312910" duration="7266000" />
-    </task>
-    <task id="LOCAL-00003" summary="cached output of vscode extension to avoid errors on CI">
-      <created>1576739921469</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1576739921469</updated>
-    </task>
-    <task id="LOCAL-00004" summary="style improvements">
-      <created>1576818743785</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1576818743785</updated>
-    </task>
-    <task id="LOCAL-00005" summary="style improvements">
-      <created>1576819812437</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1576819812437</updated>
-    </task>
-    <task id="LOCAL-00006" summary="package upgrade for mobx">
-      <created>1576820552046</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1576820552046</updated>
-    </task>
-    <task id="LOCAL-00007" summary="package upgrade for flutter_mobx">
-      <created>1576820979411</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1576820979411</updated>
-    </task>
-    <task id="LOCAL-00008" summary="updated changelog to add names of contributors">
-      <created>1576821357875</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1576821357875</updated>
-    </task>
-    <task id="LOCAL-00009" summary="updated changelog to add names of contributors">
-      <created>1576821406863</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1576821406863</updated>
-    </task>
-    <task id="LOCAL-00010" summary="adding Robert's testimonial">
-      <created>1576840218656</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1576840218656</updated>
-    </task>
-    <task id="LOCAL-00011" summary="exposing the field to turn on/off the use of StackTrace in the Observer name">
-      <created>1577256371517</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1577256371517</updated>
-    </task>
-    <task id="LOCAL-00012" summary="fixing a few issues in mobx_examples">
-      <created>1577413772895</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1577413772895</updated>
-    </task>
-    <task id="LOCAL-00013" summary="fixing analyzer issues in mobx_examples">
-      <created>1577463242926</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1577463242926</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Creating the web version">
-      <created>1577469820614</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1577469820614</updated>
-    </task>
-    <task id="LOCAL-00015" summary="package upgrades">
-      <created>1577591843323</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1577591843323</updated>
-    </task>
-    <task id="LOCAL-00016" summary="better fonts :-)">
-      <created>1577623188849</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1577623188849</updated>
-    </task>
-    <task id="LOCAL-00017" summary="style updates">
-      <created>1577644106355</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1577644106355</updated>
-    </task>
-    <task id="LOCAL-00018" summary="changelog updates">
-      <created>1577677131217</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1577677131217</updated>
-    </task>
-    <task id="LOCAL-00019" summary="changelog updates">
-      <created>1577677352089</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1577677352089</updated>
-    </task>
-    <task id="LOCAL-00020" summary="changelog updates">
-      <created>1577677395138</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1577677395138</updated>
-    </task>
-    <task id="LOCAL-00021" summary="adding release info regarding git tagging">
-      <created>1577678254480</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1577678254480</updated>
-    </task>
-    <task id="LOCAL-00022" summary="doc updates">
-      <created>1577685473030</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1577685473030</updated>
-    </task>
-    <task id="LOCAL-00023" summary="added testimonial from Jacob">
-      <created>1577728489761</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1577728489761</updated>
+      <workItem from="1579439312910" duration="14369000" />
     </task>
     <task id="LOCAL-00024" summary="adding the generative logo">
       <created>1577860971946</created>
@@ -619,7 +466,154 @@
       <option name="project" value="LOCAL" />
       <updated>1579452949636</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="notes on extension methods, @computed, build_runner">
+      <created>1579494497252</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1579494497252</updated>
+    </task>
+    <task id="LOCAL-00053" summary="adding dart versions">
+      <created>1579527689099</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1579527689099</updated>
+    </task>
+    <task id="LOCAL-00054" summary="using the current workflow from circleci">
+      <created>1579528792953</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1579528792953</updated>
+    </task>
+    <task id="LOCAL-00055" summary="fixing the image">
+      <created>1579529006445</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1579529006446</updated>
+    </task>
+    <task id="LOCAL-00056" summary="adding flutter builds and coverages">
+      <created>1579536057887</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1579536057887</updated>
+    </task>
+    <task id="LOCAL-00057" summary="fixing shell variable">
+      <created>1579536617246</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1579536617246</updated>
+    </task>
+    <task id="LOCAL-00058" summary="added testimonial from Alois">
+      <created>1579565615541</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1579565615541</updated>
+    </task>
+    <task id="LOCAL-00059" summary="codecov action">
+      <created>1579566443904</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1579566443904</updated>
+    </task>
+    <task id="LOCAL-00060" summary="fixing syntax errors with codecov action">
+      <created>1579566638150</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1579566638150</updated>
+    </task>
+    <task id="LOCAL-00061" summary="fixing syntax errors with codecov action">
+      <created>1579566880443</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1579566880443</updated>
+    </task>
+    <task id="LOCAL-00062" summary="fixing syntax errors with codecov action">
+      <created>1579567226834</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1579567226834</updated>
+    </task>
+    <task id="LOCAL-00063" summary="only trying with flutter stable">
+      <created>1579572901803</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1579572901803</updated>
+    </task>
+    <task id="LOCAL-00064" summary="adding sudo before flutter commands as cirrusci image requires to run with the user permissions">
+      <created>1579573552049</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1579573552049</updated>
+    </task>
+    <task id="LOCAL-00065" summary="using the full path to flutter cmd">
+      <created>1579573880254</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1579573880254</updated>
+    </task>
+    <task id="LOCAL-00066" summary="trying without sudo">
+      <created>1579574100956</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1579574100956</updated>
+    </task>
+    <task id="LOCAL-00067" summary="tweaking names and adding coverage info">
+      <created>1579574386315</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1579574386315</updated>
+    </task>
+    <task id="LOCAL-00068" summary="using the flutter action">
+      <created>1579583270307</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1579583270307</updated>
+    </task>
+    <task id="LOCAL-00069" summary="fixing syntax errors">
+      <created>1579583530616</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1579583530616</updated>
+    </task>
+    <task id="LOCAL-00070" summary="fixing syntax errors">
+      <created>1579583647285</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1579583647285</updated>
+    </task>
+    <task id="LOCAL-00071" summary="simplified">
+      <created>1579584096630</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1579584096630</updated>
+    </task>
+    <task id="LOCAL-00072" summary="removing circleci">
+      <created>1579596525522</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1579596525522</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -676,24 +670,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="style updates" />
-    <MESSAGE value="changelog updates" />
-    <MESSAGE value="adding release info regarding git tagging" />
-    <MESSAGE value="added testimonial from Jacob" />
-    <MESSAGE value="adding the generative logo" />
-    <MESSAGE value="removing unneeded sections" />
-    <MESSAGE value="removing link to logo" />
-    <MESSAGE value="publishing flutter_mobx" />
-    <MESSAGE value="adding flutter-fav logo to mobx_codegen" />
-    <MESSAGE value="fix for the return-type when it is generic with type-arguments" />
-    <MESSAGE value="adding a test field for #367" />
-    <MESSAGE value="updates changelog and bumps version" />
-    <MESSAGE value="cleaning up unnecessary code branch in type extraction" />
-    <MESSAGE value="pubspec updates" />
-    <MESSAGE value="doc updates" />
-    <MESSAGE value="sample test that fails type discovery" />
-    <MESSAGE value="commenting out flutter sdk" />
-    <MESSAGE value="upgrading the version of mobx_codegen in mobx_examples" />
     <MESSAGE value="minor typo fixes in the dice example, package updates" />
     <MESSAGE value="tweaks" />
     <MESSAGE value="typos" />
@@ -701,7 +677,25 @@
     <MESSAGE value="publishing mobx_codegen" />
     <MESSAGE value="adding a cheat sheet" />
     <MESSAGE value="fixing typo and incomplete sentence" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing typo and incomplete sentence" />
+    <MESSAGE value="notes on extension methods, @computed, build_runner" />
+    <MESSAGE value="adding dart versions" />
+    <MESSAGE value="using the current workflow from circleci" />
+    <MESSAGE value="fixing the image" />
+    <MESSAGE value="adding flutter builds and coverages" />
+    <MESSAGE value="fixing shell variable" />
+    <MESSAGE value="added testimonial from Alois" />
+    <MESSAGE value="codecov action" />
+    <MESSAGE value="fixing syntax errors with codecov action" />
+    <MESSAGE value="only trying with flutter stable" />
+    <MESSAGE value="adding sudo before flutter commands as cirrusci image requires to run with the user permissions" />
+    <MESSAGE value="using the full path to flutter cmd" />
+    <MESSAGE value="trying without sudo" />
+    <MESSAGE value="tweaking names and adding coverage info" />
+    <MESSAGE value="using the flutter action" />
+    <MESSAGE value="fixing syntax errors" />
+    <MESSAGE value="simplified" />
+    <MESSAGE value="removing circleci" />
+    <option name="LAST_COMMIT_MESSAGE" value="removing circleci" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -709,11 +703,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="203" width="1127" height="666" key="#Project_Structure/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578622231406" />
-    <state x="528" y="153" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578627206683">
+    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579528447473">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="528" y="153" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1578627206683" />
-    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577465004947" />
+    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579528447473" />
     <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577637150073">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -735,12 +729,12 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="1118" y="404" key="#xdebugger.evaluate/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577977075071" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579494478962">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579596525392">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1579494478962" />
+    <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1579596525392" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311043628" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579452949508" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579574386189" />
     <state width="481" height="466" key="DebuggerActiveHint" timestamp="1578496148462">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -750,35 +744,35 @@
     </state>
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1578026220184" />
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578158948596" />
-    <state x="446" y="343" key="EditFileWatcherDialog" timestamp="1579439429050">
+    <state x="446" y="343" key="EditFileWatcherDialog" timestamp="1579525988618">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="446" y="343" key="EditFileWatcherDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576815875205" />
-    <state x="446" y="343" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579439429050" />
-    <state width="1262" height="278" key="GridCell.Tab.0.bottom" timestamp="1579321602408">
+    <state x="446" y="343" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579525988618" />
+    <state width="1250" height="278" key="GridCell.Tab.0.bottom" timestamp="1579567140478">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1262" height="278" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1579321602408" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1270" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579095041205" />
-    <state width="1262" height="278" key="GridCell.Tab.0.center" timestamp="1579321602408">
+    <state width="1250" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579567140478" />
+    <state width="1250" height="278" key="GridCell.Tab.0.center" timestamp="1579567140476">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1262" height="278" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1579321602408" />
     <state width="1878" height="288" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795303" />
-    <state width="1270" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579095041205" />
-    <state width="1262" height="278" key="GridCell.Tab.0.left" timestamp="1579321602407">
+    <state width="1250" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579567140476" />
+    <state width="1250" height="278" key="GridCell.Tab.0.left" timestamp="1579567140475">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1262" height="278" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1579321602407" />
     <state width="1878" height="288" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795302" />
-    <state width="1270" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579095041204" />
-    <state width="1262" height="278" key="GridCell.Tab.0.right" timestamp="1579321602408">
+    <state width="1250" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579567140475" />
+    <state width="1250" height="278" key="GridCell.Tab.0.right" timestamp="1579567140477">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1262" height="278" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1579321602408" />
     <state width="1878" height="288" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1270" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579095041205" />
+    <state width="1250" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579567140477" />
     <state width="1152" height="345" key="GridCell.Tab.1.bottom" timestamp="1578502180992">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -821,23 +815,23 @@
     <state x="553" y="264" key="MultipleFileMergeDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576738641901" />
     <state x="392" y="-809" key="MultipleFileMergeDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1575991880729" />
     <state x="553" y="264" key="MultipleFileMergeDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578621542066" />
-    <state x="334" y="187" key="SettingsEditor" timestamp="1579492742063">
+    <state x="615" y="174" key="SettingsEditor" timestamp="1579525993633">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="334" y="187" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1579492742063" />
     <state x="334" y="187" key="SettingsEditor/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576165320092" />
-    <state x="615" y="174" key="SettingsEditor/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579440752522" />
+    <state x="615" y="174" key="SettingsEditor/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579525993633" />
     <state width="515" height="445" key="SwitcherDM" timestamp="1577976796509">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579452952050">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579596527730">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1579234499549" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1579596527730" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579452952050" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579574388096" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
