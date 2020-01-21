@@ -22,7 +22,7 @@ jobs:
         working-directory: ${{ matrix.package }}
         run: |
           pub get
-      - name: Run Analyzer
+      - name: Analyze
         working-directory: ${{ matrix.package }}
         run: |
           dartanalyzer --fatal-infos --fatal-warnings .
@@ -53,15 +53,19 @@ jobs:
         with:
           channel: ${{ matrix.channel }}
 
-      - run: flutter --version
+      - name: Print Flutter version
+        run: flutter --version
 
-      - run: flutter packages get
+      - name: Install dependencies
+        run: flutter packages get
         working-directory: ${{ matrix.package }}
 
-      - run: flutter analyze
+      - name: Analyze
+        run: flutter analyze
         working-directory: ${{ matrix.package }}
 
-      - run: flutter test --coverage --coverage-path coverage/lcov.info
+      - name: Run tests
+        run: flutter test --coverage --coverage-path coverage/lcov.info
         working-directory: ${{ matrix.package }}
 
       - name: Upload coverage to codecov
