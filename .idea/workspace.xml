@@ -268,14 +268,7 @@
       <workItem from="1579234206767" duration="2631000" />
       <workItem from="1579436162519" duration="1416000" />
       <workItem from="1579439150120" duration="148000" />
-      <workItem from="1579439312910" duration="14215000" />
-    </task>
-    <task id="LOCAL-00013" summary="fixing analyzer issues in mobx_examples">
-      <created>1577463242926</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1577463242926</updated>
+      <workItem from="1579439312910" duration="14369000" />
     </task>
     <task id="LOCAL-00014" summary="Creating the web version">
       <created>1577469820614</created>
@@ -613,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579566880443</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="fixing syntax errors with codecov action">
+      <created>1579567226834</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1579567226834</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -729,12 +729,12 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="1118" y="404" key="#xdebugger.evaluate/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577977075071" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579566880335">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579567226730">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1579536617116" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311043628" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579566880335" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579567226730" />
     <state width="481" height="466" key="DebuggerActiveHint" timestamp="1578496148462">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -826,12 +826,12 @@
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579566882363">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579567228791">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1579536618765" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579566882363" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579567228791" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>

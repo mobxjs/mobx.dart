@@ -35,7 +35,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: ${{ matrix.package }}
-        working-directory: ${{ matrix.package }}
+          file: ./${{ matrix.package }}/coverage/lcov.info
 
   build_flutter_packages:
     runs-on: ubuntu-latest
