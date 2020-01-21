@@ -56,7 +56,7 @@ jobs:
           fetch-depth: 1
       - name: Print Flutter version
         run: |
-          sudo $FLUTTER_CMD --version
+          sudo flutter --version
       - name: Install dependencies for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
