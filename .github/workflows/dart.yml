@@ -48,22 +48,24 @@ jobs:
         package: ["flutter_mobx"]
         version: ["stable", "beta"]
 
+    env:
+      FLUTTER_CMD: "/home/cirrus/sdks/flutter/bin/flutter"
     steps:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
       - name: Print Flutter version
         run: |
-          sudo flutter --version
+          sudo $FLUTTER_CMD --version
       - name: Install dependencies for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          sudo flutter packages get
+          sudo $FLUTTER_CMD packages get
       - name: Analyze ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          sudo flutter analyze
+          sudo $FLUTTER_CMD analyze
       - name: Run tests for ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
         run: |
-          sudo flutter test --coverage --coverage-path coverage/lcov.info
+          sudo $FLUTTER_CMD test --coverage --coverage-path coverage/lcov.info
