@@ -18,19 +18,19 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - name: Install dependencies for ${{ matrix.package }}
+      - name: Install dependencies
         working-directory: ${{ matrix.package }}
         run: |
           pub get
-      - name: Analyze ${{ matrix.package }}
+      - name: Run Analyzer
         working-directory: ${{ matrix.package }}
         run: |
           dartanalyzer --fatal-infos --fatal-warnings .
-      - name: Run tests for ${{ matrix.package }}
+      - name: Run tests
         working-directory: ${{ matrix.package }}
         run: |
           pub run test_coverage
-      - name: Upload coverage for ${{ matrix.package }}
+      - name: Upload coverage to codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -56,16 +56,22 @@ jobs:
           fetch-depth: 1
       - name: Print Flutter version
         run: |
-          sudo flutter --version
-      - name: Install dependencies for ${{ matrix.package }}
+          sudo $FLUTTER_CMD --version
+      - name: Install dependencies
         working-directory: ${{ matrix.package }}
         run: |
           sudo $FLUTTER_CMD packages get
-      - name: Analyze ${{ matrix.package }}
+      - name: Run Analyzer
         working-directory: ${{ matrix.package }}
         run: |
           sudo $FLUTTER_CMD analyze
-      - name: Run tests for ${{ matrix.package }}
+      - name: Run tests
         working-directory: ${{ matrix.package }}
         run: |
           sudo $FLUTTER_CMD test --coverage --coverage-path coverage/lcov.info
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: ${{ matrix.package }}
+          file: ./${{ matrix.package }}/coverage/lcov.info
