@@ -268,14 +268,7 @@
       <workItem from="1579234206767" duration="2631000" />
       <workItem from="1579436162519" duration="1416000" />
       <workItem from="1579439150120" duration="148000" />
-      <workItem from="1579439312910" duration="13426000" />
-    </task>
-    <task id="LOCAL-00010" summary="adding Robert's testimonial">
-      <created>1576840218656</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1576840218656</updated>
+      <workItem from="1579439312910" duration="13618000" />
     </task>
     <task id="LOCAL-00011" summary="exposing the field to turn on/off the use of StackTrace in the Observer name">
       <created>1577256371517</created>
@@ -613,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579565615541</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="codecov action">
+      <created>1579566443904</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1579566443904</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +670,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="publishing flutter_mobx" />
     <MESSAGE value="adding flutter-fav logo to mobx_codegen" />
     <MESSAGE value="fix for the return-type when it is generic with type-arguments" />
     <MESSAGE value="adding a test field for #367" />
@@ -695,7 +694,8 @@
     <MESSAGE value="adding flutter builds and coverages" />
     <MESSAGE value="fixing shell variable" />
     <MESSAGE value="added testimonial from Alois" />
-    <option name="LAST_COMMIT_MESSAGE" value="added testimonial from Alois" />
+    <MESSAGE value="codecov action" />
+    <option name="LAST_COMMIT_MESSAGE" value="codecov action" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -729,12 +729,12 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="1118" y="404" key="#xdebugger.evaluate/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577977075071" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579565615406">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579566443802">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1579536617116" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311043628" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579565615406" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579566443802" />
     <state width="481" height="466" key="DebuggerActiveHint" timestamp="1578496148462">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -826,12 +826,12 @@
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579565617940">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579566445703">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1579536618765" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579565617940" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579566445703" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>

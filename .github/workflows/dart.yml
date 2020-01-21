@@ -30,9 +30,8 @@ jobs:
         working-directory: ${{ matrix.package }}
         run: |
           pub run test_coverage
-      - name: Upload coverage for ${{ matrix.package }}
+      - uses: codecov/codecov-action@v1
         working-directory: ${{ matrix.package }}
-        uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: ${{ matrix.package }}
@@ -67,9 +66,8 @@ jobs:
         working-directory: ${{ matrix.package }}
         run: |
           flutter test --coverage --coverage-path coverage/lcov.info
-      - name: Upload coverage for ${{ matrix.package }}
+      - uses: codecov/codecov-action@v1
         working-directory: ${{ matrix.package }}
-        uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: ${{ matrix.package }}
