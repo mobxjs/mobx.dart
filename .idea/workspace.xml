@@ -270,13 +270,6 @@
       <workItem from="1579439150120" duration="148000" />
       <workItem from="1579439312910" duration="14369000" />
     </task>
-    <task id="LOCAL-00019" summary="changelog updates">
-      <created>1577677352089</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1577677352089</updated>
-    </task>
     <task id="LOCAL-00020" summary="changelog updates">
       <created>1577677395138</created>
       <option name="number" value="00020" />
@@ -613,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579574386315</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="using the flutter action">
+      <created>1579583270307</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1579583270307</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +670,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="doc updates" />
     <MESSAGE value="sample test that fails type discovery" />
     <MESSAGE value="commenting out flutter sdk" />
     <MESSAGE value="upgrading the version of mobx_codegen in mobx_examples" />
@@ -695,7 +694,8 @@
     <MESSAGE value="using the full path to flutter cmd" />
     <MESSAGE value="trying without sudo" />
     <MESSAGE value="tweaking names and adding coverage info" />
-    <option name="LAST_COMMIT_MESSAGE" value="tweaking names and adding coverage info" />
+    <MESSAGE value="using the flutter action" />
+    <option name="LAST_COMMIT_MESSAGE" value="using the flutter action" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -729,10 +729,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="1118" y="404" key="#xdebugger.evaluate/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577977075071" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579574386190">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579583270180">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1579536617116" />
+    <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1579583270180" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311043628" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579574386189" />
     <state width="481" height="466" key="DebuggerActiveHint" timestamp="1578496148462">
@@ -826,10 +826,10 @@
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579574388096">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579583272081">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1579536618765" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1579583272081" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579574388096" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">

@@ -52,25 +52,11 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: ${{ matrix.channel }}
-        run: flutter --version
-      - name: Install dependencies
-        uses: subosito/flutter-action@v1
-        with:
-          channel: ${{ matrix.channel }}
         working-directory: ${{ matrix.package }}
-        run: flutter packages get
-      - name: Run Analyzer
-        uses: subosito/flutter-action@v1
-        with:
-          channel: ${{ matrix.channel }}
-        working-directory: ${{ matrix.package }}
-        run: flutter analyze
-      - name: Run tests
-        uses: subosito/flutter-action@v1
-        with:
-          channel: ${{ matrix.channel }}
-        working-directory: ${{ matrix.package }}
-        run: flutter test --coverage --coverage-path coverage/lcov.info
+      - run: flutter --version
+      - run: flutter packages get
+      - run: flutter analyze
+      - run: flutter test --coverage --coverage-path coverage/lcov.info
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v1
         with:
