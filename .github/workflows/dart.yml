@@ -1,4 +1,4 @@
-name: Dart CI
+name: Build
 
 on: [push]
 
