@@ -46,7 +46,7 @@ jobs:
     strategy:
       matrix:
         package: ["flutter_mobx"]
-        version: ["latest", "stable", "beta", "dev"]
+        version: ["stable"]
 
     steps:
       - uses: actions/checkout@v1
