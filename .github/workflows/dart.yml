@@ -52,10 +52,18 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: ${{ matrix.channel }}
+
       - run: flutter --version
-      - run: cd ${{ matrix.package }} && flutter packages get
-      - run: cd ${{ matrix.package }} && flutter analyze
-      - run: cd ${{ matrix.package }} && flutter test --coverage --coverage-path coverage/lcov.info
+
+      - run: flutter packages get
+        working-directory: ${{ matrix.package }}
+
+      - run: flutter analyze
+        working-directory: ${{ matrix.package }}
+
+      - run: flutter test --coverage --coverage-path coverage/lcov.info
+        working-directory: ${{ matrix.package }}
+
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v1
         with:
