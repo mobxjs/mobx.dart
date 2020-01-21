@@ -68,5 +68,17 @@ MobX supports me on all of my projects.`
 Brazil's community was previously attached to BLoC. With MobX, they have found a great replacement.
 
 Several people here in Brazil are building Flutter apps quickly, thanks to MobX.`
+  },
+  {
+    author: 'Aloïs Deniel',
+    twitter: 'https://twitter.com/aloisdeniel',
+    title:
+      'Mobile app maker in ❤️ with Flutter & Figma & Firebase | @JintoApp co-founder | @FlutterRennes',
+    photoUrl:
+      'https://pbs.twimg.com/profile_images/1177279072810033152/R7NHj6M1_400x400.jpg',
+    message: `This framework is just awesome. I ported my Flutter
+ app to it and everything feels so much simpler now (even if the porting process has not been easy). 
+
+I highly recommend it ! 👌`
   }
 ];
