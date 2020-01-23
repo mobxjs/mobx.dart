@@ -15,7 +15,7 @@ jobs:
 
       - name: ${{ matrix.package }}
         id: publish
-        uses: k-paxian/dart-package-publisher@master
+        uses: k-paxian/dart-package-publisher@1.0
         with:
           relativePath: ${{ matrix.package }}
           accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
@@ -41,7 +41,7 @@ jobs:
 
       - name: ${{ matrix.package }}
         id: publish
-        uses: k-paxian/dart-package-publisher@master
+        uses: k-paxian/dart-package-publisher@1.0
         with:
           flutter: true
           relativePath: ${{ matrix.package }}
