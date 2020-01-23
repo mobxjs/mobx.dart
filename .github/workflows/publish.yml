@@ -21,7 +21,7 @@ jobs:
           refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
 
       - name: Tag commit
-        if: steps.publish.outputs.remoteVersion !== steps.publish.outputs.localVersion
+        if: steps.publish.outputs.remoteVersion != steps.publish.outputs.localVersion
         uses: hole19/git-tag-action@master
         env:
           TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.remoteVersion}}
