@@ -3,6 +3,7 @@
 library flutter_mobx;
 
 export 'package:flutter_mobx/src/observer.dart';
+export 'package:flutter_mobx/src/observer_listener.dart';
 
 /// The version as per `pubspec.yaml`
 const version = '0.3.6';
