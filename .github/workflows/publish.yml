@@ -26,7 +26,7 @@ jobs:
         if: steps.publish.outputs.remoteVersion != steps.publish.outputs.localVersion
         uses: hole19/git-tag-action@master
         env:
-          TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.remoteVersion}}
+          TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build_flutter_packages:
@@ -57,5 +57,5 @@ jobs:
         if: steps.publish.outputs.remoteVersion != steps.publish.outputs.localVersion
         uses: hole19/git-tag-action@master
         env:
-          TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.remoteVersion}}
+          TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
