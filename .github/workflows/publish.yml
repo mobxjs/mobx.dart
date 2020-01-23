@@ -20,6 +20,7 @@ jobs:
           relativePath: ${{ matrix.package }}
           accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
           refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
+          skipTests: true
 
       - name: Tag commit
         if: steps.publish.outputs.remoteVersion != steps.publish.outputs.localVersion
