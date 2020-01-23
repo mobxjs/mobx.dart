@@ -1,3 +1,8 @@
+## 0.4.0+2
+
+- README updates
+- Switching to [Github Actions](https://github.com/mobxjs/mobx.dart/actions) for all builds and publishing
+
 ## 0.4.0 - 0.4.0+1
 
 - Removing the deprecated `authors` field from `pubspec.yaml`
