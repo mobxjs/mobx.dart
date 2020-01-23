@@ -1,3 +1,8 @@
+## 0.3.6+1
+
+- README updates
+- Switching to [Github Actions](https://github.com/mobxjs/mobx.dart/actions) for all builds and publishing
+
 ## 0.3.5 - 0.3.6
 
 - Updated `mobx` dependency version to **0.4.0** in `flutter_mobx` `pubspec.yaml`

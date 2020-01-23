@@ -1,3 +1,8 @@
+## 0.4.1+1
+
+- README updates
+- Switching to [Github Actions](https://github.com/mobxjs/mobx.dart/actions) for all builds and publishing
+
 ## 0.4.1
 
 There were a number of bugs with the previous implementation of the `LibraryScopedNameFinder`. This resolves them, as well as ensures that a single code path is followed whether or not the analyzed source code contains named imports, reducing the potential for future bugs.
