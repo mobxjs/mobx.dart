@@ -1,6 +1,9 @@
 name: Publish
 
-on: [push]
+on:
+  push:
+    branches: 
+      - master
 
 jobs:
   build_dart_packages:
