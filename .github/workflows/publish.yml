@@ -39,8 +39,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: subosito/flutter-action@v1
+      - name: setup-flutter
+        uses: takuyaohashi/setup-flutter@v1
         with:
+          flutter-version: latest
           channel: stable
 
       - name: ${{ matrix.package }}
