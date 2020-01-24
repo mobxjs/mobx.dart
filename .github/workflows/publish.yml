@@ -39,12 +39,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: setup-flutter
-        uses: takuyaohashi/setup-flutter@v1
-        with:
-          flutter-version: latest
-          channel: stable
-
       - name: ${{ matrix.package }}
         id: publish
         uses: k-paxian/dart-package-publisher@1.0
