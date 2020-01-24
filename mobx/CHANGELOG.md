@@ -1,3 +1,7 @@
+## 0.4.0+3
+
+- Going back to original `test_coverage` package
+
 ## 0.4.0+2
 
 - README updates
