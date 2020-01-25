@@ -1,7 +1,8 @@
-## 0.3.6+1
+## 0.3.6+1 - 0.3.6+2
 
 - README updates
 - Switching to [Github Actions](https://github.com/mobxjs/mobx.dart/actions) for all builds and publishing
+- Upgraded to `Dart 2.7` as the min SDK
 
 ## 0.3.5 - 0.3.6
 
