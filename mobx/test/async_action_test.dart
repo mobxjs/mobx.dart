@@ -1,8 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
-import 'util.dart';
-
 Future sleep(int ms) => Future.delayed(Duration(milliseconds: ms));
 
 void main() {
