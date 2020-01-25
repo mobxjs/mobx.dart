@@ -16,9 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: ${{ matrix.package }}
+      - name: Publish if new
         id: publish
-        uses: k-paxian/dart-package-publisher@1.0
+        uses: k-paxian/dart-package-publisher@master
         with:
           relativePath: ${{ matrix.package }}
           accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
@@ -42,9 +42,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: ${{ matrix.package }}
+      - name: Publish if new
         id: publish
-        uses: k-paxian/dart-package-publisher@1.0
+        uses: k-paxian/dart-package-publisher@master
         with:
           flutter: true
           relativePath: ${{ matrix.package }}

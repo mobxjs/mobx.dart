@@ -8,14 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/publish.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/publish.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/mobx.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/mobx.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/mobx_codegen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/mobx_codegen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx/lib/src/api/store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/src/api/store.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,6 +274,7 @@
       <workItem from="1579796065231" duration="39000" />
       <workItem from="1579838168200" duration="24000" />
       <workItem from="1579838205738" duration="851000" />
+      <workItem from="1579879386176" duration="1161000" />
     </task>
     <task id="LOCAL-00041" summary="minor typo fixes in the dice example, package updates">
       <created>1579019014263</created>
