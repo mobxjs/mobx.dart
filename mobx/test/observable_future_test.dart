@@ -6,9 +6,9 @@ import 'package:test/test.dart';
 import 'util.dart';
 
 void main() {
-  group('ObservableFuture', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('ObservableFuture', () {
     test('value constructor creates an immediately fulfilled future', () {
       final future = ObservableFuture.value('success');
       expect(future.value, equals('success'));

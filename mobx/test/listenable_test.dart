@@ -6,9 +6,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  group('Listenable', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('Listenable', () {
     test('dispose function removes added listener', () {
       void listener(ChangeNotification<int> change) {}
 

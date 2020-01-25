@@ -7,9 +7,9 @@ import 'package:test/test.dart';
 import 'util.dart';
 
 void main() {
-  group('ObservableStream', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('ObservableStream', () {
     test('match works', () async {
       // ignore:close_sinks
       final ctrl = StreamController<int>.broadcast();

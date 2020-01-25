@@ -1,7 +1,11 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
+  turnOffWritePolicy();
+
   test('reaction should work with a map operation on list. Github Issue #211',
       () {
     final list = ObservableList<int>()..add(1);

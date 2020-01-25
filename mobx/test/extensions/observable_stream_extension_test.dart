@@ -7,9 +7,9 @@ import 'package:test/test.dart';
 import '../util.dart';
 
 void main() {
-  group('ObservableStreamExtension', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('ObservableStreamExtension', () {
     test('Transform Stream in ObservableStream', () async {
       const stream = Stream.empty();
       expect(stream.asObservable(), isA<ObservableStream>());

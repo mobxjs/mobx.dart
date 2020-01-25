@@ -16,8 +16,6 @@ void main() {
   });
 
   group('AsyncAction', () {
-    turnOffWritePolicy();
-
     test('null name throws', () {
       expect(() => AsyncAction(null), throwsA(anything));
     });

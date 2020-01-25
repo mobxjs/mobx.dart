@@ -7,9 +7,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  group('ObservableList', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('ObservableList', () {
     test('basics work', () {
       final list = ObservableList<int>();
       var count = -1;
