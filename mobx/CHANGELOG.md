@@ -1,6 +1,7 @@
-## 0.4.0+3
+## 0.4.0+3 - 0.4.0+4
 
 - Going back to original `test_coverage` package
+- Some cleanups in the tests
 
 ## 0.4.0+2
 
