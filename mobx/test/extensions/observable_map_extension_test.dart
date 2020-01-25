@@ -5,9 +5,9 @@ import 'package:test/test.dart';
 import '../util.dart';
 
 void main() {
-  group('ObservableMapExtension', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('ObservableMapExtension', () {
     test('Transform Map in ObservableMap', () async {
       final map = {};
       expect(map.asObservable(), isA<ObservableMap>());

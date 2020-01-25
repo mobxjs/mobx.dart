@@ -8,9 +8,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  group('Reaction', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('Reaction', () {
     test('basics work', () {
       var executed = false;
       final x = Observable(10);
@@ -36,8 +36,6 @@ void main() {
     });
 
     group('equals override', () {
-      turnOffWritePolicy();
-
       test('basics work', () {
         var executed = false;
 
@@ -235,8 +233,6 @@ void main() {
     });
 
     group('start/endTracking', () {
-      turnOffWritePolicy();
-
       test('reacts to changes to reactive values between begin and end', () {
         var i = 0;
 

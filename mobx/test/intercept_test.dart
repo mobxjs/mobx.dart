@@ -6,9 +6,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  group('intercept', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('intercept', () {
     test('basics work', () {
       final x = Observable(10);
       var executed = false;

@@ -7,9 +7,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  group('MapKeysIterable', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('MapKeysIterable', () {
     test('length reports observed', () {
       final atom = MockAtom();
 
@@ -28,8 +28,6 @@ void main() {
   });
 
   group('ObservableMap', () {
-    turnOffWritePolicy();
-
     test('Observing a map key works', () {
       final map = ObservableMap.of({'a': 1});
 
@@ -80,8 +78,6 @@ void main() {
     });
 
     group('fires reportObserved() for read methods', () {
-      turnOffWritePolicy();
-
       <String, void Function(ObservableMap<String, int>)>{
         '[]': (m) => m['a'],
         'containsKey': (m) => m.containsKey('a'),
@@ -98,8 +94,6 @@ void main() {
     group(
         'fires reportObserved() for iterable transformation methods only when iterating',
         () {
-      turnOffWritePolicy();
-
       <String, Iterable Function(ObservableMap<String, int>)>{
         'keys': (m) => m.keys,
         'values': (m) => m.values,
@@ -109,8 +103,6 @@ void main() {
     });
 
     group('fires reportChanged() for write methods', () {
-      turnOffWritePolicy();
-
       <String, void Function(ObservableMap<String, int>)>{
         '[]=': (m) => m['d'] = 4,
         'addAll': (m) => m.addAll({'d': 4, 'e': 5}),

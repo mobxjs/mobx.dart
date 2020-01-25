@@ -7,9 +7,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  group('when()', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('when()', () {
     test('basics work', () {
       var executed = false;
       final x = Observable(10);

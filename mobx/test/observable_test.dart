@@ -6,9 +6,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  group('observable<T>', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('observable<T>', () {
     test('basics work', () {
       final x = Observable<int>(null);
       expect(x.value, equals(null));
@@ -52,8 +52,6 @@ void main() {
   });
 
   group('createAtom()', () {
-    turnOffWritePolicy();
-
     test('basics works', () {
       var executionCount = 0;
       final a = Atom(

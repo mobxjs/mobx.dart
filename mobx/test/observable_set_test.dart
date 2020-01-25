@@ -7,9 +7,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  group('ObservableSet', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('ObservableSet', () {
     test('linkedHashSetFrom creates a set that iterates at insertion order',
         () {
       final oset = ObservableSet<int>.linkedHashSetFrom([]);
@@ -88,8 +88,6 @@ void main() {
     });
 
     group('fires reportObserved() for read methods', () {
-      turnOffWritePolicy();
-
       <String, void Function(ObservableSet<int>)>{
         'union': (m) => m.union({2, 5, 6}),
         'toSet': (m) => m.toSet(),
@@ -121,8 +119,6 @@ void main() {
     group(
         'fires reportObserved() for iterable transformation methods only when iterating',
         () {
-      turnOffWritePolicy();
-
       <String, Iterable Function(ObservableSet<int>)>{
         'cast': (m) => m.cast<num>(),
         'expand': (m) => m.expand((i) => [3, 4]),
@@ -138,8 +134,6 @@ void main() {
     });
 
     group('fires reportChanged() for write methods', () {
-      turnOffWritePolicy();
-
       <String, void Function(ObservableSet<int>)>{
         'add': (m) => m.add(6),
         'addAll': (m) => m.addAll([6, 7]),

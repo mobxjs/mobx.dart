@@ -6,9 +6,9 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  group('Action', () {
-    turnOffWritePolicy();
+  turnOffWritePolicy();
 
+  group('Action', () {
     test('basics work', () {
       final a = Action((String name, String value) {
         expect(name, equals('name'));
@@ -218,8 +218,6 @@ void main() {
   });
 
   group('Action utility functions', () {
-    turnOffWritePolicy();
-
     test('runInAction works', () {
       final x = Observable(10);
       final y = Observable(20);
