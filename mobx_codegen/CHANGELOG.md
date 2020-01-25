@@ -1,3 +1,8 @@
+## 0.4.2
+
+- Upgraded the `build_resolvers` dependency to 1.3.2, which fixes issues with certain
+  versions of Dart being unable to resolve `dart:ui` types.
+
 ## 0.4.1+2
 
 - Going back to original `test_coverage` package
