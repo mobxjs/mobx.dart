@@ -4,9 +4,12 @@ route: /guides/cheat-sheet
 name: MobX Cheat Sheet 🚀
 ---
 
+import { PubBadge } from '../components/PubBadge';
+
 # MobX Cheat Sheet 🚀
 
-import { PubBadge } from '../components/PubBadge';
+MobX has a pretty small API surface and tries to get out of your way as much as possible. Although minimal, there are few concepts you
+should be familiar with. This guide is meant to be a crash course in MobX.
 
 ## Required Packages
 
@@ -59,6 +62,8 @@ abstract class _Todo with Store {
 > ```
 > flutter packages pub run build_runner watch --delete-conflicting-outputs
 > ```
+>
+> Ya, it looks like a mouthful 🙃 but it does the job!
 
 ## Adding @observable, @computed, @action
 
@@ -191,3 +196,61 @@ Widget build(BuildContext context) {
 ```
 
 ...Since a `@computed` property is an observable, the `Observer` will automatically render when it changes!
+
+## Adding reactions
+
+_Reactions_, as the name suggests, react to changes in observables. Without reactions, it would be a boring system
+that only produces changes in _observables_ but nothing visible or useful ever happens because there are no reactions!
+
+There are 3 types of reactions: `autorun`, `reaction`, `when`. Each reaction returns a `ReactionDisposer`, which when called will dispose
+the reaction. Disposing a reaction stops tracking the observables.
+
+- `autorun`: Is a long-running reaction and starts tracking immediately.
+
+```dart
+// example.dart
+
+import 'package:mobx/mobx.dart';
+part 'example.g.dart';
+
+class Counter = _Counter with _$Counter;
+
+abstract class _Counter with Store {
+  @observable int counter = 0;
+
+  void setupReactions() {
+    autorun((_){
+      print("Count is $counter");
+    });
+  }
+
+}
+
+```
+
+- `reaction`: Is a long-running reaction and starts tracking only after the first change. It runs the _effect_ when
+  any tracked observables change.
+
+```dart
+// example.dart
+
+import 'package:mobx/mobx.dart';
+part 'example.g.dart';
+
+class Counter = _Counter with _$Counter;
+
+abstract class _Counter with Store {
+  @observable int counter = 0;
+
+  void setupReactions() {
+    reaction((_) => counter, (int newValue){
+      print("Count is now $newValue");
+    });
+  }
+
+}
+
+
+```
+
+- `when`: a reaction that waits for a condition to become true before running the _effect_.
