@@ -7,7 +7,7 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="adding netlify as sponsor">
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="added autorun, reaction example in cheat sheet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/src/guides/cheat-sheet.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/guides/cheat-sheet.mdx" afterDir="false" />
     </list>
@@ -271,13 +271,6 @@
       <workItem from="1579838168200" duration="24000" />
       <workItem from="1579838205738" duration="851000" />
       <workItem from="1579879386176" duration="3330000" />
-    </task>
-    <task id="LOCAL-00045" summary="moving write policy inside the group...test!">
-      <created>1579086846498</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1579086846499</updated>
     </task>
     <task id="LOCAL-00046" summary="moving write policy inside the group...test!">
       <created>1579087379687</created>
@@ -615,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580005413898</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="added autorun, reaction example in cheat sheet">
+      <created>1580044987705</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1580044987705</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +670,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="tweaking names and adding coverage info" />
     <MESSAGE value="using the flutter action" />
     <MESSAGE value="fixing syntax errors" />
     <MESSAGE value="simplified" />
@@ -695,7 +694,8 @@
     <MESSAGE value="sdk update, package update" />
     <MESSAGE value="adding a Publish status badge" />
     <MESSAGE value="adding netlify as sponsor" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding netlify as sponsor" />
+    <MESSAGE value="added autorun, reaction example in cheat sheet" />
+    <option name="LAST_COMMIT_MESSAGE" value="added autorun, reaction example in cheat sheet" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -749,30 +749,30 @@
     </state>
     <state x="446" y="343" key="EditFileWatcherDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576815875205" />
     <state x="446" y="343" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579525988618" />
-    <state width="1242" height="278" key="GridCell.Tab.0.bottom" timestamp="1580005442534">
+    <state width="1242" height="278" key="GridCell.Tab.0.bottom" timestamp="1580044977914">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1241" height="278" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106400" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1242" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580005442534" />
-    <state width="1242" height="278" key="GridCell.Tab.0.center" timestamp="1580005442533">
+    <state width="1242" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580044977914" />
+    <state width="1242" height="278" key="GridCell.Tab.0.center" timestamp="1580044977913">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1241" height="278" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106399" />
     <state width="1878" height="288" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795303" />
-    <state width="1242" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580005442533" />
-    <state width="1242" height="278" key="GridCell.Tab.0.left" timestamp="1580005442532">
+    <state width="1242" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580044977913" />
+    <state width="1242" height="278" key="GridCell.Tab.0.left" timestamp="1580044977912">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1241" height="278" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106398" />
     <state width="1878" height="288" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795302" />
-    <state width="1242" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580005442532" />
-    <state width="1242" height="278" key="GridCell.Tab.0.right" timestamp="1580005442533">
+    <state width="1242" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580044977912" />
+    <state width="1242" height="278" key="GridCell.Tab.0.right" timestamp="1580044977914">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1241" height="278" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106399" />
     <state width="1878" height="288" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1242" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580005442533" />
+    <state width="1242" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580044977914" />
     <state width="1152" height="345" key="GridCell.Tab.1.bottom" timestamp="1578502180992">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -845,11 +845,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577681183195" />
-    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1580044384846">
+    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1580051639555">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1579613436300" />
-    <state x="320" y="229" width="939" height="615" key="find.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580044384846" />
+    <state x="320" y="229" width="939" height="615" key="find.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580051639555" />
     <state x="438" y="372" key="git4idea.ui.GitUnstashDialog" timestamp="1576738706671">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
