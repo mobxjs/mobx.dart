@@ -2,7 +2,7 @@ name: Publish
 
 on:
   push:
-    branches: 
+    branches:
       - master
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
           suppressBuildRunner: true
 
       - name: Tag commit
-        if: steps.publish.outputs.remoteVersion != steps.publish.outputs.localVersion
+        if: steps.publish.outputs.success
         uses: hole19/git-tag-action@master
         env:
           TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
@@ -53,7 +53,7 @@ jobs:
           suppressBuildRunner: true
 
       - name: Tag commit
-        if: steps.publish.outputs.remoteVersion != steps.publish.outputs.localVersion
+        if: steps.publish.outputs.success
         uses: hole19/git-tag-action@master
         env:
           TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
