@@ -16,6 +16,10 @@ const sponsors = [
   {
     logo: require('../images/wunderdog-sponsor.png'),
     url: 'https://wunderdog.fi'
+  },
+  {
+    logo: 'https://www.netlify.com/img/global/badges/netlify-color-bg.svg',
+    url: 'https://www.netlify.com'
   }
 ];
 export const SponsorList = () => {

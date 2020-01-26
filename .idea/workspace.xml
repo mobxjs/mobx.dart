@@ -7,11 +7,10 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="increasing coverage">
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/lib/mobx.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/lib/mobx.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/components/Sponsor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/components/Sponsor.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +53,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="test-cleanups" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -94,7 +93,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="copyright.filetypes.Dart" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/docs/node_modules/typescript/lib" />
   </component>
@@ -118,7 +117,11 @@
       <command value="pub:get:mobx_codegen" />
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.tests in mobx">
+  <component name="RunManager" selected="Dart Test.mobx bug tests">
+    <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="tests in mobx" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx" />
       <option name="scope" value="FOLDER" />
@@ -143,6 +146,10 @@
         </option>
       </method>
     </configuration>
+    <configuration name="tests in flutter_mobx_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/flutter_mobx/test/flutter_mobx_test.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="pub:get:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -158,16 +165,6 @@
       <command value="run" />
       <scripts>
         <script value="pub:get:mobx_codegen" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="pub:upgrade:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="pub:upgrade:mobx" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -194,20 +191,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Dart Test.mobx bug tests" />
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="npm.start" />
       <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.set:versions" />
       <item itemvalue="npm.pub:get:mobx" />
-      <item itemvalue="npm.pub:upgrade:mobx" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.set:versions" />
         <item itemvalue="npm.pub:get:mobx" />
-        <item itemvalue="npm.pub:upgrade:mobx" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
       </list>
     </recent_temporary>
@@ -275,8 +271,35 @@
       <workItem from="1579796065231" duration="39000" />
       <workItem from="1579838168200" duration="24000" />
       <workItem from="1579838205738" duration="851000" />
-      <workItem from="1579879386176" duration="4741000" />
-      <workItem from="1579923648989" duration="3386000" />
+      <workItem from="1579879386176" duration="3330000" />
+    </task>
+    <task id="LOCAL-00044" summary="moving write policy inside the group...test!">
+      <created>1579086391532</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1579086391532</updated>
+    </task>
+    <task id="LOCAL-00045" summary="moving write policy inside the group...test!">
+      <created>1579086846498</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1579086846499</updated>
+    </task>
+    <task id="LOCAL-00046" summary="moving write policy inside the group...test!">
+      <created>1579087379687</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1579087379687</updated>
+    </task>
+    <task id="LOCAL-00047" summary="moving write policy inside the group...test!">
+      <created>1579087555958</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1579087555958</updated>
     </task>
     <task id="LOCAL-00048" summary="moving write policy inside the group...test!">
       <created>1579089517950</created>
@@ -593,39 +616,11 @@
       <option name="project" value="LOCAL" />
       <updated>1579921261524</updated>
     </task>
-    <task id="LOCAL-00093" summary="readme updates">
-      <created>1579921675260</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1579921675260</updated>
-    </task>
-    <task id="LOCAL-00094" summary="cleanups">
-      <created>1579928376816</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1579928376817</updated>
-    </task>
-    <task id="LOCAL-00095" summary="fixing analyzer errors">
-      <created>1579928503620</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1579928503620</updated>
-    </task>
-    <task id="LOCAL-00096" summary="increasing coverage">
-      <created>1579928896264</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1579928896264</updated>
-    </task>
-    <option name="localTasksCounter" value="97" />
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -676,9 +671,13 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="trying without sudo" />
+    <MESSAGE value="tweaking names and adding coverage info" />
+    <MESSAGE value="using the flutter action" />
     <MESSAGE value="fixing syntax errors" />
     <MESSAGE value="simplified" />
     <MESSAGE value="removing circleci" />
+    <MESSAGE value="cleanups" />
     <MESSAGE value="renames" />
     <MESSAGE value="changing badges" />
     <MESSAGE value="adding github badge" />
@@ -697,11 +696,7 @@
     <MESSAGE value="name for publish step" />
     <MESSAGE value="sdk update, package update" />
     <MESSAGE value="adding a Publish status badge" />
-    <MESSAGE value="readme updates" />
-    <MESSAGE value="cleanups" />
-    <MESSAGE value="fixing analyzer errors" />
-    <MESSAGE value="increasing coverage" />
-    <option name="LAST_COMMIT_MESSAGE" value="increasing coverage" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding a Publish status badge" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -709,11 +704,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="203" width="1127" height="666" key="#Project_Structure/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578622231406" />
-    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579928840439">
+    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579528447473">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="528" y="153" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1578627206683" />
-    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579928840439" />
+    <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579528447473" />
     <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577637150073">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -727,10 +722,6 @@
     </state>
     <state x="528" y="281" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575614380126" />
     <state x="363" y="-791" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576165235690" />
-    <state x="578" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1579925612978">
-      <screen x="0" y="23" width="1680" height="1027" />
-    </state>
-    <state x="578" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579925612978" />
     <state x="413" y="-803" key="#tests_in_mobx_codegen" timestamp="1576165270995">
       <screen x="-240" y="-1057" width="1920" height="1057" />
     </state>
@@ -739,12 +730,12 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="1118" y="404" key="#xdebugger.evaluate/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577977075071" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579921675140">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1579921261395">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1579838899806" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311043628" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579921675140" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579921261395" />
     <state width="481" height="466" key="DebuggerActiveHint" timestamp="1578496148462">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -759,30 +750,30 @@
     </state>
     <state x="446" y="343" key="EditFileWatcherDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576815875205" />
     <state x="446" y="343" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579525988618" />
-    <state width="1242" height="278" key="GridCell.Tab.0.bottom" timestamp="1579928754584">
+    <state width="1242" height="278" key="GridCell.Tab.0.bottom" timestamp="1580005288390">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1241" height="278" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106400" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1242" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579928754584" />
-    <state width="1242" height="278" key="GridCell.Tab.0.center" timestamp="1579928754584">
+    <state width="1242" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580005288390" />
+    <state width="1242" height="278" key="GridCell.Tab.0.center" timestamp="1580005288389">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1241" height="278" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106399" />
     <state width="1878" height="288" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795303" />
-    <state width="1242" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579928754584" />
-    <state width="1242" height="278" key="GridCell.Tab.0.left" timestamp="1579928754583">
+    <state width="1242" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580005288389" />
+    <state width="1242" height="278" key="GridCell.Tab.0.left" timestamp="1580005288388">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1241" height="278" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106398" />
     <state width="1878" height="288" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795302" />
-    <state width="1242" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579928754583" />
-    <state width="1242" height="278" key="GridCell.Tab.0.right" timestamp="1579928754584">
+    <state width="1242" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580005288388" />
+    <state width="1242" height="278" key="GridCell.Tab.0.right" timestamp="1580005288389">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1241" height="278" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106399" />
     <state width="1878" height="288" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1242" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579928754584" />
+    <state width="1242" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580005288389" />
     <state width="1152" height="345" key="GridCell.Tab.1.bottom" timestamp="1578502180992">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -830,23 +821,23 @@
     </state>
     <state x="663" y="254" key="RollbackChangesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1579597957642" />
     <state x="663" y="254" key="RollbackChangesDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579749459363" />
-    <state x="615" y="174" key="SettingsEditor" timestamp="1579924571388">
+    <state x="615" y="174" key="SettingsEditor" timestamp="1579918136244">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="334" y="187" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1579838191762" />
     <state x="334" y="187" key="SettingsEditor/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576165320092" />
-    <state x="615" y="174" key="SettingsEditor/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579924571388" />
+    <state x="615" y="174" key="SettingsEditor/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579918136244" />
     <state width="515" height="445" key="SwitcherDM" timestamp="1577976796509">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579928898160">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1579921270320">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1579838901660" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579928898159" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579921270320" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -855,11 +846,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577681183195" />
-    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1579924386682">
+    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1579613436300">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1579613436300" />
-    <state x="320" y="229" width="939" height="615" key="find.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579924386682" />
+    <state x="320" y="229" width="939" height="615" key="find.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579451225913" />
     <state x="438" y="372" key="git4idea.ui.GitUnstashDialog" timestamp="1576738706671">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
