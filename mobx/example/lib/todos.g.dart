@@ -6,7 +6,7 @@ part of 'todos.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Todo on TodoBase, Store {
   final _$descriptionAtom = Atom(name: 'TodoBase.description');
@@ -43,8 +43,6 @@ mixin _$Todo on TodoBase, Store {
     }, _$doneAtom, name: '${_$doneAtom.name}_set');
   }
 }
-
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$TodoList on TodoListBase, Store {
   Computed<ObservableList<Todo>> _$pendingTodosComputed;

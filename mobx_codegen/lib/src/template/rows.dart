@@ -5,6 +5,7 @@ class Rows<T> {
 
   bool get isEmpty => _templates.isEmpty;
   List get templates => _templates;
+  bool get ISEMPTY => _templates.isEmpty;
 
   @override
   String toString() =>
