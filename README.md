@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -414,6 +414,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://www.faladevs.com"><img src="https://avatars2.githubusercontent.com/u/30571368?v=4" width="64px;" alt=""/><br /><sub><b>Daniel Albuquerque</b></sub></a><br /><a href="#translation-dmAlbuquerque" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/marcoms"><img src="https://avatars0.githubusercontent.com/u/4211302?v=4" width="64px;" alt=""/><br /><sub><b>Marco Scannadinari</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=marcoms" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/lsaudon"><img src="https://avatars3.githubusercontent.com/u/25029876?v=4" width="64px;" alt=""/><br /><sub><b>lsaudon</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=lsaudon" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=lsaudon" title="Documentation">📖</a></td>
   </tr>
 </table>
 

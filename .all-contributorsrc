@@ -105,6 +105,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "lsaudon",
+      "name": "lsaudon",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/25029876?v=4",
+      "profile": "https://github.com/lsaudon",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
