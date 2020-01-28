@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -407,6 +407,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/katis"><img src="https://avatars1.githubusercontent.com/u/877226?v=4" width="64px;" alt=""/><br /><sub><b>katis</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=katis" title="Code">💻</a> <a href="#ideas-katis" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/pavanpodila/mobx.dart/pulls?q=is%3Apr+reviewed-by%3Akatis" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=katis" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/shyndman"><img src="https://avatars1.githubusercontent.com/u/42326?v=4" width="64px;" alt=""/><br /><sub><b>Scott Hyndman</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=shyndman" title="Code">💻</a> <a href="#ideas-shyndman" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/pavanpodila/mobx.dart/pulls?q=is%3Apr+reviewed-by%3Ashyndman" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=shyndman" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://dexterx.dev"><img src="https://avatars1.githubusercontent.com/u/25263378?v=4" width="64px;" alt=""/><br /><sub><b>Michael Bui</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=MaikuB" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=MaikuB" title="Documentation">📖</a> <a href="https://github.com/pavanpodila/mobx.dart/pulls?q=is%3Apr+reviewed-by%3AMaikuB" title="Reviewed Pull Requests">👀</a> <a href="#example-MaikuB" title="Examples">💡</a></td>
+    <td align="center"><a href="https://github.com/rrousselGit"><img src="https://avatars3.githubusercontent.com/u/20165741?v=4" width="64px;" alt=""/><br /><sub><b>Remi Rousselet</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=rrousselGit" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=rrousselGit" title="Documentation">📖</a> <a href="https://github.com/pavanpodila/mobx.dart/pulls?q=is%3Apr+reviewed-by%3ArrousselGit" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 

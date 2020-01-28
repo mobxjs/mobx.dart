@@ -56,6 +56,17 @@
         "review",
         "example"
       ]
+    },
+    {
+      "login": "rrousselGit",
+      "name": "Remi Rousselet",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/20165741?v=4",
+      "profile": "https://github.com/rrousselGit",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7
