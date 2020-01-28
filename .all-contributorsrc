@@ -198,6 +198,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "kobiburnley",
+      "name": "Kobi",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7372363?v=4",
+      "profile": "https://github.com/kobiburnley",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
