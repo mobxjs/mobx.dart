@@ -12,3 +12,4 @@ A set of examples for using [MobX](https://github.com/mobxjs/mobx.dart).
 - [Multi Counter](lib/multi_counter)
 - [Random Stream](lib/random_stream)
 - [Todos](lib/todos)
+- [Dice](lib/dice)

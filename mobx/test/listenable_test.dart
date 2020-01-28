@@ -3,8 +3,11 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
+  turnOffWritePolicy();
+
   group('Listenable', () {
     test('dispose function removes added listener', () {
       void listener(ChangeNotification<int> change) {}

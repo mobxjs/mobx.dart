@@ -1,7 +1,11 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
+  turnOffWritePolicy();
+
   group('when reactive-reads are enforced', () {
     setUp(() {
       mainContext.config =

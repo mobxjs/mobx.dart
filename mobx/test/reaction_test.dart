@@ -87,7 +87,7 @@ void main() {
       fakeAsync((async) {
         x.value = 11;
 
-        // Even though predicate has changed, effect should not be executed
+        // Even though tracking function has changed, effect should not be executed
         expect(executed, isFalse);
         async.elapse(const Duration(milliseconds: 500));
         expect(
@@ -125,7 +125,7 @@ void main() {
         // Effect should be executed, as we are forcing an immediate change even though there is a delay
         expect(executed, isTrue);
 
-        x.value = 11; // predicate goes from false -> true
+        x.value = 11; // tracking function goes from false -> true
 
         executed = false;
         async.elapse(const Duration(milliseconds: 500));
@@ -137,7 +137,7 @@ void main() {
         expect(executed, isTrue);
 
         executed = false;
-        // predicate goes from true -> false, but effect should not run for next 1s
+        // tracking function goes from true -> false, but effect should not run for next 1s
         x.value = 9;
 
         expect(executed, isFalse);
@@ -149,7 +149,7 @@ void main() {
       });
     });
 
-    test('with pre-mature disposal in predicate', () {
+    test('with pre-mature disposal in tracking function', () {
       final x = Observable(10);
       var executed = false;
 
@@ -173,7 +173,7 @@ void main() {
       d();
     });
 
-    test('fires onError on exception inside predicate', () {
+    test('fires onError on exception inside tracking function', () {
       var thrown = false;
       final dispose = reaction(
           (_) {

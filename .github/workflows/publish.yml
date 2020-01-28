@@ -1,0 +1,60 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_dart_packages:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        package: ["mobx", "mobx_codegen"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Publish if new
+        id: publish
+        uses: k-paxian/dart-package-publisher@master
+        with:
+          relativePath: ${{ matrix.package }}
+          accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
+          refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
+          suppressBuildRunner: true
+
+      - name: Tag commit
+        if: steps.publish.outputs.success
+        uses: hole19/git-tag-action@master
+        env:
+          TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build_flutter_packages:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        package: ["flutter_mobx"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Publish if new
+        id: publish
+        uses: k-paxian/dart-package-publisher@master
+        with:
+          flutter: true
+          relativePath: ${{ matrix.package }}
+          accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
+          refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
+          suppressBuildRunner: true
+
+      - name: Tag commit
+        if: steps.publish.outputs.success
+        uses: hole19/git-tag-action@master
+        env:
+          TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

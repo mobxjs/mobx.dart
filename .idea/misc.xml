@@ -3,6 +3,7 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="JSX" />
   </component>
+  <component name="ProjectRootManager" version="2" default="true" />
   <component name="ProjectType">
     <option name="id" value="io.flutter" />
   </component>

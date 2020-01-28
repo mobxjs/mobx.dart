@@ -3,8 +3,11 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
+import 'util.dart';
 
 void main() {
+  turnOffWritePolicy();
+
   group('intercept', () {
     test('basics work', () {
       final x = Observable(10);

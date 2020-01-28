@@ -1,7 +1,11 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
+  turnOffWritePolicy();
+
   group('observe', () {
     test('works', () {
       final x = Observable(10);

@@ -5,8 +5,17 @@ route: /examples/connectivity
 ---
 
 import { PubBadge } from '../../components/PubBadge';
+import { Profile } from '../../components/Testimonial';
 
 # Connectivity
+
+<Profile
+  author="Michael Bui"
+  twitter="https://twitter.com/MaikuB84"
+  photo="https://pbs.twimg.com/profile_images/989477066566320129/zCN6USCc_400x400.jpg"
+  size={32}
+  style={{ marginBottom: '4rem' }}
+/>
 
 Applications require notifying users when the state of their connection changes. One way of doing so is to make use of snackbars to inform users as shown in [this article](https://developers.google.com/web/fundamentals/instant-and-offline/offline-ux#inform_users_of_their_current_state_and_change_of_state).
 In this example, we see how this can be accomplished by making use of reactions.

@@ -3,7 +3,11 @@ import 'dart:async';
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
+  turnOffWritePolicy();
+
   group('ObservableValue', () {
     test('basics work', () {
       final ObservableValue<int> x1 = Observable(1);

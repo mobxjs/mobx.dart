@@ -3,7 +3,11 @@ import 'dart:async';
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
+  turnOffWritePolicy();
+
   group('ObservableFuture', () {
     test('value constructor creates an immediately fulfilled future', () {
       final future = ObservableFuture.value('success');
