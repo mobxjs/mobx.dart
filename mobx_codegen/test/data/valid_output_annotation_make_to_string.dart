@@ -199,14 +199,14 @@ mixin _$User on UserBase, Store {
   @override
   String toString() {
     final toStringList = [
-      'fullName: ${fullName.toString()}',
       'firstName: ${firstName.toString()}',
       'middleName: ${middleName.toString()}',
       'lastName: ${lastName.toString()}',
       'friend: ${friend.toString()}',
       'callback: ${callback.toString()}',
       'callback2: ${callback2.toString()}',
-      '_testUsers: ${_testUsers.toString()}'
+      '_testUsers: ${_testUsers.toString()}',
+      'fullName: ${fullName.toString()}'
     ];
     final string = toStringList.reduce((curr, next) => '$curr, $next');
     return '{$string}';

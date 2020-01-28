@@ -10,7 +10,7 @@ typedef VoidCallback = void Function();
 
 class User = UserBase with _$User;
 
-@MakeStore(generateToString: true)
+@toString
 abstract class UserBase with Store {
   UserBase(this.id);
 
