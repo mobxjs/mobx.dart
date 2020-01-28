@@ -115,6 +115,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "esarbanis",
+      "name": "Efthymis Sarmpanis",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/633903?v=4",
+      "profile": "http://efthymis.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
