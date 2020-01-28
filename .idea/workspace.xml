@@ -8,7 +8,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="added when example in cheat sheet">
+      <change afterPath="$PROJECT_DIR$/mobx/example/lib/compare1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobx/example/lib/compare2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/lib/src/template/store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/lib/src/template/store.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/valid_input_to_string_false.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/valid_input_annotation_make_to_string.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/valid_input_to_string_true.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/valid_output_to_string_false.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/data/valid_output_to_string_true.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/data/valid_output_annotation_make_to_string.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_codegen/test/mobx_codegen_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +126,7 @@
       <command value="pub:get:mobx_codegen" />
     </option>
   </component>
-  <component name="RunManager" selected="Dart Test.mobx bug tests">
+  <component name="RunManager" selected="Dart Test.tests in mobx_codegen">
     <configuration name="mobx bug tests" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/mobx/test/bug_related_test.dart" />
       <method v="2" />
@@ -192,19 +203,9 @@
       <item itemvalue="Dart Test.mobx bug tests" />
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
-      <item itemvalue="npm.start" />
-      <item itemvalue="npm.pub:get:mobx_codegen" />
-      <item itemvalue="npm.set:versions" />
-      <item itemvalue="npm.pub:get:mobx" />
+      <item itemvalue="Flutter.mobx_examples" />
+      <item itemvalue="Flutter Test.tests in flutter_mobx_test.dart" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="npm.start" />
-        <item itemvalue="npm.set:versions" />
-        <item itemvalue="npm.pub:get:mobx" />
-        <item itemvalue="npm.pub:get:mobx_codegen" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -660,7 +661,9 @@
         </entry>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -707,9 +710,10 @@
     </state>
     <state x="528" y="153" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1578627206683" />
     <state x="304" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579528447473" />
-    <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577637150073">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state x="485" y="397" width="603" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580204379613">
+      <screen x="0" y="162" width="1440" height="783" />
     </state>
+    <state x="485" y="397" width="603" height="403" key="#com.intellij.fileTypes.FileTypeChooser/0.162.1440.783/1440.0.960.540@0.162.1440.783" timestamp="1580204379613" />
     <state x="566" y="347" key="#com.intellij.fileTypes.FileTypeChooser/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577637150073" />
     <state x="577" y="335" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1578537630463">
       <screen x="0" y="23" width="1680" height="1027" />
@@ -738,9 +742,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="481" height="466" key="DebuggerActiveHint/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578496148462" />
-    <state x="100" y="123" width="1480" height="827" key="DiffContextDialog" timestamp="1579781491415">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state x="86" y="232" width="1269" height="631" key="DiffContextDialog" timestamp="1580204526517">
+      <screen x="0" y="162" width="1440" height="783" />
     </state>
+    <state x="86" y="232" width="1269" height="631" key="DiffContextDialog/0.162.1440.783/1440.0.960.540@0.162.1440.783" timestamp="1580204526517" />
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1579781491415" />
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1578158948596" />
     <state x="446" y="343" key="EditFileWatcherDialog" timestamp="1579525988618">
@@ -748,27 +753,31 @@
     </state>
     <state x="446" y="343" key="EditFileWatcherDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576815875205" />
     <state x="446" y="343" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579525988618" />
-    <state width="1242" height="278" key="GridCell.Tab.0.bottom" timestamp="1580044977914">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1394" height="293" key="GridCell.Tab.0.bottom" timestamp="1580204529189">
+      <screen x="0" y="162" width="1440" height="783" />
     </state>
+    <state width="1394" height="293" key="GridCell.Tab.0.bottom/0.162.1440.783/1440.0.960.540@0.162.1440.783" timestamp="1580204529189" />
     <state width="1241" height="278" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106400" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
     <state width="1242" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580044977914" />
-    <state width="1242" height="278" key="GridCell.Tab.0.center" timestamp="1580044977913">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1394" height="293" key="GridCell.Tab.0.center" timestamp="1580204529189">
+      <screen x="0" y="162" width="1440" height="783" />
     </state>
+    <state width="1394" height="293" key="GridCell.Tab.0.center/0.162.1440.783/1440.0.960.540@0.162.1440.783" timestamp="1580204529189" />
     <state width="1241" height="278" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106399" />
     <state width="1878" height="288" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795303" />
     <state width="1242" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580044977913" />
-    <state width="1242" height="278" key="GridCell.Tab.0.left" timestamp="1580044977912">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1394" height="293" key="GridCell.Tab.0.left" timestamp="1580204529189">
+      <screen x="0" y="162" width="1440" height="783" />
     </state>
+    <state width="1394" height="293" key="GridCell.Tab.0.left/0.162.1440.783/1440.0.960.540@0.162.1440.783" timestamp="1580204529189" />
     <state width="1241" height="278" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106398" />
     <state width="1878" height="288" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795302" />
     <state width="1242" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580044977912" />
-    <state width="1242" height="278" key="GridCell.Tab.0.right" timestamp="1580044977914">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1394" height="293" key="GridCell.Tab.0.right" timestamp="1580204529189">
+      <screen x="0" y="162" width="1440" height="783" />
     </state>
+    <state width="1394" height="293" key="GridCell.Tab.0.right/0.162.1440.783/1440.0.960.540@0.162.1440.783" timestamp="1580204529189" />
     <state width="1241" height="278" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1579839106399" />
     <state width="1878" height="288" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
     <state width="1242" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580044977914" />
@@ -844,9 +853,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577681183195" />
-    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1580051639555">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state x="274" y="319" width="805" height="538" key="find.popup" timestamp="1580202246641">
+      <screen x="0" y="162" width="1440" height="783" />
     </state>
+    <state x="274" y="319" width="805" height="538" key="find.popup/0.162.1440.783/1440.0.960.540@0.162.1440.783" timestamp="1580202246641" />
     <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1579613436300" />
     <state x="320" y="229" width="939" height="615" key="find.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580051639555" />
     <state x="438" y="372" key="git4idea.ui.GitUnstashDialog" timestamp="1576738706671">
