@@ -32,6 +32,18 @@
         "review",
         "test"
       ]
+    },
+    {
+      "login": "shyndman",
+      "name": "Scott Hyndman",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/42326?v=4",
+      "profile": "https://github.com/shyndman",
+      "contributions": [
+        "code",
+        "ideas",
+        "review",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7
