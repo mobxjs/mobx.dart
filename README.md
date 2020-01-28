@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-25-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-26-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -434,6 +434,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/yoavrofe"><img src="https://avatars2.githubusercontent.com/u/367621?v=4" width="64px;" alt=""/><br /><sub><b>Yoav Rofé</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=yoavrofe" title="Documentation">📖</a></td>
     <td align="center"><a href="https://twitter.com/matiwojt"><img src="https://avatars1.githubusercontent.com/u/20087150?v=4" width="64px;" alt=""/><br /><sub><b>Mateusz Wojtczak</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=wojtczakmat" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/t-artikov"><img src="https://avatars1.githubusercontent.com/u/1927992?v=4" width="64px;" alt=""/><br /><sub><b>Timur Artikov</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=t-artikov" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/sohonisaurabh"><img src="https://avatars1.githubusercontent.com/u/20185422?v=4" width="64px;" alt=""/><br /><sub><b>Saurabh Sohoni</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=sohonisaurabh" title="Documentation">📖</a></td>
   </tr>
 </table>
 
