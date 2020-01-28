@@ -270,6 +270,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "rchavik",
+      "name": "Rachman Chavik",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/39490?v=4",
+      "profile": "http://croogo.org",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
