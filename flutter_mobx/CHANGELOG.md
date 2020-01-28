@@ -1,3 +1,7 @@
+## 1.0.0
+
+- Ready for prime time!
+
 ## 0.3.7
 
 - Refactoring `observer.dart` to separate out the `StatelessObserverWidget`, `StatefulObserverWidget` and the `ObserverWidgetMixin` into their own files.

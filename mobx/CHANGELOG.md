@@ -1,3 +1,7 @@
+## 1.0.0
+
+- Ready for prime time!
+
 ## 0.4.0+3 - 0.4.0+4
 
 - Going back to original `test_coverage` package
