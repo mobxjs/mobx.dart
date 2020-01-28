@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -404,6 +404,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://blog.pixelingene.com"><img src="https://avatars0.githubusercontent.com/u/156846?v=4" width="64px;" alt=""/><br /><sub><b>Pavan Podila</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=pavanpodila" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=pavanpodila" title="Documentation">📖</a> <a href="#design-pavanpodila" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/katis"><img src="https://avatars1.githubusercontent.com/u/877226?v=4" width="64px;" alt=""/><br /><sub><b>katis</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=katis" title="Code">💻</a> <a href="#ideas-katis" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/pavanpodila/mobx.dart/pulls?q=is%3Apr+reviewed-by%3Akatis" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=katis" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
