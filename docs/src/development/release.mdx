@@ -44,32 +44,9 @@ npm run set:versions
 
 The versions of packages mentioned in the [Getting Started Guide](/getting-started) should match the `pubspec.yaml` files of each package.
 
-### 5. Push release tags to Github
+### 5. Git Push
 
-Before we can publish to **pub.dev**, it is necessary to push the version tags marking the point in code that corresponds to the version of
-the package. You can set the tag using the following git command. This applies to all our packages: `mobx`, `flutter_mobx` and `mobx_codegen`
-
-```shell
-git tag mobx-0.4.0
-```
-
-Note that the tag-format should be:
-
-**`<name-of-package>-<pubspec-version>`**
-
-### 6. Publish
-
-Run the command `flutter packages pub publish` in the package folder. Assuming you have done all of the earlier steps, this should be just a matter of hitting the `y` key and publishing.
-
-```
-$> flutter packages pub publish
-Publishing mobx 0.3.3+2 to https://pub.dartlang.org:
-...
-...
-...
-...
-Looks great! Are you ready to upload your package (y/n)? y
-Uploading...
-Successfully uploaded package.
-
-```
+And that's it! The rest of the work will be automatically done by [Github Actions](https://github.com/mobxjs/mobx.dart/actions).
+The Build and Publish workflow will inspect
+the local and remote versions of the package and publish to `pub.dev` if newer. It will also tag the commit with the right
+tags following the format of: `<package-name>-<version-number>`

@@ -7,16 +7,10 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="using the sucess flag from step">
-      <change afterPath="$PROJECT_DIR$/flutter_mobx/lib/src/observer_widget_mixin.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter_mobx/lib/src/stateful_observer_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter_mobx/lib/src/stateless_observer_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="adding files for flutter web">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/lib/flutter_mobx.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/lib/flutter_mobx.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/development/release.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/development/release.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/getting-started/index.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/getting-started/index.mdx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,21 +254,7 @@
       <workItem from="1579838168200" duration="24000" />
       <workItem from="1579838205738" duration="851000" />
       <workItem from="1579879386176" duration="3330000" />
-      <workItem from="1580106026970" duration="3794000" />
-    </task>
-    <task id="LOCAL-00048" summary="moving write policy inside the group...test!">
-      <created>1579089517950</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1579089517950</updated>
-    </task>
-    <task id="LOCAL-00049" summary="publishing mobx_codegen">
-      <created>1579234483074</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1579234483074</updated>
+      <workItem from="1580106026970" duration="4248000" />
     </task>
     <task id="LOCAL-00050" summary="adding a cheat sheet">
       <created>1579452530174</created>
@@ -605,7 +585,21 @@
       <option name="project" value="LOCAL" />
       <updated>1580056156950</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="breaking apart the various classes that make up the Observer">
+      <created>1580185937661</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1580185937661</updated>
+    </task>
+    <task id="LOCAL-00098" summary="adding files for flutter web">
+      <created>1580185954586</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1580185954586</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,8 +654,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="simplified" />
-    <MESSAGE value="removing circleci" />
     <MESSAGE value="cleanups" />
     <MESSAGE value="renames" />
     <MESSAGE value="changing badges" />
@@ -685,7 +677,9 @@
     <MESSAGE value="added autorun, reaction example in cheat sheet" />
     <MESSAGE value="added when example in cheat sheet" />
     <MESSAGE value="using the sucess flag from step" />
-    <option name="LAST_COMMIT_MESSAGE" value="using the sucess flag from step" />
+    <MESSAGE value="breaking apart the various classes that make up the Observer" />
+    <MESSAGE value="adding files for flutter web" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding files for flutter web" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -829,10 +823,10 @@
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1580056158629">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1580185956585">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1580056158629" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1580185956585" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580051677649" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
@@ -852,10 +846,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="438" y="372" key="git4idea.ui.GitUnstashDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576738706671" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1579921577081">
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1580186179970">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1579493778963" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1580186179970" />
     <state x="337" y="-823" width="766" height="696" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573281138898" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579921577081" />
   </component>
