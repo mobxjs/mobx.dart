@@ -1,0 +1,26 @@
+{
+  "projectName": "mobx.dart",
+  "projectOwner": "pavanpodila",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 64,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "pavanpodila",
+      "name": "Pavan Podila",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/156846?v=4",
+      "profile": "https://blog.pixelingene.com",
+      "contributions": [
+        "code",
+        "doc",
+        "design"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
