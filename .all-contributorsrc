@@ -225,6 +225,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "yoavrofe",
+      "name": "Yoav Rofé",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/367621?v=4",
+      "profile": "https://github.com/yoavrofe",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
