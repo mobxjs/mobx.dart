@@ -243,6 +243,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "t-artikov",
+      "name": "Timur Artikov",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1927992?v=4",
+      "profile": "https://github.com/t-artikov",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
