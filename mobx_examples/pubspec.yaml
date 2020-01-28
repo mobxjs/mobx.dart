@@ -13,9 +13,9 @@ environment:
   sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
-  mobx: ^0.4.0
-  flutter_mobx: ^0.3.6
-  mobx_codegen: ^0.4.0
+  mobx: ^1.0.0
+  flutter_mobx: ^1.0.0
+  mobx_codegen: ^1.0.0
   github: ^6.0.0
   validators:
   hnpwa_client:
@@ -35,13 +35,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-  flutter_mobx:
-    path: ../flutter_mobx
-  mobx_codegen:
-    path: ../mobx_codegen
-  mobx:
-    path: ../mobx
+#dependency_overrides:
+#  flutter_mobx:
+#    path: ../flutter_mobx
+#  mobx_codegen:
+#    path: ../mobx_codegen
+#  mobx:
+#    path: ../mobx
 
 flutter:
   uses-material-design: true
