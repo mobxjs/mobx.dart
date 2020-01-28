@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -410,6 +410,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/rrousselGit"><img src="https://avatars3.githubusercontent.com/u/20165741?v=4" width="64px;" alt=""/><br /><sub><b>Remi Rousselet</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=rrousselGit" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=rrousselGit" title="Documentation">📖</a> <a href="https://github.com/pavanpodila/mobx.dart/pulls?q=is%3Apr+reviewed-by%3ArrousselGit" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/adiakhaitan"><img src="https://avatars2.githubusercontent.com/u/20572621?v=4" width="64px;" alt=""/><br /><sub><b>adiaKhaitan</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=adiakhaitan" title="Documentation">📖</a></td>
     <td align="center"><a href="https://flutterando.com.br"><img src="https://avatars2.githubusercontent.com/u/4047813?v=4" width="64px;" alt=""/><br /><sub><b>Jacob Moura</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=jacobaraujo7" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=jacobaraujo7" title="Documentation">📖</a> <a href="#translation-jacobaraujo7" title="Translation">🌍</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://www.faladevs.com"><img src="https://avatars2.githubusercontent.com/u/30571368?v=4" width="64px;" alt=""/><br /><sub><b>Daniel Albuquerque</b></sub></a><br /><a href="#translation-dmAlbuquerque" title="Translation">🌍</a></td>
   </tr>
 </table>
 

@@ -87,6 +87,15 @@
         "doc",
         "translation"
       ]
+    },
+    {
+      "login": "dmAlbuquerque",
+      "name": "Daniel Albuquerque",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/30571368?v=4",
+      "profile": "https://www.faladevs.com",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7
