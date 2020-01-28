@@ -67,7 +67,7 @@ abstract class StoreTemplate {
       }
 
       for(var i = 0; i < computeds.templates.length; i++){
-        final ObservableTemplate current =  computeds.templates[i];
+        final ComputedTemplate current =  computeds.templates[i];
         toStringList.add('${current.name}: \${${current.name}.toString()}');
       }
 
