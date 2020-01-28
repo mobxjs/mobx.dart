@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-23-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-24-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -432,6 +432,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://www.upwork.com/freelancers/~01192eefd8a1c267f7"><img src="https://avatars1.githubusercontent.com/u/231950?v=4" width="64px;" alt=""/><br /><sub><b>Ivan Terekhin</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=JEuler" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/yoavrofe"><img src="https://avatars2.githubusercontent.com/u/367621?v=4" width="64px;" alt=""/><br /><sub><b>Yoav Rofé</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=yoavrofe" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://twitter.com/matiwojt"><img src="https://avatars1.githubusercontent.com/u/20087150?v=4" width="64px;" alt=""/><br /><sub><b>Mateusz Wojtczak</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=wojtczakmat" title="Documentation">📖</a></td>
   </tr>
 </table>
 

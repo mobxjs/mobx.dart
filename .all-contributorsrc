@@ -234,6 +234,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "wojtczakmat",
+      "name": "Mateusz Wojtczak",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/20087150?v=4",
+      "profile": "https://twitter.com/matiwojt",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
