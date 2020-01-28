@@ -44,6 +44,18 @@
         "review",
         "test"
       ]
+    },
+    {
+      "login": "MaikuB",
+      "name": "Michael Bui",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/25263378?v=4",
+      "profile": "https://dexterx.dev",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7
