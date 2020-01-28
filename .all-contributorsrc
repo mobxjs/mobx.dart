@@ -161,6 +161,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "kush3107",
+      "name": "Kushagra Saxena",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11977323?v=4",
+      "profile": "https://kush3107.github.io/",
+      "contributions": [
+        "doc",
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7
