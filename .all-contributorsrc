@@ -134,6 +134,15 @@
         "doc",
         "example"
       ]
+    },
+    {
+      "login": "hramnathnayak",
+      "name": "Hebri Ramnath Nayak",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/33794330?v=4",
+      "profile": "https://github.com/hramnathnayak",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
