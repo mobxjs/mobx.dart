@@ -67,6 +67,15 @@
         "doc",
         "review"
       ]
+    },
+    {
+      "login": "adiakhaitan",
+      "name": "adiaKhaitan",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/20572621?v=4",
+      "profile": "https://github.com/adiakhaitan",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
