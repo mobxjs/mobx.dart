@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -409,6 +409,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://dexterx.dev"><img src="https://avatars1.githubusercontent.com/u/25263378?v=4" width="64px;" alt=""/><br /><sub><b>Michael Bui</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=MaikuB" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=MaikuB" title="Documentation">📖</a> <a href="https://github.com/pavanpodila/mobx.dart/pulls?q=is%3Apr+reviewed-by%3AMaikuB" title="Reviewed Pull Requests">👀</a> <a href="#example-MaikuB" title="Examples">💡</a></td>
     <td align="center"><a href="https://github.com/rrousselGit"><img src="https://avatars3.githubusercontent.com/u/20165741?v=4" width="64px;" alt=""/><br /><sub><b>Remi Rousselet</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=rrousselGit" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=rrousselGit" title="Documentation">📖</a> <a href="https://github.com/pavanpodila/mobx.dart/pulls?q=is%3Apr+reviewed-by%3ArrousselGit" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/adiakhaitan"><img src="https://avatars2.githubusercontent.com/u/20572621?v=4" width="64px;" alt=""/><br /><sub><b>adiaKhaitan</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=adiakhaitan" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://flutterando.com.br"><img src="https://avatars2.githubusercontent.com/u/4047813?v=4" width="64px;" alt=""/><br /><sub><b>Jacob Moura</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=jacobaraujo7" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=jacobaraujo7" title="Documentation">📖</a> <a href="#translation-jacobaraujo7" title="Translation">🌍</a></td>
   </tr>
 </table>
 

@@ -76,6 +76,17 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "jacobaraujo7",
+      "name": "Jacob Moura",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4047813?v=4",
+      "profile": "https://flutterando.com.br",
+      "contributions": [
+        "code",
+        "doc",
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7
