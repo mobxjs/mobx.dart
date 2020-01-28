@@ -171,6 +171,15 @@
         "doc",
         "example"
       ]
+    },
+    {
+      "login": "pedromassango",
+      "name": "Pedro Massango",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/33294549?v=4",
+      "profile": "https://patreon.com/pedromassango",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7
