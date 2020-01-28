@@ -216,6 +216,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "JEuler",
+      "name": "Ivan Terekhin",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/231950?v=4",
+      "profile": "https://www.upwork.com/freelancers/~01192eefd8a1c267f7",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

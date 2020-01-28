@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-21-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-22-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -428,6 +428,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://luan.xyz"><img src="https://avatars0.githubusercontent.com/u/882703?v=4" width="64px;" alt=""/><br /><sub><b>Luan Nico</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=luanpotter" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/kobiburnley"><img src="https://avatars3.githubusercontent.com/u/7372363?v=4" width="64px;" alt=""/><br /><sub><b>Kobi</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=kobiburnley" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/chimon2000"><img src="https://avatars1.githubusercontent.com/u/6907797?v=4" width="64px;" alt=""/><br /><sub><b>Ryan</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=chimon2000" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://www.upwork.com/freelancers/~01192eefd8a1c267f7"><img src="https://avatars1.githubusercontent.com/u/231950?v=4" width="64px;" alt=""/><br /><sub><b>Ivan Terekhin</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=JEuler" title="Code">💻</a></td>
   </tr>
 </table>
 
