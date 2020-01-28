@@ -124,6 +124,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "giri-jeedigunta",
+      "name": "Giri Jeedigunta",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2689410?v=4",
+      "profile": "http://thewebstorebyg.wordpress.com/",
+      "contributions": [
+        "doc",
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7

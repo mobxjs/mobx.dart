@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -416,6 +416,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/marcoms"><img src="https://avatars0.githubusercontent.com/u/4211302?v=4" width="64px;" alt=""/><br /><sub><b>Marco Scannadinari</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=marcoms" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/lsaudon"><img src="https://avatars3.githubusercontent.com/u/25029876?v=4" width="64px;" alt=""/><br /><sub><b>lsaudon</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=lsaudon" title="Code">💻</a> <a href="https://github.com/pavanpodila/mobx.dart/commits?author=lsaudon" title="Documentation">📖</a></td>
     <td align="center"><a href="http://efthymis.com"><img src="https://avatars1.githubusercontent.com/u/633903?v=4" width="64px;" alt=""/><br /><sub><b>Efthymis Sarmpanis</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=esarbanis" title="Code">💻</a></td>
+    <td align="center"><a href="http://thewebstorebyg.wordpress.com/"><img src="https://avatars0.githubusercontent.com/u/2689410?v=4" width="64px;" alt=""/><br /><sub><b>Giri Jeedigunta</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=giri-jeedigunta" title="Documentation">📖</a> <a href="#example-giri-jeedigunta" title="Examples">💡</a></td>
   </tr>
 </table>
 
