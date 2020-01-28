@@ -1,6 +1,6 @@
 Language: [English](README.md) | [Português](translation/pt-BR/README.md)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # mobx.dart
@@ -418,6 +418,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://efthymis.com"><img src="https://avatars1.githubusercontent.com/u/633903?v=4" width="64px;" alt=""/><br /><sub><b>Efthymis Sarmpanis</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=esarbanis" title="Code">💻</a></td>
     <td align="center"><a href="http://thewebstorebyg.wordpress.com/"><img src="https://avatars0.githubusercontent.com/u/2689410?v=4" width="64px;" alt=""/><br /><sub><b>Giri Jeedigunta</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=giri-jeedigunta" title="Documentation">📖</a> <a href="#example-giri-jeedigunta" title="Examples">💡</a></td>
     <td align="center"><a href="https://github.com/hramnathnayak"><img src="https://avatars2.githubusercontent.com/u/33794330?v=4" width="64px;" alt=""/><br /><sub><b>Hebri Ramnath Nayak</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=hramnathnayak" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://youtube.com/c/robertbrunhage"><img src="https://avatars3.githubusercontent.com/u/26344867?v=4" width="64px;" alt=""/><br /><sub><b>Robert Brunhage</b></sub></a><br /><a href="https://github.com/pavanpodila/mobx.dart/commits?author=RobertBrunhage" title="Documentation">📖</a></td>
   </tr>
 </table>
 

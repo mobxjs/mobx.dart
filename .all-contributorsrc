@@ -143,6 +143,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "RobertBrunhage",
+      "name": "Robert Brunhage",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/26344867?v=4",
+      "profile": "https://youtube.com/c/robertbrunhage",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
