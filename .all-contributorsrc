@@ -207,6 +207,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "chimon2000",
+      "name": "Ryan",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6907797?v=4",
+      "profile": "https://github.com/chimon2000",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
