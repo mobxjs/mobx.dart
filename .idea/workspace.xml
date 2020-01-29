@@ -7,7 +7,7 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="adding netlify as sponsor on README.md">
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="fixing links in contributors">
       <change beforePath="$PROJECT_DIR$/.all-contributorsrc" beforeDir="false" afterPath="$PROJECT_DIR$/.all-contributorsrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -266,13 +266,6 @@
       <workItem from="1579838205738" duration="851000" />
       <workItem from="1579879386176" duration="3330000" />
       <workItem from="1580106026970" duration="12358000" />
-    </task>
-    <task id="LOCAL-00057" summary="fixing shell variable">
-      <created>1579536617246</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1579536617246</updated>
     </task>
     <task id="LOCAL-00058" summary="added testimonial from Alois">
       <created>1579565615541</created>
@@ -610,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580267875264</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="fixing links in contributors">
+      <created>1580268093981</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1580268093981</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,7 +665,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="missing id for step" />
     <MESSAGE value="test...wip" />
     <MESSAGE value="trying out the newly added fields to the dart publisher action" />
     <MESSAGE value="version updates" />
@@ -690,7 +689,8 @@
     <MESSAGE value="adding contributors cli" />
     <MESSAGE value="adding contributors" />
     <MESSAGE value="adding netlify as sponsor on README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding netlify as sponsor on README.md" />
+    <MESSAGE value="fixing links in contributors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing links in contributors" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -838,12 +838,12 @@
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1580267878162">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1580268095893">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1580200716196" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580267878162" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580268095893" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
