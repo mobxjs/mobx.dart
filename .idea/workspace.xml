@@ -7,9 +7,9 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="adding contributors">
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="adding netlify as sponsor on README.md">
+      <change beforePath="$PROJECT_DIR$/.all-contributorsrc" beforeDir="false" afterPath="$PROJECT_DIR$/.all-contributorsrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,21 +141,21 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="pub:get:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="contrib:gen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="pub:get:mobx" />
+        <script value="contrib:gen" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="pub:get:mobx_codegen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="pub:get:mobx" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="pub:get:mobx_codegen" />
+        <script value="pub:get:mobx" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -186,18 +186,18 @@
       <item itemvalue="Dart Test.tests in mobx" />
       <item itemvalue="Dart Test.tests in mobx_codegen" />
       <item itemvalue="npm.start" />
-      <item itemvalue="npm.pub:get:mobx_codegen" />
       <item itemvalue="npm.set:versions" />
       <item itemvalue="npm.pub:get:mobx" />
       <item itemvalue="npm.contrib" />
+      <item itemvalue="npm.contrib:gen" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.contrib:gen" />
         <item itemvalue="npm.contrib" />
         <item itemvalue="npm.set:versions" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.pub:get:mobx" />
-        <item itemvalue="npm.pub:get:mobx_codegen" />
       </list>
     </recent_temporary>
   </component>
@@ -266,13 +266,6 @@
       <workItem from="1579838205738" duration="851000" />
       <workItem from="1579879386176" duration="3330000" />
       <workItem from="1580106026970" duration="12358000" />
-    </task>
-    <task id="LOCAL-00056" summary="adding flutter builds and coverages">
-      <created>1579536057887</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1579536057887</updated>
     </task>
     <task id="LOCAL-00057" summary="fixing shell variable">
       <created>1579536617246</created>
@@ -610,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580222368490</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="adding netlify as sponsor on README.md">
+      <created>1580267875264</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1580267875264</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,7 +665,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added relative path to package" />
     <MESSAGE value="missing id for step" />
     <MESSAGE value="test...wip" />
     <MESSAGE value="trying out the newly added fields to the dart publisher action" />
@@ -690,7 +689,8 @@
     <MESSAGE value="setting proper versions" />
     <MESSAGE value="adding contributors cli" />
     <MESSAGE value="adding contributors" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding contributors" />
+    <MESSAGE value="adding netlify as sponsor on README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding netlify as sponsor on README.md" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -756,30 +756,30 @@
     </state>
     <state x="446" y="343" key="EditFileWatcherDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576815875205" />
     <state x="446" y="343" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579525988618" />
-    <state width="1237" height="278" key="GridCell.Tab.0.bottom" timestamp="1580221041269">
+    <state width="1237" height="278" key="GridCell.Tab.0.bottom" timestamp="1580268083532">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1237" height="278" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1580199854853" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1237" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580221041269" />
-    <state width="1237" height="278" key="GridCell.Tab.0.center" timestamp="1580221041268">
+    <state width="1237" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580268083532" />
+    <state width="1237" height="278" key="GridCell.Tab.0.center" timestamp="1580268083531">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1237" height="278" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1580199854852" />
     <state width="1878" height="288" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795303" />
-    <state width="1237" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580221041268" />
-    <state width="1237" height="278" key="GridCell.Tab.0.left" timestamp="1580221041267">
+    <state width="1237" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580268083531" />
+    <state width="1237" height="278" key="GridCell.Tab.0.left" timestamp="1580268083531">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1237" height="278" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1580199854851" />
     <state width="1878" height="288" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795302" />
-    <state width="1237" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580221041267" />
-    <state width="1237" height="278" key="GridCell.Tab.0.right" timestamp="1580221041269">
+    <state width="1237" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580268083531" />
+    <state width="1237" height="278" key="GridCell.Tab.0.right" timestamp="1580268083532">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1237" height="278" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1580199854852" />
     <state width="1878" height="288" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
-    <state width="1237" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580221041269" />
+    <state width="1237" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580268083532" />
     <state width="1152" height="345" key="GridCell.Tab.1.bottom" timestamp="1578502180992">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -838,12 +838,12 @@
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1580223260764">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1580267878162">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1580200716196" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580223260764" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580267878162" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
