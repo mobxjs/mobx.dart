@@ -61,21 +61,16 @@ abstract class StoreTemplate {
   $actions''';
 
     if (generateToString) {
-      for(var i = 0; i < observables.templates.length; i++){
-        final ObservableTemplate current =  observables.templates[i];
-        toStringList.add('${current.name}: \${${current.name}.toString()}');
-      }
-
-      for(var i = 0; i < computeds.templates.length; i++){
-        final ComputedTemplate current =  computeds.templates[i];
-        toStringList.add('${current.name}: \${${current.name}.toString()}');
-      }
+      toStringList
+        ..addAll(observables.templates.map(
+            (current) => '${current.name}: \${${current.name}.toString()}'))
+        ..addAll(computeds.templates.map(
+            (current) => '${current.name}: \${${current.name}.toString()}'));
 
       toStringMethod = '''
   @override
   String toString() {
-    final toStringList = [${toStringList.sublist(1).fold("'${toStringList[0]}'", (curr, next) => "$curr, '$next'")}];
-    final string = toStringList.reduce((curr, next) => '\$curr, \$next');
+    final string = \'${toStringList.join(',')}\';
     return '{\$string}';
   }
   ''';
