@@ -86,7 +86,7 @@ class ObservableMap<K, V>
         }
       }
 
-      if (value != oldValue) {
+      if (!_map.containsKey(key) || value != oldValue) {
         _map[key] = value;
         if (type == 'update') {
           _reportUpdate(key, value, oldValue);
