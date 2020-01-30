@@ -64,4 +64,4 @@ export 'package:mobx/src/core.dart'
 export 'package:mobx/src/api/extensions.dart';
 
 /// The current version as per `pubspec.yaml`
-const version = '1.0.0';
+const version = '1.0.1';

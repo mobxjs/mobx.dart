@@ -13,7 +13,8 @@
     "gen:mobx_examples:watch": "cd mobx_examples; flutter packages pub run build_runner watch --delete-conflicting-outputs;",
     "set:versions": "dart ./tool/expose_version.dart mobx flutter_mobx mobx_codegen",
     "contrib:add": "all-contributors add",
-    "contrib:gen": "all-contributors generate"
+    "contrib:gen": "all-contributors generate",
+    "contrib:check": "all-contributors check"
   },
   "devDependencies": {
     "all-contributors-cli": "^6.13.0"
