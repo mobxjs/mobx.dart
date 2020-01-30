@@ -209,6 +209,13 @@ void main() {
       expect(changes[1].key, equals('b'));
       expect(changes[1].newValue, equals(1));
     });
+
+    test('works when adding a null value', () {
+      final map = ObservableMap();
+      map['a'] = null;
+
+      expect(map.containsKey('a'), isTrue);
+    });
   });
 }
 
