@@ -395,7 +395,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-28-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-29-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -405,7 +405,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://blog.pixelingene.com"><img src="https://avatars0.githubusercontent.com/u/156846?v=4" width="64px;" alt=""/><br /><sub><b>Pavan Podila</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=pavanpodila" title="Code">💻</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=pavanpodila" title="Documentation">📖</a> <a href="#design-pavanpodila" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/pavanpodila"><img src="https://avatars0.githubusercontent.com/u/156846?v=4" width="64px;" alt=""/><br /><sub><b>Pavan Podila</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=pavanpodila" title="Code">💻</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=pavanpodila" title="Documentation">📖</a> <a href="https://github.com/mobxjs/mobx.dart/pulls?q=is%3Apr+reviewed-by%3Apavanpodila" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/katis"><img src="https://avatars1.githubusercontent.com/u/877226?v=4" width="64px;" alt=""/><br /><sub><b>katis</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=katis" title="Code">💻</a> <a href="#ideas-katis" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/mobxjs/mobx.dart/pulls?q=is%3Apr+reviewed-by%3Akatis" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=katis" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/shyndman"><img src="https://avatars1.githubusercontent.com/u/42326?v=4" width="64px;" alt=""/><br /><sub><b>Scott Hyndman</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=shyndman" title="Code">💻</a> <a href="#ideas-shyndman" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/mobxjs/mobx.dart/pulls?q=is%3Apr+reviewed-by%3Ashyndman" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=shyndman" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://dexterx.dev"><img src="https://avatars1.githubusercontent.com/u/25263378?v=4" width="64px;" alt=""/><br /><sub><b>Michael Bui</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=MaikuB" title="Code">💻</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=MaikuB" title="Documentation">📖</a> <a href="https://github.com/mobxjs/mobx.dart/pulls?q=is%3Apr+reviewed-by%3AMaikuB" title="Reviewed Pull Requests">👀</a> <a href="#example-MaikuB" title="Examples">💡</a></td>
@@ -439,6 +439,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/sohonisaurabh"><img src="https://avatars1.githubusercontent.com/u/20185422?v=4" width="64px;" alt=""/><br /><sub><b>Saurabh Sohoni</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=sohonisaurabh" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/renanzdm"><img src="https://avatars0.githubusercontent.com/u/47435996?v=4" width="64px;" alt=""/><br /><sub><b>renanzdm</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=renanzdm" title="Documentation">📖</a></td>
     <td align="center"><a href="http://croogo.org"><img src="https://avatars3.githubusercontent.com/u/39490?v=4" width="64px;" alt=""/><br /><sub><b>Rachman Chavik</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=rchavik" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Vardiak"><img src="https://avatars0.githubusercontent.com/u/19309601?v=4" width="64px;" alt=""/><br /><sub><b>Nathan Cabasso</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/issues?q=author%3AVardiak" title="Bug reports">🐛</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=Vardiak" title="Code">💻</a></td>
   </tr>
 </table>
 
