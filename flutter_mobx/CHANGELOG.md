@@ -1,3 +1,12 @@
+## 1.0.0 - 1.0.1
+
+- Ready for prime time!
+- Fixing version resolution
+
+## 0.3.7
+
+- Refactoring `observer.dart` to separate out the `StatelessObserverWidget`, `StatefulObserverWidget` and the `ObserverWidgetMixin` into their own files.
+
 ## 0.3.6+1 - 0.3.6+2
 
 - README updates

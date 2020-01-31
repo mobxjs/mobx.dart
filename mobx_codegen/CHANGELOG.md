@@ -1,3 +1,8 @@
+## 1.0.0 - 1.0.1
+
+- Ready for prime time!
+- Fixing version resolution
+
 ## 0.4.2
 
 - Upgraded the `build_resolvers` dependency to 1.3.2, which fixes issues with certain

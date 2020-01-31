@@ -1,3 +1,11 @@
+## 1.0.1
+
+- Fix for ObservableMap not adding null values (#417), thanks to @Vardiak
+
+## 1.0.0
+
+- Ready for prime time!
+
 ## 0.4.0+3 - 0.4.0+4
 
 - Going back to original `test_coverage` package
