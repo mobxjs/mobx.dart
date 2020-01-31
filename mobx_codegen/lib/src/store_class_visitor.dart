@@ -4,7 +4,7 @@ import 'package:build/build.dart';
 import 'package:mobx/mobx.dart';
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
-    show ComputedMethod, MakeAction, MakeObservable, MakeToString;
+    show ComputedMethod, MakeAction, MakeObservable, MakeStoreConfig;
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
@@ -62,7 +62,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
           .addIf(!element.isAbstract, element.name);
     }
     // if the class is annotated to generate toString() method we add the information to the _storeTemplate
-    if(isToStringAnnotatedStoreClass(element)) {
+    if(isGenerateToStringTrue(element)) {
       _storeTemplate.generateToString = true;
     }
   }
@@ -192,7 +192,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
 }
 
 const _storeMixinChecker = TypeChecker.fromRuntime(Store);
-const _toStringAnnotationChecker = TypeChecker.fromRuntime(MakeToString);
+const _toStringAnnotationChecker = TypeChecker.fromRuntime(MakeStoreConfig);
 
 bool isMixinStoreClass(ClassElement classElement) =>
     classElement.mixins.any(_storeMixinChecker.isExactlyType);
@@ -200,6 +200,13 @@ bool isMixinStoreClass(ClassElement classElement) =>
 // Checks if the class as a toString annotation
 bool isToStringAnnotatedStoreClass(ClassElement classElement) => _toStringAnnotationChecker.hasAnnotationOfExact(classElement);
 
+bool isGenerateToStringTrue(ClassElement classElement) {
+  if(isToStringAnnotatedStoreClass(classElement)) {
+    final annotation = _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
+    return annotation.getField('makeToString').toBoolValue();
+  }
+  return false;
+}
 bool _any(List<bool> list) => list.any(_identity);
 
 T _identity<T>(T value) => value;

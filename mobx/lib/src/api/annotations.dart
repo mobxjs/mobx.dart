@@ -1,13 +1,10 @@
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///
 /// During code-generation, this type is detected to identify Store class with generated toString() method
-class MakeToString {
-//  unnamed constructor to allow parameters in Store annotation and prevent useless code refactoring for mobx users
-  const MakeToString._();
+class MakeStoreConfig {
+  const MakeStoreConfig({this.makeToString = false});
+  final bool makeToString;
 }
-
-/// Declares the annotation identifier to generate toString() on observables and computeds.
-const MakeToString toString = MakeToString._();
 
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///
