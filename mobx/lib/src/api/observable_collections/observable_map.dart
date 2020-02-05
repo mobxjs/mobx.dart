@@ -8,7 +8,7 @@ Atom _observableMapAtom<K, V>(ReactiveContext context) {
 /// The ObservableMap tracks the various read-methods (eg: [Map.length], [Map.isEmpty]) and
 /// write-methods (eg: [Map.[]=], [Map.clear]) making it easier to use it inside reactions.
 ///
-/// As the name suggests, this is the Observable-counterpart to the standard Dart `List<T>`.
+/// As the name suggests, this is the Observable-counterpart to the standard Dart `Map<K,V>`.
 ///
 /// ```dart
 /// final map = ObservableMap<String, int>.of({'first': 1});
