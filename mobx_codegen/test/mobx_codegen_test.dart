@@ -34,8 +34,8 @@ void main() {
       await compareFiles('./data/valid_input.dart', './data/valid_output.dart');
     });
 
-    test('generates for a class mixing Store with annotation @StoreConfig(toString: true)', () async {
-      await compareFiles('./data/valid_input_annotation_store_config_to_string.dart', './data/valid_output_annotation_store_config_to_string.dart');
+    test('generates for a class mixing Store with annotation @StoreConfig(hasToString: true)', () async {
+      await compareFiles('./data/valid_input_annotation_store_config_has_to_string.dart', './data/valid_output_annotation_store_config_has_to_string.dart');
     });
 
     createTests([

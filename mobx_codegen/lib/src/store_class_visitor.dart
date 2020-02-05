@@ -62,9 +62,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
           .addIf(!element.isAbstract, element.name);
     }
     // if the class is annotated to generate toString() method we add the information to the _storeTemplate
-    if(isGenerateToStringTrue(element)) {
-      _storeTemplate.generateToString = true;
-    }
+    _storeTemplate.generateToString = isGenerateToStringTrue(element);
   }
 
   @override
@@ -198,15 +196,18 @@ bool isMixinStoreClass(ClassElement classElement) =>
     classElement.mixins.any(_storeMixinChecker.isExactlyType);
 
 // Checks if the class as a toString annotation
-bool isToStringAnnotatedStoreClass(ClassElement classElement) => _toStringAnnotationChecker.hasAnnotationOfExact(classElement);
+bool isToStringAnnotatedStoreClass(ClassElement classElement) =>
+    _toStringAnnotationChecker.hasAnnotationOf(classElement);
 
 bool isGenerateToStringTrue(ClassElement classElement) {
-  if(isToStringAnnotatedStoreClass(classElement)) {
-    final annotation = _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
-    return annotation.getField('makeToString').toBoolValue();
+  if (isToStringAnnotatedStoreClass(classElement)) {
+    final annotation =
+        _toStringAnnotationChecker.firstAnnotationOf(classElement);
+    return annotation.getField('hasToString').toBoolValue();
   }
-  return false;
+  return true;
 }
+
 bool _any(List<bool> list) => list.any(_identity);
 
 T _identity<T>(T value) => value;

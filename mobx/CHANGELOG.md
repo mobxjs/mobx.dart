@@ -1,3 +1,7 @@
+## 1.0.2
+
+- Added @StoreConfig annotation ([@hawkbee1](https://github.com/hawkbee1))
+
 ## 1.0.1
 
 - Fix for ObservableMap not adding null values (#417), thanks to @Vardiak
