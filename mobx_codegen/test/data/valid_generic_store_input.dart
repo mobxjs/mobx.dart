@@ -6,6 +6,7 @@ part 'generator_sample.g.dart';
 
 class Item<A extends num> = _Item<A> with _$Item<A>;
 
+@StoreConfig(hasToString: false)
 abstract class _Item<T extends num> with Store {
   @observable
   T value;

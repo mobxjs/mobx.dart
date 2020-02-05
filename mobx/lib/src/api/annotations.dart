@@ -2,8 +2,17 @@
 ///
 /// During code-generation, this type is detected to identify Store class with generated toString() method
 class MakeStoreConfig {
-  const MakeStoreConfig({this.makeToString = false});
-  final bool makeToString;
+  const MakeStoreConfig({this.hasToString = true});
+  const MakeStoreConfig._({this.hasToString = true});
+  final bool hasToString;
+}
+
+class StoreConfig extends MakeStoreConfig {
+  const StoreConfig({this.hasToString = true});
+  const StoreConfig._({this.hasToString = true});
+  @override
+  // ignore: overridden_fields
+  final bool hasToString;
 }
 
 /// Internal class only used for code-generation with `mobx_codegen`.

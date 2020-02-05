@@ -10,6 +10,7 @@ typedef VoidCallback = void Function();
 
 class User = UserBase with _$User;
 
+@StoreConfig(hasToString: false)
 abstract class UserBase with Store {
   UserBase(this.id);
 

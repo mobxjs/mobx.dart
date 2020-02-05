@@ -9,6 +9,7 @@ part 'generator_sample.g.dart';
 
 class User<T extends io.Process> = UserBase<T> with _$User<T>;
 
+@StoreConfig(hasToString: false)
 abstract class UserBase<T extends io.Process> with Store {
   UserBase();
 
