@@ -29,8 +29,8 @@
 library mobx;
 
 export 'package:mobx/src/api/action.dart';
-export 'package:mobx/src/api/annotations.dart';
-//    show action, computed, observable, StoreConfig;
+export 'package:mobx/src/api/annotations.dart'
+    show action, computed, observable, StoreConfig;
 export 'package:mobx/src/api/async.dart'
     show
         ObservableFuture,
