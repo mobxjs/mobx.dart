@@ -196,11 +196,11 @@ bool isMixinStoreClass(ClassElement classElement) =>
     classElement.mixins.any(_storeMixinChecker.isExactlyType);
 
 // Checks if the class as a toString annotation
-bool isToStringAnnotatedStoreClass(ClassElement classElement) =>
+bool isStoreConfigAnnotatedStoreClass(ClassElement classElement) =>
     _toStringAnnotationChecker.hasAnnotationOfExact(classElement);
 
 bool hasGeneratedToString(ClassElement classElement) {
-  if (isToStringAnnotatedStoreClass(classElement)) {
+  if (isStoreConfigAnnotatedStoreClass(classElement)) {
     final annotation =
         _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
     return annotation.getField('hasToString').toBoolValue();
