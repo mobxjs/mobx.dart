@@ -62,7 +62,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
           .addIf(!element.isAbstract, element.name);
     }
     // if the class is annotated to generate toString() method we add the information to the _storeTemplate
-    _storeTemplate.generateToString = isGenerateToStringTrue(element);
+    _storeTemplate.generateToString = hasGeneratedToString(element);
   }
 
   @override
@@ -199,7 +199,7 @@ bool isMixinStoreClass(ClassElement classElement) =>
 bool isToStringAnnotatedStoreClass(ClassElement classElement) =>
     _toStringAnnotationChecker.hasAnnotationOfExact(classElement);
 
-bool isGenerateToStringTrue(ClassElement classElement) {
+bool hasGeneratedToString(ClassElement classElement) {
   if (isToStringAnnotatedStoreClass(classElement)) {
     final annotation =
         _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
