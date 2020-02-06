@@ -1,6 +1,8 @@
 ## 1.0.2
 
-- Added @StoreConfig annotation ([@hawkbee1](https://github.com/hawkbee1))
+- Added `@StoreConfig` annotation
+
+Thanks to [@hawkbee1](https://github.com/hawkbee1)
 
 ## 1.0.1
 
