@@ -61,10 +61,16 @@ abstract class StoreTemplate {
   $actions''';
 
     if (generateToString) {
+      final publicObservablesList = observables.templates
+      ..removeWhere((element) => element.isPrivate);
+
+      final publiccomputedsList = computeds.templates
+        ..removeWhere((element) => element.isPrivate);
+
       toStringList
-        ..addAll(observables.templates.map(
+        ..addAll(publicObservablesList.map(
             (current) => '${current.name}: \${${current.name}.toString()}'))
-        ..addAll(computeds.templates.map(
+        ..addAll(publiccomputedsList.map(
             (current) => '${current.name}: \${${current.name}.toString()}'));
 
       toStringMethod = '''

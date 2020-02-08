@@ -14,6 +14,11 @@ mixin _$User on UserBase, Store {
   @override
   String get fullName =>
       (_$fullNameComputed ??= Computed<String>(() => super.fullName)).value;
+  Computed<String> _$_fullNameComputed;
+
+  @override
+  String get _fullName =>
+      (_$_fullNameComputed ??= Computed<String>(() => super._fullName)).value;
 
   final _$firstNameAtom = Atom(name: 'UserBase.firstName');
 
@@ -199,7 +204,7 @@ mixin _$User on UserBase, Store {
   @override
   String toString() {
     final string =
-        'firstName: ${firstName.toString()},middleName: ${middleName.toString()},lastName: ${lastName.toString()},friend: ${friend.toString()},callback: ${callback.toString()},callback2: ${callback2.toString()},_testUsers: ${_testUsers.toString()},fullName: ${fullName.toString()}';
+        'firstName: ${firstName.toString()},middleName: ${middleName.toString()},lastName: ${lastName.toString()},friend: ${friend.toString()},callback: ${callback.toString()},callback2: ${callback2.toString()},fullName: ${fullName.toString()}';
     return '{$string}';
   }
 }

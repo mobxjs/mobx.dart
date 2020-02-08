@@ -89,7 +89,8 @@ class StoreClassVisitor extends SimpleElementVisitor {
       ..storeTemplate = _storeTemplate
       ..atomName = '_\$${element.name}Atom'
       ..type = typeNameFinder.findVariableTypeName(element)
-      ..name = element.name;
+      ..name = element.name
+      ..isPrivate = element.isPrivate;
 
     _storeTemplate.observables.add(template);
     return;
@@ -119,7 +120,9 @@ class StoreClassVisitor extends SimpleElementVisitor {
     final template = ComputedTemplate()
       ..computedName = '_\$${element.name}Computed'
       ..name = element.name
-      ..type = typeNameFinder.findGetterTypeName(element);
+      ..type = typeNameFinder.findGetterTypeName(element)
+      ..isPrivate = element.isPrivate;
+
     _storeTemplate.computeds.add(template);
     return;
   }

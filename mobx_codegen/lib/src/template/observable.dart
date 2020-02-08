@@ -5,6 +5,7 @@ class ObservableTemplate {
   String atomName;
   String type;
   String name;
+  bool isPrivate;
 
   @override
   String toString() => """

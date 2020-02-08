@@ -43,6 +43,9 @@ abstract class UserBase with Store {
   @computed
   String get fullName => '$firstName $middleName $lastName';
 
+  @computed
+  String get _fullName => '$firstName $middleName $lastName';
+
   @action
   Future<List<User>> fetchUsers() async => Future.value([]);
 
