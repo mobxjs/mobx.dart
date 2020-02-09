@@ -35,7 +35,7 @@ export const testimonials: TestimonialContent[] = [
       'Google Product Manager on the Flutter Development Experience. Enjoys long walks on the beach and various technologies.',
     photoUrl:
       'https://pbs.twimg.com/profile_images/1660905119/vikingme128x128_400x400.jpg',
-    message: `If you haven\'t seen MobX.dart @ https://mobx.pub, check it out. In combination with Provider, it\'s PFM (Pure Flutter Magic). I use it when I build anything real. #recommended #Flutter`
+    message: `If you haven\'t seen MobX.dart @ https://mobx.netlify.com, check it out. In combination with Provider, it\'s PFM (Pure Flutter Magic). I use it when I build anything real. #recommended #Flutter`
   },
   {
     author: 'Michael Bui',

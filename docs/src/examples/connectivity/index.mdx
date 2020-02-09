@@ -112,9 +112,9 @@ class _ConnectivityExampleState extends State<ConnectivityExample> {
 }
 ```
 
-The `ConnectivityStore` is passed to the `ConnectivityExample` widget, which can be done through the `provider` package (refer to the documentation on [organizing stores](https://mobx.pub/guides/stores)).
+The `ConnectivityStore` is passed to the `ConnectivityExample` widget, which can be done through the `provider` package (refer to the documentation on [organizing stores](/guides/stores)).
 
-A [`reaction`](https://mobx.pub/api/reaction#reaction) is used here as we are only interested in letting users know when the connection state changes.
+A [`reaction`](/api/reaction#reaction) is used here as we are only interested in letting users know when the connection state changes.
 The value passed as the first argument to the `reaction` function represents reactive state that needs to be tracked i.e. the status of the user's connection.
 The second argument represents the code that we want executed whenever the reactive state changes. In this example, we want a snackbar to displayed to notify users about updates to their connection status.
 In areas where connections can repeatedly drop in and out, it may be desirable to avoid showing too many messages that would otherwise degrade the user experience.

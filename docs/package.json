@@ -12,16 +12,16 @@
   },
   "dependencies": {
     "docz": "^2.2.0",
-    "gatsby-remark-vscode": "^1.4.0",
+    "gatsby-remark-vscode": "^2.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet-async": "^1.0.4",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4",
-    "gatsby-transformer-remark": "^2.6.48",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "gatsby-transformer-remark": "^2.6.50",
     "typescript": "^3.7.5"
   },
   "bugs": {
