@@ -25,9 +25,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="fixing avatar">
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="remove redirect">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netlify.toml" beforeDir="false" afterPath="$PROJECT_DIR$/netlify.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/home.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/home.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translation/pt-BR/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/translation/pt-BR/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,14 +293,7 @@
       <workItem from="1580106026970" duration="12358000" />
       <workItem from="1580912312414" duration="8000" />
       <workItem from="1580912347028" duration="647000" />
-      <workItem from="1580923364653" duration="6005000" />
-    </task>
-    <task id="LOCAL-00065" summary="using the full path to flutter cmd">
-      <created>1579573880254</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1579573880254</updated>
+      <workItem from="1580923364653" duration="7048000" />
     </task>
     <task id="LOCAL-00066" summary="trying without sudo">
       <created>1579574100956</created>
@@ -637,7 +631,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581228049452</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="remove redirect">
+      <created>1581234150856</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1581234150856</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -735,7 +736,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="cleanups on flutter_mobx pubspec" />
     <MESSAGE value="no need for a flutter action as its part of dockerfile" />
     <MESSAGE value="name for publish step" />
     <MESSAGE value="sdk update, package update" />
@@ -760,7 +760,8 @@
     <MESSAGE value="removing redirects until the domain is resolved" />
     <MESSAGE value="fixing the bad docs build" />
     <MESSAGE value="fixing avatar" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing avatar" />
+    <MESSAGE value="remove redirect" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove redirect" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -915,13 +916,13 @@
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1581228051153">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1581234152615">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1581219655872" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580403363552" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581228051153" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581234152615" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -930,10 +931,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577681183195" />
-    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1581179507958">
+    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1581242731992">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1579613436300" />
+    <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1581242731992" />
     <state x="320" y="229" width="939" height="615" key="find.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580051639555" />
     <state x="320" y="229" width="939" height="615" key="find.popup/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581179507958" />
     <state x="438" y="372" key="git4idea.ui.GitUnstashDialog" timestamp="1576738706671">

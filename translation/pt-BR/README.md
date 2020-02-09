@@ -35,7 +35,7 @@ O MobX é uma biblioteca de gerenciamento de estado que simplifica a conexão do
 
 Não fazemos "mágica", apenas temos objetos inteligentes que se preparam para serem consumidos (**observables**),
 e as (**reactions**) os rastreia automaticamente para você. quando o _observables_
-mudam, todas as _reactions_ são chamadas. O interessante é que as _reactions_ podem ser qualquer coisa, desde um simples log do console, uma chamada de rede ou até mesmo uma renderização  da interface do usuário.
+mudam, todas as _reactions_ são chamadas. O interessante é que as _reactions_ podem ser qualquer coisa, desde um simples log do console, uma chamada de rede ou até mesmo uma renderização da interface do usuário.
 
 > MobX tem sido uma biblioteca muito eficiente para o javascript
 > esse porte visa trazer essa mesma produtividade para os apps baseados em Dart
@@ -49,7 +49,7 @@ Somos muito gratos aos nossos patrocinadores por nos tornar parte do programa _O
 
 ### Começando
 
-Acompanhe esse [Guia de introdução ao MobX (em inglês)](https://mobx-dart.netlify.com/getting-started).
+Acompanhe esse [Guia de introdução ao MobX (em inglês)](https://mobx.netlify.com/getting-started).
 
 ### Aprofundando
 
@@ -86,13 +86,14 @@ class Counter {
   final _value = Observable(0);
   int get value => _value.value;
   set value(int newValue) => _value.value = newValue;
-  
+
   Action increment;
   void _increment() {
     _value.value++;
   }
 }
 ```
+
 A primeira vista pode parecer algo verboso, por isso criamos **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** que permite substituir o código acima pelo seguinte:
 
 ```dart
@@ -123,7 +124,7 @@ Agora, basta usar a anotação @Obsevable em uma propriedade da Classe, e sim! t
 
 O estado de sua aplicação consiste em _**core-state**_ e _**derived-state**_. O _core-state_ é o estado referente ao dominio ao qual você está lidando. Por exemplo, se você tiver uma entidade chamada `Contact` , as propriedades `firstName` e `lastName` formam o _core-state_ do `Contact`. No entanto, `fullName` é um _derived-state_, obtido pela combinação do `firstName` e do `lastName`.
 
-Esse _derived state_ que depende do _core-state_ ou de outro _derived-state_ é chamado de  **Computed Observable**. Ele muda automaticamente quando seus Observables são alterados.
+Esse _derived state_ que depende do _core-state_ ou de outro _derived-state_ é chamado de **Computed Observable**. Ele muda automaticamente quando seus Observables são alterados.
 
 > Estado no MobX = Core-State + Derived-State
 
@@ -204,7 +205,7 @@ Future<void> loadStuff() async {
 
 ### Reactions
 
-Reactions completa a _Tríade do MobX_ (**observables**, **actions** and **reactions**). 
+Reactions completa a _Tríade do MobX_ (**observables**, **actions** and **reactions**).
 Eles são os observadores do nosso sistema reativo e notificam qualquer observable rastreado que tenha mudado. O Reaction possui alguns métodos para seu uso, conforme será listado abaixo, Todos eles retornam a `ReactionDisposer`, uma função que pode ser chamada para eliminar a reação.
 
 Uma das melhores caracteristicas das reactions é que ele _rastreia automaticamente_ qualquer observável sem precisar declarar nada. O fato de ter um observável dentro do escopo de uma Reaction é o suficiente para rastreá-lo.
@@ -290,7 +291,7 @@ void waitForCompletion() async {
 
 **Observer**
 
-O **Observer** é um widget (que é parte do pacote **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)**), e nos provê uma observação dos observers por meio de uma função de `builder`. Toda vez que o  observable mudar, o `Observer` renderizará novamente na view.
+O **Observer** é um widget (que é parte do pacote **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)**), e nos provê uma observação dos observers por meio de uma função de `builder`. Toda vez que o observable mudar, o `Observer` renderizará novamente na view.
 
 Abaixo temos um exemplo do _Counter_ em sua totalidade.
 
