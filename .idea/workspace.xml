@@ -25,13 +25,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="new version">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+    <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="making links to be relative, package updates">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/components/testimonials.ts" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/components/testimonials.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/src/examples/connectivity/index.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/examples/connectivity/index.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/lib/src/observer.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +93,6 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSX Harmony&#10;Dart&#10;Markdown" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.0.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.github/workflows" />
@@ -296,14 +292,7 @@
       <workItem from="1580106026970" duration="12358000" />
       <workItem from="1580912312414" duration="8000" />
       <workItem from="1580912347028" duration="647000" />
-      <workItem from="1580923364653" duration="3058000" />
-    </task>
-    <task id="LOCAL-00060" summary="fixing syntax errors with codecov action">
-      <created>1579566638150</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1579566638150</updated>
+      <workItem from="1580923364653" duration="3678000" />
     </task>
     <task id="LOCAL-00061" summary="fixing syntax errors with codecov action">
       <created>1579566880443</created>
@@ -641,7 +630,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580403358562</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="making links to be relative, package updates">
+      <created>1581219651350</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1581219651351</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -739,7 +735,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="trying out the newly added fields to the dart publisher action" />
     <MESSAGE value="version updates" />
     <MESSAGE value="using the 1.0 version of action" />
     <MESSAGE value="adding flutter action" />
@@ -764,7 +759,8 @@
     <MESSAGE value="adding netlify as sponsor on README.md" />
     <MESSAGE value="fixing links in contributors" />
     <MESSAGE value="new version" />
-    <option name="LAST_COMMIT_MESSAGE" value="new version" />
+    <MESSAGE value="making links to be relative, package updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="making links to be relative, package updates" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -832,34 +828,34 @@
     </state>
     <state x="446" y="343" key="EditFileWatcherDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576815875205" />
     <state x="446" y="343" key="EditFileWatcherDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579525988618" />
-    <state width="1195" height="278" key="GridCell.Tab.0.bottom" timestamp="1581219558834">
+    <state width="1195" height="278" key="GridCell.Tab.0.bottom" timestamp="1581225398246">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1195" height="278" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1581219558834" />
     <state width="1878" height="288" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
     <state width="1237" height="278" key="GridCell.Tab.0.bottom/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580403347521" />
-    <state width="1206" height="278" key="GridCell.Tab.0.bottom/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580921987487" />
-    <state width="1195" height="278" key="GridCell.Tab.0.center" timestamp="1581219558833">
+    <state width="1195" height="278" key="GridCell.Tab.0.bottom/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581225398246" />
+    <state width="1195" height="278" key="GridCell.Tab.0.center" timestamp="1581225398245">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1195" height="278" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1581219558833" />
     <state width="1878" height="288" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795303" />
     <state width="1237" height="278" key="GridCell.Tab.0.center/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580403347519" />
-    <state width="1206" height="278" key="GridCell.Tab.0.center/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580921987485" />
-    <state width="1195" height="278" key="GridCell.Tab.0.left" timestamp="1581219558832">
+    <state width="1195" height="278" key="GridCell.Tab.0.center/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581225398245" />
+    <state width="1195" height="278" key="GridCell.Tab.0.left" timestamp="1581225398244">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1195" height="278" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1581219558832" />
     <state width="1878" height="288" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795302" />
     <state width="1237" height="278" key="GridCell.Tab.0.left/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580403347518" />
-    <state width="1206" height="278" key="GridCell.Tab.0.left/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580921987485" />
-    <state width="1195" height="278" key="GridCell.Tab.0.right" timestamp="1581219558833">
+    <state width="1195" height="278" key="GridCell.Tab.0.left/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581225398244" />
+    <state width="1195" height="278" key="GridCell.Tab.0.right" timestamp="1581225398245">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="1195" height="278" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1581219558833" />
     <state width="1878" height="288" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1576166795304" />
     <state width="1237" height="278" key="GridCell.Tab.0.right/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580403347520" />
-    <state width="1206" height="278" key="GridCell.Tab.0.right/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580921987486" />
+    <state width="1195" height="278" key="GridCell.Tab.0.right/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581225398245" />
     <state width="1152" height="345" key="GridCell.Tab.1.bottom" timestamp="1578502180992">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -918,10 +914,10 @@
     </state>
     <state width="515" height="445" key="SwitcherDM/0.23.1680.1027@0.23.1680.1027" timestamp="1577601957656" />
     <state width="515" height="445" key="SwitcherDM/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577976796509" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1580912495507">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1581219655872">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1580200716196" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1581219655872" />
     <state x="263" y="-794" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573311047244" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580403363552" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580912495507" />
@@ -943,10 +939,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="438" y="372" key="git4idea.ui.GitUnstashDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576738706671" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1581210908623">
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1581219706281">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1580273391461" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1581219706281" />
     <state x="337" y="-823" width="766" height="696" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@-240.-1057.1920.1057" timestamp="1573281138898" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1579921577081" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581210908623" />
