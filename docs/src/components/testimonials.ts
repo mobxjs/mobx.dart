@@ -51,7 +51,7 @@ export const testimonials: TestimonialContent[] = [
     twitter: 'https://twitter.com/BlueAquilae',
     title: '#Minimalism | #flutter artist | github Awesome #flutter',
     photoUrl:
-      'https://pbs.twimg.com/profile_images/948652731115429889/sQnk1F3m_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1224113357302702080/5CwF3c3q_400x400.jpg',
     message: `On Professional projects, MobX helps me manage hundreds of forms and thousands of fields with transparency.
 When working on Generative Art, it helps me create highly configurable widgets without complexity. 
 MobX supports me on all of my projects.`
