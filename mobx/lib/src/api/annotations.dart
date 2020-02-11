@@ -1,12 +1,10 @@
-/// Internal class only used for code-generation with `mobx_codegen`.
-///
-/// During code-generation, this type is detected to identify a MobX Store class
-class MakeStore {
-  const MakeStore._();
-}
+/// Declares configuration of a Store class.
+/// Currently the only configuration used is boolean to indicate generation of toString method (true), or not (false)
 
-/// Declares the annotation identifier for a Store class.
-const MakeStore store = MakeStore._();
+class StoreConfig {
+  const StoreConfig({this.hasToString = true});
+  final bool hasToString;
+}
 
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///
