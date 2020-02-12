@@ -296,9 +296,11 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/26303198?v=4",
       "profile": "https://github.com/geisterfurz007",
       "contributions": [
-        "doc"
+        "doc",
+        "content"
       ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }

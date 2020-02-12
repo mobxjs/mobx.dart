@@ -19,6 +19,7 @@ bool debugAddStackTraceInObserverName = true;
 class Observer extends StatelessObserverWidget
     // Implements Builder to import the documentation of `builder`
     implements
+        // ignore: avoid_implementing_value_types
         Builder {
   // ignore: prefer_const_constructors_in_immutables
   Observer({Key key, @required this.builder, String name})
@@ -76,4 +77,3 @@ class Observer extends StatelessObserverWidget
     return stackFrame;
   }
 }
-

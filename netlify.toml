@@ -1,8 +1,8 @@
-[[redirects]]
-  from = "https://mobx-dart.netlify.com/*"
-  to = "https://mobx.pub/:splat"
-  status = 301
-  force = true
+#[[redirects]]
+#  from = "https://mobx.netlify.com/*"
+#  to = "https://mobx.pub/:splat"
+#  status = 301
+#  force = true
 
 [[redirects]]
   from = "/*"

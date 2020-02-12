@@ -35,7 +35,7 @@ export const testimonials: TestimonialContent[] = [
       'Google Product Manager on the Flutter Development Experience. Enjoys long walks on the beach and various technologies.',
     photoUrl:
       'https://pbs.twimg.com/profile_images/1660905119/vikingme128x128_400x400.jpg',
-    message: `If you haven\'t seen MobX.dart @ https://mobx.pub, check it out. In combination with Provider, it\'s PFM (Pure Flutter Magic). I use it when I build anything real. #recommended #Flutter`
+    message: `If you haven\'t seen MobX.dart @ https://mobx.netlify.com, check it out. In combination with Provider, it\'s PFM (Pure Flutter Magic). I use it when I build anything real. #recommended #Flutter`
   },
   {
     author: 'Michael Bui',
@@ -51,7 +51,7 @@ export const testimonials: TestimonialContent[] = [
     twitter: 'https://twitter.com/BlueAquilae',
     title: '#Minimalism | #flutter artist | github Awesome #flutter',
     photoUrl:
-      'https://pbs.twimg.com/profile_images/948652731115429889/sQnk1F3m_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1224113357302702080/5CwF3c3q_400x400.jpg',
     message: `On Professional projects, MobX helps me manage hundreds of forms and thousands of fields with transparency.
 When working on Generative Art, it helps me create highly configurable widgets without complexity. 
 MobX supports me on all of my projects.`
