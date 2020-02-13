@@ -1,3 +1,3 @@
 # Using mobx_codegen
 
-Refer to this [Getting Started](https://mobx.pub/getting-started) guide for using `mobx_codegen` with `mobx`.
+Refer to this [Getting Started](https://mobx.netlify.com/getting-started) guide for using `mobx_codegen` with `mobx`.

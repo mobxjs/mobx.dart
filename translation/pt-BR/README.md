@@ -186,7 +186,7 @@ abstract class CounterBase with Store {
 
 #### Asynchronous Actions
 
-MobX.dart já lida automaticamente com métodos asincrono sem a necessidade de alguma outra ferramenta. [`runInAction`](https://mobx.pub/api/action#runinaction).
+MobX.dart já lida automaticamente com métodos asincrono sem a necessidade de alguma outra ferramenta. [`runInAction`](https://mobx.netlify.com/api/action#runinaction).
 
 ```dart
 @observable
