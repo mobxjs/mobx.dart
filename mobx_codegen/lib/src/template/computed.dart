@@ -2,6 +2,7 @@ class ComputedTemplate {
   String computedName;
   String type;
   String name;
+  bool isPrivate;
 
   @override
   // ignore: prefer_single_quotes

@@ -32,7 +32,9 @@ abstract class StoreTemplate {
   final Rows<AsyncActionTemplate> asyncActions = Rows();
   final Rows<ObservableFutureTemplate> observableFutures = Rows();
   final Rows<ObservableStreamTemplate> observableStreams = Rows();
+  final List<String> toStringList = [];
 
+  bool generateToString = false;
   String _actionControllerName;
   String get actionControllerName =>
       _actionControllerName ??= '_\$${parentTypeName}ActionController';
@@ -41,7 +43,9 @@ abstract class StoreTemplate {
       ? ''
       : "final $actionControllerName = ActionController(name: '$parentTypeName');";
 
-  String get storeBody => '''
+  String get storeBody {
+    var toStringMethod = '';
+    final baseBody = '''
   $computeds
 
   $observables
@@ -55,6 +59,31 @@ abstract class StoreTemplate {
   $actionControllerField
 
   $actions''';
+
+    if (generateToString) {
+      final publicObservablesList = observables.templates
+      ..removeWhere((element) => element.isPrivate);
+
+      final publicComputedsList = computeds.templates
+        ..removeWhere((element) => element.isPrivate);
+
+      toStringList
+        ..addAll(publicObservablesList.map(
+            (current) => '${current.name}: \${${current.name}.toString()}'))
+        ..addAll(publicComputedsList.map(
+            (current) => '${current.name}: \${${current.name}.toString()}'));
+
+      toStringMethod = '''
+  @override
+  String toString() {
+    final string = \'${toStringList.join(',')}\';
+    return '{\$string}';
+  }
+  ''';
+    }
+
+    return baseBody + toStringMethod;
+  }
 
   @override
   String toString();

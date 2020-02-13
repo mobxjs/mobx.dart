@@ -4,7 +4,7 @@ import 'package:build/build.dart';
 import 'package:mobx/mobx.dart';
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
-    show ComputedMethod, MakeAction, MakeObservable;
+    show ComputedMethod, MakeAction, MakeObservable, StoreConfig;
 import 'package:mobx_codegen/src/errors.dart';
 import 'package:mobx_codegen/src/template/action.dart';
 import 'package:mobx_codegen/src/template/async_action.dart';
@@ -61,6 +61,8 @@ class StoreClassVisitor extends SimpleElementVisitor {
       _errors.nonAbstractStoreMixinDeclarations
           .addIf(!element.isAbstract, element.name);
     }
+    // if the class is annotated to generate toString() method we add the information to the _storeTemplate
+    _storeTemplate.generateToString = hasGeneratedToString(element);
   }
 
   @override
@@ -87,7 +89,8 @@ class StoreClassVisitor extends SimpleElementVisitor {
       ..storeTemplate = _storeTemplate
       ..atomName = '_\$${element.name}Atom'
       ..type = typeNameFinder.findVariableTypeName(element)
-      ..name = element.name;
+      ..name = element.name
+      ..isPrivate = element.isPrivate;
 
     _storeTemplate.observables.add(template);
     return;
@@ -117,9 +120,10 @@ class StoreClassVisitor extends SimpleElementVisitor {
     final template = ComputedTemplate()
       ..computedName = '_\$${element.name}Computed'
       ..name = element.name
-      ..type = typeNameFinder.findGetterTypeName(element);
-    _storeTemplate.computeds.add(template);
+      ..type = typeNameFinder.findGetterTypeName(element)
+      ..isPrivate = element.isPrivate;
 
+    _storeTemplate.computeds.add(template);
     return;
   }
 
@@ -189,9 +193,23 @@ class StoreClassVisitor extends SimpleElementVisitor {
 }
 
 const _storeMixinChecker = TypeChecker.fromRuntime(Store);
+const _toStringAnnotationChecker = TypeChecker.fromRuntime(StoreConfig);
 
 bool isMixinStoreClass(ClassElement classElement) =>
     classElement.mixins.any(_storeMixinChecker.isExactlyType);
+
+// Checks if the class as a toString annotation
+bool isStoreConfigAnnotatedStoreClass(ClassElement classElement) =>
+    _toStringAnnotationChecker.hasAnnotationOfExact(classElement);
+
+bool hasGeneratedToString(ClassElement classElement) {
+  if (isStoreConfigAnnotatedStoreClass(classElement)) {
+    final annotation =
+        _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
+    return annotation.getField('hasToString').toBoolValue();
+  }
+  return true;
+}
 
 bool _any(List<bool> list) => list.any(_identity);
 

@@ -10,7 +10,6 @@ typedef VoidCallback = void Function();
 
 class User = UserBase with _$User;
 
-@StoreConfig(hasToString: false)
 abstract class UserBase with Store {
   UserBase(this.id);
 
@@ -43,6 +42,9 @@ abstract class UserBase with Store {
 
   @computed
   String get fullName => '$firstName $middleName $lastName';
+
+  @computed
+  String get _fullName => '$firstName $middleName $lastName';
 
   @action
   Future<List<User>> fetchUsers() async => Future.value([]);

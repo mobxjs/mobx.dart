@@ -1,3 +1,9 @@
+## 1.0.2
+
+- Added automatic generation of `toString` method with `@StoreConfig` annotation 
+
+Thanks to [@hawkbee1](https://github.com/hawkbee1)
+
 ## 1.0.0 - 1.0.1
 
 - Ready for prime time!

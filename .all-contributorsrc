@@ -299,6 +299,15 @@
         "doc",
         "content"
       ]
+    },
+    {
+      "login": "hawkbee1",
+      "name": "Romuald Barbe",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/49282360?&v=4",
+      "profile": "https://github.com/hawkbee1",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
