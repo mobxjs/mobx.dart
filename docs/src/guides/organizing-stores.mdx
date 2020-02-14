@@ -129,9 +129,9 @@ In short, we have taken cues from the [SOLID](https://en.wikipedia.org/wiki/SOLI
 
 ## Linking Stores
 
-If you organize stores in a hierarchy, you will have a root-Store and then a set of child-Stores that cater to specific features of your application. If the feature is complex, it is possible to have a subtree of In such a scenario, you will want some kind of communication from the parent to the child stores. There are two common ways of doing this:
+If you organize stores in a hierarchy, you will have a root-Store and then a set of child-Stores that cater to specific features of your application. If the feature is complex, it is possible to have a subtree of Stores. In such a scenario, you will want some kind of communication from the parent to the child stores. There are two common ways of doing this:
 
-1. **Pass the `Parent` into the `Child`**: This way you have direct access to the public interface of the `Parent` and you can use that to observe certain fields or just invoke parent level functionality for certain operations. It is better to pass the parent to the `Child`'s constructor, rather than setting it as a field.
+1. **Pass the `Parent` into the `Child`**: This way you have direct access to the public interface of the `Parent` and you can use that to observe certain fields or just invoke parent level functionality for certain operations. It is better to pass the parent into the `Child`'s constructor, rather than setting it as a field.
 
 ```dart
 // parent.dart
@@ -153,7 +153,11 @@ class Child {
 }
 ```
 
-2. Using callbacks from `Child`: Rather than tightly coupling the `Parent` with the `Child`, the other option is to have an explicit set callbacks for the child to communicate with the parent. This is useful when the direction of communication is mostly from `Child` to `Parent`.
+> ### Service Locator
+>
+> If the dependencies between Stores is much more complicated, let's say each Store needs a shared instance of the `ThemeStore`, `PreferencesStore`, `AuthenticationStore`, etc., a better way to manage this is to use the _Service Locator_ pattern. The <PubBadge name="get_it" /> package makes this possible and is worth checking out.
+
+2. **Using callbacks from `Child`**: Rather than tightly coupling the `Parent` with the `Child`, the other option is to have an explicit set of callbacks for the child to communicate with the parent. This is useful when the direction of communication is mostly from `Child` to `Parent`.
 
 ```dart
 class Parent {
