@@ -120,12 +120,108 @@ import dependencyOrder from './dependency-order.png';
 This breakdown has a few advantages:
 
 - The `Widget` layer is primarily stateless and contains a good dose of `Observer` widgets sprinkled wherever the reactive-state is being rendered. You can be as generous as you need to be to with the `Observers` in selectively observing the state.
-- The `Store` layer is primarily composed of the `@observable` and `@computed` fields. Additionally you will have the `@action` methods that mutate the observable state. This layer is primarily meant to add the reactivity you need to render the UI. There is no actual work being performed here besides keeping track of the _reactive-state_.
+- The `Store` layer is primarily composed of the `@observable` and `@computed` fields. Additionally, you will have the `@action` methods that mutate the observable state. This layer is primarily meant to add the reactivity you need to render the UI. There is no actual work being performed here besides keeping track of the _reactive-state_.
 - The `Service` layer is where you do all the heavy lifting with data. This will include API calls to fetch and send data, format according to the needs of the UI, do data transformations, apply rule-based validation and error checking and so on. All the inputs needed are clearly sent in, making this layer completely stateless!
 
 In short, we have taken cues from the [SOLID](https://en.wikipedia.org/wiki/SOLID) principles and applied them here :-).
 
 > **Single Responsibility** is the most important attribute of this triad pattern.
+
+## Linking Stores
+
+If you organize stores in a hierarchy, you will have a root-Store and then a set of child-Stores that cater to specific features of your application. If the feature is complex, it is possible to have a subtree of Stores. In such a scenario, you will want some kind of communication from the parent to the child stores. There are two common ways of doing this:
+
+1. **Pass the `Parent` into the `Child`**: This way you have direct access to the public interface of the `Parent` and you can use that to observe certain fields or just invoke parent level functionality for certain operations. It is better to pass the parent into the `Child`'s constructor, rather than setting it as a field.
+
+```dart
+// parent.dart
+
+final child = Child(parent: this);
+```
+
+```dart
+// child.dart
+
+class Child {
+  Child({this.parent});
+
+  Parent parent;
+
+  void dispose() {
+    parent = null;
+  }
+}
+```
+
+> ### Service Locator
+>
+> If the dependencies between Stores is much more complicated, let's say each Store needs a shared instance of the `ThemeStore`, `PreferencesStore`, `AuthenticationStore`, etc., a better way to manage this is to use the _Service Locator_ pattern. The <PubBadge name="get_it" /> package makes this possible and is worth checking out.
+
+2. **Using callbacks from `Child`**: Rather than tightly coupling the `Parent` with the `Child`, the other option is to have an explicit set of callbacks for the child to communicate with the parent. This is useful when the direction of communication is mostly from `Child` to `Parent`.
+
+```dart
+class Parent {
+
+  /* ... */
+
+  void addChild() {
+    final child = Child();
+    child.onChange = (value) {
+      print(value);
+    };
+  }
+}
+
+class Child {
+
+  /* ... */
+
+  void Function(String) onChange;
+
+  void perform() {
+    if (onChange != null) {
+      onChange('value changed');
+    }
+  }
+}
+```
+
+## Store lifetimes
+
+Most stores should be created before rendering the UI. This includes your core application stores, preferences, translations, themes, etc. However, there are cases where a store should exist only for the lifetime of a screen. For example, a `FormWidget` that only needs a store for validation and for loading some dynamic data. Once the `FormWidget` is disposed, the store also goes away.
+
+For such cases, you should create the store in the `initState()` of the `State<FormWidget>` and dispose inside the `State<FormWidget>`'s `dispose()`.
+
+```dart
+class FormWidget extends StatefulWidget {
+  const FormWidget();
+
+  @override
+  _FormWidgetState createState() => _FormWidgetState();
+}
+
+class _FormWidgetState extends State<FormWidget> {
+  FormStore store;
+
+  @override
+  void initState() {
+    super.initState();
+
+    store = FormStore();
+    store.setupValidations(); // setup some reactions
+  }
+
+  @override
+  void dispose() {
+    store.dispose(); // dispose the reactions
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) { /* ... */ }
+}
+
+```
 
 ## Using Providers to avoid Singletons
 
