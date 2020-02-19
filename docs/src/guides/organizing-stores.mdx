@@ -186,6 +186,43 @@ class Child {
 }
 ```
 
+## Store lifetimes
+
+Most stores should be created before rendering the UI. This includes your core application stores, preferences, translations, themes, etc. However, there are cases where a store should exist only for the lifetime of a screen. For example, a `FormWidget` that only needs a store for validation and for loading some dynamic data. Once the `FormWidget` is disposed, the store also goes away.
+
+For such cases, you should create the store in the `initState()` of the `State<FormWidget>` and dispose inside the `State<FormWidget>`'s `dispose()`.
+
+```dart
+class FormWidget extends StatefulWidget {
+  const FormWidget();
+
+  @override
+  _FormWidgetState createState() => _FormWidgetState();
+}
+
+class _FormWidgetState extends State<FormWidget> {
+  FormStore store;
+
+  @override
+  void initState() {
+    super.initState();
+
+    store = FormStore();
+    store.setupValidations(); // setup some reactions
+  }
+
+  @override
+  void dispose() {
+    store.dispose(); // dispose the reactions
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) { /* ... */ }
+}
+
+```
+
 ## Using Providers to avoid Singletons
 
 The provider-pattern has become a standard way of making the top level stores available across the entire app. It avoids creating a singleton-`Store`, making it easier to use the `Store` as a plain class instance.
