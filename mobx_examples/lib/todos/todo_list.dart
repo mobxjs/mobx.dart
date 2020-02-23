@@ -1,21 +1,17 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:dart_json_mapper/dart_json_mapper.dart';
 import 'package:mobx/mobx.dart';
 
 import 'todo.dart';
 
-part 'todo_list.g.dart';
-
 enum VisibilityFilter { all, pending, completed }
 
-@JsonSerializable()
-class TodoList = _TodoList with _$TodoList;
-
-abstract class _TodoList with Store {
-  @_ObservableListJsonConverter()
+@jsonSerializable
+class TodoList with Store {
   @observable
   ObservableList<Todo> todos = ObservableList<Todo>();
 
   @observable
+  @JsonProperty(enumValues: VisibilityFilter.values)
   VisibilityFilter filter = VisibilityFilter.all;
 
   @observable
@@ -46,6 +42,7 @@ abstract class _TodoList with Store {
   }
 
   @computed
+  @JsonProperty(ignore: true)
   ObservableList<Todo> get visibleTodos {
     switch (filter) {
       case VisibilityFilter.pending:
@@ -70,11 +67,6 @@ abstract class _TodoList with Store {
     final todo = Todo(description);
     todos.add(todo);
     currentDescription = '';
-
-    // Just a quick test of the JSON encode/decode
-    final list = _$TodoListToJson(this);
-    print(list);
-    print(_$TodoListFromJson(list));
   }
 
   @action
@@ -93,17 +85,4 @@ abstract class _TodoList with Store {
       todo.done = true;
     }
   }
-}
-
-class _ObservableListJsonConverter
-    implements JsonConverter<ObservableList<Todo>, List<Map<String, dynamic>>> {
-  const _ObservableListJsonConverter();
-
-  @override
-  ObservableList<Todo> fromJson(List<Map<String, dynamic>> json) =>
-      ObservableList.of(json.map(Todo.fromJson));
-
-  @override
-  List<Map<String, dynamic>> toJson(ObservableList<Todo> list) =>
-      list.map(Todo.toJson).toList();
 }
