@@ -32,4 +32,10 @@ mixin _$SettingsStore on _SettingsStore, Store {
   Future<void> setDarkMode({@required bool value}) {
     return _$setDarkModeAsyncAction.run(() => super.setDarkMode(value: value));
   }
+
+  @override
+  String toString() {
+    final string = 'useDarkMode: ${useDarkMode.toString()}';
+    return '{$string}';
+  }
 }

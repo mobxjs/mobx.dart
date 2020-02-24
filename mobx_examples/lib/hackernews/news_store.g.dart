@@ -66,4 +66,11 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
       _$_HackerNewsStoreActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string =
+        'latestItemsFuture: ${latestItemsFuture.toString()},topItemsFuture: ${topItemsFuture.toString()}';
+    return '{$string}';
+  }
 }

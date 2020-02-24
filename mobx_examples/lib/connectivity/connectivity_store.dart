@@ -1,5 +1,5 @@
-import 'package:mobx/mobx.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:mobx/mobx.dart';
 
 part 'connectivity_store.g.dart';
 

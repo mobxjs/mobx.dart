@@ -22,7 +22,8 @@ dependencies:
   url_launcher:
   shared_preferences:
   provider: ^3.0.0
-  json_serializable: ^3.0.0
+  dart_json_mapper: ^1.5.2
+  dart_json_mapper_mobx: ^1.2.0
   flutter:
     sdk: flutter
 

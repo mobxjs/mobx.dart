@@ -3,62 +3,6 @@
 part of 'todo_list.dart';
 
 // **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-TodoList _$TodoListFromJson(Map<String, dynamic> json) {
-  return TodoList()
-    ..todos = const _ObservableListJsonConverter()
-        .fromJson(json['todos'] as List<Map<String, dynamic>>)
-    ..filter = _$enumDecodeNullable(_$VisibilityFilterEnumMap, json['filter'])
-    ..currentDescription = json['currentDescription'] as String;
-}
-
-Map<String, dynamic> _$TodoListToJson(TodoList instance) => <String, dynamic>{
-      'todos': const _ObservableListJsonConverter().toJson(instance.todos),
-      'filter': _$VisibilityFilterEnumMap[instance.filter],
-      'currentDescription': instance.currentDescription,
-    };
-
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
-}
-
-const _$VisibilityFilterEnumMap = {
-  VisibilityFilter.all: 'all',
-  VisibilityFilter.pending: 'pending',
-  VisibilityFilter.completed: 'completed',
-};
-
-// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 
@@ -206,5 +150,12 @@ mixin _$TodoList on _TodoList, Store {
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
     }
+  }
+
+  @override
+  String toString() {
+    final string =
+        'todos: ${todos.toString()},filter: ${filter.toString()},currentDescription: ${currentDescription.toString()},pendingTodos: ${pendingTodos.toString()},completedTodos: ${completedTodos.toString()},hasCompletedTodos: ${hasCompletedTodos.toString()},hasPendingTodos: ${hasPendingTodos.toString()},itemsDescription: ${itemsDescription.toString()},visibleTodos: ${visibleTodos.toString()},canRemoveAllCompleted: ${canRemoveAllCompleted.toString()},canMarkAllCompleted: ${canMarkAllCompleted.toString()}';
+    return '{$string}';
   }
 }
