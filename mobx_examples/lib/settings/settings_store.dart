@@ -2,8 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_examples/settings/preferences_service.dart';
 
-class SettingsStore with Store {
-  SettingsStore(this._preferencesService) {
+part 'settings_store.g.dart';
+
+class SettingsStore = _SettingsStore with _$SettingsStore;
+
+abstract class _SettingsStore with Store {
+  _SettingsStore(this._preferencesService) {
     _setup();
   }
 

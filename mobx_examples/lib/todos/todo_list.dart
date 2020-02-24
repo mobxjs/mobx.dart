@@ -3,10 +3,14 @@ import 'package:mobx/mobx.dart';
 
 import 'todo.dart';
 
+part 'todo_list.g.dart';
+
 enum VisibilityFilter { all, pending, completed }
 
 @jsonSerializable
-class TodoList with Store {
+class TodoList = _TodoList with _$TodoList;
+
+abstract class _TodoList with Store {
   @observable
   ObservableList<Todo> todos = ObservableList<Todo>();
 

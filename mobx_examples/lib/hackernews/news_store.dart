@@ -2,9 +2,13 @@ import 'package:hnpwa_client/hnpwa_client.dart';
 import 'package:mobx/mobx.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+part 'news_store.g.dart';
+
 enum FeedType { latest, top }
 
-class HackerNewsStore with Store {
+class HackerNewsStore = _HackerNewsStore with _$HackerNewsStore;
+
+abstract class _HackerNewsStore with Store {
   final HnpwaClient _client = HnpwaClient();
 
   @observable

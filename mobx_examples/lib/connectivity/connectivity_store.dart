@@ -1,8 +1,12 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:mobx/mobx.dart';
 
-class ConnectivityStore with Store {
-  ConnectivityStore() {
+part 'connectivity_store.g.dart';
+
+class ConnectivityStore = _ConnectivityStore with _$ConnectivityStore;
+
+abstract class _ConnectivityStore with Store {
+  _ConnectivityStore() {
     connectivityStream = ObservableStream<ConnectivityResult>(
         Connectivity().onConnectivityChanged);
   }

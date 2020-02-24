@@ -3,8 +3,12 @@ import 'dart:math';
 
 import 'package:mobx/mobx.dart';
 
-class RandomStore with Store {
-  RandomStore() {
+part 'random_store.g.dart';
+
+class RandomStore = _RandomStore with _$RandomStore;
+
+abstract class _RandomStore with Store {
+  _RandomStore() {
     _streamController = StreamController<int>();
 
     _timer = Timer.periodic(const Duration(seconds: 1),
