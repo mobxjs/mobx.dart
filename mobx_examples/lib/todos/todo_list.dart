@@ -8,8 +8,9 @@ part 'todo_list.g.dart';
 enum VisibilityFilter { all, pending, completed }
 
 @jsonSerializable
-class TodoList = _TodoList with _$TodoList;
+class TodoList extends _TodoList with _$TodoList {}
 
+@jsonSerializable
 abstract class _TodoList with Store {
   @observable
   ObservableList<Todo> todos = ObservableList<Todo>();

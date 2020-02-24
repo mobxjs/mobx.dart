@@ -58,6 +58,12 @@ mixin _$SingleCounter on _SingleCounter, Store {
       _$_SingleCounterActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string = 'value: ${value.toString()}';
+    return '{$string}';
+  }
 }
 
 mixin _$MultiCounterStore on _MultiCounterStore, Store {
@@ -82,5 +88,11 @@ mixin _$MultiCounterStore on _MultiCounterStore, Store {
     } finally {
       _$_MultiCounterStoreActionController.endAction(_$actionInfo);
     }
+  }
+
+  @override
+  String toString() {
+    final string = '';
+    return '{$string}';
   }
 }

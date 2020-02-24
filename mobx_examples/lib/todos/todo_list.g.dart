@@ -151,4 +151,11 @@ mixin _$TodoList on _TodoList, Store {
       _$_TodoListActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string =
+        'todos: ${todos.toString()},filter: ${filter.toString()},currentDescription: ${currentDescription.toString()},pendingTodos: ${pendingTodos.toString()},completedTodos: ${completedTodos.toString()},hasCompletedTodos: ${hasCompletedTodos.toString()},hasPendingTodos: ${hasPendingTodos.toString()},itemsDescription: ${itemsDescription.toString()},visibleTodos: ${visibleTodos.toString()},canRemoveAllCompleted: ${canRemoveAllCompleted.toString()},canMarkAllCompleted: ${canMarkAllCompleted.toString()}';
+    return '{$string}';
+  }
 }
