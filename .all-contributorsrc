@@ -308,6 +308,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "k-paxian",
+      "name": "Alexander Mazuruk",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/18071010?v=4",
+      "profile": "https://www.linkedin.com/in/alexander-mazuruk",
+      "contributions": [
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7,
