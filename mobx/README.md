@@ -1,4 +1,4 @@
-Language: [English](README.md) | [Português](../translation/pt-BR/README.md)
+Language: [English](README.md) | [Português](https://github.com/mobxjs/mobx.dart/blob/master/translation/pt-BR/README.md)
 
 # mobx.dart en
 
