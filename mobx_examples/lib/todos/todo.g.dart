@@ -42,11 +42,4 @@ mixin _$Todo on _Todo, Store {
       _$doneAtom.reportChanged();
     }, _$doneAtom, name: '${_$doneAtom.name}_set');
   }
-
-  @override
-  String toString() {
-    final string =
-        'description: ${description.toString()},done: ${done.toString()}';
-    return '{$string}';
-  }
 }

@@ -59,11 +59,4 @@ mixin _$DiceCounter on _DiceCounter, Store {
       _$_DiceCounterActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string =
-        'left: ${left.toString()},right: ${right.toString()},total: ${total.toString()}';
-    return '{$string}';
-  }
 }

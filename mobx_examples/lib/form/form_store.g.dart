@@ -135,13 +135,6 @@ mixin _$FormStore on _FormStore, Store {
       _$_FormStoreActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string =
-        'color: ${color.toString()},name: ${name.toString()},email: ${email.toString()},password: ${password.toString()},isUserCheckPending: ${isUserCheckPending.toString()},canLogin: ${canLogin.toString()}';
-    return '{$string}';
-  }
 }
 
 mixin _$FormErrorState on _FormErrorState, Store {
@@ -200,12 +193,5 @@ mixin _$FormErrorState on _FormErrorState, Store {
       super.password = value;
       _$passwordAtom.reportChanged();
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
-  }
-
-  @override
-  String toString() {
-    final string =
-        'username: ${username.toString()},email: ${email.toString()},password: ${password.toString()},hasErrors: ${hasErrors.toString()}';
-    return '{$string}';
   }
 }

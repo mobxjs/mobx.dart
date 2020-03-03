@@ -27,10 +27,4 @@ mixin _$ConnectivityStore on _ConnectivityStore, Store {
       _$connectivityStreamAtom.reportChanged();
     }, _$connectivityStreamAtom, name: '${_$connectivityStreamAtom.name}_set');
   }
-
-  @override
-  String toString() {
-    final string = 'connectivityStream: ${connectivityStream.toString()}';
-    return '{$string}';
-  }
 }

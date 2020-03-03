@@ -67,11 +67,4 @@ mixin _$GithubStore on _GithubStore, Store {
       _$_GithubStoreActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string =
-        'fetchReposFuture: ${fetchReposFuture.toString()},user: ${user.toString()},hasResults: ${hasResults.toString()}';
-    return '{$string}';
-  }
 }
