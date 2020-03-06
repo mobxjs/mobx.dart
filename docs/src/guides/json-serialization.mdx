@@ -4,9 +4,11 @@ route: /guides/json
 name: JSON Serialization of Stores
 ---
 
+import { PubBadge } from '../components/PubBadge';
+
 # JSON Serialization of Stores
 
-The [![pub package](https://img.shields.io/pub/v/dart_json_mapper.svg?label=dart_json_mapper&color=blue)](https://pub.dartlang.org/packages/dart_json_mapper) package is a popular way to encode/decode between json representations of your models. It works by attaching the `@jsonSerializable` annotation to the `Store` classes. Since this is a custom annotation, we have to invoke the `build_runner` command, just like we do for `mobx_codegen`.
+The <PubBadge name="dart_json_mapper" /> package is a popular way to encode/decode between json representations of your models. It works by attaching the `@jsonSerializable` annotation to the `Store` classes. Since this is a custom annotation, we have to invoke the `build_runner` command, just like we do for `mobx_codegen`.
 
 Let's add support for `dart_json_mapper` to the **todos** example.
 
@@ -14,7 +16,7 @@ Let's add support for `dart_json_mapper` to the **todos** example.
 
 ## Adding dependency in pubspec.yaml
 
-The first step is to include the dependency on the [![pub package](https://img.shields.io/pub/v/dart_json_mapper.svg?label=dart_json_mapper&color=blue)](https://pub.dartlang.org/packages/dart_json_mapper) package. We add this to the `pubspec.yaml` and run `flutter packages get` to download it.
+The first step is to include the dependency on the <PubBadge name="dart_json_mapper" /> and <PubBadge name="dart_json_mapper_mobx" /> packages. We add this to the `pubspec.yaml` and run `flutter packages get` to download it.
 
 ```yaml
 dependencies:
@@ -45,7 +47,7 @@ import 'main.reflectable.dart' show initializeReflectable;
 void main() {
   initializeReflectable();
   JsonMapper().useAdapter(mobXAdapter);
-  
+
   runApp(const MyApp());
 }
 ```
@@ -164,7 +166,6 @@ flutter packages pub run build_runner watch --delete-conflicting-outputs
 
 This will generate `main.reflectable.dart` file, which you should add to your `.gitignore` as `*.reflectable.dart`.
 It's recommended not to commit this generated code to your repository, since it's 100% generated and essential for compile time only.
-
 
 ## JSON Serialization / Deserialization
 
