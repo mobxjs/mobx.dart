@@ -1,9 +1,8 @@
-## 1.0.2 - 1.0.2+1
+## 1.0.2 - 1.0.2+2
 
-- Added `@StoreConfig` annotation
+- Added `@StoreConfig` annotation ([@hawkbee1](https://github.com/hawkbee1))
 - Fixed to link to pt-BR translation on github
-
-Thanks to [@hawkbee1](https://github.com/hawkbee1)
+- Fixed anchor link inside README.md
 
 ## 1.0.1
 

@@ -23,7 +23,6 @@ Language: [English](README.md) | [Português](https://github.com/mobxjs/mobx.dar
   - [Computed Observables](#computed-observables)
   - [Actions](#actions)
   - [Reactions](#reactions)
-- **[Roadmap](#roadmap)**
 - **[Contributing](#contributing)**
 
 ## Introduction
