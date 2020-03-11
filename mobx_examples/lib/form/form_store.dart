@@ -27,10 +27,10 @@ abstract class _FormStore with Store {
   String password = '';
 
   @observable
-  ObservableFuture<bool> _usernameCheck = ObservableFuture.value(true);
+  ObservableFuture<bool> usernameCheck = ObservableFuture.value(true);
 
   @computed
-  bool get isUserCheckPending => _usernameCheck.status == FutureStatus.pending;
+  bool get isUserCheckPending => usernameCheck.status == FutureStatus.pending;
 
   @computed
   bool get canLogin => !error.hasErrors;
@@ -54,11 +54,11 @@ abstract class _FormStore with Store {
     }
 
     try {
-      _usernameCheck = ObservableFuture(checkValidUsername(value));
+      usernameCheck = ObservableFuture(checkValidUsername(value));
 
       error.username = null;
 
-      final isValid = await _usernameCheck;
+      final isValid = await usernameCheck;
       if (!isValid) {
         error.username = 'Username cannot be "admin"';
         return;

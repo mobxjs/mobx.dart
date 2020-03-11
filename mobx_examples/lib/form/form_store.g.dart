@@ -89,21 +89,21 @@ mixin _$FormStore on _FormStore, Store {
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
-  final _$_usernameCheckAtom = Atom(name: '_FormStore._usernameCheck');
+  final _$usernameCheckAtom = Atom(name: '_FormStore.usernameCheck');
 
   @override
-  ObservableFuture<bool> get _usernameCheck {
-    _$_usernameCheckAtom.context.enforceReadPolicy(_$_usernameCheckAtom);
-    _$_usernameCheckAtom.reportObserved();
-    return super._usernameCheck;
+  ObservableFuture<bool> get usernameCheck {
+    _$usernameCheckAtom.context.enforceReadPolicy(_$usernameCheckAtom);
+    _$usernameCheckAtom.reportObserved();
+    return super.usernameCheck;
   }
 
   @override
-  set _usernameCheck(ObservableFuture<bool> value) {
-    _$_usernameCheckAtom.context.conditionallyRunInAction(() {
-      super._usernameCheck = value;
-      _$_usernameCheckAtom.reportChanged();
-    }, _$_usernameCheckAtom, name: '${_$_usernameCheckAtom.name}_set');
+  set usernameCheck(ObservableFuture<bool> value) {
+    _$usernameCheckAtom.context.conditionallyRunInAction(() {
+      super.usernameCheck = value;
+      _$usernameCheckAtom.reportChanged();
+    }, _$usernameCheckAtom, name: '${_$usernameCheckAtom.name}_set');
   }
 
   final _$validateUsernameAsyncAction = AsyncAction('validateUsername');
@@ -134,6 +134,13 @@ mixin _$FormStore on _FormStore, Store {
     } finally {
       _$_FormStoreActionController.endAction(_$actionInfo);
     }
+  }
+
+  @override
+  String toString() {
+    final string =
+        'color: ${color.toString()},name: ${name.toString()},email: ${email.toString()},password: ${password.toString()},usernameCheck: ${usernameCheck.toString()},isUserCheckPending: ${isUserCheckPending.toString()},canLogin: ${canLogin.toString()}';
+    return '{$string}';
   }
 }
 
@@ -193,5 +200,12 @@ mixin _$FormErrorState on _FormErrorState, Store {
       super.password = value;
       _$passwordAtom.reportChanged();
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+  }
+
+  @override
+  String toString() {
+    final string =
+        'username: ${username.toString()},email: ${email.toString()},password: ${password.toString()},hasErrors: ${hasErrors.toString()}';
+    return '{$string}';
   }
 }

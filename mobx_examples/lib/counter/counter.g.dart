@@ -37,4 +37,10 @@ mixin _$Counter on _Counter, Store {
       _$_CounterActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string = 'value: ${value.toString()}';
+    return '{$string}';
+  }
 }
