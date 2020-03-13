@@ -26,8 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/rfc/spying-and-tracing.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rfc/spying-and-tracing.md" beforeDir="false" afterPath="$PROJECT_DIR$/rfc/spying-and-tracing.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,14 +293,8 @@
       <workItem from="1583571774243" duration="106000" />
       <workItem from="1583838035210" duration="351000" />
       <workItem from="1583838423028" duration="4310000" />
-      <workItem from="1583937356669" duration="1539000" />
-    </task>
-    <task id="LOCAL-00076" summary="adding github badge">
-      <created>1579661856406</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1579661856406</updated>
+      <workItem from="1583937356669" duration="3824000" />
+      <workItem from="1584024456831" duration="1007000" />
     </task>
     <task id="LOCAL-00077" summary="trying out an auto-publish workflow">
       <created>1579746021397</created>
@@ -638,7 +632,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583900415211</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="initial draft of spy feature">
+      <created>1583989574873</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1583989574873</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -737,7 +738,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="breaking apart the various classes that make up the Observer" />
     <MESSAGE value="adding files for flutter web" />
     <MESSAGE value="updating docs" />
     <MESSAGE value="v1.0" />
@@ -762,7 +762,8 @@
     <MESSAGE value="using the PubBadge instead of raw urls to pub.dev" />
     <MESSAGE value="fixed link to Roadmap inside README.md" />
     <MESSAGE value="changing private field to public (usernameCheck) as its causing dart2js to generate a self-loop for setter." />
-    <option name="LAST_COMMIT_MESSAGE" value="changing private field to public (usernameCheck) as its causing dart2js to generate a self-loop for setter." />
+    <MESSAGE value="initial draft of spy feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial draft of spy feature" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -813,10 +814,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="1118" y="404" key="#xdebugger.evaluate/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577977075071" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1583900414939">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1583989574676">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1583900414939" />
+    <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1583989574676" />
     <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1583838394819" />
     <state x="351" y="147" key="CommitChangelistDialog2/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1583204774333" />
     <state width="481" height="466" key="DebuggerActiveHint" timestamp="1578496148462">
@@ -927,10 +928,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="678" y="413" key="VCS.EditChangelistDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1581655509861" />
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1583900430600">
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2" timestamp="1583989577715">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1583900430600" />
+    <state x="440" y="279" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1583989577715" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1583838431701" />
     <state x="440" y="279" key="Vcs.Push.Dialog.v2/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1583204776557" />
     <state width="840" height="513" key="XDebugger.FullValuePopup" timestamp="1577976713603">
@@ -941,10 +942,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577681183195" />
-    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1583985570008">
+    <state x="320" y="229" width="939" height="615" key="find.popup" timestamp="1584013358369">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1583985570008" />
+    <state x="320" y="229" width="939" height="615" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1584013358369" />
     <state x="320" y="229" width="939" height="615" key="find.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1580051639555" />
     <state x="320" y="229" width="939" height="615" key="find.popup/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581599233429" />
     <state x="438" y="372" key="git4idea.ui.GitUnstashDialog" timestamp="1576738706671">
