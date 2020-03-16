@@ -60,7 +60,8 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   @override
   T get value {
     if (_isComputing) {
-      throw MobXException('Cycle detected in computation $name: $_fn');
+      throw MobXCyclicReactionException(
+          'Cycle detected in computation $name: $_fn');
     }
 
     if (!_context.isWithinBatch && _observers.isEmpty) {
