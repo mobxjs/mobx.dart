@@ -30,34 +30,36 @@ class CounterListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final store = Provider.of<MultiCounterStore>(context);
 
-    return Observer(
-        builder: (_) => Column(children: <Widget>[
-              RaisedButton(
-                onPressed: store.addCounter,
-                child: const Text('Add Counter'),
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: store.counters.length,
-                  itemBuilder: (_, index) => ListTile(
-                      trailing: const Icon(Icons.navigate_next),
-                      title: Text('Count: ${store.counters[index].value}'),
-                      leading: IconButton(
-                          color: Colors.red,
-                          icon: const Icon(Icons.delete),
-                          onPressed: () => store.removeCounter(index)),
-                      onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => Scaffold(
-                                  appBar: AppBar(
-                                    title: const Text('Multi Counter'),
-                                  ),
-                                  body: CounterViewPage(
-                                      store: store, index: index)),
+    return Column(children: <Widget>[
+      RaisedButton(
+        onPressed: store.addCounter,
+        child: const Text('Add Counter'),
+      ),
+      Observer(
+        builder: (_) => ListView.builder(
+            shrinkWrap: true,
+            itemCount: store.counters.length,
+            itemBuilder: (_, index) => ListTile(
+                trailing: const Icon(Icons.navigate_next),
+                title: Observer(
+                    builder: (_) =>
+                        Text('Count: ${store.counters[index].value}')),
+                leading: IconButton(
+                    color: Colors.red,
+                    icon: const Icon(Icons.delete),
+                    onPressed: () => store.removeCounter(index)),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Scaffold(
+                            appBar: AppBar(
+                              title: const Text('Multi Counter'),
                             ),
-                          )))
-            ]));
+                            body: CounterViewPage(store: store, index: index)),
+                      ),
+                    ))),
+      )
+    ]);
   }
 }
 
