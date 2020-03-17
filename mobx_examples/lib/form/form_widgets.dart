@@ -15,7 +15,7 @@ class _FormExampleState extends State<FormExample> {
   @override
   void initState() {
     super.initState();
-//    store.setupValidations();
+    store.setupValidations();
   }
 
   @override
