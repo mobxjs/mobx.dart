@@ -28,8 +28,6 @@
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/src/api/observable.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/api/observable.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_store.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/mobx_examples/lib/multi_counter/multi_counter_widgets.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -297,13 +295,6 @@
       <workItem from="1583838035210" duration="351000" />
       <workItem from="1583838423028" duration="2366000" />
       <workItem from="1584272516376" duration="656000" />
-    </task>
-    <task id="LOCAL-00076" summary="adding github badge">
-      <created>1579661856406</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1579661856406</updated>
     </task>
     <task id="LOCAL-00077" summary="trying out an auto-publish workflow">
       <created>1579746021397</created>
@@ -641,7 +632,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584426084994</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="Adding the Observer around the right widget in multi-counter example">
+      <created>1584455206960</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1584455206960</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -740,7 +738,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="breaking apart the various classes that make up the Observer" />
     <MESSAGE value="adding files for flutter web" />
     <MESSAGE value="updating docs" />
     <MESSAGE value="v1.0" />
@@ -765,7 +762,8 @@
     <MESSAGE value="using the PubBadge instead of raw urls to pub.dev" />
     <MESSAGE value="fixed link to Roadmap inside README.md" />
     <MESSAGE value="uncommenting the line about setup validations" />
-    <option name="LAST_COMMIT_MESSAGE" value="uncommenting the line about setup validations" />
+    <MESSAGE value="Adding the Observer around the right widget in multi-counter example" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding the Observer around the right widget in multi-counter example" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -819,11 +817,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="1118" y="404" key="#xdebugger.evaluate/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1577977075071" />
-    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1584426084851">
+    <state x="351" y="147" key="CommitChangelistDialog2" timestamp="1584455206793">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="351" y="147" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1584426084851" />
-    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1583838394819" />
+    <state x="351" y="147" key="CommitChangelistDialog2/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1584455206793" />
     <state x="351" y="147" key="CommitChangelistDialog2/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1583204774333" />
     <state width="481" height="466" key="DebuggerActiveHint" timestamp="1578496148462">
       <screen x="0" y="23" width="1680" height="1027" />
