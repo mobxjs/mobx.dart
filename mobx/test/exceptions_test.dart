@@ -7,4 +7,10 @@ void main() {
 
     expect(ex.toString(), equals('Test Exception'));
   });
+
+  test('MobXCyclicReactionException has the right toString()', (){
+    final ex = MobXCyclicReactionException('Test Exception');
+
+    expect(ex.toString(), equals('Test Exception'));
+  });
 }

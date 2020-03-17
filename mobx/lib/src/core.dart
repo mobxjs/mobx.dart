@@ -33,6 +33,9 @@ class MobXCyclicReactionException implements Exception {
   MobXCyclicReactionException(this.message);
 
   String message;
+
+  @override
+  String toString() => message;
 }
 
 /// This captures the stack trace when user-land code throws an exception
