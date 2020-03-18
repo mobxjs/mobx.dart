@@ -106,6 +106,15 @@ abstract class _Contact with Store {
 }
 ```
 
+> #### Why do we need an `Observable***` Class for types like `Future`, `Stream`, `List`, `Map`, `Set`?
+>
+> The core types provided by Dart are not reactive by nature. They don't participate in the MobX reactive system and hence changes
+> in them are not notified to the `Observer`. To have a well-behaving reactive system, we need data-structures that are also
+> reactive inherently. This requires that we have an `Observable`-version of the core types like `List`, `Set`, `Map`, `Future` and `Stream`.
+>
+> The following set of types will help you build stores that participate well in the MobX world. Use them when you need reactive
+> data-structures that are MobX-ready!
+
 ## ObservableList
 
 ### `ObservableList({ReactiveContext context})`

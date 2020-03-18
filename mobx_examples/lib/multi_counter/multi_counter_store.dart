@@ -27,7 +27,8 @@ abstract class _SingleCounter with Store {
 class MultiCounterStore = _MultiCounterStore with _$MultiCounterStore;
 
 abstract class _MultiCounterStore with Store {
-  final ObservableList<SingleCounter> counters = ObservableList();
+  final ObservableList<SingleCounter> counters =
+      ObservableList<SingleCounter>.of([]);
 
   @action
   void addCounter() {
