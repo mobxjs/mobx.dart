@@ -44,6 +44,8 @@ class MobXCaughtException extends MobXException {
   final Object _stackTrace;
 
   Object get exception => _exception;
+
+  @override
   StackTrace get stackTrace => _stackTrace;
 }
 
