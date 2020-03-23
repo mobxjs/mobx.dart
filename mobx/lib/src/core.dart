@@ -8,6 +8,7 @@ part 'core/action.dart';
 part 'core/atom.dart';
 part 'core/computed.dart';
 part 'core/context.dart';
+part 'core/context_extensions.dart';
 part 'core/derivation.dart';
 part 'core/notification_handlers.dart';
 part 'core/observable.dart';
