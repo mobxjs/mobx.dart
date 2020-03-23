@@ -61,6 +61,7 @@ export 'package:mobx/src/core.dart'
         NotificationHandlers,
         ReactionImpl,
         DerivationState;
+export 'package:mobx/src/core/spy.dart';
 export 'package:mobx/src/api/extensions.dart';
 
 /// The current version as per `pubspec.yaml`
