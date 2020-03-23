@@ -168,27 +168,27 @@ void main() {
 
     expect(tester.firstWidget(find.byWidget(widget)), equals(widget));
 
-    expect(exception, isInstanceOf<MobXCaughtException>());
+    expect(exception, isInstanceOf<Error>());
   });
 
   testWidgets('Observer should report Flutter errors during invalidation',
       (tester) async {
-    final exception = await _testThrowingObserver(
+    final mobXException = await _testThrowingObserver(
       tester,
       FlutterError('setState() failed!'),
     );
-    expect(exception, isInstanceOf<FlutterError>());
+    expect(mobXException.exception, isInstanceOf<FlutterError>());
     // ignore: avoid_as
-    expect((exception as FlutterError).stackTrace, isNotNull);
+    expect((mobXException.exception as FlutterError).stackTrace, isNotNull);
   });
 
   testWidgets('Observer should report non-Flutter errors during invalidation',
       (tester) async {
-    final exception = await _testThrowingObserver(
+    final mobXException = await _testThrowingObserver(
       tester,
       StateError('Something else happened'),
     );
-    expect(exception, isInstanceOf<StateError>());
+    expect(mobXException.exception, isInstanceOf<StateError>());
   });
 
   testWidgets('Observer should report exceptions during invalidation',
@@ -197,7 +197,7 @@ void main() {
       tester,
       Exception('Some exception'),
     );
-    expect(exception, isInstanceOf<Exception>());
+    expect(exception, isInstanceOf<MobXCaughtException>());
   });
 
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
@@ -304,7 +304,7 @@ void main() {
   });
 }
 
-Future<Object> _testThrowingObserver(
+Future<MobXCaughtException> _testThrowingObserver(
   WidgetTester tester,
   Object errorToThrow,
 ) async {

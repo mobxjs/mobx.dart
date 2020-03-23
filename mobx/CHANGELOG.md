@@ -1,3 +1,8 @@
+## 1.1.0
+
+- All exceptions caught inside MobX reactions are now reported as `MobXCaughtException`. Previously they were reported as-is and that caused issues in `flutter_mobx`, where the stacktraces were not visible. The stacktrace is now being captured as part of the exception, so `flutter_mobx` can show the complete trace. This helps a lot during debugging.
+- `MobXException` now extends from `Error` to capture the stack trace. This is done because Dart only captures stack traces automatically for `Error` instances.
+
 ## 1.0.2 - 1.0.2+2
 
 - Added `@StoreConfig` annotation ([@hawkbee1](https://github.com/hawkbee1))
