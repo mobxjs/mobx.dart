@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
@@ -27,9 +25,9 @@ mixin ObserverWidgetMixin on Widget {
   /// A convenience method used for testing.
   @visibleForTesting
   Reaction createReaction(
-      Function() onInvalidate, {
-        Function(Object, Reaction) onError,
-      }) =>
+    Function() onInvalidate, {
+    Function(Object, Reaction) onError,
+  }) =>
       ReactionImpl(
         getContext(),
         onInvalidate,
@@ -83,10 +81,6 @@ mixin ObserverElementMixin on ComponentElement {
       _widget.log(
         'No observables detected in the build method of ${reaction.name}',
       );
-    }
-
-    if (reaction.errorValue != null) {
-      throw reaction.errorValue;
     }
 
     return built;

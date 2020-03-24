@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Exceptions are reported more reliably with `FlutterError.reportError`. This also includes the stack trace, as all caught exceptions are now wrapped inside `MobXCaughtException`.
+
 ## 1.0.0 - 1.0.1
 
 - Ready for prime time!

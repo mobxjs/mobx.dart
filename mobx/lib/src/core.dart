@@ -18,7 +18,7 @@ part 'interceptable.dart';
 part 'listenable.dart';
 
 /// An Exception class to capture MobX specific exceptions
-class MobXException implements Exception {
+class MobXException extends Error implements Exception {
   MobXException(this.message);
 
   String message;
@@ -29,24 +29,24 @@ class MobXException implements Exception {
 
 /// This exception would be fired when an reaction has a cycle and does
 /// not stabilize in [ReactiveConfig.maxIterations] iterations
-class MobXCyclicReactionException implements Exception {
-  MobXCyclicReactionException(this.message);
-
-  String message;
-
-  @override
-  String toString() => message;
+class MobXCyclicReactionException extends MobXException {
+  MobXCyclicReactionException(String message) : super(message);
 }
 
 /// This captures the stack trace when user-land code throws an exception
-class MobXCaughtException implements Exception {
-  MobXCaughtException(exception) : _exception = exception;
+class MobXCaughtException extends MobXException {
+  MobXCaughtException(exception, {StackTrace stackTrace})
+      : _exception = exception,
+        _stackTrace = stackTrace,
+        super('MobXCaughtException: $exception');
 
   final Object _exception;
+  final Object _stackTrace;
+
   Object get exception => _exception;
 
   @override
-  String toString() => 'MobXCaughtException: $exception';
+  StackTrace get stackTrace => _stackTrace;
 }
 
 typedef Dispose = void Function();

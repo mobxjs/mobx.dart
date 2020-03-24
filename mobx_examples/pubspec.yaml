@@ -36,13 +36,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-#dependency_overrides:
-#  flutter_mobx:
-#    path: ../flutter_mobx
-#  mobx_codegen:
-#    path: ../mobx_codegen
-#  mobx:
-#    path: ../mobx
+dependency_overrides:
+  flutter_mobx:
+    path: ../flutter_mobx
+  mobx_codegen:
+    path: ../mobx_codegen
+  mobx:
+    path: ../mobx
 
 flutter:
   uses-material-design: true

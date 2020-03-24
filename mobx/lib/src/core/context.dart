@@ -249,8 +249,8 @@ class ReactiveContext {
       try {
         result = fn();
         d._errorValue = null;
-      } on Object catch (e) {
-        d._errorValue = MobXCaughtException(e);
+      } on Object catch (e, s) {
+        d._errorValue = MobXCaughtException(e, stackTrace: s);
       }
     }
 
