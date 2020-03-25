@@ -33,8 +33,9 @@
   <component name="ChangeListManager">
     <list default="true" id="87dccf31-231e-4b6a-9b49-5967bcdc0ac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_mobx/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobx/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobx/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/api/reaction.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/api/reaction.mdx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,10 +220,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.pub:upgrade:mobx_codegen" />
         <item itemvalue="npm.pub:get:mobx_codegen" />
         <item itemvalue="Flutter Test.tests in flutter_mobx" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.gen:mobx_examples:watch" />
       </list>
     </recent_temporary>
@@ -968,11 +969,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="438" y="372" key="git4idea.ui.GitUnstashDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1576738706671" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1584982213757">
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1585146745222">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1584270122917" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1584982213757" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1680.-1057.1920.1057/-240.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1585146745222" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/798.-1057.1920.1057/-1122.-1057.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1581599992081" />
     <state x="570" y="381" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1583469479965">
       <screen x="0" y="23" width="1680" height="1027" />

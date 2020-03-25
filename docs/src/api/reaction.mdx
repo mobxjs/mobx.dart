@@ -113,6 +113,16 @@ One of the most visual reactions in the app is the UI. The **Observer** widget (
 [![pub package for flutter_mobx](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
 package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
 
+> ### Immediate context for `builder`
+>
+> The key thing to note is that the `builder` function will only track the observables in its immediate execution context. If an observable
+> is being used in a nested function, it will not be tracked. Make sure to dereference (a.k.a. read) an observable in the immediate
+> execution context. If no observables are found when running the `builder` function, it will warn you on the console.
+>
+> This is one of the most common gotchas when using MobX. Just because you have nested functions inside a `builder`, which are reading
+> an observable, it does not actually track the observable. It can appear deceiving but the fact is, the observable was not in the
+> **immediate execution context**. Be watchful for this scenario, especially when your `Observer`-wrapped `Widgets` are not updating properly.
+
 Below is the _Counter_ example in its entirety.
 
 ```dart
