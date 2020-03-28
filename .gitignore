@@ -22,7 +22,7 @@ pubspec.lock
 
 # Misc
 node_modules
-.idea
+.idea/
 *.log
 *.out
 local.properties
