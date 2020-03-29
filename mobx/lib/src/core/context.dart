@@ -120,12 +120,12 @@ class ReactiveContext {
 
   bool get isWithinBatch => _state.isWithinBatch;
 
-  bool get isSpyEnabled => _state.spyListeners.isNotEmpty;
+  bool get isSpyEnabled => _isDebugMode && _state.spyListeners.isNotEmpty;
 
   Dispose spy(SpyListener listener) {
     _state.spyListeners.add(listener);
 
-    return once(() {
+    return _once(() {
       _state.spyListeners.remove(listener);
     });
   }

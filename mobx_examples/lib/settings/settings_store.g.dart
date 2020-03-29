@@ -13,17 +13,15 @@ mixin _$SettingsStore on _SettingsStore, Store {
 
   @override
   bool get useDarkMode {
-    _$useDarkModeAtom.context.enforceReadPolicy(_$useDarkModeAtom);
-    _$useDarkModeAtom.reportObserved();
+    _$useDarkModeAtom.reportRead();
     return super.useDarkMode;
   }
 
   @override
   set useDarkMode(bool value) {
-    _$useDarkModeAtom.context.conditionallyRunInAction(() {
+    _$useDarkModeAtom.reportWrite(value, super.useDarkMode, () {
       super.useDarkMode = value;
-      _$useDarkModeAtom.reportChanged();
-    }, _$useDarkModeAtom, name: '${_$useDarkModeAtom.name}_set');
+    });
   }
 
   final _$setDarkModeAsyncAction = AsyncAction('setDarkMode');

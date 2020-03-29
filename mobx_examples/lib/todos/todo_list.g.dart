@@ -62,52 +62,45 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   ObservableList<Todo> get todos {
-    _$todosAtom.context.enforceReadPolicy(_$todosAtom);
-    _$todosAtom.reportObserved();
+    _$todosAtom.reportRead();
     return super.todos;
   }
 
   @override
   set todos(ObservableList<Todo> value) {
-    _$todosAtom.context.conditionallyRunInAction(() {
+    _$todosAtom.reportWrite(value, super.todos, () {
       super.todos = value;
-      _$todosAtom.reportChanged();
-    }, _$todosAtom, name: '${_$todosAtom.name}_set');
+    });
   }
 
   final _$filterAtom = Atom(name: '_TodoList.filter');
 
   @override
   VisibilityFilter get filter {
-    _$filterAtom.context.enforceReadPolicy(_$filterAtom);
-    _$filterAtom.reportObserved();
+    _$filterAtom.reportRead();
     return super.filter;
   }
 
   @override
   set filter(VisibilityFilter value) {
-    _$filterAtom.context.conditionallyRunInAction(() {
+    _$filterAtom.reportWrite(value, super.filter, () {
       super.filter = value;
-      _$filterAtom.reportChanged();
-    }, _$filterAtom, name: '${_$filterAtom.name}_set');
+    });
   }
 
   final _$currentDescriptionAtom = Atom(name: '_TodoList.currentDescription');
 
   @override
   String get currentDescription {
-    _$currentDescriptionAtom.context
-        .enforceReadPolicy(_$currentDescriptionAtom);
-    _$currentDescriptionAtom.reportObserved();
+    _$currentDescriptionAtom.reportRead();
     return super.currentDescription;
   }
 
   @override
   set currentDescription(String value) {
-    _$currentDescriptionAtom.context.conditionallyRunInAction(() {
+    _$currentDescriptionAtom.reportWrite(value, super.currentDescription, () {
       super.currentDescription = value;
-      _$currentDescriptionAtom.reportChanged();
-    }, _$currentDescriptionAtom, name: '${_$currentDescriptionAtom.name}_set');
+    });
   }
 
   final _$_TodoListActionController = ActionController(name: '_TodoList');

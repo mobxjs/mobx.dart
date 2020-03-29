@@ -1,3 +1,5 @@
+part of '../core.dart';
+
 typedef SpyListener = void Function(SpyEvent event);
 
 abstract class SpyEvent {
@@ -11,8 +13,8 @@ abstract class SpyEvent {
 }
 
 /// Used for reporting value changes on an Observable
-class ValueChangedSpyEvent extends SpyEvent {
-  ValueChangedSpyEvent(dynamic object,
+class ObservableValueSpyEvent extends SpyEvent {
+  ObservableValueSpyEvent(dynamic object,
       {this.newValue, this.oldValue, String name, bool isStart, bool isEnd})
       : super(object, name: name, isStart: isStart, isEnd: isEnd);
 
@@ -20,12 +22,17 @@ class ValueChangedSpyEvent extends SpyEvent {
   final dynamic oldValue;
 }
 
+class ComputedValueSpyEvent extends SpyEvent {
+  ComputedValueSpyEvent(object, {String name})
+      : super(object, name: name, isStart: true, isEnd: true);
+}
+
 class EndedSpyEvent extends SpyEvent {
   EndedSpyEvent() : super(null, isEnd: true);
 }
 
 /// Utility function that only invokes the given [fn] once.
-Function once(Function fn) {
+Function _once(Function fn) {
   var invoked = false;
 
   return () {
@@ -36,4 +43,15 @@ Function once(Function fn) {
     invoked = true;
     fn();
   };
+}
+
+bool get _isDebugMode {
+  var debug = false;
+
+  // asserts are removed in release mode!!!
+  assert(() {
+    debug = true;
+  }());
+
+  return debug;
 }

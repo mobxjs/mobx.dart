@@ -124,6 +124,10 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   }
 
   bool _trackAndCompute() {
+    if (_context.isSpyEnabled) {
+      _context.spyReport(ComputedValueSpyEvent(this, name: name));
+    }
+
     final oldValue = _value;
     final wasSuspended = _dependenciesState == DerivationState.notTracking;
 

@@ -25,85 +25,75 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   CustomColor get color {
-    _$colorAtom.context.enforceReadPolicy(_$colorAtom);
-    _$colorAtom.reportObserved();
+    _$colorAtom.reportRead();
     return super.color;
   }
 
   @override
   set color(CustomColor value) {
-    _$colorAtom.context.conditionallyRunInAction(() {
+    _$colorAtom.reportWrite(value, super.color, () {
       super.color = value;
-      _$colorAtom.reportChanged();
-    }, _$colorAtom, name: '${_$colorAtom.name}_set');
+    });
   }
 
   final _$nameAtom = Atom(name: '_FormStore.name');
 
   @override
   String get name {
-    _$nameAtom.context.enforceReadPolicy(_$nameAtom);
-    _$nameAtom.reportObserved();
+    _$nameAtom.reportRead();
     return super.name;
   }
 
   @override
   set name(String value) {
-    _$nameAtom.context.conditionallyRunInAction(() {
+    _$nameAtom.reportWrite(value, super.name, () {
       super.name = value;
-      _$nameAtom.reportChanged();
-    }, _$nameAtom, name: '${_$nameAtom.name}_set');
+    });
   }
 
   final _$emailAtom = Atom(name: '_FormStore.email');
 
   @override
   String get email {
-    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
-    _$emailAtom.reportObserved();
+    _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
   set email(String value) {
-    _$emailAtom.context.conditionallyRunInAction(() {
+    _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
-      _$emailAtom.reportChanged();
-    }, _$emailAtom, name: '${_$emailAtom.name}_set');
+    });
   }
 
   final _$passwordAtom = Atom(name: '_FormStore.password');
 
   @override
   String get password {
-    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
-    _$passwordAtom.reportObserved();
+    _$passwordAtom.reportRead();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.conditionallyRunInAction(() {
+    _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
-      _$passwordAtom.reportChanged();
-    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+    });
   }
 
   final _$usernameCheckAtom = Atom(name: '_FormStore.usernameCheck');
 
   @override
   ObservableFuture<bool> get usernameCheck {
-    _$usernameCheckAtom.context.enforceReadPolicy(_$usernameCheckAtom);
-    _$usernameCheckAtom.reportObserved();
+    _$usernameCheckAtom.reportRead();
     return super.usernameCheck;
   }
 
   @override
   set usernameCheck(ObservableFuture<bool> value) {
-    _$usernameCheckAtom.context.conditionallyRunInAction(() {
+    _$usernameCheckAtom.reportWrite(value, super.usernameCheck, () {
       super.usernameCheck = value;
-      _$usernameCheckAtom.reportChanged();
-    }, _$usernameCheckAtom, name: '${_$usernameCheckAtom.name}_set');
+    });
   }
 
   final _$validateUsernameAsyncAction = AsyncAction('validateUsername');
@@ -155,51 +145,45 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   String get username {
-    _$usernameAtom.context.enforceReadPolicy(_$usernameAtom);
-    _$usernameAtom.reportObserved();
+    _$usernameAtom.reportRead();
     return super.username;
   }
 
   @override
   set username(String value) {
-    _$usernameAtom.context.conditionallyRunInAction(() {
+    _$usernameAtom.reportWrite(value, super.username, () {
       super.username = value;
-      _$usernameAtom.reportChanged();
-    }, _$usernameAtom, name: '${_$usernameAtom.name}_set');
+    });
   }
 
   final _$emailAtom = Atom(name: '_FormErrorState.email');
 
   @override
   String get email {
-    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
-    _$emailAtom.reportObserved();
+    _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
   set email(String value) {
-    _$emailAtom.context.conditionallyRunInAction(() {
+    _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
-      _$emailAtom.reportChanged();
-    }, _$emailAtom, name: '${_$emailAtom.name}_set');
+    });
   }
 
   final _$passwordAtom = Atom(name: '_FormErrorState.password');
 
   @override
   String get password {
-    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
-    _$passwordAtom.reportObserved();
+    _$passwordAtom.reportRead();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.conditionallyRunInAction(() {
+    _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
-      _$passwordAtom.reportChanged();
-    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+    });
   }
 
   @override
