@@ -19,34 +19,30 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   ObservableFuture<List<Repository>> get fetchReposFuture {
-    _$fetchReposFutureAtom.context.enforceReadPolicy(_$fetchReposFutureAtom);
-    _$fetchReposFutureAtom.reportObserved();
+    _$fetchReposFutureAtom.reportRead();
     return super.fetchReposFuture;
   }
 
   @override
   set fetchReposFuture(ObservableFuture<List<Repository>> value) {
-    _$fetchReposFutureAtom.context.conditionallyRunInAction(() {
+    _$fetchReposFutureAtom.reportWrite(value, super.fetchReposFuture, () {
       super.fetchReposFuture = value;
-      _$fetchReposFutureAtom.reportChanged();
-    }, _$fetchReposFutureAtom, name: '${_$fetchReposFutureAtom.name}_set');
+    });
   }
 
   final _$userAtom = Atom(name: '_GithubStore.user');
 
   @override
   String get user {
-    _$userAtom.context.enforceReadPolicy(_$userAtom);
-    _$userAtom.reportObserved();
+    _$userAtom.reportRead();
     return super.user;
   }
 
   @override
   set user(String value) {
-    _$userAtom.context.conditionallyRunInAction(() {
+    _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
-      _$userAtom.reportChanged();
-    }, _$userAtom, name: '${_$userAtom.name}_set');
+    });
   }
 
   final _$fetchReposAsyncAction = AsyncAction('fetchRepos');
