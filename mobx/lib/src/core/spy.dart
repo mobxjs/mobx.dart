@@ -51,6 +51,7 @@ bool get _isDebugMode {
   // asserts are removed in release mode!!!
   assert(() {
     debug = true;
+    return true;
   }());
 
   return debug;
