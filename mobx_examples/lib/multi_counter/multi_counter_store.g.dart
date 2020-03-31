@@ -29,31 +29,40 @@ mixin _$SingleCounter on _SingleCounter, Store {
 
   @override
   void reset() {
+    final _$reportInfo =
+        _$_SingleCounterActionController.reportStart('_SingleCounter.reset');
     final _$actionInfo = _$_SingleCounterActionController.startAction();
     try {
       return super.reset();
     } finally {
       _$_SingleCounterActionController.endAction(_$actionInfo);
+      _$_SingleCounterActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void increment() {
+    final _$reportInfo = _$_SingleCounterActionController
+        .reportStart('_SingleCounter.increment');
     final _$actionInfo = _$_SingleCounterActionController.startAction();
     try {
       return super.increment();
     } finally {
       _$_SingleCounterActionController.endAction(_$actionInfo);
+      _$_SingleCounterActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void decrement() {
+    final _$reportInfo = _$_SingleCounterActionController
+        .reportStart('_SingleCounter.decrement');
     final _$actionInfo = _$_SingleCounterActionController.startAction();
     try {
       return super.decrement();
     } finally {
       _$_SingleCounterActionController.endAction(_$actionInfo);
+      _$_SingleCounterActionController.reportEnd(_$reportInfo);
     }
   }
 
@@ -70,21 +79,27 @@ mixin _$MultiCounterStore on _MultiCounterStore, Store {
 
   @override
   void addCounter() {
+    final _$reportInfo = _$_MultiCounterStoreActionController
+        .reportStart('_MultiCounterStore.addCounter');
     final _$actionInfo = _$_MultiCounterStoreActionController.startAction();
     try {
       return super.addCounter();
     } finally {
       _$_MultiCounterStoreActionController.endAction(_$actionInfo);
+      _$_MultiCounterStoreActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void removeCounter(int index) {
+    final _$reportInfo = _$_MultiCounterStoreActionController
+        .reportStart('_MultiCounterStore.removeCounter');
     final _$actionInfo = _$_MultiCounterStoreActionController.startAction();
     try {
       return super.removeCounter(index);
     } finally {
       _$_MultiCounterStoreActionController.endAction(_$actionInfo);
+      _$_MultiCounterStoreActionController.reportEnd(_$reportInfo);
     }
   }
 

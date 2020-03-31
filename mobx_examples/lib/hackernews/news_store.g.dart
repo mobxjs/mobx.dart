@@ -45,21 +45,27 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   Future<dynamic> fetchLatest() {
+    final _$reportInfo = _$_HackerNewsStoreActionController
+        .reportStart('_HackerNewsStore.fetchLatest');
     final _$actionInfo = _$_HackerNewsStoreActionController.startAction();
     try {
       return super.fetchLatest();
     } finally {
       _$_HackerNewsStoreActionController.endAction(_$actionInfo);
+      _$_HackerNewsStoreActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   Future<dynamic> fetchTop() {
+    final _$reportInfo = _$_HackerNewsStoreActionController
+        .reportStart('_HackerNewsStore.fetchTop');
     final _$actionInfo = _$_HackerNewsStoreActionController.startAction();
     try {
       return super.fetchTop();
     } finally {
       _$_HackerNewsStoreActionController.endAction(_$actionInfo);
+      _$_HackerNewsStoreActionController.reportEnd(_$reportInfo);
     }
   }
 

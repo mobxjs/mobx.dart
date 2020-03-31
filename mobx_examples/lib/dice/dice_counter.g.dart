@@ -48,11 +48,14 @@ mixin _$DiceCounter on _DiceCounter, Store {
 
   @override
   void roll() {
+    final _$reportInfo =
+        _$_DiceCounterActionController.reportStart('_DiceCounter.roll');
     final _$actionInfo = _$_DiceCounterActionController.startAction();
     try {
       return super.roll();
     } finally {
       _$_DiceCounterActionController.endAction(_$actionInfo);
+      _$_DiceCounterActionController.reportEnd(_$reportInfo);
     }
   }
 
