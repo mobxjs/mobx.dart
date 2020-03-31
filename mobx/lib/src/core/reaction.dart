@@ -75,6 +75,13 @@ class ReactionImpl implements Reaction {
   void track(void Function() fn) {
     _context.startBatch();
 
+    final notify = _context.isSpyEnabled;
+    DateTime startTime;
+    if (notify) {
+      startTime = DateTime.now();
+      _context.spyReport(ReactionSpyEvent(name: name));
+    }
+
     _isRunning = true;
     _context.trackDerivation(this, fn);
     _isRunning = false;
@@ -85,6 +92,12 @@ class ReactionImpl implements Reaction {
 
     if (_context._hasCaughtException(this)) {
       _reportException(_errorValue);
+    }
+
+    if (notify) {
+      _context.spyReport(EndedSpyEvent(
+          name: 'reaction $name',
+          duration: DateTime.now().difference(startTime)));
     }
 
     _context.endBatch();
@@ -157,6 +170,10 @@ class ReactionImpl implements Reaction {
     if (_context.config.disableErrorBoundaries == true) {
       // ignore: only_throw_errors
       throw exception;
+    }
+
+    if (_context.isSpyEnabled) {
+      _context.spyReport(ReactionErrorSpyEvent(exception, name: name));
     }
 
     _context._notifyReactionErrorHandlers(exception, this);

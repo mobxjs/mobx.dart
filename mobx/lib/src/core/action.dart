@@ -79,6 +79,8 @@ class ActionController {
   final ReactiveContext _context;
   final String name;
 
+  ReactiveContext get context => _context;
+
   ActionRunInfo startAction() {
     final prevDerivation = _context.startUntracked();
     _context.startBatch();

@@ -108,21 +108,27 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   void validatePassword(String value) {
+    final _$reportInfo =
+        _$_FormStoreActionController.reportStart('_FormStore.validatePassword');
     final _$actionInfo = _$_FormStoreActionController.startAction();
     try {
       return super.validatePassword(value);
     } finally {
       _$_FormStoreActionController.endAction(_$actionInfo);
+      _$_FormStoreActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void validateEmail(String value) {
+    final _$reportInfo =
+        _$_FormStoreActionController.reportStart('_FormStore.validateEmail');
     final _$actionInfo = _$_FormStoreActionController.startAction();
     try {
       return super.validateEmail(value);
     } finally {
       _$_FormStoreActionController.endAction(_$actionInfo);
+      _$_FormStoreActionController.reportEnd(_$reportInfo);
     }
   }
 

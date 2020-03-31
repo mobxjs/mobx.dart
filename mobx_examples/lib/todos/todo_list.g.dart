@@ -107,41 +107,53 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   void addTodo(String description) {
+    final _$reportInfo =
+        _$_TodoListActionController.reportStart('_TodoList.addTodo');
     final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.addTodo(description);
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void removeTodo(Todo todo) {
+    final _$reportInfo =
+        _$_TodoListActionController.reportStart('_TodoList.removeTodo');
     final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.removeTodo(todo);
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void removeCompleted() {
+    final _$reportInfo =
+        _$_TodoListActionController.reportStart('_TodoList.removeCompleted');
     final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.removeCompleted();
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void markAllAsCompleted() {
+    final _$reportInfo =
+        _$_TodoListActionController.reportStart('_TodoList.markAllAsCompleted');
     final _$actionInfo = _$_TodoListActionController.startAction();
     try {
       return super.markAllAsCompleted();
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
+      _$_TodoListActionController.reportEnd(_$reportInfo);
     }
   }
 

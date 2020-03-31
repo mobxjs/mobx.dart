@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 
-extension CodegenReporter on Atom {
+extension AtomSpyReporter on Atom {
   void reportRead() {
     context.enforceReadPolicy(this);
     reportObserved();
@@ -8,14 +8,14 @@ extension CodegenReporter on Atom {
 
   void reportWrite<T>(T newValue, T oldValue, void Function() setNewValue) {
     context.spyReport(ObservableValueSpyEvent(this,
-        newValue: newValue, oldValue: oldValue, name: name, isStart: true));
+        newValue: newValue, oldValue: oldValue, name: name));
 
     // ignore: cascade_invocations
     context.conditionallyRunInAction(() {
       setNewValue();
       reportChanged();
 
-      context.spyReport(EndedSpyEvent());
+      context.spyReport(EndedSpyEvent(name: 'observable ${name}'));
     }, this, name: '${name}_set');
   }
 }
