@@ -28,8 +28,7 @@ mixin _$ConnectivityStore on _ConnectivityStore, Store {
   @override
   String toString() {
     return '''
-      connectivityStream: ${connectivityStream}
-    '''
-        .trim();
+connectivityStream: ${connectivityStream}
+    ''';
   }
 }

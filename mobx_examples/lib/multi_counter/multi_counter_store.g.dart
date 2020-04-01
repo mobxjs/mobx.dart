@@ -63,9 +63,8 @@ mixin _$SingleCounter on _SingleCounter, Store {
   @override
   String toString() {
     return '''
-      value: ${value}
-    '''
-        .trim();
+value: ${value}
+    ''';
   }
 }
 
@@ -98,8 +97,7 @@ mixin _$MultiCounterStore on _MultiCounterStore, Store {
   @override
   String toString() {
     return '''
-      
-    '''
-        .trim();
+
+    ''';
   }
 }
