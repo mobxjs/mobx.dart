@@ -41,8 +41,10 @@ mixin _$Todo on _Todo, Store {
 
   @override
   String toString() {
-    final string =
-        'description: ${description.toString()},done: ${done.toString()}';
-    return '{$string}';
+    return '''
+      description: ${description},
+done: ${done}
+    '''
+        .trim();
   }
 }

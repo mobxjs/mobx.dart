@@ -107,60 +107,63 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   void addTodo(String description) {
-    final _$reportInfo =
-        _$_TodoListActionController.reportStart('_TodoList.addTodo');
-    final _$actionInfo = _$_TodoListActionController.startAction();
+    final _$actionInfo =
+        _$_TodoListActionController.startAction(name: '_TodoList.addTodo');
     try {
       return super.addTodo(description);
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
-      _$_TodoListActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void removeTodo(Todo todo) {
-    final _$reportInfo =
-        _$_TodoListActionController.reportStart('_TodoList.removeTodo');
-    final _$actionInfo = _$_TodoListActionController.startAction();
+    final _$actionInfo =
+        _$_TodoListActionController.startAction(name: '_TodoList.removeTodo');
     try {
       return super.removeTodo(todo);
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
-      _$_TodoListActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void removeCompleted() {
-    final _$reportInfo =
-        _$_TodoListActionController.reportStart('_TodoList.removeCompleted');
-    final _$actionInfo = _$_TodoListActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction(
+        name: '_TodoList.removeCompleted');
     try {
       return super.removeCompleted();
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
-      _$_TodoListActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void markAllAsCompleted() {
-    final _$reportInfo =
-        _$_TodoListActionController.reportStart('_TodoList.markAllAsCompleted');
-    final _$actionInfo = _$_TodoListActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction(
+        name: '_TodoList.markAllAsCompleted');
     try {
       return super.markAllAsCompleted();
     } finally {
       _$_TodoListActionController.endAction(_$actionInfo);
-      _$_TodoListActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   String toString() {
-    final string =
-        'todos: ${todos.toString()},filter: ${filter.toString()},currentDescription: ${currentDescription.toString()},pendingTodos: ${pendingTodos.toString()},completedTodos: ${completedTodos.toString()},hasCompletedTodos: ${hasCompletedTodos.toString()},hasPendingTodos: ${hasPendingTodos.toString()},itemsDescription: ${itemsDescription.toString()},visibleTodos: ${visibleTodos.toString()},canRemoveAllCompleted: ${canRemoveAllCompleted.toString()},canMarkAllCompleted: ${canMarkAllCompleted.toString()}';
-    return '{$string}';
+    return '''
+      todos: ${todos},
+filter: ${filter},
+currentDescription: ${currentDescription},
+pendingTodos: ${pendingTodos},
+completedTodos: ${completedTodos},
+hasCompletedTodos: ${hasCompletedTodos},
+hasPendingTodos: ${hasPendingTodos},
+itemsDescription: ${itemsDescription},
+visibleTodos: ${visibleTodos},
+canRemoveAllCompleted: ${canRemoveAllCompleted},
+canMarkAllCompleted: ${canMarkAllCompleted}
+    '''
+        .trim();
   }
 }

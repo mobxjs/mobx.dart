@@ -96,7 +96,8 @@ class ReactionImpl implements Reaction {
 
     if (notify) {
       _context.spyReport(EndedSpyEvent(
-          name: 'reaction $name',
+          type: 'reaction',
+          name: name,
           duration: DateTime.now().difference(startTime)));
     }
 

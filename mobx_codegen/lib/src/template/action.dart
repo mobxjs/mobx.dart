@@ -10,13 +10,11 @@ class ActionTemplate {
   String toString() => """
     @override
     ${method.returnType} ${method.name}${method.typeParams}(${method.params}) {
-      final _\$reportInfo = ${storeTemplate.actionControllerName}.reportStart('${storeTemplate.parentTypeName}.${method.name}');
-      final _\$actionInfo = ${storeTemplate.actionControllerName}.startAction();
+      final _\$actionInfo = ${storeTemplate.actionControllerName}.startAction(name: '${storeTemplate.parentTypeName}.${method.name}${method.typeParams}');
       try {
         return super.${method.name}${method.typeArgs}(${method.args});
       } finally {
         ${storeTemplate.actionControllerName}.endAction(_\$actionInfo);
-        ${storeTemplate.actionControllerName}.reportEnd(_\$reportInfo);
       }
     }""";
 }

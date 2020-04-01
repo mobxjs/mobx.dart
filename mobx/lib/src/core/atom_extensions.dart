@@ -14,8 +14,9 @@ extension AtomSpyReporter on Atom {
     context.conditionallyRunInAction(() {
       setNewValue();
       reportChanged();
-
-      context.spyReport(EndedSpyEvent(name: 'observable ${name}'));
     }, this, name: '${name}_set');
+
+    // ignore: cascade_invocations
+    context.spyReport(EndedSpyEvent(type: 'observable', name: name));
   }
 }

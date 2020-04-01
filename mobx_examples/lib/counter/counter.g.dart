@@ -28,20 +28,20 @@ mixin _$Counter on _Counter, Store {
 
   @override
   void increment() {
-    final _$reportInfo =
-        _$_CounterActionController.reportStart('_Counter.increment');
-    final _$actionInfo = _$_CounterActionController.startAction();
+    final _$actionInfo =
+        _$_CounterActionController.startAction(name: '_Counter.increment');
     try {
       return super.increment();
     } finally {
       _$_CounterActionController.endAction(_$actionInfo);
-      _$_CounterActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
-    return '{$string}';
+    return '''
+      value: ${value}
+    '''
+        .trim();
   }
 }

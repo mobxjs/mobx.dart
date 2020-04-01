@@ -43,9 +43,34 @@ abstract class StoreTemplate {
       ? ''
       : "final $actionControllerName = ActionController(name: '$parentTypeName');";
 
-  String get storeBody {
-    var toStringMethod = '';
-    final baseBody = '''
+  String get toStringMethod {
+    if (!generateToString) {
+      return '';
+    }
+
+    final publicObservablesList = observables.templates
+      ..removeWhere((element) => element.isPrivate);
+
+    final publicComputedsList = computeds.templates
+      ..removeWhere((element) => element.isPrivate);
+
+    final allStrings = toStringList
+      ..addAll(publicObservablesList
+          .map((current) => '${current.name}: \${${current.name}}'))
+      ..addAll(publicComputedsList
+          .map((current) => '${current.name}: \${${current.name}}'));
+
+    return '''
+  @override
+  String toString() {
+    return \'\'\'
+      ${allStrings.join(',\n')}
+    \'\'\'.trim();
+  }
+  ''';
+  }
+
+  String get storeBody => '''
   $computeds
 
   $observables
@@ -58,33 +83,8 @@ abstract class StoreTemplate {
 
   $actionControllerField
 
-  $actions''';
+  $actions
 
-    if (generateToString) {
-      final publicObservablesList = observables.templates
-      ..removeWhere((element) => element.isPrivate);
-
-      final publicComputedsList = computeds.templates
-        ..removeWhere((element) => element.isPrivate);
-
-      toStringList
-        ..addAll(publicObservablesList.map(
-            (current) => '${current.name}: \${${current.name}.toString()}'))
-        ..addAll(publicComputedsList.map(
-            (current) => '${current.name}: \${${current.name}.toString()}'));
-
-      toStringMethod = '''
-  @override
-  String toString() {
-    final string = \'${toStringList.join(',')}\';
-    return '{\$string}';
-  }
+  $toStringMethod
   ''';
-    }
-
-    return baseBody + toStringMethod;
-  }
-
-  @override
-  String toString();
 }
