@@ -33,7 +33,9 @@ mixin _$SettingsStore on _SettingsStore, Store {
 
   @override
   String toString() {
-    final string = 'useDarkMode: ${useDarkMode.toString()}';
-    return '{$string}';
+    return '''
+      useDarkMode: ${useDarkMode}
+    '''
+        .trim();
   }
 }

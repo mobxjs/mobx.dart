@@ -108,35 +108,38 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   void validatePassword(String value) {
-    final _$reportInfo =
-        _$_FormStoreActionController.reportStart('_FormStore.validatePassword');
-    final _$actionInfo = _$_FormStoreActionController.startAction();
+    final _$actionInfo = _$_FormStoreActionController.startAction(
+        name: '_FormStore.validatePassword');
     try {
       return super.validatePassword(value);
     } finally {
       _$_FormStoreActionController.endAction(_$actionInfo);
-      _$_FormStoreActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   void validateEmail(String value) {
-    final _$reportInfo =
-        _$_FormStoreActionController.reportStart('_FormStore.validateEmail');
-    final _$actionInfo = _$_FormStoreActionController.startAction();
+    final _$actionInfo = _$_FormStoreActionController.startAction(
+        name: '_FormStore.validateEmail');
     try {
       return super.validateEmail(value);
     } finally {
       _$_FormStoreActionController.endAction(_$actionInfo);
-      _$_FormStoreActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   String toString() {
-    final string =
-        'color: ${color.toString()},name: ${name.toString()},email: ${email.toString()},password: ${password.toString()},usernameCheck: ${usernameCheck.toString()},isUserCheckPending: ${isUserCheckPending.toString()},canLogin: ${canLogin.toString()}';
-    return '{$string}';
+    return '''
+      color: ${color},
+name: ${name},
+email: ${email},
+password: ${password},
+usernameCheck: ${usernameCheck},
+isUserCheckPending: ${isUserCheckPending},
+canLogin: ${canLogin}
+    '''
+        .trim();
   }
 }
 
@@ -194,8 +197,12 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   String toString() {
-    final string =
-        'username: ${username.toString()},email: ${email.toString()},password: ${password.toString()},hasErrors: ${hasErrors.toString()}';
-    return '{$string}';
+    return '''
+      username: ${username},
+email: ${email},
+password: ${password},
+hasErrors: ${hasErrors}
+    '''
+        .trim();
   }
 }

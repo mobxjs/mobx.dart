@@ -63,7 +63,6 @@ export 'package:mobx/src/core.dart'
         DerivationState;
 
 export 'package:mobx/src/core/atom_extensions.dart';
-export 'package:mobx/src/core/action_extensions.dart';
 export 'package:mobx/src/api/extensions.dart';
 
 /// The current version as per `pubspec.yaml`

@@ -56,21 +56,22 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   void setUser(String text) {
-    final _$reportInfo =
-        _$_GithubStoreActionController.reportStart('_GithubStore.setUser');
-    final _$actionInfo = _$_GithubStoreActionController.startAction();
+    final _$actionInfo = _$_GithubStoreActionController.startAction(
+        name: '_GithubStore.setUser');
     try {
       return super.setUser(text);
     } finally {
       _$_GithubStoreActionController.endAction(_$actionInfo);
-      _$_GithubStoreActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   String toString() {
-    final string =
-        'fetchReposFuture: ${fetchReposFuture.toString()},user: ${user.toString()},hasResults: ${hasResults.toString()}';
-    return '{$string}';
+    return '''
+      fetchReposFuture: ${fetchReposFuture},
+user: ${user},
+hasResults: ${hasResults}
+    '''
+        .trim();
   }
 }

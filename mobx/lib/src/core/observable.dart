@@ -34,7 +34,7 @@ class Observable<T> extends Atom
         super._(context, name: name ?? context.nameFor('Observable')) {
     if (_context.isSpyEnabled) {
       _context.spyReport(ObservableValueSpyEvent(this,
-          newValue: _value, name: this.name, isStart: true, isEnd: true));
+          newValue: _value, name: this.name, isEnd: true));
     }
   }
 
@@ -66,7 +66,7 @@ class Observable<T> extends Atom
 
     if (notifySpy) {
       _context.spyReport(ObservableValueSpyEvent(this,
-          newValue: newValue, oldValue: oldValue, name: name, isStart: true));
+          newValue: newValue, oldValue: oldValue, name: name));
     }
 
     _value = newValue;
@@ -83,7 +83,7 @@ class Observable<T> extends Atom
     }
 
     if (notifySpy) {
-      _context.spyReport(EndedSpyEvent());
+      _context.spyReport(EndedSpyEvent(type: 'observable'));
     }
   }
 

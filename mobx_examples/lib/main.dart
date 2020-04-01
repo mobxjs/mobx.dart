@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dart_json_mapper/dart_json_mapper.dart';
 import 'package:dart_json_mapper_mobx/dart_json_mapper_mobx.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,9 @@ void main() {
   initializeReflectable();
   JsonMapper().useAdapter(mobXAdapter);
 
-  mainContext.spy(print);
+  mainContext.spy((event) {
+    log(event.toString());
+  });
 
   runApp(const MyApp());
 }

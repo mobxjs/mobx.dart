@@ -3,76 +3,84 @@ part of '../core.dart';
 typedef SpyListener = void Function(SpyEvent event);
 
 abstract class SpyEvent {
-  SpyEvent(this.object, {this.name, this.duration, this.isStart, this.isEnd});
+  SpyEvent(this.object,
+      {this.type, this.name, this.duration, this.isStart, this.isEnd});
 
   final dynamic object;
   final String name;
+  final String type;
 
   final Duration duration;
   final bool isStart;
   final bool isEnd;
 
+  String get sentinel {
+    final hasStart =
+        isStart != null && isStart == true && (isEnd == null || isEnd == false);
+    final hasEnd =
+        isEnd != null && isEnd == true && (isStart == null || isStart == false);
+
+    if (hasStart) {
+      return '(START)';
+    }
+
+    if (hasEnd) {
+      return '(END${duration == null ? '' : ' after ${duration.inMilliseconds}ms'})';
+    }
+
+    return '';
+  }
+
   @override
-  String toString() => '$name';
+  String toString() => '$type$sentinel $name';
 }
 
 /// Used for reporting value changes on an Observable
 class ObservableValueSpyEvent extends SpyEvent {
   ObservableValueSpyEvent(dynamic object,
-      {this.newValue, this.oldValue, String name, bool isStart, bool isEnd})
-      : super(object, name: name, isStart: isStart, isEnd: isEnd);
+      {this.newValue, this.oldValue, String name, bool isEnd})
+      : super(object,
+            type: 'observable', name: name, isStart: true, isEnd: isEnd);
 
   final dynamic newValue;
   final dynamic oldValue;
 
   @override
-  String toString() {
-    final hasStart =
-        isStart != null && isStart == true && (isEnd == null || isEnd == false);
-    return 'observable $name=$newValue${hasStart ? ' START' : ''}';
-  }
+  String toString() => '${super.toString()}=$newValue, previously=$oldValue';
 }
 
 class ComputedValueSpyEvent extends SpyEvent {
   ComputedValueSpyEvent(object, {String name})
-      : super(object, name: name, isStart: true, isEnd: true);
-
-  @override
-  String toString() => 'computed $name';
+      : super(object, type: 'computed', name: name, isStart: true, isEnd: true);
 }
 
 class ReactionSpyEvent extends SpyEvent {
-  ReactionSpyEvent({String name}) : super(null, name: name, isStart: true);
-
-  @override
-  String toString() => 'reaction $name START';
+  ReactionSpyEvent({String name})
+      : super(null, type: 'reaction', name: name, isStart: true);
 }
 
 class ReactionErrorSpyEvent extends SpyEvent {
   ReactionErrorSpyEvent(
     this.error, {
     String name,
-  }) : super(null, name: name, isStart: true, isEnd: true);
+  }) : super(null,
+            type: 'reaction-error', name: name, isStart: true, isEnd: true);
 
   final Object error;
+
+  @override
+  String toString() => '${super.toString()} $error';
 }
 
 class ActionSpyEvent extends SpyEvent {
   ActionSpyEvent({
     String name,
-  }) : super(null, name: name, isStart: true);
-
-  @override
-  String toString() => 'action $name START';
+  }) : super(null, type: 'action', name: name, isStart: true);
 }
 
 class EndedSpyEvent extends SpyEvent {
-  EndedSpyEvent({String name, Duration duration})
-      : super(null, name: name, duration: duration, isEnd: true);
-
-  @override
-  String toString() =>
-      '$name END${duration == null ? '' : ' after ${duration.inMilliseconds}ms'}';
+  EndedSpyEvent({String type, String name, Duration duration})
+      : super(null, type: type, name: name, duration: duration, isEnd: true);
 }
 
 /// Utility function that only invokes the given [fn] once.

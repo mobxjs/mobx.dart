@@ -48,21 +48,22 @@ mixin _$DiceCounter on _DiceCounter, Store {
 
   @override
   void roll() {
-    final _$reportInfo =
-        _$_DiceCounterActionController.reportStart('_DiceCounter.roll');
-    final _$actionInfo = _$_DiceCounterActionController.startAction();
+    final _$actionInfo =
+        _$_DiceCounterActionController.startAction(name: '_DiceCounter.roll');
     try {
       return super.roll();
     } finally {
       _$_DiceCounterActionController.endAction(_$actionInfo);
-      _$_DiceCounterActionController.reportEnd(_$reportInfo);
     }
   }
 
   @override
   String toString() {
-    final string =
-        'left: ${left.toString()},right: ${right.toString()},total: ${total.toString()}';
-    return '{$string}';
+    return '''
+      left: ${left},
+right: ${right},
+total: ${total}
+    '''
+        .trim();
   }
 }
