@@ -40,8 +40,7 @@ mixin _$Counter on _Counter, Store {
   @override
   String toString() {
     return '''
-      value: ${value}
-    '''
-        .trim();
+value: ${value}
+    ''';
   }
 }

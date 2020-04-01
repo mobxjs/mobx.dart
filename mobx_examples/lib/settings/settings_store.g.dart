@@ -24,7 +24,7 @@ mixin _$SettingsStore on _SettingsStore, Store {
     });
   }
 
-  final _$setDarkModeAsyncAction = AsyncAction('setDarkMode');
+  final _$setDarkModeAsyncAction = AsyncAction('_SettingsStore.setDarkMode');
 
   @override
   Future<void> setDarkMode({@required bool value}) {
@@ -34,8 +34,7 @@ mixin _$SettingsStore on _SettingsStore, Store {
   @override
   String toString() {
     return '''
-      useDarkMode: ${useDarkMode}
-    '''
-        .trim();
+useDarkMode: ${useDarkMode}
+    ''';
   }
 }

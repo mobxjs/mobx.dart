@@ -152,7 +152,7 @@ mixin _$TodoList on _TodoList, Store {
   @override
   String toString() {
     return '''
-      todos: ${todos},
+todos: ${todos},
 filter: ${filter},
 currentDescription: ${currentDescription},
 pendingTodos: ${pendingTodos},
@@ -163,7 +163,6 @@ itemsDescription: ${itemsDescription},
 visibleTodos: ${visibleTodos},
 canRemoveAllCompleted: ${canRemoveAllCompleted},
 canMarkAllCompleted: ${canMarkAllCompleted}
-    '''
-        .trim();
+    ''';
   }
 }

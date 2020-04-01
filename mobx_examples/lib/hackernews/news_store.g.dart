@@ -68,9 +68,8 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
   @override
   String toString() {
     return '''
-      latestItemsFuture: ${latestItemsFuture},
+latestItemsFuture: ${latestItemsFuture},
 topItemsFuture: ${topItemsFuture}
-    '''
-        .trim();
+    ''';
   }
 }

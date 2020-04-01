@@ -60,12 +60,13 @@ abstract class StoreTemplate {
       ..addAll(publicComputedsList
           .map((current) => '${current.name}: \${${current.name}}'));
 
+    // The indents have been kept to ensure each field comes on a separate line without any tabs/spaces
     return '''
   @override
   String toString() {
     return \'\'\'
-      ${allStrings.join(',\n')}
-    \'\'\'.trim();
+${allStrings.join(',\n')}
+    \'\'\';
   }
   ''';
   }

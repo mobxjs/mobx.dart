@@ -60,10 +60,9 @@ mixin _$DiceCounter on _DiceCounter, Store {
   @override
   String toString() {
     return '''
-      left: ${left},
+left: ${left},
 right: ${right},
 total: ${total}
-    '''
-        .trim();
+    ''';
   }
 }

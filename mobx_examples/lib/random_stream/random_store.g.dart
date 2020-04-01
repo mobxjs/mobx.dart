@@ -12,8 +12,7 @@ mixin _$RandomStore on _RandomStore, Store {
   @override
   String toString() {
     return '''
-      
-    '''
-        .trim();
+
+    ''';
   }
 }

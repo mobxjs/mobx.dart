@@ -96,7 +96,8 @@ mixin _$FormStore on _FormStore, Store {
     });
   }
 
-  final _$validateUsernameAsyncAction = AsyncAction('validateUsername');
+  final _$validateUsernameAsyncAction =
+      AsyncAction('_FormStore.validateUsername');
 
   @override
   Future<dynamic> validateUsername(String value) {
@@ -131,15 +132,14 @@ mixin _$FormStore on _FormStore, Store {
   @override
   String toString() {
     return '''
-      color: ${color},
+color: ${color},
 name: ${name},
 email: ${email},
 password: ${password},
 usernameCheck: ${usernameCheck},
 isUserCheckPending: ${isUserCheckPending},
 canLogin: ${canLogin}
-    '''
-        .trim();
+    ''';
   }
 }
 
@@ -198,11 +198,10 @@ mixin _$FormErrorState on _FormErrorState, Store {
   @override
   String toString() {
     return '''
-      username: ${username},
+username: ${username},
 email: ${email},
 password: ${password},
 hasErrors: ${hasErrors}
-    '''
-        .trim();
+    ''';
   }
 }

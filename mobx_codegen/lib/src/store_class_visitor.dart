@@ -141,6 +141,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
       if (element.isAsynchronous) {
         final template = AsyncActionTemplate()
+          ..storeTemplate = _storeTemplate
           ..isObservable = _observableChecker.hasAnnotationOfExact(element)
           ..method =
               MethodOverrideTemplate.fromElement(element, typeNameFinder);

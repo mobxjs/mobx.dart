@@ -45,7 +45,7 @@ mixin _$GithubStore on _GithubStore, Store {
     });
   }
 
-  final _$fetchReposAsyncAction = AsyncAction('fetchRepos');
+  final _$fetchReposAsyncAction = AsyncAction('_GithubStore.fetchRepos');
 
   @override
   Future<List<Repository>> fetchRepos() {
@@ -68,10 +68,9 @@ mixin _$GithubStore on _GithubStore, Store {
   @override
   String toString() {
     return '''
-      fetchReposFuture: ${fetchReposFuture},
+fetchReposFuture: ${fetchReposFuture},
 user: ${user},
 hasResults: ${hasResults}
-    '''
-        .trim();
+    ''';
   }
 }
