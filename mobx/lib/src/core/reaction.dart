@@ -139,6 +139,9 @@ class ReactionImpl implements Reaction {
       return;
     }
 
+    _context.spyReport(ReactionDisposedSpyEvent(name: name));
+
+    // ignore: cascade_invocations
     _context
       ..startBatch()
       .._clearObservables(this)

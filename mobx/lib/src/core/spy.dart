@@ -72,6 +72,13 @@ class ReactionErrorSpyEvent extends SpyEvent {
   String toString() => '${super.toString()} $error';
 }
 
+class ReactionDisposedSpyEvent extends SpyEvent {
+  ReactionDisposedSpyEvent({
+    String name,
+  }) : super(null,
+            type: 'reaction-dispose', name: name, isStart: true, isEnd: true);
+}
+
 class ActionSpyEvent extends SpyEvent {
   ActionSpyEvent({
     String name,
