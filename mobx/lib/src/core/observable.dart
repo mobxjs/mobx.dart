@@ -83,7 +83,7 @@ class Observable<T> extends Atom
     }
 
     if (notifySpy) {
-      _context.spyReport(EndedSpyEvent(type: 'observable'));
+      _context.spyReport(EndedSpyEvent(type: 'observable', name: name));
     }
   }
 

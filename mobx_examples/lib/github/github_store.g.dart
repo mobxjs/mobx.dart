@@ -13,7 +13,9 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   bool get hasResults =>
-      (_$hasResultsComputed ??= Computed<bool>(() => super.hasResults)).value;
+      (_$hasResultsComputed ??= Computed<bool>(() => super.hasResults,
+              name: '_GithubStore.hasResults'))
+          .value;
 
   final _$fetchReposFutureAtom = Atom(name: '_GithubStore.fetchReposFuture');
 

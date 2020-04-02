@@ -12,7 +12,9 @@ mixin _$DiceCounter on _DiceCounter, Store {
   Computed<int> _$totalComputed;
 
   @override
-  int get total => (_$totalComputed ??= Computed<int>(() => super.total)).value;
+  int get total => (_$totalComputed ??=
+          Computed<int>(() => super.total, name: '_DiceCounter.total'))
+      .value;
 
   final _$leftAtom = Atom(name: '_DiceCounter.left');
 

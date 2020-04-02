@@ -1,8 +1,8 @@
 part of '../observable_collections.dart';
 
-Atom _listAtom<T>(ReactiveContext context) {
+Atom _observableListAtom<T>(ReactiveContext context, String name) {
   final ctx = context ?? mainContext;
-  return Atom(name: ctx.nameFor('ObservableList<$T>'), context: ctx);
+  return Atom(name: name ?? ctx.nameFor('ObservableList<$T>'), context: ctx);
 }
 
 /// The ObservableList tracks the various read-methods (eg: [List.first], [List.last]) and
@@ -25,11 +25,12 @@ class ObservableList<T>
         ListMixin<T>
     implements
         Listenable<ListChange<T>> {
-  ObservableList({ReactiveContext context})
-      : this._wrap(context, _listAtom<T>(context), []);
+  ObservableList({ReactiveContext context, String name})
+      : this._wrap(context, _observableListAtom<T>(context, name), []);
 
-  ObservableList.of(Iterable<T> elements, {ReactiveContext context})
-      : this._wrap(context, _listAtom<T>(context),
+  ObservableList.of(Iterable<T> elements,
+      {ReactiveContext context, String name})
+      : this._wrap(context, _observableListAtom<T>(context, name),
             List<T>.of(elements, growable: true));
 
   ObservableList._wrap(ReactiveContext context, this._atom, this._list)

@@ -119,6 +119,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
     final template = ComputedTemplate()
       ..computedName = '_\$${element.name}Computed'
+      ..storeTemplate = _storeTemplate
       ..name = element.name
       ..type = typeNameFinder.findGetterTypeName(element)
       ..isPrivate = element.isPrivate;
