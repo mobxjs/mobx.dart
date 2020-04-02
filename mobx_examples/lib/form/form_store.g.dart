@@ -13,13 +13,15 @@ mixin _$FormStore on _FormStore, Store {
 
   @override
   bool get isUserCheckPending => (_$isUserCheckPendingComputed ??=
-          Computed<bool>(() => super.isUserCheckPending))
+          Computed<bool>(() => super.isUserCheckPending,
+              name: '_FormStore.isUserCheckPending'))
       .value;
   Computed<bool> _$canLoginComputed;
 
   @override
-  bool get canLogin =>
-      (_$canLoginComputed ??= Computed<bool>(() => super.canLogin)).value;
+  bool get canLogin => (_$canLoginComputed ??=
+          Computed<bool>(() => super.canLogin, name: '_FormStore.canLogin'))
+      .value;
 
   final _$colorAtom = Atom(name: '_FormStore.color');
 
@@ -148,7 +150,9 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   bool get hasErrors =>
-      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors)).value;
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_FormErrorState.hasErrors'))
+          .value;
 
   final _$usernameAtom = Atom(name: '_FormErrorState.username');
 
