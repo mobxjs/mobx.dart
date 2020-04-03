@@ -4,7 +4,7 @@ class Rows<T> {
   void add(T template) => _templates.add(template);
 
   bool get isEmpty => _templates.isEmpty;
-  List get templates => _templates;
+  List<T> get templates => _templates;
 
   @override
   String toString() =>
