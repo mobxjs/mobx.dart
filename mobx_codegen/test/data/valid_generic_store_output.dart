@@ -3,33 +3,29 @@ mixin _$Item<T extends num> on _Item<T>, Store {
 
   @override
   T get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
+    _$valueAtom.reportRead();
     return super.value;
   }
 
   @override
   set value(T value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
+    _$valueAtom.reportWrite(value, super.value, () {
       super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+    });
   }
 
   final _$valuesAtom = Atom(name: '_Item.values');
 
   @override
   List<T> get values {
-    _$valuesAtom.context.enforceReadPolicy(_$valuesAtom);
-    _$valuesAtom.reportObserved();
+    _$valuesAtom.reportRead();
     return super.values;
   }
 
   @override
   set values(List<T> value) {
-    _$valuesAtom.context.conditionallyRunInAction(() {
+    _$valuesAtom.reportWrite(value, super.values, () {
       super.values = value;
-      _$valuesAtom.reportChanged();
-    }, _$valuesAtom, name: '${_$valuesAtom.name}_set');
+    });
   }
 }

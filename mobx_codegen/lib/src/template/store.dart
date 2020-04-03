@@ -49,16 +49,17 @@ abstract class StoreTemplate {
     }
 
     final publicObservablesList = observables.templates
-      ..removeWhere((element) => element.isPrivate);
+        .where((element) => !element.isPrivate)
+        .map((current) => '${current.name}: \${${current.name}}');
 
     final publicComputedsList = computeds.templates
-      ..removeWhere((element) => element.isPrivate);
+        .where((element) => !element.isPrivate)
+        .map((current) => '${current.name}: \${${current.name}}');
+    ;
 
     final allStrings = toStringList
-      ..addAll(publicObservablesList
-          .map((current) => '${current.name}: \${${current.name}}'))
-      ..addAll(publicComputedsList
-          .map((current) => '${current.name}: \${${current.name}}'));
+      ..addAll(publicObservablesList)
+      ..addAll(publicComputedsList);
 
     // The indents have been kept to ensure each field comes on a separate line without any tabs/spaces
     return '''

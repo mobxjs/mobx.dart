@@ -84,6 +84,7 @@ void main() {
   group('ComputedTemplate', () {
     test('renders template based on template data', () {
       final template = ComputedTemplate()
+        ..storeTemplate = (MixinStoreTemplate()..parentTypeName = 'Base')
         ..computedName = 'computedName'
         ..type = 'ReturnType'
         ..name = 'computedField';
@@ -93,7 +94,7 @@ void main() {
   Computed<ReturnType> computedName;
 
   @override
-  ReturnType get computedField => (computedName ??= Computed<ReturnType>(() => super.computedField)).value;"""));
+  ReturnType get computedField => (computedName ??= Computed<ReturnType>(() => super.computedField, name: 'Base.computedField')).value;"""));
     });
   });
 
@@ -110,17 +111,15 @@ void main() {
 
   @override
   FieldType get fieldName {
-    _atomFieldName.context.enforceReadPolicy(_atomFieldName);
-    _atomFieldName.reportObserved();
+    _atomFieldName.reportRead();
     return super.fieldName;
   }
 
   @override
   set fieldName(FieldType value) {
-    _atomFieldName.context.conditionallyRunInAction(() {
+    _atomFieldName.reportWrite(value, super.fieldName, () {
       super.fieldName = value;
-      _atomFieldName.reportChanged();
-    }, _atomFieldName, name: '\${_atomFieldName.name}_set');
+    });
   }"""));
     });
   });
@@ -236,7 +235,7 @@ void main() {
       expect(template.toString(), equals("""
     @override
     ReturnType myAction<T, S extends String>(T arg1, [S arg2 = "arg2value", String arg3], {String namedArg1 = "default", int namedArg2 = 3}) {
-      final _\$actionInfo = _\$ParentClassActionController.startAction();
+      final _\$actionInfo = _\$ParentClassActionController.startAction(name: 'ParentClass.myAction<T, S extends String>');
       try {
         return super.myAction<T, S>(arg1, arg2, arg3, namedArg1: namedArg1, namedArg2: namedArg2);
       } finally {
