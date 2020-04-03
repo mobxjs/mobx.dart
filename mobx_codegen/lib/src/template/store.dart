@@ -55,7 +55,6 @@ abstract class StoreTemplate {
     final publicComputedsList = computeds.templates
         .where((element) => !element.isPrivate)
         .map((current) => '${current.name}: \${${current.name}}');
-    ;
 
     final allStrings = toStringList
       ..addAll(publicObservablesList)
