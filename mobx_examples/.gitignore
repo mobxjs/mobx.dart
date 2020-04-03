@@ -8,7 +8,6 @@
 .buildlog/
 .history
 .svn/
-*.reflectable.dart
 
 # IntelliJ related
 *.iml
