@@ -1,6 +1,6 @@
 name: Build
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build_dart_packages:
@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        package: ["mobx", "mobx_codegen"]
+        package: ["mobx_codegen"]
         version: ["latest", "dev"]
 
     steps:
