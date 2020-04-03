@@ -105,14 +105,20 @@ class RepositoryListView extends StatelessWidget {
                   return ListTile(
                     title: Row(
                       children: <Widget>[
-                        Text(
-                          repo.name,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        Expanded(
+                          child: Text(
+                            repo.name,
+                            overflow: TextOverflow.fade,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
                         Text(' (${repo.stargazersCount} ⭐️)'),
                       ],
                     ),
-                    subtitle: Text(repo.description ?? ''),
+                    subtitle: Text(
+                      repo.description ?? '',
+                      overflow: TextOverflow.fade,
+                    ),
                   );
                 });
           },

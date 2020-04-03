@@ -34,7 +34,10 @@ void main() {
       when(context.startUntracked()).thenReturn(prevDerivation);
 
       final runInfo = ActionRunInfo(
-          prevDerivation: prevDerivation, prevAllowStateChanges: false);
+          name: 'test',
+          prevDerivation: prevDerivation,
+          prevAllowStateChanges: false,
+          startTime: DateTime.now());
 
       ActionController(context: context)
         ..startAction()

@@ -7,7 +7,7 @@ void main() {
     test('when a spy unsubscribes, it is removed from the list', () {});
     test('spies are enabled', () {
       final context = ReactiveContext();
-      expect(context.isSpyEnabled, isTrue);
+      expect(context.isSpyEnabled, isFalse);
     });
   });
 }
