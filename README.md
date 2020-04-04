@@ -395,7 +395,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-32-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-33-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -445,6 +445,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/geisterfurz007"><img src="https://avatars1.githubusercontent.com/u/26303198?v=4" width="64px;" alt=""/><br /><sub><b>geisterfurz007</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=geisterfurz007" title="Documentation">📖</a> <a href="#content-geisterfurz007" title="Content">🖋</a></td>
     <td align="center"><a href="https://github.com/hawkbee1"><img src="https://avatars1.githubusercontent.com/u/49282360?&v=4" width="64px;" alt=""/><br /><sub><b>Romuald Barbe</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=hawkbee1" title="Code">💻</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/alexander-mazuruk"><img src="https://avatars0.githubusercontent.com/u/18071010?v=4" width="64px;" alt=""/><br /><sub><b>Alexander Mazuruk</b></sub></a><br /><a href="#example-k-paxian" title="Examples">💡</a></td>
+    <td align="center"><a href="http://www.albertobonacina.com"><img src="https://avatars1.githubusercontent.com/u/202140?v=4" width="64px;" alt=""/><br /><sub><b>Alberto Bonacina</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=polilluminato" title="Documentation">📖</a></td>
   </tr>
 </table>
 
