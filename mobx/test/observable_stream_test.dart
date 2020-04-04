@@ -24,6 +24,8 @@ void main() {
       final stream = ObservableStream(ctrl.stream, name: 'test');
 
       expect(stream.name, equals('test'));
+
+      ctrl.close();
     });
 
     test('listening to a stream gives back a subscription', () async {
@@ -40,9 +42,9 @@ void main() {
       await ctrl.close();
 
       expect(arrived, isTrue);
-      expect(sub, isNotNull);
 
-      sub.cancel();
+      await ctrl.close();
+      await sub.cancel();
     });
 
     test('match works', () async {
