@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 /// Declares configuration of a Store class.
 /// Currently the only configuration used is boolean to indicate generation of toString method (true), or not (false)
 
