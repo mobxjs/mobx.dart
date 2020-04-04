@@ -27,7 +27,8 @@ void main() {
         expect((event as ObservableValueSpyEvent).newValue, equals(0));
       });
 
-      final x = Observable(0);
+      Observable(0);
+
       d();
     });
 
