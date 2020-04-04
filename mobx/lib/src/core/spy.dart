@@ -3,7 +3,7 @@ part of '../core.dart';
 typedef SpyListener = void Function(SpyEvent event);
 
 abstract class SpyEvent {
-  SpyEvent(this.object,
+  SpyEvent._(this.object,
       {this.type, this.name, this.duration, this.isStart, this.isEnd});
 
   final dynamic object;
@@ -39,7 +39,7 @@ abstract class SpyEvent {
 class ObservableValueSpyEvent extends SpyEvent {
   ObservableValueSpyEvent(dynamic object,
       {this.newValue, this.oldValue, String name, bool isEnd})
-      : super(object,
+      : super._(object,
             type: 'observable', name: name, isStart: true, isEnd: isEnd);
 
   final dynamic newValue;
@@ -51,19 +51,20 @@ class ObservableValueSpyEvent extends SpyEvent {
 
 class ComputedValueSpyEvent extends SpyEvent {
   ComputedValueSpyEvent(object, {String name})
-      : super(object, type: 'computed', name: name, isStart: true, isEnd: true);
+      : super._(object,
+            type: 'computed', name: name, isStart: true, isEnd: true);
 }
 
 class ReactionSpyEvent extends SpyEvent {
   ReactionSpyEvent({String name})
-      : super(null, type: 'reaction', name: name, isStart: true);
+      : super._(null, type: 'reaction', name: name, isStart: true);
 }
 
 class ReactionErrorSpyEvent extends SpyEvent {
   ReactionErrorSpyEvent(
     this.error, {
     String name,
-  }) : super(null,
+  }) : super._(null,
             type: 'reaction-error', name: name, isStart: true, isEnd: true);
 
   final Object error;
@@ -75,19 +76,19 @@ class ReactionErrorSpyEvent extends SpyEvent {
 class ReactionDisposedSpyEvent extends SpyEvent {
   ReactionDisposedSpyEvent({
     String name,
-  }) : super(null,
+  }) : super._(null,
             type: 'reaction-dispose', name: name, isStart: true, isEnd: true);
 }
 
 class ActionSpyEvent extends SpyEvent {
   ActionSpyEvent({
     String name,
-  }) : super(null, type: 'action', name: name, isStart: true);
+  }) : super._(null, type: 'action', name: name, isStart: true);
 }
 
 class EndedSpyEvent extends SpyEvent {
   EndedSpyEvent({String type, String name, Duration duration})
-      : super(null, type: type, name: name, duration: duration, isEnd: true);
+      : super._(null, type: type, name: name, duration: duration, isEnd: true);
 }
 
 /// Utility function that only invokes the given [fn] once.
