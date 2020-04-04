@@ -9,17 +9,22 @@ import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
 import 'package:mobx_examples/settings/preferences_service.dart';
 import 'package:mobx_examples/settings/settings_store.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'main.reflectable.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final sharedPreferences = await SharedPreferences.getInstance();
   initializeReflectable();
   JsonMapper().useAdapter(mobXAdapter);
-  runApp(const MyApp());
+  runApp(MyApp(sharedPreferences));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp();
+  const MyApp(this.sharedPreferences);
+
+  final SharedPreferences sharedPreferences;
 
   @override
   Widget build(BuildContext context) => MultiProvider(
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
             Provider<MultiCounterStore>(create: (_) => MultiCounterStore()),
             Provider<Counter>(create: (_) => Counter()),
             Provider<PreferencesService>(
-              create: (_) => PreferencesService(),
+              create: (_) => PreferencesService(sharedPreferences),
             ),
             ProxyProvider<PreferencesService, SettingsStore>(
                 update: (_, preferencesService, __) =>
