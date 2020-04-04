@@ -1,9 +1,7 @@
 part of '../observable_collections.dart';
 
-Atom _observableSetAtom<T>(ReactiveContext context, String name) {
-  final ctx = context ?? mainContext;
-  return Atom(name: name ?? ctx.nameFor('ObservableSet<$T>'), context: ctx);
-}
+Atom _observableSetAtom<T>(ReactiveContext context, String name) =>
+    Atom(name: name ?? context.nameFor('ObservableSet<$T>'), context: context);
 
 /// ObservableSet provides a reactive set that notifies changes when a member is added or removed.
 ///

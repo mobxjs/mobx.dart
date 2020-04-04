@@ -62,9 +62,7 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
             FutureStatus.rejected, error, name);
 
   ObservableFuture._(this._context, this._future, this._initialStatus,
-      this._initialResult, String name)
-      : assert(_context != null),
-        assert(_future != null) {
+      this._initialResult, String name) {
     _name = name ?? _context.nameFor('ObservableFuture<$T>');
     // create the result up-front instead of being lazy
     _result =

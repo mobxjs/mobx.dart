@@ -79,8 +79,6 @@ class ActionController {
   final ReactiveContext _context;
   final String name;
 
-  ReactiveContext get context => _context;
-
   ActionRunInfo startAction({String name}) {
     final reportingName = name ?? this.name;
     _context.spyReport(ActionSpyEvent(name: reportingName));

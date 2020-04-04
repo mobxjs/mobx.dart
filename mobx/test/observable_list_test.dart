@@ -10,6 +10,16 @@ void main() {
   turnOffWritePolicy();
 
   group('ObservableList', () {
+    test('generates a name if not given', () {
+      final list = ObservableList.of([]);
+      expect(list.name, matches(RegExp(r'ObservableList\<.*\>@')));
+    });
+
+    test('uses the name if given', () {
+      final list = ObservableList.of([], name: 'test');
+      expect(list.name, equals('test'));
+    });
+
     test('basics work', () {
       final list = ObservableList<int>();
       var count = -1;
@@ -71,6 +81,21 @@ void main() {
         ..add(1);
 
       expect(count, equals(1));
+    });
+
+    test('observe with fireImmediately works', () {
+      final list = ObservableList.of([0]);
+
+      var count = 0;
+
+      list
+        ..observe((change) {
+          count++;
+        }, fireImmediately: true)
+        ..add(1);
+
+      // 1 + 1: fireImmediately + add
+      expect(count, equals(2));
     });
 
     test('observe insert item works', () {
