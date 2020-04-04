@@ -317,6 +317,15 @@
       "contributions": [
         "example"
       ]
+    },
+    {
+      "login": "polilluminato",
+      "name": "Alberto Bonacina",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/202140?v=4",
+      "profile": "http://www.albertobonacina.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
