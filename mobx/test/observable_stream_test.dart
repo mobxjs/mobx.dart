@@ -10,6 +10,22 @@ void main() {
   turnOffWritePolicy();
 
   group('ObservableStream', () {
+    test('generates a name if not given', () {
+      final ctrl = StreamController<int>.broadcast();
+      final stream = ObservableStream(ctrl.stream);
+
+      expect(stream.name, matches(RegExp(r'ObservableStream\<.*\>@')));
+
+      ctrl.close();
+    });
+
+    test('uses the name if given', () {
+      final ctrl = StreamController<int>.broadcast();
+      final stream = ObservableStream(ctrl.stream, name: 'test');
+
+      expect(stream.name, equals('test'));
+    });
+
     test('listening to a stream gives back a subscription', () async {
       final ctrl = StreamController<int>.broadcast();
       final stream = ObservableStream(ctrl.stream);
