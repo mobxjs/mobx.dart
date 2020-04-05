@@ -13,43 +13,41 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   bool get hasResults =>
-      (_$hasResultsComputed ??= Computed<bool>(() => super.hasResults)).value;
+      (_$hasResultsComputed ??= Computed<bool>(() => super.hasResults,
+              name: '_GithubStore.hasResults'))
+          .value;
 
   final _$fetchReposFutureAtom = Atom(name: '_GithubStore.fetchReposFuture');
 
   @override
   ObservableFuture<List<Repository>> get fetchReposFuture {
-    _$fetchReposFutureAtom.context.enforceReadPolicy(_$fetchReposFutureAtom);
-    _$fetchReposFutureAtom.reportObserved();
+    _$fetchReposFutureAtom.reportRead();
     return super.fetchReposFuture;
   }
 
   @override
   set fetchReposFuture(ObservableFuture<List<Repository>> value) {
-    _$fetchReposFutureAtom.context.conditionallyRunInAction(() {
+    _$fetchReposFutureAtom.reportWrite(value, super.fetchReposFuture, () {
       super.fetchReposFuture = value;
-      _$fetchReposFutureAtom.reportChanged();
-    }, _$fetchReposFutureAtom, name: '${_$fetchReposFutureAtom.name}_set');
+    });
   }
 
   final _$userAtom = Atom(name: '_GithubStore.user');
 
   @override
   String get user {
-    _$userAtom.context.enforceReadPolicy(_$userAtom);
-    _$userAtom.reportObserved();
+    _$userAtom.reportRead();
     return super.user;
   }
 
   @override
   set user(String value) {
-    _$userAtom.context.conditionallyRunInAction(() {
+    _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
-      _$userAtom.reportChanged();
-    }, _$userAtom, name: '${_$userAtom.name}_set');
+    });
   }
 
-  final _$fetchReposAsyncAction = AsyncAction('fetchRepos');
+  final _$fetchReposAsyncAction = AsyncAction('_GithubStore.fetchRepos');
 
   @override
   Future<List<Repository>> fetchRepos() {
@@ -60,7 +58,8 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   void setUser(String text) {
-    final _$actionInfo = _$_GithubStoreActionController.startAction();
+    final _$actionInfo = _$_GithubStoreActionController.startAction(
+        name: '_GithubStore.setUser');
     try {
       return super.setUser(text);
     } finally {
@@ -70,8 +69,10 @@ mixin _$GithubStore on _GithubStore, Store {
 
   @override
   String toString() {
-    final string =
-        'fetchReposFuture: ${fetchReposFuture.toString()},user: ${user.toString()},hasResults: ${hasResults.toString()}';
-    return '{$string}';
+    return '''
+fetchReposFuture: ${fetchReposFuture},
+user: ${user},
+hasResults: ${hasResults}
+    ''';
   }
 }

@@ -43,9 +43,35 @@ abstract class StoreTemplate {
       ? ''
       : "final $actionControllerName = ActionController(name: '$parentTypeName');";
 
-  String get storeBody {
-    var toStringMethod = '';
-    final baseBody = '''
+  String get toStringMethod {
+    if (!generateToString) {
+      return '';
+    }
+
+    final publicObservablesList = observables.templates
+        .where((element) => !element.isPrivate)
+        .map((current) => '${current.name}: \${${current.name}}');
+
+    final publicComputedsList = computeds.templates
+        .where((element) => !element.isPrivate)
+        .map((current) => '${current.name}: \${${current.name}}');
+
+    final allStrings = toStringList
+      ..addAll(publicObservablesList)
+      ..addAll(publicComputedsList);
+
+    // The indents have been kept to ensure each field comes on a separate line without any tabs/spaces
+    return '''
+  @override
+  String toString() {
+    return \'\'\'
+${allStrings.join(',\n')}
+    \'\'\';
+  }
+  ''';
+  }
+
+  String get storeBody => '''
   $computeds
 
   $observables
@@ -58,33 +84,8 @@ abstract class StoreTemplate {
 
   $actionControllerField
 
-  $actions''';
+  $actions
 
-    if (generateToString) {
-      final publicObservablesList = observables.templates
-      ..removeWhere((element) => element.isPrivate);
-
-      final publicComputedsList = computeds.templates
-        ..removeWhere((element) => element.isPrivate);
-
-      toStringList
-        ..addAll(publicObservablesList.map(
-            (current) => '${current.name}: \${${current.name}.toString()}'))
-        ..addAll(publicComputedsList.map(
-            (current) => '${current.name}: \${${current.name}.toString()}'));
-
-      toStringMethod = '''
-  @override
-  String toString() {
-    final string = \'${toStringList.join(',')}\';
-    return '{\$string}';
-  }
+  $toStringMethod
   ''';
-    }
-
-    return baseBody + toStringMethod;
-  }
-
-  @override
-  String toString();
 }

@@ -14,23 +14,21 @@ mixin _$ConnectivityStore on _ConnectivityStore, Store {
 
   @override
   ObservableStream<ConnectivityResult> get connectivityStream {
-    _$connectivityStreamAtom.context
-        .enforceReadPolicy(_$connectivityStreamAtom);
-    _$connectivityStreamAtom.reportObserved();
+    _$connectivityStreamAtom.reportRead();
     return super.connectivityStream;
   }
 
   @override
   set connectivityStream(ObservableStream<ConnectivityResult> value) {
-    _$connectivityStreamAtom.context.conditionallyRunInAction(() {
+    _$connectivityStreamAtom.reportWrite(value, super.connectivityStream, () {
       super.connectivityStream = value;
-      _$connectivityStreamAtom.reportChanged();
-    }, _$connectivityStreamAtom, name: '${_$connectivityStreamAtom.name}_set');
+    });
   }
 
   @override
   String toString() {
-    final string = 'connectivityStream: ${connectivityStream.toString()}';
-    return '{$string}';
+    return '''
+connectivityStream: ${connectivityStream}
+    ''';
   }
 }

@@ -11,7 +11,8 @@ part of 'random_store.dart';
 mixin _$RandomStore on _RandomStore, Store {
   @override
   String toString() {
-    final string = '';
-    return '{$string}';
+    return '''
+
+    ''';
   }
 }

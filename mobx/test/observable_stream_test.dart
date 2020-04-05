@@ -10,6 +10,43 @@ void main() {
   turnOffWritePolicy();
 
   group('ObservableStream', () {
+    test('generates a name if not given', () {
+      final ctrl = StreamController<int>.broadcast();
+      final stream = ObservableStream(ctrl.stream);
+
+      expect(stream.name, matches(RegExp(r'ObservableStream\<.*\>@')));
+
+      ctrl.close();
+    });
+
+    test('uses the name if given', () {
+      final ctrl = StreamController<int>.broadcast();
+      final stream = ObservableStream(ctrl.stream, name: 'test');
+
+      expect(stream.name, equals('test'));
+
+      ctrl.close();
+    });
+
+    test('listening to a stream gives back a subscription', () async {
+      final ctrl = StreamController<int>.broadcast();
+      final stream = ObservableStream(ctrl.stream);
+
+      var arrived = false;
+      final sub = stream.listen((data) {
+        arrived = data == 100;
+      });
+
+      ctrl.add(100);
+
+      await ctrl.close();
+
+      expect(arrived, isTrue);
+
+      await ctrl.close();
+      await sub.cancel();
+    });
+
     test('match works', () async {
       // ignore:close_sinks
       final ctrl = StreamController<int>.broadcast();
@@ -149,10 +186,17 @@ void main() {
       await ctrl.close();
 
       expect(values, equals([0, 1, 2]));
+      expect(stream.error, equals(2));
+      expect(stream.hasError, isTrue);
     });
 
     <String, StreamTestBody>{
-      'asBroadcastStream': (s) => s.asBroadcastStream(),
+      'asBroadcastStream': (s) {
+        final stream = s.asBroadcastStream();
+
+        expect(stream.isBroadcast, isTrue);
+        return stream;
+      },
       'asyncExpand': (s) =>
           s.asyncExpand((n) => Stream.fromIterable(Iterable<int>.generate(n))),
       'asyncMap': (s) => s.asyncMap((n) => Future.value(n + 1)),
@@ -163,6 +207,13 @@ void main() {
       'skipWhile': (s) => s.skipWhile((n) => n > 3),
       'take': (s) => s.take(5),
       'takeWhile': (s) => s.takeWhile((n) => n < 4),
+      'handleError': (s) => s.handleError((_) {}),
+      'timeout': (s) =>
+          s.timeout(const Duration(seconds: 0), onTimeout: (n) => true),
+      'transform': (s) =>
+          s.transform(StreamTransformer.fromHandlers(handleData: (data, sink) {
+            sink.add(data);
+          })),
       'where': (s) => s.where((n) => n != 2)
     }.forEach(testStreamCombinator);
   });

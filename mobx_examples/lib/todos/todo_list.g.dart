@@ -13,108 +13,110 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   ObservableList<Todo> get pendingTodos => (_$pendingTodosComputed ??=
-          Computed<ObservableList<Todo>>(() => super.pendingTodos))
+          Computed<ObservableList<Todo>>(() => super.pendingTodos,
+              name: '_TodoList.pendingTodos'))
       .value;
   Computed<ObservableList<Todo>> _$completedTodosComputed;
 
   @override
   ObservableList<Todo> get completedTodos => (_$completedTodosComputed ??=
-          Computed<ObservableList<Todo>>(() => super.completedTodos))
+          Computed<ObservableList<Todo>>(() => super.completedTodos,
+              name: '_TodoList.completedTodos'))
       .value;
   Computed<bool> _$hasCompletedTodosComputed;
 
   @override
-  bool get hasCompletedTodos => (_$hasCompletedTodosComputed ??=
-          Computed<bool>(() => super.hasCompletedTodos))
+  bool get hasCompletedTodos => (_$hasCompletedTodosComputed ??= Computed<bool>(
+          () => super.hasCompletedTodos,
+          name: '_TodoList.hasCompletedTodos'))
       .value;
   Computed<bool> _$hasPendingTodosComputed;
 
   @override
-  bool get hasPendingTodos => (_$hasPendingTodosComputed ??=
-          Computed<bool>(() => super.hasPendingTodos))
-      .value;
+  bool get hasPendingTodos =>
+      (_$hasPendingTodosComputed ??= Computed<bool>(() => super.hasPendingTodos,
+              name: '_TodoList.hasPendingTodos'))
+          .value;
   Computed<String> _$itemsDescriptionComputed;
 
   @override
   String get itemsDescription => (_$itemsDescriptionComputed ??=
-          Computed<String>(() => super.itemsDescription))
+          Computed<String>(() => super.itemsDescription,
+              name: '_TodoList.itemsDescription'))
       .value;
   Computed<ObservableList<Todo>> _$visibleTodosComputed;
 
   @override
   ObservableList<Todo> get visibleTodos => (_$visibleTodosComputed ??=
-          Computed<ObservableList<Todo>>(() => super.visibleTodos))
+          Computed<ObservableList<Todo>>(() => super.visibleTodos,
+              name: '_TodoList.visibleTodos'))
       .value;
   Computed<bool> _$canRemoveAllCompletedComputed;
 
   @override
   bool get canRemoveAllCompleted => (_$canRemoveAllCompletedComputed ??=
-          Computed<bool>(() => super.canRemoveAllCompleted))
+          Computed<bool>(() => super.canRemoveAllCompleted,
+              name: '_TodoList.canRemoveAllCompleted'))
       .value;
   Computed<bool> _$canMarkAllCompletedComputed;
 
   @override
   bool get canMarkAllCompleted => (_$canMarkAllCompletedComputed ??=
-          Computed<bool>(() => super.canMarkAllCompleted))
+          Computed<bool>(() => super.canMarkAllCompleted,
+              name: '_TodoList.canMarkAllCompleted'))
       .value;
 
   final _$todosAtom = Atom(name: '_TodoList.todos');
 
   @override
   ObservableList<Todo> get todos {
-    _$todosAtom.context.enforceReadPolicy(_$todosAtom);
-    _$todosAtom.reportObserved();
+    _$todosAtom.reportRead();
     return super.todos;
   }
 
   @override
   set todos(ObservableList<Todo> value) {
-    _$todosAtom.context.conditionallyRunInAction(() {
+    _$todosAtom.reportWrite(value, super.todos, () {
       super.todos = value;
-      _$todosAtom.reportChanged();
-    }, _$todosAtom, name: '${_$todosAtom.name}_set');
+    });
   }
 
   final _$filterAtom = Atom(name: '_TodoList.filter');
 
   @override
   VisibilityFilter get filter {
-    _$filterAtom.context.enforceReadPolicy(_$filterAtom);
-    _$filterAtom.reportObserved();
+    _$filterAtom.reportRead();
     return super.filter;
   }
 
   @override
   set filter(VisibilityFilter value) {
-    _$filterAtom.context.conditionallyRunInAction(() {
+    _$filterAtom.reportWrite(value, super.filter, () {
       super.filter = value;
-      _$filterAtom.reportChanged();
-    }, _$filterAtom, name: '${_$filterAtom.name}_set');
+    });
   }
 
   final _$currentDescriptionAtom = Atom(name: '_TodoList.currentDescription');
 
   @override
   String get currentDescription {
-    _$currentDescriptionAtom.context
-        .enforceReadPolicy(_$currentDescriptionAtom);
-    _$currentDescriptionAtom.reportObserved();
+    _$currentDescriptionAtom.reportRead();
     return super.currentDescription;
   }
 
   @override
   set currentDescription(String value) {
-    _$currentDescriptionAtom.context.conditionallyRunInAction(() {
+    _$currentDescriptionAtom.reportWrite(value, super.currentDescription, () {
       super.currentDescription = value;
-      _$currentDescriptionAtom.reportChanged();
-    }, _$currentDescriptionAtom, name: '${_$currentDescriptionAtom.name}_set');
+    });
   }
 
   final _$_TodoListActionController = ActionController(name: '_TodoList');
 
   @override
   void addTodo(String description) {
-    final _$actionInfo = _$_TodoListActionController.startAction();
+    final _$actionInfo =
+        _$_TodoListActionController.startAction(name: '_TodoList.addTodo');
     try {
       return super.addTodo(description);
     } finally {
@@ -124,7 +126,8 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   void removeTodo(Todo todo) {
-    final _$actionInfo = _$_TodoListActionController.startAction();
+    final _$actionInfo =
+        _$_TodoListActionController.startAction(name: '_TodoList.removeTodo');
     try {
       return super.removeTodo(todo);
     } finally {
@@ -134,7 +137,8 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   void removeCompleted() {
-    final _$actionInfo = _$_TodoListActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction(
+        name: '_TodoList.removeCompleted');
     try {
       return super.removeCompleted();
     } finally {
@@ -144,7 +148,8 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   void markAllAsCompleted() {
-    final _$actionInfo = _$_TodoListActionController.startAction();
+    final _$actionInfo = _$_TodoListActionController.startAction(
+        name: '_TodoList.markAllAsCompleted');
     try {
       return super.markAllAsCompleted();
     } finally {
@@ -154,8 +159,18 @@ mixin _$TodoList on _TodoList, Store {
 
   @override
   String toString() {
-    final string =
-        'todos: ${todos.toString()},filter: ${filter.toString()},currentDescription: ${currentDescription.toString()},pendingTodos: ${pendingTodos.toString()},completedTodos: ${completedTodos.toString()},hasCompletedTodos: ${hasCompletedTodos.toString()},hasPendingTodos: ${hasPendingTodos.toString()},itemsDescription: ${itemsDescription.toString()},visibleTodos: ${visibleTodos.toString()},canRemoveAllCompleted: ${canRemoveAllCompleted.toString()},canMarkAllCompleted: ${canMarkAllCompleted.toString()}';
-    return '{$string}';
+    return '''
+todos: ${todos},
+filter: ${filter},
+currentDescription: ${currentDescription},
+pendingTodos: ${pendingTodos},
+completedTodos: ${completedTodos},
+hasCompletedTodos: ${hasCompletedTodos},
+hasPendingTodos: ${hasPendingTodos},
+itemsDescription: ${itemsDescription},
+visibleTodos: ${visibleTodos},
+canRemoveAllCompleted: ${canRemoveAllCompleted},
+canMarkAllCompleted: ${canMarkAllCompleted}
+    ''';
   }
 }

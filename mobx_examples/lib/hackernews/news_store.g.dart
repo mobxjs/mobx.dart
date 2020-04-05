@@ -14,34 +14,30 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   ObservableFuture<List<FeedItem>> get latestItemsFuture {
-    _$latestItemsFutureAtom.context.enforceReadPolicy(_$latestItemsFutureAtom);
-    _$latestItemsFutureAtom.reportObserved();
+    _$latestItemsFutureAtom.reportRead();
     return super.latestItemsFuture;
   }
 
   @override
   set latestItemsFuture(ObservableFuture<List<FeedItem>> value) {
-    _$latestItemsFutureAtom.context.conditionallyRunInAction(() {
+    _$latestItemsFutureAtom.reportWrite(value, super.latestItemsFuture, () {
       super.latestItemsFuture = value;
-      _$latestItemsFutureAtom.reportChanged();
-    }, _$latestItemsFutureAtom, name: '${_$latestItemsFutureAtom.name}_set');
+    });
   }
 
   final _$topItemsFutureAtom = Atom(name: '_HackerNewsStore.topItemsFuture');
 
   @override
   ObservableFuture<List<FeedItem>> get topItemsFuture {
-    _$topItemsFutureAtom.context.enforceReadPolicy(_$topItemsFutureAtom);
-    _$topItemsFutureAtom.reportObserved();
+    _$topItemsFutureAtom.reportRead();
     return super.topItemsFuture;
   }
 
   @override
   set topItemsFuture(ObservableFuture<List<FeedItem>> value) {
-    _$topItemsFutureAtom.context.conditionallyRunInAction(() {
+    _$topItemsFutureAtom.reportWrite(value, super.topItemsFuture, () {
       super.topItemsFuture = value;
-      _$topItemsFutureAtom.reportChanged();
-    }, _$topItemsFutureAtom, name: '${_$topItemsFutureAtom.name}_set');
+    });
   }
 
   final _$_HackerNewsStoreActionController =
@@ -49,7 +45,8 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   Future<dynamic> fetchLatest() {
-    final _$actionInfo = _$_HackerNewsStoreActionController.startAction();
+    final _$actionInfo = _$_HackerNewsStoreActionController.startAction(
+        name: '_HackerNewsStore.fetchLatest');
     try {
       return super.fetchLatest();
     } finally {
@@ -59,7 +56,8 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   Future<dynamic> fetchTop() {
-    final _$actionInfo = _$_HackerNewsStoreActionController.startAction();
+    final _$actionInfo = _$_HackerNewsStoreActionController.startAction(
+        name: '_HackerNewsStore.fetchTop');
     try {
       return super.fetchTop();
     } finally {
@@ -69,8 +67,9 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
 
   @override
   String toString() {
-    final string =
-        'latestItemsFuture: ${latestItemsFuture.toString()},topItemsFuture: ${topItemsFuture.toString()}';
-    return '{$string}';
+    return '''
+latestItemsFuture: ${latestItemsFuture},
+topItemsFuture: ${topItemsFuture}
+    ''';
   }
 }

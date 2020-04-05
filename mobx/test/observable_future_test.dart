@@ -9,6 +9,18 @@ void main() {
   turnOffWritePolicy();
 
   group('ObservableFuture', () {
+    test('generates a name if not given', () {
+      final future = ObservableFuture.value('success');
+
+      expect(future.name, matches(RegExp(r'ObservableFuture\<.*\>@')));
+    });
+
+    test('uses the name if given', () {
+      final future = ObservableFuture.value('success', name: 'test');
+
+      expect(future.name, equals('test'));
+    });
+
     test('value constructor creates an immediately fulfilled future', () {
       final future = ObservableFuture.value('success');
       expect(future.value, equals('success'));

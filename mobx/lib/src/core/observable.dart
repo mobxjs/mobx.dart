@@ -31,7 +31,12 @@ class Observable<T> extends Atom
   Observable._(ReactiveContext context, this._value, {String name, this.equals})
       : _interceptors = Interceptors(context),
         _listeners = Listeners(context),
-        super._(context, name: name ?? context.nameFor('Observable'));
+        super._(context, name: name ?? context.nameFor('Observable')) {
+    if (_context.isSpyEnabled) {
+      _context.spyReport(ObservableValueSpyEvent(this,
+          newValue: _value, name: this.name, isEnd: true));
+    }
+  }
 
   final Interceptors<T> _interceptors;
   final Listeners<ChangeNotification<T>> _listeners;
@@ -57,6 +62,13 @@ class Observable<T> extends Atom
       return;
     }
 
+    final notifySpy = _context.isSpyEnabled;
+
+    if (notifySpy) {
+      _context.spyReport(ObservableValueSpyEvent(this,
+          newValue: newValue, oldValue: oldValue, name: name));
+    }
+
     _value = newValue;
 
     reportChanged();
@@ -68,6 +80,10 @@ class Observable<T> extends Atom
           type: OperationType.update,
           object: this);
       _listeners.notifyListeners(change);
+    }
+
+    if (notifySpy) {
+      _context.spyReport(EndedSpyEvent(type: 'observable', name: name));
     }
   }
 

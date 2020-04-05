@@ -13,20 +13,18 @@ mixin _$SettingsStore on _SettingsStore, Store {
 
   @override
   bool get useDarkMode {
-    _$useDarkModeAtom.context.enforceReadPolicy(_$useDarkModeAtom);
-    _$useDarkModeAtom.reportObserved();
+    _$useDarkModeAtom.reportRead();
     return super.useDarkMode;
   }
 
   @override
   set useDarkMode(bool value) {
-    _$useDarkModeAtom.context.conditionallyRunInAction(() {
+    _$useDarkModeAtom.reportWrite(value, super.useDarkMode, () {
       super.useDarkMode = value;
-      _$useDarkModeAtom.reportChanged();
-    }, _$useDarkModeAtom, name: '${_$useDarkModeAtom.name}_set');
+    });
   }
 
-  final _$setDarkModeAsyncAction = AsyncAction('setDarkMode');
+  final _$setDarkModeAsyncAction = AsyncAction('_SettingsStore.setDarkMode');
 
   @override
   Future<void> setDarkMode({@required bool value}) {
@@ -35,7 +33,8 @@ mixin _$SettingsStore on _SettingsStore, Store {
 
   @override
   String toString() {
-    final string = 'useDarkMode: ${useDarkMode.toString()}';
-    return '{$string}';
+    return '''
+useDarkMode: ${useDarkMode}
+    ''';
   }
 }

@@ -14,7 +14,9 @@
     "set:versions": "dart ./tool/expose_version.dart mobx flutter_mobx mobx_codegen",
     "contrib:add": "all-contributors add",
     "contrib:gen": "all-contributors generate",
-    "contrib:check": "all-contributors check"
+    "contrib:check": "all-contributors check",
+    "mobx:coverage:html": "cd mobx && ../tool/coverage.sh && genhtml --output-directory coverage/ coverage/lcov.info",
+    "mobx_codgen:coverage:html": "cd mobx_codegen && ../tool/coverage.sh && genhtml --output-directory coverage/ coverage/lcov.info"
   },
   "devDependencies": {
     "all-contributors-cli": "^6.13.0"

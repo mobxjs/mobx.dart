@@ -60,7 +60,8 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   @override
   T get value {
     if (_isComputing) {
-      throw MobXException('Cycle detected in computation $name: $_fn');
+      throw MobXCyclicReactionException(
+          'Cycle detected in computation $name: $_fn');
     }
 
     if (!_context.isWithinBatch && _observers.isEmpty) {
@@ -123,6 +124,10 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   }
 
   bool _trackAndCompute() {
+    if (_context.isSpyEnabled) {
+      _context.spyReport(ComputedValueSpyEvent(this, name: name));
+    }
+
     final oldValue = _value;
     final wasSuspended = _dependenciesState == DerivationState.notTracking;
 

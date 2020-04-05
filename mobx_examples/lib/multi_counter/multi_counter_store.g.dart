@@ -13,17 +13,15 @@ mixin _$SingleCounter on _SingleCounter, Store {
 
   @override
   int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
+    _$valueAtom.reportRead();
     return super.value;
   }
 
   @override
   set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
+    _$valueAtom.reportWrite(value, super.value, () {
       super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+    });
   }
 
   final _$_SingleCounterActionController =
@@ -31,7 +29,8 @@ mixin _$SingleCounter on _SingleCounter, Store {
 
   @override
   void reset() {
-    final _$actionInfo = _$_SingleCounterActionController.startAction();
+    final _$actionInfo = _$_SingleCounterActionController.startAction(
+        name: '_SingleCounter.reset');
     try {
       return super.reset();
     } finally {
@@ -41,7 +40,8 @@ mixin _$SingleCounter on _SingleCounter, Store {
 
   @override
   void increment() {
-    final _$actionInfo = _$_SingleCounterActionController.startAction();
+    final _$actionInfo = _$_SingleCounterActionController.startAction(
+        name: '_SingleCounter.increment');
     try {
       return super.increment();
     } finally {
@@ -51,7 +51,8 @@ mixin _$SingleCounter on _SingleCounter, Store {
 
   @override
   void decrement() {
-    final _$actionInfo = _$_SingleCounterActionController.startAction();
+    final _$actionInfo = _$_SingleCounterActionController.startAction(
+        name: '_SingleCounter.decrement');
     try {
       return super.decrement();
     } finally {
@@ -61,8 +62,9 @@ mixin _$SingleCounter on _SingleCounter, Store {
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
-    return '{$string}';
+    return '''
+value: ${value}
+    ''';
   }
 }
 
@@ -72,7 +74,8 @@ mixin _$MultiCounterStore on _MultiCounterStore, Store {
 
   @override
   void addCounter() {
-    final _$actionInfo = _$_MultiCounterStoreActionController.startAction();
+    final _$actionInfo = _$_MultiCounterStoreActionController.startAction(
+        name: '_MultiCounterStore.addCounter');
     try {
       return super.addCounter();
     } finally {
@@ -82,7 +85,8 @@ mixin _$MultiCounterStore on _MultiCounterStore, Store {
 
   @override
   void removeCounter(int index) {
-    final _$actionInfo = _$_MultiCounterStoreActionController.startAction();
+    final _$actionInfo = _$_MultiCounterStoreActionController.startAction(
+        name: '_MultiCounterStore.removeCounter');
     try {
       return super.removeCounter(index);
     } finally {
@@ -92,7 +96,8 @@ mixin _$MultiCounterStore on _MultiCounterStore, Store {
 
   @override
   String toString() {
-    final string = '';
-    return '{$string}';
+    return '''
+
+    ''';
   }
 }

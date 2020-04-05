@@ -28,6 +28,16 @@ void main() {
   });
 
   group('ObservableMap', () {
+    test('generates a name if not given', () {
+      final map = ObservableMap.of({});
+      expect(map.name, matches(RegExp(r'ObservableMap\<.*\>@')));
+    });
+
+    test('uses the name if given', () {
+      final map = ObservableMap.of({}, name: 'test');
+      expect(map.name, equals('test'));
+    });
+
     test('Observing a map key works', () {
       final map = ObservableMap.of({'a': 1});
 

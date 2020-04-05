@@ -10,7 +10,7 @@ class ActionTemplate {
   String toString() => """
     @override
     ${method.returnType} ${method.name}${method.typeParams}(${method.params}) {
-      final _\$actionInfo = ${storeTemplate.actionControllerName}.startAction();
+      final _\$actionInfo = ${storeTemplate.actionControllerName}.startAction(name: '${storeTemplate.parentTypeName}.${method.name}${method.typeParams}');
       try {
         return super.${method.name}${method.typeArgs}(${method.args});
       } finally {

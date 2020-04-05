@@ -4,24 +4,33 @@ enum StreamStatus { waiting, active, done }
 
 class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
   ObservableStream(Stream<T> stream,
-      {T initialValue, bool cancelOnError = false, ReactiveContext context})
-      : this._(context ?? mainContext, stream, initialValue, cancelOnError);
+      {T initialValue,
+      bool cancelOnError = false,
+      ReactiveContext context,
+      String name})
+      : this._(
+            context ?? mainContext, stream, initialValue, cancelOnError, name);
 
   ObservableStream._(ReactiveContext context, this._stream, this._initialValue,
-      this._cancelOnError)
-      : _context = context;
+      this._cancelOnError, String name)
+      : _context = context {
+    _name = name ?? _context.nameFor('ObservableStream<$T>');
+  }
 
   T _initialValue;
   final bool _cancelOnError;
   final ReactiveContext _context;
   final Stream<T> _stream;
 
+  String _name;
+  String get name => _name;
+
   _ObservableStreamController<T> _controllerField;
   _ObservableStreamController<T> get _controller {
     if (_controllerField == null) {
       _controllerField = _ObservableStreamController<T>(
           _context, _stream, _initialValue,
-          cancelOnError: _cancelOnError);
+          cancelOnError: _cancelOnError, name: '$name.StreamController');
       _initialValue = null;
     }
     return _controllerField;
@@ -78,13 +87,13 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
 
   /// Create a new stream with the provided initialValue and cancelOnError.
   ObservableStream<T> configure({T initialValue, bool cancelOnError = false}) =>
-      ObservableStream._(_context, _stream, initialValue, cancelOnError);
+      ObservableStream._(_context, _stream, initialValue, cancelOnError, name);
 
   ObservableStream<R> _wrap<R>(Stream<R> stream) =>
-      ObservableStream._(_context, stream, null, _cancelOnError);
+      ObservableStream._(_context, stream, null, _cancelOnError, name);
 
   ObservableFuture<R> _wrapFuture<R>(Future<R> future) =>
-      ObservableFuture._(_context, future, FutureStatus.pending, null);
+      ObservableFuture._(_context, future, FutureStatus.pending, null, name);
 
   // Delegated methods
 
@@ -244,19 +253,16 @@ enum _ValueType { value, error }
 class _ObservableStreamController<T> {
   _ObservableStreamController(
       ReactiveContext context, this._stream, T initialValue,
-      {bool cancelOnError = false})
-      : _actions = ActionController(
-            context: context, name: context.nameFor('ObservableStream<$T>')),
+      {bool cancelOnError = false, this.name})
+      : _actions =
+            ActionController(context: context, name: '$name.ActionController'),
         _status = Observable(
             initialValue == null ? StreamStatus.waiting : StreamStatus.active,
             context: context,
-            name: context.nameFor('ObservableStream<$T>.status')),
+            name: '$name.status'),
         _valueType = Observable(_ValueType.value,
-            context: context,
-            name: context.nameFor('ObservableStream<$T>.valueType')),
-        _data = Observable(initialValue,
-            context: context,
-            name: context.nameFor('ObservableStream<$T>.data')),
+            context: context, name: '$name.valueType'),
+        _data = Observable(initialValue, context: context, name: '$name.data'),
         _cancelOnError = cancelOnError {
     _status
       ..onBecomeObserved(_listen)
@@ -269,6 +275,7 @@ class _ObservableStreamController<T> {
       ..onBecomeUnobserved(_unsubscribe);
   }
 
+  final String name;
   final bool _cancelOnError;
   final Stream<T> _stream;
   StreamSubscription<T> _subscription;

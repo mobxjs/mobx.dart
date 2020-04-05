@@ -1,8 +1,8 @@
 part of '../observable_collections.dart';
 
-Atom _observableMapAtom<K, V>(ReactiveContext context) {
+Atom _observableMapAtom<K, V>(ReactiveContext context, String name) {
   final ctx = context ?? mainContext;
-  return Atom(name: ctx.nameFor('ObservableMap<$K, $V>'), context: ctx);
+  return Atom(name: name ?? ctx.nameFor('ObservableMap<$K, $V>'), context: ctx);
 }
 
 /// The ObservableMap tracks the various read-methods (eg: [Map.length], [Map.isEmpty]) and
@@ -26,28 +26,30 @@ class ObservableMap<K, V>
         MapMixin<K, V>
     implements
         Listenable<MapChange<K, V>> {
-  ObservableMap({ReactiveContext context})
+  ObservableMap({ReactiveContext context, String name})
       : _context = context ?? mainContext,
-        _atom = _observableMapAtom<K, V>(context),
+        _atom = _observableMapAtom<K, V>(context, name),
         _map = <K, V>{};
 
-  ObservableMap.of(Map<K, V> other, {ReactiveContext context})
+  ObservableMap.of(Map<K, V> other, {ReactiveContext context, String name})
       : _context = context ?? mainContext,
-        _atom = _observableMapAtom<K, V>(context),
+        _atom = _observableMapAtom<K, V>(context, name),
         _map = Map.of(other);
 
-  ObservableMap.linkedHashMapFrom(Map<K, V> other, {ReactiveContext context})
+  ObservableMap.linkedHashMapFrom(Map<K, V> other,
+      {ReactiveContext context, String name})
       : _context = context ?? mainContext,
-        _atom = _observableMapAtom<K, V>(context),
+        _atom = _observableMapAtom<K, V>(context, name),
         _map = LinkedHashMap.from(other);
 
   ObservableMap.splayTreeMapFrom(Map<K, V> other,
       {int Function(K, K) compare,
       // ignore: avoid_annotating_with_dynamic
       bool Function(dynamic) isValidKey,
-      ReactiveContext context})
+      ReactiveContext context,
+      String name})
       : _context = context ?? mainContext,
-        _atom = _observableMapAtom<K, V>(context),
+        _atom = _observableMapAtom<K, V>(context, name),
         _map = SplayTreeMap.from(other, compare, isValidKey);
 
   ObservableMap._wrap(this._context, this._map, this._atom);
@@ -55,6 +57,8 @@ class ObservableMap<K, V>
   final ReactiveContext _context;
   final Atom _atom;
   final Map<K, V> _map;
+
+  String get name => _atom.name;
 
   Listeners<MapChange<K, V>> _listenersField;
 

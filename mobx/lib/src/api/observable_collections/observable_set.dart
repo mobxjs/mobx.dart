@@ -1,6 +1,9 @@
 part of '../observable_collections.dart';
 
-/// ObservbableSet provides a reactive set that notifies changes when a member is added or removed.
+Atom _observableSetAtom<T>(ReactiveContext context, String name) =>
+    Atom(name: name ?? context.nameFor('ObservableSet<$T>'), context: context);
+
+/// ObservableSet provides a reactive set that notifies changes when a member is added or removed.
 ///
 /// ```dart
 /// final set = ObservableSet.of([1, 2, 3]);
@@ -18,43 +21,47 @@ class ObservableSet<T>
         SetMixin<T>
     implements
         Listenable<SetChange<T>> {
-  ObservableSet({ReactiveContext context})
-      : this._(context ?? mainContext, HashSet());
+  ObservableSet({ReactiveContext context, String name})
+      : this._(context ?? mainContext, HashSet(), name);
 
-  ObservableSet.of(Iterable<T> other, {ReactiveContext context})
-      : this._(context ?? mainContext, HashSet.of(other));
+  ObservableSet.of(Iterable<T> other, {ReactiveContext context, String name})
+      : this._(context ?? mainContext, HashSet.of(other), name);
 
   ObservableSet.linkedHashSetFrom(Iterable<T> other,
       {bool Function(T, T) equals,
       int Function(T) hashCode,
       // ignore:avoid_annotating_with_dynamic
       bool Function(dynamic) isValidKey,
-      ReactiveContext context})
+      ReactiveContext context,
+      String name})
       : this._(
             context ?? mainContext,
             // ignore: prefer_collection_literals
             LinkedHashSet(
                 equals: equals, hashCode: hashCode, isValidKey: isValidKey)
-              ..addAll(other));
+              ..addAll(other),
+            name);
 
   ObservableSet.splayTreeSetFrom(Iterable<T> other,
       {int Function(T, T) compare,
       // ignore:avoid_annotating_with_dynamic
       bool Function(dynamic) isValidKey,
-      ReactiveContext context})
+      ReactiveContext context,
+      String name})
       : this._(context ?? mainContext,
-            SplayTreeSet.of(other, compare, isValidKey));
+            SplayTreeSet.of(other, compare, isValidKey), name);
 
   ObservableSet._wrap(this._context, this._atom, this._set);
 
-  ObservableSet._(this._context, Set<T> wrapped)
-      : _atom = Atom(
-            name: _context.nameFor('ObservableSet<$T>'), context: _context),
+  ObservableSet._(this._context, Set<T> wrapped, String name)
+      : _atom = _observableSetAtom(_context, name),
         _set = wrapped;
 
   final ReactiveContext _context;
   final Atom _atom;
   final Set<T> _set;
+
+  String get name => _atom.name;
 
   Listeners<SetChange<T>> _listenersField;
 

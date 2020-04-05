@@ -4,11 +4,11 @@ enum FutureStatus { pending, rejected, fulfilled }
 
 class FutureResult<T> {
   FutureResult(ReactiveContext context, Future<T> _future, initialResult,
-      FutureStatus initialStatus)
-      : _axnController = ActionController(
-            context: context, name: context.nameFor('ObservableFuture<$T>')),
-        _status = Observable(initialStatus),
-        _result = Observable(initialResult) {
+      FutureStatus initialStatus, String name)
+      : _axnController =
+            ActionController(context: context, name: '$name.ActionController'),
+        _status = Observable(initialStatus, name: '$name.status'),
+        _result = Observable(initialResult, name: '$name.result') {
     _future.then(_fulfill, onError: _reject);
   }
 
@@ -43,28 +43,32 @@ class FutureResult<T> {
 
 class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
   /// Create a new observable future that tracks the state of the provided future.
-  ObservableFuture(Future<T> future, {ReactiveContext context})
-      : this._(context ?? mainContext, future, FutureStatus.pending, null);
+  ObservableFuture(Future<T> future, {ReactiveContext context, String name})
+      : this._(
+            context ?? mainContext, future, FutureStatus.pending, null, name);
 
   /// Create a new future that is completed with a value.
   ///
   /// [status] is immediately [FutureStatus.fulfilled].
-  ObservableFuture.value(T value, {ReactiveContext context})
+  ObservableFuture.value(T value, {ReactiveContext context, String name})
       : this._(context ?? mainContext, Future.value(value),
-            FutureStatus.fulfilled, value);
+            FutureStatus.fulfilled, value, name);
 
   /// Create a new future that is completed with an error.
   ///
   /// [status] is immediately [FutureStatus.rejected].
-  ObservableFuture.error(error, {ReactiveContext context})
+  ObservableFuture.error(error, {ReactiveContext context, String name})
       : this._(context ?? mainContext, Future.error(error),
-            FutureStatus.rejected, error);
+            FutureStatus.rejected, error, name);
 
-  ObservableFuture._(
-      this._context, this._future, this._initialStatus, this._initialResult)
-      : assert(_context != null),
-        assert(_future != null) {
-    _result; // create the result up-front instead of being lazy
+  ObservableFuture._(this._context, this._future, this._initialStatus,
+      this._initialResult, String name) {
+    _name = name ?? _context.nameFor('ObservableFuture<$T>');
+    // create the result up-front instead of being lazy
+    _result =
+        FutureResult(_context, _future, _initialResult, _initialStatus, _name);
+    _initialResult = null;
+    _initialStatus = null;
   }
 
   final ReactiveContext _context;
@@ -72,18 +76,10 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
   FutureStatus _initialStatus;
   dynamic _initialResult;
 
-  FutureResult<T> _resultField;
+  FutureResult<T> _result;
 
-  FutureResult<T> get _result {
-    if (_resultField == null) {
-      _resultField =
-          FutureResult(_context, _future, _initialResult, _initialStatus);
-      _initialResult = null;
-      _initialStatus = null;
-    }
-
-    return _resultField;
-  }
+  String _name;
+  String get name => _name;
 
   /// Observable status of this.
   FutureStatus get status => _result.status;
@@ -128,23 +124,23 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
   /// Useful when you don't want to clear the result of the previous operation while
   /// executing the new operation.
   ObservableFuture<T> replace(Future<T> nextFuture) =>
-      ObservableFuture<T>._(_context, nextFuture, status, result);
+      ObservableFuture<T>._(_context, nextFuture, status, result, name);
 
   @override
-  ObservableStream<T> asStream() =>
-      ObservableStream._(_context, _future.asStream(), value, false);
+  ObservableStream<T> asStream() => ObservableStream._(
+      _context, _future.asStream(), value, false, '${name}_asStream');
 
   @override
   ObservableFuture<T> catchError(Function onError,
           {bool Function(Object error) test}) =>
       ObservableFuture._(_context, _future.catchError(onError, test: test),
-          FutureStatus.pending, null);
+          FutureStatus.pending, null, name);
 
   @override
   ObservableFuture<R> then<R>(FutureOr<R> Function(T value) onValue,
           {Function onError}) =>
       ObservableFuture._(_context, _future.then(onValue, onError: onError),
-          FutureStatus.pending, null);
+          FutureStatus.pending, null, name);
 
   @override
   ObservableFuture<T> timeout(Duration timeLimit,
@@ -153,10 +149,11 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
           _context,
           _future.timeout(timeLimit, onTimeout: onTimeout),
           FutureStatus.pending,
-          null);
+          null,
+          name);
 
   @override
   ObservableFuture<T> whenComplete(FutureOr Function() action) =>
-      ObservableFuture._(
-          _context, _future.whenComplete(action), FutureStatus.pending, null);
+      ObservableFuture._(_context, _future.whenComplete(action),
+          FutureStatus.pending, null, name);
 }

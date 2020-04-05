@@ -34,6 +34,8 @@ class _ReactiveState {
   /// Are we inside a reaction or computed?
   bool get isWithinDerivation =>
       trackingDerivation != null || computationDepth > 0;
+
+  List<SpyListener> spyListeners = [];
 }
 
 typedef ReactionErrorHandler = void Function(Object error, Reaction reaction);
@@ -118,6 +120,26 @@ class ReactiveContext {
 
   bool get isWithinBatch => _state.isWithinBatch;
 
+  bool get isSpyEnabled => _isDebugMode && _state.spyListeners.isNotEmpty;
+
+  Dispose spy(SpyListener listener) {
+    _state.spyListeners.add(listener);
+
+    return _once(() {
+      _state.spyListeners.remove(listener);
+    });
+  }
+
+  void spyReport(SpyEvent event) {
+    if (!isSpyEnabled) {
+      return;
+    }
+
+    for (var i = 0; i < _state.spyListeners.length; i++) {
+      _state.spyListeners[i](event);
+    }
+  }
+
   void startBatch() {
     _state.batch++;
   }
@@ -200,28 +222,6 @@ class ReactiveContext {
 
       return true;
     }());
-  }
-
-  /// Only run within an action if outside a batch
-  /// [fn] is the function to execute. Optionally provide a debug-[name].
-  void conditionallyRunInAction(void Function() fn, Atom atom,
-      {String name, ActionController actionController}) {
-    if (isWithinBatch) {
-      enforceWritePolicy(atom);
-      fn();
-    } else {
-      final controller = actionController ??
-          ActionController(
-              context: this, name: name ?? nameFor('conditionallyRunInAction'));
-      final runInfo = controller.startAction();
-
-      try {
-        enforceWritePolicy(atom);
-        fn();
-      } finally {
-        controller.endAction(runInfo);
-      }
-    }
   }
 
   Derivation _startTracking(Derivation derivation) {

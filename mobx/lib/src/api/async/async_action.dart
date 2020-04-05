@@ -39,7 +39,7 @@ class AsyncAction {
   static dynamic _noOp() => null;
 
   R _run<R>(Zone self, ZoneDelegate parent, Zone zone, R Function() f) {
-    final actionInfo = _actions.startAction();
+    final actionInfo = _actions.startAction(name: '${_actions.name}(Zone.run)');
     try {
       final result = parent.run(zone, f);
       return result;
@@ -52,7 +52,8 @@ class AsyncAction {
   // when a result is produced
   R _runUnary<R, A>(
       Zone self, ZoneDelegate parent, Zone zone, R Function(A a) f, A a) {
-    final actionInfo = _actions.startAction();
+    final actionInfo =
+        _actions.startAction(name: '${_actions.name}(Zone.runUnary)');
     try {
       final result = parent.runUnary(zone, f, a);
       return result;

@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        package: ["mobx", "mobx_codegen"]
+        package: ["mobx_codegen", "mobx"]
         version: ["latest", "dev"]
 
     steps:

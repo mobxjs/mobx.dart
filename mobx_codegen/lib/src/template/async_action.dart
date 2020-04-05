@@ -1,6 +1,8 @@
 import 'package:mobx_codegen/src/template/method_override.dart';
+import 'package:mobx_codegen/src/template/store.dart';
 
 class AsyncActionTemplate {
+  StoreTemplate storeTemplate;
   bool isObservable;
   MethodOverrideTemplate method;
 
@@ -18,7 +20,7 @@ class AsyncActionTemplate {
 
   @override
   String toString() => """
-  final $_actionField = AsyncAction('${method.name}');
+  final $_actionField = AsyncAction('${storeTemplate.parentTypeName}.${method.name}');
 
   @override
   $_futureType${method.returnTypeArgs} ${method.name}${method.typeParams}(${method.params}) {
