@@ -29,34 +29,44 @@ import 'observable_value_test.dart' as observable_value_test;
 import 'observe_test.dart' as observe_test;
 import 'reaction_test.dart' as reaction_test;
 import 'reactive_policies_test.dart' as reactive_policies_test;
+import 'spy_test.dart' as spy_test;
 import 'when_test.dart' as when_test;
 
 void main() {
-  action_test.main();
-  bug_related_test.main();
-  listenable_test.main();
-  computed_test.main();
-  observable_future_test.main();
-  observable_map_test.main();
-  intercept_test.main();
-  exceptions_test.main();
-  context_test.main();
-  extensions_observable_map_extension_test.main();
-  extensions_observable_stream_extension_test.main();
-  extensions_observable_set_extension_test.main();
-  extensions_observable_list_extension_test.main();
-  extensions_observable_future_extension_test.main();
-  observe_test.main();
-  reaction_test.main();
-  observable_set_test.main();
   observable_test.main();
+  observable_value_test.main();
+  computed_test.main();
+
+  observable_list_test.main();
+  observable_map_test.main();
+  observable_set_test.main();
+  observable_future_test.main();
+  observable_stream_test.main();
+
+  reaction_test.main();
+  autorun_test.main();
   when_test.main();
+
+  context_test.main();
+
+  action_test.main();
+  async_action_test.main();
+  action_controller_test.main();
+
+  exceptions_test.main();
+  listenable_test.main();
+  intercept_test.main();
+  observe_test.main();
+
+  extensions_observable_list_extension_test.main();
+  extensions_observable_map_extension_test.main();
+  extensions_observable_set_extension_test.main();
+  extensions_observable_future_extension_test.main();
+  extensions_observable_stream_extension_test.main();
+
+  bug_related_test.main();
   reactive_policies_test.main();
   annotations_test.main();
-  observable_value_test.main();
-  autorun_test.main();
-  async_action_test.main();
-  observable_list_test.main();
-  action_controller_test.main();
-  observable_stream_test.main();
+
+  spy_test.main();
 }
