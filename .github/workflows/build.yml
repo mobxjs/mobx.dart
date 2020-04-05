@@ -27,7 +27,7 @@ jobs:
 
       - name: Run tests
         working-directory: ${{ matrix.package }}
-        run: pub run test_coverage
+        run: ../tool/coverage.sh
 
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v1

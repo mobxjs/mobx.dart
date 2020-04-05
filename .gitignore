@@ -24,6 +24,7 @@ pubspec.lock
 node_modules
 .idea
 *.log
+*.out
 local.properties
 .vscode/settings.json
 local.properties
