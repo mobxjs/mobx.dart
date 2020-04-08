@@ -1,4 +1,4 @@
-Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Chinese](translation/zh-CN/README.md)
+语言: [英语](../../README.md) | [葡萄牙语](../pt-BR/README.md) | [中文](README.md)
 
 # mobx.dart
 
@@ -20,65 +20,57 @@ Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Ch
 
 ![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx.png)
 
-[MobX](https://github.com/mobxjs/mobx) for the Dart language.
+[MobX](https://github.com/mobxjs/mobx) Dart语言版本.
 
-> Supercharge the state-management in your Dart apps with Transparent Functional Reactive Programming (TFRP)
+> 通过使用透明的函数响应式编程（TFRP）加强你的 Dart 应用中的状态管理。
 
-- **[Introduction](#introduction)**
-- **[Core Concepts](#core-concepts)**
-  - [Observables](#observables)
-  - [Computed Observables](#computed-observables)
-  - [Actions](#actions)
-  - [Reactions](#reactions)
-- **[Contributing](#contributing)**
+- **[介绍](#介绍)**
+- **[核心概念](#核心概念)**
+  - [可观察对象（Observables）](#可观察对象（Observables）)
+  - [可计算观察对象（Computed Observables）](#可计算观察对象（Computed&nbsp;Observables）)
+  - [动作（Actions）](#动作（Actions）)
+  - [反应（Reactions）](#反应（Reactions）)
+- **[如何贡献](#如何贡献)**
 
-## Introduction
+## 介绍
 
-MobX is a state-management library that makes it simple to connect the
-reactive data of your application with the UI. This wiring is completely automatic
-and feels very natural. As the application-developer, you focus purely on what reactive-data
-needs to be consumed in the UI (and elsewhere) without worrying about keeping the two
-in sync.
+MobX是一种状态管理库，它让应用程序的响应式数据与 UI 关联起来变得很简单。
+这种关联是完全自动的，感觉像是自然发生的一样。作为应用程序开发人员，您仅关注于需要在 UI（或其他任何地方）中使用哪些响应式数据，而不必担心使两者保持同步。
 
-It's not really magic but it does have some smarts around what is being consumed (**observables**)
-and where (**reactions**), and automatically tracks it for you. When the _observables_
-change, all _reactions_ are re-run. What's interesting is that these reactions can be anything from a simple
-console log, a network call to re-rendering the UI.
+这并不是真正的魔术，但是它确实对正在消费的（可观察的对象）和在哪里（反应）有一些了解，并会自动为您跟踪。当观察对象值改变时，所有反应都将重新运行。有趣的是，从简单的控制台日志，网络调用到重新呈现 UI，这些反应可以是任何东西。
 
-> MobX has been a very effective library for the JavaScript
-> apps and this port to the Dart language aims to bring the same levels of productivity.
+> MobX 的 JavaScript 版本非常成熟。
+> 应用程序和 Dart 语言的这种移植旨在带来相同水平的生产力。
 
-### Sponsors
+### 赞助商
 
-We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program. [[Become a sponsor](https://opencollective.com/mobx#sponsor)]
+我们非常感谢赞助商们，能够让我们成为其开源软件（OSS）计划的一部分。 [[Become a sponsor](https://opencollective.com/mobx#sponsor)]
 
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/publicis-sapient-sponsor.png" height="64">](https://publicis.sapient.com)
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/wunderdog-sponsor.png" height="64">](https://wunderdog.fi)
 - [<img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg" height="64">](https://www.netlify.com)
 
-### Get Started
+### 开始
 
-Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx.netlify.com/getting-started).
+[MobX.dart 官网的入门指南](https://mobx.netlify.com/getting-started).
 
-### Go deep
+### 深入
 
-For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
+更深入地学习 Mob，请看 [MobX 快速入门指南](https://www.packtpub.com/web-development/mobx-quick-start-guide). 虽然这本书使用的是 JavaScript 版本的 MobX，但是核心的概念是完全适用于 Dart 和 Flutter 版本的。
 
 [![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
 
-## Core Concepts
+## 核心概念
 
 ![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx-triad.png)
 
-At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
+MobX 的核心是三个重要的概念：可观察的对象（Observables），动作（Actions）和反应（Reactions）。
 
-### Observables
+### 可观察对象（Observables）
 
-Observables represent the reactive-state of your application. They can be simple scalars to complex object trees. By
-defining the state of the application as a tree of observables, you can expose a _reactive-state-tree_ that the UI
-(or other observers in the app) consume.
+可观察对象表示应用程序的响应式状态。它们可以是复杂对象树的简单标量。通过将应用程序的状态定义为可观察树，您可以暴露一个 UI（或应用程序中的其他观察者）使用的_reactive-state-tree_。
 
-A simple reactive-counter is represented by the following observable:
+一个简单的响应式计数器由以下可观察对象表示：
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -86,7 +78,7 @@ import 'package:mobx/mobx.dart';
 final counter = Observable(0);
 ```
 
-More complex observables, such as classes, can be created as well.
+也可以创建更复杂的可观察对象，例如类。
 
 ```dart
 class Counter {
@@ -106,8 +98,8 @@ class Counter {
 }
 ```
 
-On first sight, this does look like some boilerplate code which can quickly go out of hand!
-This is why we added **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** to the mix that allows you to replace the above code with the following:
+乍一看，这看起来确实有些模板代码，它们很快就会失去控制！
+这就是为什么我们添加 **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** 的原因，该组合允许您将上面的代码替换为以下代码：
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -127,21 +119,19 @@ abstract class CounterBase with Store {
 }
 ```
 
-Note the use of annotations to mark the observable properties of the class. Yes, there is some header boilerplate here
-but its fixed for any class. As you build more complex classes this boilerplate
-will fade away and you will mostly focus on the code within the braces.
+请注意使用批注来标记类的可观察属性。是的，这里有一些类似头部的样板代码，但它适用于任何类。当您构建更复杂的类时，这样的样板将逐渐消失在您的视野中，您将主要关注您的业务代码。
 
-**Note**: Annotations are available via the **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** package.
+**注意**：注释可通过 **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** 软件包获得。
 
-### Computed Observables
+### 可计算观察对象（Computed Observables）
 
-> What can be derived, should be derived. Automatically.
+> 什么可以被计算，什么应该被计算。保持自动化！
 
-The state of your application consists of _**core-state**_ and _**derived-state**_. The _core-state_ is state inherent to the domain you are dealing with. For example, if you have a `Contact` entity, the `firstName` and `lastName` form the _core-state_ of `Contact`. However, `fullName` is _derived-state_, obtained by combining `firstName` and `lastName`.
+您的应用程序的状态包含 **核心状态** 和 **派生状态** 。核心状态是您正在处理的域所固有的状态。例如，如果您有一个 `Contact` 实体，则 `firstName` 和 `lastName` 构成Contact的核心状态。但是，`fullName` 是派生状态，是通过组合 `firstName` 和 `lastName` 获得的。
 
-Such _derived state_, that depends on _core-state_ or _other derived-state_ is called a **Computed Observable**. It is automatically kept in sync when its underlying observables change.
+这种依赖于核心状态或其他派生状态的派生状态称为 **可计算观察对象**。当其观察的对象更改时，它会自动保持同步。
 
-> State in MobX = Core-State + Derived-State
+> MobX 中的状态 = 核心状态 + 派生状态
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -163,18 +153,13 @@ abstract class ContactBase with Store {
 }
 ```
 
-In the example above **`fullName`** is automatically kept in sync if either `firstName` and/or `lastName` changes.
+在上面的示例中，如果 `firstName` 或 `lastName` 更改，则 `fullName` 将自动保持同步。
 
-### Actions
+### 动作（Actions）
 
-Actions are how you mutate the observables. Rather than mutating them directly, actions
-add a semantic meaning to the mutations. For example, instead of just doing `value++`,
-firing an `increment()` action carries more meaning. Besides, actions also batch up
-all the notifications and ensure the changes are notified only after they complete.
-Thus the observers are notified only upon the atomic completion of the action.
+动作即您将如何改变可观察对象。动作不是直接对其进行更改，而是为这个更改添加了语义，例如，触发一个 `increment()` 操作不只是执行 `value++`，还可以具有更多含义。此外，动作还分批处理所有通知，并确保仅在更改完成后通知观察对象进行更改。因此，仅在一个原子性的动作完成时观察者才收到通知。
 
-Note that actions can also be nested, in which case the notifications go out
-when the top-most action has completed.
+请注意，动作也可以嵌套，在这种情况下，最外层的动作完成后通知会发出。
 
 ```dart
 final counter = Observable(0);
@@ -184,7 +169,7 @@ final increment = Action((){
 });
 ```
 
-When creating actions inside a class, you can take advantage of annotations!
+你可以用修饰符在一个类里创建动作！
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -204,9 +189,9 @@ abstract class CounterBase with Store {
 }
 ```
 
-#### Asynchronous Actions
+#### 异步的动作
 
-MobX.dart handles asynchronous actions automatically and does not require wrapping the code with [`runInAction`](https://mobx.netlify.com/api/action#runinaction).
+MobX.dart 自动处理异步操作，不需要使用 [`runInAction`](https://mobx.netlify.com/api/action#runinaction) 包装代码。
 
 ```dart
 @observable
@@ -223,21 +208,17 @@ Future<void> loadStuff() async {
 }
 ```
 
-### Reactions
+### 反应（Reactions）
 
-Reactions complete the _MobX triad_ of **observables**, **actions** and **reactions**. They are
-the observers of the reactive-system and get notified whenever an observable they
-track is changed. Reactions come in few flavors as listed below. All of them
-return a `ReactionDisposer`, a function that can be called to dispose the reaction.
+有了反应，MobX 可观察性，动作和反应即可形成闭环。他们是响应式系统的观察者，只要他们跟踪的可观察对象发生变化，它们就会得到通知。下表列出了几种反应。它们全部返回 `ReactionDisposer`，可以调用该函数来处理反应。
 
-One _striking feature_ of reactions is that they _automatically track_ all the observables without any explicit wiring. The act of _reading an observable_ within a reaction is enough to track it!
+反应的一个显着特征是它们无需明确地设置关联即可自动跟踪所有可观察对象。直接从反应中读取可观察对象的值，就足以跟踪它的最新状态！
 
-> The code you write with MobX appears to be literally ceremony-free!
+> 您用 MobX 编写的代码似乎完全没有仪式！
 
 **`ReactionDisposer autorun(Function(Reaction) fn)`**
 
-Runs the reaction immediately and also on any change in the observables used inside
-`fn`.
+立即运行反应，也可以对 `fn` 内部使用的可观察值进行任何更改。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -261,8 +242,7 @@ dispose();
 
 **`ReactionDisposer reaction<T>(T Function(Reaction) predicate, void Function(T) effect)`**
 
-Monitors the observables used inside the `predicate()` function and runs the `effect()` when
-the predicate returns a different value. Only the observables inside `predicate()` are tracked.
+监视 `predicate()` 函数内部使用的可观察对象，并在 predicate 返回不同值时运行`effect()`。仅跟踪 `predicate` 中的可观察对象。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -283,7 +263,7 @@ dispose();
 
 **`ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`**
 
-Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
+监视 `predicate()` 内部使用的可观察对象，并在返回 `true` 时运行 `effect()`。运行`effect()` 后，`when` 自动执行。因此，您可以将 `when` 视为一个一次性的反应。您也可以更早地执行 `when()`。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -301,7 +281,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 **`Future<void> asyncWhen(bool Function(Reaction) predicate)`**
 
-Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
+与 `when` 相似，但返回的类型是 `Future`，并且是在 `predicate()`返回 `true` 时执行。这是一个简单的等待 `predicate()` 变为 `true` 的方法。
 
 ```dart
 final completed = Observable(false);
@@ -315,9 +295,9 @@ void waitForCompletion() async {
 
 **Observer**
 
-One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
+应用程序中最直观的反应之一就是 UI。**Observer**（属于 **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** 包的一部分）的 `builder` 函数中提供了可观察对象的观察器，只要这些可观察对象发生变化，`Observer` 就会重建并渲染。
 
-Below is the _Counter_ example in its entirety.
+下面是完整的计算器示例代码。
 
 ```dart
 import 'package:flutter/material.dart';
@@ -377,28 +357,26 @@ class _CounterExampleState extends State<CounterExample> {
 }
 ```
 
-## Contributing
+## 如何贡献
 
-If you have read up till here, then 🎉🎉🎉. There are couple of ways in which you can contribute to
-the growing community of `MobX.dart`.
+恭喜您已经读到这里🎉🎉🎉。您可以通过几种方式为不断增长的 `MobX.dart` 社区做出贡献。
 
-- Pick up any issue marked with ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
-- Propose any feature, enhancement
-- Report a bug
-- Fix a bug
-- Participate in a discussion and help in decision making
-- Write and improve some **documentation**. Documentation is super critical and its importance
-  cannot be overstated!
-- Send in a Pull Request :-)
-- Chime in and [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
+- 负责被标注为 ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) 的 issue
+- 提出功能、质量提升类型的建议
+- 发现并报告 bug
+- 修复 bug
+- 参与讨论并帮助做决策
+- 编写并提升文档，文档是至关重要的！
+- 提交 Pull Request
+- 参与 [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
 
-## Contributors ✨
+## 贡献者 ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-34-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+感谢棒棒哒小伙伴们！ ([emoji key](https://allcontributors.org/docs/en/emoji-key))：
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -454,4 +432,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+这个项目遵循 [all-contributors](https://github.com/all-contributors/all-contributors) 规范。欢迎大家以各种形式进行贡献！
