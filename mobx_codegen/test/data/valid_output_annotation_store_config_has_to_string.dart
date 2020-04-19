@@ -9,6 +9,8 @@ part of generator_sample;
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$User on UserBase, Store {
+  static const _reportOnEqualSet = true;
+
   Computed<String> _$fullNameComputed;
 
   @override
@@ -32,9 +34,12 @@ mixin _$User on UserBase, Store {
 
   @override
   set firstName(String value) {
-    _$firstNameAtom.reportWrite(value, super.firstName, () {
-      super.firstName = value;
-    });
+    final oldValue = super.firstName;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$firstNameAtom.reportWrite(value, super.firstName, () {
+        super.firstName = value;
+      });
+    }
   }
 
   final _$middleNameAtom = Atom(name: 'UserBase.middleName');
@@ -47,9 +52,12 @@ mixin _$User on UserBase, Store {
 
   @override
   set middleName(String value) {
-    _$middleNameAtom.reportWrite(value, super.middleName, () {
-      super.middleName = value;
-    });
+    final oldValue = super.middleName;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$middleNameAtom.reportWrite(value, super.middleName, () {
+        super.middleName = value;
+      });
+    }
   }
 
   final _$lastNameAtom = Atom(name: 'UserBase.lastName');
@@ -62,9 +70,12 @@ mixin _$User on UserBase, Store {
 
   @override
   set lastName(String value) {
-    _$lastNameAtom.reportWrite(value, super.lastName, () {
-      super.lastName = value;
-    });
+    final oldValue = super.lastName;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$lastNameAtom.reportWrite(value, super.lastName, () {
+        super.lastName = value;
+      });
+    }
   }
 
   final _$friendAtom = Atom(name: 'UserBase.friend');
@@ -77,9 +88,12 @@ mixin _$User on UserBase, Store {
 
   @override
   set friend(User value) {
-    _$friendAtom.reportWrite(value, super.friend, () {
-      super.friend = value;
-    });
+    final oldValue = super.friend;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$friendAtom.reportWrite(value, super.friend, () {
+        super.friend = value;
+      });
+    }
   }
 
   final _$callbackAtom = Atom(name: 'UserBase.callback');
@@ -92,9 +106,12 @@ mixin _$User on UserBase, Store {
 
   @override
   set callback(void Function() value) {
-    _$callbackAtom.reportWrite(value, super.callback, () {
-      super.callback = value;
-    });
+    final oldValue = super.callback;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$callbackAtom.reportWrite(value, super.callback, () {
+        super.callback = value;
+      });
+    }
   }
 
   final _$callback2Atom = Atom(name: 'UserBase.callback2');
@@ -107,9 +124,12 @@ mixin _$User on UserBase, Store {
 
   @override
   set callback2(VoidCallback value) {
-    _$callback2Atom.reportWrite(value, super.callback2, () {
-      super.callback2 = value;
-    });
+    final oldValue = super.callback2;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$callback2Atom.reportWrite(value, super.callback2, () {
+        super.callback2 = value;
+      });
+    }
   }
 
   final _$_testUsersAtom = Atom(name: 'UserBase._testUsers');
@@ -122,9 +142,12 @@ mixin _$User on UserBase, Store {
 
   @override
   set _testUsers(List<User> value) {
-    _$_testUsersAtom.reportWrite(value, super._testUsers, () {
-      super._testUsers = value;
-    });
+    final oldValue = super._testUsers;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$_testUsersAtom.reportWrite(value, super._testUsers, () {
+        super._testUsers = value;
+      });
+    }
   }
 
   @override

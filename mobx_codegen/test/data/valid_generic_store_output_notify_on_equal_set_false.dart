@@ -1,5 +1,5 @@
 mixin _$Item<T extends num> on _Item<T>, Store {
-  static const _reportOnEqualSet = true;
+  static const _reportOnEqualSet = false;
 
   final _$valueAtom = Atom(name: '_Item.value');
 

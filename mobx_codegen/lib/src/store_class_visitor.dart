@@ -62,7 +62,9 @@ class StoreClassVisitor extends SimpleElementVisitor {
           .addIf(!element.isAbstract, element.name);
     }
     // if the class is annotated to generate toString() method we add the information to the _storeTemplate
-    _storeTemplate.generateToString = hasGeneratedToString(element);
+    _storeTemplate
+      ..generateToString = hasGeneratedToString(element)
+      ..reportOnEqualSet = shouldreportOnEqualSet(element);
   }
 
   @override
@@ -209,6 +211,15 @@ bool hasGeneratedToString(ClassElement classElement) {
     final annotation =
         _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
     return annotation.getField('hasToString').toBoolValue();
+  }
+  return true;
+}
+
+bool shouldreportOnEqualSet(ClassElement classElement) {
+  if (isStoreConfigAnnotatedStoreClass(classElement)) {
+    final annotation =
+    _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
+    return annotation.getField('reportOnEqualSet').toBoolValue();
   }
   return true;
 }

@@ -35,6 +35,8 @@ abstract class StoreTemplate {
   final List<String> toStringList = [];
 
   bool generateToString = false;
+  bool reportOnEqualSet = true;
+
   String _actionControllerName;
   String get actionControllerName =>
       _actionControllerName ??= '_\$${parentTypeName}ActionController';
@@ -42,6 +44,16 @@ abstract class StoreTemplate {
   String get actionControllerField => actions.isEmpty
       ? ''
       : "final $actionControllerName = ActionController(name: '$parentTypeName');";
+
+  // Any other StoreConfig level boolean configurations could be placed here,
+  // if they create flags in the generated code.
+  Map<String, bool> get staticConfigurations =>
+      { 'reportOnEqualSet': reportOnEqualSet };
+
+  String get staticConfigurationFields =>
+      staticConfigurations.entries
+          .map((entry) => 'static const _${entry.key} = ${entry.value};')
+          .join('\n');
 
   String get toStringMethod {
     if (!generateToString) {
@@ -72,6 +84,8 @@ ${allStrings.join(',\n')}
   }
 
   String get storeBody => '''
+  $staticConfigurationFields
+  
   $computeds
 
   $observables
