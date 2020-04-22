@@ -78,6 +78,32 @@ void main() {
       final x = Observable(10);
       final y = Observable(20);
 
+      var observationCount = 0;
+
+      final total = Computed(() => x.value + y.value);
+
+      var expectedComputedValue = x.value + y.value;
+
+      final dispose = total.observe((change) {
+        observationCount++;
+        expect(change.newValue, equals(expectedComputedValue));
+      });
+
+      expect(observationCount, equals(1));
+
+      expectedComputedValue += 10;
+      x.value = x.value + 10;
+      expect(observationCount, equals(2));
+
+      dispose();
+      x.value = 100; // should not invoke observe
+      expect(observationCount, equals(2));
+    });
+
+    test('only runs computation while observed', () {
+      final x = Observable(10);
+      final y = Observable(20);
+
       var executionCount = 0;
 
       final total = Computed(() {
@@ -85,15 +111,13 @@ void main() {
         return x.value + y.value;
       });
 
-      final dispose1 = total.observe((change) {
+      final dispose = total.observe((change) {
         expect(change.newValue, equals(30));
         expect(executionCount, equals(1));
       });
 
-      dispose1(); // no more observations
-
-      x.value = 100; // should not invoke observe
-
+      dispose(); // no more observations
+      x.value = 100; // should not invoke computation
       expect(executionCount, equals(1));
     });
 

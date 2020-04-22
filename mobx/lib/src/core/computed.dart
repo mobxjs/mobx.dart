@@ -146,21 +146,28 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
 
   bool _isEqual(T x, T y) => x == y;
 
+  // [fireImmediately] never did quite what it sounded like, and the handler has always
+  // fired immediately. So it is deprecated and now non-functional.
   Function observe(void Function(ChangeNotification<T>) handler,
-      {bool fireImmediately}) {
+      {@deprecated bool fireImmediately}) {
     var firstTime = true;
     T prevValue;
 
     return autorun((_) {
       final newValue = value;
-      if (firstTime == true || fireImmediately == true) {
-        _context.untracked(() {
-          handler(ChangeNotification(
-              type: OperationType.update,
-              object: this,
-              oldValue: prevValue,
-              newValue: newValue));
-        });
+
+      void handleChange() {
+        handler(ChangeNotification(
+            type: OperationType.update,
+            object: this,
+            oldValue: prevValue,
+            newValue: newValue));
+      }
+
+      if (firstTime == true) {
+        _context.untracked(handleChange);
+      } else {
+        handleChange();
       }
 
       firstTime = false;
