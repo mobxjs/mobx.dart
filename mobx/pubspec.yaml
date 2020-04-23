@@ -12,6 +12,7 @@ dependencies:
   meta: ^1.1.6
 
 dev_dependencies:
+  collection: ^1.0.0
   coverage: ^0.13.9
   fake_async: ^1.0.1
   mockito: ^4.1.1
