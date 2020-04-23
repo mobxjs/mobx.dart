@@ -8,7 +8,6 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
   testSetup();
 
   group('Reaction', () {

@@ -9,15 +9,22 @@ import 'package:test/test.dart';
 /// order and the error will already have been rethrown.
 /// If you choose to set [throwReactionErrors] to false, failed expectations in observers will
 /// appear to pass!
+///
+/// [turnOffWritePolicy] is true by default.
 void testSetup({
   bool throwReactionErrors = true,
+  bool turnOffWritePolicy = true,
 }) {
   if (throwReactionErrors) {
     setupThrowReactionErrors();
   }
+
+  if (turnOffWritePolicy) {
+    setupTurnOffWritePolicy();
+  }
 }
 
-void turnOffWritePolicy() {
+void setupTurnOffWritePolicy() {
   setUp(() => mainContext.config =
       ReactiveConfig(writePolicy: ReactiveWritePolicy.never));
 

@@ -7,7 +7,6 @@ import 'package:test/test.dart';
 import '../util.dart';
 
 void main() {
-  turnOffWritePolicy();
   testSetup();
 
   group('ObservableFutureExtension', () {
