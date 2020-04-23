@@ -8,6 +8,7 @@ import 'util.dart';
 
 void main() {
   turnOffWritePolicy();
+  testSetup();
 
   group('MapKeysIterable', () {
     test('length reports observed', () {

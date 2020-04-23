@@ -8,6 +8,7 @@ import 'util.dart';
 
 void main() {
   turnOffWritePolicy();
+  testSetup();
 
   group('ObservableList', () {
     test('generates a name if not given', () {

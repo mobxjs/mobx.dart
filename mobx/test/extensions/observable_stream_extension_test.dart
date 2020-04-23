@@ -8,6 +8,7 @@ import '../util.dart';
 
 void main() {
   turnOffWritePolicy();
+  testSetup();
 
   group('ObservableStreamExtension', () {
     test('Transform Stream in ObservableStream', () async {

@@ -1,6 +1,22 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+/// Run boilerplate test setups, with options.
+///
+/// [throwReactionErrors] is true by default, meaning that you will see errors in reactions,
+/// including failed expectations. You may need to turn this off to test other error handlers for
+/// reactions, as any added after this call won't be used, since the handlers are evaluated in
+/// order and the error will already have been rethrown.
+/// If you choose to set [throwReactionErrors] to false, failed expectations in observers will
+/// appear to pass!
+void testSetup({
+  bool throwReactionErrors = true,
+}) {
+  if (throwReactionErrors) {
+    setupThrowReactionErrors();
+  }
+}
+
 void turnOffWritePolicy() {
   setUp(() => mainContext.config =
       ReactiveConfig(writePolicy: ReactiveWritePolicy.never));
@@ -9,7 +25,7 @@ void turnOffWritePolicy() {
 }
 
 // Without invoking this setup, errors in reactions, *including expectation failures*, are ignored.
-void throwReactionErrors() {
+void setupThrowReactionErrors() {
   Dispose disposeReactionError;
 
   setUp(() => disposeReactionError = mainContext.onReactionError((_, rxn) {

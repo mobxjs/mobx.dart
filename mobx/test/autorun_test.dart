@@ -9,6 +9,7 @@ import 'util.dart';
 
 void main() {
   turnOffWritePolicy();
+  testSetup();
 
   group('autorun()', () {
     test('basics work', () {

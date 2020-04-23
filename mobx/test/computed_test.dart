@@ -8,7 +8,7 @@ import 'util.dart';
 
 void main() {
   turnOffWritePolicy();
-  throwReactionErrors();
+  testSetup();
 
   group('Computed', () {
     test('basics work', () {

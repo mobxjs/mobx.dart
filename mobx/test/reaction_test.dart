@@ -9,6 +9,7 @@ import 'util.dart';
 
 void main() {
   turnOffWritePolicy();
+  testSetup();
 
   group('Reaction', () {
     test('basics work', () {

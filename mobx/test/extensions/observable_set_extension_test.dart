@@ -6,6 +6,7 @@ import '../util.dart';
 
 void main() {
   turnOffWritePolicy();
+  testSetup();
 
   group('ObservableSetExtension', () {
     test('Transform Set in ObservableSet', () async {

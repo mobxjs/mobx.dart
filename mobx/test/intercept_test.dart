@@ -7,6 +7,7 @@ import 'util.dart';
 
 void main() {
   turnOffWritePolicy();
+  testSetup();
 
   group('intercept', () {
     test('basics work', () {
