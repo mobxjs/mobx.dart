@@ -270,14 +270,7 @@ abstract class CounterBase with Store {
   }
 }
 
-class CounterExample extends StatefulWidget {
-  const CounterExample({Key key}) : super(key: key);
-
-  @override
-  _CounterExampleState createState() => _CounterExampleState();
-}
-
-class _CounterExampleState extends State<CounterExample> {
+class CounterExample extends StatelessWidget {
   final _counter = Counter();
 
   @override
