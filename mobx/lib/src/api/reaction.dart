@@ -13,7 +13,7 @@ import 'package:mobx/src/core.dart';
 /// var y = Observable(20);
 /// var total = Observable(0);
 ///
-/// var dispose = autorun((){
+/// var dispose = autorun((_){
 ///   print('x = ${x}, y = ${y}, total = ${total}');
 /// });
 ///
