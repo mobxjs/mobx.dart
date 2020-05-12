@@ -60,8 +60,15 @@ class ObservableList<T>
   set length(int value) {
     /// There is no need to enforceWritePolicy since we are conditionally wrapping in an Action.
     _context.conditionallyRunInAction(() {
-      _list.length = value;
-      _notifyListUpdate(0, null, null);
+      if (value < _list.length) {
+        final removed = _list.sublist(value);
+        _list.length = value;
+        _notifyRangeUpdate(value, null, removed);
+      } else if (value > _list.length) {
+        final index = _list.length;
+        _list.length = value;
+        _notifyRangeUpdate(index, _list.sublist(index), null);
+      }
     }, _atom);
   }
 
@@ -89,7 +96,7 @@ class ObservableList<T>
 
       if (oldValue != value) {
         _list[index] = value;
-        _notifyChildUpdate(index, value, oldValue);
+        _notifyElementUpdate(index, value, oldValue);
       }
     }, _atom);
   }
@@ -99,16 +106,18 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       final index = _list.length;
       _list.add(element);
-      _notifyListUpdate(index, [element], null);
+      _notifyElementUpdate(index, element, null, type: OperationType.add);
     }, _atom);
   }
 
   @override
   void addAll(Iterable<T> iterable) {
     _context.conditionallyRunInAction(() {
-      final index = _list.length;
-      _list.addAll(iterable);
-      _notifyListUpdate(index, iterable.toList(growable: false), null);
+      if (iterable.isNotEmpty) {
+        final index = _list.length;
+        _list.addAll(iterable);
+        _notifyRangeUpdate(index, iterable.toList(growable: false), null);
+      }
     }, _atom);
   }
 
@@ -170,31 +179,33 @@ class ObservableList<T>
   set first(T value) {
     _context.conditionallyRunInAction(() {
       final oldValue = _list.first;
-
-      _list.first = value;
-      _notifyChildUpdate(0, value, oldValue);
+      if (oldValue != value) {
+        _list.first = value;
+        _notifyElementUpdate(0, value, oldValue);
+      }
     }, _atom);
   }
 
   @override
   void clear() {
     _context.conditionallyRunInAction(() {
-      final oldItems = _list.toList(growable: false);
-      _list.clear();
-      _notifyListUpdate(0, null, oldItems);
+      if (_list.isNotEmpty) {
+        final oldItems = _list.toList(growable: false);
+        _list.clear();
+        _notifyRangeUpdate(0, null, oldItems);
+      }
     }, _atom);
   }
 
   @override
   void fillRange(int start, int end, [T fill]) {
     _context.conditionallyRunInAction(() {
-      final oldContents = _list.sublist(start, end);
-
-      _list.fillRange(start, end, fill);
-
-      final newContents = _list.sublist(start, end);
-
-      _notifyListUpdate(start, newContents, oldContents);
+      if (end > start) {
+        final oldContents = _list.sublist(start, end);
+        _list.fillRange(start, end, fill);
+        final newContents = _list.sublist(start, end);
+        _notifyRangeUpdate(start, newContents, oldContents);
+      }
     }, _atom);
   }
 
@@ -202,15 +213,17 @@ class ObservableList<T>
   void insert(int index, T element) {
     _context.conditionallyRunInAction(() {
       _list.insert(index, element);
-      _notifyListUpdate(index, [element], null);
+      _notifyElementUpdate(index, element, null, type: OperationType.add);
     }, _atom);
   }
 
   @override
   void insertAll(int index, Iterable<T> iterable) {
     _context.conditionallyRunInAction(() {
-      _list.insertAll(index, iterable);
-      _notifyListUpdate(index, iterable.toList(growable: false), null);
+      if (iterable.isNotEmpty) {
+        _list.insertAll(index, iterable);
+        _notifyRangeUpdate(index, iterable.toList(growable: false), null);
+      }
     }, _atom);
   }
 
@@ -220,10 +233,10 @@ class ObservableList<T>
 
     _context.conditionallyRunInAction(() {
       final index = _list.indexOf(element);
-      didRemove = _list.remove(element);
-
-      if (didRemove) {
-        _notifyListUpdate(index, null, element == null ? null : [element]);
+      if (index >= 0) {
+        _list.removeAt(index);
+        _notifyElementUpdate(index, null, element, type: OperationType.remove);
+        didRemove = true;
       }
     }, _atom);
 
@@ -236,7 +249,7 @@ class ObservableList<T>
 
     _context.conditionallyRunInAction(() {
       value = _list.removeAt(index);
-      _notifyListUpdate(index, null, value == null ? null : [value]);
+      _notifyElementUpdate(index, null, value, type: OperationType.remove);
     }, _atom);
 
     return value;
@@ -248,9 +261,8 @@ class ObservableList<T>
 
     _context.conditionallyRunInAction(() {
       value = _list.removeLast();
-
       // Index is _list.length as it points to the index before the last element is removed
-      _notifyListUpdate(_list.length, null, value == null ? null : [value]);
+      _notifyElementUpdate(_list.length, null, value, type: OperationType.remove);
     }, _atom);
 
     return value;
@@ -259,69 +271,122 @@ class ObservableList<T>
   @override
   void removeRange(int start, int end) {
     _context.conditionallyRunInAction(() {
-      final removedItems = _list.sublist(start, end);
-      _list.removeRange(start, end);
-      _notifyListUpdate(start, null, removedItems);
+      if (end > start) {
+        final removedItems = _list.sublist(start, end);
+        _list.removeRange(start, end);
+        _notifyRangeUpdate(start, null, removedItems);
+      }
     }, _atom);
   }
 
   @override
   void removeWhere(bool Function(T element) test) {
     _context.conditionallyRunInAction(() {
-      final removedItems = _list.where(test).toList(growable: false);
-      _list.removeWhere(test);
-      _notifyListUpdate(0, null, removedItems);
+      final removedElements = Queue<ElementChange>();
+      for (var i = _list.length - 1; i >= 0; --i) {
+        final element = _list[i];
+        if (test(element)) {
+          removedElements.addFirst(ElementChange(index: i, oldValue: element, type: OperationType.remove));
+          _list.removeAt(i);
+        }
+      }
+      if (removedElements.isNotEmpty) {
+        _notifyElementsUpdate(removedElements.toList(growable: false));
+      }
     }, _atom);
   }
 
   @override
   void replaceRange(int start, int end, Iterable<T> newContents) {
     _context.conditionallyRunInAction(() {
-      final oldContents = _list.sublist(start, end);
-      _list.replaceRange(start, end, newContents);
-      _notifyListUpdate(start, newContents, oldContents);
+      if (end > start || newContents.isNotEmpty) {
+        final oldContents = _list.sublist(start, end);
+        _list.replaceRange(start, end, newContents);
+        _notifyRangeUpdate(start, newContents.toList(growable: false), oldContents);
+      }
     }, _atom);
   }
 
   @override
   void retainWhere(bool Function(T element) test) {
     _context.conditionallyRunInAction(() {
-      final removedItems = _list.where((_) => !test(_)).toList(growable: false);
-
-      _list.retainWhere(test);
-      _notifyListUpdate(0, null, removedItems);
+      final removedElements = Queue<ElementChange>();
+      for (var i = _list.length - 1; i >= 0; --i) {
+        final element = _list[i];
+        if (!test(element)) {
+          removedElements.addFirst(ElementChange(index: i, oldValue: element, type: OperationType.remove));
+          _list.removeAt(i);
+        }
+      }
+      if (removedElements.isNotEmpty) {
+        _notifyElementsUpdate(removedElements.toList(growable: false));
+      }
     }, _atom);
   }
 
   @override
   void setAll(int index, Iterable<T> iterable) {
     _context.conditionallyRunInAction(() {
-      _list.setAll(index, iterable);
-      _notifyListUpdate(index, null, null);
+      if (iterable.isNotEmpty) {
+        final oldValues = _list.sublist(index, index + iterable.length);
+        final newValues = iterable.toList(growable: false);
+        _list.setAll(index, iterable);
+        _notifyRangeUpdate(index, newValues, oldValues);
+      }
     }, _atom);
   }
 
   @override
   void setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
     _context.conditionallyRunInAction(() {
-      _list.setRange(start, end, iterable, skipCount);
-      _notifyListUpdate(start, null, null);
+      if (end > start) {
+        final oldValues = _list.sublist(start, end);
+        final newValues = iterable.skip(skipCount).take(end - start).toList(growable: false);
+        _list.setRange(start, end, iterable, skipCount);
+        _notifyRangeUpdate(start, newValues, oldValues);
+      }
     }, _atom);
   }
 
   @override
   void shuffle([Random random]) {
     _context.conditionallyRunInAction(() {
-      _list.shuffle(random);
-      _notifyListUpdate(0, null, null);
+      if (_list.isNotEmpty) {
+        final oldList = _list.toList(growable: false);
+        _list.shuffle(random);
+        final changes = <ElementChange>[];
+        for (var i = 0; i < _list.length; ++i) {
+          final oldValue = oldList[i];
+          final newValue = _list[i];
+          if (newValue != oldValue) {
+            changes.add(ElementChange(index: i, oldValue: oldValue, newValue: newValue));
+          }
+        }
+        if (changes.isNotEmpty) {
+          _notifyElementsUpdate(changes);
+        }
+      }
     }, _atom);
   }
 
   @override
   void sort([int Function(T a, T b) compare]) {
     _context.conditionallyRunInAction(() {
-      _list.sort(compare);
-      _notifyListUpdate(0, null, null);
+      if (_list.isNotEmpty) {
+        final oldList = _list.toList(growable: false);
+        _list.sort(compare);
+        final changes = <ElementChange>[];
+        for (var i = 0; i < _list.length; ++i) {
+          final oldValue = oldList[i];
+          final newValue = _list[i];
+          if (newValue != oldValue) {
+            changes.add(ElementChange(index: i, oldValue: oldValue, newValue: newValue));
+          }
+        }
+        if (changes.isNotEmpty) {
+          _notifyElementsUpdate(changes);
+        }
+      }
     }, _atom);
   }
 
@@ -333,42 +398,44 @@ class ObservableList<T>
   Dispose observe(Listener<ListChange<T>> listener, {bool fireImmediately}) {
     if (fireImmediately == true) {
       final change = ListChange(
-          object: this,
-          index: 0,
-          type: OperationType.add,
-          added: toList(growable: false));
+          list: this,
+          rangeChanges: <RangeChange>[RangeChange(index: 0, newValues: toList(growable: false)) ]
+      );
       listener(change);
     }
 
     return _listeners.add(listener);
   }
 
-  void _notifyChildUpdate(int index, T newValue, T oldValue) {
+  void _notifyElementUpdate(int index, T newValue, T oldValue, { OperationType type = OperationType.update }) {
     _atom.reportChanged();
 
     final change = ListChange(
-        index: index,
-        newValue: newValue,
-        oldValue: oldValue,
-        object: this,
-        type: OperationType.update);
+        list: this,
+        elementChanges: <ElementChange>[ElementChange(index: index, newValue: newValue, oldValue: oldValue, type: type)]
+    );
 
     _listeners.notifyListeners(change);
   }
 
-  void _notifyListUpdate(int index, List<T> added, List<T> removed) {
+  void _notifyElementsUpdate(final List<ElementChange> elementChanges) {
     _atom.reportChanged();
 
     final change = ListChange(
-        index: index,
-        added: added,
-        removed: removed,
-        object: this,
-        type: (added != null && added.isNotEmpty)
-            ? OperationType.add
-            : (removed != null && removed.isNotEmpty
-                ? OperationType.remove
-                : OperationType.update));
+        list: this,
+        elementChanges: elementChanges
+    );
+
+    _listeners.notifyListeners(change);
+  }
+
+  void _notifyRangeUpdate(int index, List<T> newValues, List<T> oldValues) {
+    _atom.reportChanged();
+
+    final change = ListChange(
+        list: this,
+        rangeChanges: <RangeChange>[RangeChange(index: index, newValues: newValues, oldValues: oldValues )]
+    );
 
     _listeners.notifyListeners(change);
   }
@@ -377,27 +444,65 @@ class ObservableList<T>
 typedef ListChangeListener<TNotification> = void Function(
     ListChange<TNotification>);
 
-/// Stores the change related information when a list-item is modified, added or removed
-class ListChange<T> {
-  ListChange(
-      {this.index,
-      this.type,
-      this.newValue,
-      this.oldValue,
-      this.object,
-      this.added,
-      this.removed});
-
-  final OperationType type;
+/// Stores the change in the value of an element with specific [index].
+/// 
+/// The value [OperationType.update] of [type] means changing the value of the element
+/// from [oldValue] to [newValue].
+/// 
+/// The value [OperationType.add] of [type] means inserting the element with value
+/// [newValue] in the list.
+/// 
+/// The value [OperationType.remove] of [type] means the element with value [oldValue]
+/// was removed from the list.
+class ElementChange<T> {
+  ElementChange({
+    @required this.index,
+    this.type = OperationType.update,
+    this.newValue,
+    this.oldValue
+  }) : assert(index != null);
 
   final int index;
+  final OperationType type;
   final T newValue;
   final T oldValue;
+}
 
-  final List<T> added;
-  final List<T> removed;
+/// Stores the change of values in a range of [ObservableList] started with specific [index].
+/// 
+/// The values of elements in the range were changed if [oldValues] and [newValues] are not null
+/// and have the same length.
+/// 
+/// The elements were added to the list if [newValues] is set and not empty, and [oldValues] is
+/// null.
+/// 
+/// The elements were removed from the list if [oldValues] is set and not empty, and [newValues]
+/// is null.
+class RangeChange<T> {
+  RangeChange({
+    @required this.index,
+    this.newValues,
+    this.oldValues
+  }) : assert(index != null);
 
-  final ObservableList<T> object;
+  final int index;
+  final List<T> newValues;
+  final List<T> oldValues;
+}
+
+/// Stores the change related information when items was modified, added or removed from [list].
+/// 
+/// The [elementChanges] object stores change mappings for the indexes of changed elements.
+/// The [rangeChanges] object stores mappings of the changed ranges to the indexes of the first
+/// elements of this ranges.
+/// These two objects cannot overlap (cannot contain the same indexes of changed elements), in
+/// most cases only one of them will be defined.
+class ListChange<T> {
+  ListChange({ this.list, this.elementChanges, this.rangeChanges});
+
+  final ObservableList<T> list;
+  final List<ElementChange> elementChanges;
+  final List<RangeChange> rangeChanges;
 }
 
 /// Used during testing for wrapping a regular `List<T>` as an `ObservableList<T>`
