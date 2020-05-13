@@ -11,18 +11,19 @@
     "build": "docz build --typescript"
   },
   "dependencies": {
-    "docz": "^2.2.0",
-    "gatsby-remark-vscode": "^1.4.0",
+    "dart-syntax-highlighting-only": "git+https://github.com/oscarcs/dart-syntax-highlighting-only.git",
+    "docz": "^2.3.1",
+    "gatsby-remark-vscode": "^2.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-helmet-async": "^1.0.4",
-    "styled-components": "^5.0.1"
+    "react-helmet-async": "^1.0.6",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.25",
-    "@types/react-dom": "^16.9.5",
-    "gatsby-transformer-remark": "^2.7.1",
-    "typescript": "^3.8.3"
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "gatsby-transformer-remark": "^2.8.8",
+    "typescript": "^3.9.2"
   },
   "bugs": {
     "url": "https://github.com/mobxjs/mobx.dart/issues"

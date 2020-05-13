@@ -1,5 +1,3 @@
-const path = require('path');
-
 export default {
   title: 'MobX.dart',
   description: 'Hassle free state-management for your Dart and Flutter Apps',
@@ -12,45 +10,36 @@ export default {
   gatsbyRemarkPlugins: [
     {
       resolve: 'gatsby-remark-vscode',
-      // OPTIONAL
       options: {
-        extensionDataDirectory: path.resolve(
-          __dirname,
-          'gatsby-remark-vscode-extensions'
-        ),
-        extensions: [
-          {
-            identifier: 'oscarcs.dart-syntax-highlighting-only',
-            version: '1.0.0'
-          }
-        ]
-      }
-    }
+        language: 'dart',
+        extensions: ['dart-syntax-highlighting-only'],
+      },
+    },
   ],
   themeConfig: {
     showDarkModeSwitch: false,
     fonts: {
       monospace: 'PT Mono',
       body: 'Montserrat',
-      main: 'Montserrat'
+      main: 'Montserrat',
     },
     mode: 'light',
     colors: {
       primary: '#1389FD',
       codeColor: '#fa6000',
-      blockquoteColor: '#00579b'
+      blockquoteColor: '#00579b',
     },
     styles: {
       h1: {
-        fontFamily: 'Montserrat, sans-serif'
+        fontFamily: 'Montserrat, sans-serif',
       },
       code: {
-        fontSize: '1.1rem'
+        fontSize: '1.1rem',
       },
       img: {
-        marginBottom: 0
-      }
-    }
+        marginBottom: 0,
+      },
+    },
   },
   menu: [
     'Home',
@@ -60,6 +49,6 @@ export default {
     'Guides',
     'Community',
     'API Overview',
-    'Developer'
-  ]
+    'Developer',
+  ],
 };
