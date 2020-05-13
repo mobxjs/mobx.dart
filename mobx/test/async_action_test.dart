@@ -1,9 +1,13 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 Future sleep(int ms) => Future.delayed(Duration(milliseconds: ms));
 
 void main() {
+  testSetup();
+
   setUp(() {
     mainContext.config =
         ReactiveConfig(writePolicy: ReactiveWritePolicy.always);

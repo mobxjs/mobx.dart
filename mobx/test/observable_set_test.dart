@@ -7,7 +7,7 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
+  testSetup();
 
   group('ObservableSet', () {
     test('generates a name if not given', () {

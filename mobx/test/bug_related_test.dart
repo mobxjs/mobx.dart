@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
+  testSetup();
 
   test('reaction should work with a map operation on list. Github Issue #211',
       () {

@@ -8,7 +8,7 @@ import 'util.dart';
 class MockDerivation extends Mock implements Derivation {}
 
 void main() {
-  turnOffWritePolicy();
+  testSetup();
 
   group('ActionController', () {
     test('can be created with both null context and name', () {

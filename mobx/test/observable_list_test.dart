@@ -7,7 +7,7 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
+  testSetup();
 
   group('ObservableList', () {
     test('generates a name if not given', () {
@@ -234,8 +234,6 @@ void main() {
     });
 
     group('fires reportObserved() for read-methods', () {
-      turnOffWritePolicy();
-
       <String, Function(ObservableList<int>)>{
         'isEmpty': (_) => _.isEmpty,
         'isNotEmpty': (_) => _.isNotEmpty,
@@ -272,8 +270,6 @@ void main() {
   });
 
   group('fires reportChanged() for write-methods', () {
-    turnOffWritePolicy();
-
     <String, void Function(ObservableList<int>)>{
       'length=': (_) => _.length = 0,
       'last=': (_) => _.last = 100,
@@ -300,8 +296,6 @@ void main() {
   });
 
   group('fires reportObserved() lazily on iterator returning methods', () {
-    turnOffWritePolicy();
-
     <String, Iterable Function(ObservableList<int>)>{
       'map': (_) => _.map((v) => v + 3),
       'expand': (_) => _.expand((v) => [3, 2]),

@@ -1,7 +1,11 @@
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
+import 'util.dart';
+
 void main() {
+  testSetup();
+
   test('MobXException has the right toString()', () {
     final ex = MobXException('Test Exception');
 

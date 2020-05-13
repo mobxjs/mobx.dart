@@ -7,7 +7,7 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
+  testSetup();
 
   group('Computed', () {
     test('basics work', () {

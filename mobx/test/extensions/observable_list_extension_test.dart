@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 import '../util.dart';
 
 void main() {
-  turnOffWritePolicy();
+  testSetup();
 
   group('ObservableListExtension', () {
     test('Transform List in ObservableList', () async {

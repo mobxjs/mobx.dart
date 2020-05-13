@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
+  testSetup();
 
   group('when reactive-reads are enforced', () {
     setUp(() {

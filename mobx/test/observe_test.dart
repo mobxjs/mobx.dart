@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
+  testSetup();
 
   group('observe', () {
     test('works', () {

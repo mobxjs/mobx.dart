@@ -4,7 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'util.dart';
 
 void main() {
-  turnOffWritePolicy();
+  testSetup(throwReactionErrors: false);
 
   group('Spy', () {
     test('spies are disabled by default', () {
