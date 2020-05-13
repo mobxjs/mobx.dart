@@ -32,15 +32,13 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   /// change. This makes them fast and you are free to use them throughout your application. Internally
   /// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
   factory Computed(T Function() fn,
-          {String name,
-          ReactiveContext context,
-          EqualityComparator<T> equals}) =>
+          {String name, ReactiveContext context, EqualityComparer<T> equals}) =>
       Computed._(context ?? mainContext, fn, name: name, equals: equals);
 
   Computed._(ReactiveContext context, this._fn, {String name, this.equals})
       : super._(context, name: name ?? context.nameFor('Computed'));
 
-  final EqualityComparator<T> equals;
+  final EqualityComparer<T> equals;
 
   @override
   MobXCaughtException _errorValue;

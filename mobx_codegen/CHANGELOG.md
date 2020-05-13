@@ -1,3 +1,8 @@
+## 1.1.0
+
+- Added the ability to **spy** on changes happening inside MobX. You can now setup a `spy()` to see all these changes. See [this](https://github.com/mobxjs/mobx.dart/blob/5095e966fe591d223c7730579de2f4778a7ff465/mobx_examples/lib/main.dart#L26) for an example. The changes in `mobx_codegen` help in the reporting of updates to observables.
+- Simplified the handling of tests and coverage. We are no longer dependent on the `test_coverage` package, which was causing issues on CI.
+
 ## 1.0.3
 
 - Upgrading `mobx` to `1.1.0`

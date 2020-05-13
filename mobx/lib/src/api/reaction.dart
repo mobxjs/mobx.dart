@@ -48,7 +48,7 @@ ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect,
         {String name,
         int delay,
         bool fireImmediately,
-        EqualityComparator<T> equals,
+        EqualityComparer<T> equals,
         ReactiveContext context,
         void Function(Object, Reaction) onError}) =>
     createReaction(context ?? mainContext, fn, effect,

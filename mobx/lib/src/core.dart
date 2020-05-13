@@ -52,4 +52,4 @@ class MobXCaughtException extends MobXException {
 }
 
 typedef Dispose = void Function();
-typedef EqualityComparator<T> = bool Function(T, T);
+typedef EqualityComparer<T> = bool Function(T, T);
