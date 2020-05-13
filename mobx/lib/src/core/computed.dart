@@ -12,6 +12,9 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   ///
   /// A computed's value is read with the `value` property.
   ///
+  /// It is possible to override equality comparison (when deciding whether to notify observers)
+  /// by providing an [equals] comparator.
+  ///
   /// ```
   /// var x = Observable(10);
   /// var y = Observable(10);
@@ -28,11 +31,16 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   /// A computed value is _cached_ and it recomputes only when the dependent observables actually
   /// change. This makes them fast and you are free to use them throughout your application. Internally
   /// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
-  factory Computed(T Function() fn, {String name, ReactiveContext context}) =>
-      Computed._(context ?? mainContext, fn, name: name);
+  factory Computed(T Function() fn,
+      {String name,
+      ReactiveContext context,
+      EqualityComparator<T> equals}) =>
+      Computed._(context ?? mainContext, fn, name: name, equals: equals);
 
-  Computed._(ReactiveContext context, this._fn, {String name})
+  Computed._(ReactiveContext context, this._fn, {String name, this.equals})
       : super._(context, name: name ?? context.nameFor('Computed'));
+
+  final EqualityComparator<T> equals;
 
   @override
   MobXCaughtException _errorValue;
@@ -144,7 +152,8 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
     return changed;
   }
 
-  bool _isEqual(T x, T y) => x == y;
+  bool _isEqual(T x, T y) =>
+      equals == null ? x == y : equals(x, y);
 
   Function observe(void Function(ChangeNotification<T>) handler,
       {bool fireImmediately}) {

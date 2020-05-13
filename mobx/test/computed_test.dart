@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:mobx/src/api/context.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mobx/mobx.dart' hide when;
@@ -95,6 +96,58 @@ void main() {
       x.value = 100; // should not invoke observe
 
       expect(executionCount, equals(1));
+    });
+
+    test('only notifies observers when computed value changed', () {
+      final x = Observable(10);
+      final y = Observable(20);
+
+      var observationCount = 0;
+
+      final total = Computed(() => x.value + y.value);
+
+      final dispose = total.observe((change) {
+        observationCount++;
+      });
+
+      expect(observationCount, equals(1));
+
+      // shouldn't notify because the total is the same
+      Action(() {
+        x.value = x.value + 10;
+        y.value = y.value - 10;
+      })();
+
+      expect(observationCount, equals(1));
+
+      dispose();
+    });
+
+    test('can use a custom equality', () {
+      final list = ObservableList<int>.of([1, 2, 4]);
+
+      var observationCount = 0;
+
+      final evens = Computed(() =>
+          list.where((element) => element.isEven).toList(),
+          equals: const ListEquality().equals
+      );
+
+      final dispose = evens.observe((change) {
+        observationCount++;
+      });
+
+      expect(observationCount, equals(1));
+
+      // evens didn't change, so should not invoke observe
+      list.add(5);
+      expect(observationCount, equals(1));
+
+      // evens changed, so should invoke observe
+      list.add(6);
+      expect(observationCount, equals(2));
+
+      dispose();
     });
 
     test('uses provided context', () {
