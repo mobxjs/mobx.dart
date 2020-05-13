@@ -32,9 +32,9 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   /// change. This makes them fast and you are free to use them throughout your application. Internally
   /// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
   factory Computed(T Function() fn,
-      {String name,
-      ReactiveContext context,
-      EqualityComparator<T> equals}) =>
+          {String name,
+          ReactiveContext context,
+          EqualityComparator<T> equals}) =>
       Computed._(context ?? mainContext, fn, name: name, equals: equals);
 
   Computed._(ReactiveContext context, this._fn, {String name, this.equals})
@@ -152,27 +152,27 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
     return changed;
   }
 
-  bool _isEqual(T x, T y) =>
-      equals == null ? x == y : equals(x, y);
+  bool _isEqual(T x, T y) => equals == null ? x == y : equals(x, y);
 
   Function observe(void Function(ChangeNotification<T>) handler,
-      {bool fireImmediately}) {
-    var firstTime = true;
+      {@deprecated bool fireImmediately}) {
     T prevValue;
+
+    void notifyChange() {
+      _context.untracked(() {
+        handler(ChangeNotification(
+            type: OperationType.update,
+            object: this,
+            oldValue: prevValue,
+            newValue: value));
+      });
+    }
 
     return autorun((_) {
       final newValue = value;
-      if (firstTime == true || fireImmediately == true) {
-        _context.untracked(() {
-          handler(ChangeNotification(
-              type: OperationType.update,
-              object: this,
-              oldValue: prevValue,
-              newValue: newValue));
-        });
-      }
 
-      firstTime = false;
+      notifyChange();
+
       prevValue = newValue;
     }, context: _context);
   }

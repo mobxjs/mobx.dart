@@ -128,10 +128,9 @@ void main() {
 
       var observationCount = 0;
 
-      final evens = Computed(() =>
-          list.where((element) => element.isEven).toList(),
-          equals: const ListEquality().equals
-      );
+      final evens = Computed(
+          () => list.where((element) => element.isEven).toList(),
+          equals: const ListEquality().equals);
 
       final dispose = evens.observe((change) {
         observationCount++;
