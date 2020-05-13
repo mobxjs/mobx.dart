@@ -353,6 +353,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "hmayer00",
+      "name": "Henry Mayer",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/821904?v=4",
+      "profile": "https://github.com/hmayer00",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
