@@ -16,7 +16,7 @@ The **MobX triad** is completed when we add **Reactions** into the mix. Having r
 >
 > Technically, a computed is also a reaction, aka **Derivation**, as it depends on other observables or computeds. The only difference between a regular `Reaction` and `Computed` is that the former does not produce any value. Computeds are mostly read-only observables that derive their value from other observables.
 
-Reactions, or Derivations come in few flavors: `autorun`, `reaction`, `when` and of course the Flutter Widget: `Observer`. All of these variations take a function that is tracked for any observables. When the tracked observables change, the function is re-executed. This simple behavior is the defining characteristic of a reaction. Note that there is no explicit subscription or wiring needed. Reactions also return a _disposer-function_ (`ReactionDisposer`) that can be invoked to pre-maturely dispose a rection.
+Reactions, or Derivations come in few flavors: `autorun`, `reaction`, `when` and of course the Flutter Widget: `Observer`. All of these variations take a function that is tracked for any observables. When the tracked observables change, the function is re-executed. This simple behavior is the defining characteristic of a reaction. Note that there is no explicit subscription or wiring needed. Reactions also return a _disposer-function_ (`ReactionDisposer`) that can be invoked to pre-maturely dispose a reaction.
 
 ## autorun
 
