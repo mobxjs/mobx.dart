@@ -363,6 +363,16 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "darkstarx",
+      "name": "Sergey",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3534966?v=4",
+      "profile": "https://github.com/darkstarx",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
