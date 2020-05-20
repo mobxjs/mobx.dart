@@ -1,3 +1,8 @@
+## 1.2.1
+
+- Improved `observe()` API for `ObservableList`. We now get better change events with accurate details about what has changed. Thanks to
+  @darkstarx for the PR (#490)
+
 ## 1.2.0
 
 - Added the ability to **spy** on changes happening inside MobX. You can now setup a `spy()` to see all these changes. See [this](https://github.com/mobxjs/mobx.dart/blob/5095e966fe591d223c7730579de2f4778a7ff465/mobx_examples/lib/main.dart#L26) for an example.
