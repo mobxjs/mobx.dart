@@ -6,7 +6,7 @@ import 'package:mobx/src/core.dart';
 ///
 /// Optional configuration:
 /// * [name]: debug name for this reaction
-/// * [delay]: debouncing delay in milliseconds
+/// * [delay]: throttling delay in milliseconds
 ///
 /// ```
 /// var x = Observable(10);
@@ -39,7 +39,7 @@ ReactionDisposer autorun(Function(Reaction) fn,
 ///
 /// *Note*: Only the [fn] function is tracked and not the [effect].
 ///
-/// You can also pass in an optional [name], a debouncing [delay] in milliseconds. Use
+/// You can also pass in an optional [name], a throttling [delay] in milliseconds. Use
 /// [fireImmediately] if you want to invoke the effect immediately without waiting for
 /// the [fn] to change its value. It is possible to define a custom [equals] function
 /// to override the default comparison for the value returned by [fn], to have fined
