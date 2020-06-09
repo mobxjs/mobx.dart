@@ -395,7 +395,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-38-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-39-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -453,6 +453,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/xinhaiwang"><img src="https://avatars0.githubusercontent.com/u/20069410?v=4" width="64px;" alt=""/><br /><sub><b>Xinhai Wang</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=xinhaiwang" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/hmayer00"><img src="https://avatars0.githubusercontent.com/u/821904?v=4" width="64px;" alt=""/><br /><sub><b>Henry Mayer</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=hmayer00" title="Code">💻</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=hmayer00" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/darkstarx"><img src="https://avatars3.githubusercontent.com/u/3534966?v=4" width="64px;" alt=""/><br /><sub><b>Sergey</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=darkstarx" title="Code">💻</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=darkstarx" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/MisterJimson"><img src="https://avatars1.githubusercontent.com/u/7351329?v=4" width="64px;" alt=""/><br /><sub><b>Jason Rai</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=MisterJimson" title="Documentation">📖</a></td>
   </tr>
 </table>
 
