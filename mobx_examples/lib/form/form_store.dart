@@ -44,6 +44,21 @@ abstract class _FormStore with Store {
       reaction((_) => password, validatePassword)
     ];
   }
+  
+  @action
+  void setUsername(String value) {
+    name = value;
+  }
+
+  @action
+  void setEmail(String value) {
+    email = value;
+  }
+
+  @action
+  void setPassword(String value) {
+    password = value;
+  }
 
   @action
   // ignore: avoid_void_async
