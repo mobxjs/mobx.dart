@@ -46,6 +46,21 @@ abstract class _FormStore with Store {
   }
 
   @action
+  void setUsername(String value) {
+    name = value;
+  }
+
+  @action
+  void setEmail(String value) {
+    email = value;
+  }
+
+  @action
+  void setPassword(String value) {
+    password = value;
+  }
+
+  @action
   // ignore: avoid_void_async
   Future validateUsername(String value) async {
     if (isNull(value) || value.isEmpty) {
