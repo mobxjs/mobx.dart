@@ -4,6 +4,7 @@
 - Simplified the handling of tests and coverage. We are no longer dependent on the `test_coverage` package, which was causing issues on CI.
 - Adding an ignore for the analyzer warning for `unnecessary_brace_in_string_interps`
 - Syncing versions with pubspec.yaml
+- Fixes a test that was not including an analyzer warning
 
 ## 1.0.3
 
