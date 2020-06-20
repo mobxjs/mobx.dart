@@ -1,7 +1,9 @@
-## 1.2.1
+## 1.2.1 - 1.2.1+1
 
 - Improved `observe()` API for `ObservableList`. We now get better change events with accurate details about what has changed. Thanks to
   @darkstarx for the PR (#490)
+- API docs update for reaction. Rewording the _debouncing_ to _throttle_, since the behavior is more like throttling.
+- Syncing versions with pubspec.yaml
 
 ## 1.2.0
 
