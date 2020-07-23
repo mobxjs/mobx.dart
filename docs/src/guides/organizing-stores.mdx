@@ -135,8 +135,13 @@ If you organize stores in a hierarchy, you will have a root-Store and then a set
 
 ```dart
 // parent.dart
-
-final child = Child(parent: this);
+class Parent {
+  Parent(){
+    child = Child(parent: this);
+  }
+  
+  Child child;
+}
 ```
 
 ```dart
