@@ -382,6 +382,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "joshuadeguzman",
+      "name": "Joshua de Guzman",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/20706361?v=4",
+      "profile": "http://joshuadeguzman.net",
+      "contributions": [
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7,
