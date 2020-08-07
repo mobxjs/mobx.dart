@@ -1,3 +1,7 @@
+## 1.2.1+2
+
+- Reformatting for improving the pub.dev score
+
 ## 1.2.1 - 1.2.1+1
 
 - Improved `observe()` API for `ObservableList`. We now get better change events with accurate details about what has changed. Thanks to
