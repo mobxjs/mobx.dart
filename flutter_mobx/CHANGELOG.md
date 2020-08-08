@@ -1,3 +1,7 @@
+## 1.1.0+2
+
+- Reformatting for improving the pub.dev score
+
 ## 1.1.0 - 1.1.0+1
 
 - Exceptions are reported more reliably with `FlutterError.reportError`. This also includes the stack trace, as all caught exceptions are now wrapped inside `MobXCaughtException`.

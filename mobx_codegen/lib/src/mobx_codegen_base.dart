@@ -58,7 +58,8 @@ class StoreGenerator extends Generator {
           // increase the analyzer dependency's lower bound to 0.38.2, and
           // migrate to using `ClassElement.instantiate`.
           // ignore: deprecated_member_use
-          c.type, baseClass.type.instantiate(c.supertype.typeArguments));
+          c.type,
+          baseClass.type.instantiate(c.supertype.typeArguments));
     }, orElse: () => null);
 
     if (mixedClass != null) {

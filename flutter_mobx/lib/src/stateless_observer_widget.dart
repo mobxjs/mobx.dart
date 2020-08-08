@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
 
@@ -43,4 +41,3 @@ class StatelessObserverElement extends StatelessElement
   @override
   StatelessObserverWidget get widget => super.widget as StatelessObserverWidget;
 }
-
