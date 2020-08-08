@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type_system.dart';
 import 'package:build/build.dart';
 import 'package:mobx_codegen/src/store_class_visitor.dart';
@@ -59,7 +60,9 @@ class StoreGenerator extends Generator {
           // migrate to using `ClassElement.instantiate`.
           // ignore: deprecated_member_use
           c.type,
-          baseClass.type.instantiate(c.supertype.typeArguments));
+          baseClass.instantiate(
+              typeArguments: c.supertype.typeArguments,
+              nullabilitySuffix: NullabilitySuffix.none));
     }, orElse: () => null);
 
     if (mixedClass != null) {
