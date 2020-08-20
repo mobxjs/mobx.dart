@@ -20,7 +20,13 @@ Reactions, or Derivations come in few flavors: `autorun`, `reaction`, `when` and
 
 ## autorun
 
-### `ReactionDisposer autorun(Function(Reaction) fn)`
+### `ReactionDisposer autorun(Function(Reaction) fn, {String name, int delay, ReactiveContext context, void Function(Object, Reaction) onError})`
+
+- **`Function fn`**: A function that bridges from reactive to interative code.
+- **`String name`**: An optional name to identify this reaction.
+- **`int delay`**:  An optional throttling delay in milliseconds.
+- **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
+- **`Function onError`**: An Function to execute when an Timout Error occurs instead of propagating them.
 
 Runs the reaction immediately and also on any change in the observables used inside
 `fn`.
@@ -47,7 +53,16 @@ dispose();
 
 ## reaction
 
-### `ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect)`
+### `ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect, {String name, int delay, bool fireImmediately, EqualityComparer<T> equals, ReactiveContext context, void Function(Object, Reaction) onError})`
+
+- **`Function fn`**: A function that return a value Type of T.
+- **`Function effect`**: A function that bridges from reactive to interative code.
+- **`String name`**: An optional name to identify this reaction.
+- **`int delay`**:  An optional throttling delay in milliseconds.
+- **`bool fireImmediatly`**: An optional boolean to immediatly execute the effect function,without awaiting the result of the fn function.
+- **`Equality<Comparer<>> equals`**: An optional function to define a custom equality of type T.
+- **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
+- **`Function onError`**: An Function to execute when an Timout Error occurs instead of propagating them.
 
 Monitors the observables used inside the `fn()` tracking function and runs the `effect()` when
 the tracking function returns a different value. Only the observables inside `fn()` are tracked.
@@ -71,7 +86,14 @@ dispose();
 
 ## when
 
-### `ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`
+### `ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect, {String name, int timeout, ReactiveContext context, void Function(Object, Reaction) onError} )`
+
+- **`Function predicate`**: An optional function that defines the condtion.
+- **`Function effect`**: An optional function that is run when predicate becomes true.
+- **`String name`**: An optional name to identify this reaction.
+- **`int timeout`**: An optional timeout to force dispose after the set time in milliseconds and propagate the error.
+- **`ReactiveContext`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
+- **`Function onError`**: An Function to execute when an Timout Error occurs instead of propagating them
 
 Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
 
@@ -91,7 +113,12 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 ## asyncWhen
 
-### `Future<void> asyncWhen(bool Function(Reaction) predicate)`
+### `Future<void> asyncWhen(bool Function(Reaction) predicate, {String name, int timeout, ReactiveContext context})`
+
+- **`bool Function predicate`**: An optional function that defines the condtion for the programm to execute further.
+- **`String name`**: An optional name to identify this reaction.
+- **`int timeout`**: An optional timeout to force dispose after the set time in milliseconds and propagate the error.
+- **`ReactiveContext`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
 
 Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
 
@@ -107,7 +134,11 @@ void waitForCompletion() async {
 
 ## Observer Widget
 
-### `Observer({@required Widget Function(BuildContext context) builder})`
+### `Observer({Key key, @required Widget Function(BuildContext context) builder, String name})`
+
+- **`Key key`**: An optional key for the created Widget.
+- **`Function builder`**: An creational Function for UI-Widget generation.
+- **`String name`**: An optional name String for the StatelessObserverWidget.
 
 One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the
 [![pub package for flutter_mobx](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
