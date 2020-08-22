@@ -70,7 +70,7 @@ ReactionDisposer createReaction<T>(
     {String name,
     int delay,
     bool fireImmediately,
-    EqualityComparer equals,
+    EqualityComparer<T> equals,
     void Function(Object, Reaction) onError}) {
   ReactionImpl rxn;
 
