@@ -400,6 +400,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "avioli",
+      "name": "Evo Stamatov",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/524259?v=4",
+      "profile": "https://avioli.github.io/blog/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
