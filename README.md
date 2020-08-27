@@ -395,7 +395,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-40-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-41-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -455,6 +455,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/darkstarx"><img src="https://avatars3.githubusercontent.com/u/3534966?v=4" width="64px;" alt=""/><br /><sub><b>Sergey</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=darkstarx" title="Code">💻</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=darkstarx" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/MisterJimson"><img src="https://avatars1.githubusercontent.com/u/7351329?v=4" width="64px;" alt=""/><br /><sub><b>Jason Rai</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=MisterJimson" title="Documentation">📖</a></td>
     <td align="center"><a href="http://joshuadeguzman.net"><img src="https://avatars1.githubusercontent.com/u/20706361?v=4" width="64px;" alt=""/><br /><sub><b>Joshua de Guzman</b></sub></a><br /><a href="#example-joshuadeguzman" title="Examples">💡</a></td>
+    <td align="center"><a href="https://github.com/hertleinj"><img src="https://avatars1.githubusercontent.com/u/33684625?v=4" width="64px;" alt=""/><br /><sub><b>Jan Hertlein</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=hertleinj" title="Documentation">📖</a></td>
   </tr>
 </table>
 
