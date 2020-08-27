@@ -51,7 +51,7 @@ ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect,
         EqualityComparer<T> equals,
         ReactiveContext context,
         void Function(Object, Reaction) onError}) =>
-    createReaction(context ?? mainContext, fn, effect,
+    createReaction<T>(context ?? mainContext, fn, effect,
         name: name,
         delay: delay,
         equals: equals,
