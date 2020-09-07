@@ -68,7 +68,7 @@ Temos 3 conceitos principais no MobX: **Observables**, **Actions** e **Reactions
 
 ### Observables
 
-Observables representam o reactive-state de sua aplicação. Eles são simples e escalares, mesmo em uma árvore de objetos complexa. Você pode expor sua árvore de oberváveis que podem ser consumidas por outros Observables ou pela UI.
+Observables representam o reactive-state de sua aplicação. Eles são simples e escalares, mesmo em uma árvore de objetos complexa. Você pode expor sua árvore de observáveis que podem ser consumidas por outros Observables ou pela UI.
 
 Um "contador reativo" pode ser representado pelo seguinte Observable
 
@@ -78,7 +78,7 @@ import 'package:mobx/mobx.dart';
 final counter = Observable(0);
 ```
 
-Também podem ser criados observable mais complexos usando Classes(Orientação a objetos):
+Também podem ser criados Observable mais complexos usando Classes(Orientação a Objetos):
 
 ```dart
 class Counter {
@@ -189,7 +189,7 @@ abstract class CounterBase with Store {
 
 #### Asynchronous Actions
 
-MobX.dart já lida automaticamente com métodos asincrono sem a necessidade de alguma outra ferramenta. [`runInAction`](https://mobx.netlify.com/api/action#runinaction).
+MobX.dart já lida automaticamente com métodos assíncrono sem a necessidade de alguma outra ferramenta. [`runInAction`](https://mobx.netlify.com/api/action#runinaction).
 
 ```dart
 @observable
@@ -209,7 +209,7 @@ Future<void> loadStuff() async {
 ### Reactions
 
 Reactions completa a _Tríade do MobX_ (**observables**, **actions** and **reactions**).
-Eles são os observadores do nosso sistema reativo e notificam qualquer observable rastreado que tenha mudado. O Reaction possui alguns métodos para seu uso, conforme será listado abaixo, Todos eles retornam a `ReactionDisposer`, uma função que pode ser chamada para eliminar a reação.
+Eles são os observadores do nosso sistema reativo e notificam qualquer observable rastreado que tenha mudado. O Reaction possui alguns métodos para seu uso, conforme será listado abaixo, todos eles retornam a `ReactionDisposer`, uma função que pode ser chamada para eliminar a reação.
 
 Uma das melhores caracteristicas das reactions é que ele _rastreia automaticamente_ qualquer observável sem precisar declarar nada. O fato de ter um observável dentro do escopo de uma Reaction é o suficiente para rastreá-lo.
 
