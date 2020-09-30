@@ -1,9 +1,17 @@
 ---
-route: '/'
+route: /
 ---
 
+import {PubBadge} from "./components/PubBadge";
 import book from './images/book.png';
-import flutterFavorite from './images/flutter-favorite.png';
+import {
+    BuildStatus,
+    CoverageStatus,
+    DiscordChat,
+    FlutterFavorite,
+    NetlifyStatus,
+    PublishStatus
+} from "./components/Shield";
 
 # MobX.dart
 
@@ -11,28 +19,21 @@ import flutterFavorite from './images/flutter-favorite.png';
 
 > Hassle free state-management for your Dart and Flutter apps
 
-[![pub package for mobx](https://img.shields.io/pub/v/mobx.svg?label=mobx&color=blue)](https://pub.dartlang.org/packages/mobx)
-[![pub package for flutter_mobx](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
-[![pub package for mobx_codegen](https://img.shields.io/pub/v/mobx_codegen.svg?label=mobx_codegen&color=blue)](https://pub.dartlang.org/packages/mobx_codegen)
+<PubBadge name="mobx"/> <PubBadge name="flutter_mobx"/> <PubBadge name="mobx_codegen"/>
 
-[![Build Status](https://github.com/mobxjs/mobx.dart/workflows/Build/badge.svg)](https://github.com/mobxjs/mobx.dart/actions)
-[![Publish](https://github.com/mobxjs/mobx.dart/workflows/Publish/badge.svg)](https://github.com/mobxjs/mobx.dart/actions)
-[![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/05330d31-0411-4aac-a278-76615bcaff9e/deploy-status)](https://app.netlify.com/sites/mobx/deploys)
+<BuildStatus/> <PublishStatus/> <CoverageStatus/> <NetlifyStatus/>
 
-[![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
+<DiscordChat/>
 
-<a href="https://flutter.dev/docs/development/packages-and-plugins/favorites">
-  <img src={flutterFavorite} height={128} />
-</a>
+<FlutterFavorite/>
 
 ## Sponsors
 
 We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program. [[Become a sponsor](https://opencollective.com/mobx#sponsor)]
 
-import { SponsorList } from './components/Sponsor';
+import {SponsorList} from './components/Sponsor';
 
-<SponsorList />
+<SponsorList/>
 
 ## Introduction
 
@@ -52,9 +53,9 @@ console log, a network call to re-rendering the UI.
 
 ## Tried, tested and said...
 
-import { TestimonialList } from './components/Testimonial';
+import {TestimonialList} from './components/Testimonial';
 
-<TestimonialList />
+<TestimonialList/>
 
 ## Get Started 🚀
 
@@ -65,5 +66,5 @@ Follow along with the [Getting Started Guide](/getting-started) to incorporate M
 For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, **almost all** of the concepts are applicable to Dart and Flutter.
 
 <a href="https://www.packtpub.com/web-development/mobx-quick-start-guide">
-  <img src={book} />
+    <img src={book}/>
 </a>
