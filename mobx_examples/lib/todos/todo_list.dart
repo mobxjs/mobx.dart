@@ -19,9 +19,6 @@ abstract class _TodoList with Store {
   @JsonProperty(enumValues: VisibilityFilter.values)
   VisibilityFilter filter = VisibilityFilter.all;
 
-  @observable
-  String currentDescription = '';
-
   @computed
   ObservableList<Todo> get pendingTodos =>
       ObservableList.of(todos.where((todo) => todo.done != true));
@@ -71,7 +68,6 @@ abstract class _TodoList with Store {
   void addTodo(String description) {
     final todo = Todo(description);
     todos.add(todo);
-    currentDescription = '';
   }
 
   @action

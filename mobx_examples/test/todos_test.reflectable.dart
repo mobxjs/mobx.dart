@@ -29,8 +29,9 @@ final _data = <r.Reflectable, r.ReflectorData>{
             7,
             0,
             const prefix0.JsonSerializable(),
-            const <int>[5],
+            const <int>[4],
             const <int>[
+              5,
               6,
               7,
               8,
@@ -50,10 +51,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
               22,
               23,
               24,
-              25,
-              26,
-              27,
-              28
+              25
             ],
             const <int>[],
             1,
@@ -74,22 +72,22 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[
               0,
               1,
-              2,
+              10,
               11,
               12,
               13,
-              14,
+              18,
+              19,
+              20,
               21,
               22,
               23,
               24,
               25,
-              26,
-              27,
-              28,
-              29
+              26
             ],
             const <int>[
+              5,
               6,
               7,
               8,
@@ -109,10 +107,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
               22,
               23,
               24,
-              25,
-              26,
-              27,
-              28
+              25
             ],
             const <int>[],
             3,
@@ -130,8 +125,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
             7,
             2,
             const prefix0.JsonSerializable(),
-            const <int>[30],
-            const <int>[6, 7, 8, 9, 10, 31, 32, 33, 34],
+            const <int>[27],
+            const <int>[5, 6, 7, 8, 9, 28, 29, 30, 31],
             const <int>[],
             -1,
             {},
@@ -152,7 +147,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             3,
             const prefix0.JsonSerializable(),
             const <int>[],
-            const <int>[6, 7, 8, 9, 10],
+            const <int>[5, 6, 7, 8, 9],
             const <int>[],
             -1,
             const {},
@@ -187,16 +182,6 @@ final _data = <r.Reflectable, r.ReflectorData>{
           const prefix0.JsonProperty(
               enumValues: prefix1.VisibilityFilter.values)
         ]),
-        r.VariableMirrorImpl(
-            r'currentDescription',
-            32773,
-            1,
-            const prefix0.JsonSerializable(),
-            -1,
-            7,
-            7,
-            const <int>[],
-            const <Object>[prefix3.observable]),
         r.VariableMirrorImpl(
             r'description',
             32773,
@@ -291,12 +276,10 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[],
             const prefix0.JsonSerializable(),
             const <Object>[prefix3.action]),
-        r.ImplicitGetterMirrorImpl(const prefix0.JsonSerializable(), 0, 15),
-        r.ImplicitSetterMirrorImpl(const prefix0.JsonSerializable(), 0, 16),
-        r.ImplicitGetterMirrorImpl(const prefix0.JsonSerializable(), 1, 17),
-        r.ImplicitSetterMirrorImpl(const prefix0.JsonSerializable(), 1, 18),
-        r.ImplicitGetterMirrorImpl(const prefix0.JsonSerializable(), 2, 19),
-        r.ImplicitSetterMirrorImpl(const prefix0.JsonSerializable(), 2, 20),
+        r.ImplicitGetterMirrorImpl(const prefix0.JsonSerializable(), 0, 14),
+        r.ImplicitSetterMirrorImpl(const prefix0.JsonSerializable(), 0, 15),
+        r.ImplicitGetterMirrorImpl(const prefix0.JsonSerializable(), 1, 16),
+        r.ImplicitSetterMirrorImpl(const prefix0.JsonSerializable(), 1, 17),
         r.MethodMirrorImpl(
             r'pendingTodos',
             4325379,
@@ -390,18 +373,18 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <Object>[prefix3.computed]),
         r.MethodMirrorImpl(r'', 64, 1, -1, 1, 1, const <int>[], const <int>[],
             const prefix0.JsonSerializable(), const []),
-        r.MethodMirrorImpl(r'', 0, 2, -1, 2, 2, const <int>[], const <int>[7],
+        r.MethodMirrorImpl(r'', 0, 2, -1, 2, 2, const <int>[], const <int>[6],
             const prefix0.JsonSerializable(), const []),
-        r.ImplicitGetterMirrorImpl(const prefix0.JsonSerializable(), 3, 31),
-        r.ImplicitSetterMirrorImpl(const prefix0.JsonSerializable(), 3, 32),
-        r.ImplicitGetterMirrorImpl(const prefix0.JsonSerializable(), 4, 33),
-        r.ImplicitSetterMirrorImpl(const prefix0.JsonSerializable(), 4, 34)
+        r.ImplicitGetterMirrorImpl(const prefix0.JsonSerializable(), 2, 28),
+        r.ImplicitSetterMirrorImpl(const prefix0.JsonSerializable(), 2, 29),
+        r.ImplicitGetterMirrorImpl(const prefix0.JsonSerializable(), 3, 30),
+        r.ImplicitSetterMirrorImpl(const prefix0.JsonSerializable(), 3, 31)
       ],
       <m.ParameterMirror>[
         r.ParameterMirrorImpl(
             r'other',
             32774,
-            6,
+            5,
             const prefix0.JsonSerializable(),
             -1,
             12,
@@ -413,7 +396,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'invocation',
             32774,
-            8,
+            7,
             const prefix0.JsonSerializable(),
             -1,
             13,
@@ -425,7 +408,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'description',
             32774,
-            11,
+            10,
             const prefix0.JsonSerializable(),
             -1,
             7,
@@ -437,7 +420,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'todo',
             32774,
-            12,
+            11,
             const prefix0.JsonSerializable(),
             2,
             2,
@@ -449,7 +432,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'_todos',
             2130022,
-            16,
+            15,
             const prefix0.JsonSerializable(),
             -1,
             4,
@@ -461,23 +444,11 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'_filter',
             32870,
-            18,
+            17,
             const prefix0.JsonSerializable(),
             -1,
             6,
             6,
-            const <int>[],
-            const [],
-            null,
-            null),
-        r.ParameterMirrorImpl(
-            r'_currentDescription',
-            32870,
-            20,
-            const prefix0.JsonSerializable(),
-            -1,
-            7,
-            7,
             const <int>[],
             const [],
             null,
@@ -485,7 +456,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'description',
             32774,
-            30,
+            27,
             const prefix0.JsonSerializable(),
             -1,
             7,
@@ -497,7 +468,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'_description',
             32870,
-            32,
+            29,
             const prefix0.JsonSerializable(),
             -1,
             7,
@@ -509,7 +480,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'_done',
             32870,
-            34,
+            31,
             const prefix0.JsonSerializable(),
             -1,
             8,
@@ -549,8 +520,6 @@ final _data = <r.Reflectable, r.ReflectorData>{
             instance.markAllAsCompleted,
         r'todos': (dynamic instance) => instance.todos,
         r'filter': (dynamic instance) => instance.filter,
-        r'currentDescription': (dynamic instance) =>
-            instance.currentDescription,
         r'pendingTodos': (dynamic instance) => instance.pendingTodos,
         r'completedTodos': (dynamic instance) => instance.completedTodos,
         r'hasCompletedTodos': (dynamic instance) => instance.hasCompletedTodos,
@@ -567,8 +536,6 @@ final _data = <r.Reflectable, r.ReflectorData>{
       {
         r'todos=': (dynamic instance, value) => instance.todos = value,
         r'filter=': (dynamic instance, value) => instance.filter = value,
-        r'currentDescription=': (dynamic instance, value) =>
-            instance.currentDescription = value,
         r'description=': (dynamic instance, value) =>
             instance.description = value,
         r'done=': (dynamic instance, value) => instance.done = value

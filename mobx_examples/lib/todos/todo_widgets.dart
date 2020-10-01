@@ -146,9 +146,7 @@ class AddTodo extends StatelessWidget {
       decoration: const InputDecoration(
           labelText: 'Add a Todo', contentPadding: EdgeInsets.all(8)),
       controller: _textController,
-      onChanged: (String newValue) {
-        list.currentDescription = newValue;
-      },
+      textInputAction: TextInputAction.done,
       onSubmitted: (String value) {
         list.addTodo(value);
         _textController.clear();
