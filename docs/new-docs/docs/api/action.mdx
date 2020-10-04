@@ -1,0 +1,125 @@
+---
+name: Actions
+menu: API Overview
+route: /api/action
+---
+
+# Actions
+
+### `Action(Function fn, {ReactiveContext context, String name})`
+
+- **`Function fn`**: A function that mutates some observables
+- **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
+- **`String name`**: An optional name to identify this action
+
+**Actions** are functions that encapsulate the mutations on observables. They are used to give a semantic name to the operation, such as `incrementCounter()` instead of simply doing `counter++`. These semantic names are how you would identify the various operations happening in the domain, as exposed on the UI.
+
+Additionally, actions also provide _few other guarantees_:
+
+- Changes to the observables are only notified at the end of the action. This ensures all mutations happen as an atomic unit. This also eliminates noisy notifications, especially if you are changing a lot of observables (say, in a loop).
+- Actions can call other actions. For such nested actions, the change-notifications will be sent when the top-most action completes.
+- All the linked reactions (ones that depend on the observables mutated inside the action) are run only at the end of the action. This also ensures there are no pre-mature reactions occurring in the system.
+
+```dart
+final counter = Observable(0);
+
+// Create an action
+final incrementCounter = Action((){
+    counter.value++;
+});
+
+// Invoke the action
+// The first argument is a list of args that are passed to the inner function, which is empty in this case
+incrementCounter([]);
+```
+
+### Annotations
+
+As seen above, the raw form of using an `Action` can have a bit of boilerplate, especially as you start having lot of actions in your code. For most practical use-cases you are better off using a `Store` class and annotating functions with **`@action`**, as shown below:
+
+```dart
+import 'package:mobx/mobx.dart';
+
+part 'counter.g.dart';
+
+class Counter = _Counter with _$Counter;
+
+abstract class _Counter with Store {
+  @observable
+  int value = 0;
+
+  @action
+  void increment() {
+    value++;
+  }
+}
+
+// Use a counter and increment it
+final counter = Counter();
+counter.increment(); // Looks natural and hides all boilerplate
+```
+
+### Safety first
+
+By default, MobX enforces a rule that all mutations to observables should happen inside an action. This is part of the configuration for a `ReactiveContext`. If you mutate an observable that is being observed, outside of an action, MobX will throw an `Exception`. This is a safety measure to ensure there are no stray mutations happening in your application.
+
+> Do not mutate observables outside an action.
+
+Although not advisable, you can relax this restriction by setting a different `config` for the [**`ReactiveContext`**](/api/context#reactivecontext).
+
+### Async actions
+
+The action methods can also be async, which allows you to intersperse mutations along with async calls. The code-generator takes care of ensuring all mutations are wrapped within actions. Internally, it relies on **`zones`** to do most of the heavy lifting.
+
+```dart
+  @action
+  Future<List<Repository>> fetchRepos() async {
+    repositories = [];
+    final future = client.repositories.listUserRepositories(user).toList();
+    fetchReposFuture = ObservableFuture(future);
+
+    return repositories = await future;
+  }
+
+```
+
+## runInAction
+
+### `T runInAction<T>(T Function() fn, {String name, ReactiveContext context})`
+
+- **`Function fn`**: A function that mutates some observables
+- **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
+- **`String name`**: An optional name to identify this action
+- **`T`**: the return value of the passed in function `fn`
+
+Sometimes it can be excessive to have an `Action` created just to mutate some observables. It's much easier to just wrap your mutating function inside a `runInAction()`.
+
+## untracked
+
+### `T untracked<T>(T Function() fn, {ReactiveContext context})`
+
+- **`Function fn`**: A function that reads or mutates observables
+- **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
+- **`T`**: the return value of the passed in function `fn`
+
+This is a lower level function and normally may not be needed. This is useful in cases where you are reading an observable inside a reaction but don't want it to be tracked by MobX. By default, MobX tracks every observable dereferenced inside a reaction.
+
+```dart
+final x = Observable(0);
+
+autorun((_){
+  untracked(() => print(x.value));
+});
+
+x.value++; // the autorun() will NOT re-execute as x.value was not tracked
+```
+
+## transaction
+
+### `T transaction<T>(T Function() fn, {ReactiveContext context})`
+
+- **`Function fn`**: A function that reads or mutates some observables
+- **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
+- **`T`**: the return value of the passed in function `fn`
+
+This is a lower level function and normally may not be needed. It is used internally by an `Action`. Transactions guarantee that no notifications will be sent until the end of the given function, `fn`. They also ensure none of the linked reactions are executed until the end of `fn`.
