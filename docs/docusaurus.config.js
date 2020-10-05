@@ -20,14 +20,14 @@ module.exports = {
       },
       items: [
         {
-          label: 'Discord Chat',
           href: 'https://discord.gg/dNHY52k',
           position: 'right',
+          className: 'icon-link discord-link',
         },
         {
           href: 'https://github.com/mobxjs/mobx.dart',
-          label: 'GitHub',
           position: 'right',
+          className: 'icon-link github-link',
         },
       ],
     },
