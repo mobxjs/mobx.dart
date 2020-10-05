@@ -8,6 +8,10 @@ module.exports = {
   organizationName: 'mobxjs', // Usually your GitHub org/user name.
   projectName: 'mobx.dart', // Usually your repo name.
   themeConfig: {
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: true,
+    },
     navbar: {
       title: 'MobX.dart',
       logo: {
