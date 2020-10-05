@@ -1,0 +1,49 @@
+---
+title: Release Guidelines
+description: If you are a developer on the MobX project, here are few guidelines that will help in your journey.
+---
+
+If you are a developer on the MobX project, here are few guidelines that will help in your journey. These apply to all the packages: `mobx`, `mobx_codegen`, `flutter_mobx`.
+
+### 1. pubspec.yaml
+
+- Use the [semantic versioning policy](https://dart.dev/tools/pub/versioning) to update the version in `pubspec.yaml`.
+- Say you are updating from `0.1.0` to `0.2.0`, then update the `version` field in `pubspec.yaml`:
+
+```yaml
+version: 0.2.0
+```
+
+### 2. Expose version
+
+- Expose the updated version of `pubspec.yaml` to the library `.dart` file by running the appropriate command:
+
+```bash
+./tool/expose_version.dart <package_name>
+```
+
+There is a handy _npm-script_ called **`set:versions`** inside the root-level `package.json` file. You could run that to update versions in all packages. Note that you do need [Node.js](https://nodejs.org) for this.
+
+```
+npm run set:versions
+```
+
+### 3. Changelog
+
+- Update the `CHANGELOG.md` file to include the changes introduced in the new version. Normally you would do this by adding a new bullet point for the version and follow the template from earlier versions.
+- If the changes are minimal, you can also append the change to an earlier bullet point but include the new version as a range. For example, the changes in `0.3.2+3` were minimal, so we added it as a range from the earlier version.
+
+```markdown
+## 0.3.0 - 0.3.2+3
+```
+
+### 4. Update the versions in the Getting Started Guide
+
+The versions of packages mentioned in the [Getting Started Guide](/getting-started) should match the `pubspec.yaml` files of each package.
+
+### 5. Git Push
+
+And that's it! The rest of the work will be automatically done by [Github Actions](https://github.com/mobxjs/mobx.dart/actions).
+The Build and Publish workflow will inspect
+the local and remote versions of the package and publish to `pub.dev` if newer. It will also tag the commit with the right
+tags following the format of: `<package-name>-<version-number>`

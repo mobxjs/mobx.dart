@@ -1,0 +1,224 @@
+---
+title: Github Repos
+slug: /examples/github-repos
+description: In this example, we will fetch the repositories for a github user. This will also show the use of an ObservableFuture with an Observer.
+---
+
+import { PubBadge } from '../../../src/components/PubBadge';
+
+In this example, we will use the <PubBadge name="github" /> package to fetch the repositories for a user. This will also show the use of an `ObservableFuture` with an `Observer`.
+
+> The full source code can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/github)
+
+## Define the observable state
+
+The first step is to define the reactive (aka _observable_) state of your UI. This gives you a good grounding on what is to be expected eventually on the UI itself.
+
+In this case, we want a simple UI where we accept the _github-ID_ as input. We use that to fetch the user's repositories. This call will be made using the <PubBadge name="github" /> package, the results for which are stored as a `List<Repository>`. The `GithubStore` class so far looks like so:
+
+```dart
+import 'package:github/server.dart';
+import 'package:mobx/mobx.dart';
+
+part 'github_store.g.dart';
+
+class GithubStore = _GithubStore with _$GithubStore;
+
+abstract class _GithubStore with Store {
+  final GitHub client = createGitHubClient();
+
+  List<Repository> repositories = [];
+
+  @observable
+  String user = '';
+
+}
+
+```
+
+Notice that we are not making the `repositories` into an observable field. Instead, we will make use of the `ObservableFuture` to track it.
+
+### Dealing with async
+
+The call to fetch repositories is an async operation. We do want to track and show the visual feedback while this network call is in progress. Such _async-operations_ are normally tracked with an `ObservableFuture`.
+
+> An `ObservableFuture` is a wrapper around a `Future` and gives you a way to react to the `status` changes.
+
+In our case, we will use one like below. The `ObservableFuture` is tracking the results, which is a `List<Repository>`.
+
+```dart
+abstract class _GithubStore with Store {
+  // ...
+
+  // We are starting with an empty future to avoid a null check
+  @observable
+  ObservableFuture<List<Repository>> fetchReposFuture = emptyResponse;
+
+  @computed
+  bool get hasResults =>
+      fetchReposFuture != emptyResponse &&
+      fetchReposFuture.status == FutureStatus.fulfilled;
+
+  static ObservableFuture<List<Repository>> emptyResponse =
+      ObservableFuture.value([]);
+
+  // ...
+}
+
+```
+
+A few things to note here:
+
+- The `fetchReposFuture` is marked as an `@observable`, because it will change its value when the network call is invoked. We start with an `emptyResponse` to avoid making null checks.
+- The `@computed` field `hasResults` is an easy way to know if there are results available. It is normally a good practice to create such _computed-fields_ to simplify the logic.
+
+### Adding the actions
+
+Now that we have our reactive state ready, we can focus on defining the actions that will mutate this state. We have two operations that will be invoked from the UI:
+
+- Setting the github-ID
+- Invoking the async operation to fetch the repos
+
+Both of these have been incorporated in the `_GithubStore` class:
+
+```dart
+abstract class _GithubStore with Store {
+  // ...
+
+  @action
+  Future<List<Repository>> fetchRepos() async {
+    repositories = [];
+    final future = client.repositories.listUserRepositories(user).toList();
+    fetchReposFuture = ObservableFuture(future);
+
+    return repositories = await future;
+  }
+
+  @action
+  void setUser(String text) {
+    fetchReposFuture = emptyResponse;
+    user = text;
+  }
+}
+
+```
+
+The interesting thing about `fetchRepos()` is that it is an **async-action**. MobX is smart enough to wrap the mutations inside an _action-construct_. This ensures there are no stray mutations once the async operation completes.
+
+And with that we are ready with our _observable state and actions_. Let's get on with the Flutter UI.
+
+## Tackle the UI
+
+The top-level widget is a `StatefulWidget` that holds the instance of the `GithubStore` and assembles all of the other _observer-Widgets_.
+
+```dart
+class GithubExample extends StatefulWidget {
+  const GithubExample();
+
+  @override
+  GithubExampleState createState() => GithubExampleState();
+}
+
+class GithubExampleState extends State<GithubExample> {
+  final GithubStore store = GithubStore();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: const Text('Github Repos'),
+      ),
+      body: Column(
+        children: <Widget>[
+          UserInput(store),
+          ShowError(store),
+          LoadingIndicator(store),
+          RepositoryListView(store)
+        ],
+      ));
+}
+
+```
+
+Most of the widgets in the `Column` should be self-explanatory. The simplest of these is the `LoadingIndicator`, a `StatelessWidget`, that tracks when the fetch operation is in progress. The `Observer` is from the <PubBadge name="flutter_mobx" /> package that tracks the use of _observables_ within its _builder-function_ and rebuilds on change. Notice we rely on the `fetchReposFuture` field, an `ObservableFuture`, to show the loading indicator when the `status` is _pending_.
+
+### LoadingIndicator
+
+```dart
+class LoadingIndicator extends StatelessWidget {
+  const LoadingIndicator(this.store);
+
+  final GithubStore store;
+
+  @override
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => store.fetchReposFuture.status == FutureStatus.pending
+          ? const LinearProgressIndicator()
+          : Container());
+}
+
+```
+
+### RepositoryListView
+
+The list-view for repositories also shows the state for an empty list of repos. If there is at least one repo, it will build the `ListView` and render the repositories. Notice the use of the computed field `hasResults`, which simplifies the overall logic of the component.
+
+```dart
+class RepositoryListView extends StatelessWidget {
+  const RepositoryListView(this.store);
+
+  final GithubStore store;
+
+  @override
+  Widget build(BuildContext context) => Expanded(
+        child: Observer(
+          builder: (_) {
+            if (!store.hasResults) {
+              return Container();
+            }
+
+            if (store.repositories.isEmpty) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text('We could not find any repos for user: '),
+                  Text(
+                    store.user,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              );
+            }
+
+            return ListView.builder(
+                itemCount: store.repositories.length,
+                itemBuilder: (_, int index) {
+                  final repo = store.repositories[index];
+                  return ListTile(
+                    title: Row(
+                      children: <Widget>[
+                        Text(
+                          repo.name,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(' (${repo.stargazersCount} ⭐️)'),
+                      ],
+                    ),
+                    subtitle: Text(repo.description ?? ''),
+                  );
+                });
+          },
+        ),
+      );
+}
+
+```
+
+## In Action
+
+Below you can see the example working for various use cases.
+
+import githubRepos from './github-repos.gif';
+
+<img src={githubRepos} />
+
+> The full source code can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/github)

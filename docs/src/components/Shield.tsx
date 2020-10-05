@@ -51,7 +51,7 @@ export const FlutterFavorite = () => (
   <div style={{ margin: '2rem 0' }}>
     <a href="https://flutter.dev/docs/development/packages-and-plugins/favorites">
       <img
-        src={require('../images/flutter-favorite.png')}
+        src={require('../images/flutter-favorite.png').default}
         height={128}
         alt="Flutter Favorite Badge"
       />

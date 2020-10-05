@@ -1,0 +1,220 @@
+---
+slug: /guides/json
+title: JSON Serialization of Stores
+description: Some techniques for serializing and deserializing JSON
+---
+
+import { PubBadge } from '../../src/components/PubBadge';
+
+The <PubBadge name="dart_json_mapper" /> package is a popular way to encode/decode between json representations of your models. It works by attaching the `@jsonSerializable` annotation to the `Store` classes. Since this is a custom annotation, we have to invoke the `build_runner` command, just like we do for `mobx_codegen`.
+
+Let's add support for `dart_json_mapper` to the **todos** example.
+
+> See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
+
+## Adding dependency in pubspec.yaml
+
+The first step is to include the dependency on the <PubBadge name="dart_json_mapper" /> and <PubBadge name="dart_json_mapper_mobx" /> packages. We add this to the `pubspec.yaml` and run `flutter packages get` to download it.
+
+```yaml
+dependencies:
+  dart_json_mapper: ^1.5.2
+  dart_json_mapper_mobx: ^1.2.0
+```
+
+## Configure `build.yaml`
+
+```yaml
+targets:
+  $default:
+    builders:
+      reflectable:
+        generate_for:
+          - lib/main.dart
+          - test/*_test.dart
+```
+
+## Configure `main.dart`
+
+```dart
+import 'package:dart_json_mapper/dart_json_mapper.dart' show JsonMapper;
+import 'package:dart_json_mapper_mobx/dart_json_mapper_mobx.dart' show mobXAdapter;
+
+import 'main.reflectable.dart' show initializeReflectable;
+
+void main() {
+  initializeReflectable();
+  JsonMapper().useAdapter(mobXAdapter);
+
+  runApp(const MyApp());
+}
+```
+
+## Adding annotations
+
+To make our store classes travel to JSON and back, we need to annotate them with `@jsonSerializable`:
+
+```dart
+import 'package:dart_json_mapper/dart_json_mapper.dart';
+import 'package:mobx/mobx.dart';
+
+part 'todo.g.dart';
+
+@jsonSerializable
+@Json(allowCircularReferences: 1)
+class Todo extends _Todo with _$Todo {
+  Todo(String description) : super(description);
+}
+
+enum VisibilityFilter { all, pending, completed }
+
+@jsonSerializable
+class TodoList extends _TodoList with _$TodoList {}
+
+@jsonSerializable
+abstract class _TodoList with Store {
+  @observable
+  ObservableList<Todo> todos = ObservableList<Todo>();
+
+  @observable
+  @JsonProperty(enumValues: VisibilityFilter.values)
+  VisibilityFilter filter = VisibilityFilter.all;
+
+  @observable
+  String currentDescription = '';
+
+  @computed
+  ObservableList<Todo> get pendingTodos =>
+      ObservableList.of(todos.where((todo) => todo.done != true));
+
+  @computed
+  ObservableList<Todo> get completedTodos =>
+      ObservableList.of(todos.where((todo) => todo.done == true));
+
+  @computed
+  bool get hasCompletedTodos => completedTodos.isNotEmpty;
+
+  @computed
+  bool get hasPendingTodos => pendingTodos.isNotEmpty;
+
+  @computed
+  String get itemsDescription {
+    if (todos.isEmpty) {
+      return "There are no Todos here. Why don't you add one?.";
+    }
+
+    final suffix = pendingTodos.length == 1 ? 'todo' : 'todos';
+    return '${pendingTodos.length} pending $suffix, ${completedTodos.length} completed';
+  }
+
+  @computed
+  @JsonProperty(ignore: true)
+  ObservableList<Todo> get visibleTodos {
+    switch (filter) {
+      case VisibilityFilter.pending:
+        return pendingTodos;
+      case VisibilityFilter.completed:
+        return completedTodos;
+      default:
+        return todos;
+    }
+  }
+
+  @computed
+  bool get canRemoveAllCompleted =>
+      hasCompletedTodos && filter != VisibilityFilter.pending;
+
+  @computed
+  bool get canMarkAllCompleted =>
+      hasPendingTodos && filter != VisibilityFilter.completed;
+
+  @action
+  void addTodo(String description) {
+    final todo = Todo(description);
+    todos.add(todo);
+    currentDescription = '';
+  }
+
+  @action
+  void removeTodo(Todo todo) {
+    todos.removeWhere((x) => x == todo);
+  }
+
+  @action
+  void removeCompleted() {
+    todos.removeWhere((todo) => todo.done);
+  }
+
+  @action
+  void markAllAsCompleted() {
+    for (final todo in todos) {
+      todo.done = true;
+    }
+  }
+}
+```
+
+## On with the code-generation
+
+With these changes, let's run the `build_runner` command in the project folder:
+
+```
+flutter packages pub run build_runner watch --delete-conflicting-outputs
+```
+
+This will generate `main.reflectable.dart` file, which you should add to your `.gitignore` as `*.reflectable.dart`.
+It's recommended not to commit this generated code to your repository, since it's 100% generated and essential for compile time only.
+
+## JSON Serialization / Deserialization
+
+```dart
+final list = TodoList();
+expect(list.todos.length, equals(0));
+
+list..addTodo('first one')..addTodo('second one');
+const targetJson = '''
+{
+ "todos": [
+  {
+   "description": "first one",
+   "done": false
+  },
+  {
+   "description": "second one",
+   "done": false
+  }
+ ],
+ "filter": "VisibilityFilter.all",
+ "currentDescription": "",
+ "pendingTodos": [
+  {
+   "description": "first one",
+   "done": false
+  },
+  {
+   "description": "second one",
+   "done": false
+  }
+ ],
+ "completedTodos": [],
+ "hasCompletedTodos": false,
+ "hasPendingTodos": true,
+ "itemsDescription": "2 pending todos, 0 completed",
+ "canRemoveAllCompleted": false,
+ "canMarkAllCompleted": true
+}''';
+
+final listJson = JsonMapper.serialize(list);
+expect(listJson, targetJson);
+
+final listInstance = JsonMapper.deserialize<TodoList>(listJson);
+expect(list.todos.length, listInstance.todos.length);
+expect(list.canMarkAllCompleted, listInstance.canMarkAllCompleted);
+expect(list.itemsDescription, listInstance.itemsDescription);
+```
+
+## Summary
+
+With these changes, you should now be able to serialize the **Todos** to/from `JSON` ✌️. BTW, its worth noting that `mobx_codegen` can co-exist with other generators.
+
+> See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).

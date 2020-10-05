@@ -1,0 +1,280 @@
+---
+slug: /guides/cheat-sheet
+title: MobX Cheat Sheet 🚀
+description: The MobX.dart cheat sheet
+---
+
+import { PubBadge } from '../../src/components/PubBadge';
+
+MobX has a pretty small API surface and tries to get out of your way as much as possible. Although minimal, there are few concepts you
+should be familiar with. This guide is meant to be a crash course in MobX.
+
+## Required Packages
+
+Make sure to have the following packages installed for working effectively with `MobX` and `Flutter`:
+
+1. <PubBadge name={'mobx'} />
+
+The main MobX package that includes `Observables`, `Actions`, and `Reactions`
+
+2. <PubBadge name={'flutter_mobx'} />
+
+Provides the `Observer` widget that auto-renders when the tracked observables change.
+
+3. <PubBadge name={'mobx_codegen'} />
+
+A powerful code-generator that greatly improves the developer experience with MobX. It provides annotations like
+`@observable`, `@computed`, `@action` which hides all the boilerplate in a separately generated file, `*.g.dart`.
+
+These packages should appear in your `pubspec.yaml` like below.
+
+```yaml
+dependencies:
+  mobx: ^0.4.0
+  flutter_mobx: ^0.3.6
+  mobx_codegen: ^0.4.1
+```
+
+## Declaring a Store class
+
+Every store in MobX should be declared with the following boilerplate. This is probably the only boilerplate that
+gets repeated. You could make this into a code-snippet in your IDE. Below, we are declaring a `Todo` store.
+
+```dart
+// todo.dart
+import 'package:mobx/mobx.dart';
+
+part 'todo.g.dart';
+
+class Todo = _Todo with _$Todo;
+
+abstract class _Todo with Store {
+  /* rest of the class*/
+}
+```
+
+> Note that the basename of the _part-file_ must match the _containing-file_ exactly! In the above case, the part
+> file is called `todo.g.dart`, which matches the `todo.dart` file in which it is contained. To generate the _part-file_,
+> you have to run the following command:
+>
+> ```
+> flutter packages pub run build_runner watch --delete-conflicting-outputs
+> ```
+>
+> Ya, it looks like a mouthful 🙃 but it does the job!
+
+## Adding @observable, @computed, @action
+
+_Observables_ are the reactive state of your store and _Actions_ are semantic operations that mutate them. _Computed
+Observables_ are read-only properties that depend on other observables and auto-update when any of the dependent
+observables change.
+
+```dart
+// contact.dart
+import 'package:mobx/mobx.dart';
+
+part 'contact.g.dart';
+
+class Contact = _Contact with _$Contact;
+
+abstract class _Contact with Store {
+  // highlight-next-line
+  @observable
+  String firstName;
+
+  // highlight-next-line
+  @observable
+  String lastName;
+
+  // highlight-next-line
+  @computed
+  String get fullName() => '$firstName, $lastName';
+
+  ObservableList<String> phoneNumbers = ObservableList.of([]);
+
+  // highlight-next-line
+  @action
+  void addPhone(String phone) {
+    phoneNumbers.add(phone);
+  }
+
+  // async action
+  // highlight-next-line
+  @action
+  Future<void> fetchPhoneNumbers() async {
+    final numbers = await contactService.fetchFor(firstName, lastName);
+    phoneNumbers = ObservableList.of(numbers);
+  }
+}
+
+```
+
+## Reactive wrappers
+
+MobX also comes with a set of wrapper-classes that add the reactive behavior. These include:
+
+- `ObservableList<T>`
+- `ObservableSet<T>`
+- `ObservableMap<K,V>`
+- `ObservableFuture<T>`
+- `ObservableStream<T>`
+
+> ### Reactive Extensions
+>
+> You can convert plain `List`, `Map`, `Set`, `Future` and `Stream` instances into an observable version with the `asObservable()` extension method.
+> For example, in the code-snippet above, you could do:
+>
+> ```dart
+> ObservableList<String> phoneNumbers = [].asObservable();
+> ```
+
+## Don't underestimate the @computed
+
+Although `@computed` looks like a simple, readonly observable, it can easily be your most powerful tool.
+By creating `@computed` properties that depend on other observables, you can dramatically simplify the UI code and
+eliminate most of the business logic inside your Widgets. It is most often used for hiding conditional logic and
+calculating some derived information.
+
+For example, rather than checking if some data is loaded successfully inside a Widget...
+
+```dart
+Widget build(BuildContext context) {
+  final store = Provider.of<Contact>(context);
+
+  return Observer(
+      builder: (_) {
+  // highlight-start
+        if (store.loadOperation != null &&
+            store.loadOperation.status == FutureStatus.fulfilled) {
+  // highlight-end
+          return ContactView(store);
+        }
+
+        return Container();
+      }
+  );
+}
+```
+
+...you can create a `@computed` property called `hasResults`...
+
+```dart
+class _Contact with Store {
+  /* rest of the class */
+
+  @observable ObservableFuture<void> loadOperation = null;
+
+  @computed
+  // highlight-start
+  bool get hasResults =>
+      loadOperation != null &&
+      loadOperation.status == FutureStatus.fulfilled;
+  // highlight-end
+}
+```
+
+...and simplify your widget logic...
+
+```dart
+Widget build(BuildContext context) {
+  final store = Provider.of<Contact>(context);
+
+  return Observer(
+      builder: (_) {
+  // highlight-next-line
+        if (store.hasResults) {
+          return ContactView(store);
+        }
+
+        return Container();
+      }
+  );
+}
+
+```
+
+...Since a `@computed` property is an observable, the `Observer` will automatically render when it changes!
+
+## Adding reactions
+
+_Reactions_, as the name suggests, react to changes in observables. Without reactions, it would be a boring system
+that only produces changes in _observables_ but nothing visible or useful ever happens because there are no reactions!
+
+There are 3 types of reactions: `autorun`, `reaction`, `when`. Each reaction returns a `ReactionDisposer`, which when called will dispose
+the reaction. Disposing a reaction stops tracking the observables.
+
+- `autorun`: Is a long-running reaction and starts tracking immediately.
+
+```dart
+// example.dart
+
+import 'package:mobx/mobx.dart';
+part 'example.g.dart';
+
+class Counter = _Counter with _$Counter;
+
+abstract class _Counter with Store {
+  @observable int counter = 0;
+  ReactionDisposer _dispose;
+
+  void setupReactions() {
+    _dispose = autorun((_){
+      print("Count is $counter");
+    });
+  }
+
+}
+
+```
+
+- `reaction`: Is a long-running reaction and starts tracking only after the first change. It runs the _effect_ when
+  any tracked observables change.
+
+```dart
+// example.dart
+
+import 'package:mobx/mobx.dart';
+part 'example.g.dart';
+
+class Counter = _Counter with _$Counter;
+
+abstract class _Counter with Store {
+  @observable int counter = 0;
+  ReactionDisposer _dispose;
+
+  void setupReactions() {
+    _dispose = reaction((_) => counter, (int newValue){
+      print("Count is now $newValue");
+    });
+  }
+
+}
+
+
+```
+
+- `when`: a reaction that waits for a condition to become true before running the _effect_. After running the effect,
+  it automatically disposes. Thus `when` is a one-time only reaction!.
+
+```dart
+// example.dart
+
+import 'package:mobx/mobx.dart';
+part 'example.g.dart';
+
+class Counter = _Counter with _$Counter;
+
+abstract class _Counter with Store {
+  @observable int counter = 0;
+  ReactionDisposer _dispose;
+
+  void setupReactions() {
+    _dispose = when((_) => counter > 10, (){
+      print("Count has reached the limit of 10");
+    });
+  }
+
+}
+
+
+```
