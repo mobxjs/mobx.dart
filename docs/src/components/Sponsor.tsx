@@ -10,11 +10,11 @@ export const Sponsor = ({ logo, url }) => {
 
 const sponsors = [
   {
-    logo: require('../../docs/images/publicis-sapient-sponsor.png').default,
+    logo: require('../images/publicis-sapient-sponsor.png').default,
     url: 'https://publicis.sapient.com',
   },
   {
-    logo: require('../../docs/images/wunderdog-sponsor.png').default,
+    logo: require('../images/wunderdog-sponsor.png').default,
     url: 'https://wunderdog.fi',
   },
   {

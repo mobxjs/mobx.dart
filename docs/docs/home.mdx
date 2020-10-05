@@ -7,7 +7,7 @@ slug: /
 ---
 
 import { PubBadge } from '../src/components/PubBadge';
-import book from './images/book.png';
+import book from '../src/images/book.png';
 import {
   BuildStatus,
   CoverageStatus,
@@ -17,7 +17,11 @@ import {
   PublishStatus,
 } from '../src/components/Shield';
 
-<img src={require('./images/mobx.png').default} alt={'MobX logo'} width={128} />
+<img
+  src={require('../src/images/mobx.png').default}
+  alt={'MobX logo'}
+  width={128}
+/>
 
 # [MobX](https://github.com/mobxjs/mobx) for Dart and Flutter
 

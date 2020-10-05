@@ -4,7 +4,7 @@ module.exports = {
   url: 'https://mobx.netlify.app',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  favicon: 'img/mobx.png',
+  favicon: 'mobx.png',
   organizationName: 'mobxjs', // Usually your GitHub org/user name.
   projectName: 'mobx.dart', // Usually your repo name.
   themeConfig: {
@@ -12,7 +12,7 @@ module.exports = {
       title: 'MobX.dart',
       logo: {
         alt: 'MobX.dart Logo',
-        src: 'img/mobx.svg',
+        src: 'mobx.svg',
       },
       items: [
         {

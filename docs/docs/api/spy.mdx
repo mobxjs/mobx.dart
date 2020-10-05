@@ -1,5 +1,6 @@
 ---
 title: Spy
+description: Spy exposes the internal workings of MobX and gives a deeper look into the reactive system.
 ---
 
 MobX so far has been somewhat of a black-box, nicely hiding the details of how its reactive system works internally. Some have seen this as "too much magic" and not sure of how/why things work. The problem exacerbates when you have runtime exceptions. The amount of detail exposed on the error may not be enough. It also lacks the complete trace of events that led to the failure.
@@ -10,7 +11,7 @@ MobX so far has been somewhat of a black-box, nicely hiding the details of how i
 - Enables better developer experience while debugging
 - Paves the way for integrating with other tools
 
-import spy from '../images/spy.png';
+import spy from '../../src/images/spy.png';
 
 <img src={spy} alt="Spy Characterization" />
 
@@ -74,7 +75,7 @@ Future<void> main() async {
 
 Running the counter example in the simulator gives the following output:
 
-import counterSpy from '../images/mobx-counter-spy.png';
+import counterSpy from '../../src/images/mobx-counter-spy.png';
 
 <img src={counterSpy} width={300} />
 

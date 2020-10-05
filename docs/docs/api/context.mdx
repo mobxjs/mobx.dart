@@ -1,5 +1,6 @@
 ---
 title: Context
+description: The MobX reactive system operates in a context where it is aware of the various observables and their linked reactions. All reactivity occurs within this context.
 ---
 
 The MobX reactive system operates in a context where it is aware of the various observables and their linked reactions. Within this context, if an observable changes, any linked reaction would automatically execute. By default, there is a singleton, top-level context called the **`mainContext`**. All reactivity occurs within this context.

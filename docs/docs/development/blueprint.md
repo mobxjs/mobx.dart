@@ -1,5 +1,6 @@
 ---
 title: Blueprint
+description: This document outlines the core behaviors of MobX that need to be implemented for an effective reactive system.
 ---
 
 This document outlines the core behaviors of MobX that need to be implemented for an effective reactive system.
