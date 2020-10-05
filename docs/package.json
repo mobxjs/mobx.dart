@@ -1,44 +1,42 @@
 {
-  "name": "mobx.dart-docs",
-  "description": "Documentation Website for MobX.dart",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mobxjs/mobx.dart.git"
-  },
-  "license": "MIT",
+  "name": "new-docs",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "docz dev --typescript",
-    "build": "docz build --typescript",
-    "serve": "docz serve"
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "serve": "docusaurus serve"
   },
   "dependencies": {
-    "dart-syntax-highlighting-only": "git+https://github.com/oscarcs/dart-syntax-highlighting-only.git",
-    "docz": "^2.3.1",
-    "gatsby-remark-vscode": "^2.1.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-helmet-async": "^1.0.7",
+    "@docusaurus/core": "2.0.0-alpha.65",
+    "@docusaurus/preset-classic": "2.0.0-alpha.65",
+    "@mdx-js/react": "^1.5.8",
+    "clsx": "^1.1.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "styled-components": "^5.2.0"
   },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
-    "@types/react": "^16.9.49",
-    "@types/react-dom": "^16.9.8",
-    "gatsby-transformer-remark": "^2.8.36",
-    "typescript": "^3.9.7"
-  },
-  "bugs": {
-    "url": "https://github.com/mobxjs/mobx.dart/issues"
-  },
-  "homepage": "https://github.com/mobxjs/mobx.dart#readme",
-  "version": "1.0.0",
-  "main": "doczrc.js",
-  "keywords": [
-    "mobx",
-    "flutter",
-    "dart",
-    "reactive",
-    "state",
-    "docs"
-  ],
-  "author": "Pavan Podila <pavan@pixelingene.com>"
+    "@docusaurus/module-type-aliases": "^2.0.0-alpha.51",
+    "@tsconfig/docusaurus": "^1.0.2",
+    "@types/react": "^16.9.50",
+    "@types/react-helmet": "^6.1.0",
+    "@types/react-router-dom": "^5.1.5",
+    "typescript": "^4.0.3"
+  }
 }
