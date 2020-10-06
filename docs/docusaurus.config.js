@@ -35,6 +35,23 @@ module.exports = {
       style: 'dark',
       links: [
         {
+          title: 'Learn',
+          items: [
+            {
+              label: 'Getting Started 🚀',
+              href: '/getting-started',
+            },
+            {
+              label: 'Cheat Sheet',
+              href: '/guides/cheat-sheet',
+            },
+            {
+              label: 'Core Concepts',
+              href: '/concepts',
+            },
+          ],
+        },
+        {
           title: 'Community',
           items: [
             {
@@ -46,8 +63,8 @@ module.exports = {
               href: 'https://discord.gg/dNHY52k',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/pavanpodila',
+              label: 'GitHub',
+              href: 'https://github.com/mobxjs/mobx.dart',
             },
           ],
         },
@@ -55,8 +72,8 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/mobxjs/mobx.dart',
+              label: 'Twitter',
+              href: 'https://twitter.com/pavanpodila',
             },
           ],
         },

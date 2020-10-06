@@ -1,13 +1,13 @@
 {
-  "name": "new-docs",
-  "version": "0.0.0",
+  "name": "mobx-dart-docs",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
     "serve": "docusaurus serve"
   },
   "dependencies": {
