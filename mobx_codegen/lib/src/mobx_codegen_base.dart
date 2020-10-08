@@ -17,20 +17,15 @@ class StoreGenerator extends Generator {
       return '';
     }
 
-    // TODO(shyndman): This ignored deprecation can be removed when we
-    // increase the analyzer dependency's lower bound to 0.39.1, and
-    // migrate to using `LibraryElement.typeSystem`.
-    // ignore: deprecated_member_use
-    final typeSystem = await library.allElements.first.session.typeSystem;
-    final file = StoreFileTemplate()
-      ..storeSources = _generateCodeForLibrary(library, typeSystem).toSet();
+    final typeSystem = library.element.typeSystem;
+    final file = StoreFileTemplate()..storeSources = _generateCodeForLibrary(library, typeSystem).toSet();
     return file.toString();
   }
 
   Iterable<String> _generateCodeForLibrary(
-    LibraryReader library,
-    TypeSystem typeSystem,
-  ) sync* {
+      LibraryReader library,
+      TypeSystem typeSystem,
+      ) sync* {
     for (final classElement in library.classes) {
       if (isMixinStoreClass(classElement)) {
         yield* _generateCodeForMixinStore(library, classElement, typeSystem);
@@ -39,10 +34,10 @@ class StoreGenerator extends Generator {
   }
 
   Iterable<String> _generateCodeForMixinStore(
-    LibraryReader library,
-    ClassElement baseClass,
-    TypeSystem typeSystem,
-  ) sync* {
+      LibraryReader library,
+      ClassElement baseClass,
+      TypeSystem typeSystem,
+      ) sync* {
     final typeNameFinder = LibraryScopedNameFinder(library.element);
     final otherClasses = library.classes.where((c) => c != baseClass);
     final mixedClass = otherClasses.firstWhere((c) {
@@ -55,30 +50,23 @@ class StoreGenerator extends Generator {
       // Apply the subclass' type arguments to the base type (if there are none
       // this has no impact), and perform a supertype check.
       return typeSystem.isSubtypeOf(
-          // TODO(shyndman): This ignored deprecation can be removed when we
-          // increase the analyzer dependency's lower bound to 0.38.2, and
-          // migrate to using `ClassElement.instantiate`.
-          // ignore: deprecated_member_use
-          c.type,
-          baseClass.instantiate(
-              typeArguments: c.supertype.typeArguments,
-              nullabilitySuffix: NullabilitySuffix.none));
+        c.thisType,
+        baseClass.instantiate(typeArguments: c.supertype.typeArguments, nullabilitySuffix: NullabilitySuffix.none),
+      );
     }, orElse: () => null);
 
     if (mixedClass != null) {
-      yield _generateCodeFromTemplate(
-          mixedClass.name, baseClass, MixinStoreTemplate(), typeNameFinder);
+      yield _generateCodeFromTemplate(mixedClass.name, baseClass, MixinStoreTemplate(), typeNameFinder);
     }
   }
 
   String _generateCodeFromTemplate(
-    String publicTypeName,
-    ClassElement userStoreClass,
-    StoreTemplate template,
-    LibraryScopedNameFinder typeNameFinder,
-  ) {
-    final visitor = StoreClassVisitor(
-        publicTypeName, userStoreClass, template, typeNameFinder);
+      String publicTypeName,
+      ClassElement userStoreClass,
+      StoreTemplate template,
+      LibraryScopedNameFinder typeNameFinder,
+      ) {
+    final visitor = StoreClassVisitor(publicTypeName, userStoreClass, template, typeNameFinder);
     userStoreClass
       ..accept(visitor)
       ..visitChildren(visitor);
