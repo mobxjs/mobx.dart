@@ -418,6 +418,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "leonardocustodio",
+      "name": "Leonardo Custodio",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5619696?v=4",
+      "profile": "http://www.inovatso.com.br",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
