@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Upgraded our `analyzer` dependency's to support a range from **0.39.1**, up to latest **0.40.x** in order to be compatible with other packages.
+
 ## 1.1.0+2
 
 - Reformatting for improving the pub.dev score
