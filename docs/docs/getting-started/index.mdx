@@ -24,16 +24,16 @@ Add the following **dependencies** to your `pubspec.yaml` file.
 
 ```yaml
 dependencies:
-  mobx: ^1.0.0
-  flutter_mobx: ^1.0.0
+  mobx: ^{{ plugins.mobx }}
+  flutter_mobx: ^{{ plugins.flutter_mobx }}
 ```
 
 Next add the following **dev_dependencies**:
 
 ```yaml
 dev_dependencies:
-  build_runner: ^1.7.2
-  mobx_codegen: ^1.0.0
+  build_runner: ^{{ plugins.build_runner }}
+  mobx_codegen: ^{{ plugins.mobx_codegen }}
 ```
 
 In your project folder, run this command to fetch all the packages:

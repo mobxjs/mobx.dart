@@ -99,5 +99,5 @@ final List<Example> examples = [
     description: 'A Fun Dice app.',
     path: '/dice',
     widgetBuilder: (_) => DiceExample(),
-  ),  
+  ),
 ];

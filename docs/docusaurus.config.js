@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   title: 'MobX.dart',
   tagline: 'Hassle free state-management for your Dart and Flutter apps',
@@ -105,6 +107,9 @@ module.exports = {
       trackingID: 'UA-60235345-4',
     },
   },
+  plugins: [
+    path.resolve(__dirname, './plugins/fetch-versions'),
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',

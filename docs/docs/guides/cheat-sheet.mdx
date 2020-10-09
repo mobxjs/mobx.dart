@@ -30,9 +30,12 @@ These packages should appear in your `pubspec.yaml` like below.
 
 ```yaml
 dependencies:
-  mobx: ^0.4.0
-  flutter_mobx: ^0.3.6
-  mobx_codegen: ^0.4.1
+  mobx: ^{{ plugins.mobx }}
+  flutter_mobx: ^{{ plugins.flutter_mobx }}
+
+dev_dependencies:
+  build_runner: ^{{ plugins.build_runner }}
+  mobx_codegen: ^{{ plugins.mobx_codegen }}
 ```
 
 ## Declaring a Store class
