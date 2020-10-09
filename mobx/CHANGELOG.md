@@ -1,4 +1,4 @@
-## 1.2.1+2
+## 1.2.1+2 - 1.2.1+3
 
 - Reformatting for improving the pub.dev score
 

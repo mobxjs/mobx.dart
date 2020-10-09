@@ -36,8 +36,8 @@ void setupThrowReactionErrors() {
   Dispose disposeReactionError;
 
   setUp(() => disposeReactionError = mainContext.onReactionError((_, rxn) {
-    throw Exception(rxn.errorValue);
-  }));
+        throw Exception(rxn.errorValue);
+      }));
 
   tearDown(() => disposeReactionError());
 }
