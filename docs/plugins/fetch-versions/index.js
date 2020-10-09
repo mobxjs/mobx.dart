@@ -12,7 +12,13 @@ const plugins = [
   },
   {
     pub: 'build_runner',
-  }
+  },
+  {
+    pub: 'dart_json_mapper',
+  },
+  {
+    pub: 'dart_json_mapper_mobx',
+  },
 ];
 
 // Fetch the plugins latest version from the pub API
@@ -72,7 +78,7 @@ module.exports = function sourceVersions() {
                 ...current,
                 [envVar]: JSON.stringify(process.env[envVar] || ''),
               };
-            }, {}),
+            }, {})
           ),
         ],
       };
