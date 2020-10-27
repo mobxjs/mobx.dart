@@ -152,14 +152,13 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       Atom(name: 'UserBase.prefixedTypedefCallback');
 
   @override
-  bool Function(io.X509Certificate, String, int) get prefixedTypedefCallback {
+  io.BadCertificateCallback get prefixedTypedefCallback {
     _$prefixedTypedefCallbackAtom.reportRead();
     return super.prefixedTypedefCallback;
   }
 
   @override
-  set prefixedTypedefCallback(
-      bool Function(io.X509Certificate, String, int) value) {
+  set prefixedTypedefCallback(io.BadCertificateCallback value) {
     _$prefixedTypedefCallbackAtom
         .reportWrite(value, super.prefixedTypedefCallback, () {
       super.prefixedTypedefCallback = value;

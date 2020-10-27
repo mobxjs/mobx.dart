@@ -1,3 +1,7 @@
+## 1.1.1+2
+
+- Fixed a test related to typedef-ed identifiers with prefixes
+
 ## 1.1.1 - 1.1.1+1
 
 - Upgraded our `analyzer` dependency's to support a range from **0.39.1**, up to latest **0.40.x** in order to be compatible with other packages.
