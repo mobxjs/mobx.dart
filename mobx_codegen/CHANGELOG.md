@@ -1,6 +1,7 @@
-## 1.1.1+2
+## 1.1.1+2 - 1.1.1+3
 
 - Fixed a test related to typedef-ed identifiers with prefixes
+- Fixed analyzer errors for the dev channel
 
 ## 1.1.1 - 1.1.1+1
 
