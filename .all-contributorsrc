@@ -427,6 +427,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "pr-1",
+      "name": "Prince Srivastava",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/26018750?v=4",
+      "profile": "https://aboutprince.in/",
+      "contributions": [
+        "example",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
