@@ -46,7 +46,7 @@ Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of `T
 
 - [x] a list of `Todo`s
 - [x] a `filter` that tracks the visibility-filter applied on the list of todos
-- [x] the `currentDescription`, which tracks the description entered by the user for a new todo.
+
 
 This can be seen with the `@observable` properties.
 
@@ -65,9 +65,6 @@ abstract class _TodoList with Store {
 
   @observable
   VisibilityFilter filter = VisibilityFilter.all;
-
-  @observable
-  String currentDescription = '';
 
 }
 ```
@@ -149,7 +146,6 @@ abstract class _TodoList with Store {
   void addTodo(String description) {
     final todo = Todo(description);
     todos.add(todo);
-    currentDescription = '';
   }
 
   @action
@@ -157,9 +153,7 @@ abstract class _TodoList with Store {
     todos.removeWhere((x) => x == todo);
   }
 
-  @action
-  void changeDescription(String description) =>
-      currentDescription = description;
+
 
   @action
   void changeFilter(VisibilityFilter filter) => this.filter = filter;
@@ -193,9 +187,6 @@ abstract class _TodoList with Store {
 
   @observable
   VisibilityFilter filter = VisibilityFilter.all;
-
-  @observable
-  String currentDescription = '';
 
   @computed
   ObservableList<Todo> get pendingTodos =>
@@ -245,17 +236,12 @@ abstract class _TodoList with Store {
   void addTodo(String description) {
     final todo = Todo(description);
     todos.add(todo);
-    currentDescription = '';
   }
 
   @action
   void removeTodo(Todo todo) {
     todos.removeWhere((x) => x == todo);
   }
-
-  @action
-  void changeDescription(String description) =>
-      currentDescription = description;
 
   @action
   void changeFilter(VisibilityFilter filter) => this.filter = filter;
@@ -380,7 +366,7 @@ class TodoListView extends StatelessWidget {
 
 **AddTodo**
 
-Similarly, here is the `AddTodo` widget that observes the `list.currentDescription` and also fires the `list.changeDescription` action.
+Similarly, here is the `AddTodo` widget that fires the `list.addTodo` action.
 
 ```dart
 class AddTodo extends StatelessWidget {
@@ -395,9 +381,7 @@ class AddTodo extends StatelessWidget {
       decoration: const InputDecoration(
           labelText: 'Add a Todo', contentPadding: EdgeInsets.all(8)),
       controller: _textController,
-      onChanged: (String newValue) {
-        list.currentDescription = newValue;
-      },
+      textInputAction: TextInputAction.done,
       onSubmitted: (String value) {
         list.addTodo(value);
         _textController.clear();
