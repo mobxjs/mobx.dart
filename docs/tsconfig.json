@@ -1,9 +1,11 @@
 {
+  "extends": "@tsconfig/docusaurus/tsconfig.json",
+  "include": ["src/"],
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "allowJs": true,
     "jsx": "react"
   },

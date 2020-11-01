@@ -418,6 +418,25 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "leonardocustodio",
+      "name": "Leonardo Custodio",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5619696?v=4",
+      "profile": "http://www.inovatso.com.br",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "pr-1",
+      "name": "Prince Srivastava",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/26018750?v=4",
+      "profile": "https://aboutprince.in/",
+      "contributions": [
+        "example",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

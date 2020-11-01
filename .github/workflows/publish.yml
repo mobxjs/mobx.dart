@@ -6,12 +6,12 @@ on:
       - master
 
 jobs:
-  build_dart_packages:
+  publish_dart_packages:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        package: ["mobx", "mobx_codegen"]
+        package: [ "mobx", "mobx_codegen" ]
 
     steps:
       - uses: actions/checkout@v2
@@ -32,12 +32,12 @@ jobs:
           TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  build_flutter_packages:
+  publish_flutter_packages:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        package: ["flutter_mobx"]
+        package: [ "flutter_mobx" ]
 
     steps:
       - uses: actions/checkout@v2

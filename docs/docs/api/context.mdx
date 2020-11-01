@@ -1,0 +1,52 @@
+---
+title: Context
+description: The MobX reactive system operates in a context where it is aware of the various observables and their linked reactions. All reactivity occurs within this context.
+---
+
+The MobX reactive system operates in a context where it is aware of the various observables and their linked reactions. Within this context, if an observable changes, any linked reaction would automatically execute. By default, there is a singleton, top-level context called the **`mainContext`**. All reactivity occurs within this context.
+
+> Creating custom context is an advanced feature and not needed for your normal usage.
+
+However, MobX also allows you to create your own context and run reactions specifically within that. This is useful if you have independent reactive systems that don't need to share the same context. Imagine a library that uses MobX internally to run some reactivity. If that library is used in a Flutter app, which is also using MobX, there is no need for the library and the app to share the `mainContext`. This is a good use-case for creating a custom context.
+
+## ReactiveContext
+
+### `ReactiveContext({ReactiveConfig config})`
+
+Create a `ReactiveContext` by passing a configuration object. If no configuration is passed, it will use the defaults.
+
+## ReactiveConfig
+
+### `ReactiveConfig({bool disableErrorBoundaries, ReactiveWritePolicy writePolicy, ReactiveReadPolicy readPolicy, int maxIterations})`
+
+- **`disableErrorBoundaries`**: When `true`, MobX will not guard against exceptions thrown during reactions. By default, it is `false`, which means MobX will catch unhandled exceptions and ensure the consistency of the reactive system.
+- **`writePolicy`**: This is an enumeration of the various behaviors in MobX for dealing with stray observable mutations. Stray mutations are those that are **not** wrapped in actions. By default, it is set to `observed`. This means if there is an observable which is being observed and you mutate it outside of an action, MobX will throw an exception.
+
+```dart
+enum ReactiveWritePolicy { observed, always, never }
+```
+
+- **`readPolicy`**: This controls the behavior for reading observable values. Typically these values are only read in a reactive context like an `action` or `reaction`. Reading it outside doesn't result in any notifications getting fired. Use the `ReactiveReadPolicy` to control this. By **default** we have turned off reactive-reads, which means you can read observables wherever you like.
+
+```dart
+enum ReactiveReadPolicy { always, never }
+```
+
+- **`maxIterations`**: This is the number of iterations MobX will run through before treating the reaction as _unstable_. At this point, it will throw an exception. Unstable reactions do not settle down and keep on triggering more reactions. This is most likely due to a cyclical chain of dependencies. The **default** is set to `100`.
+
+## Reactive Policies
+
+### `enum ReactiveReadPolicy { always, never }`
+
+This controls the behavior for reading observables. Typically these values are only read inside a reactive context like an `Action` or `Reaction`. Reading it outside has no effect as no read-notifications will be fired. This policy will be enforced in the getter for the observable value. The policy is also applied for `ObservableList`, `ObservableSet` and `ObservableMap`.
+
+- **`always`**: Always enforce the reads to happen inside a reactive context like an `Action` or `Reaction`.
+- **`never`**: Never enforce the read-policy. This allows reads to happen everywhere. This is the **default**.
+
+### `enum ReactiveWritePolicy { observed, always, never }`
+
+The write-policy ensures there are no stray mutations of observables. These are applicable for all observables including, singular `Observable` and collections like `ObservableList`, `ObservableSet` and `ObservableMap`.
+
+- **`always`**: Always enforce the writes to happen inside an `Action`.
+- **`never`**: Never enforce the write-policy. This means mutations can happen everywhere. We discourage this option as it can result in stray-writes and they lack the benefits of an `Action`.
+- **`observed`**: Enforce the mutation to happen inside an `Action`, only if the observable being mutated is being _observed_ in a `Reaction`. This is a middle ground between the `always` and `never` option. If the observable is not being observed, we allow the mutation and consider it safe. This is the **default** value.

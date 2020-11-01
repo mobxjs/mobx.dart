@@ -1,9 +1,3 @@
-#[[redirects]]
-#  from = "https://mobx.netlify.com/*"
-#  to = "https://mobx.pub/:splat"
-#  status = 301
-#  force = true
-
 [[redirects]]
   from = "/*"
   to = "/index.html"

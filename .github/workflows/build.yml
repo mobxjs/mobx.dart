@@ -19,11 +19,11 @@ jobs:
 
       - name: Install dependencies
         working-directory: ${{ matrix.package }}
-        run: pub get
+        run: dart pub get
 
       - name: Analyze
         working-directory: ${{ matrix.package }}
-        run: dartanalyzer --fatal-infos --fatal-warnings .
+        run: dart analyze --fatal-infos --fatal-warnings .
 
       - name: Run tests
         working-directory: ${{ matrix.package }}
