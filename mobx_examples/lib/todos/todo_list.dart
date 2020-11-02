@@ -5,6 +5,7 @@ import 'todo.dart';
 
 part 'todo_list.g.dart';
 
+@jsonSerializable
 enum VisibilityFilter { all, pending, completed }
 
 @jsonSerializable
@@ -16,8 +17,8 @@ abstract class _TodoList with Store {
   ObservableList<Todo> todos = ObservableList<Todo>();
 
   @observable
-  @JsonProperty(enumValues: VisibilityFilter.values)
-  VisibilityFilter filter = VisibilityFilter.all;
+  @JsonProperty(defaultValue: VisibilityFilter.all)
+  VisibilityFilter filter;
 
   @computed
   ObservableList<Todo> get pendingTodos =>
