@@ -437,6 +437,15 @@
         "example",
         "code"
       ]
+    },
+    {
+      "login": "muhajirdev",
+      "name": "Muhammad Muhajir",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12745166?v=4",
+      "profile": "http://muhajir.dev",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
