@@ -1,3 +1,8 @@
+## 1.1.2
+
+- Fixing some analyzer errors related to deprecated types. Now using the 
+newer types as the analyzer package has been upgraded to `^0.39`
+
 ## 1.1.1+2 - 1.1.1+3
 
 - Fixed a test related to typedef-ed identifiers with prefixes
