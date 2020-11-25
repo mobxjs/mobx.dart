@@ -10,7 +10,7 @@ description: A set of examples showing effective use of MobX.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   mobx: ^1.1.1
