@@ -10,9 +10,8 @@ class NotificationHandlers<TNotification> {
   Dispose add(covariant Function handler) {
     // ignore: prefer_collection_literals
     _handlers ??= LinkedHashSet<Function>();
-
-    final listeners = _handlers?..add(handler);
-    return () => listeners?.remove(handler);
+    final listeners = _handlers!..add(handler);
+    return () => listeners.remove(handler);
   }
 
   bool get hasHandlers => _handlers?.isNotEmpty ?? false;

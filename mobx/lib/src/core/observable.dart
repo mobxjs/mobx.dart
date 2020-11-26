@@ -22,11 +22,11 @@ class Observable<T> extends Atom
   /// print('x = ${x.value}'); // read an Observable's value
   /// ```
   factory Observable(T initialValue,
-          {String name, ReactiveContext context, EqualityComparer<T> equals}) =>
+          {String? name, ReactiveContext? context, EqualityComparer<T>? equals}) =>
       Observable._(context ?? mainContext, initialValue,
           name: name, equals: equals);
 
-  Observable._(ReactiveContext context, this._value, {String name, this.equals})
+  Observable._(ReactiveContext context, this._value, {String? name, this.equals})
       : _interceptors = Interceptors(context),
         _listeners = Listeners(context),
         super._(context, name: name ?? context.nameFor('Observable')) {
@@ -38,7 +38,7 @@ class Observable<T> extends Atom
 
   final Interceptors<T> _interceptors;
   final Listeners<ChangeNotification<T>> _listeners;
-  final EqualityComparer<T> equals;
+  final EqualityComparer<T>? equals;
 
   T _value;
 
@@ -54,11 +54,12 @@ class Observable<T> extends Atom
     _context.enforceWritePolicy(this);
 
     final oldValue = _value;
-    final newValue = _prepareNewValue(value);
+    final newValueDynamic = _prepareNewValue(value);
 
-    if (newValue == WillChangeNotification.unchanged) {
+    if (newValueDynamic == WillChangeNotification.unchanged) {
       return;
     }
+    final newValue = newValueDynamic as T;
 
     final notifySpy = _context.isSpyEnabled;
 
@@ -86,7 +87,7 @@ class Observable<T> extends Atom
   }
 
   dynamic _prepareNewValue(T newValue) {
-    var prepared = newValue;
+    T? prepared = newValue;
     if (_interceptors.hasHandlers) {
       final change = _interceptors.interceptChange(WillChangeNotification(
           newValue: prepared, type: OperationType.update, object: this));
@@ -99,14 +100,14 @@ class Observable<T> extends Atom
     }
 
     final areEqual =
-        equals == null ? prepared == value : equals(prepared, _value);
+        equals == null ? prepared == value : equals!(prepared, _value);
 
     return (!areEqual) ? prepared : WillChangeNotification.unchanged;
   }
 
   @override
   Dispose observe(Listener<ChangeNotification<T>> listener,
-      {bool fireImmediately}) {
+      {bool fireImmediately = false}) {
     if (fireImmediately == true) {
       listener(ChangeNotification<T>(
           type: OperationType.update,

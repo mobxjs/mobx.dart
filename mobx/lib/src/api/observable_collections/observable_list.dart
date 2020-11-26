@@ -1,6 +1,6 @@
 part of '../observable_collections.dart';
 
-Atom _observableListAtom<T>(ReactiveContext context, String name) {
+Atom _observableListAtom<T>(ReactiveContext? context, String? name) {
   final ctx = context ?? mainContext;
   return Atom(name: name ?? ctx.nameFor('ObservableList<$T>'), context: ctx);
 }
@@ -25,22 +25,22 @@ class ObservableList<T>
         ListMixin<T>
     implements
         Listenable<ListChange<T>> {
-  ObservableList({ReactiveContext context, String name})
+  ObservableList({ReactiveContext? context, String? name})
       : this._wrap(context, _observableListAtom<T>(context, name), []);
 
   ObservableList.of(Iterable<T> elements,
-      {ReactiveContext context, String name})
+      {ReactiveContext? context, String? name})
       : this._wrap(context, _observableListAtom<T>(context, name),
             List<T>.of(elements, growable: true));
 
-  ObservableList._wrap(ReactiveContext context, this._atom, this._list)
+  ObservableList._wrap(ReactiveContext? context, this._atom, this._list)
       : _context = context ?? mainContext;
 
   final ReactiveContext _context;
   final Atom _atom;
   final List<T> _list;
 
-  Listeners<ListChange<T>> _listenersField;
+  Listeners<ListChange<T>>? _listenersField;
 
   Listeners<ListChange<T>> get _listeners =>
       _listenersField ??= Listeners(_context);
@@ -130,7 +130,7 @@ class ObservableList<T>
   }
 
   @override
-  int lastIndexWhere(bool Function(T element) test, [int start]) {
+  int lastIndexWhere(bool Function(T element) test, [int? start]) {
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
@@ -138,7 +138,7 @@ class ObservableList<T>
   }
 
   @override
-  T lastWhere(bool Function(T element) test, {T Function() orElse}) {
+  T lastWhere(bool Function(T element) test, {T Function()? orElse}) {
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
@@ -154,7 +154,7 @@ class ObservableList<T>
   }
 
   @override
-  List<T> sublist(int start, [int end]) {
+  List<T> sublist(int start, [int? end]) {
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
@@ -198,7 +198,7 @@ class ObservableList<T>
   }
 
   @override
-  void fillRange(int start, int end, [T fill]) {
+  void fillRange(int start, int end, [T? fill]) {
     _context.conditionallyRunInAction(() {
       if (end > start) {
         final oldContents = _list.sublist(start, end);
@@ -228,11 +228,11 @@ class ObservableList<T>
   }
 
   @override
-  bool remove(Object element) {
+  bool remove(Object? element) {
     var didRemove = false;
 
     _context.conditionallyRunInAction(() {
-      final index = _list.indexOf(element);
+      final index = _list.indexOf(element as T);
       if (index >= 0) {
         _list.removeAt(index);
         _notifyElementUpdate(index, null, element, type: OperationType.remove);
@@ -245,7 +245,7 @@ class ObservableList<T>
 
   @override
   T removeAt(int index) {
-    T value;
+    late T value;
 
     _context.conditionallyRunInAction(() {
       value = _list.removeAt(index);
@@ -257,7 +257,7 @@ class ObservableList<T>
 
   @override
   T removeLast() {
-    T value;
+    late T value;
 
     _context.conditionallyRunInAction(() {
       value = _list.removeLast();
@@ -283,7 +283,7 @@ class ObservableList<T>
   @override
   void removeWhere(bool Function(T element) test) {
     _context.conditionallyRunInAction(() {
-      final removedElements = Queue<ElementChange>();
+      final removedElements = Queue<ElementChange<T>>();
       for (var i = _list.length - 1; i >= 0; --i) {
         final element = _list[i];
         if (test(element)) {
@@ -313,7 +313,7 @@ class ObservableList<T>
   @override
   void retainWhere(bool Function(T element) test) {
     _context.conditionallyRunInAction(() {
-      final removedElements = Queue<ElementChange>();
+      final removedElements = Queue<ElementChange<T>>();
       for (var i = _list.length - 1; i >= 0; --i) {
         final element = _list[i];
         if (!test(element)) {
@@ -354,12 +354,12 @@ class ObservableList<T>
   }
 
   @override
-  void shuffle([Random random]) {
+  void shuffle([Random? random]) {
     _context.conditionallyRunInAction(() {
       if (_list.isNotEmpty) {
         final oldList = _list.toList(growable: false);
         _list.shuffle(random);
-        final changes = <ElementChange>[];
+        final changes = <ElementChange<T>>[];
         for (var i = 0; i < _list.length; ++i) {
           final oldValue = oldList[i];
           final newValue = _list[i];
@@ -376,12 +376,12 @@ class ObservableList<T>
   }
 
   @override
-  void sort([int Function(T a, T b) compare]) {
+  void sort([int Function(T a, T b)? compare]) {
     _context.conditionallyRunInAction(() {
       if (_list.isNotEmpty) {
         final oldList = _list.toList(growable: false);
         _list.sort(compare);
-        final changes = <ElementChange>[];
+        final changes = <ElementChange<T>>[];
         for (var i = 0; i < _list.length; ++i) {
           final oldValue = oldList[i];
           final newValue = _list[i];
@@ -402,9 +402,9 @@ class ObservableList<T>
   /// You can choose to receive the change notification immediately (with [fireImmediately])
   /// or on the first change
   @override
-  Dispose observe(Listener<ListChange<T>> listener, {bool fireImmediately}) {
+  Dispose observe(Listener<ListChange<T>> listener, {bool fireImmediately = false}) {
     if (fireImmediately == true) {
-      final change = ListChange(list: this, rangeChanges: <RangeChange>[
+      final change = ListChange<T>(list: this, rangeChanges: <RangeChange<T>>[
         RangeChange(index: 0, newValues: toList(growable: false))
       ]);
       listener(change);
@@ -413,11 +413,11 @@ class ObservableList<T>
     return _listeners.add(listener);
   }
 
-  void _notifyElementUpdate(int index, T newValue, T oldValue,
+  void _notifyElementUpdate(int index, T? newValue, T? oldValue,
       {OperationType type = OperationType.update}) {
     _atom.reportChanged();
 
-    final change = ListChange(list: this, elementChanges: <ElementChange>[
+    final change = ListChange<T>(list: this, elementChanges: <ElementChange<T>>[
       ElementChange(
           index: index, newValue: newValue, oldValue: oldValue, type: type)
     ]);
@@ -425,18 +425,18 @@ class ObservableList<T>
     _listeners.notifyListeners(change);
   }
 
-  void _notifyElementsUpdate(final List<ElementChange> elementChanges) {
+  void _notifyElementsUpdate(final List<ElementChange<T>> elementChanges) {
     _atom.reportChanged();
 
-    final change = ListChange(list: this, elementChanges: elementChanges);
+    final change = ListChange<T>(list: this, elementChanges: elementChanges);
 
     _listeners.notifyListeners(change);
   }
 
-  void _notifyRangeUpdate(int index, List<T> newValues, List<T> oldValues) {
+  void _notifyRangeUpdate(int index, List<T>? newValues, List<T>? oldValues) {
     _atom.reportChanged();
 
-    final change = ListChange(list: this, rangeChanges: <RangeChange>[
+    final change = ListChange<T>(list: this, rangeChanges: <RangeChange<T>>[
       RangeChange(index: index, newValues: newValues, oldValues: oldValues)
     ]);
 
@@ -459,7 +459,7 @@ typedef ListChangeListener<TNotification> = void Function(
 /// was removed from the list.
 class ElementChange<T> {
   ElementChange(
-      {@required this.index,
+      {required this.index,
       this.type = OperationType.update,
       this.newValue,
       this.oldValue})
@@ -467,8 +467,8 @@ class ElementChange<T> {
 
   final int index;
   final OperationType type;
-  final T newValue;
-  final T oldValue;
+  final T? newValue;
+  final T? oldValue;
 }
 
 /// Stores the change of values in a range of [ObservableList] started with specific [index].
@@ -482,12 +482,12 @@ class ElementChange<T> {
 /// The elements were removed from the list if [oldValues] is set and not empty, and [newValues]
 /// is null.
 class RangeChange<T> {
-  RangeChange({@required this.index, this.newValues, this.oldValues})
+  RangeChange({required this.index, this.newValues, this.oldValues})
       : assert(index != null);
 
   final int index;
-  final List<T> newValues;
-  final List<T> oldValues;
+  final List<T>? newValues;
+  final List<T>? oldValues;
 }
 
 /// Stores the change related information when items was modified, added or removed from [list].
@@ -498,11 +498,11 @@ class RangeChange<T> {
 /// These two objects cannot overlap (cannot contain the same indexes of changed elements), in
 /// most cases only one of them will be defined.
 class ListChange<T> {
-  ListChange({this.list, this.elementChanges, this.rangeChanges});
+  ListChange({required this.list, this.elementChanges, this.rangeChanges});
 
   final ObservableList<T> list;
-  final List<ElementChange> elementChanges;
-  final List<RangeChange> rangeChanges;
+  final List<ElementChange<T>>? elementChanges;
+  final List<RangeChange<T>>? rangeChanges;
 }
 
 /// Used during testing for wrapping a regular `List<T>` as an `ObservableList<T>`

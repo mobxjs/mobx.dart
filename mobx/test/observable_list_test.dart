@@ -1,3 +1,7 @@
+// @dart = 2.10
+
+import 'dart:math';
+
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core.dart';
 import 'package:mobx/src/api/observable_collections.dart';
@@ -712,7 +716,7 @@ void main() {
         return true;
       },
       'shuffle': (_) {
-        _.shuffle();
+        _.shuffle(Random(0));
         return true;
       },
       'retainWhere': (_) {

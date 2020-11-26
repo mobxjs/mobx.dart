@@ -37,7 +37,7 @@ class MobXCyclicReactionException extends MobXException {
 
 /// This captures the stack trace when user-land code throws an exception
 class MobXCaughtException extends MobXException {
-  MobXCaughtException(exception, {required StackTrace stackTrace})
+  MobXCaughtException(Object exception, {required StackTrace stackTrace})
       : _exception = exception,
         _stackTrace = stackTrace,
         super('MobXCaughtException: $exception');
@@ -48,8 +48,8 @@ class MobXCaughtException extends MobXException {
   Object get exception => _exception;
 
   @override
-  StackTrace get stackTrace => _stackTrace;
+  StackTrace? get stackTrace => _stackTrace;
 }
 
 typedef Dispose = void Function();
-typedef EqualityComparer<T> = bool Function(T, T);
+typedef EqualityComparer<T> = bool Function(T?, T?);

@@ -14,5 +14,5 @@ final ReactiveContext mainContext = createContext(config: ReactiveConfig.main);
 /// this context in calls to `autorun`, `reaction`, `when`, `action`, `observable`, etc.
 ///
 /// Most of the time you should be fine with the [mainContext]
-ReactiveContext createContext({ReactiveConfig config}) =>
+ReactiveContext createContext({ReactiveConfig? config}) =>
     ReactiveContext(config: config);

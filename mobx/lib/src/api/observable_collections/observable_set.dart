@@ -1,6 +1,6 @@
 part of '../observable_collections.dart';
 
-Atom _observableSetAtom<T>(ReactiveContext context, String name) =>
+Atom _observableSetAtom<T>(ReactiveContext context, String? name) =>
     Atom(name: name ?? context.nameFor('ObservableSet<$T>'), context: context);
 
 /// ObservableSet provides a reactive set that notifies changes when a member is added or removed.
@@ -21,19 +21,19 @@ class ObservableSet<T>
         SetMixin<T>
     implements
         Listenable<SetChange<T>> {
-  ObservableSet({ReactiveContext context, String name})
+  ObservableSet({ReactiveContext? context, String? name})
       : this._(context ?? mainContext, HashSet(), name);
 
-  ObservableSet.of(Iterable<T> other, {ReactiveContext context, String name})
+  ObservableSet.of(Iterable<T> other, {ReactiveContext? context, String? name})
       : this._(context ?? mainContext, HashSet.of(other), name);
 
   ObservableSet.linkedHashSetFrom(Iterable<T> other,
-      {bool Function(T, T) equals,
-      int Function(T) hashCode,
+      {bool Function(T, T)? equals,
+      int Function(T)? hashCode,
       // ignore:avoid_annotating_with_dynamic
-      bool Function(dynamic) isValidKey,
-      ReactiveContext context,
-      String name})
+      bool Function(dynamic)? isValidKey,
+      ReactiveContext? context,
+      String? name})
       : this._(
             context ?? mainContext,
             // ignore: prefer_collection_literals
@@ -43,17 +43,17 @@ class ObservableSet<T>
             name);
 
   ObservableSet.splayTreeSetFrom(Iterable<T> other,
-      {int Function(T, T) compare,
+      {int Function(T, T)? compare,
       // ignore:avoid_annotating_with_dynamic
-      bool Function(dynamic) isValidKey,
-      ReactiveContext context,
-      String name})
+      bool Function(dynamic)? isValidKey,
+      ReactiveContext? context,
+      String? name})
       : this._(context ?? mainContext,
             SplayTreeSet.of(other, compare, isValidKey), name);
 
   ObservableSet._wrap(this._context, this._atom, this._set);
 
-  ObservableSet._(this._context, Set<T> wrapped, String name)
+  ObservableSet._(this._context, Set<T> wrapped, String? name)
       : _atom = _observableSetAtom(_context, name),
         _set = wrapped;
 
@@ -63,13 +63,13 @@ class ObservableSet<T>
 
   String get name => _atom.name;
 
-  Listeners<SetChange<T>> _listenersField;
+  Listeners<SetChange<T>>? _listenersField;
 
   Listeners<SetChange<T>> get _listeners =>
       _listenersField ??= Listeners(_context);
 
   bool get _hasListeners =>
-      _listenersField != null && _listenersField.hasHandlers;
+      _listenersField != null && _listenersField!.hasHandlers;
 
   @override
   bool add(T value) {
@@ -91,7 +91,7 @@ class ObservableSet<T>
   }
 
   @override
-  bool contains(Object element) {
+  bool contains(Object? element) {
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
@@ -110,7 +110,7 @@ class ObservableSet<T>
   }
 
   @override
-  T lookup(Object element) {
+  T? lookup(Object? element) {
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
@@ -118,14 +118,14 @@ class ObservableSet<T>
   }
 
   @override
-  bool remove(Object value) {
+  bool remove(Object? value) {
     var removed = false;
 
     _context.conditionallyRunInAction(() {
       removed = _set.remove(value);
 
       if (removed && _hasListeners) {
-        _reportRemove(value);
+        _reportRemove(value as T?);
       }
 
       if (removed) {
@@ -164,7 +164,7 @@ class ObservableSet<T>
   /// Attaches a listener to changes happening in the [ObservableSet]. You have
   /// the option to be notified immediately ([fireImmediately]) or wait for until the first change.
   @override
-  Dispose observe(SetChangeListener<T> listener, {bool fireImmediately}) {
+  Dispose observe(SetChangeListener<T> listener, {bool fireImmediately = false}) {
     final dispose = _listeners.add(listener);
     if (fireImmediately == true) {
       _set.forEach(_reportAdd);
@@ -180,7 +180,7 @@ class ObservableSet<T>
     ));
   }
 
-  void _reportRemove(T value) {
+  void _reportRemove(T? value) {
     _listeners.notifyListeners(SetChange(
       object: this,
       type: OperationType.remove,
@@ -229,13 +229,13 @@ typedef SetChangeListener<T> = void Function(SetChange<T>);
 /// as the notification instance.
 class SetChange<T> {
   SetChange({
-    @required this.object,
-    @required this.type,
-    @required this.value,
+    required this.object,
+    required this.type,
+    required this.value,
   })  : assert(object != null),
         assert(type != null);
 
   final ObservableSet<T> object;
   final OperationType type;
-  final T value;
+  final T? value;
 }

@@ -24,14 +24,14 @@ enum DerivationState {
 }
 
 abstract class Derivation {
-  String get name;
-  Set<Atom> _observables;
-  Set<Atom> _newObservables;
+  String? get name;
+  late Set<Atom> _observables;
+  Set<Atom>? _newObservables;
 
-  MobXCaughtException _errorValue;
-  MobXCaughtException get errorValue;
+  MobXCaughtException? _errorValue;
+  MobXCaughtException? get errorValue;
 
-  DerivationState _dependenciesState;
+  late DerivationState _dependenciesState;
 
   void _onBecomeStale();
 

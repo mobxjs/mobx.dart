@@ -10,17 +10,17 @@ abstract class Reaction implements Derivation {
 
 class ReactionImpl implements Reaction {
   ReactionImpl(this._context, Function() onInvalidate,
-      {this.name, void Function(Object, Reaction) onError})
+      {required this.name, void Function(Object, Reaction)? onError})
       : assert(_context != null),
         assert(onInvalidate != null) {
     _onInvalidate = onInvalidate;
     _onError = onError;
   }
 
-  void Function(Object, ReactionImpl) _onError;
+  void Function(Object, ReactionImpl)? _onError;
 
   final ReactiveContext _context;
-  void Function() _onInvalidate;
+  late void Function() _onInvalidate;
   bool _isScheduled = false;
   bool _isDisposed = false;
   bool _isRunning = false;
@@ -29,7 +29,7 @@ class ReactionImpl implements Reaction {
   final String name;
 
   @override
-  Set<Atom> _newObservables;
+  Set<Atom>? _newObservables;
 
   @override
   // ignore: prefer_final_fields
@@ -42,10 +42,10 @@ class ReactionImpl implements Reaction {
   DerivationState _dependenciesState = DerivationState.notTracking;
 
   @override
-  MobXCaughtException _errorValue;
+  MobXCaughtException? _errorValue;
 
   @override
-  MobXCaughtException get errorValue => _errorValue;
+  MobXCaughtException? get errorValue => _errorValue;
 
   @override
   bool get isDisposed => _isDisposed;
@@ -55,13 +55,13 @@ class ReactionImpl implements Reaction {
     schedule();
   }
 
-  Derivation startTracking() {
+  Derivation? startTracking() {
     _context.startBatch();
     _isRunning = true;
     return _context._startTracking(this);
   }
 
-  void endTracking(Derivation previous) {
+  void endTracking(Derivation? previous) {
     _context._endTracking(this, previous);
     _isRunning = false;
 
@@ -76,7 +76,7 @@ class ReactionImpl implements Reaction {
     _context.startBatch();
 
     final notify = _context.isSpyEnabled;
-    DateTime startTime;
+    DateTime? startTime;
     if (notify) {
       startTime = DateTime.now();
       _context.spyReport(ReactionSpyEvent(name: name));
@@ -91,14 +91,14 @@ class ReactionImpl implements Reaction {
     }
 
     if (_context._hasCaughtException(this)) {
-      _reportException(_errorValue);
+      _reportException(_errorValue!);
     }
 
     if (notify) {
       _context.spyReport(EndedSpyEvent(
           type: 'reaction',
           name: name,
-          duration: DateTime.now().difference(startTime)));
+          duration: DateTime.now().difference(startTime!)));
     }
 
     _context.endBatch();
@@ -120,7 +120,7 @@ class ReactionImpl implements Reaction {
       } on Object catch (e, s) {
         // Note: "on Object" accounts for both Error and Exception
         _errorValue = MobXCaughtException(e, stackTrace: s);
-        _reportException(_errorValue);
+        _reportException(_errorValue!);
       }
     }
 
@@ -167,7 +167,7 @@ class ReactionImpl implements Reaction {
 
   void _reportException(Object exception) {
     if (_onError != null) {
-      _onError(exception, this);
+      _onError!(exception, this);
       return;
     }
 

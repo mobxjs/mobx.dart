@@ -24,10 +24,10 @@ import 'package:mobx/src/core.dart';
 /// x.value = 30; // Will not cause autorun() to re-trigger as it's disposed.
 /// ```
 ReactionDisposer autorun(Function(Reaction) fn,
-        {String name,
-        int delay,
-        ReactiveContext context,
-        void Function(Object, Reaction) onError}) =>
+        {String? name,
+        int? delay,
+        ReactiveContext? context,
+        void Function(Object, Reaction)? onError}) =>
     createAutorun(context ?? mainContext, fn,
         name: name, delay: delay, onError: onError);
 
@@ -45,12 +45,12 @@ ReactionDisposer autorun(Function(Reaction) fn,
 /// to override the default comparison for the value returned by [fn], to have fined
 /// grained control over when the reactions should run.
 ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect,
-        {String name,
-        int delay,
-        bool fireImmediately,
-        EqualityComparer<T> equals,
-        ReactiveContext context,
-        void Function(Object, Reaction) onError}) =>
+        {String? name,
+        int? delay,
+        bool? fireImmediately,
+        EqualityComparer<T>? equals,
+        ReactiveContext? context,
+        void Function(Object, Reaction)? onError}) =>
     createReaction<T>(context ?? mainContext, fn, effect,
         name: name,
         delay: delay,
@@ -65,10 +65,10 @@ ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect,
 ///
 /// Returns a function to dispose pre-maturely.
 ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect,
-        {String name,
-        ReactiveContext context,
-        int timeout,
-        void Function(Object, Reaction) onError}) =>
+        {String? name,
+        ReactiveContext? context,
+        int? timeout,
+        void Function(Object, Reaction)? onError}) =>
     createWhenReaction(context ?? mainContext, predicate, effect,
         name: name, timeout: timeout, onError: onError);
 
@@ -81,6 +81,6 @@ ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect,
 /// // ... execute the effect ...
 /// ```
 Future<void> asyncWhen(bool Function(Reaction) predicate,
-        {String name, int timeout, ReactiveContext context}) =>
+        {String? name, int? timeout, ReactiveContext? context}) =>
     createAsyncWhenReaction(context ?? mainContext, predicate,
         name: name, timeout: timeout);

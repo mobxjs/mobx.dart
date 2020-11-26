@@ -95,7 +95,7 @@ class EndedSpyEvent extends SpyEvent {
 }
 
 /// Utility function that only invokes the given [fn] once.
-Function _once(Function fn) {
+void Function() _once(Function fn) {
   var invoked = false;
 
   return () {

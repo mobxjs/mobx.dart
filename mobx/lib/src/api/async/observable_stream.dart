@@ -2,30 +2,30 @@ part of '../async.dart';
 
 enum StreamStatus { waiting, active, done }
 
-class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
+class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
   ObservableStream(Stream<T> stream,
-      {T initialValue,
-      bool cancelOnError = false,
-      ReactiveContext context,
-      String name})
+      {T? initialValue,
+      bool? cancelOnError,
+      ReactiveContext? context,
+      String? name})
       : this._(
-            context ?? mainContext, stream, initialValue, cancelOnError, name);
+            context ?? mainContext, stream, initialValue, cancelOnError ?? false, name);
 
   ObservableStream._(ReactiveContext context, this._stream, this._initialValue,
-      this._cancelOnError, String name)
+      this._cancelOnError, String? name)
       : _context = context {
     _name = name ?? _context.nameFor('ObservableStream<$T>');
   }
 
-  T _initialValue;
+  T? _initialValue;
   final bool _cancelOnError;
   final ReactiveContext _context;
   final Stream<T> _stream;
 
-  String _name;
+  late String _name;
   String get name => _name;
 
-  _ObservableStreamController<T> _controllerField;
+  _ObservableStreamController<T>? _controllerField;
   _ObservableStreamController<T> get _controller {
     if (_controllerField == null) {
       _controllerField = _ObservableStreamController<T>(
@@ -33,7 +33,7 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
           cancelOnError: _cancelOnError, name: '$name.StreamController');
       _initialValue = null;
     }
-    return _controllerField;
+    return _controllerField!;
   }
 
   // Current value or error if failed.
@@ -41,8 +41,8 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
 
   /// Current value or null if waiting and no initialValue, or null if data is an error.
   @override
-  T get value =>
-      _controller.valueType == _ValueType.value ? _controller.data : null;
+  T? get value =>
+      _controller.valueType == _ValueType.value ? _controller.data as T : null;
 
   /// Current error or null if not failed.
   dynamic get error =>
@@ -58,13 +58,13 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
   ///
   /// Returns null if a callback is not provided for the active status.
   /// If [done] is null, [active] and [error] are used instead.
-  R match<R>(
-      {R Function() waiting,
-      R Function(T) active,
+  R? match<R>(
+      {R Function()? waiting,
+      R Function(T)? active,
       // ignore:avoid_annotating_with_dynamic
-      R Function(dynamic) error,
+      R Function(dynamic)? error,
       // ignore:avoid_annotating_with_dynamic
-      R Function(T, dynamic) done}) {
+      R Function(T?, dynamic)? done}) {
     final status = _controller.status;
     if (status == StreamStatus.waiting) {
       return waiting == null ? null : waiting();
@@ -77,16 +77,16 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
 
     if (isActive || overrideDone) {
       if (hasValue) {
-        return active == null ? null : active(data);
+        return active == null ? null : active(data as T);
       } else {
         return error == null ? null : error(data);
       }
     }
-    return hasValue ? done(data, null) : done(null, data);
+    return hasValue ? done!(data as T, null) : done!(null, data);
   }
 
   /// Create a new stream with the provided initialValue and cancelOnError.
-  ObservableStream<T> configure({T initialValue, bool cancelOnError = false}) =>
+  ObservableStream<T> configure({T? initialValue, bool cancelOnError = false}) =>
       ObservableStream._(_context, _stream, initialValue, cancelOnError, name);
 
   ObservableStream<R> _wrap<R>(Stream<R> stream) =>
@@ -103,12 +103,12 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
 
   @override
   ObservableStream<T> asBroadcastStream(
-          {void Function(StreamSubscription<T> subscription) onListen,
-          void Function(StreamSubscription<T> subscription) onCancel}) =>
+          {void Function(StreamSubscription<T> subscription)? onListen,
+          void Function(StreamSubscription<T> subscription)? onCancel}) =>
       _wrap(_stream.asBroadcastStream(onListen: onListen, onCancel: onCancel));
 
   @override
-  ObservableStream<E> asyncExpand<E>(Stream<E> Function(T event) convert) =>
+  ObservableStream<E> asyncExpand<E>(Stream<E>? Function(T event) convert) =>
       _wrap(_stream.asyncExpand(convert));
 
   @override
@@ -119,15 +119,15 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
   ObservableStream<R> cast<R>() => _wrap(_stream.cast());
 
   @override
-  ObservableFuture<bool> contains(Object needle) =>
+  ObservableFuture<bool> contains(Object? needle) =>
       _wrapFuture(_stream.contains(needle));
 
   @override
-  ObservableStream<T> distinct([bool Function(T previous, T next) equals]) =>
+  ObservableStream<T> distinct([bool Function(T previous, T next)? equals]) =>
       _wrap(_stream.distinct(equals));
 
   @override
-  ObservableFuture<E> drain<E>([E futureValue]) =>
+  ObservableFuture<E> drain<E>([E? futureValue]) =>
       _wrapFuture(_stream.drain(futureValue));
 
   @override
@@ -147,7 +147,7 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
 
   @override
   ObservableFuture<T> firstWhere(bool Function(T element) test,
-          {T Function() orElse}) =>
+          {T Function()? orElse}) =>
       _wrapFuture(_stream.firstWhere(test, orElse: orElse));
 
   @override
@@ -162,7 +162,7 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
   @override
   ObservableStream<T> handleError(Function onError,
           // ignore:avoid_annotating_with_dynamic
-          {bool Function(dynamic) test}) =>
+          {bool Function(dynamic)? test}) =>
       _wrap(_stream.handleError(onError, test: test));
 
   @override
@@ -180,15 +180,15 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
 
   @override
   ObservableFuture<T> lastWhere(bool Function(T element) test,
-          {T Function() orElse}) =>
+          {T Function()? orElse}) =>
       _wrapFuture(_stream.lastWhere(test, orElse: orElse));
 
   @override
   ObservableFuture<int> get length => _wrapFuture(_stream.length);
 
   @override
-  StreamSubscription<T> listen(void Function(T event) onData,
-      {Function onError, void Function() onDone, bool cancelOnError}) {
+  StreamSubscription<T> listen(void Function(T event)? onData,
+      {Function? onError, void Function()? onDone, bool? cancelOnError}) {
     final sub = _stream.listen(onData,
         onError: onError, onDone: onDone, cancelOnError: cancelOnError);
     return sub;
@@ -211,7 +211,7 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
 
   @override
   ObservableFuture<T> singleWhere(bool Function(T element) test,
-          {T Function() orElse}) =>
+          {T Function()? orElse}) =>
       _wrapFuture(_stream.singleWhere(test, orElse: orElse));
 
   @override
@@ -230,7 +230,7 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
 
   @override
   ObservableStream<T> timeout(Duration timeLimit,
-          {void Function(EventSink<T> sink) onTimeout}) =>
+          {void Function(EventSink<T> sink)? onTimeout}) =>
       _wrap(_stream.timeout(timeLimit, onTimeout: onTimeout));
 
   @override
@@ -252,8 +252,8 @@ enum _ValueType { value, error }
 
 class _ObservableStreamController<T> {
   _ObservableStreamController(
-      ReactiveContext context, this._stream, T initialValue,
-      {bool cancelOnError = false, this.name})
+      ReactiveContext context, this._stream, T? initialValue,
+      {bool cancelOnError = false, required this.name})
       : _actions =
             ActionController(context: context, name: '$name.ActionController'),
         _status = Observable(
@@ -278,7 +278,7 @@ class _ObservableStreamController<T> {
   final String name;
   final bool _cancelOnError;
   final Stream<T> _stream;
-  StreamSubscription<T> _subscription;
+  StreamSubscription<T>? _subscription;
 
   final ActionController _actions;
 
@@ -298,15 +298,15 @@ class _ObservableStreamController<T> {
     if (_subscription == null) {
       _subscription = _stream.listen(_onData,
           onError: _onError, onDone: _onDone, cancelOnError: _cancelOnError);
-    } else if (_subscription.isPaused) {
-      _subscription.resume();
+    } else if (_subscription!.isPaused) {
+      _subscription!.resume();
     }
   }
 
   // TODO(katis): Doesn't take into account subscriptions made with ObservableStream.listen
   void _unsubscribe() {
     _listenCount--;
-    if (_listenCount == 0 && !_subscription.isPaused) {
+    if (_listenCount == 0 && !_subscription!.isPaused) {
       _subscription?.pause();
     }
   }

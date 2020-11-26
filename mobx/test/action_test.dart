@@ -1,3 +1,5 @@
+// @dart = 2.10
+
 import 'package:mobx/mobx.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -84,7 +86,7 @@ void main() {
       final a = Action(() => y.value);
 
       final d = autorun((_) {
-        total = x.value + a();
+        total = x.value + (a() as int);
       });
 
       expect(total, equals(30));

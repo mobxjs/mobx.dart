@@ -10,7 +10,7 @@ class _ReactiveState {
 
   /// Tracks the currently executing derivation (reactions or computeds).
   /// The Observables used here are linked to this derivation.
-  Derivation trackingDerivation;
+  Derivation? trackingDerivation;
 
   /// The reactions that must be triggered at the end of a `transaction` or an `action`
   List<Reaction> pendingReactions = [];
@@ -55,11 +55,12 @@ enum ReactiveWritePolicy { observed, always, never }
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
-  ReactiveConfig(
-      {this.disableErrorBoundaries,
-      this.writePolicy,
-      this.readPolicy,
-      this.maxIterations = 100});
+  ReactiveConfig({
+    this.disableErrorBoundaries = false,
+    this.writePolicy = ReactiveWritePolicy.observed,
+    this.readPolicy = ReactiveReadPolicy.never,
+    this.maxIterations = 100,
+  });
 
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
@@ -83,10 +84,10 @@ class ReactiveConfig {
   final Set<ReactionErrorHandler> _reactionErrorHandlers = {};
 
   ReactiveConfig clone(
-          {bool disableErrorBoundaries,
-          ReactiveWritePolicy writePolicy,
-          ReactiveReadPolicy readPolicy,
-          int maxIterations}) =>
+          {bool? disableErrorBoundaries,
+          ReactiveWritePolicy? writePolicy,
+          ReactiveReadPolicy? readPolicy,
+          int? maxIterations}) =>
       ReactiveConfig(
           disableErrorBoundaries:
               disableErrorBoundaries ?? this.disableErrorBoundaries,
@@ -96,11 +97,11 @@ class ReactiveConfig {
 }
 
 class ReactiveContext {
-  ReactiveContext({ReactiveConfig config}) {
+  ReactiveContext({ReactiveConfig? config}) {
     this.config = config ?? ReactiveConfig.main;
   }
 
-  ReactiveConfig _config;
+  late ReactiveConfig _config;
 
   ReactiveConfig get config => _config;
   set config(ReactiveConfig newValue) {
@@ -224,7 +225,7 @@ class ReactiveContext {
     }());
   }
 
-  Derivation _startTracking(Derivation derivation) {
+  Derivation? _startTracking(Derivation derivation) {
     final prevDerivation = _state.trackingDerivation;
     _state.trackingDerivation = derivation;
 
@@ -234,14 +235,14 @@ class ReactiveContext {
     return prevDerivation;
   }
 
-  void _endTracking(Derivation currentDerivation, Derivation prevDerivation) {
+  void _endTracking(Derivation currentDerivation, Derivation? prevDerivation) {
     _state.trackingDerivation = prevDerivation;
     _bindDependencies(currentDerivation);
   }
 
-  T trackDerivation<T>(Derivation d, T Function() fn) {
+  T? trackDerivation<T>(Derivation d, T Function() fn) {
     final prevDerivation = _startTracking(d);
-    T result;
+    T? result;
 
     if (config.disableErrorBoundaries == true) {
       result = fn();
@@ -262,7 +263,7 @@ class ReactiveContext {
     final derivation = _state.trackingDerivation;
 
     if (derivation != null) {
-      derivation._newObservables.add(atom);
+      derivation._newObservables!.add(atom);
       if (!atom._isBeingObserved) {
         atom
           .._isBeingObserved = true
@@ -273,9 +274,9 @@ class ReactiveContext {
 
   void _bindDependencies(Derivation derivation) {
     final staleObservables =
-        derivation._observables.difference(derivation._newObservables);
+        derivation._observables.difference(derivation._newObservables!);
     final newObservables =
-        derivation._newObservables.difference(derivation._observables);
+        derivation._newObservables!.difference(derivation._observables);
     var lowestNewDerivationState = DerivationState.upToDate;
 
     // Add newly found observables
@@ -303,7 +304,7 @@ class ReactiveContext {
     }
 
     derivation
-      .._observables = derivation._newObservables
+      .._observables = derivation._newObservables!
       .._newObservables = {}; // No need for newObservables beyond this point
   }
 
@@ -472,14 +473,14 @@ class ReactiveContext {
 
   bool isComputingDerivation() => _state.trackingDerivation != null;
 
-  Derivation startUntracked() {
+  Derivation? startUntracked() {
     final prevDerivation = _state.trackingDerivation;
     _state.trackingDerivation = null;
     return prevDerivation;
   }
 
   // ignore: use_setters_to_change_properties
-  void endUntracked(Derivation prevDerivation) {
+  void endUntracked(Derivation? prevDerivation) {
     _state.trackingDerivation = prevDerivation;
   }
 
@@ -506,14 +507,14 @@ class ReactiveContext {
     });
   }
 
-  bool startAllowStateChanges({bool allow}) {
+  bool startAllowStateChanges({bool allow = true}) {
     final prevValue = _state.allowStateChanges;
     _state.allowStateChanges = allow;
 
     return prevValue;
   }
 
-  void endAllowStateChanges({bool allow}) {
+  void endAllowStateChanges({bool allow = true}) {
     _state.allowStateChanges = allow;
   }
 
