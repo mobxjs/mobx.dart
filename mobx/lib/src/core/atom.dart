@@ -13,15 +13,15 @@ class Atom {
   /// Use the [onObserved] and [onUnobserved] handlers to know when the atom is active and inactive
   /// respectively. Use a debug [name] to identify easily.
   factory Atom(
-          {String name,
-          Function() onObserved,
-          Function() onUnobserved,
-          ReactiveContext context}) =>
+          {String? name,
+          Function()? onObserved,
+          Function()? onUnobserved,
+          ReactiveContext? context}) =>
       Atom._(context ?? mainContext,
           name: name, onObserved: onObserved, onUnobserved: onUnobserved);
 
   Atom._(this._context,
-      {String name, Function() onObserved, Function() onUnobserved})
+      {String? name, Function()? onObserved, Function()? onUnobserved})
       : name = name ?? _context.nameFor('Atom') {
     if (onObserved != null) {
       onBecomeObserved(onObserved);
@@ -33,7 +33,7 @@ class Atom {
   }
 
   final ReactiveContext _context;
-  ReactiveContext/*!*/ get context => _context;
+  ReactiveContext get context => _context;
 
   final String name;
 
@@ -49,7 +49,7 @@ class Atom {
 
   bool get hasObservers => _observers.isNotEmpty;
 
-  final Map<_ListenerKind, Set<void Function()>> _observationListeners = {};
+  final Map<_ListenerKind, Set<void Function()>?> _observationListeners = {};
 
   void reportObserved() {
     _context._reportObserved(this);
@@ -95,7 +95,7 @@ class Atom {
   void Function() onBecomeUnobserved(void Function() fn) =>
       _addListener(_ListenerKind.onBecomeUnobserved, fn);
 
-  void Function() _addListener(_ListenerKind kind, void Function()/*!*/ fn) {
+  void Function() _addListener(_ListenerKind kind, void Function() fn) {
     if (fn == null) {
       throw MobXException('$kind handler cannot be null');
     }
@@ -103,7 +103,7 @@ class Atom {
     if (_observationListeners[kind] == null) {
       _observationListeners[kind] = {}..add(fn);
     } else {
-      _observationListeners[kind].add(fn);
+      _observationListeners[kind]!.add(fn);
     }
 
     return () {
@@ -124,9 +124,9 @@ class WillChangeNotification<T> {
   WillChangeNotification({this.type, this.newValue, this.object});
 
   /// One of add | update | delete
-  final OperationType type;
+  final OperationType? type;
 
-  T newValue;
+  T? newValue;
   final dynamic object;
 
   static WillChangeNotification unchanged = WillChangeNotification();
@@ -138,10 +138,10 @@ class ChangeNotification<T> {
   ChangeNotification({this.type, this.newValue, this.oldValue, this.object});
 
   /// One of add | update | delete
-  final OperationType type;
+  final OperationType? type;
 
-  final T oldValue;
-  T newValue;
+  final T? oldValue;
+  T? newValue;
 
   dynamic object;
 }
