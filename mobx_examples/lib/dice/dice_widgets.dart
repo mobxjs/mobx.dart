@@ -3,35 +3,33 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'dice_counter.dart';
 
-
 class DiceExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Provider<DiceCounter>(
-    create: (_) => DiceCounter(),
-    child: Scaffold(
-        backgroundColor: Colors.amber,
-        appBar: AppBar(
-          backgroundColor: Colors.amberAccent,
-          title: Text(
-            'Tap the dice !!!'.toUpperCase(),
-            style: TextStyle( 
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontSize: 16,
-                fontFamily: 'Hind'),
+        create: (_) => DiceCounter(),
+        child: Scaffold(
+          backgroundColor: Colors.amber,
+          appBar: AppBar(
+            backgroundColor: Colors.amberAccent,
+            title: Text(
+              'Tap the dice !!!'.toUpperCase(),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontFamily: 'Hind'),
+            ),
+          ),
+          body: SafeArea(
+            child: DiceView(),
           ),
         ),
-        body: SafeArea(
-          child: DiceView(),
-        ),
-      ),
-  );
+      );
 }
 
 class DiceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
     final diceCounter = Provider.of<DiceCounter>(context);
 
     return Center(

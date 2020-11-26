@@ -1,9 +1,8 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import styled from 'styled-components';
-import config from '../../doczrc';
 import { testimonials } from './testimonials';
 
-const primaryColor = config.themeConfig.colors.primary;
+const primaryColor = '#1389FD';
 
 interface Props {
   author: string;
@@ -86,7 +85,7 @@ export const Profile: FunctionComponent<{
           marginLeft: 10,
           flex: 1,
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
         }}
       >
         <div className={'name'}>
@@ -103,7 +102,7 @@ const Testimonial: FunctionComponent<Props> = ({
   title,
   message,
   photoUrl,
-  twitter
+  twitter,
 }) => {
   return (
     <Container>

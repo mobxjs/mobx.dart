@@ -6,116 +6,120 @@ part of 'todos.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Todo on TodoBase, Store {
   final _$descriptionAtom = Atom(name: 'TodoBase.description');
 
   @override
   String get description {
-    _$descriptionAtom.context.enforceReadPolicy(_$descriptionAtom);
-    _$descriptionAtom.reportObserved();
+    _$descriptionAtom.reportRead();
     return super.description;
   }
 
   @override
   set description(String value) {
-    _$descriptionAtom.context.conditionallyRunInAction(() {
+    _$descriptionAtom.reportWrite(value, super.description, () {
       super.description = value;
-      _$descriptionAtom.reportChanged();
-    }, _$descriptionAtom, name: '${_$descriptionAtom.name}_set');
+    });
   }
 
   final _$doneAtom = Atom(name: 'TodoBase.done');
 
   @override
   bool get done {
-    _$doneAtom.context.enforceReadPolicy(_$doneAtom);
-    _$doneAtom.reportObserved();
+    _$doneAtom.reportRead();
     return super.done;
   }
 
   @override
   set done(bool value) {
-    _$doneAtom.context.conditionallyRunInAction(() {
+    _$doneAtom.reportWrite(value, super.done, () {
       super.done = value;
-      _$doneAtom.reportChanged();
-    }, _$doneAtom, name: '${_$doneAtom.name}_set');
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+description: ${description},
+done: ${done}
+    ''';
   }
 }
-
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$TodoList on TodoListBase, Store {
   Computed<ObservableList<Todo>> _$pendingTodosComputed;
 
   @override
   ObservableList<Todo> get pendingTodos => (_$pendingTodosComputed ??=
-          Computed<ObservableList<Todo>>(() => super.pendingTodos))
+          Computed<ObservableList<Todo>>(() => super.pendingTodos,
+              name: 'TodoListBase.pendingTodos'))
       .value;
   Computed<ObservableList<Todo>> _$completedTodosComputed;
 
   @override
   ObservableList<Todo> get completedTodos => (_$completedTodosComputed ??=
-          Computed<ObservableList<Todo>>(() => super.completedTodos))
+          Computed<ObservableList<Todo>>(() => super.completedTodos,
+              name: 'TodoListBase.completedTodos'))
       .value;
   Computed<bool> _$hasCompletedTodosComputed;
 
   @override
-  bool get hasCompletedTodos => (_$hasCompletedTodosComputed ??=
-          Computed<bool>(() => super.hasCompletedTodos))
+  bool get hasCompletedTodos => (_$hasCompletedTodosComputed ??= Computed<bool>(
+          () => super.hasCompletedTodos,
+          name: 'TodoListBase.hasCompletedTodos'))
       .value;
   Computed<bool> _$hasPendingTodosComputed;
 
   @override
-  bool get hasPendingTodos => (_$hasPendingTodosComputed ??=
-          Computed<bool>(() => super.hasPendingTodos))
-      .value;
+  bool get hasPendingTodos =>
+      (_$hasPendingTodosComputed ??= Computed<bool>(() => super.hasPendingTodos,
+              name: 'TodoListBase.hasPendingTodos'))
+          .value;
   Computed<String> _$itemsDescriptionComputed;
 
   @override
   String get itemsDescription => (_$itemsDescriptionComputed ??=
-          Computed<String>(() => super.itemsDescription))
+          Computed<String>(() => super.itemsDescription,
+              name: 'TodoListBase.itemsDescription'))
       .value;
   Computed<ObservableList<Todo>> _$visibleTodosComputed;
 
   @override
   ObservableList<Todo> get visibleTodos => (_$visibleTodosComputed ??=
-          Computed<ObservableList<Todo>>(() => super.visibleTodos))
+          Computed<ObservableList<Todo>>(() => super.visibleTodos,
+              name: 'TodoListBase.visibleTodos'))
       .value;
 
   final _$todosAtom = Atom(name: 'TodoListBase.todos');
 
   @override
   ObservableList<Todo> get todos {
-    _$todosAtom.context.enforceReadPolicy(_$todosAtom);
-    _$todosAtom.reportObserved();
+    _$todosAtom.reportRead();
     return super.todos;
   }
 
   @override
   set todos(ObservableList<Todo> value) {
-    _$todosAtom.context.conditionallyRunInAction(() {
+    _$todosAtom.reportWrite(value, super.todos, () {
       super.todos = value;
-      _$todosAtom.reportChanged();
-    }, _$todosAtom, name: '${_$todosAtom.name}_set');
+    });
   }
 
   final _$filterAtom = Atom(name: 'TodoListBase.filter');
 
   @override
   VisibilityFilter get filter {
-    _$filterAtom.context.enforceReadPolicy(_$filterAtom);
-    _$filterAtom.reportObserved();
+    _$filterAtom.reportRead();
     return super.filter;
   }
 
   @override
   set filter(VisibilityFilter value) {
-    _$filterAtom.context.conditionallyRunInAction(() {
+    _$filterAtom.reportWrite(value, super.filter, () {
       super.filter = value;
-      _$filterAtom.reportChanged();
-    }, _$filterAtom, name: '${_$filterAtom.name}_set');
+    });
   }
 
   final _$currentDescriptionAtom =
@@ -123,25 +127,23 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   String get currentDescription {
-    _$currentDescriptionAtom.context
-        .enforceReadPolicy(_$currentDescriptionAtom);
-    _$currentDescriptionAtom.reportObserved();
+    _$currentDescriptionAtom.reportRead();
     return super.currentDescription;
   }
 
   @override
   set currentDescription(String value) {
-    _$currentDescriptionAtom.context.conditionallyRunInAction(() {
+    _$currentDescriptionAtom.reportWrite(value, super.currentDescription, () {
       super.currentDescription = value;
-      _$currentDescriptionAtom.reportChanged();
-    }, _$currentDescriptionAtom, name: '${_$currentDescriptionAtom.name}_set');
+    });
   }
 
   final _$TodoListBaseActionController = ActionController(name: 'TodoListBase');
 
   @override
   void addTodo(String description) {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction(
+        name: 'TodoListBase.addTodo');
     try {
       return super.addTodo(description);
     } finally {
@@ -151,7 +153,8 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   void removeTodo(Todo todo) {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction(
+        name: 'TodoListBase.removeTodo');
     try {
       return super.removeTodo(todo);
     } finally {
@@ -161,7 +164,8 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   void changeDescription(String description) {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction(
+        name: 'TodoListBase.changeDescription');
     try {
       return super.changeDescription(description);
     } finally {
@@ -171,7 +175,8 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   void changeFilter(VisibilityFilter filter) {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction(
+        name: 'TodoListBase.changeFilter');
     try {
       return super.changeFilter(filter);
     } finally {
@@ -181,7 +186,8 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   void removeCompleted() {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction(
+        name: 'TodoListBase.removeCompleted');
     try {
       return super.removeCompleted();
     } finally {
@@ -191,11 +197,27 @@ mixin _$TodoList on TodoListBase, Store {
 
   @override
   void markAllAsCompleted() {
-    final _$actionInfo = _$TodoListBaseActionController.startAction();
+    final _$actionInfo = _$TodoListBaseActionController.startAction(
+        name: 'TodoListBase.markAllAsCompleted');
     try {
       return super.markAllAsCompleted();
     } finally {
       _$TodoListBaseActionController.endAction(_$actionInfo);
     }
+  }
+
+  @override
+  String toString() {
+    return '''
+todos: ${todos},
+filter: ${filter},
+currentDescription: ${currentDescription},
+pendingTodos: ${pendingTodos},
+completedTodos: ${completedTodos},
+hasCompletedTodos: ${hasCompletedTodos},
+hasPendingTodos: ${hasPendingTodos},
+itemsDescription: ${itemsDescription},
+visibleTodos: ${visibleTodos}
+    ''';
   }
 }

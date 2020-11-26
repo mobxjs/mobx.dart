@@ -240,30 +240,5 @@ void main() {
       // ignore: avoid_function_literals_in_foreach_calls
       disposers.forEach((f) => f());
     });
-
-    test('fails for null handler', () {
-      final x = Observable(100);
-
-      var observeFailed = false;
-      var interceptFailed = false;
-
-      try {
-        x.observe(null);
-        // ignore: avoid_catching_errors
-      } on AssertionError catch (_) {
-        observeFailed = true;
-      }
-
-      expect(observeFailed, isTrue);
-
-      try {
-        x.intercept(null);
-        // ignore: avoid_catching_errors
-      } on AssertionError catch (_) {
-        interceptFailed = true;
-      }
-
-      expect(interceptFailed, isTrue);
-    });
   });
 }

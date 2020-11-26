@@ -82,7 +82,7 @@ class LibraryScopedNameFinder {
     if (type is FunctionType) {
       // If we're dealing with a typedef, we let it undergo the standard name
       // lookup. Otherwise, we special case the function naming.
-      if (typeElement?.enclosingElement is GenericTypeAliasElement) {
+      if (typeElement?.enclosingElement is FunctionTypeAliasElement) {
         typeElement = typeElement.enclosingElement;
       } else {
         return _getFunctionTypeName(type);
@@ -92,11 +92,8 @@ class LibraryScopedNameFinder {
         typeElement == null ||
             // This is a bare type param, like "T"
             type is TypeParameterType) {
-      // TODO(shyndman): This ignored deprecation can be removed when we
-      // increase the analyzer dependency's lower bound to 0.39.2, and
-      // migrate to using `DartType.getDisplayString`.
-      // ignore: deprecated_member_use
-      return type.displayName;
+      // TODO(pavanpodila): Once we migrate to NNBD, change the flag to `true`
+      return type.getDisplayString(withNullability: false);
     }
 
     return _getNamedElementTypeName(typeElement, type);

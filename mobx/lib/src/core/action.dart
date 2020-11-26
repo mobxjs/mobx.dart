@@ -111,7 +111,7 @@ class ActionController {
 
 class ActionRunInfo {
   ActionRunInfo({
-    this.name,
+    required this.name,
     required this.startTime,
     this.prevDerivation,
     this.prevAllowStateChanges = true,
@@ -119,6 +119,6 @@ class ActionRunInfo {
 
   final Derivation? prevDerivation;
   final bool prevAllowStateChanges;
-  final String? name;
+  final String name;
   final DateTime startTime;
 }
