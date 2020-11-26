@@ -1,3 +1,5 @@
+// @dart = 2.10
+
 import 'package:collection/collection.dart';
 import 'package:mobx/src/api/context.dart';
 import 'package:mockito/mockito.dart';

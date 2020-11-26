@@ -1,3 +1,5 @@
+// @dart = 2.10
+
 import 'package:mobx/src/api/observable_collections.dart';
 import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';

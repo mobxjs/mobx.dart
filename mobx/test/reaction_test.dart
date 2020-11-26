@@ -1,3 +1,5 @@
+// @dart = 2.10
+
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart' hide when;
 import 'package:mobx/src/core.dart';
