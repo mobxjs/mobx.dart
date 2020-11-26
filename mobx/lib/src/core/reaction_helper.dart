@@ -22,7 +22,7 @@ class ReactionDisposer {
 
 /// An internal helper function to create a [autorun]
 ReactionDisposer createAutorun(
-    ReactiveContext context, Function(Reaction) trackingFn,
+    ReactiveContext context, Function(Reaction/*!*/) trackingFn,
     {String name, int delay, void Function(Object, Reaction) onError}) {
   ReactionImpl rxn;
 
@@ -70,9 +70,9 @@ ReactionDisposer createReaction<T>(
     {String name,
     int delay,
     bool fireImmediately,
-    EqualityComparer<T> equals,
+    EqualityComparer<T/*!*/> equals,
     void Function(Object, Reaction) onError}) {
-  ReactionImpl rxn;
+  ReactionImpl/*!*/ rxn;
 
   final rxnName = name ?? context.nameFor('Reaction');
 

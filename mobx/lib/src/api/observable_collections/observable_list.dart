@@ -22,9 +22,9 @@ Atom _observableListAtom<T>(ReactiveContext context, String name) {
 class ObservableList<T>
     with
         // ignore: prefer_mixin
-        ListMixin<T>
+        ListMixin<T/*!*/>
     implements
-        Listenable<ListChange<T>> {
+        Listenable<ListChange<T/*!*/>> {
   ObservableList({ReactiveContext context, String name})
       : this._wrap(context, _observableListAtom<T>(context, name), []);
 
@@ -38,7 +38,7 @@ class ObservableList<T>
 
   final ReactiveContext _context;
   final Atom _atom;
-  final List<T> _list;
+  final List<T/*!*/> _list;
 
   Listeners<ListChange<T>> _listenersField;
 
@@ -245,7 +245,7 @@ class ObservableList<T>
 
   @override
   T removeAt(int index) {
-    T value;
+    T/*!*/ value;
 
     _context.conditionallyRunInAction(() {
       value = _list.removeAt(index);
@@ -257,7 +257,7 @@ class ObservableList<T>
 
   @override
   T removeLast() {
-    T value;
+    T/*!*/ value;
 
     _context.conditionallyRunInAction(() {
       value = _list.removeLast();
@@ -402,7 +402,7 @@ class ObservableList<T>
   /// You can choose to receive the change notification immediately (with [fireImmediately])
   /// or on the first change
   @override
-  Dispose observe(Listener<ListChange<T>> listener, {bool fireImmediately}) {
+  Dispose observe(Listener<ListChange<T>> listener, {bool/*!*/ fireImmediately = false}) {
     if (fireImmediately == true) {
       final change = ListChange<T>(list: this, rangeChanges: <RangeChange<T>>[
         RangeChange(index: 0, newValues: toList(growable: false))
@@ -500,7 +500,7 @@ class RangeChange<T> {
 class ListChange<T> {
   ListChange({this.list, this.elementChanges, this.rangeChanges});
 
-  final ObservableList<T> list;
+  final ObservableList<T>/*!*/ list;
   final List<ElementChange<T>> elementChanges;
   final List<RangeChange<T>> rangeChanges;
 }

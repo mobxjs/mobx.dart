@@ -3,12 +3,12 @@ part of '../async.dart';
 enum FutureStatus { pending, rejected, fulfilled }
 
 class FutureResult<T> {
-  FutureResult(ReactiveContext context, Future<T> _future, initialResult,
-      FutureStatus initialStatus, String name)
+  FutureResult(ReactiveContext context, Future<T> _future, dynamic initialResult,
+      FutureStatus/*!*/ initialStatus, String/*!*/ name)
       : _axnController =
             ActionController(context: context, name: '$name.ActionController'),
         _status = Observable(initialStatus, name: '$name.status'),
-        _result = Observable(initialResult, name: '$name.result') {
+        _result = Observable<dynamic>(initialResult, name: '$name.result') {
     _future.then(_fulfill, onError: _reject);
   }
 
@@ -30,7 +30,7 @@ class FutureResult<T> {
     }
   }
 
-  void _reject(error) {
+  void _reject(dynamic error) {
     final prevDerivation = _axnController.startAction();
     try {
       _status.value = FutureStatus.rejected;
@@ -41,7 +41,7 @@ class FutureResult<T> {
   }
 }
 
-class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
+class ObservableFuture<T> implements Future<T>, ObservableValue<T/*!*/> {
   /// Create a new observable future that tracks the state of the provided future.
   ObservableFuture(Future<T> future, {ReactiveContext context, String name})
       : this._(
@@ -57,28 +57,24 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
   /// Create a new future that is completed with an error.
   ///
   /// [status] is immediately [FutureStatus.rejected].
-  ObservableFuture.error(error, {ReactiveContext context, String name})
+  ObservableFuture.error(dynamic error, {ReactiveContext context, String name})
       : this._(context ?? mainContext, Future.error(error),
             FutureStatus.rejected, error, name);
 
-  ObservableFuture._(this._context, this._future, this._initialStatus,
-      this._initialResult, String name) {
+  ObservableFuture._(this._context, this._future, FutureStatus initialStatus,
+      dynamic initialResult, String name) {
     _name = name ?? _context.nameFor('ObservableFuture<$T>');
     // create the result up-front instead of being lazy
     _result =
-        FutureResult(_context, _future, _initialResult, _initialStatus, _name);
-    _initialResult = null;
-    _initialStatus = null;
+        FutureResult(_context, _future, initialResult, initialStatus, _name);
   }
 
   final ReactiveContext _context;
   Future<T> _future;
-  FutureStatus _initialStatus;
-  dynamic _initialResult;
 
   FutureResult<T> _result;
 
-  String _name;
+  String/*!*/ _name;
   String get name => _name;
 
   /// Observable status of this.
@@ -88,7 +84,7 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
   ///
   /// Null otherwise.
   @override
-  T get value => status == FutureStatus.fulfilled ? _result.result as T : null;
+  T get value => status == FutureStatus.fulfilled ? _result.result as T/*!*/ : null;
 
   /// Error value if this completed with an error
   ///
@@ -111,7 +107,7 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
     final status = this.status;
 
     if (status == FutureStatus.fulfilled) {
-      return fulfilled == null ? null : fulfilled(result as T);
+      return fulfilled == null ? null : fulfilled(result as T/*!*/);
     } else if (status == FutureStatus.rejected) {
       return rejected == null ? null : rejected(result);
     }

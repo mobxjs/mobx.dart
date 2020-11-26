@@ -119,5 +119,5 @@ class ActionRunInfo {
   final Derivation prevDerivation;
   final bool prevAllowStateChanges;
   final String name;
-  final DateTime startTime;
+  final DateTime/*!*/ startTime;
 }

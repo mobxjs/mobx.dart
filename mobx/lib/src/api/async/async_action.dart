@@ -16,7 +16,7 @@ class AsyncAction {
   final ActionController _actions;
 
   Zone _zoneField;
-  Zone get _zone {
+  Zone/*!*/ get _zone {
     if (_zoneField == null) {
       final spec = ZoneSpecification(run: _run, runUnary: _runUnary);
       _zoneField = Zone.current.fork(specification: spec);

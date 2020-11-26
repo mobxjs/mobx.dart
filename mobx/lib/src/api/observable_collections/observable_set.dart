@@ -20,7 +20,7 @@ class ObservableSet<T>
         // ignore:prefer_mixin
         SetMixin<T>
     implements
-        Listenable<SetChange<T>> {
+        Listenable<SetChange<T/*!*/>> {
   ObservableSet({ReactiveContext context, String name})
       : this._(context ?? mainContext, HashSet(), name);
 
@@ -65,7 +65,7 @@ class ObservableSet<T>
 
   Listeners<SetChange<T>> _listenersField;
 
-  Listeners<SetChange<T>> get _listeners =>
+  Listeners<SetChange<T/*!*/>> get _listeners =>
       _listenersField ??= Listeners(_context);
 
   bool get _hasListeners =>
@@ -164,7 +164,7 @@ class ObservableSet<T>
   /// Attaches a listener to changes happening in the [ObservableSet]. You have
   /// the option to be notified immediately ([fireImmediately]) or wait for until the first change.
   @override
-  Dispose observe(SetChangeListener<T> listener, {bool fireImmediately}) {
+  Dispose observe(SetChangeListener<T> listener, {bool/*!*/ fireImmediately = false}) {
     final dispose = _listeners.add(listener);
     if (fireImmediately == true) {
       _set.forEach(_reportAdd);
@@ -237,5 +237,5 @@ class SetChange<T> {
 
   final ObservableSet<T> object;
   final OperationType type;
-  final T value;
+  final T/*?*/ value;
 }

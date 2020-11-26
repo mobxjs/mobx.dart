@@ -19,14 +19,14 @@ class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>> {
   @override
   Dispose add(Interceptor<T> handler) => super.add(handler);
 
-  WillChangeNotification interceptChange(WillChangeNotification<T> change) {
+  WillChangeNotification<T> interceptChange(WillChangeNotification<T> change) {
     if (!_canHandle(change)) {
       return change;
     }
 
     return _context.untracked(() {
       var nextChange = change;
-      for (final interceptor in _handlers.toList(growable: false)) {
+      for (final interceptor in _handlers.cast<Interceptor<T>>().toList(growable: false)) {
         nextChange = interceptor(nextChange);
         if (nextChange == null) {
           break;

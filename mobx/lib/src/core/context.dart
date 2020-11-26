@@ -102,7 +102,7 @@ class ReactiveContext {
 
   ReactiveConfig _config;
 
-  ReactiveConfig get config => _config;
+  ReactiveConfig/*!*/ get config => _config;
   set config(ReactiveConfig newValue) {
     _config = newValue;
     _state.allowStateChanges = _config.writePolicy == ReactiveWritePolicy.never;

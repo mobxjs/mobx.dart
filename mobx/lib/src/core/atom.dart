@@ -33,7 +33,7 @@ class Atom {
   }
 
   final ReactiveContext _context;
-  ReactiveContext get context => _context;
+  ReactiveContext/*!*/ get context => _context;
 
   final String name;
 
@@ -49,7 +49,7 @@ class Atom {
 
   bool get hasObservers => _observers.isNotEmpty;
 
-  final Map<_ListenerKind, Set<Function()>> _observationListeners = {};
+  final Map<_ListenerKind, Set<void Function()>> _observationListeners = {};
 
   void reportObserved() {
     _context._reportObserved(this);
@@ -82,20 +82,20 @@ class Atom {
     listeners?.forEach(_notifyListener);
   }
 
-  static void _notifyListener(Function() listener) => listener();
+  static void _notifyListener(void Function() listener) => listener();
 
   void _notifyOnBecomeUnobserved() {
     final listeners = _observationListeners[_ListenerKind.onBecomeUnobserved];
     listeners?.forEach(_notifyListener);
   }
 
-  void Function() onBecomeObserved(Function fn) =>
+  void Function() onBecomeObserved(void Function() fn) =>
       _addListener(_ListenerKind.onBecomeObserved, fn);
 
-  void Function() onBecomeUnobserved(Function fn) =>
+  void Function() onBecomeUnobserved(void Function() fn) =>
       _addListener(_ListenerKind.onBecomeUnobserved, fn);
 
-  void Function() _addListener(_ListenerKind kind, Function fn) {
+  void Function() _addListener(_ListenerKind kind, void Function()/*!*/ fn) {
     if (fn == null) {
       throw MobXException('$kind handler cannot be null');
     }
@@ -107,12 +107,13 @@ class Atom {
     }
 
     return () {
-      if (_observationListeners[kind] == null) {
+      final listeners = _observationListeners[kind];
+      if (listeners == null) {
         return;
       }
 
-      _observationListeners[kind].removeWhere((f) => f == fn);
-      if (_observationListeners[kind].isEmpty) {
+      listeners.removeWhere((f) => f == fn);
+      if (listeners.isEmpty) {
         _observationListeners[kind] = null;
       }
     };

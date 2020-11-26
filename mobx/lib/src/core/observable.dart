@@ -38,9 +38,9 @@ class Observable<T> extends Atom
 
   final Interceptors<T> _interceptors;
   final Listeners<ChangeNotification<T>> _listeners;
-  final EqualityComparer<T> equals;
+  final EqualityComparer<T/*!*/> equals;
 
-  T _value;
+  T/*!*/ _value;
 
   @override
   T get value {
@@ -107,7 +107,7 @@ class Observable<T> extends Atom
 
   @override
   Dispose observe(Listener<ChangeNotification<T>> listener,
-      {bool fireImmediately}) {
+      {bool fireImmediately = false}) {
     if (fireImmediately == true) {
       listener(ChangeNotification<T>(
           type: OperationType.update,

@@ -5,11 +5,11 @@ enum StreamStatus { waiting, active, done }
 class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
   ObservableStream(Stream<T> stream,
       {T initialValue,
-      bool cancelOnError = false,
+      bool/*?*/ cancelOnError,
       ReactiveContext context,
       String name})
       : this._(
-            context ?? mainContext, stream, initialValue, cancelOnError, name);
+            context ?? mainContext, stream, initialValue, cancelOnError ?? false, name);
 
   ObservableStream._(ReactiveContext context, this._stream, this._initialValue,
       this._cancelOnError, String name)
@@ -18,15 +18,15 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
   }
 
   T _initialValue;
-  final bool _cancelOnError;
+  final bool/*!*/ _cancelOnError;
   final ReactiveContext _context;
   final Stream<T> _stream;
 
   String _name;
-  String get name => _name;
+  String/*!*/ get name => _name;
 
   _ObservableStreamController<T> _controllerField;
-  _ObservableStreamController<T> get _controller {
+  _ObservableStreamController<T>/*!*/ get _controller {
     if (_controllerField == null) {
       _controllerField = _ObservableStreamController<T>(
           _context, _stream, _initialValue,
@@ -42,7 +42,7 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
   /// Current value or null if waiting and no initialValue, or null if data is an error.
   @override
   T get value =>
-      _controller.valueType == _ValueType.value ? _controller.data as T : null;
+      _controller.valueType == _ValueType.value ? _controller.data as T/*!*/ : null;
 
   /// Current error or null if not failed.
   dynamic get error =>
@@ -77,12 +77,12 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T> {
 
     if (isActive || overrideDone) {
       if (hasValue) {
-        return active == null ? null : active(data as T);
+        return active == null ? null : active(data as T/*!*/);
       } else {
         return error == null ? null : error(data);
       }
     }
-    return hasValue ? done(data as T, null) : done(null, data);
+    return hasValue ? done(data as T/*!*/, null) : done(null, data);
   }
 
   /// Create a new stream with the provided initialValue and cancelOnError.
@@ -252,7 +252,7 @@ enum _ValueType { value, error }
 
 class _ObservableStreamController<T> {
   _ObservableStreamController(
-      ReactiveContext context, this._stream, T initialValue,
+      ReactiveContext context, this._stream, T/*?*/ initialValue,
       {bool cancelOnError = false, this.name})
       : _actions =
             ActionController(context: context, name: '$name.ActionController'),
@@ -275,7 +275,7 @@ class _ObservableStreamController<T> {
       ..onBecomeUnobserved(_unsubscribe);
   }
 
-  final String name;
+  final String/*!*/ name;
   final bool _cancelOnError;
   final Stream<T> _stream;
   StreamSubscription<T> _subscription;

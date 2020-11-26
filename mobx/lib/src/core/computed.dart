@@ -1,6 +1,6 @@
 part of '../core.dart';
 
-class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
+class Computed<T> extends Atom implements Derivation, ObservableValue<T/*!*/> {
   /// Creates a computed value with an optional [name].
   ///
   /// The passed in function: [fn], is used to give back the computed value.
@@ -64,7 +64,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   bool _isComputing = false;
 
   @override
-  T get value {
+  T/*!*/ get value {
     if (_isComputing) {
       throw MobXCyclicReactionException(
           'Cycle detected in computation $name: $_fn');
@@ -152,7 +152,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
 
   bool _isEqual(T x, T y) => equals == null ? x == y : equals(x, y);
 
-  Function observe(void Function(ChangeNotification<T>) handler,
+  void Function() observe(void Function(ChangeNotification<T>) handler,
       {@deprecated bool fireImmediately}) {
     T prevValue;
 
@@ -172,6 +172,6 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
       notifyChange();
 
       prevValue = newValue;
-    }, context: _context);
+    }, context: _context).call;
   }
 }

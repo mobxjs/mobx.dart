@@ -17,7 +17,7 @@ class ReactionImpl implements Reaction {
     _onError = onError;
   }
 
-  void Function(Object, ReactionImpl) _onError;
+  void Function(Object/*!*/, ReactionImpl) _onError;
 
   final ReactiveContext _context;
   void Function() _onInvalidate;

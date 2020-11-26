@@ -73,7 +73,7 @@ class ObservableMap<K, V>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _map[key];
+    return _map[key]; // TODO
   }
 
   @override
@@ -213,7 +213,7 @@ class ObservableMap<K, V>
   ///
   /// You can also choose to receive the notifications immediately (with [fireImmediately])
   @override
-  Dispose observe(MapChangeListener<K, V> listener, {bool fireImmediately}) {
+  Dispose observe(MapChangeListener<K, V> listener, {bool/*!*/ fireImmediately = false}) {
     final dispose = _listeners.add(listener);
     if (fireImmediately == true) {
       _map.forEach(_reportAdd);
@@ -241,7 +241,7 @@ class MapChange<K, V> {
   final V newValue;
   final V oldValue;
 
-  final ObservableMap<K, V> object;
+  final ObservableMap<K, V>/*!*/ object;
 }
 
 /// An iterable class that is used to iterate over all the keys of the [ObservableMap].
