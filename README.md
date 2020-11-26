@@ -395,7 +395,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-47-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-48-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -464,6 +464,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://aboutprince.in/"><img src="https://avatars3.githubusercontent.com/u/26018750?v=4" width="64px;" alt=""/><br /><sub><b>Prince Srivastava</b></sub></a><br /><a href="#example-pr-1" title="Examples">💡</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=pr-1" title="Code">💻</a></td>
     <td align="center"><a href="http://muhajir.dev"><img src="https://avatars2.githubusercontent.com/u/12745166?v=4" width="64px;" alt=""/><br /><sub><b>Muhammad Muhajir</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=muhajirdev" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/geweald"><img src="https://avatars1.githubusercontent.com/u/16155640?v=4" width="64px;" alt=""/><br /><sub><b>D</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=geweald" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/davidmartos96"><img src="https://avatars1.githubusercontent.com/u/22084723?v=4" width="64px;" alt=""/><br /><sub><b>David Martos</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=davidmartos96" title="Code">💻</a></td>
   </tr>
 </table>
 
