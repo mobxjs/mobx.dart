@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core.dart';
 import 'package:mobx/src/api/observable_collections.dart';
@@ -646,7 +648,7 @@ void main() {
       'removeRange': (_) { _.removeRange(0, 1); return true; },
       'removeAt': (_) { _.removeAt(0); return true; },
       'removeWhere': (_) { _.removeWhere((_) => true); return true; },
-      'shuffle': (_) { _.shuffle(); return true; },
+      'shuffle': (_) { _.shuffle(Random(0)); return true; },
       'retainWhere': (_) { _.retainWhere((_) => false); return true; },
 
       '!length=': (_) { _.length = 4; return false; },
