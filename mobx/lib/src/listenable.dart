@@ -21,7 +21,7 @@ class Listeners<TNotification> extends NotificationHandlers<TNotification> {
     }
 
     _context.untracked(() {
-      for (final listener in _handlers.toList(growable: false)) {
+      for (final listener in _handlers?.toList(growable: false) ?? []) {
         listener(change);
       }
     });

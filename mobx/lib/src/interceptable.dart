@@ -26,11 +26,8 @@ class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>> {
 
     return _context.untracked(() {
       var nextChange = change;
-      for (final interceptor in _handlers.toList(growable: false)) {
+      for (final interceptor in _handlers?.toList(growable: false) ?? []) {
         nextChange = interceptor(nextChange);
-        if (nextChange == null) {
-          break;
-        }
       }
 
       return nextChange;

@@ -37,13 +37,13 @@ class MobXCyclicReactionException extends MobXException {
 
 /// This captures the stack trace when user-land code throws an exception
 class MobXCaughtException extends MobXException {
-  MobXCaughtException(exception, {StackTrace stackTrace})
+  MobXCaughtException(exception, {required StackTrace stackTrace})
       : _exception = exception,
         _stackTrace = stackTrace,
         super('MobXCaughtException: $exception');
 
   final Object _exception;
-  final Object _stackTrace;
+  final StackTrace _stackTrace;
 
   Object get exception => _exception;
 
