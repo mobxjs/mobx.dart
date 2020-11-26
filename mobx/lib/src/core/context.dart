@@ -26,7 +26,7 @@ class _ReactiveState {
   int computationDepth = 0;
 
   /// Tracks if observables can be mutated
-  bool allowStateChanges = true;
+  bool/*!*/ allowStateChanges = true;
 
   /// Are we inside an action or transaction?
   bool get isWithinBatch => batch > 0;
@@ -55,11 +55,14 @@ enum ReactiveWritePolicy { observed, always, never }
 
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
-  ReactiveConfig(
-      {this.disableErrorBoundaries,
-      this.writePolicy,
-      this.readPolicy,
-      this.maxIterations = 100});
+  ReactiveConfig({
+    bool disableErrorBoundaries,
+    ReactiveWritePolicy writePolicy,
+    ReactiveReadPolicy readPolicy,
+    this.maxIterations = 100,
+  })  : disableErrorBoundaries = main.disableErrorBoundaries,
+        writePolicy = main.writePolicy,
+        readPolicy = main.readPolicy;
 
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
@@ -102,7 +105,7 @@ class ReactiveContext {
 
   ReactiveConfig _config;
 
-  ReactiveConfig/*!*/ get config => _config;
+  ReactiveConfig /*!*/ get config => _config;
   set config(ReactiveConfig newValue) {
     _config = newValue;
     _state.allowStateChanges = _config.writePolicy == ReactiveWritePolicy.never;
@@ -506,14 +509,14 @@ class ReactiveContext {
     });
   }
 
-  bool startAllowStateChanges({bool allow}) {
+  bool startAllowStateChanges({bool allow = true}) {
     final prevValue = _state.allowStateChanges;
     _state.allowStateChanges = allow;
 
     return prevValue;
   }
 
-  void endAllowStateChanges({bool allow}) {
+  void endAllowStateChanges({bool allow = true}) {
     _state.allowStateChanges = allow;
   }
 

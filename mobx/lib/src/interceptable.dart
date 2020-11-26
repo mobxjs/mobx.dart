@@ -1,6 +1,6 @@
 part of 'core.dart';
 
-typedef Interceptor<T> = WillChangeNotification<T> Function(
+typedef Interceptor<T> = WillChangeNotification<T>/*!*/ Function(
     WillChangeNotification<T>);
 
 // ignore: one_member_abstracts
@@ -13,7 +13,7 @@ abstract class Interceptable<T> {
 /// When `observableInstance.intercept(handler)` is invoked, the passed-in handler
 /// is stored inside the `Interceptors<T>`.
 /// This is an internal class and should not be used directly.
-class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>> {
+class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>/*!*/> {
   Interceptors(ReactiveContext context) : super(context);
 
   @override
@@ -26,7 +26,7 @@ class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>> {
 
     return _context.untracked(() {
       var nextChange = change;
-      for (final interceptor in _handlers.cast<Interceptor<T>>().toList(growable: false)) {
+      for (final interceptor in (_handlers ?? {}).cast<Interceptor<T>>().toList(growable: false)) {
         nextChange = interceptor(nextChange);
         if (nextChange == null) {
           break;

@@ -107,7 +107,7 @@ class Observable<T> extends Atom
 
   @override
   Dispose observe(Listener<ChangeNotification<T>> listener,
-      {bool fireImmediately = false}) {
+      {bool/*!*/ fireImmediately = false}) {
     if (fireImmediately == true) {
       listener(ChangeNotification<T>(
           type: OperationType.update,

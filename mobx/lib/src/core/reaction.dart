@@ -76,7 +76,7 @@ class ReactionImpl implements Reaction {
     _context.startBatch();
 
     final notify = _context.isSpyEnabled;
-    DateTime startTime;
+    DateTime/*?*/ startTime;
     if (notify) {
       startTime = DateTime.now();
       _context.spyReport(ReactionSpyEvent(name: name));
@@ -165,7 +165,7 @@ class ReactionImpl implements Reaction {
     // Not applicable right now
   }
 
-  void _reportException(Object exception) {
+  void _reportException(Object/*!*/ exception) {
     if (_onError != null) {
       _onError(exception, this);
       return;
