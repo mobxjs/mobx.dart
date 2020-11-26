@@ -88,7 +88,7 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
   ///
   /// Null otherwise.
   @override
-  T get value => status == FutureStatus.fulfilled ? _result.result : null;
+  T get value => status == FutureStatus.fulfilled ? _result.result as T : null;
 
   /// Error value if this completed with an error
   ///
@@ -111,7 +111,7 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T> {
     final status = this.status;
 
     if (status == FutureStatus.fulfilled) {
-      return fulfilled == null ? null : fulfilled(result);
+      return fulfilled == null ? null : fulfilled(result as T);
     } else if (status == FutureStatus.rejected) {
       return rejected == null ? null : rejected(result);
     }

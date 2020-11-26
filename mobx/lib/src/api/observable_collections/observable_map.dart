@@ -134,7 +134,7 @@ class ObservableMap<K, V>
       if (_hasListeners) {
         if (_map.containsKey(key)) {
           value = _map.remove(key);
-          _reportRemove(key, value);
+          _reportRemove(key as K, value);
           _atom.reportChanged();
           return;
         }

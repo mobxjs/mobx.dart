@@ -174,7 +174,7 @@ void main() {
 
       final values = <int>[];
       autorun((_) {
-        values.add(stream.data);
+        values.add(stream.data as int);
       });
 
       ctrl
@@ -280,7 +280,7 @@ void testStreamToFutureCombinator<T>(String description, Case testCase) {
   test(description, () async {
     final stream = ObservableStream(
         Stream.fromIterable(Iterable<int>.generate(testCase.length)));
-    final ObservableFuture future = testCase.body(stream);
+    final ObservableFuture future = testCase.body(stream) as ObservableFuture;
     expect(future.value, isNull);
 
     autorun((_) => future.value);

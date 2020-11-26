@@ -43,7 +43,7 @@ class MobXCaughtException extends MobXException {
         super('MobXCaughtException: $exception');
 
   final Object _exception;
-  final Object _stackTrace;
+  final StackTrace _stackTrace;
 
   Object get exception => _exception;
 

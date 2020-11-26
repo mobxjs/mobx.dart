@@ -84,7 +84,7 @@ void main() {
       final a = Action(() => y.value);
 
       final d = autorun((_) {
-        total = x.value + a();
+        total = x.value + (a() as int);
       });
 
       expect(total, equals(30));

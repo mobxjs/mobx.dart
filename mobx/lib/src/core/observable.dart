@@ -54,11 +54,12 @@ class Observable<T> extends Atom
     _context.enforceWritePolicy(this);
 
     final oldValue = _value;
-    final newValue = _prepareNewValue(value);
+    final newValueDynamic = _prepareNewValue(value);
 
-    if (newValue == WillChangeNotification.unchanged) {
+    if (newValueDynamic == WillChangeNotification.unchanged) {
       return;
     }
+    final newValue = newValueDynamic as T;
 
     final notifySpy = _context.isSpyEnabled;
 

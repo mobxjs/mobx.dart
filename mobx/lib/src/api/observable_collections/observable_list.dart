@@ -232,10 +232,10 @@ class ObservableList<T>
     var didRemove = false;
 
     _context.conditionallyRunInAction(() {
-      final index = _list.indexOf(element);
+      final index = _list.indexOf(element as T);
       if (index >= 0) {
         _list.removeAt(index);
-        _notifyElementUpdate(index, null, element, type: OperationType.remove);
+        _notifyElementUpdate(index, null, element as T, type: OperationType.remove);
         didRemove = true;
       }
     }, _atom);
@@ -283,7 +283,7 @@ class ObservableList<T>
   @override
   void removeWhere(bool Function(T element) test) {
     _context.conditionallyRunInAction(() {
-      final removedElements = Queue<ElementChange>();
+      final removedElements = Queue<ElementChange<T>>();
       for (var i = _list.length - 1; i >= 0; --i) {
         final element = _list[i];
         if (test(element)) {
@@ -313,7 +313,7 @@ class ObservableList<T>
   @override
   void retainWhere(bool Function(T element) test) {
     _context.conditionallyRunInAction(() {
-      final removedElements = Queue<ElementChange>();
+      final removedElements = Queue<ElementChange<T>>();
       for (var i = _list.length - 1; i >= 0; --i) {
         final element = _list[i];
         if (!test(element)) {
@@ -359,7 +359,7 @@ class ObservableList<T>
       if (_list.isNotEmpty) {
         final oldList = _list.toList(growable: false);
         _list.shuffle(random);
-        final changes = <ElementChange>[];
+        final changes = <ElementChange<T>>[];
         for (var i = 0; i < _list.length; ++i) {
           final oldValue = oldList[i];
           final newValue = _list[i];
@@ -381,7 +381,7 @@ class ObservableList<T>
       if (_list.isNotEmpty) {
         final oldList = _list.toList(growable: false);
         _list.sort(compare);
-        final changes = <ElementChange>[];
+        final changes = <ElementChange<T>>[];
         for (var i = 0; i < _list.length; ++i) {
           final oldValue = oldList[i];
           final newValue = _list[i];
@@ -404,7 +404,7 @@ class ObservableList<T>
   @override
   Dispose observe(Listener<ListChange<T>> listener, {bool fireImmediately}) {
     if (fireImmediately == true) {
-      final change = ListChange(list: this, rangeChanges: <RangeChange>[
+      final change = ListChange<T>(list: this, rangeChanges: <RangeChange<T>>[
         RangeChange(index: 0, newValues: toList(growable: false))
       ]);
       listener(change);
@@ -417,7 +417,7 @@ class ObservableList<T>
       {OperationType type = OperationType.update}) {
     _atom.reportChanged();
 
-    final change = ListChange(list: this, elementChanges: <ElementChange>[
+    final change = ListChange<T>(list: this, elementChanges: <ElementChange<T>>[
       ElementChange(
           index: index, newValue: newValue, oldValue: oldValue, type: type)
     ]);
@@ -425,10 +425,10 @@ class ObservableList<T>
     _listeners.notifyListeners(change);
   }
 
-  void _notifyElementsUpdate(final List<ElementChange> elementChanges) {
+  void _notifyElementsUpdate(final List<ElementChange<T>> elementChanges) {
     _atom.reportChanged();
 
-    final change = ListChange(list: this, elementChanges: elementChanges);
+    final change = ListChange<T>(list: this, elementChanges: elementChanges);
 
     _listeners.notifyListeners(change);
   }
@@ -436,7 +436,7 @@ class ObservableList<T>
   void _notifyRangeUpdate(int index, List<T> newValues, List<T> oldValues) {
     _atom.reportChanged();
 
-    final change = ListChange(list: this, rangeChanges: <RangeChange>[
+    final change = ListChange<T>(list: this, rangeChanges: <RangeChange<T>>[
       RangeChange(index: index, newValues: newValues, oldValues: oldValues)
     ]);
 
@@ -501,8 +501,8 @@ class ListChange<T> {
   ListChange({this.list, this.elementChanges, this.rangeChanges});
 
   final ObservableList<T> list;
-  final List<ElementChange> elementChanges;
-  final List<RangeChange> rangeChanges;
+  final List<ElementChange<T>> elementChanges;
+  final List<RangeChange<T>> rangeChanges;
 }
 
 /// Used during testing for wrapping a regular `List<T>` as an `ObservableList<T>`

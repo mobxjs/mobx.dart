@@ -125,7 +125,7 @@ class ObservableSet<T>
       removed = _set.remove(value);
 
       if (removed && _hasListeners) {
-        _reportRemove(value);
+        _reportRemove(value as T);
       }
 
       if (removed) {
