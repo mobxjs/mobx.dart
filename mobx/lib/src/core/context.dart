@@ -56,13 +56,11 @@ enum ReactiveWritePolicy { observed, always, never }
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
   ReactiveConfig({
-    bool disableErrorBoundaries,
-    ReactiveWritePolicy writePolicy,
-    ReactiveReadPolicy readPolicy,
+    this.disableErrorBoundaries = false,
+    this.writePolicy = ReactiveWritePolicy.observed,
+    this.readPolicy = ReactiveReadPolicy.never,
     this.maxIterations = 100,
-  })  : disableErrorBoundaries = main.disableErrorBoundaries,
-        writePolicy = main.writePolicy,
-        readPolicy = main.readPolicy;
+  });
 
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
