@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mockito/mockito.dart' hide when;
@@ -65,7 +63,7 @@ void main() {
     });
 
     test('exceptions inside asyncWhen are caught and reaction is disposed', () {
-      Reaction rxn;
+      late Reaction rxn;
       asyncWhen((_) {
         rxn = _;
         throw Exception('FAIL');

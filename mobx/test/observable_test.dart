@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'package:mobx/mobx.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -12,7 +10,7 @@ void main() {
 
   group('observable<T>', () {
     test('basics work', () {
-      final x = Observable<int>(null);
+      final x = Observable<int?>(null);
       expect(x.value, equals(null));
 
       x.value = 100;
@@ -35,7 +33,7 @@ void main() {
 
       expect(x.value, equals(1000));
 
-      final x1 = Observable<int>(null, context: mainContext);
+      final x1 = Observable<int?>(null, context: mainContext);
       expect(x1.value, isNull);
 
       final y = Observable('Hello', name: 'greeting', context: mainContext);
