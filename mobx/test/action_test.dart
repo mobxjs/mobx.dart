@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'package:mobx/mobx.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -105,9 +103,9 @@ void main() {
     });
 
     test('can be invoked with named args', () {
-      String message;
+      late String message;
 
-      final a = Action(({String name, String value}) {
+      final a = Action(({String name = '', String value = ''}) {
         message = '$name: $value';
       });
 

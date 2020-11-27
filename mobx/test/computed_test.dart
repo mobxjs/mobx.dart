@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'package:collection/collection.dart';
 import 'package:mobx/src/api/context.dart';
 import 'package:mockito/mockito.dart';
@@ -181,7 +179,7 @@ void main() {
     });
 
     test('throws on finding a cycle', () {
-      Computed<int> c1;
+      late Computed<int> c1;
       c1 = Computed(() => c1.value);
 
       expect(() {
@@ -189,7 +187,7 @@ void main() {
       }, throwsException);
 
       // ignore: avoid_as
-      expect((c1.errorValue.exception as MobXException).message.toLowerCase(),
+      expect((c1.errorValue?.exception as MobXException).message.toLowerCase(),
           contains('cycle'));
     });
 

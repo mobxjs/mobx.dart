@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/reaction.dart';
@@ -15,7 +13,7 @@ void main() {
   group('autorun()', () {
     test('basics work', () {
       final c = Observable(0);
-      int nextValue;
+      late int nextValue;
 
       final dispose = autorun((_) {
         nextValue = c.value + 1;
@@ -37,7 +35,7 @@ void main() {
     test('with 2 observables', () {
       final x = Observable('Hello');
       final y = Observable('Pavan');
-      String message;
+      late String message;
 
       final dispose = autorun((_) {
         message = '${x.value} ${y.value}';
@@ -57,7 +55,7 @@ void main() {
     test('with changing observables', () {
       final x = Observable(10);
       final y = Observable(20);
-      int value;
+      int? value;
 
       final dispose = autorun((_) {
         value = (value == null) ? x.value : y.value;
@@ -72,7 +70,7 @@ void main() {
     });
 
     test('with delayed scheduler', () {
-      Function dispose;
+      late Function dispose;
       const delayMs = 5000;
 
       final x = Observable(10);

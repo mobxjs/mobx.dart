@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'package:mobx/mobx.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -44,12 +42,12 @@ void main() {
       final x = Observable(10);
 
       final dispose1 = x.intercept((change) {
-        change.newValue = change.newValue + 10;
+        change.newValue = (change.newValue ?? 0) + 10;
         return change;
       });
 
       final dispose2 = x.intercept((change) {
-        change.newValue = change.newValue + 10;
+        change.newValue = (change.newValue ?? 0) + 10;
         return change;
       });
 
@@ -64,14 +62,14 @@ void main() {
       final x = Observable(10);
 
       final dispose1 = x.intercept((change) {
-        change.newValue = change.newValue + 10;
+        change.newValue = (change.newValue ?? 0) + 10;
         return change;
       });
 
       final dispose2 = x.intercept((change) => null);
 
       final dispose3 = x.intercept((change) {
-        change.newValue = change.newValue + 10;
+        change.newValue = (change.newValue ?? 0) + 10;
         return change;
       });
 
@@ -92,16 +90,6 @@ void main() {
         ..interceptChange(WillChangeNotification());
 
       verify(context.untracked(any));
-    });
-
-    test('asserts for null notifications', () {
-      final handlers = Interceptors(MockContext())
-        // ignore: missing_return
-        ..add((_) {});
-
-      expect(() {
-        handlers.interceptChange(null);
-      }, throwsA(const TypeMatcher<AssertionError>()));
     });
   });
 }

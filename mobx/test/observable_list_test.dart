@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'dart:math';
 
 import 'package:mobx/mobx.dart';
@@ -106,17 +104,17 @@ void main() {
     test('observe set length works', () {
       final list = ObservableList.of([0]);
 
-      var index = -1;
-      var addedValues = <int>[];
-      var removedValues = <int>[];
+      int index = -1;
+      List<int?>? addedValues = [];
+      List<int>? removedValues = [];
 
       list
         ..observe((change) {
           expect(change.rangeChanges, isNotNull);
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges?.first.newValues;
+          removedValues = change.rangeChanges?.first.oldValues;
         })
         ..length = 5;
       expect(index, equals(1));
@@ -136,20 +134,21 @@ void main() {
 
       var index = -1;
       var addedValues = <int>[];
-      var removedValues = <int>[];
+      List<int>? removedValues = <int>[];
 
       list
         ..observe((change) {
           if (change.rangeChanges != null) {
-            expect(change.rangeChanges.length, equals(1));
-            index = change.rangeChanges.first.index;
-            addedValues = change.rangeChanges.first.newValues;
-            removedValues = change.rangeChanges.first.oldValues;
+            expect(change.rangeChanges!.length, equals(1));
+            index = change.rangeChanges!.first.index;
+            addedValues = change.rangeChanges!.first.newValues!;
+            removedValues = change.rangeChanges!.first.oldValues!;
           } else if (change.elementChanges != null) {
-            expect(change.elementChanges.length, equals(1));
-            index = change.elementChanges.first.index;
-            expect(change.elementChanges.first.type, equals(OperationType.add));
-            addedValues = [change.elementChanges.first.newValue];
+            expect(change.elementChanges!.length, equals(1));
+            index = change.elementChanges!.first.index;
+            expect(
+                change.elementChanges!.first.type, equals(OperationType.add));
+            addedValues = [change.elementChanges!.first.newValue!];
             removedValues = null;
           }
         })
@@ -164,16 +163,16 @@ void main() {
       final list = ObservableList.of([0, 4]);
 
       var index = -1;
-      var addedValues = <int>[];
-      var removedValues = <int>[];
+      List<int>? addedValues;
+      List<int>? removedValues;
 
       list
         ..observe((change) {
           expect(change.rangeChanges, isNotNull);
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges?.first.newValues;
+          removedValues = change.rangeChanges?.first.oldValues;
         })
         ..insertAll(1, [1, 2, 3]);
 
@@ -187,20 +186,21 @@ void main() {
 
       var index = -1;
       var addedValues = <int>[];
-      var removedValues = <int>[];
+      List<int>? removedValues = <int>[];
 
       list
         ..observe((change) {
           if (change.rangeChanges != null) {
-            expect(change.rangeChanges.length, equals(1));
-            index = change.rangeChanges.first.index;
-            addedValues = change.rangeChanges.first.newValues;
-            removedValues = change.rangeChanges.first.oldValues;
+            expect(change.rangeChanges!.length, equals(1));
+            index = change.rangeChanges!.first.index;
+            addedValues = change.rangeChanges!.first.newValues!;
+            removedValues = change.rangeChanges!.first.oldValues!;
           } else if (change.elementChanges != null) {
-            expect(change.elementChanges.length, equals(1));
-            index = change.elementChanges.first.index;
-            expect(change.elementChanges.first.type, equals(OperationType.add));
-            addedValues = [change.elementChanges.first.newValue];
+            expect(change.elementChanges!.length, equals(1));
+            index = change.elementChanges!.first.index;
+            expect(
+                change.elementChanges!.first.type, equals(OperationType.add));
+            addedValues = [change.elementChanges!.first.newValue!];
             removedValues = null;
           }
         })
@@ -215,16 +215,16 @@ void main() {
       final list = ObservableList.of([0]);
 
       var index = -1;
-      var addedValues = <int>[];
-      var removedValues = <int>[];
+      List<int>? addedValues;
+      List<int>? removedValues;
 
       list
         ..observe((change) {
           expect(change.rangeChanges, isNotNull);
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges?.first.newValues;
+          removedValues = change.rangeChanges?.first.oldValues;
         })
         ..addAll([1, 2]);
 
@@ -244,17 +244,17 @@ void main() {
       list
         ..observe((change) {
           if (change.rangeChanges != null) {
-            expect(change.rangeChanges.length, equals(1));
-            index = change.rangeChanges.first.index;
-            addedValues = change.rangeChanges.first.newValues;
-            removedValues = change.rangeChanges.first.oldValues;
+            expect(change.rangeChanges!.length, equals(1));
+            index = change.rangeChanges!.first.index;
+            addedValues = change.rangeChanges!.first.newValues!;
+            removedValues = change.rangeChanges!.first.oldValues!;
           } else if (change.elementChanges != null) {
-            expect(change.elementChanges.length, equals(1));
-            index = change.elementChanges.first.index;
-            expect(
-                change.elementChanges.first.type, equals(OperationType.update));
-            addedValues = [change.elementChanges.first.newValue];
-            removedValues = [change.elementChanges.first.oldValue];
+            expect(change.elementChanges!.length, equals(1));
+            index = change.elementChanges!.first.index;
+            expect(change.elementChanges!.first.type,
+                equals(OperationType.update));
+            addedValues = [change.elementChanges!.first.newValue!];
+            removedValues = [change.elementChanges!.first.oldValue!];
           }
         })
         ..first = 1;
@@ -268,16 +268,16 @@ void main() {
       final list = ObservableList.of([0, 1, 2]);
 
       var index = -1;
-      var addedValues = <int>[];
-      var removedValues = <int>[];
+      List<int>? addedValues;
+      List<int>? removedValues;
 
       list
         ..observe((change) {
           expect(change.rangeChanges, isNotNull);
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges?.first.newValues;
+          removedValues = change.rangeChanges?.first.oldValues;
         })
         ..clear();
 
@@ -296,10 +296,10 @@ void main() {
       list
         ..observe((change) {
           expect(change.rangeChanges, isNotNull);
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges!.first.newValues!;
+          removedValues = change.rangeChanges!.first.oldValues!;
         })
         ..fillRange(1, 3, 7);
 
@@ -312,22 +312,22 @@ void main() {
       final list = ObservableList.of([0, 1, null]);
 
       var index = -1;
-      var addedValues = <int>[];
-      var removedValues = <int>[];
+      List<int?>? addedValues = <int>[];
+      List<int?> removedValues = <int>[];
 
       list.observe((change) {
         if (change.rangeChanges != null) {
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges!.first.newValues!;
+          removedValues = change.rangeChanges!.first.oldValues!;
         } else if (change.elementChanges != null) {
-          expect(change.elementChanges.length, equals(1));
-          index = change.elementChanges.first.index;
+          expect(change.elementChanges!.length, equals(1));
+          index = change.elementChanges!.first.index;
           expect(
-              change.elementChanges.first.type, equals(OperationType.remove));
+              change.elementChanges!.first.type, equals(OperationType.remove));
           addedValues = null;
-          removedValues = [change.elementChanges.first.oldValue];
+          removedValues = [change.elementChanges!.first.oldValue];
         }
       });
 
@@ -348,22 +348,22 @@ void main() {
       final list = ObservableList.of([0, null, 1]);
 
       var index = -1;
-      var addedValues = <int>[];
-      var removedValues = <int>[];
+      List<int?>? addedValues;
+      List<int?>? removedValues;
 
       list.observe((change) {
         if (change.rangeChanges != null) {
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges?.first.newValues;
+          removedValues = change.rangeChanges?.first.oldValues;
         } else if (change.elementChanges != null) {
-          expect(change.elementChanges.length, equals(1));
-          index = change.elementChanges.first.index;
+          expect(change.elementChanges!.length, equals(1));
+          index = change.elementChanges!.first.index;
           expect(
-              change.elementChanges.first.type, equals(OperationType.remove));
+              change.elementChanges!.first.type, equals(OperationType.remove));
           addedValues = null;
-          removedValues = [change.elementChanges.first.oldValue];
+          removedValues = [change.elementChanges?.first.oldValue];
         }
       });
 
@@ -382,23 +382,23 @@ void main() {
       final list = ObservableList<int>.of([0, 1, 2, 3]);
 
       var index = -1;
-      var addedValues = <int>[];
+      List<int>? addedValues = [];
       var removedValues = <int>[];
 
       list
         ..observe((change) {
           if (change.rangeChanges != null) {
-            expect(change.rangeChanges.length, equals(1));
-            index = change.rangeChanges.first.index;
-            addedValues = change.rangeChanges.first.newValues;
-            removedValues = change.rangeChanges.first.oldValues;
+            expect(change.rangeChanges!.length, equals(1));
+            index = change.rangeChanges!.first.index;
+            addedValues = change.rangeChanges!.first.newValues!;
+            removedValues = change.rangeChanges!.first.oldValues!;
           } else if (change.elementChanges != null) {
-            expect(change.elementChanges.length, equals(1));
-            index = change.elementChanges.first.index;
-            expect(
-                change.elementChanges.first.type, equals(OperationType.remove));
+            expect(change.elementChanges!.length, equals(1));
+            index = change.elementChanges!.first.index;
+            expect(change.elementChanges!.first.type,
+                equals(OperationType.remove));
             addedValues = null;
-            removedValues = [change.elementChanges.first.oldValue];
+            removedValues = [change.elementChanges!.first.oldValue!];
           }
         })
         ..removeLast();
@@ -412,16 +412,16 @@ void main() {
       final list = ObservableList<int>.of([0, -1, -2, 3]);
 
       var index = -1;
-      var addedValues = <int>[];
-      var removedValues = <int>[];
+      List<int>? addedValues;
+      List<int>? removedValues;
 
       list
         ..observe((change) {
           expect(change.rangeChanges, isNotNull);
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges?.first.newValues;
+          removedValues = change.rangeChanges?.first.oldValues;
         })
         ..removeRange(1, 3);
 
@@ -441,10 +441,10 @@ void main() {
       list
         ..observe((change) {
           expect(change.rangeChanges, isNotNull);
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges!.first.newValues!;
+          removedValues = change.rangeChanges!.first.oldValues!;
         })
         ..replaceRange(1, 3, replacement);
 
@@ -462,10 +462,10 @@ void main() {
       list
         ..observe((change) {
           expect(change.elementChanges, isNotNull);
-          for (var elementChange in change.elementChanges) {
+          for (var elementChange in change.elementChanges!) {
             expect(elementChange.type, equals(OperationType.remove));
             indexes.add(elementChange.index);
-            removedValues.add(elementChange.oldValue);
+            removedValues.add(elementChange.oldValue!);
           }
         })
         ..removeWhere((element) => element < 0);
@@ -483,10 +483,10 @@ void main() {
       list
         ..observe((change) {
           expect(change.elementChanges, isNotNull);
-          for (var elementChange in change.elementChanges) {
+          for (var elementChange in change.elementChanges!) {
             expect(elementChange.type, equals(OperationType.remove));
             indexes.add(elementChange.index);
-            removedValues.add(elementChange.oldValue);
+            removedValues.add(elementChange.oldValue!);
           }
         })
         ..retainWhere((element) => element < 0);
@@ -506,10 +506,10 @@ void main() {
       list
         ..observe((change) {
           expect(change.rangeChanges, isNotNull);
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges!.first.newValues!;
+          removedValues = change.rangeChanges!.first.oldValues!;
         })
         ..setAll(1, replacement);
 
@@ -528,10 +528,10 @@ void main() {
       list
         ..observe((change) {
           expect(change.rangeChanges, isNotNull);
-          expect(change.rangeChanges.length, equals(1));
-          index = change.rangeChanges.first.index;
-          addedValues = change.rangeChanges.first.newValues;
-          removedValues = change.rangeChanges.first.oldValues;
+          expect(change.rangeChanges!.length, equals(1));
+          index = change.rangeChanges!.first.index;
+          addedValues = change.rangeChanges!.first.newValues!;
+          removedValues = change.rangeChanges!.first.oldValues!;
         })
         ..setRange(1, 3, [0, 1, 2, 3], 1);
 
@@ -550,11 +550,11 @@ void main() {
       list
         ..observe((change) {
           expect(change.elementChanges, isNotNull);
-          for (var elementChange in change.elementChanges) {
+          for (var elementChange in change.elementChanges!) {
             expect(elementChange.type, equals(OperationType.update));
             indexes.add(elementChange.index);
-            addedValues.add(elementChange.newValue);
-            removedValues.add(elementChange.oldValue);
+            addedValues.add(elementChange.newValue!);
+            removedValues.add(elementChange.oldValue!);
           }
         })
         ..sort();

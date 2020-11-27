@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
