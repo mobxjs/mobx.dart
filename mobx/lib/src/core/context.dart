@@ -114,7 +114,6 @@ class ReactiveContext {
   int get nextId => ++_state.nextIdCounter;
 
   String nameFor(String prefix) {
-    assert(prefix != null);
     assert(prefix.isNotEmpty);
     return '$prefix@$nextId';
   }
@@ -464,8 +463,6 @@ class ReactiveContext {
           return false;
         });
     }
-
-    return false;
   }
 
   bool _hasCaughtException(Derivation d) =>

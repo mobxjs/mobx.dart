@@ -4,7 +4,7 @@ part of '../extensions.dart';
 extension ObservableStreamExtension<T> on Stream<T> {
   ObservableStream<T> asObservable(
           {T? initialValue,
-          bool? cancelOnError,
+          bool cancelOnError = false,
           ReactiveContext? context,
           String? name}) =>
       ObservableStream<T>(this,

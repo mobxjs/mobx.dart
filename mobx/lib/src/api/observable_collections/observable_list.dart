@@ -402,7 +402,8 @@ class ObservableList<T>
   /// You can choose to receive the change notification immediately (with [fireImmediately])
   /// or on the first change
   @override
-  Dispose observe(Listener<ListChange<T>> listener, {bool fireImmediately = false}) {
+  Dispose observe(Listener<ListChange<T>> listener,
+      {bool fireImmediately = false}) {
     if (fireImmediately == true) {
       final change = ListChange<T>(list: this, rangeChanges: <RangeChange<T>>[
         RangeChange(index: 0, newValues: toList(growable: false))
@@ -462,8 +463,7 @@ class ElementChange<T> {
       {required this.index,
       this.type = OperationType.update,
       this.newValue,
-      this.oldValue})
-      : assert(index != null);
+      this.oldValue});
 
   final int index;
   final OperationType type;
@@ -482,8 +482,7 @@ class ElementChange<T> {
 /// The elements were removed from the list if [oldValues] is set and not empty, and [newValues]
 /// is null.
 class RangeChange<T> {
-  RangeChange({required this.index, this.newValues, this.oldValues})
-      : assert(index != null);
+  RangeChange({required this.index, this.newValues, this.oldValues});
 
   final int index;
   final List<T>? newValues;

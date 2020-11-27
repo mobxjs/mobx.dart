@@ -79,13 +79,6 @@ void main() {
       d();
     });
 
-    test('throws AssertionError if a name prefix is not provided', () {
-      final context = createContext();
-
-      expect(() => context.nameFor(null),
-          throwsA(const TypeMatcher<AssertionError>()));
-    });
-
     group('conditionallyRunInAction', () {
       test('when running OUTSIDE an Action, it should USE the ActionController',
           () {

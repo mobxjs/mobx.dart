@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'dart:async';
 
 import 'package:mobx/src/api/async.dart';

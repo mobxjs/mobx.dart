@@ -43,17 +43,15 @@ ReactionDisposer createAutorun(
       if (!isScheduled) {
         isScheduled = true;
 
-        if (timer != null) {
-          timer!.cancel();
-          timer = null;
-        }
+        timer?.cancel();
+        timer = null;
 
         timer = scheduler(() {
           isScheduled = false;
           if (!rxn.isDisposed) {
             rxn.track(() => trackingFn(rxn));
           } else {
-            timer!.cancel();
+            timer?.cancel();
           }
         });
       }
@@ -123,17 +121,15 @@ ReactionDisposer createReaction<T>(
     } else if (!isScheduled) {
       isScheduled = true;
 
-      if (timer != null) {
-        timer!.cancel();
-        timer = null;
-      }
+      timer?.cancel();
+      timer = null;
 
       timer = scheduler!(() {
         isScheduled = false;
         if (!rxn.isDisposed) {
           reactionRunner();
         } else {
-          timer!.cancel();
+          timer?.cancel();
         }
       });
     }
@@ -176,10 +172,8 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
   return dispose = createAutorun(context, (reaction) {
     if (predicate(reaction)) {
       reaction.dispose();
-      if (timer != null) {
-        timer!.cancel();
-        timer = null;
-      }
+      timer?.cancel();
+      timer = null;
       effectAction();
     }
   }, name: rxnName, onError: onError);

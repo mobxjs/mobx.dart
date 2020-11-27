@@ -10,9 +10,7 @@ abstract class Reaction implements Derivation {
 
 class ReactionImpl implements Reaction {
   ReactionImpl(this._context, Function() onInvalidate,
-      {required this.name, void Function(Object, Reaction)? onError})
-      : assert(_context != null),
-        assert(onInvalidate != null) {
+      {required this.name, void Function(Object, Reaction)? onError}) {
     _onInvalidate = onInvalidate;
     _onError = onError;
   }

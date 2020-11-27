@@ -96,10 +96,6 @@ class Atom {
       _addListener(_ListenerKind.onBecomeUnobserved, fn);
 
   void Function() _addListener(_ListenerKind kind, void Function() fn) {
-    if (fn == null) {
-      throw MobXException('$kind handler cannot be null');
-    }
-
     if (_observationListeners[kind] == null) {
       _observationListeners[kind] = {}..add(fn);
     } else {

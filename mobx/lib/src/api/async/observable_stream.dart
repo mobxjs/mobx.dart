@@ -5,11 +5,11 @@ enum StreamStatus { waiting, active, done }
 class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
   ObservableStream(Stream<T> stream,
       {T? initialValue,
-      bool? cancelOnError,
+      bool cancelOnError = false,
       ReactiveContext? context,
       String? name})
       : this._(
-            context ?? mainContext, stream, initialValue, cancelOnError ?? false, name);
+            context ?? mainContext, stream, initialValue, cancelOnError, name);
 
   ObservableStream._(ReactiveContext context, this._stream, this._initialValue,
       this._cancelOnError, String? name)
@@ -86,7 +86,8 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
   }
 
   /// Create a new stream with the provided initialValue and cancelOnError.
-  ObservableStream<T> configure({T? initialValue, bool cancelOnError = false}) =>
+  ObservableStream<T> configure(
+          {T? initialValue, bool cancelOnError = false}) =>
       ObservableStream._(_context, _stream, initialValue, cancelOnError, name);
 
   ObservableStream<R> _wrap<R>(Stream<R> stream) =>

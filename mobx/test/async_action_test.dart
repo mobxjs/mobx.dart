@@ -20,10 +20,6 @@ void main() {
   });
 
   group('AsyncAction', () {
-    test('null name throws', () {
-      expect(() => AsyncAction(null), throwsA(anything));
-    });
-
     test('run allows updating observable values in an async function',
         () async {
       final action = AsyncAction('testAction');

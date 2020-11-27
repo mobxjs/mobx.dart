@@ -164,7 +164,8 @@ class ObservableSet<T>
   /// Attaches a listener to changes happening in the [ObservableSet]. You have
   /// the option to be notified immediately ([fireImmediately]) or wait for until the first change.
   @override
-  Dispose observe(SetChangeListener<T> listener, {bool fireImmediately = false}) {
+  Dispose observe(SetChangeListener<T> listener,
+      {bool fireImmediately = false}) {
     final dispose = _listeners.add(listener);
     if (fireImmediately == true) {
       _set.forEach(_reportAdd);
@@ -232,8 +233,7 @@ class SetChange<T> {
     required this.object,
     required this.type,
     required this.value,
-  })  : assert(object != null),
-        assert(type != null);
+  });
 
   final ObservableSet<T> object;
   final OperationType type;

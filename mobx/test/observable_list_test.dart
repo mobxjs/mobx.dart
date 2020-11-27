@@ -88,13 +88,6 @@ void main() {
       expect(count, equals(1));
     });
 
-    test('ListChange basics', () {
-      expect(() => ElementChange(index: null),
-          throwsA(const TypeMatcher<AssertionError>()));
-      expect(() => RangeChange(index: null),
-          throwsA(const TypeMatcher<AssertionError>()));
-    });
-
     test('observe with fireImmediately works', () {
       final list = ObservableList.of([0]);
 

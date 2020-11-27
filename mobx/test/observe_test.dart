@@ -196,18 +196,6 @@ void main() {
       d2();
     });
 
-    test('throws if null is passed', () {
-      final x = Observable(10);
-
-      expect(() {
-        x.onBecomeObserved(null);
-      }, throwsException);
-
-      expect(() {
-        x.onBecomeUnobserved(null);
-      }, throwsException);
-    });
-
     test('multiple can be attached', () {
       final x = Observable(10);
 

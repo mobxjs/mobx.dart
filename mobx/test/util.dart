@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
@@ -35,7 +33,7 @@ void setupTurnOffWritePolicy() {
 
 // Without invoking this setup, errors in reactions, *including expectation failures*, are ignored.
 void setupThrowReactionErrors() {
-  Dispose disposeReactionError;
+  late Dispose disposeReactionError;
 
   setUp(() => disposeReactionError = mainContext.onReactionError((_, rxn) {
         throw Exception(rxn.errorValue);

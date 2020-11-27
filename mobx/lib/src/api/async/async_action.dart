@@ -10,8 +10,7 @@ class AsyncAction {
       : this._(context ?? mainContext, name);
 
   AsyncAction._(ReactiveContext context, String name)
-      : assert(name != null),
-        _actions = ActionController(context: context, name: name);
+      : _actions = ActionController(context: context, name: name);
 
   final ActionController _actions;
 
