@@ -3,8 +3,8 @@ part of '../async.dart';
 enum FutureStatus { pending, rejected, fulfilled }
 
 class FutureResult<T> {
-  FutureResult(ReactiveContext context, Future<T> _future, dynamic initialResult,
-      FutureStatus initialStatus, String name)
+  FutureResult(ReactiveContext context, Future<T> _future,
+      dynamic initialResult, FutureStatus initialStatus, String name)
       : _axnController =
             ActionController(context: context, name: '$name.ActionController'),
         _status = Observable(initialStatus, name: '$name.status'),

@@ -5,8 +5,6 @@ import 'package:test/test.dart';
 import 'shared_mocks.dart';
 import 'util.dart';
 
-class MockDerivation extends Mock implements Derivation {}
-
 void main() {
   testSetup();
 

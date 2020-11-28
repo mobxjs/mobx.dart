@@ -213,7 +213,8 @@ class ObservableMap<K, V>
   ///
   /// You can also choose to receive the notifications immediately (with [fireImmediately])
   @override
-  Dispose observe(MapChangeListener<K, V> listener, {bool fireImmediately = false}) {
+  Dispose observe(MapChangeListener<K, V> listener,
+      {bool fireImmediately = false}) {
     final dispose = _listeners.add(listener);
     if (fireImmediately == true) {
       _map.forEach(_reportAdd);
@@ -233,7 +234,12 @@ typedef MapChangeListener<K, V> = void Function(MapChange<K, V>);
 /// Stores the information related to changes happening in an [ObservableMap]. This is
 /// used when firing the change notifications to all the listeners
 class MapChange<K, V> {
-  MapChange({this.type, this.key, this.newValue, this.oldValue, required this.object});
+  MapChange(
+      {this.type,
+      this.key,
+      this.newValue,
+      this.oldValue,
+      required this.object});
 
   final OperationType? type;
 

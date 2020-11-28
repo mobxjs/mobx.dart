@@ -22,11 +22,14 @@ class Observable<T> extends Atom
   /// print('x = ${x.value}'); // read an Observable's value
   /// ```
   factory Observable(T initialValue,
-          {String? name, ReactiveContext? context, EqualityComparer<T>? equals}) =>
+          {String? name,
+          ReactiveContext? context,
+          EqualityComparer<T>? equals}) =>
       Observable._(context ?? mainContext, initialValue,
           name: name, equals: equals);
 
-  Observable._(ReactiveContext context, this._value, {String? name, this.equals})
+  Observable._(ReactiveContext context, this._value,
+      {String? name, this.equals})
       : _interceptors = Interceptors(context),
         _listeners = Listeners(context),
         super._(context, name: name ?? context.nameFor('Observable')) {

@@ -14,3 +14,5 @@ class MockAtom extends Mock implements Atom {
 }
 
 class MockActionController extends Mock implements ActionController {}
+
+class MockDerivation extends Mock implements Derivation {}

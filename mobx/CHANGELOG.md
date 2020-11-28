@@ -1,3 +1,8 @@
+## 2.0.0-nullsafety.0 - 2.0.0-nullsafety.1
+
+- Null safe migration
+- Formatting fixes to improve Pub Points
+
 ## 1.2.1+2 - 1.2.1+4
 
 - Reformatting for improving the pub.dev score
