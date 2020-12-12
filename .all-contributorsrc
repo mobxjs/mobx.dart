@@ -464,6 +464,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "inimaga",
+      "name": "Issa Nimaga",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/24917864?v=4",
+      "profile": "https://github.com/inimaga",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
