@@ -5,7 +5,14 @@ description: If you are a developer on the MobX project, here are few guidelines
 
 If you are a developer on the MobX project, here are few guidelines that will help in your journey. These apply to all the packages: `mobx`, `mobx_codegen`, `flutter_mobx`.
 
-### 1. pubspec.yaml
+### 1. Format your code
+
+To format your files following [Dart guidelines](https://dart.dev/guides/language/effective-dart/style#formatting). This will format your code accordingly regardless of your IDE settings.
+```
+dartfmt -w .
+```
+
+### 2. pubspec.yaml
 
 - Use the [semantic versioning policy](https://dart.dev/tools/pub/versioning) to update the version in `pubspec.yaml`.
 - Say you are updating from `0.1.0` to `0.2.0`, then update the `version` field in `pubspec.yaml`:
@@ -14,7 +21,7 @@ If you are a developer on the MobX project, here are few guidelines that will he
 version: 0.2.0
 ```
 
-### 2. Expose version
+### 3. Expose version
 
 - Expose the updated version of `pubspec.yaml` to the library `.dart` file by running the appropriate command:
 
@@ -28,7 +35,7 @@ There is a handy _npm-script_ called **`set:versions`** inside the root-level `p
 npm run set:versions
 ```
 
-### 3. Changelog
+### 4. Changelog
 
 - Update the `CHANGELOG.md` file to include the changes introduced in the new version. Normally you would do this by adding a new bullet point for the version and follow the template from earlier versions.
 - If the changes are minimal, you can also append the change to an earlier bullet point but include the new version as a range. For example, the changes in `0.3.2+3` were minimal, so we added it as a range from the earlier version.
@@ -36,10 +43,6 @@ npm run set:versions
 ```markdown
 ## 0.3.0 - 0.3.2+3
 ```
-
-### 4. Update the versions in the Getting Started Guide
-
-The versions of packages mentioned in the [Getting Started Guide](/getting-started) should match the `pubspec.yaml` files of each package.
 
 ### 5. Git Push
 

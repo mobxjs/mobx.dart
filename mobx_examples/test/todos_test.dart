@@ -33,7 +33,6 @@ void main() {
   }
  ],
  "filter": "VisibilityFilter.all",
- "currentDescription": "",
  "pendingTodos": [
   {
    "description": "first one",
@@ -64,7 +63,6 @@ void main() {
   test('TodoList starts with default configuration', () {
     expect(list.todos.length, equals(0));
     expect(list.filter, equals(VisibilityFilter.all));
-    expect(list.currentDescription, equals(''));
   });
 
   test('when a todo is added, the computed properties are updated', () {

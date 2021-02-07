@@ -85,10 +85,12 @@ void main() {
     });
 
     test('ListChange basics', () {
-      expect(() => ElementChange(index: null), throwsA(const TypeMatcher<AssertionError>()));
-      expect(() => RangeChange(index: null), throwsA(const TypeMatcher<AssertionError>()));
+      expect(() => ElementChange(index: null),
+          throwsA(const TypeMatcher<AssertionError>()));
+      expect(() => RangeChange(index: null),
+          throwsA(const TypeMatcher<AssertionError>()));
     });
-  
+
     test('observe with fireImmediately works', () {
       final list = ObservableList.of([0]);
 
@@ -252,7 +254,8 @@ void main() {
           } else if (change.elementChanges != null) {
             expect(change.elementChanges.length, equals(1));
             index = change.elementChanges.first.index;
-            expect(change.elementChanges.first.type, equals(OperationType.update));
+            expect(
+                change.elementChanges.first.type, equals(OperationType.update));
             addedValues = [change.elementChanges.first.newValue];
             removedValues = [change.elementChanges.first.oldValue];
           }
@@ -316,20 +319,21 @@ void main() {
       var removedValues = <int>[];
 
       list.observe((change) {
-          if (change.rangeChanges != null) {
-            expect(change.rangeChanges.length, equals(1));
-            index = change.rangeChanges.first.index;
-            addedValues = change.rangeChanges.first.newValues;
-            removedValues = change.rangeChanges.first.oldValues;
-          } else if (change.elementChanges != null) {
-            expect(change.elementChanges.length, equals(1));
-            index = change.elementChanges.first.index;
-            expect(change.elementChanges.first.type, equals(OperationType.remove));
-            addedValues = null;
-            removedValues = [change.elementChanges.first.oldValue];
-          }
-        });
-        
+        if (change.rangeChanges != null) {
+          expect(change.rangeChanges.length, equals(1));
+          index = change.rangeChanges.first.index;
+          addedValues = change.rangeChanges.first.newValues;
+          removedValues = change.rangeChanges.first.oldValues;
+        } else if (change.elementChanges != null) {
+          expect(change.elementChanges.length, equals(1));
+          index = change.elementChanges.first.index;
+          expect(
+              change.elementChanges.first.type, equals(OperationType.remove));
+          addedValues = null;
+          removedValues = [change.elementChanges.first.oldValue];
+        }
+      });
+
       expect(list.remove(-1), equals(false));
 
       expect(list.remove(1), equals(true));
@@ -351,19 +355,20 @@ void main() {
       var removedValues = <int>[];
 
       list.observe((change) {
-          if (change.rangeChanges != null) {
-            expect(change.rangeChanges.length, equals(1));
-            index = change.rangeChanges.first.index;
-            addedValues = change.rangeChanges.first.newValues;
-            removedValues = change.rangeChanges.first.oldValues;
-          } else if (change.elementChanges != null) {
-            expect(change.elementChanges.length, equals(1));
-            index = change.elementChanges.first.index;
-            expect(change.elementChanges.first.type, equals(OperationType.remove));
-            addedValues = null;
-            removedValues = [change.elementChanges.first.oldValue];
-          }
-        });
+        if (change.rangeChanges != null) {
+          expect(change.rangeChanges.length, equals(1));
+          index = change.rangeChanges.first.index;
+          addedValues = change.rangeChanges.first.newValues;
+          removedValues = change.rangeChanges.first.oldValues;
+        } else if (change.elementChanges != null) {
+          expect(change.elementChanges.length, equals(1));
+          index = change.elementChanges.first.index;
+          expect(
+              change.elementChanges.first.type, equals(OperationType.remove));
+          addedValues = null;
+          removedValues = [change.elementChanges.first.oldValue];
+        }
+      });
 
       expect(list.removeAt(1), equals(null));
       expect(index, equals(1));
@@ -393,7 +398,8 @@ void main() {
           } else if (change.elementChanges != null) {
             expect(change.elementChanges.length, equals(1));
             index = change.elementChanges.first.index;
-            expect(change.elementChanges.first.type, equals(OperationType.remove));
+            expect(
+                change.elementChanges.first.type, equals(OperationType.remove));
             addedValues = null;
             removedValues = [change.elementChanges.first.oldValue];
           }
@@ -567,7 +573,9 @@ void main() {
       var fired = false;
 
       list
-        ..observe((change) { fired = true; })
+        ..observe((change) {
+          fired = true;
+        })
         ..shuffle();
 
       // All elements of list are equal, so shuffling should have no effect.
@@ -627,43 +635,150 @@ void main() {
 
   group('fires reportChanged() for write-methods', () {
     <String, bool Function(ObservableList<int>)>{
-      'length=': (_) { _.length = 0; return true; },
-      'last=': (_) { _.last = 100; return true; },
-      'first=': (_) { _.first = 100; return true; },
-      'insertAll': (_) { _.insertAll(0, [100]); return true; },
-      'insert': (_) { _.insert(0, 100); return true; },
-      'sort': (_) { _.sort((l, r) => r.compareTo(l)); return true; },
-      'setRange': (_) { _.setRange(0, 1, [100]); return true; },
-      'fillRange': (_) { _.fillRange(0, 2, 100); return true; },
-      'replaceRange': (_) { _.replaceRange(0, 1, [100]); return true; },
-      'setAll': (_) { _.setAll(0, [100]); return true; },
-      '[]=': (_) { _[0] = 100; return true; },
-      'add': (_) { _.add(100); return true; },
-      'addAll': (_) { _.addAll([100]); return true; },
-      'clear': (_) { _.clear(); return true; },
-      'removeLast': (_) { _.removeLast(); return true; },
-      'remove': (_) { _.remove(0); return true; },
-      'removeRange': (_) { _.removeRange(0, 1); return true; },
-      'removeAt': (_) { _.removeAt(0); return true; },
-      'removeWhere': (_) { _.removeWhere((_) => true); return true; },
-      'shuffle': (_) { _.shuffle(); return true; },
-      'retainWhere': (_) { _.retainWhere((_) => false); return true; },
-
-      '!length=': (_) { _.length = 4; return false; },
-      '!last=': (_) { _.last = 3; return false; },
-      '!first=': (_) { _.first = 0; return false; },
-      '!insertAll': (_) { _.insertAll(0, []); return false; },
-      '!sort': (_) { _.sort(); return false; },
-      '!setRange': (_) { _.setRange(1, 1, [100]); return false; },
-      '!fillRange': (_) { _.fillRange(2, 2, 100); return false; },
-      '!replaceRange': (_) { _.replaceRange(1, 1, []); return false; },
-      '!setAll': (_) { _.setAll(0, []); return false; },
-      '![]=': (_) { _[2] = 2; return false; },
-      '!addAll': (_) { _.addAll([]); return false; },
-      '!remove': (_) { _.remove(-1); return false; },
-      '!removeRange': (_) { _.removeRange(1, 1); return false; },
-      '!removeWhere': (_) { _.removeWhere((_) => false); return false; },
-      '!retainWhere': (_) { _.retainWhere((_) => true); return false; },
+      'length=': (_) {
+        _.length = 0;
+        return true;
+      },
+      'last=': (_) {
+        _.last = 100;
+        return true;
+      },
+      'first=': (_) {
+        _.first = 100;
+        return true;
+      },
+      'insertAll': (_) {
+        _.insertAll(0, [100]);
+        return true;
+      },
+      'insert': (_) {
+        _.insert(0, 100);
+        return true;
+      },
+      'sort': (_) {
+        _.sort((l, r) => r.compareTo(l));
+        return true;
+      },
+      'setRange': (_) {
+        _.setRange(0, 1, [100]);
+        return true;
+      },
+      'fillRange': (_) {
+        _.fillRange(0, 2, 100);
+        return true;
+      },
+      'replaceRange': (_) {
+        _.replaceRange(0, 1, [100]);
+        return true;
+      },
+      'setAll': (_) {
+        _.setAll(0, [100]);
+        return true;
+      },
+      '[]=': (_) {
+        _[0] = 100;
+        return true;
+      },
+      'add': (_) {
+        _.add(100);
+        return true;
+      },
+      'addAll': (_) {
+        _.addAll([100]);
+        return true;
+      },
+      'clear': (_) {
+        _.clear();
+        return true;
+      },
+      'removeLast': (_) {
+        _.removeLast();
+        return true;
+      },
+      'remove': (_) {
+        _.remove(0);
+        return true;
+      },
+      'removeRange': (_) {
+        _.removeRange(0, 1);
+        return true;
+      },
+      'removeAt': (_) {
+        _.removeAt(0);
+        return true;
+      },
+      'removeWhere': (_) {
+        _.removeWhere((_) => true);
+        return true;
+      },
+      'shuffle': (_) {
+        _.shuffle();
+        return true;
+      },
+      'retainWhere': (_) {
+        _.retainWhere((_) => false);
+        return true;
+      },
+      '!length=': (_) {
+        _.length = 4;
+        return false;
+      },
+      '!last=': (_) {
+        _.last = 3;
+        return false;
+      },
+      '!first=': (_) {
+        _.first = 0;
+        return false;
+      },
+      '!insertAll': (_) {
+        _.insertAll(0, []);
+        return false;
+      },
+      '!sort': (_) {
+        _.sort();
+        return false;
+      },
+      '!setRange': (_) {
+        _.setRange(1, 1, [100]);
+        return false;
+      },
+      '!fillRange': (_) {
+        _.fillRange(2, 2, 100);
+        return false;
+      },
+      '!replaceRange': (_) {
+        _.replaceRange(1, 1, []);
+        return false;
+      },
+      '!setAll': (_) {
+        _.setAll(0, []);
+        return false;
+      },
+      '![]=': (_) {
+        _[2] = 2;
+        return false;
+      },
+      '!addAll': (_) {
+        _.addAll([]);
+        return false;
+      },
+      '!remove': (_) {
+        _.remove(-1);
+        return false;
+      },
+      '!removeRange': (_) {
+        _.removeRange(1, 1);
+        return false;
+      },
+      '!removeWhere': (_) {
+        _.removeWhere((_) => false);
+        return false;
+      },
+      '!retainWhere': (_) {
+        _.retainWhere((_) => true);
+        return false;
+      },
     }.forEach(_templateWriteTest);
   });
 
@@ -720,9 +835,7 @@ void _templateWriteTest(
     verifyNever(atom.reportObserved());
 
     // fire the method caused or not the reportChanged() to be invoked.
-    fn(list)
-      ? verify(atom.reportChanged())
-      : verifyNever(atom.reportChanged());
+    fn(list) ? verify(atom.reportChanged()) : verifyNever(atom.reportChanged());
   });
 }
 
