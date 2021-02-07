@@ -24,14 +24,14 @@ const plugins = [
 // Fetch the plugins latest version from the pub API
 async function fetchPluginVersion(plugin) {
   try {
-    const response = await axios.get(`https://pub.dev/api/packages/${plugin}`);
+    const response = await axios.get(`https://pub.dev/packages/${plugin}.json`);
     const versions = response.data.versions;
 
     if (!Array.isArray(versions)) {
       return '';
     }
 
-    return versions[versions.length - 1].version;
+    return versions[versions.length - 1];
   } catch (e) {
     console.log(`Failed to load version for plugin "${plugin}".`);
     return '';
@@ -78,7 +78,7 @@ module.exports = function sourceVersions() {
                 ...current,
                 [envVar]: JSON.stringify(process.env[envVar] || ''),
               };
-            }, {})
+            }, {}),
           ),
         ],
       };
