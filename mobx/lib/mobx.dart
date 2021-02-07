@@ -66,4 +66,4 @@ export 'package:mobx/src/core/atom_extensions.dart';
 export 'package:mobx/src/api/extensions.dart';
 
 /// The current version as per `pubspec.yaml`
-const version = '1.2.1+3';
+const version = '1.2.1+4';

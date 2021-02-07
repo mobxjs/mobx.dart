@@ -1,6 +1,7 @@
-## 1.2.1+2 - 1.2.1+3
+## 1.2.1+2 - 1.2.1+4
 
 - Reformatting for improving the pub.dev score
+- Regenerated the example files
 
 ## 1.2.1 - 1.2.1+1
 

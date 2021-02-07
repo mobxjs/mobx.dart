@@ -96,21 +96,6 @@ mixin _$TodoList on _TodoList, Store {
     });
   }
 
-  final _$currentDescriptionAtom = Atom(name: '_TodoList.currentDescription');
-
-  @override
-  String get currentDescription {
-    _$currentDescriptionAtom.reportRead();
-    return super.currentDescription;
-  }
-
-  @override
-  set currentDescription(String value) {
-    _$currentDescriptionAtom.reportWrite(value, super.currentDescription, () {
-      super.currentDescription = value;
-    });
-  }
-
   final _$_TodoListActionController = ActionController(name: '_TodoList');
 
   @override
@@ -162,7 +147,6 @@ mixin _$TodoList on _TodoList, Store {
     return '''
 todos: ${todos},
 filter: ${filter},
-currentDescription: ${currentDescription},
 pendingTodos: ${pendingTodos},
 completedTodos: ${completedTodos},
 hasCompletedTodos: ${hasCompletedTodos},
