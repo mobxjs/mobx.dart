@@ -6,13 +6,24 @@ class ObservableTemplate {
   String type;
   String name;
   bool isPrivate;
+  bool isReadOnly;
+
+  /// Formats the `name` from `_foo_bar` to `foo_bar`
+  /// such that the getter gets public
+  String get _getterName {
+    if (isReadOnly) {
+      final nameWithoutUnderline = name.replaceAll(RegExp(r'^_*'), '');
+      return nameWithoutUnderline;
+    }
+    return name;
+  }
 
   @override
   String toString() => """
   final $atomName = Atom(name: '${storeTemplate.parentTypeName}.$name');
 
   @override
-  $type get $name {
+  $type get $_getterName {
     $atomName.reportRead();
     return super.$name;
   }

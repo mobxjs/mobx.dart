@@ -85,12 +85,18 @@ class StoreClassVisitor extends SimpleElementVisitor {
       return;
     }
 
+    final isReadOnly = _observableChecker
+        .firstAnnotationOfExact(element)
+        .getField('readOnly')
+        .toBoolValue();
+
     final template = ObservableTemplate()
       ..storeTemplate = _storeTemplate
       ..atomName = '_\$${element.name}Atom'
       ..type = typeNameFinder.findVariableTypeName(element)
       ..name = element.name
-      ..isPrivate = element.isPrivate;
+      ..isPrivate = element.isPrivate
+      ..isReadOnly = isReadOnly;
 
     _storeTemplate.observables.add(template);
     return;
