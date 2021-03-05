@@ -10,7 +10,7 @@ class ComputedTemplate {
   @override
   // ignore: prefer_single_quotes
   String toString() => """
-  Computed<$type> $computedName;
+  Computed<$type>? $computedName;
 
   @override
   $type get $name => ($computedName ??= Computed<$type>(() => super.$name, name: '${storeTemplate.parentTypeName}.$name')).value;""";
