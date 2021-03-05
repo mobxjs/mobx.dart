@@ -78,25 +78,28 @@ class LibraryScopedNameFinder {
   ///
   /// The returned string will include import prefixes on all applicable types.
   String _getDartTypeName(DartType type) {
-    var typeElement = type.element;
-    if (type is FunctionType) {
-      // If we're dealing with a typedef, we let it undergo the standard name
-      // lookup. Otherwise, we special case the function naming.
-      if (typeElement?.enclosingElement is FunctionTypeAliasElement) {
-        typeElement = typeElement.enclosingElement;
-      } else {
-        return _getFunctionTypeName(type);
-      }
-    } else if (
-        // Some types don't have associated elements, like void
-        typeElement == null ||
-            // This is a bare type param, like "T"
-            type is TypeParameterType) {
-      // TODO(pavanpodila): Once we migrate to NNBD, change the flag to `true`
-      return type.getDisplayString(withNullability: false);
-    }
+    return type.getDisplayString(withNullability: true);
 
-    return _getNamedElementTypeName(typeElement, type);
+    // TODO(fzyzcjy): Should use the line above to replace these code?
+    // var typeElement = type.element;
+    // if (type is FunctionType) {
+    //   // If we're dealing with a typedef, we let it undergo the standard name
+    //   // lookup. Otherwise, we special case the function naming.
+    //   if (typeElement?.enclosingElement is FunctionTypeAliasElement) {
+    //     typeElement = typeElement.enclosingElement;
+    //   } else {
+    //     return _getFunctionTypeName(type);
+    //   }
+    // } else if (
+    //     // Some types don't have associated elements, like void
+    //     typeElement == null ||
+    //         // This is a bare type param, like "T"
+    //         type is TypeParameterType) {
+    //   // TODO(pavanpodila): Once we migrate to NNBD, change the flag to `true`
+    //   return type.getDisplayString(withNullability: false);
+    // }
+    //
+    // return _getNamedElementTypeName(typeElement, type);
   }
 
   String _getFunctionTypeName(FunctionType type) {
