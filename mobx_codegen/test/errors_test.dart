@@ -121,7 +121,6 @@ void main() {
   group('InvalidReadOnlyAnnotations', () {
     test('message returns singular message with one field added', () {
       final fields = InvalidReadOnlyAnnotations()..addIf(true, 'testField');
-      // Remove @readonly annotation for $property $propertyList. They only apply to private fields.
       expect(fields.message,
           'Remove @readonly annotation from the field "testField". They only apply to private fields.');
     });
