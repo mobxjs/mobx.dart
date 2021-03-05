@@ -85,26 +85,33 @@ class StoreClassVisitor extends SimpleElementVisitor {
       return;
     }
 
-    final isReadOnly = _observableChecker
-        .firstAnnotationOfExact(element)
-        .getField('readOnly')
-        .toBoolValue();
-
     final template = ObservableTemplate()
       ..storeTemplate = _storeTemplate
       ..atomName = '_\$${element.name}Atom'
       ..type = typeNameFinder.findVariableTypeName(element)
       ..name = element.name
       ..isPrivate = element.isPrivate
-      ..isReadOnly = isReadOnly;
+      ..isReadOnly = _isObservableReadOnly(element);
 
     _storeTemplate.observables.add(template);
     return;
   }
 
+  bool _isObservableReadOnly(FieldElement element) {
+    final isReadOnly = _observableChecker
+        .firstAnnotationOfExact(element)
+        .getField('readOnly')
+        .toBoolValue();
+    return isReadOnly;
+  }
+
   bool _fieldIsNotValid(FieldElement element) => _any([
         _errors.staticObservables.addIf(element.isStatic, element.name),
-        _errors.finalObservables.addIf(element.isFinal, element.name)
+        _errors.finalObservables.addIf(element.isFinal, element.name),
+        _errors.invalidReadOnlyAnnotations.addIf(
+          _isObservableReadOnly(element) && element.setter.isPublic,
+          element.name,
+        ),
       ]);
 
   @override

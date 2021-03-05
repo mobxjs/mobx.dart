@@ -9,6 +9,7 @@ class StoreClassCodegenErrors implements CodegenError {
       nonAbstractStoreMixinDeclarations,
       invalidComputedAnnotations,
       invalidObservableAnnotations,
+      invalidReadOnlyAnnotations,
       invalidActionAnnotations,
       staticObservables,
       staticMethods,
@@ -27,6 +28,8 @@ class StoreClassCodegenErrors implements CodegenError {
   final PropertyErrors staticObservables = StaticObservableFields();
   final PropertyErrors invalidObservableAnnotations =
       InvalidObservableAnnotations();
+  final PropertyErrors invalidReadOnlyAnnotations =
+      InvalidReadOnlyAnnotations();
 
   final PropertyErrors invalidComputedAnnotations =
       InvalidComputedAnnotations();
@@ -150,6 +153,16 @@ class InvalidObservableAnnotations extends PropertyErrors {
   @override
   String get message =>
       'Remove @observable annotation for $property $propertyList. They only apply to fields.';
+}
+
+class InvalidReadOnlyAnnotations extends PropertyErrors {
+  @override
+  // ignore: overridden_fields
+  Pluralize propertyPlural = _fieldPluralizer;
+
+  @override
+  String get message =>
+      'Remove @readonly annotation from $property $propertyList. They only apply to private fields.';
 }
 
 class InvalidActionAnnotations extends PropertyErrors {
