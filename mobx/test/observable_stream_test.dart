@@ -283,7 +283,7 @@ void testStreamToFutureCombinator<T>(String description, Case testCase) {
   test(description, () async {
     final stream = ObservableStream(
         Stream.fromIterable(Iterable<int>.generate(testCase.length)));
-    final ObservableFuture future = testCase.body(stream) as ObservableFuture;
+    final future = testCase.body(stream) as ObservableFuture;
     expect(future.value, isNull);
 
     autorun((_) => future.value);
