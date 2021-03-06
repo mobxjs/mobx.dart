@@ -12,6 +12,7 @@ class StoreClassCodegenErrors implements CodegenError {
       invalidReadOnlyAnnotations,
       invalidActionAnnotations,
       staticObservables,
+      invalidPublicSetterOnReadOnlyObservable,
       staticMethods,
       finalObservables,
       asyncGeneratorActions,
@@ -34,6 +35,8 @@ class StoreClassCodegenErrors implements CodegenError {
   final PropertyErrors invalidComputedAnnotations =
       InvalidComputedAnnotations();
 
+  final PropertyErrors invalidPublicSetterOnReadOnlyObservable =
+      InvalidSetterOnReadOnlyObservable();
   final PropertyErrors staticMethods = InvalidStaticMethods();
   final PropertyErrors asyncGeneratorActions = AsyncGeneratorActionMethods();
   final PropertyErrors nonAsyncMethods = NonAsyncMethods();
@@ -173,6 +176,16 @@ class InvalidActionAnnotations extends PropertyErrors {
   @override
   String get message =>
       'Remove @action annotation for $property $propertyList. They only apply to methods.';
+}
+
+class InvalidSetterOnReadOnlyObservable extends PropertyErrors {
+  @override
+  // ignore: overridden_fields
+  Pluralize propertyPlural = _memberPluralizer;
+
+  @override
+  String get message =>
+      'Must not define a public setter to a readonly field. Remove $property $propertyList.';
 }
 
 class InvalidStaticMethods extends PropertyErrors {

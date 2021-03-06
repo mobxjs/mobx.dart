@@ -16,6 +16,7 @@ import 'package:mobx_codegen/src/template/observable_stream.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 import 'package:mobx_codegen/src/type_names.dart';
+import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
 import 'package:source_gen/source_gen.dart';
 
 class StoreClassVisitor extends SimpleElementVisitor {
@@ -47,7 +48,10 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
   final StoreClassCodegenErrors _errors;
 
+  final _publicSettersCache = <PropertyAccessorElement>[];
+
   String get source {
+    validate();
     if (_errors.hasErrors) {
       log.severe(_errors.message);
       return '';
@@ -116,6 +120,12 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
   @override
   void visitPropertyAccessorElement(PropertyAccessorElement element) {
+    // Caching
+    if (element.isSetter && element.isPublic) {
+      _publicSettersCache.add(element);
+    }
+
+    // Validations
     if (_observableChecker.hasAnnotationOfExact(element)) {
       _errors.invalidObservableAnnotations.addIf(true, element.name);
       return;
@@ -205,6 +215,24 @@ class StoreClassVisitor extends SimpleElementVisitor {
         _errors.asyncGeneratorActions
             .addIf(element.isAsynchronous && element.isGenerator, element.name),
       ]);
+
+  /// Runs validations after all elements have been visited.
+  void validate() {
+    for (final publicSetter in _publicSettersCache) {
+      _errors.invalidPublicSetterOnReadOnlyObservable.addIf(
+        _isInvalidPublicSetterOnReadOnlyObservable(publicSetter),
+        publicSetter.displayName,
+      );
+    }
+  }
+
+  bool _isInvalidPublicSetterOnReadOnlyObservable(
+          PropertyAccessorElement publicSetter) =>
+      _storeTemplate.observables.templates.any(
+        (template) =>
+            template.name.nonPrivateName == publicSetter.displayName &&
+            template.isReadOnly,
+      );
 }
 
 const _storeMixinChecker = TypeChecker.fromRuntime(Store);

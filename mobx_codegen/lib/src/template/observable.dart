@@ -1,4 +1,5 @@
 import 'package:mobx_codegen/src/template/store.dart';
+import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
 
 class ObservableTemplate {
   StoreTemplate storeTemplate;
@@ -8,12 +9,9 @@ class ObservableTemplate {
   bool isPrivate;
   bool isReadOnly;
 
-  /// Formats the `name` from `_foo_bar` to `foo_bar`
-  /// such that the getter gets public
   String get _getterName {
     if (isReadOnly) {
-      final nameWithoutUnderline = name.replaceAll(RegExp(r'^_*'), '');
-      return nameWithoutUnderline;
+      return name.nonPrivateName;
     }
     return name;
   }
@@ -22,7 +20,7 @@ class ObservableTemplate {
   String toString() => """
   final $atomName = Atom(name: '${storeTemplate.parentTypeName}.$name');
 
-  @override
+  ${isReadOnly ? '' : '@override'}
   $type get $_getterName {
     $atomName.reportRead();
     return super.$name;

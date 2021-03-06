@@ -134,6 +134,23 @@ void main() {
     });
   });
 
+  group('InvalidSetterOnReadOnlyObservable', () {
+    test('message returns singular message with one field added', () {
+      final fields = InvalidSetterOnReadOnlyObservable()
+        ..addIf(true, 'testField');
+      expect(fields.message,
+          'Must not define a public setter to a readonly field. Remove the member "testField".');
+    });
+
+    test('message returns plural message with multiple fields added', () {
+      final fields = InvalidSetterOnReadOnlyObservable()
+        ..addIf(true, 'testField')
+        ..addIf(true, 'testField2');
+      expect(fields.message,
+          'Must not define a public setter to a readonly field. Remove members "testField" and "testField2".');
+    });
+  });
+
   group('StaticObservableFields', () {
     test('message returns singular message with one field added', () {
       final fields = StaticObservableFields()..addIf(true, 'testField');
