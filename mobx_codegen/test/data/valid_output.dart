@@ -1,5 +1,5 @@
 mixin _$User on UserBase, Store {
-  Computed<String> _$fullNameComputed;
+  Computed<String>? _$fullNameComputed;
 
   @override
   String get fullName => (_$fullNameComputed ??=

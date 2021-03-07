@@ -1,5 +1,5 @@
 mixin _$User<T extends io.Process> on UserBase<T>, Store {
-  Computed<io.File> _$biographyNotesComputed;
+  Computed<io.File>? _$biographyNotesComputed;
 
   @override
   io.File get biographyNotes => (_$biographyNotesComputed ??= Computed<io.File>(

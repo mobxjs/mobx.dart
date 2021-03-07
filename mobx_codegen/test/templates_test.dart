@@ -91,7 +91,7 @@ void main() {
 
       // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
-  Computed<ReturnType> computedName;
+  Computed<ReturnType>? computedName;
 
   @override
   ReturnType get computedField => (computedName ??= Computed<ReturnType>(() => super.computedField, name: 'Base.computedField')).value;"""));
