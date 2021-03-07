@@ -23,7 +23,7 @@ jobs:
 
       - name: Analyze
         working-directory: ${{ matrix.package }}
-        run: dart analyze --fatal-warnings .
+        run: dart analyze --fatal-warnings --fatal-infos .
 
       - name: Run tests
         working-directory: ${{ matrix.package }}
