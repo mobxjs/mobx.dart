@@ -268,7 +268,7 @@ mixin _$User on UserBase, Store {
   final _$UserBaseActionController = ActionController(name: 'UserBase');
 
   @override
-  void updateNames({@required String firstName, String lastName}) {
+  void updateNames({required String firstName, String lastName}) {
     final _$actionInfo =
     _$UserBaseActionController.startAction(name: 'UserBase.updateNames');
     try {
@@ -279,7 +279,7 @@ mixin _$User on UserBase, Store {
   }
 
   @override
-  void updateNamesNullable({@required String? firstName, String? lastName}) {
+  void updateNamesNullable({required String? firstName, String? lastName}) {
     final _$actionInfo = _$UserBaseActionController.startAction(
         name: 'UserBase.updateNamesNullable');
     try {

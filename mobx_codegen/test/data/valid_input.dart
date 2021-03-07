@@ -68,13 +68,13 @@ abstract class UserBase with Store {
   Future<List<User>>? fetchUsersNullable() async => null;
 
   @action
-  void updateNames({@required String firstName, String lastName}) {
+  void updateNames({required String firstName, String lastName}) {
     if (firstName != null) this.firstName = firstName;
     if (lastName != null) this.lastName = firstName;
   }
 
   @action
-  void updateNamesNullable({@required String? firstName, String? lastName}) {
+  void updateNamesNullable({required String? firstName, String? lastName}) {
     if (firstName != null) this.firstName = firstName;
     if (lastName != null) this.lastName = firstName;
   }
