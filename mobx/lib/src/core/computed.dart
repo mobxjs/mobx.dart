@@ -32,26 +32,28 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   /// change. This makes them fast and you are free to use them throughout your application. Internally
   /// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
   factory Computed(T Function() fn,
-          {String name, ReactiveContext context, EqualityComparer<T> equals}) =>
+          {String? name,
+          ReactiveContext? context,
+          EqualityComparer<T>? equals}) =>
       Computed._(context ?? mainContext, fn, name: name, equals: equals);
 
-  Computed._(ReactiveContext context, this._fn, {String name, this.equals})
+  Computed._(ReactiveContext context, this._fn, {String? name, this.equals})
       : super._(context, name: name ?? context.nameFor('Computed'));
 
-  final EqualityComparer<T> equals;
+  final EqualityComparer<T>? equals;
 
   @override
-  MobXCaughtException _errorValue;
+  MobXCaughtException? _errorValue;
 
   @override
-  MobXCaughtException get errorValue => _errorValue;
+  MobXCaughtException? get errorValue => _errorValue;
 
   @override
   // ignore: prefer_final_fields
   Set<Atom> _observables = {};
 
   @override
-  Set<Atom> _newObservables;
+  Set<Atom>? _newObservables;
 
   T Function() _fn;
 
@@ -59,7 +61,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   // ignore: prefer_final_fields
   DerivationState _dependenciesState = DerivationState.notTracking;
 
-  T _value;
+  T? _value;
 
   bool _isComputing = false;
 
@@ -86,17 +88,17 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
     }
 
     if (_context._hasCaughtException(this)) {
-      throw _errorValue;
+      throw _errorValue!;
     }
 
-    return _value;
+    return _value as T;
   }
 
-  T computeValue({bool track}) {
+  T? computeValue({required bool track}) {
     _isComputing = true;
     _context._pushComputation();
 
-    T value;
+    T? value;
     if (track) {
       value = _context.trackDerivation(this, _fn);
     } else {
@@ -150,11 +152,11 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
     return changed;
   }
 
-  bool _isEqual(T x, T y) => equals == null ? x == y : equals(x, y);
+  bool _isEqual(T? x, T? y) => equals == null ? x == y : equals!(x, y);
 
-  Function observe(void Function(ChangeNotification<T>) handler,
-      {@deprecated bool fireImmediately}) {
-    T prevValue;
+  void Function() observe(void Function(ChangeNotification<T>) handler,
+      {@deprecated bool? fireImmediately}) {
+    T? prevValue;
 
     void notifyChange() {
       _context.untracked(() {
@@ -172,6 +174,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
       notifyChange();
 
       prevValue = newValue;
-    }, context: _context);
+    }, context: _context)
+        .call;
   }
 }

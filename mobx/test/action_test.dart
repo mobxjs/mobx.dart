@@ -84,7 +84,7 @@ void main() {
       final a = Action(() => y.value);
 
       final d = autorun((_) {
-        total = x.value + a();
+        total = x.value + (a() as int);
       });
 
       expect(total, equals(30));
@@ -103,9 +103,9 @@ void main() {
     });
 
     test('can be invoked with named args', () {
-      String message;
+      late String message;
 
-      final a = Action(({String name, String value}) {
+      final a = Action(({String name = '', String value = ''}) {
         message = '$name: $value';
       });
 

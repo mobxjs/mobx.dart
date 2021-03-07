@@ -49,7 +49,7 @@ void main() {
       });
       expect(count, equals(1));
 
-      map['a']++;
+      map['a'] = map['a']! + 1;
       expect(count, equals(2));
     });
 
@@ -130,7 +130,7 @@ void main() {
     });
 
     test('[]= reports an add change when there are listeners', () {
-      MapChange change;
+      late MapChange change;
       final map = ObservableMap()..observe((c) => change = c);
       map['a'] = 1;
 
@@ -153,7 +153,7 @@ void main() {
     });
 
     test('[]= reports an update when there are listeners', () {
-      MapChange change;
+      late MapChange change;
       final map = ObservableMap.of({'a': 0})..observe((c) => change = c);
       map['a'] = 1;
 
@@ -186,7 +186,7 @@ void main() {
     test(
         'remove reports remove change when there are listeners and the item exists',
         () {
-      MapChange change;
+      late MapChange change;
       ObservableMap.of({'a': 0})
         ..observe((c) => change = c)
         ..remove('a');
@@ -198,7 +198,7 @@ void main() {
     test(
         "remove doesn't report changes when there are listeners and the item doesn't exist",
         () {
-      MapChange change;
+      MapChange? change;
       ObservableMap.of({'a': 0})
         ..observe((c) => change = c)
         ..remove('b');

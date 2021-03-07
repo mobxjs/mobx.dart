@@ -12,8 +12,8 @@ void main() {
     test('basics work', () {
       final ObservableValue<int> x1 = Observable(1);
       final ObservableValue<int> x2 = Computed(() => x1.value * 2);
-      final ObservableValue<int> x3 = ObservableFuture.value(3);
-      final ObservableValue<int> x4 =
+      final ObservableValue<int?> x3 = ObservableFuture.value(3);
+      final ObservableValue<int?> x4 =
           ObservableStream(const Stream<int>.empty(), initialValue: 4);
 
       expect(x1.value, equals(1));

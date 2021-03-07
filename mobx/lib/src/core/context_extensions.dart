@@ -4,7 +4,7 @@ extension ConditionalAction on ReactiveContext {
   /// Only run within an action if outside a batch
   /// [fn] is the function to execute. Optionally provide a debug-[name].
   void conditionallyRunInAction(void Function() fn, Atom atom,
-      {String name, ActionController actionController}) {
+      {String? name, ActionController? actionController}) {
     if (isWithinBatch) {
       enforceWritePolicy(atom);
       fn();

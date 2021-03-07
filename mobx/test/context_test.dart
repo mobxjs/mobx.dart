@@ -1,3 +1,6 @@
+// @todo pavanpodila: remove once Mockito is null-safe
+// @dart = 2.10
+
 import 'package:mobx/mobx.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -75,13 +78,6 @@ void main() {
       expect(() => runInAction(() => a.value = 1),
           throwsA(const TypeMatcher<MobXCyclicReactionException>()));
       d();
-    });
-
-    test('throws AssertionError if a name prefix is not provided', () {
-      final context = createContext();
-
-      expect(() => context.nameFor(null),
-          throwsA(const TypeMatcher<AssertionError>()));
     });
 
     group('conditionallyRunInAction', () {

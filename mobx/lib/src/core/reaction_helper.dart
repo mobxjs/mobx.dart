@@ -23,8 +23,8 @@ class ReactionDisposer {
 /// An internal helper function to create a [autorun]
 ReactionDisposer createAutorun(
     ReactiveContext context, Function(Reaction) trackingFn,
-    {String name, int delay, void Function(Object, Reaction) onError}) {
-  ReactionImpl rxn;
+    {String? name, int? delay, void Function(Object, Reaction)? onError}) {
+  late ReactionImpl rxn;
 
   final rxnName = name ?? context.nameFor('Autorun');
 
@@ -37,23 +37,21 @@ ReactionDisposer createAutorun(
     // Use a delayed scheduler.
     final scheduler = createDelayedScheduler(delay);
     var isScheduled = false;
-    Timer timer;
+    Timer? timer;
 
     rxn = ReactionImpl(context, () {
       if (!isScheduled) {
         isScheduled = true;
 
-        if (timer != null) {
-          timer.cancel();
-          timer = null;
-        }
+        timer?.cancel();
+        timer = null;
 
         timer = scheduler(() {
           isScheduled = false;
           if (!rxn.isDisposed) {
             rxn.track(() => trackingFn(rxn));
           } else {
-            timer.cancel();
+            timer?.cancel();
           }
         });
       }
@@ -67,12 +65,12 @@ ReactionDisposer createAutorun(
 /// An internal helper function to create a [reaction]
 ReactionDisposer createReaction<T>(
     ReactiveContext context, T Function(Reaction) fn, void Function(T) effect,
-    {String name,
-    int delay,
-    bool fireImmediately,
-    EqualityComparer<T> equals,
-    void Function(Object, Reaction) onError}) {
-  ReactionImpl rxn;
+    {String? name,
+    int? delay,
+    bool? fireImmediately,
+    EqualityComparer<T>? equals,
+    void Function(Object, Reaction)? onError}) {
+  late ReactionImpl rxn;
 
   final rxnName = name ?? context.nameFor('Reaction');
 
@@ -83,7 +81,7 @@ ReactionDisposer createReaction<T>(
   final scheduler = delay != null ? createDelayedScheduler(delay) : null;
 
   var firstTime = true;
-  T value;
+  T? value;
 
   void reactionRunner() {
     if (rxn.isDisposed) {
@@ -114,7 +112,7 @@ ReactionDisposer createReaction<T>(
     }
   }
 
-  Timer timer;
+  Timer? timer;
   var isScheduled = false;
 
   rxn = ReactionImpl(context, () {
@@ -123,17 +121,15 @@ ReactionDisposer createReaction<T>(
     } else if (!isScheduled) {
       isScheduled = true;
 
-      if (timer != null) {
-        timer.cancel();
-        timer = null;
-      }
+      timer?.cancel();
+      timer = null;
 
-      timer = scheduler(() {
+      timer = scheduler!(() {
         isScheduled = false;
         if (!rxn.isDisposed) {
           reactionRunner();
         } else {
-          timer.cancel();
+          timer?.cancel();
         }
       });
     }
@@ -148,12 +144,12 @@ ReactionDisposer createReaction<T>(
 /// An internal helper function to create a [when]
 ReactionDisposer createWhenReaction(ReactiveContext context,
     bool Function(Reaction) predicate, void Function() effect,
-    {String name, int timeout, void Function(Object, Reaction) onError}) {
+    {String? name, int? timeout, void Function(Object, Reaction)? onError}) {
   final rxnName = name ?? context.nameFor('When');
   final effectAction = Action(effect, name: '$rxnName-effect');
 
-  Timer timer;
-  ReactionDisposer dispose;
+  Timer? timer;
+  late ReactionDisposer dispose;
 
   // Run a race with a timeout!
   if (timeout != null) {
@@ -176,10 +172,8 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
   return dispose = createAutorun(context, (reaction) {
     if (predicate(reaction)) {
       reaction.dispose();
-      if (timer != null) {
-        timer.cancel();
-        timer = null;
-      }
+      timer?.cancel();
+      timer = null;
       effectAction();
     }
   }, name: rxnName, onError: onError);
@@ -188,7 +182,7 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
 /// An internal helper function to create an [asyncWhen]
 Future<void> createAsyncWhenReaction(
     ReactiveContext context, bool Function(Reaction) predicate,
-    {String name, int timeout}) {
+    {String? name, int? timeout}) {
   final completer = Completer<void>();
   createWhenReaction(context, predicate, completer.complete,
       name: name, timeout: timeout, onError: (error, reaction) {

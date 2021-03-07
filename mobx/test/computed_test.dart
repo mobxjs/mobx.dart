@@ -179,7 +179,7 @@ void main() {
     });
 
     test('throws on finding a cycle', () {
-      Computed<int> c1;
+      late Computed<int> c1;
       c1 = Computed(() => c1.value);
 
       expect(() {
@@ -187,7 +187,7 @@ void main() {
       }, throwsException);
 
       // ignore: avoid_as
-      expect((c1.errorValue.exception as MobXException).message.toLowerCase(),
+      expect((c1.errorValue?.exception as MobXException).message.toLowerCase(),
           contains('cycle'));
     });
 
