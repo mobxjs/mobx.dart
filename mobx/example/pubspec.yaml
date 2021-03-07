@@ -1,0 +1,21 @@
+name: mobx_example
+description: Examples for MobX
+private: true
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.10.0 <3.0.0'
+
+dependencies:
+  mobx:
+
+dependency_overrides:
+  mobx:
+    path: ../
+  mobx_codegen:
+    path: ../../mobx_codegen
+
+dev_dependencies:
+  build_runner:
+  mobx_codegen:

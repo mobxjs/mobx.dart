@@ -1,0 +1,15 @@
+targets:
+  $default:
+    builders:
+      mobx_codegen|mobx_generator:
+        enabled: true
+
+builders:
+  mobx_generator:
+    target: ':store_generator'
+    import: 'package:mobx_codegen/builder.dart'
+    builder_factories: ['storeGenerator']
+    build_extensions: { '.dart': ['.store.g.part'] }
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ['source_gen|combining_builder']

@@ -1,0 +1,213 @@
+---
+title: Hacker News
+slug: /examples/hacker-news
+description: In this example we will rely on the ObservableFuture to keep track of the fetch calls to the HackerNews API.
+---
+
+import { PubBadge } from '../../../src/components/PubBadge';
+
+In this example we will rely on the `ObservableFuture` to keep track of the fetch calls to the HackerNews API. The entire state of the application will be defined in terms of the `ObservableFuture`.
+
+> The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
+
+## Observable State
+
+Rather than writing our own HTTP layer to talk to the hacker-news API, we will rely on a package: <PubBadge name="hnpwa_client" />, available on Pub. Here we will take a different perspective on defining the observable state.
+
+The hacker-news client essentially shows a list of items for the latest and the top news items submitted on the [HackerNews website](https://news.ycombinator.com/). Instead of defining the observable state as two separate lists of items, we will just create two separate `ObservableFuture`s. The `result` field of an `ObservableFuture` will point to the `List<FeedItem>`, which is the first page of the latest and top news feed.
+
+Thus the reactive state of this example looks like so:
+
+```dart
+import 'package:hnpwa_client/hnpwa_client.dart';
+import 'package:mobx/mobx.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+part 'news_store.g.dart';
+
+enum FeedType { latest, top }
+
+class HackerNewsStore = _HackerNewsStore with _$HackerNewsStore;
+
+abstract class _HackerNewsStore with Store {
+  final HnpwaClient _client = HnpwaClient();
+
+  @observable
+  ObservableFuture<List<FeedItem>> latestItemsFuture;
+
+  @observable
+  ObservableFuture<List<FeedItem>> topItemsFuture;
+
+  @action
+  Future fetchLatest() => latestItemsFuture =
+      ObservableFuture(_client.newest().then((Feed feed) => feed.items));
+
+  @action
+  Future fetchTop() => topItemsFuture =
+      ObservableFuture(_client.news().then((Feed feed) => feed.items));
+
+  // ...
+}
+
+```
+
+> Note that in the background we are running the build_runner to generate the `*.g.dart` file. This command is run in the folder containing the project.
+>
+> ```
+> flutter packages pub run build_runner watch --delete-conflicting-outputs
+> ```
+
+The two actions `fetchLatest()` and `fetchTop()` create a new instance of the `ObservableFuture`, fetching the refreshed results. Note that the `result` field of each stores the list: `List<FeedItem>`.
+
+## Observer Widgets
+
+The root widgets is simple a tab-container of two tabs, one of Latest and one for Top news:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hnpwa_client/hnpwa_client.dart';
+import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/hackernews/news_store.dart';
+
+class HackerNewsExample extends StatefulWidget {
+  const HackerNewsExample();
+
+  @override
+  _HackerNewsExampleState createState() => _HackerNewsExampleState();
+}
+
+class _HackerNewsExampleState extends State<HackerNewsExample>
+    with SingleTickerProviderStateMixin {
+  final HackerNewsStore store = HackerNewsStore();
+
+  TabController _tabController;
+  final _tabs = [FeedType.latest, FeedType.top];
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 2, vsync: this)
+      ..addListener(_onTabChange);
+
+    store.loadNews(_tabs.first);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: const Text('Hacker News'),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [Tab(text: 'Newest'), Tab(text: 'Top')],
+        ),
+      ),
+      body: SafeArea(
+        child: TabBarView(controller: _tabController, children: [
+          FeedItemsView(store, FeedType.latest),
+          FeedItemsView(store, FeedType.top),
+        ]),
+      ));
+
+  void _onTabChange() {
+    store.loadNews(_tabs[_tabController.index]);
+  }
+}
+
+```
+
+The most interesting `Widget` above is the **`FeedItemsView`**, an _Observer-Widget_ that tracks the load of the specific feed type.
+
+### FeedItemsView
+
+`FeedItemsView` tracks the specific _observable-future_ depending on the `FeedType`. An `ObservableFuture` has three distinct states:
+
+import observableFuture from './mobx-ObservableFuture.png';
+
+<img src={observableFuture} />
+
+Thus for visual feedback, it is important to show each of these three states separately. `Pending` is normally shown with some loading-indicator. `Fulfilled` will be shown as as `ListView` of `FeedItem`s and finally `Rejected` is the error state. You can see each of these in the following snippet:
+
+```dart
+class FeedItemsView extends StatelessWidget {
+  const FeedItemsView(this.store, this.type);
+
+  final HackerNewsStore store;
+  final FeedType type;
+
+  @override
+  Widget build(BuildContext context) => Observer(builder: (_) {
+        final future = type == FeedType.latest
+            ? store.latestItemsFuture
+            : store.topItemsFuture;
+
+        switch (future.status) {
+          case FutureStatus.pending:
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                CircularProgressIndicator(),
+                Text('Loading items...'),
+              ],
+            );
+
+          case FutureStatus.rejected:
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'Failed to load items.',
+                  style: TextStyle(color: Colors.red),
+                ),
+                RaisedButton(
+                  child: const Text('Tap to try again'),
+                  onPressed: _refresh,
+                )
+              ],
+            );
+
+          case FutureStatus.fulfilled:
+            final List<FeedItem> items = future.result;
+            return RefreshIndicator(
+              onRefresh: _refresh,
+              child: ListView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: items.length,
+                  itemBuilder: (_, index) {
+                    final item = items[index];
+                    return ListTile(
+                      leading: Text(
+                        '${item.points}',
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      title: Text(
+                        item.title,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                          '- ${item.user}, ${item.commentsCount} comment(s)'),
+                      onTap: () => store.openUrl(item.url),
+                    );
+                  }),
+            );
+            break;
+        }
+      });
+
+  Future _refresh() =>
+      (type == FeedType.latest) ? store.fetchLatest() : store.fetchTop();
+}
+
+```
+
+We have also added the _Pull to Refresh_ behavior for fetching the latest updates to the news. This can be seen with the use of `RefreshIndicator`.
+
+import hnGif from './hn.gif';
+
+<img src={hnGif} />
+
+## Summary
+
+The HackerNews example makes good use of the `ObservableFuture` and uses it to show the different states of fetching the news. Since we are not really storing the news for anything else, we could pull if off with a just the `ObservableFuture<List<FeedItem>>`. As the use cases change, we may have to store it in a `List<FeedItem>`, or even an `ObservableList<FeedItem>`.
+
+> The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
