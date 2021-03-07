@@ -1,2 +1,0 @@
-Could not make class "NonAbstractUser" observable. Changes needed:
-  1. Classes that use the Store mixin must be marked abstract. Affected classes: "NonAbstractUserBase".

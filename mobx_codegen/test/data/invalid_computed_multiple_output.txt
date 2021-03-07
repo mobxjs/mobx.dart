@@ -1,2 +1,0 @@
-Could not make class "Test" observable. Changes needed:
-  1. Remove @computed annotation for members "firstName", "lastName" and "changeName". They only apply to property-getters.
