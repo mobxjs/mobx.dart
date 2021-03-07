@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
 
@@ -78,28 +79,24 @@ class LibraryScopedNameFinder {
   ///
   /// The returned string will include import prefixes on all applicable types.
   String _getDartTypeName(DartType type) {
-    return type.getDisplayString(withNullability: true);
+    var typeElement = type.element;
+    if (type is FunctionType) {
+      // If we're dealing with a typedef, we let it undergo the standard name
+      // lookup. Otherwise, we special case the function naming.
+      if (typeElement?.enclosingElement is FunctionTypeAliasElement) {
+        typeElement = typeElement.enclosingElement;
+      } else {
+        return _getFunctionTypeName(type);
+      }
+    } else if (
+        // Some types don't have associated elements, like void
+        typeElement == null ||
+            // This is a bare type param, like "T"
+            type is TypeParameterType) {
+      return type.getDisplayString(withNullability: true);
+    }
 
-    // TODO(fzyzcjy): Should use the line above to replace these code?
-    // var typeElement = type.element;
-    // if (type is FunctionType) {
-    //   // If we're dealing with a typedef, we let it undergo the standard name
-    //   // lookup. Otherwise, we special case the function naming.
-    //   if (typeElement?.enclosingElement is FunctionTypeAliasElement) {
-    //     typeElement = typeElement.enclosingElement;
-    //   } else {
-    //     return _getFunctionTypeName(type);
-    //   }
-    // } else if (
-    //     // Some types don't have associated elements, like void
-    //     typeElement == null ||
-    //         // This is a bare type param, like "T"
-    //         type is TypeParameterType) {
-    //   // TODO(pavanpodila): Once we migrate to NNBD, change the flag to `true`
-    //   return type.getDisplayString(withNullability: false);
-    // }
-    //
-    // return _getNamedElementTypeName(typeElement, type);
+    return _getNamedElementTypeName(typeElement, type);
   }
 
   String _getFunctionTypeName(FunctionType type) {
@@ -132,9 +129,12 @@ class LibraryScopedNameFinder {
     if (type is ParameterizedType && type.typeArguments.isNotEmpty) {
       final typeArgNames = SurroundedCommaList(
           '<', '>', type.typeArguments.map(_getDartTypeName).toList());
-      return '${namesByElement[typeElement]}$typeArgNames';
+      return '${namesByElement[typeElement]}$typeArgNames${_nullabilitySuffixToString(type.nullabilitySuffix)}';
     }
 
-    return namesByElement[typeElement];
+    return namesByElement[typeElement] + _nullabilitySuffixToString(type.nullabilitySuffix);
   }
+
+  String _nullabilitySuffixToString(NullabilitySuffix nullabilitySuffix) =>
+      nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
 }

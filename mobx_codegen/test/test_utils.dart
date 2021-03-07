@@ -84,5 +84,10 @@ Future<void> compareFiles(String sourceFile, String outputFile) async {
   final generatedOutput = await generate(source);
   final output = await readFile(outputFile);
 
-  expect(generatedOutput.trim(), endsWith(output.trim()));
+  expect(removeIndent(generatedOutput), endsWith(removeIndent(output)));
+}
+
+String removeIndent(String text) {
+  final lines = text.trim().split('\n');
+  return lines.map((line) => line.trim()).join('\n');
 }
