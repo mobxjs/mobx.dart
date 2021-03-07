@@ -49,15 +49,5 @@ void main() {
           output:
               './data/invalid_multiple_setter_on_readonly_observable_output.txt'),
     ]);
-    test('a', () async {
-      await compareFiles(
-          './data/invalid_single_setter_on_readonly_observable_input.dart',
-          './data/invalid_single_setter_on_readonly_observable_output.txt');
-    });
-    test('b', () async {
-      await compareFiles(
-          './data/invalid_multiple_setter_on_readonly_observable_input.dart',
-          './data/invalid_multiple_setter_on_readonly_observable_output.txt');
-    });
   });
 }
