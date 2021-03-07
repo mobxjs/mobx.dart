@@ -1,5 +1,6 @@
 analyzer:
   exclude:
+    - mobx/test/*.mocks.dart
     - mobx_examples/lib/**/*.g.dart
     - mobx_codegen/test/data/**.dart
   # TODO: migrate mobx to enable these
