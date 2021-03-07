@@ -47,15 +47,45 @@ mixin _$Item<T extends num> on _Item<T>, Store {
   final _$values2Atom = Atom(name: '_Item.values2');
 
   @override
-  List<T> get values2 {
+  List<T?> get values2 {
     _$values2Atom.reportRead();
     return super.values2;
   }
 
   @override
-  set values2(List<T> value) {
+  set values2(List<T?> value) {
     _$values2Atom.reportWrite(value, super.values2, () {
       super.values2 = value;
+    });
+  }
+
+  final _$values3Atom = Atom(name: '_Item.values3');
+
+  @override
+  List<T>? get values3 {
+    _$values3Atom.reportRead();
+    return super.values3;
+  }
+
+  @override
+  set values3(List<T>? value) {
+    _$values3Atom.reportWrite(value, super.values3, () {
+      super.values3 = value;
+    });
+  }
+
+  final _$values4Atom = Atom(name: '_Item.values4');
+
+  @override
+  List<T?>? get values4 {
+    _$values4Atom.reportRead();
+    return super.values4;
+  }
+
+  @override
+  set values4(List<T?>? value) {
+    _$values4Atom.reportWrite(value, super.values4, () {
+      super.values4 = value;
     });
   }
 }

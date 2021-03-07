@@ -29,33 +29,63 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
     });
   }
 
-  final _$filesAtom = Atom(name: 'UserBase.files');
+  final _$files1Atom = Atom(name: 'UserBase.files1');
 
   @override
-  List<io.File> get files {
-    _$filesAtom.reportRead();
-    return super.files;
+  List<io.File> get files1 {
+    _$files1Atom.reportRead();
+    return super.files1;
   }
 
   @override
-  set files(List<io.File> value) {
-    _$filesAtom.reportWrite(value, super.files, () {
-      super.files = value;
+  set files1(List<io.File> value) {
+    _$files1Atom.reportWrite(value, super.files1, () {
+      super.files1 = value;
     });
   }
 
-  final _$filesNullableAtom = Atom(name: 'UserBase.filesNullable');
+  final _$files2Atom = Atom(name: 'UserBase.files2');
 
   @override
-  List<io.File?> get filesNullable {
-    _$filesNullableAtom.reportRead();
-    return super.filesNullable;
+  List<io.File?> get files2 {
+    _$files2Atom.reportRead();
+    return super.files2;
   }
 
   @override
-  set filesNullable(List<io.File?> value) {
-    _$filesNullableAtom.reportWrite(value, super.filesNullable, () {
-      super.filesNullable = value;
+  set files2(List<io.File?> value) {
+    _$files2Atom.reportWrite(value, super.files2, () {
+      super.files2 = value;
+    });
+  }
+
+  final _$files3Atom = Atom(name: 'UserBase.files3');
+
+  @override
+  List<io.File>? get files3 {
+    _$files3Atom.reportRead();
+    return super.files3;
+  }
+
+  @override
+  set files3(List<io.File>? value) {
+    _$files3Atom.reportWrite(value, super.files3, () {
+      super.files3 = value;
+    });
+  }
+
+  final _$files4Atom = Atom(name: 'UserBase.files4');
+
+  @override
+  List<io.File?>? get files4 {
+    _$files4Atom.reportRead();
+    return super.files4;
+  }
+
+  @override
+  set files4(List<io.File?>? value) {
+    _$files4Atom.reportWrite(value, super.files4, () {
+      super.files4 = value;
     });
   }
 

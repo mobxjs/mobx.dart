@@ -18,5 +18,11 @@ abstract class _Item<T extends num> with Store {
   List<T> values1;
 
   @observable
-  List<T> values2;
+  List<T?> values2;
+
+  @observable
+  List<T>? values3;
+
+  @observable
+  List<T?>? values4;
 }

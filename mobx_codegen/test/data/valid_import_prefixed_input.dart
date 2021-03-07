@@ -17,10 +17,16 @@ abstract class UserBase<T extends io.Process> with Store {
   List<String> names;
 
   @observable
-  List<io.File> files;
+  List<io.File> files1;
 
   @observable
-  List<io.File?> filesNullable;
+  List<io.File?> files2;
+
+  @observable
+  List<io.File>? files3;
+
+  @observable
+  List<io.File?>? files4;
 
   @observable
   List<T> processes;
