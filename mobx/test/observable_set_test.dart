@@ -34,7 +34,7 @@ void main() {
 
     test('add with listeners reports a change', () {
       final oset = ObservableSet.of([1, 2, 3]);
-      SetChange<int> change;
+      late SetChange<int> change;
       oset
         ..observe((c) => change = c)
         ..add(4);
@@ -45,7 +45,7 @@ void main() {
 
     test('remove with listeners reports a change', () {
       final oset = ObservableSet.of([1, 2, 3]);
-      SetChange<int> change;
+      late SetChange<int> change;
       oset
         ..observe((c) => change = c)
         ..remove(2);
@@ -76,25 +76,6 @@ void main() {
       expect(changes[0].value, equals(1));
       expect(changes[1].type, equals(OperationType.add));
       expect(changes[1].value, equals(2));
-    });
-
-    test('SetChange asserts non-null parameters', () {
-      expect(
-        () => SetChange(
-          object: null, //!
-          type: OperationType.add,
-          value: 1,
-        ),
-        throwsA(anything),
-      );
-      expect(
-        () => SetChange(
-          object: ObservableSet(),
-          type: null, //!
-          value: 1,
-        ),
-        throwsA(anything),
-      );
     });
 
     group('fires reportObserved() for read methods', () {

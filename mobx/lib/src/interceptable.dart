@@ -1,6 +1,6 @@
 part of 'core.dart';
 
-typedef Interceptor<T> = WillChangeNotification<T> Function(
+typedef Interceptor<T> = WillChangeNotification<T>? Function(
     WillChangeNotification<T>);
 
 // ignore: one_member_abstracts
@@ -19,15 +19,15 @@ class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>> {
   @override
   Dispose add(Interceptor<T> handler) => super.add(handler);
 
-  WillChangeNotification interceptChange(WillChangeNotification<T> change) {
+  WillChangeNotification<T>? interceptChange(WillChangeNotification<T> change) {
     if (!_canHandle(change)) {
       return change;
     }
 
     return _context.untracked(() {
-      var nextChange = change;
-      for (final interceptor in _handlers.toList(growable: false)) {
-        nextChange = interceptor(nextChange);
+      WillChangeNotification<T>? nextChange = change;
+      for (final interceptor in _handlers?.toList(growable: false) ?? []) {
+        nextChange = (interceptor as Interceptor<T>)(nextChange!);
         if (nextChange == null) {
           break;
         }

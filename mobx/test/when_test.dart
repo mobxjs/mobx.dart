@@ -63,7 +63,7 @@ void main() {
     });
 
     test('exceptions inside asyncWhen are caught and reaction is disposed', () {
-      Reaction rxn;
+      late Reaction rxn;
       asyncWhen((_) {
         rxn = _;
         throw Exception('FAIL');

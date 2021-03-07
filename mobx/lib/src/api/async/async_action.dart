@@ -6,22 +6,21 @@ part of '../async.dart';
 /// You would rarely need to use this class directly. Instead, use the `@action` annotation along with
 /// the `mobx_codegen` package.
 class AsyncAction {
-  AsyncAction(String name, {ReactiveContext context})
+  AsyncAction(String name, {ReactiveContext? context})
       : this._(context ?? mainContext, name);
 
   AsyncAction._(ReactiveContext context, String name)
-      : assert(name != null),
-        _actions = ActionController(context: context, name: name);
+      : _actions = ActionController(context: context, name: name);
 
   final ActionController _actions;
 
-  Zone _zoneField;
+  Zone? _zoneField;
   Zone get _zone {
     if (_zoneField == null) {
       final spec = ZoneSpecification(run: _run, runUnary: _runUnary);
       _zoneField = Zone.current.fork(specification: spec);
     }
-    return _zoneField;
+    return _zoneField!;
   }
 
   Future<R> run<R>(Future<R> Function() body) async {

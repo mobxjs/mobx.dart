@@ -1,3 +1,6 @@
+// @todo pavanpodila: remove once Mockito is null-safe
+// @dart = 2.10
+
 import 'dart:async';
 
 import 'package:mobx/src/api/async.dart';
@@ -174,7 +177,7 @@ void main() {
 
       final values = <int>[];
       autorun((_) {
-        values.add(stream.data);
+        values.add(stream.data as int);
       });
 
       ctrl
@@ -280,7 +283,7 @@ void testStreamToFutureCombinator<T>(String description, Case testCase) {
   test(description, () async {
     final stream = ObservableStream(
         Stream.fromIterable(Iterable<int>.generate(testCase.length)));
-    final ObservableFuture future = testCase.body(stream);
+    final future = testCase.body(stream) as ObservableFuture;
     expect(future.value, isNull);
 
     autorun((_) => future.value);

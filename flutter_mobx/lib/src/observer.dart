@@ -22,16 +22,15 @@ class Observer extends StatelessObserverWidget
         // ignore: avoid_implementing_value_types
         Builder {
   // ignore: prefer_const_constructors_in_immutables
-  Observer({Key key, @required this.builder, String name})
-      : assert(builder != null),
-        debugConstructingStackFrame = debugFindConstructingStackFrame(),
+  Observer({Key? key, required this.builder, String? name})
+      : debugConstructingStackFrame = debugFindConstructingStackFrame(),
         super(key: key, name: name);
 
   @override
   final WidgetBuilder builder;
 
   /// The stack frame pointing to the source that constructed this instance.
-  final String debugConstructingStackFrame;
+  final String? debugConstructingStackFrame;
 
   @override
   String getName() =>
@@ -50,8 +49,8 @@ class Observer extends StatelessObserverWidget
   ///
   /// [stackTrace] defaults to [StackTrace.current].
   @visibleForTesting
-  static String debugFindConstructingStackFrame([StackTrace stackTrace]) {
-    String stackFrame;
+  static String? debugFindConstructingStackFrame([StackTrace? stackTrace]) {
+    String? stackFrame;
 
     assert(() {
       if (debugAddStackTraceInObserverName) {
@@ -69,8 +68,11 @@ class Observer extends StatelessObserverWidget
             // Search for the first non-constructor frame
             .firstWhere(
                 (frame) => !_constructorStackFramePattern.hasMatch(frame),
-                orElse: () => null);
+                orElse: () => '');
+
+        stackFrame = stackFrame == '' ? null : stackFrame;
       }
+
       return true;
     }());
 

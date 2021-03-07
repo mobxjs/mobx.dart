@@ -7,12 +7,12 @@ class MockContext extends Mock implements ReactiveContext {
 }
 
 class MockAtom extends Mock implements Atom {
-  MockAtom() {
-    context = MockContext();
-  }
+  MockAtom() : context = MockContext();
 
   @override
   MockContext context;
 }
 
 class MockActionController extends Mock implements ActionController {}
+
+class MockDerivation extends Mock implements Derivation {}

@@ -1,3 +1,6 @@
+// @todo pavanpodila: remove once Mockito is null-safe
+// @dart = 2.10
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_mobx/src/observer.dart';
@@ -10,7 +13,7 @@ class MockReaction extends Mock implements ReactionImpl {}
 
 // ignore: must_be_immutable
 class TestObserver extends Observer {
-  TestObserver(this.reaction, {WidgetBuilder builder})
+  TestObserver(this.reaction, {@required WidgetBuilder builder})
       : super(builder: builder);
 
   final Reaction reaction;
@@ -211,13 +214,6 @@ void main() {
     await tester.pumpWidget(const Placeholder());
 
     verify(mock.dispose());
-  });
-
-  test('Observer builder must not be null', () {
-    expect(
-      () => Observer(builder: null),
-      throwsA(isInstanceOf<AssertionError>()),
-    );
   });
 
   testWidgets("Release mode, the reaction's default name is widget.toString()",

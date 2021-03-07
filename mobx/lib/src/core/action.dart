@@ -33,10 +33,10 @@ class Action {
   /// notifications and propagates them only after the completion of the action. Actions
   /// can also be nested inside, in which case the change notification will propagate when
   /// the top-level action completes.
-  factory Action(Function fn, {ReactiveContext context, String name}) =>
+  factory Action(Function fn, {ReactiveContext? context, String? name}) =>
       Action._(context ?? mainContext, fn, name: name);
 
-  Action._(ReactiveContext context, this._fn, {String name})
+  Action._(ReactiveContext context, this._fn, {String? name})
       : _controller = ActionController(context: context, name: name);
 
   String get name => _controller.name;
@@ -44,7 +44,7 @@ class Action {
   final ActionController _controller;
   final Function _fn;
 
-  dynamic call([List args = const [], Map<String, dynamic> namedArgs]) {
+  dynamic call([List args = const [], Map<String, dynamic>? namedArgs]) {
     final runInfo = _controller.startAction();
 
     try {
@@ -70,16 +70,16 @@ class Action {
 /// You would rarely need to use this directly. This is primarily meant for the **`mobx_codegen`** package.
 ///
 class ActionController {
-  ActionController({ReactiveContext context, String name})
+  ActionController({ReactiveContext? context, String? name})
       : this._(context ?? mainContext, name: name);
 
-  ActionController._(this._context, {String name})
+  ActionController._(this._context, {String? name})
       : name = name ?? _context.nameFor('Action');
 
   final ReactiveContext _context;
   final String name;
 
-  ActionRunInfo startAction({String name}) {
+  ActionRunInfo startAction({String? name}) {
     final reportingName = name ?? this.name;
     _context.spyReport(ActionSpyEvent(name: reportingName));
     final startTime = DateTime.now();
@@ -110,13 +110,14 @@ class ActionController {
 }
 
 class ActionRunInfo {
-  ActionRunInfo(
-      {this.name,
-      this.startTime,
-      this.prevDerivation,
-      this.prevAllowStateChanges});
+  ActionRunInfo({
+    required this.name,
+    required this.startTime,
+    this.prevDerivation,
+    this.prevAllowStateChanges = true,
+  });
 
-  final Derivation prevDerivation;
+  final Derivation? prevDerivation;
   final bool prevAllowStateChanges;
   final String name;
   final DateTime startTime;

@@ -69,13 +69,6 @@ void main() {
       });
     });
 
-    test('crashes if asserts are ommited', () {
-      expect(() => ReactionImpl(null, () {}),
-          throwsA(const TypeMatcher<AssertionError>()));
-      expect(() => ReactionImpl(mainContext, null),
-          throwsA(const TypeMatcher<AssertionError>()));
-    });
-
     test('works with delay', () {
       final x = Observable(10);
       var executed = false;
@@ -238,7 +231,7 @@ void main() {
 
         final reaction = ReactionImpl(mainContext, () {
           i++;
-        });
+        }, name: 'test_reaction');
 
         final var1 = Observable(0);
         final var2 = Observable(0);
@@ -274,7 +267,7 @@ void main() {
         var i = 0;
         final reaction = ReactionImpl(mainContext, () {
           i++;
-        });
+        }, name: 'test_reaction');
         final var1 = Observable(0);
 
         final prevDerivation = reaction.startTracking();
@@ -292,7 +285,7 @@ void main() {
         var autoVar = 0;
         final reaction = ReactionImpl(mainContext, () {
           i++;
-        });
+        }, name: 'test_reaction');
         final var1 = Observable(0);
 
         final prevDerivation = reaction.startTracking();
@@ -309,13 +302,16 @@ void main() {
       });
 
       test('ReactionImpl tracks observables', () {
-        final reaction = ReactionImpl(mainContext, () {})..track(() {});
+        final reaction =
+            ReactionImpl(mainContext, () {}, name: 'test_reaction_1')
+              ..track(() {});
 
         expect(reaction.hasObservables, isFalse);
 
         final x = Observable(0);
-        final reaction1 = ReactionImpl(mainContext, () {})
-          ..track(() => x.value + 1);
+        final reaction1 =
+            ReactionImpl(mainContext, () {}, name: 'test_reaction_2')
+              ..track(() => x.value + 1);
 
         expect(reaction1.hasObservables, isTrue);
       });

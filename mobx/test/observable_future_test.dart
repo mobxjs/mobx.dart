@@ -86,7 +86,7 @@ void main() {
     test('match works for future completing with a value', () async {
       final future = ObservableFuture<int>(Future(() => 0));
 
-      String getResult() => future.match(
+      String? getResult() => future.match(
             fulfilled: (i) => 'fulfilled',
             pending: () => 'pending',
             rejected: (error) => 'rejected',
@@ -105,7 +105,7 @@ void main() {
       final completer = Completer<int>();
       final future = ObservableFuture<int>(completer.future);
 
-      String getResult() => future.match(
+      String? getResult() => future.match(
             fulfilled: (i) => 'fulfilled',
             pending: () => 'pending',
             rejected: (error) => 'rejected',
@@ -129,7 +129,7 @@ void main() {
         () async {
       final future = ObservableFuture<int>(Future(() => 0));
 
-      String getResult() => future.match(
+      String? getResult() => future.match(
             fulfilled: (i) => 'fulfilled',
             rejected: (error) => 'rejected',
           );
@@ -145,7 +145,7 @@ void main() {
         () async {
       final future = ObservableFuture<int>(Future(() => 0));
 
-      String getResult() => future.match(
+      String? getResult() => future.match(
             pending: () => 'pending',
             rejected: (error) => 'rejected',
           );
@@ -162,7 +162,7 @@ void main() {
       final completer = Completer<int>();
       final future = ObservableFuture<int>(completer.future);
 
-      String getResult() => future.match(
+      String? getResult() => future.match(
             pending: () => 'pending',
             fulfilled: (i) => 'fulfilled',
           );

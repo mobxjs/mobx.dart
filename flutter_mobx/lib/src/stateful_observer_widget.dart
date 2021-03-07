@@ -15,13 +15,14 @@ import 'observer_widget_mixin.dart';
 abstract class StatefulObserverWidget extends StatefulWidget
     with ObserverWidgetMixin {
   /// Initializes [key], [context] and [name] for subclasses.
-  const StatefulObserverWidget({Key key, ReactiveContext context, String name})
+  const StatefulObserverWidget(
+      {Key? key, ReactiveContext? context, String? name})
       : _name = name,
         _context = context,
         super(key: key);
 
-  final String _name;
-  final ReactiveContext _context;
+  final String? _name;
+  final ReactiveContext? _context;
 
   @override
   String getName() => _name ?? '$this';
