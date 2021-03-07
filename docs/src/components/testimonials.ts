@@ -62,7 +62,7 @@ MobX supports me on all of my projects.`,
     title:
       'Founded the Brazilian community Flutterando. Creator of bloc_pattern, Slidy and flutter_modular packages.',
     photoUrl:
-      'https://pbs.twimg.com/profile_images/1245084668069924866/-DRI-sZi_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1350144832350597124/pZ5ykSgo_400x400.jpg',
     message: `MobX feels so robust and leverages the Dart language very well.
 
 Brazil's community was previously attached to BLoC. With MobX, they have found a great replacement.
@@ -75,7 +75,7 @@ Several people here in Brazil are building Flutter apps quickly, thanks to MobX.
     title:
       'Mobile app maker in ❤️ with Flutter & Figma & Firebase | @JintoApp co-founder | @FlutterRennes',
     photoUrl:
-      'https://pbs.twimg.com/profile_images/1177279072810033152/R7NHj6M1_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1352225937065127936/HvZ47bKL_400x400.jpg',
     message: `This framework is just awesome. I ported my Flutter
  app to it and everything feels so much simpler now (even if the porting process has not been easy). 
 

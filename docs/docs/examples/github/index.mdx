@@ -17,7 +17,7 @@ The first step is to define the reactive (aka _observable_) state of your UI. Th
 In this case, we want a simple UI where we accept the _github-ID_ as input. We use that to fetch the user's repositories. This call will be made using the <PubBadge name="github" /> package, the results for which are stored as a `List<Repository>`. The `GithubStore` class so far looks like so:
 
 ```dart
-import 'package:github/server.dart';
+import 'package:github/github.dart';
 import 'package:mobx/mobx.dart';
 
 part 'github_store.g.dart';
@@ -25,7 +25,7 @@ part 'github_store.g.dart';
 class GithubStore = _GithubStore with _$GithubStore;
 
 abstract class _GithubStore with Store {
-  final GitHub client = createGitHubClient();
+  final GitHub client = GitHub();
 
   List<Repository> repositories = [];
 
