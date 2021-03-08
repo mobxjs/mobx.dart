@@ -5,9 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core.dart';
-import 'package:mockito/mockito.dart' as M;
+import 'package:mockito/mockito.dart' as mockito;
 
-class MockReaction extends M.Mock implements ReactionImpl {}
+class MockReaction extends mockito.Mock implements ReactionImpl {}
 
 // ignore: must_be_immutable
 class TestObserver extends Observer {
@@ -73,7 +73,7 @@ class FlutterErrorThrowingObserverElement extends StatelessObserverElement {
 }
 
 void stubTrack(MockReaction mock) {
-  M.when(mock.track(M.any)).thenAnswer((invocation) {
+  mockito.when(mock.track(mockito.any)).thenAnswer((invocation) {
     invocation.positionalArguments[0]();
   });
 }
