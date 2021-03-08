@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
 
@@ -92,8 +93,7 @@ class LibraryScopedNameFinder {
         typeElement == null ||
             // This is a bare type param, like "T"
             type is TypeParameterType) {
-      // TODO(pavanpodila): Once we migrate to NNBD, change the flag to `true`
-      return type.getDisplayString(withNullability: false);
+      return type.getDisplayString(withNullability: true);
     }
 
     return _getNamedElementTypeName(typeElement, type);
@@ -129,9 +129,12 @@ class LibraryScopedNameFinder {
     if (type is ParameterizedType && type.typeArguments.isNotEmpty) {
       final typeArgNames = SurroundedCommaList(
           '<', '>', type.typeArguments.map(_getDartTypeName).toList());
-      return '${namesByElement[typeElement]}$typeArgNames';
+      return '${namesByElement[typeElement]}$typeArgNames${_nullabilitySuffixToString(type.nullabilitySuffix)}';
     }
 
-    return namesByElement[typeElement];
+    return namesByElement[typeElement] + _nullabilitySuffixToString(type.nullabilitySuffix);
   }
+
+  String _nullabilitySuffixToString(NullabilitySuffix nullabilitySuffix) =>
+      nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
 }
