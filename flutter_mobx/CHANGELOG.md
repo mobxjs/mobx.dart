@@ -1,3 +1,7 @@
+## 2.0.0-nullsafety.0 - 2.0.0-nullsafety.1
+
+- Null safety support
+
 ## 1.1.0+2
 
 - Reformatting for improving the pub.dev score
