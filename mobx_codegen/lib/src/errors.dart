@@ -4,21 +4,7 @@ abstract class CodegenError {
 }
 
 class StoreClassCodegenErrors implements CodegenError {
-  StoreClassCodegenErrors(this.name) {
-    _errorCategories = [
-      nonAbstractStoreMixinDeclarations,
-      invalidComputedAnnotations,
-      invalidObservableAnnotations,
-      invalidReadOnlyAnnotations,
-      invalidActionAnnotations,
-      staticObservables,
-      invalidPublicSetterOnReadOnlyObservable,
-      staticMethods,
-      finalObservables,
-      asyncGeneratorActions,
-      nonAsyncMethods,
-    ];
-  }
+  StoreClassCodegenErrors(this.name);
 
   final String name;
 
@@ -42,7 +28,19 @@ class StoreClassCodegenErrors implements CodegenError {
   final PropertyErrors nonAsyncMethods = NonAsyncMethods();
   final PropertyErrors invalidActionAnnotations = InvalidActionAnnotations();
 
-  List<CodegenError> _errorCategories;
+  List<CodegenError> get _errorCategories => [
+        nonAbstractStoreMixinDeclarations,
+        invalidComputedAnnotations,
+        invalidObservableAnnotations,
+        invalidReadOnlyAnnotations,
+        invalidActionAnnotations,
+        staticObservables,
+        invalidPublicSetterOnReadOnlyObservable,
+        staticMethods,
+        finalObservables,
+        asyncGeneratorActions,
+        nonAsyncMethods,
+      ];
 
   @override
   String get message {

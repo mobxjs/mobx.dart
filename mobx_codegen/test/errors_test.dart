@@ -7,6 +7,64 @@ class TestFieldErrors extends PropertyErrors {
 }
 
 void main() {
+  group('StoreClassCodegenErrors', () {
+    StoreClassCodegenErrors storeClassCodegenErrors;
+    List<String> errorsMessages;
+
+    setUp(() {
+      storeClassCodegenErrors = StoreClassCodegenErrors('store')
+        ..nonAbstractStoreMixinDeclarations
+            .addIf(true, 'nonAbstractStoreMixinDeclarations')
+        ..invalidComputedAnnotations.addIf(true, 'invalidComputedAnnotations')
+        ..invalidObservableAnnotations
+            .addIf(true, 'invalidObservableAnnotations')
+        ..invalidReadOnlyAnnotations.addIf(true, 'invalidReadOnlyAnnotations')
+        ..invalidActionAnnotations.addIf(true, 'invalidActionAnnotations')
+        ..staticObservables.addIf(true, 'staticObservables')
+        ..invalidPublicSetterOnReadOnlyObservable
+            .addIf(true, 'invalidPublicSetterOnReadOnlyObservable')
+        ..staticMethods.addIf(true, 'staticMethods')
+        ..finalObservables.addIf(true, 'finalObservables')
+        ..asyncGeneratorActions.addIf(true, 'asyncGeneratorActions')
+        ..nonAsyncMethods.addIf(true, 'nonAsyncMethods');
+
+      errorsMessages = <CodegenError>[
+        NonAbstractStoreMixinDeclarations()
+          ..addIf(true, 'nonAbstractStoreMixinDeclarations'),
+        InvalidComputedAnnotations()..addIf(true, 'invalidComputedAnnotations'),
+        InvalidObservableAnnotations()
+          ..addIf(true, 'invalidObservableAnnotations'),
+        InvalidReadOnlyAnnotations()..addIf(true, 'invalidReadOnlyAnnotations'),
+        InvalidActionAnnotations()..addIf(true, 'invalidActionAnnotations'),
+        StaticObservableFields()..addIf(true, 'staticObservables'),
+        InvalidSetterOnReadOnlyObservable()
+          ..addIf(true, 'invalidPublicSetterOnReadOnlyObservable'),
+        InvalidStaticMethods()..addIf(true, 'staticMethods'),
+        FinalObservableFields()..addIf(true, 'finalObservables'),
+        AsyncGeneratorActionMethods()..addIf(true, 'asyncGeneratorActions'),
+        NonAsyncMethods()..addIf(true, 'nonAsyncMethods'),
+      ].map((error) => error.message).toList();
+    });
+
+    test('message accounts for all kinds of PropertyErrors', () {
+      expect(
+        storeClassCodegenErrors.message,
+        allOf(errorsMessages.map(contains).toList()),
+      );
+    });
+
+    test('message contains only errors, nothing else', () {
+      var message = storeClassCodegenErrors.message;
+      message = message.replaceFirst(
+          'Could not make class "store" observable. Changes needed:', '');
+      for (final errorMessage in errorsMessages) {
+        message = message.replaceFirst(errorMessage, '');
+      }
+      message = message.replaceAll(RegExp(r'\s*\d+\.\s'), '').trim();
+      expect(message, isEmpty);
+    });
+  });
+
   group('Pluralize', () {
     test('Pluralize.call returns single string when count is 1', () {
       expect(Pluralize('the item', 'items').call(1), 'the item');
