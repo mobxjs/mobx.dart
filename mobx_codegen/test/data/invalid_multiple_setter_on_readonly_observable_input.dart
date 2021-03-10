@@ -1,3 +1,5 @@
+import 'package:mobx/mobx.dart';
+
 class CounterStore = _CounterStoreBase with _$CounterStore;
 
 abstract class _CounterStoreBase with Store {

@@ -104,7 +104,8 @@ void main() {
         ..storeTemplate = (MixinStoreTemplate()..parentTypeName = 'ParentName')
         ..atomName = '_atomFieldName'
         ..type = 'FieldType'
-        ..name = 'fieldName';
+        ..name = 'fieldName'
+        ..isReadOnly = false;
 
       expect(template.toString(), equals("""
   final _atomFieldName = Atom(name: 'ParentName.fieldName');
