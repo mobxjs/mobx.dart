@@ -1,9 +1,13 @@
 /// Declares configuration of a Store class.
-/// Currently the only configuration used is boolean to indicate generation of toString method (true), or not (false)
+/// Currently the only configurations used are:
+/// - boolean to indicate generation of toString method (true), or not (false)
+/// - boolean to indicate whether to report writes to observables when the value is equal.
+///   Defaults to true.
 
 class StoreConfig {
-  const StoreConfig({this.hasToString = true});
+  const StoreConfig({this.hasToString = true, this.reportOnEqualSet = true});
   final bool hasToString;
+  final bool reportOnEqualSet;
 }
 
 /// Internal class only used for code-generation with `mobx_codegen`.

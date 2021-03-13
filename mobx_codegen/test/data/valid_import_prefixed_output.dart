@@ -1,4 +1,6 @@
 mixin _$User<T extends io.Process> on UserBase<T>, Store {
+  static const _reportOnEqualSet = true;
+
   Computed<io.File> _$biographyNotesComputed;
 
   @override
@@ -17,9 +19,12 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set names(List<String> value) {
-    _$namesAtom.reportWrite(value, super.names, () {
-      super.names = value;
-    });
+    final oldValue = super.names;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$namesAtom.reportWrite(value, super.names, () {
+        super.names = value;
+      });
+    }
   }
 
   final _$filesAtom = Atom(name: 'UserBase.files');
@@ -32,9 +37,12 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set files(List<io.File> value) {
-    _$filesAtom.reportWrite(value, super.files, () {
-      super.files = value;
-    });
+    final oldValue = super.files;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$filesAtom.reportWrite(value, super.files, () {
+        super.files = value;
+      });
+    }
   }
 
   final _$processesAtom = Atom(name: 'UserBase.processes');
@@ -47,9 +55,12 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set processes(List<T> value) {
-    _$processesAtom.reportWrite(value, super.processes, () {
-      super.processes = value;
-    });
+    final oldValue = super.processes;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$processesAtom.reportWrite(value, super.processes, () {
+        super.processes = value;
+      });
+    }
   }
 
   final _$biographyAtom = Atom(name: 'UserBase.biography');
@@ -62,9 +73,12 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set biography(io.File value) {
-    _$biographyAtom.reportWrite(value, super.biography, () {
-      super.biography = value;
-    });
+    final oldValue = super.biography;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$biographyAtom.reportWrite(value, super.biography, () {
+        super.biography = value;
+      });
+    }
   }
 
   final _$friendWithImplicitTypeArgumentAtom =
@@ -78,10 +92,13 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set friendWithImplicitTypeArgument(User<io.Process> value) {
-    _$friendWithImplicitTypeArgumentAtom
-        .reportWrite(value, super.friendWithImplicitTypeArgument, () {
-      super.friendWithImplicitTypeArgument = value;
-    });
+    final oldValue = super.friendWithImplicitTypeArgument;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$friendWithImplicitTypeArgumentAtom
+          .reportWrite(value, super.friendWithImplicitTypeArgument, () {
+        super.friendWithImplicitTypeArgument = value;
+      });
+    }
   }
 
   final _$friendWithExplicitTypeArgumentAtom =
@@ -95,10 +112,13 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set friendWithExplicitTypeArgument(User<T> value) {
-    _$friendWithExplicitTypeArgumentAtom
-        .reportWrite(value, super.friendWithExplicitTypeArgument, () {
-      super.friendWithExplicitTypeArgument = value;
-    });
+    final oldValue = super.friendWithExplicitTypeArgument;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$friendWithExplicitTypeArgumentAtom
+          .reportWrite(value, super.friendWithExplicitTypeArgument, () {
+        super.friendWithExplicitTypeArgument = value;
+      });
+    }
   }
 
   final _$callbackAtom = Atom(name: 'UserBase.callback');
@@ -111,9 +131,12 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set callback(void Function(io.File, {T another}) value) {
-    _$callbackAtom.reportWrite(value, super.callback, () {
-      super.callback = value;
-    });
+    final oldValue = super.callback;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$callbackAtom.reportWrite(value, super.callback, () {
+        super.callback = value;
+      });
+    }
   }
 
   final _$callback2Atom = Atom(name: 'UserBase.callback2');
@@ -126,9 +149,12 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set callback2(io.File Function(String, [int, io.File]) value) {
-    _$callback2Atom.reportWrite(value, super.callback2, () {
-      super.callback2 = value;
-    });
+    final oldValue = super.callback2;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$callback2Atom.reportWrite(value, super.callback2, () {
+        super.callback2 = value;
+      });
+    }
   }
 
   final _$localTypedefCallbackAtom =
@@ -142,10 +168,13 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set localTypedefCallback(ValueCallback<io.Process> value) {
-    _$localTypedefCallbackAtom.reportWrite(value, super.localTypedefCallback,
-        () {
-      super.localTypedefCallback = value;
-    });
+    final oldValue = super.localTypedefCallback;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$localTypedefCallbackAtom.reportWrite(value, super.localTypedefCallback,
+          () {
+        super.localTypedefCallback = value;
+      });
+    }
   }
 
   final _$prefixedTypedefCallbackAtom =
@@ -159,10 +188,13 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   set prefixedTypedefCallback(io.BadCertificateCallback value) {
-    _$prefixedTypedefCallbackAtom
-        .reportWrite(value, super.prefixedTypedefCallback, () {
-      super.prefixedTypedefCallback = value;
-    });
+    final oldValue = super.prefixedTypedefCallback;
+    if (_reportOnEqualSet || value != oldValue) {
+      _$prefixedTypedefCallbackAtom
+          .reportWrite(value, super.prefixedTypedefCallback, () {
+        super.prefixedTypedefCallback = value;
+      });
+    }
   }
 
   @override

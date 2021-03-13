@@ -117,9 +117,12 @@ void main() {
 
   @override
   set fieldName(FieldType value) {
-    _atomFieldName.reportWrite(value, super.fieldName, () {
-      super.fieldName = value;
-    });
+    final oldValue = super.fieldName;
+    if (_reportOnEqualSet || value != oldValue) {
+      _atomFieldName.reportWrite(value, super.fieldName, () {
+        super.fieldName = value;
+      });
+    }
   }"""));
     });
   });

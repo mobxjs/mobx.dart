@@ -42,6 +42,10 @@ void main() {
           './data/valid_output_annotation_store_config_has_to_string.dart');
     });
 
+    test('generates for a class mixing Store with annotation @StoreConfig(hasToString: true)', () async {
+      await compareFiles('./data/valid_input_annotation_store_config_has_to_string.dart', './data/valid_output_annotation_store_config_has_to_string.dart');
+    });
+
     createTests([
       const TestInfo(
           description: 'invalid output is handled',
@@ -55,6 +59,10 @@ void main() {
           description: 'generates types with import prefixes correctly',
           source: './data/valid_import_prefixed_input.dart',
           output: './data/valid_import_prefixed_output.dart'),
+      const TestInfo(
+          description: 'generates for a generic class mixing Store with reportOnEqualSet false',
+          source: './data/valid_generic_store_input_notify_on_equal_set_false.dart',
+          output: './data/valid_generic_store_output_notify_on_equal_set_false.dart'),
     ]);
   });
 }

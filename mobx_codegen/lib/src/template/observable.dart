@@ -19,8 +19,11 @@ class ObservableTemplate {
 
   @override
   set $name($type value) {
-    $atomName.reportWrite(value, super.$name, () {
-      super.$name = value;
-    });
+    final oldValue = super.$name;
+    if (_reportOnEqualSet || value != oldValue) {
+      $atomName.reportWrite(value, super.$name, () {
+        super.$name = value;
+      });
+    }
   }""";
 }
