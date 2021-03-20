@@ -18,8 +18,8 @@ class StoreGenerator extends Generator {
     }
 
     final typeSystem = library.element.typeSystem;
-    final file = StoreFileTemplate()
-      ..storeSources = _generateCodeForLibrary(library, typeSystem).toSet();
+    final file = StoreFileTemplate(
+        storeSources: _generateCodeForLibrary(library, typeSystem).toSet());
     return file.toString();
   }
 
@@ -41,26 +41,30 @@ class StoreGenerator extends Generator {
   ) sync* {
     final typeNameFinder = LibraryScopedNameFinder(library.element);
     final otherClasses = library.classes.where((c) => c != baseClass);
-    final mixedClass = otherClasses.firstWhere((c) {
-      // If our base class has different type parameterization requirements than
-      // the class we're evaluating provides, we know it's not a subclass.
-      if (baseClass.typeParameters.length != c.supertype.typeArguments.length) {
-        return false;
-      }
+    try {
+      final mixedClass = otherClasses.firstWhere((c) {
+        // If our base class has different type parameterization requirements than
+        // the class we're evaluating provides, we know it's not a subclass.
+        if (baseClass.typeParameters.length !=
+            c.supertype!.typeArguments.length) {
+          return false;
+        }
 
-      // Apply the subclass' type arguments to the base type (if there are none
-      // this has no impact), and perform a supertype check.
-      return typeSystem.isSubtypeOf(
-        c.thisType,
-        baseClass.instantiate(
-            typeArguments: c.supertype.typeArguments,
-            nullabilitySuffix: NullabilitySuffix.none),
-      );
-    }, orElse: () => null);
+        // Apply the subclass' type arguments to the base type (if there are none
+        // this has no impact), and perform a supertype check.
+        return typeSystem.isSubtypeOf(
+          c.thisType,
+          baseClass.instantiate(
+              typeArguments: c.supertype!.typeArguments,
+              nullabilitySuffix: NullabilitySuffix.none),
+        );
+      });
 
-    if (mixedClass != null) {
       yield _generateCodeFromTemplate(
           mixedClass.name, baseClass, MixinStoreTemplate(), typeNameFinder);
+      // ignore: avoid_catching_errors
+    } on StateError {
+      // ignore the case when no element is found
     }
   }
 

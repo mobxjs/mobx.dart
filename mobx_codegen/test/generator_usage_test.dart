@@ -12,7 +12,7 @@ abstract class _TestStore with Store {
   String field1;
 
   @observable
-  String field2;
+  String? field2;
 
   @action
   void setFields(String field1, String field2) {
@@ -117,7 +117,7 @@ abstract class _TestStore with Store {
 }
 
 void main() {
-  ReactiveWritePolicy prevWritePolicy;
+  late ReactiveWritePolicy prevWritePolicy;
   setUp(() {
     prevWritePolicy = mainContext.config.writePolicy;
     mainContext.config =
@@ -189,7 +189,7 @@ void main() {
 
     final stuff = <String>[];
     autorun((_) {
-      stuff.add(stream.value);
+      stuff.add(stream.value!);
     });
     await asyncWhen((_) => stream.status == StreamStatus.done);
 
@@ -202,7 +202,7 @@ void main() {
 
     final stuff = <String>[];
     autorun((_) {
-      stuff.add(stream.value);
+      stuff.add(stream.value!);
     });
     await asyncWhen((_) => stream.status == StreamStatus.done);
 
@@ -215,7 +215,7 @@ void main() {
 
     final values = <String>[];
     autorun((_) {
-      values.add(future.value);
+      values.add(future.value!);
     });
 
     await asyncWhen((_) => future.status == FutureStatus.fulfilled);
@@ -229,7 +229,7 @@ void main() {
 
     final values = <String>[];
     autorun((_) {
-      values.add(future.value);
+      values.add(future.value!);
     });
 
     await asyncWhen((_) => future.status == FutureStatus.fulfilled);

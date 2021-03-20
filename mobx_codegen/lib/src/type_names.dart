@@ -22,19 +22,14 @@ class LibraryScopedNameFinder {
 
   final LibraryElement library;
 
-  Map<Element, String> _namesByElement;
+  final Map<Element, String> _namesByElement = {};
+
   Map<Element, String> get namesByElement {
-    if (_namesByElement != null) {
-      return _namesByElement;
-    }
-
-    _namesByElement = {};
-
     // Add all of this library's type-defining elements to the name map
     final libraryElements =
         library.topLevelElements.whereType<TypeDefiningElement>();
     for (final element in libraryElements) {
-      _namesByElement[element] = element.name;
+      _namesByElement[element] = element.name!;
     }
 
     // Reverse each import's export namespace so we can map elements to their
@@ -72,7 +67,7 @@ class LibraryScopedNameFinder {
 
   String findTypeParameterBoundsTypeName(TypeParameterElement typeParameter) {
     assert(typeParameter.bound != null);
-    return _getDartTypeName(typeParameter.bound);
+    return _getDartTypeName(typeParameter.bound!);
   }
 
   /// Calculates a type name, including its type arguments
@@ -84,7 +79,7 @@ class LibraryScopedNameFinder {
       // If we're dealing with a typedef, we let it undergo the standard name
       // lookup. Otherwise, we special case the function naming.
       if (typeElement?.enclosingElement is TypeAliasElement) {
-        typeElement = typeElement.enclosingElement;
+        typeElement = typeElement!.enclosingElement;
       } else {
         return _getFunctionTypeName(type);
       }
@@ -96,7 +91,7 @@ class LibraryScopedNameFinder {
       return type.getDisplayString(withNullability: true);
     }
 
-    return _getNamedElementTypeName(typeElement, type);
+    return _getNamedElementTypeName(typeElement!, type);
   }
 
   String _getFunctionTypeName(FunctionType type) {
@@ -132,7 +127,8 @@ class LibraryScopedNameFinder {
       return '${namesByElement[typeElement]}$typeArgNames${_nullabilitySuffixToString(type.nullabilitySuffix)}';
     }
 
-    return namesByElement[typeElement] + _nullabilitySuffixToString(type.nullabilitySuffix);
+    return namesByElement[typeElement]! +
+        _nullabilitySuffixToString(type.nullabilitySuffix);
   }
 
   String _nullabilitySuffixToString(NullabilitySuffix nullabilitySuffix) =>

@@ -13,11 +13,11 @@ class MethodOverrideTemplate {
     LibraryScopedNameFinder typeNameFinder,
   ) {
     // ignore: prefer_function_declarations_over_variables
-    final param = (ParameterElement element) => ParamTemplate()
-      ..name = element.name
-      ..type = typeNameFinder.findParameterTypeName(element)
-      ..defaultValue = element.defaultValueCode
-      ..hasRequiredKeyword = element.isRequiredNamed;
+    final param = (ParameterElement element) => ParamTemplate(
+        name: element.name,
+        type: typeNameFinder.findParameterTypeName(element),
+        defaultValue: element.defaultValueCode,
+        hasRequiredKeyword: element.isRequiredNamed);
 
     final positionalParams = method.parameters
         .where((param) => param.isPositional && !param.isOptionalPositional)
@@ -41,20 +41,20 @@ class MethodOverrideTemplate {
           '<', '>', typeNameFinder.findReturnTypeArgumentTypeNames(method));
   }
 
-  String name;
-  String returnType;
-  SurroundedCommaList<String> returnTypeArgs;
+  late String name;
+  late String returnType;
+  late SurroundedCommaList<String> returnTypeArgs;
 
-  SurroundedCommaList<TypeParamTemplate> _typeParams;
-  SurroundedCommaList<String> _typeArgs;
+  late SurroundedCommaList<TypeParamTemplate> _typeParams;
+  late SurroundedCommaList<String> _typeArgs;
 
-  CommaList<ParamTemplate> _positionalParams;
-  SurroundedCommaList<ParamTemplate> _optionalParams;
-  SurroundedCommaList<ParamTemplate> _namedParams;
+  late CommaList<ParamTemplate> _positionalParams;
+  late SurroundedCommaList<ParamTemplate> _optionalParams;
+  late SurroundedCommaList<ParamTemplate> _namedParams;
 
-  CommaList<String> _positionalArgs;
-  CommaList<String> _optionalArgs;
-  CommaList<NamedArgTemplate> _namedArgs;
+  late CommaList<String> _positionalArgs;
+  late CommaList<String> _optionalArgs;
+  late CommaList<NamedArgTemplate> _namedArgs;
 
   // ignore: always_declare_return_types, type_annotate_public_apis
   setTypeParams(Iterable<TypeParamTemplate> params) {

@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/util.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
@@ -19,14 +19,14 @@ MockMethod mockFutureMethod({
   bool isGenerator = false,
 }) {
   final returnType = MockType();
-  when(returnType.isDynamic).thenReturn(returnsDynamic);
-  when(returnType.isDartAsyncFuture).thenReturn(returnsFuture);
-  when(returnType.isDartAsyncFutureOr).thenReturn(returnsFutureOr);
+  when(() => returnType.isDynamic).thenReturn(returnsDynamic);
+  when(() => returnType.isDartAsyncFuture).thenReturn(returnsFuture);
+  when(() => returnType.isDartAsyncFutureOr).thenReturn(returnsFutureOr);
 
   final method = MockMethod();
-  when(method.returnType).thenReturn(returnType);
-  when(method.isAsynchronous).thenReturn(isAsync);
-  when(method.isGenerator).thenReturn(isGenerator);
+  when(() => method.returnType).thenReturn(returnType);
+  when(() => method.isAsynchronous).thenReturn(isAsync);
+  when(() => method.isGenerator).thenReturn(isGenerator);
   return method;
 }
 
@@ -36,18 +36,18 @@ MockMethod mockStreamMethod({
   bool returnsDynamic = false,
 }) {
   final returnType = MockType();
-  when(returnType.isDynamic).thenReturn(returnsDynamic);
+  when(() => returnType.isDynamic).thenReturn(returnsDynamic);
 
   final method = MockMethod();
-  when(method.returnType).thenReturn(returnType);
-  when(method.isAsynchronous).thenReturn(isAsync);
-  when(method.isGenerator).thenReturn(isGenerator);
+  when(() => method.returnType).thenReturn(returnType);
+  when(() => method.isAsynchronous).thenReturn(isAsync);
+  when(() => method.isGenerator).thenReturn(isGenerator);
   return method;
 }
 
 MockTypeChecker streamChecker({bool isStream = false}) {
   final checker = MockTypeChecker();
-  when(checker.isAssignableFromType(any)).thenReturn(isStream);
+  when(() => checker.isAssignableFromType(any)).thenReturn(isStream);
   return checker;
 }
 

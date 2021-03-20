@@ -9,7 +9,8 @@ import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
 class TestInfo {
-  const TestInfo({this.description, this.source, this.output});
+  const TestInfo(
+      {required this.description, required this.source, required this.output});
 
   final String description;
   final String output;

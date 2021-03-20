@@ -50,11 +50,6 @@ void main() {
     test('toString returns empty string if templates are empty', () {
       expect(CommaList([]).toString(), equals(''));
     });
-
-    test('constructor throws if templates list is null', () {
-      // ignore: unnecessary_lambdas
-      expect(() => CommaList(null).toString(), throwsA(anything));
-    });
   });
 
   group('SurroundedCommaList', () {
@@ -67,27 +62,15 @@ void main() {
       expect(SurroundedCommaList('(', ')', ['A', 2, '', '', 'C']).toString(),
           equals('(A, 2, C)'));
     });
-
-    test('constructor throws if any argument is null', () {
-      // ignore: unnecessary_lambdas
-      expect(() => SurroundedCommaList(null, ')', ['A']).toString(),
-          throwsA(anything));
-      // ignore: unnecessary_lambdas
-      expect(() => SurroundedCommaList('(', null, ['B']).toString(),
-          throwsA(anything));
-      // ignore: unnecessary_lambdas
-      expect(() => SurroundedCommaList('(', ')', null).toString(),
-          throwsA(anything));
-    });
   });
 
   group('ComputedTemplate', () {
     test('renders template based on template data', () {
-      final template = ComputedTemplate()
-        ..storeTemplate = (MixinStoreTemplate()..parentTypeName = 'Base')
-        ..computedName = 'computedName'
-        ..type = 'ReturnType'
-        ..name = 'computedField';
+      final template = ComputedTemplate(
+          storeTemplate: (MixinStoreTemplate()..parentTypeName = 'Base'),
+          computedName: 'computedName',
+          type: 'ReturnType',
+          name: 'computedField');
 
       // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
@@ -100,11 +83,11 @@ void main() {
 
   group('ObservableTemplate', () {
     test('renders template based on template data', () {
-      final template = ObservableTemplate()
-        ..storeTemplate = (MixinStoreTemplate()..parentTypeName = 'ParentName')
-        ..atomName = '_atomFieldName'
-        ..type = 'FieldType'
-        ..name = 'fieldName';
+      final template = ObservableTemplate(
+          storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentName'),
+          atomName: '_atomFieldName',
+          type: 'FieldType',
+          name: 'fieldName');
 
       expect(template.toString(), equals("""
   final _atomFieldName = Atom(name: 'ParentName.fieldName');
@@ -126,36 +109,28 @@ void main() {
 
   group('ParamTemplate', () {
     test('renders parameter without default value', () {
-      final template = ParamTemplate()
-        ..name = 'size'
-        ..type = 'int';
+      final template = ParamTemplate(name: 'size', type: 'int');
 
       expect(template.toString(), equals('int size'));
     });
 
     test('renders parameter with a default value', () {
-      final template = ParamTemplate()
-        ..name = 'address'
-        ..type = 'String'
-        ..defaultValue = '"unknown"';
+      final template = ParamTemplate(
+          name: 'address', type: 'String', defaultValue: '"unknown"');
 
       expect(template.toString(), equals('String address = "unknown"'));
     });
 
     test('asArgument returns name', () {
-      final template = ParamTemplate()
-        ..name = 'address'
-        ..type = 'String'
-        ..defaultValue = '"unknown"';
+      final template = ParamTemplate(
+          name: 'address', type: 'String', defaultValue: '"unknown"');
 
       expect(template.asArgument, equals('address'));
     });
 
     test('asNamedArgument.toString() returns named argument code', () {
-      final template = ParamTemplate()
-        ..name = 'address'
-        ..type = 'String'
-        ..defaultValue = '"unknown"';
+      final template = ParamTemplate(
+          name: 'address', type: 'String', defaultValue: '"unknown"');
 
       expect(template.asNamedArgument.toString(), equals('address: address'));
     });
@@ -163,23 +138,19 @@ void main() {
 
   group('TypeParamTemplate', () {
     test('renders type parameter without a bound', () {
-      final template = TypeParamTemplate()..name = 'T';
+      final template = TypeParamTemplate(name: 'T');
 
       expect(template.toString(), equals('T'));
     });
 
     test('renders type parameter with a bound', () {
-      final template = TypeParamTemplate()
-        ..name = 'T'
-        ..bound = 'String';
+      final template = TypeParamTemplate(name: 'T', bound: 'String');
 
       expect(template.toString(), equals('T extends String'));
     });
 
     test('asArgument returns the name', () {
-      final template = TypeParamTemplate()
-        ..name = 'T'
-        ..bound = 'String';
+      final template = TypeParamTemplate(name: 'T', bound: 'String');
 
       expect(template.asArgument, equals('T'));
     });
@@ -187,7 +158,7 @@ void main() {
 
   group('NamedArgTemplate', () {
     test('renders named argument list entry', () {
-      final template = NamedArgTemplate()..name = 'address';
+      final template = NamedArgTemplate(name: 'address');
 
       expect(template.toString(), equals('address: address'));
     });
@@ -195,41 +166,26 @@ void main() {
 
   group('ActionTemplate', () {
     test('renders properly', () {
-      final template = ActionTemplate()
-        ..storeTemplate = (MixinStoreTemplate()..parentTypeName = 'ParentClass')
-        ..method = (MethodOverrideTemplate()
-          ..name = 'myAction'
-          ..returnType = 'ReturnType'
-          ..setTypeParams([
-            TypeParamTemplate()..name = 'T',
-            TypeParamTemplate()
-              ..name = 'S'
-              ..bound = 'String'
-          ])
-          ..positionalParams = [
-            ParamTemplate()
-              ..name = 'arg1'
-              ..type = 'T'
-          ]
-          ..optionalParams = [
-            ParamTemplate()
-              ..name = 'arg2'
-              ..type = 'S'
-              ..defaultValue = '"arg2value"',
-            ParamTemplate()
-              ..name = 'arg3'
-              ..type = 'String'
-          ]
-          ..namedParams = [
-            ParamTemplate()
-              ..name = 'namedArg1'
-              ..type = 'String'
-              ..defaultValue = '"default"',
-            ParamTemplate()
-              ..name = 'namedArg2'
-              ..type = 'int'
-              ..defaultValue = '3'
-          ]);
+      final template = ActionTemplate(
+          storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentClass'),
+          method: (MethodOverrideTemplate()
+            ..name = 'myAction'
+            ..returnType = 'ReturnType'
+            ..setTypeParams([
+              TypeParamTemplate(name: 'T'),
+              TypeParamTemplate(name: 'S', bound: 'String')
+            ])
+            ..positionalParams = [ParamTemplate(name: 'arg1', type: 'T')]
+            ..optionalParams = [
+              ParamTemplate(
+                  name: 'arg2', type: 'S', defaultValue: '"arg2value"'),
+              ParamTemplate(name: 'arg3', type: 'String')
+            ]
+            ..namedParams = [
+              ParamTemplate(
+                  name: 'namedArg1', type: 'String', defaultValue: '"default"'),
+              ParamTemplate(name: 'namedArg2', type: 'int', defaultValue: '3')
+            ]));
 
       // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
@@ -247,41 +203,34 @@ void main() {
 
   group('ObservableFutureTemplate', () {
     test('renders properly', () {
-      final template = ObservableFutureTemplate()
-        ..method = (MethodOverrideTemplate()
-          ..name = 'fetchData'
-          ..returnType = 'Future'
-          ..returnTypeArgs = SurroundedCommaList('<', '>', ['T'])
-          ..setTypeParams([
-            TypeParamTemplate()..name = 'T',
-            TypeParamTemplate()
-              ..name = 'S'
-              ..bound = 'String'
-          ])
-          ..positionalParams = [
-            ParamTemplate()
-              ..name = 'arg1'
-              ..type = 'T'
-          ]
-          ..optionalParams = [
-            ParamTemplate()
-              ..name = 'arg2'
-              ..type = 'S'
-              ..defaultValue = '"arg2value"',
-            ParamTemplate()
-              ..name = 'arg3'
-              ..type = 'String'
-          ]
-          ..namedParams = [
-            ParamTemplate()
-              ..name = 'namedArg1'
-              ..type = 'String'
-              ..defaultValue = '"default"',
-            ParamTemplate()
-              ..name = 'namedArg2'
-              ..type = 'int'
-              ..defaultValue = '3'
-          ]);
+      final template = ObservableFutureTemplate(
+          method: (MethodOverrideTemplate()
+            ..name = 'fetchData'
+            ..returnType = 'Future'
+            ..returnTypeArgs = SurroundedCommaList('<', '>', ['T'])
+            ..setTypeParams([
+              TypeParamTemplate(name: 'T'),
+              TypeParamTemplate(name: 'S', bound: 'String')
+            ])
+            ..positionalParams = [
+              ParamTemplate(
+                name: 'arg1',
+                type: 'T',
+              )
+            ]
+            ..optionalParams = [
+              ParamTemplate(
+                  name: 'arg2', type: 'S', defaultValue: '"arg2value"'),
+              ParamTemplate(
+                name: 'arg3',
+                type: 'String',
+              )
+            ]
+            ..namedParams = [
+              ParamTemplate(
+                  name: 'namedArg1', type: 'String', defaultValue: '"default"'),
+              ParamTemplate(name: 'namedArg2', type: 'int', defaultValue: '3')
+            ]));
 
       // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
