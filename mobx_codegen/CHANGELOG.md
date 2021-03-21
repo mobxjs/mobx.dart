@@ -1,6 +1,6 @@
-## 2.0.0-nullsafety.0
+## 2.0.0-nullsafety.0 - 2.0.0-nullsafety.2
 
-- Initial support for null safety
+- Support for null safety
 
 ## 1.1.2
 
