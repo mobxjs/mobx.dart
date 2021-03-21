@@ -47,11 +47,15 @@ MockMethod mockStreamMethod({
 
 MockTypeChecker streamChecker({bool isStream = false}) {
   final checker = MockTypeChecker();
-  when(() => checker.isAssignableFromType(any)).thenReturn(isStream);
+  when(() => checker.isAssignableFromType(any())).thenReturn(isStream);
   return checker;
 }
 
 void main() {
+  setUpAll(() {
+    registerFallbackValue<DartType>(MockType());
+  });
+
   group('AsyncMethodChecker', () {
     group('returnsFuture', () {
       test('true if returns Future', () {
@@ -81,7 +85,7 @@ void main() {
       test('true if returns Stream', () {
         expect(
             AsyncMethodChecker(streamChecker(isStream: true))
-                .returnsStream(MockMethod()),
+                .returnsStream(mockStreamMethod(returnsDynamic: true)),
             isTrue);
       });
 

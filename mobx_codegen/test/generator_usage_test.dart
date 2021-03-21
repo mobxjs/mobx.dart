@@ -135,7 +135,7 @@ void main() {
     autorun((_) {
       fields.add(store.field1);
       // ignore: cascade_invocations
-      fields.add(store.field2);
+      fields.add(store.field2!);
     });
     store.setFields('field1++', 'field2++');
 
@@ -193,7 +193,7 @@ void main() {
     });
     await asyncWhen((_) => stream.status == StreamStatus.done);
 
-    expect(stuff, equals([null, 'item1', 'item2', 'item3']));
+    expect(stuff, equals(['item1', 'item2', 'item3']));
   });
 
   test('observable stream works', () async {
@@ -206,7 +206,7 @@ void main() {
     });
     await asyncWhen((_) => stream.status == StreamStatus.done);
 
-    expect(stuff, equals([null, 'item1', 'item2', 'item3']));
+    expect(stuff, equals(['item1', 'item2', 'item3']));
   });
 
   test('observable future works', () async {
@@ -220,7 +220,7 @@ void main() {
 
     await asyncWhen((_) => future.status == FutureStatus.fulfilled);
 
-    expect(values, equals([null, 'item']));
+    expect(values, equals(['item']));
   });
 
   test('observable async method works', () async {
@@ -234,7 +234,7 @@ void main() {
 
     await asyncWhen((_) => future.status == FutureStatus.fulfilled);
 
-    expect(values, equals([null, 'item']));
+    expect(values, equals(['item']));
   });
 
   test('async action batches changes between awaits', () async {

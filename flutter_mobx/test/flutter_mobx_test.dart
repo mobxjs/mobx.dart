@@ -1,12 +1,8 @@
-// @todo pavanpodila: remove once Mockito is null-safe
-// @dart = 2.10
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_mobx/src/observer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when, version;
-import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
 
 import 'helpers.dart';
@@ -64,13 +60,12 @@ void main() {
 
   testWidgets('Observer build should call reaction.track', (tester) async {
     final mock = MockReaction();
-    stubTrack(mock);
     when(mock.hasObservables).thenReturn(true);
 
     await tester.pumpWidget(
         TestObserver(mock, builder: (context) => const Placeholder()));
 
-    verify(mock.track(any));
+    verify(mock.track(voidFn));
   });
 
   testWidgets(
@@ -136,7 +131,6 @@ void main() {
 
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
     final mock = MockReaction();
-    stubTrack(mock);
     when(mock.hasObservables).thenReturn(true);
 
     await tester.pumpWidget(
@@ -235,7 +229,7 @@ Future<MobXCaughtException> _testThrowingObserver(
   WidgetTester tester,
   Object errorToThrow,
 ) async {
-  Object exception;
+  late Object exception;
   final prevOnError = FlutterError.onError;
   FlutterError.onError = (details) => exception = details.exception;
 
@@ -246,7 +240,7 @@ Future<MobXCaughtException> _testThrowingObserver(
       builder: (context) => Text(count.value.toString()),
     ));
     count.value++;
-    return exception;
+    return exception as MobXCaughtException;
   } finally {
     FlutterError.onError = prevOnError;
   }
@@ -254,7 +248,7 @@ Future<MobXCaughtException> _testThrowingObserver(
 
 class ConstObserver extends StatelessObserverWidget {
   // const keyword compiles
-  const ConstObserver({Key key}) : super(key: key);
+  const ConstObserver({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container();
@@ -265,7 +259,7 @@ class ConstObserver extends StatelessObserverWidget {
 
 class ConstStatefulObserver extends StatefulObserverWidget {
   // const keyword compiles
-  const ConstStatefulObserver({Key key}) : super(key: key);
+  const ConstStatefulObserver({Key? key}) : super(key: key);
 
   @override
   _ConstStatefulObserverState createState() => _ConstStatefulObserverState();

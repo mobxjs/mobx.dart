@@ -1,17 +1,27 @@
-// @todo pavanpodila: remove once Mockito is null-safe
-// @dart = 2.10
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx/src/core.dart';
-import 'package:mockito/mockito.dart' as mockito;
+import 'package:mockito/mockito.dart';
+import 'package:mobx/src/core.dart' show ReactionImpl;
 
-class MockReaction extends mockito.Mock implements ReactionImpl {}
+// ignore: top_level_function_literal_block, prefer_function_declarations_over_variables
+final voidFn = () {};
+
+class MockReaction extends Mock implements ReactionImpl {
+  @override
+  void track(Function fn) {
+    fn(); // Explicitly invoke this
+    super.noSuchMethod(Invocation.method(#track, [voidFn]));
+  }
+
+  @override
+  bool get hasObservables =>
+      super.noSuchMethod(Invocation.getter(#hasObservables), returnValue: true);
+}
 
 // ignore: must_be_immutable
 class TestObserver extends Observer {
-  TestObserver(this.reaction, {@required WidgetBuilder builder})
+  TestObserver(this.reaction, {required WidgetBuilder builder})
       : super(builder: builder);
 
   final Reaction reaction;
@@ -19,7 +29,7 @@ class TestObserver extends Observer {
   @override
   Reaction createReaction(
     Function() onInvalidate, {
-    Function(Object, Reaction) onError,
+    Function(Object, Reaction)? onError,
   }) =>
       reaction;
 }
@@ -28,11 +38,11 @@ class TestObserver extends Observer {
 class LoggingObserver extends Observer {
   // ignore: prefer_const_constructors_in_immutables
   LoggingObserver({
-    @required WidgetBuilder builder,
-    Key key,
+    required WidgetBuilder builder,
+    Key? key,
   }) : super(key: key, builder: builder);
 
-  String previousLog;
+  String? previousLog;
 
   @override
   void log(String msg) {
@@ -44,9 +54,9 @@ class LoggingObserver extends Observer {
 class FlutterErrorThrowingObserver extends Observer {
   // ignore: prefer_const_constructors_in_immutables
   FlutterErrorThrowingObserver({
-    @required WidgetBuilder builder,
-    @required this.errorToThrow,
-    Key key,
+    required WidgetBuilder builder,
+    required this.errorToThrow,
+    Key? key,
   }) : super(key: key, builder: builder);
 
   final Object errorToThrow;
@@ -70,10 +80,4 @@ class FlutterErrorThrowingObserverElement extends StatelessObserverElement {
     // ignore: only_throw_errors
     throw widget.errorToThrow;
   }
-}
-
-void stubTrack(MockReaction mock) {
-  mockito.when(mock.track(mockito.any)).thenAnswer((invocation) {
-    invocation.positionalArguments[0]();
-  });
 }
