@@ -82,7 +82,7 @@ class LibraryScopedNameFinder {
     if (type is FunctionType) {
       // If we're dealing with a typedef, we let it undergo the standard name
       // lookup. Otherwise, we special case the function naming.
-      if (typeElement?.enclosingElement is FunctionTypeAliasElement) {
+      if (typeElement?.enclosingElement is TypeAliasElement) {
         typeElement = typeElement.enclosingElement;
       } else {
         return _getFunctionTypeName(type);
