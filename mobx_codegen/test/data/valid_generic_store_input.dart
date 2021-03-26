@@ -9,8 +9,14 @@ class Item<A extends num> = _Item<A> with _$Item<A>;
 @StoreConfig(hasToString: false)
 abstract class _Item<T extends num> with Store {
   @observable
-  T value;
+  T value1;
 
   @observable
-  List<T> values;
+  T? value2;
+
+  @observable
+  List<T> values1;
+
+  @observable
+  List<T> values2;
 }

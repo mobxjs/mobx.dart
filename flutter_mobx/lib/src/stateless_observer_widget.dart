@@ -14,13 +14,14 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 abstract class StatelessObserverWidget extends StatelessWidget
     with ObserverWidgetMixin {
   /// Initializes [key], [context] and [name] for subclasses.
-  const StatelessObserverWidget({Key key, ReactiveContext context, String name})
+  const StatelessObserverWidget(
+      {Key? key, ReactiveContext? context, String? name})
       : _name = name,
         _context = context,
         super(key: key);
 
-  final String _name;
-  final ReactiveContext _context;
+  final String? _name;
+  final ReactiveContext? _context;
 
   @override
   String getName() => _name ?? '$this';

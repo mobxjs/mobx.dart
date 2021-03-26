@@ -2,8 +2,10 @@ import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 
 class ActionTemplate {
-  StoreTemplate storeTemplate;
-  MethodOverrideTemplate method;
+  ActionTemplate({required this.storeTemplate, required this.method});
+
+  final StoreTemplate storeTemplate;
+  final MethodOverrideTemplate method;
 
   @override
   // ignore: prefer_single_quotes

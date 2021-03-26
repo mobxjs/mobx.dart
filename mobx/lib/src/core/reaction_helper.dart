@@ -75,7 +75,7 @@ ReactionDisposer createReaction<T>(
   final rxnName = name ?? context.nameFor('Reaction');
 
   final effectAction =
-      Action((T value) => effect(value), name: '$rxnName-effect');
+      Action((T? value) => effect(value as T), name: '$rxnName-effect');
 
   final runSync = delay == null;
   final scheduler = delay != null ? createDelayedScheduler(delay) : null;

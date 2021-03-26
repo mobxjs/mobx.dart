@@ -1,14 +1,21 @@
 class ParamTemplate {
-  String name;
-  String type;
-  String defaultValue;
-  bool hasRequiredAnnotation = false;
+  ParamTemplate(
+      {required this.name,
+      required this.type,
+      this.defaultValue,
+      this.hasRequiredKeyword = false});
+
+  final String name;
+  final String type;
+  final String? defaultValue;
+
+  final bool hasRequiredKeyword;
 
   String get asArgument => name;
 
-  NamedArgTemplate get asNamedArgument => NamedArgTemplate()..name = name;
+  NamedArgTemplate get asNamedArgument => NamedArgTemplate(name: name);
 
-  String get metadata => hasRequiredAnnotation ? '@required ' : '';
+  String get metadata => hasRequiredKeyword ? 'required ' : '';
 
   @override
   String toString() => defaultValue == null
@@ -17,8 +24,11 @@ class ParamTemplate {
 }
 
 class TypeParamTemplate {
-  String name;
-  String bound;
+  TypeParamTemplate({required this.name, this.bound});
+
+  final String name;
+
+  final String? bound;
 
   String get asArgument => name;
 
@@ -27,7 +37,9 @@ class TypeParamTemplate {
 }
 
 class NamedArgTemplate {
-  String name;
+  NamedArgTemplate({required this.name});
+
+  final String name;
 
   @override
   String toString() => '$name: $name';

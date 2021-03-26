@@ -231,7 +231,7 @@ void main() {
 
         final reaction = ReactionImpl(mainContext, () {
           i++;
-        }, name: "test_reaction");
+        }, name: 'test_reaction');
 
         final var1 = Observable(0);
         final var2 = Observable(0);
@@ -267,7 +267,7 @@ void main() {
         var i = 0;
         final reaction = ReactionImpl(mainContext, () {
           i++;
-        }, name: "test_reaction");
+        }, name: 'test_reaction');
         final var1 = Observable(0);
 
         final prevDerivation = reaction.startTracking();
@@ -285,7 +285,7 @@ void main() {
         var autoVar = 0;
         final reaction = ReactionImpl(mainContext, () {
           i++;
-        }, name: "test_reaction");
+        }, name: 'test_reaction');
         final var1 = Observable(0);
 
         final prevDerivation = reaction.startTracking();
@@ -303,14 +303,14 @@ void main() {
 
       test('ReactionImpl tracks observables', () {
         final reaction =
-            ReactionImpl(mainContext, () {}, name: "test_reaction_1")
+            ReactionImpl(mainContext, () {}, name: 'test_reaction_1')
               ..track(() {});
 
         expect(reaction.hasObservables, isFalse);
 
         final x = Observable(0);
         final reaction1 =
-            ReactionImpl(mainContext, () {}, name: "test_reaction_2")
+            ReactionImpl(mainContext, () {}, name: 'test_reaction_2')
               ..track(() => x.value + 1);
 
         expect(reaction1.hasObservables, isTrue);

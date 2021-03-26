@@ -3,7 +3,9 @@ const _analyzerIgnores =
 
 /// Template for a file containing one or more generated stores.
 class StoreFileTemplate {
-  Iterable<String> storeSources;
+  StoreFileTemplate({required this.storeSources});
+
+  final Iterable<String> storeSources;
 
   @override
   String toString() => storeSources.isEmpty

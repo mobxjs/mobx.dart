@@ -36,7 +36,7 @@ class StoreClassCodegenErrors implements CodegenError {
   final PropertyErrors nonAsyncMethods = NonAsyncMethods();
   final PropertyErrors invalidActionAnnotations = InvalidActionAnnotations();
 
-  List<CodegenError> _errorCategories;
+  late List<CodegenError> _errorCategories;
 
   @override
   String get message {

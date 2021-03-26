@@ -104,7 +104,7 @@ void main() {
     test('observe set length works', () {
       final list = ObservableList.of([0]);
 
-      int index = -1;
+      var index = -1;
       List<int?>? addedValues = [];
       List<int>? removedValues = [];
 

@@ -12,11 +12,11 @@ String surroundNonEmpty(String prefix, String suffix, dynamic content) {
 const _streamChecker = TypeChecker.fromRuntime(Stream);
 
 class AsyncMethodChecker {
-  AsyncMethodChecker([TypeChecker checkStream]) {
+  AsyncMethodChecker([TypeChecker? checkStream]) {
     _checkStream = checkStream ?? _streamChecker;
   }
 
-  TypeChecker _checkStream;
+  late TypeChecker _checkStream;
 
   bool returnsFuture(MethodElement method) =>
       method.returnType.isDartAsyncFuture ||
@@ -35,8 +35,8 @@ TypeParamTemplate typeParamTemplate(
   TypeParameterElement param,
   LibraryScopedNameFinder typeNameFinder,
 ) =>
-    TypeParamTemplate()
-      ..name = param.name
-      ..bound = param.bound != null
-          ? typeNameFinder.findTypeParameterBoundsTypeName(param)
-          : null;
+    TypeParamTemplate(
+        name: param.name,
+        bound: param.bound != null
+            ? typeNameFinder.findTypeParameterBoundsTypeName(param)
+            : null);

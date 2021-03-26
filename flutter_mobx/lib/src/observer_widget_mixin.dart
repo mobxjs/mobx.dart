@@ -26,7 +26,7 @@ mixin ObserverWidgetMixin on Widget {
   @visibleForTesting
   Reaction createReaction(
     Function() onInvalidate, {
-    Function(Object, Reaction) onError,
+    Function(Object, Reaction)? onError,
   }) =>
       ReactionImpl(
         getContext(),
@@ -49,14 +49,14 @@ mixin ObserverWidgetMixin on Widget {
 /// [ObserverWidgetMixin].
 mixin ObserverElementMixin on ComponentElement {
   ReactionImpl get reaction => _reaction;
-  ReactionImpl _reaction;
+  late ReactionImpl _reaction;
 
   // Not using the original `widget` getter as it would otherwise make the mixin
   // impossible to use
   ObserverWidgetMixin get _widget => widget as ObserverWidgetMixin;
 
   @override
-  void mount(Element parent, dynamic newSlot) {
+  void mount(Element? parent, dynamic newSlot) {
     _reaction = _widget.createReaction(invalidate, onError: (e, _) {
       FlutterError.reportError(FlutterErrorDetails(
         library: 'flutter_mobx',
@@ -71,7 +71,7 @@ mixin ObserverElementMixin on ComponentElement {
 
   @override
   Widget build() {
-    Widget built;
+    late Widget built;
 
     reaction.track(() {
       built = super.build();

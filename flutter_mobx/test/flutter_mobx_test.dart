@@ -3,79 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_mobx/src/observer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when, version;
-import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
 
-class MockReaction extends Mock implements ReactionImpl {}
-
-// ignore: must_be_immutable
-class TestObserver extends Observer {
-  TestObserver(this.reaction, {WidgetBuilder builder})
-      : super(builder: builder);
-
-  final Reaction reaction;
-
-  @override
-  Reaction createReaction(
-    Function() onInvalidate, {
-    Function(Object, Reaction) onError,
-  }) =>
-      reaction;
-}
-
-// ignore: must_be_immutable
-class LoggingObserver extends Observer {
-  // ignore: prefer_const_constructors_in_immutables
-  LoggingObserver({
-    @required WidgetBuilder builder,
-    Key key,
-  }) : super(key: key, builder: builder);
-
-  String previousLog;
-
-  @override
-  void log(String msg) {
-    previousLog = msg;
-  }
-}
-
-// ignore: must_be_immutable
-class FlutterErrorThrowingObserver extends Observer {
-  // ignore: prefer_const_constructors_in_immutables
-  FlutterErrorThrowingObserver({
-    @required WidgetBuilder builder,
-    @required this.errorToThrow,
-    Key key,
-  }) : super(key: key, builder: builder);
-
-  final Object errorToThrow;
-
-  @override
-  FlutterErrorThrowingObserverElement createElement() =>
-      FlutterErrorThrowingObserverElement(this);
-}
-
-class FlutterErrorThrowingObserverElement extends StatelessObserverElement {
-  FlutterErrorThrowingObserverElement(StatelessObserverWidget widget)
-      : super(widget);
-
-  @override
-  FlutterErrorThrowingObserver get widget =>
-      // ignore: avoid_as, this is the official way to use Element.widget
-      super.widget as FlutterErrorThrowingObserver;
-
-  @override
-  void invalidate() {
-    // ignore: only_throw_errors
-    throw widget.errorToThrow;
-  }
-}
-
-void stubTrack(MockReaction mock) {
-  when(mock.track(any)).thenAnswer((invocation) {
-    invocation.positionalArguments[0]();
-  });
-}
+import 'helpers.dart';
 
 void main() {
   setUp(() => mainContext.config =
@@ -130,13 +60,12 @@ void main() {
 
   testWidgets('Observer build should call reaction.track', (tester) async {
     final mock = MockReaction();
-    stubTrack(mock);
     when(mock.hasObservables).thenReturn(true);
 
     await tester.pumpWidget(
         TestObserver(mock, builder: (context) => const Placeholder()));
 
-    verify(mock.track(any));
+    verify(mock.track(voidFn));
   });
 
   testWidgets(
@@ -202,7 +131,6 @@ void main() {
 
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
     final mock = MockReaction();
-    stubTrack(mock);
     when(mock.hasObservables).thenReturn(true);
 
     await tester.pumpWidget(
@@ -211,13 +139,6 @@ void main() {
     await tester.pumpWidget(const Placeholder());
 
     verify(mock.dispose());
-  });
-
-  test('Observer builder must not be null', () {
-    expect(
-      () => Observer(builder: null),
-      throwsA(isInstanceOf<AssertionError>()),
-    );
   });
 
   testWidgets("Release mode, the reaction's default name is widget.toString()",
@@ -308,7 +229,7 @@ Future<MobXCaughtException> _testThrowingObserver(
   WidgetTester tester,
   Object errorToThrow,
 ) async {
-  Object exception;
+  late Object exception;
   final prevOnError = FlutterError.onError;
   FlutterError.onError = (details) => exception = details.exception;
 
@@ -319,7 +240,7 @@ Future<MobXCaughtException> _testThrowingObserver(
       builder: (context) => Text(count.value.toString()),
     ));
     count.value++;
-    return exception;
+    return exception as MobXCaughtException;
   } finally {
     FlutterError.onError = prevOnError;
   }
@@ -327,7 +248,7 @@ Future<MobXCaughtException> _testThrowingObserver(
 
 class ConstObserver extends StatelessObserverWidget {
   // const keyword compiles
-  const ConstObserver({Key key}) : super(key: key);
+  const ConstObserver({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container();
@@ -338,7 +259,7 @@ class ConstObserver extends StatelessObserverWidget {
 
 class ConstStatefulObserver extends StatefulObserverWidget {
   // const keyword compiles
-  const ConstStatefulObserver({Key key}) : super(key: key);
+  const ConstStatefulObserver({Key? key}) : super(key: key);
 
   @override
   _ConstStatefulObserverState createState() => _ConstStatefulObserverState();

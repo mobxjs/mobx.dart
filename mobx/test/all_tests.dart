@@ -1,6 +1,8 @@
 // @todo pavanpodila: remove once Mockito is null-safe
 // @dart = 2.10
 
+import 'package:mockito/annotations.dart';
+
 import 'action_controller_test.dart' as action_controller_test;
 import 'action_test.dart' as action_test;
 import 'annotations_test.dart' as annotations_test;
@@ -32,9 +34,14 @@ import 'observable_value_test.dart' as observable_value_test;
 import 'observe_test.dart' as observe_test;
 import 'reaction_test.dart' as reaction_test;
 import 'reactive_policies_test.dart' as reactive_policies_test;
+import 'shared_mocks.dart';
 import 'spy_test.dart' as spy_test;
 import 'when_test.dart' as when_test;
 
+// ignore: directives_ordering, unused_import
+import 'all_tests.mocks.dart';
+
+@GenerateMocks([MockContext, MockActionController, MockAtom, MockDerivation])
 void main() {
   observable_test.main();
   observable_value_test.main();

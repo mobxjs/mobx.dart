@@ -6,5 +6,5 @@ class NestedStore = _NestedStore with _$NestedStore;
 
 abstract class _NestedStore with Store {
   @observable
-  String name;
+  late String name;
 }
