@@ -10,12 +10,20 @@ class StoreConfig {
 ///
 /// During code-generation, this type is detected to identify an `Observable`
 class MakeObservable {
-  const MakeObservable._();
+  const MakeObservable._({this.readOnly = false});
+
+  final bool readOnly;
 }
 
 /// Declares a class field as an observable. See the `Observable` class for full
 /// documentation
 const MakeObservable observable = MakeObservable._();
+
+/// Declares a class field as an observable. See the `Observable` class for full
+/// documentation.
+///
+/// But, it's only modifiable within the Store
+const MakeObservable readonly = MakeObservable._(readOnly: true);
 
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///
