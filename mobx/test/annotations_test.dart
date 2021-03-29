@@ -11,5 +11,6 @@ void main() {
     expect(computed, isNotNull);
     expect(action, isNotNull);
     expect(StoreConfig, isNotNull);
+    expect(readonly, isNotNull);
   });
 }
