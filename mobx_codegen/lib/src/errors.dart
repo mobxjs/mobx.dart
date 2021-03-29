@@ -4,19 +4,7 @@ abstract class CodegenError {
 }
 
 class StoreClassCodegenErrors implements CodegenError {
-  StoreClassCodegenErrors(this.name) {
-    _errorCategories = [
-      nonAbstractStoreMixinDeclarations,
-      invalidComputedAnnotations,
-      invalidObservableAnnotations,
-      invalidActionAnnotations,
-      staticObservables,
-      staticMethods,
-      finalObservables,
-      asyncGeneratorActions,
-      nonAsyncMethods,
-    ];
-  }
+  StoreClassCodegenErrors(this.name);
 
   final String name;
 
@@ -27,16 +15,32 @@ class StoreClassCodegenErrors implements CodegenError {
   final PropertyErrors staticObservables = StaticObservableFields();
   final PropertyErrors invalidObservableAnnotations =
       InvalidObservableAnnotations();
+  final PropertyErrors invalidReadOnlyAnnotations =
+      InvalidReadOnlyAnnotations();
 
   final PropertyErrors invalidComputedAnnotations =
       InvalidComputedAnnotations();
 
+  final PropertyErrors invalidPublicSetterOnReadOnlyObservable =
+      InvalidSetterOnReadOnlyObservable();
   final PropertyErrors staticMethods = InvalidStaticMethods();
   final PropertyErrors asyncGeneratorActions = AsyncGeneratorActionMethods();
   final PropertyErrors nonAsyncMethods = NonAsyncMethods();
   final PropertyErrors invalidActionAnnotations = InvalidActionAnnotations();
 
-  late List<CodegenError> _errorCategories;
+  List<CodegenError> get _errorCategories => [
+        nonAbstractStoreMixinDeclarations,
+        invalidComputedAnnotations,
+        invalidObservableAnnotations,
+        invalidReadOnlyAnnotations,
+        invalidActionAnnotations,
+        staticObservables,
+        invalidPublicSetterOnReadOnlyObservable,
+        staticMethods,
+        finalObservables,
+        asyncGeneratorActions,
+        nonAsyncMethods,
+      ];
 
   @override
   String get message {
@@ -150,6 +154,26 @@ class InvalidObservableAnnotations extends PropertyErrors {
   @override
   String get message =>
       'Remove @observable annotation for $property $propertyList. They only apply to fields.';
+}
+
+class InvalidReadOnlyAnnotations extends PropertyErrors {
+  @override
+  // ignore: overridden_fields
+  Pluralize propertyPlural = _fieldPluralizer;
+
+  @override
+  String get message =>
+      'You should only use @readonly annotation with private properties. Please remove from $property $propertyList.';
+}
+
+class InvalidSetterOnReadOnlyObservable extends PropertyErrors {
+  @override
+  // ignore: overridden_fields
+  Pluralize propertyPlural = _memberPluralizer;
+
+  @override
+  String get message =>
+      'Must not define a public setter to a readonly field. Remove $property $propertyList.';
 }
 
 class InvalidActionAnnotations extends PropertyErrors {

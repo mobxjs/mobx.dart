@@ -34,6 +34,20 @@ void main() {
               'Errors when there are multiple invalid @action annotations',
           source: './data/invalid_action_multiple.dart',
           output: './data/invalid_action_multiple_output.txt'),
+      const TestInfo(
+          description:
+              'Errors when there is a single InvalidSetterOnReadOnlyObservable',
+          source:
+              './data/invalid_single_setter_on_readonly_observable_input.dart',
+          output:
+              './data/invalid_single_setter_on_readonly_observable_output.txt'),
+      const TestInfo(
+          description:
+              'Errors when there are multiple InvalidSetterOnReadOnlyObservable',
+          source:
+              './data/invalid_multiple_setter_on_readonly_observable_input.dart',
+          output:
+              './data/invalid_multiple_setter_on_readonly_observable_output.txt'),
     ]);
   });
 }
