@@ -12,15 +12,15 @@ In this example we will rely on the `ObservableFuture` to keep track of the fetc
 
 ## Observable State
 
-Rather than writing our own HTTP layer to talk to the hacker-news API, we will rely on a package: <PubBadge name="hnpwa_client" />, available on Pub. Here we will take a different perspective on defining the observable state.
+We will wrap our calls to the HackerNews API within a simple `HNApi` wrapper. For the observable state, we will take a different perspective.
 
 The hacker-news client essentially shows a list of items for the latest and the top news items submitted on the [HackerNews website](https://news.ycombinator.com/). Instead of defining the observable state as two separate lists of items, we will just create two separate `ObservableFuture`s. The `result` field of an `ObservableFuture` will point to the `List<FeedItem>`, which is the first page of the latest and top news feed.
 
 Thus the reactive state of this example looks like so:
 
 ```dart
-import 'package:hnpwa_client/hnpwa_client.dart';
 import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/hackernews/hn_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 part 'news_store.g.dart';
@@ -30,23 +30,38 @@ enum FeedType { latest, top }
 class HackerNewsStore = _HackerNewsStore with _$HackerNewsStore;
 
 abstract class _HackerNewsStore with Store {
-  final HnpwaClient _client = HnpwaClient();
+  final _hnApi = HNApi();
 
   @observable
-  ObservableFuture<List<FeedItem>> latestItemsFuture;
+  ObservableFuture<List<FeedItem>>? latestItemsFuture;
 
   @observable
-  ObservableFuture<List<FeedItem>> topItemsFuture;
+  ObservableFuture<List<FeedItem>>? topItemsFuture;
+
+  // highlight-start
+  @action
+  Future fetchLatest() => latestItemsFuture = ObservableFuture(_hnApi.newest());
 
   @action
-  Future fetchLatest() => latestItemsFuture =
-      ObservableFuture(_client.newest().then((Feed feed) => feed.items));
+  Future fetchTop() => topItemsFuture = ObservableFuture(_hnApi.top());
+  // highlight-end
 
-  @action
-  Future fetchTop() => topItemsFuture =
-      ObservableFuture(_client.news().then((Feed feed) => feed.items));
+  void loadNews(FeedType type) {
+    if (type == FeedType.latest && latestItemsFuture == null) {
+      fetchLatest();
+    } else if (type == FeedType.top && topItemsFuture == null) {
+      fetchTop();
+    }
+  }
 
-  // ...
+  // ignore: avoid_void_async
+  void openUrl(String? url) async {
+    if (await canLaunch(url ?? '')) {
+      await launch(url!);
+    } else {
+      print('Could not open $url');
+    }
+  }
 }
 
 ```
@@ -66,8 +81,9 @@ The root widgets is simple a tab-container of two tabs, one of Latest and one fo
 ```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hnpwa_client/hnpwa_client.dart';
 import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/hackernews/hn_api.dart';
+
 import 'package:mobx_examples/hackernews/news_store.dart';
 
 class HackerNewsExample extends StatefulWidget {
@@ -81,7 +97,7 @@ class _HackerNewsExampleState extends State<HackerNewsExample>
     with SingleTickerProviderStateMixin {
   final HackerNewsStore store = HackerNewsStore();
 
-  TabController _tabController;
+  late TabController _tabController;
   final _tabs = [FeedType.latest, FeedType.top];
 
   @override
@@ -113,7 +129,6 @@ class _HackerNewsExampleState extends State<HackerNewsExample>
     store.loadNews(_tabs[_tabController.index]);
   }
 }
-
 ```
 
 The most interesting `Widget` above is the **`FeedItemsView`**, an _Observer-Widget_ that tracks the load of the specific feed type.
@@ -136,10 +151,15 @@ class FeedItemsView extends StatelessWidget {
   final FeedType type;
 
   @override
+  // ignore: missing_return
   Widget build(BuildContext context) => Observer(builder: (_) {
         final future = type == FeedType.latest
             ? store.latestItemsFuture
             : store.topItemsFuture;
+
+        if (future == null) {
+          return const CircularProgressIndicator();
+        }
 
         switch (future.status) {
           case FutureStatus.pending:
@@ -159,7 +179,7 @@ class FeedItemsView extends StatelessWidget {
                   'Failed to load items.',
                   style: TextStyle(color: Colors.red),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: const Text('Tap to try again'),
                   onPressed: _refresh,
                 )
@@ -177,27 +197,24 @@ class FeedItemsView extends StatelessWidget {
                     final item = items[index];
                     return ListTile(
                       leading: Text(
-                        '${item.points}',
+                        '${item.score}',
                         style: const TextStyle(fontSize: 20),
                       ),
                       title: Text(
                         item.title,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text(
-                          '- ${item.user}, ${item.commentsCount} comment(s)'),
+                      subtitle: Text('- ${item.author}'),
                       onTap: () => store.openUrl(item.url),
                     );
                   }),
             );
-            break;
         }
       });
 
   Future _refresh() =>
       (type == FeedType.latest) ? store.fetchLatest() : store.fetchTop();
 }
-
 ```
 
 We have also added the _Pull to Refresh_ behavior for fetching the latest updates to the news. This can be seen with the use of `RefreshIndicator`.
