@@ -23,7 +23,7 @@ abstract class _RandomStore with Store {
 
   late final StreamController<int> _streamController;
 
-  late final ObservableStream<int> randomStream;
+  late final ObservableStream<int?> randomStream;
 
   // ignore: avoid_void_async
   void dispose() async {

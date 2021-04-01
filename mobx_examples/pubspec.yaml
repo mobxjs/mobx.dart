@@ -20,14 +20,14 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_mobx: ^2.0.0-nullsafety.0
-#  github: ^8.0.1
-#  hnpwa_client: ^2.0.0
+  github: ^8.0.1
+  http: ^0.13.0
   mobx: ^2.0.0-nullsafety.0
   mobx_codegen: ^2.0.0-nullsafety.0
   provider: ^5.0.0
   shared_preferences:
   url_launcher:
-  validators: ^2.0.0
+  validators2: ^3.0.0
 
 dev_dependencies:
   build_runner: ^1.12.2

@@ -116,7 +116,7 @@ class RepositoryListView extends StatelessWidget {
                       ],
                     ),
                     subtitle: Text(
-                      repo.description ?? '',
+                      repo.description,
                       overflow: TextOverflow.fade,
                     ),
                   );

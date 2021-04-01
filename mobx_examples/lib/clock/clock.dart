@@ -14,7 +14,7 @@ class Clock {
   }
 
   late final Atom _atom;
-  late final Timer? _timer;
+  Timer? _timer;
 
   void _startTimer() {
     print('Clock started ticking');

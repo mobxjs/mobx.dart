@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hnpwa_client/hnpwa_client.dart';
 import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/hackernews/hn_api.dart';
 
 import 'package:mobx_examples/hackernews/news_store.dart';
 
@@ -16,7 +16,7 @@ class _HackerNewsExampleState extends State<HackerNewsExample>
     with SingleTickerProviderStateMixin {
   final HackerNewsStore store = HackerNewsStore();
 
-  TabController _tabController;
+  late TabController _tabController;
   final _tabs = [FeedType.latest, FeedType.top];
 
   @override
@@ -62,6 +62,10 @@ class FeedItemsView extends StatelessWidget {
             ? store.latestItemsFuture
             : store.topItemsFuture;
 
+        if (future == null) {
+          return const CircularProgressIndicator();
+        }
+
         switch (future.status) {
           case FutureStatus.pending:
             return Column(
@@ -98,15 +102,14 @@ class FeedItemsView extends StatelessWidget {
                     final item = items[index];
                     return ListTile(
                       leading: Text(
-                        '${item.points}',
+                        '${item.score}',
                         style: const TextStyle(fontSize: 20),
                       ),
                       title: Text(
                         item.title,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text(
-                          '- ${item.user}, ${item.commentsCount} comment(s)'),
+                      subtitle: Text('- ${item.author}'),
                       onTap: () => store.openUrl(item.url),
                     );
                   }),

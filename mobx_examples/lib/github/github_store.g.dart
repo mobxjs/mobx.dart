@@ -20,13 +20,13 @@ mixin _$GithubStore on _GithubStore, Store {
   final _$fetchReposFutureAtom = Atom(name: '_GithubStore.fetchReposFuture');
 
   @override
-  ObservableFuture<List<dynamic>> get fetchReposFuture {
+  ObservableFuture<List<Repository>> get fetchReposFuture {
     _$fetchReposFutureAtom.reportRead();
     return super.fetchReposFuture;
   }
 
   @override
-  set fetchReposFuture(ObservableFuture<List<dynamic>> value) {
+  set fetchReposFuture(ObservableFuture<List<Repository>> value) {
     _$fetchReposFutureAtom.reportWrite(value, super.fetchReposFuture, () {
       super.fetchReposFuture = value;
     });
@@ -50,7 +50,7 @@ mixin _$GithubStore on _GithubStore, Store {
   final _$fetchReposAsyncAction = AsyncAction('_GithubStore.fetchRepos');
 
   @override
-  Future<List<dynamic>> fetchRepos() {
+  Future<List<Repository>> fetchRepos() {
     return _$fetchReposAsyncAction.run(() => super.fetchRepos());
   }
 

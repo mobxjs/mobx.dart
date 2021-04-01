@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:mobx/mobx.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:validators/validators.dart';
+import 'package:validators2/validators.dart';
 
 part 'form_store.g.dart';
 
