@@ -66,7 +66,7 @@ class _FormExampleState extends State<FormExample> {
                       errorText: store.error.password),
                 ),
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: const Text('Sign up'),
                 onPressed: store.validateAll,
               )

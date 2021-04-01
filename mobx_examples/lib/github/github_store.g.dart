@@ -9,7 +9,7 @@ part of 'github_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GithubStore on _GithubStore, Store {
-  Computed<bool> _$hasResultsComputed;
+  Computed<bool>? _$hasResultsComputed;
 
   @override
   bool get hasResults =>
@@ -20,13 +20,13 @@ mixin _$GithubStore on _GithubStore, Store {
   final _$fetchReposFutureAtom = Atom(name: '_GithubStore.fetchReposFuture');
 
   @override
-  ObservableFuture<List<Repository>> get fetchReposFuture {
+  ObservableFuture<List<dynamic>> get fetchReposFuture {
     _$fetchReposFutureAtom.reportRead();
     return super.fetchReposFuture;
   }
 
   @override
-  set fetchReposFuture(ObservableFuture<List<Repository>> value) {
+  set fetchReposFuture(ObservableFuture<List<dynamic>> value) {
     _$fetchReposFutureAtom.reportWrite(value, super.fetchReposFuture, () {
       super.fetchReposFuture = value;
     });
@@ -50,7 +50,7 @@ mixin _$GithubStore on _GithubStore, Store {
   final _$fetchReposAsyncAction = AsyncAction('_GithubStore.fetchRepos');
 
   @override
-  Future<List<Repository>> fetchRepos() {
+  Future<List<dynamic>> fetchRepos() {
     return _$fetchReposAsyncAction.run(() => super.fetchRepos());
   }
 

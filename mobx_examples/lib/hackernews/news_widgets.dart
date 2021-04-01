@@ -80,7 +80,7 @@ class FeedItemsView extends StatelessWidget {
                   'Failed to load items.',
                   style: TextStyle(color: Colors.red),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: const Text('Tap to try again'),
                   onPressed: _refresh,
                 )

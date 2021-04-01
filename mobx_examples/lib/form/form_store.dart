@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:mobx/mobx.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:validators/validators.dart';
 
 part 'form_store.g.dart';
@@ -15,7 +16,7 @@ abstract class _FormStore with Store {
   final FormErrorState error = FormErrorState();
 
   @observable
-  CustomColor color;
+  CustomColor color = CustomColor(0);
 
   @observable
   String name = '';
@@ -35,7 +36,7 @@ abstract class _FormStore with Store {
   @computed
   bool get canLogin => !error.hasErrors;
 
-  List<ReactionDisposer> _disposers;
+  late List<ReactionDisposer> _disposers;
 
   void setupValidations() {
     _disposers = [
@@ -103,13 +104,13 @@ class FormErrorState = _FormErrorState with _$FormErrorState;
 
 abstract class _FormErrorState with Store {
   @observable
-  String username;
+  String? username;
 
   @observable
-  String email;
+  String? email;
 
   @observable
-  String password;
+  String? password;
 
   @computed
   bool get hasErrors => username != null || email != null || password != null;

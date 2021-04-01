@@ -18,7 +18,7 @@ abstract class _TodoList with Store {
 
   @observable
   @JsonProperty(defaultValue: VisibilityFilter.all)
-  VisibilityFilter filter;
+  VisibilityFilter filter = VisibilityFilter.all;
 
   @computed
   ObservableList<Todo> get pendingTodos =>

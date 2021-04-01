@@ -27,7 +27,7 @@ mixin _$SettingsStore on _SettingsStore, Store {
   final _$setDarkModeAsyncAction = AsyncAction('_SettingsStore.setDarkMode');
 
   @override
-  Future<void> setDarkMode({@required bool value}) {
+  Future<void> setDarkMode({required bool value}) {
     return _$setDarkModeAsyncAction.run(() => super.setDarkMode(value: value));
   }
 

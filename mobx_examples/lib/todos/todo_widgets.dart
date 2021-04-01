@@ -52,7 +52,7 @@ class TodoListView extends StatelessWidget {
                         builder: (_) => CheckboxListTile(
                               controlAffinity: ListTileControlAffinity.leading,
                               value: todo.done,
-                              onChanged: (flag) => todo.done = flag,
+                              onChanged: (flag) => todo.done = flag!,
                               title: Row(
                                 children: <Widget>[
                                   Expanded(
@@ -116,13 +116,13 @@ class ActionBar extends StatelessWidget {
       Observer(
           builder: (_) => ButtonBar(
                 children: <Widget>[
-                  RaisedButton(
+                  ElevatedButton(
                     child: const Text('Remove Completed'),
                     onPressed: list.canRemoveAllCompleted
                         ? list.removeCompleted
                         : null,
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     child: const Text('Mark All Completed'),
                     onPressed: list.canMarkAllCompleted
                         ? list.markAllAsCompleted

@@ -17,10 +17,10 @@ import 'package:mobx_examples/dice/dice_widgets.dart';
 
 class Example {
   Example(
-      {@required this.title,
-      @required this.description,
-      @required this.path,
-      @required this.widgetBuilder});
+      {required this.title,
+      required this.description,
+      required this.path,
+      required this.widgetBuilder});
 
   final WidgetBuilder widgetBuilder;
   final String path;

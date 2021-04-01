@@ -17,13 +17,13 @@ abstract class _RandomStore with Store {
     randomStream = ObservableStream(_streamController.stream);
   }
 
-  Timer _timer;
+  late final Timer _timer;
 
   final _random = Random();
 
-  StreamController<int> _streamController;
+  late final StreamController<int> _streamController;
 
-  ObservableStream<int> randomStream;
+  late final ObservableStream<int> randomStream;
 
   // ignore: avoid_void_async
   void dispose() async {

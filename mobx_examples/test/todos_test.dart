@@ -10,7 +10,7 @@ void main() {
   initializeReflectable();
   JsonMapper().useAdapter(mobXAdapter);
 
-  TodoList list;
+  late TodoList list;
 
   setUp(() {
     list = TodoList();
@@ -55,9 +55,9 @@ void main() {
     expect(listJson, targetJson);
 
     final listInstance = JsonMapper.deserialize<TodoList>(listJson);
-    expect(list.todos.length, listInstance.todos.length);
-    expect(list.canMarkAllCompleted, listInstance.canMarkAllCompleted);
-    expect(list.itemsDescription, listInstance.itemsDescription);
+    expect(list.todos.length, listInstance?.todos.length);
+    expect(list.canMarkAllCompleted, listInstance?.canMarkAllCompleted);
+    expect(list.itemsDescription, listInstance?.itemsDescription);
   });
 
   test('TodoList starts with default configuration', () {

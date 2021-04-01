@@ -13,23 +13,19 @@ class Clock {
     return DateTime.now();
   }
 
-  Atom _atom;
-  Timer _timer;
+  late final Atom _atom;
+  late final Timer? _timer;
 
   void _startTimer() {
     print('Clock started ticking');
 
-    if (_timer != null) {
-      _timer.cancel();
-    }
+    _timer?.cancel();
 
     _timer = Timer.periodic(const Duration(seconds: 1), _onTick);
   }
 
   void _stopTimer() {
-    if (_timer != null) {
-      _timer.cancel();
-    }
+    _timer?.cancel();
 
     print('Clock stopped ticking');
   }
