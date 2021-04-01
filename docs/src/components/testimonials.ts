@@ -23,7 +23,7 @@ export const testimonials: TestimonialContent[] = [
     title:
       'Founder of GeekyAnts • Creator of BuilderXio, NativeBaseIO & VueNativeIO • Speaker • Loves tea • Strums guitar',
     photoUrl:
-      'https://pbs.twimg.com/profile_images/1188747996843761665/8CiUdKZW_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1369921787568422915/hoyvrUpc_400x400.jpg',
     message:
       'We at GeekyAnts have used MobX.dart in many Flutter projects. We have chosen it as the default state-management library for the internal frameworks built for Flutter.',
   },
@@ -34,7 +34,7 @@ export const testimonials: TestimonialContent[] = [
     title:
       'Google Product Manager on the Flutter Development Experience. Enjoys long walks on the beach and various technologies.',
     photoUrl:
-      'https://pbs.twimg.com/profile_images/1660905119/vikingme128x128_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1364300036025196545/tIbY1xcH_400x400.jpg',
     message: `If you haven\'t seen MobX.dart @ https://mobx.netlify.com, check it out. In combination with Provider, it\'s PFM (Pure Flutter Magic). I use it when I build anything real. #recommended #Flutter`,
   },
   {

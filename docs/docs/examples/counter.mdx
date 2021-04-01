@@ -44,15 +44,27 @@ Now that our model for the `Store` is ready, we can focus on bringing it to life
 final Counter counter = Counter();
 ```
 
-Next we create a `StatelessWidget` that renders the count and exposes the _Increment_ button. To make the count automatically update on changes, we wrap the `Text` widget inside an `Observer` widget. Any observable that gets used in the `builder` function of `Observer` is automatically tracked. When it changes, `Observer` re-renders by calling the `builder` again.
+Next we create a simple `StatefulWidget` that renders the count and exposes the _Increment_ button.
+To make the count automatically update on changes, we wrap the `Text` widget inside an `Observer` widget.
+Any observable that gets used in the `builder` function of `Observer` is automatically tracked.
+When it changes, `Observer` re-renders by calling the `builder` again.
+This can be seen in the highlighted code below.
 
 ```dart
-class CounterExample extends StatelessWidget {
+class CounterExample extends StatefulWidget {
   const CounterExample();
+
+  @override
+  CounterExampleState createState() => CounterExampleState();
+}
+
+class CounterExampleState extends State<CounterExample> {
+  final Counter counter = Counter();
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue,
           title: const Text('MobX Counter'),
         ),
         body: Center(
@@ -62,11 +74,13 @@ class CounterExample extends StatelessWidget {
               const Text(
                 'You have pushed the button this many times:',
               ),
+              // highlight-start
               Observer(
                   builder: (_) => Text(
                         '${counter.value}',
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 40),
                       )),
+              // highlight-end
             ],
           ),
         ),

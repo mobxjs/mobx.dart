@@ -47,7 +47,6 @@ Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of `T
 - [x] a list of `Todo`s
 - [x] a `filter` that tracks the visibility-filter applied on the list of todos
 
-
 This can be seen with the `@observable` properties.
 
 ```dart
@@ -432,13 +431,13 @@ class ActionBar extends StatelessWidget {
       Observer(
           builder: (_) => ButtonBar(
                 children: <Widget>[
-                  RaisedButton(
+                  ElevatedButton(
                     child: const Text('Remove Completed'),
                     onPressed: list.canRemoveAllCompleted
                         ? list.removeCompleted
                         : null,
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     child: const Text('Mark All Completed'),
                     onPressed: list.canMarkAllCompleted
                         ? list.markAllAsCompleted
