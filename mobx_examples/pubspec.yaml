@@ -19,11 +19,11 @@ dependencies:
   dart_json_mapper_mobx: ^2.0.0
   flutter:
     sdk: flutter
-  flutter_mobx: ^2.0.0-nullsafety.0
+  flutter_mobx: ^2.0.0
   github: ^8.0.1
   http: ^0.13.0
-  mobx: ^2.0.0-nullsafety.0
-  mobx_codegen: ^2.0.0-nullsafety.0
+  mobx: ^2.0.0
+  mobx_codegen: ^2.0.0
   provider: ^5.0.0
   shared_preferences:
   url_launcher:

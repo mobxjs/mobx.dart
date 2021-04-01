@@ -1,11 +1,15 @@
+## 2.0.0
+
+- Full support for Null Safety
+
 ## 2.0.0-nullsafety.0 - 2.0.0-nullsafety.2
 
 - Support for null safety
 
 ## 1.1.2
 
-- Fixing some analyzer errors related to deprecated types. Now using the 
-newer types as the analyzer package has been upgraded to `^0.39`
+- Fixing some analyzer errors related to deprecated types. Now using the
+  newer types as the analyzer package has been upgraded to `^0.39`
 
 ## 1.1.1+2 - 1.1.1+3
 
