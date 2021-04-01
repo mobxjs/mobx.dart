@@ -24,6 +24,7 @@ jobs:
           accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
           refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
           suppressBuildRunner: true
+          skipTests: true
 
       - name: Tag commit
         if: steps.publish.outputs.success
@@ -51,6 +52,7 @@ jobs:
           accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
           refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
           suppressBuildRunner: true
+          skipTests: true
 
       - name: Tag commit
         if: steps.publish.outputs.success
