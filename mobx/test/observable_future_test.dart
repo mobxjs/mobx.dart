@@ -185,7 +185,7 @@ void main() {
     });
 
     test('observing stream should work', () async {
-      final future = ObservableFuture(Future(() => 1));
+      final future = ObservableFuture<int?>(Future(() => 1));
       final stream = future.asStream();
 
       await asyncWhen((_) => stream.value == 1);
