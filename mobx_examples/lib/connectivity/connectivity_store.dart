@@ -6,13 +6,9 @@ part 'connectivity_store.g.dart';
 class ConnectivityStore = _ConnectivityStore with _$ConnectivityStore;
 
 abstract class _ConnectivityStore with Store {
-  _ConnectivityStore() {
-    connectivityStream = ObservableStream<ConnectivityResult>(
-        Connectivity().onConnectivityChanged);
-  }
-
   @observable
-  late ObservableStream<ConnectivityResult> connectivityStream;
+  ObservableStream<ConnectivityResult> connectivityStream =
+      ObservableStream(Connectivity().onConnectivityChanged);
 
   void dispose() {}
 }

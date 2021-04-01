@@ -1,5 +1,3 @@
-#! /usr/bin/env dart
-
 import 'dart:async';
 import 'dart:convert';
 
@@ -77,6 +75,7 @@ class HNApi {
   }
 }
 
+// Only for testing
 Future<void> main() async {
   final list = await HNApi().top();
   print(list);
