@@ -8,7 +8,8 @@ import formImage from './form.png';
 import formGif from './form.gif';
 import { PubBadge } from '../../../src/components/PubBadge';
 
-In this article we will use the complete _MobX triad_ to do form validation. This will involve the creation of a `FormStore` that contains the **observables**, **actions** to mutate the fields and **reactions** that do validations when a field changes.
+In this article we will use the complete _MobX triad_ to do form validation.
+This will involve the creation of a `FormStore` that contains the **observables**, **actions** to mutate the fields and **reactions** that do validations when a field changes.
 
 > See the full code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/form).
 
@@ -46,6 +47,14 @@ abstract class _FormStore with Store {
 ## Actions to mutate the fields
 
 The actions that mutate these fields are straightforward. They are invoked whenever the user edits and modifies the `TextFields` corresponding to the _observable-properties_.
+
+> ### Auto-actions for property setters
+>
+> Do note that for single-property changes, you can assign the value directly as in `form.name = 'new value'`. MobX internally auto-wraps the property setters within an action. For more elaborate
+> mutations, it is advisable to wrap it in an action for atomic updates and notifications.
+>
+> For this example, the code below is only indicative. The property setters are called directly in the Widgets
+> to take advantage of the auto-action-wrapped setters.
 
 ```dart
 abstract class _FormStore with Store {
