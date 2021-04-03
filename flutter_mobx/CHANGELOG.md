@@ -1,3 +1,7 @@
+## 2.0.0
+
+- Full support for Null Safety
+
 ## 2.0.0-nullsafety.0 - 2.0.0-nullsafety.3
 
 - Null safety support

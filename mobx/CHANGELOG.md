@@ -1,3 +1,7 @@
+## 2.0.0
+
+- Full support for Null Safety
+
 ## 2.0.0-nullsafety.6
 
 - Adding support for `@readonly` annotation, as per this [issue](https://github.com/mobxjs/mobx.dart/issues/220)

@@ -22,7 +22,7 @@ class _RandomNumberExampleState extends State<RandomNumberExample> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               'Random number',
               style: TextStyle(color: Colors.grey),
             ),

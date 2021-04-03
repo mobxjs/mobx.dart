@@ -13,13 +13,13 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
       Atom(name: '_HackerNewsStore.latestItemsFuture');
 
   @override
-  ObservableFuture<List<FeedItem>> get latestItemsFuture {
+  ObservableFuture<List<FeedItem>>? get latestItemsFuture {
     _$latestItemsFutureAtom.reportRead();
     return super.latestItemsFuture;
   }
 
   @override
-  set latestItemsFuture(ObservableFuture<List<FeedItem>> value) {
+  set latestItemsFuture(ObservableFuture<List<FeedItem>>? value) {
     _$latestItemsFutureAtom.reportWrite(value, super.latestItemsFuture, () {
       super.latestItemsFuture = value;
     });
@@ -28,13 +28,13 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
   final _$topItemsFutureAtom = Atom(name: '_HackerNewsStore.topItemsFuture');
 
   @override
-  ObservableFuture<List<FeedItem>> get topItemsFuture {
+  ObservableFuture<List<FeedItem>>? get topItemsFuture {
     _$topItemsFutureAtom.reportRead();
     return super.topItemsFuture;
   }
 
   @override
-  set topItemsFuture(ObservableFuture<List<FeedItem>> value) {
+  set topItemsFuture(ObservableFuture<List<FeedItem>>? value) {
     _$topItemsFutureAtom.reportWrite(value, super.topItemsFuture, () {
       super.topItemsFuture = value;
     });

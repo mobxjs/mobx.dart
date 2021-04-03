@@ -9,56 +9,56 @@ part of 'todo_list.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TodoList on _TodoList, Store {
-  Computed<ObservableList<Todo>> _$pendingTodosComputed;
+  Computed<ObservableList<Todo>>? _$pendingTodosComputed;
 
   @override
   ObservableList<Todo> get pendingTodos => (_$pendingTodosComputed ??=
           Computed<ObservableList<Todo>>(() => super.pendingTodos,
               name: '_TodoList.pendingTodos'))
       .value;
-  Computed<ObservableList<Todo>> _$completedTodosComputed;
+  Computed<ObservableList<Todo>>? _$completedTodosComputed;
 
   @override
   ObservableList<Todo> get completedTodos => (_$completedTodosComputed ??=
           Computed<ObservableList<Todo>>(() => super.completedTodos,
               name: '_TodoList.completedTodos'))
       .value;
-  Computed<bool> _$hasCompletedTodosComputed;
+  Computed<bool>? _$hasCompletedTodosComputed;
 
   @override
   bool get hasCompletedTodos => (_$hasCompletedTodosComputed ??= Computed<bool>(
           () => super.hasCompletedTodos,
           name: '_TodoList.hasCompletedTodos'))
       .value;
-  Computed<bool> _$hasPendingTodosComputed;
+  Computed<bool>? _$hasPendingTodosComputed;
 
   @override
   bool get hasPendingTodos =>
       (_$hasPendingTodosComputed ??= Computed<bool>(() => super.hasPendingTodos,
               name: '_TodoList.hasPendingTodos'))
           .value;
-  Computed<String> _$itemsDescriptionComputed;
+  Computed<String>? _$itemsDescriptionComputed;
 
   @override
   String get itemsDescription => (_$itemsDescriptionComputed ??=
           Computed<String>(() => super.itemsDescription,
               name: '_TodoList.itemsDescription'))
       .value;
-  Computed<ObservableList<Todo>> _$visibleTodosComputed;
+  Computed<ObservableList<Todo>>? _$visibleTodosComputed;
 
   @override
   ObservableList<Todo> get visibleTodos => (_$visibleTodosComputed ??=
           Computed<ObservableList<Todo>>(() => super.visibleTodos,
               name: '_TodoList.visibleTodos'))
       .value;
-  Computed<bool> _$canRemoveAllCompletedComputed;
+  Computed<bool>? _$canRemoveAllCompletedComputed;
 
   @override
   bool get canRemoveAllCompleted => (_$canRemoveAllCompletedComputed ??=
           Computed<bool>(() => super.canRemoveAllCompleted,
               name: '_TodoList.canRemoveAllCompleted'))
       .value;
-  Computed<bool> _$canMarkAllCompletedComputed;
+  Computed<bool>? _$canMarkAllCompletedComputed;
 
   @override
   bool get canMarkAllCompleted => (_$canMarkAllCompletedComputed ??=

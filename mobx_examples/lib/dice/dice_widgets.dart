@@ -13,7 +13,7 @@ class DiceExample extends StatelessWidget {
             backgroundColor: Colors.amberAccent,
             title: Text(
               'Tap the dice !!!'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                   fontSize: 16,
@@ -39,7 +39,7 @@ class DiceView extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: FlatButton(
+                child: TextButton(
                   child: Observer(
                     builder: (_) =>
                         Image.asset('images/dice${diceCounter.left}.png'),
@@ -48,7 +48,7 @@ class DiceView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: FlatButton(
+                child: TextButton(
                   child: Observer(
                     builder: (_) =>
                         Image.asset('images/dice${diceCounter.right}.png'),
@@ -63,7 +63,7 @@ class DiceView extends StatelessWidget {
             child: Observer(
               builder: (_) => Text(
                 'Total ${diceCounter.total}',
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                     fontSize: 16,

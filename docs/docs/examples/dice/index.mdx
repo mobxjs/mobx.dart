@@ -64,8 +64,9 @@ abstract class _DiceCounter with Store {
 With the above implementation I was able to keep a track of the left, right and total counts with every user interaction as expected or so I thought 🤔.
 
 > #### Discovering `@computed`
->
-> I ran into an issue... The `total` count was `null` for the very first time. It gets updated only when the action-method `roll()` is called.
+
+I ran into an issue... The `total` count was `null` for the very first time. It gets updated only when the action-method `roll()` is called.
+
 > In search of the solution I went through the documentation and few examples and realised there is an insanely easy way to get around this issue. `@computed` BOOM! my issue is solved.
 
 I have modified the above `DiceCounter` implementation using `@computed`.
@@ -123,6 +124,8 @@ The observables and actions from the store can be accessed via the newly created
 class DiceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final diceCounter = Provider.of<DiceCounter>(context);
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -130,44 +133,49 @@ class DiceView extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: FlatButton(
+                child: TextButton(
+            // highlight-start
                   child: Observer(
                     builder: (_) =>
                         Image.asset('images/dice${diceCounter.left}.png'),
                   ),
+            // highlight-end
                   onPressed: diceCounter.roll,
                 ),
               ),
               Expanded(
-                child: FlatButton(
+                child: TextButton(
+            // highlight-start
                   child: Observer(
                     builder: (_) =>
                         Image.asset('images/dice${diceCounter.right}.png'),
                   ),
+            // highlight-end
                   onPressed: diceCounter.roll,
                 ),
               ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
+            // highlight-start
             child: Observer(
               builder: (_) => Text(
                 'Total ${diceCounter.total}',
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
-                    fontSize: 16.0,
+                    fontSize: 16,
                     fontFamily: 'Verdana'),
               ),
             ),
+            // highlight-end
           ),
         ],
       ),
     );
   }
 }
-
 ```
 
 ## Summary

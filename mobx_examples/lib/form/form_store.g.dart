@@ -9,14 +9,14 @@ part of 'form_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$FormStore on _FormStore, Store {
-  Computed<bool> _$isUserCheckPendingComputed;
+  Computed<bool>? _$isUserCheckPendingComputed;
 
   @override
   bool get isUserCheckPending => (_$isUserCheckPendingComputed ??=
           Computed<bool>(() => super.isUserCheckPending,
               name: '_FormStore.isUserCheckPending'))
       .value;
-  Computed<bool> _$canLoginComputed;
+  Computed<bool>? _$canLoginComputed;
 
   @override
   bool get canLogin => (_$canLoginComputed ??=
@@ -146,7 +146,7 @@ canLogin: ${canLogin}
 }
 
 mixin _$FormErrorState on _FormErrorState, Store {
-  Computed<bool> _$hasErrorsComputed;
+  Computed<bool>? _$hasErrorsComputed;
 
   @override
   bool get hasErrors =>
@@ -157,13 +157,13 @@ mixin _$FormErrorState on _FormErrorState, Store {
   final _$usernameAtom = Atom(name: '_FormErrorState.username');
 
   @override
-  String get username {
+  String? get username {
     _$usernameAtom.reportRead();
     return super.username;
   }
 
   @override
-  set username(String value) {
+  set username(String? value) {
     _$usernameAtom.reportWrite(value, super.username, () {
       super.username = value;
     });
@@ -172,13 +172,13 @@ mixin _$FormErrorState on _FormErrorState, Store {
   final _$emailAtom = Atom(name: '_FormErrorState.email');
 
   @override
-  String get email {
+  String? get email {
     _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
-  set email(String value) {
+  set email(String? value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
     });
@@ -187,13 +187,13 @@ mixin _$FormErrorState on _FormErrorState, Store {
   final _$passwordAtom = Atom(name: '_FormErrorState.password');
 
   @override
-  String get password {
+  String? get password {
     _$passwordAtom.reportRead();
     return super.password;
   }
 
   @override
-  set password(String value) {
+  set password(String? value) {
     _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
     });

@@ -31,7 +31,7 @@ class CounterListPage extends StatelessWidget {
     final store = Provider.of<MultiCounterStore>(context);
 
     return Column(children: <Widget>[
-      RaisedButton(
+      ElevatedButton(
         onPressed: store.addCounter,
         child: const Text('Add Counter'),
       ),
@@ -64,7 +64,7 @@ class CounterListPage extends StatelessWidget {
 }
 
 class CounterViewPage extends StatelessWidget {
-  const CounterViewPage({@required this.store, @required this.index});
+  const CounterViewPage({required this.store, required this.index});
 
   final int index;
   final MultiCounterStore store;
@@ -81,7 +81,7 @@ class CounterViewPage extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                RaisedButton(
+                ElevatedButton(
                   child: const Icon(Icons.remove),
                   onPressed: counter.decrement,
                 ),
@@ -94,15 +94,17 @@ class CounterViewPage extends StatelessWidget {
                             )),
                   ),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: const Icon(Icons.add),
                   onPressed: counter.increment,
                 ),
               ],
             ),
-            FlatButton(
+            TextButton(
               child: const Text('Reset'),
-              textColor: Colors.red,
+              style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.red)),
               onPressed: counter.reset,
             )
           ],
