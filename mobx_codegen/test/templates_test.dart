@@ -8,6 +8,7 @@ import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/template/rows.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/template/util.dart';
+import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -82,6 +83,30 @@ void main() {
   });
 
   group('ObservableTemplate', () {
+    test('generates public getter when isReadOnly is false', () {
+      final template = ObservableTemplate(
+        storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentName'),
+        atomName: '_atomFieldName',
+        type: 'FieldType',
+        name: 'fieldName',
+        isPrivate: false,
+        isReadOnly: false,
+      );
+      expect(template.getterName, equals(template.name));
+    });
+
+    test('generates private getter when isReadOnly is true', () {
+      final template = ObservableTemplate(
+        storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentName'),
+        atomName: '_atom_FieldName',
+        type: 'FieldType',
+        name: '_fieldName',
+        isPrivate: true,
+        isReadOnly: true,
+      );
+      expect(template.getterName, equals(template.name.nonPrivateName));
+    });
+
     test('renders template based on template data', () {
       final template = ObservableTemplate(
           storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentName'),

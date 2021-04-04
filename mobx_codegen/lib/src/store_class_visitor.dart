@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
+import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
@@ -16,6 +17,7 @@ import 'package:mobx_codegen/src/template/observable_stream.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 import 'package:mobx_codegen/src/type_names.dart';
+import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
 import 'package:source_gen/source_gen.dart';
 
 class StoreClassVisitor extends SimpleElementVisitor {
@@ -24,7 +26,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
     ClassElement userClass,
     StoreTemplate template,
     this.typeNameFinder,
-  ) : _errors = StoreClassCodegenErrors(publicTypeName) {
+  ) : errors = StoreClassCodegenErrors(publicTypeName) {
     _storeTemplate = template
       ..typeParams.templates.addAll(userClass.typeParameters
           .map((type) => typeParamTemplate(type, typeNameFinder)))
@@ -45,11 +47,15 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
   LibraryScopedNameFinder typeNameFinder;
 
-  final StoreClassCodegenErrors _errors;
+  final StoreClassCodegenErrors errors;
+
+  @visibleForTesting
+  final publicSettersCache = <PropertyAccessorElement>[];
 
   String get source {
-    if (_errors.hasErrors) {
-      log.severe(_errors.message);
+    validate();
+    if (errors.hasErrors) {
+      log.severe(errors.message);
       return '';
     }
     return _storeTemplate.toString();
@@ -58,7 +64,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
   @override
   void visitClassElement(ClassElement element) {
     if (isMixinStoreClass(element)) {
-      _errors.nonAbstractStoreMixinDeclarations
+      errors.nonAbstractStoreMixinDeclarations
           .addIf(!element.isAbstract, element.name);
     }
     // if the class is annotated to generate toString() method we add the information to the _storeTemplate
@@ -68,12 +74,12 @@ class StoreClassVisitor extends SimpleElementVisitor {
   @override
   void visitFieldElement(FieldElement element) {
     if (_computedChecker.hasAnnotationOfExact(element)) {
-      _errors.invalidComputedAnnotations.addIf(true, element.name);
+      errors.invalidComputedAnnotations.addIf(true, element.name);
       return;
     }
 
     if (_actionChecker.hasAnnotationOfExact(element)) {
-      _errors.invalidActionAnnotations.addIf(true, element.name);
+      errors.invalidActionAnnotations.addIf(true, element.name);
       return;
     }
 
@@ -86,30 +92,47 @@ class StoreClassVisitor extends SimpleElementVisitor {
     }
 
     final template = ObservableTemplate(
-        storeTemplate: _storeTemplate,
-        atomName: '_\$${element.name}Atom',
-        type: typeNameFinder.findVariableTypeName(element),
-        name: element.name,
-        isPrivate: element.isPrivate);
+      storeTemplate: _storeTemplate,
+      atomName: '_\$${element.name}Atom',
+      type: typeNameFinder.findVariableTypeName(element),
+      name: element.name,
+      isPrivate: element.isPrivate,
+      isReadOnly: _isObservableReadOnly(element),
+    );
 
     _storeTemplate.observables.add(template);
     return;
   }
 
+  bool _isObservableReadOnly(FieldElement element) =>
+      _observableChecker
+          .firstAnnotationOfExact(element)
+          ?.getField('readOnly')
+          ?.toBoolValue() ??
+      false;
+
   bool _fieldIsNotValid(FieldElement element) => _any([
-        _errors.staticObservables.addIf(element.isStatic, element.name),
-        _errors.finalObservables.addIf(element.isFinal, element.name)
+        errors.staticObservables.addIf(element.isStatic, element.name),
+        errors.finalObservables.addIf(element.isFinal, element.name),
+        errors.invalidReadOnlyAnnotations.addIf(
+          _isObservableReadOnly(element) && element.setter!.isPublic,
+          element.name,
+        ),
       ]);
 
   @override
   void visitPropertyAccessorElement(PropertyAccessorElement element) {
+    if (element.isSetter && element.isPublic) {
+      publicSettersCache.add(element);
+    }
+
     if (_observableChecker.hasAnnotationOfExact(element)) {
-      _errors.invalidObservableAnnotations.addIf(true, element.name);
+      errors.invalidObservableAnnotations.addIf(true, element.name);
       return;
     }
 
     if (_actionChecker.hasAnnotationOfExact(element)) {
-      _errors.invalidActionAnnotations.addIf(true, element.name);
+      errors.invalidActionAnnotations.addIf(true, element.name);
       return;
     }
 
@@ -131,7 +154,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
   @override
   void visitMethodElement(MethodElement element) {
     if (_computedChecker.hasAnnotationOfExact(element)) {
-      _errors.invalidComputedAnnotations.addIf(true, element.name);
+      errors.invalidComputedAnnotations.addIf(true, element.name);
       return;
     }
 
@@ -180,18 +203,36 @@ class StoreClassVisitor extends SimpleElementVisitor {
   }
 
   bool _asyncObservableIsNotValid(MethodElement method) => _any([
-        _errors.staticMethods.addIf(method.isStatic, method.name),
-        _errors.nonAsyncMethods.addIf(
+        errors.staticMethods.addIf(method.isStatic, method.name),
+        errors.nonAsyncMethods.addIf(
             !_asyncChecker.returnsFuture(method) &&
                 !_asyncChecker.returnsStream(method),
             method.name),
       ]);
 
   bool _actionIsNotValid(MethodElement element) => _any([
-        _errors.staticMethods.addIf(element.isStatic, element.name),
-        _errors.asyncGeneratorActions
+        errors.staticMethods.addIf(element.isStatic, element.name),
+        errors.asyncGeneratorActions
             .addIf(element.isAsynchronous && element.isGenerator, element.name),
       ]);
+
+  /// Runs validations after all elements have been visited.
+  void validate() {
+    for (final publicSetter in publicSettersCache) {
+      errors.invalidPublicSetterOnReadOnlyObservable.addIf(
+        _isInvalidPublicSetterOnReadOnlyObservable(publicSetter),
+        publicSetter.displayName,
+      );
+    }
+  }
+
+  bool _isInvalidPublicSetterOnReadOnlyObservable(
+          PropertyAccessorElement publicSetter) =>
+      _storeTemplate.observables.templates.any(
+        (template) =>
+            template.name.nonPrivateName == publicSetter.displayName &&
+            template.isReadOnly,
+      );
 }
 
 const _storeMixinChecker = TypeChecker.fromRuntime(Store);

@@ -19,7 +19,7 @@ class MakeObservable {
 /// documentation
 const MakeObservable observable = MakeObservable._();
 
-/// Declares a class field as a readonly observable. See the `Observable` class for full
+/// Declares a class field as an observable. See the `Observable` class for full
 /// documentation.
 ///
 /// But, it's only modifiable within the Store
