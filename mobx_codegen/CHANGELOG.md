@@ -1,4 +1,4 @@
-## 2.0.1
+## 2.0.1 - 2.0.1+2
 
 - Adds `@readonly` annotation support for creating read-only observables. Thanks to [Ascenio](https://github.com/Ascenio)
   for the [PR](https://github.com/mobxjs/mobx.dart/pull/649).
