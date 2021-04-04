@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Adds `@readonly` annotation support for creating read-only observables.
+
 ## 2.0.0
 
 - Full support for Null Safety

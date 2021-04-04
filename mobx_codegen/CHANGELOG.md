@@ -1,3 +1,8 @@
+## 2.0.1
+
+- Adds `@readonly` annotation support for creating read-only observables. Thanks to [Ascenio](https://github.com/Ascenio)
+  for the [PR](https://github.com/mobxjs/mobx.dart/pull/649).
+
 ## 2.0.0
 
 - Full support for Null Safety
