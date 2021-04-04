@@ -395,7 +395,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-49-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-50-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -466,6 +466,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/geweald"><img src="https://avatars1.githubusercontent.com/u/16155640?v=4?s=64" width="64px;" alt=""/><br /><sub><b>D</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=geweald" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/davidmartos96"><img src="https://avatars1.githubusercontent.com/u/22084723?v=4?s=64" width="64px;" alt=""/><br /><sub><b>David Martos</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=davidmartos96" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/inimaga"><img src="https://avatars3.githubusercontent.com/u/24917864?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Issa Nimaga</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=inimaga" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Ascenio"><img src="https://avatars.githubusercontent.com/u/7662016?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Ascênio</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=Ascenio" title="Code">💻</a></td>
   </tr>
 </table>
 
