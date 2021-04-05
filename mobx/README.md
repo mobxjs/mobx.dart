@@ -118,41 +118,9 @@ will fade away and you will mostly focus on the code within the braces.
 
 ### Readonly
 
-Generally speaking you want two things in your stores: reactive fields and encapsulation. Let's take a look at the counter
-example once again.
+Let's say you made your fields private for encapsulation, it should look like this:
 
 ```dart
-import 'package:mobx/mobx.dart';
-
-part 'counter.g.dart';
-
-class Counter = CounterBase with _$Counter;
-
-abstract class CounterBase with Store {
-  @observable
-  int value = 0;
-
-  @action
-  void increment() {
-    value++;
-  }
-}
-```
-
-As you can see, the `value` field is public, which means you are allowed to do the following:
-
-```dart
-final counter = Counter();
-counter.value = -42;
-```
-
-This violates the encapsulation principle from OOP, so let's make it private.
-
-```dart
-import 'package:mobx/mobx.dart';
-
-part 'counter.g.dart';
-
 class Counter = CounterBase with _$Counter;
 
 abstract class CounterBase with Store {
@@ -169,18 +137,10 @@ abstract class CounterBase with Store {
 }
 ```
 
-So, because you made it private you're now required to make a getter, otherwise the client wouldn't have access to `value`.
-But, as most of the time you want to keep things privatly, a _Store_ with slightly more fields would result in
-some serious boilerplate. Could we avoid that?
-
-I'm glad you asked. To solve this problem we made a annotation which makes getters for private variables so that you
-don't have to. Look how it translates into code:
+Things can go out of hand pretty quickly this way. The more fields you add the more computeds you need to add.
+Fear no more, with `@readonly` you can make your university's OOP teacher happy. The code above is equivalent to:
 
 ```dart
-import 'package:mobx/mobx.dart';
-
-part 'counter.g.dart';
-
 class Counter = CounterBase with _$Counter;
 
 abstract class CounterBase with Store {
@@ -193,12 +153,6 @@ abstract class CounterBase with Store {
   }
 }
 ```
-
-Isn't it awesome? Now your fields can only be changed by `@actions` methods while being available throught getters.
-It is no different than an observable though, you're allowed to use of computed getters the same way you do with `@observable`.
-
->**Note:** Just don't forget to use it only on **private fields**, because it just doesn't make sense otherwise.
-> But don't worry, if by any chance you happens to forget, we warn you with friendly errors at code generation time.
 
 ### Computed Observables
 
