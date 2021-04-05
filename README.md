@@ -27,7 +27,9 @@ Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Ch
 - **[Introduction](#introduction)**
 - **[Core Concepts](#core-concepts)**
   - [Observables](#observables)
-  - [Computed Observables](#computed-observables)
+    - [@observable](#observables)
+    - [@readonly](#readonly)
+    - [@computed](#computed-observables)
   - [Actions](#actions)
   - [Reactions](#reactions)
 - **[Contributing](#contributing)**
@@ -132,6 +134,44 @@ but its fixed for any class. As you build more complex classes this boilerplate
 will fade away and you will mostly focus on the code within the braces.
 
 **Note**: Annotations are available via the **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** package.
+
+### Readonly
+
+Let's say you made your fields private for encapsulation, it should look like this:
+
+```dart
+class Counter = CounterBase with _$Counter;
+
+abstract class CounterBase with Store {
+  @observable
+  int _value = 0;
+
+  @computed
+  int get value => _value;
+
+  @action
+  void increment() {
+    _value++;
+  }
+}
+```
+
+Things can go out of hand pretty quickly this way. The more fields you add the more computeds you need to add.
+Fear no more, with `@readonly` you can make your university's OOP teacher happy. The code above is equivalent to:
+
+```dart
+class Counter = CounterBase with _$Counter;
+
+abstract class CounterBase with Store {
+  @readonly
+  int _value = 0;
+
+  @action
+  void increment() {
+    _value++;
+  }
+}
+```
 
 ### Computed Observables
 
