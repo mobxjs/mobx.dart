@@ -34,6 +34,10 @@ void main() {
       await compareFiles('./data/valid_input.dart', './data/valid_output.dart');
     });
 
+    test('generates for a class containing late observables', () async {
+      await compareFiles('./data/valid_late_variables_input.dart', './data/valid_late_variables_output.dart');
+    });
+
     test(
         'generates for a class mixing Store with annotation @StoreConfig(hasToString: true)',
         () async {

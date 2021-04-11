@@ -1,3 +1,7 @@
+## 2.0.1+3
+
+- Adding a test specifically for `late` observables
+
 ## 2.0.1 - 2.0.1+2
 
 - Adds `@readonly` annotation support for creating read-only observables. Thanks to [Ascenio](https://github.com/Ascenio)
