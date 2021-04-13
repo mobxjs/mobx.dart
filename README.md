@@ -28,6 +28,7 @@ Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Ch
 - **[Core Concepts](#core-concepts)**
   - [Observables](#observables)
     - [@observable](#observables)
+    - [@readonly](#readonly)
     - [@computed](#computed-observables)
   - [Actions](#actions)
   - [Reactions](#reactions)
@@ -73,6 +74,7 @@ For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www
 
 At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
 
+### Observables
 ### Observables
 
 Observables represent the reactive-state of your application. They can be simple scalars to complex object trees. By
@@ -133,6 +135,12 @@ but its fixed for any class. As you build more complex classes this boilerplate
 will fade away and you will mostly focus on the code within the braces.
 
 **Note**: Annotations are available via the **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** package.
+
+### Readonly
+
+If you want to reduce your code you may want to swap `@observable` for `@readonly`.
+For every private variable it generates a public getter such that the client of your store
+can't change its value. Read more about it [here](https://mobx.netlify.app/api/observable#readonly)
 
 ### Computed Observables
 
