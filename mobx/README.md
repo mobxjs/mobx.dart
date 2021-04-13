@@ -122,7 +122,6 @@ If you want to reduce your code you may want to swap `@observable` for `@readonl
 For every private variable it generates a public getter such that the client of your store
 can't change its value. Read more about it [here](https://mobx.netlify.app/api/observable#readonly)
 
-
 ### Computed Observables
 
 > What can be derived, should be derived. Automatically.
