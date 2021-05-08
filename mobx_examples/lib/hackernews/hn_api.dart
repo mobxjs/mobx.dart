@@ -33,6 +33,7 @@ class FeedItem {
 
   @override
   String toString() =>
+      // ignore: unnecessary_this
       '${this.author}: ${this.title}(${this.score}⭐️), ${this.url ?? 'no-url'}';
 }
 
