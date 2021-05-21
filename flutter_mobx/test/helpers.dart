@@ -9,9 +9,10 @@ final voidFn = () {};
 
 class MockReaction extends Mock implements ReactionImpl {
   @override
-  void track(Function fn) {
-    fn(); // Explicitly invoke this
+  T? track<T>(T Function() fn) {
+    final result = fn(); // Explicitly invoke this
     super.noSuchMethod(Invocation.method(#track, [voidFn]));
+    return result;
   }
 
   @override

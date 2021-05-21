@@ -48,6 +48,13 @@ mixin ObserverWidgetMixin on Widget {
 /// A mixin that overrides [build] to listen to the observables used by
 /// [ObserverWidgetMixin].
 mixin ObserverElementMixin on ComponentElement {
+  static void _reportError(Object e, dynamic _) =>
+      FlutterError.reportError(FlutterErrorDetails(
+        library: 'flutter_mobx',
+        exception: e,
+        stack: e is Error ? e.stackTrace : null,
+      ));
+
   ReactionImpl get reaction => _reaction;
   late ReactionImpl _reaction;
 
@@ -57,13 +64,7 @@ mixin ObserverElementMixin on ComponentElement {
 
   @override
   void mount(Element? parent, dynamic newSlot) {
-    _reaction = _widget.createReaction(invalidate, onError: (e, _) {
-      FlutterError.reportError(FlutterErrorDetails(
-        library: 'flutter_mobx',
-        exception: e,
-        stack: e is Error ? e.stackTrace : null,
-      ));
-    }) as ReactionImpl;
+    _reaction = _widget.createReaction(invalidate, onError: _reportError) as ReactionImpl;
     super.mount(parent, newSlot);
   }
 
@@ -71,11 +72,7 @@ mixin ObserverElementMixin on ComponentElement {
 
   @override
   Widget build() {
-    late Widget built;
-
-    reaction.track(() {
-      built = super.build();
-    });
+    final built = reaction.track(super.build)!;
 
     if (!reaction.hasObservables) {
       _widget.log(

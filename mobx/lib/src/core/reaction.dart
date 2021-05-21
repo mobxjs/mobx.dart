@@ -70,7 +70,7 @@ class ReactionImpl implements Reaction {
     _context.endBatch();
   }
 
-  void track(void Function() fn) {
+  T? track<T>(T Function() fn) {
     _context.startBatch();
 
     final notify = _context.isSpyEnabled;
@@ -81,7 +81,7 @@ class ReactionImpl implements Reaction {
     }
 
     _isRunning = true;
-    _context.trackDerivation(this, fn);
+    final result = _context.trackDerivation(this, fn);
     _isRunning = false;
 
     if (_isDisposed) {
@@ -100,6 +100,7 @@ class ReactionImpl implements Reaction {
     }
 
     _context.endBatch();
+    return result;
   }
 
   @override
