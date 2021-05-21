@@ -77,7 +77,6 @@ For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www
 At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
 
 ### Observables
-### Observables
 
 Observables represent the reactive-state of your application. They can be simple scalars to complex object trees. By
 defining the state of the application as a tree of observables, you can expose a _reactive-state-tree_ that the UI
