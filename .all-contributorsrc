@@ -483,6 +483,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "s0nerik",
+      "name": "Alex Isaienko",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5076429?v=4",
+      "profile": "https://sonerik.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
