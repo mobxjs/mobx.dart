@@ -60,6 +60,7 @@ class ReactiveConfig {
     this.writePolicy = ReactiveWritePolicy.observed,
     this.readPolicy = ReactiveReadPolicy.never,
     this.maxIterations = 100,
+    this.isSpyEnabled = false,
   });
 
   /// The main or default configuration used by [ReactiveContext]
@@ -83,17 +84,21 @@ class ReactiveConfig {
 
   final Set<ReactionErrorHandler> _reactionErrorHandlers = {};
 
+  final bool isSpyEnabled;
+
   ReactiveConfig clone(
           {bool? disableErrorBoundaries,
           ReactiveWritePolicy? writePolicy,
           ReactiveReadPolicy? readPolicy,
-          int? maxIterations}) =>
+          int? maxIterations,
+          bool? isSpyEnabled}) =>
       ReactiveConfig(
           disableErrorBoundaries:
               disableErrorBoundaries ?? this.disableErrorBoundaries,
           writePolicy: writePolicy ?? this.writePolicy,
           readPolicy: readPolicy ?? this.readPolicy,
-          maxIterations: maxIterations ?? this.maxIterations);
+          maxIterations: maxIterations ?? this.maxIterations,
+          isSpyEnabled: isSpyEnabled ?? this.isSpyEnabled);
 }
 
 class ReactiveContext {
@@ -120,7 +125,8 @@ class ReactiveContext {
 
   bool get isWithinBatch => _state.isWithinBatch;
 
-  bool get isSpyEnabled => _isDebugMode && _state.spyListeners.isNotEmpty;
+  bool get isSpyEnabled =>
+      _config.isSpyEnabled && _state.spyListeners.isNotEmpty;
 
   Dispose spy(SpyListener listener) {
     _state.spyListeners.add(listener);
