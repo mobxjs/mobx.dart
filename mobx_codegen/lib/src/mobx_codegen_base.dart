@@ -5,8 +5,8 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type_system.dart';
 import 'package:build/build.dart';
 import 'package:mobx_codegen/src/store_class_visitor.dart';
-import 'package:mobx_codegen/src/template/store_file.dart';
 import 'package:mobx_codegen/src/template/store.dart';
+import 'package:mobx_codegen/src/template/store_file.dart';
 import 'package:mobx_codegen/src/type_names.dart';
 import 'package:source_gen/source_gen.dart';
 

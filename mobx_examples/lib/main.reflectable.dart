@@ -3,23 +3,18 @@
 // @dart = 2.12
 
 import 'dart:core';
+
 import 'package:dart_json_mapper/src/model/annotations.dart' as prefix0;
 import 'package:mobx/src/api/annotations.dart' as prefix3;
 import 'package:mobx/src/api/observable_collections.dart' as prefix4;
 import 'package:mobx_examples/todos/todo.dart' as prefix2;
 import 'package:mobx_examples/todos/todo_list.dart' as prefix1;
-
-// ignore_for_file: prefer_adjacent_string_concatenation
-// ignore_for_file: prefer_collection_literals
-// ignore_for_file: unnecessary_const
-// ignore_for_file: implementation_imports
-
 // ignore:unused_import
 import 'package:reflectable/mirrors.dart' as m;
 // ignore:unused_import
-import 'package:reflectable/src/reflectable_builder_based.dart' as r;
-// ignore:unused_import
 import 'package:reflectable/reflectable.dart' as r show Reflectable;
+// ignore:unused_import
+import 'package:reflectable/src/reflectable_builder_based.dart' as r;
 
 final _data = <r.Reflectable, r.ReflectorData>{
   const prefix0.JsonSerializable(): r.ReflectorData(

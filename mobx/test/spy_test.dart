@@ -1,5 +1,5 @@
-import 'package:test/test.dart';
 import 'package:mobx/mobx.dart';
+import 'package:test/test.dart';
 
 import 'util.dart';
 

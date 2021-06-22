@@ -39,6 +39,7 @@ export 'package:mobx/src/api/async.dart'
         StreamStatus,
         AsyncAction;
 export 'package:mobx/src/api/context.dart';
+export 'package:mobx/src/api/extensions.dart';
 export 'package:mobx/src/api/observable_collections.dart'
     show
         ObservableList,
@@ -61,9 +62,7 @@ export 'package:mobx/src/core.dart'
         NotificationHandlers,
         ReactionImpl,
         DerivationState;
-
 export 'package:mobx/src/core/atom_extensions.dart';
-export 'package:mobx/src/api/extensions.dart';
 
 /// The current version as per `pubspec.yaml`
 const version = '2.0.1+1';
