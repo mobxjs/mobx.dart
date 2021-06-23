@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
-
 import 'package:mobx_examples/todos/todo_list.dart';
+import 'package:provider/provider.dart';
 
 class TodoExample extends StatelessWidget {
   @override

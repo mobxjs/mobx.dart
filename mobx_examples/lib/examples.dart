@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mobx_examples/clock/clock_widgets.dart';
 import 'package:mobx_examples/connectivity/connectivity_store.dart';
 import 'package:mobx_examples/connectivity/connectivity_widgets.dart';
-import 'package:provider/provider.dart';
-
-import 'package:mobx_examples/clock/clock_widgets.dart';
 import 'package:mobx_examples/counter/counter_widgets.dart';
+import 'package:mobx_examples/dice/dice_widgets.dart';
 import 'package:mobx_examples/form/form_widgets.dart';
 import 'package:mobx_examples/github/github_widgets.dart';
 import 'package:mobx_examples/hackernews/news_widgets.dart';
@@ -13,7 +12,7 @@ import 'package:mobx_examples/random_stream/random_widgets.dart';
 import 'package:mobx_examples/settings/settings_store.dart';
 import 'package:mobx_examples/settings/settings_widgets.dart';
 import 'package:mobx_examples/todos/todo_widgets.dart';
-import 'package:mobx_examples/dice/dice_widgets.dart';
+import 'package:provider/provider.dart';
 
 class Example {
   Example(

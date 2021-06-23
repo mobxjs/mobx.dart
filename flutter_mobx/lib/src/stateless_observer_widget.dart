@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:mobx/mobx.dart';
-
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 /// A [StatelessWidget] that rebuilds when an [Observable] used inside [build]
 /// updates.

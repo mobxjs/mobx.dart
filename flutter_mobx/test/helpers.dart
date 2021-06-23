@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mockito/mockito.dart';
 import 'package:mobx/src/core.dart' show ReactionImpl;
+import 'package:mockito/mockito.dart';
 
 // ignore: top_level_function_literal_block, prefer_function_declarations_over_variables
 final voidFn = () {};

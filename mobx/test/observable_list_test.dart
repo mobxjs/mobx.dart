@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:mobx/mobx.dart';
-import 'package:mobx/src/core.dart';
 import 'package:mobx/src/api/observable_collections.dart';
+import 'package:mobx/src/core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 

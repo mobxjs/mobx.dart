@@ -107,15 +107,3 @@ void Function() _once(Function fn) {
     fn();
   };
 }
-
-bool get _isDebugMode {
-  var debug = false;
-
-  // asserts are removed in release mode!!!
-  assert(() {
-    debug = true;
-    return true;
-  }());
-
-  return debug;
-}
