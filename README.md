@@ -405,7 +405,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-51-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-52-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -480,6 +480,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/Ascenio"><img src="https://avatars.githubusercontent.com/u/7662016?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Ascênio</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=Ascenio" title="Code">💻</a></td>
     <td align="center"><a href="https://sonerik.dev"><img src="https://avatars.githubusercontent.com/u/5076429?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Alex Isaienko</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=s0nerik" title="Code">💻</a></td>
+    <td align="center"><a href="http://moritzweber.xyz"><img src="https://avatars.githubusercontent.com/u/17176771?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Moritz Weber</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=moritz-weber" title="Code">💻</a></td>
   </tr>
 </table>
 
