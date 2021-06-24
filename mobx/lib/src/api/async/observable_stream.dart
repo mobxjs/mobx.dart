@@ -41,8 +41,9 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
 
   /// Current value or null if waiting and no initialValue, or null if data is an error.
   @override
-  T? get value =>
-      _controller.valueType == _ValueType.value ? _controller.data as T : null;
+  T? get value => _controller.valueType == _ValueType.value && _controller.data != null
+      ? _controller.data as T
+      : null;
 
   /// Current error or null if not failed.
   dynamic get error =>
