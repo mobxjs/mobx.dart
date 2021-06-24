@@ -492,6 +492,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "moritz-weber",
+      "name": "Moritz Weber",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17176771?v=4",
+      "profile": "http://moritzweber.xyz",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
