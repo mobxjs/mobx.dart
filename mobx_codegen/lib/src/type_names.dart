@@ -78,8 +78,8 @@ class LibraryScopedNameFinder {
     if (type is FunctionType) {
       // If we're dealing with a typedef, we let it undergo the standard name
       // lookup. Otherwise, we special case the function naming.
-      if (typeElement?.enclosingElement is TypeAliasElement) {
-        typeElement = typeElement!.enclosingElement;
+      if (type.aliasElement is TypeAliasElement) {
+        typeElement = type.aliasElement!.aliasedElement?.enclosingElement;
       } else {
         return _getFunctionTypeName(type);
       }
@@ -120,10 +120,17 @@ class LibraryScopedNameFinder {
     // Determine the name of the type, without type arguments.
     assert(namesByElement.containsKey(typeElement));
 
+    List<DartType>? genericTypes;
     // If the type is parameterized, we recursively name its type arguments
-    if (type is ParameterizedType && type.typeArguments.isNotEmpty) {
+    if (type is ParameterizedType) {
+      genericTypes = type.typeArguments;
+    } else if (type is FunctionType) {
+      genericTypes = type.aliasArguments;
+    }
+
+    if (genericTypes != null && genericTypes.isNotEmpty) {
       final typeArgNames = SurroundedCommaList(
-          '<', '>', type.typeArguments.map(_getDartTypeName).toList());
+          '<', '>', genericTypes.map(_getDartTypeName).toList());
       return '${namesByElement[typeElement]}$typeArgNames${_nullabilitySuffixToString(type.nullabilitySuffix)}';
     }
 
