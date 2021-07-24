@@ -7,6 +7,9 @@ class MockContext extends Mock implements ReactiveContext {
 
   @override
   String nameFor(String prefix) => '${prefix}Test-When';
+
+  @override
+  bool startAllowStateChanges({bool allow = true}) => allow;
 }
 
 class MockAtom extends Mock implements Atom {
