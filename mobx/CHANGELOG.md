@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Fixes #681: ObservableStream.value throws Exception when data is null
+
 ## 2.0.1 - 2.0.1+1
 
 - Adds `@readonly` annotation support for creating read-only observables.
