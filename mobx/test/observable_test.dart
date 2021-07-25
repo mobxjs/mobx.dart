@@ -1,9 +1,11 @@
 import 'package:mobx/mobx.dart';
-import 'package:mocktail/mocktail.dart' as Mock;
+import 'package:mocktail/mocktail.dart' as mock;
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
 import 'util.dart';
+
+// ignore_for_file: unnecessary_lambdas
 
 void main() {
   testSetup();
@@ -43,13 +45,14 @@ void main() {
 
     test('uses provided context', () {
       final context = MockContext();
-      Mock.when(() => context.nameFor(Mock.any()))
+      mock
+          .when(() => context.nameFor(mock.any()))
           .thenReturn('Test-Observable');
-      Mock.when(() => context.isSpyEnabled).thenReturn(false);
+      mock.when(() => context.isSpyEnabled).thenReturn(false);
 
       final value = Observable(0, context: context)..value += 1;
 
-      Mock.verifyInOrder([
+      mock.verifyInOrder([
         () => context.startBatch(),
         () => context.propagateChanged(value),
         () => context.endBatch()

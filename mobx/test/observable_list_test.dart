@@ -9,6 +9,8 @@ import 'package:test/test.dart';
 import 'shared_mocks.dart';
 import 'util.dart';
 
+// ignore_for_file: unnecessary_lambdas
+
 void main() {
   testSetup();
 
@@ -102,6 +104,7 @@ void main() {
     });
 
     test('observe set length works', () {
+      // ignore: omit_local_variable_types
       final ObservableList<int?> list = ObservableList.of([0]);
 
       var index = -1;

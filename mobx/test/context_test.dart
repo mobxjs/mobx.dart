@@ -1,9 +1,11 @@
 import 'package:mobx/mobx.dart';
-import 'package:mocktail/mocktail.dart' as Mock;
+import 'package:mocktail/mocktail.dart' as mock;
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
 import 'util.dart';
+
+// ignore_for_file: unnecessary_lambdas
 
 void main() {
   testSetup(throwReactionErrors: false);
@@ -79,13 +81,14 @@ void main() {
 
     group('conditionallyRunInAction', () {
       setUpAll(() {
-        Mock.registerFallbackValue(FakeActionRunInfo());
+        mock.registerFallbackValue(FakeActionRunInfo());
       });
 
       test('when running OUTSIDE an Action, it should USE the ActionController',
           () {
         final controller = MockActionController();
-        Mock.when(() => controller.startAction(name: Mock.any(named: 'name')))
+        mock
+            .when(() => controller.startAction(name: mock.any(named: 'name')))
             .thenReturn(MockActionRunInfo());
 
         final context = createContext();
@@ -96,9 +99,9 @@ void main() {
           hasRun = true;
         }, o, actionController: controller);
 
-        Mock.verifyInOrder([
+        mock.verifyInOrder([
           () => controller.startAction(),
-          () => controller.endAction(Mock.any())
+          () => controller.endAction(mock.any())
         ]);
         expect(hasRun, isTrue);
       });
@@ -132,8 +135,8 @@ void main() {
           }, o, actionController: controller);
         }, context: context);
 
-        Mock.verifyNever(() => controller.startAction());
-        Mock.verifyNever(() => controller.endAction(Mock.any()));
+        mock.verifyNever(() => controller.startAction());
+        mock.verifyNever(() => controller.endAction(mock.any()));
         expect(hasRun, isTrue);
       });
     });

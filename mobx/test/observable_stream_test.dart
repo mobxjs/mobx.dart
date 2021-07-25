@@ -52,6 +52,7 @@ void main() {
     test('match works', () async {
       // ignore:close_sinks
       final ctrl = StreamController<int>.broadcast();
+      // ignore: omit_local_variable_types
       final ObservableStream<int> stream = ObservableStream(ctrl.stream);
 
       final values = <String>[];
