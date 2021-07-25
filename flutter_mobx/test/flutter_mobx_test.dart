@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_mobx/src/observer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when, version;
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'helpers.dart';
 
@@ -60,12 +60,12 @@ void main() {
 
   testWidgets('Observer build should call reaction.track', (tester) async {
     final mock = MockReaction();
-    when(mock.hasObservables).thenReturn(true);
+    when(() => mock.hasObservables).thenReturn(true);
 
     await tester.pumpWidget(
         TestObserver(mock, builder: (context) => const Placeholder()));
 
-    verify(mock.track(voidFn));
+    verify(() => mock.track(voidFn));
   });
 
   testWidgets(
@@ -131,14 +131,14 @@ void main() {
 
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
     final mock = MockReaction();
-    when(mock.hasObservables).thenReturn(true);
+    when(() => mock.hasObservables).thenReturn(true);
 
     await tester.pumpWidget(
         TestObserver(mock, builder: (context) => const Placeholder()));
 
     await tester.pumpWidget(const Placeholder());
 
-    verify(mock.dispose());
+    verify(mock.dispose);
   });
 
   testWidgets("Release mode, the reaction's default name is widget.toString()",

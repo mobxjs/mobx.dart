@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Package upgrades
+
 ## 2.0.1+3
 
 - Adding a test specifically for `late` observables
