@@ -1,3 +1,8 @@
+## 2.0.2 - 2.0.3
+
+- Fixes #681: ObservableStream.value throws Exception when data is null
+- Removes `mockito` as a dependency and using `mocktail` instead.
+
 ## 2.0.1 - 2.0.1+1
 
 - Adds `@readonly` annotation support for creating read-only observables.

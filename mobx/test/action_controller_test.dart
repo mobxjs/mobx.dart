@@ -1,9 +1,11 @@
 import 'package:mobx/src/core.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
 import 'util.dart';
+
+// ignore_for_file: unnecessary_lambdas
 
 void main() {
   testSetup();
@@ -12,16 +14,21 @@ void main() {
     test('can be created with both null context and name', () {
       ActionController();
     });
+
     test(
         'startAction calls startUntracked, startBatch and startAllowStateChanges',
         () {
       final context = MockContext();
+      when(() => context.nameFor(any())).thenReturn('Test-Action');
+      when(() => context.startAllowStateChanges(allow: any(named: 'allow')))
+          .thenReturn(true);
+
       ActionController(context: context).startAction();
 
       verifyInOrder([
-        context.startUntracked(),
-        context.startBatch(),
-        context.startAllowStateChanges(allow: true),
+        () => context.startUntracked(),
+        () => context.startBatch(),
+        () => context.startAllowStateChanges(allow: true),
       ]);
     });
 
@@ -29,7 +36,10 @@ void main() {
       final context = MockContext();
       final prevDerivation = MockDerivation();
 
-      when(context.startUntracked()).thenReturn(prevDerivation);
+      when(() => context.nameFor(any())).thenReturn('Test-Action');
+      when(() => context.startAllowStateChanges(allow: any(named: 'allow')))
+          .thenReturn(true);
+      when(() => context.startUntracked()).thenReturn(prevDerivation);
 
       final runInfo = ActionRunInfo(
           name: 'test',
@@ -42,9 +52,9 @@ void main() {
         ..endAction(runInfo);
 
       verifyInOrder([
-        context.endAllowStateChanges(allow: false),
-        context.endBatch(),
-        context.endUntracked(prevDerivation),
+        () => context.endAllowStateChanges(allow: false),
+        () => context.endBatch(),
+        () => context.endUntracked(prevDerivation),
       ]);
     });
   });

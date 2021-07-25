@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Moving from `mockito` to `mocktail`
+
 ## 2.0.0
 
 - Full support for Null Safety

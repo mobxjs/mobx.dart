@@ -1,4 +1,3 @@
-// @todo pavanpodila: remove once Mockito is null-safe
 // @dart = 2.10
 
 import 'dart:async';
@@ -53,7 +52,8 @@ void main() {
     test('match works', () async {
       // ignore:close_sinks
       final ctrl = StreamController<int>.broadcast();
-      final stream = ObservableStream(ctrl.stream);
+      // ignore: omit_local_variable_types
+      final ObservableStream<int> stream = ObservableStream(ctrl.stream);
 
       final values = <String>[];
       autorun((_) {
