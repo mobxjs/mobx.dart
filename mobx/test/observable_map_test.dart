@@ -1,10 +1,12 @@
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/observable_collections.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
 import 'util.dart';
+
+// ignore_for_file: unnecessary_lambdas
 
 void main() {
   testSetup();
@@ -13,17 +15,17 @@ void main() {
     test('length reports observed', () {
       final atom = MockAtom();
 
-      verifyNever(atom.reportObserved());
+      verifyNever(() => atom.reportObserved());
       expect(MapKeysIterable(['a', 'b'], atom).length, equals(2));
-      verify(atom.reportObserved());
+      verify(() => atom.reportObserved());
     });
 
     test('contains reports observed', () {
       final atom = MockAtom();
 
-      verifyNever(atom.reportObserved());
+      verifyNever(() => atom.reportObserved());
       expect(MapKeysIterable(['a', 'b'], atom).contains('a'), isTrue);
-      verify(atom.reportObserved());
+      verify(() => atom.reportObserved());
     });
   });
 
@@ -235,12 +237,12 @@ void runWriteTest(
     final atom = MockAtom();
     final map = wrapInObservableMap(atom, {'a': 1, 'b': 2, 'c': 3});
 
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     body(map);
 
-    verify(atom.reportChanged());
+    verify(() => atom.reportChanged());
   });
 }
 
@@ -250,13 +252,13 @@ void runReadTest(
     final atom = MockAtom();
     final map = wrapInObservableMap(atom, {'a': 1, 'b': 2, 'c': 3});
 
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     body(map);
 
-    verify(atom.reportObserved());
-    verifyNever(atom.reportChanged());
+    verify(() => atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
   });
 }
 
@@ -266,16 +268,16 @@ void runIterableTest(
     final atom = MockAtom();
     final map = wrapInObservableMap(atom, {'a': 1, 'b': 2, 'c': 3});
 
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     final iter = body(map);
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     void noOp(_) {}
     iter.forEach(noOp);
-    verify(atom.reportObserved());
-    verifyNever(atom.reportChanged());
+    verify(() => atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
   });
 }

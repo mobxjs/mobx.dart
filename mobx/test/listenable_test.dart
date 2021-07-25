@@ -1,8 +1,5 @@
-// @todo pavanpodila: remove once Mockito is null-safe
-// @dart = 2.10
-
 import 'package:mobx/mobx.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
@@ -30,7 +27,7 @@ void main() {
       Listeners(context)
         ..add((_) {})
         ..notifyListeners(ChangeNotification());
-      verify(context.untracked(any));
+      verify(() => context.untracked(any()));
     });
 
     test('asserts for null notifications', () {

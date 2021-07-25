@@ -1,11 +1,13 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart' hide when;
 import 'package:mobx/src/core.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
 import 'util.dart';
+
+// ignore_for_file: unnecessary_lambdas
 
 void main() {
   testSetup();
@@ -202,13 +204,17 @@ void main() {
 
     test('uses provided context', () {
       final context = MockContext();
+      when(() => context.nameFor(any())).thenReturn('Test-Reaction');
+
       int trackingFn(Reaction reaction) => 1;
       void onInvalidate(int i) {}
       final dispose = reaction(trackingFn, onInvalidate, context: context);
 
-      verify(context.nameFor('Reaction'));
-      verify(context.addPendingReaction(dispose.reaction));
-      verify(context.runReactions());
+      verifyInOrder([
+        () => context.nameFor('Reaction'),
+        () => context.addPendingReaction(dispose.reaction),
+        () => context.runReactions()
+      ]);
 
       dispose();
     });

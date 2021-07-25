@@ -1,10 +1,12 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mockito/mockito.dart' hide when;
+import 'package:mocktail/mocktail.dart' as mock;
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
 import 'util.dart';
+
+// ignore_for_file: unnecessary_lambdas
 
 void main() {
   testSetup();
@@ -75,8 +77,11 @@ void main() {
 
     test('uses provided context', () {
       final context = MockContext();
+      mock.when(() => context.nameFor(mock.any())).thenReturn('Test-When');
+
       when((_) => true, () {}, context: context);
-      verify(context.runReactions());
+
+      mock.verify(() => context.runReactions());
     });
 
     test('throws if timeout occurs before when() completes', () {

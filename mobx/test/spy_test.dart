@@ -7,6 +7,15 @@ void main() {
   testSetup(throwReactionErrors: false);
 
   group('Spy', () {
+    setUp(() {
+      mainContext.config = ReactiveConfig.main
+          .clone(isSpyEnabled: true, writePolicy: ReactiveWritePolicy.never);
+    });
+
+    tearDown(() {
+      mainContext.config = ReactiveConfig.main;
+    });
+
     test('spies are disabled by default', () {
       final context = ReactiveContext();
       expect(context.isSpyEnabled, isFalse);

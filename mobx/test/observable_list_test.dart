@@ -3,11 +3,13 @@ import 'dart:math';
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/observable_collections.dart';
 import 'package:mobx/src/core.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
 import 'util.dart';
+
+// ignore_for_file: unnecessary_lambdas
 
 void main() {
   testSetup();
@@ -102,11 +104,12 @@ void main() {
     });
 
     test('observe set length works', () {
-      final list = ObservableList.of([0]);
+      // ignore: omit_local_variable_types
+      final ObservableList<int?> list = ObservableList.of([0]);
 
       var index = -1;
       List<int?>? addedValues = [];
-      List<int>? removedValues = [];
+      List<int?>? removedValues = [];
 
       list
         ..observe((change) {
@@ -125,8 +128,6 @@ void main() {
       expect(index, equals(3));
       expect(addedValues, equals(null));
       expect(removedValues, equals(List.filled(2, null)));
-
-      print('final size ${list.length}');
     });
 
     test('observe insert item works', () {
@@ -231,7 +232,6 @@ void main() {
       expect(index, equals(1));
       expect(addedValues, equals([1, 2]));
       expect(removedValues, equals(null));
-      print('final size ${list.length}');
     });
 
     test('observe first works', () {
@@ -812,13 +812,13 @@ void _templateReadTest(
     final atom = MockAtom();
     final list = wrapInObservableList(atom, [0, 1, 2, 3]);
 
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     fn(list);
 
-    verify(atom.reportObserved());
-    verifyNever(atom.reportChanged());
+    verify(() => atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
   });
 }
 
@@ -828,11 +828,13 @@ void _templateWriteTest(
     final atom = MockAtom();
     final list = wrapInObservableList(atom, [0, 1, 2, 3]);
 
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     // fire the method caused or not the reportChanged() to be invoked.
-    fn(list) ? verify(atom.reportChanged()) : verifyNever(atom.reportChanged());
+    fn(list)
+        ? verify(() => atom.reportChanged())
+        : verifyNever(() => atom.reportChanged());
   });
 }
 
@@ -845,14 +847,14 @@ void _templateIterableReadTest(
     // No reports on iterator iterator transformation
     final iterable = testCase(list);
 
-    verifyNever(atom.reportObserved());
-    verifyNever(atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
 
     // Observation reports happen when the iterator is iterated
     // ignore:avoid_function_literals_in_foreach_calls
     iterable.forEach((_) {});
 
-    verify(atom.reportObserved());
-    verifyNever(atom.reportChanged());
+    verify(() => atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
   });
 }

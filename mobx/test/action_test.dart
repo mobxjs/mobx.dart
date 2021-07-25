@@ -1,9 +1,11 @@
 import 'package:mobx/mobx.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart' as mock;
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
 import 'util.dart';
+
+// ignore_for_file: unnecessary_lambdas
 
 void main() {
   testSetup();
@@ -144,15 +146,22 @@ void main() {
     test('uses provided context', () {
       final context = MockContext();
       void fn() {}
-      final act = Action(fn, context: context);
+      mock.when(() => context.nameFor(mock.any())).thenReturn('Test-Action');
+      mock
+          .when(() =>
+              context.startAllowStateChanges(allow: mock.any(named: 'allow')))
+          .thenReturn(true);
 
+      final act = Action(fn, context: context);
       act();
 
-      verify(context.nameFor('Action'));
-      verify(context.startUntracked());
-      verify(context.startBatch());
-      verify(context.endBatch());
-      verify(context.endUntracked(null));
+      mock.verifyInOrder([
+        () => context.nameFor('Action'),
+        () => context.startUntracked(),
+        () => context.startBatch(),
+        () => context.endBatch(),
+        () => context.endUntracked(null)
+      ]);
     });
 
     test(
