@@ -1,6 +1,6 @@
 import 'package:mobx/src/api/observable_collections.dart';
 import 'package:mobx/src/core.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
@@ -144,13 +144,13 @@ void runReadTest(String description, void Function(ObservableSet<int>) body) {
     final atom = MockAtom();
     final map = wrapInObservableSet(atom, {1, 2, 3, 4});
 
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     body(map);
 
-    verify(atom.reportObserved());
-    verifyNever(atom.reportChanged());
+    verify(() => atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
   });
 }
 
@@ -159,12 +159,12 @@ void runWriteTest(String description, void Function(ObservableSet<int>) body) {
     final atom = MockAtom();
     final map = wrapInObservableSet(atom, {1, 2, 3, 4});
 
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     body(map);
 
-    verify(atom.reportChanged());
+    verify(() => atom.reportChanged());
   });
 }
 
@@ -174,16 +174,16 @@ void runIterableTest(
     final atom = MockAtom();
     final map = wrapInObservableSet(atom, {1, 2, 3, 4});
 
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     final iter = body(map);
-    verifyNever(atom.reportChanged());
-    verifyNever(atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
+    verifyNever(() => atom.reportObserved());
 
     void noOp(_) {}
     iter.forEach(noOp);
-    verify(atom.reportObserved());
-    verifyNever(atom.reportChanged());
+    verify(() => atom.reportObserved());
+    verifyNever(() => atom.reportChanged());
   });
 }

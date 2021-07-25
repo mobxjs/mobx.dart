@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart' as Mock;
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
@@ -43,11 +43,17 @@ void main() {
 
     test('uses provided context', () {
       final context = MockContext();
+      Mock.when(() => context.nameFor(Mock.any()))
+          .thenReturn('Test-Observable');
+      Mock.when(() => context.isSpyEnabled).thenReturn(false);
+
       final value = Observable(0, context: context)..value += 1;
 
-      verify(context.startBatch());
-      verify(context.propagateChanged(value));
-      verify(context.endBatch());
+      Mock.verifyInOrder([
+        () => context.startBatch(),
+        () => context.propagateChanged(value),
+        () => context.endBatch()
+      ]);
     });
   });
 

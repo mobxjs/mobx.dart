@@ -1,7 +1,7 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/reaction.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart' as Mock;
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
@@ -132,8 +132,10 @@ void main() {
 
     test('uses provided context', () {
       final context = MockContext();
+      Mock.when(() => context.nameFor(Mock.any())).thenReturn('Test-Reaction');
+
       autorun((_) {}, context: context);
-      verify(context.runReactions());
+      Mock.verify(() => context.runReactions());
     });
 
     test('can be disposed inside the tracking function', () {

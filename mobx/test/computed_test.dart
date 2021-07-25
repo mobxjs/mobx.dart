@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:mobx/mobx.dart' hide when;
 import 'package:mobx/src/api/context.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import 'shared_mocks.dart';
@@ -151,12 +151,14 @@ void main() {
 
     test('uses provided context', () {
       final context = MockContext();
+      when(() => context.nameFor(any())).thenReturn('Test-Computed');
+
       int fn() => 1;
 
       final c = Computed(fn, context: context)..computeValue(track: true);
 
-      verify(context.nameFor('Computed'));
-      verify(context.trackDerivation(c, fn));
+      verify(() => context.nameFor('Computed'));
+      verify(() => context.trackDerivation(c, fn));
     });
 
     test('catches exception in evaluation', () {
