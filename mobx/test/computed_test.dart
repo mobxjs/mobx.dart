@@ -200,5 +200,39 @@ void main() {
 
       expect(() => c.value, throwsException);
     });
+
+    test('with nullable values will propagate changes after errors', () {
+      final shouldThrow = Observable(true);
+
+      final c1 = Computed<int?>(() {
+        if (shouldThrow.value) {
+          throw Exception('FAIL');
+        }
+        return null;
+      });
+
+      final c2 = Computed<String>(() {
+        c1.value;
+        return 'SUCCESS';
+      });
+
+      String? value;
+      MobXCaughtException? error;
+      autorun((_) {
+        try {
+          value = c2.value;
+        } finally {
+          error = c2.errorValue;
+        }
+      });
+
+      expect(value, isNull);
+      expect(error, isNotNull);
+
+      shouldThrow.value = false;
+
+      expect(value, equals('SUCCESS'));
+      expect(error, isNull);
+    });
   });
 }

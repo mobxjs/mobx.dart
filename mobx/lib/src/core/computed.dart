@@ -138,12 +138,14 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
 
     final oldValue = _value;
     final wasSuspended = _dependenciesState == DerivationState.notTracking;
+    final hadCaughtException = _context._hasCaughtException(this);
 
     final newValue = computeValue(track: true);
 
-    final changed = wasSuspended ||
-        _context._hasCaughtException(this) ||
-        !_isEqual(oldValue, newValue);
+    final changedException =
+        hadCaughtException != _context._hasCaughtException(this);
+    final changed =
+        wasSuspended || changedException || !_isEqual(oldValue, newValue);
 
     if (changed) {
       _value = newValue;
