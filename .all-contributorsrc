@@ -501,6 +501,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sno2",
+      "name": "Carter Snook",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43641633?v=4",
+      "profile": "https://profile.codersrank.io/user/sno2/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
