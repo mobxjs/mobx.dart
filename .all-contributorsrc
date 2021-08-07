@@ -511,6 +511,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "brianrobles204",
+      "name": "Brian Robles",
+      "avatar_url": "https://avatars.githubusercontent.com/u/872114?v=4",
+      "profile": "https://github.com/brianrobles204",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
