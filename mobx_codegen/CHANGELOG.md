@@ -1,3 +1,7 @@
+## 2.0.3
+
+- Moved `analyzer` package to `2.0.0` - @davidmartos96
+
 ## 2.0.2
 
 - Package upgrades

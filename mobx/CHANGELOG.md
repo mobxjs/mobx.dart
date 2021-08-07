@@ -1,3 +1,9 @@
+## 2.0.4
+
+- Moved `analyzer` package to `2.0.0` - @davidmartos96
+- Fixed a bug in `Computed` that was not propagating values after an exception - @brianrobles204
+- Several documentations typo fixes - @sno2, @Ascenio
+
 ## 2.0.2 - 2.0.3
 
 - Fixes #681: ObservableStream.value throws Exception when data is null

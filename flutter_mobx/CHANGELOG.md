@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Moved `analyzer` package to `2.0.0` - @davidmartos96
+
 ## 2.0.1
 
 - Moving from `mockito` to `mocktail`
