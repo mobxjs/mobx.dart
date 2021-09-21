@@ -170,6 +170,190 @@ void main() {
       expect(ctrl.isPaused, isTrue);
     });
 
+    test('listen() subscription keeps observable values updated', () async {
+      // ignore: close_sinks
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      ctrl.add(1);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isTrue);
+      expect(stream.value, equals(0), reason: 'no subscription, not updated');
+
+      final subscription = stream.listen(null);
+
+      ctrl.add(2);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse);
+      expect(stream.value, equals(2), reason: 'with subscription, updated');
+
+      ctrl.add(3);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse);
+      expect(stream.value, equals(3));
+
+      subscription.pause();
+
+      ctrl.add(4);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isTrue);
+      expect(stream.value, equals(3), reason: 'respects subscription pause');
+
+      subscription.resume();
+
+      ctrl.add(5);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse);
+      expect(stream.value, equals(5), reason: 'respects subscription resume');
+
+      await subscription.cancel();
+
+      ctrl.add(6);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isTrue);
+      expect(stream.value, equals(5));
+    });
+
+    test('listen() and observation both keep values updated', () async {
+      // ignore: close_sinks
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      ctrl.add(1);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isTrue);
+      expect(stream.value, equals(0));
+
+      final reactionValues = <int>[];
+      final dispose = autorun((_) {
+        reactionValues.add(stream.data as int);
+      });
+
+      ctrl.add(2);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse);
+      expect(stream.value, equals(2));
+
+      final sub = stream.listen(null);
+
+      ctrl.add(3);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse);
+      expect(stream.value, equals(3));
+
+      dispose();
+
+      ctrl.add(4);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse);
+      expect(stream.value, equals(4));
+
+      await sub.cancel();
+
+      ctrl.add(5);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isTrue);
+      expect(stream.value, equals(4));
+      expect(reactionValues, equals([0, 1, 2, 3]));
+    });
+
+    test('listen() also keeps values updated for broadcast streams', () async {
+      // ignore: close_sinks
+      final ctrl = StreamController<int>.broadcast();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      ctrl.add(1);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse,
+          reason: 'broadcast ctrl itself does not pause');
+      expect(stream.value, equals(0));
+
+      final sub1 = stream.listen(null);
+
+      ctrl.add(2);
+      await pumpEventQueue();
+      expect(stream.value, equals(2));
+
+      final sub2 = stream.listen(null);
+
+      ctrl.add(3);
+      await pumpEventQueue();
+      expect(stream.value, equals(3));
+
+      sub1.pause();
+
+      ctrl.add(4);
+      await pumpEventQueue();
+      expect(stream.value, equals(4));
+
+      sub2.pause();
+
+      ctrl.add(5);
+      await pumpEventQueue();
+      expect(stream.value, equals(5),
+          reason: 'all subs are paused, but pause is on a subscription level, '
+              'broadcast stream still emits');
+
+      sub1.resume();
+
+      ctrl.add(6);
+      await pumpEventQueue();
+      expect(stream.value, equals(6));
+
+      sub2.resume();
+
+      ctrl.add(7);
+      await pumpEventQueue();
+      expect(stream.value, equals(7));
+
+      await sub2.cancel();
+
+      ctrl.add(8);
+      await pumpEventQueue();
+      expect(stream.value, equals(8));
+
+      await sub1.cancel();
+
+      ctrl.add(9);
+      await pumpEventQueue();
+      expect(stream.value, equals(8), reason: 'no subs, no longer updated');
+    });
+
+    test('implicit subscriptions keep observable values updated', () async {
+      // ignore: close_sinks
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      ctrl.add(1);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isTrue);
+      expect(stream.value, equals(0));
+
+      // firstWhere implicitly subscribes to stream, ends when value is 4
+      // ignore: unawaited_futures
+      stream.firstWhere((value) => value == 4);
+
+      ctrl.add(2);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse);
+      expect(stream.value, equals(2));
+
+      ctrl.add(3);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse);
+      expect(stream.value, equals(3));
+
+      ctrl.add(4); // Implicit sub should stop here, with value at 4
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isTrue);
+      expect(stream.value, equals(4));
+
+      ctrl.add(5);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isTrue);
+      expect(stream.value, equals(4)); // not updated
+    });
+
     test('cancelOnError cancels the stream on first error', () async {
       final ctrl = StreamController<int>();
       final stream =
@@ -191,6 +375,36 @@ void main() {
       expect(values, equals([0, 1, 2]));
       expect(stream.error, equals(2));
       expect(stream.hasError, isTrue);
+    });
+
+    test('cancelOnError in listen() cancels observation on error', () async {
+      // ignore: close_sinks
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(
+        ctrl.stream,
+        initialValue: 0,
+        cancelOnError: false, // cancelOnError here doesn't affect subscription
+      );
+
+      final sub = stream.listen(null, onError: (_) {}, cancelOnError: true);
+
+      ctrl.add(1);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isFalse);
+      expect(stream.value, equals(1));
+
+      ctrl.addError(2);
+      await pumpEventQueue();
+      expect(ctrl.isPaused, isTrue);
+      expect(stream.value, isNull);
+      expect(stream.error, equals(2));
+
+      ctrl.add(3);
+      await pumpEventQueue();
+      expect(stream.value, isNull);
+      expect(stream.error, equals(2));
+
+      await sub.cancel();
     });
 
     <String, StreamTestBody>{
