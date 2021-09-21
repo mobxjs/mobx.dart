@@ -433,31 +433,31 @@ void main() {
           })),
       'where': (s) => s.where((n) => n != 2)
     }.forEach(testStreamCombinator);
-  });
 
-  <String, Case>{
-    'any': futureCase((s) => s.any((v) => v > 3), true),
-    'contains': futureCase((s) => s.contains(3), true),
-    'drain': futureCase((s) => s.drain<int>(3), 3),
-    'elementAt': futureCase((s) => s.elementAt(2), 2),
-    'every': futureCase((s) => s.every((n) => n < 100), true),
-    'first': futureCase((s) => s.first, 0),
-    'firstWhere': futureCase((s) => s.firstWhere((n) => n == 2), 2),
-    'fold': futureCase((s) => s.fold<int>(0, (a, b) => a + b), 45),
-    'forEach': futureCase((s) => s.forEach((n) {}), null as dynamic),
-    'isEmpty': futureCase((s) => s.isEmpty, false),
-    'join': futureCase((s) => s.join(' '), '0 1 2 3 4 5 6 7 8 9'),
-    'last': futureCase((s) => s.last, 9),
-    'lastWhere': futureCase((s) => s.lastWhere((n) => n <= 8), 8),
-    'length': futureCase((s) => s.length, 10),
-    'pipe': futureCase(
-        (s) => s.pipe(StreamController.broadcast()), null as dynamic),
-    'reduce': futureCase((s) => s.reduce((a, b) => a + b), 45),
-    'single': futureCase((s) => s.single, 0, length: 1),
-    'singleWhere': futureCase((s) => s.singleWhere((n) => n == 8), 8),
-    'toList': futureCase((s) => s.toList(), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
-    'toSet': futureCase((s) => s.toSet(), {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}),
-  }.forEach(testStreamToFutureCombinator);
+    <String, Case>{
+      'any': futureCase((s) => s.any((v) => v > 3), true),
+      'contains': futureCase((s) => s.contains(3), true),
+      'drain': futureCase((s) => s.drain<int>(3), 3),
+      'elementAt': futureCase((s) => s.elementAt(2), 2),
+      'every': futureCase((s) => s.every((n) => n < 100), true),
+      'first': futureCase((s) => s.first, 0),
+      'firstWhere': futureCase((s) => s.firstWhere((n) => n == 2), 2),
+      'fold': futureCase((s) => s.fold<int>(0, (a, b) => a + b), 45),
+      'forEach': futureCase((s) => s.forEach((n) {}), null as dynamic),
+      'isEmpty': futureCase((s) => s.isEmpty, false),
+      'join': futureCase((s) => s.join(' '), '0 1 2 3 4 5 6 7 8 9'),
+      'last': futureCase((s) => s.last, 9),
+      'lastWhere': futureCase((s) => s.lastWhere((n) => n <= 8), 8),
+      'length': futureCase((s) => s.length, 10),
+      'pipe': futureCase(
+          (s) => s.pipe(StreamController.broadcast()), null as dynamic),
+      'reduce': futureCase((s) => s.reduce((a, b) => a + b), 45),
+      'single': futureCase((s) => s.single, 0, length: 1),
+      'singleWhere': futureCase((s) => s.singleWhere((n) => n == 8), 8),
+      'toList': futureCase((s) => s.toList(), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+      'toSet': futureCase((s) => s.toSet(), {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}),
+    }.forEach(testStreamToFutureCombinator);
+  });
 }
 
 Case<F> futureCase<
