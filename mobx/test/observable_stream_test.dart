@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:mobx/mobx.dart';
 import 'package:mobx/src/api/async.dart';
 import 'package:mobx/src/api/reaction.dart';
 import 'package:test/test.dart';
@@ -298,7 +299,10 @@ void main() {
 
       ctrl.add(5);
       await pumpEventQueue();
-      expect(ctrl.isPaused, isTrue);
+      expect(ctrl.hasListener, isFalse);
+      expect(ctrl.isPaused, isFalse,
+          reason: 'per docs, when controller has no more listeners, '
+              'it is no longer paused');
       expect(stream.value, equals(4));
       expect(reactionValues, equals([0, 1, 2, 3]));
       expect(subValues, equals([0, 1, 2, 3, 4]));
@@ -410,12 +414,14 @@ void main() {
 
       ctrl.add(4); // Implicit sub should stop here, with value at 4
       await pumpEventQueue();
-      expect(ctrl.isPaused, isTrue);
+      expect(ctrl.hasListener, isFalse);
+      expect(ctrl.isPaused, isFalse,
+          reason: 'no more listeners, no longer paused');
       expect(stream.value, equals(4));
 
       ctrl.add(5);
       await pumpEventQueue();
-      expect(ctrl.isPaused, isTrue);
+      expect(ctrl.isPaused, isFalse);
       expect(stream.value, equals(4)); // not updated
     });
 
@@ -460,7 +466,9 @@ void main() {
 
       ctrl.addError(2);
       await pumpEventQueue();
-      expect(ctrl.isPaused, isTrue);
+      expect(ctrl.hasListener, isFalse);
+      expect(ctrl.isPaused, isFalse,
+          reason: 'no more listeners, no longer paused');
       expect(stream.value, isNull);
       expect(stream.error, equals(2));
 
@@ -470,6 +478,64 @@ void main() {
       expect(stream.error, equals(2));
 
       await sub.cancel();
+    });
+
+    test(
+      'closes correctly when values are no longer observed',
+      () async {
+        final ctrl = StreamController<int>();
+        final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+        final future = asyncWhen((_) => stream.value == 2);
+        ctrl.add(2);
+        await future; // reaction should be disposed, no longer observing value
+
+        expect(ctrl.close(), completes);
+      },
+      timeout: const Timeout(Duration(seconds: 3)),
+      skip: 'limitation: internal subscription is still paused, cannot close',
+    );
+
+    test('closes correctly when all subscriptions are cancelled', () async {
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      final sub = stream.listen(null);
+      await sub.cancel();
+
+      expect(ctrl.close(), completes);
+    }, timeout: const Timeout(Duration(seconds: 3)));
+
+    test('closes correctly even if broadcast stream', () async {
+      final ctrl = StreamController<int>.broadcast();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      final sub = stream.listen(null);
+      await sub.cancel();
+
+      final sub2 = stream.listen(null);
+      await sub2.cancel();
+
+      expect(ctrl.close(), completes);
+    }, timeout: const Timeout(Duration(seconds: 3)));
+
+    test('cannot observe non-broadcast stream once sub is cancelled', () async {
+      // ignore: close_sinks
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      final future = asyncWhen((_) => stream.value == 2);
+
+      final sub = stream.listen(null);
+
+      ctrl.add(2);
+      await expectLater(future, completes, reason: 'sub not yet cancelled');
+
+      await sub.cancel();
+
+      final future2 = asyncWhen((_) => stream.value == 3);
+      expect(future2, throwsA(isA<MobXCaughtException>()),
+          reason: 'sub on non-broadcast stream already cancelled');
     });
 
     <String, StreamTestBody>{

@@ -300,7 +300,7 @@ class _ObservableStreamController<T> {
             onListen: _listen,
             onPause: _unsubscribe,
             onResume: _listen,
-            onCancel: _unsubscribe,
+            onCancel: _onCancel,
             sync: true,
           );
   }
@@ -309,6 +309,7 @@ class _ObservableStreamController<T> {
   final bool cancelOnError;
   final Stream<T> origStream;
   StreamSubscription<T>? _subscription;
+  StreamSubscription<T>? _broadcastSubscription;
   T? _initialStreamValue;
 
   final ActionController _actions;
@@ -326,12 +327,37 @@ class _ObservableStreamController<T> {
   late final StreamController<T> _controller;
 
   int _listenCount = 0;
+  bool _isCancelled = false;
+
+  Future<void> _onCancel() async {
+    _unsubscribe();
+    _isCancelled = true;
+
+    await _subscription?.cancel();
+    _subscription = null;
+
+    await _broadcastSubscription?.cancel();
+    _broadcastSubscription = null;
+
+    await _controller.close();
+  }
 
   void _listen() {
     _listenCount++;
     if (_subscription == null) {
+      assert(
+          !_isCancelled,
+          'Tried to observe or listen to an observable stream '
+          'after the source stream has already ended.');
       _subscription = origStream.listen(_onData,
           onError: _onError, onDone: _onDone, cancelOnError: cancelOnError);
+
+      if (origStream.isBroadcast) {
+        void _noop(error) {}
+        _broadcastSubscription = origStream.listen(null,
+            onError: _noop, onDone: _onCancel, cancelOnError: cancelOnError);
+      }
+
       scheduleMicrotask(_tryInsertInitialValue);
     } else if (_subscription!.isPaused) {
       _subscription!.resume();
@@ -339,6 +365,10 @@ class _ObservableStreamController<T> {
   }
 
   void _unsubscribe() {
+    if (_isCancelled) {
+      return;
+    }
+
     _listenCount--;
     if (_listenCount == 0 && !_subscription!.isPaused) {
       _subscription?.pause();
