@@ -117,6 +117,22 @@ class ObservableStream<T> extends StreamView<T> implements ObservableValue<T?> {
   ObservableFuture<R> _wrapFuture<R>(Future<R> future) =>
       ObservableFuture._(_context, future, FutureStatus.pending, null, name);
 
+  /// Close the observable stream, and stop any future updates to observable
+  /// properties or any stream subscribers.
+  ///
+  /// Most of the time, this method doesn't need to be called. ObservableStream
+  /// can clean-up automatically. This is always true if the original stream
+  /// is a broadcast stream.
+  ///
+  /// However, if the original stream is a single-subscription stream and you
+  /// observed the stream's properties ([data], [value], [error], [hasError],
+  /// [status], etc.), then this method can be used to stop the observation and
+  /// ensure the original stream closes.
+  ///
+  /// Note that if you [listen] to this observable stream, the observable stream
+  /// will be closed automatically when you cancel the subscription.
+  Future<void> close() => _controller.close();
+
   // Delegated methods
 
   @override
@@ -207,6 +223,25 @@ class ObservableStream<T> extends StreamView<T> implements ObservableValue<T?> {
 
   @override
   ObservableFuture<int> get length => _wrapFuture(super.length);
+
+  @override
+  StreamSubscription<T> listen(
+    void Function(T value)? onData, {
+    Function? onError,
+    void Function()? onDone,
+    bool? cancelOnError,
+  }) {
+    if (_controller.isCancelled) {
+      throw StateError('Tried to observe or listen to an observable stream '
+          'after the stream has already ended / closed.');
+    }
+    return super.listen(
+      onData,
+      onError: onError,
+      onDone: onDone,
+      cancelOnError: cancelOnError,
+    );
+  }
 
   @override
   ObservableStream<S> map<S>(S Function(T event) convert) =>
@@ -328,9 +363,14 @@ class _ObservableStreamController<T> {
 
   int _listenCount = 0;
   bool _isCancelled = false;
+  bool get isCancelled => _isCancelled;
 
   Future<void> _onCancel() async {
     _unsubscribe();
+    await close();
+  }
+
+  Future<void> close() async {
     _isCancelled = true;
 
     await _subscription?.cancel();
@@ -339,16 +379,20 @@ class _ObservableStreamController<T> {
     await _broadcastSubscription?.cancel();
     _broadcastSubscription = null;
 
-    await _controller.close();
+    // controller.close() never completes if it's a non-broadcast stream
+    // with no listeners. Avoid this case.
+    if (origStream.isBroadcast || _controller.hasListener) {
+      await _controller.close();
+    }
   }
 
   void _listen() {
     _listenCount++;
     if (_subscription == null) {
-      assert(
-          !_isCancelled,
-          'Tried to observe or listen to an observable stream '
-          'after the source stream has already ended.');
+      if (_isCancelled) {
+        throw StateError('Tried to observe or listen to an observable stream '
+            'after the stream has already ended / closed.');
+      }
       _subscription = origStream.listen(_onData,
           onError: _onError, onDone: _onDone, cancelOnError: cancelOnError);
 

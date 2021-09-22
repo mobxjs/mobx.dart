@@ -480,21 +480,48 @@ void main() {
       await sub.cancel();
     });
 
-    test(
-      'closes correctly when values are no longer observed',
-      () async {
-        final ctrl = StreamController<int>();
-        final stream = ObservableStream(ctrl.stream, initialValue: 0);
+    test('.close() can be used to close stream correctly', () async {
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
 
-        final future = asyncWhen((_) => stream.value == 2);
-        ctrl.add(2);
-        await future; // reaction should be disposed, no longer observing value
+      final future = asyncWhen((_) => stream.value == 2);
+      ctrl.add(2);
+      await future; // reaction should be disposed, no longer observing value
 
-        expect(ctrl.close(), completes);
-      },
-      timeout: const Timeout(Duration(seconds: 3)),
-      skip: 'limitation: internal subscription is still paused, cannot close',
-    );
+      await stream.close();
+      expect(ctrl.close(), completes);
+    }, timeout: const Timeout(Duration(seconds: 3)));
+
+    test('.close() can close broadcast streams correctly', () async {
+      final ctrl = StreamController<int>.broadcast();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      final future = asyncWhen((_) => stream.value == 2);
+      ctrl.add(2);
+      await future; // reaction should be disposed, no longer observing value
+
+      await stream.close();
+      expect(ctrl.close(), completes);
+    }, timeout: const Timeout(Duration(seconds: 3)));
+
+    test('trying to listen or observe after close throws', () async {
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      final future = asyncWhen((_) => stream.value == 2);
+      ctrl.add(2);
+      await expectLater(future, completes);
+
+      await stream.close();
+
+      final future2 = asyncWhen((_) => stream.value == 3);
+      ctrl.add(3);
+      await expectLater(future2, throwsA(isA<MobXCaughtException>()));
+
+      expect(() => stream.listen(null), throwsA(isStateError));
+
+      await ctrl.close();
+    });
 
     test('closes correctly when all subscriptions are cancelled', () async {
       final ctrl = StreamController<int>();
