@@ -271,7 +271,8 @@ class _ObservableStreamController<T> {
     T? initialValue, {
     required this.cancelOnError,
     required this.name,
-  })  : _actions =
+  })  : _initialStreamValue = origStream.isBroadcast ? null : initialValue,
+        _actions =
             ActionController(context: context, name: '$name.ActionController'),
         _status = Observable(
             initialValue == null ? StreamStatus.waiting : StreamStatus.active,
@@ -308,6 +309,7 @@ class _ObservableStreamController<T> {
   final bool cancelOnError;
   final Stream<T> origStream;
   StreamSubscription<T>? _subscription;
+  T? _initialStreamValue;
 
   final ActionController _actions;
 
@@ -330,6 +332,7 @@ class _ObservableStreamController<T> {
     if (_subscription == null) {
       _subscription = origStream.listen(_onData,
           onError: _onError, onDone: _onDone, cancelOnError: cancelOnError);
+      scheduleMicrotask(_tryInsertInitialValue);
     } else if (_subscription!.isPaused) {
       _subscription!.resume();
     }
@@ -350,6 +353,7 @@ class _ObservableStreamController<T> {
       _data.value = data;
     } finally {
       _actions.endAction(actionInfo);
+      _tryInsertInitialValue();
       _controller.add(data);
     }
   }
@@ -362,6 +366,7 @@ class _ObservableStreamController<T> {
       _data.value = error;
     } finally {
       _actions.endAction(actionInfo);
+      _tryInsertInitialValue();
       _controller.addError(error);
     }
   }
@@ -372,7 +377,16 @@ class _ObservableStreamController<T> {
       _status.value = StreamStatus.done;
     } finally {
       _actions.endAction(actionInfo);
+      _tryInsertInitialValue();
       _controller.close();
+    }
+  }
+
+  void _tryInsertInitialValue() {
+    final initialStreamValue = _initialStreamValue;
+    if (initialStreamValue != null) {
+      _initialStreamValue = null;
+      _controller.add(initialStreamValue);
     }
   }
 }

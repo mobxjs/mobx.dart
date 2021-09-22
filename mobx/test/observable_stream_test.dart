@@ -210,8 +210,48 @@ void main() {
 
       ctrl.add(6);
       await pumpEventQueue();
-      expect(ctrl.isPaused, isTrue);
-      expect(stream.value, equals(5));
+      expect(stream.value, equals(5), reason: 'no sub, no longer updated');
+    });
+
+    test('listen() receives all events if source is non-broadcast', () async {
+      // ignore: close_sinks
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      ctrl.add(1);
+      await pumpEventQueue();
+
+      final subValues = <int>[];
+      final subscription = stream.listen(subValues.add);
+
+      ctrl.add(2);
+      await pumpEventQueue();
+      expect(subValues, equals([0, 1, 2]),
+          reason: 'non-broadcast streams buffer events');
+
+      ctrl.add(3);
+      await pumpEventQueue();
+
+      subscription.pause();
+
+      ctrl.add(4);
+      await pumpEventQueue();
+      expect(subValues, equals([0, 1, 2, 3]),
+          reason: 'subscription itself is paused, does not receive events');
+
+      subscription.resume();
+
+      ctrl.add(5);
+      await pumpEventQueue();
+      expect(subValues, equals([0, 1, 2, 3, 4, 5]),
+          reason: 'receives all events emitted during pause');
+
+      await subscription.cancel();
+
+      ctrl.add(6);
+      await pumpEventQueue();
+      expect(subValues, equals([0, 1, 2, 3, 4, 5]),
+          reason: 'sub cancelled, no longer receives events');
     });
 
     test('listen() and observation both keep values updated', () async {
@@ -226,7 +266,7 @@ void main() {
 
       final reactionValues = <int>[];
       final dispose = autorun((_) {
-        reactionValues.add(stream.data as int);
+        reactionValues.add(stream.value);
       });
 
       ctrl.add(2);
@@ -234,12 +274,16 @@ void main() {
       expect(ctrl.isPaused, isFalse);
       expect(stream.value, equals(2));
 
-      final sub = stream.listen(null);
+      final subValues = <int>[];
+      final sub = stream.listen(subValues.add);
 
       ctrl.add(3);
       await pumpEventQueue();
       expect(ctrl.isPaused, isFalse);
       expect(stream.value, equals(3));
+      expect(reactionValues, equals([0, 1, 2, 3]));
+      expect(subValues, equals([0, 1, 2, 3]),
+          reason: 'non-broadcast streams buffer events');
 
       dispose();
 
@@ -247,6 +291,8 @@ void main() {
       await pumpEventQueue();
       expect(ctrl.isPaused, isFalse);
       expect(stream.value, equals(4));
+      expect(reactionValues, equals([0, 1, 2, 3]));
+      expect(subValues, equals([0, 1, 2, 3, 4]));
 
       await sub.cancel();
 
@@ -255,6 +301,7 @@ void main() {
       expect(ctrl.isPaused, isTrue);
       expect(stream.value, equals(4));
       expect(reactionValues, equals([0, 1, 2, 3]));
+      expect(subValues, equals([0, 1, 2, 3, 4]));
     });
 
     test('listen() also keeps values updated for broadcast streams', () async {
@@ -268,23 +315,31 @@ void main() {
           reason: 'broadcast ctrl itself does not pause');
       expect(stream.value, equals(0));
 
-      final sub1 = stream.listen(null);
+      final sub1Values = <int>[];
+      final sub1 = stream.listen(sub1Values.add);
 
       ctrl.add(2);
       await pumpEventQueue();
       expect(stream.value, equals(2));
+      expect(sub1Values, equals([2]),
+          reason: 'broadcast streams do not buffer events');
 
-      final sub2 = stream.listen(null);
+      final sub2Values = <int>[];
+      final sub2 = stream.listen(sub2Values.add);
 
       ctrl.add(3);
       await pumpEventQueue();
       expect(stream.value, equals(3));
+      expect(sub1Values, equals([2, 3]));
+      expect(sub2Values, equals([3]));
 
       sub1.pause();
 
       ctrl.add(4);
       await pumpEventQueue();
       expect(stream.value, equals(4));
+      expect(sub1Values, equals([2, 3]));
+      expect(sub2Values, equals([3, 4]));
 
       sub2.pause();
 
@@ -293,30 +348,40 @@ void main() {
       expect(stream.value, equals(5),
           reason: 'all subs are paused, but pause is on a subscription level, '
               'broadcast stream still emits');
+      expect(sub1Values, equals([2, 3]));
+      expect(sub2Values, equals([3, 4]));
 
       sub1.resume();
 
       ctrl.add(6);
       await pumpEventQueue();
       expect(stream.value, equals(6));
+      expect(sub1Values, equals([2, 3, 4, 5, 6]));
+      expect(sub2Values, equals([3, 4]));
 
       sub2.resume();
 
       ctrl.add(7);
       await pumpEventQueue();
       expect(stream.value, equals(7));
+      expect(sub1Values, equals([2, 3, 4, 5, 6, 7]));
+      expect(sub2Values, equals([3, 4, 5, 6, 7]));
 
       await sub2.cancel();
 
       ctrl.add(8);
       await pumpEventQueue();
       expect(stream.value, equals(8));
+      expect(sub1Values, equals([2, 3, 4, 5, 6, 7, 8]));
+      expect(sub2Values, equals([3, 4, 5, 6, 7]));
 
       await sub1.cancel();
 
       ctrl.add(9);
       await pumpEventQueue();
       expect(stream.value, equals(8), reason: 'no subs, no longer updated');
+      expect(sub1Values, equals([2, 3, 4, 5, 6, 7, 8]));
+      expect(sub2Values, equals([3, 4, 5, 6, 7]));
     });
 
     test('implicit subscriptions keep observable values updated', () async {
