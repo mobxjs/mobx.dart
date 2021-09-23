@@ -327,7 +327,6 @@ class _ObservableStreamController<T> {
   final bool cancelOnError;
   final Stream<T> origStream;
   StreamSubscription<T>? _subscription;
-  StreamSubscription<T>? _broadcastSubscription;
   T? _initialStreamValue;
 
   final ActionController _actions;
@@ -359,9 +358,6 @@ class _ObservableStreamController<T> {
     await _subscription?.cancel();
     _subscription = null;
 
-    await _broadcastSubscription?.cancel();
-    _broadcastSubscription = null;
-
     // controller.close() never completes if it's a non-broadcast stream
     // with no listeners. Avoid this case.
     if (origStream.isBroadcast || _controller.hasListener) {
@@ -379,12 +375,6 @@ class _ObservableStreamController<T> {
       _subscription = origStream.listen(_onData,
           onError: _onError, onDone: _onDone, cancelOnError: cancelOnError);
 
-      if (origStream.isBroadcast) {
-        void _noop(error) {}
-        _broadcastSubscription = origStream.listen(null,
-            onError: _noop, onDone: _onCancel, cancelOnError: cancelOnError);
-      }
-
       scheduleMicrotask(_tryInsertInitialValue);
     } else if (_subscription!.isPaused) {
       _subscription!.resume();
@@ -397,8 +387,13 @@ class _ObservableStreamController<T> {
     }
 
     _listenCount--;
-    if (_listenCount == 0 && !_subscription!.isPaused) {
-      _subscription?.pause();
+    if (_listenCount == 0 && !(_subscription?.isPaused ?? true)) {
+      if (origStream.isBroadcast) {
+        _subscription!.cancel();
+        _subscription = null;
+      } else {
+        _subscription!.pause();
+      }
     }
   }
 

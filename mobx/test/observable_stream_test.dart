@@ -388,6 +388,45 @@ void main() {
       expect(sub2Values, equals([3, 4, 5, 6, 7]));
     });
 
+    test('listen() can be used multiple times for broadcast streams', () async {
+      final ctrl = StreamController<int>.broadcast();
+      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+
+      final sub1Values = <int>[];
+      final sub1 = stream.listen(sub1Values.add);
+
+      ctrl.add(1);
+      await pumpEventQueue();
+      expect(stream.value, equals(1));
+      expect(sub1Values, equals([1]));
+
+      await sub1.cancel();
+
+      ctrl.add(2);
+      await pumpEventQueue();
+      expect(stream.value, equals(1), reason: 'no subs, no updates');
+      expect(sub1Values, equals([1]));
+
+      final sub2Values = <int>[];
+      final sub2 = stream.listen(sub2Values.add);
+
+      ctrl.add(3);
+      await pumpEventQueue();
+      expect(stream.value, equals(3), reason: 'with subs, with updates again');
+      expect(sub1Values, equals([1]));
+      expect(sub2Values, equals([3]));
+
+      await sub2.cancel();
+
+      ctrl.add(4);
+      await pumpEventQueue();
+      expect(stream.value, equals(3));
+      expect(sub1Values, equals([1]));
+      expect(sub2Values, equals([3]));
+
+      await ctrl.close();
+    });
+
     test('implicit subscriptions keep observable values updated', () async {
       // ignore: close_sinks
       final ctrl = StreamController<int>();
