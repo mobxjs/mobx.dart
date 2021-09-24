@@ -78,8 +78,8 @@ class LibraryScopedNameFinder {
     if (type is FunctionType) {
       // If we're dealing with a typedef, we let it undergo the standard name
       // lookup. Otherwise, we special case the function naming.
-      if (type.aliasElement is TypeAliasElement) {
-        typeElement = type.aliasElement!.aliasedElement?.enclosingElement;
+      if (type.alias?.element is TypeAliasElement) {
+        typeElement = type.alias!.element.aliasedElement?.enclosingElement;
       } else {
         return _getFunctionTypeName(type);
       }
@@ -125,7 +125,7 @@ class LibraryScopedNameFinder {
     if (type is ParameterizedType) {
       genericTypes = type.typeArguments;
     } else if (type is FunctionType) {
-      genericTypes = type.aliasArguments;
+      genericTypes = type.alias?.typeArguments;
     }
 
     if (genericTypes != null && genericTypes.isNotEmpty) {
