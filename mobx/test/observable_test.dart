@@ -6,6 +6,7 @@ import 'shared_mocks.dart';
 import 'util.dart';
 
 // ignore_for_file: unnecessary_lambdas
+// ignore_for_file: unnecessary_type_check
 
 void main() {
   testSetup();
