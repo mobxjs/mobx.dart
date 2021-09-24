@@ -2,7 +2,40 @@ part of '../async.dart';
 
 enum StreamStatus { waiting, active, done }
 
+/// Stream that tracks the emitted values of the provided stream and makes
+/// them available as a MobX observable value.
+///
+/// The latest events emitted by the stream are captured an made available as
+/// MobX observable values via properties such as [data], [value], [error],
+/// [hasError] and [status].
+///
+/// If the source `stream` is a single-subscription stream, this stream will
+/// also be single-subscription. Either calling [listen] or observing [value],
+/// etc. in a reaction will start the stream. Both can be done at the same time.
+///
+/// If the observation ends, and a subscription was never created via [listen],
+/// the stream will be paused. If a subscription (created via [listen]) is
+/// cancelled, the stream ends, and [value] etc. can no longer be observed
+/// inside a reaction.
+///
+/// If the source `stream` is a broadcast stream, this stream will also be a
+/// broadcast stream. This means the observable stream can be listened to
+/// multiple times.
 class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
+  /// Create a stream that tracks the emitted values of the provided stream and
+  /// makes them available as a MobX observable value.
+  ///
+  /// If the source `stream` is a single-subscription stream, this stream will
+  /// also be single-subscription. If the source `stream` is a broadcast stream,
+  /// this stream will also be a broadcast stream.
+  ///
+  /// If `initialValue` is provided, [value] will use it as the initial value
+  /// while waiting for the first item to be emitted from the source stream.
+  /// If the stream is a single-subscription stream, `initialValue` will also be
+  /// the first value emitted to the subscription created by [listen].
+  ///
+  /// If `cancelOnError` is `true`, the stream will be cancelled when an error
+  /// event is emitted by the source stream. The default value is `false`.
   ObservableStream(Stream<T> stream,
       {T? initialValue,
       bool cancelOnError = false,
@@ -106,9 +139,10 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
   /// is a broadcast stream.
   ///
   /// However, if the original stream is a single-subscription stream and you
-  /// observed the stream's properties ([data], [value], [error], [hasError],
-  /// [status], etc.), then this method can be used to stop the observation and
-  /// ensure the original stream closes.
+  /// previously observed the stream's properties ([data], [value], [error],
+  /// [hasError], [status], etc.) but then stopped the observation (thereby
+  /// pausing the stream), then this method can be used to ensure the original
+  /// paused stream closes correctly.
   ///
   /// Note that if you [listen] to this observable stream, the observable stream
   /// will be closed automatically when you cancel the subscription.
