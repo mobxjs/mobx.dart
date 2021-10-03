@@ -77,7 +77,7 @@ ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect,
 /// effect after that.
 ///
 /// ```
-/// await asyncWhen(() => x.value > 10);
+/// await asyncWhen((_) => x.value > 10);
 /// // ... execute the effect ...
 /// ```
 Future<void> asyncWhen(bool Function(Reaction) predicate,
