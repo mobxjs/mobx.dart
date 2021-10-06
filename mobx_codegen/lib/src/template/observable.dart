@@ -30,29 +30,30 @@ class ObservableTemplate {
   }
 
   String _buildGetters() {
-    final buffer = StringBuffer()..writeln();
-    if (!isReadOnly) {
-      buffer.writeln('  @override');
-    }
-    buffer.writeln('''
+    if (isReadOnly) {
+      return '''
   $type get $getterName {
     $atomName.reportRead();
     return super.$name;
-  }''');
-    if (isReadOnly) {
-      buffer
-        ..writeln()
-        ..writeln('  @override')
-        ..write('  $type get $name => $getterName;')
-        ..writeln();
+  }
+
+  @override
+  $type get $name => $getterName;''';
     }
-    return buffer.toString();
+    return '''
+  @override
+  $type get $getterName {
+    $atomName.reportRead();
+    return super.$name;
+  }''';
   }
 
   @override
   String toString() => """
   final $atomName = Atom(name: '${storeTemplate.parentTypeName}.$name');
+
 ${_buildGetters()}
+
   @override
   set $name($type value) {
     $atomName.reportWrite(value, super.$name, () {
