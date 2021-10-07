@@ -29,15 +29,30 @@ class ObservableTemplate {
     return name;
   }
 
-  @override
-  String toString() => """
-  final $atomName = Atom(name: '${storeTemplate.parentTypeName}.$name');
-
-  ${isReadOnly ? '' : '@override'}
+  String _buildGetters() {
+    if (isReadOnly) {
+      return '''
   $type get $getterName {
     $atomName.reportRead();
     return super.$name;
   }
+
+  @override
+  $type get $name => $getterName;''';
+    }
+    return '''
+  @override
+  $type get $getterName {
+    $atomName.reportRead();
+    return super.$name;
+  }''';
+  }
+
+  @override
+  String toString() => """
+  final $atomName = Atom(name: '${storeTemplate.parentTypeName}.$name');
+
+${_buildGetters()}
 
   @override
   set $name($type value) {

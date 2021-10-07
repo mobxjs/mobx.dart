@@ -107,14 +107,15 @@ void main() {
       expect(template.getterName, equals(template.name.nonPrivateName));
     });
 
-    test('renders template based on template data', () {
-      final template = ObservableTemplate(
-          storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentName'),
-          atomName: '_atomFieldName',
-          type: 'FieldType',
-          name: 'fieldName');
-
-      expect(template.toString(), equals("""
+    group('renders template based on template data', () {
+      test('on public field', () {
+        final template = ObservableTemplate(
+            storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentName'),
+            atomName: '_atomFieldName',
+            type: 'FieldType',
+            name: 'fieldName');
+        final output = template.toString();
+        expect(output, equals("""
   final _atomFieldName = Atom(name: 'ParentName.fieldName');
 
   @override
@@ -129,6 +130,36 @@ void main() {
       super.fieldName = value;
     });
   }"""));
+      });
+
+      test('on readonly field', () {
+        final template = ObservableTemplate(
+          storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentName'),
+          atomName: '_atomFieldName',
+          type: 'FieldType',
+          name: '_fieldName', 
+          isPrivate: true,
+          isReadOnly: true,
+        );
+        final output = template.toString();
+        expect(output, equals("""
+  final _atomFieldName = Atom(name: 'ParentName._fieldName');
+
+  FieldType get fieldName {
+    _atomFieldName.reportRead();
+    return super._fieldName;
+  }
+
+  @override
+  FieldType get _fieldName => fieldName;
+
+  @override
+  set _fieldName(FieldType value) {
+    _atomFieldName.reportWrite(value, super._fieldName, () {
+      super._fieldName = value;
+    });
+  }"""));
+      });
     });
   });
 
