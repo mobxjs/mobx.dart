@@ -1,3 +1,7 @@
+## 2.0.4
+
+- make readonly work with computed - @Ascenio
+
 ## 2.0.3
 
 - Moved `analyzer` package to `2.0.0` - @davidmartos96

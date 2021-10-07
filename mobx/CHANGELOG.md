@@ -1,3 +1,8 @@
+## 2.0.5
+
+- Fix for `ObservableStream.listen()` should also keep observable values updated (#708) - @brianrobles204
+- Added missing parameter to `asyncWhen` - @easeccy
+
 ## 2.0.4
 
 - Moved `analyzer` package to `2.0.0` - @davidmartos96
