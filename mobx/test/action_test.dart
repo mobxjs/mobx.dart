@@ -157,11 +157,11 @@ void main() {
       act();
 
       mock.verifyInOrder([
-        //() => context.nameFor('Action'),
-        //() => context.startUntracked(),
-        //() => context.startBatch(),
-        //() => context.endBatch(),
-        //() => context.endUntracked(null)
+        () => context.nameFor('Action'),
+        () => context.startUntracked(),
+        () => context.startBatch(),
+        () => context.endBatch(),
+        () => context.endUntracked(null)
       ]);
     });
 
