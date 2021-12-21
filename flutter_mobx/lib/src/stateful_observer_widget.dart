@@ -2,8 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 
-import 'observer_widget_mixin.dart';
-
 /// A [StatefulWidget] that rebuilds when an [Observable] used inside
 /// [State.build] updates.
 ///

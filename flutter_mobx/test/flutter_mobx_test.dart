@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_mobx/src/observer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when, version;
 import 'package:mocktail/mocktail.dart';
