@@ -22,6 +22,7 @@ void main() {
       when(() => context.nameFor(any())).thenReturn('Test-Action');
       when(() => context.startAllowStateChanges(allow: any(named: 'allow')))
           .thenReturn(true);
+      when(() => context.isSpyEnabled).thenReturn(false);
 
       ActionController(context: context).startAction();
 
@@ -40,6 +41,7 @@ void main() {
       when(() => context.startAllowStateChanges(allow: any(named: 'allow')))
           .thenReturn(true);
       when(() => context.startUntracked()).thenReturn(prevDerivation);
+      when(() => context.isSpyEnabled).thenReturn(false);
 
       final runInfo = ActionRunInfo(
           name: 'test',
