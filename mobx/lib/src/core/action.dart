@@ -82,24 +82,27 @@ class ActionController {
   ActionRunInfo startAction({String? name}) {
     final reportingName = name ?? this.name;
     _context.spyReport(ActionSpyEvent(name: reportingName));
-    final startTime = DateTime.now();
+    final startTime = _context.isSpyEnabled ? DateTime.now() : null;
 
     final prevDerivation = _context.startUntracked();
     _context.startBatch();
     final prevAllowStateChanges = _context.startAllowStateChanges(allow: true);
 
     return ActionRunInfo(
-        prevDerivation: prevDerivation,
-        prevAllowStateChanges: prevAllowStateChanges,
-        name: reportingName,
-        startTime: startTime);
+      prevDerivation: prevDerivation,
+      prevAllowStateChanges: prevAllowStateChanges,
+      name: reportingName,
+      startTime: startTime,
+    );
   }
 
   void endAction(ActionRunInfo info) {
-    _context.spyReport(EndedSpyEvent(
-        type: 'action',
-        name: info.name,
-        duration: DateTime.now().difference(info.startTime)));
+    final duration = _context.isSpyEnabled
+        ? DateTime.now().difference(info.startTime!)
+        : Duration.zero;
+    _context.spyReport(
+      EndedSpyEvent(type: 'action', name: info.name, duration: duration),
+    );
 
     // ignore: cascade_invocations
     _context
@@ -112,7 +115,7 @@ class ActionController {
 class ActionRunInfo {
   ActionRunInfo({
     required this.name,
-    required this.startTime,
+    this.startTime,
     this.prevDerivation,
     this.prevAllowStateChanges = true,
   });
@@ -120,5 +123,5 @@ class ActionRunInfo {
   final Derivation? prevDerivation;
   final bool prevAllowStateChanges;
   final String name;
-  final DateTime startTime;
+  final DateTime? startTime;
 }
