@@ -73,7 +73,8 @@ class ObservableMap<K, V>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _map[key as K?];
+    final castedKey = key as K?;
+    return _map[castedKey];
   }
 
   @override
