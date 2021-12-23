@@ -1,23 +1,30 @@
-import 'package:dart_json_mapper/dart_json_mapper.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/todos/observable_todo_list_converter.dart';
 
 import 'todo.dart';
 
 part 'todo_list.g.dart';
 
-@jsonSerializable
 enum VisibilityFilter { all, pending, completed }
 
-@jsonSerializable
-class TodoList extends _TodoList with _$TodoList {}
+@JsonSerializable()
+class TodoList extends _TodoList with _$TodoList {
+  TodoList();
 
-@jsonSerializable
+  factory TodoList.fromJson(Map<String, dynamic> json) =>
+      _$TodoListFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TodoListToJson(this);
+}
+
 abstract class _TodoList with Store {
   @observable
+  @ObservableTodoListConverter()
   ObservableList<Todo> todos = ObservableList<Todo>();
 
   @observable
-  @JsonProperty(defaultValue: VisibilityFilter.all)
+  @JsonKey(defaultValue: VisibilityFilter.all)
   VisibilityFilter filter = VisibilityFilter.all;
 
   @computed
@@ -45,7 +52,7 @@ abstract class _TodoList with Store {
   }
 
   @computed
-  @JsonProperty(ignore: true)
+  @JsonKey(ignore: true)
   ObservableList<Todo> get visibleTodos {
     switch (filter) {
       case VisibilityFilter.pending:

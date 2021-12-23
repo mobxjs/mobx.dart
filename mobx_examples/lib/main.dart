@@ -1,5 +1,3 @@
-import 'package:dart_json_mapper/dart_json_mapper.dart';
-import 'package:dart_json_mapper_mobx/dart_json_mapper_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -12,14 +10,10 @@ import 'package:mobx_examples/settings/settings_store.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'main.reflectable.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final sharedPreferences = await SharedPreferences.getInstance();
-  initializeReflectable();
-  JsonMapper().useAdapter(mobXAdapter);
 
   mainContext.spy(print);
 

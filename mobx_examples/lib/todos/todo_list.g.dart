@@ -3,6 +3,27 @@
 part of 'todo_list.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+TodoList _$TodoListFromJson(Map<String, dynamic> json) => TodoList()
+  ..todos = const ObservableTodoListConverter()
+      .fromJson(json['todos'] as Iterable<Map<String, dynamic>>)
+  ..filter = $enumDecodeNullable(_$VisibilityFilterEnumMap, json['filter']) ??
+      VisibilityFilter.all;
+
+Map<String, dynamic> _$TodoListToJson(TodoList instance) => <String, dynamic>{
+      'todos': const ObservableTodoListConverter().toJson(instance.todos),
+      'filter': _$VisibilityFilterEnumMap[instance.filter],
+    };
+
+const _$VisibilityFilterEnumMap = {
+  VisibilityFilter.all: 'all',
+  VisibilityFilter.pending: 'pending',
+  VisibilityFilter.completed: 'completed',
+};
+
+// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 

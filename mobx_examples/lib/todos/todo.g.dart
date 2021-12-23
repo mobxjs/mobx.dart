@@ -3,6 +3,19 @@
 part of 'todo.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Todo _$TodoFromJson(Map<String, dynamic> json) => Todo(
+      json['description'] as String,
+    )..done = json['done'] as bool;
+
+Map<String, dynamic> _$TodoToJson(Todo instance) => <String, dynamic>{
+      'description': instance.description,
+      'done': instance.done,
+    };
+
+// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 

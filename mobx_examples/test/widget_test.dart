@@ -1,15 +1,8 @@
-import 'package:dart_json_mapper/dart_json_mapper.dart';
-import 'package:dart_json_mapper_mobx/dart_json_mapper_mobx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_examples/todos/todo_list.dart';
 
-import 'todos_test.reflectable.dart';
-
 void main() {
-  initializeReflectable();
-  JsonMapper().useAdapter(mobXAdapter);
-
   late TodoList list;
 
   setUp(() {
@@ -18,46 +11,25 @@ void main() {
 
   test('TodoList JSON serialization/(de)serialization', () {
     expect(list.todos.length, equals(0));
-    list..addTodo('first one')..addTodo('second one');
+    list
+      ..addTodo('first one')
+      ..addTodo('second one');
 
-    const targetJson = '''
-{
- "todos": [
-  {
-   "description": "first one",
-   "done": false
-  },
-  {
-   "description": "second one",
-   "done": false
-  }
- ],
- "filter": "VisibilityFilter.all",
- "pendingTodos": [
-  {
-   "description": "first one",
-   "done": false
-  },
-  {
-   "description": "second one",
-   "done": false
-  }
- ],
- "completedTodos": [],
- "hasCompletedTodos": false,
- "hasPendingTodos": true,
- "itemsDescription": "2 pending todos, 0 completed",
- "canRemoveAllCompleted": false,
- "canMarkAllCompleted": true
-}''';
+    const targetJson = <String, dynamic>{
+      'todos': [
+        {'description': 'first one', 'done': false},
+        {'description': 'second one', 'done': false}
+      ],
+      'filter': 'all',
+    };
 
-    final listJson = JsonMapper.serialize(list);
+    final listJson = list.toJson();
     expect(listJson, targetJson);
 
-    final listInstance = JsonMapper.deserialize<TodoList>(listJson);
-    expect(list.todos.length, listInstance?.todos.length);
-    expect(list.canMarkAllCompleted, listInstance?.canMarkAllCompleted);
-    expect(list.itemsDescription, listInstance?.itemsDescription);
+    final listInstance = TodoList.fromJson(listJson);
+    expect(list.todos.length, listInstance.todos.length);
+    expect(list.canMarkAllCompleted, listInstance.canMarkAllCompleted);
+    expect(list.itemsDescription, listInstance.itemsDescription);
   });
 
   test('TodoList starts with default configuration', () {
