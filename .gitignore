@@ -47,7 +47,6 @@ coverage_badge.svg
 .svn/
 
 # IntelliJ related
-*.iml
 *.ipr
 *.iws
 .idea/
