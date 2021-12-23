@@ -521,6 +521,15 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "harrypunk",
+      "name": "harrypunk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4889163?v=4",
+      "profile": "https://github.com/harrypunk",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
