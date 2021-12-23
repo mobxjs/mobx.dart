@@ -1,6 +1,7 @@
-## 2.0.3
+## 2.0.3 - 2.0.3+1
 
 - Package upgrades
+- Minor cleanups
 
 ## 2.0.2
 
