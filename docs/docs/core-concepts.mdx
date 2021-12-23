@@ -43,7 +43,7 @@ class Counter {
   int get value => _value.value;
 
   set value(int newValue) => _value.value = newValue;
-  Action increment;
+  late Action increment;
 
   void _increment() {
     _value.value++;
