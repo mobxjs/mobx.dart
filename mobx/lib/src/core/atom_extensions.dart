@@ -10,11 +10,13 @@ extension AtomSpyReporter on Atom {
     context.spyReport(ObservableValueSpyEvent(this,
         newValue: newValue, oldValue: oldValue, name: name));
 
+    final actionName = context.isSpyEnabled ? '${name}_set' : name;
+
     // ignore: cascade_invocations
     context.conditionallyRunInAction(() {
       setNewValue();
       reportChanged();
-    }, this, name: '${name}_set');
+    }, this, name: actionName);
 
     // ignore: cascade_invocations
     context.spyReport(EndedSpyEvent(type: 'observable', name: name));

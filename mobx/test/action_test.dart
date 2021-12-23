@@ -151,6 +151,7 @@ void main() {
           .when(() =>
               context.startAllowStateChanges(allow: mock.any(named: 'allow')))
           .thenReturn(true);
+      mock.when(() => context.isSpyEnabled).thenReturn(false);
 
       final act = Action(fn, context: context);
       act();
