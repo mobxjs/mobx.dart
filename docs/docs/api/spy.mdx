@@ -23,8 +23,9 @@ Using the `spy()` method of a `ReactiveContext`, you can get notified of all act
 import 'package:mobx/mobx.dart';
 
 void main() {
-
-  // ...
+  mainContext.config = mainContext.config.clone(
+    isSpyEnabled: true,
+  );
 
   mainContext.spy((event) { /* ... */ });
 
@@ -33,6 +34,9 @@ void main() {
 ```
 
 In this case, we are setting up a spy right in the top-level `main()` method. This gives us visibility into MobX, right from the get-go.
+
+Notice that before we spy on events, we must first make sure that spying is
+enabled. Otherwise, we won't be able to capture any events.
 
 ### `ReactiveContext.spy()`
 
@@ -63,9 +67,10 @@ Let us setup the spy to do some logging of the MobX activities.
 ```dart {7}
 import 'package:mobx/mobx.dart';
 
-Future<void> main() async {
-
-  // ...
+void main() {
+  mainContext.config = mainContext.config.clone(
+    isSpyEnabled: true,
+  );
 
   mainContext.spy(print);
 
