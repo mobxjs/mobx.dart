@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/util.dart';
+import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
@@ -53,7 +54,7 @@ MockTypeChecker streamChecker({bool isStream = false}) {
 
 void main() {
   setUpAll(() {
-    registerFallbackValue<DartType>(MockType());
+    registerFallbackValue(MockType());
   });
 
   group('AsyncMethodChecker', () {
@@ -97,5 +98,9 @@ void main() {
             isTrue);
       });
     });
+  });
+
+  test('NonPrivateNameExtension should remove only leading underscores', () {
+    expect('__foo_bar__'.nonPrivateName, equals('foo_bar__'));
   });
 }

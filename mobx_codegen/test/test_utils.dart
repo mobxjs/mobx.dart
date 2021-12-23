@@ -57,8 +57,8 @@ Future<String> generate(String source) async {
 String getFilePath(String filename) {
   final context = path.Context(
       style: Platform.isWindows ? path.Style.windows : path.Style.posix);
-  final baseDir = context.dirname(Platform.script.path);
-  var filePath = context.join(baseDir, filename);
+  final baseDir = context.dirname(Directory.current.path);
+  var filePath = context.join(baseDir, 'mobx_codegen/test/', filename);
   filePath = context.fromUri(context.normalize(filePath));
   filePath = context.fromUri(filePath).split('file:').last;
 
