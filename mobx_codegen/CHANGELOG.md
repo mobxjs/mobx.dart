@@ -1,3 +1,8 @@
+## 2.0.5
+
+- Fixed some tests not picking the right path for data files
+- Package upgrades
+
 ## 2.0.4
 
 - make readonly work with computed - @Ascenio
