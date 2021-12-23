@@ -70,7 +70,7 @@ mixin ObserverElementMixin on ComponentElement {
 
   @override
   Widget build() {
-    late Widget built;
+    late final Widget built;
 
     reaction.track(() {
       built = super.build();
