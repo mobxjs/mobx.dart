@@ -1,3 +1,8 @@
+## 2.0.6
+
+- Improved performance when spying is disabled. Thanks to @Ascenio.
+- Package upgrades
+
 ## 2.0.5
 
 - Fix for `ObservableStream.listen()` should also keep observable values updated (#708) - @brianrobles204
