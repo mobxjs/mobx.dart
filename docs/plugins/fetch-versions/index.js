@@ -14,10 +14,10 @@ const plugins = [
     pub: 'build_runner',
   },
   {
-    pub: 'dart_json_mapper',
+    pub: 'json_serializable',
   },
   {
-    pub: 'dart_json_mapper_mobx',
+    pub: 'json_annotation',
   },
 ];
 
