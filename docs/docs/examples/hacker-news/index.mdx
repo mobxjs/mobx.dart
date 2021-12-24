@@ -8,7 +8,9 @@ import { PubBadge } from '../../../src/components/PubBadge';
 
 In this example we will rely on the `ObservableFuture` to keep track of the fetch calls to the HackerNews API. The entire state of the application will be defined in terms of the `ObservableFuture`.
 
-> The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
+:::info
+The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
+:::
 
 ## Observable State
 
@@ -227,4 +229,6 @@ import hnGif from './hn.gif';
 
 The HackerNews example makes good use of the `ObservableFuture` and uses it to show the different states of fetching the news. Since we are not really storing the news for anything else, we could pull if off with a just the `ObservableFuture<List<FeedItem>>`. As the use cases change, we may have to store it in a `List<FeedItem>`, or even an `ObservableList<FeedItem>`.
 
-> The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
+:::info
+The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
+:::
