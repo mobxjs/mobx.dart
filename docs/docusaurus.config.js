@@ -105,6 +105,14 @@ module.exports = {
     gtag: {
       trackingID: 'UA-60235345-4',
     },
+    algolia: {
+      appId: 'BH4D9OD16A',
+
+      // Public API key: it is safe to commit it
+      apiKey: 'f0884fc2d6adbe519ae7a1ea72aa2af6',
+
+      indexName: 'mobx_dart_flutter',
+    },
   },
   plugins: [path.resolve(__dirname, './plugins/fetch-versions')],
   presets: [
