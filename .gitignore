@@ -36,7 +36,6 @@ coverage_badge.svg
 
 # Miscellaneous
 *.class
-*.lock
 *.log
 *.pyc
 *.swp
