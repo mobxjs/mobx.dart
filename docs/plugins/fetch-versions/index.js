@@ -31,7 +31,7 @@ async function fetchPluginVersion(plugin) {
       return '';
     }
 
-    return versions[versions.length - 1];
+    return versions[0];
   } catch (e) {
     console.log(`Failed to load version for plugin "${plugin}".`);
     return '';
@@ -78,7 +78,7 @@ module.exports = function sourceVersions() {
                 ...current,
                 [envVar]: JSON.stringify(process.env[envVar] || ''),
               };
-            }, {}),
+            }, {})
           ),
         ],
       };

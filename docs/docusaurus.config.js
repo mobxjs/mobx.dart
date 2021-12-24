@@ -87,7 +87,7 @@ module.exports = {
       additionalLanguages: ['dart'],
       defaultLanguage: 'dart',
     },
-    metadatas: [
+    metadata: [
       { name: 'twitter:card', content: 'summary' },
       { name: 'twitter:site', content: '@pavanpodila' },
       { name: 'twitter:title', content: 'MobX for the Dart language' },
@@ -98,8 +98,7 @@ module.exports = {
       },
       {
         name: 'twitter:image',
-        content:
-          'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/mobx.png',
+        content: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/mobx.png',
       },
       { name: 'twitter:image:alt', content: 'The MobX Logo' },
     ],
@@ -107,9 +106,7 @@ module.exports = {
       trackingID: 'UA-60235345-4',
     },
   },
-  plugins: [
-    path.resolve(__dirname, './plugins/fetch-versions'),
-  ],
+  plugins: [path.resolve(__dirname, './plugins/fetch-versions')],
   presets: [
     [
       '@docusaurus/preset-classic',
