@@ -1,7 +1,8 @@
-## 2.0.6
+## 2.0.6 - 2.0.6+1
 
 - Improved performance when spying is disabled. Thanks to @Ascenio.
 - Package upgrades
+- Adopting the recommended linting for Dart
 
 ## 2.0.5
 

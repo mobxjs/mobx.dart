@@ -36,6 +36,7 @@ abstract class _HackerNewsStore with Store {
     if (await canLaunch(url ?? '')) {
       await launch(url!);
     } else {
+      // ignore: avoid_print
       print('Could not open $url');
     }
   }

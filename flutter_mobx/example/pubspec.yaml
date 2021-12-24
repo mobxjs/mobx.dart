@@ -1,9 +1,0 @@
-name: flutter_mobx_example
-description: Examples for flutter_mobx.
-private: true
-
-version: 1.0.0+1
-
-environment:
-  sdk: '>=2.7.0 <3.0.0'
-

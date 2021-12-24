@@ -15,13 +15,14 @@ Future<void> main() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
+  // ignore: avoid_print
   mainContext.spy(print);
 
   runApp(MyApp(sharedPreferences));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp(this.sharedPreferences);
+  const MyApp(this.sharedPreferences, {Key? key}) : super(key: key);
 
   final SharedPreferences sharedPreferences;
 
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
                       store.useDarkMode ? Brightness.dark : Brightness.light,
                 ),
                 routes: {
-                  '/': (_) => ExampleList(),
+                  '/': (_) => const ExampleList(),
                 }..addEntries(
                     examples.map((ex) => MapEntry(ex.path, ex.widgetBuilder))),
               ),
@@ -60,6 +61,8 @@ class MyApp extends StatelessWidget {
 }
 
 class ExampleList extends StatelessWidget {
+  const ExampleList({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(

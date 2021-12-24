@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_examples/counter/counter.dart';
 
 class CounterExample extends StatefulWidget {
-  const CounterExample();
+  const CounterExample({Key? key}) : super(key: key);
 
   @override
   CounterExampleState createState() => CounterExampleState();

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
 import 'package:mobx_examples/random_stream/random_store.dart';
 
 class RandomNumberExample extends StatefulWidget {
-  const RandomNumberExample();
+  const RandomNumberExample({Key? key}) : super(key: key);
 
   @override
   _RandomNumberExampleState createState() => _RandomNumberExampleState();
@@ -31,7 +30,7 @@ class _RandomNumberExampleState extends State<RandomNumberExample> {
                 final value = store.randomStream.value;
 
                 return Text(
-                  '${value == null ? '---' : value}',
+                  '${value ?? '---'}',
                   style: const TextStyle(fontSize: 96),
                 );
               },

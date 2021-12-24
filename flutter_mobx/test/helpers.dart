@@ -21,8 +21,8 @@ class MockReaction extends Mock implements ReactionImpl {
 
 // ignore: must_be_immutable
 class TestObserver extends Observer {
-  TestObserver(this.reaction, {required WidgetBuilder builder})
-      : super(builder: builder);
+  TestObserver(this.reaction, {Key? key, required WidgetBuilder builder})
+      : super(builder: builder, key: key);
 
   final Reaction reaction;
 

@@ -156,8 +156,10 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
 
   bool _isEqual(T? x, T? y) => equals == null ? x == y : equals!(x, y);
 
-  void Function() observe(void Function(ChangeNotification<T>) handler,
-      {@deprecated bool? fireImmediately}) {
+  void Function() observe(
+      void Function(ChangeNotification<T>) handler,
+      {@Deprecated('fireImmediately has no effect anymore. It is on by default.')
+          bool? fireImmediately}) {
     T? prevValue;
 
     void notifyChange() {

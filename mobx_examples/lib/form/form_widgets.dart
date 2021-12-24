@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_examples/form/form_store.dart';
 
 class FormExample extends StatefulWidget {
-  const FormExample();
+  const FormExample({Key? key}) : super(key: key);
 
   @override
   _FormExampleState createState() => _FormExampleState();

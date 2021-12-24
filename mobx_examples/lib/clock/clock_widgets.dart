@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_examples/clock/clock.dart';
 
 class ClockExample extends StatefulWidget {
-  const ClockExample();
+  const ClockExample({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ClockState();

@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_examples/hackernews/hn_api.dart';
-
 import 'package:mobx_examples/hackernews/news_store.dart';
 
 class HackerNewsExample extends StatefulWidget {
-  const HackerNewsExample();
+  const HackerNewsExample({Key? key}) : super(key: key);
 
   @override
   _HackerNewsExampleState createState() => _HackerNewsExampleState();
@@ -50,7 +49,7 @@ class _HackerNewsExampleState extends State<HackerNewsExample>
 }
 
 class FeedItemsView extends StatelessWidget {
-  const FeedItemsView(this.store, this.type);
+  const FeedItemsView(this.store, this.type, {Key? key}) : super(key: key);
 
   final HackerNewsStore store;
   final FeedType type;

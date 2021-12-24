@@ -51,7 +51,7 @@ final List<Example> examples = [
     title: 'Todos',
     description: 'Managing a list of Todos, the TodoMVC way.',
     path: '/todos',
-    widgetBuilder: (_) => TodoExample(),
+    widgetBuilder: (_) => const TodoExample(),
   ),
   Example(
     title: 'Github Repos',
@@ -97,6 +97,6 @@ final List<Example> examples = [
     title: 'Dice',
     description: 'A Fun Dice app.',
     path: '/dice',
-    widgetBuilder: (_) => DiceExample(),
+    widgetBuilder: (_) => const DiceExample(),
   ),
 ];

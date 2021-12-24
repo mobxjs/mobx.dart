@@ -79,5 +79,6 @@ class HNApi {
 // Only for testing
 Future<void> main() async {
   final list = await HNApi().top();
+  // ignore: avoid_print
   print(list);
 }

@@ -4,6 +4,8 @@ import 'package:mobx_examples/todos/todo_list.dart';
 import 'package:provider/provider.dart';
 
 class TodoExample extends StatelessWidget {
+  const TodoExample({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Provider<TodoList>(
       create: (_) => TodoList(),
@@ -14,14 +16,16 @@ class TodoExample extends StatelessWidget {
           body: Column(
             children: <Widget>[
               AddTodo(),
-              ActionBar(),
-              Description(),
-              TodoListView()
+              const ActionBar(),
+              const Description(),
+              const TodoListView()
             ],
           )));
 }
 
 class Description extends StatelessWidget {
+  const Description({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final list = Provider.of<TodoList>(context);
@@ -37,6 +41,8 @@ class Description extends StatelessWidget {
 }
 
 class TodoListView extends StatelessWidget {
+  const TodoListView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final list = Provider.of<TodoList>(context);
@@ -72,6 +78,8 @@ class TodoListView extends StatelessWidget {
 }
 
 class ActionBar extends StatelessWidget {
+  const ActionBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final list = Provider.of<TodoList>(context);
@@ -135,6 +143,8 @@ class ActionBar extends StatelessWidget {
 
 class AddTodo extends StatelessWidget {
   final _textController = TextEditingController(text: '');
+
+  AddTodo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -17,6 +17,7 @@ class Clock {
   Timer? _timer;
 
   void _startTimer() {
+    // ignore: avoid_print
     print('Clock started ticking');
 
     _timer?.cancel();
@@ -27,6 +28,7 @@ class Clock {
   void _stopTimer() {
     _timer?.cancel();
 
+    // ignore: avoid_print
     print('Clock stopped ticking');
   }
 

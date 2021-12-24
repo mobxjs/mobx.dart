@@ -7,10 +7,10 @@ class ObservableTodoListConverter extends JsonConverter<ObservableList<Todo>,
   const ObservableTodoListConverter();
 
   @override
-  ObservableList<Todo> fromJson(Iterable<Map<String, dynamic>> list) =>
-      ObservableList.of(list.map(Todo.fromJson));
+  ObservableList<Todo> fromJson(Iterable<Map<String, dynamic>> json) =>
+      ObservableList.of(json.map(Todo.fromJson));
 
   @override
-  Iterable<Map<String, dynamic>> toJson(ObservableList<Todo> list) =>
-      list.map((element) => element.toJson());
+  Iterable<Map<String, dynamic>> toJson(ObservableList<Todo> object) =>
+      object.map((element) => element.toJson());
 }

@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_examples/settings/settings_store.dart';
 
 class SettingsExample extends StatelessWidget {
-  const SettingsExample(this.store);
+  const SettingsExample(this.store, {Key? key}) : super(key: key);
 
   final SettingsStore store;
 

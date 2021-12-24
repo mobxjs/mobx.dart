@@ -49,42 +49,42 @@ done: ${done}
 }
 
 mixin _$TodoList on TodoListBase, Store {
-  Computed<ObservableList<Todo>> _$pendingTodosComputed;
+  Computed<ObservableList<Todo>>? _$pendingTodosComputed;
 
   @override
   ObservableList<Todo> get pendingTodos => (_$pendingTodosComputed ??=
           Computed<ObservableList<Todo>>(() => super.pendingTodos,
               name: 'TodoListBase.pendingTodos'))
       .value;
-  Computed<ObservableList<Todo>> _$completedTodosComputed;
+  Computed<ObservableList<Todo>>? _$completedTodosComputed;
 
   @override
   ObservableList<Todo> get completedTodos => (_$completedTodosComputed ??=
           Computed<ObservableList<Todo>>(() => super.completedTodos,
               name: 'TodoListBase.completedTodos'))
       .value;
-  Computed<bool> _$hasCompletedTodosComputed;
+  Computed<bool>? _$hasCompletedTodosComputed;
 
   @override
   bool get hasCompletedTodos => (_$hasCompletedTodosComputed ??= Computed<bool>(
           () => super.hasCompletedTodos,
           name: 'TodoListBase.hasCompletedTodos'))
       .value;
-  Computed<bool> _$hasPendingTodosComputed;
+  Computed<bool>? _$hasPendingTodosComputed;
 
   @override
   bool get hasPendingTodos =>
       (_$hasPendingTodosComputed ??= Computed<bool>(() => super.hasPendingTodos,
               name: 'TodoListBase.hasPendingTodos'))
           .value;
-  Computed<String> _$itemsDescriptionComputed;
+  Computed<String>? _$itemsDescriptionComputed;
 
   @override
   String get itemsDescription => (_$itemsDescriptionComputed ??=
           Computed<String>(() => super.itemsDescription,
               name: 'TodoListBase.itemsDescription'))
       .value;
-  Computed<ObservableList<Todo>> _$visibleTodosComputed;
+  Computed<ObservableList<Todo>>? _$visibleTodosComputed;
 
   @override
   ObservableList<Todo> get visibleTodos => (_$visibleTodosComputed ??=

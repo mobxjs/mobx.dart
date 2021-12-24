@@ -1,8 +1,7 @@
-include: ../analysis_options.yaml
+include: package:lints/recommended.yaml
 
 analyzer:
   exclude:
     - test/*.mocks.dart
-    - example/**/*.dart # Todo(pavanpodila) remove this after mobx_codegen is migrated to null-safety
   strong-mode:
     implicit-casts: false

@@ -1,7 +1,8 @@
-## 2.0.3 - 2.0.3+1
+## 2.0.3 - 2.0.3+2
 
 - Package upgrades
 - Minor cleanups
+- Adopting the recommended linting for Dart
 
 ## 2.0.2
 
