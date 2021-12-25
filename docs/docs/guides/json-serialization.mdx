@@ -49,6 +49,8 @@ class TodoList extends _TodoList with _$TodoList {}
 
 abstract class _TodoList with Store {
   @observable
+// highlight-next-line
+  @ObservableTodoListConverter()
   ObservableList<Todo> todos = ObservableList<Todo>();
 
   @observable
@@ -126,6 +128,46 @@ abstract class _TodoList with Store {
       todo.done = true;
     }
   }
+}
+```
+
+## Custom Converters
+
+In case of special types like `ObservableList<Todo>`, which are not directly serializable into JSON, we can write custom converters
+by extending the `JsonConverter<T, S>` type, as shown below:
+
+```dart
+import 'package:json_annotation/json_annotation.dart';
+import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/todos/todo.dart';
+
+// highlight-start
+class ObservableTodoListConverter extends JsonConverter<ObservableList<Todo>,
+    Iterable<Map<String, dynamic>>> {
+// highlight-end
+  const ObservableTodoListConverter();
+
+  @override
+  ObservableList<Todo> fromJson(Iterable<Map<String, dynamic>> json) =>
+      ObservableList.of(json.map(Todo.fromJson));
+
+  @override
+  Iterable<Map<String, dynamic>> toJson(ObservableList<Todo> object) =>
+      object.map((element) => element.toJson());
+}
+
+```
+
+This converter is then used for the `todos` property as shown below:
+
+```dart
+abstract class _TodoList with Store {
+  @observable
+// highlight-next-line
+  @ObservableTodoListConverter()
+  ObservableList<Todo> todos = ObservableList<Todo>();
+
+// ...
 }
 ```
 

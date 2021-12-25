@@ -39,14 +39,14 @@ dev_dependencies:
 In your project folder, run this command to fetch all the packages:
 
 ```
-flutter packages get
+flutter pub get
 ```
 
 At this point you should have all the necessary packages to continue development.
 
 ## Add a Store
 
-Now, let's create a MobX store. A store in MobX is a way of collecting the related observable state under one class. The store allows us to use annotations and keeps the code simple. Create a new file `counter.dart` in **`\lib`** folder and add the following code to it.
+Now, let's create a MobX **store**. A store in MobX is a way of collecting the related observable state under one class. The store allows us to use annotations and keeps the code simple. Create a new file `counter.dart` in **`\lib`** folder and add the following code to it.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -85,7 +85,7 @@ The interesting parts here are:
 Run the following command inside your project folder. This generates the code in `counter.g.dart`, which we have already included as part file.
 
 ```
-flutter packages pub run build_runner build
+flutter pub run build_runner build
 ```
 
 On the command-line, here's the output we got from running it. Yours might be slightly different.
@@ -120,7 +120,7 @@ On the command-line, here's the output we got from running it. Yours might be sl
 > If you are making changes to the store and want to generate `*.g.dart` files automatically, you can use the following command:
 
 > ```
-> flutter packages pub run build_runner watch
+> flutter pub run build_runner watch
 > ```
 >
 > ### Starting Clean
@@ -129,7 +129,7 @@ On the command-line, here's the output we got from running it. Yours might be sl
 > `build_runner`. In that case, you can add the following flag to delete the `*.g.dart` files before generating them.
 >
 > ```
-> flutter packages pub run build_runner watch --delete-conflicting-outputs
+> flutter pub run build_runner watch --delete-conflicting-outputs
 > ```
 
 ## Connect the Store and add an Observer to your Widget

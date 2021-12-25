@@ -15,7 +15,7 @@ The version of the `sdk` used in the `pubspec.yaml` has a big influence on what 
 As you work on your stores, you would want to keep the `build_runner` active, constantly generating the `*.g.dart` files. The trick to keep it running is to use the **`watch`** sub-command, as shown below:
 
 ```
-flutter packages pub run build_runner watch
+flutter pub run build_runner watch
 ```
 
 OR
@@ -31,13 +31,13 @@ Sometimes `build_runner` will simply refuse to run the build if you already have
 - Clean and remove all generated files
 
 ```
-flutter packages pub run build_runner clean
+flutter pub run build_runner clean
 ```
 
 - Delete conflicting files
 
 ```
-flutter packages pub run build_runner watch --delete-conflicting-outputs
+flutter pub run build_runner watch --delete-conflicting-outputs
 ```
 
 ## Unable to run the app in iOS Simulator (Old iOS Deployment Target)

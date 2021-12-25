@@ -71,7 +71,7 @@ abstract class _HackerNewsStore with Store {
 > Note that in the background we are running the build_runner to generate the `*.g.dart` file. This command is run in the folder containing the project.
 >
 > ```
-> flutter packages pub run build_runner watch --delete-conflicting-outputs
+> flutter pub run build_runner watch --delete-conflicting-outputs
 > ```
 
 The two actions `fetchLatest()` and `fetchTop()` create a new instance of the `ObservableFuture`, fetching the refreshed results. Note that the `result` field of each stores the list: `List<FeedItem>`.
