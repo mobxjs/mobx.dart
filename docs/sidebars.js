@@ -35,13 +35,7 @@ module.exports = {
       type: 'category',
       label: 'API Overview',
       collapsed: false,
-      items: [
-        'api/observable',
-        'api/action',
-        'api/reaction',
-        'api/context',
-        'api/spy',
-      ],
+      items: ['api/observable', 'api/action', 'api/reaction', 'api/observers', 'api/context', 'api/spy'],
     },
     {
       Development: ['development/blueprint', 'development/release'],
