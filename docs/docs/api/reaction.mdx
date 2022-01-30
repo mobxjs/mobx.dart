@@ -17,7 +17,7 @@ Reactions, or Derivations come in few flavors: `autorun`, `reaction`, `when` and
 
 ## autorun
 
-### `ReactionDisposer autorun(Function(Reaction) fn)`
+#### `ReactionDisposer autorun(Function(Reaction) fn)`
 
 Runs the reaction immediately and also on any change in the observables used inside
 `fn`.
@@ -44,7 +44,7 @@ dispose();
 
 ## reaction
 
-### `ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect)`
+#### `ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect)`
 
 Monitors the observables used inside the `fn()` tracking function and runs the `effect()` when
 the tracking function returns a different value. Only the observables inside `fn()` are tracked.
@@ -68,7 +68,7 @@ dispose();
 
 ## when
 
-### `ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`
+#### `ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`
 
 Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
 
@@ -88,7 +88,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 ## asyncWhen
 
-### `Future<void> asyncWhen(bool Function(Reaction) predicate)`
+#### `Future<void> asyncWhen(bool Function(Reaction) predicate)`
 
 Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
 
@@ -99,83 +99,5 @@ void waitForCompletion() async {
   await asyncWhen(() => completed.value == true);
 
   print('Completed');
-}
-```
-
-## Observer Widget
-
-### `Observer({@required Widget Function(BuildContext context) builder})`
-
-One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the
-[![pub package for flutter_mobx](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
-package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
-
-> ### Immediate context for `builder`
->
-> The key thing to note is that the `builder` function will only track the observables in its immediate execution context. If an observable
-> is being used in a nested function, it will not be tracked. Make sure to dereference (a.k.a. read) an observable in the immediate
-> execution context. If no observables are found when running the `builder` function, it will warn you on the console.
->
-> This is one of the most common gotchas when using MobX. Just because you have nested functions inside a `builder`, which are reading
-> an observable, it does not actually track the observable. It can appear deceiving but the fact is, the observable was not in the
-> **immediate execution context**. Be watchful for this scenario, especially when your `Observer`-wrapped `Widgets` are not updating properly.
-
-Below is the _Counter_ example in its entirety.
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
-
-part 'counter.g.dart';
-
-class Counter = CounterBase with _$Counter;
-
-abstract class CounterBase with Store {
-  @observable
-  int value = 0;
-
-  @action
-  void increment() {
-    value++;
-  }
-}
-
-class CounterExample extends StatefulWidget {
-  const CounterExample({Key key}) : super(key: key);
-
-  @override
-  _CounterExampleState createState() => _CounterExampleState();
-}
-
-class _CounterExampleState extends State<CounterExample> {
-  final _counter = Counter();
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Counter'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              Observer(
-                  builder: (_) => Text(
-                        '${_counter.value}',
-                        style: const TextStyle(fontSize: 20),
-                      )),
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _counter.increment,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ),
-      );
 }
 ```
