@@ -3,7 +3,7 @@ title: Actions
 description: Actions are functions that encapsulate the mutations on observables.
 ---
 
-### `Action(Function fn, {ReactiveContext context, String name})`
+#### `Action(Function fn, {ReactiveContext context, String name})`
 
 - **`Function fn`**: A function that mutates some observables
 - **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
@@ -82,7 +82,7 @@ The action methods can also be async, which allows you to intersperse mutations 
 
 ## runInAction
 
-### `T runInAction<T>(T Function() fn, {String name, ReactiveContext context})`
+#### `T runInAction<T>(T Function() fn, {String name, ReactiveContext context})`
 
 - **`Function fn`**: A function that mutates some observables
 - **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
@@ -93,7 +93,7 @@ Sometimes it can be excessive to have an `Action` created just to mutate some ob
 
 ## untracked
 
-### `T untracked<T>(T Function() fn, {ReactiveContext context})`
+#### `T untracked<T>(T Function() fn, {ReactiveContext context})`
 
 - **`Function fn`**: A function that reads or mutates observables
 - **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.
@@ -113,7 +113,7 @@ x.value++; // the autorun() will NOT re-execute as x.value was not tracked
 
 ## transaction
 
-### `T transaction<T>(T Function() fn, {ReactiveContext context})`
+#### `T transaction<T>(T Function() fn, {ReactiveContext context})`
 
 - **`Function fn`**: A function that reads or mutates some observables
 - **`ReactiveContext context`**: An optional context within which this should be executed. Normally, you don't need to pass any value here, in which case it uses the singleton `mainContext` of the application.

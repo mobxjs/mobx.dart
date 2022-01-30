@@ -1,3 +1,8 @@
+## 2.0.4
+
+- Introducing a ReactionBuilder widget that helps you create an inline reaction and eliminates the need
+  to have a wrapper-`StatefulWidget` that uses the `initState` to do the same. You can read more in the [docs for ReactionBuilder](http://mobx.netlify.app/api/observers#reactionbuilder-widget).
+
 ## 2.0.3 - 2.0.3+2
 
 - Package upgrades
