@@ -54,68 +54,50 @@ By doing so, we can make use of reactions to respond to changes as we shall soon
 ## Setting up the reaction
 
 To have our user interface inform users of changes about the state of their connection, we'll need to configure a reaction.
-We'll need to use a `StatefulWidget` so that the reaction can be configured within the `initState` method. The reaction will also need to be disposed when the state is going to be disposed. The complete code is as follows
+We will use the `ReactionBuilder` for this as it simplifies the setup of the reaction and takes care of cleaning it up, when the widget is disposed.
 
 ```dart
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_examples/connectivity/connectivity_store.dart';
 
-class ConnectivityExample extends StatefulWidget {
+class ConnectivityExample extends StatelessWidget {
   const ConnectivityExample(this.store, {Key? key}) : super(key: key);
 
   final ConnectivityStore store;
 
   @override
-  _ConnectivityExampleState createState() => _ConnectivityExampleState();
-}
-
-class _ConnectivityExampleState extends State<ConnectivityExample> {
-  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
-
-  ReactionDisposer? _disposer;
-
-  @override
-  void initState() {
-    super.initState();
-    // a delay is used to avoid showing the snackbar too much when the connection drops in and out repeatedly
-    // highlight-start
-    _disposer = reaction(
-        (_) => widget.store.connectivityStream.value,
-        (result) => _scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
-            content: Text(result == ConnectivityResult.none
-                ? 'You\'re offline'
-                : 'You\'re online'))),
-        delay: 4000);
-    // highlight-end
-  }
-
-  @override
-  void dispose() {
-    _disposer!();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) => ScaffoldMessenger(
-        key: _scaffoldMessengerKey,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Settings'),
-          ),
-          body: const Padding(
-            padding: EdgeInsets.all(16),
-            child: Text(
-                'Turn your connection on/off for approximately 4 seconds to see the app respond to changes in your connection status.'),
-          ),
-        ),
+// highlight-next-line
+        child: ReactionBuilder(
+            builder: (context) {
+              return reaction((_) => store.connectivityStream.value, (result) {
+                final messenger = ScaffoldMessenger.of(context);
+
+                messenger.showSnackBar(SnackBar(
+                    content: Text(result == ConnectivityResult.none
+                        ? 'You\'re offline'
+                        : 'You\'re online')));
+              }, delay: 4000);
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                title: const Text('Settings'),
+              ),
+              body: const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                    'Turn your connection on/off for approximately 4 seconds to see the app respond to changes in your connection status.'),
+              ),
+            )),
       );
 }
 ```
 
-The `ConnectivityStore` is passed to the `ConnectivityExample` widget, which can be done through the `provider` package (refer to the documentation on [organizing stores](/guides/stores)).
+The `ConnectivityStore` is passed to the `ConnectivityExample` widget, which can be done through the <PubBadge name="provider" /> package
+(refer to the documentation on [organizing stores](/guides/stores)).
 
 A [`reaction`](/api/reaction#reaction) is used here as we are only interested in letting users know when the connection state changes.
 The value passed as the first argument to the `reaction` function represents reactive state that needs to be tracked i.e. the status of the user's connection.
@@ -138,6 +120,8 @@ This example demonstrates how we can make use of reactions. Most of the time, de
 However, some scenarios require displaying brief messages where the user interface elements aren't actually returned by a widget's `build` method.
 MobX provides functions such as `reaction` that are suitable for these scenarios that are simple to setup but also provide powerful features such as
 the ability to apply a throttling delay.
+
+Using the `ReactionBuilder`, it also simplifies setting up the **reactions** in the Flutter widget tree.
 
 :::info
 The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/connectivity)

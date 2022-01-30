@@ -102,9 +102,6 @@ module.exports = {
       },
       { name: 'twitter:image:alt', content: 'The MobX Logo' },
     ],
-    gtag: {
-      trackingID: 'UA-60235345-4',
-    },
     algolia: {
       appId: 'BH4D9OD16A',
 
@@ -130,6 +127,10 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        googleAnalytics: {
+          trackingID: 'UA-60235345-4',
+          anonymizeIP: true,
         },
       },
     ],

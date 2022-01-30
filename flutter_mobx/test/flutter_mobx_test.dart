@@ -215,12 +215,24 @@ void main() {
 
     expect(find.byType(Container), findsOneWidget);
   });
+
   testWidgets('StatefulObserverWidget can be subclassed', (tester) async {
     // Ignore the lack of a `const` so that coverage hits the line
     // ignore: prefer_const_constructors
     await tester.pumpWidget(ConstStatefulObserver());
 
     expect(find.byType(Container), findsOneWidget);
+  });
+
+  group('ReactionBuilder', () {
+    testWidgets('Reaction is invoked on init',
+        (tester) async {});
+
+    testWidgets('Reaction is disposed on dispose',
+        (tester) async {});
+
+    testWidgets('Given child is returned as part of the build method',
+        (tester) async {});
   });
 }
 

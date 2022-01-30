@@ -17,7 +17,7 @@ The derived state can be much bigger than the core-state. This is understandable
 
 ## Observable
 
-### `Observable(T initialValue, {String name, ReactiveContext context})`
+#### `Observable(T initialValue, {String name, ReactiveContext context})`
 
 - **`T initialValue`**: the initial value for the `Observable` or `null` otherwise.
 - **`String name`**: a name to identify during debugging
@@ -137,12 +137,12 @@ abstract class CounterBase with Store {
 Isn't it awesome? Now your fields can only be changed by `@actions` methods while being available throught getters.
 It is no different than an observable though, you're allowed to use of computed getters the same way you do with `@observable`.
 
->**Note:** Just don't forget to use it only on **private fields**, because it just doesn't make sense otherwise.
+> **Note:** Just don't forget to use it only on **private fields**, because it just doesn't make sense otherwise.
 > But don't worry, if by any chance you happens to forget, we warn you with friendly errors at code generation time.
 
 ## Computed
 
-### `Computed(T Function() fn, {String name, ReactiveContext context})`
+#### `Computed(T Function() fn, {String name, ReactiveContext context})`
 
 - **`T Function() fn`**: the function which relies on observables to compute its value.
 - **`String name`**: a name to identify during debugging
@@ -198,7 +198,7 @@ abstract class _Contact with Store {
 
 ## ObservableList
 
-### `ObservableList({ReactiveContext context})`
+#### `ObservableList({ReactiveContext context})`
 
 - **`ReactiveContext context`**: the context to which this list is bound. By default, all `ObservableList`s are bound to the singleton `mainContext` of the application.
 
@@ -206,7 +206,7 @@ An `ObservableList` gives you a deeper level of observability on a list of value
 
 ## ObservableMap
 
-### `ObservableMap({ReactiveContext context})`
+#### `ObservableMap({ReactiveContext context})`
 
 - **`ReactiveContext context`**: the context to which this map is bound. By default, all `ObservableMap`s are bound to the singleton `mainContext` of the application.
 
@@ -214,7 +214,7 @@ An `ObservableMap` gives you a deeper level of observability on a map of values.
 
 ## ObservableSet
 
-### `ObservableSet({ReactiveContext context})`
+#### `ObservableSet({ReactiveContext context})`
 
 - **`ReactiveContext context`**: the context to which this set is bound. By default, all `ObservableSet`s are bound to the singleton `mainContext` of the application.
 
@@ -222,7 +222,7 @@ An `ObservableSet` gives you a deeper level of observability on a set of values.
 
 ## ObservableFuture
 
-### `ObservableFuture(Future<T> future, {ReactiveContext context})`
+#### `ObservableFuture(Future<T> future, {ReactiveContext context})`
 
 - **`Future<T> future`**: The future that is tracked for status changes.
 - **`ReactiveContext context`**: the context to which this observable-future is bound. By default, all `ObservableFuture`s are bound to the singleton `mainContext` of the application.
@@ -268,7 +268,7 @@ class LoadingIndicator extends StatelessWidget {
 
 ## ObservableStream
 
-### `ObservableStream(Stream<T> stream, {T initialValue, bool cancelOnError, ReactiveContext context})`
+#### `ObservableStream(Stream<T> stream, {T initialValue, bool cancelOnError, ReactiveContext context})`
 
 - **`Stream<T> stream`**: The stream that is tracked for `status` and `value` changes.
 - **`T initialValue`**: The starting value of the stream.
