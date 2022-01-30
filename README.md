@@ -24,7 +24,7 @@ Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Ch
 
 > Supercharge the state-management in your Dart apps with Transparent Functional Reactive Programming (TFRP)
 
-> ## We are looking for maintainers. Reach out on Discord or Github Issues!
+> ## We are looking for maintainers. Reach out on Discord or GitHub Issues!
 
 - **[Introduction](#introduction)**
 - **[Core Concepts](#core-concepts)**
