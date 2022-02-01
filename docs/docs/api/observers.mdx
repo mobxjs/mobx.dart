@@ -135,7 +135,7 @@ class ConnectivityExample extends StatelessWidget {
 
 ```
 
-Notice the use of the `ReactionBuilder` that sets up the reaction in the builder. The reaction is setup in the `builder()` method.
+Notice the use of the `ReactionBuilder` that sets up the reaction in the `builder()` method.
 
 This simplifies the outer widget and keeps it as a `StatelessWidget`.
 Without the `ReactionBuilder`, you would have to create a wrapper `StatefulWidget`, prepare the reaction in the `initState()` and then dispose it in the `dispose()` of the widget.
