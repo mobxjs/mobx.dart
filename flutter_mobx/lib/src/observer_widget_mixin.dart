@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
+
 // ignore: implementation_imports
 import 'package:mobx/src/core.dart' show ReactionImpl;
 
@@ -61,19 +62,13 @@ mixin ObserverElementMixin on ComponentElement {
         library: 'flutter_mobx',
         exception: e,
         stack: e is Error ? e.stackTrace : null,
+        context: ErrorDescription('From reaction of ${_widget.getName()} of type $runtimeType.'),
       ));
     }) as ReactionImpl;
     super.mount(parent, newSlot);
   }
 
-  void invalidate() {
-    try {
-      markNeedsBuild();
-    } on FlutterError {
-      _widget.log('invalidate() has error (reaction.name=${reaction.name})');
-      rethrow;
-    }
-  }
+  void invalidate() => markNeedsBuild();
 
   @override
   Widget build() {
