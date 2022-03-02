@@ -66,7 +66,14 @@ mixin ObserverElementMixin on ComponentElement {
     super.mount(parent, newSlot);
   }
 
-  void invalidate() => markNeedsBuild();
+  void invalidate() {
+    try {
+      markNeedsBuild();
+    } on FlutterError {
+      _widget.log('invalidate() has error (reaction.name=${reaction.name})');
+      rethrow;
+    }
+  }
 
   @override
   Widget build() {
