@@ -80,8 +80,18 @@ mixin ObserverElementMixin on ComponentElement {
     // 3. https://stackoverflow.com/questions/71367080
 
     // if there's a current frame,
-    final shouldWait = SchedulerBinding.instance!.schedulerPhase != SchedulerPhase.idle;
+    final schedulerPhase = SchedulerBinding.instance!.schedulerPhase;
+    final shouldWait =
+        // surely, `idle` is ok
+        schedulerPhase != SchedulerPhase.idle &&
+            // By experience, it is safe to do something like
+            // `SchedulerBinding.addPostFrameCallback((_) => someObservable.value = newValue)`
+            // So it is safe if we are in this phase
+            schedulerPhase != SchedulerPhase.postFrameCallbacks;
     if (shouldWait) {
+      // uncomment to log
+      // print('hi wait phase=$schedulerPhase');
+
       // wait for the end of that frame.
       await SchedulerBinding.instance!.endOfFrame;
 
