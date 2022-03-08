@@ -600,6 +600,24 @@ void main() {
           reason: 'sub on non-broadcast stream already cancelled');
     });
 
+    test('can observe value with custom equals', () async {
+      final ctrl = StreamController<int>();
+      final stream = ObservableStream(ctrl.stream,
+          initialValue: 3, equals: (_, __) => false);
+
+      final subValues = <int>[];
+      final sub = stream.listen(subValues.add);
+
+      ctrl.add(3);
+      ctrl.add(3);
+      ctrl.add(3);
+      await pumpEventQueue();
+      expect(stream.value, equals(3), reason: 'with subs, with updates again');
+      expect(subValues, equals([3, 3, 3, 3]));
+
+      await sub.cancel();
+    });
+
     <String, StreamTestBody>{
       'asBroadcastStream': (s) {
         final stream = s.asBroadcastStream();
