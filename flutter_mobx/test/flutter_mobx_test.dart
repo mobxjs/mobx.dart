@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when, version;
@@ -337,11 +336,11 @@ class _ObserverRebuildTestOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('One.build');
+    // print('One.build');
     return Column(
       children: [
         Observer(builder: (_) {
-          print('One.Observer.build');
+          // print('One.Observer.build');
           return Text('One read status: ${store.status}');
         }),
         TextButton(
@@ -386,15 +385,15 @@ class _ObserverRebuildTestTwoChildState
   @override
   void initState() {
     super.initState();
-    print('TwoChild.initState');
+    // print('TwoChild.initState');
     widget.store.fetch();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('TwoChild.build');
+    // print('TwoChild.build');
     return Observer(builder: (_) {
-      print('TwoChild.Observer.build');
+      // print('TwoChild.Observer.build');
       return Text('TwoChild read status: ${widget.store.status}');
     });
   }
@@ -412,7 +411,7 @@ abstract class __ObserverRebuildTestMyStore with Store {
 
   @action
   Future<void> fetch() async {
-    print('Store.fetch set to pending');
+    // print('Store.fetch set to pending');
     status = FutureStatus.pending;
 
     // to be more realistic, uncomment this:

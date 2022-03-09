@@ -65,7 +65,8 @@ mixin ObserverElementMixin on ComponentElement {
         library: 'flutter_mobx',
         exception: e,
         stack: e is Error ? e.stackTrace : null,
-        context: ErrorDescription('From reaction of ${_widget.getName()} of type $runtimeType.'),
+        context: ErrorDescription(
+            'From reaction of ${_widget.getName()} of type $runtimeType.'),
       ));
     }) as ReactionImpl;
     super.mount(parent, newSlot);
