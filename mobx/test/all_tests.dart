@@ -32,6 +32,7 @@ import 'observe_test.dart' as observe_test;
 import 'reaction_test.dart' as reaction_test;
 import 'reactive_policies_test.dart' as reactive_policies_test;
 import 'spy_test.dart' as spy_test;
+import 'store_test.dart' as store_test;
 import 'when_test.dart' as when_test;
 
 void main() {
@@ -71,4 +72,5 @@ void main() {
   annotations_test.main();
 
   spy_test.main();
+  store_test.main();
 }

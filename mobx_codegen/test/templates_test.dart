@@ -24,7 +24,10 @@ void main() {
 
   group('Rows', () {
     test('Rows toString joins non empty strings on their own lines', () {
-      final rows = Rows()..add('first')..add('')..add('third');
+      final rows = Rows()
+        ..add('first')
+        ..add('')
+        ..add('third');
 
       expect(rows.toString(), equals('first\nthird'));
     });
@@ -110,13 +113,14 @@ void main() {
     group('renders template based on template data', () {
       test('on public field', () {
         final template = ObservableTemplate(
-            storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentName'),
+            storeTemplate: (MixinStoreTemplate()
+              ..parentTypeName = 'ParentName'),
             atomName: '_atomFieldName',
             type: 'FieldType',
             name: 'fieldName');
         final output = template.toString();
         expect(output, equals("""
-  final _atomFieldName = Atom(name: 'ParentName.fieldName');
+  late final _atomFieldName = Atom(name: 'ParentName.fieldName', context: context);
 
   @override
   FieldType get fieldName {
@@ -137,13 +141,13 @@ void main() {
           storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentName'),
           atomName: '_atomFieldName',
           type: 'FieldType',
-          name: '_fieldName', 
+          name: '_fieldName',
           isPrivate: true,
           isReadOnly: true,
         );
         final output = template.toString();
         expect(output, equals("""
-  final _atomFieldName = Atom(name: 'ParentName._fieldName');
+  late final _atomFieldName = Atom(name: 'ParentName._fieldName', context: context);
 
   FieldType get fieldName {
     _atomFieldName.reportRead();
@@ -293,7 +297,7 @@ void main() {
   @override
   ObservableFuture<T> fetchData<T, S extends String>(T arg1, [S arg2 = "arg2value", String arg3], {String namedArg1 = "default", int namedArg2 = 3}) {
     final _\$future = super.fetchData<T, S>(arg1, arg2, arg3, namedArg1: namedArg1, namedArg2: namedArg2);
-    return ObservableFuture<T>(_\$future);
+    return ObservableFuture<T>(_\$future, context: context);
   }"""));
     });
   });

@@ -42,7 +42,7 @@ abstract class StoreTemplate {
 
   String get actionControllerField => actions.isEmpty
       ? ''
-      : "final $actionControllerName = ActionController(name: '$parentTypeName');";
+      : "late final $actionControllerName = ActionController(name: '$parentTypeName', context: context);";
 
   String get toStringMethod {
     if (!generateToString) {
