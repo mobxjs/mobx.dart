@@ -1,3 +1,4 @@
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
 
@@ -48,8 +49,10 @@ mixin ObserverWidgetMixin on Widget {
 /// A mixin that overrides [build] to listen to the observables used by
 /// [ObserverWidgetMixin].
 mixin ObserverElementMixin on ComponentElement {
-  ReactionImpl get reaction => _reaction;
-  late ReactionImpl _reaction;
+  ReactionImpl get reaction => _reaction!;
+
+  // null means it is unmounted
+  ReactionImpl? _reaction;
 
   // Not using the original `widget` getter as it would otherwise make the mixin
   // impossible to use
@@ -62,13 +65,43 @@ mixin ObserverElementMixin on ComponentElement {
         library: 'flutter_mobx',
         exception: e,
         stack: e is Error ? e.stackTrace : null,
-        context: ErrorDescription('From reaction of ${_widget.getName()} of type $runtimeType.'),
+        context: ErrorDescription(
+            'From reaction of ${_widget.getName()} of type $runtimeType.'),
       ));
     }) as ReactionImpl;
     super.mount(parent, newSlot);
   }
 
-  void invalidate() => markNeedsBuild();
+  void invalidate() => _markNeedsBuildImmediatelyOrDelayed();
+
+  void _markNeedsBuildImmediatelyOrDelayed() async {
+    // reference
+    // 1. https://github.com/mobxjs/mobx.dart/issues/768
+    // 2. https://stackoverflow.com/a/64702218/4619958
+    // 3. https://stackoverflow.com/questions/71367080
+
+    // if there's a current frame,
+    final schedulerPhase = SchedulerBinding.instance!.schedulerPhase;
+    final shouldWait =
+        // surely, `idle` is ok
+        schedulerPhase != SchedulerPhase.idle &&
+            // By experience, it is safe to do something like
+            // `SchedulerBinding.addPostFrameCallback((_) => someObservable.value = newValue)`
+            // So it is safe if we are in this phase
+            schedulerPhase != SchedulerPhase.postFrameCallbacks;
+    if (shouldWait) {
+      // uncomment to log
+      // print('hi wait phase=$schedulerPhase');
+
+      // wait for the end of that frame.
+      await SchedulerBinding.instance!.endOfFrame;
+
+      // If it is disposed after this frame, we should no longer call `markNeedsBuild`
+      if (_reaction == null) return;
+    }
+
+    markNeedsBuild();
+  }
 
   @override
   Widget build() {
@@ -89,7 +122,8 @@ mixin ObserverElementMixin on ComponentElement {
 
   @override
   void unmount() {
-    reaction.dispose();
+    _reaction!.dispose();
+    _reaction = null;
     super.unmount();
   }
 }

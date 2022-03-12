@@ -1,4 +1,6 @@
-import 'package:flutter/widgets.dart';
+// ignore_for_file: avoid_print, non_constant_identifier_names
+
+import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when, version;
@@ -224,12 +226,30 @@ void main() {
     expect(find.byType(Container), findsOneWidget);
   });
 
-  group('ReactionBuilder', () {
-    testWidgets('Reaction is invoked on init',
-        (tester) async {});
+  testWidgets(
+      'The `setState() or markNeedsBuild() called during build` error is resolved',
+      (tester) async {
+    // ignore: prefer_const_constructors
+    await tester.pumpWidget(_ObserverRebuildTestMyApp());
 
-    testWidgets('Reaction is disposed on dispose',
-        (tester) async {});
+    expect(find.textContaining('One read status: null'), findsOneWidget);
+
+    // should NOT have errors
+    // See #768
+    await tester.tap(find.byType(TextButton));
+
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('One read status: FutureStatus.pending'),
+        findsOneWidget);
+    expect(find.textContaining('TwoChild read status: FutureStatus.pending'),
+        findsOneWidget);
+  });
+
+  group('ReactionBuilder', () {
+    testWidgets('Reaction is invoked on init', (tester) async {});
+
+    testWidgets('Reaction is disposed on dispose', (tester) async {});
 
     testWidgets('Given child is returned as part of the build method',
         (tester) async {});
@@ -279,4 +299,170 @@ class ConstStatefulObserver extends StatefulObserverWidget {
 class _ConstStatefulObserverState extends State<ConstStatefulObserver> {
   @override
   Widget build(BuildContext context) => Container();
+}
+
+class _ObserverRebuildTestMyApp extends StatefulWidget {
+  const _ObserverRebuildTestMyApp({Key? key}) : super(key: key);
+
+  @override
+  State<_ObserverRebuildTestMyApp> createState() =>
+      _ObserverRebuildTestMyAppState();
+}
+
+class _ObserverRebuildTestMyAppState extends State<_ObserverRebuildTestMyApp> {
+  final store = _ObserverRebuildTestMyStore();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(),
+        body: Column(
+          children: [
+            _ObserverRebuildTestOne(store: store),
+            _ObserverRebuildTestTwo(store: store),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ObserverRebuildTestOne extends StatelessWidget {
+  final _ObserverRebuildTestMyStore store;
+
+  const _ObserverRebuildTestOne({Key? key, required this.store})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // print('One.build');
+    return Column(
+      children: [
+        Observer(builder: (_) {
+          // print('One.Observer.build');
+          return Text('One read status: ${store.status}');
+        }),
+        TextButton(
+            onPressed: () => store.showTwo = true,
+            child: const Text('click me')),
+      ],
+    );
+  }
+}
+
+class _ObserverRebuildTestTwo extends StatelessWidget {
+  final _ObserverRebuildTestMyStore store;
+
+  const _ObserverRebuildTestTwo({Key? key, required this.store})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(builder: (_) {
+      if (store.showTwo) {
+        return _ObserverRebuildTestTwoChild(store: store);
+      } else {
+        return const Text('Two: empty');
+      }
+    });
+  }
+}
+
+class _ObserverRebuildTestTwoChild extends StatefulWidget {
+  final _ObserverRebuildTestMyStore store;
+
+  const _ObserverRebuildTestTwoChild({Key? key, required this.store})
+      : super(key: key);
+
+  @override
+  _ObserverRebuildTestTwoChildState createState() =>
+      _ObserverRebuildTestTwoChildState();
+}
+
+class _ObserverRebuildTestTwoChildState
+    extends State<_ObserverRebuildTestTwoChild> {
+  @override
+  void initState() {
+    super.initState();
+    // print('TwoChild.initState');
+    widget.store.fetch();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // print('TwoChild.build');
+    return Observer(builder: (_) {
+      // print('TwoChild.Observer.build');
+      return Text('TwoChild read status: ${widget.store.status}');
+    });
+  }
+}
+
+class _ObserverRebuildTestMyStore = __ObserverRebuildTestMyStore
+    with _$_ObserverRebuildTestMyStore;
+
+abstract class __ObserverRebuildTestMyStore with Store {
+  @observable
+  var showTwo = false;
+
+  @observable
+  FutureStatus? status;
+
+  @action
+  Future<void> fetch() async {
+    // print('Store.fetch set to pending');
+    status = FutureStatus.pending;
+
+    // to be more realistic, uncomment this:
+    // await Future<void>.delayed(const Duration(seconds: 1));
+    // print('Store.fetch set to fulfilled');
+    // status = FutureStatus.fulfilled;
+  }
+}
+
+mixin _$_ObserverRebuildTestMyStore on __ObserverRebuildTestMyStore, Store {
+  final _$_showTwoAtom = Atom(name: '__ObserverRebuildTestMyStore.showTwo');
+
+  @override
+  bool get showTwo {
+    _$_showTwoAtom.reportRead();
+    return super.showTwo;
+  }
+
+  @override
+  set showTwo(bool value) {
+    _$_showTwoAtom.reportWrite(value, super.showTwo, () {
+      super.showTwo = value;
+    });
+  }
+
+  final _$_statusAtom = Atom(name: '__ObserverRebuildTestMyStore.status');
+
+  @override
+  FutureStatus? get status {
+    _$_statusAtom.reportRead();
+    return super.status;
+  }
+
+  @override
+  set status(FutureStatus? value) {
+    _$_statusAtom.reportWrite(value, super.status, () {
+      super.status = value;
+    });
+  }
+
+  final _$_fetchAsyncAction = AsyncAction('__BaseHttpAction.fetch');
+
+  @override
+  Future<void> fetch() {
+    return _$_fetchAsyncAction.run(() => super.fetch());
+  }
+
+  @override
+  String toString() {
+    return '''
+
+    ''';
+  }
 }
