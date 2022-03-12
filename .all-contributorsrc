@@ -539,6 +539,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "amondnet",
+      "name": "amond",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1964421?v=4",
+      "profile": "https://amond.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
