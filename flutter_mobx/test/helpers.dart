@@ -39,8 +39,13 @@ class LoggingObserver extends Observer {
   // ignore: prefer_const_constructors_in_immutables
   LoggingObserver({
     required WidgetBuilder builder,
+    bool? warnWhenNoObservables,
     Key? key,
-  }) : super(key: key, builder: builder);
+  }) : super(
+          key: key,
+          builder: builder,
+          warnWhenNoObservables: warnWhenNoObservables,
+        );
 
   String? previousLog;
 

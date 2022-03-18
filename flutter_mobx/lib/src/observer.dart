@@ -22,9 +22,17 @@ class Observer extends StatelessObserverWidget
         // ignore: avoid_implementing_value_types
         Builder {
   // ignore: prefer_const_constructors_in_immutables
-  Observer({Key? key, required this.builder, String? name})
-      : debugConstructingStackFrame = debugFindConstructingStackFrame(),
-        super(key: key, name: name);
+  Observer({
+    Key? key,
+    required this.builder,
+    String? name,
+    bool? warnWhenNoObservables,
+  })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
+        super(
+          key: key,
+          name: name,
+          warnWhenNoObservables: warnWhenNoObservables,
+        );
 
   @override
   final WidgetBuilder builder;
@@ -72,8 +80,11 @@ class Observer extends StatelessObserverWidget
                 (frame) => !_constructorStackFramePattern.hasMatch(frame),
                 orElse: () => '');
 
-        final stackFrameCore = _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);
-        final cleanedStackFrame = stackFrameCore == null ? null : 'Observer constructed from: $stackFrameCore';
+        final stackFrameCore =
+            _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);
+        final cleanedStackFrame = stackFrameCore == null
+            ? null
+            : 'Observer constructed from: $stackFrameCore';
 
         stackFrame = cleanedStackFrame;
       }

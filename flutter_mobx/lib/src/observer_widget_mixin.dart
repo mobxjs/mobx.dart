@@ -42,6 +42,10 @@ mixin ObserverWidgetMixin on Widget {
     debugPrint(msg);
   }
 
+  /// Whether to warn when there is no observables in the builder function
+  /// null means true
+  bool? get warnWhenNoObservables => null;
+
 // We don't override `createElement` to specify that it should return a
 // `ObserverElementMixin` as it'd make the mixin impossible to use.
 }
@@ -111,7 +115,7 @@ mixin ObserverElementMixin on ComponentElement {
       built = super.build();
     });
 
-    if (!reaction.hasObservables) {
+    if ((_widget.warnWhenNoObservables ?? true) && !reaction.hasObservables) {
       _widget.log(
         'No observables detected in the build method of ${reaction.name}',
       );

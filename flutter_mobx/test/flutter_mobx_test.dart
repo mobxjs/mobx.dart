@@ -221,6 +221,18 @@ void main() {
     expect(observer.previousLog, isNull);
   });
 
+  testWidgets(
+      'Observer should NOT log when there are no observables in builder but it is disabled',
+      (tester) async {
+    final observer = LoggingObserver(
+      builder: (_) => const Placeholder(),
+      warnWhenNoObservables: false,
+    );
+    await tester.pumpWidget(observer);
+
+    expect(observer.previousLog, isNull);
+  });
+
   testWidgets('StatelessObserverWidget can be subclassed', (tester) async {
     await tester.pumpWidget(const ConstObserver());
 
