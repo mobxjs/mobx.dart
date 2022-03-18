@@ -539,6 +539,25 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "amondnet",
+      "name": "amond",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1964421?v=4",
+      "profile": "https://amond.dev",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "fzyzcjy",
+      "name": "fzyzcjy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5236035?v=4",
+      "profile": "https://github.com/fzyzcjy",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,

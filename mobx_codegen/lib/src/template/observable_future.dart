@@ -11,6 +11,6 @@ class ObservableFutureTemplate {
   @override
   ObservableFuture${method.returnTypeArgs} ${method.name}${method.typeParams}(${method.params}) {
     final _\$future = super.${method.name}${method.typeArgs}(${method.args});
-    return ObservableFuture${method.returnTypeArgs}(_\$future);
+    return ObservableFuture${method.returnTypeArgs}(_\$future, context: context);
   }""";
 }

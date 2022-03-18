@@ -1,5 +1,5 @@
 mixin _$Item<T extends num> on _Item<T>, Store {
-  final _$value1Atom = Atom(name: '_Item.value1');
+  late final _$value1Atom = Atom(name: '_Item.value1', context: context);
 
   @override
   T get value1 {
@@ -14,7 +14,7 @@ mixin _$Item<T extends num> on _Item<T>, Store {
     });
   }
 
-  final _$value2Atom = Atom(name: '_Item.value2');
+  late final _$value2Atom = Atom(name: '_Item.value2', context: context);
 
   @override
   T? get value2 {
@@ -29,7 +29,7 @@ mixin _$Item<T extends num> on _Item<T>, Store {
     });
   }
 
-  final _$values1Atom = Atom(name: '_Item.values1');
+  late final _$values1Atom = Atom(name: '_Item.values1', context: context);
 
   @override
   List<T> get values1 {
@@ -44,7 +44,7 @@ mixin _$Item<T extends num> on _Item<T>, Store {
     });
   }
 
-  final _$values2Atom = Atom(name: '_Item.values2');
+  late final _$values2Atom = Atom(name: '_Item.values2', context: context);
 
   @override
   List<T> get values2 {
