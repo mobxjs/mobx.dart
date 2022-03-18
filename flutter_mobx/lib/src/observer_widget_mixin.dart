@@ -5,6 +5,9 @@ import 'package:mobx/mobx.dart';
 // ignore: implementation_imports
 import 'package:mobx/src/core.dart' show ReactionImpl;
 
+/// Whether to warn when there is no observables in the builder function
+bool enableWarnWhenNoObservables = true;
+
 /// Observer observes the observables used in the `build` method and rebuilds
 /// the Widget whenever any of them change. There is no need to do any other
 /// wiring besides simply referencing the required observables.
@@ -115,7 +118,9 @@ mixin ObserverElementMixin on ComponentElement {
       built = super.build();
     });
 
-    if ((_widget.warnWhenNoObservables ?? true) && !reaction.hasObservables) {
+    if (enableWarnWhenNoObservables &&
+        (_widget.warnWhenNoObservables ?? true) &&
+        !reaction.hasObservables) {
       _widget.log(
         'No observables detected in the build method of ${reaction.name}',
       );

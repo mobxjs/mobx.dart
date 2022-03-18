@@ -222,8 +222,8 @@ void main() {
   });
 
   testWidgets(
-      'Observer should NOT log when there are no observables in builder but it is disabled',
-      (tester) async {
+      'Observer should NOT log when there are no observables in builder '
+      'but it is disabled by the field', (tester) async {
     final observer = LoggingObserver(
       builder: (_) => const Placeholder(),
       warnWhenNoObservables: false,
@@ -231,6 +231,24 @@ void main() {
     await tester.pumpWidget(observer);
 
     expect(observer.previousLog, isNull);
+  });
+
+  testWidgets(
+      'Observer should NOT log when there are no observables in builder '
+      'but it is disabled by global config', (tester) async {
+    final oldEnableWarnWhenNoObservables = enableWarnWhenNoObservables;
+    try {
+      enableWarnWhenNoObservables = false;
+
+      final observer = LoggingObserver(
+        builder: (_) => const Placeholder(),
+      );
+      await tester.pumpWidget(observer);
+
+      expect(observer.previousLog, isNull);
+    } finally {
+      enableWarnWhenNoObservables = oldEnableWarnWhenNoObservables;
+    }
   });
 
   testWidgets('StatelessObserverWidget can be subclassed', (tester) async {
