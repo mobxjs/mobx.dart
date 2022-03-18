@@ -45,6 +45,8 @@ class Observer extends StatelessObserverWidget
   /// Matches constructor stack frames, in both VM and web environments.
   static final _constructorStackFramePattern = RegExp(r'\bnew\b');
 
+  static final _stackFrameCleanUpPattern = RegExp(r'^#\d+\s+(.*)$');
+
   /// Finds the first non-constructor frame in the stack trace.
   ///
   /// [stackTrace] defaults to [StackTrace.current].
@@ -55,7 +57,7 @@ class Observer extends StatelessObserverWidget
     assert(() {
       if (debugAddStackTraceInObserverName) {
         final stackTraceString = (stackTrace ?? StackTrace.current).toString();
-        stackFrame = LineSplitter.split(stackTraceString)
+        final rawStackFrame = LineSplitter.split(stackTraceString)
             // We are skipping frames representing:
             // 1. The anonymous function in the assert
             // 2. The debugFindConstructingStackFrame method
@@ -70,7 +72,10 @@ class Observer extends StatelessObserverWidget
                 (frame) => !_constructorStackFramePattern.hasMatch(frame),
                 orElse: () => '');
 
-        stackFrame = stackFrame == '' ? null : stackFrame;
+        final stackFrameCore = _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);
+        final cleanedStackFrame = stackFrameCore == null ? null : 'Observer constructed from: $stackFrameCore';
+
+        stackFrame = cleanedStackFrame;
       }
 
       return true;
