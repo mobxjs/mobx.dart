@@ -194,7 +194,7 @@ void main() {
     final observer = Observer(builder: (_) => Container());
     expect(
       observer.debugConstructingStackFrame,
-      startsWith('Observer constructed from: main.<anonymous closure>('),
+      startsWith('Observer constructed from: main.<anonymous closure> ('),
     );
   });
 
