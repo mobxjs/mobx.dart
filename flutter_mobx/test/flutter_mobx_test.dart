@@ -189,6 +189,15 @@ void main() {
     );
   });
 
+  testWidgets('debugFindConstructingStackFrame has friendly output',
+      (tester) async {
+    final observer = Observer(builder: (_) => Container());
+    expect(
+      observer.debugConstructingStackFrame,
+      startsWith('#3      main.<anonymous closure> ('),
+    );
+  });
+
   testWidgets('Observer should log when there are no observables in builder',
       (tester) async {
     final observer = LoggingObserver(
