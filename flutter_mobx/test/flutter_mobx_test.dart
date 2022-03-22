@@ -70,7 +70,7 @@ void main() {
   });
 
   testWidgets(
-      'Observer should re-throw exceptions occuring inside the reaction',
+      'Observer should throw exception if exceptions occur inside the reaction',
       (tester) async {
     dynamic exception;
 
@@ -98,7 +98,7 @@ void main() {
 
     expect(tester.firstWidget(find.byWidget(widget)), equals(widget));
 
-    expect(exception, isInstanceOf<Error>());
+    expect(exception.message, 'Error building widget');
   });
 
   testWidgets('Observer should report Flutter errors during invalidation',

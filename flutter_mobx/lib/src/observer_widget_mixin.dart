@@ -114,7 +114,7 @@ mixin ObserverElementMixin on ComponentElement {
 
   @override
   Widget build() {
-    late final Widget built;
+    Widget? built;
 
     reaction.track(() {
       built = super.build();
@@ -128,7 +128,12 @@ mixin ObserverElementMixin on ComponentElement {
       );
     }
 
-    return built;
+    // Better than a "LateInitializationError" which confuses the user, see #780
+    if (built == null) {
+      throw Exception('Error building widget');
+    }
+
+    return built!;
   }
 
   @override
