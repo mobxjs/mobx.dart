@@ -130,7 +130,8 @@ mixin ObserverElementMixin on ComponentElement {
 
     // Better than a "LateInitializationError" which confuses the user, see #780
     if (built == null) {
-      throw Exception('Error building widget');
+      throw Exception(
+          'Error happens when building ${_widget.runtimeType}, but it was captured since disableErrorBoundaries==true');
     }
 
     return built!;
