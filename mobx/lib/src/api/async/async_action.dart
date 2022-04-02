@@ -24,7 +24,7 @@ class AsyncAction {
   }
 
   Future<R> run<R>(Future<R> Function() body) async {
-    final actionInfo = _actions.startAction(name: '${_actions.name}');
+    final actionInfo = _actions.startAction(name: _actions.name);
     try {
       return await _zone.run(body);
     } finally {
