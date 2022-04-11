@@ -1,32 +1,32 @@
 part of '../extensions.dart';
 
 
-extension ObservableIntExtension on int {
+extension IntExtension on int {
   ObservableInt asObservable({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
   }
 }
 
-extension ObservableBoolExtension on bool {
+extension BoolExtension on bool {
   ObservableBool asObservable({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
   }
 }
 
 /// lets you toggle the internal value of ObservableBool
-extension ObservableBoolToggle on ObservableBool {
+extension ObservableBoolExtension on ObservableBool {
   void toggle() {
     runInAction(() => value = !value);
   }
 }
 
-extension ObservableDoubleExtension on double {
+extension DoubleExtension on double {
   ObservableDouble asObservable({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
   }
 }
 
-extension ObservableStringExtension on String {
+extension StringExtension on String {
   ObservableString asObservable({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
   }
