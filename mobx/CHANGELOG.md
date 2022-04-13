@@ -1,3 +1,20 @@
+## 2.0.7
+
+- Type aliases for primitive types.\
+  So instead of `Observable<int>` you can now write `ObservableInt`.
+- `.asObservable()` extension for primitive types.\
+  Now you can easily convert literals to observables like:
+  ```dart
+  var name = ''.asObservable(); // infers ObservableString
+  var counter = 0.asObservable(); // infers ObservableInt
+  ```
+- `toggle()` method for ObservableBool. Lets you toggle the internal value of ObservableBool
+  ```dart
+  var lights = true.asObservable();
+  lights.toggle(); // now it has a value of false
+  ```
+  Changes made by [@subzero911](https://github.com/subzero911)
+
 ## 2.0.6 - 2.0.6+1
 
 - Improved performance when spying is disabled. Thanks to @Ascenio.
