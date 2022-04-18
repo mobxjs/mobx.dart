@@ -99,7 +99,7 @@ void main() {
     expect(tester.firstWidget(find.byWidget(widget)), equals(widget));
 
     expect(exception.message,
-        'Error happens when building Observer, but it was captured since disableErrorBoundaries==true');
+        'Error happened when building Observer, but it was captured since disableErrorBoundaries==true');
   });
 
   testWidgets('Observer should report Flutter errors during invalidation',
