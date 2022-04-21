@@ -212,7 +212,7 @@ Runs the reaction immediately and also on any change in the observables used ins
 ```dart
 import 'package:mobx/mobx.dart';
 
-String greeting = Observable('Hello World');
+final greeting = Observable('Hello World');
 
 final dispose = autorun((_){
   print(greeting.value);
@@ -237,7 +237,7 @@ the `fn()` function returns a different value. Only the observables inside `fn()
 ```dart
 import 'package:mobx/mobx.dart';
 
-String greeting = Observable('Hello World');
+final greeting = Observable('Hello World');
 
 final dispose = reaction((_) => greeting.value, (msg) => print(msg));
 
@@ -258,7 +258,7 @@ Monitors the observables used inside `predicate()` and runs the `effect()` _when
 ```dart
 import 'package:mobx/mobx.dart';
 
-String greeting = Observable('Hello World');
+final greeting = Observable('Hello World');
 
 final dispose = when((_) => greeting.value == 'Hello MobX', () => print('Someone greeted MobX'));
 
