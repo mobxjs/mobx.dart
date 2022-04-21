@@ -252,7 +252,7 @@ Runs the reaction immediately and also on any change in the observables used ins
 ```dart
 import 'package:mobx/mobx.dart';
 
-String greeting = Observable('Hello World');
+final greeting = Observable('Hello World');
 
 final dispose = autorun((_){
   print(greeting.value);
@@ -277,7 +277,7 @@ the predicate returns a different value. Only the observables inside `predicate(
 ```dart
 import 'package:mobx/mobx.dart';
 
-String greeting = Observable('Hello World');
+final greeting = Observable('Hello World');
 
 final dispose = reaction((_) => greeting.value, (msg) => print(msg));
 
@@ -298,7 +298,7 @@ Monitors the observables used inside `predicate()` and runs the `effect()` _when
 ```dart
 import 'package:mobx/mobx.dart';
 
-String greeting = Observable('Hello World');
+final greeting = Observable('Hello World');
 
 final dispose = when((_) => greeting.value == 'Hello MobX', () => print('Someone greeted MobX'));
 
@@ -405,7 +405,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-58-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-59-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -489,6 +489,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://amond.dev"><img src="https://avatars.githubusercontent.com/u/1964421?v=4?s=64" width="64px;" alt=""/><br /><sub><b>amond</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=amondnet" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/fzyzcjy"><img src="https://avatars.githubusercontent.com/u/5236035?v=4?s=64" width="64px;" alt=""/><br /><sub><b>fzyzcjy</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=fzyzcjy" title="Code">💻</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=fzyzcjy" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://pixolity.se"><img src="https://avatars.githubusercontent.com/u/759524?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Vandad Nahavandipoor</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=vandadnp" title="Documentation">📖</a></td>
   </tr>
 </table>
 

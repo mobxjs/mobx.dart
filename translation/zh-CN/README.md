@@ -223,7 +223,7 @@ Future<void> loadStuff() async {
 ```dart
 import 'package:mobx/mobx.dart';
 
-String greeting = Observable('Hello World');
+final greeting = Observable('Hello World');
 
 final dispose = autorun((_){
   print(greeting.value);
@@ -247,7 +247,7 @@ dispose();
 ```dart
 import 'package:mobx/mobx.dart';
 
-String greeting = Observable('Hello World');
+final greeting = Observable('Hello World');
 
 final dispose = reaction((_) => greeting.value, (msg) => print(msg));
 
@@ -268,7 +268,7 @@ dispose();
 ```dart
 import 'package:mobx/mobx.dart';
 
-String greeting = Observable('Hello World');
+final greeting = Observable('Hello World');
 
 final dispose = when((_) => greeting.value == 'Hello MobX', () => print('Someone greeted MobX'));
 
