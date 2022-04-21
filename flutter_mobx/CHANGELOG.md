@@ -1,3 +1,10 @@
+## 2.0.5
+
+- Improve `debugFindConstructingStackFrame` to let the message be less confusing to the reader
+- Allow disabling `No observables detected in the build method of Observer`
+- The `analyzer: ^3.0.0` in master branch is incompatible with Flutter stable
+- If `builder` of `Observer` errors, further error `LateInitializationError: Local 'built' has not been initialized.` will happen in addition to the actual error, reducing developer experience
+
 ## 2.0.4
 
 - Introducing a ReactionBuilder widget that helps you create an inline reaction and eliminates the need

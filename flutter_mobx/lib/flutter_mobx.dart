@@ -42,4 +42,4 @@ export 'package:flutter_mobx/src/stateful_observer_widget.dart';
 export 'package:flutter_mobx/src/stateless_observer_widget.dart';
 
 /// The version as per `pubspec.yaml`
-const version = '2.0.4';
+const version = '2.0.5';

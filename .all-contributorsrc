@@ -567,6 +567,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "subzero911",
+      "name": "Sergey Molchanovsky",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12999702?v=4",
+      "profile": "https://molchanovsky.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
