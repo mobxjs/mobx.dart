@@ -1,3 +1,7 @@
+## 2.0.6
+
+- Globally disable `toString()` method generation
+
 ## 2.0.5 - 2.0.5+2
 
 - Fixed some tests not picking the right path for data files

@@ -558,6 +558,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "vandadnp",
+      "name": "Vandad Nahavandipoor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/759524?v=4",
+      "profile": "https://pixolity.se",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
