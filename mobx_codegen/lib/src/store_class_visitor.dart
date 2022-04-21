@@ -26,6 +26,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
     ClassElement userClass,
     StoreTemplate template,
     this.typeNameFinder,
+    this.options,
   ) : errors = StoreClassCodegenErrors(publicTypeName) {
     _storeTemplate = template
       ..typeParams.templates.addAll(userClass.typeParameters
@@ -46,6 +47,8 @@ class StoreClassVisitor extends SimpleElementVisitor {
   late StoreTemplate _storeTemplate;
 
   LibraryScopedNameFinder typeNameFinder;
+
+  final BuilderOptions options;
 
   final StoreClassCodegenErrors errors;
 
@@ -68,7 +71,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
           .addIf(!element.isAbstract, element.name);
     }
     // if the class is annotated to generate toString() method we add the information to the _storeTemplate
-    _storeTemplate.generateToString = hasGeneratedToString(element);
+    _storeTemplate.generateToString = hasGeneratedToString(options, element);
   }
 
   @override
@@ -245,11 +248,17 @@ bool isMixinStoreClass(ClassElement classElement) =>
 bool isStoreConfigAnnotatedStoreClass(ClassElement classElement) =>
     _toStringAnnotationChecker.hasAnnotationOfExact(classElement);
 
-bool hasGeneratedToString(ClassElement classElement) {
-  if (isStoreConfigAnnotatedStoreClass(classElement)) {
+bool hasGeneratedToString(BuilderOptions options, ClassElement? classElement) {
+  const fieldKey = 'hasToString';
+
+  if (classElement != null && isStoreConfigAnnotatedStoreClass(classElement)) {
     final annotation =
         _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
-    return annotation?.getField('hasToString')?.toBoolValue() ?? false;
+    return annotation?.getField(fieldKey)?.toBoolValue() ?? false;
+  }
+
+  if (options.config.containsKey(fieldKey)) {
+    return options.config[fieldKey]! as bool;
   }
 
   return true;

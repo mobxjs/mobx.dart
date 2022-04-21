@@ -5,6 +5,9 @@ import 'package:mobx/mobx.dart';
 // ignore: implementation_imports
 import 'package:mobx/src/core.dart' show ReactionImpl;
 
+/// Whether to warn when there is no observables in the builder function
+bool enableWarnWhenNoObservables = true;
+
 /// Observer observes the observables used in the `build` method and rebuilds
 /// the Widget whenever any of them change. There is no need to do any other
 /// wiring besides simply referencing the required observables.
@@ -41,6 +44,10 @@ mixin ObserverWidgetMixin on Widget {
   void log(String msg) {
     debugPrint(msg);
   }
+
+  /// Whether to warn when there is no observables in the builder function
+  /// null means true
+  bool? get warnWhenNoObservables => null;
 
 // We don't override `createElement` to specify that it should return a
 // `ObserverElementMixin` as it'd make the mixin impossible to use.
@@ -81,6 +88,7 @@ mixin ObserverElementMixin on ComponentElement {
     // 3. https://stackoverflow.com/questions/71367080
 
     // if there's a current frame,
+    // ignore: unnecessary_non_null_assertion
     final schedulerPhase = SchedulerBinding.instance!.schedulerPhase;
     final shouldWait =
         // surely, `idle` is ok
@@ -94,6 +102,7 @@ mixin ObserverElementMixin on ComponentElement {
       // print('hi wait phase=$schedulerPhase');
 
       // wait for the end of that frame.
+      // ignore: unnecessary_non_null_assertion
       await SchedulerBinding.instance!.endOfFrame;
 
       // If it is disposed after this frame, we should no longer call `markNeedsBuild`
@@ -105,19 +114,28 @@ mixin ObserverElementMixin on ComponentElement {
 
   @override
   Widget build() {
-    late final Widget built;
+    Widget? built;
 
     reaction.track(() {
       built = super.build();
     });
 
-    if (!reaction.hasObservables) {
+    if (enableWarnWhenNoObservables &&
+        (_widget.warnWhenNoObservables ?? true) &&
+        !reaction.hasObservables) {
       _widget.log(
         'No observables detected in the build method of ${reaction.name}',
       );
     }
 
-    return built;
+    // This "throw" is better than a "LateInitializationError" 
+    // which confused the user. Please see #780 for details.
+    if (built == null) {
+      throw Exception(
+          'Error happened when building ${_widget.runtimeType}, but it was captured since disableErrorBoundaries==true');
+    }
+
+    return built!;
   }
 
   @override

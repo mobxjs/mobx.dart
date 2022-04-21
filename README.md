@@ -405,7 +405,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-59-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-60-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -490,6 +490,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://amond.dev"><img src="https://avatars.githubusercontent.com/u/1964421?v=4?s=64" width="64px;" alt=""/><br /><sub><b>amond</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=amondnet" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/fzyzcjy"><img src="https://avatars.githubusercontent.com/u/5236035?v=4?s=64" width="64px;" alt=""/><br /><sub><b>fzyzcjy</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=fzyzcjy" title="Code">💻</a> <a href="https://github.com/mobxjs/mobx.dart/commits?author=fzyzcjy" title="Documentation">📖</a></td>
     <td align="center"><a href="https://pixolity.se"><img src="https://avatars.githubusercontent.com/u/759524?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Vandad Nahavandipoor</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=vandadnp" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://molchanovsky.com"><img src="https://avatars.githubusercontent.com/u/12999702?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Sergey Molchanovsky</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=subzero911" title="Code">💻</a></td>
   </tr>
 </table>
 
