@@ -8,7 +8,7 @@
   var name = ''.asObservable(); // infers ObservableString
   var counter = 0.asObservable(); // infers ObservableInt
   ```
-- `toggle()` method for ObservableBool. Lets you toggle the internal value of ObservableBool
+- `toggle()` method for `ObservableBool`. Lets you toggle the internal value of `ObservableBool`
   ```dart
   var lights = true.asObservable();
   lights.toggle(); // now it has a value of false
