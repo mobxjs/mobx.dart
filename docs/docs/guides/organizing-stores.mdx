@@ -292,10 +292,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MultiProvider(
           providers: [
             Provider<PreferencesService>(
-              builder: (_) => PreferencesService(_sharedPreferences),
+              create: (_) => PreferencesService(_sharedPreferences),
             ),
             ProxyProvider<PreferencesService, SettingsStore>(
-                builder: (_, preferencesService, __) =>
+                update: (_, preferencesService, __) =>
                     SettingsStore(preferencesService)),
           ],
           child: Consumer<SettingsStore>(
