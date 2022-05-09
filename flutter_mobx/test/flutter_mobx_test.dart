@@ -70,7 +70,7 @@ void main() {
   });
 
   testWidgets(
-      'Observer should re-throw exceptions occuring inside the reaction',
+      'Observer should throw exception if exceptions occur inside the reaction',
       (tester) async {
     dynamic exception;
 
@@ -98,7 +98,8 @@ void main() {
 
     expect(tester.firstWidget(find.byWidget(widget)), equals(widget));
 
-    expect(exception, isInstanceOf<Error>());
+    expect(exception.message,
+        'Error happened when building Observer, but it was captured since disableErrorBoundaries==true');
   });
 
   testWidgets('Observer should report Flutter errors during invalidation',
@@ -189,6 +190,15 @@ void main() {
     );
   });
 
+  testWidgets('debugFindConstructingStackFrame has friendly output',
+      (tester) async {
+    final observer = Observer(builder: (_) => Container());
+    expect(
+      observer.debugConstructingStackFrame,
+      startsWith('Observer constructed from: main.<anonymous closure> ('),
+    );
+  });
+
   testWidgets('Observer should log when there are no observables in builder',
       (tester) async {
     final observer = LoggingObserver(
@@ -210,6 +220,36 @@ void main() {
     await tester.pumpWidget(observer);
 
     expect(observer.previousLog, isNull);
+  });
+
+  testWidgets(
+      'Observer should NOT log when there are no observables in builder '
+      'but it is disabled by the field', (tester) async {
+    final observer = LoggingObserver(
+      builder: (_) => const Placeholder(),
+      warnWhenNoObservables: false,
+    );
+    await tester.pumpWidget(observer);
+
+    expect(observer.previousLog, isNull);
+  });
+
+  testWidgets(
+      'Observer should NOT log when there are no observables in builder '
+      'but it is disabled by global config', (tester) async {
+    final oldEnableWarnWhenNoObservables = enableWarnWhenNoObservables;
+    try {
+      enableWarnWhenNoObservables = false;
+
+      final observer = LoggingObserver(
+        builder: (_) => const Placeholder(),
+      );
+      await tester.pumpWidget(observer);
+
+      expect(observer.previousLog, isNull);
+    } finally {
+      enableWarnWhenNoObservables = oldEnableWarnWhenNoObservables;
+    }
   });
 
   testWidgets('StatelessObserverWidget can be subclassed', (tester) async {

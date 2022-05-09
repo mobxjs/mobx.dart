@@ -11,6 +11,10 @@ import 'package:mobx_codegen/src/type_names.dart';
 import 'package:source_gen/source_gen.dart';
 
 class StoreGenerator extends Generator {
+  final BuilderOptions options;
+
+  StoreGenerator([this.options = BuilderOptions.empty]);
+
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
     if (library.allElements.isEmpty) {
@@ -75,7 +79,7 @@ class StoreGenerator extends Generator {
     LibraryScopedNameFinder typeNameFinder,
   ) {
     final visitor = StoreClassVisitor(
-        publicTypeName, userStoreClass, template, typeNameFinder);
+        publicTypeName, userStoreClass, template, typeNameFinder, options);
     userStoreClass
       ..accept(visitor)
       ..visitChildren(visitor);
