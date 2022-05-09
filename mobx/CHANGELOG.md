@@ -1,3 +1,7 @@
+## 2.0.7+1
+
+- Fixed unnecessary ActionSpyEvents being triggered for AsyncAction
+
 ## 2.0.7
 
 - Type aliases for primitive types.\
