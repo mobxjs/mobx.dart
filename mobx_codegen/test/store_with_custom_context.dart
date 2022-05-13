@@ -3,6 +3,7 @@ import 'package:test/test.dart';
 
 part 'store_with_custom_context.g.dart';
 
+// ignore: library_private_types_in_public_api
 class CustomContextStore = _CustomContextStore with _$CustomContextStore;
 
 final ReactiveContext customContext = ReactiveContext();

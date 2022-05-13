@@ -6,7 +6,7 @@ class RandomNumberExample extends StatefulWidget {
   const RandomNumberExample({Key? key}) : super(key: key);
 
   @override
-  _RandomNumberExampleState createState() => _RandomNumberExampleState();
+  State<RandomNumberExample> createState() => _RandomNumberExampleState();
 }
 
 class _RandomNumberExampleState extends State<RandomNumberExample> {

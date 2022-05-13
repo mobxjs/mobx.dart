@@ -1,3 +1,7 @@
+## 2.0.6+2
+
+- Package upgrades
+
 ## 2.0.6+1
  
 - Upgrading `mobx` to `2.0.7` - @amondnet

@@ -96,6 +96,10 @@ class ActionBar extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8),
                 child: ToggleButtons(
                   borderRadius: BorderRadius.circular(8),
+                  onPressed: (index) {
+                    list.filter = VisibilityFilter.values[index];
+                  },
+                  isSelected: selections,
                   children: const <Widget>[
                     Padding(
                       padding: EdgeInsets.only(left: 5, right: 5),
@@ -110,10 +114,6 @@ class ActionBar extends StatelessWidget {
                       child: Text('Completed'),
                     )
                   ],
-                  onPressed: (index) {
-                    list.filter = VisibilityFilter.values[index];
-                  },
-                  isSelected: selections,
                 ),
               ),
             ],
@@ -124,16 +124,16 @@ class ActionBar extends StatelessWidget {
           builder: (_) => ButtonBar(
                 children: <Widget>[
                   ElevatedButton(
-                    child: const Text('Remove Completed'),
                     onPressed: list.canRemoveAllCompleted
                         ? list.removeCompleted
                         : null,
+                    child: const Text('Remove Completed'),
                   ),
                   ElevatedButton(
-                    child: const Text('Mark All Completed'),
                     onPressed: list.canMarkAllCompleted
                         ? list.markAllAsCompleted
                         : null,
+                    child: const Text('Mark All Completed'),
                   )
                 ],
               ))

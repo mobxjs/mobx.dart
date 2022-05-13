@@ -6,6 +6,7 @@ part 'news_store.g.dart';
 
 enum FeedType { latest, top }
 
+// ignore: library_private_types_in_public_api
 class HackerNewsStore = _HackerNewsStore with _$HackerNewsStore;
 
 abstract class _HackerNewsStore with Store {
@@ -33,8 +34,9 @@ abstract class _HackerNewsStore with Store {
 
   // ignore: avoid_void_async
   void openUrl(String? url) async {
-    if (await canLaunch(url ?? '')) {
-      await launch(url!);
+    final uri = Uri.parse(url ?? '');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
     } else {
       // ignore: avoid_print
       print('Could not open $url');

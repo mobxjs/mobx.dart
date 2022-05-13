@@ -1,3 +1,7 @@
+## 2.0.7+1
+
+- Package upgrades
+
 ## 2.0.7
 
 - Type aliases for primitive types.\

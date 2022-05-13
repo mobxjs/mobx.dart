@@ -45,20 +45,20 @@ class DiceView extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: TextButton(
+                  onPressed: diceCounter.roll,
                   child: Observer(
                     builder: (_) =>
                         Image.asset('images/dice${diceCounter.left}.png'),
                   ),
-                  onPressed: diceCounter.roll,
                 ),
               ),
               Expanded(
                 child: TextButton(
+                  onPressed: diceCounter.roll,
                   child: Observer(
                     builder: (_) =>
                         Image.asset('images/dice${diceCounter.right}.png'),
                   ),
-                  onPressed: diceCounter.roll,
                 ),
               ),
             ],

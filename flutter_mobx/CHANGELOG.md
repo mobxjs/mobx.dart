@@ -1,3 +1,7 @@
+## 2.0.5+1
+
+- Package upgrades
+
 ## 2.0.5
 
 - Improve `debugFindConstructingStackFrame` to let the message be less confusing to the reader
