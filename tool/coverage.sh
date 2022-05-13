@@ -28,5 +28,5 @@ pub run coverage:format_coverage \
   --lcov \
   --in=coverage/coverage.json \
   --out=coverage/lcov.info \
-  --packages=.packages \
+  --packages=.dart_tool/package_config.json \
   --report-on=lib
