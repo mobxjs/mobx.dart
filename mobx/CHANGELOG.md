@@ -14,6 +14,7 @@
   lights.toggle(); // now it has a value of false
   ```
   Changes made by [@subzero911](https://github.com/subzero911)
+- Allow use custom context(#770) - @amondnet
 
 ## 2.0.6 - 2.0.6+1
 
