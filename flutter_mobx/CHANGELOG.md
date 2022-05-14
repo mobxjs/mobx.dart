@@ -1,4 +1,4 @@
-## 2.0.6
+## 2.0.6 - 2.0.6+1
 
 - Adding support for previous versions of Flutter SDK
 

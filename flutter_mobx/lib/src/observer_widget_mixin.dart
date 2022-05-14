@@ -87,7 +87,6 @@ mixin ObserverElementMixin on ComponentElement {
     // 3. https://stackoverflow.com/questions/71367080
 
     // if there's a current frame,
-    // ignore: unnecessary_non_null_assertion
     final schedulerPhase =
         _ambiguate(SchedulerBinding.instance)!.schedulerPhase;
     final shouldWait =
@@ -102,8 +101,7 @@ mixin ObserverElementMixin on ComponentElement {
       // print('hi wait phase=$schedulerPhase');
 
       // wait for the end of that frame.
-      // ignore: unnecessary_non_null_assertion
-      await SchedulerBinding.instance.endOfFrame;
+      await _ambiguate(SchedulerBinding.instance)!.endOfFrame;
 
       // If it is disposed after this frame, we should no longer call `markNeedsBuild`
       if (_reaction == null) return;
