@@ -1,3 +1,7 @@
+## 2.0.6
+
+- Adding support for previous versions of Flutter SDK
+
 ## 2.0.5+1
 
 - Package upgrades
