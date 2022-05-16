@@ -1,3 +1,7 @@
+## 2.0.7
+
+- Update codegen templates to ignore newly recommended lint rules in generated code
+
 ## 2.0.6+2
 
 - Package upgrades
