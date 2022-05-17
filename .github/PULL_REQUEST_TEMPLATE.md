@@ -1,7 +1,10 @@
-Describe the changes proposed in this Pull Request
+Describe the changes proposed in this Pull Request.
+
+If the PR fixes a specific issue, reference the issue with **`Fixes #`**.
 
 ---
 ## Pull Request Checklist
+
 
 - [ ] If the changes are being made to code, ensure the **version in `pubspec.yaml`** is updated. 
 - [ ] Increment the **`major`/`minor`/`patch`/`patch-count`**, depending on the complexity of change
