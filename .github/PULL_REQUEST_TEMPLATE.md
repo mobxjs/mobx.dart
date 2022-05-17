@@ -9,3 +9,4 @@ Describe the changes proposed in this Pull Request
 - [ ] Update the **Changelog** to include all changes made in this PR
 - [ ] Run the **`set:versions` command** using `npm` or `yarn`. You can find this command in the `package.json` file in the root directory
 - [ ] Include the **necessary reviewers** for the PR
+- [ ] Update the docs if there are any API changes or additions to functionality
