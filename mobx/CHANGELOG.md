@@ -1,6 +1,10 @@
-## 2.0.7+1
+## 2.0.7+3
 
 - Fixed unnecessary ActionSpyEvents being triggered for AsyncAction
+
+## 2.0.7+1 - 2.0.7+2
+
+- Package upgrades
 
 ## 2.0.7
 
@@ -18,6 +22,7 @@
   lights.toggle(); // now it has a value of false
   ```
   Changes made by [@subzero911](https://github.com/subzero911)
+- Allow use custom context(#770) - @amondnet
 
 ## 2.0.6 - 2.0.6+1
 

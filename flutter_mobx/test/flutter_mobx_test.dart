@@ -333,7 +333,7 @@ class ConstStatefulObserver extends StatefulObserverWidget {
   const ConstStatefulObserver({Key? key}) : super(key: key);
 
   @override
-  _ConstStatefulObserverState createState() => _ConstStatefulObserverState();
+  State<ConstStatefulObserver> createState() => _ConstStatefulObserverState();
 }
 
 class _ConstStatefulObserverState extends State<ConstStatefulObserver> {

@@ -3,3 +3,4 @@ include: package:lints/recommended.yaml
 analyzer:
   exclude:
     - test/data/**.dart
+    - test/*.g.dart

@@ -5,6 +5,7 @@ import 'package:mobx/mobx.dart';
 
 part 'random_store.g.dart';
 
+// ignore: library_private_types_in_public_api
 class RandomStore = _RandomStore with _$RandomStore;
 
 abstract class _RandomStore with Store {

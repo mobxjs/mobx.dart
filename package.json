@@ -2,11 +2,10 @@
   "name": "mobx.dart",
   "version": "1.0.0",
   "description": "This file is purely to leverage NPM for running the scripts. This is NOT to track any dependencies.",
+  "type": "module",
   "scripts": {
-    "pub:get:mobx": "cd mobx; dart pub get;",
-    "pub:upgrade:mobx": "cd mobx; dart pub upgrade;",
-    "pub:get:mobx_codegen": "cd mobx_codegen; dart pub get;",
-    "pub:upgrade:mobx_codegen": "cd mobx_codegen; dart pub upgrade;",
+    "pub-get-all": "node --loader ts-node/esm tool/pub-get-all.ts",
+    "pub-upgrade-all": "node --loader ts-node/esm tool/pub-get-all.ts --upgrade",
     "gen:mobx:example": "cd mobx/example; dart run build_runner build",
     "gen:mobx_codegen": "cd mobx_codegen; dart run build_runner build",
     "gen:mobx_examples": "cd mobx_examples; dart run build_runner build",
@@ -19,6 +18,11 @@
     "mobx_codgen:coverage:html": "cd mobx_codegen && ../tool/coverage.sh && genhtml --output-directory coverage/ coverage/lcov.info"
   },
   "devDependencies": {
-    "all-contributors-cli": "^6.13.0"
+    "all-contributors-cli": "^6.13.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "zx": "^6.1.0"
   }
 }

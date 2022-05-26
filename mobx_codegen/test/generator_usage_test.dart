@@ -3,9 +3,11 @@ import 'package:test/test.dart';
 
 part 'generator_usage_test.g.dart';
 
+// ignore: library_private_types_in_public_api
 class TestStore = _TestStore with _$TestStore;
 
 abstract class _TestStore with Store {
+  // ignore: unused_element
   _TestStore(this.field1, {this.field2});
 
   @observable

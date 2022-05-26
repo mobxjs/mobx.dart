@@ -27,7 +27,7 @@ void main() {
       Listeners(context)
         ..add((_) {})
         ..notifyListeners(ChangeNotification());
-      verify(() => context.untracked(any()));
+      verifyNever(() => context.untracked(any()));
     });
 
     test('asserts for null notifications', () {

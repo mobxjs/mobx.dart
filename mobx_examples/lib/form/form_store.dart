@@ -10,6 +10,7 @@ class CustomColor extends Color {
   CustomColor(int value) : super(value);
 }
 
+// ignore: library_private_types_in_public_api
 class FormStore = _FormStore with _$FormStore;
 
 abstract class _FormStore with Store {
@@ -100,6 +101,7 @@ abstract class _FormStore with Store {
   }
 }
 
+// ignore: library_private_types_in_public_api
 class FormErrorState = _FormErrorState with _$FormErrorState;
 
 abstract class _FormErrorState with Store {

@@ -3,5 +3,6 @@ include: package:lints/recommended.yaml
 analyzer:
   exclude:
     - test/*.mocks.dart
+    - example/lib/*.dart
   strong-mode:
     implicit-casts: false

@@ -56,7 +56,7 @@ void main() {
             throw Exception('FAILED in when');
           },
           () {},
-          onError: (_, _a) {
+          onError: (_, a) {
             thrown = true;
           });
 
@@ -89,7 +89,7 @@ void main() {
         final x = Observable(10);
         var thrown = false;
         final d =
-            when((_) => x.value > 10, () {}, timeout: 1000, onError: (_, _a) {
+            when((_) => x.value > 10, () {}, timeout: 1000, onError: (_, a) {
           thrown = true;
         });
 

@@ -8,7 +8,7 @@ class HackerNewsExample extends StatefulWidget {
   const HackerNewsExample({Key? key}) : super(key: key);
 
   @override
-  _HackerNewsExampleState createState() => _HackerNewsExampleState();
+  State<HackerNewsExample> createState() => _HackerNewsExampleState();
 }
 
 class _HackerNewsExampleState extends State<HackerNewsExample>
@@ -84,8 +84,8 @@ class FeedItemsView extends StatelessWidget {
                   style: TextStyle(color: Colors.red),
                 ),
                 ElevatedButton(
-                  child: const Text('Tap to try again'),
                   onPressed: _refresh,
+                  child: const Text('Tap to try again'),
                 )
               ],
             );
