@@ -3,9 +3,7 @@ part of '../extensions.dart';
 /// turns an int into ObservableInt
 extension IntExtension on int {
   @Deprecated('Use toObs() instead')
-  ObservableInt asObservable({ReactiveContext? context, String? name}) {
-    return Observable(this, context: context, name: name);
-  }
+  ObservableInt asObservable({ReactiveContext? context, String? name}) => toObs(context: context, name: name);
 
   ObservableInt toObs({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
@@ -15,9 +13,7 @@ extension IntExtension on int {
 /// turns a bool into ObservableBool
 extension BoolExtension on bool {
   @Deprecated('Use toObs() instead')
-  ObservableBool asObservable({ReactiveContext? context, String? name}) {
-    return Observable(this, context: context, name: name);
-  }
+  ObservableBool asObservable({ReactiveContext? context, String? name}) => toObs(context: context, name: name);
 
   ObservableBool toObs({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
@@ -34,9 +30,7 @@ extension ObservableBoolExtension on ObservableBool {
 /// turns a double into ObservableDouble
 extension DoubleExtension on double {
   @Deprecated('Use toObs() instead')
-  ObservableDouble asObservable({ReactiveContext? context, String? name}) {
-    return Observable(this, context: context, name: name);
-  }
+  ObservableDouble asObservable({ReactiveContext? context, String? name}) => toObs(context: context, name: name);
 
   ObservableDouble toObs({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
@@ -46,9 +40,7 @@ extension DoubleExtension on double {
 /// turns a String into ObservableString
 extension StringExtension on String {
   @Deprecated('Use toObs() instead')
-  ObservableString asObservable({ReactiveContext? context, String? name}) {
-    return Observable(this, context: context, name: name);
-  }
+  ObservableString asObservable({ReactiveContext? context, String? name}) => toObs(context: context, name: name);
 
   ObservableString toObs({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
