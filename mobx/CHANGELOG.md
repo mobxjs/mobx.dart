@@ -1,3 +1,6 @@
+## 2.0.7+3
+- `asObservable()` renamed to shorter `toObs()` - [@subzero911](https://github.com/subzero911)
+
 ## 2.0.7+1 - 2.0.7+2
 
 - Package upgrades
