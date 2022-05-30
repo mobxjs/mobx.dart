@@ -12,7 +12,7 @@ void main() {
   group('ObservableStreamExtension', () {
     test('Transform Stream in ObservableStream', () async {
       const stream = Stream.empty();
-      expect(stream.asObservable(), isA<ObservableStream>());
+      expect(stream.toObs(), isA<ObservableStream>());
     });
   });
 }

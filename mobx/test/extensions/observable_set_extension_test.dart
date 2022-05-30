@@ -10,7 +10,7 @@ void main() {
   group('ObservableSetExtension', () {
     test('Transform Set in ObservableSet', () async {
       final set = <dynamic>{};
-      expect(set.asObservable(), isA<ObservableSet>());
+      expect(set.toObs(), isA<ObservableSet>());
     });
   });
 }

@@ -10,7 +10,7 @@ void main() {
   group('ObservableListExtension', () {
     test('Transform List in ObservableList', () async {
       final list = [];
-      expect(list.asObservable(), isA<ObservableList>());
+      expect(list.toObs(), isA<ObservableList>());
     });
   });
 }

@@ -124,11 +124,11 @@ MobX also comes with a set of wrapper-classes that add the reactive behavior. Th
 
 > ### Reactive Extensions
 >
-> You can convert plain `List`, `Map`, `Set`, `Future` and `Stream` instances into an observable version with the `asObservable()` extension method.
+> You can convert plain `List`, `Map`, `Set`, `Future` and `Stream` instances into an observable version with the `toObs()` extension method.
 > For example, in the code-snippet above, you could do:
 >
 > ```dart
-> ObservableList<String> phoneNumbers = [].asObservable();
+> ObservableList<String> phoneNumbers = [].toObs();
 > ```
 
 ## Don't underestimate the @computed

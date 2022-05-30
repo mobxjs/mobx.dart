@@ -12,7 +12,7 @@ void main() {
   group('ObservableFutureExtension', () {
     test('Transform Future in ObservableFuture', () async {
       final future = Future.value(1);
-      expect(future.asObservable(), isA<ObservableFuture>());
+      expect(future.toObs(), isA<ObservableFuture>());
     });
   });
 }
