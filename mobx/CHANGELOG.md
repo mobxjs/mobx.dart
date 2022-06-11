@@ -1,3 +1,7 @@
+## 2.0.7+3
+
+- Fixed unnecessary ActionSpyEvents being triggered for AsyncAction
+
 ## 2.0.7+1 - 2.0.7+2
 
 - Package upgrades
