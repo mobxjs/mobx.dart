@@ -1,3 +1,7 @@
+## 2.0.7+4
+fixes:
+- shortened `1.asObservable()` to `1.obs()` (same for boolean, double, String) - [@subzero911](https://github.com/subzero911)
+
 ## 2.0.7+3
 
 - Fixed unnecessary ActionSpyEvents being triggered for AsyncAction
