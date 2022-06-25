@@ -16,7 +16,6 @@ part 'core/observable_value.dart';
 part 'core/reaction.dart';
 part 'core/reaction_helper.dart';
 part 'core/spy.dart';
-part 'core/typedefs.dart';
 part 'interceptable.dart';
 part 'listenable.dart';
 
