@@ -116,6 +116,38 @@ abstract class _TestStore with Store {
     // ignore: only_throw_errors
     throw 'TEST ERROR';
   }
+
+  @action
+  Future<void> oldAsyncAction(String param1) async {
+    batchItem1 = 'item1';
+    await Future.delayed(const Duration(milliseconds: 10));
+    batchItem2 = 'item2';
+    batchItem3 = 'item3';
+    await Future.delayed(const Duration(milliseconds: 10));
+    batchItem4 = 'item4';
+  }
+
+  @action
+  Future<void> newAsyncActionOptionalParam(String param1,
+      [$newBehavior = true]) async {
+    batchItem1 = 'item1';
+    await Future.delayed(const Duration(milliseconds: 10));
+    batchItem2 = 'item2';
+    batchItem3 = 'item3';
+    await Future.delayed(const Duration(milliseconds: 10));
+    batchItem4 = 'item4';
+  }
+
+  @action
+  Future<void> newAsyncActionNamedParam(String param1,
+      {$newBehavior = true}) async {
+    batchItem1 = 'item1';
+    await Future.delayed(const Duration(milliseconds: 10));
+    batchItem2 = 'item2';
+    batchItem3 = 'item3';
+    await Future.delayed(const Duration(milliseconds: 10));
+    batchItem4 = 'item4';
+  }
 }
 
 void main() {

@@ -6,7 +6,7 @@ part of 'generator_usage_test.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TestStore on _TestStore, Store {
   Computed<String>? _$fieldsComputed;
@@ -203,6 +203,38 @@ mixin _$TestStore on _TestStore, Store {
   @override
   Future<void> throwsError() {
     return _$throwsErrorAsyncAction.run(() => super.throwsError());
+  }
+
+  late final _$oldAsyncActionAsyncAction =
+      AsyncAction('_TestStore.oldAsyncAction', context: context);
+
+  @override
+  Future<void> oldAsyncAction(String param1) {
+    return _$oldAsyncActionAsyncAction.run(() => super.oldAsyncAction(param1));
+  }
+
+  late final _$newAsyncActionOptionalParamAsyncAction = AsyncAction(
+      '_TestStore.newAsyncActionOptionalParam',
+      context: context,
+      newBehavior: true);
+
+  @override
+  Future<void> newAsyncActionOptionalParam(String param1,
+      [dynamic $newBehavior = true]) {
+    return _$newAsyncActionOptionalParamAsyncAction
+        .run(() => super.newAsyncActionOptionalParam(param1, $newBehavior));
+  }
+
+  late final _$newAsyncActionNamedParamAsyncAction = AsyncAction(
+      '_TestStore.newAsyncActionNamedParam',
+      context: context,
+      newBehavior: true);
+
+  @override
+  Future<void> newAsyncActionNamedParam(String param1,
+      {dynamic $newBehavior = true}) {
+    return _$newAsyncActionNamedParamAsyncAction.run(() =>
+        super.newAsyncActionNamedParam(param1, $newBehavior: $newBehavior));
   }
 
   late final _$_TestStoreActionController =
