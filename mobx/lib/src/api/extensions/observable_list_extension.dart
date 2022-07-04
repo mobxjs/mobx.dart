@@ -4,4 +4,6 @@ part of '../extensions.dart';
 extension ObservableListExtension<T> on List<T> {
   ObservableList<T> asObservable({ReactiveContext? context, String? name}) =>
       ObservableList<T>.of(this, context: context, name: name);
+
+  ObservableList<T> get asObs => ObservableList<T>.of(this);
 }

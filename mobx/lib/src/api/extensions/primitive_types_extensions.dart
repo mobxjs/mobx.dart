@@ -5,6 +5,8 @@ extension IntExtension on int {
   Observable<int> obs({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
   }
+
+  Observable<int> get asObs => Observable(this);
 }
 
 extension BoolExtension on bool {
@@ -12,6 +14,8 @@ extension BoolExtension on bool {
   Observable<bool> obs({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
   }
+
+  Observable<bool> get asObs => Observable(this);
 }
 
 extension ObservableBoolExtension on Observable<bool> {
@@ -26,6 +30,8 @@ extension DoubleExtension on double {
   Observable<double> obs({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
   }
+
+  Observable<double> get asObs => Observable(this);
 }
 
 extension StringExtension on String {
@@ -33,4 +39,6 @@ extension StringExtension on String {
   Observable<String> obs({ReactiveContext? context, String? name}) {
     return Observable(this, context: context, name: name);
   }
+
+  Observable<String> get asObs => Observable(this);
 }

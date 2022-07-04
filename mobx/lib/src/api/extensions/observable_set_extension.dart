@@ -4,4 +4,6 @@ part of '../extensions.dart';
 extension ObservableSetExtension<T> on Set<T> {
   ObservableSet<T> asObservable({ReactiveContext? context, String? name}) =>
       ObservableSet<T>.of(this, context: context, name: name);
+
+  ObservableSet<T> get asObs => ObservableSet<T>.of(this);
 }

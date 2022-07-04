@@ -4,4 +4,6 @@ part of '../extensions.dart';
 extension ObservableFutureExtension<T> on Future<T> {
   ObservableFuture<T> asObservable({ReactiveContext? context, String? name}) =>
       ObservableFuture<T>(this, context: context, name: name);
+
+  ObservableFuture<T> get asObs => ObservableFuture<T>(this);
 }

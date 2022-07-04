@@ -12,4 +12,6 @@ extension ObservableStreamExtension<T> on Stream<T> {
           cancelOnError: cancelOnError,
           context: context,
           name: name);
+
+  ObservableStream<T> get asObs => ObservableStream<T>(this);
 }
