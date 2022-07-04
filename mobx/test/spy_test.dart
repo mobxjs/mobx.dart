@@ -142,7 +142,7 @@ void main() {
 
       final actionCompleter = Completer();
       final microtaskCompleter = Completer();
-      AsyncAction('test').run(() async {
+      AsyncAction('test', newBehavior: true).run(() async {
         scheduleMicrotask(() {
           microtaskCompleter.complete();
         });
