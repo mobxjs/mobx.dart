@@ -1,4 +1,5 @@
 import 'package:mobx_codegen/src/template/method_override.dart';
+import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 
 class AsyncActionTemplate {
@@ -23,9 +24,31 @@ class AsyncActionTemplate {
       ? 'ObservableFuture${method.returnTypeArgs}($_methodCall)'
       : _methodCall;
 
+  String get _newBehavior {
+    bool? isNewBehavior;
+
+    for (final list in method.params.templates) {
+      for (final ParamTemplate param in list.templates) {
+        if (param.name == '\$newBehavior') {
+          isNewBehavior = param.defaultValue == 'true';
+
+          break;
+        }
+      }
+
+      if (isNewBehavior != null) break;
+    }
+
+    if (isNewBehavior == true) {
+      return ', newBehavior: $isNewBehavior';
+    }
+
+    return '';
+  }
+
   @override
   String toString() => """
-  late final $_actionField = AsyncAction('${storeTemplate.parentTypeName}.${method.name}', context: context);
+  late final $_actionField = AsyncAction('${storeTemplate.parentTypeName}.${method.name}', context: context$_newBehavior);
 
   @override
   $_futureType${method.returnTypeArgs} ${method.name}${method.typeParams}(${method.params}) {
