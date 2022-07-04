@@ -14,5 +14,10 @@ void main() {
       final future = Future.value(1);
       expect(future.asObservable(), isA<ObservableFuture>());
     });
+
+    test('Transform Future in ObservableFuture (Use .asObs)', () async {
+      final future = Future.value(1);
+      expect(future.asObs, isA<ObservableFuture>());
+    });
   });
 }

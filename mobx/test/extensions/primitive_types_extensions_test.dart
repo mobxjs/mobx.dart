@@ -10,21 +10,25 @@ void main() {
     test('Transform Int into ObsInt', () {
       final count = 0;
       expect(count.obs(), isA<Observable<int>>());
+      expect(count.asObs, isA<Observable<int>>());
     });
 
     test('Transform Double into ObsDouble', () {
       final count = 0.0;
       expect(count.obs(), isA<Observable<double>>());
+      expect(count.asObs, isA<Observable<double>>());
     });
 
     test('Transform Bool into ObsBool', () {
       final flag = false;
       expect(flag.obs(), isA<Observable<bool>>());
+      expect(flag.asObs, isA<Observable<bool>>());
     });
 
     test('Transform String into ObsString', () {
       final str = '';
       expect(str.obs(), isA<Observable<String>>());
+      expect(str.asObs, isA<Observable<String>>());
     });
 
     test('Toggles ObservableBool', () {
@@ -32,6 +36,5 @@ void main() {
       flag.toggle();
       expect(flag.value, equals(true));
     });
-
   });
 }

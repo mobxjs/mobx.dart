@@ -12,5 +12,10 @@ void main() {
       final map = {};
       expect(map.asObservable(), isA<ObservableMap>());
     });
+
+    test('Transform Map in ObservableMap (Use .asObs)', () async {
+      final map = {};
+      expect(map.asObs, isA<ObservableMap>());
+    });
   });
 }

@@ -12,5 +12,10 @@ void main() {
       final set = <dynamic>{};
       expect(set.asObservable(), isA<ObservableSet>());
     });
+
+    test('Transform Set in ObservableSet (Use .asObs)', () async {
+      final set = <dynamic>{};
+      expect(set.asObs, isA<ObservableSet>());
+    });
   });
 }

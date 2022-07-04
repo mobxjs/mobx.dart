@@ -14,5 +14,10 @@ void main() {
       const stream = Stream.empty();
       expect(stream.asObservable(), isA<ObservableStream>());
     });
+
+    test('Transform Stream in ObservableStream (Use .asObs)', () async {
+      const stream = Stream.empty();
+      expect(stream.asObs, isA<ObservableStream>());
+    });
   });
 }

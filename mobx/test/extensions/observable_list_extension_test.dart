@@ -12,5 +12,10 @@ void main() {
       final list = [];
       expect(list.asObservable(), isA<ObservableList>());
     });
+
+    test('Transform List in ObservableList (Use .asObs)', () async {
+      final list = [];
+      expect(list.asObs, isA<ObservableList>());
+    });
   });
 }
