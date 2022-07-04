@@ -1,3 +1,7 @@
+## 2.0.7+1
+
+- Support new flag `$newBehavior` for `@action` method. (>= mobx 2.0.7+6)
+
 ## 2.0.7
 
 - Update codegen templates to ignore newly recommended lint rules in generated code
