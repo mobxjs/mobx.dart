@@ -1,5 +1,33 @@
+## 2.0.7+5
+
+- Add simple version of type aliases for all possible types:
+
+``` dart
+final obsValue = 0.asObs; // = Observable<int>(0)
+final obsValue = ''.asObs; // = Observable<String>('')
+final obsValue = <String>[].asObs; // = ObservableList<String>();
+```
+
+- Add simple version of getter/setter for `Observable<T>` type:
+  - Get value: `final value = obsValue();`
+  - Set value: `obsValue('new value');`
+
+``` dart
+final obsValue = 'initial value'.asObs;
+
+// Get value instead of using `obsValue.value`
+print(obsValue()); // => print 'initial value'
+
+// Set value (Also wrapped with `runInAction` by default)
+// instead of using `runInAction(() => obsValue.value = 'new value');`
+obsValue('new value');
+print(obsValue()); // => print 'new value'
+```
+
 ## 2.0.7+4
+
 fixes:
+
 - shortened `1.asObservable()` to `1.obs()` (same for boolean, double, String) - [@subzero911](https://github.com/subzero911)
 - removed experimental typedefs from `2.0.7`
 
@@ -17,15 +45,19 @@ fixes:
   So instead of `Observable<int>` you can now write `ObservableInt`.
 - `.asObservable()` extension for primitive types.\
   Now you can easily convert literals to observables like:
+
   ```dart
   var name = ''.asObservable(); // infers ObservableString
   var counter = 0.asObservable(); // infers ObservableInt
   ```
+
 - `toggle()` method for `ObservableBool`. Lets you toggle the internal value of `ObservableBool`
+
   ```dart
   var lights = true.asObservable();
   lights.toggle(); // now it has a value of false
   ```
+
   Changes made by [@subzero911](https://github.com/subzero911)
 - Allow use custom context(#770) - @amondnet
 
