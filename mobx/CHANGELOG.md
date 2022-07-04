@@ -1,3 +1,28 @@
+## 2.0.7+6
+
+Add flag `$newBehavior` to `@action` method to allow old users to continue using old behavior of the `AsyncAction` which mean the `Future` action. Read the issue [#834](https://github.com/mobxjs/mobx.dart/issues/834) for more details.
+
+``` dart
+// Old behavior
+@action
+Future someMethod() async {}
+
+// New behavior
+@action
+Future someMethod([$newBehavior = true]) async {} // With optional parameter
+// Or
+@action
+Future someMethod({$newBehavior = true}) async {} // With named parameter
+```
+
+Other parameters you can use as your purposes, just need to make sure the `$newBehavior = true` parameter is exist if you want to use the new behavior.
+
+If you want to use `AsyncAction` directly, you can do this:
+
+``` dart
+AsyncAction('name', contaxt: context, newBehavior = true);
+```
+
 ## 2.0.7+5
 
 - Add simple version of type aliases for all possible types:
