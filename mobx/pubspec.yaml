@@ -1,5 +1,5 @@
 name: mobx
-version: 2.0.7+4
+version: 2.0.7+5
 description: "MobX is a library for reactively managing the state of your applications. Use the power of observables, actions, and reactions to supercharge your Dart and Flutter apps."
 
 homepage: https://github.com/mobxjs/mobx.dart

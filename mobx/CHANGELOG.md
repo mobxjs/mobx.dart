@@ -1,3 +1,28 @@
+## 2.0.7+5
+
+- Add flag `asyncActionBehavior` to `ReactiveConfig` to control the behavior of `@action` on `Future` methods.
+
+``` dart
+/// Notify all nested actions in the `Future` method. This is the old behavior of the mobx <= 2.0.7+2
+/// This is currently the default behavior of the `@action` on `Future` methods.
+abstract class _YourStore with Store {
+  @override
+  ReactiveContext get context {
+    return mainContext
+      ..config.clone(asyncActionBehavior: AsyncActionBehavior.notifyEachNested);
+  }
+}
+
+/// Notify only the last action in the `Future` method. This is the new behavior of the mobx >= 2.0.7+3
+abstract class _YourStore with Store {
+  @override
+  ReactiveContext get context {
+    return mainContext
+      ..config.clone(asyncActionBehavior: AsyncActionBehavior.notifyOnlyLast);
+  }
+}
+```
+
 ## 2.0.7+4
 fixes:
 - shortened `1.asObservable()` to `1.obs()` (same for boolean, double, String) - [@subzero911](https://github.com/subzero911)
