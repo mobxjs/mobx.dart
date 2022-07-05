@@ -18,8 +18,15 @@ void main() {
   });
 
   group('AsyncAction', () {
-    test('run allows updating observable values in an async function',
+    test(
+        'run allows updating observable values in an async function (with flag `AsyncActionBehavior.notifyEachNested`)',
         () async {
+      final lastConfig = mainContext.config;
+
+      mainContext.config = mainContext.config.clone(
+        asyncActionBehavior: AsyncActionBehavior.notifyEachNested,
+      );
+
       final action = AsyncAction('testAction');
 
       final counter = Observable<int>(0);
@@ -40,6 +47,41 @@ void main() {
 
       expect(counter.value, equals(3));
       expect(values, equals([0, 2, 3]));
+
+      mainContext.config = lastConfig;
+    });
+
+    test(
+        'run allows updating only last observable value in an async function (with flag `AsyncActionBehavior.notifyOnlyLast`)',
+        () async {
+      final lastConfig = mainContext.config;
+
+      mainContext.config = mainContext.config.clone(
+        asyncActionBehavior: AsyncActionBehavior.notifyOnlyLast,
+      );
+
+      final action = AsyncAction('testAction');
+
+      final counter = Observable<int>(0);
+
+      final values = <int>[];
+      autorun((_) {
+        values.add(counter.value);
+      });
+
+      await action.run(() async {
+        await sleep(10);
+        counter
+          ..value = 1
+          ..value = 2;
+        await sleep(10);
+        counter.value = 3;
+      });
+
+      expect(counter.value, equals(3));
+      expect(values, equals([0, 3]));
+
+      mainContext.config = lastConfig;
     });
 
     test('run allows updating observable values in a Future returning function',

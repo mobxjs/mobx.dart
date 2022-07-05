@@ -5,52 +5,19 @@ part of '../async.dart';
 ///
 /// You would rarely need to use this class directly. Instead, use the `@action` annotation along with
 /// the `mobx_codegen` package.
-class AsyncAction {
-  AsyncAction(String name, {ReactiveContext? context})
-      : this._(context ?? mainContext, name);
+abstract class AsyncAction {
+  factory AsyncAction(String name, {ReactiveContext? context}) {
+    context ??= mainContext;
 
-  AsyncAction._(ReactiveContext context, String name)
-      : _actions = ActionController(context: context, name: name);
-
-  final ActionController _actions;
-
-  Zone? _zoneField;
-  Zone get _zone {
-    if (_zoneField == null) {
-      final spec = ZoneSpecification(run: _run, runUnary: _runUnary);
-      _zoneField = Zone.current.fork(specification: spec);
-    }
-    return _zoneField!;
-  }
-
-  Future<R> run<R>(Future<R> Function() body) async {
-    final actionInfo = _actions.startAction(name: _actions.name);
-    try {
-      return await _zone.run(body);
-    } finally {
-      // @katis:
-      // Delay completion until next microtask completion.
-      // Needed to make sure that all mobx state changes are
-      // applied after `await run()` completes, not sure why.
-      await Future.microtask(_noOp);
-      _actions.endAction(actionInfo);
+    if (context.config.asyncActionBehavior ==
+        AsyncActionBehavior.notifyEachNested) {
+      return _NotifyEachNested(name, context: context);
+    } else {
+      return _NotifyOnlyLast(name, context: context);
     }
   }
 
-  static dynamic _noOp() => null;
-
-  R _run<R>(Zone self, ZoneDelegate parent, Zone zone, R Function() f) {
-    final result = parent.run(zone, f);
-    return result;
-  }
-
-  // Will be invoked for a catch clause that has a single argument: exception or
-  // when a result is produced
-  R _runUnary<R, A>(
-      Zone self, ZoneDelegate parent, Zone zone, R Function(A a) f, A a) {
-    final result = parent.runUnary(zone, f, a);
-    return result;
-  }
+  Future<R> run<R>(Future<R> Function() body) => throw UnimplementedError();
 
   // Will be invoked for a catch clause that has two arguments: exception and stacktrace
 //  R _runBinary<R, A, B>(Zone self, ZoneDelegate parent, Zone zone,

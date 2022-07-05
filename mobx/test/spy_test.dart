@@ -126,8 +126,15 @@ void main() {
       d();
     });
 
-    test('spy-event is raised only once when an AsyncAction is executed',
+    test(
+        'spy-event is raised only once when an AsyncAction with flag `AsyncActionBehavior.notifyOnlyLast` is executed',
         () async {
+      final lastConfig = mainContext.config;
+
+      mainContext.config = mainContext.config.clone(
+        asyncActionBehavior: AsyncActionBehavior.notifyOnlyLast,
+      );
+
       var eventCount = 0;
       var endEventCount = 0;
       final d = mainContext.spy((event) {
@@ -159,6 +166,52 @@ void main() {
       expect(endEventCount, 1);
 
       d();
+
+      mainContext.config = lastConfig;
+    });
+
+    test(
+        'spy-event is raised multiple times when an AsyncAction with flag `AsyncActionBehavior.notifyEachNested` is executed',
+        () async {
+      final lastConfig = mainContext.config;
+
+      mainContext.config = mainContext.config.clone(
+        asyncActionBehavior: AsyncActionBehavior.notifyEachNested,
+      );
+
+      var eventCount = 0;
+      var endEventCount = 0;
+      final d = mainContext.spy((event) {
+        if (event is ActionSpyEvent) {
+          eventCount += 1;
+        }
+
+        if (event is EndedSpyEvent && event.type == 'action') {
+          endEventCount += 1;
+        }
+      });
+
+      final actionCompleter = Completer();
+      final microtaskCompleter = Completer();
+      AsyncAction('test').run(() async {
+        scheduleMicrotask(() {
+          microtaskCompleter.complete();
+        });
+        actionCompleter.complete();
+      });
+      await actionCompleter.future;
+      await microtaskCompleter.future;
+
+      // This is needed to ensure that all spy callbacks are executed
+      // before moving on to `expect`s.
+      await Future.value();
+
+      expect(eventCount, greaterThan(1));
+      expect(endEventCount, greaterThan(1));
+
+      d();
+
+      mainContext.config = lastConfig;
     });
 
     test('spy-event is raised when a Reaction is executed', () {

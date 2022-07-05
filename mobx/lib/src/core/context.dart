@@ -53,6 +53,12 @@ enum ReactiveReadPolicy { always, never }
 /// `never`: Allow mutating observables outside actions
 enum ReactiveWritePolicy { observed, always, never }
 
+/// Defines the behavior for AsyncAction
+///
+/// `notifyEachNested`: Notify each nested action in `@action` of the `Future` method. This is the default.
+/// `notifyOnlyLast`: Notify the last action in `@action` of the `Future` method.
+enum AsyncActionBehavior { notifyEachNested, notifyOnlyLast }
+
 /// Configuration used by [ReactiveContext]
 class ReactiveConfig {
   ReactiveConfig({
@@ -61,6 +67,7 @@ class ReactiveConfig {
     this.readPolicy = ReactiveReadPolicy.never,
     this.maxIterations = 100,
     this.isSpyEnabled = false,
+    this.asyncActionBehavior = AsyncActionBehavior.notifyEachNested,
   });
 
   /// The main or default configuration used by [ReactiveContext]
@@ -86,19 +93,24 @@ class ReactiveConfig {
 
   final bool isSpyEnabled;
 
+  /// Set the behavior for the `AsyncAction`
+  final AsyncActionBehavior asyncActionBehavior;
+
   ReactiveConfig clone(
           {bool? disableErrorBoundaries,
           ReactiveWritePolicy? writePolicy,
           ReactiveReadPolicy? readPolicy,
           int? maxIterations,
-          bool? isSpyEnabled}) =>
+          bool? isSpyEnabled,
+          AsyncActionBehavior? asyncActionBehavior}) =>
       ReactiveConfig(
           disableErrorBoundaries:
               disableErrorBoundaries ?? this.disableErrorBoundaries,
           writePolicy: writePolicy ?? this.writePolicy,
           readPolicy: readPolicy ?? this.readPolicy,
           maxIterations: maxIterations ?? this.maxIterations,
-          isSpyEnabled: isSpyEnabled ?? this.isSpyEnabled);
+          isSpyEnabled: isSpyEnabled ?? this.isSpyEnabled,
+          asyncActionBehavior: asyncActionBehavior ?? this.asyncActionBehavior);
 }
 
 class ReactiveContext {
