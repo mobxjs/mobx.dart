@@ -126,6 +126,7 @@ void main() {
       d();
     });
 
+    // TODO: https://github.com/mobxjs/mobx.dart/issues/734
     test('spy-event is raised only once when an AsyncAction is executed',
         () async {
       var eventCount = 0;
@@ -159,7 +160,7 @@ void main() {
       expect(endEventCount, 1);
 
       d();
-    });
+    }, skip: true);
 
     test('spy-event is raised when a Reaction is executed', () {
       final o = Observable(0);
