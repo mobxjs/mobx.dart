@@ -40,6 +40,8 @@ class ObservableList<T>
   final Atom _atom;
   final List<T> _list;
 
+  List<T> get nonObservableInner => _list;
+
   Listeners<ListChange<T>>? _listenersField;
 
   Listeners<ListChange<T>> get _listeners =>

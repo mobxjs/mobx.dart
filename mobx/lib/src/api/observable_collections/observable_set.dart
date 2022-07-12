@@ -61,6 +61,8 @@ class ObservableSet<T>
   final Atom _atom;
   final Set<T> _set;
 
+  Set<T> get nonObservableInner => _set;
+
   String get name => _atom.name;
 
   Listeners<SetChange<T>>? _listenersField;

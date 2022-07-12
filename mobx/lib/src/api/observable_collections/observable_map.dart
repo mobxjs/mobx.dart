@@ -58,6 +58,8 @@ class ObservableMap<K, V>
   final Atom _atom;
   final Map<K, V> _map;
 
+  Map<K, V> get nonObservableInner => _map;
+
   String get name => _atom.name;
 
   Listeners<MapChange<K, V>>? _listenersField;
