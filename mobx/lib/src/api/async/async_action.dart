@@ -24,7 +24,6 @@ class AsyncAction {
   }
 
   Future<R> run<R>(Future<R> Function() body) async {
-    final actionInfo = _actions.startAction(name: _actions.name);
     try {
       return await _zone.run(body);
     } finally {
@@ -33,23 +32,33 @@ class AsyncAction {
       // Needed to make sure that all mobx state changes are
       // applied after `await run()` completes, not sure why.
       await Future.microtask(_noOp);
-      _actions.endAction(actionInfo);
     }
   }
 
   static dynamic _noOp() => null;
 
   R _run<R>(Zone self, ZoneDelegate parent, Zone zone, R Function() f) {
-    final result = parent.run(zone, f);
-    return result;
+    final actionInfo = _actions.startAction(name: '${_actions.name}(Zone.run)');
+    try {
+      final result = parent.run(zone, f);
+      return result;
+    } finally {
+      _actions.endAction(actionInfo);
+    }
   }
 
   // Will be invoked for a catch clause that has a single argument: exception or
   // when a result is produced
   R _runUnary<R, A>(
       Zone self, ZoneDelegate parent, Zone zone, R Function(A a) f, A a) {
-    final result = parent.runUnary(zone, f, a);
-    return result;
+    final actionInfo =
+    _actions.startAction(name: '${_actions.name}(Zone.runUnary)');
+    try {
+      final result = parent.runUnary(zone, f, a);
+      return result;
+    } finally {
+      _actions.endAction(actionInfo);
+    }
   }
 
   // Will be invoked for a catch clause that has two arguments: exception and stacktrace
