@@ -96,11 +96,7 @@ class Atom {
       _addListener(_ListenerKind.onBecomeUnobserved, fn);
 
   void Function() _addListener(_ListenerKind kind, void Function() fn) {
-    if (_observationListeners[kind] == null) {
-      _observationListeners[kind] = {}..add(fn);
-    } else {
-      _observationListeners[kind]!.add(fn);
-    }
+    (_observationListeners[kind] ??= {}).add(fn);
 
     return () {
       final listeners = _observationListeners[kind];
