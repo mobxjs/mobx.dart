@@ -256,7 +256,7 @@ void main() {
       });
 
       group(
-          'when the computation is called twice, should dispose the value generated in the first computation',
+          'when the computation is called twice, should dispose the unused value',
           () {
         test('when access Computed twice *outside* reactive environment', () {
           expect(computedCallCount, 0);
@@ -338,6 +338,40 @@ void main() {
 
         expect(computedCallCount, 1);
         expect(disposeValueArguments, const <String>['A1-Computed#0']);
+      });
+
+      group('when call Computed.dispose()', () {
+        test('when nobody was observing it, should do nothing', () {
+          computed.dispose();
+          expect(computedCallCount, 0);
+          expect(disposeValueArguments, const <String>[]);
+        });
+
+        test(
+            'when somebody was observing it, should still dispose the current value',
+            () {
+          expect(computedCallCount, 0);
+          expect(disposeValueArguments, const <String>[]);
+
+          late final String computedValue;
+          final autorunDisposer =
+              autorun((_) => computedValue = computed.value);
+          expect(computedValue, 'A1-Computed#0');
+
+          expect(computedCallCount, 1);
+          expect(disposeValueArguments, const <String>[]);
+
+          // NOTE this
+          computed.dispose();
+
+          expect(computedCallCount, 1);
+          expect(disposeValueArguments, const <String>['A1-Computed#0']);
+
+          autorunDisposer();
+
+          expect(computedCallCount, 1);
+          expect(disposeValueArguments, const <String>['A1-Computed#0']);
+        });
       });
     });
   });
