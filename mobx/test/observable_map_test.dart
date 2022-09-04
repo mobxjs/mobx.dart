@@ -228,6 +228,22 @@ void main() {
 
       expect(map.containsKey('a'), isTrue);
     });
+
+    test('bypass observable system', () {
+      final map = ObservableMap<int, int>();
+
+      int? nonObservableInnerLength;
+      autorun((_) => nonObservableInnerLength = map.nonObservableInner.length);
+
+      expect(map.nonObservableInner.length, 0);
+      expect(nonObservableInnerLength, equals(0));
+
+      map[10] = 20;
+
+      expect(map.nonObservableInner.length, 1);
+      expect(nonObservableInnerLength, equals(0),
+          reason: 'should not be observable');
+    });
   });
 }
 

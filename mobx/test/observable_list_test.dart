@@ -626,6 +626,23 @@ void main() {
         '[]': (_) => _[0],
         '+': (_) => _ + [100],
       }.forEach(_templateReadTest);
+
+      test('bypass observable system', () {
+        final list = ObservableList<int>();
+
+        int? nonObservableInnerLength;
+        autorun(
+            (_) => nonObservableInnerLength = list.nonObservableInner.length);
+
+        expect(list.nonObservableInner.length, 0);
+        expect(nonObservableInnerLength, equals(0));
+
+        list.add(20);
+
+        expect(list.nonObservableInner.length, 1);
+        expect(nonObservableInnerLength, equals(0),
+            reason: 'should not be observable');
+      });
     });
   });
 

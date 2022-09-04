@@ -1,4 +1,5 @@
 import 'package:mobx/src/api/observable_collections.dart';
+import 'package:mobx/src/api/reaction.dart';
 import 'package:mobx/src/core.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -137,6 +138,22 @@ void main() {
         'retainAll': (m) => m.retainAll([1, 2]),
         'retainWhere': (m) => m.retainWhere((i) => i < 3),
       }.forEach(runWriteTest);
+    });
+
+    test('bypass observable system', () {
+      final set = ObservableSet<int>();
+
+      int? nonObservableInnerLength;
+      autorun((_) => nonObservableInnerLength = set.nonObservableInner.length);
+
+      expect(set.nonObservableInner.length, 0);
+      expect(nonObservableInnerLength, equals(0));
+
+      set.add(10);
+
+      expect(set.nonObservableInner.length, 1);
+      expect(nonObservableInnerLength, equals(0),
+          reason: 'should not be observable');
     });
   });
 }

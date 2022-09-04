@@ -247,14 +247,17 @@ void main() {
         disposeValueArguments = [];
         computed = Computed(
           () {
-            observableThatDoesNotAffectValue.value; // just access it, but does not affect computed's value
+            observableThatDoesNotAffectValue
+                .value; // just access it, but does not affect computed's value
             return '${observableThatAffectsValue.value}-Computed#${computedCallCount++}';
           },
           disposeValue: disposeValueArguments.add,
         );
       });
 
-      group('when the computation is called twice, should dispose the value generated in the first computation', () {
+      group(
+          'when the computation is called twice, should dispose the value generated in the first computation',
+          () {
         test('when access Computed twice *outside* reactive environment', () {
           expect(computedCallCount, 0);
           expect(disposeValueArguments, const <String>[]);
@@ -276,7 +279,8 @@ void main() {
             expect(disposeValueArguments, const <String>[]);
 
             late String computedValue;
-            final autorunDisposer = autorun((_) => computedValue = computed.value);
+            final autorunDisposer =
+                autorun((_) => computedValue = computed.value);
             expect(computedValue, 'A1-Computed#0');
 
             runInAction(() => observableThatAffectsValue.value = 'A2');
@@ -288,7 +292,8 @@ void main() {
             autorunDisposer();
 
             expect(computedCallCount, 2);
-            expect(disposeValueArguments, const <String>['A1-Computed#0', 'A2-Computed#1']);
+            expect(disposeValueArguments,
+                const <String>['A1-Computed#0', 'A2-Computed#1']);
           });
 
           test('and when the computed value does not change', () {
@@ -296,10 +301,12 @@ void main() {
             expect(disposeValueArguments, const <String>[]);
 
             late String computedValue;
-            final autorunDisposer = autorun((_) => computedValue = computed.value);
+            final autorunDisposer =
+                autorun((_) => computedValue = computed.value);
             expect(computedValue, 'A1-Computed#0');
 
-            runInAction(() => observableThatDoesNotAffectValue.value = 'something else but this does not matter');
+            runInAction(() => observableThatDoesNotAffectValue.value =
+                'something else but this does not matter');
 
             expect(computedValue, 'A1-Computed#1');
             expect(computedCallCount, 2);
@@ -308,13 +315,15 @@ void main() {
             autorunDisposer();
 
             expect(computedCallCount, 2);
-            expect(disposeValueArguments, const <String>['A1-Computed#0', 'A1-Computed#1']);
+            expect(disposeValueArguments,
+                const <String>['A1-Computed#0', 'A1-Computed#1']);
           });
         });
       });
 
       // indeed, via `_suspend`
-      test('when nobody is observing the Computed, should dispose the value', () {
+      test('when nobody is observing the Computed, should dispose the value',
+          () {
         expect(computedCallCount, 0);
         expect(disposeValueArguments, const <String>[]);
 
