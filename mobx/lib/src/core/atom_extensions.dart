@@ -7,6 +7,11 @@ extension AtomSpyReporter on Atom {
   }
 
   void reportWrite<T>(T newValue, T oldValue, void Function() setNewValue) {
+    // Avoid unnecessary observable notifications of @observable fields of Stores
+    if (newValue == oldValue) {
+      return;
+    }
+
     context.spyReport(ObservableValueSpyEvent(this,
         newValue: newValue, oldValue: oldValue, name: name));
 
