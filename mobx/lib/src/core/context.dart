@@ -70,7 +70,7 @@ class ReactiveConfig {
       readPolicy: ReactiveReadPolicy.never);
 
   /// Whether MobX should throw exceptions instead of catching them and store
-  /// as [ReactionImpl.errorValue].
+  /// as [Derivation.errorValue].
   final bool disableErrorBoundaries;
 
   /// Enforce mutation of observables inside an action
