@@ -63,7 +63,8 @@ void main() {
 
       var count = 0;
       autorun((_) {
-        for (final _ in list) {
+        // ignore: unused_local_variable
+        for (final x in list) {
           count++;
         }
       });
@@ -614,7 +615,7 @@ void main() {
         'getRange': (_) => _.getRange(0, 0),
 
         // ignore: avoid_function_literals_in_foreach_calls
-        'forEach': (_) => _.forEach((_a) {}),
+        'forEach': (_) => _.forEach((a) {}),
 
         'contains': (_) => _.contains(null),
         'indexWhere': (_) => _.indexWhere((_) => true),

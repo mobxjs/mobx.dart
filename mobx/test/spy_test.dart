@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:mobx/mobx.dart';
 import 'package:test/test.dart';
 
@@ -123,6 +125,42 @@ void main() {
 
       d();
     });
+
+    // TODO: https://github.com/mobxjs/mobx.dart/issues/734
+    test('spy-event is raised only once when an AsyncAction is executed',
+        () async {
+      var eventCount = 0;
+      var endEventCount = 0;
+      final d = mainContext.spy((event) {
+        if (event is ActionSpyEvent) {
+          eventCount += 1;
+        }
+
+        if (event is EndedSpyEvent && event.type == 'action') {
+          endEventCount += 1;
+        }
+      });
+
+      final actionCompleter = Completer();
+      final microtaskCompleter = Completer();
+      AsyncAction('test').run(() async {
+        scheduleMicrotask(() {
+          microtaskCompleter.complete();
+        });
+        actionCompleter.complete();
+      });
+      await actionCompleter.future;
+      await microtaskCompleter.future;
+
+      // This is needed to ensure that all spy callbacks are executed
+      // before moving on to `expect`s.
+      await Future.value();
+
+      expect(eventCount, 1);
+      expect(endEventCount, 1);
+
+      d();
+    }, skip: true);
 
     test('spy-event is raised when a Reaction is executed', () {
       final o = Observable(0);

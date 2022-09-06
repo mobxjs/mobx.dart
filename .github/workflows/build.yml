@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: google/dart:${{ matrix.version }}
+      image: dart:${{ matrix.version }}
 
     strategy:
       matrix:
         package: ["mobx_codegen", "mobx"]
-        version: ["latest", "dev"]
+        version: ["stable", "beta"]
 
     steps:
       - uses: actions/checkout@v2

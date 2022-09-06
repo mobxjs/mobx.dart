@@ -1,7 +1,6 @@
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
-
 // ignore: implementation_imports
 import 'package:mobx/src/core.dart' show ReactionImpl;
 
@@ -88,8 +87,8 @@ mixin ObserverElementMixin on ComponentElement {
     // 3. https://stackoverflow.com/questions/71367080
 
     // if there's a current frame,
-    // ignore: unnecessary_non_null_assertion
-    final schedulerPhase = SchedulerBinding.instance.schedulerPhase;
+    final schedulerPhase =
+        _ambiguate(SchedulerBinding.instance)!.schedulerPhase;
     final shouldWait =
         // surely, `idle` is ok
         schedulerPhase != SchedulerPhase.idle &&
@@ -102,8 +101,7 @@ mixin ObserverElementMixin on ComponentElement {
       // print('hi wait phase=$schedulerPhase');
 
       // wait for the end of that frame.
-      // ignore: unnecessary_non_null_assertion
-      await SchedulerBinding.instance.endOfFrame;
+      await _ambiguate(SchedulerBinding.instance)!.endOfFrame;
 
       // If it is disposed after this frame, we should no longer call `markNeedsBuild`
       if (_reaction == null) return;
@@ -128,7 +126,7 @@ mixin ObserverElementMixin on ComponentElement {
       );
     }
 
-    // This "throw" is better than a "LateInitializationError" 
+    // This "throw" is better than a "LateInitializationError"
     // which confused the user. Please see #780 for details.
     if (built == null) {
       throw Exception(
@@ -145,3 +143,11 @@ mixin ObserverElementMixin on ComponentElement {
     super.unmount();
   }
 }
+
+/// This allows a value of type T or T?
+/// to be treated as a value of type T?.
+///
+/// We use this so that APIs that have become
+/// non-nullable can still be used with `!` and `?`
+/// to support older versions of the API as well.
+T? _ambiguate<T>(T? value) => value;

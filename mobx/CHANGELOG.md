@@ -1,3 +1,20 @@
+## 2.0.7+5
+
+- revert #784 - [@amondnet](https://github.com/amondnet)
+
+## 2.0.7+4
+fixes:
+- shortened `1.asObservable()` to `1.obs()` (same for boolean, double, String) - [@subzero911](https://github.com/subzero911)
+- removed experimental typedefs from `2.0.7`
+
+## 2.0.7+3
+
+- Fixed unnecessary ActionSpyEvents being triggered for AsyncAction
+
+## 2.0.7+1 - 2.0.7+2
+
+- Package upgrades
+
 ## 2.0.7
 
 - Type aliases for primitive types.\
@@ -14,6 +31,7 @@
   lights.toggle(); // now it has a value of false
   ```
   Changes made by [@subzero911](https://github.com/subzero911)
+- Allow use custom context(#770) - @amondnet
 
 ## 2.0.6 - 2.0.6+1
 

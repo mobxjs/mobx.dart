@@ -7,28 +7,28 @@ void main() {
   testSetup();
 
   group('PrimitiveTypesExtensions', () {
-    test('Transform Int into ObservableInt', () {
+    test('Transform Int into ObsInt', () {
       final count = 0;
-      expect(count.asObservable(), isA<ObservableInt>());
+      expect(count.obs(), isA<Observable<int>>());
     });
 
-    test('Transform Double into ObservableDouble', () {
+    test('Transform Double into ObsDouble', () {
       final count = 0.0;
-      expect(count.asObservable(), isA<ObservableDouble>());
+      expect(count.obs(), isA<Observable<double>>());
     });
 
-    test('Transform Bool into ObservableBool', () {
+    test('Transform Bool into ObsBool', () {
       final flag = false;
-      expect(flag.asObservable(), isA<ObservableBool>());
+      expect(flag.obs(), isA<Observable<bool>>());
     });
 
-    test('Transform String into ObservableString', () {
+    test('Transform String into ObsString', () {
       final str = '';
-      expect(str.asObservable(), isA<ObservableString>());
+      expect(str.obs(), isA<Observable<String>>());
     });
 
     test('Toggles ObservableBool', () {
-      final flag = false.asObservable();
+      final flag = false.obs();
       flag.toggle();
       expect(flag.value, equals(true));
     });

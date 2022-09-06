@@ -88,7 +88,7 @@ void main() {
         ..add((_) => null)
         ..interceptChange(WillChangeNotification());
 
-      verify(() => context.untracked(any()));
+      verifyNever(() => context.untracked(any()));
     });
   });
 }

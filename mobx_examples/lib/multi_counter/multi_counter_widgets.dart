@@ -7,7 +7,7 @@ class MultiCounterExample extends StatefulWidget {
   const MultiCounterExample({Key? key}) : super(key: key);
 
   @override
-  _MultiCounterExampleState createState() => _MultiCounterExampleState();
+  State<MultiCounterExample> createState() => _MultiCounterExampleState();
 }
 
 class _MultiCounterExampleState extends State<MultiCounterExample> {
@@ -82,8 +82,8 @@ class CounterViewPage extends StatelessWidget {
             Row(
               children: <Widget>[
                 ElevatedButton(
-                  child: const Icon(Icons.remove),
                   onPressed: counter.decrement,
+                  child: const Icon(Icons.remove),
                 ),
                 Expanded(
                   child: Center(
@@ -95,17 +95,17 @@ class CounterViewPage extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  child: const Icon(Icons.add),
                   onPressed: counter.increment,
+                  child: const Icon(Icons.add),
                 ),
               ],
             ),
             TextButton(
-              child: const Text('Reset'),
               style: ButtonStyle(
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.red)),
               onPressed: counter.reset,
+              child: const Text('Reset'),
             )
           ],
         ),

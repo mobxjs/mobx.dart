@@ -1,3 +1,11 @@
+## 2.0.6 - 2.0.6+1
+
+- Adding support for previous versions of Flutter SDK
+
+## 2.0.5+1
+
+- Package upgrades
+
 ## 2.0.5
 
 - Improve `debugFindConstructingStackFrame` to let the message be less confusing to the reader

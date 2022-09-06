@@ -3,30 +3,15 @@
 # Fast fail the script on failures.
 set -e
 
-OBS_PORT=9292
-echo "Collecting coverage on port $OBS_PORT..."
-
-# Start tests in one VM.
+# Run Dart tests and output them at directory `./coverage`.
 echo "Starting tests..."
-dart \
-  --disable-service-auth-codes \
-  --pause-isolates-on-exit \
-  --enable_asserts \
-  --enable-vm-service=$OBS_PORT \
-  test/all_tests.dart &
+dart run test --coverage=./coverage test/all_tests.dart
 
-# Run the coverage collector to generate the JSON coverage report.
-echo "Collecting coverage..."
-nohup pub run coverage:collect_coverage \
-  --port=$OBS_PORT \
-  --out=coverage/coverage.json \
-  --wait-paused \
-  --resume-isolates
-
+## Format collected coverage to LCOV (only for directory "lib").
 echo "Generating LCOV report..."
-pub run coverage:format_coverage \
+dart run coverage:format_coverage \
   --lcov \
-  --in=coverage/coverage.json \
+  --in=coverage \
   --out=coverage/lcov.info \
   --packages=.dart_tool/package_config.json \
   --report-on=lib

@@ -175,7 +175,7 @@ void main() {
             throw Exception('FAILED in reaction');
           },
           (_) {},
-          onError: (_, _a) {
+          onError: (_, a) {
             thrown = true;
           });
 
@@ -190,7 +190,7 @@ void main() {
 
       final dispose = reaction((_) => x.value, (_) {
         throw Exception('FAILED in reaction');
-      }, onError: (_, _a) {
+      }, onError: (_, a) {
         thrown = true;
       });
 

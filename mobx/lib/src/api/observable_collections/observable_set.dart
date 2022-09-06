@@ -195,8 +195,8 @@ class ObservableSet<T>
 /// A convenience method used during unit testing. It creates an [ObservableSet] with a custom instance
 /// of an [Atom]
 @visibleForTesting
-ObservableSet<T> wrapInObservableSet<T>(Atom atom, Set<T> _set) =>
-    ObservableSet._wrap(mainContext, atom, _set);
+ObservableSet<T> wrapInObservableSet<T>(Atom atom, Set<T> set) =>
+    ObservableSet._wrap(mainContext, atom, set);
 
 /// An internal iterator used to ensure that every read is tracked as part of the
 /// MobX reactivity system.
