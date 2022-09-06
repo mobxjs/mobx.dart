@@ -31,27 +31,16 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   /// A computed value is _cached_ and it recomputes only when the dependent observables actually
   /// change. This makes them fast and you are free to use them throughout your application. Internally
   /// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
-  factory Computed(
-    T Function() fn, {
-    String? name,
-    ReactiveContext? context,
-    EqualityComparer<T>? equals,
-    void Function(T)? disposeValue,
-  }) =>
-      Computed._(
-        context ?? mainContext,
-        fn,
-        (v) => v == null ? null : disposeValue?.call(v),
-        name: name,
-        equals: equals,
-      );
+  factory Computed(T Function() fn,
+          {String? name,
+          ReactiveContext? context,
+          EqualityComparer<T>? equals}) =>
+      Computed._(context ?? mainContext, fn, name: name, equals: equals);
 
-  Computed._(ReactiveContext context, this._fn, this._disposeValue,
-      {String? name, this.equals})
+  Computed._(ReactiveContext context, this._fn, {String? name, this.equals})
       : super._(context, name: name ?? context.nameFor('Computed'));
 
   final EqualityComparer<T>? equals;
-  final void Function(T?) _disposeValue;
 
   @override
   MobXCaughtException? _errorValue;
@@ -72,18 +61,9 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   // ignore: prefer_final_fields
   DerivationState _dependenciesState = DerivationState.notTracking;
 
+  T? _value;
+
   bool _isComputing = false;
-
-  T? get _cachedValue => __cachedValue;
-
-  // do NOT directly set `__cachedValue`. Instead, set `_cachedValue`,
-  // which will properly dispose the old value.
-  T? __cachedValue;
-
-  set _cachedValue(T? newValue) {
-    _disposeValue(__cachedValue);
-    __cachedValue = newValue;
-  }
 
   @override
   T get value {
@@ -95,7 +75,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
     if (!_context.isWithinBatch && _observers.isEmpty) {
       if (_context._shouldCompute(this)) {
         _context.startBatch();
-        _cachedValue = computeValue(track: false);
+        _value = computeValue(track: false);
         _context.endBatch();
       }
     } else {
@@ -111,7 +91,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
       throw _errorValue!;
     }
 
-    return _cachedValue as T;
+    return _value as T;
   }
 
   T? computeValue({required bool track}) {
@@ -143,7 +123,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   @override
   void _suspend() {
     _context._clearObservables(this);
-    _cachedValue = null;
+    _value = null;
   }
 
   @override
@@ -156,7 +136,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
       _context.spyReport(ComputedValueSpyEvent(this, name: name));
     }
 
-    final oldValue = _cachedValue;
+    final oldValue = _value;
     final wasSuspended = _dependenciesState == DerivationState.notTracking;
     final hadCaughtException = _context._hasCaughtException(this);
 
@@ -168,10 +148,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
         wasSuspended || changedException || !_isEqual(oldValue, newValue);
 
     if (changed) {
-      _cachedValue = newValue;
-    } else {
-      // the new value is not used, so we should dispose it
-      _disposeValue(newValue);
+      _value = newValue;
     }
 
     return changed;
