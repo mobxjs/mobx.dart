@@ -42,6 +42,8 @@ class Atom {
 
   DerivationState _lowestObserverState = DerivationState.notTracking;
 
+  bool get isBeingObserved => _isBeingObserved;
+
   // ignore: prefer_final_fields
   bool _isBeingObserved = false;
 
