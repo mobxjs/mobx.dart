@@ -140,10 +140,6 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
     return value;
   }
 
-  void dispose() {
-    _suspend();
-  }
-
   @override
   void _suspend() {
     _context._clearObservables(this);
