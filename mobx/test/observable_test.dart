@@ -59,6 +59,14 @@ void main() {
         () => context.endBatch()
       ]);
     });
+
+    test('nonObservableValue', () {
+      final x = Observable<int?>(null);
+      expect(x.nonObservableValue, null);
+
+      x.value = 100;
+      expect(x.nonObservableValue, 100);
+    });
   });
 
   group('createAtom()', () {

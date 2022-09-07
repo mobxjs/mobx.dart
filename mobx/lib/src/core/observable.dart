@@ -53,6 +53,8 @@ class Observable<T> extends Atom
     return _value;
   }
 
+  T get nonObservableValue => _value;
+
   set value(T value) {
     _context.enforceWritePolicy(this);
 
