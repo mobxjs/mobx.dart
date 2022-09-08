@@ -30,6 +30,7 @@ class ReactionImpl implements Reaction {
   bool _isDisposed = false;
   bool _isRunning = false;
 
+  @override
   late final StackTrace? debugCreationStack;
 
   @override
