@@ -6,6 +6,8 @@ abstract class Reaction implements Derivation {
   void dispose();
 
   void _run();
+
+  StackTrace? get debugCreationStack;
 }
 
 class ReactionImpl implements Reaction {
@@ -13,6 +15,11 @@ class ReactionImpl implements Reaction {
       {required this.name, void Function(Object, Reaction)? onError}) {
     _onInvalidate = onInvalidate;
     _onError = onError;
+
+    assert(() {
+      debugCreationStack = StackTrace.current;
+      return true;
+    }());
   }
 
   void Function(Object, ReactionImpl)? _onError;
@@ -22,6 +29,8 @@ class ReactionImpl implements Reaction {
   bool _isScheduled = false;
   bool _isDisposed = false;
   bool _isRunning = false;
+
+  late final StackTrace? debugCreationStack;
 
   @override
   final String name;
@@ -182,5 +191,5 @@ class ReactionImpl implements Reaction {
   }
 
   @override
-  String toString() => 'Reaction($name)';
+  String toString() => 'Reaction(name: $name)';
 }

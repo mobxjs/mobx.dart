@@ -15,7 +15,12 @@ void main() {
   group('Reaction', () {
     test('toString', () {
       final r = ReactionImpl(mainContext, () => null, name: 'MyName');
-      expect(r.toString(), 'Reaction(MyName)');
+      expect(r.toString(), contains('MyName'));
+    });
+
+    test('debugCreationStack', () {
+      final r = ReactionImpl(mainContext, () => null, name: 'MyName');
+      expect(r.debugCreationStack, isNotNull);
     });
 
     test('basics work', () {
