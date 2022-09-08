@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:mobx/src/utils.dart';
 import 'package:mocktail/mocktail.dart' as mock;
 import 'package:test/test.dart';
 
@@ -12,6 +13,18 @@ void main() {
   testSetup();
 
   group('observable<T>', () {
+    test('toString', () {
+      final object = Observable(42, name: 'MyName');
+      expect(object.toString(), contains('MyName'));
+    });
+
+    test('debugCreationStack', () {
+      DebugCreationStack.enable = true;
+      addTearDown(() => DebugCreationStack.enable = false);
+      final object = Observable(42);
+      expect(object.debugCreationStack, isNotNull);
+    });
+
     test('basics work', () {
       final x = Observable<int?>(null);
       expect(x.value, equals(null));

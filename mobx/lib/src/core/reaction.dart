@@ -10,16 +10,11 @@ abstract class Reaction implements Derivation {
   StackTrace? get debugCreationStack;
 }
 
-class ReactionImpl implements Reaction {
+class ReactionImpl with DebugCreationStack implements Reaction {
   ReactionImpl(this._context, Function() onInvalidate,
       {required this.name, void Function(Object, Reaction)? onError}) {
     _onInvalidate = onInvalidate;
     _onError = onError;
-
-    assert(() {
-      debugCreationStack = StackTrace.current;
-      return true;
-    }());
   }
 
   void Function(Object, ReactionImpl)? _onError;
@@ -29,9 +24,6 @@ class ReactionImpl implements Reaction {
   bool _isScheduled = false;
   bool _isDisposed = false;
   bool _isRunning = false;
-
-  @override
-  late final StackTrace? debugCreationStack;
 
   @override
   final String name;
@@ -192,5 +184,6 @@ class ReactionImpl implements Reaction {
   }
 
   @override
-  String toString() => 'Reaction(name: $name)';
+  String toString() =>
+      'Reaction(name: $name, identity: ${identityHashCode(this)})';
 }

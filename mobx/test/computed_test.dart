@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:mobx/mobx.dart' hide when;
+import 'package:mobx/src/utils.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -10,6 +11,18 @@ void main() {
   testSetup();
 
   group('Computed', () {
+    test('toString', () {
+      final object = Computed(() {}, name: 'MyName');
+      expect(object.toString(), contains('MyName'));
+    });
+
+    test('debugCreationStack', () {
+      DebugCreationStack.enable = true;
+      addTearDown(() => DebugCreationStack.enable = false);
+      final object = Computed(() {});
+      expect(object.debugCreationStack, isNotNull);
+    });
+
     test('basics work', () {
       final x = Observable(20);
       final y = Observable(10);

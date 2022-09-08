@@ -127,4 +127,8 @@ class Observable<T> extends Atom
   @override
   Dispose intercept(Interceptor<T> interceptor) =>
       _interceptors.add(interceptor);
+
+  @override
+  String toString() =>
+      'Observable<$T>(name: $name, identity: ${identityHashCode(this)})';
 }
