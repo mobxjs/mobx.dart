@@ -13,6 +13,11 @@ void main() {
   testSetup();
 
   group('Reaction', () {
+    test('toString', () {
+      final r = ReactionImpl(mainContext, () => null, name: 'MyName');
+      expect(r.toString(), 'Reaction(MyName)');
+    });
+
     test('basics work', () {
       var executed = false;
       final x = Observable(10);

@@ -180,4 +180,7 @@ class ReactionImpl implements Reaction {
 
     _context._notifyReactionErrorHandlers(exception, this);
   }
+
+  @override
+  String toString() => 'Reaction($name)';
 }
