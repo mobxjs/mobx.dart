@@ -204,6 +204,57 @@ abstract class _Contact with Store {
 
 An `ObservableList` gives you a deeper level of observability on a list of values. It tracks when items are added, removed or modified and notifies the observers. Use an `ObservableList` when a change in the list matters. You can couple this with the `@observable` annotation to also track when the list reference changes, eg: going from `null` to a list with values.
 
+Whenever you are using `Observer` and need to pass `ObservableList` to Observer child,  use `observableList.toList()` to tell your `Observer` to track your list mutations and pass it to child widget as a `List`.
+Look for the example below for better understanding.
+
+#### Example
+
+Below is the example to use `ObservableList` with `Observer`.
+
+```dart
+class Controller {
+  final ObservableList<String> observableList = ObservableList<String>();
+}
+```
+
+```dart
+  Observer(builder: (_) {
+            return SizedBox(
+              width: 1024,
+              height: 512,
+              child: ChildWidget(
+                list: controller.observableList.toList(), // Mobx will detect mutations to observableList
+              ),
+            );
+          }),
+```
+```dart
+class ChildWidget extends StatelessWidget {
+  const ChildWidget({super.key, required this.list});
+
+/// Don't use ObservableList here otherwise the context for parent widget
+/// observer will change and it will not track these mutations.
+
+  final List<String> list; 
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          return SizedBox(
+            width: 112,
+            height: 48,
+            child: ListTile(
+              title: Text(list[index]),
+            ),
+          );
+        });
+  }
+}
+```
+
+
 ## ObservableMap
 
 #### `ObservableMap({ReactiveContext context})`
