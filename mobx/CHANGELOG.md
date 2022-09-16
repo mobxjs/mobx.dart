@@ -1,3 +1,9 @@
+## 2.0.8
+fixes:
+- `ObservableSet` now uses LinkedHashSet to maintain order of iteration
+- `ObservableSet.linkedHashSetFrom()` removed. Use `ObservableSet()` or `ObservableSet.of()` instead
+
+
 ## 2.0.7+5
 
 - revert #784 - [@amondnet](https://github.com/amondnet)
