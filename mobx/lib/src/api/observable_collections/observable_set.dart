@@ -22,8 +22,7 @@ class ObservableSet<T>
     implements
         Listenable<SetChange<T>> {
   ObservableSet({ReactiveContext? context, String? name})
-      // ignore: prefer_collection_literals
-      : this._(context ?? mainContext, Set<T>(), name);
+      : this._(context ?? mainContext, <T>{}, name);
 
   ObservableSet.of(Iterable<T> other, {ReactiveContext? context, String? name})
       : this._(context ?? mainContext, LinkedHashSet<T>.of(other), name);
