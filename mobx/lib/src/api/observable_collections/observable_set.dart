@@ -25,7 +25,7 @@ class ObservableSet<T>
       : this._(context ?? mainContext, <T>{}, name);
 
   ObservableSet.of(Iterable<T> other, {ReactiveContext? context, String? name})
-      : this._(context ?? mainContext, LinkedHashSet<T>.of(other), name);
+      : this._(context ?? mainContext, Set<T>.of(other), name);
 
   ObservableSet.splayTreeSetFrom(Iterable<T> other,
       {int Function(T, T)? compare,
