@@ -1,3 +1,7 @@
+## 2.0.7+1
+
+- Fixed issue in showing issue tracker link on pub.dev
+
 ## 2.0.7
 
 - Update codegen templates to ignore newly recommended lint rules in generated code
