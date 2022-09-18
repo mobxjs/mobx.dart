@@ -653,18 +653,18 @@ void main() {
   });
 }
 
-Case<F> futureCase<
+Case<F, R> futureCase<
         R,
         F extends ObservableFuture<R> Function(
             ObservableStream<int>)>(F body, R result, {int length = 10}) =>
     Case(body, result, length);
 
-class Case<F extends Function> {
+class Case<F extends Function, R> {
   Case(this.body, this.result, this.length);
 
   final int length;
   final F body;
-  final dynamic result;
+  final R result;
 }
 
 typedef FutureTestBody = ObservableFuture Function(ObservableStream<int>);
