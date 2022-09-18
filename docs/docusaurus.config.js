@@ -98,7 +98,8 @@ module.exports = {
       },
       {
         name: 'twitter:image',
-        content: 'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/mobx.png',
+        content:
+          'https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/mobx.png',
       },
       { name: 'twitter:image:alt', content: 'The MobX Logo' },
     ],

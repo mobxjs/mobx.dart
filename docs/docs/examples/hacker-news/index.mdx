@@ -1,22 +1,33 @@
 ---
 title: Hacker News
-slug: /examples/hacker-news
-description: In this example we will rely on the ObservableFuture to keep track of the fetch calls to the HackerNews API.
 ---
 
-import { PubBadge } from '../../../src/components/PubBadge';
+import observableFuture from './mobx-ObservableFuture.png';
+import hnGif from './hn.gif';
 
-In this example we will rely on the `ObservableFuture` to keep track of the fetch calls to the HackerNews API. The entire state of the application will be defined in terms of the `ObservableFuture`.
+In this example we will rely on the `ObservableFuture` to keep track of the
+fetch calls to the HackerNews API. The entire state of the application will be
+defined in terms of the `ObservableFuture`.
 
 :::info
-The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
+
+The complete example can be seen
+[here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
+
 :::
 
 ## Observable State
 
-We will wrap our calls to the HackerNews API within a simple `HNApi` wrapper. For the observable state, we will take a different perspective.
+We will wrap our calls to the HackerNews API within a simple `HNApi` wrapper.
+For the observable state, we will take a different perspective.
 
-The hacker-news client essentially shows a list of items for the latest and the top news items submitted on the [HackerNews website](https://news.ycombinator.com/). Instead of defining the observable state as two separate lists of items, we will just create two separate `ObservableFuture`s. The `result` field of an `ObservableFuture` will point to the `List<FeedItem>`, which is the first page of the latest and top news feed.
+The hacker-news client essentially shows a list of items for the latest and the
+top news items submitted on the
+[HackerNews website](https://news.ycombinator.com/). Instead of defining the
+observable state as two separate lists of items, we will just create two
+separate `ObservableFuture`s. The `result` field of an `ObservableFuture` will
+point to the `List<FeedItem>`, which is the first page of the latest and top
+news feed.
 
 Thus the reactive state of this example looks like so:
 
@@ -68,17 +79,18 @@ abstract class _HackerNewsStore with Store {
 
 ```
 
-> Note that in the background we are running the build_runner to generate the `*.g.dart` file. This command is run in the folder containing the project.
->
-> ```
-> flutter pub run build_runner watch --delete-conflicting-outputs
-> ```
+> Note that in the background we are running the build_runner to generate the
+> `*.g.dart` file. This command is run in the folder containing the
+> project.`flutter pub run build_runner watch --delete-conflicting-outputs`> ```
 
-The two actions `fetchLatest()` and `fetchTop()` create a new instance of the `ObservableFuture`, fetching the refreshed results. Note that the `result` field of each stores the list: `List<FeedItem>`.
+The two actions `fetchLatest()` and `fetchTop()` create a new instance of the
+`ObservableFuture`, fetching the refreshed results. Note that the `result` field
+of each stores the list: `List<FeedItem>`.
 
 ## Observer Widgets
 
-The root widgets is simple a tab-container of two tabs, one of Latest and one for Top news:
+The root widgets is simple a tab-container of two tabs, one of Latest and one
+for Top news:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -133,17 +145,20 @@ class _HackerNewsExampleState extends State<HackerNewsExample>
 }
 ```
 
-The most interesting `Widget` above is the **`FeedItemsView`**, an _Observer-Widget_ that tracks the load of the specific feed type.
+The most interesting `Widget` above is the **`FeedItemsView`**, an
+_Observer-Widget_ that tracks the load of the specific feed type.
 
 ### FeedItemsView
 
-`FeedItemsView` tracks the specific _observable-future_ depending on the `FeedType`. An `ObservableFuture` has three distinct states:
-
-import observableFuture from './mobx-ObservableFuture.png';
+`FeedItemsView` tracks the specific _observable-future_ depending on the
+`FeedType`. An `ObservableFuture` has three distinct states:
 
 <img src={observableFuture} />
 
-Thus for visual feedback, it is important to show each of these three states separately. `Pending` is normally shown with some loading-indicator. `Fulfilled` will be shown as as `ListView` of `FeedItem`s and finally `Rejected` is the error state. You can see each of these in the following snippet:
+Thus for visual feedback, it is important to show each of these three states
+separately. `Pending` is normally shown with some loading-indicator. `Fulfilled`
+will be shown as as `ListView` of `FeedItem`s and finally `Rejected` is the
+error state. You can see each of these in the following snippet:
 
 ```dart
 class FeedItemsView extends StatelessWidget {
@@ -219,16 +234,22 @@ class FeedItemsView extends StatelessWidget {
 }
 ```
 
-We have also added the _Pull to Refresh_ behavior for fetching the latest updates to the news. This can be seen with the use of `RefreshIndicator`.
-
-import hnGif from './hn.gif';
+We have also added the _Pull to Refresh_ behavior for fetching the latest
+updates to the news. This can be seen with the use of `RefreshIndicator`.
 
 <img src={hnGif} />
 
 ## Summary
 
-The HackerNews example makes good use of the `ObservableFuture` and uses it to show the different states of fetching the news. Since we are not really storing the news for anything else, we could pull if off with a just the `ObservableFuture<List<FeedItem>>`. As the use cases change, we may have to store it in a `List<FeedItem>`, or even an `ObservableList<FeedItem>`.
+The HackerNews example makes good use of the `ObservableFuture` and uses it to
+show the different states of fetching the news. Since we are not really storing
+the news for anything else, we could pull if off with a just the
+`ObservableFuture<List<FeedItem>>`. As the use cases change, we may have to
+store it in a `List<FeedItem>`, or even an `ObservableList<FeedItem>`.
 
 :::info
-The complete example can be seen [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
+
+The complete example can be seen
+[here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/hackernews)
+
 :::

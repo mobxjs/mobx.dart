@@ -1,23 +1,28 @@
 ---
 slug: /guides/json
 title: JSON Serialization of Stores
-description: Some techniques for serializing and deserializing JSON
 ---
 
 import { PubBadge } from '../../src/components/PubBadge';
 
-The <PubBadge name="json_serializable" /> package is a popular way to encode/decode between json representations of your models.
-It works by attaching the `@JsonSerializable()` annotation to the `Store` classes.
-Since this is a custom annotation, we have to invoke the `build_runner` command, just like we do for `mobx_codegen`.
+The <PubBadge name="json_serializable" /> package is a popular way to
+encode/decode between json representations of your models. It works by attaching
+the `@JsonSerializable()` annotation to the `Store` classes. Since this is a
+custom annotation, we have to invoke the `build_runner` command, just like we do
+for `mobx_codegen`.
 
 Let's add support for `json_serializable` to the **todos** example.
 
-> See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
+> See the complete code
+> [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
 
 ## Adding dependency in pubspec.yaml
 
-The first step is to include the dependency on the <PubBadge name="json_serializable" /> and <PubBadge name="json_annotation" /> packages.
-We add this to the `pubspec.yaml` and run `flutter pub get` to download it.
+The first step is to include the dependency on the
+
+<PubBadge name="json_serializable" /> and <PubBadge name="json_annotation" />
+packages. We add this to the `pubspec.yaml` and run `flutter pub get` to download
+it.
 
 ```yaml
 dependencies:
@@ -27,7 +32,8 @@ dependencies:
 
 ## Adding annotations
 
-To make our store classes travel to JSON and back, we need to annotate them with `@JsonSerializable()`:
+To make our store classes travel to JSON and back, we need to annotate them with
+`@JsonSerializable()`:
 
 ```dart
 import 'package:json_annotation/json_annotation.dart';
@@ -133,8 +139,9 @@ abstract class _TodoList with Store {
 
 ## Custom Converters
 
-In case of special types like `ObservableList<Todo>`, which are not directly serializable into JSON, we can write custom converters
-by extending the `JsonConverter<T, S>` type, as shown below:
+In case of special types like `ObservableList<Todo>`, which are not directly
+serializable into JSON, we can write custom converters by extending the
+`JsonConverter<T, S>` type, as shown below:
 
 ```dart
 import 'package:json_annotation/json_annotation.dart';
@@ -214,6 +221,9 @@ expect(list.itemsDescription, listInstance.itemsDescription);
 
 ## Summary
 
-With these changes, you should now be able to serialize the **Todos** to/from `JSON` ✌️. BTW, its worth noting that `mobx_codegen` can co-exist with other generators.
+With these changes, you should now be able to serialize the **Todos** to/from
+`JSON` ✌️. BTW, its worth noting that `mobx_codegen` can co-exist with other
+generators.
 
-> See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
+> See the complete code
+> [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
