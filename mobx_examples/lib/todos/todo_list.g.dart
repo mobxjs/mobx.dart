@@ -14,7 +14,7 @@ TodoList _$TodoListFromJson(Map<String, dynamic> json) => TodoList()
 
 Map<String, dynamic> _$TodoListToJson(TodoList instance) => <String, dynamic>{
       'todos': const ObservableTodoListConverter().toJson(instance.todos),
-      'filter': _$VisibilityFilterEnumMap[instance.filter],
+      'filter': _$VisibilityFilterEnumMap[instance.filter]!,
     };
 
 const _$VisibilityFilterEnumMap = {
@@ -27,7 +27,7 @@ const _$VisibilityFilterEnumMap = {
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TodoList on _TodoList, Store {
   Computed<ObservableList<Todo>>? _$pendingTodosComputed;
@@ -87,7 +87,7 @@ mixin _$TodoList on _TodoList, Store {
               name: '_TodoList.canMarkAllCompleted'))
       .value;
 
-  final _$todosAtom = Atom(name: '_TodoList.todos');
+  late final _$todosAtom = Atom(name: '_TodoList.todos', context: context);
 
   @override
   ObservableList<Todo> get todos {
@@ -102,7 +102,7 @@ mixin _$TodoList on _TodoList, Store {
     });
   }
 
-  final _$filterAtom = Atom(name: '_TodoList.filter');
+  late final _$filterAtom = Atom(name: '_TodoList.filter', context: context);
 
   @override
   VisibilityFilter get filter {
@@ -117,7 +117,8 @@ mixin _$TodoList on _TodoList, Store {
     });
   }
 
-  final _$_TodoListActionController = ActionController(name: '_TodoList');
+  late final _$_TodoListActionController =
+      ActionController(name: '_TodoList', context: context);
 
   @override
   void addTodo(String description) {

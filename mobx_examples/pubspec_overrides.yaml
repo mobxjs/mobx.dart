@@ -1,0 +1,8 @@
+# melos_managed_dependency_overrides: flutter_mobx,mobx,mobx_codegen
+dependency_overrides:
+  flutter_mobx:
+    path: ../flutter_mobx
+  mobx:
+    path: ../mobx
+  mobx_codegen:
+    path: ../mobx_codegen

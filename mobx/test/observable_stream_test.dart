@@ -1,5 +1,3 @@
-// @dart = 2.10
-
 import 'dart:async';
 
 import 'package:mobx/mobx.dart';
@@ -15,7 +13,7 @@ void main() {
       final ctrl = StreamController<int>.broadcast();
       final stream = ObservableStream(ctrl.stream);
 
-      expect(stream.name, matches(RegExp(r'ObservableStream\<.*\>@')));
+      expect(stream.name, matches(RegExp(r'ObservableStream<.*>@')));
 
       ctrl.close();
     });
@@ -61,7 +59,7 @@ void main() {
           active: (i) => 'value',
           done: (_, __) => 'done',
           error: (err) => 'error',
-        ));
+        )!);
       });
 
       ctrl
@@ -81,7 +79,7 @@ void main() {
 
       autorun((_) {
         values.add(stream.match(
-            waiting: () => 'waiting', active: (i) => 'value/done'));
+            waiting: () => 'waiting', active: (i) => 'value/done')!);
       });
 
       ctrl.add(1);
@@ -101,7 +99,7 @@ void main() {
         values.add(stream.match(
           waiting: () => 'waiting',
           error: (i) => 'error/done',
-        ));
+        )!);
       });
 
       ctrl.addError('ERROR');
@@ -140,7 +138,7 @@ void main() {
 
       final values = <String>[];
       autorun((_) {
-        values.add(stream.value);
+        values.add(stream.value!);
       });
 
       await asyncWhen((_) => stream.status == StreamStatus.done);
@@ -265,7 +263,7 @@ void main() {
 
       final reactionValues = <int>[];
       final dispose = autorun((_) {
-        reactionValues.add(stream.value);
+        reactionValues.add(stream.value!);
       });
 
       ctrl.add(2);
