@@ -1,3 +1,7 @@
+## 2.0.7+6
+
+- Fixed issue in showing issue tracker link on pub.dev
+
 ## 2.0.7+5
 
 - revert #784 - [@amondnet](https://github.com/amondnet)
