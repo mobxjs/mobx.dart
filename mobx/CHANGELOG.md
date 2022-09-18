@@ -1,5 +1,5 @@
 ## 2.1.0
-fixes:
+
 - `ObservableSet` now uses `Set` to maintain order of iteration
 - `ObservableSet.linkedHashSetFrom()` removed. Use `ObservableSet()` or `ObservableSet.of()` instead.
 ## 2.0.7+7
