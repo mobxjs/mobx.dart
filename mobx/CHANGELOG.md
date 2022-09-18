@@ -1,3 +1,7 @@
+## 2.1.0
+
+- `ObservableSet` now uses `Set` to maintain order of iteration
+- `ObservableSet.linkedHashSetFrom()` removed. Use `ObservableSet()` or `ObservableSet.of()` instead.
 ## 2.0.7+7
 
 - Moved the version into its own file (`version.dart`) and exported from the main library file
