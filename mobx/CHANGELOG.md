@@ -3,6 +3,9 @@ fixes:
 - `ObservableSet` now uses LinkedHashSet to maintain order of iteration
 - `ObservableSet.linkedHashSetFrom()` removed. Use `ObservableSet()` or `ObservableSet.of()` instead
 
+## 2.0.7+6
+
+- Fixed issue in showing issue tracker link on pub.dev
 
 ## 2.0.7+5
 
