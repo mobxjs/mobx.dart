@@ -1,3 +1,7 @@
+## 2.0.6+3
+
+- Moved the version into its own file (`version.dart`) and exported from the main library file
+
 # 2.0.6+2
 
 - Fixed issue in showing issue tracker link on pub.dev

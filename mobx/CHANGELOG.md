@@ -1,3 +1,7 @@
+## 2.0.7+7
+
+- Moved the version into its own file (`version.dart`) and exported from the main library file
+
 ## 2.0.7+6
 
 - Fixed issue in showing issue tracker link on pub.dev
@@ -7,7 +11,9 @@
 - revert #784 - [@amondnet](https://github.com/amondnet)
 
 ## 2.0.7+4
+
 fixes:
+
 - shortened `1.asObservable()` to `1.obs()` (same for boolean, double, String) - [@subzero911](https://github.com/subzero911)
 - removed experimental typedefs from `2.0.7`
 
