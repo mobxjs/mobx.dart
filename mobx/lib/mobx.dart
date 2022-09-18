@@ -64,5 +64,6 @@ export 'package:mobx/src/core.dart'
         DerivationState;
 export 'package:mobx/src/core/atom_extensions.dart';
 
+
 /// The current version as per `pubspec.yaml`
-const version = '2.0.8';
+const version = '2.1.0';

@@ -1,3 +1,7 @@
+## 2.0.7+2
+
+- Moved the version into its own file (`version.dart`) and exported from the main library file
+
 ## 2.0.7+1
 
 - Fixed issue in showing issue tracker link on pub.dev
@@ -11,7 +15,7 @@
 - Package upgrades
 
 ## 2.0.6+1
- 
+
 - Upgrading `mobx` to `2.0.7` - @amondnet
 
 ## 2.0.6

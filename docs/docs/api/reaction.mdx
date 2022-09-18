@@ -1,26 +1,36 @@
 ---
 title: Reactions
-description: The MobX triad is completed when we add Reactions into the mix of Observables and Actions.
 ---
 
 import mobxTriad from '../../src/images/mobx-triad.png';
 
 <img src={mobxTriad} />
 
-The **MobX triad** is completed when we add **Reactions** into the mix. Having reactions is what triggers the reactivity in the system. A reaction implicitly tracks all the observables which are being used and then re-executes its logic whenever the depending observables change.
+The **MobX triad** is completed when we add **Reactions** into the mix. Having
+reactions is what triggers the reactivity in the system. A reaction implicitly
+tracks all the observables which are being used and then re-executes its logic
+whenever the depending observables change.
 
-> **Computed, a reaction?**
->
-> Technically, a computed is also a reaction, aka **Derivation**, as it depends on other observables or computeds. The only difference between a regular `Reaction` and `Computed` is that the former does not produce any value. Computeds are mostly read-only observables that derive their value from other observables.
+> **Computed, a reaction?**Technically, a computed is also a reaction, aka
+> **Derivation**, as it depends on other observables or computeds. The only
+> difference between a regular `Reaction` and `Computed` is that the former does
+> not produce any value. Computeds are mostly read-only observables that derive
+> their value from other observables.
 
-Reactions, or Derivations come in few flavors: `autorun`, `reaction`, `when` and of course the Flutter Widget: `Observer`. All of these variations take a function that is tracked for any observables. When the tracked observables change, the function is re-executed. This simple behavior is the defining characteristic of a reaction. Note that there is no explicit subscription or wiring needed. Reactions also return a _disposer-function_ (`ReactionDisposer`) that can be invoked to pre-maturely dispose a reaction.
+Reactions, or Derivations come in few flavors: `autorun`, `reaction`, `when` and
+of course the Flutter Widget: `Observer`. All of these variations take a
+function that is tracked for any observables. When the tracked observables
+change, the function is re-executed. This simple behavior is the defining
+characteristic of a reaction. Note that there is no explicit subscription or
+wiring needed. Reactions also return a _disposer-function_ (`ReactionDisposer`)
+that can be invoked to pre-maturely dispose a reaction.
 
 ## autorun
 
 #### `ReactionDisposer autorun(Function(Reaction) fn)`
 
-Runs the reaction immediately and also on any change in the observables used inside
-`fn`.
+Runs the reaction immediately and also on any change in the observables used
+inside `fn`.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -46,8 +56,9 @@ dispose();
 
 #### `ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect)`
 
-Monitors the observables used inside the `fn()` tracking function and runs the `effect()` when
-the tracking function returns a different value. Only the observables inside `fn()` are tracked.
+Monitors the observables used inside the `fn()` tracking function and runs the
+`effect()` when the tracking function returns a different value. Only the
+observables inside `fn()` are tracked.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -70,7 +81,10 @@ dispose();
 
 #### `ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`
 
-Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
+Monitors the observables used inside `predicate()` and runs the `effect()`
+_when_ it returns `true`. After the `effect()` is run, `when` automatically
+disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can
+also dispose `when()` pre-maturely.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -90,7 +104,9 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 #### `Future<void> asyncWhen(bool Function(Reaction) predicate)`
 
-Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
+Similar to `when` but returns a `Future`, which is fulfilled when the
+`predicate()` returns _true_. This is a convenient way of waiting for the
+`predicate()` to turn `true`.
 
 ```dart
 final completed = Observable(false);
