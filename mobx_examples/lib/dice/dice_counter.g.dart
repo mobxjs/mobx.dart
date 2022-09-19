@@ -6,7 +6,7 @@ part of 'dice_counter.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DiceCounter on _DiceCounter, Store {
   Computed<int>? _$totalComputed;
@@ -16,7 +16,7 @@ mixin _$DiceCounter on _DiceCounter, Store {
           Computed<int>(() => super.total, name: '_DiceCounter.total'))
       .value;
 
-  final _$leftAtom = Atom(name: '_DiceCounter.left');
+  late final _$leftAtom = Atom(name: '_DiceCounter.left', context: context);
 
   @override
   int get left {
@@ -31,7 +31,7 @@ mixin _$DiceCounter on _DiceCounter, Store {
     });
   }
 
-  final _$rightAtom = Atom(name: '_DiceCounter.right');
+  late final _$rightAtom = Atom(name: '_DiceCounter.right', context: context);
 
   @override
   int get right {
@@ -46,7 +46,8 @@ mixin _$DiceCounter on _DiceCounter, Store {
     });
   }
 
-  final _$_DiceCounterActionController = ActionController(name: '_DiceCounter');
+  late final _$_DiceCounterActionController =
+      ActionController(name: '_DiceCounter', context: context);
 
   @override
   void roll() {

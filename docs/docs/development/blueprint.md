@@ -1,9 +1,9 @@
 ---
 title: Blueprint
-description: This document outlines the core behaviors of MobX that need to be implemented for an effective reactive system.
 ---
 
-This document outlines the core behaviors of MobX that need to be implemented for an effective reactive system.
+This document outlines the core behaviors of MobX that need to be implemented
+for an effective reactive system.
 
 ## Core Actors
 
@@ -24,7 +24,8 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 
 ### Reaction
 
-- Reactions are scheduled with a sync-scheduler or debounced with a timer-based scheduler
+- Reactions are scheduled with a sync-scheduler or debounced with a timer-based
+  scheduler
 - They are derivations with no output value and only cause side-effects
 - Handle exceptions and report them back with global handlers
 - Can dispose
@@ -42,11 +43,13 @@ This document outlines the core behaviors of MobX that need to be implemented fo
 
 - Provides an atomic way to mutate observables
 - Fires notifications only upon the completion of the action
-- Handles any level of nesting and ensures notifications are fired only when the outermost action has completed
+- Handles any level of nesting and ensures notifications are fired only when the
+  outermost action has completed
 
 ## API
 
-- Convenience layer to provide programmer friendly interface to the Core Actors and behaviors
+- Convenience layer to provide programmer friendly interface to the Core Actors
+  and behaviors
 
 ### Cross cutting layers
 

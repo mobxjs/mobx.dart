@@ -6,11 +6,11 @@ part of 'news_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$HackerNewsStore on _HackerNewsStore, Store {
-  final _$latestItemsFutureAtom =
-      Atom(name: '_HackerNewsStore.latestItemsFuture');
+  late final _$latestItemsFutureAtom =
+      Atom(name: '_HackerNewsStore.latestItemsFuture', context: context);
 
   @override
   ObservableFuture<List<FeedItem>>? get latestItemsFuture {
@@ -25,7 +25,8 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
     });
   }
 
-  final _$topItemsFutureAtom = Atom(name: '_HackerNewsStore.topItemsFuture');
+  late final _$topItemsFutureAtom =
+      Atom(name: '_HackerNewsStore.topItemsFuture', context: context);
 
   @override
   ObservableFuture<List<FeedItem>>? get topItemsFuture {
@@ -40,8 +41,8 @@ mixin _$HackerNewsStore on _HackerNewsStore, Store {
     });
   }
 
-  final _$_HackerNewsStoreActionController =
-      ActionController(name: '_HackerNewsStore');
+  late final _$_HackerNewsStoreActionController =
+      ActionController(name: '_HackerNewsStore', context: context);
 
   @override
   Future<dynamic> fetchLatest() {

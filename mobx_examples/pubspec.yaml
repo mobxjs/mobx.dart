@@ -20,7 +20,7 @@ dependencies:
   flutter_mobx:
   github:
   http:
-  json_annotation: ^4.4.0
+  json_annotation:
   json_serializable:
   mobx:
   mobx_codegen:
@@ -34,14 +34,6 @@ dev_dependencies:
   flutter_lints:
   flutter_test:
     sdk: flutter
-
-dependency_overrides:
-  flutter_mobx:
-    path: ../flutter_mobx
-  mobx:
-    path: ../mobx
-  mobx_codegen:
-    path: ../mobx_codegen
 
 flutter:
   uses-material-design: true

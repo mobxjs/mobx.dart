@@ -1,11 +1,12 @@
 ---
 title: Getting Started 🚀
-slug: /getting-started
 ---
 
-In this tutorial you will learn how to create a MobX version of the default Flutter **"counter"** app.
+In this tutorial you will learn how to create a MobX version of the default
+Flutter **"counter"** app.
 
 import finalImage from './end-result.png';
+import endResult from './mobx-counter.gif';
 
 <img
   src={finalImage}
@@ -15,7 +16,10 @@ import finalImage from './end-result.png';
 
 ## Prepare
 
-1. Before starting this tutorial make sure you have [flutter installed](https://flutter.dev/docs/get-started/install) and know how to [create a new flutter project](https://flutter.dev/docs/get-started/test-drive).
+1. Before starting this tutorial make sure you have
+   [flutter installed](https://flutter.dev/docs/get-started/install) and know
+   how to
+   [create a new flutter project](https://flutter.dev/docs/get-started/test-drive).
 2. Create a new flutter project on your computer to start.
 
 ## Install Dependencies
@@ -42,11 +46,15 @@ In your project folder, run this command to fetch all the packages:
 flutter pub get
 ```
 
-At this point you should have all the necessary packages to continue development.
+At this point you should have all the necessary packages to continue
+development.
 
 ## Add a Store
 
-Now, let's create a MobX **store**. A store in MobX is a way of collecting the related observable state under one class. The store allows us to use annotations and keeps the code simple. Create a new file `counter.dart` in **`\lib`** folder and add the following code to it.
+Now, let's create a MobX **store**. A store in MobX is a way of collecting the
+related observable state under one class. The store allows us to use annotations
+and keeps the code simple. Create a new file `counter.dart` in **`\lib`** folder
+and add the following code to it.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -71,24 +79,32 @@ abstract class _Counter with Store {
 
 The interesting parts here are:
 
-- The abstract class `_Counter` that includes the `Store` mixin. All of your store-related code should be placed inside this abstract class. We create a `Counter` class to blend in the code from the `build_runner`.
-- The generated code will be inside the part file: `counter.g.dart`, which we include with the _`part` directive_. Without this, the `build_runner` will not produce any output. The generated file contains the `_$Counter` mixin.
+- The abstract class `_Counter` that includes the `Store` mixin. All of your
+  store-related code should be placed inside this abstract class. We create a
+  `Counter` class to blend in the code from the `build_runner`.
+- The generated code will be inside the part file: `counter.g.dart`, which we
+  include with the _`part` directive_. Without this, the `build_runner` will not
+  produce any output. The generated file contains the `_$Counter` mixin.
 
-> #### Note
->
-> It is essential to use proper casing for the file name, else the `build_runner` **will not** generate any output.
-> Since our file is called `counter.dart`, the part file must be named as `counter.g.dart` (note the lowercase letters)
+:::caution
+
+It is essential to use proper casing for the file name, else the `build_runner` **will not** generate any output.
+Since our file is called `counter.dart`, the part file must be named as`counter.g.dart` (note the lowercase letters)
+
+:::
 
 - The `@observable` annotation to mark the `value` as observable.
 - Use of `@action` to mark the `increment()` method as an action.
 
-Run the following command inside your project folder. This generates the code in `counter.g.dart`, which we have already included as part file.
+Run the following command inside your project folder. This generates the code in
+`counter.g.dart`, which we have already included as part file.
 
 ```
 flutter pub run build_runner build
 ```
 
-On the command-line, here's the output we got from running it. Yours might be slightly different.
+On the command-line, here's the output we got from running it. Yours might be
+slightly different.
 
 ```
 ➜  [mobx_getting_started]> flutter packages pub run build_runner build
@@ -115,26 +131,33 @@ On the command-line, here's the output we got from running it. Yours might be sl
 
 ```
 
-> ### Stay on watch
->
-> If you are making changes to the store and want to generate `*.g.dart` files automatically, you can use the following command:
+:::info
 
-> ```
-> flutter pub run build_runner watch
-> ```
->
-> ### Starting Clean
->
-> Sometimes you may have an error running this command due to existing files, possibly generated from an earlier version of
-> `build_runner`. In that case, you can add the following flag to delete the `*.g.dart` files before generating them.
->
-> ```
-> flutter pub run build_runner watch --delete-conflicting-outputs
-> ```
+#### Stay on watch
+
+If you are making changes to the store and want to generate `*.g.dart` files automatically, you can use the following command:
+
+```
+flutter pub run build_runner watch
+```
+
+#### Starting Clean
+
+Sometimes you may have an error running this command due to existing files, possibly generated from
+an earlier version of `build_runner`. In that case, you can add the following
+flag to delete the `*.g.dart` files before generating
+them.
+
+```
+flutter pub run build_runner watch --delete-conflicting-outputs
+```
+
+:::
 
 ## Connect the Store and add an Observer to your Widget
 
-Now comes the part where we connect the MobX store to the Widget. In your `main.dart` file, replace the code with the following:
+Now comes the part where we connect the MobX store to the Widget. In your
+`main.dart` file, replace the code with the following:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -196,16 +219,20 @@ class MyHomePage extends StatelessWidget {
 }
 ```
 
-You will notice above that we have not used any `StatefulWidget` instances! The state is stored in the `Counter` store and the `Observer` widget reads the `counter.value` to render the count. Just the simple act of reading the `counter.value` is enough for the `Observer` to start tracking and re-render on changes.
+You will notice above that we have not used any `StatefulWidget` instances! The
+state is stored in the `Counter` store and the `Observer` widget reads the
+`counter.value` to render the count. Just the simple act of reading the
+`counter.value` is enough for the `Observer` to start tracking and re-render on
+changes.
 
 ## And we are done!
 
-Our end result will look exactly the same as our start! As you tap on the `FloatingActionButton`, the counter will increment and update automatically.
-
-import endResult from './mobx-counter.gif';
+Our end result will look exactly the same as our start! As you tap on the
+`FloatingActionButton`, the counter will increment and update automatically.
 
 <img src={endResult} width={300} />
 
-> #### Keep exploring!
->
-> Browse through other examples to get a feel for MobX. It's all about `Observables`, `Actions` and `Reactions` 😇. We have already looked at `Observables` and `Actions`. `Reactions` are covered in other examples.
+### Keep exploring!
+
+Browse through other examples to get a feel for MobX. It's all about `Observables`, `Actions` and `Reactions` 😇.
+We have already looked at `Observables` and `Actions`. `Reactions` are covered in other examples.

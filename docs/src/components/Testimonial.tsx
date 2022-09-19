@@ -1,5 +1,5 @@
-import React, { FunctionComponent, Fragment } from 'react';
-import styled from 'styled-components';
+import React, { FunctionComponent } from 'react';
+import styled from '@emotion/styled';
 import { testimonials } from './testimonials';
 
 const primaryColor = '#1389FD';
