@@ -1,6 +1,7 @@
-## 2.0.7+2
+## 2.0.7+2 - 2.0.7+3
 
 - Moved the version into its own file (`version.dart`) and exported from the main library file
+- Bringing the `version.dart` file in sync with `pubspec.yaml`
 
 ## 2.0.7+1
 
