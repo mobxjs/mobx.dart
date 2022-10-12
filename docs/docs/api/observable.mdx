@@ -370,7 +370,8 @@ class LoadingIndicator extends StatelessWidget {
 
 ## ObservableStream
 
-#### `ObservableStream(Stream<T> stream, {T initialValue, bool cancelOnError, ReactiveContext context})`
+#### `ObservableStream(Stream<T> stream, {T initialValue, bool cancelOnError, ReactiveContext context, String? name,
+      EqualityComparer<dynamic>? equals})`
 
 - **`Stream<T> stream`**: The stream that is tracked for `status` and `value`
   changes.
@@ -380,6 +381,8 @@ class LoadingIndicator extends StatelessWidget {
 - **`ReactiveContext context`**: the context to which this observable-stream is
   bound. By default, all `ObservableStream`s are bound to the singleton
   `mainContext` of the application.
+- **`String? name`**: This string is used as a debug name.
+- **`EqualityComparer<dynamic>? equals`**: It acts as a comparison function for comparing the previous value with the next value. If this function considers the values to be equal, then the observers will not be re-evaluated.
 
 Similar to `ObservableFuture`, an **`ObservableStream`** provides a reactive
 wrapper around a `Stream`. This gives an easy way to observe and re-render

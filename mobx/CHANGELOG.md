@@ -1,3 +1,7 @@
+## 2.1.1
+
+- Allow a custom equals parameter for ObservableStream - [@amondnet](https://github.com/amondnet)
+
 ## 2.1.0
 
 - `ObservableSet` now uses `Set` to maintain order of iteration

@@ -36,17 +36,21 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
   ///
   /// If `cancelOnError` is `true`, the stream will be cancelled when an error
   /// event is emitted by the source stream. The default value is `false`.
+  ///
+  /// It is possible to override equality comparison of new values with [equals].
   ObservableStream(Stream<T> stream,
       {T? initialValue,
       bool cancelOnError = false,
       ReactiveContext? context,
-      String? name})
-      : this._(
-            context ?? mainContext, stream, initialValue, cancelOnError, name);
+      String? name,
+      EqualityComparer<dynamic>? equals})
+      : this._(context ?? mainContext, stream, initialValue, cancelOnError,
+            name, equals);
 
   ObservableStream._(ReactiveContext context, this._stream, this._initialValue,
-      this._cancelOnError, String? name)
-      : _context = context {
+      this._cancelOnError, String? name, EqualityComparer<dynamic>? equals)
+      : _context = context,
+        _equals = equals {
     _name = name ?? _context.nameFor('ObservableStream<$T>');
   }
 
@@ -56,14 +60,20 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
   final Stream<T> _stream;
 
   late String _name;
+
   String get name => _name;
 
+  final EqualityComparer<dynamic>? _equals;
+
   _ObservableStreamController<T>? _controllerField;
+
   _ObservableStreamController<T> get _controller {
     if (_controllerField == null) {
       _controllerField = _ObservableStreamController<T>(
           _context, _stream, _initialValue,
-          cancelOnError: _cancelOnError, name: '$name.StreamController');
+          cancelOnError: _cancelOnError,
+          name: '$name.StreamController',
+          equals: _equals);
       _initialValue = null;
     }
     return _controllerField!;
@@ -123,10 +133,12 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
   /// Create a new stream with the provided initialValue and cancelOnError.
   ObservableStream<T> configure(
           {T? initialValue, bool cancelOnError = false}) =>
-      ObservableStream._(_context, _stream, initialValue, cancelOnError, name);
+      ObservableStream._(
+          _context, _stream, initialValue, cancelOnError, name, _equals);
 
-  ObservableStream<R> _wrap<R>(Stream<R> stream) =>
-      ObservableStream._(_context, stream, null, _cancelOnError, name);
+  ObservableStream<R> _wrap<R>(Stream<R> stream,
+          {EqualityComparer<dynamic>? equals}) =>
+      ObservableStream._(_context, stream, null, _cancelOnError, name, _equals ?? equals);
 
   ObservableFuture<R> _wrapFuture<R>(Future<R> future) =>
       ObservableFuture._(_context, future, FutureStatus.pending, null, name);
@@ -323,6 +335,7 @@ class _ObservableStreamController<T> {
     T? initialValue, {
     required this.cancelOnError,
     required this.name,
+    EqualityComparer<dynamic>? equals,
   })  : _initialStreamValue = origStream.isBroadcast ? null : initialValue,
         _actions =
             ActionController(context: context, name: '$name.ActionController'),
@@ -332,7 +345,8 @@ class _ObservableStreamController<T> {
             name: '$name.status'),
         _valueType = Observable(_ValueType.value,
             context: context, name: '$name.valueType'),
-        _data = Observable(initialValue, context: context, name: '$name.data') {
+        _data = Observable<dynamic>(initialValue,
+            context: context, name: '$name.data', equals: equals) {
     _status
       ..onBecomeObserved(_listen)
       ..onBecomeUnobserved(_unsubscribe);
@@ -366,12 +380,15 @@ class _ObservableStreamController<T> {
   final ActionController _actions;
 
   final Observable<_ValueType> _valueType;
+
   _ValueType get valueType => _valueType.value;
 
   final Observable _data;
+
   dynamic get data => _data.value;
 
   final Observable<StreamStatus> _status;
+
   StreamStatus get status => _status.value;
 
   late final Stream<T> stream = _controller.stream;
@@ -379,6 +396,7 @@ class _ObservableStreamController<T> {
 
   int _listenCount = 0;
   bool _isCancelled = false;
+
   bool get isCancelled => _isCancelled;
 
   Future<void> _onCancel() async {
