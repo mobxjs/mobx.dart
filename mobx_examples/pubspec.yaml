@@ -28,6 +28,7 @@ dependencies:
   shared_preferences:
   url_launcher:
   validators2:
+  get_it:
 
 dev_dependencies:
   build_runner:
