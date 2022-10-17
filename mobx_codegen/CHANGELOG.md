@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Update analyzer version to `>=4.4.0 <6.0.0`
+
 ## 2.0.7+2 - 2.0.7+3
 
 - Moved the version into its own file (`version.dart`) and exported from the main library file
