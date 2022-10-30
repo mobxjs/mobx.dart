@@ -1,0 +1,21 @@
+name: mobx_dart
+
+packages:
+  - mobx
+  - flutter_mobx
+  - mobx_codegen
+  - mobx_examples
+
+scripts:
+  analyze:
+    exec: dart analyze .
+  get:
+    exec: dart pub get
+  set_version:
+    exec: $MELOS_ROOT_PATH/tool/expose_version.dart
+  generate:
+    run: cd mobx_examples && dart run build_runner watch --delete-conflicting-outputs
+
+command:
+  bootstrap:
+    usePubspecOverrides: true

@@ -124,7 +124,7 @@ class ObservableFuture<T> implements Future<T>, ObservableValue<T?> {
 
   @override
   ObservableStream<T> asStream() => ObservableStream._(
-      _context, _future.asStream(), value, false, '${name}_asStream');
+      _context, _future.asStream(), value, false, '${name}_asStream', null);
 
   @override
   ObservableFuture<T> catchError(Function onError,

@@ -22,25 +22,10 @@ class ObservableSet<T>
     implements
         Listenable<SetChange<T>> {
   ObservableSet({ReactiveContext? context, String? name})
-      : this._(context ?? mainContext, HashSet(), name);
+      : this._(context ?? mainContext, <T>{}, name);
 
   ObservableSet.of(Iterable<T> other, {ReactiveContext? context, String? name})
-      : this._(context ?? mainContext, HashSet.of(other), name);
-
-  ObservableSet.linkedHashSetFrom(Iterable<T> other,
-      {bool Function(T, T)? equals,
-      int Function(T)? hashCode,
-      // ignore:avoid_annotating_with_dynamic
-      bool Function(dynamic)? isValidKey,
-      ReactiveContext? context,
-      String? name})
-      : this._(
-            context ?? mainContext,
-            // ignore: prefer_collection_literals
-            LinkedHashSet(
-                equals: equals, hashCode: hashCode, isValidKey: isValidKey)
-              ..addAll(other),
-            name);
+      : this._(context ?? mainContext, Set<T>.of(other), name);
 
   ObservableSet.splayTreeSetFrom(Iterable<T> other,
       {int Function(T, T)? compare,

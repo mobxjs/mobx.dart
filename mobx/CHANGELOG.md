@@ -1,9 +1,27 @@
+## 2.1.1
+
+- Allow a custom equals parameter for ObservableStream - [@amondnet](https://github.com/amondnet)
+
+## 2.1.0
+
+- `ObservableSet` now uses `Set` to maintain order of iteration
+- `ObservableSet.linkedHashSetFrom()` removed. Use `ObservableSet()` or `ObservableSet.of()` instead.
+## 2.0.7+7
+
+- Moved the version into its own file (`version.dart`) and exported from the main library file
+
+## 2.0.7+6
+
+- Fixed issue in showing issue tracker link on pub.dev
+
 ## 2.0.7+5
 
 - revert #784 - [@amondnet](https://github.com/amondnet)
 
 ## 2.0.7+4
+
 fixes:
+
 - shortened `1.asObservable()` to `1.obs()` (same for boolean, double, String) - [@subzero911](https://github.com/subzero911)
 - removed experimental typedefs from `2.0.7`
 

@@ -1,3 +1,12 @@
+## 2.0.6+3 - 2.0.6+4
+
+- Moved the version into its own file (`version.dart`) and exported from the main library file
+- Bringing the `version.dart` file in sync with `pubspec.yaml`
+
+# 2.0.6+2
+
+- Fixed issue in showing issue tracker link on pub.dev
+
 ## 2.0.6 - 2.0.6+1
 
 - Adding support for previous versions of Flutter SDK

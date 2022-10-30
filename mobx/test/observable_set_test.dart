@@ -22,9 +22,16 @@ void main() {
       expect(set.name, equals('test'));
     });
 
-    test('linkedHashSetFrom creates a set that iterates at insertion order',
+    test('creates a set that iterates at insertion order',
         () {
-      final oset = ObservableSet<int>.linkedHashSetFrom([]);
+      final oset = ObservableSet<int>();
+      [3, 2, 1].forEach(oset.add);
+      expect(oset.toList(), equals([3, 2, 1]));
+    });
+
+    test('of creates a set that iterates at insertion order',
+        () {
+      final oset = ObservableSet<int>();
       [3, 2, 1].forEach(oset.add);
       expect(oset.toList(), equals([3, 2, 1]));
     });
