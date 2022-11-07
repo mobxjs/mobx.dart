@@ -272,7 +272,7 @@ abstract class _Counter with Store {
   ReactionDisposer _dispose;
 
   void setupReactions() {
-    _dispose = when((_) => counter > 10, (){
+    _dispose = when((_) => counter >= 10, (){
       print("Count has reached the limit of 10");
     });
   }
