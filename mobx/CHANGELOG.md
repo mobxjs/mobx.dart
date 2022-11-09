@@ -1,7 +1,10 @@
+## 2.1.2
+
+- Fix tests in dart 2.19 - [@amondnet](https://github.com/amondnet)
+
 ## 2.1.1
 
 - Allow a custom equals parameter for ObservableStream - [@amondnet](https://github.com/amondnet)
-- Fix tests in dart 2.19 - [@amondnet](https://github.com/amondnet)
 
 ## 2.1.0
 
