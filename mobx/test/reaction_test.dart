@@ -321,6 +321,21 @@ void main() {
 
         expect(reaction1.hasObservables, isTrue);
       });
+
+      test('when disposed, clearObservables', () {
+        final x = Observable(0);
+
+        final reaction = ReactionImpl(mainContext, () {}, name: 'test_reaction_1')
+        ..track(() => x.value + 1);
+        expect(reaction.hasObservables, isTrue);
+
+        reaction.dispose();
+        final prevDerivation =  reaction.startTracking();
+        reaction.endTracking(prevDerivation);
+
+        expect(reaction.hasObservables, isFalse);
+
+      });
     });
   });
 }
