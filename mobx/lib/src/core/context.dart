@@ -264,7 +264,8 @@ class ReactiveContext {
     return result;
   }
 
-  void _reportObserved(Atom atom) {
+  @protected
+  void reportObserved(Atom atom) {
     final derivation = _state.trackingDerivation;
 
     if (derivation != null) {
@@ -404,7 +405,8 @@ class ReactiveContext {
     }
   }
 
-  void _clearObservables(Derivation derivation) {
+  @protected
+  void clearObservables(Derivation derivation) {
     final observables = derivation._observables;
     derivation._observables = {};
 
@@ -521,11 +523,13 @@ class ReactiveContext {
     _state.allowStateChanges = allow;
   }
 
-  void _pushComputation() {
+  @protected
+  void pushComputation() {
     _state.computationDepth++;
   }
 
-  void _popComputation() {
+  @protected
+  void popComputation() {
     _state.computationDepth--;
   }
 
