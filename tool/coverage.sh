@@ -12,6 +12,6 @@ echo "Generating LCOV report..."
 dart run coverage:format_coverage \
   --lcov \
   --in=coverage \
-  --out=coverage/lcov.info \
+  --out=coverage/lcov.txt \
   --packages=.dart_tool/package_config.json \
   --report-on=lib

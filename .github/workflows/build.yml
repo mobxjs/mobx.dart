@@ -15,7 +15,7 @@ jobs:
         version: ["stable", "beta"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install dependencies
         working-directory: ${{ matrix.package }}
@@ -30,11 +30,11 @@ jobs:
         run: ../tool/coverage.sh
 
       - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: ${{ matrix.package }}
-          file: ./${{ matrix.package }}/coverage/lcov.info
+          files: ./${{ matrix.package }}/coverage/lcov.txt
 
   build_flutter_packages:
     runs-on: ubuntu-latest
@@ -45,8 +45,8 @@ jobs:
         channel: ["stable", "beta"]
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v1
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
         with:
           channel: ${{ matrix.channel }}
 
@@ -59,12 +59,12 @@ jobs:
         working-directory: ${{ matrix.package }}
 
       - name: Run tests
-        run: flutter test --coverage --coverage-path coverage/lcov.info
+        run: flutter test --coverage --coverage-path coverage/lcov.txt
         working-directory: ${{ matrix.package }}
 
       - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: ${{ matrix.package }}
-          file: ./${{ matrix.package }}/coverage/lcov.info
+          files: ./${{ matrix.package }}/coverage/lcov.txt
