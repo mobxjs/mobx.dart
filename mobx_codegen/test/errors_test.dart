@@ -81,7 +81,11 @@ void main() {
     });
 
     test('toString returns two quoted fields with and between', () {
-      expect((NameList()..add('myField1')..add('myField2')).toString(),
+      expect(
+          (NameList()
+                ..add('myField1')
+                ..add('myField2'))
+              .toString(),
           equals('"myField1" and "myField2"'));
     });
 
@@ -89,13 +93,21 @@ void main() {
         'toString returns three quoted fields with a comma between first two and "and" between last two',
         () {
       expect(
-          (NameList()..add('myField1')..add('myField2')..add('myField3'))
+          (NameList()
+                ..add('myField1')
+                ..add('myField2')
+                ..add('myField3'))
               .toString(),
           equals('"myField1", "myField2" and "myField3"'));
     });
 
     test('length returns the count of added names', () {
-      expect((NameList()..add('myField1')..add('myField2')).length, equals(2));
+      expect(
+          (NameList()
+                ..add('myField1')
+                ..add('myField2'))
+              .length,
+          equals(2));
     });
 
     test('isEmpty returns false if items are added', () {

@@ -138,7 +138,8 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
 
   ObservableStream<R> _wrap<R>(Stream<R> stream,
           {EqualityComparer<dynamic>? equals}) =>
-      ObservableStream._(_context, stream, null, _cancelOnError, name, _equals ?? equals);
+      ObservableStream._(
+          _context, stream, null, _cancelOnError, name, _equals ?? equals);
 
   ObservableFuture<R> _wrapFuture<R>(Future<R> future) =>
       ObservableFuture._(_context, future, FutureStatus.pending, null, name);

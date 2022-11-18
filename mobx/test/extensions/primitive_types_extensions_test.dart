@@ -32,6 +32,5 @@ void main() {
       flag.toggle();
       expect(flag.value, equals(true));
     });
-
   });
 }

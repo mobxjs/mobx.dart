@@ -1,6 +1,6 @@
 mixin _$TestStore on _TestStore, Store {
   late final _$usernameAtom =
-  Atom(name: '_TestStore.username', context: context);
+      Atom(name: '_TestStore.username', context: context);
 
   @override
   String get username {
