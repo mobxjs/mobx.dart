@@ -1,7 +1,8 @@
-## 2.0.6+3 - 2.0.6+4
+## 2.0.6+3 - 2.0.6+5
 
 - Moved the version into its own file (`version.dart`) and exported from the main library file
 - Bringing the `version.dart` file in sync with `pubspec.yaml`
+- Updated Changelog to change insecure link
 
 # 2.0.6+2
 
@@ -25,7 +26,7 @@
 ## 2.0.4
 
 - Introducing a ReactionBuilder widget that helps you create an inline reaction and eliminates the need
-  to have a wrapper-`StatefulWidget` that uses the `initState` to do the same. You can read more in the [docs for ReactionBuilder](http://mobx.netlify.app/api/observers#reactionbuilder-widget).
+  to have a wrapper-`StatefulWidget` that uses the `initState` to do the same. You can read more in the [docs for ReactionBuilder](https://mobx.netlify.app/api/observers#reactionbuilder-widget).
 
 ## 2.0.3 - 2.0.3+2
 
