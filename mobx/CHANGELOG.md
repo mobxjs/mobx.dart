@@ -1,3 +1,7 @@
+## 2.1.4
+
+- add manual reporting change of observable and collections
+
 ## 2.1.2 - 2.1.3
 
 - Fix tests in dart 2.19 - [@amondnet](https://github.com/amondnet)
