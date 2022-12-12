@@ -122,6 +122,16 @@ class Observable<T> extends Atom
     return _listeners.add(listener);
   }
 
+  /// use it if you manually want to notify change
+  void reportManualChange() {
+    reportChanged();
+    _listeners.notifyListeners(ChangeNotification<T>(
+        newValue: value,
+        oldValue: value,
+        type: OperationType.update,
+        object: this));
+  }
+
   @override
   Dispose intercept(Interceptor<T> interceptor) =>
       _interceptors.add(interceptor);

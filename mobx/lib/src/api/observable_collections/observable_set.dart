@@ -48,6 +48,12 @@ class ObservableSet<T>
 
   String get name => _atom.name;
 
+  void reportManualChange([SetChange<T>? notification]) {
+    _atom.reportChanged();
+    _listeners.notifyListeners(notification ??
+        SetChange<T>(object: this, type: OperationType.update, value: null));
+  }
+
   Listeners<SetChange<T>>? _listenersField;
 
   Listeners<SetChange<T>> get _listeners =>

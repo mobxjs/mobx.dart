@@ -60,6 +60,11 @@ class ObservableMap<K, V>
 
   String get name => _atom.name;
 
+  void reportManualChange([MapChange<K, V>? notification]) {
+    _atom.reportChanged();
+    _listeners.notifyListeners(notification ?? MapChange<K, V>(object: this));
+  }
+
   Listeners<MapChange<K, V>>? _listenersField;
 
   Listeners<MapChange<K, V>> get _listeners =>

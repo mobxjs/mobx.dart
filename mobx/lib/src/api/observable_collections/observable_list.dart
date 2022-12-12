@@ -45,6 +45,11 @@ class ObservableList<T>
   Listeners<ListChange<T>> get _listeners =>
       _listenersField ??= Listeners(_context);
 
+  void reportManualChange([ListChange<T>? notification]) {
+    _atom.reportChanged();
+    _listeners.notifyListeners(notification ?? ListChange<T>(list: this));
+  }
+
   /// The name used to identify for debugging purposes
   String get name => _atom.name;
 
