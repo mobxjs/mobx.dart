@@ -58,7 +58,7 @@ class MobxUtils {
     );
   }
 
-  static WithDisposer<Observable<T>> fromVn<T extends ValueNotifier>(
+  static WithDisposer<Observable<T>> fromCN<T extends ChangeNotifier>(
     T vn, {
     bool? dispose,
   }) {
