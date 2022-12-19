@@ -1,6 +1,6 @@
-import React, { FunctionComponent, Fragment } from 'react';
-import styled from 'styled-components';
-import config from '../../doczrc';
+import React, { Fragment, FunctionComponent } from 'react';
+import styled from '@emotion/styled';
+import config from '../../docusaurus.config';
 
 const primaryColor = config.themeConfig.colors.primary;
 

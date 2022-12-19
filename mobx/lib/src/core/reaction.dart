@@ -66,7 +66,7 @@ class ReactionImpl with DebugCreationStack implements Reaction {
     _isRunning = false;
 
     if (_isDisposed) {
-      _context._clearObservables(this);
+      _context.clearObservables(this);
     }
 
     _context.endBatch();
@@ -87,7 +87,7 @@ class ReactionImpl with DebugCreationStack implements Reaction {
     _isRunning = false;
 
     if (_isDisposed) {
-      _context._clearObservables(this);
+      _context.clearObservables(this);
     }
 
     if (_context._hasCaughtException(this)) {
@@ -144,7 +144,7 @@ class ReactionImpl with DebugCreationStack implements Reaction {
     // ignore: cascade_invocations
     _context
       ..startBatch()
-      .._clearObservables(this)
+      ..clearObservables(this)
       ..endBatch();
   }
 
