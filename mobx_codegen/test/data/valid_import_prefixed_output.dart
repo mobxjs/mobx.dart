@@ -4,14 +4,14 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   @override
   io.File get biographyNotes => (_$biographyNotesComputed ??= Computed<io.File>(
           () => super.biographyNotes,
-      name: 'UserBase.biographyNotes'))
+          name: 'UserBase.biographyNotes'))
       .value;
   Computed<io.File?>? _$biographyNotesNullableComputed;
 
   @override
   io.File? get biographyNotesNullable => (_$biographyNotesNullableComputed ??=
-      Computed<io.File?>(() => super.biographyNotesNullable,
-          name: 'UserBase.biographyNotesNullable'))
+          Computed<io.File?>(() => super.biographyNotesNullable,
+              name: 'UserBase.biographyNotesNullable'))
       .value;
 
   late final _$namesAtom = Atom(name: 'UserBase.names', context: context);
@@ -45,7 +45,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$filesNullableAtom =
-  Atom(name: 'UserBase.filesNullable', context: context);
+      Atom(name: 'UserBase.filesNullable', context: context);
 
   @override
   List<io.File?> get filesNullable {
@@ -61,7 +61,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$processesAtom =
-  Atom(name: 'UserBase.processes', context: context);
+      Atom(name: 'UserBase.processes', context: context);
 
   @override
   List<T> get processes {
@@ -77,7 +77,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$biographyAtom =
-  Atom(name: 'UserBase.biography', context: context);
+      Atom(name: 'UserBase.biography', context: context);
 
   @override
   io.File get biography {
@@ -93,7 +93,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$biographyNullableAtom =
-  Atom(name: 'UserBase.biographyNullable', context: context);
+      Atom(name: 'UserBase.biographyNullable', context: context);
 
   @override
   io.File? get biographyNullable {
@@ -109,7 +109,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$friendWithImplicitTypeArgumentAtom =
-  Atom(name: 'UserBase.friendWithImplicitTypeArgument', context: context);
+      Atom(name: 'UserBase.friendWithImplicitTypeArgument', context: context);
 
   @override
   User<io.Process> get friendWithImplicitTypeArgument {
@@ -144,7 +144,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$friendWithExplicitTypeArgumentAtom =
-  Atom(name: 'UserBase.friendWithExplicitTypeArgument', context: context);
+      Atom(name: 'UserBase.friendWithExplicitTypeArgument', context: context);
 
   @override
   User<T> get friendWithExplicitTypeArgument {
@@ -194,7 +194,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$callbackNullableAtom =
-  Atom(name: 'UserBase.callbackNullable', context: context);
+      Atom(name: 'UserBase.callbackNullable', context: context);
 
   @override
   void Function(io.File?, {T? another}) get callbackNullable {
@@ -210,7 +210,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$callback2Atom =
-  Atom(name: 'UserBase.callback2', context: context);
+      Atom(name: 'UserBase.callback2', context: context);
 
   @override
   io.File Function(String, [int, io.File]) get callback2 {
@@ -226,7 +226,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$callback2NullableAtom =
-  Atom(name: 'UserBase.callback2Nullable', context: context);
+      Atom(name: 'UserBase.callback2Nullable', context: context);
 
   @override
   io.File? Function(String?, [int?, io.File?]) get callback2Nullable {
@@ -242,7 +242,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$localTypedefCallbackAtom =
-  Atom(name: 'UserBase.localTypedefCallback', context: context);
+      Atom(name: 'UserBase.localTypedefCallback', context: context);
 
   @override
   ValueCallback<io.Process> get localTypedefCallback {
@@ -253,13 +253,13 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   @override
   set localTypedefCallback(ValueCallback<io.Process> value) {
     _$localTypedefCallbackAtom.reportWrite(value, super.localTypedefCallback,
-            () {
-          super.localTypedefCallback = value;
-        });
+        () {
+      super.localTypedefCallback = value;
+    });
   }
 
   late final _$localTypedefCallbackNullableAtom =
-  Atom(name: 'UserBase.localTypedefCallbackNullable', context: context);
+      Atom(name: 'UserBase.localTypedefCallbackNullable', context: context);
 
   @override
   ValueCallback<io.Process?> get localTypedefCallbackNullable {
@@ -276,7 +276,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$prefixedTypedefCallbackAtom =
-  Atom(name: 'UserBase.prefixedTypedefCallback', context: context);
+      Atom(name: 'UserBase.prefixedTypedefCallback', context: context);
 
   @override
   io.BadCertificateCallback get prefixedTypedefCallback {
@@ -293,7 +293,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$prefixedTypedefCallbackNullableAtom =
-  Atom(name: 'UserBase.prefixedTypedefCallbackNullable', context: context);
+      Atom(name: 'UserBase.prefixedTypedefCallbackNullable', context: context);
 
   @override
   io.BadCertificateCallback? get prefixedTypedefCallbackNullable {
@@ -337,7 +337,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   }
 
   late final _$UserBaseActionController =
-  ActionController(name: 'UserBase', context: context);
+      ActionController(name: 'UserBase', context: context);
 
   @override
   void updateBiography(io.File newBiography) {
