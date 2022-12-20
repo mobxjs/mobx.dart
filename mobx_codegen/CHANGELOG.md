@@ -1,6 +1,7 @@
-## 2.1.0
+## 2.1.0 - 2.1.1
 
 - Update analyzer version to `>=4.4.0 <6.0.0`
+- Dart formatting fixes
 
 ## 2.0.7+2 - 2.0.7+3
 

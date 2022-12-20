@@ -35,7 +35,8 @@ void main() {
     });
 
     test('generates for a class containing late observables', () async {
-      await compareFiles('./data/valid_late_variables_input.dart', './data/valid_late_variables_output.dart');
+      await compareFiles('./data/valid_late_variables_input.dart',
+          './data/valid_late_variables_output.dart');
     });
 
     test(

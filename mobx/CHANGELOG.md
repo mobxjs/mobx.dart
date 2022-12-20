@@ -1,6 +1,7 @@
-## 2.1.2
+## 2.1.2 - 2.1.3
 
 - Fix tests in dart 2.19 - [@amondnet](https://github.com/amondnet)
+- Dart formatting fixes
 
 ## 2.1.1
 
@@ -10,6 +11,7 @@
 
 - `ObservableSet` now uses `Set` to maintain order of iteration
 - `ObservableSet.linkedHashSetFrom()` removed. Use `ObservableSet()` or `ObservableSet.of()` instead.
+
 ## 2.0.7+7
 
 - Moved the version into its own file (`version.dart`) and exported from the main library file
