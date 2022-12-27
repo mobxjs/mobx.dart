@@ -1,4 +1,8 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, {
+  Fragment,
+  FunctionComponent,
+  FunctionComponentElement,
+} from 'react';
 import styled from '@emotion/styled';
 import config from '../../docusaurus.config';
 
@@ -20,7 +24,7 @@ const Bullet = styled.div`
   font-family: monospace;
 `;
 
-export const CircleBullet: FunctionComponent = ({ children }) => {
+export const CircleBullet: FunctionComponent<any> = ({ children }) => {
   return (
     <Fragment>
       <div />

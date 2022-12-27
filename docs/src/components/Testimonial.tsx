@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { CSSProperties, FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import { testimonials } from './testimonials';
 
@@ -75,7 +75,7 @@ export const Profile: FunctionComponent<{
   title: string;
   twitter: string;
   size?: number;
-  style?: CSSStyleDeclaration;
+  style?: CSSProperties;
 }> = ({ photo, author, title, twitter, size = 64, style }) => {
   return (
     <ProfileContainer style={style}>
