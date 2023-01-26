@@ -1,11 +1,15 @@
+## 2.1.4
+
+- feat: add ObservableQueue by [@amondnet](https://github.com/amondnet) in [#892](https://github.com/mobxjs/mobx.dart/pull/892)
+
 ## 2.1.2 - 2.1.3
 
-- Fix tests in dart 2.19 - [@amondnet](https://github.com/amondnet)
+- Fix tests in dart 2.19 by [@amondnet](https://github.com/amondnet) in [#879](https://github.com/mobxjs/mobx.dart/pull/879)
 - Dart formatting fixes
 
 ## 2.1.1
 
-- Allow a custom equals parameter for ObservableStream - [@amondnet](https://github.com/amondnet)
+- Allow a custom equals parameter for ObservableStream by [@amondnet](https://github.com/amondnet) in [#771](https://github.com/mobxjs/mobx.dart/pull/771)
 
 ## 2.1.0
 
