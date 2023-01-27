@@ -343,7 +343,9 @@ class ReactiveContext {
         _resetState();
 
         throw MobXCyclicReactionException(
-            "Reaction doesn't converge to a stable state after ${config.maxIterations} iterations. Probably there is a cycle in the reactive function: $failingReaction");
+            "Reaction doesn't converge to a stable state after ${config.maxIterations} iterations. "
+            "Probably there is a cycle in the reactive function: $failingReaction "
+            "(creation stack: ${failingReaction.debugCreationStack})");
       }
 
       final remainingReactions = allReactions.toList(growable: false);

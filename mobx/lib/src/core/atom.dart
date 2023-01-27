@@ -5,7 +5,7 @@ enum _ListenerKind {
   onBecomeUnobserved,
 }
 
-class Atom {
+class Atom with DebugCreationStack {
   /// Creates a simple Atom for tracking its usage in a reactive context. This is useful when
   /// you don't need the value but instead a way of knowing when it becomes active and inactive
   /// in a reaction.
@@ -41,6 +41,8 @@ class Atom {
   bool _isPendingUnobservation = false;
 
   DerivationState _lowestObserverState = DerivationState.notTracking;
+
+  bool get isBeingObserved => _isBeingObserved;
 
   // ignore: prefer_final_fields
   bool _isBeingObserved = false;
@@ -114,6 +116,9 @@ class Atom {
       }
     };
   }
+
+  @override
+  String toString() => 'Atom(name: $name, identity: ${identityHashCode(this)})';
 }
 
 class WillChangeNotification<T> {

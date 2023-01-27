@@ -181,4 +181,8 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
     }, context: _context)
         .call;
   }
+
+  @override
+  String toString() =>
+      'Computed<$T>(name: $name, identity: ${identityHashCode(this)})';
 }

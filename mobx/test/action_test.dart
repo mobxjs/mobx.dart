@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:mobx/src/utils.dart';
 import 'package:mocktail/mocktail.dart' as mock;
 import 'package:test/test.dart';
 
@@ -11,6 +12,18 @@ void main() {
   testSetup();
 
   group('Action', () {
+    test('toString', () {
+      final object = Action(() {}, name: 'MyName');
+      expect(object.toString(), contains('MyName'));
+    });
+
+    test('debugCreationStack', () {
+      DebugCreationStack.enable = true;
+      addTearDown(() => DebugCreationStack.enable = false);
+      final object = Action(() {});
+      expect(object.debugCreationStack, isNotNull);
+    });
+
     test('basics work', () {
       final a = Action((String name, String value) {
         expect(name, equals('name'));

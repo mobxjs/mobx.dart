@@ -6,9 +6,11 @@ abstract class Reaction implements Derivation {
   void dispose();
 
   void _run();
+
+  StackTrace? get debugCreationStack;
 }
 
-class ReactionImpl implements Reaction {
+class ReactionImpl with DebugCreationStack implements Reaction {
   ReactionImpl(this._context, Function() onInvalidate,
       {required this.name, void Function(Object, Reaction)? onError}) {
     _onInvalidate = onInvalidate;
@@ -180,4 +182,8 @@ class ReactionImpl implements Reaction {
 
     _context._notifyReactionErrorHandlers(exception, this);
   }
+
+  @override
+  String toString() =>
+      'Reaction(name: $name, identity: ${identityHashCode(this)})';
 }
