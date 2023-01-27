@@ -23,6 +23,7 @@ import 'observable_future_test.dart' as observable_future_test;
 import 'observable_list_test.dart' as observable_list_test;
 import 'observable_map_test.dart' as observable_map_test;
 import 'observable_set_test.dart' as observable_set_test;
+import 'observable_queue_test.dart' as observable_queue_test;
 import 'observable_stream_test.dart' as observable_stream_test;
 import 'observable_test.dart' as observable_test;
 import 'observable_value_test.dart' as observable_value_test;
@@ -41,6 +42,7 @@ void main() {
   observable_list_test.main();
   observable_map_test.main();
   observable_set_test.main();
+  observable_queue_test.main();
   observable_future_test.main();
   observable_stream_test.main();
 
