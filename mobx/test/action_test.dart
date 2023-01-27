@@ -340,5 +340,23 @@ void main() {
 
       d();
     });
+
+    test('action should wrap in transaction', () {
+      final values = [];
+      final observable = Observable(0);
+
+      autorun((_) => values.add(observable.value));
+
+      final increment = Action((int amount) {
+        observable.value = observable.value + amount * 2; // 14
+        observable.value = observable.value - amount; // 7
+      }, name: 'increment');
+
+      expect(increment, isA<Action>());
+
+      increment([7]);
+
+      expect(values, [0, 7]);
+    });
   });
 }
