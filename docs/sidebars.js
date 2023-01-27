@@ -28,6 +28,7 @@ module.exports = {
         'guides/json-serialization',
         'guides/organizing-stores',
         'guides/when-does-mobx-react',
+        'guides/mobx-utils',
       ],
     },
     'community',
