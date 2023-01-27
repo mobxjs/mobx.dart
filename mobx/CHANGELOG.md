@@ -1,3 +1,10 @@
+## 2.1.4
+
+- Allow users to bypass observability system for performance by [@fzyzcjy](https://github.com/fzyzcjy) in [#844](https://github.com/mobxjs/mobx.dart/pull/844)
+- Avoid unnecessary observable notifications of @observable fields of Stores by [@fzyzcjy](https://github.com/fzyzcjy) in [#844](https://github.com/mobxjs/mobx.dart/pull/844)
+- Fix Reaction lacks toString, so cannot see which reaction causes the error by [@fzyzcjy](https://github.com/fzyzcjy) in [#844](https://github.com/mobxjs/mobx.dart/pull/844)
+- Add StackTrace to reactions in debug mode to easily spot which reaction it is by [@fzyzcjy](https://github.com/fzyzcjy) in [#844](https://github.com/mobxjs/mobx.dart/pull/844)
+
 ## 2.1.2 - 2.1.3
 
 - Fix tests in dart 2.19 - [@amondnet](https://github.com/amondnet)
