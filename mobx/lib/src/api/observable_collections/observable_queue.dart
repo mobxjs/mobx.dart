@@ -294,14 +294,6 @@ class ObservableQueue<T> extends ListQueue<T>
   }
 
   @override
-  T reduce(T Function(T value, T element) combine) {
-    _context.enforceReadPolicy(_atom);
-
-    _atom.reportObserved();
-    return _queue.reduce(combine);
-  }
-
-  @override
   T removeFirst() {
     late T value;
 
