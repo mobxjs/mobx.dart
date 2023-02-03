@@ -1,7 +1,8 @@
-## 2.1.2 - 2.1.3
+## 2.1.2 - 2.1.3+1
 
 - Fix tests in dart 2.19 - [@amondnet](https://github.com/amondnet)
 - Dart formatting fixes
+- Refactor `atom.dart` to make code cleaner by [@fzyzcjy](https://github.com/fzyzcjy) in [#854](https://github.com/mobxjs/mobx.dart/pull/854)
 
 ## 2.1.1
 
