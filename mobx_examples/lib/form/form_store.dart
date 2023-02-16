@@ -29,76 +29,79 @@ abstract class _FormStore with Store {
   String password = '';
 
   @observable
-  ObservableFuture<bool> usernameCheck = ObservableFuture.value(true);
+  ObservableFuture<bool> usernameCheck = ObservableFuture.value(false);
 
   @computed
   bool get isUserCheckPending => usernameCheck.status == FutureStatus.pending;
-
-  @computed
-  bool get canLogin => !error.hasErrors;
 
   late List<ReactionDisposer> _disposers;
 
   void setupValidations() {
     _disposers = [
-      reaction((_) => name, validateUsername),
+      reaction((_) => name, validateName),
       reaction((_) => email, validateEmail),
-      reaction((_) => password, validatePassword)
+      reaction((_) => password, validatePassword),
     ];
   }
 
-  @action
-  // ignore: avoid_void_async
-  Future validateUsername(String value) async {
-    if (isNull(value) || value.isEmpty) {
-      error.username = 'Cannot be blank';
-      return;
-    }
-
-    try {
-      usernameCheck = ObservableFuture(checkValidUsername(value));
-
-      error.username = null;
-
-      final isValid = await usernameCheck;
-      if (!isValid) {
-        error.username = 'Username cannot be "admin"';
-        return;
-      }
-    } on Object catch (_) {
-      error.username = null;
-    }
-
-    error.username = null;
-  }
-
-  @action
-  void validatePassword(String value) {
-    error.password = isNull(value) || value.isEmpty ? 'Cannot be blank' : null;
-  }
-
-  @action
-  void validateEmail(String value) {
-    error.email = isEmail(value) ? null : 'Not a valid email';
-  }
-
-  Future<bool> checkValidUsername(String value) async {
-    await Future.delayed(const Duration(seconds: 1));
-
-    return value != 'admin';
-  }
-
   void dispose() {
-    for (final d in _disposers) {
+    for (var d in _disposers) {
       d();
     }
   }
 
-  void validateAll() {
-    validatePassword(password);
-    validateEmail(email);
-    validateUsername(name);
+  @action
+  void validateName(_) {
+    name = name.trim();
+    error.username = null;
+    if (isNull(name) || name.trim().isEmpty) {
+      error.username = 'Cannot be blank';
+      return;
+    }
   }
+
+  @action
+  void validateEmail(_) {
+    email = email.trim();
+    error.email = isEmail(email) ? null : 'Not a valid email';
+  }
+
+  @action
+  void validatePassword(_) {
+    password = password.trim();
+    error.password = null;
+    if (isNull(password) || password.isEmpty) {
+      error.password = 'Cannot be blank';
+      return;
+    }
+    if (!isLength(password, 5)) {
+      error.password = 'Must be at least 5 characters long';
+    }
+  }
+
+  @action
+  Future<bool> serverValidation(String value) async {
+    bool result = true;
+    try {
+      usernameCheck = ObservableFuture(_serverUsernameCheck(value));
+      final isValid = await usernameCheck;
+      if (!isValid) {
+        error.username = 'Username cannot be "admin"';
+        result = false;
+      }
+    } on Object catch (_) {
+      error.username = 'Server validation is broken';
+    }
+    return result;
+  }
+
+  Future<bool> _serverUsernameCheck(String value) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return value != 'admin';
+  }
+
+  @computed
+  bool get canLogin => !error.hasErrors;
 }
 
 // ignore: library_private_types_in_public_api

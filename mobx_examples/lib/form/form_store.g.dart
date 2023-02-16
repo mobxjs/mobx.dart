@@ -23,21 +23,6 @@ mixin _$FormStore on _FormStore, Store {
           Computed<bool>(() => super.canLogin, name: '_FormStore.canLogin'))
       .value;
 
-  late final _$colorAtom = Atom(name: '_FormStore.color', context: context);
-
-  @override
-  CustomColor get color {
-    _$colorAtom.reportRead();
-    return super.color;
-  }
-
-  @override
-  set color(CustomColor value) {
-    _$colorAtom.reportWrite(value, super.color, () {
-      super.color = value;
-    });
-  }
-
   late final _$nameAtom = Atom(name: '_FormStore.name', context: context);
 
   @override
@@ -100,35 +85,46 @@ mixin _$FormStore on _FormStore, Store {
     });
   }
 
-  late final _$validateUsernameAsyncAction =
-      AsyncAction('_FormStore.validateUsername', context: context);
+  late final _$serverValidationAsyncAction =
+      AsyncAction('_FormStore.serverValidation', context: context);
 
   @override
-  Future<dynamic> validateUsername(String value) {
-    return _$validateUsernameAsyncAction
-        .run(() => super.validateUsername(value));
+  Future<bool> serverValidation(String value) {
+    return _$serverValidationAsyncAction
+        .run(() => super.serverValidation(value));
   }
 
   late final _$_FormStoreActionController =
       ActionController(name: '_FormStore', context: context);
 
   @override
-  void validatePassword(String value) {
+  void validateName(dynamic _) {
     final _$actionInfo = _$_FormStoreActionController.startAction(
-        name: '_FormStore.validatePassword');
+        name: '_FormStore.validateName');
     try {
-      return super.validatePassword(value);
+      return super.validateName(_);
     } finally {
       _$_FormStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void validateEmail(String value) {
+  void validateEmail(dynamic _) {
     final _$actionInfo = _$_FormStoreActionController.startAction(
         name: '_FormStore.validateEmail');
     try {
-      return super.validateEmail(value);
+      return super.validateEmail(_);
+    } finally {
+      _$_FormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validatePassword(dynamic _) {
+    final _$actionInfo = _$_FormStoreActionController.startAction(
+        name: '_FormStore.validatePassword');
+    try {
+      return super.validatePassword(_);
     } finally {
       _$_FormStoreActionController.endAction(_$actionInfo);
     }
@@ -137,7 +133,6 @@ mixin _$FormStore on _FormStore, Store {
   @override
   String toString() {
     return '''
-color: ${color},
 name: ${name},
 email: ${email},
 password: ${password},
