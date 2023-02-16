@@ -1,6 +1,6 @@
 part of '../core.dart';
 
-class Action {
+class Action with DebugCreationStack {
   /// Creates an action that encapsulates all the mutations happening on the
   /// observables.
   ///
@@ -61,6 +61,10 @@ class Action {
       _controller.endAction(runInfo);
     }
   }
+
+  @override
+  String toString() =>
+      'Action(name: $name, identity: ${identityHashCode(this)})';
 }
 
 /// `ActionController` is used to define the start/end boundaries of code which

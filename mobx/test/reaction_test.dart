@@ -1,6 +1,7 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart' hide when;
 import 'package:mobx/src/core.dart';
+import 'package:mobx/src/utils.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -13,6 +14,18 @@ void main() {
   testSetup();
 
   group('Reaction', () {
+    test('toString', () {
+      final object = ReactionImpl(mainContext, () => null, name: 'MyName');
+      expect(object.toString(), contains('MyName'));
+    });
+
+    test('debugCreationStack', () {
+      DebugCreationStack.enable = true;
+      addTearDown(() => DebugCreationStack.enable = false);
+      final object = ReactionImpl(mainContext, () => null, name: 'MyName');
+      expect(object.debugCreationStack, isNotNull);
+    });
+
     test('basics work', () {
       var executed = false;
       final x = Observable(10);

@@ -53,6 +53,8 @@ class Observable<T> extends Atom
     return _value;
   }
 
+  T get nonObservableValue => _value;
+
   set value(T value) {
     _context.enforceWritePolicy(this);
 
@@ -125,4 +127,8 @@ class Observable<T> extends Atom
   @override
   Dispose intercept(Interceptor<T> interceptor) =>
       _interceptors.add(interceptor);
+
+  @override
+  String toString() =>
+      'Observable<$T>(name: $name, identity: ${identityHashCode(this)})';
 }
