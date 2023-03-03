@@ -1,8 +1,6 @@
-import 'dart:ui';
-
+import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:validators2/validators.dart';
+import 'package:validators2/validators2.dart';
 
 part 'form_store.g.dart';
 
@@ -48,7 +46,6 @@ abstract class _FormStore with Store {
   }
 
   @action
-  // ignore: avoid_void_async
   Future validateUsername(String value) async {
     if (isNull(value) || value.isEmpty) {
       error.username = 'Cannot be blank';
