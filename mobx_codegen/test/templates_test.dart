@@ -76,7 +76,6 @@ void main() {
           type: 'ReturnType',
           name: 'computedField');
 
-      // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
   Computed<ReturnType>? computedName;
 
@@ -225,29 +224,33 @@ void main() {
   });
 
   group('ActionTemplate', () {
+    final method = MethodOverrideTemplate()
+      ..name = 'myAction'
+      ..returnType = 'ReturnType'
+      ..setTypeParams([
+        TypeParamTemplate(name: 'T'),
+        TypeParamTemplate(name: 'S', bound: 'String')
+      ])
+      ..positionalParams = [ParamTemplate(name: 'arg1', type: 'T')]
+      ..optionalParams = [
+        ParamTemplate(name: 'arg2', type: 'S', defaultValue: '"arg2value"'),
+        ParamTemplate(name: 'arg3', type: 'String')
+      ]
+      ..namedParams = [
+        ParamTemplate(
+            name: 'namedArg1', type: 'String', defaultValue: '"default"'),
+        ParamTemplate(name: 'namedArg2', type: 'int', defaultValue: '3')
+      ];
+
     test('renders properly', () {
       final template = ActionTemplate(
-          storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentClass'),
-          method: (MethodOverrideTemplate()
-            ..name = 'myAction'
-            ..returnType = 'ReturnType'
-            ..setTypeParams([
-              TypeParamTemplate(name: 'T'),
-              TypeParamTemplate(name: 'S', bound: 'String')
-            ])
-            ..positionalParams = [ParamTemplate(name: 'arg1', type: 'T')]
-            ..optionalParams = [
-              ParamTemplate(
-                  name: 'arg2', type: 'S', defaultValue: '"arg2value"'),
-              ParamTemplate(name: 'arg3', type: 'String')
-            ]
-            ..namedParams = [
-              ParamTemplate(
-                  name: 'namedArg1', type: 'String', defaultValue: '"default"'),
-              ParamTemplate(name: 'namedArg2', type: 'int', defaultValue: '3')
-            ]));
+        storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentClass'),
+        method: method,
+        hasProtected: false,
+        hasVisibleForOverriding: false,
+        hasVisibleForTesting: false,
+      );
 
-      // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
     @override
     ReturnType myAction<T, S extends String>(T arg1, [S arg2 = "arg2value", String arg3], {String namedArg1 = "default", int namedArg2 = 3}) {
@@ -259,46 +262,117 @@ void main() {
       }
     }"""));
     });
+
+    test('generates template with "@protected" annotation', () {
+      final template = ActionTemplate(
+        storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentClass'),
+        method: method,
+        hasProtected: true,
+        hasVisibleForOverriding: false,
+        hasVisibleForTesting: false,
+      );
+
+      expect(template.toString(), contains('@protected'));
+    });
+
+    test('generates template with "@visibleForOverriding" annotation', () {
+      final template = ActionTemplate(
+        storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentClass'),
+        method: method,
+        hasProtected: false,
+        hasVisibleForOverriding: true,
+        hasVisibleForTesting: false,
+      );
+
+      expect(template.toString(), contains('@visibleForOverriding'));
+    });
+
+    test('generates template with "@visibleForTesting" annotation', () {
+      final template = ActionTemplate(
+        storeTemplate: (MixinStoreTemplate()..parentTypeName = 'ParentClass'),
+        method: method,
+        hasProtected: false,
+        hasVisibleForOverriding: false,
+        hasVisibleForTesting: true,
+      );
+
+      expect(template.toString(), contains('@visibleForTesting'));
+    });
   });
 
   group('ObservableFutureTemplate', () {
+    final method = MethodOverrideTemplate()
+      ..name = 'fetchData'
+      ..returnType = 'Future'
+      ..returnTypeArgs = SurroundedCommaList('<', '>', ['T'])
+      ..setTypeParams([
+        TypeParamTemplate(name: 'T'),
+        TypeParamTemplate(name: 'S', bound: 'String')
+      ])
+      ..positionalParams = [
+        ParamTemplate(
+          name: 'arg1',
+          type: 'T',
+        )
+      ]
+      ..optionalParams = [
+        ParamTemplate(name: 'arg2', type: 'S', defaultValue: '"arg2value"'),
+        ParamTemplate(
+          name: 'arg3',
+          type: 'String',
+        )
+      ]
+      ..namedParams = [
+        ParamTemplate(
+            name: 'namedArg1', type: 'String', defaultValue: '"default"'),
+        ParamTemplate(name: 'namedArg2', type: 'int', defaultValue: '3')
+      ];
+
     test('renders properly', () {
       final template = ObservableFutureTemplate(
-          method: (MethodOverrideTemplate()
-            ..name = 'fetchData'
-            ..returnType = 'Future'
-            ..returnTypeArgs = SurroundedCommaList('<', '>', ['T'])
-            ..setTypeParams([
-              TypeParamTemplate(name: 'T'),
-              TypeParamTemplate(name: 'S', bound: 'String')
-            ])
-            ..positionalParams = [
-              ParamTemplate(
-                name: 'arg1',
-                type: 'T',
-              )
-            ]
-            ..optionalParams = [
-              ParamTemplate(
-                  name: 'arg2', type: 'S', defaultValue: '"arg2value"'),
-              ParamTemplate(
-                name: 'arg3',
-                type: 'String',
-              )
-            ]
-            ..namedParams = [
-              ParamTemplate(
-                  name: 'namedArg1', type: 'String', defaultValue: '"default"'),
-              ParamTemplate(name: 'namedArg2', type: 'int', defaultValue: '3')
-            ]));
+        method: method,
+        hasProtected: false,
+        hasVisibleForOverriding: false,
+        hasVisibleForTesting: false,
+      );
 
-      // ignore: prefer_single_quotes
       expect(template.toString(), equals("""
   @override
   ObservableFuture<T> fetchData<T, S extends String>(T arg1, [S arg2 = "arg2value", String arg3], {String namedArg1 = "default", int namedArg2 = 3}) {
     final _\$future = super.fetchData<T, S>(arg1, arg2, arg3, namedArg1: namedArg1, namedArg2: namedArg2);
     return ObservableFuture<T>(_\$future, context: context);
   }"""));
+    });
+
+    test('generates template with "@protected" annotation', () {
+      final template = ObservableFutureTemplate(
+        method: method,
+        hasProtected: true,
+        hasVisibleForOverriding: false,
+        hasVisibleForTesting: false,
+      );
+
+      expect(template.toString(), contains('@protected'));
+    });
+    test('generates template with "@visibleForOverriding" annotation', () {
+      final template = ObservableFutureTemplate(
+        method: method,
+        hasProtected: false,
+        hasVisibleForOverriding: true,
+        hasVisibleForTesting: false,
+      );
+
+      expect(template.toString(), contains('@visibleForOverriding'));
+    });
+    test('generates template with "@visibleForTesting" annotation', () {
+      final template = ObservableFutureTemplate(
+        method: method,
+        hasProtected: false,
+        hasVisibleForOverriding: false,
+        hasVisibleForTesting: true,
+      );
+
+      expect(template.toString(), contains('@visibleForTesting'));
     });
   });
 }
