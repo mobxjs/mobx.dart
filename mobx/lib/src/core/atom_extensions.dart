@@ -6,9 +6,13 @@ extension AtomSpyReporter on Atom {
     reportObserved();
   }
 
-  void reportWrite<T>(T newValue, T oldValue, void Function() setNewValue) {
+  void reportWrite<T>(T newValue, T oldValue, void Function() setNewValue,
+      {EqualityComparer<T>? equals}) {
+    final areEqual =
+        equals == null ? oldValue == newValue : equals(oldValue, newValue);
+
     // Avoid unnecessary observable notifications of @observable fields of Stores
-    if (newValue == oldValue) {
+    if (areEqual) {
       return;
     }
 

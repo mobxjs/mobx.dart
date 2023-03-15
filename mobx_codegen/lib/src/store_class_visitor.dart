@@ -3,6 +3,7 @@ import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
 import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
+
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
     show ComputedMethod, MakeAction, MakeObservable, StoreConfig;
@@ -101,6 +102,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
       name: element.name,
       isPrivate: element.isPrivate,
       isReadOnly: _isObservableReadOnly(element),
+      equals: _getEquals(element),
     );
 
     _storeTemplate.observables.add(template);
@@ -113,6 +115,11 @@ class StoreClassVisitor extends SimpleElementVisitor {
           ?.getField('readOnly')
           ?.toBoolValue() ??
       false;
+
+  ExecutableElement? _getEquals(FieldElement element) => _observableChecker
+      .firstAnnotationOfExact(element)
+      ?.getField('equals')
+      ?.toFunctionValue();
 
   bool _fieldIsNotValid(FieldElement element) => _any([
         errors.staticObservables.addIf(element.isStatic, element.name),
