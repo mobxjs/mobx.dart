@@ -16,39 +16,37 @@ bool debugAddStackTraceInObserverName = true;
 /// See also:
 ///
 /// - [Builder], which is the same thing but for [StatelessWidget] instead.
-class Observer extends StatelessObserverWidget
-    // Implements Builder to import the documentation of `builder`
-    implements
-        // ignore: avoid_implementing_value_types
-        Builder {
+class Observer extends StatelessObserverWidget {
   // ignore: prefer_const_constructors_in_immutables
   Observer({
     Key? key,
-    required this.builder,
+    this.builder,
+    this.builderWithChild,
+    this.child,
     String? name,
     bool? warnWhenNoObservables,
   })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
+        assert(builder != null || (builderWithChild != null && child != null)),
         super(
           key: key,
           name: name,
           warnWhenNoObservables: warnWhenNoObservables,
         );
 
-  @override
-  final WidgetBuilder builder;
+  final WidgetBuilder? builder;
+  /// A builder that builds a widget given a child.
+  final TransitionBuilder? builderWithChild;
+  /// The child widget to pass to the [builderWithChild].
+  final Widget? child;
 
   /// The stack frame pointing to the source that constructed this instance.
   final String? debugConstructingStackFrame;
 
   @override
-  String getName() =>
-      super.getName() +
-      (debugConstructingStackFrame != null
-          ? '\n$debugConstructingStackFrame'
-          : '');
+  String getName() => super.getName() + (debugConstructingStackFrame != null ? '\n$debugConstructingStackFrame' : '');
 
   @override
-  Widget build(BuildContext context) => builder(context);
+  Widget build(BuildContext context) => builderWithChild?.call(context, child) ?? builder!.call(context);
 
   /// Matches constructor stack frames, in both VM and web environments.
   static final _constructorStackFramePattern = RegExp(r'\bnew\b');
@@ -76,15 +74,10 @@ class Observer extends StatelessObserverWidget
             // regex)
             .skip(3)
             // Search for the first non-constructor frame
-            .firstWhere(
-                (frame) => !_constructorStackFramePattern.hasMatch(frame),
-                orElse: () => '');
+            .firstWhere((frame) => !_constructorStackFramePattern.hasMatch(frame), orElse: () => '');
 
-        final stackFrameCore =
-            _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);
-        final cleanedStackFrame = stackFrameCore == null
-            ? null
-            : 'Observer constructed from: $stackFrameCore';
+        final stackFrameCore = _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);
+        final cleanedStackFrame = stackFrameCore == null ? null : 'Observer constructed from: $stackFrameCore';
 
         stackFrame = cleanedStackFrame;
       }

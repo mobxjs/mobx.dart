@@ -1,9 +1,9 @@
 ## 2.0.7
-- `ObserverWithExcludedChild` added.
-  It has an optional `child` parameter, so you can exclude child branch from re-render. - [@subzero911](https://github.com/subzero911)
+- `Observer` is updated with new optional `child` parameter, so you can exclude child branch from re-render. - [@subzero911](https://github.com/subzero911) \
+  You should provide either `builder` or both `builderWithChild` and `child`:
   ```dart
-  ObserverWithExcludedChild(
-    builder: (context, child) {
+  Observer(
+    builderWithChild: (context, child) {
       return GestureDetector(
         onTap: () => message.value = 'Clicked',
         child: child,
