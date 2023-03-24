@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_mobx/src/observer_with_excluded_child.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobx/mobx.dart' hide when, version;
 import 'package:mocktail/mocktail.dart';
@@ -57,6 +58,31 @@ void main() {
     await tester.pump();
 
     expect(renderCount, equals(1));
+  });
+
+  testWidgets("ObserverWithExcludedChild child doesn't re-render", (tester) async {
+    final message = Observable('Click');
+    final key = UniqueKey();
+
+    await tester.pumpWidget(
+      ObserverWithExcludedChild(
+        builder: (context, child) {
+          return GestureDetector(
+            onTap: () => message.value = 'Clicked',
+            child: child,
+          );
+        },
+        child: Text(message.value, key: key, textDirection: TextDirection.ltr),
+      ),
+    );
+
+    expect(tester.widget<Text>(find.byKey(key)).data, equals('Click'));
+
+    await tester.tap(find.byKey(key));
+    expect(message.value, equals('Clicked'));        
+
+    await tester.pump();    
+    expect(tester.widget<Text>(find.byKey(key)).data, equals('Click')); // child text did not change
   });
 
   testWidgets('Observer build should call reaction.track', (tester) async {
