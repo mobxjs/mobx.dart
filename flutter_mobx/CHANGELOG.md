@@ -1,3 +1,18 @@
+## 2.0.7
+- `ObserverWithExcludedChild` added.
+  It has an optional `child` parameter, so you can exclude child branch from re-render. - [@subzero911](https://github.com/subzero911)
+  ```dart
+  ObserverWithExcludedChild(
+    builder: (context, child) {
+      return GestureDetector(
+        onTap: () => message.value = 'Clicked',
+        child: child,
+      );
+    },
+    child: Text(message.value), // is not rebuilt
+  ),
+  ```
+
 ## 2.0.6+3 - 2.0.6+5
 
 - Moved the version into its own file (`version.dart`) and exported from the main library file
