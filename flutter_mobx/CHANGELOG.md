@@ -3,15 +3,10 @@
   You should provide either `builder` or both `builderWithChild` and `child`:
   ```dart
   Observer(
-    builderWithChild: (context, child) {
-      return GestureDetector(
-        onTap: () => message.value = 'Clicked',
-        child: child,
-      );
-    },
-    child: Text(message.value), // is not rebuilt
+    builderWithChild: (context, child) => FooWidget(foo: foo, child: child),
+    child: BarWidget(), // is not rebuilt
   ),
-  ```
+  ``` 
 
 ## 2.0.6+3 - 2.0.6+5
 
