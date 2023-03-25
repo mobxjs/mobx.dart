@@ -9,8 +9,7 @@ import 'package:mocktail/mocktail.dart';
 import 'helpers.dart';
 
 void main() {
-  setUp(() => mainContext.config =
-      ReactiveConfig(writePolicy: ReactiveWritePolicy.never));
+  setUp(() => mainContext.config = ReactiveConfig(writePolicy: ReactiveWritePolicy.never));
 
   tearDown(() => mainContext.config = ReactiveConfig.main);
 
@@ -18,8 +17,7 @@ void main() {
     expect(version, isNotNull);
   });
 
-  testWidgets('Observer re-renders when observed state changes',
-      (tester) async {
+  testWidgets('Observer re-renders when observed state changes', (tester) async {
     final message = Observable('Click');
 
     final key = UniqueKey();
@@ -27,8 +25,7 @@ void main() {
     await tester.pumpWidget(Observer(
         builder: (context) => GestureDetector(
               onTap: () => message.value = 'Clicked',
-              child: Text(message.value,
-                  key: key, textDirection: TextDirection.ltr),
+              child: Text(message.value, key: key, textDirection: TextDirection.ltr),
             )));
 
     expect(tester.widget<Text>(find.byKey(key)).data, equals('Click'));
@@ -40,8 +37,7 @@ void main() {
     expect(tester.widget<Text>(find.byKey(key)).data, equals('Clicked'));
   });
 
-  testWidgets("Observer doesn't re-render when observed state doesn't change",
-      (tester) async {
+  testWidgets("Observer doesn't re-render when observed state doesn't change", (tester) async {
     var renderCount = 0;
 
     final i = Observable(0);
@@ -61,42 +57,47 @@ void main() {
 
   testWidgets("Observer child doesn't re-render", (tester) async {
     final message = Observable('Click');
-    final key = UniqueKey();
+    final key1 = UniqueKey();
+    final key2 = UniqueKey();
 
     await tester.pumpWidget(
-      Observer(
-        builderWithChild: (context, child) {
-          return GestureDetector(
-            onTap: () => message.value = 'Clicked',
-            child: child,
-          );
-        },
-        child: Text(message.value, key: key, textDirection: TextDirection.ltr),
+      MaterialApp(
+        home: Observer(
+          builderWithChild: (context, child) {          
+            return Column(
+              children: [
+                ElevatedButton(onPressed: () => message.value = 'Clicked', child: Container()),
+                Text(message.value, key: key1),
+                child!,
+              ],
+            );
+          },
+          child: Text(message.value, key: key2),
+        ),
       ),
     );
 
-    expect(tester.widget<Text>(find.byKey(key)).data, equals('Click'));
+    expect(tester.widget<Text>(find.byKey(key1)).data, equals('Click'));
+    expect(tester.widget<Text>(find.byKey(key2)).data, equals('Click'));
 
-    await tester.tap(find.byKey(key));
-    expect(message.value, equals('Clicked'));        
+    await tester.tap(find.byType(ElevatedButton));
+    expect(message.value, equals('Clicked'));
 
-    await tester.pump();    
-    expect(tester.widget<Text>(find.byKey(key)).data, equals('Click')); // child text did not change
+    await tester.pump();
+    expect(tester.widget<Text>(find.byKey(key1)).data, equals('Clicked')); // Observer rebuilt the Text1
+    expect(tester.widget<Text>(find.byKey(key2)).data, equals('Click')); // child Text2 did not change
   });
 
   testWidgets('Observer build should call reaction.track', (tester) async {
     final mock = MockReaction();
     when(() => mock.hasObservables).thenReturn(true);
 
-    await tester.pumpWidget(
-        TestObserver(mock, builder: (context) => const Placeholder()));
+    await tester.pumpWidget(TestObserver(mock, builder: (context) => const Placeholder()));
 
     verify(() => mock.track(voidFn));
   });
 
-  testWidgets(
-      'Observer should throw exception if exceptions occur inside the reaction',
-      (tester) async {
+  testWidgets('Observer should throw exception if exceptions occur inside the reaction', (tester) async {
     dynamic exception;
 
     final prevOnError = FlutterError.onError;
@@ -123,12 +124,10 @@ void main() {
 
     expect(tester.firstWidget(find.byWidget(widget)), equals(widget));
 
-    expect(exception.message,
-        'Error happened when building Observer, but it was captured since disableErrorBoundaries==true');
+    expect(exception.message, 'Error happened when building Observer, but it was captured since disableErrorBoundaries==true');
   });
 
-  testWidgets('Observer should report Flutter errors during invalidation',
-      (tester) async {
+  testWidgets('Observer should report Flutter errors during invalidation', (tester) async {
     final mobXException = await _testThrowingObserver(
       tester,
       FlutterError('setState() failed!'),
@@ -138,8 +137,7 @@ void main() {
     expect((mobXException.exception as FlutterError).stackTrace, isNotNull);
   });
 
-  testWidgets('Observer should report non-Flutter errors during invalidation',
-      (tester) async {
+  testWidgets('Observer should report non-Flutter errors during invalidation', (tester) async {
     final mobXException = await _testThrowingObserver(
       tester,
       StateError('Something else happened'),
@@ -147,8 +145,7 @@ void main() {
     expect(mobXException.exception, isInstanceOf<StateError>());
   });
 
-  testWidgets('Observer should report exceptions during invalidation',
-      (tester) async {
+  testWidgets('Observer should report exceptions during invalidation', (tester) async {
     final exception = await _testThrowingObserver(
       tester,
       Exception('Some exception'),
@@ -160,16 +157,14 @@ void main() {
     final mock = MockReaction();
     when(() => mock.hasObservables).thenReturn(true);
 
-    await tester.pumpWidget(
-        TestObserver(mock, builder: (context) => const Placeholder()));
+    await tester.pumpWidget(TestObserver(mock, builder: (context) => const Placeholder()));
 
     await tester.pumpWidget(const Placeholder());
 
     verify(mock.dispose);
   });
 
-  testWidgets("Release mode, the reaction's default name is widget.toString()",
-      (tester) async {
+  testWidgets("Release mode, the reaction's default name is widget.toString()", (tester) async {
     debugAddStackTraceInObserverName = false;
     addTearDown(() => debugAddStackTraceInObserverName = true);
 
@@ -186,9 +181,7 @@ void main() {
     expect(element.reaction.name, equals('$observer'));
   });
 
-  testWidgets(
-      "Debug mode inserts the caller's stack frame in the reaction's name",
-      (tester) async {
+  testWidgets("Debug mode inserts the caller's stack frame in the reaction's name", (tester) async {
     final observer = LoggingObserver(
       builder: (_) => Container(),
     );
@@ -215,8 +208,7 @@ void main() {
     );
   });
 
-  testWidgets('debugFindConstructingStackFrame has friendly output',
-      (tester) async {
+  testWidgets('debugFindConstructingStackFrame has friendly output', (tester) async {
     final observer = Observer(builder: (_) => Container());
     expect(
       observer.debugConstructingStackFrame,
@@ -224,8 +216,7 @@ void main() {
     );
   });
 
-  testWidgets('Observer should log when there are no observables in builder',
-      (tester) async {
+  testWidgets('Observer should log when there are no observables in builder', (tester) async {
     final observer = LoggingObserver(
       builder: (_) => const Placeholder(),
     );
@@ -234,8 +225,7 @@ void main() {
     expect(observer.previousLog, isNotNull);
   });
 
-  testWidgets('Observer should NOT log when there are observables in builder',
-      (tester) async {
+  testWidgets('Observer should NOT log when there are observables in builder', (tester) async {
     final x = Observable(0);
     final observer = LoggingObserver(builder: (context) {
       x.value;
@@ -291,9 +281,7 @@ void main() {
     expect(find.byType(Container), findsOneWidget);
   });
 
-  testWidgets(
-      'The `setState() or markNeedsBuild() called during build` error is resolved',
-      (tester) async {
+  testWidgets('The `setState() or markNeedsBuild() called during build` error is resolved', (tester) async {
     // ignore: prefer_const_constructors
     await tester.pumpWidget(_ObserverRebuildTestMyApp());
 
@@ -305,10 +293,8 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('One read status: FutureStatus.pending'),
-        findsOneWidget);
-    expect(find.textContaining('TwoChild read status: FutureStatus.pending'),
-        findsOneWidget);
+    expect(find.textContaining('One read status: FutureStatus.pending'), findsOneWidget);
+    expect(find.textContaining('TwoChild read status: FutureStatus.pending'), findsOneWidget);
   });
 
   group('ReactionBuilder', () {
@@ -316,8 +302,7 @@ void main() {
 
     testWidgets('Reaction is disposed on dispose', (tester) async {});
 
-    testWidgets('Given child is returned as part of the build method',
-        (tester) async {});
+    testWidgets('Given child is returned as part of the build method', (tester) async {});
   });
 }
 
@@ -370,8 +355,7 @@ class _ObserverRebuildTestMyApp extends StatefulWidget {
   const _ObserverRebuildTestMyApp({Key? key}) : super(key: key);
 
   @override
-  State<_ObserverRebuildTestMyApp> createState() =>
-      _ObserverRebuildTestMyAppState();
+  State<_ObserverRebuildTestMyApp> createState() => _ObserverRebuildTestMyAppState();
 }
 
 class _ObserverRebuildTestMyAppState extends State<_ObserverRebuildTestMyApp> {
@@ -396,8 +380,7 @@ class _ObserverRebuildTestMyAppState extends State<_ObserverRebuildTestMyApp> {
 class _ObserverRebuildTestOne extends StatelessWidget {
   final _ObserverRebuildTestMyStore store;
 
-  const _ObserverRebuildTestOne({Key? key, required this.store})
-      : super(key: key);
+  const _ObserverRebuildTestOne({Key? key, required this.store}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -408,9 +391,7 @@ class _ObserverRebuildTestOne extends StatelessWidget {
           // print('One.Observer.build');
           return Text('One read status: ${store.status}');
         }),
-        TextButton(
-            onPressed: () => store.showTwo = true,
-            child: const Text('click me')),
+        TextButton(onPressed: () => store.showTwo = true, child: const Text('click me')),
       ],
     );
   }
@@ -419,8 +400,7 @@ class _ObserverRebuildTestOne extends StatelessWidget {
 class _ObserverRebuildTestTwo extends StatelessWidget {
   final _ObserverRebuildTestMyStore store;
 
-  const _ObserverRebuildTestTwo({Key? key, required this.store})
-      : super(key: key);
+  const _ObserverRebuildTestTwo({Key? key, required this.store}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -437,16 +417,13 @@ class _ObserverRebuildTestTwo extends StatelessWidget {
 class _ObserverRebuildTestTwoChild extends StatefulWidget {
   final _ObserverRebuildTestMyStore store;
 
-  const _ObserverRebuildTestTwoChild({Key? key, required this.store})
-      : super(key: key);
+  const _ObserverRebuildTestTwoChild({Key? key, required this.store}) : super(key: key);
 
   @override
-  _ObserverRebuildTestTwoChildState createState() =>
-      _ObserverRebuildTestTwoChildState();
+  _ObserverRebuildTestTwoChildState createState() => _ObserverRebuildTestTwoChildState();
 }
 
-class _ObserverRebuildTestTwoChildState
-    extends State<_ObserverRebuildTestTwoChild> {
+class _ObserverRebuildTestTwoChildState extends State<_ObserverRebuildTestTwoChild> {
   @override
   void initState() {
     super.initState();
@@ -464,8 +441,7 @@ class _ObserverRebuildTestTwoChildState
   }
 }
 
-class _ObserverRebuildTestMyStore = __ObserverRebuildTestMyStore
-    with _$_ObserverRebuildTestMyStore;
+class _ObserverRebuildTestMyStore = __ObserverRebuildTestMyStore with _$_ObserverRebuildTestMyStore;
 
 abstract class __ObserverRebuildTestMyStore with Store {
   @observable
