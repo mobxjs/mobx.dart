@@ -1,3 +1,6 @@
+## 2.0.6+6
+- test "Observer child not in immediate context is not rebuilt" added - [@subzero911](https://github.com/subzero911)
+
 ## 2.0.6+3 - 2.0.6+5
 
 - Moved the version into its own file (`version.dart`) and exported from the main library file
