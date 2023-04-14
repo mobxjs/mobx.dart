@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/single_child_widget.dart';
 
 /// A builder function that creates a reaction
 typedef ReactionBuilderFunction = ReactionDisposer Function(
@@ -16,11 +17,14 @@ typedef ReactionBuilderFunction = ReactionDisposer Function(
 /// [builder] that takes in a [BuildContext] and prepares the reaction. It should
 /// end up returning a [ReactionDisposer]. This will be disposed when the [ReactionBuilder]
 /// is disposed. The [child] Widget gets rendered as part of the build process.
-class ReactionBuilder extends StatefulWidget {
+class ReactionBuilder extends SingleChildStatefulWidget {
   final ReactionBuilderFunction builder;
-  final Widget child;
 
-  const ReactionBuilder({Key? key, required this.child, required this.builder})
+  /// The widget which will be rendered as a descendant of the
+  /// [ReactionBuilder]
+  final Widget? child;
+
+  const ReactionBuilder({Key? key, this.child, required this.builder})
       : super(key: key);
 
   @override
@@ -28,7 +32,7 @@ class ReactionBuilder extends StatefulWidget {
 }
 
 @visibleForTesting
-class ReactionBuilderState extends State<ReactionBuilder> {
+class ReactionBuilderState extends SingleChildState<ReactionBuilder> {
   late ReactionDisposer _disposeReaction;
 
   bool get isDisposed => _disposeReaction.reaction.isDisposed;
@@ -41,13 +45,18 @@ class ReactionBuilderState extends State<ReactionBuilder> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return widget.child;
-  }
-
-  @override
   void dispose() {
     _disposeReaction();
     super.dispose();
+  }
+
+  @override
+  Widget buildWithChild(BuildContext context, Widget? child) {
+    assert(
+      child != null,
+      '''${widget.runtimeType} used outside of MultiReactionBuilder must specify a child''',
+    );
+
+    return child!;
   }
 }
