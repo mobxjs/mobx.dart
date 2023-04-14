@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         package: ["mobx_codegen", "mobx"]
-        version: ["stable", "beta"]
+        version: ["stable"]
 
     steps:
       - uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
     strategy:
       matrix:
         package: ["flutter_mobx"]
-        channel: ["stable", "beta"]
+        channel: ["stable"]
 
     steps:
       - uses: actions/checkout@v3
