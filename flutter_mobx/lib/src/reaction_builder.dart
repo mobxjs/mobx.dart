@@ -20,12 +20,8 @@ typedef ReactionBuilderFunction = ReactionDisposer Function(
 class ReactionBuilder extends SingleChildStatefulWidget {
   final ReactionBuilderFunction builder;
 
-  /// The widget which will be rendered as a descendant of the
-  /// [ReactionBuilder]
-  final Widget? child;
-
-  const ReactionBuilder({Key? key, this.child, required this.builder})
-      : super(key: key);
+  const ReactionBuilder({Key? key, Widget? child, required this.builder})
+      : super(key: key, child: child);
 
   @override
   ReactionBuilderState createState() => ReactionBuilderState();
