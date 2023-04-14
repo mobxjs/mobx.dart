@@ -4,5 +4,5 @@ analyzer:
   exclude:
     - test/*.mocks.dart
     - example/lib/*.dart
-  strong-mode:
-    implicit-casts: false
+  language:
+    strict-casts: true

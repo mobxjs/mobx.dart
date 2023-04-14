@@ -168,17 +168,23 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
       if (element.isAsynchronous) {
         final template = AsyncActionTemplate(
-            storeTemplate: _storeTemplate,
-            isObservable: _observableChecker.hasAnnotationOfExact(element),
-            method:
-                MethodOverrideTemplate.fromElement(element, typeNameFinder));
+          storeTemplate: _storeTemplate,
+          isObservable: _observableChecker.hasAnnotationOfExact(element),
+          method: MethodOverrideTemplate.fromElement(element, typeNameFinder),
+          hasProtected: element.hasProtected,
+          hasVisibleForOverriding: element.hasVisibleForOverriding,
+          hasVisibleForTesting: element.hasVisibleForTesting,
+        );
 
         _storeTemplate.asyncActions.add(template);
       } else {
         final template = ActionTemplate(
-            storeTemplate: _storeTemplate,
-            method:
-                MethodOverrideTemplate.fromElement(element, typeNameFinder));
+          storeTemplate: _storeTemplate,
+          method: MethodOverrideTemplate.fromElement(element, typeNameFinder),
+          hasProtected: element.hasProtected,
+          hasVisibleForOverriding: element.hasVisibleForOverriding,
+          hasVisibleForTesting: element.hasVisibleForTesting,
+        );
 
         _storeTemplate.actions.add(template);
       }
@@ -189,14 +195,20 @@ class StoreClassVisitor extends SimpleElementVisitor {
 
       if (_asyncChecker.returnsFuture(element)) {
         final template = ObservableFutureTemplate(
-            method:
-                MethodOverrideTemplate.fromElement(element, typeNameFinder));
+          method: MethodOverrideTemplate.fromElement(element, typeNameFinder),
+          hasProtected: element.hasProtected,
+          hasVisibleForOverriding: element.hasVisibleForOverriding,
+          hasVisibleForTesting: element.hasVisibleForTesting,
+        );
 
         _storeTemplate.observableFutures.add(template);
       } else if (_asyncChecker.returnsStream(element)) {
         final template = ObservableStreamTemplate(
-            method:
-                MethodOverrideTemplate.fromElement(element, typeNameFinder));
+          method: MethodOverrideTemplate.fromElement(element, typeNameFinder),
+          hasProtected: element.hasProtected,
+          hasVisibleForOverriding: element.hasVisibleForOverriding,
+          hasVisibleForTesting: element.hasVisibleForTesting,
+        );
 
         _storeTemplate.observableStreams.add(template);
       }

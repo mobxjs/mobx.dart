@@ -47,6 +47,13 @@ void main() {
           './data/valid_output_annotation_store_config_has_to_string.dart');
     });
 
+    test(
+        'generates for a class containing annotations "@protected", "@visibleForTesting" and "visibleForOverriding"',
+        () async {
+      await compareFiles('./data/annotations_test_class_input.dart',
+          './data/annotations_test_class_output.dart');
+    });
+
     createTests([
       const TestInfo(
           description: 'invalid output is handled',
