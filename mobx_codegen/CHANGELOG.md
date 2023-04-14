@@ -1,3 +1,7 @@
+## 2.2.0
+
+- Adds support for annotations `@protected`, `@visibleForTesting` and `@visibleForOverriding` for actions, observables futures and observables stream.
+
 ## 2.1.0 - 2.1.1
 
 - Update analyzer version to `>=4.4.0 <6.0.0`

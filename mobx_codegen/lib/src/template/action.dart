@@ -1,16 +1,26 @@
+import 'package:mobx_codegen/src/template/annotations_generator_mixin.dart';
 import 'package:mobx_codegen/src/template/method_override.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 
-class ActionTemplate {
-  ActionTemplate({required this.storeTemplate, required this.method});
+class ActionTemplate with AnnotationsGenerator {
+  ActionTemplate({
+    required this.storeTemplate,
+    required this.method,
+    required bool hasProtected,
+    required bool hasVisibleForOverriding,
+    required bool hasVisibleForTesting,
+  }) {
+    this.hasProtected = hasProtected;
+    this.hasVisibleForOverriding = hasVisibleForOverriding;
+    this.hasVisibleForTesting = hasVisibleForTesting;
+  }
 
   final StoreTemplate storeTemplate;
   final MethodOverrideTemplate method;
 
   @override
-  // ignore: prefer_single_quotes
   String toString() => """
-    @override
+    $annotations
     ${method.returnType} ${method.name}${method.typeParams}(${method.params}) {
       final _\$actionInfo = ${storeTemplate.actionControllerName}.startAction(name: '${storeTemplate.parentTypeName}.${method.name}${method.typeParams}');
       try {
