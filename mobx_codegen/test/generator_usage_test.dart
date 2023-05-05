@@ -6,6 +6,8 @@ part 'generator_usage_test.g.dart';
 // ignore: library_private_types_in_public_api
 class TestStore = _TestStore with _$TestStore;
 
+bool customEquals(String? oldValue, String? newValue) => oldValue != newValue;
+
 abstract class _TestStore with Store {
   // ignore: unused_element
   _TestStore(this.field1, {this.field2});
@@ -27,6 +29,12 @@ abstract class _TestStore with Store {
 
   @observable
   String stuff = 'stuff';
+
+  @alwaysNotify
+  String always = 'stuff';
+
+  @MakeObservable(equals: customEquals)
+  String custom = 'stuff';
 
   @action
   Future<void> loadStuff() async {

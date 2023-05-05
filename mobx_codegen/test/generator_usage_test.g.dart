@@ -68,6 +68,36 @@ mixin _$TestStore on _TestStore, Store {
     });
   }
 
+  late final _$alwaysAtom = Atom(name: '_TestStore.always', context: context);
+
+  @override
+  String get always {
+    _$alwaysAtom.reportRead();
+    return super.always;
+  }
+
+  @override
+  set always(String value) {
+    _$alwaysAtom.reportWrite(value, super.always, () {
+      super.always = value;
+    }, equals: observableAlwaysNotEqual);
+  }
+
+  late final _$customAtom = Atom(name: '_TestStore.custom', context: context);
+
+  @override
+  String get custom {
+    _$customAtom.reportRead();
+    return super.custom;
+  }
+
+  @override
+  set custom(String value) {
+    _$customAtom.reportWrite(value, super.custom, () {
+      super.custom = value;
+    }, equals: customEquals);
+  }
+
   late final _$batchItem1Atom =
       Atom(name: '_TestStore.batchItem1', context: context);
 
@@ -225,6 +255,8 @@ mixin _$TestStore on _TestStore, Store {
 field1: ${field1},
 field2: ${field2},
 stuff: ${stuff},
+always: ${always},
+custom: ${custom},
 batchItem1: ${batchItem1},
 batchItem2: ${batchItem2},
 batchItem3: ${batchItem3},

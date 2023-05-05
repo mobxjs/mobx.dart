@@ -3,27 +3,57 @@
 
 class StoreConfig {
   const StoreConfig({this.hasToString = true});
+
   final bool hasToString;
 }
 
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///
 /// During code-generation, this type is detected to identify an `Observable`
+/// [readOnly] indicates that the field is only modifiable within the Store.
+/// It is possible to override equality comparison of new values with [equals].
+/// ```
+///
+/// bool _alwaysNotEqual(_, __) => false;
+///
+/// @MakeObservable(equals: _alwaysNotEqual)
+/// String alwaysNotifyObservable = 'hello';
+///
+/// bool _equals(oldValue, newValue) => oldValue == newValue;
+///
+/// @MakeObservable(equals: _equals)
+/// String withEquals = 'world';
+/// ```
 class MakeObservable {
-  const MakeObservable._({this.readOnly = false});
+  const MakeObservable({this.readOnly = false, this.equals});
 
   final bool readOnly;
+  /// A [Function] to use check whether the value of an observable has changed.
+  ///
+  /// Must be a top-level or static [Function] that takes two arguments and
+  /// returns a [bool].
+  /// The arguments are the old value and the new value of the observable.
+  /// If the function returns `true`, a reaction will be triggered.
+  /// If the function returns `false`, no reaction will be triggered.
+  /// If no function is provided, the default behavior is to only trigger if
+  /// : `oldValue != newValue`.
+  final Function? equals;
 }
+
+bool observableAlwaysNotEqual(_, __) => false;
 
 /// Declares a class field as an observable. See the `Observable` class for full
 /// documentation
-const MakeObservable observable = MakeObservable._();
+const MakeObservable observable = MakeObservable();
 
 /// Declares a class field as an observable. See the `Observable` class for full
 /// documentation.
 ///
 /// But, it's only modifiable within the Store
-const MakeObservable readonly = MakeObservable._(readOnly: true);
+const MakeObservable readonly = MakeObservable(readOnly: true);
+
+/// Allows a reaction to be fired even if the value hasn't changed.
+const MakeObservable alwaysNotify = MakeObservable(equals: observableAlwaysNotEqual);
 
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///

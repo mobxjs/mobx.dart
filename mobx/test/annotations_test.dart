@@ -13,4 +13,12 @@ void main() {
     expect(StoreConfig, isNotNull);
     expect(readonly, isNotNull);
   });
+
+  test('observableAlwaysNotEqual should return false', () {
+    expect(observableAlwaysNotEqual(1, 2), isFalse);
+    expect(observableAlwaysNotEqual(1, 1), isFalse);
+    expect(observableAlwaysNotEqual('a', 'a'), isFalse);
+    expect(observableAlwaysNotEqual(true, true), isFalse);
+    expect(observableAlwaysNotEqual(false, false), isFalse);
+  });
 }

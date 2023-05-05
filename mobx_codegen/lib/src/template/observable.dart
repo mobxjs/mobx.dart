@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
@@ -10,6 +11,7 @@ class ObservableTemplate {
     required this.name,
     this.isReadOnly = false,
     this.isPrivate = false,
+    this.equals,
   });
 
   final StoreTemplate storeTemplate;
@@ -18,6 +20,7 @@ class ObservableTemplate {
   final String name;
   final bool isPrivate;
   final bool isReadOnly;
+  final ExecutableElement? equals;
 
   /// Formats the `name` from `_foo_bar` to `foo_bar`
   /// such that the getter gets public
@@ -58,6 +61,6 @@ ${_buildGetters()}
   set $name($type value) {
     $atomName.reportWrite(value, super.$name, () {
       super.$name = value;
-    });
+    }${equals != null ? ', equals: ${equals!.name}' : ''});
   }""";
 }
