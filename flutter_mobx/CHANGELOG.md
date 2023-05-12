@@ -1,3 +1,13 @@
+## 2.0.7
+- `Observer` is updated with new optional `child` parameter, so you can exclude child branch from re-render. - [@subzero911](https://github.com/subzero911) \
+  You should provide either `builder` or both `builderWithChild` and `child`:
+  ```dart
+  Observer(
+    builderWithChild: (context, child) => FooWidget(foo: foo, child: child),
+    child: BarWidget(), // is not rebuilt
+  ),
+  ``` 
+
 ## 2.0.6+3 - 2.0.6+5
 
 - Moved the version into its own file (`version.dart`) and exported from the main library file
