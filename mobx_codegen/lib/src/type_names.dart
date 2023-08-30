@@ -81,8 +81,7 @@ class LibraryScopedNameFinder {
       // If we're dealing with a typedef, we let it undergo the standard name
       // lookup. Otherwise, we special case the function naming.
       if (type.alias?.element is TypeAliasElement) {
-        // ignore: deprecated_member_use
-        typeElement = type.alias!.element.aliasedElement?.enclosingElement3;
+        typeElement = type.alias!.element.aliasedElement?.enclosingElement;
       } else {
         return _getFunctionTypeName(type);
       }
