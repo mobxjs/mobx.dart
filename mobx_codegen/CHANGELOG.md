@@ -1,6 +1,8 @@
-## 2.3.1
+## 2.4.0
 
-- Update analyzer version to `>=4.4.0 <6.2.0`
+- Require `analyzer: ^5.12.0`
+- Support the latest package:analyzer
+- Require Dart 3.0
 
 ## 2.3.0
 
