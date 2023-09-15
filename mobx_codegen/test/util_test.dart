@@ -20,7 +20,8 @@ MockMethod mockFutureMethod({
   bool isGenerator = false,
 }) {
   final returnType = MockType();
-  when(() => returnType is DynamicType).thenReturn(returnsDynamic);
+  // ignore: deprecated_member_use
+  when(() => returnType.isDynamic).thenReturn(returnsDynamic);
   when(() => returnType.isDartAsyncFuture).thenReturn(returnsFuture);
   when(() => returnType.isDartAsyncFutureOr).thenReturn(returnsFutureOr);
 
@@ -37,7 +38,8 @@ MockMethod mockStreamMethod({
   bool returnsDynamic = false,
 }) {
   final returnType = MockType();
-  when(() => returnType is DynamicType).thenReturn(returnsDynamic);
+  // ignore: deprecated_member_use
+  when(() => returnType.isDynamic).thenReturn(returnsDynamic);
 
   final method = MockMethod();
   when(() => method.returnType).thenReturn(returnType);
