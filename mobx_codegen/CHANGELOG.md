@@ -1,3 +1,9 @@
+## 2.4.0
+
+- Require `analyzer: ^5.12.0`
+- Support the latest package:analyzer
+- Require Dart 3.0
+
 ## 2.3.0
 
 - Adds `@alwaysNotify` annotation support for creating always notify observables. [@amondnet](https://github.com/amondnet) in [#907](https://github.com/mobxjs/mobx.dart/pull/907)
