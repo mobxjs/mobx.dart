@@ -1,3 +1,7 @@
+## 2.1.0
+
+- feat: add `MultiReactionBuilder` widget by [@amondnet](https://github.com/amondnet)
+
 ## 2.0.6+3 - 2.0.6+5
 
 - Moved the version into its own file (`version.dart`) and exported from the main library file

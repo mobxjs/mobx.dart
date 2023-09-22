@@ -82,5 +82,22 @@ void main() {
       message.value += 1;
       expect(count, 2);
     });
+
+    testWidgets(
+        'throws AssertionError if child is not specified in the builder',
+        (tester) async {
+      final message = Observable(0);
+      const expected =
+          '''ReactionBuilder used outside of MultiReactionBuilder must specify a child''';
+      await tester.pumpWidget(ReactionBuilder(
+        builder: (context) {
+          return reaction((_) => message.value, (int value) {});
+        },
+      ));
+      expect(
+        tester.takeException(),
+        isA<AssertionError>().having((e) => e.message, 'message', expected),
+      );
+    });
   });
 }
