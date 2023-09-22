@@ -25,6 +25,7 @@ void main() {
 
       await tester.pumpWidget(
         MultiReactionBuilder(
+          key: const Key('MultiReactionBuilder'),
           builders: [
             ReactionBuilder(
               builder: (context) => reaction(
