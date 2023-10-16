@@ -10,6 +10,6 @@ If the PR fixes a specific issue, reference the issue with **`Fixes #`**.
 - [ ] Increment the **`major`/`minor`/`patch`/`patch-count`**, depending on the complexity of change
 - [ ] Add the necessary **unit tests** to ensure the coverage does not drop
 - [ ] Update the **Changelog** to include all changes made in this PR, organized by version
-- [ ] Run the **`melo run set_version` command** from the root directory
+- [ ] Run the **`melos run set_version` command** from the root directory
 - [ ] Include the **necessary reviewers** for the PR
-- [ ] Update the docs if there are any API changes or additions to functionality
+- [ ] Update the **docs** if there are any API changes or additions to functionality
