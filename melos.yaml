@@ -12,7 +12,7 @@ scripts:
   get:
     exec: dart pub get
   set_version:
-    exec: $MELOS_ROOT_PATH/tool/expose_version.dart
+    exec: dart run $MELOS_ROOT_PATH/tool/expose_version.dart
   generate:
     run: cd mobx_examples && dart run build_runner watch --delete-conflicting-outputs
 
