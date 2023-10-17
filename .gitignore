@@ -27,7 +27,6 @@ node_modules
 *.out
 local.properties
 .vscode/settings.json
-local.properties
 Generated.xcconfig
 
 coverage/
@@ -36,7 +35,6 @@ coverage_badge.svg
 
 # Miscellaneous
 *.class
-*.log
 *.pyc
 *.swp
 .DS_Store
@@ -48,20 +46,14 @@ coverage_badge.svg
 # IntelliJ related
 *.ipr
 *.iws
-.idea/
 *.iml
 
 # Visual Studio Code related
 .vscode/
 
 # Flutter/Dart/Pub related
-**/doc/api/
-.dart_tool/
 .flutter-plugins
-.packages
 .pub-cache/
-.pub/
-build/
 
 # Android related
 **/android/**/gradle-wrapper.jar
