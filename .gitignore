@@ -49,6 +49,7 @@ coverage_badge.svg
 *.ipr
 *.iws
 .idea/
+*.iml
 
 # Visual Studio Code related
 .vscode/

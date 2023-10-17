@@ -1,3 +1,7 @@
+## 2.1.0+1
+
+- Patching to update the version in the library file
+
 ## 2.1.0
 
 - feat: add `MultiReactionBuilder` widget by [@amondnet](https://github.com/amondnet)
