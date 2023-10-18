@@ -598,8 +598,19 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "ParthBaraiya",
+      "name": "Parth Baraiya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36261739?v=4",
+      "profile": "https://github.com/ParthBaraiya",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs"
 }

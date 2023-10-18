@@ -115,10 +115,13 @@ class ObservableList<T>
   @override
   void addAll(Iterable<T> iterable) {
     _context.conditionallyRunInAction(() {
-      if (iterable.isNotEmpty) {
+      final list = iterable.toList(growable: false);
+
+      if (list.isNotEmpty) {
         final index = _list.length;
-        _list.addAll(iterable);
-        _notifyRangeUpdate(index, iterable.toList(growable: false), null);
+
+        _list.addAll(list);
+        _notifyRangeUpdate(index, list, null);
       }
     }, _atom);
   }
@@ -222,9 +225,11 @@ class ObservableList<T>
   @override
   void insertAll(int index, Iterable<T> iterable) {
     _context.conditionallyRunInAction(() {
-      if (iterable.isNotEmpty) {
-        _list.insertAll(index, iterable);
-        _notifyRangeUpdate(index, iterable.toList(growable: false), null);
+      final list = iterable.toList(growable: false);
+
+      if (list.isNotEmpty) {
+        _list.insertAll(index, list);
+        _notifyRangeUpdate(index, list, null);
       }
     }, _atom);
   }
@@ -303,11 +308,13 @@ class ObservableList<T>
   @override
   void replaceRange(int start, int end, Iterable<T> newContents) {
     _context.conditionallyRunInAction(() {
-      if (end > start || newContents.isNotEmpty) {
+      final list = newContents.toList(growable: false);
+
+      if (end > start || list.isNotEmpty) {
         final oldContents = _list.sublist(start, end);
-        _list.replaceRange(start, end, newContents);
-        _notifyRangeUpdate(
-            start, newContents.toList(growable: false), oldContents);
+
+        _list.replaceRange(start, end, list);
+        _notifyRangeUpdate(start, list, oldContents);
       }
     }, _atom);
   }
@@ -333,10 +340,11 @@ class ObservableList<T>
   @override
   void setAll(int index, Iterable<T> iterable) {
     _context.conditionallyRunInAction(() {
-      if (iterable.isNotEmpty) {
-        final oldValues = _list.sublist(index, index + iterable.length);
-        final newValues = iterable.toList(growable: false);
-        _list.setAll(index, iterable);
+      final newValues = iterable.toList(growable: false);
+
+      if (newValues.isNotEmpty) {
+        final oldValues = _list.sublist(index, index + newValues.length);
+        _list.setAll(index, newValues);
         _notifyRangeUpdate(index, newValues, oldValues);
       }
     }, _atom);
@@ -347,9 +355,12 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       if (end > start) {
         final oldValues = _list.sublist(start, end);
+
         final newValues =
             iterable.skip(skipCount).take(end - start).toList(growable: false);
-        _list.setRange(start, end, iterable, skipCount);
+
+        _list.setRange(start, end, newValues);
+
         _notifyRangeUpdate(start, newValues, oldValues);
       }
     }, _atom);

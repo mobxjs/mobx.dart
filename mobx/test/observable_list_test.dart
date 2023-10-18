@@ -811,6 +811,88 @@ void main() {
       'reversed': (_) => _.reversed
     }.forEach(_templateIterableReadTest);
   });
+
+  group('checks for iterable use with ObservableList', () {
+    test('ObservableList addAll runs Iterable only once', () {
+      final list = ObservableList<String>();
+      var op = '';
+
+      list.addAll([1, 2].map((e) {
+        op += '$e';
+
+        return '$e';
+      }));
+
+      expect(op, '12');
+      expect(list.join(''), '12');
+    });
+
+    test('ObservableList insertAll runs Iterable only once', () {
+      final list = ObservableList<String>.of(['1']);
+      var op = '';
+
+      list.insertAll(
+          1,
+          [2, 3].map((e) {
+            op += '$e';
+
+            return '$e';
+          }));
+
+      expect(op, '23');
+      expect(list.join(''), '123');
+    });
+
+    test('ObservableList replaceRange runs Iterable only once', () {
+      final list = ObservableList<String>.of(['1', '2', '3']);
+      var op = '';
+
+      list.replaceRange(
+          0,
+          2,
+          [4, 5].map((e) {
+            op += '$e';
+
+            return '$e';
+          }));
+
+      expect(op, '45');
+      expect(list.join(''), '453');
+    });
+
+    test('ObservableList setAll runs Iterable only once', () {
+      final list = ObservableList<String>.of(['1', '2', '3']);
+      var op = '';
+
+      list.setAll(
+          0,
+          [4, 5, 6].map((e) {
+            op += '$e';
+
+            return '$e';
+          }));
+
+      expect(op, '456');
+      expect(list.join(''), '456');
+    });
+
+    test('ObservableList setRange runs Iterable only once', () {
+      final list =
+          ObservableList<String>.of(['1', '2', '3', '4', '5', '6', '7']);
+      var op = '';
+
+      list.setRange(
+          1,
+          4,
+          [8, 9, 10].map((e) {
+            op += '$e';
+
+            return '$e';
+          }));
+
+      expect(op, '8910');
+    });
+  });
 }
 
 dynamic _ignoreException(Function fn) {

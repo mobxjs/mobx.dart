@@ -1,3 +1,7 @@
+## 2.2.1
+
+- Reduces unnecessary iterations while using `Iterables` with `addAll`, `insertAll`, `replaceRange`, `setAll` and `setRange` methods. [#942](https://github.com/mobxjs/mobx.dart/pull/942).
+ 
 ## 2.2.0
 
 - Allows a reaction to be fired even if the value hasn't changed by [@amondnet](https://github.com/amondnet) in [#907](https://github.com/mobxjs/mobx.dart/pull/907)
