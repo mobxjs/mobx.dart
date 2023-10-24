@@ -34,6 +34,7 @@
 
 library flutter_mobx;
 
+export 'package:flutter_mobx/src/multi_reaction_builder.dart';
 export 'package:flutter_mobx/src/observer.dart';
 export 'package:flutter_mobx/src/observer_widget_mixin.dart';
 export 'package:flutter_mobx/src/reaction_builder.dart'
