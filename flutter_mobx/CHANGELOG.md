@@ -1,4 +1,4 @@
-## 2.1.0+2
+## 2.1.1
 
 - refactor: export `MultiReactionBuilder` from `flutter_mobx.dart` by [@amondnet](https://github.com/amondnet)
 
