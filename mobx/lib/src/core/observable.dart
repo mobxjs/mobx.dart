@@ -105,7 +105,7 @@ class Observable<T> extends Atom
     }
 
     final areEqual =
-        equals == null ? prepared == value : equals!(prepared, _value);
+        equals == null ? equatable(prepared, value) : equals!(prepared, _value);
 
     return (!areEqual) ? prepared : WillChangeNotification.unchanged;
   }

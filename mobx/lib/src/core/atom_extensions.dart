@@ -1,5 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:mobx/mobx.dart';
+
+import '../utils.dart';
 
 extension AtomSpyReporter on Atom {
   void reportRead() {
@@ -10,7 +11,7 @@ extension AtomSpyReporter on Atom {
   void reportWrite<T>(T newValue, T oldValue, void Function() setNewValue,
       {EqualityComparer<T>? equals}) {
     final areEqual = equals == null
-        ? _equals(oldValue, newValue)
+        ? equatable(oldValue, newValue)
         : equals(oldValue, newValue);
 
     // Avoid unnecessary observable notifications of @observable fields of Stores
@@ -33,19 +34,3 @@ extension AtomSpyReporter on Atom {
     context.spyReport(EndedSpyEvent(type: 'observable', name: name));
   }
 }
-
-/// Determines whether [a] and [b] are equal.
-bool _equals<T>(T a, T b) {
-  if (identical(a, b)) return true;
-  if (a is Iterable || a is Map) {
-    if (!_equality.equals(a, b)) return false;
-  } else if (a.runtimeType != b.runtimeType) {
-    return false;
-  } else if (a != b) {
-    return false;
-  }
-
-  return true;
-}
-
-const DeepCollectionEquality _equality = DeepCollectionEquality();

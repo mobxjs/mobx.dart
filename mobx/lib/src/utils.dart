@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart' show DeepCollectionEquality;
+
 const Duration ms = Duration(milliseconds: 1);
 
 Timer Function(void Function()) createDelayedScheduler(int delayMs) =>
@@ -20,3 +22,19 @@ mixin DebugCreationStack {
     return result;
   }();
 }
+
+/// Determines whether [a] and [b] are equal.
+bool equatable<T>(T a, T b) {
+  if (identical(a, b)) return true;
+  if (a is Iterable || a is Map) {
+    if (!_equality.equals(a, b)) return false;
+  } else if (a.runtimeType != b.runtimeType) {
+    return false;
+  } else if (a != b) {
+    return false;
+  }
+
+  return true;
+}
+
+const DeepCollectionEquality _equality = DeepCollectionEquality();
