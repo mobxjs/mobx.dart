@@ -10,12 +10,10 @@ extension AtomSpyReporter on Atom {
 
   void reportWrite<T>(T newValue, T oldValue, void Function() setNewValue,
       {EqualityComparer<T>? equals}) {
-    final areEqual = equals == null
-        ? equatable(oldValue, newValue)
-        : equals(oldValue, newValue);
+    final areEqual = equals ?? equatable;
 
     // Avoid unnecessary observable notifications of @observable fields of Stores
-    if (areEqual) {
+    if (areEqual(newValue, oldValue)) {
       return;
     }
 
