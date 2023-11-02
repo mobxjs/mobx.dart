@@ -53,20 +53,20 @@ void main() {
           () {
         final store = _ExampleStore();
 
-        final autorunResults = <String>[];
-        autorun((_) => autorunResults.add(store.value3));
+        final autorunResults = <int>[];
+        autorun((_) => autorunResults.add(store.value3.length));
 
-        expect(autorunResults, ['first']); // length: 5
+        expect(autorunResults, [5]); // length: 5
 
         // length: 5, should not trigger
         store.value3 = 'third';
 
-        expect(autorunResults, ['first']);
+        expect(autorunResults, [5]);
 
         // length: 6, should trigger
         store.value3 = 'second';
 
-        expect(autorunResults, ['first', 'second']);
+        expect(autorunResults, [5, 6]);
       });
 
   test(
@@ -120,7 +120,7 @@ void main() {
 
 class _ExampleStore = __ExampleStore with _$_ExampleStore;
 
-bool _equals(String? oldValue, String? newValue) => (oldValue == newValue);
+bool _equals(String? oldValue, String? newValue) => (oldValue?.length == newValue?.length);
 
 abstract class __ExampleStore with Store {
   @observable
