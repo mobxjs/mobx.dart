@@ -1,6 +1,6 @@
 ## 2.2.3
 
-- Avoid unnecessary observable notifications of `@observable` `Iterable` or `Map` fields of Stores by [@amondnet](https://github.com/amondnet)
+- Avoid unnecessary observable notifications of `@observable` `Iterable` or `Map` fields of Stores by [@amondnet](https://github.com/amondnet)  in [#951](https://github.com/mobxjs/mobx.dart/pull/951)
 
 ## 2.2.2
 
