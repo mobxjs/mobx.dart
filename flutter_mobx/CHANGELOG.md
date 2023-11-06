@@ -1,9 +1,9 @@
 ## 2.2.0
- - `Observer` is updated with new optional `child` parameter, so you can exclude child branch from re-render. - [@subzero911](https://github.com/subzero911) \
-   You should provide either `builder` or both `builderWithChild` and `child`:
+ - `Observer` is updated with the new `Observer.optimized` constructor, so you can exclude child branch from the re-rendering. - [@subzero911](https://github.com/subzero911) \
+   In case if you use `Builder.optimized`, you should provide two parameters: `builderOptimized` and `child`:
    ```dart
    Observer.optimized(
-     builderWithChild: (context, child) => FooWidget(foo: foo, child: child),
+     builderOptimized: (context, child) => FooWidget(foo: foo, child: child),
      child: BarWidget(), // is not rebuilt
    ),
    ``` 
