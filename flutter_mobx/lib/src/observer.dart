@@ -52,10 +52,9 @@ class Observer extends StatelessObserverWidget {
 
   final WidgetBuilder? builder;
 
-  /// A builder that builds a widget given a child.
   final TransitionBuilder? builderOptimized;
 
-  /// The child widget to pass to the [builderWithChild].
+  /// The child widget to pass to the [builderOptimized].
   final Widget? child;
 
   /// The stack frame pointing to the source that constructed this instance.
