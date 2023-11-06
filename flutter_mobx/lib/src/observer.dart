@@ -26,6 +26,7 @@ class Observer extends StatelessObserverWidget {
   })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
         builderOptimized = null,
         child = null,
+        assert(builder != null),
         super(
           key: key,
           name: name,
@@ -42,6 +43,7 @@ class Observer extends StatelessObserverWidget {
     bool? warnWhenNoObservables,
   })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
         builder = null,
+        assert(builderOptimized != null && child != null),
         super(
           key: key,
           name: name,
