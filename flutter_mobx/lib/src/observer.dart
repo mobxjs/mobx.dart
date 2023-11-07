@@ -61,7 +61,11 @@ class Observer extends StatelessObserverWidget {
   final String? debugConstructingStackFrame;
 
   @override
-  String getName() => super.getName() + (debugConstructingStackFrame != null ? '\n$debugConstructingStackFrame' : '');
+  String getName() =>
+    super.getName() + 
+    (debugConstructingStackFrame != null
+      ? '\n$debugConstructingStackFrame'
+      : '');
 
   @override
   Widget build(BuildContext context) => builderOptimized?.call(context, child) ?? builder!.call(context);
@@ -92,10 +96,16 @@ class Observer extends StatelessObserverWidget {
             // regex)
             .skip(3)
             // Search for the first non-constructor frame
-            .firstWhere((frame) => !_constructorStackFramePattern.hasMatch(frame), orElse: () => '');
+            .firstWhere(
+              (frame) => 
+                !_constructorStackFramePattern.hasMatch(frame),
+                orElse: () => '');
 
-        final stackFrameCore = _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);
-        final cleanedStackFrame = stackFrameCore == null ? null : 'Observer constructed from: $stackFrameCore';
+        final stackFrameCore =
+          _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);
+        final cleanedStackFrame = stackFrameCore == null
+          ? null
+          : 'Observer constructed from: $stackFrameCore';
 
         stackFrame = cleanedStackFrame;
       }
