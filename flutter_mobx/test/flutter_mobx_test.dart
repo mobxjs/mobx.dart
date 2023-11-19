@@ -59,7 +59,7 @@ void main() {
     expect(renderCount, equals(1));
   });
 
-  testWidgets("Observer.optimized's child doesn't re-render", (tester) async {
+  testWidgets("Observer.withChild's child doesn't re-render", (tester) async {
     final message = Observable('Click');
      final key1 = UniqueKey();
      final key2 = UniqueKey();
