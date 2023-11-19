@@ -24,7 +24,7 @@ class Observer extends StatelessObserverWidget {
     String? name,
     bool? warnWhenNoObservables,
   })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
-        builderOptimized = null,
+        builderWithChild = null,
         child = null,
         assert(builder != null),
         super(
@@ -35,15 +35,15 @@ class Observer extends StatelessObserverWidget {
 
   /// Observer which excludes the child branch
   // ignore: prefer_const_constructors_in_immutables
-  Observer.optimized({
+  Observer.withChild({
     Key? key,
-    required this.builderOptimized,
+    required this.builderWithChild,
     required this.child,
     String? name,
     bool? warnWhenNoObservables,
   })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
         builder = null,
-        assert(builderOptimized != null && child != null),
+        assert(builderWithChild != null && child != null),
         super(
           key: key,
           name: name,
@@ -52,9 +52,9 @@ class Observer extends StatelessObserverWidget {
 
   final WidgetBuilder? builder;
 
-  final TransitionBuilder? builderOptimized;
+  final TransitionBuilder? builderWithChild;
 
-  /// The child widget to pass to the [builderOptimized].
+  /// The child widget to pass to the [builderWithChild].
   final Widget? child;
 
   /// The stack frame pointing to the source that constructed this instance.
@@ -68,7 +68,7 @@ class Observer extends StatelessObserverWidget {
       : '');
 
   @override
-  Widget build(BuildContext context) => builderOptimized?.call(context, child) ?? builder!.call(context);
+  Widget build(BuildContext context) => builderWithChild?.call(context, child) ?? builder!.call(context);
 
   /// Matches constructor stack frames, in both VM and web environments.
   static final _constructorStackFramePattern = RegExp(r'\bnew\b');
