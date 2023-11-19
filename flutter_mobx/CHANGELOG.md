@@ -1,3 +1,13 @@
+## 2.2.0
+ - `Observer` is updated with the new `Observer.withChild` constructor, so you can exclude child branch from the re-rendering. - [@subzero911](https://github.com/subzero911) \
+   In case if you use `Builder.withChild`, you should provide two parameters: `builderWithChild` and `child`:
+   ```dart
+   Observer.withChild(
+     builderWithChild: (context, child) => FooWidget(foo: foo, child: child),
+     child: BarWidget(), // is not rebuilt
+   ),
+   ``` 
+
 ## 2.1.1
 
 - refactor: export `MultiReactionBuilder` from `flutter_mobx.dart` by [@amondnet](https://github.com/amondnet)
