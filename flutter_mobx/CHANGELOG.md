@@ -1,13 +1,13 @@
 ## 2.2.0+1
- - renamed `Observer.withChild` to `Observer.excludedChild`
+ - renamed `Observer.withChild` to `Observer.withBuiltChild`
 `
 ## 2.2.0
- - `Observer` is updated with the new `Observer.excludedChild` constructor, so you can exclude child branch from the re-rendering. - [@subzero911](https://github.com/subzero911) \
-   In case if you use `Observer.excludedChild`, you should provide two parameters: `builderWithChild` and `child`:
+ - `Observer` is updated with the new `Observer.withBuiltChild` constructor, so you can exclude child branch from the re-rendering. - [@subzero911](https://github.com/subzero911) \
+   In case if you use `Observer.withBuiltChild`, you should provide two parameters: `builderWithChild` and `child`:
    ```dart
-   Observer.excludedChild(
-     builderWithChild: (context, child) => FooWidget(foo: foo, child: child),
-     child: BarWidget(), // is not rebuilt
+   Observer.withBuiltChild(
+     builderWithChild: (context, child) => FooWidget(foo: foo, bar: child),
+     child: BarWidget(), // won't rebuild
    ),
    ``` 
 

@@ -59,7 +59,7 @@ void main() {
     expect(renderCount, equals(1));
   });
 
-  testWidgets("Observer.excludedChild's child doesn't re-render", (tester) async {
+  testWidgets("Observer.withBuiltChild's child doesn't re-render", (tester) async {
     final message = Observable('Click');
      final key1 = UniqueKey();
      final key2 = UniqueKey();
@@ -67,7 +67,7 @@ void main() {
 
      await tester.pumpWidget(
        MaterialApp(
-         home: Observer.excludedChild(
+         home: Observer.withBuiltChild(
            builderWithChild: (context, child) {          
              return Column(
                children: [
