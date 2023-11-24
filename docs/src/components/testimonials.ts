@@ -29,7 +29,7 @@ export const testimonials: TestimonialContent[] = [
     author: 'Chris Sells',
     twitter: 'https://twitter.com/csells',
     title:
-      'Google Product Manager on the Flutter Development Experience. Enjoys long walks on the beach and various technologies.',
+      'Ex-Product Manager on the Flutter Development Experience. Enjoys long walks on the beach and various technologies.',
     photoUrl: require('../images/people/chris.png').default,
     message: `If you haven\'t seen MobX.dart @ https://mobx.netlify.app, check it out. In combination with Provider, it\'s PFM (Pure Flutter Magic). I use it when I build anything real. #recommended #Flutter`,
   },
