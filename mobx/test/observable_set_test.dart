@@ -86,6 +86,19 @@ void main() {
       expect(changes[1].value, equals(2));
     });
 
+    test(
+        'observe should not send add events to all listeners when fireImmediately is true',
+        () {
+      final oset = ObservableSet.of([1, 2]);
+      final changes1 = <SetChange<int>>[];
+      final changes2 = <SetChange<int>>[];
+      oset.observe(changes1.add);
+      oset.observe(changes2.add, fireImmediately: true);
+
+      expect(changes1, isEmpty);
+      expect(changes2, isNotEmpty);
+    });
+
     group('fires reportObserved() for read methods', () {
       <String, void Function(ObservableSet<int>)>{
         'union': (m) => m.union({2, 5, 6}),
