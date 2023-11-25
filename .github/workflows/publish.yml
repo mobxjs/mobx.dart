@@ -60,3 +60,30 @@ jobs:
         env:
           TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish_lint_packages:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        package: [ "mobx_lint" ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Publish if new
+        id: publish
+        uses: k-paxian/dart-package-publisher@master
+        with:
+          relativePath: ${{ matrix.package }}
+          accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
+          refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
+          suppressBuildRunner: true
+          skipTests: true
+
+      - name: Tag commit
+        if: steps.publish.outputs.success
+        uses: hole19/git-tag-action@master
+        env:
+          TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
