@@ -78,7 +78,7 @@ jobs:
 
     strategy:
       matrix:
-        package: ["mobx_lint", "mobx_lint_flutter"]
+        package: ["mobx_lint", "mobx_lint_flutter_test"]
         version: ["stable"]
 
     steps:
