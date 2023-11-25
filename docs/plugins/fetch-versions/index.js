@@ -1,87 +1,52 @@
-const webpack = require('webpack');
 const axios = require('axios');
 const plugins = [
-  {
-    pub: 'mobx',
-  },
-  {
-    pub: 'flutter_mobx',
-  },
-  {
-    pub: 'mobx_codegen',
-  },
-  {
-    pub: 'build_runner',
-  },
-  {
-    pub: 'json_serializable',
-  },
-  {
-    pub: 'json_annotation',
-  },
+  'mobx',
+  'flutter_mobx',
+  'mobx_codegen',
+  'build_runner',
+  'json_serializable',
+  'json_annotation',
 ];
 
 // Fetch the plugins latest version from the pub API
 async function fetchPluginVersion(plugin) {
+  const defaultVersion = 'any';
+
   try {
     const response = await axios.get(`https://pub.dev/packages/${plugin}.json`);
     const versions = response.data.versions;
 
     if (!Array.isArray(versions)) {
-      return '';
+      return defaultVersion;
     }
 
     return versions[0];
   } catch (e) {
     console.log(`Failed to load version for plugin "${plugin}".`);
-    return '';
+    return defaultVersion;
   }
 }
 
 module.exports = function sourceVersions() {
   return {
     name: '@mobx/fetch-versions',
-    // Create a content string which will contain pub.dev versions for each plugin in the format of a .env file
-    // See https://www.npmjs.com/package/dotenv#usage for more information.
+    // Create a content map which will contain pub.dev versions for each plugin
     async loadContent() {
-      let versions = '';
+      let versions = {};
 
-      for (let i = 0; i < plugins.length; i++) {
-        const { pub } = plugins[i];
-
-        const version = await fetchPluginVersion(pub);
-        versions += `PUB_${pub.toUpperCase()}=${version}`;
-        if (i < plugins.length - 1) versions += '\n';
+      for (let plugin of plugins) {
+        versions[plugin] = await fetchPluginVersion(plugin);
       }
 
       return versions;
     },
-    // Using the content string, create a cached file on the local filesystem
-    // Read the contents of the file with dotenv.
-    // See https://www.npmjs.com/package/dotenv#path for more information.
+    // Using the content map and set as global data
     async contentLoaded({ content, actions }) {
-      require('dotenv').config({
-        path: await actions.createData('versions.env', content),
-        debug: process.env.NODE_ENV !== 'production',
+      const { setGlobalData } = actions;
+
+      setGlobalData({
+        versions: content,
       });
-    },
-    // Using webpack, create a global variable for each plugin, using the created environment variable.
-    // This ensures we can access the data on both the server and client.
-    // See https://webpack.js.org/plugins/define-plugin/ for more information.
-    configureWebpack() {
-      return {
-        plugins: [
-          new webpack.DefinePlugin(
-            plugins.reduce((current, plugin) => {
-              const envVar = `PUB_${plugin.pub.toUpperCase()}`;
-              return {
-                ...current,
-                [envVar]: JSON.stringify(process.env[envVar] || ''),
-              };
-            }, {})
-          ),
-        ],
-      };
     },
   };
 };

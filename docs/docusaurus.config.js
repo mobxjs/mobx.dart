@@ -83,7 +83,7 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} MobX.dart team. Built with Docusaurus.`,
     },
     prism: {
-      theme: require('prism-react-renderer/themes/vsDark'),
+      theme: require('prism-react-renderer').themes.vsDark,
       additionalLanguages: ['dart'],
       defaultLanguage: 'dart',
     },
