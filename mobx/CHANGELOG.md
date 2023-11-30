@@ -1,3 +1,7 @@
+## 2.2.2
+
+- Fix [#956]((https://github.com/mobxjs/mobx.dart/issues/956)): ObservableSet` and `ObservableMap` should not notify all listeners when `observe` with fireImmediately. by [@amondnet](https://github.com/amondnet) in [#962](https://github.com/mobxjs/mobx.dart/pull/962)
+
 ## 2.2.1
 
 - Reduces unnecessary iterations while using `Iterables` with `addAll`, `insertAll`, `replaceRange`, `setAll` and `setRange` methods. [#942](https://github.com/mobxjs/mobx.dart/pull/942).

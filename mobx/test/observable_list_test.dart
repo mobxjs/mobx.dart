@@ -103,6 +103,32 @@ void main() {
       expect(count, equals(2));
     });
 
+    test(
+        'observe with fireImmediately should not send events to already registered listeners',
+        () {
+      final list = ObservableList.of([0]);
+
+      var count1 = 0;
+      var count2 = 0;
+
+      list
+        .observe((change) {
+          count1++;
+        });
+
+      list
+        .observe((change) {
+          count2++;
+        }, fireImmediately: true);
+
+      list.add(1);
+
+      // 0 + 1: add
+      expect(count1, equals(1));
+      // 1 + 1: fireImmediately + add
+      expect(count2, equals(2));
+    });
+
     test('observe set length works', () {
       // ignore: omit_local_variable_types
       final ObservableList<int?> list = ObservableList.of([0]);

@@ -219,11 +219,17 @@ class ObservableMap<K, V>
   @override
   Dispose observe(MapChangeListener<K, V> listener,
       {bool fireImmediately = false}) {
-    final dispose = _listeners.add(listener);
     if (fireImmediately == true) {
-      _map.forEach(_reportAdd);
+      _map.forEach((key, value) {
+        listener(MapChange<K, V>(
+          type: OperationType.add,
+          key: key,
+          newValue: value,
+          object: this,
+        ));
+      });
     }
-    return dispose;
+    return _listeners.add(listener);
   }
 }
 

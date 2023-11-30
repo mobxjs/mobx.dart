@@ -222,6 +222,20 @@ void main() {
       expect(changes[1].newValue, equals(1));
     });
 
+    test(
+        'observe should not send changes to all listeners immediately when fireImmediately is true',
+        () {
+      final changes1 = <MapChange>[];
+      final changes2 = <MapChange>[];
+      final map = ObservableMap.of({'a': 0, 'b': 1});
+
+      map.observe(changes1.add);
+      map.observe(changes2.add, fireImmediately: true);
+
+      expect(changes1, isEmpty);
+      expect(changes2, isNotEmpty);
+    });
+
     test('works when adding a null value', () {
       final map = ObservableMap();
       map['a'] = null;
