@@ -33,9 +33,9 @@ class Observer extends StatelessObserverWidget {
           warnWhenNoObservables: warnWhenNoObservables,
         );
 
-  /// Observer which excludes the child branch
+  /// Observer which excludes the child branch from being rebuilt
   // ignore: prefer_const_constructors_in_immutables
-  Observer.withChild({
+  Observer.withBuiltChild({
     Key? key,
     required this.builderWithChild,
     required this.child,
@@ -50,8 +50,10 @@ class Observer extends StatelessObserverWidget {
           warnWhenNoObservables: warnWhenNoObservables,
         );
 
+  /// regular builder, suitable for most cases
   final WidgetBuilder? builder;
 
+  /// builder function with child parameter
   final TransitionBuilder? builderWithChild;
 
   /// The child widget to pass to the [builderWithChild].
