@@ -68,6 +68,54 @@ void main() {
 
     expect(autorunResults, ['first', 'second']);
   });
+
+  test(
+      'when write to @observable iterable field with unchanged value, should not trigger notifications for downstream',
+      () {
+    final store = _ExampleStore();
+
+    final autorunResults = <List<String>>[];
+    autorun((_) => autorunResults.add(store.list));
+
+    store.list = ['first'];
+    expect(autorunResults, [
+      ['first']
+    ]);
+
+    store.list = ['first'];
+    expect(autorunResults, [
+      ['first']
+    ]);
+
+    store.list = ['first'];
+    expect(autorunResults, [
+      ['first']
+    ]);
+  });
+
+  test(
+      'when write to @observable map field with unchanged value, should not trigger notifications for downstream',
+      () {
+    final store = _ExampleStore();
+
+    final autorunResults = <Map<String, int>>[];
+    autorun((_) => autorunResults.add(store.map));
+
+    store.map = {'first': 1};
+    expect(autorunResults, [
+      {'first': 1}
+    ]);
+
+    store.map = {'first': 1};
+    expect(autorunResults, [
+      {'first': 1}
+    ]);
+
+    store.map = {'first': 1};
+    expect(autorunResults, [
+      {'first': 1}
+    ]);
+  });
 }
 
 class _ExampleStore = __ExampleStore with _$_ExampleStore;
@@ -83,6 +131,12 @@ abstract class __ExampleStore with Store {
 
   @MakeObservable(equals: _equals)
   String value3 = 'first';
+
+  @observable
+  List<String> list = ['first'];
+
+  @observable
+  Map<String, int> map = {'first': 1};
 }
 
 // This is what typically a mobx codegen will generate.
@@ -137,5 +191,37 @@ mixin _$_ExampleStore on __ExampleStore, Store {
     },
         equals: (String? oldValue, String? newValue) =>
             oldValue?.length == newValue?.length);
+  }
+
+  // ignore: non_constant_identifier_names
+  late final _$listAtom = Atom(name: '__ExampleStore.list', context: context);
+
+  @override
+  List<String> get list {
+    _$listAtom.reportRead();
+    return super.list;
+  }
+
+  @override
+  set list(List<String> value) {
+    _$listAtom.reportWrite(value, super.list, () {
+      super.list = value;
+    });
+  }
+
+  // ignore: non_constant_identifier_names
+  late final _$mapAtom = Atom(name: '__ExampleStore.map', context: context);
+
+  @override
+  Map<String, int> get map {
+    _$mapAtom.reportRead();
+    return super.map;
+  }
+
+  @override
+  set map(Map<String, int> value) {
+    _$mapAtom.reportWrite(value, super.map, () {
+      super.map = value;
+    });
   }
 }
