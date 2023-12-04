@@ -4,75 +4,123 @@ import 'package:test/test.dart';
 void main() {
   test(
       'when write to @observable field with changed value, should trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+          () {
+        final store = _ExampleStore();
 
-    final autorunResults = <String>[];
-    autorun((_) => autorunResults.add(store.value));
+        final autorunResults = <String>[];
+        autorun((_) => autorunResults.add(store.value));
 
-    expect(autorunResults, ['first']);
+        expect(autorunResults, ['first']);
 
-    store.value = 'second';
+        store.value = 'second';
 
-    expect(autorunResults, ['first', 'second']);
-  });
+        expect(autorunResults, ['first', 'second']);
+      });
 
   // fixed by #855
   test(
       'when write to @observable field with unchanged value, should not trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+          () {
+        final store = _ExampleStore();
 
-    final autorunResults = <String>[];
-    autorun((_) => autorunResults.add(store.value));
+        final autorunResults = <String>[];
+        autorun((_) => autorunResults.add(store.value));
 
-    expect(autorunResults, ['first']);
+        expect(autorunResults, ['first']);
 
-    store.value = store.value;
+        store.value = store.value;
 
-    expect(autorunResults, ['first']);
-  });
+        expect(autorunResults, ['first']);
+      });
 
   test(
       'when write to @alwaysNotify field with unchanged value, should trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+          () {
+        final store = _ExampleStore();
 
-    final autorunResults = <String>[];
-    autorun((_) => autorunResults.add(store.value2));
+        final autorunResults = <String>[];
+        autorun((_) => autorunResults.add(store.value2));
 
-    expect(autorunResults, ['first']);
+        expect(autorunResults, ['first']);
 
-    store.value2 = store.value2;
+        store.value2 = store.value2;
 
-    expect(autorunResults, ['first', 'first']);
-  });
+        expect(autorunResults, ['first', 'first']);
+      });
 
   test(
       'when write to @MakeObservable(equals: "a?.length == b?.length") field with changed value and not equals, should trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+          () {
+        final store = _ExampleStore();
 
-    final autorunResults = <String>[];
-    autorun((_) => autorunResults.add(store.value3));
+        final autorunResults = <int>[];
+        autorun((_) => autorunResults.add(store.value3.length));
 
-    expect(autorunResults, ['first']); // length: 5
+        expect(autorunResults, [5]); // length: 5
 
-    // length: 5, should not trigger
-    store.value3 = 'third';
+        // length: 5, should not trigger
+        store.value3 = 'third';
 
-    expect(autorunResults, ['first']);
+        expect(autorunResults, [5]);
 
-    // length: 6, should trigger
-    store.value3 = 'second';
+        // length: 6, should trigger
+        store.value3 = 'second';
 
-    expect(autorunResults, ['first', 'second']);
-  });
+        expect(autorunResults, [5, 6]);
+      });
+
+  test(
+      'when write to iterable @observable field with unchanged value, should not trigger notifications for downstream',
+          () {
+        final store = _ExampleStore();
+
+        final autorunResults = <List<String>>[];
+        autorun((_) => autorunResults.add(store.list));
+
+        store.list = ['first'];
+        expect(autorunResults, [
+          ['first']
+        ]);
+
+        store.list = ['first'];
+        expect(autorunResults, [
+          ['first']
+        ]);
+
+        store.list = ['first'];
+        expect(autorunResults, [
+          ['first']
+        ]);
+      });
+
+  test(
+      'when write to map @observable field with unchanged value, should not trigger notifications for downstream',
+          () {
+        final store = _ExampleStore();
+
+        final autorunResults = <Map<String, int>>[];
+        autorun((_) => autorunResults.add(store.map));
+
+        store.map = {'first': 1};
+        expect(autorunResults, [
+          {'first': 1}
+        ]);
+
+        store.map = {'first': 1};
+        expect(autorunResults, [
+          {'first': 1}
+        ]);
+
+        store.map = {'first': 1};
+        expect(autorunResults, [
+          {'first': 1}
+        ]);
+      });
 }
 
 class _ExampleStore = __ExampleStore with _$_ExampleStore;
 
-bool _equals(String? oldValue, String? newValue) => (oldValue == newValue);
+bool _equals(String? oldValue, String? newValue) => (oldValue?.length == newValue?.length);
 
 abstract class __ExampleStore with Store {
   @observable
@@ -83,6 +131,12 @@ abstract class __ExampleStore with Store {
 
   @MakeObservable(equals: _equals)
   String value3 = 'first';
+
+  @observable
+  List<String> list = ['first'];
+
+  @observable
+  Map<String, int> map = {'first': 1};
 }
 
 // This is what typically a mobx codegen will generate.
@@ -105,7 +159,7 @@ mixin _$_ExampleStore on __ExampleStore, Store {
 
   // ignore: non_constant_identifier_names
   late final _$value2Atom =
-      Atom(name: '__ExampleStore.value2', context: context);
+  Atom(name: '__ExampleStore.value2', context: context);
 
   @override
   String get value2 {
@@ -122,7 +176,7 @@ mixin _$_ExampleStore on __ExampleStore, Store {
 
   // ignore: non_constant_identifier_names
   late final _$value3Atom =
-      Atom(name: '__ExampleStore.value3', context: context);
+  Atom(name: '__ExampleStore.value3', context: context);
 
   @override
   String get value3 {
@@ -135,7 +189,38 @@ mixin _$_ExampleStore on __ExampleStore, Store {
     _$value3Atom.reportWrite(value, super.value3, () {
       super.value3 = value;
     },
-        equals: (String? oldValue, String? newValue) =>
-            oldValue?.length == newValue?.length);
+        equals: _equals);
+  }
+
+  // ignore: non_constant_identifier_names
+  late final _$listAtom = Atom(name: '__ExampleStore.list', context: context);
+
+  @override
+  List<String> get list {
+    _$listAtom.reportRead();
+    return super.list;
+  }
+
+  @override
+  set list(List<String> value) {
+    _$listAtom.reportWrite(value, super.list, () {
+      super.list = value;
+    });
+  }
+
+  // ignore: non_constant_identifier_names
+  late final _$mapAtom = Atom(name: '__ExampleStore.map', context: context);
+
+  @override
+  Map<String, int> get map {
+    _$mapAtom.reportRead();
+    return super.map;
+  }
+
+  @override
+  set map(Map<String, int> value) {
+    _$mapAtom.reportWrite(value, super.map, () {
+      super.map = value;
+    });
   }
 }

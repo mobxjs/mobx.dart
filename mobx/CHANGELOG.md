@@ -1,3 +1,7 @@
+## 2.2.3
+
+- Avoid unnecessary observable notifications of `@observable` `Iterable` or `Map` fields of Stores by [@amondnet](https://github.com/amondnet)  in [#951](https://github.com/mobxjs/mobx.dart/pull/951)
+
 ## 2.2.2
 
 - Fix [#956]((https://github.com/mobxjs/mobx.dart/issues/956)): ObservableSet` and `ObservableMap` should not notify all listeners when `observe` with fireImmediately. by [@amondnet](https://github.com/amondnet) in [#962](https://github.com/mobxjs/mobx.dart/pull/962)
