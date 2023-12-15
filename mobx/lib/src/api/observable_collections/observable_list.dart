@@ -25,20 +25,23 @@ class ObservableList<T>
         ListMixin<T>
     implements
         Listenable<ListChange<T>> {
-  ObservableList({ReactiveContext? context, String? name})
-      : this._wrap(context, _observableListAtom<T>(context, name), []);
+  ObservableList(
+      {ReactiveContext? context, String? name, EqualityComparer<T>? equals})
+      : this._wrap(context, _observableListAtom<T>(context, name), [], equals);
 
   ObservableList.of(Iterable<T> elements,
-      {ReactiveContext? context, String? name})
+      {ReactiveContext? context, String? name, EqualityComparer<T>? equals})
       : this._wrap(context, _observableListAtom<T>(context, name),
-            List<T>.of(elements, growable: true));
+            List<T>.of(elements, growable: true), equals);
 
-  ObservableList._wrap(ReactiveContext? context, this._atom, this._list)
+  ObservableList._wrap(
+      ReactiveContext? context, this._atom, this._list, this._equals)
       : _context = context ?? mainContext;
 
   final ReactiveContext _context;
   final Atom _atom;
   final List<T> _list;
+  final EqualityComparer<T>? _equals;
 
   List<T> get nonObservableInner => _list;
 
@@ -96,7 +99,7 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       final oldValue = _list[index];
 
-      if (oldValue != value) {
+      if (!_areEquals(oldValue, value)) {
         _list[index] = value;
         _notifyElementUpdate(index, value, oldValue);
       }
@@ -167,10 +170,18 @@ class ObservableList<T>
   }
 
   @override
-  Map<int, T> asMap() => ObservableMap._wrap(_context, _list.asMap(), _atom);
+  Map<int, T> asMap() =>
+      ObservableMap._wrap(_context, _list.asMap(), _atom, _equals);
 
   @override
-  List<R> cast<R>() => ObservableList._wrap(_context, _atom, _list.cast<R>());
+  List<R> cast<R>([EqualityComparer<R>? equals]) => ObservableList._wrap(
+      _context,
+      _atom,
+      _list.cast<R>(),
+      equals ??
+          (_equals != null
+              ? (R? a, R? b) => _equals!(a as T?, b as T?)
+              : null));
 
   @override
   List<T> toList({bool growable = true}) {
@@ -184,7 +195,7 @@ class ObservableList<T>
   set first(T value) {
     _context.conditionallyRunInAction(() {
       final oldValue = _list.first;
-      if (oldValue != value) {
+      if (!_areEquals(oldValue, value)) {
         _list.first = value;
         _notifyElementUpdate(0, value, oldValue);
       }
@@ -376,7 +387,7 @@ class ObservableList<T>
         for (var i = 0; i < _list.length; ++i) {
           final oldValue = oldList[i];
           final newValue = _list[i];
-          if (newValue != oldValue) {
+          if (!_areEquals(oldValue, newValue)) {
             changes.add(ElementChange(
                 index: i, oldValue: oldValue, newValue: newValue));
           }
@@ -398,7 +409,7 @@ class ObservableList<T>
         for (var i = 0; i < _list.length; ++i) {
           final oldValue = oldList[i];
           final newValue = _list[i];
-          if (newValue != oldValue) {
+          if (!_areEquals(oldValue, newValue)) {
             changes.add(ElementChange(
                 index: i, oldValue: oldValue, newValue: newValue));
           }
@@ -455,6 +466,14 @@ class ObservableList<T>
     ]);
 
     _listeners.notifyListeners(change);
+  }
+
+  bool _areEquals(T? a, T? b) {
+    if (_equals != null) {
+      return _equals!(a, b);
+    } else {
+      return equatable(a, b);
+    }
   }
 }
 
@@ -520,4 +539,4 @@ class ListChange<T> {
 /// Used during testing for wrapping a regular `List<T>` as an `ObservableList<T>`
 @visibleForTesting
 ObservableList<T> wrapInObservableList<T>(Atom atom, List<T> list) =>
-    ObservableList._wrap(mainContext, atom, list);
+    ObservableList._wrap(mainContext, atom, list, null);
