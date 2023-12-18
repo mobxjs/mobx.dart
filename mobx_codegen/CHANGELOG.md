@@ -1,3 +1,7 @@
+## 2.5.0
+
+- Added automatic generation of `==` and `hashCode` method with `@StoreConfig` annotation
+
 ## 2.4.0
 
 - Require `analyzer: ^5.12.0`

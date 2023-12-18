@@ -338,4 +338,19 @@ fullName: ${fullName},
 fullNameNullable: ${fullNameNullable}
     ''';
   }
+
+  @override
+  List<Object?> get props => [
+        super.firstName,
+        super.firstNameNullable,
+        super.middleName,
+        super.lastName,
+        super.friend,
+        super.friendNullable,
+        super.callback,
+        super.callbackNullable,
+        super.callback2,
+        super.callback2Nullable,
+        super._testUsers
+      ];
 }

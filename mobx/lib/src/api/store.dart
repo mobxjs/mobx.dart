@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:mobx/src/utils.dart';
 
 /// The `Store` mixin is primarily meant for code-generation and used as part of the
 /// `mobx_codegen` package.
@@ -9,4 +10,18 @@ import 'package:mobx/mobx.dart';
 mixin Store {
   /// Override this method to use a custom context.
   ReactiveContext get context => mainContext;
+
+  List<Object?> props = [];
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is Store &&
+            runtimeType == other.runtimeType &&
+            equatable(props, other.props);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode ^ mapPropsToHashCode(props);
+
 }

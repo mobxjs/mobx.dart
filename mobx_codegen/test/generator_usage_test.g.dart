@@ -266,4 +266,18 @@ fields: ${fields},
 batchedItems: ${batchedItems}
     ''';
   }
+
+  @override
+  List<Object?> get props => [
+        super.field1,
+        super.field2,
+        super.stuff,
+        super.always,
+        super.custom,
+        super.batchItem1,
+        super.batchItem2,
+        super.batchItem3,
+        super.batchItem4,
+        super.errorField
+      ];
 }

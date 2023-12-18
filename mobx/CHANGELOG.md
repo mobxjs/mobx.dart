@@ -1,3 +1,7 @@
+## 2.3.0
+
+- Added automatic generation of `==` and `hashCode` method with `@StoreConfig` annotation
+
 ## 2.2.3
 
 - Avoid unnecessary observable notifications of `@observable` `Iterable` or `Map` fields of Stores by [@amondnet](https://github.com/amondnet)  in [#951](https://github.com/mobxjs/mobx.dart/pull/951)
