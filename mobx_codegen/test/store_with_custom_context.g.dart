@@ -31,4 +31,7 @@ mixin _$CustomContextStore on _CustomContextStore, Store {
 name: ${name}
     ''';
   }
+
+  @override
+  List<Object?> get props => [super.name];
 }

@@ -73,6 +73,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
     }
     // if the class is annotated to generate toString() method we add the information to the _storeTemplate
     _storeTemplate.generateToString = hasGeneratedToString(options, element);
+    _storeTemplate.generateEquals = hasGeneratedEquals(options, element);
   }
 
   @override
@@ -273,6 +274,22 @@ bool hasGeneratedToString(BuilderOptions options, ClassElement? classElement) {
   if (classElement != null && isStoreConfigAnnotatedStoreClass(classElement)) {
     final annotation =
         _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
+    return annotation?.getField(fieldKey)?.toBoolValue() ?? false;
+  }
+
+  if (options.config.containsKey(fieldKey)) {
+    return options.config[fieldKey]! as bool;
+  }
+
+  return true;
+}
+
+bool hasGeneratedEquals(BuilderOptions options, ClassElement? classElement) {
+  const fieldKey = 'hasEqualsAndHashCode';
+
+  if (classElement != null && isStoreConfigAnnotatedStoreClass(classElement)) {
+    final annotation =
+    _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
     return annotation?.getField(fieldKey)?.toBoolValue() ?? false;
   }
 

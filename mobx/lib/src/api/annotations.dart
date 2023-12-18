@@ -2,9 +2,10 @@
 /// Currently the only configuration used is boolean to indicate generation of toString method (true), or not (false)
 
 class StoreConfig {
-  const StoreConfig({this.hasToString = true});
+  const StoreConfig({this.hasToString = true, this.hasEqualsAndHashCode = true});
 
   final bool hasToString;
+  final bool hasEqualsAndHashCode;
 }
 
 /// Internal class only used for code-generation with `mobx_codegen`.

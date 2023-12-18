@@ -73,5 +73,12 @@ void main() {
         true,
       );
     });
+
+    test('hasGeneratedEquals understands BuilderOptions', () {
+      expect(
+        hasGeneratedEquals(BuilderOptions({'hasEqualsAndHashCode': true}), null),
+        true,
+      );
+    });
   });
 }

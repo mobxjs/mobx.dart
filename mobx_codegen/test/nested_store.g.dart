@@ -30,4 +30,7 @@ mixin _$NestedStore on _NestedStore, Store {
 name: ${name}
     ''';
   }
+
+  @override
+  List<Object?> get props => [super.name];
 }

@@ -73,4 +73,7 @@ mixin _$AnnotationsTestClass on AnnotationsTestClassBase, Store {
 foo: ${foo}
     ''';
   }
+
+  @override
+  List<Object?> get props => [super.foo];
 }

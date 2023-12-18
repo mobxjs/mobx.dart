@@ -34,8 +34,10 @@ abstract class StoreTemplate {
   final Rows<ObservableFutureTemplate> observableFutures = Rows();
   final Rows<ObservableStreamTemplate> observableStreams = Rows();
   final List<String> toStringList = [];
+  final List<String> props = [];
 
   bool generateToString = false;
+  bool generateEquals = true;
   String? _actionControllerName;
   String get actionControllerName =>
       _actionControllerName ??= '_\$${parentTypeName}ActionController';
@@ -72,6 +74,24 @@ ${allStrings.join(',\n')}
   ''';
   }
 
+  String get propsMethod {
+    if (!generateEquals) {
+      return '';
+    }
+
+    final allObservables = observables.templates
+        .map((current) => 'super.${current.name}');
+
+    final allProps = props..addAll(allObservables);
+
+    // The indents have been kept to ensure each field comes on a separate line without any tabs/spaces
+    return '''
+  @override
+  List<Object?> get props => [${allProps.join(', ')}];
+  ''';
+  }
+
+
   String get storeBody => '''
   $computeds
 
@@ -88,5 +108,7 @@ ${allStrings.join(',\n')}
   $actions
 
   $toStringMethod
+  
+  $propsMethod
   ''';
 }

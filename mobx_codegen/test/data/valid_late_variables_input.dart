@@ -6,7 +6,7 @@ part 'generator_sample.g.dart';
 
 class TestStore = _TestStore with _$TestStore;
 
-@StoreConfig(hasToString: false)
+@StoreConfig(hasToString: false, hasEqualsAndHashCode: false)
 abstract class _TestStore with Store {
   @observable
   late String username;
