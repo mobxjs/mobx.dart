@@ -33,6 +33,7 @@ import 'spy_test.dart' as spy_test;
 import 'store_test.dart' as store_test;
 import 'when_test.dart' as when_test;
 import 'atom_test.dart' as atom_test;
+import 'utils_test.dart' as utils_test;
 
 void main() {
   observable_test.main();
@@ -74,4 +75,5 @@ void main() {
   store_test.main();
 
   atom_test.main();
+  utils_test.main();
 }

@@ -1,3 +1,10 @@
+## 2.2.3+1
+
+Make the change in 2.2.3 optional. If you want the use this behavior , modify `@observable` to 
+`@MakeObservable(useDeepEquality: true)`.
+
+- Adds `useDeepEquality` for creating observables by [@amondnet](https://github.com/amondnet)
+
 ## 2.2.3
 
 - Avoid unnecessary observable notifications of `@observable` `Iterable` or `Map` fields of Stores by [@amondnet](https://github.com/amondnet)  in [#951](https://github.com/mobxjs/mobx.dart/pull/951)

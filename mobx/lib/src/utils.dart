@@ -24,9 +24,9 @@ mixin DebugCreationStack {
 }
 
 /// Determines whether [a] and [b] are equal.
-bool equatable<T>(T a, T b) {
+bool equatable<T>(T a, T b, {bool useDeepEquality = false}) {
   if (identical(a, b)) return true;
-  if (a is Iterable || a is Map) {
+  if (useDeepEquality && (a is Iterable || a is Map)) {
     if (!_equality.equals(a, b)) return false;
   } else if (a.runtimeType != b.runtimeType) {
     return false;
