@@ -1,3 +1,7 @@
+## 2.6.0
+
+- Add `keepAlive` to `Computed` to avoids suspending computed values when they are not being observed by anything.
+
 ## 2.5.0
 
 - Support `late` observables by [@amondnet](https://github.com/amondnet). fix [#919](https://github.com/mobxjs/mobx.dart/issues/919)

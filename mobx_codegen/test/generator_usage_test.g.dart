@@ -15,6 +15,14 @@ mixin _$TestStore on _TestStore, Store {
   String get fields => (_$fieldsComputed ??=
           Computed<String>(() => super.fields, name: '_TestStore.fields'))
       .value;
+  Computed<String>? _$fieldsKeepAliveComputed;
+
+  @override
+  String get fieldsKeepAlive => (_$fieldsKeepAliveComputed ??= Computed<String>(
+          () => super.fieldsKeepAlive,
+          name: '_TestStore.fieldsKeepAlive',
+          keepAlive: true))
+      .value;
   Computed<String>? _$batchedItemsComputed;
 
   @override
@@ -284,6 +292,7 @@ batchItem4: ${batchItem4},
 errorField: ${errorField},
 lateField: ${lateField},
 fields: ${fields},
+fieldsKeepAlive: ${fieldsKeepAlive},
 batchedItems: ${batchedItems}
     ''';
   }

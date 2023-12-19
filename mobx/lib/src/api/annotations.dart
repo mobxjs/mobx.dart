@@ -64,12 +64,14 @@ const MakeObservable alwaysNotify = MakeObservable(equals: observableAlwaysNotEq
 ///
 /// During code-generation, this type is detected to identify a `Computed`
 class ComputedMethod {
-  const ComputedMethod._();
+  const ComputedMethod({this.keepAlive});
+
+  final bool? keepAlive;
 }
 
 /// Declares a method as a computed value. See the `Computed` class for full
 /// documentation.
-const ComputedMethod computed = ComputedMethod._();
+const ComputedMethod computed = ComputedMethod();
 
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///
