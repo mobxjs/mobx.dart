@@ -178,6 +178,26 @@ mixin _$TestStore on _TestStore, Store {
     });
   }
 
+  late final _$lateFieldAtom =
+      Atom(name: '_TestStore.lateField', context: context);
+
+  @override
+  String get lateField {
+    _$lateFieldAtom.reportRead();
+    return super.lateField;
+  }
+
+  bool _lateFieldIsInitialized = false;
+
+  @override
+  set lateField(String value) {
+    _$lateFieldAtom.reportWrite(
+        value, _lateFieldIsInitialized ? super.lateField : null, () {
+      super.lateField = value;
+      _lateFieldIsInitialized = true;
+    });
+  }
+
   @override
   ObservableFuture<String> future() {
     final _$future = super.future();
@@ -262,6 +282,7 @@ batchItem2: ${batchItem2},
 batchItem3: ${batchItem3},
 batchItem4: ${batchItem4},
 errorField: ${errorField},
+lateField: ${lateField},
 fields: ${fields},
 batchedItems: ${batchedItems}
     ''';

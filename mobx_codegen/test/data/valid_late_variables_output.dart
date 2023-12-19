@@ -8,10 +8,14 @@ mixin _$TestStore on _TestStore, Store {
     return super.username;
   }
 
+  bool _usernameIsInitialized = false;
+
   @override
   set username(String value) {
-    _$usernameAtom.reportWrite(value, super.username, () {
+    _$usernameAtom
+        .reportWrite(value, _usernameIsInitialized ? super.username : null, () {
       super.username = value;
+      _usernameIsInitialized = true;
     });
   }
 }

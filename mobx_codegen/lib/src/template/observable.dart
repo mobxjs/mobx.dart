@@ -11,6 +11,7 @@ class ObservableTemplate {
     required this.name,
     this.isReadOnly = false,
     this.isPrivate = false,
+    this.isLate = false,
     this.equals,
     this.useDeepEquality,
   });
@@ -21,6 +22,7 @@ class ObservableTemplate {
   final String name;
   final bool isPrivate;
   final bool isReadOnly;
+  final bool isLate;
   final ExecutableElement? equals;
   final bool? useDeepEquality;
 
@@ -53,16 +55,34 @@ class ObservableTemplate {
   }''';
   }
 
+  String _buildSetters() {
+    if (isLate) {
+      return '''
+  bool _${name}IsInitialized = false;
+      
+  @override
+  set $name($type value) {
+    $atomName.reportWrite(value, _${name}IsInitialized ? super.$name : null, () {
+      super.$name = value;
+      _${name}IsInitialized = true;
+    }${equals != null ? ', equals: ${equals!.name}' : ''});
+  }''';
+    }
+
+    return '''
+  @override
+  set $name($type value) {
+    $atomName.reportWrite(value, super.$name, () {
+      super.$name = value;
+    }${equals != null ? ', equals: ${equals!.name}' : ''}${useDeepEquality != null ? ', useDeepEquality: $useDeepEquality' : ''});
+  }''';
+  }
+
   @override
   String toString() => """
   late final $atomName = Atom(name: '${storeTemplate.parentTypeName}.$name', context: context);
 
 ${_buildGetters()}
 
-  @override
-  set $name($type value) {
-    $atomName.reportWrite(value, super.$name, () {
-      super.$name = value;
-    }${equals != null ? ', equals: ${equals!.name}' : ''}${useDeepEquality != null ? ', useDeepEquality: $useDeepEquality' : ''});
-  }""";
+${_buildSetters()}""";
 }

@@ -1,3 +1,7 @@
+## 2.5.0
+
+- Support `late` observables by [@amondnet](https://github.com/amondnet). fix [#919](https://github.com/mobxjs/mobx.dart/issues/919)
+
 ## 2.4.1
 
 - Adds `useDeepEquality` for creating observables by [@amondnet](https://github.com/amondnet)
