@@ -116,6 +116,31 @@ void main() {
           {'first': 1}
         ]);
       });
+
+
+  test(
+      'when write to @MakeObservable(useDeepEquality: true) field with same value, should not trigger notifications for downstream',
+          () {
+        final store = _ExampleStore();
+
+        final autorunResults = <List<int>>[];
+        autorun((_) => autorunResults.add(store.iterable));
+
+        store.iterable = [1];
+        expect(autorunResults, [
+          [1]
+        ]);
+
+        store.iterable = [1];
+        expect(autorunResults, [
+          [1]
+        ]);
+
+        store.iterable = [1];
+        expect(autorunResults, [
+          [1]
+        ]);
+      });
 }
 
 class _ExampleStore = __ExampleStore with _$_ExampleStore;
@@ -137,6 +162,9 @@ abstract class __ExampleStore with Store {
 
   @observable
   Map<String, int> map = {'first': 1};
+
+  @MakeObservable(useDeepEquality: true)
+  List<int> iterable = [1];
 }
 
 // This is what typically a mobx codegen will generate.
@@ -222,5 +250,21 @@ mixin _$_ExampleStore on __ExampleStore, Store {
     _$mapAtom.reportWrite(value, super.map, () {
       super.map = value;
     });
+  }
+
+  // ignore: non_constant_identifier_names
+  late final _$iterableAtom = Atom(name: '__ExampleStore.iterable', context: context);
+
+  @override
+  List<int> get iterable {
+    _$iterableAtom.reportRead();
+    return super.iterable;
+  }
+
+  @override
+  set iterable(List<int> value) {
+    _$iterableAtom.reportWrite(value, super.iterable, () {
+      super.iterable = value;
+    }, useDeepEquality: true);
   }
 }

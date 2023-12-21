@@ -1,3 +1,7 @@
+## 2.4.1
+
+- Adds `useDeepEquality` for creating observables by [@amondnet](https://github.com/amondnet)
+
 ## 2.4.0
 
 - Require `analyzer: ^5.12.0`

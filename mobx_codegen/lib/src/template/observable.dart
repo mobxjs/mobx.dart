@@ -12,6 +12,7 @@ class ObservableTemplate {
     this.isReadOnly = false,
     this.isPrivate = false,
     this.equals,
+    this.useDeepEquality,
   });
 
   final StoreTemplate storeTemplate;
@@ -21,6 +22,7 @@ class ObservableTemplate {
   final bool isPrivate;
   final bool isReadOnly;
   final ExecutableElement? equals;
+  final bool? useDeepEquality;
 
   /// Formats the `name` from `_foo_bar` to `foo_bar`
   /// such that the getter gets public
@@ -61,6 +63,6 @@ ${_buildGetters()}
   set $name($type value) {
     $atomName.reportWrite(value, super.$name, () {
       super.$name = value;
-    }${equals != null ? ', equals: ${equals!.name}' : ''});
+    }${equals != null ? ', equals: ${equals!.name}' : ''}${useDeepEquality != null ? ', useDeepEquality: $useDeepEquality' : ''});
   }""";
 }
