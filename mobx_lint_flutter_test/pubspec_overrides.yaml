@@ -1,0 +1,8 @@
+# melos_managed_dependency_overrides: flutter_mobx,mobx,mobx_lint
+dependency_overrides:
+  flutter_mobx:
+    path: ../flutter_mobx
+  mobx:
+    path: ../mobx
+  mobx_lint:
+    path: ../mobx_lint
