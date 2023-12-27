@@ -1,10 +1,10 @@
 ## 2.3.0
 
-- Add `keepAlive` to `Computed` to avoids suspending computed values when they are not being observed by anything.
+- Add `keepAlive` to `Computed` to avoid suspending computed values when they are not being observed by anything.
 
 ## 2.2.3+1
 
-Make the change in 2.2.3 optional. If you want the use this behavior , modify `@observable` to 
+Make the change in `2.2.3` optional. If you want the use this behavior , modify `@observable` to 
 `@MakeObservable(useDeepEquality: true)`.
 
 - Adds `useDeepEquality` for creating observables by [@amondnet](https://github.com/amondnet)
