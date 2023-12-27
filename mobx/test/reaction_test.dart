@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart' hide when;
 import 'package:mobx/src/core.dart';
@@ -91,6 +93,31 @@ void main() {
       final d = reaction((_) => x.value > 10, (isGreaterThan10) {
         executed = true;
       }, delay: 1000);
+
+      fakeAsync((async) {
+        x.value = 11;
+
+        // Even though tracking function has changed, effect should not be executed
+        expect(executed, isFalse);
+        async.elapse(const Duration(milliseconds: 500));
+        expect(
+            executed, isFalse); // should still be false as 1s has not elapsed
+
+        async.elapse(
+            const Duration(milliseconds: 500)); // should now trigger effect
+        expect(executed, isTrue);
+
+        d();
+      });
+    });
+
+    test('works with scheduler', () {
+      final x = Observable(10);
+      var executed = false;
+
+      final d = reaction((_) => x.value > 10, (isGreaterThan10) {
+        executed = true;
+      }, scheduler: (fn) => Timer(const Duration(milliseconds: 1000), fn));
 
       fakeAsync((async) {
         x.value = 11;
