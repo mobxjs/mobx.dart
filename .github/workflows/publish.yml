@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        package: [ "mobx", "mobx_codegen" ]
+        package: [ "mobx", "mobx_codegen", "mobx_lint" ]
 
     steps:
       - uses: actions/checkout@v3
