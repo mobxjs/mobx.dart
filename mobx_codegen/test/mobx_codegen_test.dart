@@ -54,6 +54,11 @@ void main() {
           './data/annotations_test_class_output.dart');
     });
 
+    test('generates for a class containing keep alive computed', () async {
+      await compareFiles('./data/valid_keep_alive_computed_input.dart',
+          './data/valid_keep_alive_computed_output.dart');
+    });
+
     createTests([
       const TestInfo(
           description: 'invalid output is handled',

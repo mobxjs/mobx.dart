@@ -246,5 +246,81 @@ void main() {
       expect(value, equals('SUCCESS'));
       expect(error, isNull);
     });
+
+    test("keeping computed properties alive does not run before access", () {
+      var calcs = 0;
+      final x = Observable(1);
+      // ignore: unused_local_variable
+      final y = Computed(() {
+        calcs++;
+        return x.value * 2;
+      }, keepAlive: true);
+
+      expect(calcs, 0); // initially there is no calculation done
+    });
+
+    test("keeping computed properties alive runs on first access", () {
+      var calcs = 0;
+      final x = Observable(1);
+      final y = Computed(() {
+        calcs++;
+        return x.value * 2;
+      }, keepAlive: true);
+
+      expect(calcs, 0);
+      expect(y.value, 2); // perform calculation on access
+      expect(calcs, 1);
+    });
+
+    test(
+        "keeping computed properties alive caches values on subsequent accesses",
+        () {
+      var calcs = 0;
+      final x = Observable(1);
+      final y = Computed(() {
+        calcs++;
+        return x.value * 2;
+      }, keepAlive: true);
+
+      expect(y.value, 2); // first access: do calculation
+      expect(y.value, 2); // second access: use cached value, no calculation
+      expect(calcs, 1); // only one calculation: cached!
+
+
+    });
+
+    test("keeping computed properties alive does not recalculate when dirty",
+        () {
+      var calcs = 0;
+      final x = Observable(1);
+      final y = Computed(() {
+        calcs++;
+        return x.value * 2;
+      }, keepAlive: true);
+
+      expect(y.value, 2); // first access: do calculation
+      expect(calcs, 1);
+      x.value = 3; // mark as dirty: no calculation
+      expect(calcs, 1);
+      expect(y.value, 6);
+    });
+
+    test(
+        "keeping computed properties alive recalculates when accessing it dirty",
+        () {
+      var calcs = 0;
+      final x = Observable(1);
+      final y = Computed(() {
+        calcs++;
+        return x.value * 2;
+      }, keepAlive: true);
+
+      expect(y.value, 2); // first access: do calculation
+      expect(calcs, 1);
+      x.value = 3; // mark as dirty: no calculation
+      expect(calcs, 1);
+      expect(y.value, 6);
+      expect(calcs, 2);
+    });
   });
 }

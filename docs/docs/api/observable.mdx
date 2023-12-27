@@ -223,7 +223,7 @@ abstract class _Todos with Store {
 
 ## Computed
 
-#### `Computed(T Function() fn, {String name, ReactiveContext context})`
+#### `Computed(T Function() fn, {String name, ReactiveContext context, EqualityComparer<T>? equals, bool? keepAlive})`
 
 - **`T Function() fn`**: the function which relies on observables to compute its
   value.
@@ -231,6 +231,14 @@ abstract class _Todos with Store {
 - **`ReactiveContext context`**: the context to which this computed is bound. By
   default, all computeds are bound to the singleton `mainContext` of the
   application.
+- **`EqualityComparer<T>? equals`**: It acts as a comparison function for
+  comparing the previous value with the next value. If this function considers
+  the values to be equal, then the observers will not be re-evaluated.
+  This is useful when working with structural data and types from other libraries.
+- **`bool? keepAlive`**: This avoids suspending computed values when they are not
+being observed by anything (see the above explanation). Can potentially create memory
+leaks.
+
 
 **Computeds** form the derived state of your application. They depend on other
 observables or computeds for their value. Any time the depending observables
@@ -240,6 +248,11 @@ the cached-value, will they fire notifications. This behavior is key to ensure
 the connected reactions don't execute unnecessarily.
 
 > #### CachingThe caching behavior is only for _notifications_ and **not** for the _value_. Calling a computed property will always evaluate and return the value. There is no caching on the computation itself. However, notifications fire only when the computed value is different from the previous one. This is where the caching behavior applies.
+
+It can be overridden by setting the annotation with the keepAlive option or by creating
+a no-op `autorun(() { someComputed })`, which can be nicely cleaned
+up later if needed. Note that both solutions have the risk of creating memory leaks. Changing
+the default behavior here is an anti-pattern.
 
 ```dart
 final first = Observable('Pavan');

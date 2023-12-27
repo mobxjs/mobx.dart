@@ -15,6 +15,10 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   /// It is possible to override equality comparison (when deciding whether to notify observers)
   /// by providing an [equals] comparator.
   ///
+  /// [keepAlive]
+  /// This avoids suspending computed values when they are not being observed by anything.
+  /// Can potentially create memory leaks.
+  ///
   /// ```
   /// var x = Observable(10);
   /// var y = Observable(10);
@@ -34,13 +38,19 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   factory Computed(T Function() fn,
           {String? name,
           ReactiveContext? context,
-          EqualityComparer<T>? equals}) =>
-      Computed._(context ?? mainContext, fn, name: name, equals: equals);
+          EqualityComparer<T>? equals,
+          bool? keepAlive}) =>
+      Computed._(context ?? mainContext, fn,
+          name: name, equals: equals, keepAlive: keepAlive);
 
-  Computed._(ReactiveContext context, this._fn, {String? name, this.equals})
-      : super._(context, name: name ?? context.nameFor('Computed'));
+  Computed._(ReactiveContext context, this._fn,
+      {String? name, this.equals, bool? keepAlive})
+      : _keepAlive = keepAlive ?? false,
+        super._(context, name: name ?? context.nameFor('Computed'));
 
   final EqualityComparer<T>? equals;
+
+  final bool _keepAlive;
 
   @override
   MobXCaughtException? _errorValue;
@@ -72,7 +82,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
           'Cycle detected in computation $name: $_fn');
     }
 
-    if (!_context.isWithinBatch && _observers.isEmpty) {
+    if (!_context.isWithinBatch && _observers.isEmpty && !_keepAlive) {
       if (_context._shouldCompute(this)) {
         _context.startBatch();
         _value = computeValue(track: false);
@@ -122,8 +132,10 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
 
   @override
   void _suspend() {
-    _context.clearObservables(this);
-    _value = null;
+    if (!this._keepAlive) {
+      _context.clearObservables(this);
+      _value = null;
+    }
   }
 
   @override
@@ -156,10 +168,10 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
 
   bool _isEqual(T? x, T? y) => equals == null ? x == y : equals!(x, y);
 
-  void Function() observe(
-      void Function(ChangeNotification<T>) handler,
-      {@Deprecated('fireImmediately has no effect anymore. It is on by default.')
-          bool? fireImmediately}) {
+  void Function() observe(void Function(ChangeNotification<T>) handler,
+      {@Deprecated(
+          'fireImmediately has no effect anymore. It is on by default.')
+      bool? fireImmediately}) {
     T? prevValue;
 
     void notifyChange() {

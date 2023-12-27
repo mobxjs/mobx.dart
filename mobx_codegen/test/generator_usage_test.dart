@@ -27,6 +27,9 @@ abstract class _TestStore with Store {
   @computed
   String get fields => '$field1 $field2';
 
+  @ComputedMethod(keepAlive: true)
+  String get fieldsKeepAlive => '$field1 $field2';
+
   @observable
   String stuff = 'stuff';
 
@@ -161,6 +164,18 @@ void main() {
     final fields = <String>[];
     autorun((_) {
       fields.add(store.fields);
+    });
+    store.setFields('field1++', 'field2++');
+
+    expect(fields, equals(['field1 field2', 'field1++ field2++']));
+  });
+
+  test('keep alive computed fields works', () {
+    final store = TestStore('field1', field2: 'field2');
+
+    final fields = <String>[];
+    autorun((_) {
+      fields.add(store.fieldsKeepAlive);
     });
     store.setFields('field1++', 'field2++');
 

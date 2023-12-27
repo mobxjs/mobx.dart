@@ -37,7 +37,9 @@ export 'package:mobx/src/api/annotations.dart'
         observable,
         StoreConfig,
         MakeObservable,
-        alwaysNotify, observableAlwaysNotEqual;
+        alwaysNotify,
+        observableAlwaysNotEqual,
+        ComputedMethod;
 export 'package:mobx/src/api/async.dart'
     show
         ObservableFuture,
