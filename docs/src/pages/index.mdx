@@ -1,7 +1,5 @@
 ---
-title: Home
 hide_table_of_contents: true
-slug: /
 ---
 
 import { PubBadge } from '../components/PubBadge';
@@ -17,27 +15,39 @@ import {
 import { SponsorList } from '../components/Sponsor';
 import { TestimonialList } from '../components/Testimonial';
 
-<img
-  src={require('../images/mobx.png').default}
-  alt={'MobX logo'}
-  width={128}
-/>
+import MobXLogo from '../images/mobx.svg';
 
-# [MobX](https://github.com/mobxjs/mobx) for Dart and Flutter
+<div className={'container'}>
+  <div className={'grid grid-cols-2 gap-4'}>
+    <div>
+      <div className={'text-6xl font-extrabold'}>
+        [MobX](https://github.com/mobxjs/mobx) for Dart and Flutter
+      </div>
+      <div className={'text-xl text-gray-600 mb-12'}>Hassle free state-management for your Dart and Flutter apps</div>
 
-> Hassle free state-management for your Dart and Flutter apps
+      <div>
+        <PubBadge name="mobx" />
+        <PubBadge name="flutter_mobx" />
+        <PubBadge name="mobx_codegen" />
+      </div>
 
-<div>
-  <PubBadge name="mobx" />
-  <PubBadge name="flutter_mobx" />
-  <PubBadge name="mobx_codegen" />
+      <div>
+        <BuildStatus /> <PublishStatus /> <CoverageStatus /> <NetlifyStatus />
+      </div>
+
+      <DiscordChat />
+    </div>
+    <div>
+      <MobXLogo
+        alt={'MobX logo'}
+        width={512}
+      />
+
+    </div>
+
+  </div>
+
 </div>
-
-<div>
-  <BuildStatus /> <PublishStatus /> <CoverageStatus /> <NetlifyStatus />
-</div>
-
-<DiscordChat />
 
 <FlutterFavorite />
 

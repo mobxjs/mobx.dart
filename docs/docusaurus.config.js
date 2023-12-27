@@ -118,7 +118,19 @@ module.exports = {
       indexName: 'mobx_dart_flutter',
     },
   },
-  plugins: [path.resolve(__dirname, './plugins/fetch-versions')],
+  plugins: [
+    path.resolve(__dirname, './plugins/fetch-versions'),
+    function postCSSPlugin(context, options) {
+      return {
+        name: 'docusaurus-tailwindcss',
+        configurePostCss(postcssOptions) {
+          postcssOptions.plugins.push(require('tailwindcss'));
+          postcssOptions.plugins.push(require('autoprefixer'));
+          return postcssOptions;
+        },
+      };
+    },
+  ],
   presets: [
     [
       'classic',
