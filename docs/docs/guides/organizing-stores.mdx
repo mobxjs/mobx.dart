@@ -115,12 +115,15 @@ Note that we are not making the `details` field into an `@observable` as its
 value is not going to change. The reactive-state that matters is inside the
 `PersonDetails`, which is already marked `@observable`.
 
-> ### Store co-ordination
->
-> Stores should be made as **independent** as possible with all of their inputs clearly defined.
-> All their **dependencies** should be fed in via **constructor parameters** or through **fields**.
-> Any external communication that needs to happen from the Store should be done via **callbacks**.
-> Adopting this approach improves the **portability** and also simplifies **testing**.
+:::info Store co-ordination
+
+Stores should be made as **independent** as possible with all of their inputs
+clearly defined. All their **dependencies** should be fed in via **constructor
+parameters** or through **fields**. Any external communication that needs to
+happen from the Store should be done via **callbacks**. Adopting this approach
+improves the **portability** and also simplifies **testing**.
+
+:::
 
 ## The triad of Widget - Store - Service
 
@@ -201,11 +204,15 @@ class Child {
 }
 ```
 
-> ### Service Locator
->
-> If the dependencies between Stores is much more complicated, let's say each Store needs a shared instance of the
-> `ThemeStore`, `PreferencesStore`, `AuthenticationStore`, etc., a better way to manage this is to use the _Service Locator_ pattern.
-> The <PubBadge name="get_it" /> package makes this possible and is worth checking out.
+:::info Service Locator
+
+If the dependencies between Stores is much more complicated, let's say each
+Store needs a shared instance of the `ThemeStore`, `PreferencesStore`,
+`AuthenticationStore`, etc., a better way to manage this is to use the _Service
+Locator_ pattern. The <PubBadge name="get_it" /> package makes this possible and
+is worth checking out.
+
+:::
 
 2. **Using callbacks from `Child`**: Rather than tightly coupling the `Parent`
    with the `Child`, the other option is to have an explicit set of callbacks

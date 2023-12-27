@@ -1,12 +1,11 @@
 ---
-id: home
 title: Home
-hide_title: true
+hide_table_of_contents: true
 slug: /
 ---
 
-import { PubBadge } from '../src/components/PubBadge';
-import book from '../src/images/book.png';
+import { PubBadge } from '../components/PubBadge';
+import book from '../images/book.png';
 import {
   BuildStatus,
   CoverageStatus,
@@ -14,12 +13,12 @@ import {
   FlutterFavorite,
   NetlifyStatus,
   PublishStatus,
-} from '../src/components/Shield';
-import { SponsorList } from '../src/components/Sponsor';
-import { TestimonialList } from '../src/components/Testimonial';
+} from '../components/Shield';
+import { SponsorList } from '../components/Sponsor';
+import { TestimonialList } from '../components/Testimonial';
 
 <img
-  src={require('../src/images/mobx.png').default}
+  src={require('../images/mobx.png').default}
   alt={'MobX logo'}
   width={128}
 />
@@ -29,7 +28,8 @@ import { TestimonialList } from '../src/components/Testimonial';
 > Hassle free state-management for your Dart and Flutter apps
 
 <div>
-  <PubBadge name="mobx" /> <PubBadge name="flutter_mobx" />{' '}
+  <PubBadge name="mobx" />
+  <PubBadge name="flutter_mobx" />
   <PubBadge name="mobx_codegen" />
 </div>
 

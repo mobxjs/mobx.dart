@@ -8,10 +8,17 @@ export const PubBadge: FunctionComponent<Props> = (props) => {
   const { name } = props;
 
   return (
-    <a href={`https://pub.dartlang.org/packages/${name}`}>
+    <a
+      href={`https://pub.dartlang.org/packages/${name}`}
+      style={{
+        display: 'inline-block',
+        marginLeft: '0.25rem',
+        marginRight: '0.25rem',
+      }}
+    >
       <img
         alt="pub"
-        src={`https://img.shields.io/pub/v/${name}.svg?label=${name}&color=blue`}
+        src={`https://img.shields.io/pub/v/${name}.svg?label=${name}&logo=dart&color=blue&style=for-the-badge`}
       />
     </a>
   );

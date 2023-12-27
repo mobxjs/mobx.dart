@@ -59,10 +59,12 @@ _observable-properties_.
 
 :::info Auto-actions for property setters
 
-Do note that for single-property changes, you can assign the value directly as in `form.name = 'new value'`.
-MobX internally auto-wraps the property setters within an action.
-For more elaborate mutations, it is advisable to wrap it in an action for atomic updates and notifications.
-For this example, the code below is only indicative. The property setters are called directly in the Widgets to take advantage of the auto-action-wrapped setters.
+Do note that for single-property changes, you can assign the value directly as
+in `form.name = 'new value'`. MobX internally auto-wraps the property setters
+within an action. For more elaborate mutations, it is advisable to wrap it in an
+action for atomic updates and notifications. For this example, the code below is
+only indicative. The property setters are called directly in the Widgets to take
+advantage of the auto-action-wrapped setters.
 
 :::
 

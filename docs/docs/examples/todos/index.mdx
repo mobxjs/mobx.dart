@@ -1,22 +1,29 @@
 ---
 title: Todos
 slug: /examples/todos
-description: In this example, we will build the classic TodoMVC, which has become the default way of showcasing the capabilities of a state-management library.
+description:
+  In this example, we will build the classic TodoMVC, which has become the
+  default way of showcasing the capabilities of a state-management library.
 ---
 
 import { PubBadge } from '../../../src/components/PubBadge';
 
-In this example, we will build the classic [TodoMVC](http://todomvc.com/), which has become the default way of showcasing the capabilities of a state-management library.
+In this example, we will build the classic [TodoMVC](http://todomvc.com/), which
+has become the default way of showcasing the capabilities of a state-management
+library.
 
 :::info
 
-See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
+See the complete code
+[here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
 
 :::
 
 ## Creating the Observable state
 
-We first start by defining the Observable state of our application. This is usually the first step in modeling your application. In this case, we have a `TodoList` managing a list of `Todo` instances.
+We first start by defining the Observable state of our application. This is
+usually the first step in modeling your application. In this case, we have a
+`TodoList` managing a list of `Todo` instances.
 
 A `Todo` is defined by a simple class like the following.
 
@@ -42,11 +49,13 @@ abstract class _Todo with Store {
 
 You should now be familiar with the little boilerplate here.
 
-> If the boilerplate seems new, take a look at the [Counter example](/examples/counter)
+> If the boilerplate seems new, take a look at the
+> [Counter example](/examples/counter)
 
 ### TodoList class
 
-Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of `TodoList` includes:
+Next comes the `TodoList`, which manages a list of `Todo`s. The core-state of
+`TodoList` includes:
 
 - [x] a list of `Todo`s
 - [x] a `filter` that tracks the visibility-filter applied on the list of todos
@@ -74,7 +83,10 @@ abstract class _TodoList with Store {
 
 **Computed Properties**
 
-To render a useful UI, we also need a bunch of _derived (aka computed)_ properties. These properties are not inherent to the `TodoList` but derived from the core-state. Our UI looks like below, so you can identify the mapping of the _computed properties_ to the various widgets.
+To render a useful UI, we also need a bunch of _derived (aka computed)_
+properties. These properties are not inherent to the `TodoList` but derived from
+the core-state. Our UI looks like below, so you can identify the mapping of the
+_computed properties_ to the various widgets.
 
 import todosImage from './todos.png';
 
@@ -137,7 +149,9 @@ abstract class _TodoList with Store {
 
 **Actions**
 
-Actions are the semantic operations that mutate the observable state. They also create a transaction-boundary to ensure all notifications are sent out only at the end of an action. In our case, we have a few actions such as:
+Actions are the semantic operations that mutate the observable state. They also
+create a transaction-boundary to ensure all notifications are sent out only at
+the end of an action. In our case, we have a few actions such as:
 
 ```dart
 class TodoList = _TodoList with _$TodoList;
@@ -179,7 +193,8 @@ abstract class _TodoList with Store {
 
 ### The power of co-location
 
-Here is the complete `TodoList` with all the observable, computed properties and the actions.
+Here is the complete `TodoList` with all the observable, computed properties and
+the actions.
 
 ```dart
 class TodoList = _TodoList with _$TodoList;
@@ -264,15 +279,25 @@ abstract class _TodoList with Store {
 
 ```
 
-Note that all of the details of the store are together. This is an important benefit of MobX: it keeps all the state-related code together. _**Co-location**_ is an important virtue and adds lot of value as you build more complex apps with sophisticated state-management.
+Note that all of the details of the store are together. This is an important
+benefit of MobX: it keeps all the state-related code together. _**Co-location**_
+is an important virtue and adds lot of value as you build more complex apps with
+sophisticated state-management.
 
-Co-location also helps in _readability_ of your code. By choosing _Domain-specific_ names for your properties, actions and stores, there will be a clear mapping between the Business-domain and state code.
+Co-location also helps in _readability_ of your code. By choosing
+_Domain-specific_ names for your properties, actions and stores, there will be a
+clear mapping between the Business-domain and state code.
 
 ## Connecting the UI
 
-Now that the state has been defined, the UI becomes a natural, and _visual_ extension of the Store. In case of MobX, we can sprinkle the _Widget-tree_ with as many `Observer` widgets as needed. You can observe as little as you want or as much as needed!
+Now that the state has been defined, the UI becomes a natural, and _visual_
+extension of the Store. In case of MobX, we can sprinkle the _Widget-tree_ with
+as many `Observer` widgets as needed. You can observe as little as you want or
+as much as needed!
 
-> **MobX** is smart enough to know what you are observing and automatically starts tracking it. There is no extra work needed on your part. This results in friction-free code and makes it a joy to use `Observer`.
+> **MobX** is smart enough to know what you are observing and automatically
+> starts tracking it. There is no extra work needed on your part. This results
+> in friction-free code and makes it a joy to use `Observer`.
 
 At the highest level, this is what your widget tree looks like:
 
@@ -297,15 +322,26 @@ class TodoExample extends StatelessWidget {
 
 ```
 
-We are supplying the state using a `Provider<T>`. This comes from the <PubBadge name="provider" /> package and makes it easier to access the store in all of the children. Since the state is kept outside of the `Widget`, this is also called _**"Lifting the State"**_, which makes the root Widget a `StatelessWidget`. **_Line#1_** lifts the state with the `Provider<TodoList>`. Each child accesses the store (aka state) using the `Provider.of<TodoList>()` passing the `BuildContext` as argument.
+We are supplying the state using a `Provider<T>`. This comes from the
 
-:::tip
-**The Provider package**
+<PubBadge name="provider" /> package and makes it easier to access the store in
+all of the children. Since the state is kept outside of the `Widget`, this is
+also called _**"Lifting the State"**_, which makes the root Widget a
+`StatelessWidget`. **_Line#1_** lifts the state with the `Provider<TodoList>`.
+Each child accesses the store (aka state) using the `Provider.of<TodoList>()`
+passing the `BuildContext` as argument.
 
-We strongly recommend the use of `Provider<T>` to supply the state of your `Widget` and also for the application. Lifting the state via a `Provider` makes it convenient and avoids using globals to track your store. It also comes with several conveniences that makes it noteworthy. This is part of the <PubBadge name="provider" /> package and definitely worth using in your apps.
-:::
+:::tip **The Provider package**
 
-Each of the children in the root-Widget is an `Observer`. Let's take the simplest of all the children: `Description`.
+We strongly recommend the use of `Provider<T>` to supply the state of your
+`Widget` and also for the application. Lifting the state via a `Provider` makes
+it convenient and avoids using globals to track your store. It also comes with
+several conveniences that makes it noteworthy. This is part of the
+
+<PubBadge name="provider" /> package and definitely worth using in your apps. :::
+
+Each of the children in the root-Widget is an `Observer`. Let's take the
+simplest of all the children: `Description`.
 
 **Description**
 
@@ -326,11 +362,17 @@ class Description extends StatelessWidget {
 }
 ```
 
-The _builder-function_ passed into `Observer` monitors all observables referenced inside. In this case, the `list.itemsDescription` is referenced. The act of reading this observable is a hint to MobX to start tracking. Anytime it changes, the `Observer` will rebuild the widget. Notice that there is no extra work needed from your side! Using the `Provider.of<TodoList>(context)`, we get access to the `list`.
+The _builder-function_ passed into `Observer` monitors all observables
+referenced inside. In this case, the `list.itemsDescription` is referenced. The
+act of reading this observable is a hint to MobX to start tracking. Anytime it
+changes, the `Observer` will rebuild the widget. Notice that there is no extra
+work needed from your side! Using the `Provider.of<TodoList>(context)`, we get
+access to the `list`.
 
 **TodoListView**
 
-The `TodoListView` is yet another `Observer`, in particular of the `list.visibleTodos`
+The `TodoListView` is yet another `Observer`, in particular of the
+`list.visibleTodos`
 
 ```dart
 class TodoListView extends StatelessWidget {
@@ -399,9 +441,12 @@ class AddTodo extends StatelessWidget {
 
 **ActionBar**
 
-And finally we have the `ActionBar` that contains the radio-buttons to select a filter. It also has the buttons to mark all todos and remove the completed ones.
+And finally we have the `ActionBar` that contains the radio-buttons to select a
+filter. It also has the buttons to mark all todos and remove the completed ones.
 
-Notice that _there is no business logic here_. Most of the state of the UI is controlled by _computed-properties_. This is an important modeling tip that you can use in state-management and even unit-testing!
+Notice that _there is no business logic here_. Most of the state of the UI is
+controlled by _computed-properties_. This is an important modeling tip that you
+can use in state-management and even unit-testing!
 
 ```dart
 class ActionBar extends StatelessWidget {
@@ -463,15 +508,24 @@ import todosGif from './todos.gif';
 
 <img src={todosGif} />
 
-Hope you can see the clarity of expressing the observable-state with `@observable`, `@computed`, and `@action`. Using the `Observer` widget, you get an automatically-updating Widget that renders the observable-state. To pass around the state, we rely on the `Provider<T>` from the <PubBadge name="provider" /> package.
+Hope you can see the clarity of expressing the observable-state with
+`@observable`, `@computed`, and `@action`. Using the `Observer` widget, you get
+an automatically-updating Widget that renders the observable-state. To pass
+around the state, we rely on the `Provider<T>` from the
+
+<PubBadge name="provider" /> package.
 
 :::info
 
-See the complete code [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
+See the complete code
+[here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/todos).
 
 :::
 
 > ### Comprehensive TodoMVC
 >
-> A more comprehensive example is available in [Brian Egan's Flutter Architecture Samples](https://github.com/brianegan/flutter_architecture_samples/tree/master/mobx), that covers few other use cases like localization, persistence,
-> unit-testing, navigation, etc. Do take a look [here](https://github.com/brianegan/flutter_architecture_samples/tree/master/mobx).
+> A more comprehensive example is available in
+> [Brian Egan's Flutter Architecture Samples](https://github.com/brianegan/flutter_architecture_samples/tree/master/mobx),
+> that covers few other use cases like localization, persistence, unit-testing,
+> navigation, etc. Do take a look
+> [here](https://github.com/brianegan/flutter_architecture_samples/tree/master/mobx).

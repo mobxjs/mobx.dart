@@ -1,48 +1,79 @@
 import React from 'react';
 
-export const BuildStatus = () => {
-  return (
-    <a href="https://github.com/mobxjs/mobx.dart/actions">
-      <img
-        alt="Build Status"
-        src="https://github.com/mobxjs/mobx.dart/workflows/Build/badge.svg"
-      />
-    </a>
-  );
-};
-
-export const PublishStatus = () => (
-  <a href="https://github.com/mobxjs/mobx.dart/actions">
+const GithubWorkflowStatus = ({
+  label,
+  workflow,
+}: {
+  label: string;
+  workflow: string;
+}) => (
+  <a
+    href={`https://github.com/mobxjs/mobx.dart/actions/workflows/${workflow}.yml`}
+    style={{
+      display: 'inline-block',
+      marginLeft: '0.25rem',
+      marginRight: '0.25rem',
+    }}
+  >
     <img
-      alt="Publish"
-      src="https://github.com/mobxjs/mobx.dart/workflows/Publish/badge.svg"
+      alt={label}
+      src={`https://img.shields.io/github/actions/workflow/status/mobxjs/mobx.dart/${workflow}.yml?label=${label}&logo=github&style=for-the-badge`}
     />
   </a>
 );
 
+export const BuildStatus = () => (
+  <GithubWorkflowStatus workflow="build" label="Build" />
+);
+
+export const PublishStatus = () => (
+  <GithubWorkflowStatus workflow="publish" label="Publish" />
+);
+
 export const CoverageStatus = () => (
-  <a href="https://codecov.io/gh/mobxjs/mobx.dart">
+  <a
+    href="https://codecov.io/gh/mobxjs/mobx.dart"
+    style={{
+      display: 'inline-block',
+      marginLeft: '0.25rem',
+      marginRight: '0.25rem',
+    }}
+  >
     <img
       alt="Coverage Status"
-      src="https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg"
+      src="https://img.shields.io/codecov/c/github/mobxjs/mobx.dart?logo=codecov&style=for-the-badge"
     />
   </a>
 );
 
 export const NetlifyStatus = () => (
-  <a href="https://app.netlify.com/sites/mobx/deploys">
+  <a
+    href="https://app.netlify.com/sites/mobx/deploys"
+    style={{
+      display: 'inline-block',
+      marginLeft: '0.25rem',
+      marginRight: '0.25rem',
+    }}
+  >
     <img
       alt="Netlify Status"
-      src="https://api.netlify.com/api/v1/badges/05330d31-0411-4aac-a278-76615bcaff9e/deploy-status"
+      src="https://img.shields.io/netlify/05330d31-0411-4aac-a278-76615bcaff9e?logo=netlify&style=for-the-badge"
     />
   </a>
 );
 
 export const DiscordChat = () => (
-  <a href="https://discord.gg/dNHY52k">
+  <a
+    href="https://discord.gg/dNHY52k"
+    style={{
+      display: 'inline-block',
+      marginLeft: '0.25rem',
+      marginRight: '0.25rem',
+    }}
+  >
     <img
       alt="Join the chat at https://discord.gg/dNHY52k"
-      src="https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&amp;logo=discord"
+      src="https://img.shields.io/discord/637471236116447233?style=for-the-badge&logo=discord"
     />
   </a>
 );

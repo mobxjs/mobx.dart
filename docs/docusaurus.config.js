@@ -22,6 +22,12 @@ module.exports = {
       },
       items: [
         {
+          type: 'doc',
+          position: 'left',
+          docId: 'getting-started/index',
+          label: 'Docs',
+        },
+        {
           href: 'https://discord.gg/dNHY52k',
           position: 'right',
           className: 'icon-link discord-link',
@@ -115,9 +121,13 @@ module.exports = {
   plugins: [path.resolve(__dirname, './plugins/fetch-versions')],
   presets: [
     [
-      '@docusaurus/preset-classic',
+      'classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
       {
-        pages: false,
+        pages: {
+          path: 'src/pages',
+          routeBasePath: '/',
+        },
         blog: false,
         docs: {
           path: 'docs',
