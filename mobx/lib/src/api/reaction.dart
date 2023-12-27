@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/core.dart';
 
@@ -7,6 +9,9 @@ import 'package:mobx/src/core.dart';
 /// Optional configuration:
 /// * [name]: debug name for this reaction
 /// * [delay]: throttling delay in milliseconds
+/// * [context]: the [ReactiveContext] to use. By default the [mainContext] is used.
+/// * [scheduler]: the scheduler to use. By default the [mainContext] scheduler is used.
+/// * [onError]: an error handler for errors thrown during the [fn] execution.
 ///
 /// ```
 /// var x = Observable(10);
@@ -27,9 +32,10 @@ ReactionDisposer autorun(Function(Reaction) fn,
         {String? name,
         int? delay,
         ReactiveContext? context,
+        Timer Function(void Function())? scheduler,
         void Function(Object, Reaction)? onError}) =>
     createAutorun(context ?? mainContext, fn,
-        name: name, delay: delay, onError: onError);
+        name: name, delay: delay, scheduler: scheduler, onError: onError);
 
 /// Executes the [fn] function and tracks the observables used in it. Returns
 /// a function to dispose the reaction.
@@ -43,20 +49,25 @@ ReactionDisposer autorun(Function(Reaction) fn,
 /// [fireImmediately] if you want to invoke the effect immediately without waiting for
 /// the [fn] to change its value. It is possible to define a custom [equals] function
 /// to override the default comparison for the value returned by [fn], to have fined
-/// grained control over when the reactions should run.
+/// grained control over when the reactions should run. By default, the [mainContext]
+/// is used, but you can also pass in a custom [context].
+/// You can also pass in an optional [onError] handler for errors thrown during the [fn] execution.
+/// You can also pass in an optional [scheduler] to schedule the [effect] execution.
 ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect,
         {String? name,
         int? delay,
         bool? fireImmediately,
         EqualityComparer<T>? equals,
         ReactiveContext? context,
+        Timer Function(void Function())? scheduler,
         void Function(Object, Reaction)? onError}) =>
     createReaction<T>(context ?? mainContext, fn, effect,
         name: name,
         delay: delay,
         equals: equals,
         fireImmediately: fireImmediately,
-        onError: onError);
+        onError: onError,
+        scheduler: scheduler);
 
 /// A one-time reaction that auto-disposes when the [predicate] becomes true. It also
 /// executes the [effect] when the predicate turns true.
