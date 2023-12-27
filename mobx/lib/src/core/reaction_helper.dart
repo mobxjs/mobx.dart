@@ -23,19 +23,24 @@ class ReactionDisposer {
 /// An internal helper function to create a [autorun]
 ReactionDisposer createAutorun(
     ReactiveContext context, Function(Reaction) trackingFn,
-    {String? name, int? delay, void Function(Object, Reaction)? onError}) {
+    {String? name,
+    int? delay,
+    Timer Function(void Function())? scheduler,
+    void Function(Object, Reaction)? onError}) {
   late ReactionImpl rxn;
 
   final rxnName = name ?? context.nameFor('Autorun');
+  final runSync = scheduler == null && delay == null;
 
-  if (delay == null) {
+  if (runSync) {
     // Use a sync-scheduler.
     rxn = ReactionImpl(context, () {
       rxn.track(() => trackingFn(rxn));
     }, name: rxnName, onError: onError);
   } else {
-    // Use a delayed scheduler.
-    final scheduler = createDelayedScheduler(delay);
+    // Use a scheduler or delayed scheduler.
+    final schedulerFromOptions =
+        scheduler ?? (delay != null ? createDelayedScheduler(delay) : null);
     var isScheduled = false;
     Timer? timer;
 
@@ -46,7 +51,7 @@ ReactionDisposer createAutorun(
         timer?.cancel();
         timer = null;
 
-        timer = scheduler(() {
+        timer = schedulerFromOptions!(() {
           isScheduled = false;
           if (!rxn.isDisposed) {
             rxn.track(() => trackingFn(rxn));
@@ -69,6 +74,7 @@ ReactionDisposer createReaction<T>(
     int? delay,
     bool? fireImmediately,
     EqualityComparer<T>? equals,
+    Timer Function(void Function())? scheduler,
     void Function(Object, Reaction)? onError}) {
   late ReactionImpl rxn;
 
@@ -77,8 +83,9 @@ ReactionDisposer createReaction<T>(
   final effectAction =
       Action((T? value) => effect(value as T), name: '$rxnName-effect');
 
-  final runSync = delay == null;
-  final scheduler = delay != null ? createDelayedScheduler(delay) : null;
+  final runSync = scheduler == null && delay == null;
+  final schedulerFromOptions =
+      scheduler ?? (delay != null ? createDelayedScheduler(delay) : null);
 
   var firstTime = true;
   T? value;
@@ -124,7 +131,7 @@ ReactionDisposer createReaction<T>(
       timer?.cancel();
       timer = null;
 
-      timer = scheduler!(() {
+      timer = schedulerFromOptions!(() {
         isScheduled = false;
         if (!rxn.isDisposed) {
           reactionRunner();

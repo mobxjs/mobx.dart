@@ -1,3 +1,7 @@
+## 2.4.0
+
+- Add `scheduler` to `reaction` and `autorun` to allow customizing the scheduler used to schedule the reaction. By [@amondnet]((https://github.com/amondnet).
+
 ## 2.2.3+1
 
 Make the change in 2.2.3 optional. If you want the use this behavior , modify `@observable` to 
