@@ -124,6 +124,9 @@ abstract class _TestStore with Store {
     // ignore: only_throw_errors
     throw 'TEST ERROR';
   }
+
+  @observable
+  late String lateField;
 }
 
 void main() {
@@ -278,5 +281,17 @@ void main() {
     } on Object catch (_) {}
 
     expect(values, equals(['', 'field1', 'field2']));
+  });
+
+  test('setting late fields with action works', () {
+    final store = TestStore('field1', field2: 'field2');
+
+    final fields = <String>[];
+    autorun((_) {
+      fields.add(store.lateField);
+    });
+    store.lateField = 'field';
+
+    expect(fields, equals(['field']));
   });
 }
