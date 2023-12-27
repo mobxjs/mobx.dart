@@ -68,3 +68,49 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: ${{ matrix.package }}
           files: ./${{ matrix.package }}/coverage/lcov.txt
+
+  build_lint_packages:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ matrix.package }}
+
+    strategy:
+      matrix:
+        package: ["mobx_lint", "mobx_lint_flutter_test"]
+        version: ["stable"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ matrix.channel }}
+      - name: Add pub cache bin to PATH
+        run: echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
+      - name: Add pub cache to PATH
+        run: echo "PUB_CACHE="$HOME/.pub-cache"" >> $GITHUB_ENV
+      - name: Install dependencies
+        run: flutter pub get
+      - run: dart pub global activate custom_lint
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run custom_lint
+        run: custom_lint
+        # Workaround to https://github.com/invertase/dart_custom_lint/issues/77
+        if: matrix.package == 'mobx_lint_flutter_test'
+
+      - name: Run tests
+        if: matrix.package == 'mobx_lint_flutter_test'
+        # Workaround to https://github.com/dart-lang/sdk/issues/53530
+        run: ../tool/coverage.sh
+
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v3
+        if: matrix.package == 'mobx_lint_flutter_test'
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: mobx_lint
+          files: coverage/lcov.txt

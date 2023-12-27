@@ -1,0 +1,25 @@
+name: mobx_lint_flutter_test
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mobx:
+  flutter_mobx:
+
+
+dev_dependencies:
+  mobx_lint:
+    path: ../mobx_lint
+  test: ^1.15.0
+
+dependency_overrides:
+  mobx:
+    path: ../mobx
+  flutter_mobx:
+    path: ../flutter_mobx
+
