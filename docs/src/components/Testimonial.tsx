@@ -18,14 +18,14 @@ export const Profile: FunctionComponent<{
   style?: CSSProperties;
 }> = ({ photo, author, title, twitter, size = 64, style }) => {
   return (
-    <div className={'flex flex-row'}>
+    <div className={'flex flex-col lg:flex-row gap-4'}>
       <img
         src={photo}
         width={size}
         height={size}
         className={'rounded-full border-solid border-2 border-blue-300'}
       />
-      <div className={'flex flex-col flex-1 ml-8'}>
+      <div className={'flex flex-col flex-1'}>
         <a href={twitter} className={'text-xl text-blue-300 mb-2'}>
           {author}
         </a>
@@ -43,7 +43,11 @@ const Testimonial: FunctionComponent<Props> = ({
   twitter,
 }) => {
   return (
-    <div className={'flex flex-col shadow-sm shadow-white rounded-xl p-8'}>
+    <div
+      className={
+        'flex flex-col border-gray-500 border-solid border rounded-xl p-4 sm:p-8'
+      }
+    >
       <div className={'text-xl mb-8'}>{message}</div>
       <Profile
         photo={photoUrl}
@@ -57,7 +61,9 @@ const Testimonial: FunctionComponent<Props> = ({
 
 export const TestimonialList: FunctionComponent = () => {
   return (
-    <div className={'grid grid-cols-3 gap-8'}>
+    <div
+      className={'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-16'}
+    >
       {testimonials.map((item) => (
         <Testimonial {...item} key={item.author} />
       ))}
