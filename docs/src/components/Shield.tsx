@@ -9,11 +9,6 @@ const GithubWorkflowStatus = ({
 }) => (
   <a
     href={`https://github.com/mobxjs/mobx.dart/actions/workflows/${workflow}.yml`}
-    style={{
-      display: 'inline-block',
-      marginLeft: '0.25rem',
-      marginRight: '0.25rem',
-    }}
   >
     <img
       alt={label}
@@ -31,14 +26,7 @@ export const PublishStatus = () => (
 );
 
 export const CoverageStatus = () => (
-  <a
-    href="https://codecov.io/gh/mobxjs/mobx.dart"
-    style={{
-      display: 'inline-block',
-      marginLeft: '0.25rem',
-      marginRight: '0.25rem',
-    }}
-  >
+  <a href="https://codecov.io/gh/mobxjs/mobx.dart">
     <img
       alt="Coverage Status"
       src="https://img.shields.io/codecov/c/github/mobxjs/mobx.dart?logo=codecov&style=for-the-badge"
@@ -47,14 +35,7 @@ export const CoverageStatus = () => (
 );
 
 export const NetlifyStatus = () => (
-  <a
-    href="https://app.netlify.com/sites/mobx/deploys"
-    style={{
-      display: 'inline-block',
-      marginLeft: '0.25rem',
-      marginRight: '0.25rem',
-    }}
-  >
+  <a href="https://app.netlify.com/sites/mobx/deploys">
     <img
       alt="Netlify Status"
       src="https://img.shields.io/netlify/05330d31-0411-4aac-a278-76615bcaff9e?logo=netlify&style=for-the-badge"
@@ -63,14 +44,7 @@ export const NetlifyStatus = () => (
 );
 
 export const DiscordChat = () => (
-  <a
-    href="https://discord.gg/dNHY52k"
-    style={{
-      display: 'inline-block',
-      marginLeft: '0.25rem',
-      marginRight: '0.25rem',
-    }}
-  >
+  <a href="https://discord.gg/dNHY52k">
     <img
       alt="Join the chat at https://discord.gg/dNHY52k"
       src="https://img.shields.io/discord/637471236116447233?style=for-the-badge&logo=discord"

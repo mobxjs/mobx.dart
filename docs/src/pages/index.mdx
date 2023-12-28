@@ -17,33 +17,49 @@ import { TestimonialList } from '../components/Testimonial';
 
 import MobXLogo from '../images/mobx.svg';
 
-<div className={'container'}>
-  <div className={'grid grid-cols-2 gap-4'}>
-    <div>
-      <div className={'text-6xl font-extrabold'}>
-        [MobX](https://github.com/mobxjs/mobx) for Dart and Flutter
-      </div>
-      <div className={'text-xl text-gray-600 mb-12'}>Hassle free state-management for your Dart and Flutter apps</div>
-
-      <div>
-        <PubBadge name="mobx" />
-        <PubBadge name="flutter_mobx" />
-        <PubBadge name="mobx_codegen" />
-      </div>
-
-      <div>
-        <BuildStatus /> <PublishStatus /> <CoverageStatus /> <NetlifyStatus />
-      </div>
-
-      <DiscordChat />
+<div className={'mb-16 grid grid-cols-2 gap-8 items-center justify-items-center'}>
+  <div>
+    <div className={'text-6xl font-extrabold'}>
+      [MobX](https://github.com/mobxjs/mobx) for Dart and Flutter
     </div>
-    <div>
-      <MobXLogo
-        alt={'MobX logo'}
-        width={512}
-      />
 
+    <div className={'text-3xl mb-8'}>
+      Hassle free state-management for your Dart and Flutter apps.
     </div>
+
+    <div className={'text-xl text-gray-500 mb-32'}>
+      Use the power of `Observables`, `Actions` and `Reactions` to supercharge the state in your apps.
+    </div>
+
+    <a
+      className={'border-blue-800 border bg-blue-500 hover:bg-blue-600 hover:transition-colors text-2xl p-6 rounded-lg hover:no-underline text-white hover:text-white mr-4'}
+      href={'/getting-started'}>Get Started 🚀</a>
+    <a
+      className={'border-blue-500 border-2 border-solid text-2xl p-6 rounded-lg hover:no-underline hover:border-blue-600 hover:transition-colors '}
+      href={'/concepts'}>Learn
+      More...</a>
+
+  </div>
+
+{' '}
+
+{' '}
+
+<MobXLogo alt={'MobX logo'} width={512} />
+
+</div>
+
+<div className={'bg-amber-100'}>
+  <div className={'flex flex-wrap gap-4'}>
+    <PubBadge name="mobx" />
+    <PubBadge name="flutter_mobx" />
+    <PubBadge name="mobx_codegen" />
+
+    <BuildStatus />
+    <PublishStatus />
+    <CoverageStatus />
+    <NetlifyStatus />
+    <DiscordChat />
 
   </div>
 
