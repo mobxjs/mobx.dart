@@ -250,10 +250,15 @@ function NutshellListItem({
   detail: React.ReactElement;
   index: number;
 }) {
-  const blue = `bg-blue-${index * 100}`;
+  // NOTE:
+  // Have to specifically create this array to ensure the tailwindcss processor
+  // does not exclude these classes
+  const blue = ['bg-blue-100', 'bg-blue-200', 'bg-blue-300'];
   return (
     <aside
-      className={`border border-solid border-blue-500 p-4 sm:p-8 rounded-lg ${blue}`}
+      className={`border border-solid border-blue-500 p-4 sm:p-8 rounded-lg ${
+        blue[index - 1]
+      }`}
     >
       <h2 className={'text-xl sm:text-2xl'}>
         <span
