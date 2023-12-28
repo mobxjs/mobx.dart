@@ -1,8 +1,5 @@
 import React, { CSSProperties, FunctionComponent } from 'react';
-import styled from '@emotion/styled';
 import { testimonials } from './testimonials';
-
-const primaryColor = '#1389FD';
 
 interface Props {
   author: string;
@@ -11,63 +8,6 @@ interface Props {
   twitter: string;
   photoUrl: string;
 }
-
-const Message = styled.div`
-  padding: 16px;
-  font-size: 18px;
-
-  &:before,
-  &:after {
-    font-size: 24px;
-    font-family: 'Georgia', serif;
-    color: ${primaryColor};
-  }
-
-  &:before {
-    content: '“';
-  }
-
-  &:after {
-    content: '”';
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background: #f5f6f7;
-  border-radius: 8px;
-  margin-bottom: 30px;
-  box-shadow: 1px 1px 5px #ddd;
-`;
-
-const ProfileContainer = styled.div`
-  display: flex;
-  align-items: center;
-
-  .name {
-    font-size: 18px;
-    color: ${primaryColor};
-
-    & > a,
-    & > a:visited,
-    & > a:hover {
-      color: ${primaryColor};
-      text-decoration: none;
-    }
-  }
-
-  .title {
-    font-size: 14px;
-    color: gray;
-  }
-
-  img {
-    border-radius: 50%;
-    border: 5px solid ${primaryColor};
-  }
-`;
 
 export const Profile: FunctionComponent<{
   photo: string;
@@ -78,22 +18,20 @@ export const Profile: FunctionComponent<{
   style?: CSSProperties;
 }> = ({ photo, author, title, twitter, size = 64, style }) => {
   return (
-    <ProfileContainer style={style}>
-      <img src={photo} width={size} height={size} />
-      <div
-        style={{
-          marginLeft: 10,
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <div className={'name'}>
-          <a href={twitter}>{author}</a>
-        </div>
-        <div className={'title'}>{title}</div>
+    <div className={'flex flex-col lg:flex-row gap-4'}>
+      <img
+        src={photo}
+        width={size}
+        height={size}
+        className={'rounded-full border-solid border-2 border-blue-300'}
+      />
+      <div className={'flex flex-col flex-1'}>
+        <a href={twitter} className={'text-xl text-blue-300 mb-2'}>
+          {author}
+        </a>
+        <div className={'text-sm font-mono'}>{title}</div>
       </div>
-    </ProfileContainer>
+    </div>
   );
 };
 
@@ -105,26 +43,30 @@ const Testimonial: FunctionComponent<Props> = ({
   twitter,
 }) => {
   return (
-    <Container>
-      <Message>{message}</Message>
+    <div
+      className={
+        'flex flex-col border-gray-500 border-solid border rounded-xl p-4 sm:p-8'
+      }
+    >
+      <div className={'text-xl mb-8'}>{message}</div>
       <Profile
         photo={photoUrl}
         twitter={twitter}
         author={author}
         title={title}
       />
-    </Container>
+    </div>
   );
 };
 
-const TestimonialContainer = styled.div``;
-
 export const TestimonialList: FunctionComponent = () => {
   return (
-    <TestimonialContainer>
+    <div
+      className={'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-16'}
+    >
       {testimonials.map((item) => (
         <Testimonial {...item} key={item.author} />
       ))}
-    </TestimonialContainer>
+    </div>
   );
 };

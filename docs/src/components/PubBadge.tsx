@@ -11,7 +11,7 @@ export const PubBadge: FunctionComponent<Props> = (props) => {
     <a href={`https://pub.dartlang.org/packages/${name}`}>
       <img
         alt="pub"
-        src={`https://img.shields.io/pub/v/${name}.svg?label=${name}&color=blue`}
+        src={`https://img.shields.io/pub/v/${name}.svg?label=${name}&logo=dart&color=blue&style=for-the-badge`}
       />
     </a>
   );

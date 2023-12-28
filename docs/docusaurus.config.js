@@ -22,6 +22,12 @@ module.exports = {
       },
       items: [
         {
+          type: 'doc',
+          position: 'left',
+          docId: 'getting-started/index',
+          label: 'Docs',
+        },
+        {
           href: 'https://discord.gg/dNHY52k',
           position: 'right',
           className: 'icon-link discord-link',
@@ -112,12 +118,28 @@ module.exports = {
       indexName: 'mobx_dart_flutter',
     },
   },
-  plugins: [path.resolve(__dirname, './plugins/fetch-versions')],
+  plugins: [
+    path.resolve(__dirname, './plugins/fetch-versions'),
+    function postCSSPlugin(context, options) {
+      return {
+        name: 'docusaurus-tailwindcss',
+        configurePostCss(postcssOptions) {
+          postcssOptions.plugins.push(require('tailwindcss'));
+          postcssOptions.plugins.push(require('autoprefixer'));
+          return postcssOptions;
+        },
+      };
+    },
+  ],
   presets: [
     [
-      '@docusaurus/preset-classic',
+      'classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
       {
-        pages: false,
+        pages: {
+          path: 'src/pages',
+          routeBasePath: '/',
+        },
         blog: false,
         docs: {
           path: 'docs',
