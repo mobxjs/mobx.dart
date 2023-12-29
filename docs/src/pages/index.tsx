@@ -42,11 +42,11 @@ function HeroSection() {
           Flutter
         </div>
 
-        <div className={'text-2xl sm:text-3xl mb-8'}>
+        <div className={'text-2xl sm:text-3xl my-4'}>
           Hassle free state-management for your Dart and Flutter apps.
         </div>
 
-        <div className={'text-lg sm:text-xl text-gray-500 mb-32'}>
+        <div className={'text-lg sm:text-xl text-gray-500 mb-16'}>
           Use the power of <code>Observables</code>, <code>Actions</code> and{' '}
           <code>Reactions</code> to supercharge the state in your apps.
         </div>
@@ -88,7 +88,7 @@ function MobXLogoViewer({ className }: { className?: string }) {
 function BadgesSection() {
   return (
     <Section
-      className={'bg-slate-300'}
+      className={'bg-slate-100'}
       containerClassName={'grid grid-cols-1 sm:grid-cols-2 gap-8 items-center'}
     >
       <div className={'flex flex-col lg:flex-row gap-4 items-center'}>
@@ -174,7 +174,7 @@ function NutshellSection() {
           />
         </div>
 
-        <div className={'col-span-3 text-center'}>
+        <div className={'col-span-3 text-center mt-8'}>
           <img
             src={require('../images/mobx-triad.png').default}
             alt="MobX Triad"
@@ -188,7 +188,7 @@ function NutshellSection() {
 
 function SponsorSection() {
   return (
-    <Section className={'bg-slate-300'} title={'Sponsors'}>
+    <Section className={'bg-slate-100'} title={'Sponsors'}>
       <div className={'text-xl mb-8'}>
         We are very thankful to our sponsors to make us part of their{' '}
         <i>Open Source Software (OSS)</i> program.

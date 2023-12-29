@@ -34,7 +34,7 @@ export const SponsorList = () => {
         <a
           href={'https://opencollective.com/mobx#sponsor'}
           className={
-            'bg-gray-100 hover:bg-blue-100 border-gray-300 border border-solid rounded-lg items-center flex flex-col px-4 hover:no-underline'
+            'bg-slate-300 hover:bg-blue-300 rounded-lg items-center flex flex-col px-4 py-2 hover:no-underline'
           }
         >
           <div className={'text-5xl'}>+</div>
