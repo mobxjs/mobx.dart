@@ -66,28 +66,60 @@ export function NutshellSection() {
         </div>
       </div>
 
-      <h1 className={'my-16'}>Let's see in code...</h1>
-      <CodeBlock
-        language={'dart'}
-        showLineNumbers={true}
-        className={'mb-8'}
-        title={'Classic Counter example in MobX'}
-      >
-        {counterSource}
-      </CodeBlock>
-
-      <p className={'text-xl'}>
-        Read more about building the Counter example, using an alternative
-        approach, involving the <code>mobx_codegen</code> package.
-      </p>
-      <a
-        href={'/examples/counter'}
-        className={
-          'inline-block border border-solid border-blue-500 rounded p-4'
-        }
-      >
-        Read more...
-      </a>
+      <CodeExample />
     </Section>
+  );
+}
+
+function CodeExample() {
+  return (
+    <>
+      <h1 className={'my-16'}>Let's see in code...</h1>
+      <div className={'grid grid-cols-1 md:grid-cols-2 gap-8'}>
+        <div style={{ height: 640 }}>
+          <CodeBlock
+            language={'dart'}
+            showLineNumbers={true}
+            className={'mb-8 h-full overflow-auto'}
+            title={'Classic Counter example in MobX'}
+          >
+            {counterSource}
+          </CodeBlock>
+        </div>
+
+        <div className={'text-xl'}>
+          <ul className={'list-none'}>
+            <li>
+              <h3>
+                <code>Step 1</code> Observable State
+              </h3>
+              Setup the observable state. In this case its a simple count as an
+              integer.
+            </li>
+            <li className={'my-8'}>
+              <h3>
+                <code>Step 2</code> Action to mutate state
+              </h3>
+              Setup the action to increment the count. When the action is
+              executed, it will fire notifications automatically and inform all
+              associated reactions.
+            </li>
+            <li>
+              <h3>
+                <code>Step 3</code> Reaction to observe state
+              </h3>
+              Display the count using the Observer. The Observer is a reaction
+              internally that tracks changes to the associated observable
+              (count). When the count changes, it gets notified by the action
+              and re-renders the Flutter Widget to show the updated count.
+            </li>
+          </ul>
+          This is a just a simple example to get you started.{' '}
+          <a href={'/examples/counter'}>Read more</a> about building the Counter
+          example, using an alternative approach, involving the{' '}
+          <code>mobx_codegen</code> package.
+        </div>
+      </div>
+    </>
   );
 }

@@ -5,16 +5,11 @@ import 'package:mobx/mobx.dart';
 class SimpleCounter {
 // highlight-start
   // Step 1
-  // ======
-  // Setup the observable state.
-  // In this case its a simple count as an integer.
   final count = Observable(0);
 // highlight-end
 
 // highlight-start
   // Step 2
-  // ======
-  // Setup the action to increment the count
   void increment() {
     runInAction(() => count.value++);
   }
@@ -46,8 +41,6 @@ class CounterExampleState extends State<CounterView> {
               ),
 // highlight-start
               // Step 3
-              // ======
-              // Display the count using the Observer (a reaction)
               Observer(
                   builder: (_) => Text(
                         '${counter.count.value}',
