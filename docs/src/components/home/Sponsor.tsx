@@ -1,5 +1,5 @@
 import React from 'react';
-import { sponsors } from '../data/sponsors';
+import { sponsors } from '../../data/sponsors';
 
 export const Sponsor = ({ logo, url }) => {
   return (

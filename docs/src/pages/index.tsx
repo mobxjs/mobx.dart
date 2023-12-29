@@ -8,13 +8,15 @@ import {
   PubBadge,
   PublishStatus,
 } from '../components/Shield';
-import { SponsorList } from '../components/Sponsor';
-import { TestimonialList } from '../components/Testimonial';
+import { SponsorList } from '../components/home/Sponsor';
+import { TestimonialList } from '../components/home/Testimonial';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Spline from '@splinetool/react-spline';
-import { NutshellListItem } from '../components/NutshellListItem';
-import { Section } from '../components/Section';
+import { NutshellListItem } from '../components/home/NutshellListItem';
+import { Section } from '../components/home/Section';
+import CodeBlock from '@theme/CodeBlock';
+import counterSource from '!!raw-loader!../../../mobx_examples/lib/counter/without_codegen.dart';
 
 export default function () {
   return (
@@ -183,6 +185,16 @@ function NutshellSection() {
           />
         </div>
       </div>
+
+      <h2 className={'my-16'}>Let's see in code...</h2>
+      <CodeBlock
+        language={'dart'}
+        showLineNumbers={true}
+        className={'my-8 overflow-auto'}
+        title={'Classic Counter example in MobX'}
+      >
+        {counterSource}
+      </CodeBlock>
     </Section>
   );
 }
