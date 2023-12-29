@@ -80,7 +80,7 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Twitter',
+              label: 'X',
               href: 'https://twitter.com/pavanpodila',
             },
           ],

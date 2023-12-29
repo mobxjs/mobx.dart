@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 const GithubWorkflowStatus = ({
   label,
@@ -60,3 +60,20 @@ export const FlutterFavorite = () => (
     />
   </a>
 );
+
+interface Props {
+  name: string;
+}
+
+export const PubBadge: FunctionComponent<Props> = (props) => {
+  const { name } = props;
+
+  return (
+    <a href={`https://pub.dartlang.org/packages/${name}`}>
+      <img
+        alt="pub"
+        src={`https://img.shields.io/pub/v/${name}.svg?label=${name}&logo=dart&color=blue&style=for-the-badge`}
+      />
+    </a>
+  );
+};
