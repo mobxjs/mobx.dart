@@ -87,18 +87,18 @@ function CodeExample() {
           </CodeBlock>
         </div>
 
-        <div className={'text-xl'}>
+        <div className={'text-lg sm:text-xl'}>
           <ul className={'list-none'}>
             <li>
               <h3>
-                <code>Step 1</code> Observable State
+                <code className={'px-2'}>Step 1</code> Observable State
               </h3>
               Setup the observable state. In this case its a simple count as an
-              integer.
+              integer. This forms the reactive state of our example.
             </li>
             <li className={'my-8'}>
               <h3>
-                <code>Step 2</code> Action to mutate state
+                <code className={'px-2'}>Step 2</code> Action to mutate state
               </h3>
               Setup the action to increment the count. When the action is
               executed, it will fire notifications automatically and inform all
@@ -106,7 +106,7 @@ function CodeExample() {
             </li>
             <li>
               <h3>
-                <code>Step 3</code> Reaction to observe state
+                <code className={'px-2'}>Step 3</code> Reaction to observe state
               </h3>
               Display the count using the Observer. The Observer is a reaction
               internally that tracks changes to the associated observable
