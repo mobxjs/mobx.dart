@@ -14,6 +14,7 @@ import { TestimonialList } from '../components/Testimonial';
 import MobXLogo from '../images/mobx.svg';
 import React from 'react';
 import Layout from '@theme/Layout';
+import Spline from '@splinetool/react-spline';
 
 export default function () {
   return (
@@ -70,8 +71,17 @@ function HeroSection() {
         </div>
       </div>
 
-      <MobXLogo className={'order-1 sm:order-2 w-48 sm:w-80 lg:w-96'} />
+      <MobXLogoViewer className={'order-1 sm:order-2 w-full'} />
     </Section>
+  );
+}
+
+function MobXLogoViewer({ className }: { className?: string }) {
+  return (
+    <Spline
+      scene="https://prod.spline.design/CB9ncfOuCZuIaUKV/scene.splinecode"
+      className={className}
+    />
   );
 }
 
