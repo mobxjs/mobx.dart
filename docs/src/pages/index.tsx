@@ -1,4 +1,3 @@
-import { PubBadge } from '../components/PubBadge';
 import book from '../images/book.png';
 import {
   BuildStatus,
@@ -6,15 +5,16 @@ import {
   DiscordChat,
   FlutterFavorite,
   NetlifyStatus,
+  PubBadge,
   PublishStatus,
 } from '../components/Shield';
 import { SponsorList } from '../components/Sponsor';
 import { TestimonialList } from '../components/Testimonial';
-
-import MobXLogo from '../images/mobx.svg';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Spline from '@splinetool/react-spline';
+import { NutshellListItem } from '../components/NutshellListItem';
+import { Section } from '../components/Section';
 
 export default function () {
   return (
@@ -22,8 +22,8 @@ export default function () {
       <HeroSection />
       <BadgesSection />
       <NutshellSection />
-      <SponsorSection />
       <TestimonialSection />
+      <SponsorSection />
       <ConcludingSection />
     </Layout>
   );
@@ -32,6 +32,7 @@ export default function () {
 function HeroSection() {
   return (
     <Section
+      className={'bg-white'}
       containerClassName={
         'grid grid-cols-1 sm:grid-cols-2 gap-8 items-center justify-items-center'
       }
@@ -248,60 +249,5 @@ function ConcludingSection() {
         </div>
       </div>
     </Section>
-  );
-}
-
-function NutshellListItem({
-  title,
-  detail,
-  index,
-}: {
-  title: string;
-  detail: React.ReactElement;
-  index: number;
-}) {
-  // NOTE:
-  // Have to specifically create this array to ensure the tailwindcss processor
-  // does not exclude these classes
-  const blue = ['bg-blue-100', 'bg-blue-200', 'bg-blue-300'];
-  return (
-    <aside
-      className={`border border-solid border-blue-500 p-4 sm:p-8 rounded-lg ${
-        blue[index - 1]
-      }`}
-    >
-      <h2 className={'text-xl sm:text-2xl'}>
-        <span
-          className={
-            'inline-block mr-4 rounded-lg px-4 py-2 text-lg sm:text-xl bg-blue-900 text-white'
-          }
-        >
-          {index}
-        </span>
-        <span className={'text-blue-900'}>{title}</span>
-      </h2>
-      <div className={'text-lg sm:text-xl'}>{detail}</div>
-    </aside>
-  );
-}
-
-function Section({
-  children,
-  className,
-  containerClassName,
-  title,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  containerClassName?: string;
-  title?: string;
-}) {
-  return (
-    <section className={`py-16 ${className}`}>
-      <div className={`container ${containerClassName}`}>
-        {title && <h1>{title}</h1>}
-        {children}
-      </div>
-    </section>
   );
 }
