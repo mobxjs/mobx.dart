@@ -186,11 +186,11 @@ function NutshellSection() {
         </div>
       </div>
 
-      <h2 className={'my-16'}>Let's see in code...</h2>
+      <h1 className={'my-16'}>Let's see in code...</h1>
       <CodeBlock
         language={'dart'}
         showLineNumbers={true}
-        className={'my-8 overflow-auto'}
+        className={'overflow-auto'}
         title={'Classic Counter example in MobX'}
       >
         {counterSource}
