@@ -22,14 +22,14 @@ export function NutshellListItem({
       <h2 className={'text-xl sm:text-2xl'}>
         <span
           className={
-            'inline-block mr-4 rounded-lg px-4 py-2 text-lg sm:text-xl bg-blue-900 text-white'
+            'inline-block mr-4 rounded-lg px-4 py-2 bg-blue-900 text-white'
           }
         >
           {index}
         </span>
         <span className={'text-blue-900'}>{title}</span>
       </h2>
-      <div className={'text-lg sm:text-xl'}>{detail}</div>
+      <div className={''}>{detail}</div>
     </aside>
   );
 }

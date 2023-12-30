@@ -12,9 +12,9 @@ import { SponsorList } from '../components/home/Sponsor';
 import { TestimonialList } from '../components/home/Testimonial';
 import React from 'react';
 import Layout from '@theme/Layout';
-import Spline from '@splinetool/react-spline';
 import { Section } from '../components/home/Section';
 import { NutshellSection } from '../components/home/NutshellSection';
+import { HeroSection } from '../components/home/HeroSection';
 
 export default function () {
   return (
@@ -26,63 +26,6 @@ export default function () {
       <SponsorSection />
       <ConcludingSection />
     </Layout>
-  );
-}
-
-function HeroSection() {
-  return (
-    <Section
-      className={'bg-white'}
-      containerClassName={
-        'grid grid-cols-1 sm:grid-cols-2 gap-8 items-center justify-items-center'
-      }
-    >
-      <div className={'order-2 sm:order-1'}>
-        <div className={'text-4xl sm:text-6xl font-extrabold'}>
-          <a href={'https://github.com/mobxjs/mobx'}>MobX</a> for Dart and
-          Flutter
-        </div>
-
-        <div className={'text-2xl sm:text-3xl my-4'}>
-          Hassle free state-management for your Dart and Flutter apps.
-        </div>
-
-        <div className={'text-lg sm:text-xl text-gray-500 mb-16'}>
-          Use the power of <code>Observables</code>, <code>Actions</code> and{' '}
-          <code>Reactions</code> to supercharge the state in your apps.
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 text-center">
-          <a
-            className={
-              'text-2xl p-4 rounded-md sm:rounded-lg border-blue-800 border bg-blue-500 hover:bg-blue-600 hover:transition-colors hover:no-underline text-white hover:text-white'
-            }
-            href={'/getting-started'}
-          >
-            Get Started 🚀
-          </a>
-          <a
-            className={
-              'text-2xl p-4 rounded-md sm:rounded-lg border-blue-500 border-2 border-solid hover:no-underline hover:border-blue-600 hover:transition-colors '
-            }
-            href={'/concepts'}
-          >
-            Learn More...
-          </a>
-        </div>
-      </div>
-
-      <MobXLogoViewer className={'order-1 sm:order-2 w-full'} />
-    </Section>
-  );
-}
-
-function MobXLogoViewer({ className }: { className?: string }) {
-  return (
-    <Spline
-      scene="https://prod.spline.design/CB9ncfOuCZuIaUKV/scene.splinecode"
-      className={className}
-    />
   );
 }
 

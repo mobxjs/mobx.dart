@@ -6,8 +6,8 @@ import counterSource from '!!raw-loader!../../../../mobx_examples/lib/counter/wi
 
 export function NutshellSection() {
   return (
-    <Section title={'In a nutshell...'}>
-      <div className={'text-lg sm:text-2xl text-gray-500 mb-16 sm:columns-2'}>
+    <Section title={'In a nutshell...'} className={'text-lg md:text-xl'}>
+      <div className={'text-gray-500 mb-16 sm:columns-2'}>
         MobX is a state-management library that makes it simple to connect the
         reactive data of your application with the UI (or any observer). This
         wiring is <b>completely automatic</b> and feels very natural. As the
@@ -76,18 +76,18 @@ function CodeExample() {
     <>
       <h1 className={'my-16'}>Let's see in code...</h1>
       <div className={'grid grid-cols-1 md:grid-cols-2 gap-8'}>
-        <div style={{ height: 640 }}>
+        <div className={'h-96 md:h-svh'}>
           <CodeBlock
             language={'dart'}
             showLineNumbers={true}
-            className={'mb-8 h-full overflow-auto'}
+            className={'mb-8 h-full overflow-auto text-sm sm:text-base'}
             title={'Classic Counter example in MobX'}
           >
             {counterSource}
           </CodeBlock>
         </div>
 
-        <div className={'text-lg sm:text-xl'}>
+        <div>
           <ul className={'list-none'}>
             <li>
               <h3>
