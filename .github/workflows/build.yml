@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         package: ["mobx_codegen", "mobx"]
-        version: ["stable"]
+        version: ["stable", "beta"]
 
     steps:
       - uses: actions/checkout@v3
