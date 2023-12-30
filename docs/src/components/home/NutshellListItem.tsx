@@ -15,9 +15,10 @@ export function NutshellListItem({
   const blue = ['bg-blue-100', 'bg-blue-200', 'bg-blue-300'];
   return (
     <aside
-      className={`border border-solid border-blue-500 p-4 sm:p-8 rounded-lg ${
-        blue[index - 1]
-      }`}
+      className={`
+      border border-solid border-blue-500 p-4 sm:p-8 rounded-lg
+      shadow-lg shadow-blue-300 
+      ${blue[index - 1]}`}
     >
       <h2 className={'text-xl sm:text-2xl'}>
         <span

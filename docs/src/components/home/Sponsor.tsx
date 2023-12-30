@@ -22,7 +22,9 @@ export const SponsorList = () => {
           }
         >
           <div className={'text-5xl'}>+</div>
-          <div className={'text-lg sm:text-xl'}>Become a sponsor</div>
+          <div className={'text-sm sm:text-xl text-nowrap'}>
+            Become a sponsor
+          </div>
         </a>
 
         {sponsors
