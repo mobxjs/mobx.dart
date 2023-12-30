@@ -80,13 +80,13 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Twitter',
+              label: 'X',
               href: 'https://twitter.com/pavanpodila',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} MobX.dart team. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} MobX.dart team. All rights reserved.`,
     },
     prism: {
       theme: require('prism-react-renderer').themes.vsDark,

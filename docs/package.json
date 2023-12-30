@@ -16,6 +16,8 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mdx-js/react": "^3.0.0",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^1.0.17",
     "axios": "^1.6.3",
     "dotenv": "^16.3.1",
     "lodash.get": "^4.4.2",
@@ -25,6 +27,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.0.0",
     "@docusaurus/types": "^3.0.1",
+    "raw-loader": "^4.0.2",
     "@types/lodash.get": "^4.4.9",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",

@@ -1,5 +1,5 @@
 import React, { CSSProperties, FunctionComponent } from 'react';
-import { testimonials } from './testimonials';
+import { testimonials } from '../../data/testimonials';
 
 interface Props {
   author: string;
