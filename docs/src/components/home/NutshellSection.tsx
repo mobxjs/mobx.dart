@@ -91,28 +91,14 @@ function CodeExample() {
           <ul className={'list-none'}>
             <li>
               <h3>
-                <code
-                  className={
-                    'px-2 shadow-lg shadow-blue-500 bg-white text-base'
-                  }
-                >
-                  Step 1
-                </code>{' '}
-                Observable State
+                <StepIndicator>Step 1</StepIndicator> Observable State
               </h3>
-              Setup the observable state. In this case its a simple count as an
-              integer. This forms the reactive state of our example.
+              We first setup the observable state. In this case its a simple
+              count as an integer. This forms the reactive state of our example.
             </li>
             <li className={'my-8'}>
               <h3>
-                <code
-                  className={
-                    'px-2 shadow-lg shadow-blue-500 bg-white text-base'
-                  }
-                >
-                  Step 2
-                </code>{' '}
-                Action to mutate state
+                <StepIndicator>Step 2</StepIndicator> Action to mutate state
               </h3>
               Setup the action to increment the count. When the action is
               executed, it will fire notifications automatically and inform all
@@ -120,19 +106,15 @@ function CodeExample() {
             </li>
             <li>
               <h3>
-                <code
-                  className={
-                    'px-2 shadow-lg shadow-blue-500 bg-white text-base'
-                  }
-                >
-                  Step 3
-                </code>{' '}
+                <StepIndicator>Step 3</StepIndicator>
                 Reaction to observe state
               </h3>
-              Display the count using the Observer. The Observer is a reaction
-              internally that tracks changes to the associated observable
-              (count). When the count changes, it gets notified by the action
-              and re-renders the Flutter Widget to show the updated count.
+              Display the count using the <code>Observer</code>. Internally, the
+              Observer is a reaction that tracks changes to the associated
+              observable (count). Tracking happens automatically. The simple act
+              of reading an observable value is enough. When the count changes,
+              it gets notified by the action and re-renders the Flutter Widget
+              to show the updated count.
             </li>
           </ul>
           This is a just a simple example to get you started.{' '}
@@ -142,5 +124,13 @@ function CodeExample() {
         </div>
       </div>
     </>
+  );
+}
+
+function StepIndicator({ children }: { children: React.ReactNode }) {
+  return (
+    <code className={'px-2 shadow-lg shadow-blue-500 bg-white text-base mr-2'}>
+      {children}
+    </code>
   );
 }
