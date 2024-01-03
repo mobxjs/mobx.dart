@@ -15,9 +15,12 @@ export function BadgesSection() {
     <Section className={'bg-slate-100'}>
       <div className="flex flex-col sm:flex-row gap-8 items-center justify-center pb-8">
         <Statistic stat={'2.3K+'}>
-          <div className={'flex flex-row items-center'}>
-            <a href={'https://github.com/mobxjs/mobx.dart'}>
-              Github <Star />
+          <div>
+            <a
+              href={'https://github.com/mobxjs/mobx.dart'}
+              className={'inline-flex flex-row items-center'}
+            >
+              <span>Github</span> <Star />
             </a>
           </div>
         </Statistic>
@@ -67,7 +70,7 @@ function Statistic({
   return (
     <div
       className={
-        'flex flex-col items-center bg-white p-8 rounded-lg text-center shadow-xl'
+        'flex flex-col items-center p-8 rounded-lg text-center shadow-xl bg-white'
       }
     >
       <div className={'text-3xl font-bold font-mono'}>{stat}</div>

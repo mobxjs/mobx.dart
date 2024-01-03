@@ -33,7 +33,7 @@ export function HeroSection() {
               border border-solid border-white
               bg-gradient-to-br from-blue-700 to-blue-300
               hover:from-blue-900 hover:to-blue-500  
-              hover:transition-colors hover:no-underline 
+              hover:no-underline 
               text-white hover:text-white`}
             href={'/getting-started'}
           >
