@@ -109,17 +109,15 @@ module.exports = {
       },
       { name: 'twitter:image:alt', content: 'The MobX Logo' },
     ],
-    algolia: {
-      appId: 'BH4D9OD16A',
-
-      // Public API key: it is safe to commit it
-      apiKey: 'a829c1cef394f368e6b41dbd49b41b72',
-
-      indexName: 'mobx_dart_flutter',
-    },
   },
   plugins: [
-    path.resolve(__dirname, './plugins/fetch-versions'),
+    [
+      path.resolve(__dirname, './plugins/fetch-versions'),
+      {
+        indexBaseUrl: true,
+      },
+    ],
+    require.resolve('docusaurus-lunr-search'),
     function postCSSPlugin(context, options) {
       return {
         name: 'docusaurus-tailwindcss',

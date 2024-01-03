@@ -20,6 +20,26 @@
   --ifm-color-primary-lightest: #64b1fe;
 
   --ifm-code-font-size: 100%;
+
+  --ifm-navbar-search-input-background-color: theme('colors.blue.100');
+}
+
+.navbar__search-input {
+  border: 1px solid theme('colors.blue.300');
+
+  &::placeholder {
+      color: theme('colors.blue.400');
+  }
+}
+
+.navbar__title {
+  @apply invisible;
+}
+
+@media screen and (min-width: 400px) {
+  .navbar__title {
+    @apply visible;
+  }
 }
 
 .docusaurus-highlight-code-line {

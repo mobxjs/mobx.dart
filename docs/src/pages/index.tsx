@@ -1,13 +1,4 @@
 import book from '../images/book.png';
-import {
-  BuildStatus,
-  CoverageStatus,
-  DiscordChat,
-  FlutterFavorite,
-  NetlifyStatus,
-  PubBadge,
-  PublishStatus,
-} from '../components/Shield';
 import { SponsorList } from '../components/home/Sponsor';
 import { TestimonialList } from '../components/home/Testimonial';
 import React from 'react';
@@ -15,6 +6,7 @@ import Layout from '@theme/Layout';
 import { Section } from '../components/home/Section';
 import { NutshellSection } from '../components/home/NutshellSection';
 import { HeroSection } from '../components/home/HeroSection';
+import { BadgesSection } from '../components/home/BadgesSection';
 
 export default function () {
   return (
@@ -26,42 +18,6 @@ export default function () {
       <SponsorSection />
       <ConcludingSection />
     </Layout>
-  );
-}
-
-function BadgesSection() {
-  return (
-    <Section
-      className={'bg-slate-100'}
-      containerClassName={'grid grid-cols-1 sm:grid-cols-2 gap-8 items-center'}
-    >
-      <div className={'flex flex-col lg:flex-row gap-4 items-center'}>
-        <FlutterFavorite />
-
-        <ul className={'list-none text-xl'}>
-          <li>
-            🎉 With official support for{' '}
-            <a href={'https://dart.dev/null-safety'}>Null Safety</a>
-          </li>
-          <li className={'my-2'}>
-            Works on iOS, Android, Web, MacOS, Linux, Windows
-          </li>
-          <li>Dart 3.0 compatible</li>
-        </ul>
-      </div>
-
-      <div className={'flex flex-wrap gap-2'}>
-        <PubBadge name="mobx" />
-        <PubBadge name="flutter_mobx" />
-        <PubBadge name="mobx_codegen" />
-
-        <BuildStatus />
-        <PublishStatus />
-        <CoverageStatus />
-        <NetlifyStatus />
-        <DiscordChat />
-      </div>
-    </Section>
   );
 }
 
@@ -88,6 +44,7 @@ function TestimonialSection() {
     </Section>
   );
 }
+
 function ConcludingSection() {
   return (
     <Section
