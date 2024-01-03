@@ -26,6 +26,7 @@
 
 .navbar__search-input {
   border: 1px solid theme('colors.blue.300');
+  font-size: 1rem;
 
   &::placeholder {
       color: theme('colors.blue.400');
