@@ -48,6 +48,7 @@ export function BadgesSection() {
           <PubBadge name="mobx" />
           <PubBadge name="flutter_mobx" />
           <PubBadge name="mobx_codegen" />
+          <PubBadge name="mobx_lint" />
 
           <BuildStatus />
           <PublishStatus />

@@ -1,26 +1,30 @@
+## 2.3.0+1
+
+- `pubspec.yaml` updated to include homepage and topics
+
 ## 2.3.0
 
 - Add `keepAlive` to `Computed` to avoid suspending computed values when they are not being observed by anything.
 
 ## 2.2.3+1
 
-Make the change in `2.2.3` optional. If you want the use this behavior , modify `@observable` to 
+Make the change in `2.2.3` optional. If you want the use this behavior , modify `@observable` to
 `@MakeObservable(useDeepEquality: true)`.
 
 - Adds `useDeepEquality` for creating observables by [@amondnet](https://github.com/amondnet)
 
 ## 2.2.3
 
-- Avoid unnecessary observable notifications of `@observable` `Iterable` or `Map` fields of Stores by [@amondnet](https://github.com/amondnet)  in [#951](https://github.com/mobxjs/mobx.dart/pull/951)
+- Avoid unnecessary observable notifications of `@observable` `Iterable` or `Map` fields of Stores by [@amondnet](https://github.com/amondnet) in [#951](https://github.com/mobxjs/mobx.dart/pull/951)
 
 ## 2.2.2
 
-- Fix [#956]((https://github.com/mobxjs/mobx.dart/issues/956)): ObservableSet` and `ObservableMap` should not notify all listeners when `observe` with fireImmediately. by [@amondnet](https://github.com/amondnet) in [#962](https://github.com/mobxjs/mobx.dart/pull/962)
+- Fix [#956](<(https://github.com/mobxjs/mobx.dart/issues/956)>): ObservableSet`and`ObservableMap`should not notify all listeners when`observe` with fireImmediately. by [@amondnet](https://github.com/amondnet) in [#962](https://github.com/mobxjs/mobx.dart/pull/962)
 
 ## 2.2.1
 
 - Reduces unnecessary iterations while using `Iterables` with `addAll`, `insertAll`, `replaceRange`, `setAll` and `setRange` methods. [#942](https://github.com/mobxjs/mobx.dart/pull/942).
- 
+
 ## 2.2.0
 
 - Allows a reaction to be fired even if the value hasn't changed by [@amondnet](https://github.com/amondnet) in [#907](https://github.com/mobxjs/mobx.dart/pull/907)
