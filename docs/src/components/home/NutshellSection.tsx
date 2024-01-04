@@ -15,55 +15,55 @@ export function NutshellSection() {
         be consumed <b>without worrying about keeping the two in sync</b>.
       </div>
 
-      <div className={'flex flex-col-reverse lg:flex-col'}>
-        <div className={'grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8'}>
-          <NutshellListItem
-            title={'Observables'}
-            index={1}
-            detail={
-              <div>
-                Observables store the <b>reactive state</b> of your application.
-                It will notify the associated reactions whenever the state
-                changes. Observables can be simple primitives like numbers,
-                strings, booleans to List, Map, Stream and Future.
-              </div>
-            }
-          />
-          <NutshellListItem
-            title={'Actions'}
-            index={2}
-            detail={
-              <div>
-                Actions are responsible for <b>mutating</b> the reactive state.
-                When the mutations happen, the notifications are fired
-                immediately, causing all the reactions to execute. An action
-                acts as an intentionally-named operation that changes the state
-                of the application.
-              </div>
-            }
-          />
-          <NutshellListItem
-            title={'Reactions'}
-            index={3}
-            detail={
-              <div>
-                Reactions, as the name suggests are responsible for{' '}
-                <b>reacting to the state changes</b>. These can be anything from
-                a simple console log, API calls to rendering the Flutter UI.
-                Reaction (aka <i>"side-effect"</i>) is the only element that can
-                take you out of the MobX reactivity loop.
-              </div>
-            }
-          />
-        </div>
+      <div className={'text-center'}>
+        <video
+          src={'/mobx.mp4'}
+          className={'text-center w-full md:w-fit'}
+          muted
+          autoPlay
+          loop
+        />
+      </div>
 
-        <div className={'col-span-3 text-center mt-8'}>
-          <img
-            src={require('../../images/mobx-triad.png').default}
-            alt="MobX Triad"
-            className={'sm:col-span-3 text-center w-fit'}
-          />
-        </div>
+      <div className={'grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8'}>
+        <NutshellListItem
+          title={'Observables'}
+          index={1}
+          detail={
+            <div>
+              Observables store the <b>reactive state</b> of your application.
+              It will notify the associated reactions whenever the state
+              changes. Observables can be simple primitives like numbers,
+              strings, booleans to List, Map, Stream and Future.
+            </div>
+          }
+        />
+        <NutshellListItem
+          title={'Actions'}
+          index={2}
+          detail={
+            <div>
+              Actions are responsible for <b>mutating</b> the reactive state.
+              When the mutations happen, the notifications are fired
+              immediately, causing all the reactions to execute. An action acts
+              as an intentionally-named operation that changes the state of the
+              application.
+            </div>
+          }
+        />
+        <NutshellListItem
+          title={'Reactions'}
+          index={3}
+          detail={
+            <div>
+              Reactions, as the name suggests are responsible for{' '}
+              <b>reacting to the state changes</b>. These can be anything from a
+              simple console log, API calls to rendering the Flutter UI.
+              Reaction (aka <i>"side-effect"</i>) is the only element that can
+              take you out of the MobX reactivity loop.
+            </div>
+          }
+        />
       </div>
 
       <CodeExample />

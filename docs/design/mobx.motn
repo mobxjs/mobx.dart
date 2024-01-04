@@ -144,7 +144,7 @@
 	<resolutionMode>0</resolutionMode>
 	<dynamicResolution>1</dynamicResolution>
 	<viewmode>0</viewmode>
-	<overlayOptions>125452</overlayOptions>
+	<overlayOptions>125708</overlayOptions>
 	<oscOptions>30</oscOptions>
 	<compensateAspectRatio>1</compensateAspectRatio>
 	<renderFields>0</renderFields>
@@ -155,15 +155,15 @@
 	<showReflection>1</showReflection>
 	<showDepthOfField>0</showDepthOfField>
 	<renderFullView>0</renderFullView>
-	<renderQuality>2</renderQuality>
-	<textRenderQuality>2</textRenderQuality>
-	<showHighQualityResampling>0</showHighQualityResampling>
+	<renderQuality>6</renderQuality>
+	<textRenderQuality>6</textRenderQuality>
+	<showHighQualityResampling>1</showHighQualityResampling>
 	<showShapeAntialiasing>1</showShapeAntialiasing>
-	<show3DIntersectionAntialiasing>0</show3DIntersectionAntialiasing>
+	<show3DIntersectionAntialiasing>1</show3DIntersectionAntialiasing>
 	<cameraType>0</cameraType>
 	<cameraName>Active Camera</cameraName>
 	<mirrorHMD>0</mirrorHMD>
-	<panZoom camera="0" zoom="2.4200509525174625" panX="387" panY="-194" mode="1" centered="0"/>
+	<panZoom camera="0" zoom="1.9520180931897857" panX="170" panY="-130" mode="1" centered="0"/>
 </viewer>
 
 <projectPanel>
@@ -200,7 +200,7 @@
 	<displayEffects>1</displayEffects>
 	<videoVerticalZoom>1.5555555555555556</videoVerticalZoom>
 	<audioVerticalZoom>1.5555555820465088</audioVerticalZoom>
-	<displayRange in="-43 353 1 0" out="1102 353 1 0"/>
+	<displayRange in="-215 867 3 0" out="4550 867 3 0"/>
 </timeline>
 
 <curveeditor>
@@ -208,8 +208,8 @@
 	<snapping>0</snapping>
 	<displayAudioWaveform>0</displayAudioWaveform>
 	<lockKeyframesInTime>0</lockKeyframesInTime>
-	<displayRange in="-43 353 1 0" out="1102 353 1 0"/>
-	<currentviewvolume originx="-0.12181303116147309" originy="-62.5" width="3.2436260623229463" height="125"/>
+	<displayRange in="-215 867 3 0" out="4550 867 3 0"/>
+	<currentviewvolume originx="-0.24798154555940022" originy="-62.5" width="5.4959630911188002" height="125"/>
 	<snapshotChannels>0</snapshotChannels>
 </curveeditor>
 
@@ -241,7 +241,7 @@
 		<sharpScaling>0</sharpScaling>
 		<startTimecode>0</startTimecode>
 		<presetPath>/Applications/Motion.app/Contents/Resources/en.lproj/Presets/Project/Presentation - Medium.preset</presetPath>
-		<backgroundMode>0</backgroundMode>
+		<backgroundMode>1</backgroundMode>
 		<reflectionRecursionLimit>2</reflectionRecursionLimit>
 		<glyphOSCMode>0</glyphOSCMode>
 		<animateFlag>0</animateFlag>
@@ -249,12 +249,13 @@
 		<savePreviewMovie>0</savePreviewMovie>
 		<Object3DEnvironments>100</Object3DEnvironments>
 		<DRTSupport>0</DRTSupport>
-		<onHDRDisplay>0</onHDRDisplay>
+		<onHDRDisplay>1</onHDRDisplay>
 	</sceneSettings>
 	<publishSettings>
 		<version>2</version>
 	</publishSettings>
-	<currentFrame>184320 153600 1 0</currentFrame>
+	<currentFrame>286720 153600 1 0</currentFrame>
+	<currentObject>10000</currentObject>
 	<activeLayer>10003</activeLayer>
 	<timeRange offset="0 1 1 0" duration="768000 153600 1 0"/>
 	<playRange offset="0 153600 1 0" duration="604160 153600 1 0"/>
@@ -280,7 +281,7 @@
 		<flags>0</flags>
 		<timing in="0 1 1 0" out="-10240 153600 1 0" offset="0 1 1 0"/>
 		<foldFlags>0</foldFlags>
-		<baseFlags>16</baseFlags>
+		<baseFlags>268435473</baseFlags>
 		<parameter name="Properties" id="1" flags="8589938704">
 			<parameter name="HDR White Level" id="103" flags="8589967376" default="0.75" value="0.75"/>
 		</parameter>
@@ -369,7 +370,7 @@
 		</scenenode>
 		<scenenode name="arrow A - O" id="10015" factoryID="7" version="5">
 			<validTracks>1</validTracks>
-			<aspectRatio>0</aspectRatio>
+			<aspectRatio>1</aspectRatio>
 			<flags>0</flags>
 			<timing in="0 153600 1 0" out="143360 153600 1 0" offset="-153600 153600 1 0"/>
 			<foldFlags>16384</foldFlags>
@@ -378,8 +379,8 @@
 				<parameter name="Transform" id="100" flags="8589938704">
 					<parameter name="Position" id="101" flags="8589938704">
 						<foldFlags>15</foldFlags>
-						<parameter name="X" id="1" flags="8589934608" default="0" value="-227.62522904872469"/>
-						<parameter name="Y" id="2" flags="8589934608" default="0" value="-93.973949421016385"/>
+						<parameter name="X" id="1" flags="8589934608" default="0" value="-229.07444779869493"/>
+						<parameter name="Y" id="2" flags="8589934608" default="0" value="-89.358298051907866"/>
 						<parameter name="Z" id="3" flags="8589934608" default="0" value="0"/>
 					</parameter>
 					<parameter name="Rotation" id="109" flags="8589938704">
@@ -447,7 +448,7 @@
 							</keypoint>
 							<keypoint flags="0">
 								<time>1 1 1 0</time>
-								<value>96.598495483570474</value>
+								<value>95.669631958151456</value>
 							</keypoint>
 						</curve>
 					</parameter>
@@ -460,7 +461,7 @@
 							</keypoint>
 							<keypoint flags="0">
 								<time>1 1 1 0</time>
-								<value>189.65627670289808</value>
+								<value>190.41601181030899</value>
 							</keypoint>
 						</curve>
 					</parameter>
@@ -584,7 +585,7 @@
 		</scenenode>
 		<scenenode name="arrow O - R copy" id="10028" factoryID="7" version="5">
 			<validTracks>1</validTracks>
-			<aspectRatio>0</aspectRatio>
+			<aspectRatio>1</aspectRatio>
 			<flags>0</flags>
 			<timing in="153600 153600 1 0" out="296960 153600 1 0" offset="0 153600 1 0"/>
 			<foldFlags>16384</foldFlags>
@@ -593,8 +594,8 @@
 				<parameter name="Transform" id="100" flags="8589938704">
 					<parameter name="Position" id="101" flags="8589938704">
 						<foldFlags>15</foldFlags>
-						<parameter name="X" id="1" flags="8589934608" default="0" value="-76.305372405048601"/>
-						<parameter name="Y" id="2" flags="8589934608" default="0" value="104.90643550101075"/>
+						<parameter name="X" id="1" flags="8589934608" default="0" value="-74.049583601944292"/>
+						<parameter name="Y" id="2" flags="8589934608" default="0" value="104.96887923422811"/>
 						<parameter name="Z" id="3" flags="8589934608" default="0" value="0"/>
 					</parameter>
 					<parameter name="Rotation" id="109" flags="8589938704">
@@ -800,7 +801,7 @@
 		</scenenode>
 		<scenenode name="arrow R - SE" id="1999639430" factoryID="7" version="5">
 			<validTracks>1</validTracks>
-			<aspectRatio>0</aspectRatio>
+			<aspectRatio>1</aspectRatio>
 			<flags>0</flags>
 			<timing in="307200 153600 1 0" out="440320 153600 1 0" offset="307200 153600 1 0"/>
 			<foldFlags>16384</foldFlags>
@@ -1026,7 +1027,7 @@
 		</scenenode>
 		<scenenode name="arrow R - A" id="10021" factoryID="7" version="5">
 			<validTracks>1</validTracks>
-			<aspectRatio>0</aspectRatio>
+			<aspectRatio>1</aspectRatio>
 			<flags>0</flags>
 			<timing in="450560 153600 1 0" out="593920 153600 1 0" offset="450560 153600 1 0"/>
 			<foldFlags>16384</foldFlags>
@@ -1035,8 +1036,8 @@
 				<parameter name="Transform" id="100" flags="8589938704">
 					<parameter name="Position" id="101" flags="8589938704">
 						<foldFlags>15</foldFlags>
-						<parameter name="X" id="1" flags="8589934608" default="0" value="-11.236140418017385"/>
-						<parameter name="Y" id="2" flags="8589934608" default="0" value="-144.05005549243049"/>
+						<parameter name="X" id="1" flags="8589934608" default="0" value="-10.991572546927358"/>
+						<parameter name="Y" id="2" flags="8589934608" default="0" value="-147.51309870531685"/>
 						<parameter name="Z" id="3" flags="8589934608" default="0" value="0"/>
 					</parameter>
 					<parameter name="Rotation" id="109" flags="8589938704">
@@ -1683,7 +1684,6 @@
 					</parameter>
 					<parameter name="Particle Source" id="128" flags="8589934592" default="0" value="1999639401"/>
 					<parameter name="Hidden Channel" id="136" flags="8589934594" default="0" value="1"/>
-					<parameter name="Hidden Channel" id="150" flags="8589934594" default="5" value="1"/>
 					<parameter name="Obsolete Rotational Variance" id="109" flags="8589934594" default="0" value="2.8623400000000001"/>
 				</parameter>
 				<behavior name="Random Motion" id="1999639396" factoryID="19">
@@ -1722,8 +1722,8 @@
 					</parameter>
 					<parameter name="Custom Scale" id="200" flags="8589938690">
 						<foldFlags>15</foldFlags>
-						<parameter name="X" id="1" flags="8724283408" default="0.20000000000000001" value="1"/>
-						<parameter name="Y" id="2" flags="8724283408" default="0.20000000000000001" value="1"/>
+						<parameter name="X" id="1" flags="13019250704" default="0.20000000000000001" value="1"/>
+						<parameter name="Y" id="2" flags="13019250704" default="0.20000000000000001" value="1"/>
 						<rangeName>Over Life</rangeName>
 					</parameter>
 				</behavior>
@@ -1833,7 +1833,7 @@
 		</scenenode>
 		<scenenode name="mobx-triad" id="10012" factoryID="7" version="5">
 			<validTracks>1</validTracks>
-			<aspectRatio>0</aspectRatio>
+			<aspectRatio>1</aspectRatio>
 			<flags>0</flags>
 			<timing in="0 1 1 0" out="757760 153600 1 0" offset="0 1 1 0"/>
 			<foldFlags>16384</foldFlags>
@@ -1842,8 +1842,13 @@
 				<parameter name="Transform" id="100" flags="8589938704">
 					<parameter name="Position" id="101" flags="8589938704">
 						<foldFlags>15</foldFlags>
-						<parameter name="X" id="1" flags="8589934608" default="0" value="-0.10044860839204262"/>
-						<parameter name="Y" id="2" flags="8589934608" default="0" value="-0.35649871826315271"/>
+						<parameter name="X" id="1" flags="8589934608" default="0" value="2.5149362764425058"/>
+						<parameter name="Y" id="2" flags="8589934608" default="0" value="0.75858547635067941"/>
+					</parameter>
+					<parameter name="Scale" id="105" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8589934608" default="1" value="0.51717724039397528"/>
+						<parameter name="Y" id="2" flags="8589934608" default="1" value="0.51717724039397528"/>
 					</parameter>
 					<parameter name="Anchor Point" id="107" flags="8589938704">
 						<foldFlags>15</foldFlags>
@@ -1956,7 +1961,7 @@
 			</parameter>
 		</clip>
 		<clip name="arrow" id="10014">
-			<pathURL>file:///Users/pavanpodila/Projects/mobx.dart/docs/design/arrow.png</pathURL>
+			<pathURL>file:///Users/pavanpodila/Projects/vyuh/mobx.dart/docs/design/arrow.png</pathURL>
 			<relativeURL>arrow.png</relativeURL>
 			<missingWidth>52</missingWidth>
 			<missingHeight>92</missingHeight>
@@ -1988,10 +1993,10 @@
 			</parameter>
 		</clip>
 		<clip name="mobx-triad" id="10011">
-			<pathURL>file:///Users/pavanpodila/Projects/mobx.dart/docs/design/mobx-triad.png</pathURL>
+			<pathURL>file:///Users/pavanpodila/Projects/vyuh/mobx.dart/docs/design/mobx-triad.png</pathURL>
 			<relativeURL>mobx-triad.png</relativeURL>
-			<missingWidth>771</missingWidth>
-			<missingHeight>435</missingHeight>
+			<missingWidth>1542</missingWidth>
+			<missingHeight>870</missingHeight>
 			<missingDuration>0.033333333333333333</missingDuration>
 			<missingDynamicRangeType>0</missingDynamicRangeType>
 			<creationDuration>1</creationDuration>
@@ -2007,8 +2012,8 @@
 				</parameter>
 				<parameter name="Pixel Aspect Ratio" id="104" flags="12884901888" default="1" value="1"/>
 				<parameter name="Frame Rate" id="107" flags="8589934592" default="0" value="30"/>
-				<parameter name="Fixed Width" id="114" flags="12884901888" default="771" value="771"/>
-				<parameter name="Fixed Height" id="115" flags="12884901888" default="435" value="435"/>
+				<parameter name="Fixed Width" id="114" flags="12884901888" default="1542" value="1542"/>
+				<parameter name="Fixed Height" id="115" flags="12884901888" default="870" value="870"/>
 				<parameter name="Use Background Color" id="116" flags="8589934594" default="0" value="0"/>
 				<parameter name="Background Color" id="117" flags="8589971458">
 					<foldFlags>15</foldFlags>
