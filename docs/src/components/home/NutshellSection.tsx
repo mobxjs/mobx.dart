@@ -22,6 +22,7 @@ export function NutshellSection() {
           muted
           autoPlay
           loop
+          playsInline
         />
       </div>
 
