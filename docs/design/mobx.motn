@@ -200,7 +200,7 @@
 	<displayEffects>1</displayEffects>
 	<videoVerticalZoom>1.5555555555555556</videoVerticalZoom>
 	<audioVerticalZoom>1.5555555820465088</audioVerticalZoom>
-	<displayRange in="-215 867 3 0" out="4550 867 3 0"/>
+	<displayRange in="-369260006 1861328125 3 0" out="4198385229 1000000000 3 0"/>
 </timeline>
 
 <curveeditor>
@@ -208,8 +208,8 @@
 	<snapping>0</snapping>
 	<displayAudioWaveform>0</displayAudioWaveform>
 	<lockKeyframesInTime>0</lockKeyframesInTime>
-	<displayRange in="-215 867 3 0" out="4550 867 3 0"/>
-	<currentviewvolume originx="-0.24798154555940022" originy="-62.5" width="5.4959630911188002" height="125"/>
+	<displayRange in="-369260006 1861328125 3 0" out="4198385229 1000000000 3 0"/>
+	<currentviewvolume originx="-0.19838522882686255" originy="-62.5" width="4.3967704579999998" height="125"/>
 	<snapshotChannels>0</snapshotChannels>
 </curveeditor>
 
@@ -224,7 +224,7 @@
 	<sceneSettings>
 		<width>800</width>
 		<height>600</height>
-		<duration>75</duration>
+		<duration>60</duration>
 		<shouldOverrideFCDuration>0</shouldOverrideFCDuration>
 		<frameRate>15</frameRate>
 		<NTSC>0</NTSC>
@@ -254,11 +254,11 @@
 	<publishSettings>
 		<version>2</version>
 	</publishSettings>
-	<currentFrame>286720 153600 1 0</currentFrame>
-	<currentObject>10000</currentObject>
+	<currentFrame>348160 153600 1 0</currentFrame>
+	<currentObject>10021</currentObject>
 	<activeLayer>10003</activeLayer>
-	<timeRange offset="0 1 1 0" duration="768000 153600 1 0"/>
-	<playRange offset="0 153600 1 0" duration="604160 153600 1 0"/>
+	<timeRange offset="0 1 1 0" duration="614400 153600 1 0"/>
+	<playRange offset="0 153600 1 0" duration="614400 153600 1 0"/>
 	<flags>1</flags>
 	<audioTracks>0</audioTracks>
 	<timemarkerset/>
@@ -281,7 +281,7 @@
 		<flags>0</flags>
 		<timing in="0 1 1 0" out="-10240 153600 1 0" offset="0 1 1 0"/>
 		<foldFlags>0</foldFlags>
-		<baseFlags>268435473</baseFlags>
+		<baseFlags>16</baseFlags>
 		<parameter name="Properties" id="1" flags="8589938704">
 			<parameter name="HDR White Level" id="103" flags="8589967376" default="0.75" value="0.75"/>
 		</parameter>
@@ -803,7 +803,7 @@
 			<validTracks>1</validTracks>
 			<aspectRatio>1</aspectRatio>
 			<flags>0</flags>
-			<timing in="307200 153600 1 0" out="440320 153600 1 0" offset="307200 153600 1 0"/>
+			<timing in="307200 153600 1 0" out="450560 153600 1 0" offset="307200 153600 1 0"/>
 			<foldFlags>16384</foldFlags>
 			<baseFlags>524304</baseFlags>
 			<parameter name="Properties" id="1" flags="8589938704">
@@ -861,7 +861,7 @@
 				<parameter name="Height" id="314" flags="8589934610" default="1" value="92"/>
 			</parameter>
 			<filter name="Hue/Saturation" id="1999639443" factoryID="16" pluginUUID="D23AF030-B0BF-44DF-B622-7C9EA0DF5744" pluginVersion="1" pluginName="Hue/Saturation" pluginDynamicParams="0">
-				<timing in="307200 153600 1 0" out="440320 153600 1 0" offset="307200 153600 1 0"/>
+				<timing in="307200 153600 1 0" out="450560 153600 1 0" offset="307200 153600 1 0"/>
 				<baseFlags>8589934608</baseFlags>
 				<parameter name="Hue" id="1" flags="12884901904" default="0" value="3.2445004870984206"/>
 				<parameter name="Saturation" id="2" flags="12884901904" default="0" value="1.3500000000000001"/>
@@ -871,13 +871,13 @@
 				<parameter name="Input Points" id="10003" flags="12889161760" default="1" value="1"/>
 			</filter>
 			<behavior name="Fade In/Fade Out copy" id="1999639431" factoryID="13">
-				<timing in="307200 153600 1 0" out="440320 153600 1 0" offset="307200 153600 1 0"/>
+				<timing in="307200 153600 1 0" out="450560 153600 1 0" offset="307200 153600 1 0"/>
 				<baseFlags>8589934608</baseFlags>
 				<parameter name="Fade In Time" id="200" flags="8589934608" default="20" value="5"/>
 				<parameter name="Fade Out Time" id="201" flags="8589934608" default="20" value="5"/>
 			</behavior>
 			<behavior name="Motion Path" id="1999639432" factoryID="17">
-				<timing in="307200 153600 1 0" out="440320 153600 1 0" offset="307200 153600 1 0"/>
+				<timing in="307200 153600 1 0" out="450560 153600 1 0" offset="307200 153600 1 0"/>
 				<baseFlags>8589934608</baseFlags>
 				<parameter name="Position" id="200" flags="9263190034">
 					<foldFlags>15</foldFlags>
@@ -1029,9 +1029,9 @@
 			<validTracks>1</validTracks>
 			<aspectRatio>1</aspectRatio>
 			<flags>0</flags>
-			<timing in="450560 153600 1 0" out="593920 153600 1 0" offset="450560 153600 1 0"/>
+			<timing in="460800 153600 1 0" out="604160 153600 1 0" offset="460800 153600 1 0"/>
 			<foldFlags>16384</foldFlags>
-			<baseFlags>524304</baseFlags>
+			<baseFlags>524305</baseFlags>
 			<parameter name="Properties" id="1" flags="8589938704">
 				<parameter name="Transform" id="100" flags="8589938704">
 					<parameter name="Position" id="101" flags="8589938704">
@@ -1087,13 +1087,13 @@
 				<parameter name="Height" id="314" flags="8589934610" default="1" value="92"/>
 			</parameter>
 			<behavior name="Fade In/Fade Out copy" id="10027" factoryID="13">
-				<timing in="450560 153600 1 0" out="593920 153600 1 0" offset="450560 153600 1 0"/>
+				<timing in="460800 153600 1 0" out="604160 153600 1 0" offset="460800 153600 1 0"/>
 				<baseFlags>8589934608</baseFlags>
 				<parameter name="Fade In Time" id="200" flags="8589934608" default="20" value="5"/>
 				<parameter name="Fade Out Time" id="201" flags="8589934608" default="20" value="5"/>
 			</behavior>
 			<behavior name="Motion Path" id="10022" factoryID="17">
-				<timing in="450560 153600 1 0" out="593920 153600 1 0" offset="450560 153600 1 0"/>
+				<timing in="460800 153600 1 0" out="604160 153600 1 0" offset="460800 153600 1 0"/>
 				<baseFlags>8589934672</baseFlags>
 				<parameter name="Position" id="200" flags="9263190034">
 					<foldFlags>15</foldFlags>
@@ -1244,7 +1244,7 @@
 		<scenenode name="Heavy Sparks" id="1999639386" factoryID="18" version="5">
 			<scenenode name="Spark11" id="1999639389" factoryID="12" version="5">
 				<flags>0</flags>
-				<timing in="337920 153600 1 0" out="440320 153600 1 0" offset="0 153600 1 0"/>
+				<timing in="337920 153600 1 0" out="512000 153600 1 0" offset="0 153600 1 0"/>
 				<foldFlags>1</foldFlags>
 				<baseFlags>524304</baseFlags>
 				<parameter name="Properties" id="1" flags="8589938704"/>
@@ -1687,7 +1687,7 @@
 					<parameter name="Obsolete Rotational Variance" id="109" flags="8589934594" default="0" value="2.8623400000000001"/>
 				</parameter>
 				<behavior name="Random Motion" id="1999639396" factoryID="19">
-					<timing in="337920 153600 1 0" out="440320 153600 1 0" offset="0 153600 1 0"/>
+					<timing in="337920 153600 1 0" out="512000 153600 1 0" offset="0 153600 1 0"/>
 					<baseFlags>8589934608</baseFlags>
 					<foldFlags>4</foldFlags>
 					<parameter name="Affect Subobjects" id="300" flags="8589934610" default="0" value="0"/>
@@ -1696,14 +1696,14 @@
 					<parameter name="Random Seed" id="403" flags="8589934608" default="29300" value="28458"/>
 				</behavior>
 				<behavior name="Gravity" id="1999639397" factoryID="15">
-					<timing in="337920 153600 1 0" out="440320 153600 1 0" offset="0 153600 1 0"/>
+					<timing in="337920 153600 1 0" out="512000 153600 1 0" offset="0 153600 1 0"/>
 					<baseFlags>8589934608</baseFlags>
 					<foldFlags>4</foldFlags>
 					<parameter name="Affect Subobjects" id="300" flags="8589934610" default="0" value="1"/>
 					<parameter name="Acceleration" id="401" flags="8589934608" default="30" value="235"/>
 				</behavior>
 				<behavior name="Scale Over Life" id="1999639398" factoryID="14">
-					<timing in="337920 153600 1 0" out="440320 153600 1 0" offset="0 153600 1 0"/>
+					<timing in="337920 153600 1 0" out="512000 153600 1 0" offset="0 153600 1 0"/>
 					<baseFlags>8589934608</baseFlags>
 					<foldFlags>4</foldFlags>
 					<parameter name="Increment Type" id="201" flags="8589934608" default="3" value="1"/>
@@ -1730,7 +1730,7 @@
 			</scenenode>
 			<aspectRatio>1</aspectRatio>
 			<flags>0</flags>
-			<timing in="337920 153600 1 0" out="440320 153600 1 0" offset="0 153600 1 0"/>
+			<timing in="337920 153600 1 0" out="512000 153600 1 0" offset="0 153600 1 0"/>
 			<foldFlags>262145</foldFlags>
 			<baseFlags>524304</baseFlags>
 			<parameter name="Properties" id="1" flags="8589938704">
@@ -1822,7 +1822,7 @@
 				</parameter>
 			</parameter>
 			<behavior name="Random Motion" id="1999639387" factoryID="19">
-				<timing in="337920 153600 1 0" out="440320 153600 1 0" offset="0 153600 1 0"/>
+				<timing in="337920 153600 1 0" out="512000 153600 1 0" offset="0 153600 1 0"/>
 				<baseFlags>8589934608</baseFlags>
 				<enabled>0</enabled>
 				<foldFlags>4</foldFlags>
