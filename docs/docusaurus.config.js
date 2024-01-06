@@ -7,7 +7,7 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'mobx.png',
-  organizationName: 'mobxjs', // Usually your GitHub org/user name.
+  organizationName: 'mobxjs', // Usually your GitHub org/username.
   projectName: 'mobx.dart', // Usually your repo name.
   themeConfig: {
     colorMode: {
@@ -109,6 +109,14 @@ module.exports = {
       },
       { name: 'twitter:image:alt', content: 'The MobX Logo' },
     ],
+    algolia: {
+      appId: 'AMDU1T0FSC',
+
+      // Public API key: it is safe to commit it
+      apiKey: 'a35f8d278e5a09518b214b23d3b03bf7',
+
+      indexName: 'mobx',
+    },
   },
   plugins: [
     [
@@ -117,7 +125,7 @@ module.exports = {
         indexBaseUrl: true,
       },
     ],
-    require.resolve('docusaurus-lunr-search'),
+    // require.resolve('docusaurus-lunr-search'),
     function postCSSPlugin(context, options) {
       return {
         name: 'docusaurus-tailwindcss',
