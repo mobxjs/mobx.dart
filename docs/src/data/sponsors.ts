@@ -14,4 +14,9 @@ export const sponsors = [
     url: 'https://www.netlify.com',
     active: true,
   },
+  {
+    logo: require('../images/algolia-sponsor.png').default,
+    url: 'https://www.algolia.com',
+    active: true,
+  },
 ];
