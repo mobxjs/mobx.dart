@@ -109,23 +109,30 @@ module.exports = {
       },
       { name: 'twitter:image:alt', content: 'The MobX Logo' },
     ],
-    // algolia: {
-    //   appId: 'AMDU1T0FSC',
-    //
-    //   // Public API key: it is safe to commit it
-    //   apiKey: 'a35f8d278e5a09518b214b23d3b03bf7',
-    //
-    //   indexName: 'mobx',
-    // },
+    algolia: {
+      appId: 'AMDU1T0FSC',
+
+      // Public API key: it is safe to commit it
+      apiKey: 'a35f8d278e5a09518b214b23d3b03bf7',
+
+      indexName: 'mobx',
+
+      // The following configuration is required to ensure we are not tampering the facets for Algolia
+      // The default values of Docusaurus are not helping in retrieving the results correctly
+      contextualSearch: false,
+      searchParameters: {
+        facetFilters: [],
+      },
+    },
   },
   plugins: [
+    // require.resolve('docusaurus-lunr-search'),
     [
       path.resolve(__dirname, './plugins/fetch-versions'),
       {
         indexBaseUrl: true,
       },
     ],
-    require.resolve('docusaurus-lunr-search'),
     function postCSSPlugin(context, options) {
       return {
         name: 'docusaurus-tailwindcss',
