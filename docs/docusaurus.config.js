@@ -86,7 +86,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} MobX.dart team. All rights reserved.`,
+      copyright: `Copyright © 2018-${new Date().getFullYear()} MobX.dart team. All rights reserved.`,
     },
     prism: {
       theme: require('prism-react-renderer').themes.vsDark,

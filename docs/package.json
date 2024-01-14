@@ -17,7 +17,7 @@
     "@emotion/styled": "^11.11.0",
     "@mdx-js/react": "^3.0.0",
     "@splinetool/react-spline": "^2.2.6",
-    "@splinetool/runtime": "^1.0.17",
+    "@splinetool/runtime": "^1.0.28",
     "axios": "^1.6.3",
     "docusaurus-lunr-search": "^3.3.1",
     "lodash.get": "^4.4.2",
