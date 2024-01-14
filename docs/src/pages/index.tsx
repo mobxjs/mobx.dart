@@ -1,5 +1,4 @@
 import book from '../images/book.png';
-import { SponsorList } from '../components/home/Sponsor';
 import { TestimonialList } from '../components/home/Testimonial';
 import React from 'react';
 import Layout from '@theme/Layout';
@@ -7,6 +6,7 @@ import { Section } from '../components/home/Section';
 import { NutshellSection } from '../components/home/NutshellSection';
 import { HeroSection } from '../components/home/HeroSection';
 import { BadgesSection } from '../components/home/BadgesSection';
+import { SponsorSection } from '../components/home/SponsorSection';
 
 export default function () {
   return (
@@ -18,19 +18,6 @@ export default function () {
       <SponsorSection />
       <ConcludingSection />
     </Layout>
-  );
-}
-
-function SponsorSection() {
-  return (
-    <Section className={'bg-slate-100'} title={'Sponsors'}>
-      <div className={'text-xl mb-8'}>
-        We are very thankful to our sponsors to make us part of their{' '}
-        <i>Open Source Software (OSS)</i> program.
-      </div>
-
-      <SponsorList />
-    </Section>
   );
 }
 

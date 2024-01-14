@@ -1,7 +1,8 @@
+import { Section } from './Section';
 import React from 'react';
 import { sponsors } from '../../data/sponsors';
 
-export const Sponsor = ({ logo, url }) => {
+const Sponsor = ({ logo, url }) => {
   return (
     <a href={url} target={'_blank'}>
       <img src={logo} height={64} />
@@ -9,24 +10,10 @@ export const Sponsor = ({ logo, url }) => {
   );
 };
 
-export const SponsorList = () => {
+const SponsorList = () => {
   return (
     <>
-      <ul
-        className={'list-none flex flex-row items-center gap-8 sm:gap-16 p-0'}
-      >
-        <a
-          href={'https://opencollective.com/mobx#sponsor'}
-          className={
-            'bg-slate-300 hover:bg-blue-300 rounded-lg items-center flex flex-col px-4 py-2 hover:no-underline'
-          }
-        >
-          <div className={'text-5xl'}>+</div>
-          <div className={'text-sm sm:text-xl text-nowrap'}>
-            Become a sponsor
-          </div>
-        </a>
-
+      <ul className={'list-none flex flex-wrap items-center gap-8 p-0'}>
         {sponsors
           .filter((x) => x.active)
           .map((s) => (
@@ -53,3 +40,24 @@ export const SponsorList = () => {
     </>
   );
 };
+
+export function SponsorSection() {
+  return (
+    <Section className={'bg-slate-100'} title={'Sponsors'}>
+      <a
+        href="https://opencollective.com/mobx/donate"
+        target="_blank"
+        className={'w-64 block'}
+      >
+        <img src="https://opencollective.com/mobx/donate/button@2x.png?color=blue" />
+      </a>
+
+      <div className={'text-xl my-8'}>
+        We are very thankful to our sponsors to make us part of their{' '}
+        <i>Open Source Software (OSS)</i> program.
+      </div>
+
+      <SponsorList />
+    </Section>
+  );
+}
