@@ -165,8 +165,9 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        googleTagManager: {
-          containerId: 'G-FVJXL2NH4P',
+        gtag: {
+          trackingID: 'G-HD7VP109DL',
+          anonymizeIP: true,
         },
       },
     ],
