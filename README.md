@@ -56,9 +56,14 @@ console log, a network call to re-rendering the UI.
 
 We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program. [[Become a sponsor](https://opencollective.com/mobx#sponsor)]
 
+- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/vyuh-sponsor.png" height="64">](https://vyuh.tech)
+- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/algolia-sponsor.png" height="64">](https://algolia.com)
+- [<img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg" height="64">](https://www.netlify.com)
+
+### Past Sponsors
+
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/publicis-sapient-sponsor.png" height="64">](https://publicis.sapient.com)
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/wunderdog-sponsor.png" height="64">](https://wunderdog.fi)
-- [<img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg" height="64">](https://www.netlify.com)
 
 ### Get Started
 
@@ -405,7 +410,9 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-63-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
