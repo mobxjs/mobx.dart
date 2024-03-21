@@ -6,6 +6,7 @@ packages:
   - mobx_codegen
   - mobx_examples
   - mobx_lint
+  - mobx_lint_flutter_test
 
 scripts:
   analyze:
