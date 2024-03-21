@@ -91,7 +91,7 @@ class ReactionImpl with DebugCreationStack implements Reaction {
     }
 
     if (_context._hasCaughtException(this)) {
-      _reportException(_errorValue!);
+      _reportException(_errorValue!, _errorValue!.stackTrace);
     }
 
     if (notify) {
@@ -120,7 +120,7 @@ class ReactionImpl with DebugCreationStack implements Reaction {
       } on Object catch (e, s) {
         // Note: "on Object" accounts for both Error and Exception
         _errorValue = MobXCaughtException(e, stackTrace: s);
-        _reportException(_errorValue!);
+        _reportException(_errorValue!, s);
       }
     }
 
@@ -165,15 +165,18 @@ class ReactionImpl with DebugCreationStack implements Reaction {
     // Not applicable right now
   }
 
-  void _reportException(Object exception) {
+  void _reportException(Object exception, StackTrace? stackTrace) {
     if (_onError != null) {
       _onError!(exception, this);
       return;
     }
 
     if (_context.config.disableErrorBoundaries == true) {
-      // ignore: only_throw_errors
-      throw exception;
+      if (stackTrace != null) {
+        Error.throwWithStackTrace(exception, stackTrace);
+      } else {
+        throw exception;
+      }
     }
 
     if (_context.isSpyEnabled) {
