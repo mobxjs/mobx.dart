@@ -28,6 +28,7 @@ module.exports = {
         'guides/organizing-stores',
         'guides/when-does-mobx-react',
         'guides/mobx-vs-inherited-model',
+        'guides/mobx-utils',
       ],
     },
     'community',
