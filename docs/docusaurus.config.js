@@ -86,7 +86,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} MobX.dart team. All rights reserved.`,
+      copyright: `Copyright © 2018-${new Date().getFullYear()} MobX.dart team. All rights reserved.`,
     },
     prism: {
       theme: require('prism-react-renderer').themes.vsDark,
@@ -165,8 +165,8 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        googleAnalytics: {
-          trackingID: 'UA-60235345-4',
+        gtag: {
+          trackingID: 'G-HD7VP109DL',
           anonymizeIP: true,
         },
       },
