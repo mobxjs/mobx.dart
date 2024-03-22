@@ -7,7 +7,7 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'mobx.png',
-  organizationName: 'mobxjs', // Usually your GitHub org/user name.
+  organizationName: 'mobxjs', // Usually your GitHub org/username.
   projectName: 'mobx.dart', // Usually your repo name.
   themeConfig: {
     colorMode: {
@@ -21,6 +21,12 @@ module.exports = {
         src: 'mobx.svg',
       },
       items: [
+        {
+          type: 'doc',
+          position: 'left',
+          docId: 'getting-started/index',
+          label: 'Docs',
+        },
         {
           href: 'https://discord.gg/dNHY52k',
           position: 'right',
@@ -74,13 +80,13 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Twitter',
+              label: 'X',
               href: 'https://twitter.com/pavanpodila',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} MobX.dart team. Built with Docusaurus.`,
+      copyright: `Copyright © 2018-${new Date().getFullYear()} MobX.dart team. All rights reserved.`,
     },
     prism: {
       theme: require('prism-react-renderer').themes.vsDark,
@@ -104,20 +110,50 @@ module.exports = {
       { name: 'twitter:image:alt', content: 'The MobX Logo' },
     ],
     algolia: {
-      appId: 'BH4D9OD16A',
+      appId: 'AMDU1T0FSC',
 
       // Public API key: it is safe to commit it
-      apiKey: 'a829c1cef394f368e6b41dbd49b41b72',
+      apiKey: 'a35f8d278e5a09518b214b23d3b03bf7',
 
-      indexName: 'mobx_dart_flutter',
+      indexName: 'mobx',
+
+      // The following configuration is required to ensure we are not tampering the facets for Algolia
+      // The default values of Docusaurus are not helping in retrieving the results correctly
+      contextualSearch: false,
+      searchParameters: {
+        facetFilters: [],
+      },
     },
   },
-  plugins: [path.resolve(__dirname, './plugins/fetch-versions')],
+  plugins: [
+    // require.resolve('docusaurus-lunr-search'),
+    [
+      path.resolve(__dirname, './plugins/fetch-versions'),
+      {
+        indexBaseUrl: true,
+      },
+    ],
+    function postCSSPlugin(context, options) {
+      return {
+        name: 'docusaurus-tailwindcss',
+        configurePostCss(postcssOptions) {
+          postcssOptions.plugins.push(require('tailwindcss/nesting'));
+          postcssOptions.plugins.push(require('tailwindcss'));
+          postcssOptions.plugins.push(require('autoprefixer'));
+          return postcssOptions;
+        },
+      };
+    },
+  ],
   presets: [
     [
-      '@docusaurus/preset-classic',
+      'classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
       {
-        pages: false,
+        pages: {
+          path: 'src/pages',
+          routeBasePath: '/',
+        },
         blog: false,
         docs: {
           path: 'docs',
@@ -129,8 +165,8 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        googleAnalytics: {
-          trackingID: 'UA-60235345-4',
+        gtag: {
+          trackingID: 'G-HD7VP109DL',
           anonymizeIP: true,
         },
       },

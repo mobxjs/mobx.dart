@@ -3,7 +3,6 @@ import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
 import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
-
 // ignore: implementation_imports
 import 'package:mobx/src/api/annotations.dart'
     show ComputedMethod, MakeAction, MakeObservable, StoreConfig;
@@ -102,6 +101,7 @@ class StoreClassVisitor extends SimpleElementVisitor {
       name: element.name,
       isPrivate: element.isPrivate,
       isReadOnly: _isObservableReadOnly(element),
+      isLate: element.isLate,
       equals: _getEquals(element),
     );
 
@@ -130,6 +130,12 @@ class StoreClassVisitor extends SimpleElementVisitor {
         ),
       ]);
 
+  bool? _isComputedKeepAlive(Element element) =>
+      _computedChecker
+          .firstAnnotationOfExact(element)
+          ?.getField('keepAlive')
+          ?.toBoolValue();
+
   @override
   void visitPropertyAccessorElement(PropertyAccessorElement element) {
     if (element.isSetter && element.isPublic) {
@@ -155,7 +161,8 @@ class StoreClassVisitor extends SimpleElementVisitor {
         storeTemplate: _storeTemplate,
         name: element.name,
         type: typeNameFinder.findGetterTypeName(element),
-        isPrivate: element.isPrivate);
+        isPrivate: element.isPrivate,
+        isKeepAlive: _isComputedKeepAlive(element));
 
     _storeTemplate.computeds.add(template);
     return;

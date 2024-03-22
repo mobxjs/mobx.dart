@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
 
+import '../utils.dart';
+
 extension AtomSpyReporter on Atom {
   void reportRead() {
     context.enforceReadPolicy(this);
@@ -7,12 +9,12 @@ extension AtomSpyReporter on Atom {
   }
 
   void reportWrite<T>(T newValue, T oldValue, void Function() setNewValue,
-      {EqualityComparer<T>? equals}) {
-    final areEqual =
-        equals == null ? oldValue == newValue : equals(oldValue, newValue);
+      {EqualityComparer<T>? equals, bool? useDeepEquality}) {
+    final areEqual = equals ??
+        (a, b) => equatable(a, b, useDeepEquality: useDeepEquality ?? false);
 
     // Avoid unnecessary observable notifications of @observable fields of Stores
-    if (areEqual) {
+    if (areEqual(newValue, oldValue)) {
       return;
     }
 

@@ -1,3 +1,19 @@
+## 2.6.0+1
+
+- `pubspec.yaml` updated to include homepage and topics
+
+## 2.6.0
+
+- Add `keepAlive` to `Computed` to avoids suspending computed values when they are not being observed by anything.
+
+## 2.5.0
+
+- Support `late` observables by [@amondnet](https://github.com/amondnet). fix [#919](https://github.com/mobxjs/mobx.dart/issues/919)
+
+## 2.4.1
+
+- Adds `useDeepEquality` for creating observables by [@amondnet](https://github.com/amondnet)
+
 ## 2.4.0
 
 - Require `analyzer: ^5.12.0`

@@ -9,6 +9,8 @@ coverage:
         flags: mobx_codegen
       flutter_mobx:
         flags: flutter_mobx
+      mobx_lint:
+        flags: mobx_lint
 
 flags:
   # filter the folder(s) you wish to measure by that flag
@@ -22,3 +24,6 @@ flags:
   flutter_mobx:
     paths:
       - flutter_mobx/lib/
+  mobx_lint:
+    paths:
+      - mobx_lint/lib/

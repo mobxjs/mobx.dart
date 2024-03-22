@@ -5,6 +5,8 @@ packages:
   - flutter_mobx
   - mobx_codegen
   - mobx_examples
+  - mobx_lint
+  - mobx_lint_flutter_test
 
 scripts:
   analyze:
@@ -15,7 +17,3 @@ scripts:
     exec: dart run $MELOS_ROOT_PATH/tool/expose_version.dart
   generate:
     run: cd mobx_examples && dart run build_runner watch --delete-conflicting-outputs
-
-command:
-  bootstrap:
-    usePubspecOverrides: true

@@ -1,30 +1,35 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-export const BuildStatus = () => {
-  return (
-    <a href="https://github.com/mobxjs/mobx.dart/actions">
-      <img
-        alt="Build Status"
-        src="https://github.com/mobxjs/mobx.dart/workflows/Build/badge.svg"
-      />
-    </a>
-  );
-};
-
-export const PublishStatus = () => (
-  <a href="https://github.com/mobxjs/mobx.dart/actions">
+const GithubWorkflowStatus = ({
+  label,
+  workflow,
+}: {
+  label: string;
+  workflow: string;
+}) => (
+  <a
+    href={`https://github.com/mobxjs/mobx.dart/actions/workflows/${workflow}.yml`}
+  >
     <img
-      alt="Publish"
-      src="https://github.com/mobxjs/mobx.dart/workflows/Publish/badge.svg"
+      alt={label}
+      src={`https://img.shields.io/github/actions/workflow/status/mobxjs/mobx.dart/${workflow}.yml?label=${label}&logo=github&style=for-the-badge`}
     />
   </a>
+);
+
+export const BuildStatus = () => (
+  <GithubWorkflowStatus workflow="build" label="Build" />
+);
+
+export const PublishStatus = () => (
+  <GithubWorkflowStatus workflow="publish" label="Publish" />
 );
 
 export const CoverageStatus = () => (
   <a href="https://codecov.io/gh/mobxjs/mobx.dart">
     <img
       alt="Coverage Status"
-      src="https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg"
+      src="https://img.shields.io/codecov/c/github/mobxjs/mobx.dart?logo=codecov&style=for-the-badge"
     />
   </a>
 );
@@ -33,7 +38,7 @@ export const NetlifyStatus = () => (
   <a href="https://app.netlify.com/sites/mobx/deploys">
     <img
       alt="Netlify Status"
-      src="https://api.netlify.com/api/v1/badges/05330d31-0411-4aac-a278-76615bcaff9e/deploy-status"
+      src="https://img.shields.io/netlify/05330d31-0411-4aac-a278-76615bcaff9e?logo=netlify&style=for-the-badge"
     />
   </a>
 );
@@ -42,19 +47,33 @@ export const DiscordChat = () => (
   <a href="https://discord.gg/dNHY52k">
     <img
       alt="Join the chat at https://discord.gg/dNHY52k"
-      src="https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&amp;logo=discord"
+      src="https://img.shields.io/discord/637471236116447233?style=for-the-badge&logo=discord"
     />
   </a>
 );
 
 export const FlutterFavorite = () => (
-  <div style={{ margin: '2rem 0' }}>
-    <a href="https://flutter.dev/docs/development/packages-and-plugins/favorites">
+  <a href="https://flutter.dev/docs/development/packages-and-plugins/favorites">
+    <img
+      src={require('../images/flutter-favorite.png').default}
+      alt="Flutter Favorite Badge"
+    />
+  </a>
+);
+
+interface Props {
+  name: string;
+}
+
+export const PubBadge: FunctionComponent<Props> = (props) => {
+  const { name } = props;
+
+  return (
+    <a href={`https://pub.dartlang.org/packages/${name}`}>
       <img
-        src={require('../images/flutter-favorite.png').default}
-        height={128}
-        alt="Flutter Favorite Badge"
+        alt="pub"
+        src={`https://img.shields.io/pub/v/${name}.svg?label=${name}&logo=dart&color=blue&style=for-the-badge`}
       />
     </a>
-  </div>
-);
+  );
+};

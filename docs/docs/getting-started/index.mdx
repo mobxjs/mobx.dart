@@ -88,8 +88,9 @@ The interesting parts here are:
 
 :::caution
 
-It is essential to use proper casing for the file name, else the `build_runner` **will not** generate any output.
-Since our file is called `counter.dart`, the part file must be named as`counter.g.dart` (note the lowercase letters)
+It is essential to use proper casing for the file name, else the `build_runner`
+**will not** generate any output. Since our file is called `counter.dart`, the
+part file must be named as`counter.g.dart` (note the lowercase letters)
 
 :::
 
@@ -135,7 +136,8 @@ slightly different.
 
 #### Stay on watch
 
-If you are making changes to the store and want to generate `*.g.dart` files automatically, you can use the following command:
+If you are making changes to the store and want to generate `*.g.dart` files
+automatically, you can use the following command:
 
 ```
 flutter pub run build_runner watch
@@ -143,9 +145,9 @@ flutter pub run build_runner watch
 
 #### Starting Clean
 
-Sometimes you may have an error running this command due to existing files, possibly generated from
-an earlier version of `build_runner`. In that case, you can add the following
-flag to delete the `*.g.dart` files before generating
+Sometimes you may have an error running this command due to existing files,
+possibly generated from an earlier version of `build_runner`. In that case, you
+can add the following flag to delete the `*.g.dart` files before generating
 them.
 
 ```
@@ -234,5 +236,6 @@ Our end result will look exactly the same as our start! As you tap on the
 
 ### Keep exploring!
 
-Browse through other examples to get a feel for MobX. It's all about `Observables`, `Actions` and `Reactions` 😇.
-We have already looked at `Observables` and `Actions`. `Reactions` are covered in other examples.
+Browse through other examples to get a feel for MobX. It's all about
+`Observables`, `Actions` and `Reactions` 😇. We have already looked at
+`Observables` and `Actions`. `Reactions` are covered in other examples.

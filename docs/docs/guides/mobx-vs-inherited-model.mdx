@@ -1,0 +1,62 @@
+---
+slug: /guides/mobx-vs-inherited-model
+title: MobX versus Inherited Model
+---
+
+`MobX` and
+[`InheritedModel`](https://api.flutter.dev/flutter/widgets/InheritedModel-class.html)
+are both state management solutions for Flutter apps, but they have different
+strengths and weaknesses.
+
+**`MobX` is a more complex library, but it offers a number of advantages over
+InheritedModel, including:**
+
+- Reactivity: MobX uses a reactive programming model, which means that changes
+  to state are automatically reflected in the UI. This can simplify your code
+  and make it easier to maintain.
+- Centralized state management: MobX allows you to manage all of your app's
+  state in one place, which can make it easier to debug and reason about your
+  code.
+- Performance: MobX is highly optimized and can provide significant performance
+  benefits for complex apps.
+
+**`InheritedModel` is a simpler library, but it also has some limitations:**
+
+- Manual updates: InheritedModel does not automatically update the UI when state
+  changes. You must manually call the notifyListeners() method to notify the UI
+  of changes.
+- Decentralized state management: InheritedModel is a decentralized state
+  management solution. This means that state can be scattered throughout your
+  app, which can make it difficult to debug and reason about.
+- Performance: InheritedModel can be less performant than MobX for complex apps.
+
+### When to use MobX:
+
+- You are building a complex app with a lot of state.
+- You want to use a reactive programming model.
+- You want to centralize state management.
+- You need high performance.
+
+### When to use InheritedModel:
+
+- You are building a simple app with a little bit of state.
+- You want to use a decentralized state management solution.
+- You need a simple solution that is easy to learn and use.
+- You are not concerned about performance.
+
+### Which one should you use?
+
+It depends on your specific needs. If you are building a complex app with a lot
+of state, you should use MobX. If you are building a simple app with a little
+bit of state, you can use InheritedModel.
+
+### Can the Inherited Model completely replace MobX?
+
+Yes, the Inherited Model can completely replace MobX. However, it is important
+to note that the Inherited Model is a more manual solution. You will need to
+manually update the UI when state changes, and you will need to manage state
+yourself.
+
+If you are looking for a more powerful and automated state management solution,
+then MobX is a better choice. However, if you need a simple solution that is
+easy to learn and use, then the Inherited Model is a good option.

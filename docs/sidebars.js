@@ -1,6 +1,5 @@
 module.exports = {
   docs: [
-    'home',
     'getting-started/index',
     'concepts',
     {
@@ -28,6 +27,7 @@ module.exports = {
         'guides/json-serialization',
         'guides/organizing-stores',
         'guides/when-does-mobx-react',
+        'guides/mobx-vs-inherited-model',
         'guides/mobx-utils',
       ],
     },

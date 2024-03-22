@@ -25,7 +25,7 @@ class StoreConfig {
 /// String withEquals = 'world';
 /// ```
 class MakeObservable {
-  const MakeObservable({this.readOnly = false, this.equals});
+  const MakeObservable({this.readOnly = false, this.equals, this.useDeepEquality = true});
 
   final bool readOnly;
   /// A [Function] to use check whether the value of an observable has changed.
@@ -38,6 +38,11 @@ class MakeObservable {
   /// If no function is provided, the default behavior is to only trigger if
   /// : `oldValue != newValue`.
   final Function? equals;
+
+  /// By default, MobX uses the `==` to compare the previous value. This is fine for
+  /// primitives, but for Iterable and Map, you may want to use a deep equality on collections. When
+  /// using deep equal, no reaction will occur if all elements are equal.
+  final bool useDeepEquality;
 }
 
 bool observableAlwaysNotEqual(_, __) => false;
@@ -59,12 +64,14 @@ const MakeObservable alwaysNotify = MakeObservable(equals: observableAlwaysNotEq
 ///
 /// During code-generation, this type is detected to identify a `Computed`
 class ComputedMethod {
-  const ComputedMethod._();
+  const ComputedMethod({this.keepAlive});
+
+  final bool? keepAlive;
 }
 
 /// Declares a method as a computed value. See the `Computed` class for full
 /// documentation.
-const ComputedMethod computed = ComputedMethod._();
+const ComputedMethod computed = ComputedMethod();
 
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///

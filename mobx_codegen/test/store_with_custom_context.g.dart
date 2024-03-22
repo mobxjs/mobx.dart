@@ -18,10 +18,13 @@ mixin _$CustomContextStore on _CustomContextStore, Store {
     return super.name;
   }
 
+  bool _nameIsInitialized = false;
+
   @override
   set name(String value) {
-    _$nameAtom.reportWrite(value, super.name, () {
+    _$nameAtom.reportWrite(value, _nameIsInitialized ? super.name : null, () {
       super.name = value;
+      _nameIsInitialized = true;
     });
   }
 

@@ -153,11 +153,16 @@ class ObservableSet<T>
   @override
   Dispose observe(SetChangeListener<T> listener,
       {bool fireImmediately = false}) {
-    final dispose = _listeners.add(listener);
     if (fireImmediately == true) {
-      _set.forEach(_reportAdd);
+      for (final value in _set) {
+        listener(SetChange(
+          object: this,
+          type: OperationType.add,
+          value: value,
+        ));
+      }
     }
-    return dispose;
+    return _listeners.add(listener);
   }
 
   void _reportAdd(T value) {

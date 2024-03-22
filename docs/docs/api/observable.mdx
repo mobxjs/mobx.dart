@@ -162,9 +162,67 @@ though, you're allowed to use of computed getters the same way you do with
 > just doesn't make sense otherwise. But don't worry, if by any chance you
 > happens to forget, we warn you with friendly errors at code generation time.
 
+## Use deep equality on collections
+
+By default, MobX uses the `==` to compare the previous value. This is fine for
+primitives, but for collections, you may want to use a
+[DeepCollectionEquality](https://api.flutter.dev/flutter/package-collection_collection/DeepCollectionEquality-class.html).
+When using deep equal, no reaction will occur if all elements are equal.
+
+```dart
+import 'package:mobx/mobx.dart';
+
+part 'todo.g.dart';
+
+class Todo = _Todo with _$Todo;
+
+abstract class _Todo with Store {
+  _Todo(this.description);
+
+  @observable
+  String description = '';
+
+  @observable
+  bool done = false;
+
+  @action
+  void markDone(bool flag) {
+    done = flag;
+  }
+
+  @override
+  int get hashCode => description.hashCode ^ done.hashCode;
+
+  @override
+  operator ==(Object other) =>
+      identical(this, other) ||
+      other is Todo &&
+          runtimeType == other.runtimeType &&
+          description == other.description &&
+          done == other.done;
+}
+
+class Todos = _Todos with _$Todos;
+
+abstract class _Todos with Store {
+  _Todos();
+
+  @MakeObservable(useDeepEquals: true)
+  List<Todo> _todos = [];
+
+  @computed
+  List get todos => _todos;
+
+  @action
+  void setTodos(List<Todo> todos) {
+    _todos = todos;
+  }
+}
+```
+
 ## Computed
 
-#### `Computed(T Function() fn, {String name, ReactiveContext context})`
+#### `Computed(T Function() fn, {String name, ReactiveContext context, EqualityComparer<T>? equals, bool? keepAlive})`
 
 - **`T Function() fn`**: the function which relies on observables to compute its
   value.
@@ -172,15 +230,37 @@ though, you're allowed to use of computed getters the same way you do with
 - **`ReactiveContext context`**: the context to which this computed is bound. By
   default, all computeds are bound to the singleton `mainContext` of the
   application.
+- **`EqualityComparer<T>? equals`**: It acts as a comparison function for
+  comparing the previous value with the next value. If this function considers
+  the values to be equal, then the observers will not be re-evaluated. This is
+  useful when working with structural data and types from other libraries.
+- **`bool? keepAlive`**: This avoids suspending computed values when they are
+  not being observed by anything (see the above explanation). Can potentially
+  create memory leaks.
 
-**Computeds** form the derived state of your application. They depend on other
-observables or computeds for their value. Any time the depending observables
-change, they will recompute their new value. Computeds are also smart and
-**cache** their previous value. Only when the computed-value is different than
+**Computed-s** form the derived state of your application. They depend on other
+observables or `computed` for their value. Any time the depending-observables
+change, they will recompute their new value. Computed-s are also smart and
+**cache** their previous value. Only when the computed-value is different from
 the cached-value, will they fire notifications. This behavior is key to ensure
 the connected reactions don't execute unnecessarily.
 
-> #### CachingThe caching behavior is only for _notifications_ and **not** for the _value_. Calling a computed property will always evaluate and return the value. There is no caching on the computation itself. However, notifications fire only when the computed value is different from the previous one. This is where the caching behavior applies.
+:::info
+
+#### Caching
+
+The caching behavior is only for _notifications_ and **not** for the _value_.
+Calling a computed property will always evaluate and return the value. There is
+no caching on the computation itself. However, notifications fire only when the
+computed value is different from the previous one. This is where the caching
+behavior applies.
+
+It can be overridden by setting the annotation with the `keepAlive` option or by
+creating a no-op `autorun(() { someComputed })`, which can be nicely cleaned up
+later if needed. Note that both solutions have the risk of creating memory
+leaks. Changing the default behavior here is an anti-pattern.
+
+:::
 
 ```dart
 final first = Observable('Pavan');
@@ -215,11 +295,20 @@ abstract class _Contact with Store {
 }
 ```
 
-> #### Why do we need an `Observable***` Class for types like `Future`, `Stream`, `List`, `Map`, `Set`?The core types provided by Dart are not reactive by nature. They don't participate in the MobX reactive system and hence changesin them are not notified to the `Observer`. To have a well-behaving reactivesystem, we need data-structures that are also reactive inherently. Thisrequires that we have an `Observable`-version of the core types like `List`,
->
-> `Set`, `Map`, `Future` and `Stream`.The following set of types will help you
-> build stores that participate well in the MobX world. Use them when you need
-> reactive data-structures that are MobX-ready!
+:::info
+
+#### Why do we need an `Observable***` Class for types like `Future`, `Stream`, `List`, `Map`, `Set`?
+
+The core types provided by Dart are not reactive by nature. They don't
+participate in the MobX reactive system and hence changes in them are not
+notified to the `Observer`. To have a well-behaving reactive system, we need
+data-structures that are also reactive inherently. This requires that we have an
+`Observable`-version of the core types like `List`,`Set`, `Map`, `Future` and
+`Stream`.The following set of types will help you build stores that participate
+well in the MobX world. Use them when you need reactive data-structures that are
+MobX-ready!
+
+:::
 
 ## ObservableList
 
@@ -381,7 +470,9 @@ class LoadingIndicator extends StatelessWidget {
   bound. By default, all `ObservableStream`s are bound to the singleton
   `mainContext` of the application.
 - **`String? name`**: This string is used as a debug name.
-- **`EqualityComparer<dynamic>? equals`**: It acts as a comparison function for comparing the previous value with the next value. If this function considers the values to be equal, then the observers will not be re-evaluated.
+- **`EqualityComparer<dynamic>? equals`**: It acts as a comparison function for
+  comparing the previous value with the next value. If this function considers
+  the values to be equal, then the observers will not be re-evaluated.
 
 Similar to `ObservableFuture`, an **`ObservableStream`** provides a reactive
 wrapper around a `Stream`. This gives an easy way to observe and re-render
@@ -396,15 +487,19 @@ value. That is the responsibility of the `Observable`, which extends `Atom` to
 add the storage. You would rarely need to use an Atom directly. Instead, depend
 on an `Observable` for most use-cases.
 
-> **Aside**The **`mobx_codegen`** package uses an `Atom` internally for all the
-> `@observable` annotated fields.
+:::info Aside
+
+The **`mobx_codegen`** package uses an `Atom` internally for all the
+`@observable` annotated fields.
+
+:::
 
 ### Atomic Clock
 
 Here is a simple clock that relies on an `Atom` to notify every second.
 
 > Full code can be seen
-> [here](https://github.com/mobxjs/mobx.dart/tree/master/mobx_examples/lib/clock).
+> [here](https://github.com/mobxjs/mobx.dart/tree/main/mobx_examples/lib/clock).
 
 - When the clock gets observed the first time, we start the timer
   (`_startTimer`).
