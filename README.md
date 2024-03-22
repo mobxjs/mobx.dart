@@ -410,9 +410,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-63-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-64-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -502,6 +500,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ko16a46"><img src="https://avatars.githubusercontent.com/u/100613422?v=4?s=64" width="64px;" alt="ko16a46"/><br /><sub><b>ko16a46</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=ko16a46" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/yatharth25"><img src="https://avatars.githubusercontent.com/u/54071856?v=4?s=64" width="64px;" alt="Yatharth Chauhan"/><br /><sub><b>Yatharth Chauhan</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=yatharth25" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ParthBaraiya"><img src="https://avatars.githubusercontent.com/u/36261739?v=4?s=64" width="64px;" alt="Parth Baraiya"/><br /><sub><b>Parth Baraiya</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=ParthBaraiya" title="Code">💻</a> <a href="https://github.com/mobxjs/mobx.dart/issues?q=author%3AParthBaraiya" title="Bug reports">🐛</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/altynbek132"><img src="https://avatars.githubusercontent.com/u/48729942?v=4?s=64" width="64px;" alt="Altynbek Aidarbekov"/><br /><sub><b>Altynbek Aidarbekov</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=altynbek132" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
