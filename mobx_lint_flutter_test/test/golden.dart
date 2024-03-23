@@ -21,10 +21,10 @@ File writeToTemporaryFile(String content) {
 }
 
 void testGolden(
-    String description,
-    String fileName,
-    Future<Iterable<PrioritizedSourceChange>> Function() body,
-    ) {
+  String description,
+  String fileName,
+  Future<Iterable<PrioritizedSourceChange>> Function() body,
+) {
   test(description, () async {
     final changes = await body().then((value) => value.toList());
 
