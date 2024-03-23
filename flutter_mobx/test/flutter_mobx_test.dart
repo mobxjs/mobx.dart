@@ -176,6 +176,34 @@ void main() {
     expect(exception, isInstanceOf<MobXCaughtException>());
   });
 
+  testWidgets(
+    'Observer should print full stacktrace of error coming from computed',
+    (tester) async {
+      late StackTrace stackTrace;
+      final errorWrapper = await _testThrowingObserverWithStackTrace(
+        tester,
+        firstError: true,
+        actionThrows: (tester) async {
+          await tester.pumpWidget(
+            Observer(
+              builder: (context) {
+                Computed(() {
+                  try {
+                    throw Exception();
+                  } on Exception catch (e, st) {
+                    stackTrace = st;
+                    rethrow;
+                  }
+                }).value;
+              },
+            ),
+          );
+        },
+      );
+      expect(errorWrapper.stackTrace, stackTrace);
+    },
+  );
+
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
     final mock = MockReaction();
     when(() => mock.hasObservables).thenReturn(true);
@@ -345,18 +373,45 @@ Future<MobXCaughtException> _testThrowingObserver(
   WidgetTester tester,
   Object errorToThrow,
 ) async {
-  late Object exception;
+  return (await _testThrowingObserverWithStackTrace(
+    tester,
+    actionThrows: (tester) async {
+      final count = Observable(0);
+      await tester.pumpWidget(FlutterErrorThrowingObserver(
+        errorToThrow: errorToThrow,
+        builder: (context) => Text(count.value.toString()),
+      ));
+      count.value++;
+    },
+  ))
+      .exception as MobXCaughtException;
+}
+
+class _ErrorWrapper {
+  final Object exception;
+  final StackTrace? stackTrace;
+
+  _ErrorWrapper({required this.exception, required this.stackTrace});
+}
+
+Future<_ErrorWrapper> _testThrowingObserverWithStackTrace(
+  WidgetTester tester, {
+  required Future<void> Function(WidgetTester tester) actionThrows,
+  bool firstError = false,
+}) async {
+  _ErrorWrapper? errorWrapper;
   final prevOnError = FlutterError.onError;
-  FlutterError.onError = (details) => exception = details.exception;
+  FlutterError.onError = (details) {
+    if (firstError && errorWrapper != null) {
+      return;
+    }
+    errorWrapper =
+        _ErrorWrapper(exception: details.exception, stackTrace: details.stack);
+  };
 
   try {
-    final count = Observable(0);
-    await tester.pumpWidget(FlutterErrorThrowingObserver(
-      errorToThrow: errorToThrow,
-      builder: (context) => Text(count.value.toString()),
-    ));
-    count.value++;
-    return exception as MobXCaughtException;
+    await actionThrows(tester);
+    return errorWrapper!;
   } finally {
     FlutterError.onError = prevOnError;
   }

@@ -26,4 +26,21 @@ void main() {
       expect(ex.stackTrace, isNotNull);
     }
   });
+
+  test('should preserve stacktrace', () async {
+    late StackTrace stackTrace;
+    try {
+      Computed(() {
+        try {
+          throw Exception();
+        } on Exception catch (e, st) {
+          stackTrace = st;
+          rethrow;
+        }
+      }).value;
+    } on MobXCaughtException catch (e, st) {
+      expect(st, stackTrace);
+      expect(st, e.stackTrace);
+    }
+  });
 }
