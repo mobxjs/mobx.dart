@@ -64,13 +64,14 @@ class Observer extends StatelessObserverWidget {
 
   @override
   String getName() =>
-    super.getName() + 
-    (debugConstructingStackFrame != null
-      ? '\n$debugConstructingStackFrame'
-      : '');
+      super.getName() +
+      (debugConstructingStackFrame != null
+          ? '\n$debugConstructingStackFrame'
+          : '');
 
   @override
-  Widget build(BuildContext context) => builderWithChild?.call(context, child) ?? builder!.call(context);
+  Widget build(BuildContext context) =>
+      builderWithChild?.call(context, child) ?? builder!.call(context);
 
   /// Matches constructor stack frames, in both VM and web environments.
   static final _constructorStackFramePattern = RegExp(r'\bnew\b');
@@ -99,15 +100,14 @@ class Observer extends StatelessObserverWidget {
             .skip(3)
             // Search for the first non-constructor frame
             .firstWhere(
-              (frame) => 
-                !_constructorStackFramePattern.hasMatch(frame),
+                (frame) => !_constructorStackFramePattern.hasMatch(frame),
                 orElse: () => '');
 
         final stackFrameCore =
-          _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);
+            _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);
         final cleanedStackFrame = stackFrameCore == null
-          ? null
-          : 'Observer constructed from: $stackFrameCore';
+            ? null
+            : 'Observer constructed from: $stackFrameCore';
 
         stackFrame = cleanedStackFrame;
       }

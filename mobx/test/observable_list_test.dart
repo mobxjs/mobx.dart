@@ -111,15 +111,13 @@ void main() {
       var count1 = 0;
       var count2 = 0;
 
-      list
-        .observe((change) {
-          count1++;
-        });
+      list.observe((change) {
+        count1++;
+      });
 
-      list
-        .observe((change) {
-          count2++;
-        }, fireImmediately: true);
+      list.observe((change) {
+        count2++;
+      }, fireImmediately: true);
 
       list.add(1);
 
