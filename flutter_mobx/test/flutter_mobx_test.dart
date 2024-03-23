@@ -59,45 +59,49 @@ void main() {
     expect(renderCount, equals(1));
   });
 
-  testWidgets("Observer.withBuiltChild's child doesn't re-render", (tester) async {
+  testWidgets("Observer.withBuiltChild's child doesn't re-render",
+      (tester) async {
     final message = Observable('Click');
-     final key1 = UniqueKey();
-     final key2 = UniqueKey();
-     final key3 = UniqueKey();
+    final key1 = UniqueKey();
+    final key2 = UniqueKey();
+    final key3 = UniqueKey();
 
-     await tester.pumpWidget(
-       MaterialApp(
-         home: Observer.withBuiltChild(
-           builderWithChild: (context, child) {          
-             return Column(
-               children: [
-                 ElevatedButton(onPressed: () => message.value = 'Clicked', child: Container()),
-                 Text(message.value, key: key1),
-                 child!,
-                 Builder(
-                   builder: (context) {
-                     return Text(message.value, key: key3); 
-                   }
-                 ),
-               ],
-             );
-           },
-           child: Text(message.value, key: key2),
-         ),
-       ),
-     );    
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Observer.withBuiltChild(
+          builderWithChild: (context, child) {
+            return Column(
+              children: [
+                ElevatedButton(
+                    onPressed: () => message.value = 'Clicked',
+                    child: Container()),
+                Text(message.value, key: key1),
+                child!,
+                Builder(builder: (context) {
+                  return Text(message.value, key: key3);
+                }),
+              ],
+            );
+          },
+          child: Text(message.value, key: key2),
+        ),
+      ),
+    );
 
-     expect(tester.widget<Text>(find.byKey(key1)).data, equals('Click'));
-     expect(tester.widget<Text>(find.byKey(key2)).data, equals('Click'));
-     expect(tester.widget<Text>(find.byKey(key3)).data, equals('Click'));
+    expect(tester.widget<Text>(find.byKey(key1)).data, equals('Click'));
+    expect(tester.widget<Text>(find.byKey(key2)).data, equals('Click'));
+    expect(tester.widget<Text>(find.byKey(key3)).data, equals('Click'));
 
-     await tester.tap(find.byType(ElevatedButton));
-     expect(message.value, equals('Clicked'));
+    await tester.tap(find.byType(ElevatedButton));
+    expect(message.value, equals('Clicked'));
 
-     await tester.pump();
-     expect(tester.widget<Text>(find.byKey(key1)).data, equals('Clicked')); // Observer rebuilt the Text1
-     expect(tester.widget<Text>(find.byKey(key2)).data, equals('Click')); // child Text2 did not change
-     expect(tester.widget<Text>(find.byKey(key3)).data, equals('Clicked')); // Builder does not preserve from rebuild
+    await tester.pump();
+    expect(tester.widget<Text>(find.byKey(key1)).data,
+        equals('Clicked')); // Observer rebuilt the Text1
+    expect(tester.widget<Text>(find.byKey(key2)).data,
+        equals('Click')); // child Text2 did not change
+    expect(tester.widget<Text>(find.byKey(key3)).data,
+        equals('Clicked')); // Builder does not preserve from rebuild
   });
 
   testWidgets('Observer build should call reaction.track', (tester) async {
@@ -171,6 +175,34 @@ void main() {
     );
     expect(exception, isInstanceOf<MobXCaughtException>());
   });
+
+  testWidgets(
+    'Observer should print full stacktrace of error coming from computed',
+    (tester) async {
+      late StackTrace stackTrace;
+      final errorWrapper = await _testThrowingObserverWithStackTrace(
+        tester,
+        firstError: true,
+        actionThrows: (tester) async {
+          await tester.pumpWidget(
+            Observer(
+              builder: (context) {
+                Computed(() {
+                  try {
+                    throw Exception();
+                  } on Exception catch (e, st) {
+                    stackTrace = st;
+                    rethrow;
+                  }
+                }).value;
+              },
+            ),
+          );
+        },
+      );
+      expect(errorWrapper.stackTrace, stackTrace);
+    },
+  );
 
   testWidgets('Observer unmount should dispose Reaction', (tester) async {
     final mock = MockReaction();
@@ -341,18 +373,45 @@ Future<MobXCaughtException> _testThrowingObserver(
   WidgetTester tester,
   Object errorToThrow,
 ) async {
-  late Object exception;
+  return (await _testThrowingObserverWithStackTrace(
+    tester,
+    actionThrows: (tester) async {
+      final count = Observable(0);
+      await tester.pumpWidget(FlutterErrorThrowingObserver(
+        errorToThrow: errorToThrow,
+        builder: (context) => Text(count.value.toString()),
+      ));
+      count.value++;
+    },
+  ))
+      .exception as MobXCaughtException;
+}
+
+class _ErrorWrapper {
+  final Object exception;
+  final StackTrace? stackTrace;
+
+  _ErrorWrapper({required this.exception, required this.stackTrace});
+}
+
+Future<_ErrorWrapper> _testThrowingObserverWithStackTrace(
+  WidgetTester tester, {
+  required Future<void> Function(WidgetTester tester) actionThrows,
+  bool firstError = false,
+}) async {
+  _ErrorWrapper? errorWrapper;
   final prevOnError = FlutterError.onError;
-  FlutterError.onError = (details) => exception = details.exception;
+  FlutterError.onError = (details) {
+    if (firstError && errorWrapper != null) {
+      return;
+    }
+    errorWrapper =
+        _ErrorWrapper(exception: details.exception, stackTrace: details.stack);
+  };
 
   try {
-    final count = Observable(0);
-    await tester.pumpWidget(FlutterErrorThrowingObserver(
-      errorToThrow: errorToThrow,
-      builder: (context) => Text(count.value.toString()),
-    ));
-    count.value++;
-    return exception as MobXCaughtException;
+    await actionThrows(tester);
+    return errorWrapper!;
   } finally {
     FlutterError.onError = prevOnError;
   }

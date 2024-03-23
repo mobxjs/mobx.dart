@@ -1,3 +1,7 @@
+## 2.3.1
+
+- Fix preserving stacktrace in Computed and Reaction when exception thrown inside argument function
+
 ## 2.3.0+1
 
 - `pubspec.yaml` updated to include homepage and topics
