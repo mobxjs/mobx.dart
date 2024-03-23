@@ -130,11 +130,10 @@ class StoreClassVisitor extends SimpleElementVisitor {
         ),
       ]);
 
-  bool? _isComputedKeepAlive(Element element) =>
-      _computedChecker
-          .firstAnnotationOfExact(element)
-          ?.getField('keepAlive')
-          ?.toBoolValue();
+  bool? _isComputedKeepAlive(Element element) => _computedChecker
+      .firstAnnotationOfExact(element)
+      ?.getField('keepAlive')
+      ?.toBoolValue();
 
   @override
   void visitPropertyAccessorElement(PropertyAccessorElement element) {

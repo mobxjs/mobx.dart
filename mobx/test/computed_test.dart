@@ -285,8 +285,6 @@ void main() {
       expect(y.value, 2); // first access: do calculation
       expect(y.value, 2); // second access: use cached value, no calculation
       expect(calcs, 1); // only one calculation: cached!
-
-
     });
 
     test("keeping computed properties alive does not recalculate when dirty",
