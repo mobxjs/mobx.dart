@@ -25,9 +25,11 @@ class StoreConfig {
 /// String withEquals = 'world';
 /// ```
 class MakeObservable {
-  const MakeObservable({this.readOnly = false, this.equals, this.useDeepEquality = true});
+  const MakeObservable(
+      {this.readOnly = false, this.equals, this.useDeepEquality = true});
 
   final bool readOnly;
+
   /// A [Function] to use check whether the value of an observable has changed.
   ///
   /// Must be a top-level or static [Function] that takes two arguments and
@@ -58,7 +60,8 @@ const MakeObservable observable = MakeObservable();
 const MakeObservable readonly = MakeObservable(readOnly: true);
 
 /// Allows a reaction to be fired even if the value hasn't changed.
-const MakeObservable alwaysNotify = MakeObservable(equals: observableAlwaysNotEqual);
+const MakeObservable alwaysNotify =
+    MakeObservable(equals: observableAlwaysNotEqual);
 
 /// Internal class only used for code-generation with `mobx_codegen`.
 ///
