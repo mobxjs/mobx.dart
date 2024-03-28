@@ -61,7 +61,8 @@ class Observable<T> extends Atom
     final oldValue = _value;
     final newValueDynamic = _prepareNewValue(value);
 
-    if (newValueDynamic == WillChangeNotification.unchanged) {
+    if (newValueDynamic is WillChangeNotification &&
+        newValueDynamic == WillChangeNotification.unchanged) {
       return;
     }
     final newValue = newValueDynamic as T;
