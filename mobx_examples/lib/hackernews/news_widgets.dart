@@ -67,9 +67,9 @@ class FeedItemsView extends StatelessWidget {
 
         switch (future.status) {
           case FutureStatus.pending:
-            return Column(
+            return const Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 CircularProgressIndicator(),
                 Text('Loading items...'),
               ],

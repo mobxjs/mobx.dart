@@ -28,11 +28,11 @@ class Observable<T> extends Atom
       Observable._(context ?? mainContext, initialValue,
           name: name, equals: equals);
 
-  Observable._(ReactiveContext context, this._value,
+  Observable._(super.context, this._value,
       {String? name, this.equals})
       : _interceptors = Interceptors(context),
         _listeners = Listeners(context),
-        super._(context, name: name ?? context.nameFor('Observable')) {
+        super._(name: name ?? context.nameFor('Observable')) {
     if (_context.isSpyEnabled) {
       _context.spyReport(ObservableValueSpyEvent(this,
           newValue: _value, name: this.name, isEnd: true));

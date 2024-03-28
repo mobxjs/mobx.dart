@@ -50,8 +50,8 @@ import 'package:provider/provider.dart';
 class MultiReactionBuilder extends MultiProvider {
   /// {@macro multi_reaction_builder}
   MultiReactionBuilder({
-    Key? key,
+    super.key,
     required List<ReactionBuilder> builders,
-    required Widget child,
-  }) : super(key: key, providers: builders, child: child);
+    required Widget super.child,
+  }) : super(providers: builders);
 }

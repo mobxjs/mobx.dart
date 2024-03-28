@@ -1,3 +1,11 @@
+## 2.2.1+1
+
+- Analyzer fixes
+
+## 2.2.1
+
+- Upgrading packages and sdk
+
 ## 2.2.0+2
 
 - `pubspec.yaml` updated to include homepage and topics

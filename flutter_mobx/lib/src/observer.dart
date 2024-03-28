@@ -19,36 +19,26 @@ bool debugAddStackTraceInObserverName = true;
 class Observer extends StatelessObserverWidget {
   // ignore: prefer_const_constructors_in_immutables
   Observer({
-    Key? key,
+    super.key,
     required this.builder,
-    String? name,
-    bool? warnWhenNoObservables,
+    super.name,
+    super.warnWhenNoObservables,
   })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
         builderWithChild = null,
         child = null,
-        assert(builder != null),
-        super(
-          key: key,
-          name: name,
-          warnWhenNoObservables: warnWhenNoObservables,
-        );
+        assert(builder != null);
 
   /// Observer which excludes the child branch from being rebuilt
   // ignore: prefer_const_constructors_in_immutables
   Observer.withBuiltChild({
-    Key? key,
+    super.key,
     required this.builderWithChild,
     required this.child,
-    String? name,
-    bool? warnWhenNoObservables,
+    super.name,
+    super.warnWhenNoObservables,
   })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
         builder = null,
-        assert(builderWithChild != null && child != null),
-        super(
-          key: key,
-          name: name,
-          warnWhenNoObservables: warnWhenNoObservables,
-        );
+        assert(builderWithChild != null && child != null);
 
   /// regular builder, suitable for most cases
   final WidgetBuilder? builder;

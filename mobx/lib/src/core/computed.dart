@@ -43,10 +43,10 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
       Computed._(context ?? mainContext, fn,
           name: name, equals: equals, keepAlive: keepAlive);
 
-  Computed._(ReactiveContext context, this._fn,
+  Computed._(super.context, this._fn,
       {String? name, this.equals, bool? keepAlive})
       : _keepAlive = keepAlive ?? false,
-        super._(context, name: name ?? context.nameFor('Computed'));
+        super._(name: name ?? context.nameFor('Computed'));
 
   final EqualityComparer<T>? equals;
 

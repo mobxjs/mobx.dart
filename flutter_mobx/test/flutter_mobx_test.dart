@@ -419,7 +419,7 @@ Future<_ErrorWrapper> _testThrowingObserverWithStackTrace(
 
 class ConstObserver extends StatelessObserverWidget {
   // const keyword compiles
-  const ConstObserver({Key? key}) : super(key: key);
+  const ConstObserver({super.key});
 
   @override
   Widget build(BuildContext context) => Container();
@@ -430,7 +430,7 @@ class ConstObserver extends StatelessObserverWidget {
 
 class ConstStatefulObserver extends StatefulObserverWidget {
   // const keyword compiles
-  const ConstStatefulObserver({Key? key}) : super(key: key);
+  const ConstStatefulObserver({super.key});
 
   @override
   State<ConstStatefulObserver> createState() => _ConstStatefulObserverState();
@@ -442,7 +442,7 @@ class _ConstStatefulObserverState extends State<ConstStatefulObserver> {
 }
 
 class _ObserverRebuildTestMyApp extends StatefulWidget {
-  const _ObserverRebuildTestMyApp({Key? key}) : super(key: key);
+  const _ObserverRebuildTestMyApp();
 
   @override
   State<_ObserverRebuildTestMyApp> createState() =>
@@ -471,8 +471,7 @@ class _ObserverRebuildTestMyAppState extends State<_ObserverRebuildTestMyApp> {
 class _ObserverRebuildTestOne extends StatelessWidget {
   final _ObserverRebuildTestMyStore store;
 
-  const _ObserverRebuildTestOne({Key? key, required this.store})
-      : super(key: key);
+  const _ObserverRebuildTestOne({required this.store});
 
   @override
   Widget build(BuildContext context) {
@@ -494,8 +493,7 @@ class _ObserverRebuildTestOne extends StatelessWidget {
 class _ObserverRebuildTestTwo extends StatelessWidget {
   final _ObserverRebuildTestMyStore store;
 
-  const _ObserverRebuildTestTwo({Key? key, required this.store})
-      : super(key: key);
+  const _ObserverRebuildTestTwo({required this.store});
 
   @override
   Widget build(BuildContext context) {
@@ -512,8 +510,7 @@ class _ObserverRebuildTestTwo extends StatelessWidget {
 class _ObserverRebuildTestTwoChild extends StatefulWidget {
   final _ObserverRebuildTestMyStore store;
 
-  const _ObserverRebuildTestTwoChild({Key? key, required this.store})
-      : super(key: key);
+  const _ObserverRebuildTestTwoChild({required this.store});
 
   @override
   _ObserverRebuildTestTwoChildState createState() =>

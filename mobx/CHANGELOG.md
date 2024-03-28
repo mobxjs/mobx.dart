@@ -1,3 +1,11 @@
+## 2.3.3+1
+
+- Analyzer fixes
+
+## 2.3.3
+
+- Upgrading packages and sdk
+
 ## 2.3.2
 
 - Fix Observable.value setter when class with operator ==(covariant) is used as a value

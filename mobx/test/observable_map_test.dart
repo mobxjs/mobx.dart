@@ -93,7 +93,7 @@ void main() {
       <String, void Function(ObservableMap<String, int>)>{
         '[]': (m) => m['a'],
         'containsKey': (m) => m.containsKey('a'),
-        'containsValue': (m) => m.containsKey(1),
+        'containsValue': (m) => m.containsValue(1),
         'forEach': (m) => m.forEach((_, __) {}),
         'putIfAbsent': (m) => m.putIfAbsent('a', () => 1),
         'length': (m) => m.length,

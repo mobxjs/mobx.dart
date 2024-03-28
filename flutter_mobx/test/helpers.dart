@@ -21,8 +21,7 @@ class MockReaction extends Mock implements ReactionImpl {
 
 // ignore: must_be_immutable
 class TestObserver extends Observer {
-  TestObserver(this.reaction, {Key? key, required WidgetBuilder builder})
-      : super(builder: builder, key: key);
+  TestObserver(this.reaction, {super.key, required WidgetBuilder super.builder});
 
   final Reaction reaction;
 
@@ -38,14 +37,10 @@ class TestObserver extends Observer {
 class LoggingObserver extends Observer {
   // ignore: prefer_const_constructors_in_immutables
   LoggingObserver({
-    required WidgetBuilder builder,
-    bool? warnWhenNoObservables,
-    Key? key,
-  }) : super(
-          key: key,
-          builder: builder,
-          warnWhenNoObservables: warnWhenNoObservables,
-        );
+    required WidgetBuilder super.builder,
+    super.warnWhenNoObservables,
+    super.key,
+  });
 
   String? previousLog;
 
@@ -59,10 +54,10 @@ class LoggingObserver extends Observer {
 class FlutterErrorThrowingObserver extends Observer {
   // ignore: prefer_const_constructors_in_immutables
   FlutterErrorThrowingObserver({
-    required WidgetBuilder builder,
+    required WidgetBuilder super.builder,
     required this.errorToThrow,
-    Key? key,
-  }) : super(key: key, builder: builder);
+    super.key,
+  });
 
   final Object errorToThrow;
 
@@ -72,8 +67,7 @@ class FlutterErrorThrowingObserver extends Observer {
 }
 
 class FlutterErrorThrowingObserverElement extends StatelessObserverElement {
-  FlutterErrorThrowingObserverElement(StatelessObserverWidget widget)
-      : super(widget);
+  FlutterErrorThrowingObserverElement(super.widget);
 
   @override
   FlutterErrorThrowingObserver get widget =>
