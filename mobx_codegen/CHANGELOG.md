@@ -1,3 +1,7 @@
+## 2.6.1
+
+- Upgrading packages and sdk
+
 ## 2.6.0+1
 
 - `pubspec.yaml` updated to include homepage and topics

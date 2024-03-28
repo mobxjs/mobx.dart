@@ -77,17 +77,17 @@ void main() {
     final autorunResults = <List<String>>[];
     autorun((_) => autorunResults.add(store.list));
 
-    store.list = ['first'];
+    store.list[0] = 'first';
     expect(autorunResults, [
       ['first']
     ]);
 
-    store.list = ['first'];
+    store.list[0] = 'first';
     expect(autorunResults, [
       ['first']
     ]);
 
-    store.list = ['first'];
+    store.list[0] = 'first';
     expect(autorunResults, [
       ['first']
     ]);
@@ -101,17 +101,17 @@ void main() {
     final autorunResults = <Map<String, int>>[];
     autorun((_) => autorunResults.add(store.map));
 
-    store.map = {'first': 1};
+    store.map['first'] = 1;
     expect(autorunResults, [
       {'first': 1}
     ]);
 
-    store.map = {'first': 1};
+    store.map['first'] = 1;
     expect(autorunResults, [
       {'first': 1}
     ]);
 
-    store.map = {'first': 1};
+    store.map['first'] = 1;
     expect(autorunResults, [
       {'first': 1}
     ]);

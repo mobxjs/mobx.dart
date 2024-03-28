@@ -2,6 +2,8 @@ import 'action_controller_test.dart' as action_controller_test;
 import 'action_test.dart' as action_test;
 import 'annotations_test.dart' as annotations_test;
 import 'async_action_test.dart' as async_action_test;
+import 'atom_extensions_test.dart' as atom_extensions_test;
+import 'atom_test.dart' as atom_test;
 import 'autorun_test.dart' as autorun_test;
 import 'bug_related_test.dart' as bug_related_test;
 import 'computed_test.dart' as computed_test;
@@ -17,6 +19,8 @@ import 'extensions/observable_set_extension_test.dart'
     as extensions_observable_set_extension_test;
 import 'extensions/observable_stream_extension_test.dart'
     as extensions_observable_stream_extension_test;
+import 'extensions/primitive_types_extensions_test.dart'
+    as extensions_primitive_types_extensions_test;
 import 'intercept_test.dart' as intercept_test;
 import 'listenable_test.dart' as listenable_test;
 import 'observable_future_test.dart' as observable_future_test;
@@ -31,9 +35,8 @@ import 'reaction_test.dart' as reaction_test;
 import 'reactive_policies_test.dart' as reactive_policies_test;
 import 'spy_test.dart' as spy_test;
 import 'store_test.dart' as store_test;
-import 'when_test.dart' as when_test;
-import 'atom_test.dart' as atom_test;
 import 'utils_test.dart' as utils_test;
+import 'when_test.dart' as when_test;
 
 void main() {
   observable_test.main();
@@ -66,6 +69,8 @@ void main() {
   extensions_observable_set_extension_test.main();
   extensions_observable_future_extension_test.main();
   extensions_observable_stream_extension_test.main();
+  extensions_primitive_types_extensions_test.main();
+  atom_extensions_test.main();
 
   bug_related_test.main();
   reactive_policies_test.main();

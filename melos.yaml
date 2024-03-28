@@ -15,5 +15,7 @@ scripts:
     exec: dart pub get
   set_version:
     exec: dart run $MELOS_ROOT_PATH/tool/expose_version.dart
+    packageFilters:
+      scope: "{mobx,mobx_codegen,flutter_mobx,mobx_lint}"
   generate:
     run: cd mobx_examples && dart run build_runner watch --delete-conflicting-outputs
