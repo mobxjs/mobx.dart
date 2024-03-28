@@ -80,6 +80,11 @@ void main() {
       x.value = 100;
       expect(x.nonObservableValue, 100);
     });
+
+    test('set value covariant', () async {
+      final x = Observable<_Covariant?>(null);
+      x.value = _Covariant();
+    });
   });
 
   group('createAtom()', () {
@@ -110,4 +115,14 @@ void main() {
       expect(a.name, startsWith('Atom@'));
     });
   });
+}
+
+class _Covariant {
+  @override
+  // ignore: hash_and_equals
+  bool operator ==(covariant _Covariant other) {
+    if (identical(this, other)) return true;
+
+    return other is _Covariant;
+  }
 }

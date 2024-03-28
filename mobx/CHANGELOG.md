@@ -1,3 +1,7 @@
+## 2.3.2
+
+- Fix Observable.value setter when class with operator ==(covariant) is used as a value
+
 ## 2.3.1
 
 - Fix preserving stacktrace in Computed and Reaction when exception thrown inside argument function
