@@ -47,7 +47,7 @@ class MobXException extends Error implements Exception {
 /// This exception would be fired when an reaction has a cycle and does
 /// not stabilize in [ReactiveConfig.maxIterations] iterations
 class MobXCyclicReactionException extends MobXException {
-  MobXCyclicReactionException(String message) : super(message);
+  MobXCyclicReactionException(super.message);
 }
 
 /// This captures the stack trace when user-land code throws an exception

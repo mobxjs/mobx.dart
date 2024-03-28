@@ -14,13 +14,12 @@ abstract class StatelessObserverWidget extends StatelessWidget
     with ObserverWidgetMixin {
   /// Initializes [key], [context] and [name] for subclasses.
   const StatelessObserverWidget({
-    Key? key,
+    super.key,
     ReactiveContext? context,
     String? name,
     this.warnWhenNoObservables,
   })  : _name = name,
-        _context = context,
-        super(key: key);
+        _context = context;
 
   final String? _name;
   final ReactiveContext? _context;
@@ -41,7 +40,7 @@ abstract class StatelessObserverWidget extends StatelessWidget
 class StatelessObserverElement extends StatelessElement
     with ObserverElementMixin {
   /// Creates an element that uses the given widget as its configuration.
-  StatelessObserverElement(StatelessObserverWidget widget) : super(widget);
+  StatelessObserverElement(StatelessObserverWidget super.widget);
 
   @override
   StatelessObserverWidget get widget => super.widget as StatelessObserverWidget;

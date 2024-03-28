@@ -1,3 +1,7 @@
+## 2.2.1+1
+
+- Analyzer fixes
+
 ## 2.2.1
 
 - Upgrading packages and sdk

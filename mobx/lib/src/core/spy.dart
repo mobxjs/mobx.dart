@@ -39,10 +39,9 @@ abstract class SpyEvent {
 
 /// Used for reporting value changes on an Observable
 class ObservableValueSpyEvent extends SpyEvent {
-  ObservableValueSpyEvent(dynamic object,
-      {this.newValue, this.oldValue, required String name, bool isEnd = false})
-      : super._(object,
-            type: 'observable', name: name, isStart: true, isEnd: isEnd);
+  ObservableValueSpyEvent(super.object,
+      {this.newValue, this.oldValue, required super.name, super.isEnd})
+      : super._(type: 'observable', isStart: true);
 
   final dynamic newValue;
   final dynamic oldValue;
@@ -52,9 +51,8 @@ class ObservableValueSpyEvent extends SpyEvent {
 }
 
 class ComputedValueSpyEvent extends SpyEvent {
-  ComputedValueSpyEvent(object, {required String name})
-      : super._(object,
-            type: 'computed', name: name, isStart: true, isEnd: true);
+  ComputedValueSpyEvent(super.object, {required super.name})
+      : super._(type: 'computed', isStart: true, isEnd: true);
 }
 
 class ReactionSpyEvent extends SpyEvent {

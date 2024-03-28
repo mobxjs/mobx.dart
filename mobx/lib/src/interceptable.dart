@@ -14,7 +14,7 @@ abstract class Interceptable<T> {
 /// is stored inside the `Interceptors<T>`.
 /// This is an internal class and should not be used directly.
 class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>> {
-  Interceptors(ReactiveContext context) : super(context);
+  Interceptors(super.context);
 
   @override
   Dispose add(Interceptor<T> handler) => super.add(handler);

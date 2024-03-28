@@ -6,7 +6,7 @@ import 'package:mobx/mobx.dart';
 class _TestWrapper extends StatefulWidget {
   final Observable<int> counter;
 
-  const _TestWrapper({Key? key, required this.counter}) : super(key: key);
+  const _TestWrapper({required this.counter});
 
   @override
   State<_TestWrapper> createState() => _TestWrapperState();

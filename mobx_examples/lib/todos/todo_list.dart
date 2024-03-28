@@ -52,7 +52,7 @@ abstract class _TodoList with Store {
   }
 
   @computed
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   ObservableList<Todo> get visibleTodos {
     switch (filter) {
       case VisibilityFilter.pending:
