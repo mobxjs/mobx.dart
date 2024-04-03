@@ -28,8 +28,7 @@ class Observable<T> extends Atom
       Observable._(context ?? mainContext, initialValue,
           name: name, equals: equals);
 
-  Observable._(super.context, this._value,
-      {String? name, this.equals})
+  Observable._(super.context, this._value, {String? name, this.equals})
       : _interceptors = Interceptors(context),
         _listeners = Listeners(context),
         super._(name: name ?? context.nameFor('Observable')) {

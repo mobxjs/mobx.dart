@@ -1,4 +1,4 @@
-## 2.3.3+1
+## 2.3.3+1 - 2.3.3+2
 
 - Analyzer fixes
 
@@ -35,7 +35,7 @@ Make the change in `2.2.3` optional. If you want the use this behavior , modify 
 
 ## 2.2.2
 
-- Fix [#956](<(https://github.com/mobxjs/mobx.dart/issues/956)>): ObservableSet`and`ObservableMap`should not notify all listeners when`observe` with fireImmediately. by [@amondnet](https://github.com/amondnet) in [#962](https://github.com/mobxjs/mobx.dart/pull/962)
+- Fix [#956](https://github.com/mobxjs/mobx.dart/issues/956): ObservableSet`and`ObservableMap`should not notify all listeners when`observe` with fireImmediately. by [@amondnet](https://github.com/amondnet) in [#962](https://github.com/mobxjs/mobx.dart/pull/962)
 
 ## 2.2.1
 

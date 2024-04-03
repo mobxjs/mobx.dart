@@ -80,7 +80,8 @@ void main() {
       fakeAsync((async) {
         dispose = autorun((_) {
           value = x.value + 1;
-        }, delay: delayMs).call;
+        }, delay: delayMs)
+            .call;
 
         async.elapse(const Duration(milliseconds: 2500));
 
