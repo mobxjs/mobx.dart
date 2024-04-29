@@ -41,27 +41,29 @@ class DiceView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: TextButton(
-                  onPressed: diceCounter.roll,
-                  child: Observer(
-                    builder: (_) =>
-                        Image.asset('images/dice${diceCounter.left}.png'),
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextButton(
+                    onPressed: diceCounter.roll,
+                    child: Observer(
+                      builder: (_) =>
+                          Image.asset('images/dice${diceCounter.left}.png'),
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: diceCounter.roll,
-                  child: Observer(
-                    builder: (_) =>
-                        Image.asset('images/dice${diceCounter.right}.png'),
+                Expanded(
+                  child: TextButton(
+                    onPressed: diceCounter.roll,
+                    child: Observer(
+                      builder: (_) =>
+                          Image.asset('images/dice${diceCounter.right}.png'),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(16),
