@@ -410,7 +410,7 @@ the growing community of `MobX.dart`.
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-64-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-65-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -503,6 +503,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/altynbek132"><img src="https://avatars.githubusercontent.com/u/48729942?v=4?s=64" width="64px;" alt="Altynbek Aidarbekov"/><br /><sub><b>Altynbek Aidarbekov</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=altynbek132" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/CpedniyNikon"><img src="https://avatars.githubusercontent.com/u/50595311?v=4?s=64" width="64px;" alt="CpedniyNikon"/><br /><sub><b>CpedniyNikon</b></sub></a><br /><a href="https://github.com/mobxjs/mobx.dart/commits?author=CpedniyNikon" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
