@@ -16,7 +16,7 @@ dependencies:
   collection: ^1.15.0
 
 dev_dependencies:
-  build_runner: ^2.4.10
+  build_runner: ^2.4.9
   coverage: ^1.8.0
   fake_async: ^1.2.0
   lints: ^4.0.0
