@@ -89,7 +89,7 @@ class LibraryScopedNameFinder {
             // This is a bare type param, like "T"
             type is TypeParameterType) {
       // ignore: deprecated_member_use_from_same_package
-      return type.getDisplayString(withNullability: true);
+      return type.getDisplayString();
     }
 
     return _getNamedElementTypeName(typeElement!, type);

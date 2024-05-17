@@ -16,9 +16,9 @@ dependencies:
   collection: ^1.15.0
 
 dev_dependencies:
-  build_runner: ^2.0.6
-  coverage: ^1.0.1
+  build_runner: ^2.4.10
+  coverage: ^1.8.0
   fake_async: ^1.2.0
-  lints: ^3.0.0
+  lints: ^4.0.0
   mocktail: ^1.0.3
   test: ^1.17.0
