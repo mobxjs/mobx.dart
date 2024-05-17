@@ -2,9 +2,9 @@ import 'package:mobx/mobx.dart';
 
 part 'multi_counter_store.g.dart';
 
-class SingleCounter = _SingleCounter with _$SingleCounter;
+class SingleCounter = InternalSingleCounter with _$SingleCounter;
 
-abstract class _SingleCounter with Store {
+abstract class InternalSingleCounter with Store {
   @observable
   int value = 0;
 
@@ -24,9 +24,9 @@ abstract class _SingleCounter with Store {
   }
 }
 
-class MultiCounterStore = _MultiCounterStore with _$MultiCounterStore;
+class MultiCounterStore = InternalMultiCounterStore with _$MultiCounterStore;
 
-abstract class _MultiCounterStore with Store {
+abstract class InternalMultiCounterStore with Store {
   final ObservableList<SingleCounter> counters =
       ObservableList<SingleCounter>.of([]);
 

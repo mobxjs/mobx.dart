@@ -6,10 +6,10 @@ class FormExample extends StatefulWidget {
   const FormExample({Key? key}) : super(key: key);
 
   @override
-  _FormExampleState createState() => _FormExampleState();
+  FormExampleState createState() => FormExampleState();
 }
 
-class _FormExampleState extends State<FormExample> {
+class FormExampleState extends State<FormExample> {
   final FormStore store = FormStore();
 
   @override

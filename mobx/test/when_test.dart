@@ -66,8 +66,8 @@ void main() {
 
     test('exceptions inside asyncWhen are caught and reaction is disposed', () {
       late Reaction rxn;
-      asyncWhen((_) {
-        rxn = _;
+      asyncWhen((rx) {
+        rxn = rx;
         throw Exception('FAIL');
       }, name: 'Async-when')
           .catchError((_) {

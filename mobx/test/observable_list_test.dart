@@ -620,36 +620,36 @@ void main() {
 
     group('fires reportObserved() for read-methods', () {
       <String, Function(ObservableList<int>)>{
-        'isEmpty': (_) => _.isEmpty,
-        'isNotEmpty': (_) => _.isNotEmpty,
-        'iterator': (_) => _.iterator,
-        'single': (_) => _ignoreException(() => _.single),
-        'first': (_) => _ignoreException(() => _.first),
-        'last': (_) => _ignoreException(() => _.last),
-        'toSet': (_) => _.toSet(),
-        'toList': (_) => _.toList(),
-        'join': (_) => _.join(),
-        'fold': (_) => _.fold(0, (sum, item) => sum),
-        'sublist': (_) => _.sublist(0),
-        'elementAt': (_) => _ignoreException(() => _.elementAt(0)),
-        'singleWhere': (_) => _ignoreException(
-            () => _.singleWhere((_) => _ == 20, orElse: () => 0)),
-        'lastIndexOf': (_) => _.lastIndexOf(20),
-        'indexOf': (_) => _.indexOf(20),
-        'getRange': (_) => _.getRange(0, 0),
+        'isEmpty': (list) => list.isEmpty,
+        'isNotEmpty': (list) => list.isNotEmpty,
+        'iterator': (list) => list.iterator,
+        'single': (list) => _ignoreException(() => list.single),
+        'first': (list) => _ignoreException(() => list.first),
+        'last': (list) => _ignoreException(() => list.last),
+        'toSet': (list) => list.toSet(),
+        'toList': (list) => list.toList(),
+        'join': (list) => list.join(),
+        'fold': (list) => list.fold(0, (sum, item) => sum),
+        'sublist': (list) => list.sublist(0),
+        'elementAt': (list) => _ignoreException(() => list.elementAt(0)),
+        'singleWhere': (list) => _ignoreException(
+            () => list.singleWhere((x) => x == 20, orElse: () => 0)),
+        'lastIndexOf': (list) => list.lastIndexOf(20),
+        'indexOf': (list) => list.indexOf(20),
+        'getRange': (list) => list.getRange(0, 0),
 
         // ignore: avoid_function_literals_in_foreach_calls
-        'forEach': (_) => _.forEach((a) {}),
+        'forEach': (list) => list.forEach((a) {}),
 
-        'contains': (_) => _.contains(null),
-        'indexWhere': (_) => _.indexWhere((_) => true),
-        'lastWhere': (_) => _.lastWhere((_) => true, orElse: () => 0),
-        'lastIndexWhere': (_) => _.lastIndexWhere((_) => true),
-        'firstWhere': (_) => _.firstWhere((_) => true, orElse: () => 0),
-        'every': (_) => _.every((_) => true),
-        'any': (_) => _.any((_) => true),
-        '[]': (_) => _[0],
-        '+': (_) => _ + [100],
+        'contains': (list) => list.contains(null),
+        'indexWhere': (list) => list.indexWhere((_) => true),
+        'lastWhere': (list) => list.lastWhere((_) => true, orElse: () => 0),
+        'lastIndexWhere': (list) => list.lastIndexWhere((_) => true),
+        'firstWhere': (list) => list.firstWhere((_) => true, orElse: () => 0),
+        'every': (list) => list.every((_) => true),
+        'any': (list) => list.any((_) => true),
+        '[]': (list) => list[0],
+        '+': (list) => list + [100],
       }.forEach(_templateReadTest);
 
       test('bypass observable system', () {
@@ -673,148 +673,148 @@ void main() {
 
   group('fires reportChanged() for write-methods', () {
     <String, bool Function(ObservableList<int>)>{
-      'length=': (_) {
-        _.length = 0;
+      'length=': (x) {
+        x.length = 0;
         return true;
       },
-      'last=': (_) {
-        _.last = 100;
+      'last=': (x) {
+        x.last = 100;
         return true;
       },
-      'first=': (_) {
-        _.first = 100;
+      'first=': (x) {
+        x.first = 100;
         return true;
       },
-      'insertAll': (_) {
-        _.insertAll(0, [100]);
+      'insertAll': (x) {
+        x.insertAll(0, [100]);
         return true;
       },
-      'insert': (_) {
-        _.insert(0, 100);
+      'insert': (x) {
+        x.insert(0, 100);
         return true;
       },
-      'sort': (_) {
-        _.sort((l, r) => r.compareTo(l));
+      'sort': (x) {
+        x.sort((l, r) => r.compareTo(l));
         return true;
       },
-      'setRange': (_) {
-        _.setRange(0, 1, [100]);
+      'setRange': (x) {
+        x.setRange(0, 1, [100]);
         return true;
       },
-      'fillRange': (_) {
-        _.fillRange(0, 2, 100);
+      'fillRange': (x) {
+        x.fillRange(0, 2, 100);
         return true;
       },
-      'replaceRange': (_) {
-        _.replaceRange(0, 1, [100]);
+      'replaceRange': (x) {
+        x.replaceRange(0, 1, [100]);
         return true;
       },
-      'setAll': (_) {
-        _.setAll(0, [100]);
+      'setAll': (x) {
+        x.setAll(0, [100]);
         return true;
       },
-      '[]=': (_) {
-        _[0] = 100;
+      '[]=': (x) {
+        x[0] = 100;
         return true;
       },
-      'add': (_) {
-        _.add(100);
+      'add': (x) {
+        x.add(100);
         return true;
       },
-      'addAll': (_) {
-        _.addAll([100]);
+      'addAll': (x) {
+        x.addAll([100]);
         return true;
       },
-      'clear': (_) {
-        _.clear();
+      'clear': (x) {
+        x.clear();
         return true;
       },
-      'removeLast': (_) {
-        _.removeLast();
+      'removeLast': (x) {
+        x.removeLast();
         return true;
       },
-      'remove': (_) {
-        _.remove(0);
+      'remove': (x) {
+        x.remove(0);
         return true;
       },
-      'removeRange': (_) {
-        _.removeRange(0, 1);
+      'removeRange': (x) {
+        x.removeRange(0, 1);
         return true;
       },
-      'removeAt': (_) {
-        _.removeAt(0);
+      'removeAt': (x) {
+        x.removeAt(0);
         return true;
       },
-      'removeWhere': (_) {
-        _.removeWhere((_) => true);
+      'removeWhere': (x) {
+        x.removeWhere((x) => true);
         return true;
       },
-      'shuffle': (_) {
-        _.shuffle(Random(0));
+      'shuffle': (x) {
+        x.shuffle(Random(0));
         return true;
       },
-      'retainWhere': (_) {
-        _.retainWhere((_) => false);
+      'retainWhere': (x) {
+        x.retainWhere((x) => false);
         return true;
       },
-      '!length=': (_) {
-        _.length = 4;
+      '!length=': (x) {
+        x.length = 4;
         return false;
       },
-      '!last=': (_) {
-        _.last = 3;
+      '!last=': (x) {
+        x.last = 3;
         return false;
       },
-      '!first=': (_) {
-        _.first = 0;
+      '!first=': (x) {
+        x.first = 0;
         return false;
       },
-      '!insertAll': (_) {
-        _.insertAll(0, []);
+      '!insertAll': (x) {
+        x.insertAll(0, []);
         return false;
       },
-      '!sort': (_) {
-        _.sort();
+      '!sort': (x) {
+        x.sort();
         return false;
       },
-      '!setRange': (_) {
-        _.setRange(1, 1, [100]);
+      '!setRange': (x) {
+        x.setRange(1, 1, [100]);
         return false;
       },
-      '!fillRange': (_) {
-        _.fillRange(2, 2, 100);
+      '!fillRange': (x) {
+        x.fillRange(2, 2, 100);
         return false;
       },
-      '!replaceRange': (_) {
-        _.replaceRange(1, 1, []);
+      '!replaceRange': (x) {
+        x.replaceRange(1, 1, []);
         return false;
       },
-      '!setAll': (_) {
-        _.setAll(0, []);
+      '!setAll': (x) {
+        x.setAll(0, []);
         return false;
       },
-      '![]=': (_) {
-        _[2] = 2;
+      '![]=': (x) {
+        x[2] = 2;
         return false;
       },
-      '!addAll': (_) {
-        _.addAll([]);
+      '!addAll': (x) {
+        x.addAll([]);
         return false;
       },
-      '!remove': (_) {
-        _.remove(-1);
+      '!remove': (x) {
+        x.remove(-1);
         return false;
       },
-      '!removeRange': (_) {
-        _.removeRange(1, 1);
+      '!removeRange': (x) {
+        x.removeRange(1, 1);
         return false;
       },
-      '!removeWhere': (_) {
-        _.removeWhere((_) => false);
+      '!removeWhere': (x) {
+        x.removeWhere((x) => false);
         return false;
       },
-      '!retainWhere': (_) {
-        _.retainWhere((_) => true);
+      '!retainWhere': (x) {
+        x.retainWhere((x) => true);
         return false;
       },
     }.forEach(_templateWriteTest);
@@ -822,17 +822,17 @@ void main() {
 
   group('fires reportObserved() lazily on iterator returning methods', () {
     <String, Iterable Function(ObservableList<int>)>{
-      'map': (_) => _.map((v) => v + 3),
-      'expand': (_) => _.expand((v) => [3, 2]),
-      'where': (_) => _.where((v) => v < 30),
-      'whereType': (_) => _.whereType<int>(),
-      'skip': (_) => _.skip(0),
-      'skipWhile': (_) => _.skipWhile((v) => v > 100),
-      'followedBy': (_) => _.followedBy([30]),
-      'take': (_) => _.take(1),
-      'takeWhile': (_) => _.takeWhile((_) => true),
-      'cast': (_) => _.cast<num>(),
-      'reversed': (_) => _.reversed
+      'map': (list) => list.map((v) => v + 3),
+      'expand': (list) => list.expand((v) => [3, 2]),
+      'where': (list) => list.where((v) => v < 30),
+      'whereType': (list) => list.whereType<int>(),
+      'skip': (list) => list.skip(0),
+      'skipWhile': (list) => list.skipWhile((v) => v > 100),
+      'followedBy': (list) => list.followedBy([30]),
+      'take': (list) => list.take(1),
+      'takeWhile': (list) => list.takeWhile((_) => true),
+      'cast': (list) => list.cast<num>(),
+      'reversed': (list) => list.reversed
     }.forEach(_templateIterableReadTest);
   });
 

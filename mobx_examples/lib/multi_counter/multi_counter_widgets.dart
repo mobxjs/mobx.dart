@@ -102,8 +102,7 @@ class CounterViewPage extends StatelessWidget {
             ),
             TextButton(
               style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.red)),
+                  foregroundColor: WidgetStateProperty.all<Color>(Colors.red)),
               onPressed: counter.reset,
               child: const Text('Reset'),
             )

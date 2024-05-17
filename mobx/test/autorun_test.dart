@@ -141,8 +141,8 @@ void main() {
     });
 
     test('can be disposed inside the tracking function', () {
-      final dispose = autorun((_) {
-        _.dispose();
+      final dispose = autorun((rxn) {
+        rxn.dispose();
       });
 
       expect(dispose.reaction.isDisposed, isTrue);
@@ -153,10 +153,10 @@ void main() {
       ReactionDisposer dispose;
 
       fakeAsync((async) {
-        dispose = autorun((_) {
+        dispose = autorun((rxn) {
           final value = x.value + 1;
           if (value > 10) {
-            _.dispose();
+            rxn.dispose();
           }
         }, delay: 1000);
 

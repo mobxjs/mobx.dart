@@ -8,7 +8,7 @@ part of 'multi_counter_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$SingleCounter on _SingleCounter, Store {
+mixin _$SingleCounter on InternalSingleCounter, Store {
   late final _$valueAtom = Atom(name: '_SingleCounter.value', context: context);
 
   @override
@@ -68,7 +68,7 @@ value: ${value}
   }
 }
 
-mixin _$MultiCounterStore on _MultiCounterStore, Store {
+mixin _$MultiCounterStore on InternalMultiCounterStore, Store {
   late final _$_MultiCounterStoreActionController =
       ActionController(name: '_MultiCounterStore', context: context);
 
