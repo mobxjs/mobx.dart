@@ -88,6 +88,7 @@ class LibraryScopedNameFinder {
         typeElement == null ||
             // This is a bare type param, like "T"
             type is TypeParameterType) {
+      // ignore: deprecated_member_use_from_same_package
       return type.getDisplayString(withNullability: true);
     }
 
