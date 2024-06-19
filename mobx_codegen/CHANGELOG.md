@@ -1,3 +1,7 @@
+## 2.6.2
+
+- Adds `useDeepEquality` and `equals` fields in code generation while creating observables by [@Neelansh](https://github.com/Neelansh-ns)
+
 ## 2.6.1
 
 - Upgrading packages and sdk
