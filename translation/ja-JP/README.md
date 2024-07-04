@@ -1,4 +1,4 @@
-言語: [英語](../../README.md) | [ポルトガル語](../pt-BR/README.md) | [中国語](../zh-CN/README.md)
+言語: [英語](../../README.md) | [ポルトガル語](../pt-BR/README.md) | [中国語](../zh-CN/README.md) | [日本語](README.md)
 
 # mobx.dart
 
