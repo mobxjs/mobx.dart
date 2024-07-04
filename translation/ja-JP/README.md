@@ -1,4 +1,4 @@
-语言: [英语](../../README.md) | [葡萄牙语](../pt-BR/README.md) | [中文](README.md) | [日语](translation/ja-JP/README.md)
+言語: [英語](../../README.md) | [ポルトガル語](../pt-BR/README.md) | [中国語](../zh-CN/README.md)
 
 # mobx.dart
 
@@ -20,57 +20,56 @@
 
 ![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx.png)
 
-[MobX](https://github.com/mobxjs/mobx) Dart语言版本.
+[MobX](https://github.com/mobxjs/mobx) の Dart 言語バージョン。
 
-> 通过使用透明的函数响应式编程（TFRP）加强你的 Dart 应用中的状态管理。
+> 透明な関数型リアクティブプログラミング（TFRP）を使用して、Dart アプリの状態管理を強化します。
 
-- **[介绍](#介绍)**
-- **[核心概念](#核心概念)**
-  - [可观察对象（Observables）](#可观察对象（Observables）)
-  - [可计算观察对象（Computed Observables）](#可计算观察对象（Computed&nbsp;Observables）)
-  - [动作（Actions）](#动作（Actions）)
-  - [反应（Reactions）](#反应（Reactions）)
-- **[如何贡献](#如何贡献)**
+- **[紹介](#紹介)**
+- **[コアコンセプト](#コアコンセプト)**
+  - [オブザーバブル（Observables）](#オブザーバブル（Observables）)
+  - [計算オブザーバブル（Computed Observables）](#計算オブザーバブル（Computed&nbsp;Observables）)
+  - [アクション（Actions）](#アクション（Actions）)
+  - [リアクション（Reactions）](#リアクション（Reactions）)
+- **[貢献](#貢献)**
 
-## 介绍
+## 紹介
 
-MobX是一种状态管理库，它让应用程序的响应式数据与 UI 关联起来变得很简单。
-这种关联是完全自动的，感觉像是自然发生的一样。作为应用程序开发人员，您仅关注于需要在 UI（或其他任何地方）中使用哪些响应式数据，而不必担心使两者保持同步。
+MobX は、アプリケーションのリアクティブデータを UI に簡単に接続できる状態管理ライブラリです。
+この接続は完全に自動であり、非常に自然に感じられます。アプリケーション開発者として、UI（および他の場所）で消費する必要があるリアクティブデータに純粋に集中し、両者を同期させることを心配する必要はありません。
 
-这并不是真正的魔术，但是它确实对正在消费的（可观察的对象）和在哪里（反应）有一些了解，并会自动为您跟踪。当观察对象值改变时，所有反应都将重新运行。有趣的是，从简单的控制台日志，网络调用到重新呈现 UI，这些反应可以是任何东西。
+これは本当に魔法ではありませんが、消費されているもの（オブザーバブル）とどこで（リアクション）に関するいくつかのスマートな機能があり、自動的に追跡します。オブザーバブルが変更されると、すべてのリアクションが再実行されます。興味深いのは、これらのリアクションは、単純なコンソールログ、ネットワーク呼び出しから UI の再レンダリングまで、何でもかまわないということです。
 
-> MobX 的 JavaScript 版本非常成熟。
-> 应用程序和 Dart 语言的这种移植旨在带来相同水平的生产力。
+> MobX は JavaScript アプリにとって非常に効果的なライブラリであり、Dart 言語へのこの移植は同じレベルの生産性をもたらすことを目的としています。
 
-### 赞助商
+### スポンサー
 
-我们非常感谢赞助商们，能够让我们成为其开源软件（OSS）计划的一部分。 [[Become a sponsor](https://opencollective.com/mobx#sponsor)]
+私たちのスポンサーに非常に感謝しています。彼らのおかげで、私たちはオープンソースソフトウェア（OSS）プログラムの一部になることができました。 [[スポンサーになる](https://opencollective.com/mobx#sponsor)]
 
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/publicis-sapient-sponsor.png" height="64">](https://publicis.sapient.com)
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/wunderdog-sponsor.png" height="64">](https://wunderdog.fi)
 - [<img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg" height="64">](https://www.netlify.com)
 
-### 开始
+### 始める
 
-[MobX.dart 官网的入门指南](https://mobx.netlify.com/getting-started).
+[MobX.dart 公式サイトの入門ガイド](https://mobx.netlify.com/getting-started).
 
-### 深入
+### 深く掘り下げる
 
-更深入地学习 Mob，请看 [MobX 快速入门指南](https://www.packtpub.com/web-development/mobx-quick-start-guide). 虽然这本书使用的是 JavaScript 版本的 MobX，但是核心的概念是完全适用于 Dart 和 Flutter 版本的。
+MobX をより深く理解するには、[MobX クイックスタートガイド](https://www.packtpub.com/web-development/mobx-quick-start-guide) をご覧ください。この本は JavaScript バージョンの MobX を使用していますが、コアの概念は Dart および Flutter バージョンにも完全に適用できます。
 
 [![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
 
-## 核心概念
+## コアコンセプト
 
 ![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx-triad.png)
 
-MobX 的核心是三个重要的概念：可观察的对象（Observables），动作（Actions）和反应（Reactions）。
+MobX の中心には、オブザーバブル（Observables）、アクション（Actions）、リアクション（Reactions）という 3 つの重要な概念があります。
 
-### 可观察对象（Observables）
+### オブザーバブル（Observables）
 
-可观察对象表示应用程序的响应式状态。它们可以是复杂对象树的简单标量。通过将应用程序的状态定义为可观察树，您可以暴露一个 UI（或应用程序中的其他观察者）使用的_reactive-state-tree_。
+オブザーバブルは、アプリケーションのリアクティブ状態を表します。これらは、単純なスカラーから複雑なオブジェクトツリーまでさまざまです。アプリケーションの状態をオブザーバブルのツリーとして定義することにより、UI（またはアプリ内の他のオブザーバー）が使用するリアクティブ状態ツリーを公開できます。
 
-一个简单的响应式计数器由以下可观察对象表示：
+単純なリアクティブカウンターは、次のオブザーバブルで表されます。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -78,7 +77,7 @@ import 'package:mobx/mobx.dart';
 final counter = Observable(0);
 ```
 
-也可以创建更复杂的可观察对象，例如类。
+クラスなどのより複雑なオブザーバブルも作成できます。
 
 ```dart
 class Counter {
@@ -98,8 +97,8 @@ class Counter {
 }
 ```
 
-乍一看，这看起来确实有些模板代码，它们很快就会失去控制！
-这就是为什么我们添加 **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** 的原因，该组合允许您将上面的代码替换为以下代码：
+一見すると、これはすぐに手に負えなくなるテンプレートコードのように見えます！
+これが、上記のコードを次のコードに置き換えることができる **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** を追加した理由です。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -119,19 +118,19 @@ abstract class CounterBase with Store {
 }
 ```
 
-请注意使用批注来标记类的可观察属性。是的，这里有一些类似头部的样板代码，但它适用于任何类。当您构建更复杂的类时，这样的样板将逐渐消失在您的视野中，您将主要关注您的业务代码。
+クラスのオブザーバブルプロパティをマークするために注釈を使用することに注意してください。はい、ここにはヘッダーのテンプレートコードがありますが、これはどのクラスにも固定されています。より複雑なクラスを構築するにつれて、このテンプレートコードは消え、主に中括弧内のコードに集中するようになります。
 
-**注意**：注释可通过 **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** 软件包获得。
+**注意**：注釈は **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** パッケージを介して利用できます。
 
-### 可计算观察对象（Computed Observables）
+### 計算オブザーバブル（Computed Observables）
 
-> 什么可以被计算，什么应该被计算。保持自动化！
+> 何が計算できるか、何が計算されるべきか。自動的に。
 
-您的应用程序的状态包含 **核心状态** 和 **派生状态** 。核心状态是您正在处理的域所固有的状态。例如，如果您有一个 `Contact` 实体，则 `firstName` 和 `lastName` 构成Contact的核心状态。但是，`fullName` 是派生状态，是通过组合 `firstName` 和 `lastName` 获得的。
+アプリケーションの状態は、コア状態と派生状態で構成されます。コア状態は、あなたが扱っているドメインに固有の状態です。たとえば、`Contact` エンティティがある場合、`firstName` と `lastName` は `Contact` のコア状態を形成します。ただし、`fullName` は派生状態であり、`firstName` と `lastName` を組み合わせることによって取得されます。
 
-这种依赖于核心状态或其他派生状态的派生状态称为 **可计算观察对象**。当其观察的对象更改时，它会自动保持同步。
+このようなコア状態または他の派生状態に依存する派生状態は、計算オブザーバブルと呼ばれます。基になるオブザーバブルが変更されると、自動的に同期されます。
 
-> MobX 中的状态 = 核心状态 + 派生状态
+> MobX の状態 = コア状態 + 派生状態
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -153,13 +152,14 @@ abstract class ContactBase with Store {
 }
 ```
 
-在上面的示例中，如果 `firstName` 或 `lastName` 更改，则 `fullName` 将自动保持同步。
+上記の例では、`firstName` または `lastName` が変更されると、`fullName` は自動的に同期されます。
 
-### 动作（Actions）
+### アクション（Actions）
 
-动作即您将如何改变可观察对象。动作不是直接对其进行更改，而是为这个更改添加了语义，例如，触发一个 `increment()` 操作不只是执行 `value++`，还可以具有更多含义。此外，动作还分批处理所有通知，并确保仅在更改完成后通知观察对象进行更改。因此，仅在一个原子性的动作完成时观察者才收到通知。
+アクションは、オブザーバブルをどのように変更するかを示します。オブザーバブルを直接変更するのではなく、アクションは変更に意味を追加します。たとえば、単に `value++` を実行するのではなく、`increment()` アクションを発行する方が意味があります。さらに、アクションはすべての通知をバッチ処理し、完了後に変更が通知されるようにします。
+したがって、オブザーバーはアクションの原子操作が完了したときにのみ通知されます。
 
-请注意，动作也可以嵌套，在这种情况下，最外层的动作完成后通知会发出。
+アクションはネストすることもでき、最上位のアクションが完了すると通知が送信されます。
 
 ```dart
 final counter = Observable(0);
@@ -169,7 +169,7 @@ final increment = Action((){
 });
 ```
 
-你可以用修饰符在一个类里创建动作！
+クラス内でアクションを作成するときは、注釈を利用できます！
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -189,9 +189,9 @@ abstract class CounterBase with Store {
 }
 ```
 
-#### 异步的动作
+#### 非同期アクション
 
-MobX.dart 自动处理异步操作，不需要使用 [`runInAction`](https://mobx.netlify.com/api/action#runinaction) 包装代码。
+MobX.dart は非同期アクションを自動的に処理し、[`runInAction`](https://mobx.netlify.com/api/action#runinaction) でコードをラップする必要はありません。
 
 ```dart
 @observable
@@ -208,17 +208,17 @@ Future<void> loadStuff() async {
 }
 ```
 
-### 反应（Reactions）
+### リアクション（Reactions）
 
-有了反应，MobX 可观察性，动作和反应即可形成闭环。他们是响应式系统的观察者，只要他们跟踪的可观察对象发生变化，它们就会得到通知。下表列出了几种反应。它们全部返回 `ReactionDisposer`，可以调用该函数来处理反应。
+リアクションは、オブザーバブル、アクション、リアクションの MobX トライアドを完成させます。これらはリアクティブシステムのオブザーバーであり、追跡しているオブザーバブルが変更されると通知されます。リアクションには、以下にリストされているいくつかのフレーバーがあります。すべて `ReactionDisposer` を返します。これは、リアクションを破棄するために呼び出すことができる関数です。
 
-反应的一个显着特征是它们无需明确地设置关联即可自动跟踪所有可观察对象。直接从反应中读取可观察对象的值，就足以跟踪它的最新状态！
+リアクションの際立った特徴の 1 つは、明示的な配線なしで、すべてのオブザーバブルを自動的に追跡することです。リアクション内でオブザーバブルを読み取る行為だけで、それを追跡するのに十分です！
 
-> 您用 MobX 编写的代码似乎完全没有仪式！
+> MobX を使用して記述したコードは、文字通り儀式がないように見えます！
 
 **`ReactionDisposer autorun(Function(Reaction) fn)`**
 
-立即运行反应，也可以对 `fn` 内部使用的可观察值进行任何更改。
+リアクションをすぐに実行し、`fn` 内で使用されるオブザーバブルの変更時にも実行します。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -242,7 +242,7 @@ dispose();
 
 **`ReactionDisposer reaction<T>(T Function(Reaction) predicate, void Function(T) effect)`**
 
-监视 `predicate()` 函数内部使用的可观察对象，并在 predicate 返回不同值时运行`effect()`。仅跟踪 `predicate` 中的可观察对象。
+`predicate()` 関数内で使用されるオブザーバブルを監視し、predicate が異なる値を返すと `effect()` を実行します。`predicate` 内のオブザーバブルのみが追跡されます。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -263,7 +263,7 @@ dispose();
 
 **`ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`**
 
-监视 `predicate()` 内部使用的可观察对象，并在返回 `true` 时运行 `effect()`。运行`effect()` 后，`when` 自动执行。因此，您可以将 `when` 视为一个一次性的反应。您也可以更早地执行 `when()`。
+`predicate()` 内で使用されるオブザーバブルを監視し、`true` を返すと `effect()` を実行します。`effect()` が実行されると、`when` は自動的に破棄されます。したがって、`when` をワンタイムリアクションと見なすことができます。`when()` を早期に破棄することもできます。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -281,7 +281,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 **`Future<void> asyncWhen(bool Function(Reaction) predicate)`**
 
-与 `when` 相似，但返回的类型是 `Future`，并且是在 `predicate()`返回 `true` 时执行。这是一个简单的等待 `predicate()` 变为 `true` 的方法。
+`when` と似ていますが、`Future` を返します。これは、`predicate()` が `true` を返すと完了します。これは、`predicate()` が `true` になるのを待つ便利な方法です。
 
 ```dart
 final completed = Observable(false);
@@ -295,9 +295,9 @@ void waitForCompletion() async {
 
 **Observer**
 
-应用程序中最直观的反应之一就是 UI。**Observer**（属于 **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** 包的一部分）的 `builder` 函数中提供了可观察对象的观察器，只要这些可观察对象发生变化，`Observer` 就会重建并渲染。
+アプリで最も視覚的なリアクションの 1 つは UI です。**Observer** ウィジェット（**[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** パッケージの一部）は、`builder` 関数で使用されるオブザーバブルの細かいオブザーバーを提供します。これらのオブザーバブルが変更されると、`Observer` は再構築されてレンダリングされます。
 
-下面是完整的计算器示例代码。
+以下は、カウンターの例の全体です。
 
 ```dart
 import 'package:flutter/material.dart';
@@ -357,26 +357,26 @@ class _CounterExampleState extends State<CounterExample> {
 }
 ```
 
-## 如何贡献
+## 貢献
 
-恭喜您已经读到这里🎉🎉🎉。您可以通过几种方式为不断增长的 `MobX.dart` 社区做出贡献。
+ここまで読んでいただきありがとうございます🎉🎉🎉。成長し続ける `MobX.dart` コミュニティに貢献する方法はいくつかあります。
 
-- 负责被标注为 ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) 的 issue
-- 提出功能、质量提升类型的建议
-- 发现并报告 bug
-- 修复 bug
-- 参与讨论并帮助做决策
-- 编写并提升文档，文档是至关重要的！
-- 提交 Pull Request
-- 参与 [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
+- ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) とマークされた問題を選択します
+- 機能、品質向上の提案を行う
+- バグを報告する
+- バグを修正する
+- 議論に参加し、意思決定を支援する
+- ドキュメントを作成および改善します。ドキュメントは非常に重要であり、その重要性は言うまでもありません！
+- プルリクエストを送信する
+- 参加して [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
 
-## 贡献者 ✨
+## 貢献者 ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-34-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-感谢棒棒哒小伙伴们！ ([emoji key](https://allcontributors.org/docs/en/emoji-key))：
+これらの素晴らしい人々に感謝します！ ([絵文字キー](https://allcontributors.org/docs/en/emoji-key))：
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -432,4 +432,4 @@ class _CounterExampleState extends State<CounterExample> {
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-这个项目遵循 [all-contributors](https://github.com/all-contributors/all-contributors) 规范。欢迎大家以各种形式进行贡献！
+このプロジェクトは [all-contributors](https://github.com/all-contributors/all-contributors) 仕様に従っています。あらゆる種類の貢献を歓迎します！
