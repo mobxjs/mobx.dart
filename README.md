@@ -1,4 +1,4 @@
-Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Chinese](translation/zh-CN/README.md) | [Japanese](translation/ja-JP/README.md)
+Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Chinese](translation/zh-CN/README.md) | [Japanese](translation/ja-JP/README.md) | [한국어](translation/ko-KR/README.md)
 
 # mobx.dart
 
@@ -229,7 +229,7 @@ MobX.dart handles asynchronous actions automatically and does not require wrappi
 String stuff = '';
 
 @observable
-loading = false;
+bool loading = false;
 
 @action
 Future<void> loadStuff() async {

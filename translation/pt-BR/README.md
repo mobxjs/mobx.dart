@@ -1,4 +1,4 @@
-Idiomas: [English](../../README.md) | [Português](README.md) | [Chinese](translation/zh-CN/README.md) | [Japanese](translation/ja-JP/README.md)
+Idiomas: [English](../../README.md) | [Português](README.md) | [Chinese](translation/zh-CN/README.md) | [Japanese](translation/ja-JP/README.md) | [Korean](translation/ko-KR/README.md)
 
 # mobx.dart
 
