@@ -1,4 +1,4 @@
-语言: [英语](../../README.md) | [葡萄牙语](../pt-BR/README.md) | [中文](README.md)
+语言: [英语](../../README.md) | [葡萄牙语](../pt-BR/README.md) | [中文](README.md) | [日语](translation/ja-JP/README.md)
 
 # mobx.dart
 

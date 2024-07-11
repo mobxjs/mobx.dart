@@ -1,4 +1,4 @@
-Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Chinese](translation/zh-CN/README.md) | [Japanese](translation/ja-JP/README.md)
+言語: [英語](../../README.md) | [ポルトガル語](../pt-BR/README.md) | [中国語](../zh-CN/README.md) | [日本語](README.md)
 
 # mobx.dart
 
@@ -15,80 +15,61 @@ Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Ch
 [![Publish](https://github.com/mobxjs/mobx.dart/workflows/Publish/badge.svg)](https://github.com/mobxjs/mobx.dart/actions)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mobxjs/mobx.dart/master.svg)](https://codecov.io/gh/mobxjs/mobx.dart)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/05330d31-0411-4aac-a278-76615bcaff9e/deploy-status)](https://app.netlify.com/sites/mobx/deploys)
-[![Mutable.ai Auto Wiki](https://img.shields.io/badge/Auto_Wiki-Mutable.ai-blue)](https://wiki.mutable.ai/mobxjs/mobx.dart)
 
 [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
 
 ![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx.png)
 
-[MobX](https://github.com/mobxjs/mobx) for the Dart language.
+[MobX](https://github.com/mobxjs/mobx) の Dart 言語バージョン。
 
-> Supercharge the state-management in your Dart apps with Transparent Functional Reactive Programming (TFRP)
+> 透明な関数型リアクティブプログラミング（TFRP）を使用して、Dart アプリの状態管理を強化します。
 
-> ## We are looking for maintainers. Reach out on Discord or GitHub Issues!
+- **[紹介](#紹介)**
+- **[コアコンセプト](#コアコンセプト)**
+  - [オブザーバブル（Observables）](#オブザーバブル（Observables）)
+  - [計算オブザーバブル（Computed Observables）](#計算オブザーバブル（Computed&nbsp;Observables）)
+  - [アクション（Actions）](#アクション（Actions）)
+  - [リアクション（Reactions）](#リアクション（Reactions）)
+- **[貢献](#貢献)**
 
-- **[Introduction](#introduction)**
-- **[Core Concepts](#core-concepts)**
-  - [Observables](#observables)
-    - [@observable](#observables)
-    - [@readonly](#readonly)
-    - [@computed](#computed-observables)
-  - [Actions](#actions)
-  - [Reactions](#reactions)
-- **[Contributing](#contributing)**
+## 紹介
 
-## Introduction
+MobX は、アプリケーションのリアクティブデータを UI に簡単に接続できる状態管理ライブラリです。
+この接続は完全に自動であり、非常に自然に感じられます。アプリケーション開発者として、UI（および他の場所）で消費する必要があるリアクティブデータに純粋に集中し、両者を同期させることを心配する必要はありません。
 
-MobX is a state-management library that makes it simple to connect the
-reactive data of your application with the UI. This wiring is completely automatic
-and feels very natural. As the application-developer, you focus purely on what reactive-data
-needs to be consumed in the UI (and elsewhere) without worrying about keeping the two
-in sync.
+これは本当に魔法ではありませんが、消費されているもの（オブザーバブル）とどこで（リアクション）に関するいくつかのスマートな機能があり、自動的に追跡します。オブザーバブルが変更されると、すべてのリアクションが再実行されます。興味深いのは、これらのリアクションは、単純なコンソールログ、ネットワーク呼び出しから UI の再レンダリングまで、何でもかまわないということです。
 
-It's not really magic but it does have some smarts around what is being consumed (**observables**)
-and where (**reactions**), and automatically tracks it for you. When the _observables_
-change, all _reactions_ are re-run. What's interesting is that these reactions can be anything from a simple
-console log, a network call to re-rendering the UI.
+> MobX は JavaScript アプリにとって非常に効果的なライブラリであり、Dart 言語へのこの移植は同じレベルの生産性をもたらすことを目的としています。
 
-> MobX has been a very effective library for the JavaScript
-> apps and this port to the Dart language aims to bring the same levels of productivity.
+### スポンサー
 
-### Sponsors
+私たちのスポンサーに非常に感謝しています。彼らのおかげで、私たちはオープンソースソフトウェア（OSS）プログラムの一部になることができました。 [[スポンサーになる](https://opencollective.com/mobx#sponsor)]
 
-We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program. [[Become a sponsor](https://opencollective.com/mobx#sponsor)]
-
-- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/main/docs/src/images/vyuh-sponsor.png" height="64">](https://vyuh.tech)
-- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/main/docs/src/images/algolia-sponsor.png" height="64">](https://algolia.com)
+- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/publicis-sapient-sponsor.png" height="64">](https://publicis.sapient.com)
+- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/master/docs/src/images/wunderdog-sponsor.png" height="64">](https://wunderdog.fi)
 - [<img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg" height="64">](https://www.netlify.com)
 
-### Past Sponsors
+### 始める
 
-- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/main/docs/src/images/publicis-sapient-sponsor.png" height="64">](https://publicis.sapient.com)
-- [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/main/docs/src/images/wunderdog-sponsor.png" height="64">](https://wunderdog.fi)
+[MobX.dart 公式サイトの入門ガイド](https://mobx.netlify.com/getting-started).
 
-### Get Started
+### 深く掘り下げる
 
-Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx.netlify.com/getting-started).
-
-### Go deep
-
-For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
+MobX をより深く理解するには、[MobX クイックスタートガイド](https://www.packtpub.com/web-development/mobx-quick-start-guide) をご覧ください。この本は JavaScript バージョンの MobX を使用していますが、コアの概念は Dart および Flutter バージョンにも完全に適用できます。
 
 [![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
 
-## Core Concepts
+## コアコンセプト
 
 ![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx-triad.png)
 
-At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
+MobX の中心には、オブザーバブル（Observables）、アクション（Actions）、リアクション（Reactions）という 3 つの重要な概念があります。
 
-### Observables
+### オブザーバブル（Observables）
 
-Observables represent the reactive-state of your application. They can be simple scalars to complex object trees. By
-defining the state of the application as a tree of observables, you can expose a _reactive-state-tree_ that the UI
-(or other observers in the app) consume.
+オブザーバブルは、アプリケーションのリアクティブ状態を表します。これらは、単純なスカラーから複雑なオブジェクトツリーまでさまざまです。アプリケーションの状態をオブザーバブルのツリーとして定義することにより、UI（またはアプリ内の他のオブザーバー）が使用するリアクティブ状態ツリーを公開できます。
 
-A simple reactive-counter is represented by the following observable:
+単純なリアクティブカウンターは、次のオブザーバブルで表されます。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -96,7 +77,7 @@ import 'package:mobx/mobx.dart';
 final counter = Observable(0);
 ```
 
-More complex observables, such as classes, can be created as well.
+クラスなどのより複雑なオブザーバブルも作成できます。
 
 ```dart
 class Counter {
@@ -116,8 +97,8 @@ class Counter {
 }
 ```
 
-On first sight, this does look like some boilerplate code which can quickly go out of hand!
-This is why we added **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** to the mix that allows you to replace the above code with the following:
+一見すると、これはすぐに手に負えなくなるテンプレートコードのように見えます！
+これが、上記のコードを次のコードに置き換えることができる **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** を追加した理由です。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -137,27 +118,19 @@ abstract class CounterBase with Store {
 }
 ```
 
-Note the use of annotations to mark the observable properties of the class. Yes, there is some header boilerplate here
-but its fixed for any class. As you build more complex classes this boilerplate
-will fade away and you will mostly focus on the code within the braces.
+クラスのオブザーバブルプロパティをマークするために注釈を使用することに注意してください。はい、ここにはヘッダーのテンプレートコードがありますが、これはどのクラスにも固定されています。より複雑なクラスを構築するにつれて、このテンプレートコードは消え、主に中括弧内のコードに集中するようになります。
 
-**Note**: Annotations are available via the **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** package.
+**注意**：注釈は **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** パッケージを介して利用できます。
 
-### Readonly
+### 計算オブザーバブル（Computed Observables）
 
-If you want to reduce your code you may want to swap `@observable` for `@readonly`.
-For every private variable it generates a public getter such that the client of your store
-can't change its value. Read more about it [here](https://mobx.netlify.app/api/observable#readonly)
+> 何が計算できるか、何が計算されるべきか。自動的に。
 
-### Computed Observables
+アプリケーションの状態は、コア状態と派生状態で構成されます。コア状態は、あなたが扱っているドメインに固有の状態です。たとえば、`Contact` エンティティがある場合、`firstName` と `lastName` は `Contact` のコア状態を形成します。ただし、`fullName` は派生状態であり、`firstName` と `lastName` を組み合わせることによって取得されます。
 
-> What can be derived, should be derived. Automatically.
+このようなコア状態または他の派生状態に依存する派生状態は、計算オブザーバブルと呼ばれます。基になるオブザーバブルが変更されると、自動的に同期されます。
 
-The state of your application consists of _**core-state**_ and _**derived-state**_. The _core-state_ is state inherent to the domain you are dealing with. For example, if you have a `Contact` entity, the `firstName` and `lastName` form the _core-state_ of `Contact`. However, `fullName` is _derived-state_, obtained by combining `firstName` and `lastName`.
-
-Such _derived state_, that depends on _core-state_ or _other derived-state_ is called a **Computed Observable**. It is automatically kept in sync when its underlying observables change.
-
-> State in MobX = Core-State + Derived-State
+> MobX の状態 = コア状態 + 派生状態
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -179,18 +152,14 @@ abstract class ContactBase with Store {
 }
 ```
 
-In the example above **`fullName`** is automatically kept in sync if either `firstName` and/or `lastName` changes.
+上記の例では、`firstName` または `lastName` が変更されると、`fullName` は自動的に同期されます。
 
-### Actions
+### アクション（Actions）
 
-Actions are how you mutate the observables. Rather than mutating them directly, actions
-add a semantic meaning to the mutations. For example, instead of just doing `value++`,
-firing an `increment()` action carries more meaning. Besides, actions also batch up
-all the notifications and ensure the changes are notified only after they complete.
-Thus the observers are notified only upon the atomic completion of the action.
+アクションは、オブザーバブルをどのように変更するかを示します。オブザーバブルを直接変更するのではなく、アクションは変更に意味を追加します。たとえば、単に `value++` を実行するのではなく、`increment()` アクションを発行する方が意味があります。さらに、アクションはすべての通知をバッチ処理し、完了後に変更が通知されるようにします。
+したがって、オブザーバーはアクションの原子操作が完了したときにのみ通知されます。
 
-Note that actions can also be nested, in which case the notifications go out
-when the top-most action has completed.
+アクションはネストすることもでき、最上位のアクションが完了すると通知が送信されます。
 
 ```dart
 final counter = Observable(0);
@@ -200,7 +169,7 @@ final increment = Action((){
 });
 ```
 
-When creating actions inside a class, you can take advantage of annotations!
+クラス内でアクションを作成するときは、注釈を利用できます！
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -220,9 +189,9 @@ abstract class CounterBase with Store {
 }
 ```
 
-#### Asynchronous Actions
+#### 非同期アクション
 
-MobX.dart handles asynchronous actions automatically and does not require wrapping the code with [`runInAction`](https://mobx.netlify.com/api/action#runinaction).
+MobX.dart は非同期アクションを自動的に処理し、[`runInAction`](https://mobx.netlify.com/api/action#runinaction) でコードをラップする必要はありません。
 
 ```dart
 @observable
@@ -239,21 +208,17 @@ Future<void> loadStuff() async {
 }
 ```
 
-### Reactions
+### リアクション（Reactions）
 
-Reactions complete the _MobX triad_ of **observables**, **actions** and **reactions**. They are
-the observers of the reactive-system and get notified whenever an observable they
-track is changed. Reactions come in few flavors as listed below. All of them
-return a `ReactionDisposer`, a function that can be called to dispose the reaction.
+リアクションは、オブザーバブル、アクション、リアクションの MobX トライアドを完成させます。これらはリアクティブシステムのオブザーバーであり、追跡しているオブザーバブルが変更されると通知されます。リアクションには、以下にリストされているいくつかのフレーバーがあります。すべて `ReactionDisposer` を返します。これは、リアクションを破棄するために呼び出すことができる関数です。
 
-One _striking feature_ of reactions is that they _automatically track_ all the observables without any explicit wiring. The act of _reading an observable_ within a reaction is enough to track it!
+リアクションの際立った特徴の 1 つは、明示的な配線なしで、すべてのオブザーバブルを自動的に追跡することです。リアクション内でオブザーバブルを読み取る行為だけで、それを追跡するのに十分です！
 
-> The code you write with MobX appears to be literally ceremony-free!
+> MobX を使用して記述したコードは、文字通り儀式がないように見えます！
 
 **`ReactionDisposer autorun(Function(Reaction) fn)`**
 
-Runs the reaction immediately and also on any change in the observables used inside
-`fn`.
+リアクションをすぐに実行し、`fn` 内で使用されるオブザーバブルの変更時にも実行します。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -277,8 +242,7 @@ dispose();
 
 **`ReactionDisposer reaction<T>(T Function(Reaction) predicate, void Function(T) effect)`**
 
-Monitors the observables used inside the `predicate()` function and runs the `effect()` when
-the predicate returns a different value. Only the observables inside `predicate()` are tracked.
+`predicate()` 関数内で使用されるオブザーバブルを監視し、predicate が異なる値を返すと `effect()` を実行します。`predicate` 内のオブザーバブルのみが追跡されます。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -299,7 +263,7 @@ dispose();
 
 **`ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`**
 
-Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
+`predicate()` 内で使用されるオブザーバブルを監視し、`true` を返すと `effect()` を実行します。`effect()` が実行されると、`when` は自動的に破棄されます。したがって、`when` をワンタイムリアクションと見なすことができます。`when()` を早期に破棄することもできます。
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -317,7 +281,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 **`Future<void> asyncWhen(bool Function(Reaction) predicate)`**
 
-Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
+`when` と似ていますが、`Future` を返します。これは、`predicate()` が `true` を返すと完了します。これは、`predicate()` が `true` になるのを待つ便利な方法です。
 
 ```dart
 final completed = Observable(false);
@@ -331,9 +295,9 @@ void waitForCompletion() async {
 
 **Observer**
 
-One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
+アプリで最も視覚的なリアクションの 1 つは UI です。**Observer** ウィジェット（**[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** パッケージの一部）は、`builder` 関数で使用されるオブザーバブルの細かいオブザーバーを提供します。これらのオブザーバブルが変更されると、`Observer` は再構築されてレンダリングされます。
 
-Below is the _Counter_ example in its entirety.
+以下は、カウンターの例の全体です。
 
 ```dart
 import 'package:flutter/material.dart';
@@ -393,30 +357,26 @@ class _CounterExampleState extends State<CounterExample> {
 }
 ```
 
-## Contributing
+## 貢献
 
-If you have read up till here, then 🎉🎉🎉. There are couple of ways in which you can contribute to
-the growing community of `MobX.dart`.
+ここまで読んでいただきありがとうございます🎉🎉🎉。成長し続ける `MobX.dart` コミュニティに貢献する方法はいくつかあります。
 
-- Pick up any issue marked with ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
-- Propose any feature, enhancement
-- Report a bug
-- Fix a bug
-- Participate in a discussion and help in decision making
-- Write and improve some **documentation**. Documentation is super critical and its importance
-  cannot be overstated!
-- Send in a Pull Request :-)
-- Chime in and [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
+- ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) とマークされた問題を選択します
+- 機能、品質向上の提案を行う
+- バグを報告する
+- バグを修正する
+- 議論に参加し、意思決定を支援する
+- ドキュメントを作成および改善します。ドキュメントは非常に重要であり、その重要性は言うまでもありません！
+- プルリクエストを送信する
+- 参加して [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
 
-## Contributors ✨
+## 貢献者 ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-65-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-34-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+これらの素晴らしい人々に感謝します！ ([絵文字キー](https://allcontributors.org/docs/en/emoji-key))：
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -511,9 +471,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tbody>
 </table>
 
-<!-- markdownlint-restore -->
+<!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+このプロジェクトは [all-contributors](https://github.com/all-contributors/all-contributors) 仕様に従っています。あらゆる種類の貢献を歓迎します！
