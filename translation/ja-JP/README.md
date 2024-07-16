@@ -1,4 +1,4 @@
-言語: [英語](../../README.md) | [ポルトガル語](../pt-BR/README.md) | [中国語](../zh-CN/README.md) | [日本語](README.md)
+言語: [英語](../../README.md) | [ポルトガル語](../pt-BR/README.md) | [中国語](../zh-CN/README.md) | [日本語](README.md) | [韓国語](translation/ko-KR/README.md)
 
 # mobx.dart
 
@@ -198,7 +198,7 @@ MobX.dart は非同期アクションを自動的に処理し、[`runInAction`](
 String stuff = '';
 
 @observable
-loading = false;
+bool loading = false;
 
 @action
 Future<void> loadStuff() async {

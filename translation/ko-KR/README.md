@@ -1,4 +1,4 @@
-Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Chinese](translation/zh-CN/README.md) | [Japanese](translation/ja-JP/README.md) | [한국어](translation/ko-KR/README.md)
+언어: [English](README.md) | [Português](translation/pt-BR/README.md) | [Chinese](translation/zh-CN/README.md) | [Japanese](translation/ja-JP/README.md) | [Korean](translation/ko-KR/README.md)
 
 # mobx.dart
 
@@ -21,11 +21,12 @@ Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Ch
 
 ![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx.png)
 
-[MobX](https://github.com/mobxjs/mobx) for the Dart language.
+Dart 언어를 위한 [MobX](https://github.com/mobxjs/mobx).
 
-> Supercharge the state-management in your Dart apps with Transparent Functional Reactive Programming (TFRP)
+> 투명한 함수형 반응형 프로그래밍(TFRP, Transparent Functional Reactive Programming)을 사용하여 Dart 앱의 상태 관리를 강화합니다.
 
-> ## We are looking for maintainers. Reach out on Discord or GitHub Issues!
+> 
+> ## 저희는 관리자를 찾고 있습니다. Discord 또는 GitHub 이슈에 문의하세요!
 
 - **[Introduction](#introduction)**
 - **[Core Concepts](#core-concepts)**
@@ -35,60 +36,56 @@ Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Ch
     - [@computed](#computed-observables)
   - [Actions](#actions)
   - [Reactions](#reactions)
-- **[Contributing](#contributing)**
+- **[기여하기](#기여하기)**
 
-## Introduction
+## 소개
 
-MobX is a state-management library that makes it simple to connect the
-reactive data of your application with the UI. This wiring is completely automatic
-and feels very natural. As the application-developer, you focus purely on what reactive-data
-needs to be consumed in the UI (and elsewhere) without worrying about keeping the two
-in sync.
+MobX는 애플리케이션의 반응형 데이터를 UI와 간편하게 연결할 수 있는 상태 관리 라이브러리입니다. 
+이 연결은 완전히 자동으로 이루어지며 매우 자연스럽게 느껴집니다. 
+애플리케이션 개발자는 두 데이터를 동기화할 걱정 없이 UI(및 다른 곳)에서 어떤 리액티브 데이터를 사용해야 하는지에만 집중할 수 있습니다.
 
-It's not really magic but it does have some smarts around what is being consumed (**observables**)
-and where (**reactions**), and automatically tracks it for you. When the _observables_
-change, all _reactions_ are re-run. What's interesting is that these reactions can be anything from a simple
-console log, a network call to re-rendering the UI.
+이것은 정말 마법은 아니지만, 무엇이(**observables**) 어디에서(**reactions**) 소비되고 있는지를 파악하고 자동으로 추적하는 스마트한 기능을 갖추고 
+있습니다. _observables_ 이 변경되면 모든 _reactions_ 이 다시 실행됩니다. 흥미로운 점은 이러한 반응이 단순한 콘솔 로그, 네트워크 호출, UI 재렌더링
+등 무엇이든 될 수 있다는 것 입니다.
 
-> MobX has been a very effective library for the JavaScript
-> apps and this port to the Dart language aims to bring the same levels of productivity.
+> MobX는 자바스크립트 앱에 매우 효과적인 라이브러리였으며, 이번 Dart 언어 포팅은 동일한 수준의 생산성을 제공하는 것을 목표로 합니다.
 
-### Sponsors
+### 후원자
 
-We are very thankful to our sponsors to make us part of their _Open Source Software (OSS)_ program. [[Become a sponsor](https://opencollective.com/mobx#sponsor)]
+우리는 후원자들에게 매우 감사하게 생각합니다. 덕분에 우리는 오픈소스 소프트웨어(OSS) 프로그램의 일부가 될 수 있었습니다. [[후원하기](https://opencollective.com/mobx#sponsor)]
 
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/main/docs/src/images/vyuh-sponsor.png" height="64">](https://vyuh.tech)
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/main/docs/src/images/algolia-sponsor.png" height="64">](https://algolia.com)
 - [<img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg" height="64">](https://www.netlify.com)
 
-### Past Sponsors
+### 과거 후원자
 
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/main/docs/src/images/publicis-sapient-sponsor.png" height="64">](https://publicis.sapient.com)
 - [<img src="https://raw.githubusercontent.com/mobxjs/mobx.dart/main/docs/src/images/wunderdog-sponsor.png" height="64">](https://wunderdog.fi)
 
-### Get Started
+### 시작하기
+ 
+[MobX.dart 웹사이트의 시작하기 가이드](https://mobx.netlify.com/getting-started)를 따르세요.
 
-Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx.netlify.com/getting-started).
+### 더 깊이 알아보기
 
-### Go deep
-
-For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
+MobX에 대한 자세한 내용은 [MobX 빠른 시작 가이드](https://www.packtpub.com/web-development/mobx-quick-start-guide)를 참조하세요.
+이 책에서는 자바스크립트 버전의 MobX를 사용하지만, 개념은 Dart와 Flutter에 **100% 적용**할 수 있습니다.
 
 [![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
 
-## Core Concepts
+## 핵심 개념
 
 ![MobX Triad](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/mobx-triad.png)
 
-At the heart of MobX are three important concepts: **Observables**, **Actions** and **Reactions**.
+MobX의 핵심에는 세 가지 중요한 개념이 있습니다: **Observables**, **Actions**, **Reactions**.
 
 ### Observables
 
-Observables represent the reactive-state of your application. They can be simple scalars to complex object trees. By
-defining the state of the application as a tree of observables, you can expose a _reactive-state-tree_ that the UI
-(or other observers in the app) consume.
+observables은 애플리케이션의 반응 상태를 나타냅니다. 단순한 스칼라부터 복잡한 객체 트리까지 다양합니다. 애플리케이션의 상태를 observables 트리로 정의하면 
+UI(또는 앱의 다른 observer)가 소비하는 _reactive-state-tree_ 를 노출할 수 있습니다.
 
-A simple reactive-counter is represented by the following observable:
+간단한 리액티브 카운터는 다음과 같은 observables로 표현됩니다:
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -96,7 +93,7 @@ import 'package:mobx/mobx.dart';
 final counter = Observable(0);
 ```
 
-More complex observables, such as classes, can be created as well.
+클래스와 같은 더 복잡한 observables도 만들 수 있습니다.
 
 ```dart
 class Counter {
@@ -116,8 +113,8 @@ class Counter {
 }
 ```
 
-On first sight, this does look like some boilerplate code which can quickly go out of hand!
-This is why we added **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** to the mix that allows you to replace the above code with the following:
+언뜻 보기에 이 코드는 상용구 코드처럼 보이지만 금방 지겨워질 수 있습니다!
+그래서 위의 코드를 다음과 같이 대체할 수 있는 **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** 를 추가했습니다:
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -137,27 +134,27 @@ abstract class CounterBase with Store {
 }
 ```
 
-Note the use of annotations to mark the observable properties of the class. Yes, there is some header boilerplate here
-but its fixed for any class. As you build more complex classes this boilerplate
-will fade away and you will mostly focus on the code within the braces.
+어노테이션을 사용하여 클래스의 observables 속성을 표시하는 것에 주목하세요. 예, 여기에는 헤더 상용구가 있지만 모든 클래스에 대해 고정되어 있습니다. 
+더 복잡한 클래스를 만들면 이 상용구는 사라지고 대부분 중괄호 안의 코드에 집중하게 될 것입니다.
 
-**Note**: Annotations are available via the **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** package.
+**참고**: 어노테이션은 **[mobx_codegen](https://github.com/mobxjs/mobx.dart/tree/master/mobx_codegen)** 패키지를 통해 사용할 수 있습니다.
 
-### Readonly
+### readonly
 
-If you want to reduce your code you may want to swap `@observable` for `@readonly`.
-For every private variable it generates a public getter such that the client of your store
-can't change its value. Read more about it [here](https://mobx.netlify.app/api/observable#readonly)
+코드를 줄이려면 `@observable`을 `@readonly`로 바꿀 수 있습니다.
+
+모든 비공개 변수에 대해 스토어 클라이언트에서 값을 변경할 수 없도록 공개 getter를 생성합니다.
+자세한 내용은 [여기](https://mobx.netlify.app/api/observable#readonly)를 참조하세요.
 
 ### Computed Observables
 
-> What can be derived, should be derived. Automatically.
+> 도출할 수 있는 것은 반드시 도출해야 합니다. 자동으로.
 
-The state of your application consists of _**core-state**_ and _**derived-state**_. The _core-state_ is state inherent to the domain you are dealing with. For example, if you have a `Contact` entity, the `firstName` and `lastName` form the _core-state_ of `Contact`. However, `fullName` is _derived-state_, obtained by combining `firstName` and `lastName`.
+애플리케이션의 상태는 _**핵심 상태(core-state)**_ 와 _**파생 상태(derived-state)**_ 로 구성됩니다. _핵심 상태(core-state)_ 는 현재 다루고 있는 도메인에 고유한 상태입니다. 예를 들어, `Contact` 엔티티가 있는 경우 `firstName`과 `lastName`은 `Contact`의 _core-state_ 를 구성합니다. 그러나 `fullName` 은 `firstName` 과 `lastName` 을 결합하여 얻은 _파생 상태(derived-state)_ 입니다.
 
-Such _derived state_, that depends on _core-state_ or _other derived-state_ is called a **Computed Observable**. It is automatically kept in sync when its underlying observables change.
+_core-state_ 또는 _other derived-state_ 에 의존하는 이러한 _derived state_ 를 **Computed Observable** 이라고 합니다. observables이 변경되면 자동으로 동기화 상태를 유지합니다.
 
-> State in MobX = Core-State + Derived-State
+> MobX의 상태 = 핵심 상태 + 파생 상태
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -179,18 +176,16 @@ abstract class ContactBase with Store {
 }
 ```
 
-In the example above **`fullName`** is automatically kept in sync if either `firstName` and/or `lastName` changes.
+위의 예에서 ``firstName`` 및/또는 ``lastName``이 변경되면 ``fullName``이 자동으로 동기화됩니다.
 
 ### Actions
 
-Actions are how you mutate the observables. Rather than mutating them directly, actions
-add a semantic meaning to the mutations. For example, instead of just doing `value++`,
-firing an `increment()` action carries more meaning. Besides, actions also batch up
-all the notifications and ensure the changes are notified only after they complete.
-Thus the observers are notified only upon the atomic completion of the action.
+action은 observables을 변경하는 방법입니다. 액션은 직접 변경하는 대신 변화에 의미론적 의미를 추가합니다. 
+예를 들어, 단순히 `value+` 를 실행하는 대신 `increment()` action을 실행하면 더 많은 의미를 전달할 수 있습니다. 
+또한, action은 모든 알림을 일괄 처리하여 변경이 완료된 후에만 알림을 받도록 합니다. 
+따라서 observer들은 action이 원자적으로 완료될 때만 알림을 받습니다.
 
-Note that actions can also be nested, in which case the notifications go out
-when the top-most action has completed.
+action은 중첩될 수도 있으며, 이 경우 최상위 action이 완료되면 알림이 발송됩니다.
 
 ```dart
 final counter = Observable(0);
@@ -200,7 +195,7 @@ final increment = Action((){
 });
 ```
 
-When creating actions inside a class, you can take advantage of annotations!
+클래스 내에서 action을 만들 때 어노테이션을 활용할 수 있습니다!
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -222,7 +217,7 @@ abstract class CounterBase with Store {
 
 #### Asynchronous Actions
 
-MobX.dart handles asynchronous actions automatically and does not require wrapping the code with [`runInAction`](https://mobx.netlify.com/api/action#runinaction).
+MobX.dart는 비동기 동작을 자동으로 처리하며 [`runInAction`](https://mobx.netlify.com/api/action#runinaction)로 코드를 래핑할 필요가 없습니다.
 
 ```dart
 @observable
@@ -241,14 +236,13 @@ Future<void> loadStuff() async {
 
 ### Reactions
 
-Reactions complete the _MobX triad_ of **observables**, **actions** and **reactions**. They are
-the observers of the reactive-system and get notified whenever an observable they
-track is changed. Reactions come in few flavors as listed below. All of them
-return a `ReactionDisposer`, a function that can be called to dispose the reaction.
+reaction은 **observables**, **actions**, **reactions**의 _MobX triad_ 를 완성합니다. 
+이들은 반응형 시스템의 observer이며, 추적하는 observable이 변경될 때마다 알림을 받습니다.
+변경될 때마다 알림을 받습니다. reaction은 아래와 같이 몇 가지 종류가 있습니다. 이들 모두는 reaction을 삭제(dispose)기 위해 호출할 수 있는 함수인 `ReactionDisposer`를 반환합니다.
 
-One _striking feature_ of reactions is that they _automatically track_ all the observables without any explicit wiring. The act of _reading an observable_ within a reaction is enough to track it!
+reaction의 _눈에 띄는_ 특징 중 하나는 명시적인 연결 없이 모든 observable을 _자동으로 추적_ 한다는 것입니다. reaction 내에서 observable을 _읽는_ 행위만으로도 충분히 추적할 수 있습니다!
 
-> The code you write with MobX appears to be literally ceremony-free!
+> MobX로 작성하는 코드는 말 그대로 의식이 없는 것처럼 보입니다!
 
 **`ReactionDisposer autorun(Function(Reaction) fn)`**
 
@@ -277,8 +271,8 @@ dispose();
 
 **`ReactionDisposer reaction<T>(T Function(Reaction) predicate, void Function(T) effect)`**
 
-Monitors the observables used inside the `predicate()` function and runs the `effect()` when
-the predicate returns a different value. Only the observables inside `predicate()` are tracked.
+`predicate()` 함수 내에서 사용되는 observables를 모니터링하고, `predicate()` 가 다른 값을 반환하면 `effect()`를 실행합니다.
+`predicate()` 내부의 observables만 추적됩니다.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -299,7 +293,7 @@ dispose();
 
 **`ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect)`**
 
-Monitors the observables used inside `predicate()` and runs the `effect()` _when_ it returns `true`. After the `effect()` is run, `when` automatically disposes itself. So you can think of _when_ as a _one-time_ `reaction`. You can also dispose `when()` pre-maturely.
+`when`은 `predicate()` 내부에 사용된 observables를 관찰하고 `true`를 반환할 때 `effect()`를 실행합니다. `effect()`가 실행된 후에는 `when`가 자동으로 폐기됩니다. 따라서 _when_ 은 _일회성_ `reaction`으로 생각할 수 있습니다. 또한 `when()`을 미리 폐기할 수도 있습니다.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -317,7 +311,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 
 **`Future<void> asyncWhen(bool Function(Reaction) predicate)`**
 
-Similar to `when` but returns a `Future`, which is fulfilled when the `predicate()` returns _true_. This is a convenient way of waiting for the `predicate()` to turn `true`.
+`when`과 비슷하지만 `Future`를 반환합니다. 이는 `predicate()`가 `true` 를 반환할 때 완료됩니다. 이는 `predicate()`가 `true`가 될 때까지 기다릴 수 있는 편리한 방법입니다.
 
 ```dart
 final completed = Observable(false);
@@ -331,9 +325,9 @@ void waitForCompletion() async {
 
 **Observer**
 
-One of the most visual reactions in the app is the UI. The **Observer** widget (which is part of the **[`flutter_mobx`](https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** package), provides a granular observer of the observables used in its `builder` function. Whenever these observables change, `Observer` rebuilds and renders.
+앱에서 가장 시각적으로 반응하는 부분 중 하나는 UI입니다. **Observer** 위젯(**[`flutter_mobx`]https://github.com/mobxjs/mobx.dart/tree/master/flutter_mobx)** 패키지의 일부인)은 `builder` 함수에서 사용되는 observables에 대한 세분화된 observer를 제공합니다. 이러한 observables가 변경될 때마다 `Observer`는 다시 빌드하고 렌더링합니다.
 
-Below is the _Counter_ example in its entirety.
+아래는 _Counter_ 예제 전체입니다.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -393,22 +387,20 @@ class _CounterExampleState extends State<CounterExample> {
 }
 ```
 
-## Contributing
+## 기여하기
 
-If you have read up till here, then 🎉🎉🎉. There are couple of ways in which you can contribute to
-the growing community of `MobX.dart`.
+여기까지 읽으셨다면 🎉🎉🎉. `MobX.dart`의 성장하는 커뮤니티에 기여할 수 있는 몇 가지 방법이 있습니다.
 
-- Pick up any issue marked with ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
-- Propose any feature, enhancement
-- Report a bug
-- Fix a bug
-- Participate in a discussion and help in decision making
-- Write and improve some **documentation**. Documentation is super critical and its importance
-  cannot be overstated!
-- Send in a Pull Request :-)
-- Chime in and [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)
+- ["good first issue"](https://github.com/mobxjs/mobx.dart/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)로 표시된 issue를 선택합니다
+- 기능, 개선 사항 제안하기
+- 버그 신고하기
+- 버그 수정하기
+- 토론에 참여하여 의사 결정에 도움 주기
+- **문서**를 작성하고 개선하세요. 문서화는 매우 중요하며 그 중요성은 아무리 강조해도 지나치지 않습니다!
+- 풀 리퀘스트 보내기 :-)
+- [![Join the chat at https://discord.gg/dNHY52k](https://img.shields.io/badge/Chat-on%20Discord-lightgrey?style=flat&logo=discord)](https://discord.gg/dNHY52k)에서 채팅에 참여하세요
 
-## Contributors ✨
+## 기여자 ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -516,4 +508,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+이 프로젝트는 [all-contributors](https://github.com/all-contributors/all-contributors) 규정을 따릅니다. 모든 종류의 기여를 환영합니다!
