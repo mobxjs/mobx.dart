@@ -51,7 +51,7 @@ MobX は、アプリケーションのリアクティブデータを UI に簡�
 
 ### 始める
 
-[MobX.dart 公式サイトの入門ガイド](https://mobx.netlify.com/getting-started).
+[MobX.dart 公式サイトの入門ガイド](https://mobx.netlify.app/getting-started).
 
 ### 深く掘り下げる
 
