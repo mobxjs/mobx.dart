@@ -65,7 +65,7 @@ MobX는 애플리케이션의 반응형 데이터를 UI와 간편하게 연결�
 
 ### 시작하기
  
-[MobX.dart 웹사이트의 시작하기 가이드](https://mobx.netlify.com/getting-started)를 따르세요.
+[MobX.dart 웹사이트의 시작하기 가이드](https://mobx.netlify.app/getting-started)를 따르세요.
 
 ### 더 깊이 알아보기
 
