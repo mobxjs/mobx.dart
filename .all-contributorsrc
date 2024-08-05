@@ -626,6 +626,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "piedcipher",
+      "name": "Tirth",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13456345?v=4",
+      "profile": "https://github.com/piedcipher",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
