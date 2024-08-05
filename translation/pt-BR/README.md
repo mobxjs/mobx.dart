@@ -52,7 +52,7 @@ Somos muito gratos aos nossos patrocinadores por nos tornar parte do programa _O
 
 ### Começando
 
-Acompanhe esse [Guia de introdução ao MobX (em inglês)](https://mobx.netlify.com/getting-started).
+Acompanhe esse [Guia de introdução ao MobX (em inglês)](https://mobx.netlify.app/getting-started).
 
 ### Aprofundando
 

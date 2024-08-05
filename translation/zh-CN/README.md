@@ -52,7 +52,7 @@ MobX是一种状态管理库，它让应用程序的响应式数据与 UI 关联
 
 ### 开始
 
-[MobX.dart 官网的入门指南](https://mobx.netlify.com/getting-started).
+[MobX.dart 官网的入门指南](https://mobx.netlify.app/getting-started).
 
 ### 深入
 

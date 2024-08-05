@@ -68,7 +68,7 @@ We are very thankful to our sponsors to make us part of their _Open Source Softw
 
 ### Get Started
 
-Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx.netlify.com/getting-started).
+Follow along with the [Getting Started guide on the MobX.dart Website](https://mobx.netlify.app/getting-started).
 
 ### Go deep
 
