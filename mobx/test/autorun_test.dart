@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fake_async/fake_async.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mocktail/mocktail.dart' as mock;
@@ -82,6 +84,38 @@ void main() {
           value = x.value + 1;
         }, delay: delayMs)
             .call;
+
+        async.elapse(const Duration(milliseconds: 2500));
+
+        expect(value, 0); // autorun() should not have executed at this time
+
+        async.elapse(const Duration(milliseconds: 2500));
+
+        expect(value, 11); // autorun() should have executed
+
+        x.value = 100;
+
+        expect(value, 11); // should still retain the last value
+        async.elapse(const Duration(milliseconds: delayMs));
+        expect(value, 101); // should change now
+      });
+
+      dispose();
+    });
+
+    test('with custom scheduler', () {
+      late Function dispose;
+      const delayMs = 5000;
+
+      final x = Observable(10);
+      var value = 0;
+
+      fakeAsync((async) {
+        dispose = autorun((_) {
+          value = x.value + 1;
+        }, scheduler: (f) {
+          return Timer(const Duration(milliseconds: delayMs), f);
+        }).call;
 
         async.elapse(const Duration(milliseconds: 2500));
 

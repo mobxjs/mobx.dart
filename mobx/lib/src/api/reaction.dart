@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:mobx/src/api/context.dart';
 import 'package:mobx/src/core.dart';
 
@@ -6,7 +8,10 @@ import 'package:mobx/src/core.dart';
 ///
 /// Optional configuration:
 /// * [name]: debug name for this reaction
-/// * [delay]: throttling delay in milliseconds
+/// * [delay]: Number of milliseconds that can be used to throttle the effect function. If zero (default), no throttling happens.
+/// * [context]: the [ReactiveContext] to use. By default the [mainContext] is used.
+/// * [scheduler]: Set a custom scheduler to determine how re-running the autorun function should be scheduled. It takes a function that should be invoked at some point in the future.
+/// * [onError]: By default, any exception thrown inside an reaction will be logged, but not further thrown. This is to make sure that an exception in one reaction does not prevent the scheduled execution of other, possibly unrelated reactions. This also allows reactions to recover from exceptions. Throwing an exception does not break the tracking done by MobX, so subsequent runs of the reaction might complete normally again if the cause for the exception is removed. This option allows overriding that behavior. It is possible to set a global error handler or to disable catching errors completely using [ReactiveConfig].
 ///
 /// ```
 /// var x = Observable(10);
@@ -27,12 +32,20 @@ ReactionDisposer autorun(Function(Reaction) fn,
         {String? name,
         int? delay,
         ReactiveContext? context,
+        Timer Function(void Function())? scheduler,
         void Function(Object, Reaction)? onError}) =>
     createAutorun(context ?? mainContext, fn,
-        name: name, delay: delay, onError: onError);
+        name: name, delay: delay, scheduler: scheduler, onError: onError);
 
 /// Executes the [fn] function and tracks the observables used in it. Returns
 /// a function to dispose the reaction.
+///
+/// Optional configuration:
+/// * [name]: debug name for this reaction
+/// * [delay]: Number of milliseconds that can be used to throttle the effect function. If zero (default), no throttling happens.
+/// * [context]: the [ReactiveContext] to use. By default the [mainContext] is used.
+/// * [scheduler]: Set a custom scheduler to determine how re-running the autorun function should be scheduled. It takes a function that should be invoked at some point in the future.
+/// * [onError]: By default, any exception thrown inside an reaction will be logged, but not further thrown. This is to make sure that an exception in one reaction does not prevent the scheduled execution of other, possibly unrelated reactions. This also allows reactions to recover from exceptions. Throwing an exception does not break the tracking done by MobX, so subsequent runs of the reaction might complete normally again if the cause for the exception is removed. This option allows overriding that behavior. It is possible to set a global error handler or to disable catching errors completely using [ReactiveConfig].
 ///
 /// The [fn] is supposed to return a value of type T. When it changes, the
 /// [effect] function is executed.
@@ -43,20 +56,25 @@ ReactionDisposer autorun(Function(Reaction) fn,
 /// [fireImmediately] if you want to invoke the effect immediately without waiting for
 /// the [fn] to change its value. It is possible to define a custom [equals] function
 /// to override the default comparison for the value returned by [fn], to have fined
-/// grained control over when the reactions should run.
+/// grained control over when the reactions should run. By default, the [mainContext]
+/// is used, but you can also pass in a custom [context].
+/// You can also pass in an optional [onError] handler for errors thrown during the [fn] execution.
+/// You can also pass in an optional [scheduler] to schedule the [effect] execution.
 ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect,
         {String? name,
         int? delay,
         bool? fireImmediately,
         EqualityComparer<T>? equals,
         ReactiveContext? context,
+        Timer Function(void Function())? scheduler,
         void Function(Object, Reaction)? onError}) =>
     createReaction<T>(context ?? mainContext, fn, effect,
         name: name,
         delay: delay,
         equals: equals,
         fireImmediately: fireImmediately,
-        onError: onError);
+        onError: onError,
+        scheduler: scheduler);
 
 /// A one-time reaction that auto-disposes when the [predicate] becomes true. It also
 /// executes the [effect] when the predicate turns true.
