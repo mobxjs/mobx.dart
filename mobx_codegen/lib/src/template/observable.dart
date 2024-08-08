@@ -72,10 +72,10 @@ class ObservableTemplate {
     return '''
   @override
   set $name($type value) {
-    $atomName.reportWrite(value, super.$name, () {
-      super.$name = value;
-    }${equals != null ? ', equals: ${equals!.name}' : ''}${useDeepEquality != null ? ', useDeepEquality: $useDeepEquality' : ''});
-  }''';
+  $atomName.reportWrite(value, super.$name, () {
+    super.$name = value;
+  }${equals != null ? ', equals: ${equals!.enclosingElement.name != null ? '${equals!.enclosingElement.name}.' : ''}${equals!.name}' : ''}${useDeepEquality != null ? ', useDeepEquality: $useDeepEquality' : ''});
+}''';
   }
 
   @override
