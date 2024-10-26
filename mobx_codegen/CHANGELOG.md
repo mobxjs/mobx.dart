@@ -1,3 +1,7 @@
+## 2.6.1+1
+
+- Fixing some analyzer errors related to deprecated types.
+
 ## 2.6.1
 
 - Upgrading packages and sdk
