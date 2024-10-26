@@ -35,6 +35,7 @@ class LibraryScopedNameFinder {
     // Reverse each import's export namespace so we can map elements to their
     // library-local names. Note that the definedNames include a prefix if there
     // is one.
+    // ignore: deprecated_member_use_from_same_package
     for (final import in library.libraryImports) {
       for (final entry in import.namespace.definedNames.entries) {
         _namesByElement[entry.value] = entry.key;
@@ -79,6 +80,7 @@ class LibraryScopedNameFinder {
       // If we're dealing with a typedef, we let it undergo the standard name
       // lookup. Otherwise, we special case the function naming.
       if (type.alias?.element is TypeAliasElement) {
+        // ignore: deprecated_member_use_from_same_package
         typeElement = type.alias!.element.aliasedElement?.enclosingElement;
       } else {
         return _getFunctionTypeName(type);
