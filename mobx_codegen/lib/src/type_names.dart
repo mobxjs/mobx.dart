@@ -22,14 +22,14 @@ class LibraryScopedNameFinder {
 
   final LibraryElement library;
 
-  final Map<Element, String> _namesByElement = {};
+  final Map<Element, String?> _namesByElement = {};
 
-  Map<Element, String> get namesByElement {
+  Map<Element, String?> get namesByElement {
     // Add all of this library's type-defining elements to the name map
     final libraryElements =
         library.topLevelElements.whereType<TypeDefiningElement>();
     for (final element in libraryElements) {
-      _namesByElement[element] = element.name!;
+      _namesByElement[element] = element.name;
     }
 
     // Reverse each import's export namespace so we can map elements to their
@@ -59,14 +59,14 @@ class LibraryScopedNameFinder {
   String findReturnTypeName(FunctionTypedElement executable) =>
       _getDartTypeName(executable.returnType);
 
-  List<String> findReturnTypeArgumentTypeNames(ExecutableElement executable) {
+  List<String?> findReturnTypeArgumentTypeNames(ExecutableElement executable) {
     final returnType = executable.returnType;
     return returnType is ParameterizedType
         ? returnType.typeArguments.map(_getDartTypeName).toList()
         : [];
   }
 
-  String findTypeParameterBoundsTypeName(TypeParameterElement typeParameter) {
+  String? findTypeParameterBoundsTypeName(TypeParameterElement typeParameter) {
     assert(typeParameter.bound != null);
     return _getDartTypeName(typeParameter.bound!);
   }

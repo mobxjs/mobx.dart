@@ -43,7 +43,7 @@ class MethodOverrideTemplate {
 
   late String name;
   late String returnType;
-  late SurroundedCommaList<String> returnTypeArgs;
+  late SurroundedCommaList<String?> returnTypeArgs;
 
   late SurroundedCommaList<TypeParamTemplate> _typeParams;
   late SurroundedCommaList<String> _typeArgs;

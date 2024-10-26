@@ -1,3 +1,7 @@
+## 2.6.2
+
+- Fixes [error with code generation when file has unnamed extension](https://github.com/mobxjs/mobx.dart/issues/1010) by [@amondnet](https://github.com/amondnet) in [#1020](https://github.com/mobxjs/mobx.dart/pull/1020)
+
 ## 2.6.1+1
 
 - Fixing some analyzer errors related to deprecated types.
