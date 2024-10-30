@@ -2,7 +2,7 @@ library generator_sample;
 
 import 'package:mobx/mobx.dart';
 
-part 'store_with_extension.g.dart';
+part 'generator_sample.g.dart';
 
 // ignore: library_private_types_in_public_api
 class Foo = _Foo with _$Foo;
