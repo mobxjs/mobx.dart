@@ -19,12 +19,8 @@ Atom _observableQueueAtom<T>(ReactiveContext? context, String? name) {
 ///
 /// queue.addFirst(100); // autorun prints 100
 /// ```
-class ObservableQueue<T> extends ListQueue<T>
-    with
-        // ignore: prefer_mixin
-        Queue<T>
-    implements
-        Listenable<QueueChange<T>> {
+class ObservableQueue<T> extends DelegatingQueue<T>
+    implements Queue<T>, Listenable<QueueChange<T>> {
   ObservableQueue({ReactiveContext? context, String? name})
       : this._wrap(context, _observableQueueAtom<T>(context, name), Queue<T>());
 
@@ -33,12 +29,11 @@ class ObservableQueue<T> extends ListQueue<T>
       : this._wrap(context, _observableQueueAtom<T>(context, name),
             Queue<T>.of(elements));
 
-  ObservableQueue._wrap(ReactiveContext? context, this._atom, this._queue)
+  ObservableQueue._wrap(ReactiveContext? context, this._atom, super.queue)
       : _context = context ?? mainContext;
 
   final ReactiveContext _context;
   final Atom _atom;
-  final Queue<T> _queue;
 
   Listeners<QueueChange<T>>? _listenersField;
 
@@ -53,7 +48,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.length;
+    return super.length;
   }
 
   void _notifyAdd(T value, [int index = 0]) {
@@ -85,8 +80,8 @@ class ObservableQueue<T> extends ListQueue<T>
   @override
   void add(T value) {
     _context.conditionallyRunInAction(() {
-      final index = _queue.length;
-      _queue.add(value);
+      final index = super.length;
+      super.add(value);
       _notifyAdd(value, index);
     }, _atom);
   }
@@ -95,8 +90,8 @@ class ObservableQueue<T> extends ListQueue<T>
   void addAll(Iterable<T> iterable) {
     _context.conditionallyRunInAction(() {
       if (iterable.isNotEmpty) {
-        final index = _queue.length;
-        _queue.addAll(iterable);
+        final index = super.length;
+        super.addAll(iterable);
 
         _notifyRangeUpdate(index, iterable.toList(growable: false), null);
       }
@@ -104,14 +99,14 @@ class ObservableQueue<T> extends ListQueue<T>
   }
 
   @override
-  Iterator<T> get iterator => ObservableIterator(_atom, _queue.iterator);
+  Iterator<T> get iterator => ObservableIterator(_atom, super.iterator);
 
   @override
   T lastWhere(bool Function(T element) test, {T Function()? orElse}) {
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.lastWhere(test, orElse: orElse);
+    return super.lastWhere(test, orElse: orElse);
   }
 
   @override
@@ -119,7 +114,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.single;
+    return super.single;
   }
 
   @override
@@ -127,15 +122,15 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.toList(growable: growable);
+    return super.toList(growable: growable);
   }
 
   @override
   void clear() {
     _context.conditionallyRunInAction(() {
-      if (_queue.isNotEmpty) {
-        final oldItems = _queue.toList(growable: false);
-        _queue.clear();
+      if (super.isNotEmpty) {
+        final oldItems = super.toList(growable: false);
+        super.clear();
         _notifyRangeUpdate(0, null, oldItems);
       }
     }, _atom);
@@ -146,10 +141,10 @@ class ObservableQueue<T> extends ListQueue<T>
     var didRemove = false;
 
     _context.conditionallyRunInAction(() {
-      for (var i = _queue.length - 1; i >= 0; --i) {
-        final element = _queue.elementAt(i);
+      for (var i = super.length - 1; i >= 0; --i) {
+        final element = super.elementAt(i);
         if (element == value) {
-          _queue.remove(value as T);
+          super.remove(value as T);
           _notifyRemove(value, i);
           didRemove = true;
         }
@@ -164,9 +159,9 @@ class ObservableQueue<T> extends ListQueue<T>
     late T value;
 
     _context.conditionallyRunInAction(() {
-      value = _queue.removeLast();
+      value = super.removeLast();
       // Index is _queue.length as it points to the index before the last element is removed
-      _notifyRemove(value, _queue.length);
+      _notifyRemove(value, super.length);
     }, _atom);
 
     return value;
@@ -176,14 +171,14 @@ class ObservableQueue<T> extends ListQueue<T>
   void removeWhere(bool Function(T element) test) {
     _context.conditionallyRunInAction(() {
       final removedElements = Queue<QueueElementChange<T>>();
-      for (var i = _queue.length - 1; i >= 0; --i) {
-        final element = _queue.elementAt(i);
+      for (var i = super.length - 1; i >= 0; --i) {
+        final element = super.elementAt(i);
         if (test(element)) {
           removedElements.addFirst(QueueElementChange(
               index: i, oldValue: element, type: OperationType.remove));
         }
       }
-      _queue.removeWhere(test);
+      super.removeWhere(test);
       if (removedElements.isNotEmpty) {
         _notifyElementsUpdate(removedElements.toList(growable: false));
       }
@@ -194,14 +189,14 @@ class ObservableQueue<T> extends ListQueue<T>
   void retainWhere(bool Function(T element) test) {
     _context.conditionallyRunInAction(() {
       final removedElements = Queue<QueueElementChange<T>>();
-      for (var i = _queue.length - 1; i >= 0; --i) {
-        final element = _queue.elementAt(i);
+      for (var i = super.length - 1; i >= 0; --i) {
+        final element = super.elementAt(i);
         if (!test(element)) {
           removedElements.addFirst(QueueElementChange(
               index: i, oldValue: element, type: OperationType.remove));
         }
       }
-      _queue.retainWhere(test);
+      super.retainWhere(test);
       if (removedElements.isNotEmpty) {
         _notifyElementsUpdate(removedElements.toList(growable: false));
       }
@@ -215,7 +210,7 @@ class ObservableQueue<T> extends ListQueue<T>
       {bool fireImmediately = false}) {
     final dispose = _listeners.add(listener);
     if (fireImmediately == true) {
-      _queue.forEach(_reportAdd);
+      super.forEach(_reportAdd);
     }
     return dispose;
   }
@@ -223,7 +218,7 @@ class ObservableQueue<T> extends ListQueue<T>
   @override
   void addFirst(T value) {
     _context.conditionallyRunInAction(() {
-      _queue.addFirst(value);
+      super.addFirst(value);
       _notifyAdd(value, 0);
     }, _atom);
   }
@@ -231,8 +226,8 @@ class ObservableQueue<T> extends ListQueue<T>
   @override
   void addLast(T value) {
     _context.conditionallyRunInAction(() {
-      _queue.addLast(value);
-      _notifyAdd(value, _queue.length);
+      super.addLast(value);
+      _notifyAdd(value, super.length);
     }, _atom);
   }
 
@@ -241,7 +236,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.contains(element);
+    return super.contains(element);
   }
 
   @override
@@ -250,7 +245,7 @@ class ObservableQueue<T> extends ListQueue<T>
 
     _atom.reportObserved();
 
-    return _queue.elementAt(index);
+    return super.elementAt(index);
   }
 
   @override
@@ -258,7 +253,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.first;
+    return super.first;
   }
 
   @override
@@ -266,7 +261,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.firstWhere(test, orElse: orElse);
+    return super.firstWhere(test, orElse: orElse);
   }
 
   @override
@@ -274,7 +269,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.isEmpty;
+    return super.isEmpty;
   }
 
   @override
@@ -282,7 +277,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.isNotEmpty;
+    return super.isNotEmpty;
   }
 
   @override
@@ -290,7 +285,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.last;
+    return super.last;
   }
 
   @override
@@ -298,7 +293,7 @@ class ObservableQueue<T> extends ListQueue<T>
     late T value;
 
     _context.conditionallyRunInAction(() {
-      value = _queue.removeFirst();
+      value = super.removeFirst();
       _notifyRemove(value, 0);
     }, _atom);
 
@@ -310,7 +305,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.singleWhere(test, orElse: orElse);
+    return super.singleWhere(test, orElse: orElse);
   }
 
   @override
@@ -318,7 +313,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.toSet();
+    return super.toSet();
   }
 
   void _notifyElementsUpdate(final List<QueueElementChange<T>> elementChanges) {
@@ -345,19 +340,18 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.any(test);
+    return super.any(test);
   }
 
   @override
-  Queue<R> cast<R>() =>
-      ObservableQueue._wrap(_context, _atom, _queue.cast<R>());
+  Queue<R> cast<R>() => ObservableQueue._wrap(_context, _atom, super.cast<R>());
 
   @override
   bool every(bool Function(T element) test) {
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.every(test);
+    return super.every(test);
   }
 
   @override
@@ -365,7 +359,7 @@ class ObservableQueue<T> extends ListQueue<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _queue.forEach(f);
+    return super.forEach(f);
   }
 }
 
