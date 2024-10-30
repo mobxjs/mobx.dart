@@ -16,7 +16,7 @@ void main() {
   group('ObservableQueue', () {
     test('generates a name if not given', () {
       final queue = ObservableQueue.of([]);
-      expect(queue.name, matches(RegExp(r'ObservableQueue\<.*\>@')));
+      expect(queue.name, matches(RegExp(r'ObservableQueue<.*>@')));
     });
 
     test('uses the name if given', () {
@@ -347,27 +347,27 @@ void main() {
 
     group('fires reportObserved() for read-methods', () {
       <String, Function(ObservableQueue<int>)>{
-        'isEmpty': (_) => _.isEmpty,
-        'isNotEmpty': (_) => _.isNotEmpty,
-        'single': (_) => _ignoreException(() => _.single),
-        'first': (_) => _ignoreException(() => _.first),
-        'last': (_) => _ignoreException(() => _.last),
-        'toSet': (_) => _.toSet(),
-        'toList': (_) => _.toList(),
-        'join': (_) => _.join(),
-        'fold': (_) => _.fold(0, (sum, item) => sum),
-        'elementAt': (_) => _ignoreException(() => _.elementAt(0)),
-        'singleWhere': (_) => _ignoreException(
-            () => _.singleWhere((_) => _ == 20, orElse: () => 0)),
+        'isEmpty': (queue) => queue.isEmpty,
+        'isNotEmpty': (queue) => queue.isNotEmpty,
+        'single': (queue) => _ignoreException(() => queue.single),
+        'first': (queue) => _ignoreException(() => queue.first),
+        'last': (queue) => _ignoreException(() => queue.last),
+        'toSet': (queue) => queue.toSet(),
+        'toList': (queue) => queue.toList(),
+        'join': (queue) => queue.join(),
+        'fold': (queue) => queue.fold(0, (sum, item) => sum),
+        'elementAt': (queue) => _ignoreException(() => queue.elementAt(0)),
+        'singleWhere': (queue) => _ignoreException(
+            () => queue.singleWhere((x) => x == 20, orElse: () => 0)),
 
         // ignore: avoid_function_literals_in_foreach_calls
-        'forEach': (_) => _.forEach((a) {}),
+        'forEach': (queue) => queue.forEach((a) {}),
 
-        'contains': (_) => _.contains(null),
-        'lastWhere': (_) => _.lastWhere((_) => true, orElse: () => 0),
-        'firstWhere': (_) => _.firstWhere((_) => true, orElse: () => 0),
-        'every': (_) => _.every((_) => true),
-        'any': (_) => _.any((_) => true),
+        'contains': (queue) => queue.contains(null),
+        'lastWhere': (queue) => queue.lastWhere((_) => true, orElse: () => 0),
+        'firstWhere': (queue) => queue.firstWhere((_) => true, orElse: () => 0),
+        'every': (queue) => queue.every((_) => true),
+        'any': (queue) => queue.any((_) => true),
       }.forEach(_templateReadTest);
     });
   });
@@ -391,56 +391,56 @@ void main() {
 
   group('fires reportChanged() for write-methods', () {
     <String, bool Function(ObservableQueue<int>)>{
-      'add': (_) {
-        _.add(100);
+      'add': (queue) {
+        queue.add(100);
         return true;
       },
-      'addFirst': (_) {
-        _.addFirst(100);
+      'addFirst': (queue) {
+        queue.addFirst(100);
         return true;
       },
-      'addLast': (_) {
-        _.addLast(100);
+      'addLast': (queue) {
+        queue.addLast(100);
         return true;
       },
-      'addAll': (_) {
-        _.addAll([100]);
+      'addAll': (queue) {
+        queue.addAll([100]);
         return true;
       },
-      'clear': (_) {
-        _.clear();
+      'clear': (queue) {
+        queue.clear();
         return true;
       },
-      'removeLast': (_) {
-        _.removeLast();
+      'removeLast': (queue) {
+        queue.removeLast();
         return true;
       },
-      'remove': (_) {
-        _.remove(0);
+      'remove': (queue) {
+        queue.remove(0);
         return true;
       },
-      'removeWhere': (_) {
-        _.removeWhere((_) => true);
+      'removeWhere': (queue) {
+        queue.removeWhere((_) => true);
         return true;
       },
-      'retainWhere': (_) {
-        _.retainWhere((_) => false);
+      'retainWhere': (queue) {
+        queue.retainWhere((_) => false);
         return true;
       },
-      '!addAll': (_) {
-        _.addAll([]);
+      '!addAll': (queue) {
+        queue.addAll([]);
         return false;
       },
-      '!remove': (_) {
-        _.remove(-1);
+      '!remove': (queue) {
+        queue.remove(-1);
         return false;
       },
-      '!removeWhere': (_) {
-        _.removeWhere((_) => false);
+      '!removeWhere': (queue) {
+        queue.removeWhere((_) => false);
         return false;
       },
-      '!retainWhere': (_) {
-        _.retainWhere((_) => true);
+      '!retainWhere': (queue) {
+        queue.retainWhere((_) => true);
         return false;
       },
     }.forEach(_templateWriteTest);
