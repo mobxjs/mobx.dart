@@ -137,15 +137,15 @@ class ObservableQueue<T> extends DelegatingQueue<T>
   }
 
   @override
-  bool remove(Object? value) {
+  bool remove(Object? object) {
     var didRemove = false;
 
     _context.conditionallyRunInAction(() {
       for (var i = super.length - 1; i >= 0; --i) {
         final element = super.elementAt(i);
-        if (element == value) {
-          super.remove(value as T);
-          _notifyRemove(value, i);
+        if (element == object) {
+          super.remove(object as T);
+          _notifyRemove(object, i);
           didRemove = true;
         }
       }
