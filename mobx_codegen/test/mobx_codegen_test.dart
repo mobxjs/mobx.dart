@@ -59,6 +59,11 @@ void main() {
           './data/valid_keep_alive_computed_output.dart');
     });
 
+    test('generates for a class with extension', () async {
+      await compareFiles('./data/with_extension_input.dart',
+          './data/with_extension_output.dart');
+    });
+
     createTests([
       const TestInfo(
           description: 'invalid output is handled',
