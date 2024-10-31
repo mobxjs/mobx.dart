@@ -1,3 +1,7 @@
+## 2.4.0
+
+- Add `scheduler` to `reaction` and `autorun` to allow customizing the scheduler used to schedule the reaction. By [@amondnet]((https://github.com/amondnet).
+
 ## 2.3.3+1 - 2.3.3+2
 
 - Analyzer fixes
