@@ -74,7 +74,7 @@ abstract class _Todo with Store {
 
 :::info Reactive Extensions
 
-You can convert plain `int`, 'double', `bool`, adn `String` literals into
+You can convert plain `int`, 'double', `bool`, and `String` literals into
 an observable version with the `.obs()` extension method. For example:
 
 ```dart
@@ -82,7 +82,7 @@ var name = ''.obs(); // infers ObservableString
 var counter = 0.obs(); // infers ObservableInt
 ```
 
-You can toggle the internal value of `Observable<bool>` with `.toggle()`:
+You can toggle an internal value of `Observable<bool>` with `.toggle()`:
 
 ```dart
 var lights = true.obs();
