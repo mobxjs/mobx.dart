@@ -30,6 +30,21 @@ properly.
 
 :::
 
+#### Performance optimizations
+
+Mostly you try to make `Observer` as small as possible. But sometimes you want to exclude
+the widget subtree from being rebuilt and improve the performance.
+
+Real world examples:
+
+1. You have a colored Container with some heavy widgets inside (like ListView with shrinkWrap: true).
+You want to change the color by Observable, but don't want to rebuild the whole ListView.
+2. You have some fancy animation driven by Observable. You want to animate the widget and want to
+preserve its children from being rebuilt.
+
+For that you can use an `Observer.withBuiltChild` constructor. It takes `builderWithChild`
+and `child` arguments and internally uses the same technique as in [AnimatedBuilder](https://api.flutter.dev/flutter/widgets/AnimatedBuilder-class.html)
+
 Below is the _Counter_ example in its entirety.
 
 ```dart
