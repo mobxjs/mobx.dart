@@ -27,18 +27,18 @@ class Observer extends StatelessObserverWidget {
 
   /// Observer which excludes the child branch from being rebuilt
   ///
-  /// - [builderWithChild] is a builder function with a child widget as a parameter;
+  /// - [builder] is a builder function with a child widget as a parameter;
   ///
-  /// - [child] is the widget to pass to the [builderWithChild] function.
+  /// - [child] is the widget to pass to the [builder] function.
   // ignore: prefer_const_constructors_in_immutables
   Observer.withBuiltChild({
     super.key,
-    required Widget Function(BuildContext, Widget) builderWithChild,
+    required Widget Function(BuildContext, Widget) builder,
     required Widget child,
     super.name,
     super.warnWhenNoObservables,
   })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
-        builder = ((context) => builderWithChild(context, child));
+        builder = ((context) => builder(context, child));
 
   final WidgetBuilder builder;
 

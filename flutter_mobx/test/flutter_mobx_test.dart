@@ -69,7 +69,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Observer.withBuiltChild(
-          builderWithChild: (context, child) {
+          builder: (context, child) {
             return Column(
               children: [
                 ElevatedButton(
