@@ -23,31 +23,24 @@ class Observer extends StatelessObserverWidget {
     required this.builder,
     super.name,
     super.warnWhenNoObservables,
-  })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
-        builderWithChild = null,
-        child = null,
-        assert(builder != null);
+  }) : debugConstructingStackFrame = debugFindConstructingStackFrame();
 
   /// Observer which excludes the child branch from being rebuilt
+  ///
+  /// - [builderWithChild] is a builder function with a child widget as a parameter;
+  ///
+  /// - [child] is the widget to pass to the [builderWithChild] function.
   // ignore: prefer_const_constructors_in_immutables
   Observer.withBuiltChild({
     super.key,
-    required this.builderWithChild,
-    required this.child,
+    required Widget Function(BuildContext, Widget) builderWithChild,
+    required Widget child,
     super.name,
     super.warnWhenNoObservables,
   })  : debugConstructingStackFrame = debugFindConstructingStackFrame(),
-        builder = null,
-        assert(builderWithChild != null && child != null);
+        builder = ((context) => builderWithChild(context, child));
 
-  /// regular builder, suitable for most cases
-  final WidgetBuilder? builder;
-
-  /// builder function with child parameter
-  final TransitionBuilder? builderWithChild;
-
-  /// The child widget to pass to the [builderWithChild].
-  final Widget? child;
+  final WidgetBuilder builder;
 
   /// The stack frame pointing to the source that constructed this instance.
   final String? debugConstructingStackFrame;
@@ -60,8 +53,7 @@ class Observer extends StatelessObserverWidget {
           : '');
 
   @override
-  Widget build(BuildContext context) =>
-      builderWithChild?.call(context, child) ?? builder!.call(context);
+  Widget build(BuildContext context) => builder.call(context);
 
   /// Matches constructor stack frames, in both VM and web environments.
   static final _constructorStackFramePattern = RegExp(r'\bnew\b');

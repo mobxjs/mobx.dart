@@ -76,7 +76,7 @@ void main() {
                     onPressed: () => message.value = 'Clicked',
                     child: Container()),
                 Text(message.value, key: key1),
-                child!,
+                child,
                 Builder(builder: (context) {
                   return Text(message.value, key: key3);
                 }),
