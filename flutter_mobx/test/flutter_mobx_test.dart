@@ -69,14 +69,14 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Observer.withBuiltChild(
-          builderWithChild: (context, child) {
+          builder: (context, child) {
             return Column(
               children: [
                 ElevatedButton(
                     onPressed: () => message.value = 'Clicked',
                     child: Container()),
                 Text(message.value, key: key1),
-                child!,
+                child,
                 Builder(builder: (context) {
                   return Text(message.value, key: key3);
                 }),
