@@ -1,3 +1,7 @@
+## 2.2.2
+
+- fix: removed runtime asserts and nullables from `Observer.withBuiltChild` - [@subzero911](https://github.com/subzero911)
+
 ## 2.2.1+1
 
 - Analyzer fixes
