@@ -1,3 +1,21 @@
+## 2.5.0
+
+ - **FIX**: package upgrades, analysis issue fixes.
+ - **FIX**: Observable.value setter (covariant) (#993).
+ - **FIX**: stacktrace in computed (#988).
+ - **FIX**: observableset and observablemap notify all listeners when one is added with fireimmediately true (#962).
+ - **FIX**: revert #784 (#842).
+ - **FIX**: ObservableStream.listen() should also keep observable values updated (#708).
+ - **FIX**: Widgets failed to call super.dispose() (#334).
+ - **FIX**: issue 62 (#64).
+ - **FEAT**: add scheduler option to autorun and reaction (#979).
+ - **FEAT**: add keepAlive to Computed (#976).
+ - **FEAT**: Adds `useEquatable` for creating observables (#971).
+ - **FEAT**: Adds custom `equals` for creating observables. (#907).
+ - **FEAT**: Adds support for annotations (#904).
+ - **FEAT**: Allow a custom equals parameter for ObservableStream (#771).
+ - **FEAT**: Allow use custom context (#770).
+
 ## 2.4.0
 
 - Add `scheduler` to `reaction` and `autorun` to allow customizing the scheduler used to schedule the reaction. By [@amondnet]((https://github.com/amondnet).

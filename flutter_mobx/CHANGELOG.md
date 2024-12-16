@@ -1,3 +1,12 @@
+## 2.3.0
+
+ - **REFACTOR**: export `MultiReactionBuilder` from `flutter_mobx.dart` (#946).
+ - **FIX**: package upgrades, analysis issue fixes.
+ - **FIX**: stacktrace in computed (#988).
+ - **FIX**: If builder of Observer errors, further error LateInitializationError: Local 'built' has not been initialized. will happen in addition to the actual error, reducing developer experience #780.
+ - **FIX**: Disable button Remove Completed, when the completed task is occult on screen. (#73).
+ - **FEAT**: add `MultiReactionBuilder` widget (#917).
+
 ## 2.2.2
 
 - fix: removed runtime asserts and nullables from `Observer.withBuiltChild` - [@subzero911](https://github.com/subzero911)
