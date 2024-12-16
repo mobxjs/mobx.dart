@@ -32,6 +32,7 @@
 ///      );
 ///
 
+// ignore: unnecessary_library_name
 library flutter_mobx;
 
 export 'package:flutter_mobx/src/multi_reaction_builder.dart';
