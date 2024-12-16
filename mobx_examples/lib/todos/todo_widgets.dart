@@ -121,7 +121,7 @@ class ActionBar extends StatelessWidget {
         },
       ),
       Observer(
-          builder: (_) => ButtonBar(
+          builder: (_) => OverflowBar(
                 children: <Widget>[
                   ElevatedButton(
                     onPressed: list.canRemoveAllCompleted
