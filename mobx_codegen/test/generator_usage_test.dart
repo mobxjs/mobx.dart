@@ -15,7 +15,6 @@ abstract class _TestStore with Store {
   @observable
   String field1;
 
-  // ignore: unused_element_parameter
   @observable
   String? field2;
 
