@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx/src/core.dart' show ReactionImpl;
@@ -21,7 +20,11 @@ class MockReaction extends Mock implements ReactionImpl {
 
 // ignore: must_be_immutable
 class TestObserver extends Observer {
-  TestObserver(this.reaction, {super.key, required WidgetBuilder super.builder});
+  TestObserver(
+    this.reaction, {
+    super.key,
+    required super.builder,
+  });
 
   final Reaction reaction;
 
@@ -37,7 +40,7 @@ class TestObserver extends Observer {
 class LoggingObserver extends Observer {
   // ignore: prefer_const_constructors_in_immutables
   LoggingObserver({
-    required WidgetBuilder super.builder,
+    required super.builder,
     super.warnWhenNoObservables,
     super.key,
   });
@@ -54,7 +57,7 @@ class LoggingObserver extends Observer {
 class FlutterErrorThrowingObserver extends Observer {
   // ignore: prefer_const_constructors_in_immutables
   FlutterErrorThrowingObserver({
-    required WidgetBuilder super.builder,
+    required super.builder,
     required this.errorToThrow,
     super.key,
   });
