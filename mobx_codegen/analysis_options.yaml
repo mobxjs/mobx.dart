@@ -1,8 +1,6 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  errors:
-    unused_element: ignore
   exclude:
     - test/data/**.dart
     - test/*.g.dart
