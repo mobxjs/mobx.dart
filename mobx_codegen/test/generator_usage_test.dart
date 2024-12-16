@@ -9,6 +9,7 @@ class TestStore = _TestStore with _$TestStore;
 bool customEquals(String? oldValue, String? newValue) => oldValue != newValue;
 
 abstract class _TestStore with Store {
+  // ignore: unused_element
   _TestStore(this.field1, {this.field2});
 
   @observable
