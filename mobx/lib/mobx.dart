@@ -26,7 +26,7 @@
 /// Notice there is no explicit subscription to any observable values. By simply referencing the observables,
 /// the reaction picks up the dependencies. When they change, the reaction is automatically triggered.
 ///
-library mobx;
+library;
 
 export 'package:mobx/src/api/action.dart';
 export 'package:mobx/src/api/annotations.dart'

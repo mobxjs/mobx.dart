@@ -18,5 +18,5 @@ dependency_overrides:
 
 dev_dependencies:
   build_runner:
-  lints: ^1.0.1
+  lints: ^5.0.0
   mobx_codegen:

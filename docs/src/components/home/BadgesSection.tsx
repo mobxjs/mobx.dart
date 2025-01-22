@@ -14,7 +14,7 @@ export function BadgesSection() {
   return (
     <Section className={'bg-slate-100'}>
       <div className="flex flex-col sm:flex-row gap-8 items-center justify-center pb-8">
-        <Statistic stat={'2.3K+'}>
+        <Statistic stat={'2.4K+'}>
           <div>
             <a
               href={'https://github.com/mobxjs/mobx.dart'}
@@ -24,8 +24,8 @@ export function BadgesSection() {
             </a>
           </div>
         </Statistic>
-        <Statistic stat={'18,000+'}> Projects</Statistic>
-        <Statistic stat={'~70'}>Contributors</Statistic>
+        <Statistic stat={'20,000+'}> Projects</Statistic>
+        <Statistic stat={'70+'}>Contributors</Statistic>
       </div>
 
       <div className={'grid grid-cols-1 sm:grid-cols-2 gap-8 items-center'}>
