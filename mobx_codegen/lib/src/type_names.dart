@@ -36,8 +36,8 @@ class LibraryScopedNameFinder {
     // library-local names. Note that the definedNames include a prefix if there
     // is one.
     // ignore: deprecated_member_use
-    for (final import in library.libraryImports) {
-      for (final entry in import.namespace.definedNames.entries) {
+    for (final import in library.importedLibraries) {
+      for (final entry in import.exportNamespace.definedNames.entries) {
         _namesByElement[entry.value] = entry.key;
       }
     }
@@ -81,7 +81,7 @@ class LibraryScopedNameFinder {
       // lookup. Otherwise, we special case the function naming.
       if (type.alias?.element is TypeAliasElement) {
         // ignore: deprecated_member_use
-        typeElement = type.alias!.element.aliasedElement?.enclosingElement;
+        typeElement = type.alias!.element.aliasedElement?.enclosingElement3;
       } else {
         return _getFunctionTypeName(type);
       }
