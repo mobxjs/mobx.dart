@@ -1,10 +1,3 @@
-/*
- * @Description: 
- * @Author: lidary-byte lidaryl@163.com
- * @Date: 2025-02-20 11:53:11
- * @LastEditors: lidary-byte lidaryl@163.com
- * @LastEditTime: 2025-02-20 13:52:54
- */
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/params.dart';
