@@ -1,3 +1,6 @@
+## 1.1.1
+- Upgrading packages and sdk
+
 ## 1.1.0
 
  - **FIX**: package upgrades, analysis issue fixes.

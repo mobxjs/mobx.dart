@@ -1,3 +1,7 @@
+## 2.7.1
+
+- Upgrading packages and sdk
+
 ## 2.7.0
 
  - **FIX**: package upgrades, analysis issue fixes.

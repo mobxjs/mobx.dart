@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/type_names.dart';
 import 'package:source_gen/source_gen.dart';
@@ -23,14 +24,14 @@ class AsyncMethodChecker {
       (method.isAsynchronous &&
           !method.isGenerator &&
           // ignore: deprecated_member_use
-          method.returnType.isDynamic);
+          method.returnType is DynamicType);
 
   bool returnsStream(MethodElement method) =>
       _checkStream.isAssignableFromType(method.returnType) ||
       (method.isAsynchronous &&
           method.isGenerator &&
           // ignore: deprecated_member_use
-          method.returnType.isDynamic);
+          method.returnType is DynamicType);
 }
 
 TypeParamTemplate typeParamTemplate(
