@@ -1,6 +1,8 @@
 mixin _$TestStore on _TestStore, Store {
-  late final _$usernameAtom =
-      Atom(name: '_TestStore.username', context: context);
+  late final _$usernameAtom = Atom(
+    name: '_TestStore.username',
+    context: context,
+  );
 
   @override
   String get username {
@@ -12,10 +14,13 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set username(String value) {
-    _$usernameAtom
-        .reportWrite(value, _usernameIsInitialized ? super.username : null, () {
-      super.username = value;
-      _usernameIsInitialized = true;
-    });
+    _$usernameAtom.reportWrite(
+      value,
+      _usernameIsInitialized ? super.username : null,
+      () {
+        super.username = value;
+        _usernameIsInitialized = true;
+      },
+    );
   }
 }

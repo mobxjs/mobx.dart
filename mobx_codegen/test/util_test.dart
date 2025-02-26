@@ -8,9 +8,12 @@ import 'package:test/test.dart';
 
 class MockTypeChecker extends Mock implements TypeChecker {}
 
+// ignore: deprecated_member_use
 class MockMethod extends Mock implements MethodElement {}
 
 class MockType extends Mock implements DartType {}
+
+class DynamicMockType extends Mock implements DynamicType {}
 
 MockMethod mockFutureMethod({
   bool returnsDynamic = false,
@@ -19,9 +22,12 @@ MockMethod mockFutureMethod({
   bool isAsync = false,
   bool isGenerator = false,
 }) {
-  final returnType = MockType();
-  // ignore: deprecated_member_use
-  when(() => returnType.isDynamic).thenReturn(returnsDynamic);
+  final DartType returnType;
+  if (returnsDynamic) {
+    returnType = DynamicMockType();
+  } else {
+    returnType = MockType();
+  }
   when(() => returnType.isDartAsyncFuture).thenReturn(returnsFuture);
   when(() => returnType.isDartAsyncFutureOr).thenReturn(returnsFutureOr);
 
@@ -37,9 +43,12 @@ MockMethod mockStreamMethod({
   bool isGenerator = false,
   bool returnsDynamic = false,
 }) {
-  final returnType = MockType();
-  // ignore: deprecated_member_use
-  when(() => returnType.isDynamic).thenReturn(returnsDynamic);
+  final DartType returnType;
+  if (returnsDynamic) {
+    returnType = DynamicMockType();
+  } else {
+    returnType = MockType();
+  }
 
   final method = MockMethod();
   when(() => method.returnType).thenReturn(returnType);
