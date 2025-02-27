@@ -12,6 +12,8 @@ class MockMethod extends Mock implements MethodElement {}
 
 class MockType extends Mock implements DartType {}
 
+class DynamicMockType extends Mock implements DynamicType {}
+
 MockMethod mockFutureMethod({
   bool returnsDynamic = false,
   bool returnsFuture = false,
@@ -19,9 +21,7 @@ MockMethod mockFutureMethod({
   bool isAsync = false,
   bool isGenerator = false,
 }) {
-  final returnType = MockType();
-  // ignore: deprecated_member_use
-  when(() => returnType.isDynamic).thenReturn(returnsDynamic);
+  final returnType = returnsDynamic ? DynamicMockType() : MockType();
   when(() => returnType.isDartAsyncFuture).thenReturn(returnsFuture);
   when(() => returnType.isDartAsyncFutureOr).thenReturn(returnsFutureOr);
 
@@ -37,9 +37,7 @@ MockMethod mockStreamMethod({
   bool isGenerator = false,
   bool returnsDynamic = false,
 }) {
-  final returnType = MockType();
-  // ignore: deprecated_member_use
-  when(() => returnType.isDynamic).thenReturn(returnsDynamic);
+  final returnType = returnsDynamic ? DynamicMockType() : MockType();
 
   final method = MockMethod();
   when(() => method.returnType).thenReturn(returnType);
