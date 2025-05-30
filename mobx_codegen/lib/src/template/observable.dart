@@ -23,6 +23,7 @@ class ObservableTemplate {
   final bool isPrivate;
   final bool isReadOnly;
   final bool isLate;
+  // ignore: deprecated_member_use
   final ExecutableElement? equals;
   final bool? useDeepEquality;
 

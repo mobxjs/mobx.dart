@@ -1,6 +1,8 @@
 mixin _$AnnotationsTestClass on AnnotationsTestClassBase, Store {
-  late final _$fooAtom =
-      Atom(name: 'AnnotationsTestClassBase.foo', context: context);
+  late final _$fooAtom = Atom(
+    name: 'AnnotationsTestClassBase.foo',
+    context: context,
+  );
 
   @override
   String get foo {
@@ -25,33 +27,41 @@ mixin _$AnnotationsTestClass on AnnotationsTestClassBase, Store {
   }
 
   late final _$asyncActionAnnotatedAsyncAction = AsyncAction(
-      'AnnotationsTestClassBase.asyncActionAnnotated',
-      context: context);
+    'AnnotationsTestClassBase.asyncActionAnnotated',
+    context: context,
+  );
 
   @override
   @protected
   @visibleForOverriding
   @visibleForTesting
   Future<void> asyncActionAnnotated() {
-    return _$asyncActionAnnotatedAsyncAction
-        .run(() => super.asyncActionAnnotated());
+    return _$asyncActionAnnotatedAsyncAction.run(
+      () => super.asyncActionAnnotated(),
+    );
   }
 
   late final _$observableFutureAnnotatedAsyncAction = AsyncAction(
-      'AnnotationsTestClassBase.observableFutureAnnotated',
-      context: context);
+    'AnnotationsTestClassBase.observableFutureAnnotated',
+    context: context,
+  );
 
   @override
   @protected
   @visibleForOverriding
   @visibleForTesting
   ObservableFuture<void> observableFutureAnnotated() {
-    return ObservableFuture<void>(_$observableFutureAnnotatedAsyncAction
-        .run(() => super.observableFutureAnnotated()));
+    return ObservableFuture<void>(
+      _$observableFutureAnnotatedAsyncAction.run(
+        () => super.observableFutureAnnotated(),
+      ),
+    );
   }
 
-  late final _$AnnotationsTestClassBaseActionController =
-      ActionController(name: 'AnnotationsTestClassBase', context: context);
+  late final _$AnnotationsTestClassBaseActionController = ActionController(
+    name: 'AnnotationsTestClassBase',
+    context: context,
+  );
 
   @override
   @protected
@@ -59,7 +69,8 @@ mixin _$AnnotationsTestClass on AnnotationsTestClassBase, Store {
   @visibleForTesting
   void actionAnnotated() {
     final _$actionInfo = _$AnnotationsTestClassBaseActionController.startAction(
-        name: 'AnnotationsTestClassBase.actionAnnotated');
+      name: 'AnnotationsTestClassBase.actionAnnotated',
+    );
     try {
       return super.actionAnnotated();
     } finally {

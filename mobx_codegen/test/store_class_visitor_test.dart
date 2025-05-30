@@ -8,6 +8,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 class PropertyAccessorElementMock extends Fake
+    // ignore: deprecated_member_use
     implements PropertyAccessorElement {
   PropertyAccessorElementMock(this._displayName);
 
@@ -17,6 +18,7 @@ class PropertyAccessorElementMock extends Fake
   String get displayName => _displayName;
 }
 
+// ignore: deprecated_member_use
 class ClassElementMock extends Fake implements ClassElement {
   ClassElementMock(this._name);
 
@@ -26,6 +28,7 @@ class ClassElementMock extends Fake implements ClassElement {
   String get name => _name;
 
   @override
+  // ignore: deprecated_member_use
   List<TypeParameterElement> get typeParameters => [];
 }
 

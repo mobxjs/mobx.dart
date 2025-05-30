@@ -9,10 +9,11 @@ class MethodOverrideTemplate {
   MethodOverrideTemplate();
 
   MethodOverrideTemplate.fromElement(
+    // ignore: deprecated_member_use
     ExecutableElement method,
     LibraryScopedNameFinder typeNameFinder,
   ) {
-    // ignore: prefer_function_declarations_over_variables
+    // ignore: prefer_function_declarations_over_variables, deprecated_member_use
     final param = (ParameterElement element) => ParamTemplate(
         name: element.name,
         type: typeNameFinder.findParameterTypeName(element),
@@ -32,6 +33,7 @@ class MethodOverrideTemplate {
     this
       ..name = method.name
       ..returnType = typeNameFinder.findReturnTypeName(method)
+      // ignore: deprecated_member_use
       ..setTypeParams(method.typeParameters
           .map((type) => typeParamTemplate(type, typeNameFinder)))
       ..positionalParams = positionalParams.map(param)
