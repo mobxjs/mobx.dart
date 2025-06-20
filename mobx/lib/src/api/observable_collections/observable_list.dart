@@ -42,6 +42,13 @@ class ObservableList<T>
 
   List<T> get nonObservableInner => _list;
 
+  /// An observable version of [nonObservableInner].
+  List<T> get inner {
+    _context.enforceReadPolicy(_atom);
+    _atom.reportObserved();
+    return _list;
+  }
+
   Listeners<ListChange<T>>? _listenersField;
 
   Listeners<ListChange<T>> get _listeners =>

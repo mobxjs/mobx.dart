@@ -48,6 +48,13 @@ class ObservableSet<T>
 
   Set<T> get nonObservableInner => _set;
 
+  /// An observable version of [nonObservableInner].
+  Set<T> get inner {
+    _context.enforceReadPolicy(_atom);
+    _atom.reportObserved();
+    return _set;
+  }
+
   String get name => _atom.name;
 
   Listeners<SetChange<T>>? _listenersField;

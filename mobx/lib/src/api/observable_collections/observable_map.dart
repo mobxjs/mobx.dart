@@ -60,6 +60,13 @@ class ObservableMap<K, V>
 
   Map<K, V> get nonObservableInner => _map;
 
+  /// An observable version of [nonObservableInner].
+  Map<K, V> get inner {
+    _context.enforceReadPolicy(_atom);
+    _atom.reportObserved();
+    return _map;
+  }
+
   String get name => _atom.name;
 
   Listeners<MapChange<K, V>>? _listenersField;
