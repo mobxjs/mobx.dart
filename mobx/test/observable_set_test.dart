@@ -125,6 +125,7 @@ void main() {
         'join': (m) => m.join(', '),
         'last': (m) => m.last,
         'lastWhere': (m) => m.lastWhere((i) => i == 2),
+        'inner': (m) => m.inner,
       }.forEach(runReadTest);
     });
 

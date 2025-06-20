@@ -100,6 +100,7 @@ void main() {
         'isEmpty': (m) => m.isEmpty,
         'isNotEmpty': (m) => m.isNotEmpty,
         'map': (m) => m.map((key, value) => MapEntry(key, value + 1)),
+        'inner': (m) => m.inner,
       }.forEach(runReadTest);
     });
 

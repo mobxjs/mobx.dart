@@ -650,6 +650,7 @@ void main() {
         'any': (list) => list.any((_) => true),
         '[]': (list) => list[0],
         '+': (list) => list + [100],
+        'inner': (list) => list.inner,
       }.forEach(_templateReadTest);
 
       test('bypass observable system', () {
