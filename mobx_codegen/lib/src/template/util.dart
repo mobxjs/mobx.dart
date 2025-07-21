@@ -1,5 +1,4 @@
-
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/type_names.dart';
@@ -21,27 +20,27 @@ class AsyncMethodChecker {
   late TypeChecker _checkStream;
 
   // ignore: deprecated_member_use
-  bool returnsFuture(MethodElement method) =>
+  bool returnsFuture(MethodElement2 method) =>
       method.returnType.isDartAsyncFuture ||
-      (method.isAsynchronous &&
-          !method.isGenerator &&
+      (method.fragments.any((fragment) => fragment.isAsynchronous) &&
+          !method.fragments.any((fragment) => fragment.isGenerator) &&
           method.returnType is DynamicType);
 
   // ignore: deprecated_member_use
-  bool returnsStream(MethodElement method) =>
+  bool returnsStream(MethodElement2 method) =>
       _checkStream.isAssignableFromType(method.returnType) ||
-      (method.isAsynchronous &&
-          method.isGenerator &&
+      (method.fragments.any((fragment) => fragment.isAsynchronous) &&
+          method.fragments.any((fragment) => fragment.isGenerator) &&
           method.returnType is DynamicType);
 }
 
 TypeParamTemplate typeParamTemplate(
   // ignore: deprecated_member_use
-  TypeParameterElement param,
+  TypeParameterElement2 param,
   LibraryScopedNameFinder typeNameFinder,
 ) =>
     TypeParamTemplate(
-        name: param.name,
+        name: param.name3!,
         bound: param.bound != null
             ? typeNameFinder.findTypeParameterBoundsTypeName(param)
             : null);

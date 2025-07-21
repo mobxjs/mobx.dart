@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:meta/meta.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
@@ -24,7 +24,7 @@ class ObservableTemplate {
   final bool isReadOnly;
   final bool isLate;
   // ignore: deprecated_member_use
-  final ExecutableElement? equals;
+  final ExecutableElement2? equals;
   final bool? useDeepEquality;
 
   /// Formats the `name` from `_foo_bar` to `foo_bar`
@@ -66,7 +66,7 @@ class ObservableTemplate {
     $atomName.reportWrite(value, _${name}IsInitialized ? super.$name : null, () {
       super.$name = value;
       _${name}IsInitialized = true;
-    }${equals != null ? ', equals: ${equals!.name}' : ''});
+    }${equals != null ? ', equals: ${equals!.name3}' : ''});
   }''';
     }
 
@@ -75,7 +75,7 @@ class ObservableTemplate {
   set $name($type value) {
     $atomName.reportWrite(value, super.$name, () {
       super.$name = value;
-    }${equals != null ? ', equals: ${equals!.name}' : ''}${useDeepEquality != null ? ', useDeepEquality: $useDeepEquality' : ''});
+    }${equals != null ? ', equals: ${equals!.name3}' : ''}${useDeepEquality != null ? ', useDeepEquality: $useDeepEquality' : ''});
   }''';
   }
 

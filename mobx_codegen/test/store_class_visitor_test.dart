@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/build.dart';
 import 'package:mobx_codegen/src/store_class_visitor.dart';
 import 'package:mobx_codegen/src/template/observable.dart';
@@ -9,7 +9,8 @@ import 'package:test/test.dart';
 
 class PropertyAccessorElementMock extends Fake
     // ignore: deprecated_member_use
-    implements PropertyAccessorElement {
+    implements
+        PropertyAccessorElement2 {
   PropertyAccessorElementMock(this._displayName);
 
   final String _displayName;
@@ -19,17 +20,17 @@ class PropertyAccessorElementMock extends Fake
 }
 
 // ignore: deprecated_member_use
-class ClassElementMock extends Fake implements ClassElement {
+class ClassElementMock extends Fake implements ClassElement2 {
   ClassElementMock(this._name);
 
   final String _name;
 
   @override
-  String get name => _name;
+  String get name3 => _name;
 
   @override
   // ignore: deprecated_member_use
-  List<TypeParameterElement> get typeParameters => [];
+  List<TypeParameterElement2> get typeParameters2 => [];
 }
 
 class StoreTemplateFake extends StoreTemplate {}

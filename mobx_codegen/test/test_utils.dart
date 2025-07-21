@@ -20,11 +20,11 @@ class TestInfo {
 const String pkgName = 'generator_sample';
 
 Future<String> generate(String source) async {
-// Recreate generator for each test because we repeatedly create
-// classes with the same name in the same library, which will clash.
+  // Recreate generator for each test because we repeatedly create
+  // classes with the same name in the same library, which will clash.
   final Builder builder = PartBuilder([StoreGenerator()], '.g.dart');
 
-  final srcs = {
+  final sources = {
     '$pkgName|lib/generator_sample.dart': source,
   };
 
@@ -41,28 +41,34 @@ Future<String> generate(String source) async {
     }
   }
 
-  final writer = InMemoryAssetWriter();
-  await testBuilder(builder, srcs,
-      rootPackage: pkgName,
-      reader: await PackageAssetReader.currentIsolate(),
-      writer: writer,
-      onLog: captureError);
+  final readerWriter = TestReaderWriter(rootPackage: pkgName);
+  await readerWriter.testing.loadIsolateSources();
 
-  return errors.isNotEmpty
-      ? errors.join('\n')
-      : String.fromCharCodes(
-          writer.assets[AssetId(pkgName, 'lib/generator_sample.g.dart')] ?? []);
+  await testBuilder(builder, sources,
+      rootPackage: pkgName, readerWriter: readerWriter, onLog: captureError);
+
+  if (errors.isNotEmpty) {
+    return errors.join('\n');
+  }
+
+  final assetId = AssetId(pkgName,
+      '.dart_tool/build/generated/generator_sample/lib/generator_sample.g.dart');
+  final assetExists = await readerWriter.canRead(assetId);
+
+  if (!assetExists) {
+    return '';
+  }
+
+  return readerWriter.testing.readString(assetId);
 }
 
 String getFilePath(String filename) {
   final context = path.Context(
       style: Platform.isWindows ? path.Style.windows : path.Style.posix);
   final baseDir = context.dirname(Directory.current.path);
-  var filePath = context.join(baseDir, 'mobx_codegen/test/', filename);
-  filePath = context.fromUri(context.normalize(filePath));
-  filePath = context.fromUri(filePath).split('file:').last;
+  final filePath = context.join(baseDir, 'mobx_codegen', 'test', filename);
 
-  return filePath;
+  return context.normalize(filePath);
 }
 
 Future<String> readFile(String filename) {

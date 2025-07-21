@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
@@ -9,7 +9,9 @@ import 'package:test/test.dart';
 class MockTypeChecker extends Mock implements TypeChecker {}
 
 // ignore: deprecated_member_use
-class MockMethod extends Mock implements MethodElement {}
+class MockMethod extends Mock implements MethodElement2 {}
+
+class MockMethodFragment extends Mock implements MethodFragment {}
 
 class MockType extends Mock implements DartType {}
 
@@ -31,10 +33,14 @@ MockMethod mockFutureMethod({
   when(() => returnType.isDartAsyncFuture).thenReturn(returnsFuture);
   when(() => returnType.isDartAsyncFutureOr).thenReturn(returnsFutureOr);
 
+  final methodFragment = MockMethodFragment();
+  when(() => methodFragment.isGenerator).thenReturn(isGenerator);
+  when(() => methodFragment.isAsynchronous).thenReturn(isAsync);
+
   final method = MockMethod();
   when(() => method.returnType).thenReturn(returnType);
-  when(() => method.isAsynchronous).thenReturn(isAsync);
-  when(() => method.isGenerator).thenReturn(isGenerator);
+  when(() => method.fragments).thenReturn([methodFragment]);
+
   return method;
 }
 
@@ -50,10 +56,14 @@ MockMethod mockStreamMethod({
     returnType = MockType();
   }
 
+  final mockMethodFragment = MockMethodFragment();
+  when(() => mockMethodFragment.isGenerator).thenReturn(isGenerator);
+  when(() => mockMethodFragment.isAsynchronous).thenReturn(isAsync);
+
   final method = MockMethod();
   when(() => method.returnType).thenReturn(returnType);
-  when(() => method.isAsynchronous).thenReturn(isAsync);
-  when(() => method.isGenerator).thenReturn(isGenerator);
+  when(() => method.fragments).thenReturn([mockMethodFragment]);
+
   return method;
 }
 
