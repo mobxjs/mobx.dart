@@ -10,7 +10,7 @@ String surroundNonEmpty(String prefix, String suffix, dynamic content) {
   return contentStr.isEmpty ? '' : '$prefix$contentStr$suffix';
 }
 
-const _streamChecker = TypeChecker.fromRuntime(Stream);
+const _streamChecker = TypeChecker.typeNamed(Stream, inSdk: true);
 
 class AsyncMethodChecker {
   AsyncMethodChecker([TypeChecker? checkStream]) {
