@@ -3,7 +3,7 @@
 
 import 'dart:async';
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type_system.dart';
 import 'package:build/build.dart';
@@ -43,7 +43,7 @@ class StoreGenerator extends Generator {
 
   Iterable<String> _generateCodeForMixinStore(
     LibraryReader library,
-    ClassElement baseClass,
+    ClassElement2 baseClass,
     TypeSystem typeSystem,
   ) sync* {
     final typeNameFinder = LibraryScopedNameFinder(library.element);
@@ -52,7 +52,7 @@ class StoreGenerator extends Generator {
       final mixedClass = otherClasses.firstWhere((c) {
         // If our base class has different type parameterization requirements than
         // the class we're evaluating provides, we know it's not a subclass.
-        if (baseClass.typeParameters.length !=
+        if (baseClass.typeParameters2.length !=
             c.supertype!.typeArguments.length) {
           return false;
         }
@@ -68,7 +68,7 @@ class StoreGenerator extends Generator {
       });
 
       yield _generateCodeFromTemplate(
-          mixedClass.name, baseClass, MixinStoreTemplate(), typeNameFinder);
+          mixedClass.name3!, baseClass, MixinStoreTemplate(), typeNameFinder);
       // ignore: avoid_catching_errors
     } on StateError {
       // ignore the case when no element is found
@@ -77,15 +77,15 @@ class StoreGenerator extends Generator {
 
   String _generateCodeFromTemplate(
     String publicTypeName,
-    ClassElement userStoreClass,
+    ClassElement2 userStoreClass,
     StoreTemplate template,
     LibraryScopedNameFinder typeNameFinder,
   ) {
     final visitor = StoreClassVisitor(
         publicTypeName, userStoreClass, template, typeNameFinder, options);
     userStoreClass
-      ..accept(visitor)
-      ..visitChildren(visitor);
+      ..accept2(visitor)
+      ..visitChildren2(visitor);
     return visitor.source;
   }
 }
