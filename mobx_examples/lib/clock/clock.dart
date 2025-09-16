@@ -32,7 +32,7 @@ class Clock {
     print('Clock stopped ticking');
   }
 
-  void _onTick(_) {
+  void _onTick(dynamic _) {
     _atom.reportChanged();
   }
 }

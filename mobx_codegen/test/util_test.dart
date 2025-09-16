@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/util.dart';
 import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
@@ -8,8 +8,7 @@ import 'package:test/test.dart';
 
 class MockTypeChecker extends Mock implements TypeChecker {}
 
-// ignore: deprecated_member_use
-class MockMethod extends Mock implements MethodElement2 {}
+class MockMethod extends Mock implements MethodElement {}
 
 class MockMethodFragment extends Mock implements MethodFragment {}
 

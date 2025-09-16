@@ -1,4 +1,9 @@
 ## 2.7.2
+- Update analyzer version to 8.1.1
+- Update source_gen version to 4.0.1
+- Update build version to 4.0.0
+
+## 2.7.2
 - Update analyzer version to `>=7.4.0 < 8.0.0`
 - Update source_gen version to 3.0.0
 - Update build version to 3.0.0

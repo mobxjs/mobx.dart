@@ -1,7 +1,6 @@
 // https://github.com/dart-lang/sdk/blob/main/pkg/analyzer/doc/element_model_migration_guide.md
-// ignore_for_file: deprecated_member_use
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
@@ -23,15 +22,15 @@ import 'package:mobx_codegen/src/template/comma_list.dart';
 class LibraryScopedNameFinder {
   LibraryScopedNameFinder(this.library);
 
-  final LibraryElement2 library;
+  final LibraryElement library;
 
-  final Map<Element2, String?> _namesByElement = {};
+  final Map<Element, String?> _namesByElement = {};
 
-  Map<Element2, String?> get namesByElement {
+  Map<Element, String?> get namesByElement {
     // Add all of this library's type-defining elements to the name map
-    final libraryElements = library.children2.whereType<TypeDefiningElement2>();
+    final libraryElements = library.children.whereType<TypeDefiningElement>();
     for (final element in libraryElements) {
-      _namesByElement[element] = element.name3;
+      _namesByElement[element] = element.name;
     }
 
     // Reverse each import's export namespace so we can map elements to their
@@ -42,15 +41,15 @@ class LibraryScopedNameFinder {
     // it manually.
 
     final libraryImports = library.fragments
-        .map((fragment) => fragment.libraryImports2)
+        .map((fragment) => fragment.libraryImports)
         .expand((t) => t);
 
     for (final import in libraryImports) {
-      final prefix = import.prefix2;
+      final prefix = import.prefix;
       for (final entry in import.namespace.definedNames2.entries) {
-        _namesByElement[entry.value] = prefix?.name2 != null
+        _namesByElement[entry.value] = prefix?.name != null
             // If the prefix exists, we prepend it to the name
-            ? '${prefix!.name2!}.${entry.key}'
+            ? '${prefix!.name!}.${entry.key}'
             // Otherwise, we just use the name
             : entry.key;
       }
@@ -59,7 +58,7 @@ class LibraryScopedNameFinder {
     return _namesByElement;
   }
 
-  String findVariableTypeName(VariableElement2 variable) =>
+  String findVariableTypeName(VariableElement variable) =>
       _getDartTypeName(variable.type);
 
   String findGetterTypeName(GetterElement getter) {
@@ -69,17 +68,17 @@ class LibraryScopedNameFinder {
   String findParameterTypeName(FormalParameterElement parameter) =>
       _getDartTypeName(parameter.type);
 
-  String findReturnTypeName(FunctionTypedElement2 executable) =>
+  String findReturnTypeName(FunctionTypedElement executable) =>
       _getDartTypeName(executable.returnType);
 
-  List<String?> findReturnTypeArgumentTypeNames(ExecutableElement2 executable) {
+  List<String?> findReturnTypeArgumentTypeNames(ExecutableElement executable) {
     final returnType = executable.returnType;
     return returnType is ParameterizedType
         ? returnType.typeArguments.map(_getDartTypeName).toList()
         : [];
   }
 
-  String? findTypeParameterBoundsTypeName(TypeParameterElement2 typeParameter) {
+  String? findTypeParameterBoundsTypeName(TypeParameterElement typeParameter) {
     assert(typeParameter.bound != null);
     return _getDartTypeName(typeParameter.bound!);
   }
@@ -88,12 +87,12 @@ class LibraryScopedNameFinder {
   ///
   /// The returned string will include import prefixes on all applicable types.
   String _getDartTypeName(DartType type) {
-    var typeElement = type.element3;
+    var typeElement = type.element;
     if (type is FunctionType) {
       // If we're dealing with a typedef, we let it undergo the standard name
       // lookup. Otherwise, we special case the function naming.
-      if (type.alias?.element2 is TypeAliasElement2) {
-        typeElement = type.alias!.element2;
+      if (type.alias?.element is TypeAliasElement) {
+        typeElement = type.alias!.element;
       } else {
         return _getFunctionTypeName(type);
       }
@@ -102,6 +101,7 @@ class LibraryScopedNameFinder {
         typeElement == null ||
             // This is a bare type param, like "T"
             type is TypeParameterType) {
+      // ignore: deprecated_member_use
       return type.getDisplayString(withNullability: true);
     }
 
@@ -130,7 +130,7 @@ class LibraryScopedNameFinder {
     return '$returnTypeName Function($parameterTypeNames)';
   }
 
-  String _getNamedElementTypeName(Element2 typeElement, DartType type) {
+  String _getNamedElementTypeName(Element typeElement, DartType type) {
     // Determine the name of the type, without type arguments.
     assert(namesByElement.containsKey(typeElement));
 
