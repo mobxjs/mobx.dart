@@ -1,4 +1,4 @@
-## 2.7.2
+## 2.7.3
 - Update analyzer version to 8.1.1
 - Update source_gen version to 4.0.1
 - Update build version to 4.0.0
