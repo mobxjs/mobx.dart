@@ -1,4 +1,6 @@
-import 'package:analyzer/dart/element/element.dart';
+// ignore_for_file: deprecated_member_use
+
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
 import 'package:mobx_codegen/src/template/params.dart';
 import 'package:mobx_codegen/src/template/util.dart';
@@ -9,12 +11,12 @@ class MethodOverrideTemplate {
   MethodOverrideTemplate();
 
   MethodOverrideTemplate.fromElement(
-    ExecutableElement method,
+    ExecutableElement2 method,
     LibraryScopedNameFinder typeNameFinder,
   ) {
     // ignore: prefer_function_declarations_over_variables
     final param = (FormalParameterElement element) => ParamTemplate(
-        name: element.name!,
+        name: element.name3!,
         type: typeNameFinder.findParameterTypeName(element),
         defaultValue: element.defaultValueCode,
         hasRequiredKeyword: element.isRequiredNamed);
@@ -31,9 +33,9 @@ class MethodOverrideTemplate {
         method.formalParameters.where((param) => param.isNamed).toList();
 
     this
-      ..name = method.name!
+      ..name = method.name3!
       ..returnType = typeNameFinder.findReturnTypeName(method)
-      ..setTypeParams(method.typeParameters
+      ..setTypeParams(method.typeParameters2
           .map((type) => typeParamTemplate(type, typeNameFinder)))
       ..positionalParams = positionalParams.map(param)
       ..optionalParams = optionalParams.map(param)
