@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:meta/meta.dart';
 import 'package:mobx_codegen/src/template/store.dart';
@@ -23,7 +25,6 @@ class ObservableTemplate {
   final bool isPrivate;
   final bool isReadOnly;
   final bool isLate;
-  // ignore: deprecated_member_use
   final ExecutableElement2? equals;
   final bool? useDeepEquality;
 

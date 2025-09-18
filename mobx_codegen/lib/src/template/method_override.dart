@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
 import 'package:mobx_codegen/src/template/params.dart';
@@ -9,11 +11,10 @@ class MethodOverrideTemplate {
   MethodOverrideTemplate();
 
   MethodOverrideTemplate.fromElement(
-    // ignore: deprecated_member_use
     ExecutableElement2 method,
     LibraryScopedNameFinder typeNameFinder,
   ) {
-    // ignore: prefer_function_declarations_over_variables, deprecated_member_use
+    // ignore: prefer_function_declarations_over_variables
     final param = (FormalParameterElement element) => ParamTemplate(
         name: element.name3!,
         type: typeNameFinder.findParameterTypeName(element),
@@ -34,7 +35,6 @@ class MethodOverrideTemplate {
     this
       ..name = method.name3!
       ..returnType = typeNameFinder.findReturnTypeName(method)
-      // ignore: deprecated_member_use
       ..setTypeParams(method.typeParameters2
           .map((type) => typeParamTemplate(type, typeNameFinder)))
       ..positionalParams = positionalParams.map(param)

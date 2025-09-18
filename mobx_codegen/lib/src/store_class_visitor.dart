@@ -1,4 +1,5 @@
 // https://github.com/dart-lang/sdk/blob/main/pkg/analyzer/doc/element_model_migration_guide.md
+
 // ignore_for_file: deprecated_member_use
 
 import 'package:analyzer/dart/element/element2.dart';
@@ -40,11 +41,14 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
       ..publicTypeName = publicTypeName;
   }
 
-  final _observableChecker = const TypeChecker.fromRuntime(MakeObservable);
+  final _observableChecker =
+      const TypeChecker.typeNamed(MakeObservable, inPackage: 'mobx');
 
-  final _computedChecker = const TypeChecker.fromRuntime(ComputedMethod);
+  final _computedChecker =
+      const TypeChecker.typeNamed(ComputedMethod, inPackage: 'mobx');
 
-  final _actionChecker = const TypeChecker.fromRuntime(MakeAction);
+  final _actionChecker =
+      const TypeChecker.typeNamed(MakeAction, inPackage: 'mobx');
 
   final _asyncChecker = AsyncMethodChecker();
 
@@ -278,8 +282,9 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
       );
 }
 
-const _storeMixinChecker = TypeChecker.fromRuntime(Store);
-const _toStringAnnotationChecker = TypeChecker.fromRuntime(StoreConfig);
+const _storeMixinChecker = TypeChecker.typeNamed(Store, inPackage: 'mobx');
+const _toStringAnnotationChecker =
+    TypeChecker.typeNamed(StoreConfig, inPackage: 'mobx');
 
 bool isMixinStoreClass(ClassElement2 classElement) =>
     classElement.mixins.any(_storeMixinChecker.isExactlyType);

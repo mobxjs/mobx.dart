@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:mobx_codegen/src/template/params.dart';
@@ -19,14 +21,12 @@ class AsyncMethodChecker {
 
   late TypeChecker _checkStream;
 
-  // ignore: deprecated_member_use
   bool returnsFuture(MethodElement2 method) =>
       method.returnType.isDartAsyncFuture ||
       (method.fragments.any((fragment) => fragment.isAsynchronous) &&
           !method.fragments.any((fragment) => fragment.isGenerator) &&
           method.returnType is DynamicType);
 
-  // ignore: deprecated_member_use
   bool returnsStream(MethodElement2 method) =>
       _checkStream.isAssignableFromType(method.returnType) ||
       (method.fragments.any((fragment) => fragment.isAsynchronous) &&
@@ -35,7 +35,6 @@ class AsyncMethodChecker {
 }
 
 TypeParamTemplate typeParamTemplate(
-  // ignore: deprecated_member_use
   TypeParameterElement2 param,
   LibraryScopedNameFinder typeNameFinder,
 ) =>

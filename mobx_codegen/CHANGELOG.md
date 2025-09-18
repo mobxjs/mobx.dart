@@ -1,3 +1,9 @@
+## 2.7.3
+- Update analyzer version to `>=7.4.0 < 9.0.0`
+- Update source_gen version to `>=3.0.0 < 5.0.0`
+- Update build version to `>=3.0.0 < 5.0.0`
+- Update build_resolvers version to `>=3.0.0 < 5.0.0`
+
 ## 2.7.2
 - Update analyzer version to `>=7.4.0 < 8.0.0`
 - Update source_gen version to 3.0.0
