@@ -1,3 +1,6 @@
+## 2.7.4
+- Drop build_resolvers as a dependency, which enables support for build_runner 2.8.0
+
 ## 2.7.3
 - Update analyzer version to `>=7.4.0 < 9.0.0`
 - Update source_gen version to `>=3.0.0 < 5.0.0`
