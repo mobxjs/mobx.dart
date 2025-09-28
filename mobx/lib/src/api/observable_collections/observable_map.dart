@@ -10,6 +10,24 @@ Atom _observableMapAtom<K, V>(ReactiveContext? context, String? name) {
 ///
 /// As the name suggests, this is the Observable-counterpart to the standard Dart `Map<K,V>`.
 ///
+/// ## Custom Equality for Values
+///
+/// You can provide a custom `equals` parameter to control when values are considered
+/// equal. This only affects value comparisons - keys are always compared using standard
+/// equality:
+///
+/// ```dart
+/// // Only notify changes when person names are different
+/// final map = ObservableMap<String, Person>(
+///   equals: (a, b) => a?.name == b?.name
+/// );
+///
+/// map['key'] = Person('Alice', 25);
+/// map['key'] = Person('Alice', 30); // No notification - same name
+/// ```
+///
+/// ## Basic Usage
+///
 /// ```dart
 /// final map = ObservableMap<String, int>.of({'first': 1});
 ///

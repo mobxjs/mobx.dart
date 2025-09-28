@@ -5,6 +5,27 @@ Atom _observableSetAtom<T>(ReactiveContext context, String? name) =>
 
 /// ObservableSet provides a reactive set that notifies changes when a member is added or removed.
 ///
+/// ## Custom Equality
+///
+/// You can provide a custom `equals` parameter to determine set membership.
+/// This is particularly useful when you need custom equality semantics:
+///
+/// ```dart
+/// // Case-insensitive string set
+/// final set = ObservableSet<String>(
+///   equals: (a, b) => a?.toLowerCase() == b?.toLowerCase()
+/// );
+///
+/// set.add('Hello');
+/// set.add('HELLO'); // Won't be added - considered equal
+/// set.contains('hello'); // Returns true
+/// ```
+///
+/// When using custom equals, the set behaves consistently across all operations
+/// including `add`, `contains`, `remove`, and `lookup`.
+///
+/// ## Basic Usage
+///
 /// ```dart
 /// final set = ObservableSet.of([1, 2, 3]);
 ///

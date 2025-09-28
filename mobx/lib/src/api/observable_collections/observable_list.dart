@@ -10,6 +10,34 @@ Atom _observableListAtom<T>(ReactiveContext? context, String? name) {
 ///
 /// As the name suggests, this is the Observable-counterpart to the standard Dart `List<T>`.
 ///
+/// ## Custom Equality
+///
+/// You can provide a custom `equals` parameter to control when values are considered
+/// equal. This is useful for optimizing change detection or implementing custom
+/// equality semantics:
+///
+/// ```dart
+/// // Only notify changes when names are different
+/// final list = ObservableList<Person>(
+///   equals: (a, b) => a?.name == b?.name
+/// );
+///
+/// // Deep equality for nested structures
+/// final list = ObservableList<List<int>>(
+///   equals: (a, b) {
+///     if (a == null && b == null) return true;
+///     if (a == null || b == null) return false;
+///     return a.length == b.length &&
+///       a.asMap().entries.every((e) => e.value == b[e.key]);
+///   }
+/// );
+/// ```
+///
+/// Note: Bulk operations like `replaceRange` and `setRange` always trigger
+/// notifications for performance reasons, regardless of the custom equals function.
+///
+/// ## Basic Usage
+///
 /// ```dart
 /// final list = ObservableList<int>.of([1]);
 ///
