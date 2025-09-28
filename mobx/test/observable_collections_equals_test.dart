@@ -92,7 +92,7 @@ void main() {
       list.add(1.4);
       list.add(2.6);
 
-      final intList = list.cast<int>((int? a, int? b) {
+      list.cast<int>((int? a, int? b) {
         if (a == null && b == null) return true;
         if (a == null || b == null) return false;
         return a == b;
@@ -271,7 +271,7 @@ void main() {
       map['a'] = 1.4;
       map['b'] = 2.6;
 
-      final intMap = map.cast<String, int>((int? a, int? b) {
+      map.cast<String, int>((int? a, int? b) {
         if (a == null && b == null) return true;
         if (a == null || b == null) return false;
         return a == b;
@@ -426,7 +426,7 @@ void main() {
       set.add(1.4);
       set.add(2.6);
 
-      final intSet = set.cast<int>((int? a, int? b) {
+      set.cast<int>((int? a, int? b) {
         if (a == null && b == null) return true;
         if (a == null || b == null) return false;
         return a == b;
