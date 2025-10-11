@@ -30,10 +30,17 @@ that can be invoked to pre-maturely dispose a reaction.
 
 ## autorun
 
-#### `ReactionDisposer autorun(Function(Reaction) fn)`
+#### `ReactionDisposer autorun(Function(Reaction) fn, {String? name, int? delay, ReactiveContext? context, Timer Function(void Function())? scheduler, void Function(Object, Reaction)? onError})`
 
 Runs the reaction immediately and also on any change in the observables used
 inside `fn`.
+
+**Optional parameters:**
+- **`name`**: Debug name for this reaction
+- **`delay`**: Number of milliseconds to throttle the effect function. If zero (default), no throttling happens.
+- **`context`**: The `ReactiveContext` to use. By default the `mainContext` is used.
+- **`scheduler`**: Set a custom scheduler to determine how re-running the autorun function should be scheduled. It takes a function that should be invoked at some point in the future.
+- **`onError`**: By default, any exception thrown inside a reaction will be logged but not further thrown. This option allows overriding that behavior.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -57,11 +64,20 @@ dispose();
 
 ## reaction
 
-#### `ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect)`
+#### `ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect, {String? name, int? delay, bool? fireImmediately, EqualityComparer<T>? equals, ReactiveContext? context, Timer Function(void Function())? scheduler, void Function(Object, Reaction)? onError})`
 
 Monitors the observables used inside the `fn()` tracking function and runs the
 `effect()` when the tracking function returns a different value. Only the
 observables inside `fn()` are tracked.
+
+**Optional parameters:**
+- **`name`**: Debug name for this reaction
+- **`delay`**: Number of milliseconds to throttle the effect function. If zero (default), no throttling happens.
+- **`fireImmediately`**: If true, invokes the effect immediately without waiting for the `fn` to change its value.
+- **`equals`**: Custom equality function to override the default comparison for the value returned by `fn`.
+- **`context`**: The `ReactiveContext` to use. By default the `mainContext` is used.
+- **`scheduler`**: Set a custom scheduler to determine how re-running the reaction should be scheduled. It takes a function that should be invoked at some point in the future.
+- **`onError`**: By default, any exception thrown inside a reaction will be logged but not further thrown. This option allows overriding that behavior.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -119,4 +135,37 @@ void waitForCompletion() async {
 
   print('Completed');
 }
+```
+
+## Custom Scheduler Example
+
+You can use a custom scheduler with `autorun()` and `reaction()` to control when the reaction should be re-executed. This is useful when you want to defer or batch reaction executions.
+
+```dart
+import 'dart:async';
+import 'package:mobx/mobx.dart';
+
+final counter = Observable(0);
+
+// Custom scheduler that batches updates
+Timer customScheduler(void Function() fn) {
+  return Timer(Duration(milliseconds: 100), fn);
+}
+
+final dispose = autorun(
+  (_) {
+    print('Counter: ${counter.value}');
+  },
+  scheduler: customScheduler,
+);
+
+// These rapid changes will be batched
+counter.value = 1;
+counter.value = 2;
+counter.value = 3;
+
+// Only the final value will be printed after the scheduler delay
+// Prints:
+// Counter: 0 (immediate)
+// Counter: 3 (after 100ms delay)
 ```
