@@ -5,6 +5,27 @@ Atom _observableSetAtom<T>(ReactiveContext context, String? name) =>
 
 /// ObservableSet provides a reactive set that notifies changes when a member is added or removed.
 ///
+/// ## Custom Equality
+///
+/// You can provide a custom `equals` parameter to determine set membership.
+/// This is particularly useful when you need custom equality semantics:
+///
+/// ```dart
+/// // Case-insensitive string set
+/// final set = ObservableSet<String>(
+///   equals: (a, b) => a?.toLowerCase() == b?.toLowerCase()
+/// );
+///
+/// set.add('Hello');
+/// set.add('HELLO'); // Won't be added - considered equal
+/// set.contains('hello'); // Returns true
+/// ```
+///
+/// When using custom equals, the set behaves consistently across all operations
+/// including `add`, `contains`, `remove`, and `lookup`.
+///
+/// ## Basic Usage
+///
 /// ```dart
 /// final set = ObservableSet.of([1, 2, 3]);
 ///
@@ -21,30 +42,36 @@ class ObservableSet<T>
         SetMixin<T>
     implements
         Listenable<SetChange<T>> {
-  ObservableSet({ReactiveContext? context, String? name})
-      : this._(context ?? mainContext, <T>{}, name);
+  ObservableSet(
+      {ReactiveContext? context, String? name, EqualityComparer<T>? equals})
+      : this._(context ?? mainContext, <T>{}, name, equals);
 
-  ObservableSet.of(Iterable<T> other, {ReactiveContext? context, String? name})
-      : this._(context ?? mainContext, Set<T>.of(other), name);
+  ObservableSet.of(Iterable<T> other,
+      {ReactiveContext? context, String? name, EqualityComparer<T>? equals})
+      : this._(context ?? mainContext, Set<T>.of(other), name, equals);
 
   ObservableSet.splayTreeSetFrom(Iterable<T> other,
       {int Function(T, T)? compare,
       // ignore:avoid_annotating_with_dynamic
       bool Function(dynamic)? isValidKey,
       ReactiveContext? context,
-      String? name})
+      String? name,
+      EqualityComparer<T>? equals})
       : this._(context ?? mainContext,
-            SplayTreeSet.of(other, compare, isValidKey), name);
+            SplayTreeSet.of(other, compare, isValidKey), name, equals);
 
-  ObservableSet._wrap(this._context, this._atom, this._set);
+  ObservableSet._wrap(this._context, this._atom, this._set, this._equals);
 
-  ObservableSet._(this._context, Set<T> wrapped, String? name)
+  ObservableSet._(
+      this._context, Set<T> wrapped, String? name, EqualityComparer<T>? equals)
       : _atom = _observableSetAtom(_context, name),
-        _set = wrapped;
+        _set = wrapped,
+        _equals = equals;
 
   final ReactiveContext _context;
   final Atom _atom;
   final Set<T> _set;
+  final EqualityComparer<T>? _equals;
 
   Set<T> get nonObservableInner => _set;
 
@@ -63,18 +90,37 @@ class ObservableSet<T>
     var result = false;
 
     _context.conditionallyRunInAction(() {
-      result = _set.add(value);
+      final oldValue = _equals != null ? _findValue(value) : null;
 
-      if (result && _hasListeners) {
-        _reportAdd(value);
-      }
-
-      if (result) {
-        _atom.reportChanged();
+      if (oldValue == null) {
+        result = _tryAddValue(value);
       }
     }, _atom);
 
     return result;
+  }
+
+  T? _findValue(Object? value) {
+    if (value is T?) {
+      return _set.firstWhereOrNull((e) => _areEquals(e, value));
+    } else {
+      return null;
+    }
+  }
+
+  bool _tryAddValue(T value) {
+    var result = _set.add(value);
+    if (result) {
+      _reportChanges(value);
+    }
+    return result;
+  }
+
+  void _reportChanges(T value) {
+    if (_hasListeners) {
+      _reportAdd(value);
+    }
+    _atom.reportChanged();
   }
 
   @override
@@ -82,7 +128,9 @@ class ObservableSet<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _set.contains(element);
+    return _equals == null
+        ? _set.contains(element)
+        : _findValue(element) != null;
   }
 
   @override
@@ -101,7 +149,7 @@ class ObservableSet<T>
     _context.enforceReadPolicy(_atom);
 
     _atom.reportObserved();
-    return _set.lookup(element);
+    return _equals == null ? _set.lookup(element) : _findValue(element);
   }
 
   @override
@@ -109,14 +157,18 @@ class ObservableSet<T>
     var removed = false;
 
     _context.conditionallyRunInAction(() {
-      removed = _set.remove(value);
+      final oldValue = _equals != null ? _findValue(value) : value;
 
-      if (removed && _hasListeners) {
-        _reportRemove(value as T?);
-      }
+      if (oldValue != null) {
+        removed = _set.remove(oldValue);
 
-      if (removed) {
-        _atom.reportChanged();
+        if (removed && _hasListeners) {
+          _reportRemove(oldValue as T?);
+        }
+
+        if (removed) {
+          _atom.reportChanged();
+        }
       }
     }, _atom);
 
@@ -138,7 +190,14 @@ class ObservableSet<T>
   }
 
   @override
-  Set<R> cast<R>() => ObservableSet<R>._wrap(_context, _atom, _set.cast<R>());
+  Set<R> cast<R>([EqualityComparer<R>? equals]) => ObservableSet<R>._wrap(
+      _context,
+      _atom,
+      _set.cast<R>(),
+      equals ??
+          (_equals == null
+              ? null
+              : (R? a, R? b) => _equals!(a as T?, b as T?)));
 
   @override
   Set<T> toSet() {
@@ -180,13 +239,21 @@ class ObservableSet<T>
       value: value,
     ));
   }
+
+  bool _areEquals(T? a, T? b) {
+    if (_equals != null) {
+      return _equals!(a, b);
+    } else {
+      return equatable(a, b);
+    }
+  }
 }
 
 /// A convenience method used during unit testing. It creates an [ObservableSet] with a custom instance
 /// of an [Atom]
 @visibleForTesting
 ObservableSet<T> wrapInObservableSet<T>(Atom atom, Set<T> set) =>
-    ObservableSet._wrap(mainContext, atom, set);
+    ObservableSet._wrap(mainContext, atom, set, null);
 
 /// An internal iterator used to ensure that every read is tracked as part of the
 /// MobX reactivity system.

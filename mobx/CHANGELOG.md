@@ -1,3 +1,7 @@
+## 2.6.0
+
+- Allow a custom equals parameter for observable collections( ObservableList, ObservableMap, ObservableSet ) - [@amondnet](https://github.com/amondnet)
+
 ## 2.5.0
 
  - **FIX**: package upgrades, analysis issue fixes.

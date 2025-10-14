@@ -10,6 +10,24 @@ Atom _observableMapAtom<K, V>(ReactiveContext? context, String? name) {
 ///
 /// As the name suggests, this is the Observable-counterpart to the standard Dart `Map<K,V>`.
 ///
+/// ## Custom Equality for Values
+///
+/// You can provide a custom `equals` parameter to control when values are considered
+/// equal. This only affects value comparisons - keys are always compared using standard
+/// equality:
+///
+/// ```dart
+/// // Only notify changes when person names are different
+/// final map = ObservableMap<String, Person>(
+///   equals: (a, b) => a?.name == b?.name
+/// );
+///
+/// map['key'] = Person('Alice', 25);
+/// map['key'] = Person('Alice', 30); // No notification - same name
+/// ```
+///
+/// ## Basic Usage
+///
 /// ```dart
 /// final map = ObservableMap<String, int>.of({'first': 1});
 ///
@@ -26,37 +44,45 @@ class ObservableMap<K, V>
         MapMixin<K, V>
     implements
         Listenable<MapChange<K, V>> {
-  ObservableMap({ReactiveContext? context, String? name})
+  ObservableMap(
+      {ReactiveContext? context, String? name, EqualityComparer<V>? equals})
       : _context = context ?? mainContext,
         _atom = _observableMapAtom<K, V>(context, name),
-        _map = <K, V>{};
+        _map = <K, V>{},
+        _equals = equals;
 
-  ObservableMap.of(Map<K, V> other, {ReactiveContext? context, String? name})
+  ObservableMap.of(Map<K, V> other,
+      {ReactiveContext? context, String? name, EqualityComparer<V>? equals})
       : _context = context ?? mainContext,
         _atom = _observableMapAtom<K, V>(context, name),
-        _map = Map.of(other);
+        _map = Map.of(other),
+        _equals = equals;
 
   ObservableMap.linkedHashMapFrom(Map<K, V> other,
-      {ReactiveContext? context, String? name})
+      {ReactiveContext? context, String? name, EqualityComparer<V>? equals})
       : _context = context ?? mainContext,
         _atom = _observableMapAtom<K, V>(context, name),
-        _map = LinkedHashMap.from(other);
+        _map = LinkedHashMap.from(other),
+        _equals = equals;
 
   ObservableMap.splayTreeMapFrom(Map<K, V> other,
       {int Function(K, K)? compare,
       // ignore: avoid_annotating_with_dynamic
       bool Function(dynamic)? isValidKey,
       ReactiveContext? context,
-      String? name})
+      String? name,
+      EqualityComparer<V>? equals})
       : _context = context ?? mainContext,
         _atom = _observableMapAtom<K, V>(context, name),
-        _map = SplayTreeMap.from(other, compare, isValidKey);
+        _map = SplayTreeMap.from(other, compare, isValidKey),
+        _equals = equals;
 
-  ObservableMap._wrap(this._context, this._map, this._atom);
+  ObservableMap._wrap(this._context, this._map, this._atom, this._equals);
 
   final ReactiveContext _context;
   final Atom _atom;
   final Map<K, V> _map;
+  final EqualityComparer<V>? _equals;
 
   Map<K, V> get nonObservableInner => _map;
 
@@ -94,7 +120,7 @@ class ObservableMap<K, V>
         }
       }
 
-      if (!_map.containsKey(key) || value != oldValue) {
+      if (!_map.containsKey(key) || !_areEquals(value, oldValue)) {
         _map[key] = value;
         if (type == 'update') {
           _reportUpdate(key, value, oldValue);
@@ -127,8 +153,15 @@ class ObservableMap<K, V>
   Iterable<K> get keys => MapKeysIterable(_map.keys, _atom);
 
   @override
-  Map<RK, RV> cast<RK, RV>() =>
-      ObservableMap._wrap(_context, super.cast(), _atom);
+  Map<RK, RV> cast<RK, RV>([EqualityComparer<RV>? equals]) =>
+      ObservableMap._wrap(
+          _context,
+          super.cast(),
+          _atom,
+          equals ??
+              (_equals == null
+                  ? null
+                  : (RV? a, RV? b) => _equals!(a as V?, b as V?)));
 
   @override
   V? remove(Object? key) {
@@ -231,13 +264,21 @@ class ObservableMap<K, V>
     }
     return _listeners.add(listener);
   }
+
+  bool _areEquals(V? a, V? b) {
+    if (_equals != null) {
+      return _equals!(a, b);
+    } else {
+      return equatable(a, b);
+    }
+  }
 }
 
 /// A convenience method to wrap the standard `Map<K,V>` in an `ObservableMap<K,V>`.
 /// This is mostly to aid in testing.
 @visibleForTesting
 ObservableMap<K, V> wrapInObservableMap<K, V>(Atom atom, Map<K, V> map) =>
-    ObservableMap._wrap(mainContext, map, atom);
+    ObservableMap._wrap(mainContext, map, atom, null);
 
 typedef MapChangeListener<K, V> = void Function(MapChange<K, V>);
 
