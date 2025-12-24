@@ -48,7 +48,7 @@ class MakeObservable {
   final bool useDeepEquality;
 }
 
-bool observableAlwaysNotEqual(_, __) => false;
+bool observableAlwaysNotEqual(Object? _, Object? __) => false;
 
 /// Declares a class field as an observable. See the `Observable` class for full
 /// documentation
