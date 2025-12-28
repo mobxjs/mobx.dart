@@ -15,6 +15,40 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`mobx_codegen` - `v2.7.5`](#mobx_codegen---v275)
+
+---
+
+#### `mobx_codegen` - `v2.7.5`
+
+ - Upgrading sdk and Analyzer fixes
+
+ - **FIX**: fixing lints in tests.
+ - **FIX**: package upgrades, analysis issue fixes.
+ - **FIX**: error with code generation when file has unnamed extension (#1020).
+ - **FIX**: make readonly work with computed (#710).
+ - **FIX**: ObservableStream.listen() should also keep observable values updated (#708).
+ - **FEAT**: add keepAlive to Computed (#976).
+ - **FEAT**: support late observables (#973).
+ - **FEAT**: Adds `useEquatable` for creating observables (#971).
+ - **FEAT**: require `analyzer: ^5.12.0` (#934).
+ - **FEAT**: Adds custom `equals` for creating observables. (#907).
+ - **FEAT**: Adds support for annotations (#904).
+ - **FEAT**: Allow use custom context (#770).
+
+
+## 2025-12-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`mobx` - `v2.6.0`](#mobx---v260)
 
 ---
