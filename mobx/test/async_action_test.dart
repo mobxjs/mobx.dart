@@ -9,8 +9,9 @@ void main() {
   testSetup();
 
   setUp(() {
-    mainContext.config =
-        ReactiveConfig(writePolicy: ReactiveWritePolicy.always);
+    mainContext.config = ReactiveConfig(
+      writePolicy: ReactiveWritePolicy.always,
+    );
   });
 
   tearDown(() {
@@ -18,53 +19,59 @@ void main() {
   });
 
   group('AsyncAction', () {
-    test('run allows updating observable values in an async function',
-        () async {
-      final action = AsyncAction('testAction');
+    test(
+      'run allows updating observable values in an async function',
+      () async {
+        final action = AsyncAction('testAction');
 
-      final counter = Observable<int>(0);
+        final counter = Observable<int>(0);
 
-      final values = <int>[];
-      autorun((_) {
-        values.add(counter.value);
-      });
+        final values = <int>[];
+        autorun((_) {
+          values.add(counter.value);
+        });
 
-      await action.run(() async {
-        await sleep(10);
-        counter
-          ..value = 1
-          ..value = 2;
-        await sleep(10);
-        counter.value = 3;
-      });
+        await action.run(() async {
+          await sleep(10);
+          counter
+            ..value = 1
+            ..value = 2;
+          await sleep(10);
+          counter.value = 3;
+        });
 
-      expect(counter.value, equals(3));
-      expect(values, equals([0, 2, 3]));
-    });
+        expect(counter.value, equals(3));
+        expect(values, equals([0, 2, 3]));
+      },
+    );
 
-    test('run allows updating observable values in a Future returning function',
-        () async {
-      final action = AsyncAction('testAction');
+    test(
+      'run allows updating observable values in a Future returning function',
+      () async {
+        final action = AsyncAction('testAction');
 
-      final counter = Observable<int>(0);
+        final counter = Observable<int>(0);
 
-      final values = <int>[];
-      autorun((_) {
-        values.add(counter.value);
-      });
+        final values = <int>[];
+        autorun((_) {
+          values.add(counter.value);
+        });
 
-      await action.run(() => sleep(10)
-          .then((_) {
-            counter
-              ..value = 1
-              ..value = 2;
-          })
-          .then((_) => sleep(10))
-          .then((_) => counter.value = 3));
+        await action.run(
+          () => sleep(10)
+              .then((_) {
+                counter
+                  ..value = 1
+                  ..value = 2;
+              })
+              .then((_) => sleep(10))
+              .then((_) => counter.value = 3),
+        );
 
-      expect(counter.value, equals(3));
-      expect(values, equals([0, 2, 3]));
-    });
+        expect(counter.value, equals(3));
+        expect(values, equals([0, 2, 3]));
+      },
+    );
 
     test('nested runs with different actions work', () async {
       final action1 = AsyncAction('testAction1');

@@ -7,7 +7,8 @@ mixin _$TestStore on _TestStore, Store {
         () => super.usernameComputed,
         name: '_TestStore.usernameComputed',
         keepAlive: true,
-      )).value;
+      ))
+          .value;
 
   late final _$usernameAtom = Atom(
     name: '_TestStore.username',

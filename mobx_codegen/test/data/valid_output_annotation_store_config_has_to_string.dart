@@ -3,9 +3,10 @@ mixin _$User on UserBase, Store {
 
   @override
   String get fullName => (_$fullNameComputed ??= Computed<String>(
-    () => super.fullName,
-    name: 'UserBase.fullName',
-  )).value;
+        () => super.fullName,
+        name: 'UserBase.fullName',
+      ))
+          .value;
   Computed<String?>? _$fullNameNullableComputed;
 
   @override
@@ -13,7 +14,8 @@ mixin _$User on UserBase, Store {
       (_$fullNameNullableComputed ??= Computed<String?>(
         () => super.fullNameNullable,
         name: 'UserBase.fullNameNullable',
-      )).value;
+      ))
+          .value;
 
   late final _$firstNameAtom = Atom(
     name: 'UserBase.firstName',

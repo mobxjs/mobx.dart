@@ -35,18 +35,28 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   /// A computed value is _cached_ and it recomputes only when the dependent observables actually
   /// change. This makes them fast and you are free to use them throughout your application. Internally
   /// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed.
-  factory Computed(T Function() fn,
-          {String? name,
-          ReactiveContext? context,
-          EqualityComparer<T>? equals,
-          bool? keepAlive}) =>
-      Computed._(context ?? mainContext, fn,
-          name: name, equals: equals, keepAlive: keepAlive);
+  factory Computed(
+    T Function() fn, {
+    String? name,
+    ReactiveContext? context,
+    EqualityComparer<T>? equals,
+    bool? keepAlive,
+  }) => Computed._(
+    context ?? mainContext,
+    fn,
+    name: name,
+    equals: equals,
+    keepAlive: keepAlive,
+  );
 
-  Computed._(super.context, this._fn,
-      {String? name, this.equals, bool? keepAlive})
-      : _keepAlive = keepAlive ?? false,
-        super._(name: name ?? context.nameFor('Computed'));
+  Computed._(
+    super.context,
+    this._fn, {
+    String? name,
+    this.equals,
+    bool? keepAlive,
+  }) : _keepAlive = keepAlive ?? false,
+       super._(name: name ?? context.nameFor('Computed'));
 
   final EqualityComparer<T>? equals;
 
@@ -79,7 +89,8 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
   T get value {
     if (_isComputing) {
       throw MobXCyclicReactionException(
-          'Cycle detected in computation $name: $_fn');
+        'Cycle detected in computation $name: $_fn',
+      );
     }
 
     if (!_context.isWithinBatch && _observers.isEmpty && !_keepAlive) {
@@ -168,19 +179,23 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
 
   bool _isEqual(T? x, T? y) => equals == null ? x == y : equals!(x, y);
 
-  void Function() observe(void Function(ChangeNotification<T>) handler,
-      {@Deprecated(
-          'fireImmediately has no effect anymore. It is on by default.')
-      bool? fireImmediately}) {
+  void Function() observe(
+    void Function(ChangeNotification<T>) handler, {
+    @Deprecated('fireImmediately has no effect anymore. It is on by default.')
+    bool? fireImmediately,
+  }) {
     T? prevValue;
 
     void notifyChange() {
       _context.untracked(() {
-        handler(ChangeNotification(
+        handler(
+          ChangeNotification(
             type: OperationType.update,
             object: this,
             oldValue: prevValue,
-            newValue: value));
+            newValue: value,
+          ),
+        );
       });
     }
 
@@ -190,8 +205,7 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
       notifyChange();
 
       prevValue = newValue;
-    }, context: _context)
-        .call;
+    }, context: _context).call;
   }
 
   @override

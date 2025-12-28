@@ -3,9 +3,10 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   io.File get biographyNotes => (_$biographyNotesComputed ??= Computed<io.File>(
-    () => super.biographyNotes,
-    name: 'UserBase.biographyNotes',
-  )).value;
+        () => super.biographyNotes,
+        name: 'UserBase.biographyNotes',
+      ))
+          .value;
   Computed<io.File?>? _$biographyNotesNullableComputed;
 
   @override
@@ -13,7 +14,8 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       (_$biographyNotesNullableComputed ??= Computed<io.File?>(
         () => super.biographyNotesNullable,
         name: 'UserBase.biographyNotesNullable',
-      )).value;
+      ))
+          .value;
 
   late final _$namesAtom = Atom(name: 'UserBase.names', context: context);
 

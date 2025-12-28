@@ -10,8 +10,10 @@ void main() {
 
   group('Spy', () {
     setUp(() {
-      mainContext.config = ReactiveConfig.main
-          .clone(isSpyEnabled: true, writePolicy: ReactiveWritePolicy.never);
+      mainContext.config = ReactiveConfig.main.clone(
+        isSpyEnabled: true,
+        writePolicy: ReactiveWritePolicy.never,
+      );
     });
 
     tearDown(() {
@@ -56,8 +58,10 @@ void main() {
         if (event is ObservableValueSpyEvent) {
           eventRaised = true;
 
-          expect(event.toString(),
-              equals('observable(START) test=1, previously=0'));
+          expect(
+            event.toString(),
+            equals('observable(START) test=1, previously=0'),
+          );
         }
 
         if (event is EndedSpyEvent && event.type == 'observable') {
@@ -114,7 +118,9 @@ void main() {
           endEventRaised = true;
 
           expect(
-              event.toString(), matches(RegExp(r'action\(END [^\)]*\) test')));
+            event.toString(),
+            matches(RegExp(r'action\(END [^\)]*\) test')),
+          );
         }
       });
 
@@ -127,40 +133,43 @@ void main() {
     });
 
     // TODO: https://github.com/mobxjs/mobx.dart/issues/734
-    test('spy-event is raised only once when an AsyncAction is executed',
-        () async {
-      var eventCount = 0;
-      var endEventCount = 0;
-      final d = mainContext.spy((event) {
-        if (event is ActionSpyEvent) {
-          eventCount += 1;
-        }
+    test(
+      'spy-event is raised only once when an AsyncAction is executed',
+      () async {
+        var eventCount = 0;
+        var endEventCount = 0;
+        final d = mainContext.spy((event) {
+          if (event is ActionSpyEvent) {
+            eventCount += 1;
+          }
 
-        if (event is EndedSpyEvent && event.type == 'action') {
-          endEventCount += 1;
-        }
-      });
-
-      final actionCompleter = Completer();
-      final microtaskCompleter = Completer();
-      AsyncAction('test').run(() async {
-        scheduleMicrotask(() {
-          microtaskCompleter.complete();
+          if (event is EndedSpyEvent && event.type == 'action') {
+            endEventCount += 1;
+          }
         });
-        actionCompleter.complete();
-      });
-      await actionCompleter.future;
-      await microtaskCompleter.future;
 
-      // This is needed to ensure that all spy callbacks are executed
-      // before moving on to `expect`s.
-      await Future.value();
+        final actionCompleter = Completer();
+        final microtaskCompleter = Completer();
+        AsyncAction('test').run(() async {
+          scheduleMicrotask(() {
+            microtaskCompleter.complete();
+          });
+          actionCompleter.complete();
+        });
+        await actionCompleter.future;
+        await microtaskCompleter.future;
 
-      expect(eventCount, 1);
-      expect(endEventCount, 1);
+        // This is needed to ensure that all spy callbacks are executed
+        // before moving on to `expect`s.
+        await Future.value();
 
-      d();
-    }, skip: true);
+        expect(eventCount, 1);
+        expect(endEventCount, 1);
+
+        d();
+      },
+      skip: true,
+    );
 
     test('spy-event is raised when a Reaction is executed', () {
       final o = Observable(0);
@@ -179,8 +188,10 @@ void main() {
         if (event is EndedSpyEvent && event.type == 'reaction') {
           endEventRaised = true;
 
-          expect(event.toString(),
-              matches(RegExp(r'reaction\(END [^\)]*\) test')));
+          expect(
+            event.toString(),
+            matches(RegExp(r'reaction\(END [^\)]*\) test')),
+          );
         }
       });
 
@@ -195,11 +206,15 @@ void main() {
 
     test('spy-event is raised when a Reaction errors', () {
       final o = Observable(0);
-      final d1 = reaction((_) {
-        if (o.value == 1) {
-          throw Exception('test failure');
-        }
-      }, (_) {}, name: 'test');
+      final d1 = reaction(
+        (_) {
+          if (o.value == 1) {
+            throw Exception('test failure');
+          }
+        },
+        (_) {},
+        name: 'test',
+      );
 
       var eventRaised = false;
       final d = mainContext.spy((event) {

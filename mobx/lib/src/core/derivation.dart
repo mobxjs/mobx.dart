@@ -20,7 +20,7 @@ enum DerivationState {
 
   // A shallow dependency has changed since last computation and the derivation
   // will need to recompute when it's needed next.
-  stale
+  stale,
 }
 
 abstract class Derivation {

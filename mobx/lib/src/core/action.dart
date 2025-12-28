@@ -37,7 +37,7 @@ class Action with DebugCreationStack {
       Action._(context ?? mainContext, fn, name: name);
 
   Action._(ReactiveContext context, this._fn, {String? name})
-      : _controller = ActionController(context: context, name: name);
+    : _controller = ActionController(context: context, name: name);
 
   String get name => _controller.name;
 
@@ -53,8 +53,9 @@ class Action with DebugCreationStack {
         return Function.apply(_fn, args);
       } else {
         // Convert to symbol-based named-args
-        final namedSymbolArgs =
-            namedArgs.map((key, value) => MapEntry(Symbol(key), value));
+        final namedSymbolArgs = namedArgs.map(
+          (key, value) => MapEntry(Symbol(key), value),
+        );
         return Function.apply(_fn, args, namedSymbolArgs);
       }
     } finally {
@@ -75,10 +76,10 @@ class Action with DebugCreationStack {
 ///
 class ActionController {
   ActionController({ReactiveContext? context, String? name})
-      : this._(context ?? mainContext, name: name);
+    : this._(context ?? mainContext, name: name);
 
   ActionController._(this._context, {String? name})
-      : name = name ?? _context.nameFor('Action');
+    : name = name ?? _context.nameFor('Action');
 
   final ReactiveContext _context;
   final String name;
@@ -101,9 +102,10 @@ class ActionController {
   }
 
   void endAction(ActionRunInfo info) {
-    final duration = _context.isSpyEnabled
-        ? DateTime.now().difference(info.startTime!)
-        : Duration.zero;
+    final duration =
+        _context.isSpyEnabled
+            ? DateTime.now().difference(info.startTime!)
+            : Duration.zero;
     _context.spyReport(
       EndedSpyEvent(type: 'action', name: info.name, duration: duration),
     );
