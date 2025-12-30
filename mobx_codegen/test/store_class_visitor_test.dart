@@ -75,5 +75,46 @@ void main() {
         true,
       );
     });
+
+    test('useDeepEquality is included in generated setter when set to true',
+        () {
+      final store = StoreTemplateFake()..parentTypeName = 'TestStore';
+      final template = ObservableTemplate(
+        storeTemplate: store,
+        type: 'List<int>',
+        name: 'items',
+        atomName: '_itemsAtom',
+        useDeepEquality: true,
+      );
+      final output = template.toString();
+      expect(output, contains('useDeepEquality: true'));
+    });
+
+    test('useDeepEquality is included in generated setter when set to false',
+        () {
+      final store = StoreTemplateFake()..parentTypeName = 'TestStore';
+      final template = ObservableTemplate(
+        storeTemplate: store,
+        type: 'List<int>',
+        name: 'items',
+        atomName: '_itemsAtom',
+        useDeepEquality: false,
+      );
+      final output = template.toString();
+      expect(output, contains('useDeepEquality: false'));
+    });
+
+    test('useDeepEquality is not included in generated setter when null', () {
+      final store = StoreTemplateFake()..parentTypeName = 'TestStore';
+      final template = ObservableTemplate(
+        storeTemplate: store,
+        type: 'List<int>',
+        name: 'items',
+        atomName: '_itemsAtom',
+        useDeepEquality: null,
+      );
+      final output = template.toString();
+      expect(output, isNot(contains('useDeepEquality')));
+    });
   });
 }

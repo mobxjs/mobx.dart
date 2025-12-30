@@ -1,3 +1,6 @@
+## 2.7.5
+- **FIX**: useDeepEquality is not being correctly passed to the generated code.
+
 ## 2.7.4
 - Drop build_resolvers as a dependency, which enables support for build_runner 2.8.0
 
