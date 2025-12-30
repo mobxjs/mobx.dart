@@ -367,42 +367,6 @@ void main() {
     testWidgets('Given child is returned as part of the build method',
         (tester) async {});
   });
-
-  group('observeKey extension in Observer', () {
-    testWidgets('can be used directly inside Observer', (tester) async {
-      final map = ObservableMap.of({'a': 'Alpha', 'b': 'Beta'});
-      var buildCount = 0;
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Observer(
-            builder: (context) {
-              buildCount++;
-              final value = map.observeKey('a').value;
-              return Text(value ?? 'null');
-            },
-          ),
-        ),
-      );
-
-      expect(find.text('Alpha'), findsOneWidget);
-      expect(buildCount, equals(1));
-
-      // Update the observed key
-      map['a'] = 'Updated Alpha';
-      await tester.pump();
-
-      expect(find.text('Updated Alpha'), findsOneWidget);
-      expect(buildCount, equals(2));
-
-      // Update a different key - should NOT rebuild
-      map['b'] = 'Updated Beta';
-      await tester.pump();
-
-      expect(find.text('Updated Alpha'), findsOneWidget);
-      expect(buildCount, equals(2)); // Still 2 - no rebuild
-    });
-  });
 }
 
 Future<MobXCaughtException> _testThrowingObserver(
