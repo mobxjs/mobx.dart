@@ -111,6 +111,7 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
       isReadOnly: _isObservableReadOnly(element),
       isLate: element.isLate,
       equals: _getEquals(element),
+      useDeepEquality: _getUseDeepEquality(element),
     );
 
     _storeTemplate.observables.add(template);
@@ -128,6 +129,11 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
       .firstAnnotationOfExact(element)
       ?.getField('equals')
       ?.toFunctionValue2();
+
+  bool? _getUseDeepEquality(FieldElement2 element) => _observableChecker
+      .firstAnnotationOfExact(element)
+      ?.getField('useDeepEquality')
+      ?.toBoolValue();
 
   bool _fieldIsNotValid(FieldElement2 element) => _any([
         errors.staticObservables.addIf(element.isStatic, element.name3!),
