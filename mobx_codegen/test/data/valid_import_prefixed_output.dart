@@ -3,9 +3,9 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   io.File get biographyNotes => (_$biographyNotesComputed ??= Computed<io.File>(
-    () => super.biographyNotes,
-    name: 'UserBase.biographyNotes',
-  )).value;
+        () => super.biographyNotes,
+        name: 'UserBase.biographyNotes',
+      )).value;
   Computed<io.File?>? _$biographyNotesNullableComputed;
 
   @override

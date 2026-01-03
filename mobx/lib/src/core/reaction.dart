@@ -11,8 +11,12 @@ abstract class Reaction implements Derivation {
 }
 
 class ReactionImpl with DebugCreationStack implements Reaction {
-  ReactionImpl(this._context, Function() onInvalidate,
-      {required this.name, void Function(Object, Reaction)? onError}) {
+  ReactionImpl(
+    this._context,
+    Function() onInvalidate, {
+    required this.name,
+    void Function(Object, Reaction)? onError,
+  }) {
     _onInvalidate = onInvalidate;
     _onError = onError;
   }
@@ -95,10 +99,13 @@ class ReactionImpl with DebugCreationStack implements Reaction {
     }
 
     if (notify) {
-      _context.spyReport(EndedSpyEvent(
+      _context.spyReport(
+        EndedSpyEvent(
           type: 'reaction',
           name: name,
-          duration: DateTime.now().difference(startTime!)));
+          duration: DateTime.now().difference(startTime!),
+        ),
+      );
     }
 
     _context.endBatch();

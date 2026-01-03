@@ -19,28 +19,31 @@ class ObservableSet<T>
     with
         // ignore:prefer_mixin
         SetMixin<T>
-    implements
-        Listenable<SetChange<T>> {
+    implements Listenable<SetChange<T>> {
   ObservableSet({ReactiveContext? context, String? name})
-      : this._(context ?? mainContext, <T>{}, name);
+    : this._(context ?? mainContext, <T>{}, name);
 
   ObservableSet.of(Iterable<T> other, {ReactiveContext? context, String? name})
-      : this._(context ?? mainContext, Set<T>.of(other), name);
+    : this._(context ?? mainContext, Set<T>.of(other), name);
 
-  ObservableSet.splayTreeSetFrom(Iterable<T> other,
-      {int Function(T, T)? compare,
-      // ignore:avoid_annotating_with_dynamic
-      bool Function(dynamic)? isValidKey,
-      ReactiveContext? context,
-      String? name})
-      : this._(context ?? mainContext,
-            SplayTreeSet.of(other, compare, isValidKey), name);
+  ObservableSet.splayTreeSetFrom(
+    Iterable<T> other, {
+    int Function(T, T)? compare,
+    // ignore:avoid_annotating_with_dynamic
+    bool Function(dynamic)? isValidKey,
+    ReactiveContext? context,
+    String? name,
+  }) : this._(
+         context ?? mainContext,
+         SplayTreeSet.of(other, compare, isValidKey),
+         name,
+       );
 
   ObservableSet._wrap(this._context, this._atom, this._set);
 
   ObservableSet._(this._context, Set<T> wrapped, String? name)
-      : _atom = _observableSetAtom(_context, name),
-        _set = wrapped;
+    : _atom = _observableSetAtom(_context, name),
+      _set = wrapped;
 
   final ReactiveContext _context;
   final Atom _atom;
@@ -151,34 +154,30 @@ class ObservableSet<T>
   /// Attaches a listener to changes happening in the [ObservableSet]. You have
   /// the option to be notified immediately ([fireImmediately]) or wait for until the first change.
   @override
-  Dispose observe(SetChangeListener<T> listener,
-      {bool fireImmediately = false}) {
+  Dispose observe(
+    SetChangeListener<T> listener, {
+    bool fireImmediately = false,
+  }) {
     if (fireImmediately == true) {
       for (final value in _set) {
-        listener(SetChange(
-          object: this,
-          type: OperationType.add,
-          value: value,
-        ));
+        listener(
+          SetChange(object: this, type: OperationType.add, value: value),
+        );
       }
     }
     return _listeners.add(listener);
   }
 
   void _reportAdd(T value) {
-    _listeners.notifyListeners(SetChange(
-      object: this,
-      type: OperationType.add,
-      value: value,
-    ));
+    _listeners.notifyListeners(
+      SetChange(object: this, type: OperationType.add, value: value),
+    );
   }
 
   void _reportRemove(T? value) {
-    _listeners.notifyListeners(SetChange(
-      object: this,
-      type: OperationType.remove,
-      value: value,
-    ));
+    _listeners.notifyListeners(
+      SetChange(object: this, type: OperationType.remove, value: value),
+    );
   }
 }
 
@@ -221,11 +220,7 @@ typedef SetChangeListener<T> = void Function(SetChange<T>);
 /// Capture the change related information for an [ ObservableSet]. This is used
 /// as the notification instance.
 class SetChange<T> {
-  SetChange({
-    required this.object,
-    required this.type,
-    required this.value,
-  });
+  SetChange({required this.object, required this.type, required this.value});
 
   final ObservableSet<T> object;
   final OperationType type;

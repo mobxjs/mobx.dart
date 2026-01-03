@@ -22,11 +22,13 @@ class ReactionDisposer {
 
 /// An internal helper function to create a [autorun]
 ReactionDisposer createAutorun(
-    ReactiveContext context, Function(Reaction) trackingFn,
-    {String? name,
-    int? delay,
-    Timer Function(void Function())? scheduler,
-    void Function(Object, Reaction)? onError}) {
+  ReactiveContext context,
+  Function(Reaction) trackingFn, {
+  String? name,
+  int? delay,
+  Timer Function(void Function())? scheduler,
+  void Function(Object, Reaction)? onError,
+}) {
   late ReactionImpl rxn;
 
   final rxnName = name ?? context.nameFor('Autorun');
@@ -34,9 +36,14 @@ ReactionDisposer createAutorun(
 
   if (runSync) {
     // Use a sync-scheduler.
-    rxn = ReactionImpl(context, () {
-      rxn.track(() => trackingFn(rxn));
-    }, name: rxnName, onError: onError);
+    rxn = ReactionImpl(
+      context,
+      () {
+        rxn.track(() => trackingFn(rxn));
+      },
+      name: rxnName,
+      onError: onError,
+    );
   } else {
     // Use a scheduler or delayed scheduler.
     final schedulerFromOptions =
@@ -44,23 +51,28 @@ ReactionDisposer createAutorun(
     var isScheduled = false;
     Timer? timer;
 
-    rxn = ReactionImpl(context, () {
-      if (!isScheduled) {
-        isScheduled = true;
+    rxn = ReactionImpl(
+      context,
+      () {
+        if (!isScheduled) {
+          isScheduled = true;
 
-        timer?.cancel();
-        timer = null;
+          timer?.cancel();
+          timer = null;
 
-        timer = schedulerFromOptions!(() {
-          isScheduled = false;
-          if (!rxn.isDisposed) {
-            rxn.track(() => trackingFn(rxn));
-          } else {
-            timer?.cancel();
-          }
-        });
-      }
-    }, name: rxnName, onError: onError);
+          timer = schedulerFromOptions!(() {
+            isScheduled = false;
+            if (!rxn.isDisposed) {
+              rxn.track(() => trackingFn(rxn));
+            } else {
+              timer?.cancel();
+            }
+          });
+        }
+      },
+      name: rxnName,
+      onError: onError,
+    );
   }
 
   rxn.schedule();
@@ -69,19 +81,24 @@ ReactionDisposer createAutorun(
 
 /// An internal helper function to create a [reaction]
 ReactionDisposer createReaction<T>(
-    ReactiveContext context, T Function(Reaction) fn, void Function(T) effect,
-    {String? name,
-    int? delay,
-    bool? fireImmediately,
-    EqualityComparer<T>? equals,
-    Timer Function(void Function())? scheduler,
-    void Function(Object, Reaction)? onError}) {
+  ReactiveContext context,
+  T Function(Reaction) fn,
+  void Function(T) effect, {
+  String? name,
+  int? delay,
+  bool? fireImmediately,
+  EqualityComparer<T>? equals,
+  Timer Function(void Function())? scheduler,
+  void Function(Object, Reaction)? onError,
+}) {
   late ReactionImpl rxn;
 
   final rxnName = name ?? context.nameFor('Reaction');
 
-  final effectAction =
-      Action((T? value) => effect(value as T), name: '$rxnName-effect');
+  final effectAction = Action(
+    (T? value) => effect(value as T),
+    name: '$rxnName-effect',
+  );
 
   final runSync = scheduler == null && delay == null;
   final schedulerFromOptions =
@@ -122,25 +139,30 @@ ReactionDisposer createReaction<T>(
   Timer? timer;
   var isScheduled = false;
 
-  rxn = ReactionImpl(context, () {
-    if (firstTime || runSync) {
-      reactionRunner();
-    } else if (!isScheduled) {
-      isScheduled = true;
+  rxn = ReactionImpl(
+    context,
+    () {
+      if (firstTime || runSync) {
+        reactionRunner();
+      } else if (!isScheduled) {
+        isScheduled = true;
 
-      timer?.cancel();
-      timer = null;
+        timer?.cancel();
+        timer = null;
 
-      timer = schedulerFromOptions!(() {
-        isScheduled = false;
-        if (!rxn.isDisposed) {
-          reactionRunner();
-        } else {
-          timer?.cancel();
-        }
-      });
-    }
-  }, name: rxnName, onError: onError);
+        timer = schedulerFromOptions!(() {
+          isScheduled = false;
+          if (!rxn.isDisposed) {
+            reactionRunner();
+          } else {
+            timer?.cancel();
+          }
+        });
+      }
+    },
+    name: rxnName,
+    onError: onError,
+  );
 
   // ignore: cascade_invocations
   rxn.schedule();
@@ -149,9 +171,14 @@ ReactionDisposer createReaction<T>(
 }
 
 /// An internal helper function to create a [when]
-ReactionDisposer createWhenReaction(ReactiveContext context,
-    bool Function(Reaction) predicate, void Function() effect,
-    {String? name, int? timeout, void Function(Object, Reaction)? onError}) {
+ReactionDisposer createWhenReaction(
+  ReactiveContext context,
+  bool Function(Reaction) predicate,
+  void Function() effect, {
+  String? name,
+  int? timeout,
+  void Function(Object, Reaction)? onError,
+}) {
   final rxnName = name ?? context.nameFor('When');
   final effectAction = Action(effect, name: '$rxnName-effect');
 
@@ -176,26 +203,40 @@ ReactionDisposer createWhenReaction(ReactiveContext context,
     });
   }
 
-  return dispose = createAutorun(context, (reaction) {
-    if (predicate(reaction)) {
-      reaction.dispose();
-      timer?.cancel();
-      timer = null;
-      effectAction();
-    }
-  }, name: rxnName, onError: onError);
+  return dispose = createAutorun(
+    context,
+    (reaction) {
+      if (predicate(reaction)) {
+        reaction.dispose();
+        timer?.cancel();
+        timer = null;
+        effectAction();
+      }
+    },
+    name: rxnName,
+    onError: onError,
+  );
 }
 
 /// An internal helper function to create an [asyncWhen]
 Future<void> createAsyncWhenReaction(
-    ReactiveContext context, bool Function(Reaction) predicate,
-    {String? name, int? timeout}) {
+  ReactiveContext context,
+  bool Function(Reaction) predicate, {
+  String? name,
+  int? timeout,
+}) {
   final completer = Completer<void>();
-  createWhenReaction(context, predicate, completer.complete,
-      name: name, timeout: timeout, onError: (error, reaction) {
-    reaction.dispose();
-    completer.completeError(error);
-  });
+  createWhenReaction(
+    context,
+    predicate,
+    completer.complete,
+    name: name,
+    timeout: timeout,
+    onError: (error, reaction) {
+      reaction.dispose();
+      completer.completeError(error);
+    },
+  );
 
   return completer.future;
 }

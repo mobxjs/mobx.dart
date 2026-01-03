@@ -80,10 +80,10 @@ void main() {
       var value = 0;
 
       fakeAsync((async) {
-        dispose = autorun((_) {
-          value = x.value + 1;
-        }, delay: delayMs)
-            .call;
+        dispose =
+            autorun((_) {
+              value = x.value + 1;
+            }, delay: delayMs).call;
 
         async.elapse(const Duration(milliseconds: 2500));
 
@@ -111,11 +111,15 @@ void main() {
       var value = 0;
 
       fakeAsync((async) {
-        dispose = autorun((_) {
-          value = x.value + 1;
-        }, scheduler: (f) {
-          return Timer(const Duration(milliseconds: delayMs), f);
-        }).call;
+        dispose =
+            autorun(
+              (_) {
+                value = x.value + 1;
+              },
+              scheduler: (f) {
+                return Timer(const Duration(milliseconds: delayMs), f);
+              },
+            ).call;
 
         async.elapse(const Duration(milliseconds: 2500));
 
@@ -155,11 +159,14 @@ void main() {
 
     test('fires onError on exception', () {
       var thrown = false;
-      final dispose = autorun((_) {
-        throw Exception('FAILED in autorun');
-      }, onError: (_, a) {
-        thrown = true;
-      });
+      final dispose = autorun(
+        (_) {
+          throw Exception('FAILED in autorun');
+        },
+        onError: (_, a) {
+          thrown = true;
+        },
+      );
 
       expect(thrown, isTrue);
       expect(dispose.reaction.errorValue, isException);

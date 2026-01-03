@@ -39,7 +39,8 @@ void main() {
 
       var total = 0;
       final a = Action(() {
-        x.value = x.value +
+        x.value =
+            x.value +
             1; // No reaction-infinite-loop as we are not tracking the observables
       });
 
@@ -89,8 +90,9 @@ void main() {
     });
 
     test('inside autorun should be untracked', () {
-      mainContext.config =
-          ReactiveConfig(writePolicy: ReactiveWritePolicy.never);
+      mainContext.config = ReactiveConfig(
+        writePolicy: ReactiveWritePolicy.never,
+      );
 
       final x = Observable(10);
       final y = Observable(20);
@@ -161,8 +163,10 @@ void main() {
       void fn() {}
       mock.when(() => context.nameFor(mock.any())).thenReturn('Test-Action');
       mock
-          .when(() =>
-              context.startAllowStateChanges(allow: mock.any(named: 'allow')))
+          .when(
+            () =>
+                context.startAllowStateChanges(allow: mock.any(named: 'allow')),
+          )
           .thenReturn(true);
       mock.when(() => context.isSpyEnabled).thenReturn(false);
 
@@ -174,70 +178,79 @@ void main() {
         () => context.startUntracked(),
         () => context.startBatch(),
         () => context.endBatch(),
-        () => context.endUntracked(null)
+        () => context.endUntracked(null),
       ]);
     });
 
     test(
-        'on mainContext, should throw if mutating outside an action, with observers',
-        () {
-      mainContext.config =
-          ReactiveConfig(writePolicy: ReactiveWritePolicy.observed);
+      'on mainContext, should throw if mutating outside an action, with observers',
+      () {
+        mainContext.config = ReactiveConfig(
+          writePolicy: ReactiveWritePolicy.observed,
+        );
 
-      final x = Observable(0);
+        final x = Observable(0);
 
-      // Should work as there are no observers
-      expect(() => x.value = 1, returnsNormally);
+        // Should work as there are no observers
+        expect(() => x.value = 1, returnsNormally);
 
-      // Add observer
-      final d = autorun((_) => x.value);
+        // Add observer
+        final d = autorun((_) => x.value);
 
-      // Should fail now
-      expect(() => x.value = 2, throwsA(const TypeMatcher<AssertionError>()));
+        // Should fail now
+        expect(() => x.value = 2, throwsA(const TypeMatcher<AssertionError>()));
 
-      d();
-    });
+        d();
+      },
+    );
 
     test(
-        'on custom context, should throw if mutating outside an action, with observers',
-        () {
-      final context = ReactiveContext(
+      'on custom context, should throw if mutating outside an action, with observers',
+      () {
+        final context = ReactiveContext(
           config: ReactiveConfig(
-              disableErrorBoundaries: true,
-              writePolicy: ReactiveWritePolicy.observed));
-      final x = Observable(0, context: context);
+            disableErrorBoundaries: true,
+            writePolicy: ReactiveWritePolicy.observed,
+          ),
+        );
+        final x = Observable(0, context: context);
 
-      // Should work as there are no observers
-      expect(() => x.value = 1, returnsNormally);
+        // Should work as there are no observers
+        expect(() => x.value = 1, returnsNormally);
 
-      // Add observer
-      final d = autorun((_) => x.value, context: context);
+        // Add observer
+        final d = autorun((_) => x.value, context: context);
 
-      // Should fail now
-      expect(() => x.value = 2, throwsA(const TypeMatcher<AssertionError>()));
+        // Should fail now
+        expect(() => x.value = 2, throwsA(const TypeMatcher<AssertionError>()));
 
-      d();
-    });
+        d();
+      },
+    );
 
-    test('should throw if mutating outside an action, when always enforced',
-        () {
-      final context = ReactiveContext(
+    test(
+      'should throw if mutating outside an action, when always enforced',
+      () {
+        final context = ReactiveContext(
           config: ReactiveConfig(
-              disableErrorBoundaries: true,
-              writePolicy: ReactiveWritePolicy.always));
-      final x = Observable(0, context: context);
+            disableErrorBoundaries: true,
+            writePolicy: ReactiveWritePolicy.always,
+          ),
+        );
+        final x = Observable(0, context: context);
 
-      // Should fail even if there are no observers
-      expect(() => x.value = 1, throwsA(const TypeMatcher<AssertionError>()));
+        // Should fail even if there are no observers
+        expect(() => x.value = 1, throwsA(const TypeMatcher<AssertionError>()));
 
-      // Add observer
-      final d = autorun((_) => x.value, context: context);
+        // Add observer
+        final d = autorun((_) => x.value, context: context);
 
-      // Should fail now as well
-      expect(() => x.value = 2, throwsA(const TypeMatcher<AssertionError>()));
+        // Should fail now as well
+        expect(() => x.value = 2, throwsA(const TypeMatcher<AssertionError>()));
 
-      d();
-    });
+        d();
+      },
+    );
   });
 
   group('Action utility functions', () {
@@ -268,8 +281,9 @@ void main() {
     });
 
     test('transaction works', () {
-      mainContext.config =
-          ReactiveConfig(writePolicy: ReactiveWritePolicy.never);
+      mainContext.config = ReactiveConfig(
+        writePolicy: ReactiveWritePolicy.never,
+      );
 
       final x = Observable(10);
       final y = Observable(20);
