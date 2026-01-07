@@ -30,7 +30,14 @@ class LibraryScopedNameFinder {
 
   Map<Element, String?> get namesByElement {
     // Add all of this library's type-defining elements to the name map
-    final libraryElements = library.children.whereType<Element>();
+    final libraryElements = library.children.where(
+      (element) =>
+          element is ClassElement ||
+          element is TypeAliasElement ||
+          element is EnumElement ||
+          element is MixinElement ||
+          element is ExtensionTypeElement,
+    );
     for (final element in libraryElements) {
       _namesByElement[element] = element.name;
     }
