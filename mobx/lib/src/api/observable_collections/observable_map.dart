@@ -24,33 +24,35 @@ class ObservableMap<K, V>
     with
         // ignore:prefer_mixin
         MapMixin<K, V>
-    implements
-        Listenable<MapChange<K, V>> {
+    implements Listenable<MapChange<K, V>> {
   ObservableMap({ReactiveContext? context, String? name})
-      : _context = context ?? mainContext,
-        _atom = _observableMapAtom<K, V>(context, name),
-        _map = <K, V>{};
+    : _context = context ?? mainContext,
+      _atom = _observableMapAtom<K, V>(context, name),
+      _map = <K, V>{};
 
   ObservableMap.of(Map<K, V> other, {ReactiveContext? context, String? name})
-      : _context = context ?? mainContext,
-        _atom = _observableMapAtom<K, V>(context, name),
-        _map = Map.of(other);
+    : _context = context ?? mainContext,
+      _atom = _observableMapAtom<K, V>(context, name),
+      _map = Map.of(other);
 
-  ObservableMap.linkedHashMapFrom(Map<K, V> other,
-      {ReactiveContext? context, String? name})
-      : _context = context ?? mainContext,
-        _atom = _observableMapAtom<K, V>(context, name),
-        _map = LinkedHashMap.from(other);
+  ObservableMap.linkedHashMapFrom(
+    Map<K, V> other, {
+    ReactiveContext? context,
+    String? name,
+  }) : _context = context ?? mainContext,
+       _atom = _observableMapAtom<K, V>(context, name),
+       _map = LinkedHashMap.from(other);
 
-  ObservableMap.splayTreeMapFrom(Map<K, V> other,
-      {int Function(K, K)? compare,
-      // ignore: avoid_annotating_with_dynamic
-      bool Function(dynamic)? isValidKey,
-      ReactiveContext? context,
-      String? name})
-      : _context = context ?? mainContext,
-        _atom = _observableMapAtom<K, V>(context, name),
-        _map = SplayTreeMap.from(other, compare, isValidKey);
+  ObservableMap.splayTreeMapFrom(
+    Map<K, V> other, {
+    int Function(K, K)? compare,
+    // ignore: avoid_annotating_with_dynamic
+    bool Function(dynamic)? isValidKey,
+    ReactiveContext? context,
+    String? name,
+  }) : _context = context ?? mainContext,
+       _atom = _observableMapAtom<K, V>(context, name),
+       _map = SplayTreeMap.from(other, compare, isValidKey);
 
   ObservableMap._wrap(this._context, this._map, this._atom);
 
@@ -186,47 +188,57 @@ class ObservableMap<K, V>
   }
 
   void _reportUpdate(K key, V newValue, V? oldValue) {
-    _listeners.notifyListeners(MapChange<K, V>(
-      type: OperationType.update,
-      key: key,
-      newValue: newValue,
-      oldValue: oldValue,
-      object: this,
-    ));
+    _listeners.notifyListeners(
+      MapChange<K, V>(
+        type: OperationType.update,
+        key: key,
+        newValue: newValue,
+        oldValue: oldValue,
+        object: this,
+      ),
+    );
   }
 
   void _reportAdd(K key, V newValue) {
-    _listeners.notifyListeners(MapChange<K, V>(
-      type: OperationType.add,
-      key: key,
-      newValue: newValue,
-      object: this,
-    ));
+    _listeners.notifyListeners(
+      MapChange<K, V>(
+        type: OperationType.add,
+        key: key,
+        newValue: newValue,
+        object: this,
+      ),
+    );
   }
 
   void _reportRemove(K? key, V? oldValue) {
-    _listeners.notifyListeners(MapChange<K, V>(
-      type: OperationType.remove,
-      key: key,
-      oldValue: oldValue,
-      object: this,
-    ));
+    _listeners.notifyListeners(
+      MapChange<K, V>(
+        type: OperationType.remove,
+        key: key,
+        oldValue: oldValue,
+        object: this,
+      ),
+    );
   }
 
   /// Used to attach a listener for getting notified on changes happening to the map
   ///
   /// You can also choose to receive the notifications immediately (with [fireImmediately])
   @override
-  Dispose observe(MapChangeListener<K, V> listener,
-      {bool fireImmediately = false}) {
+  Dispose observe(
+    MapChangeListener<K, V> listener, {
+    bool fireImmediately = false,
+  }) {
     if (fireImmediately == true) {
       _map.forEach((key, value) {
-        listener(MapChange<K, V>(
-          type: OperationType.add,
-          key: key,
-          newValue: value,
-          object: this,
-        ));
+        listener(
+          MapChange<K, V>(
+            type: OperationType.add,
+            key: key,
+            newValue: value,
+            object: this,
+          ),
+        );
       });
     }
     return _listeners.add(listener);
@@ -244,12 +256,13 @@ typedef MapChangeListener<K, V> = void Function(MapChange<K, V>);
 /// Stores the information related to changes happening in an [ObservableMap]. This is
 /// used when firing the change notifications to all the listeners
 class MapChange<K, V> {
-  MapChange(
-      {this.type,
-      this.key,
-      this.newValue,
-      this.oldValue,
-      required this.object});
+  MapChange({
+    this.type,
+    this.key,
+    this.newValue,
+    this.oldValue,
+    required this.object,
+  });
 
   final OperationType? type;
 

@@ -10,7 +10,7 @@ description: A set of examples showing effective use of MobX.
 version: 1.1.0
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: ">=3.7.0 <4.0.0"
 
 dependencies:
   connectivity:
@@ -23,7 +23,7 @@ dependencies:
   json_annotation:
   json_serializable:
   mobx:
-  mobx_codegen:
+  mobx_codegen: 
   provider:
   shared_preferences:
   url_launcher:

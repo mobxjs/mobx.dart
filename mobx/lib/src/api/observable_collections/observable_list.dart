@@ -23,18 +23,22 @@ class ObservableList<T>
     with
         // ignore: prefer_mixin
         ListMixin<T>
-    implements
-        Listenable<ListChange<T>> {
+    implements Listenable<ListChange<T>> {
   ObservableList({ReactiveContext? context, String? name})
-      : this._wrap(context, _observableListAtom<T>(context, name), []);
+    : this._wrap(context, _observableListAtom<T>(context, name), []);
 
-  ObservableList.of(Iterable<T> elements,
-      {ReactiveContext? context, String? name})
-      : this._wrap(context, _observableListAtom<T>(context, name),
-            List<T>.of(elements, growable: true));
+  ObservableList.of(
+    Iterable<T> elements, {
+    ReactiveContext? context,
+    String? name,
+  }) : this._wrap(
+         context,
+         _observableListAtom<T>(context, name),
+         List<T>.of(elements, growable: true),
+       );
 
   ObservableList._wrap(ReactiveContext? context, this._atom, this._list)
-      : _context = context ?? mainContext;
+    : _context = context ?? mainContext;
 
   final ReactiveContext _context;
   final Atom _atom;
@@ -269,8 +273,12 @@ class ObservableList<T>
     _context.conditionallyRunInAction(() {
       value = _list.removeLast();
       // Index is _list.length as it points to the index before the last element is removed
-      _notifyElementUpdate(_list.length, null, value,
-          type: OperationType.remove);
+      _notifyElementUpdate(
+        _list.length,
+        null,
+        value,
+        type: OperationType.remove,
+      );
     }, _atom);
 
     return value;
@@ -294,8 +302,13 @@ class ObservableList<T>
       for (var i = _list.length - 1; i >= 0; --i) {
         final element = _list[i];
         if (test(element)) {
-          removedElements.addFirst(ElementChange(
-              index: i, oldValue: element, type: OperationType.remove));
+          removedElements.addFirst(
+            ElementChange(
+              index: i,
+              oldValue: element,
+              type: OperationType.remove,
+            ),
+          );
           _list.removeAt(i);
         }
       }
@@ -326,8 +339,13 @@ class ObservableList<T>
       for (var i = _list.length - 1; i >= 0; --i) {
         final element = _list[i];
         if (!test(element)) {
-          removedElements.addFirst(ElementChange(
-              index: i, oldValue: element, type: OperationType.remove));
+          removedElements.addFirst(
+            ElementChange(
+              index: i,
+              oldValue: element,
+              type: OperationType.remove,
+            ),
+          );
           _list.removeAt(i);
         }
       }
@@ -356,8 +374,10 @@ class ObservableList<T>
       if (end > start) {
         final oldValues = _list.sublist(start, end);
 
-        final newValues =
-            iterable.skip(skipCount).take(end - start).toList(growable: false);
+        final newValues = iterable
+            .skip(skipCount)
+            .take(end - start)
+            .toList(growable: false);
 
         _list.setRange(start, end, newValues);
 
@@ -377,8 +397,9 @@ class ObservableList<T>
           final oldValue = oldList[i];
           final newValue = _list[i];
           if (newValue != oldValue) {
-            changes.add(ElementChange(
-                index: i, oldValue: oldValue, newValue: newValue));
+            changes.add(
+              ElementChange(index: i, oldValue: oldValue, newValue: newValue),
+            );
           }
         }
         if (changes.isNotEmpty) {
@@ -399,8 +420,9 @@ class ObservableList<T>
           final oldValue = oldList[i];
           final newValue = _list[i];
           if (newValue != oldValue) {
-            changes.add(ElementChange(
-                index: i, oldValue: oldValue, newValue: newValue));
+            changes.add(
+              ElementChange(index: i, oldValue: oldValue, newValue: newValue),
+            );
           }
         }
         if (changes.isNotEmpty) {
@@ -415,26 +437,42 @@ class ObservableList<T>
   /// You can choose to receive the change notification immediately (with [fireImmediately])
   /// or on the first change
   @override
-  Dispose observe(Listener<ListChange<T>> listener,
-      {bool fireImmediately = false}) {
+  Dispose observe(
+    Listener<ListChange<T>> listener, {
+    bool fireImmediately = false,
+  }) {
     if (fireImmediately == true) {
-      final change = ListChange<T>(list: this, rangeChanges: <RangeChange<T>>[
-        RangeChange(index: 0, newValues: toList(growable: false))
-      ]);
+      final change = ListChange<T>(
+        list: this,
+        rangeChanges: <RangeChange<T>>[
+          RangeChange(index: 0, newValues: toList(growable: false)),
+        ],
+      );
       listener(change);
     }
 
     return _listeners.add(listener);
   }
 
-  void _notifyElementUpdate(int index, T? newValue, T? oldValue,
-      {OperationType type = OperationType.update}) {
+  void _notifyElementUpdate(
+    int index,
+    T? newValue,
+    T? oldValue, {
+    OperationType type = OperationType.update,
+  }) {
     _atom.reportChanged();
 
-    final change = ListChange<T>(list: this, elementChanges: <ElementChange<T>>[
-      ElementChange(
-          index: index, newValue: newValue, oldValue: oldValue, type: type)
-    ]);
+    final change = ListChange<T>(
+      list: this,
+      elementChanges: <ElementChange<T>>[
+        ElementChange(
+          index: index,
+          newValue: newValue,
+          oldValue: oldValue,
+          type: type,
+        ),
+      ],
+    );
 
     _listeners.notifyListeners(change);
   }
@@ -450,16 +488,19 @@ class ObservableList<T>
   void _notifyRangeUpdate(int index, List<T>? newValues, List<T>? oldValues) {
     _atom.reportChanged();
 
-    final change = ListChange<T>(list: this, rangeChanges: <RangeChange<T>>[
-      RangeChange(index: index, newValues: newValues, oldValues: oldValues)
-    ]);
+    final change = ListChange<T>(
+      list: this,
+      rangeChanges: <RangeChange<T>>[
+        RangeChange(index: index, newValues: newValues, oldValues: oldValues),
+      ],
+    );
 
     _listeners.notifyListeners(change);
   }
 }
 
-typedef ListChangeListener<TNotification> = void Function(
-    ListChange<TNotification>);
+typedef ListChangeListener<TNotification> =
+    void Function(ListChange<TNotification>);
 
 /// Stores the change in the value of an element with specific [index].
 ///
@@ -472,11 +513,12 @@ typedef ListChangeListener<TNotification> = void Function(
 /// The value [OperationType.remove] of [type] means the element with value [oldValue]
 /// was removed from the list.
 class ElementChange<T> {
-  ElementChange(
-      {required this.index,
-      this.type = OperationType.update,
-      this.newValue,
-      this.oldValue});
+  ElementChange({
+    required this.index,
+    this.type = OperationType.update,
+    this.newValue,
+    this.oldValue,
+  });
 
   final int index;
   final OperationType type;

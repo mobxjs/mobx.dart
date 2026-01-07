@@ -87,17 +87,18 @@ void main() {
     });
 
     test(
-        'observe should not send add events to all listeners when fireImmediately is true',
-        () {
-      final oset = ObservableSet.of([1, 2]);
-      final changes1 = <SetChange<int>>[];
-      final changes2 = <SetChange<int>>[];
-      oset.observe(changes1.add);
-      oset.observe(changes2.add, fireImmediately: true);
+      'observe should not send add events to all listeners when fireImmediately is true',
+      () {
+        final oset = ObservableSet.of([1, 2]);
+        final changes1 = <SetChange<int>>[];
+        final changes2 = <SetChange<int>>[];
+        oset.observe(changes1.add);
+        oset.observe(changes2.add, fireImmediately: true);
 
-      expect(changes1, isEmpty);
-      expect(changes2, isNotEmpty);
-    });
+        expect(changes1, isEmpty);
+        expect(changes2, isNotEmpty);
+      },
+    );
 
     group('fires reportObserved() for read methods', () {
       <String, void Function(ObservableSet<int>)>{
@@ -129,21 +130,22 @@ void main() {
     });
 
     group(
-        'fires reportObserved() for iterable transformation methods only when iterating',
-        () {
-      <String, Iterable Function(ObservableSet<int>)>{
-        'cast': (m) => m.cast<num>(),
-        'expand': (m) => m.expand((i) => [3, 4]),
-        'followedBy': (m) => m.followedBy([5, 6]),
-        'map': (m) => m.map((i) => i + 1),
-        'skip': (m) => m.skip(1),
-        'skipWhile': (m) => m.skipWhile((i) => i < 2),
-        'take': (m) => m.take(2),
-        'takeWhile': (m) => m.takeWhile((i) => i < 3),
-        'where': (m) => m.where((i) => i > 2),
-        'whereType': (m) => m.whereType<num>(),
-      }.forEach(runIterableTest);
-    });
+      'fires reportObserved() for iterable transformation methods only when iterating',
+      () {
+        <String, Iterable Function(ObservableSet<int>)>{
+          'cast': (m) => m.cast<num>(),
+          'expand': (m) => m.expand((i) => [3, 4]),
+          'followedBy': (m) => m.followedBy([5, 6]),
+          'map': (m) => m.map((i) => i + 1),
+          'skip': (m) => m.skip(1),
+          'skipWhile': (m) => m.skipWhile((i) => i < 2),
+          'take': (m) => m.take(2),
+          'takeWhile': (m) => m.takeWhile((i) => i < 3),
+          'where': (m) => m.where((i) => i > 2),
+          'whereType': (m) => m.whereType<num>(),
+        }.forEach(runIterableTest);
+      },
+    );
 
     group('fires reportChanged() for write methods', () {
       <String, void Function(ObservableSet<int>)>{
@@ -170,8 +172,11 @@ void main() {
       set.add(10);
 
       expect(set.nonObservableInner.length, 1);
-      expect(nonObservableInnerLength, equals(0),
-          reason: 'should not be observable');
+      expect(
+        nonObservableInnerLength,
+        equals(0),
+        reason: 'should not be observable',
+      );
     });
   });
 }
@@ -206,7 +211,9 @@ void runWriteTest(String description, void Function(ObservableSet<int>) body) {
 }
 
 void runIterableTest(
-    String description, Iterable Function(ObservableSet<int>) body) {
+  String description,
+  Iterable Function(ObservableSet<int>) body,
+) {
   test(description, () {
     final atom = MockAtom();
     final map = wrapInObservableSet(atom, {1, 2, 3, 4});

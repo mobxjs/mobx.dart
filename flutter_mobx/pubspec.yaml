@@ -19,7 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  mobx: ^2.5.0
+  mobx: ^2.6.0
   provider: ^6.0.0
 
 dev_dependencies:

@@ -75,7 +75,9 @@ void main() {
 
       x.value = 100;
       expect(
-          x.value, equals(10)); // no change as the interceptor-2 has nullified
+        x.value,
+        equals(10),
+      ); // no change as the interceptor-2 has nullified
 
       dispose1();
       dispose2();

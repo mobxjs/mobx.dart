@@ -54,12 +54,14 @@ void main() {
 
       final values = <String>[];
       autorun((_) {
-        values.add(stream.match(
-          waiting: () => 'waiting',
-          active: (i) => 'value',
-          done: (_, __) => 'done',
-          error: (err) => 'error',
-        )!);
+        values.add(
+          stream.match(
+            waiting: () => 'waiting',
+            active: (i) => 'value',
+            done: (_, __) => 'done',
+            error: (err) => 'error',
+          )!,
+        );
       });
 
       ctrl
@@ -78,8 +80,9 @@ void main() {
       final values = <String>[];
 
       autorun((_) {
-        values.add(stream.match(
-            waiting: () => 'waiting', active: (i) => 'value/done')!);
+        values.add(
+          stream.match(waiting: () => 'waiting', active: (i) => 'value/done')!,
+        );
       });
 
       ctrl.add(1);
@@ -96,10 +99,9 @@ void main() {
       final values = <String>[];
 
       autorun((_) {
-        values.add(stream.match(
-          waiting: () => 'waiting',
-          error: (i) => 'error/done',
-        )!);
+        values.add(
+          stream.match(waiting: () => 'waiting', error: (i) => 'error/done')!,
+        );
       });
 
       ctrl.addError('ERROR');
@@ -128,10 +130,10 @@ void main() {
 
     test('transforming the stream works', () async {
       final stream = ObservableStream(() async* {
-        yield 1;
-        yield 2;
-        yield 3;
-      }())
+            yield 1;
+            yield 2;
+            yield 3;
+          }())
           .where((i) => i > 1)
           .map((i) => i.toString())
           .configure(initialValue: '0');
@@ -152,7 +154,8 @@ void main() {
       final stream = ObservableStream(ctrl.stream, initialValue: 0);
 
       final future = asyncWhen(
-          (_) => stream.status == StreamStatus.done || stream.value == 2);
+        (_) => stream.status == StreamStatus.done || stream.value == 2,
+      );
       expect(ctrl.isPaused, isFalse);
 
       ctrl.add(2);
@@ -223,8 +226,11 @@ void main() {
 
       ctrl.add(2);
       await pumpEventQueue();
-      expect(subValues, equals([0, 1, 2]),
-          reason: 'non-broadcast streams buffer events');
+      expect(
+        subValues,
+        equals([0, 1, 2]),
+        reason: 'non-broadcast streams buffer events',
+      );
 
       ctrl.add(3);
       await pumpEventQueue();
@@ -233,22 +239,31 @@ void main() {
 
       ctrl.add(4);
       await pumpEventQueue();
-      expect(subValues, equals([0, 1, 2, 3]),
-          reason: 'subscription itself is paused, does not receive events');
+      expect(
+        subValues,
+        equals([0, 1, 2, 3]),
+        reason: 'subscription itself is paused, does not receive events',
+      );
 
       subscription.resume();
 
       ctrl.add(5);
       await pumpEventQueue();
-      expect(subValues, equals([0, 1, 2, 3, 4, 5]),
-          reason: 'receives all events emitted during pause');
+      expect(
+        subValues,
+        equals([0, 1, 2, 3, 4, 5]),
+        reason: 'receives all events emitted during pause',
+      );
 
       await subscription.cancel();
 
       ctrl.add(6);
       await pumpEventQueue();
-      expect(subValues, equals([0, 1, 2, 3, 4, 5]),
-          reason: 'sub cancelled, no longer receives events');
+      expect(
+        subValues,
+        equals([0, 1, 2, 3, 4, 5]),
+        reason: 'sub cancelled, no longer receives events',
+      );
     });
 
     test('listen() and observation both keep values updated', () async {
@@ -279,8 +294,11 @@ void main() {
       expect(ctrl.isPaused, isFalse);
       expect(stream.value, equals(3));
       expect(reactionValues, equals([0, 1, 2, 3]));
-      expect(subValues, equals([0, 1, 2, 3]),
-          reason: 'non-broadcast streams buffer events');
+      expect(
+        subValues,
+        equals([0, 1, 2, 3]),
+        reason: 'non-broadcast streams buffer events',
+      );
 
       dispose();
 
@@ -296,9 +314,13 @@ void main() {
       ctrl.add(5);
       await pumpEventQueue();
       expect(ctrl.hasListener, isFalse);
-      expect(ctrl.isPaused, isFalse,
-          reason: 'per docs, when controller has no more listeners, '
-              'it is no longer paused');
+      expect(
+        ctrl.isPaused,
+        isFalse,
+        reason:
+            'per docs, when controller has no more listeners, '
+            'it is no longer paused',
+      );
       expect(stream.value, equals(4));
       expect(reactionValues, equals([0, 1, 2, 3]));
       expect(subValues, equals([0, 1, 2, 3, 4]));
@@ -311,8 +333,11 @@ void main() {
 
       ctrl.add(1);
       await pumpEventQueue();
-      expect(ctrl.isPaused, isFalse,
-          reason: 'broadcast ctrl itself does not pause');
+      expect(
+        ctrl.isPaused,
+        isFalse,
+        reason: 'broadcast ctrl itself does not pause',
+      );
       expect(stream.value, equals(0));
 
       final sub1Values = <int>[];
@@ -321,8 +346,11 @@ void main() {
       ctrl.add(2);
       await pumpEventQueue();
       expect(stream.value, equals(2));
-      expect(sub1Values, equals([2]),
-          reason: 'broadcast streams do not buffer events');
+      expect(
+        sub1Values,
+        equals([2]),
+        reason: 'broadcast streams do not buffer events',
+      );
 
       final sub2Values = <int>[];
       final sub2 = stream.listen(sub2Values.add);
@@ -345,9 +373,13 @@ void main() {
 
       ctrl.add(5);
       await pumpEventQueue();
-      expect(stream.value, equals(5),
-          reason: 'all subs are paused, but pause is on a subscription level, '
-              'broadcast stream still emits');
+      expect(
+        stream.value,
+        equals(5),
+        reason:
+            'all subs are paused, but pause is on a subscription level, '
+            'broadcast stream still emits',
+      );
       expect(sub1Values, equals([2, 3]));
       expect(sub2Values, equals([3, 4]));
 
@@ -450,8 +482,11 @@ void main() {
       ctrl.add(4); // Implicit sub should stop here, with value at 4
       await pumpEventQueue();
       expect(ctrl.hasListener, isFalse);
-      expect(ctrl.isPaused, isFalse,
-          reason: 'no more listeners, no longer paused');
+      expect(
+        ctrl.isPaused,
+        isFalse,
+        reason: 'no more listeners, no longer paused',
+      );
       expect(stream.value, equals(4));
 
       ctrl.add(5);
@@ -462,8 +497,11 @@ void main() {
 
     test('cancelOnError cancels the stream on first error', () async {
       final ctrl = StreamController<int>();
-      final stream =
-          ObservableStream(ctrl.stream, initialValue: 0, cancelOnError: true);
+      final stream = ObservableStream(
+        ctrl.stream,
+        initialValue: 0,
+        cancelOnError: true,
+      );
 
       final values = <int>[];
       autorun((_) {
@@ -502,8 +540,11 @@ void main() {
       ctrl.addError(2);
       await pumpEventQueue();
       expect(ctrl.hasListener, isFalse);
-      expect(ctrl.isPaused, isFalse,
-          reason: 'no more listeners, no longer paused');
+      expect(
+        ctrl.isPaused,
+        isFalse,
+        reason: 'no more listeners, no longer paused',
+      );
       expect(stream.value, isNull);
       expect(stream.error, equals(2));
 
@@ -515,29 +556,37 @@ void main() {
       await sub.cancel();
     });
 
-    test('.close() can be used to close stream correctly', () async {
-      final ctrl = StreamController<int>();
-      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+    test(
+      '.close() can be used to close stream correctly',
+      () async {
+        final ctrl = StreamController<int>();
+        final stream = ObservableStream(ctrl.stream, initialValue: 0);
 
-      final future = asyncWhen((_) => stream.value == 2);
-      ctrl.add(2);
-      await future; // reaction should be disposed, no longer observing value
+        final future = asyncWhen((_) => stream.value == 2);
+        ctrl.add(2);
+        await future; // reaction should be disposed, no longer observing value
 
-      await stream.close();
-      expect(ctrl.close(), completes);
-    }, timeout: const Timeout(Duration(seconds: 3)));
+        await stream.close();
+        expect(ctrl.close(), completes);
+      },
+      timeout: const Timeout(Duration(seconds: 3)),
+    );
 
-    test('.close() can close broadcast streams correctly', () async {
-      final ctrl = StreamController<int>.broadcast();
-      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+    test(
+      '.close() can close broadcast streams correctly',
+      () async {
+        final ctrl = StreamController<int>.broadcast();
+        final stream = ObservableStream(ctrl.stream, initialValue: 0);
 
-      final future = asyncWhen((_) => stream.value == 2);
-      ctrl.add(2);
-      await future; // reaction should be disposed, no longer observing value
+        final future = asyncWhen((_) => stream.value == 2);
+        ctrl.add(2);
+        await future; // reaction should be disposed, no longer observing value
 
-      await stream.close();
-      expect(ctrl.close(), completes);
-    }, timeout: const Timeout(Duration(seconds: 3)));
+        await stream.close();
+        expect(ctrl.close(), completes);
+      },
+      timeout: const Timeout(Duration(seconds: 3)),
+    );
 
     test('trying to listen or observe after close throws', () async {
       final ctrl = StreamController<int>();
@@ -558,28 +607,36 @@ void main() {
       await ctrl.close();
     });
 
-    test('closes correctly when all subscriptions are cancelled', () async {
-      final ctrl = StreamController<int>();
-      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+    test(
+      'closes correctly when all subscriptions are cancelled',
+      () async {
+        final ctrl = StreamController<int>();
+        final stream = ObservableStream(ctrl.stream, initialValue: 0);
 
-      final sub = stream.listen(null);
-      await sub.cancel();
+        final sub = stream.listen(null);
+        await sub.cancel();
 
-      expect(ctrl.close(), completes);
-    }, timeout: const Timeout(Duration(seconds: 3)));
+        expect(ctrl.close(), completes);
+      },
+      timeout: const Timeout(Duration(seconds: 3)),
+    );
 
-    test('closes correctly even if broadcast stream', () async {
-      final ctrl = StreamController<int>.broadcast();
-      final stream = ObservableStream(ctrl.stream, initialValue: 0);
+    test(
+      'closes correctly even if broadcast stream',
+      () async {
+        final ctrl = StreamController<int>.broadcast();
+        final stream = ObservableStream(ctrl.stream, initialValue: 0);
 
-      final sub = stream.listen(null);
-      await sub.cancel();
+        final sub = stream.listen(null);
+        await sub.cancel();
 
-      final sub2 = stream.listen(null);
-      await sub2.cancel();
+        final sub2 = stream.listen(null);
+        await sub2.cancel();
 
-      expect(ctrl.close(), completes);
-    }, timeout: const Timeout(Duration(seconds: 3)));
+        expect(ctrl.close(), completes);
+      },
+      timeout: const Timeout(Duration(seconds: 3)),
+    );
 
     test('cannot observe non-broadcast stream once sub is cancelled', () async {
       // ignore: close_sinks
@@ -596,14 +653,20 @@ void main() {
       await sub.cancel();
 
       final future2 = asyncWhen((_) => stream.value == 3);
-      expect(future2, throwsA(isA<MobXCaughtException>()),
-          reason: 'sub on non-broadcast stream already cancelled');
+      expect(
+        future2,
+        throwsA(isA<MobXCaughtException>()),
+        reason: 'sub on non-broadcast stream already cancelled',
+      );
     });
 
     test('can observe value with custom equals', () async {
       final ctrl = StreamController<int>();
-      final stream = ObservableStream(ctrl.stream,
-          initialValue: 3, equals: (_, __) => false);
+      final stream = ObservableStream(
+        ctrl.stream,
+        initialValue: 3,
+        equals: (_, __) => false,
+      );
 
       final subValues = <int>[];
       final sub = stream.listen(subValues.add);
@@ -625,8 +688,10 @@ void main() {
         expect(stream.isBroadcast, isTrue);
         return stream;
       },
-      'asyncExpand': (s) =>
-          s.asyncExpand((n) => Stream.fromIterable(Iterable<int>.generate(n))),
+      'asyncExpand':
+          (s) => s.asyncExpand(
+            (n) => Stream.fromIterable(Iterable<int>.generate(n)),
+          ),
       'asyncMap': (s) => s.asyncMap((n) => Future.value(n + 1)),
       'cast': (s) => s.cast<num>(),
       'distinct': (s) => s.distinct(),
@@ -636,13 +701,17 @@ void main() {
       'take': (s) => s.take(5),
       'takeWhile': (s) => s.takeWhile((n) => n < 4),
       'handleError': (s) => s.handleError((_) {}),
-      'timeout': (s) =>
-          s.timeout(const Duration(seconds: 0), onTimeout: (n) => true),
-      'transform': (s) =>
-          s.transform(StreamTransformer.fromHandlers(handleData: (data, sink) {
-            sink.add(data);
-          })),
-      'where': (s) => s.where((n) => n != 2)
+      'timeout':
+          (s) => s.timeout(const Duration(seconds: 0), onTimeout: (n) => true),
+      'transform':
+          (s) => s.transform(
+            StreamTransformer.fromHandlers(
+              handleData: (data, sink) {
+                sink.add(data);
+              },
+            ),
+          ),
+      'where': (s) => s.where((n) => n != 2),
     }.forEach(testStreamCombinator);
 
     <String, Case>{
@@ -661,7 +730,9 @@ void main() {
       'lastWhere': futureCase((s) => s.lastWhere((n) => n <= 8), 8),
       'length': futureCase((s) => s.length, 10),
       'pipe': futureCase(
-          (s) => s.pipe(StreamController.broadcast()), null as dynamic),
+        (s) => s.pipe(StreamController.broadcast()),
+        null as dynamic,
+      ),
       'reduce': futureCase((s) => s.reduce((a, b) => a + b), 45),
       'single': futureCase((s) => s.single, 0, length: 1),
       'singleWhere': futureCase((s) => s.singleWhere((n) => n == 8), 8),
@@ -672,10 +743,9 @@ void main() {
 }
 
 Case<F, R> futureCase<
-        R,
-        F extends ObservableFuture<R> Function(
-            ObservableStream<int>)>(F body, R result, {int length = 10}) =>
-    Case(body, result, length);
+  R,
+  F extends ObservableFuture<R> Function(ObservableStream<int>)
+>(F body, R result, {int length = 10}) => Case(body, result, length);
 
 class Case<F extends Function, R> {
   Case(this.body, this.result, this.length);
@@ -691,8 +761,9 @@ typedef StreamTestBody = ObservableStream Function(ObservableStream<int>);
 
 void testStreamCombinator<T>(String description, StreamTestBody body) {
   test(description, () async {
-    final stream =
-        ObservableStream(Stream.fromIterable(Iterable<int>.generate(10)));
+    final stream = ObservableStream(
+      Stream.fromIterable(Iterable<int>.generate(10)),
+    );
     final transformed = body(stream);
 
     dynamic value;
@@ -707,7 +778,8 @@ void testStreamCombinator<T>(String description, StreamTestBody body) {
 void testStreamToFutureCombinator<T>(String description, Case testCase) {
   test(description, () async {
     final stream = ObservableStream(
-        Stream.fromIterable(Iterable<int>.generate(testCase.length)));
+      Stream.fromIterable(Iterable<int>.generate(testCase.length)),
+    );
     final future = testCase.body(stream) as ObservableFuture;
     expect(future.value, isNull);
 

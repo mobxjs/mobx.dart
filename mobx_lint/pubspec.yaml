@@ -20,7 +20,7 @@ dependencies:
   custom_lint_builder: ^0.5.2
   meta: ^1.7.0
   path: ^1.8.1
-  mobx: ^2.5.0
+  mobx: ^2.6.0
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.21.0

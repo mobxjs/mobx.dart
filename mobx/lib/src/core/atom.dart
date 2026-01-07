@@ -1,9 +1,6 @@
 part of '../core.dart';
 
-enum _ListenerKind {
-  onBecomeObserved,
-  onBecomeUnobserved,
-}
+enum _ListenerKind { onBecomeObserved, onBecomeUnobserved }
 
 class Atom with DebugCreationStack {
   /// Creates a simple Atom for tracking its usage in a reactive context. This is useful when
@@ -12,17 +9,24 @@ class Atom with DebugCreationStack {
   ///
   /// Use the [onObserved] and [onUnobserved] handlers to know when the atom is active and inactive
   /// respectively. Use a debug [name] to identify easily.
-  factory Atom(
-          {String? name,
-          Function()? onObserved,
-          Function()? onUnobserved,
-          ReactiveContext? context}) =>
-      Atom._(context ?? mainContext,
-          name: name, onObserved: onObserved, onUnobserved: onUnobserved);
+  factory Atom({
+    String? name,
+    Function()? onObserved,
+    Function()? onUnobserved,
+    ReactiveContext? context,
+  }) => Atom._(
+    context ?? mainContext,
+    name: name,
+    onObserved: onObserved,
+    onUnobserved: onUnobserved,
+  );
 
-  Atom._(this._context,
-      {String? name, Function()? onObserved, Function()? onUnobserved})
-      : name = name ?? _context.nameFor('Atom') {
+  Atom._(
+    this._context, {
+    String? name,
+    Function()? onObserved,
+    Function()? onUnobserved,
+  }) : name = name ?? _context.nameFor('Atom') {
     if (onObserved != null) {
       onBecomeObserved(onObserved);
     }

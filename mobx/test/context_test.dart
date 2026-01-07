@@ -32,29 +32,33 @@ void main() {
       dispose1();
     });
 
-    test('can change observables inside computed if there are no observers',
-        () {
-      final x = Observable(0);
+    test(
+      'can change observables inside computed if there are no observers',
+      () {
+        final x = Observable(0);
 
-      final c = Computed(() => x.value++);
+        final c = Computed(() => x.value++);
 
-      expect(() => c.value, returnsNormally);
-    });
+        expect(() => c.value, returnsNormally);
+      },
+    );
 
-    test('cannot change observables inside computed if they have observers',
-        () {
-      final x = Observable(0);
+    test(
+      'cannot change observables inside computed if they have observers',
+      () {
+        final x = Observable(0);
 
-      final c = Computed<int>(() => x.value++);
+        final c = Computed<int>(() => x.value++);
 
-      expect(() {
-        final d = autorun((_) => x.value);
-        // Fetch the value which is in turn mutating the observable (x.value).
-        // This is not allowed because there is an observer: autorun.
-        c.value;
-        d();
-      }, throwsException);
-    });
+        expect(() {
+          final d = autorun((_) => x.value);
+          // Fetch the value which is in turn mutating the observable (x.value).
+          // This is not allowed because there is an observer: autorun.
+          c.value;
+          d();
+        }, throwsException);
+      },
+    );
 
     test('throws Exception for reactions that do not converge', () {
       var firstTime = true;
@@ -74,8 +78,10 @@ void main() {
         });
       }, name: 'Cyclic Reaction');
 
-      expect(() => runInAction(() => a.value = 1),
-          throwsA(const TypeMatcher<MobXCyclicReactionException>()));
+      expect(
+        () => runInAction(() => a.value = 1),
+        throwsA(const TypeMatcher<MobXCyclicReactionException>()),
+      );
       d();
     });
 
@@ -84,61 +90,73 @@ void main() {
         mock.registerFallbackValue(FakeActionRunInfo());
       });
 
-      test('when running OUTSIDE an Action, it should USE the ActionController',
-          () {
-        final controller = MockActionController();
-        mock
-            .when(() => controller.startAction(name: mock.any(named: 'name')))
-            .thenReturn(MockActionRunInfo());
+      test(
+        'when running OUTSIDE an Action, it should USE the ActionController',
+        () {
+          final controller = MockActionController();
+          mock
+              .when(() => controller.startAction(name: mock.any(named: 'name')))
+              .thenReturn(MockActionRunInfo());
 
-        final context = createContext();
-        var hasRun = false;
-        final o = Observable(0);
+          final context = createContext();
+          var hasRun = false;
+          final o = Observable(0);
 
-        context.conditionallyRunInAction(() {
-          hasRun = true;
-        }, o, actionController: controller);
+          context.conditionallyRunInAction(
+            () {
+              hasRun = true;
+            },
+            o,
+            actionController: controller,
+          );
 
-        mock.verifyInOrder([
-          () => controller.startAction(),
-          () => controller.endAction(mock.any())
-        ]);
-        expect(hasRun, isTrue);
-      });
+          mock.verifyInOrder([
+            () => controller.startAction(),
+            () => controller.endAction(mock.any()),
+          ]);
+          expect(hasRun, isTrue);
+        },
+      );
 
       test(
-          'when no ActionController is provided, it should create an ad-hoc ActionController',
-          () {
-        final context = createContext();
-        var hasRun = false;
-        final o = Observable(0);
+        'when no ActionController is provided, it should create an ad-hoc ActionController',
+        () {
+          final context = createContext();
+          var hasRun = false;
+          final o = Observable(0);
 
-        context.conditionallyRunInAction(() {
-          hasRun = true;
-        }, o);
-
-        expect(hasRun, isTrue);
-      });
-
-      test(
-          'when running INSIDE an Action, it should NOT USE the ActionController',
-          () {
-        final controller = MockActionController();
-        final context = createContext();
-        final o = Observable(0);
-
-        var hasRun = false;
-
-        runInAction(() {
           context.conditionallyRunInAction(() {
             hasRun = true;
-          }, o, actionController: controller);
-        }, context: context);
+          }, o);
 
-        mock.verifyNever(() => controller.startAction());
-        mock.verifyNever(() => controller.endAction(mock.any()));
-        expect(hasRun, isTrue);
-      });
+          expect(hasRun, isTrue);
+        },
+      );
+
+      test(
+        'when running INSIDE an Action, it should NOT USE the ActionController',
+        () {
+          final controller = MockActionController();
+          final context = createContext();
+          final o = Observable(0);
+
+          var hasRun = false;
+
+          runInAction(() {
+            context.conditionallyRunInAction(
+              () {
+                hasRun = true;
+              },
+              o,
+              actionController: controller,
+            );
+          }, context: context);
+
+          mock.verifyNever(() => controller.startAction());
+          mock.verifyNever(() => controller.endAction(mock.any()));
+          expect(hasRun, isTrue);
+        },
+      );
     });
   });
 
@@ -149,8 +167,10 @@ void main() {
 
       expect(clone.maxIterations, equals(10));
       expect(clone.maxIterations != config.maxIterations, isTrue);
-      expect(clone.disableErrorBoundaries == config.disableErrorBoundaries,
-          isTrue);
+      expect(
+        clone.disableErrorBoundaries == config.disableErrorBoundaries,
+        isTrue,
+      );
       expect(clone.writePolicy == config.writePolicy, isTrue);
       expect(clone.readPolicy == config.readPolicy, isTrue);
     });
@@ -161,7 +181,9 @@ void main() {
 
       expect(clone.maxIterations, equals(config.maxIterations));
       expect(
-          clone.disableErrorBoundaries, equals(config.disableErrorBoundaries));
+        clone.disableErrorBoundaries,
+        equals(config.disableErrorBoundaries),
+      );
       expect(clone.writePolicy, equals(config.writePolicy));
       expect(clone.readPolicy, equals(config.readPolicy));
     });
