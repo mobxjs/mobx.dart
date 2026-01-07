@@ -1,7 +1,7 @@
 part of 'core.dart';
 
-typedef Interceptor<T> = WillChangeNotification<T>? Function(
-    WillChangeNotification<T>);
+typedef Interceptor<T> =
+    WillChangeNotification<T>? Function(WillChangeNotification<T>);
 
 // ignore: one_member_abstracts
 abstract class Interceptable<T> {

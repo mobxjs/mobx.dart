@@ -19,8 +19,9 @@ T untracked<T>(T Function() fn, {ReactiveContext? context}) =>
 /// and will be deferred until the end of the transaction (batch). Transactions can
 /// be nested, in which case, no derivation will be run until the top-most batch completes
 T transaction<T>(T Function() fn, {ReactiveContext? context}) {
-  final ctx = context ?? mainContext
-    ..startBatch();
+  final ctx =
+      context ?? mainContext
+        ..startBatch();
   try {
     return fn();
   } finally {

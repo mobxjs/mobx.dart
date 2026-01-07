@@ -104,28 +104,29 @@ void main() {
     });
 
     test(
-        'observe with fireImmediately should not send events to already registered listeners',
-        () {
-      final list = ObservableList.of([0]);
+      'observe with fireImmediately should not send events to already registered listeners',
+      () {
+        final list = ObservableList.of([0]);
 
-      var count1 = 0;
-      var count2 = 0;
+        var count1 = 0;
+        var count2 = 0;
 
-      list.observe((change) {
-        count1++;
-      });
+        list.observe((change) {
+          count1++;
+        });
 
-      list.observe((change) {
-        count2++;
-      }, fireImmediately: true);
+        list.observe((change) {
+          count2++;
+        }, fireImmediately: true);
 
-      list.add(1);
+        list.add(1);
 
-      // 0 + 1: add
-      expect(count1, equals(1));
-      // 1 + 1: fireImmediately + add
-      expect(count2, equals(2));
-    });
+        // 0 + 1: add
+        expect(count1, equals(1));
+        // 1 + 1: fireImmediately + add
+        expect(count2, equals(2));
+      },
+    );
 
     test('observe set length works', () {
       // ignore: omit_local_variable_types
@@ -172,7 +173,9 @@ void main() {
             expect(change.elementChanges!.length, equals(1));
             index = change.elementChanges!.first.index;
             expect(
-                change.elementChanges!.first.type, equals(OperationType.add));
+              change.elementChanges!.first.type,
+              equals(OperationType.add),
+            );
             addedValues = [change.elementChanges!.first.newValue!];
             removedValues = null;
           }
@@ -224,7 +227,9 @@ void main() {
             expect(change.elementChanges!.length, equals(1));
             index = change.elementChanges!.first.index;
             expect(
-                change.elementChanges!.first.type, equals(OperationType.add));
+              change.elementChanges!.first.type,
+              equals(OperationType.add),
+            );
             addedValues = [change.elementChanges!.first.newValue!];
             removedValues = null;
           }
@@ -275,8 +280,10 @@ void main() {
           } else if (change.elementChanges != null) {
             expect(change.elementChanges!.length, equals(1));
             index = change.elementChanges!.first.index;
-            expect(change.elementChanges!.first.type,
-                equals(OperationType.update));
+            expect(
+              change.elementChanges!.first.type,
+              equals(OperationType.update),
+            );
             addedValues = [change.elementChanges!.first.newValue!];
             removedValues = [change.elementChanges!.first.oldValue!];
           }
@@ -349,7 +356,9 @@ void main() {
           expect(change.elementChanges!.length, equals(1));
           index = change.elementChanges!.first.index;
           expect(
-              change.elementChanges!.first.type, equals(OperationType.remove));
+            change.elementChanges!.first.type,
+            equals(OperationType.remove),
+          );
           addedValues = null;
           removedValues = [change.elementChanges!.first.oldValue];
         }
@@ -385,7 +394,9 @@ void main() {
           expect(change.elementChanges!.length, equals(1));
           index = change.elementChanges!.first.index;
           expect(
-              change.elementChanges!.first.type, equals(OperationType.remove));
+            change.elementChanges!.first.type,
+            equals(OperationType.remove),
+          );
           addedValues = null;
           removedValues = [change.elementChanges?.first.oldValue];
         }
@@ -419,8 +430,10 @@ void main() {
           } else if (change.elementChanges != null) {
             expect(change.elementChanges!.length, equals(1));
             index = change.elementChanges!.first.index;
-            expect(change.elementChanges!.first.type,
-                equals(OperationType.remove));
+            expect(
+              change.elementChanges!.first.type,
+              equals(OperationType.remove),
+            );
             addedValues = null;
             removedValues = [change.elementChanges!.first.oldValue!];
           }
@@ -632,8 +645,10 @@ void main() {
         'fold': (list) => list.fold(0, (sum, item) => sum),
         'sublist': (list) => list.sublist(0),
         'elementAt': (list) => _ignoreException(() => list.elementAt(0)),
-        'singleWhere': (list) => _ignoreException(
-            () => list.singleWhere((x) => x == 20, orElse: () => 0)),
+        'singleWhere':
+            (list) => _ignoreException(
+              () => list.singleWhere((x) => x == 20, orElse: () => 0),
+            ),
         'lastIndexOf': (list) => list.lastIndexOf(20),
         'indexOf': (list) => list.indexOf(20),
         'getRange': (list) => list.getRange(0, 0),
@@ -657,7 +672,8 @@ void main() {
 
         int? nonObservableInnerLength;
         autorun(
-            (_) => nonObservableInnerLength = list.nonObservableInner.length);
+          (_) => nonObservableInnerLength = list.nonObservableInner.length,
+        );
 
         expect(list.nonObservableInner.length, 0);
         expect(nonObservableInnerLength, equals(0));
@@ -665,8 +681,11 @@ void main() {
         list.add(20);
 
         expect(list.nonObservableInner.length, 1);
-        expect(nonObservableInnerLength, equals(0),
-            reason: 'should not be observable');
+        expect(
+          nonObservableInnerLength,
+          equals(0),
+          reason: 'should not be observable',
+        );
       });
     });
   });
@@ -832,7 +851,7 @@ void main() {
       'take': (list) => list.take(1),
       'takeWhile': (list) => list.takeWhile((_) => true),
       'cast': (list) => list.cast<num>(),
-      'reversed': (list) => list.reversed
+      'reversed': (list) => list.reversed,
     }.forEach(_templateIterableReadTest);
   });
 
@@ -841,11 +860,13 @@ void main() {
       final list = ObservableList<String>();
       var op = '';
 
-      list.addAll([1, 2].map((e) {
-        op += '$e';
+      list.addAll(
+        [1, 2].map((e) {
+          op += '$e';
 
-        return '$e';
-      }));
+          return '$e';
+        }),
+      );
 
       expect(op, '12');
       expect(list.join(''), '12');
@@ -856,12 +877,13 @@ void main() {
       var op = '';
 
       list.insertAll(
-          1,
-          [2, 3].map((e) {
-            op += '$e';
+        1,
+        [2, 3].map((e) {
+          op += '$e';
 
-            return '$e';
-          }));
+          return '$e';
+        }),
+      );
 
       expect(op, '23');
       expect(list.join(''), '123');
@@ -872,13 +894,14 @@ void main() {
       var op = '';
 
       list.replaceRange(
-          0,
-          2,
-          [4, 5].map((e) {
-            op += '$e';
+        0,
+        2,
+        [4, 5].map((e) {
+          op += '$e';
 
-            return '$e';
-          }));
+          return '$e';
+        }),
+      );
 
       expect(op, '45');
       expect(list.join(''), '453');
@@ -889,30 +912,39 @@ void main() {
       var op = '';
 
       list.setAll(
-          0,
-          [4, 5, 6].map((e) {
-            op += '$e';
+        0,
+        [4, 5, 6].map((e) {
+          op += '$e';
 
-            return '$e';
-          }));
+          return '$e';
+        }),
+      );
 
       expect(op, '456');
       expect(list.join(''), '456');
     });
 
     test('ObservableList setRange runs Iterable only once', () {
-      final list =
-          ObservableList<String>.of(['1', '2', '3', '4', '5', '6', '7']);
+      final list = ObservableList<String>.of([
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+      ]);
       var op = '';
 
       list.setRange(
-          1,
-          4,
-          [8, 9, 10].map((e) {
-            op += '$e';
+        1,
+        4,
+        [8, 9, 10].map((e) {
+          op += '$e';
 
-            return '$e';
-          }));
+          return '$e';
+        }),
+      );
 
       expect(op, '8910');
     });
@@ -930,7 +962,9 @@ dynamic _ignoreException(Function fn) {
 }
 
 void _templateReadTest(
-    String description, void Function(ObservableList<int>) fn) {
+  String description,
+  void Function(ObservableList<int>) fn,
+) {
   test(description, () {
     final atom = MockAtom();
     final list = wrapInObservableList(atom, [0, 1, 2, 3]);
@@ -946,7 +980,9 @@ void _templateReadTest(
 }
 
 void _templateWriteTest(
-    String description, bool Function(ObservableList<int>) fn) {
+  String description,
+  bool Function(ObservableList<int>) fn,
+) {
   test(description, () {
     final atom = MockAtom();
     final list = wrapInObservableList(atom, [0, 1, 2, 3]);
@@ -962,7 +998,9 @@ void _templateWriteTest(
 }
 
 void _templateIterableReadTest(
-    String description, Iterable Function(ObservableList<int>) testCase) {
+  String description,
+  Iterable Function(ObservableList<int>) testCase,
+) {
   test(description, () {
     final atom = MockAtom();
     final list = wrapInObservableList(atom, [0, 1, 2, 3]);

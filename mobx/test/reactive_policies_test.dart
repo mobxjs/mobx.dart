@@ -8,8 +8,9 @@ void main() {
 
   group('when reactive-reads are enforced', () {
     setUp(() {
-      mainContext.config =
-          ReactiveConfig.main.clone(readPolicy: ReactiveReadPolicy.always);
+      mainContext.config = ReactiveConfig.main.clone(
+        readPolicy: ReactiveReadPolicy.always,
+      );
     });
 
     test('should throw when reads happen OUTSIDE actions or reactions', () {
@@ -35,8 +36,9 @@ void main() {
 
   group('when reactive-reads are NOT enforced', () {
     setUp(() {
-      mainContext.config =
-          ReactiveConfig.main.clone(readPolicy: ReactiveReadPolicy.never);
+      mainContext.config = ReactiveConfig.main.clone(
+        readPolicy: ReactiveReadPolicy.never,
+      );
     });
 
     test('should NOT throw when reads happen OUTSIDE actions or reactions', () {

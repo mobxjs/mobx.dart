@@ -52,13 +52,14 @@ void main() {
     test('fires onError on exception', () {
       var thrown = false;
       final dispose = when(
-          (_) {
-            throw Exception('FAILED in when');
-          },
-          () {},
-          onError: (_, a) {
-            thrown = true;
-          });
+        (_) {
+          throw Exception('FAILED in when');
+        },
+        () {},
+        onError: (_, a) {
+          thrown = true;
+        },
+      );
 
       expect(thrown, isTrue);
       dispose();
@@ -69,8 +70,7 @@ void main() {
       asyncWhen((rx) {
         rxn = rx;
         throw Exception('FAIL');
-      }, name: 'Async-when')
-          .catchError((_) {
+      }, name: 'Async-when').catchError((_) {
         expect(rxn.isDisposed, isTrue);
       });
     });
@@ -88,10 +88,14 @@ void main() {
       fakeAsync((async) {
         final x = Observable(10);
         var thrown = false;
-        final d =
-            when((_) => x.value > 10, () {}, timeout: 1000, onError: (_, a) {
-          thrown = true;
-        });
+        final d = when(
+          (_) => x.value > 10,
+          () {},
+          timeout: 1000,
+          onError: (_, a) {
+            thrown = true;
+          },
+        );
 
         async.elapse(const Duration(milliseconds: 1000)); // cause a timeout
         expect(thrown, isTrue);

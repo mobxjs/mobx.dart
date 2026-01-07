@@ -141,8 +141,9 @@ void main() {
       var observationCount = 0;
 
       final evens = Computed(
-          () => list.where((element) => element.isEven).toList(),
-          equals: const ListEquality().equals);
+        () => list.where((element) => element.isEven).toList(),
+        equals: const ListEquality().equals,
+      );
 
       final dispose = evens.observe((change) {
         observationCount++;
@@ -201,14 +202,19 @@ void main() {
       }, throwsException);
 
       // ignore: avoid_as
-      expect((c1.errorValue?.exception as MobXException).message.toLowerCase(),
-          contains('cycle'));
+      expect(
+        (c1.errorValue?.exception as MobXException).message.toLowerCase(),
+        contains('cycle'),
+      );
     });
 
     test('with disableErrorBoundaries = true, exception is thrown', () {
-      final c = Computed(() => throw Exception('FAIL'),
-          context: createContext(
-              config: ReactiveConfig(disableErrorBoundaries: true)));
+      final c = Computed(
+        () => throw Exception('FAIL'),
+        context: createContext(
+          config: ReactiveConfig(disableErrorBoundaries: true),
+        ),
+      );
 
       expect(() => c.value, throwsException);
     });
@@ -273,52 +279,56 @@ void main() {
     });
 
     test(
-        "keeping computed properties alive caches values on subsequent accesses",
-        () {
-      var calcs = 0;
-      final x = Observable(1);
-      final y = Computed(() {
-        calcs++;
-        return x.value * 2;
-      }, keepAlive: true);
+      "keeping computed properties alive caches values on subsequent accesses",
+      () {
+        var calcs = 0;
+        final x = Observable(1);
+        final y = Computed(() {
+          calcs++;
+          return x.value * 2;
+        }, keepAlive: true);
 
-      expect(y.value, 2); // first access: do calculation
-      expect(y.value, 2); // second access: use cached value, no calculation
-      expect(calcs, 1); // only one calculation: cached!
-    });
-
-    test("keeping computed properties alive does not recalculate when dirty",
-        () {
-      var calcs = 0;
-      final x = Observable(1);
-      final y = Computed(() {
-        calcs++;
-        return x.value * 2;
-      }, keepAlive: true);
-
-      expect(y.value, 2); // first access: do calculation
-      expect(calcs, 1);
-      x.value = 3; // mark as dirty: no calculation
-      expect(calcs, 1);
-      expect(y.value, 6);
-    });
+        expect(y.value, 2); // first access: do calculation
+        expect(y.value, 2); // second access: use cached value, no calculation
+        expect(calcs, 1); // only one calculation: cached!
+      },
+    );
 
     test(
-        "keeping computed properties alive recalculates when accessing it dirty",
-        () {
-      var calcs = 0;
-      final x = Observable(1);
-      final y = Computed(() {
-        calcs++;
-        return x.value * 2;
-      }, keepAlive: true);
+      "keeping computed properties alive does not recalculate when dirty",
+      () {
+        var calcs = 0;
+        final x = Observable(1);
+        final y = Computed(() {
+          calcs++;
+          return x.value * 2;
+        }, keepAlive: true);
 
-      expect(y.value, 2); // first access: do calculation
-      expect(calcs, 1);
-      x.value = 3; // mark as dirty: no calculation
-      expect(calcs, 1);
-      expect(y.value, 6);
-      expect(calcs, 2);
-    });
+        expect(y.value, 2); // first access: do calculation
+        expect(calcs, 1);
+        x.value = 3; // mark as dirty: no calculation
+        expect(calcs, 1);
+        expect(y.value, 6);
+      },
+    );
+
+    test(
+      "keeping computed properties alive recalculates when accessing it dirty",
+      () {
+        var calcs = 0;
+        final x = Observable(1);
+        final y = Computed(() {
+          calcs++;
+          return x.value * 2;
+        }, keepAlive: true);
+
+        expect(y.value, 2); // first access: do calculation
+        expect(calcs, 1);
+        x.value = 3; // mark as dirty: no calculation
+        expect(calcs, 1);
+        expect(y.value, 6);
+        expect(calcs, 2);
+      },
+    );
   });
 }

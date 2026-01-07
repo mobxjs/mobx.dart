@@ -49,7 +49,9 @@ void main() {
 
       x.value = 11;
       expect(
-          executed, isFalse); // reaction has been disposed, so no more effects
+        executed,
+        isFalse,
+      ); // reaction has been disposed, so no more effects
     });
 
     group('equals override', () {
@@ -81,8 +83,10 @@ void main() {
         d();
 
         x.value = 11;
-        expect(executed,
-            isFalse); // reaction has been disposed, so no more effects
+        expect(
+          executed,
+          isFalse,
+        ); // reaction has been disposed, so no more effects
       });
     });
 
@@ -101,10 +105,13 @@ void main() {
         expect(executed, isFalse);
         async.elapse(const Duration(milliseconds: 500));
         expect(
-            executed, isFalse); // should still be false as 1s has not elapsed
+          executed,
+          isFalse,
+        ); // should still be false as 1s has not elapsed
 
         async.elapse(
-            const Duration(milliseconds: 500)); // should now trigger effect
+          const Duration(milliseconds: 500),
+        ); // should now trigger effect
         expect(executed, isTrue);
 
         d();
@@ -115,9 +122,13 @@ void main() {
       final x = Observable(10);
       var executed = false;
 
-      final d = reaction((_) => x.value > 10, (isGreaterThan10) {
-        executed = true;
-      }, scheduler: (fn) => Timer(const Duration(milliseconds: 1000), fn));
+      final d = reaction(
+        (_) => x.value > 10,
+        (isGreaterThan10) {
+          executed = true;
+        },
+        scheduler: (fn) => Timer(const Duration(milliseconds: 1000), fn),
+      );
 
       fakeAsync((async) {
         x.value = 11;
@@ -126,10 +137,13 @@ void main() {
         expect(executed, isFalse);
         async.elapse(const Duration(milliseconds: 500));
         expect(
-            executed, isFalse); // should still be false as 1s has not elapsed
+          executed,
+          isFalse,
+        ); // should still be false as 1s has not elapsed
 
         async.elapse(
-            const Duration(milliseconds: 500)); // should now trigger effect
+          const Duration(milliseconds: 500),
+        ); // should now trigger effect
         expect(executed, isTrue);
 
         d();
@@ -152,9 +166,14 @@ void main() {
       final x = Observable(10);
       var executed = false;
 
-      final d = reaction((_) => x.value > 10, (isGreaterThan10) {
-        executed = true;
-      }, delay: 1000, fireImmediately: true);
+      final d = reaction(
+        (_) => x.value > 10,
+        (isGreaterThan10) {
+          executed = true;
+        },
+        delay: 1000,
+        fireImmediately: true,
+      );
 
       fakeAsync((async) {
         // Effect should be executed, as we are forcing an immediate change even though there is a delay
@@ -165,10 +184,13 @@ void main() {
         executed = false;
         async.elapse(const Duration(milliseconds: 500));
         expect(
-            executed, isFalse); // should still be false as 1s has not elapsed
+          executed,
+          isFalse,
+        ); // should still be false as 1s has not elapsed
 
         async.elapse(
-            const Duration(milliseconds: 500)); // should now trigger effect
+          const Duration(milliseconds: 500),
+        ); // should now trigger effect
         expect(executed, isTrue);
 
         executed = false;
@@ -177,7 +199,8 @@ void main() {
 
         expect(executed, isFalse);
         async.elapse(
-            const Duration(milliseconds: 1000)); // should now trigger effect
+          const Duration(milliseconds: 1000),
+        ); // should now trigger effect
         expect(executed, isTrue);
 
         d();
@@ -188,17 +211,20 @@ void main() {
       final x = Observable(10);
       var executed = false;
 
-      final d = reaction((reaction) {
-        final isGreaterThan10 = x.value > 10;
+      final d = reaction(
+        (reaction) {
+          final isGreaterThan10 = x.value > 10;
 
-        if (isGreaterThan10) {
-          reaction.dispose();
-        }
+          if (isGreaterThan10) {
+            reaction.dispose();
+          }
 
-        return isGreaterThan10;
-      }, (_) {
-        executed = true;
-      });
+          return isGreaterThan10;
+        },
+        (_) {
+          executed = true;
+        },
+      );
 
       expect(d.reaction.isDisposed, isFalse);
 
@@ -211,13 +237,14 @@ void main() {
     test('fires onError on exception inside tracking function', () {
       var thrown = false;
       final dispose = reaction(
-          (_) {
-            throw Exception('FAILED in reaction');
-          },
-          (_) {},
-          onError: (_, a) {
-            thrown = true;
-          });
+        (_) {
+          throw Exception('FAILED in reaction');
+        },
+        (_) {},
+        onError: (_, a) {
+          thrown = true;
+        },
+      );
 
       expect(thrown, isTrue);
       expect(dispose.reaction.errorValue, isException);
@@ -228,17 +255,23 @@ void main() {
       var thrown = false;
       final x = Observable(false);
 
-      final dispose = reaction((_) => x.value, (_) {
-        throw Exception('FAILED in reaction');
-      }, onError: (_, a) {
-        thrown = true;
-      });
+      final dispose = reaction(
+        (_) => x.value,
+        (_) {
+          throw Exception('FAILED in reaction');
+        },
+        onError: (_, a) {
+          thrown = true;
+        },
+      );
 
       x.value = true; // force a change
       expect(thrown, isTrue);
       expect(dispose.reaction.errorValue, isException);
-      expect(dispose.reaction.errorValue.toString(),
-          contains('MobXCaughtException'));
+      expect(
+        dispose.reaction.errorValue.toString(),
+        contains('MobXCaughtException'),
+      );
       dispose();
     });
 
@@ -253,19 +286,23 @@ void main() {
       verifyInOrder([
         () => context.nameFor('Reaction'),
         () => context.addPendingReaction(dispose.reaction),
-        () => context.runReactions()
+        () => context.runReactions(),
       ]);
 
       dispose();
     });
 
     test('reaction throws when config.disableErrorBoundaries = true', () {
-      final context =
-          ReactiveContext(config: ReactiveConfig(disableErrorBoundaries: true));
+      final context = ReactiveContext(
+        config: ReactiveConfig(disableErrorBoundaries: true),
+      );
 
       expect(() {
-        final dispose =
-            reaction((_) => throw Exception('FAIL'), (_) {}, context: context);
+        final dispose = reaction(
+          (_) => throw Exception('FAIL'),
+          (_) {},
+          context: context,
+        );
 
         dispose();
       }, throwsException);
@@ -348,16 +385,20 @@ void main() {
       });
 
       test('ReactionImpl tracks observables', () {
-        final reaction =
-            ReactionImpl(mainContext, () {}, name: 'test_reaction_1')
-              ..track(() {});
+        final reaction = ReactionImpl(
+          mainContext,
+          () {},
+          name: 'test_reaction_1',
+        )..track(() {});
 
         expect(reaction.hasObservables, isFalse);
 
         final x = Observable(0);
-        final reaction1 =
-            ReactionImpl(mainContext, () {}, name: 'test_reaction_2')
-              ..track(() => x.value + 1);
+        final reaction1 = ReactionImpl(
+          mainContext,
+          () {},
+          name: 'test_reaction_2',
+        )..track(() => x.value + 1);
 
         expect(reaction1.hasObservables, isTrue);
       });
@@ -365,9 +406,11 @@ void main() {
       test('when disposed, clearObservables', () {
         final x = Observable(0);
 
-        final reaction =
-            ReactionImpl(mainContext, () {}, name: 'test_reaction_1')
-              ..track(() => x.value + 1);
+        final reaction = ReactionImpl(
+          mainContext,
+          () {},
+          name: 'test_reaction_1',
+        )..track(() => x.value + 1);
         expect(reaction.hasObservables, isTrue);
 
         reaction.dispose();

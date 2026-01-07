@@ -25,8 +25,12 @@ void testSetup({
 }
 
 void setupTurnOffWritePolicy() {
-  setUp(() => mainContext.config =
-      ReactiveConfig(writePolicy: ReactiveWritePolicy.never));
+  setUp(
+    () =>
+        mainContext.config = ReactiveConfig(
+          writePolicy: ReactiveWritePolicy.never,
+        ),
+  );
 
   tearDown(() => mainContext.config = ReactiveConfig.main);
 }
@@ -35,9 +39,12 @@ void setupTurnOffWritePolicy() {
 void setupThrowReactionErrors() {
   late Dispose disposeReactionError;
 
-  setUp(() => disposeReactionError = mainContext.onReactionError((_, rxn) {
-        throw Exception(rxn.errorValue);
-      }));
+  setUp(
+    () =>
+        disposeReactionError = mainContext.onReactionError((_, rxn) {
+          throw Exception(rxn.errorValue);
+        }),
+  );
 
   tearDown(() => disposeReactionError());
 }

@@ -1,5 +1,20 @@
 ## 2.7.5
-- **FIX**: useDeepEquality is not being correctly passed to the generated code.
+
+ - Upgrading sdk and Analyzer fixes
+
+ - **FIX**: fixing lints in tests.
+ - **FIX**: package upgrades, analysis issue fixes.
+ - **FIX**: error with code generation when file has unnamed extension (#1020).
+ - **FIX**: make readonly work with computed (#710).
+ - **FIX**: ObservableStream.listen() should also keep observable values updated (#708).
+ - **FIX**: useDeepEquality is not being correctly passed to the generated code.
+ - **FEAT**: add keepAlive to Computed (#976).
+ - **FEAT**: support late observables (#973).
+ - **FEAT**: Adds `useEquatable` for creating observables (#971).
+ - **FEAT**: require `analyzer: ^5.12.0` (#934).
+ - **FEAT**: Adds custom `equals` for creating observables. (#907).
+ - **FEAT**: Adds support for annotations (#904).
+ - **FEAT**: Allow use custom context (#770).
 
 ## 2.7.4
 - Drop build_resolvers as a dependency, which enables support for build_runner 2.8.0

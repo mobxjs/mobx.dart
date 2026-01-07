@@ -80,8 +80,10 @@ void main() {
     });
 
     test('splayTreeMapFrom iterates based on compare function', () {
-      final map = ObservableMap<String, int>.splayTreeMapFrom({},
-          compare: (a, b) => b.compareTo(a));
+      final map = ObservableMap<String, int>.splayTreeMapFrom(
+        {},
+        compare: (a, b) => b.compareTo(a),
+      );
       map['a'] = 1;
       map['b'] = 2;
       map['c'] = 3;
@@ -104,28 +106,30 @@ void main() {
     });
 
     group(
-        'fires reportObserved() for iterable transformation methods only when iterating',
-        () {
-      <String, Iterable Function(ObservableMap<String, int>)>{
-        'keys': (m) => m.keys,
-        'values': (m) => m.values,
-        'entries': (m) => m.entries,
-        'cast': (m) => m.cast().keys
-      }.forEach(runIterableTest);
-    });
+      'fires reportObserved() for iterable transformation methods only when iterating',
+      () {
+        <String, Iterable Function(ObservableMap<String, int>)>{
+          'keys': (m) => m.keys,
+          'values': (m) => m.values,
+          'entries': (m) => m.entries,
+          'cast': (m) => m.cast().keys,
+        }.forEach(runIterableTest);
+      },
+    );
 
     group('fires reportChanged() for write methods', () {
       <String, void Function(ObservableMap<String, int>)>{
         '[]=': (m) => m['d'] = 4,
         'addAll': (m) => m.addAll({'d': 4, 'e': 5}),
-        'addEntries': (m) =>
-            m.addEntries([const MapEntry('d', 4), const MapEntry('e', 5)]),
+        'addEntries':
+            (m) =>
+                m.addEntries([const MapEntry('d', 4), const MapEntry('e', 5)]),
         'clear': (m) => m.clear(),
         'remove': (m) => m.remove('a'),
         'removeWhere': (m) => m.removeWhere((key, i) => i == 2),
         'update': (m) => m.update('a', (value) => value + 1),
-        'update ifAbsent': (m) =>
-            m.update('d', (value) => value + 1, ifAbsent: () => 4),
+        'update ifAbsent':
+            (m) => m.update('d', (value) => value + 1, ifAbsent: () => 4),
         'updateAll': (m) => m.updateAll((_, value) => value + 1),
         'putIfAbsent absent': (m) => m.putIfAbsent('d', () => 4),
       }.forEach(runWriteTest);
@@ -186,32 +190,36 @@ void main() {
     });
 
     test(
-        'remove reports remove change when there are listeners and the item exists',
-        () {
-      late MapChange change;
-      ObservableMap.of({'a': 0})
-        ..observe((c) => change = c)
-        ..remove('a');
+      'remove reports remove change when there are listeners and the item exists',
+      () {
+        late MapChange change;
+        ObservableMap.of({'a': 0})
+          ..observe((c) => change = c)
+          ..remove('a');
 
-      expect(change.key, equals('a'));
-      expect(change.oldValue, equals(0));
-    });
+        expect(change.key, equals('a'));
+        expect(change.oldValue, equals(0));
+      },
+    );
 
     test(
-        "remove doesn't report changes when there are listeners and the item doesn't exist",
-        () {
-      MapChange? change;
-      ObservableMap.of({'a': 0})
-        ..observe((c) => change = c)
-        ..remove('b');
+      "remove doesn't report changes when there are listeners and the item doesn't exist",
+      () {
+        MapChange? change;
+        ObservableMap.of({'a': 0})
+          ..observe((c) => change = c)
+          ..remove('b');
 
-      expect(change, isNull);
-    });
+        expect(change, isNull);
+      },
+    );
 
     test('observe sends changes immediately when fireImmediately is true', () {
       final changes = <MapChange>[];
-      ObservableMap.of({'a': 0, 'b': 1})
-          .observe(changes.add, fireImmediately: true);
+      ObservableMap.of({
+        'a': 0,
+        'b': 1,
+      }).observe(changes.add, fireImmediately: true);
 
       expect(changes[0].type, equals(OperationType.add));
       expect(changes[0].key, equals('a'));
@@ -223,18 +231,19 @@ void main() {
     });
 
     test(
-        'observe should not send changes to all listeners immediately when fireImmediately is true',
-        () {
-      final changes1 = <MapChange>[];
-      final changes2 = <MapChange>[];
-      final map = ObservableMap.of({'a': 0, 'b': 1});
+      'observe should not send changes to all listeners immediately when fireImmediately is true',
+      () {
+        final changes1 = <MapChange>[];
+        final changes2 = <MapChange>[];
+        final map = ObservableMap.of({'a': 0, 'b': 1});
 
-      map.observe(changes1.add);
-      map.observe(changes2.add, fireImmediately: true);
+        map.observe(changes1.add);
+        map.observe(changes2.add, fireImmediately: true);
 
-      expect(changes1, isEmpty);
-      expect(changes2, isNotEmpty);
-    });
+        expect(changes1, isEmpty);
+        expect(changes2, isNotEmpty);
+      },
+    );
 
     test('works when adding a null value', () {
       final map = ObservableMap();
@@ -255,14 +264,19 @@ void main() {
       map[10] = 20;
 
       expect(map.nonObservableInner.length, 1);
-      expect(nonObservableInnerLength, equals(0),
-          reason: 'should not be observable');
+      expect(
+        nonObservableInnerLength,
+        equals(0),
+        reason: 'should not be observable',
+      );
     });
   });
 }
 
 void runWriteTest(
-    String description, void Function(ObservableMap<String, int>) body) {
+  String description,
+  void Function(ObservableMap<String, int>) body,
+) {
   test(description, () {
     final atom = MockAtom();
     final map = wrapInObservableMap(atom, {'a': 1, 'b': 2, 'c': 3});
@@ -277,7 +291,9 @@ void runWriteTest(
 }
 
 void runReadTest(
-    String description, void Function(ObservableMap<String, int>) body) {
+  String description,
+  void Function(ObservableMap<String, int>) body,
+) {
   test(description, () {
     final atom = MockAtom();
     final map = wrapInObservableMap(atom, {'a': 1, 'b': 2, 'c': 3});
@@ -293,7 +309,9 @@ void runReadTest(
 }
 
 void runIterableTest(
-    String description, Iterable Function(ObservableMap<String, int>) body) {
+  String description,
+  Iterable Function(ObservableMap<String, int>) body,
+) {
   test(description, () {
     final atom = MockAtom();
     final map = wrapInObservableMap(atom, {'a': 1, 'b': 2, 'c': 3});

@@ -69,7 +69,7 @@ void main() {
       mock.verifyInOrder([
         () => context.startBatch(),
         () => context.propagateChanged(value),
-        () => context.endBatch()
+        () => context.endBatch(),
       ]);
     });
 
@@ -91,13 +91,14 @@ void main() {
     test('basics works', () {
       var executionCount = 0;
       final a = Atom(
-          name: 'test',
-          onObserved: () {
-            executionCount++;
-          },
-          onUnobserved: () {
-            executionCount++;
-          });
+        name: 'test',
+        onObserved: () {
+          executionCount++;
+        },
+        onUnobserved: () {
+          executionCount++;
+        },
+      );
 
       final d = autorun((_) {
         a.reportObserved();

@@ -3,143 +3,150 @@ import 'package:test/test.dart';
 
 void main() {
   test(
-      'when write to @observable field with changed value, should trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+    'when write to @observable field with changed value, should trigger notifications for downstream',
+    () {
+      final store = _ExampleStore();
 
-    final autorunResults = <String>[];
-    autorun((_) => autorunResults.add(store.value));
+      final autorunResults = <String>[];
+      autorun((_) => autorunResults.add(store.value));
 
-    expect(autorunResults, ['first']);
+      expect(autorunResults, ['first']);
 
-    store.value = 'second';
+      store.value = 'second';
 
-    expect(autorunResults, ['first', 'second']);
-  });
+      expect(autorunResults, ['first', 'second']);
+    },
+  );
 
   // fixed by #855
   test(
-      'when write to @observable field with unchanged value, should not trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+    'when write to @observable field with unchanged value, should not trigger notifications for downstream',
+    () {
+      final store = _ExampleStore();
 
-    final autorunResults = <String>[];
-    autorun((_) => autorunResults.add(store.value));
+      final autorunResults = <String>[];
+      autorun((_) => autorunResults.add(store.value));
 
-    expect(autorunResults, ['first']);
+      expect(autorunResults, ['first']);
 
-    store.value = store.value;
+      store.value = store.value;
 
-    expect(autorunResults, ['first']);
-  });
-
-  test(
-      'when write to @alwaysNotify field with unchanged value, should trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
-
-    final autorunResults = <String>[];
-    autorun((_) => autorunResults.add(store.value2));
-
-    expect(autorunResults, ['first']);
-
-    store.value2 = store.value2;
-
-    expect(autorunResults, ['first', 'first']);
-  });
+      expect(autorunResults, ['first']);
+    },
+  );
 
   test(
-      'when write to @MakeObservable(equals: "a?.length == b?.length") field with changed value and not equals, should trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+    'when write to @alwaysNotify field with unchanged value, should trigger notifications for downstream',
+    () {
+      final store = _ExampleStore();
 
-    final autorunResults = <int>[];
-    autorun((_) => autorunResults.add(store.value3.length));
+      final autorunResults = <String>[];
+      autorun((_) => autorunResults.add(store.value2));
 
-    expect(autorunResults, [5]); // length: 5
+      expect(autorunResults, ['first']);
 
-    // length: 5, should not trigger
-    store.value3 = 'third';
+      store.value2 = store.value2;
 
-    expect(autorunResults, [5]);
-
-    // length: 6, should trigger
-    store.value3 = 'second';
-
-    expect(autorunResults, [5, 6]);
-  });
+      expect(autorunResults, ['first', 'first']);
+    },
+  );
 
   test(
-      'when write to iterable @observable field with unchanged value, should not trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+    'when write to @MakeObservable(equals: "a?.length == b?.length") field with changed value and not equals, should trigger notifications for downstream',
+    () {
+      final store = _ExampleStore();
 
-    final autorunResults = <List<String>>[];
-    autorun((_) => autorunResults.add(store.list));
+      final autorunResults = <int>[];
+      autorun((_) => autorunResults.add(store.value3.length));
 
-    store.list[0] = 'first';
-    expect(autorunResults, [
-      ['first']
-    ]);
+      expect(autorunResults, [5]); // length: 5
 
-    store.list[0] = 'first';
-    expect(autorunResults, [
-      ['first']
-    ]);
+      // length: 5, should not trigger
+      store.value3 = 'third';
 
-    store.list[0] = 'first';
-    expect(autorunResults, [
-      ['first']
-    ]);
-  });
+      expect(autorunResults, [5]);
+
+      // length: 6, should trigger
+      store.value3 = 'second';
+
+      expect(autorunResults, [5, 6]);
+    },
+  );
 
   test(
-      'when write to map @observable field with unchanged value, should not trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+    'when write to iterable @observable field with unchanged value, should not trigger notifications for downstream',
+    () {
+      final store = _ExampleStore();
 
-    final autorunResults = <Map<String, int>>[];
-    autorun((_) => autorunResults.add(store.map));
+      final autorunResults = <List<String>>[];
+      autorun((_) => autorunResults.add(store.list));
 
-    store.map['first'] = 1;
-    expect(autorunResults, [
-      {'first': 1}
-    ]);
+      store.list[0] = 'first';
+      expect(autorunResults, [
+        ['first'],
+      ]);
 
-    store.map['first'] = 1;
-    expect(autorunResults, [
-      {'first': 1}
-    ]);
+      store.list[0] = 'first';
+      expect(autorunResults, [
+        ['first'],
+      ]);
 
-    store.map['first'] = 1;
-    expect(autorunResults, [
-      {'first': 1}
-    ]);
-  });
+      store.list[0] = 'first';
+      expect(autorunResults, [
+        ['first'],
+      ]);
+    },
+  );
 
   test(
-      'when write to @MakeObservable(useDeepEquality: true) field with same value, should not trigger notifications for downstream',
-      () {
-    final store = _ExampleStore();
+    'when write to map @observable field with unchanged value, should not trigger notifications for downstream',
+    () {
+      final store = _ExampleStore();
 
-    final autorunResults = <List<int>>[];
-    autorun((_) => autorunResults.add(store.iterable));
+      final autorunResults = <Map<String, int>>[];
+      autorun((_) => autorunResults.add(store.map));
 
-    store.iterable = [1];
-    expect(autorunResults, [
-      [1]
-    ]);
+      store.map['first'] = 1;
+      expect(autorunResults, [
+        {'first': 1},
+      ]);
 
-    store.iterable = [1];
-    expect(autorunResults, [
-      [1]
-    ]);
+      store.map['first'] = 1;
+      expect(autorunResults, [
+        {'first': 1},
+      ]);
 
-    store.iterable = [1];
-    expect(autorunResults, [
-      [1]
-    ]);
-  });
+      store.map['first'] = 1;
+      expect(autorunResults, [
+        {'first': 1},
+      ]);
+    },
+  );
+
+  test(
+    'when write to @MakeObservable(useDeepEquality: true) field with same value, should not trigger notifications for downstream',
+    () {
+      final store = _ExampleStore();
+
+      final autorunResults = <List<int>>[];
+      autorun((_) => autorunResults.add(store.iterable));
+
+      store.iterable = [1];
+      expect(autorunResults, [
+        [1],
+      ]);
+
+      store.iterable = [1];
+      expect(autorunResults, [
+        [1],
+      ]);
+
+      store.iterable = [1];
+      expect(autorunResults, [
+        [1],
+      ]);
+    },
+  );
 }
 
 class _ExampleStore = __ExampleStore with _$_ExampleStore;
@@ -186,8 +193,10 @@ mixin _$_ExampleStore on __ExampleStore, Store {
   }
 
   // ignore: non_constant_identifier_names
-  late final _$value2Atom =
-      Atom(name: '__ExampleStore.value2', context: context);
+  late final _$value2Atom = Atom(
+    name: '__ExampleStore.value2',
+    context: context,
+  );
 
   @override
   String get value2 {
@@ -203,8 +212,10 @@ mixin _$_ExampleStore on __ExampleStore, Store {
   }
 
   // ignore: non_constant_identifier_names
-  late final _$value3Atom =
-      Atom(name: '__ExampleStore.value3', context: context);
+  late final _$value3Atom = Atom(
+    name: '__ExampleStore.value3',
+    context: context,
+  );
 
   @override
   String get value3 {
@@ -252,8 +263,10 @@ mixin _$_ExampleStore on __ExampleStore, Store {
   }
 
   // ignore: non_constant_identifier_names
-  late final _$iterableAtom =
-      Atom(name: '__ExampleStore.iterable', context: context);
+  late final _$iterableAtom = Atom(
+    name: '__ExampleStore.iterable',
+    context: context,
+  );
 
   @override
   List<int> get iterable {

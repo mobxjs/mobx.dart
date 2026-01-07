@@ -65,9 +65,10 @@ class ReactiveConfig {
 
   /// The main or default configuration used by [ReactiveContext]
   static final ReactiveConfig main = ReactiveConfig(
-      disableErrorBoundaries: false,
-      writePolicy: ReactiveWritePolicy.observed,
-      readPolicy: ReactiveReadPolicy.never);
+    disableErrorBoundaries: false,
+    writePolicy: ReactiveWritePolicy.observed,
+    readPolicy: ReactiveReadPolicy.never,
+  );
 
   /// Whether MobX should throw exceptions instead of catching them and store
   /// as [Derivation.errorValue].
@@ -86,19 +87,20 @@ class ReactiveConfig {
 
   final bool isSpyEnabled;
 
-  ReactiveConfig clone(
-          {bool? disableErrorBoundaries,
-          ReactiveWritePolicy? writePolicy,
-          ReactiveReadPolicy? readPolicy,
-          int? maxIterations,
-          bool? isSpyEnabled}) =>
-      ReactiveConfig(
-          disableErrorBoundaries:
-              disableErrorBoundaries ?? this.disableErrorBoundaries,
-          writePolicy: writePolicy ?? this.writePolicy,
-          readPolicy: readPolicy ?? this.readPolicy,
-          maxIterations: maxIterations ?? this.maxIterations,
-          isSpyEnabled: isSpyEnabled ?? this.isSpyEnabled);
+  ReactiveConfig clone({
+    bool? disableErrorBoundaries,
+    ReactiveWritePolicy? writePolicy,
+    ReactiveReadPolicy? readPolicy,
+    int? maxIterations,
+    bool? isSpyEnabled,
+  }) => ReactiveConfig(
+    disableErrorBoundaries:
+        disableErrorBoundaries ?? this.disableErrorBoundaries,
+    writePolicy: writePolicy ?? this.writePolicy,
+    readPolicy: readPolicy ?? this.readPolicy,
+    maxIterations: maxIterations ?? this.maxIterations,
+    isSpyEnabled: isSpyEnabled ?? this.isSpyEnabled,
+  );
 }
 
 class ReactiveContext {
@@ -155,8 +157,8 @@ class ReactiveContext {
       runReactions();
 
       for (var i = 0; i < _state.pendingUnobservations.length; i++) {
-        final ob = _state.pendingUnobservations[i]
-          .._isPendingUnobservation = false;
+        final ob =
+            _state.pendingUnobservations[i].._isPendingUnobservation = false;
 
         if (ob._observers.isEmpty) {
           if (ob._isBeingObserved) {
@@ -184,8 +186,10 @@ class ReactiveContext {
     assert(() {
       switch (config.readPolicy) {
         case ReactiveReadPolicy.always:
-          assert(_state.isWithinBatch || _state.isWithinDerivation,
-              'Observable values cannot be read outside Actions and Reactions. Make sure to wrap them inside an action or a reaction. Tried to read: ${atom.name}');
+          assert(
+            _state.isWithinBatch || _state.isWithinDerivation,
+            'Observable values cannot be read outside Actions and Reactions. Make sure to wrap them inside an action or a reaction. Tried to read: ${atom.name}',
+          );
           break;
 
         case ReactiveReadPolicy.never:
@@ -200,7 +204,8 @@ class ReactiveContext {
     // Cannot mutate observables inside a computed. This is required to maintain the consistency of the reactive system.
     if (_state.computationDepth > 0 && atom.hasObservers) {
       throw MobXException(
-          'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}');
+        'Computed values are not allowed to cause side effects by changing observables that are already being observed. Tried to modify: ${atom.name}',
+      );
     }
 
     // ---
@@ -217,13 +222,17 @@ class ReactiveContext {
             break;
           }
 
-          assert(_state.isWithinBatch,
-              'Side effects like changing state are not allowed at this point. Please wrap the code in an "action". Tried to modify: ${atom.name}');
+          assert(
+            _state.isWithinBatch,
+            'Side effects like changing state are not allowed at this point. Please wrap the code in an "action". Tried to modify: ${atom.name}',
+          );
           break;
 
         case ReactiveWritePolicy.always:
-          assert(_state.isWithinBatch,
-              'Changing observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}');
+          assert(
+            _state.isWithinBatch,
+            'Changing observable values outside actions is not allowed. Please wrap the code in an "action" if this change is intended. Tried to modify ${atom.name}',
+          );
       }
 
       return true;
@@ -279,10 +288,12 @@ class ReactiveContext {
   }
 
   void _bindDependencies(Derivation derivation) {
-    final staleObservables =
-        derivation._observables.difference(derivation._newObservables!);
-    final newObservables =
-        derivation._newObservables!.difference(derivation._observables);
+    final staleObservables = derivation._observables.difference(
+      derivation._newObservables!,
+    );
+    final newObservables = derivation._newObservables!.difference(
+      derivation._observables,
+    );
     var lowestNewDerivationState = DerivationState.upToDate;
 
     // Add newly found observables
@@ -343,9 +354,10 @@ class ReactiveContext {
         _resetState();
 
         throw MobXCyclicReactionException(
-            "Reaction doesn't converge to a stable state after ${config.maxIterations} iterations. "
-            "Probably there is a cycle in the reactive function: $failingReaction "
-            "(creation stack: ${failingReaction.debugCreationStack})");
+          "Reaction doesn't converge to a stable state after ${config.maxIterations} iterations. "
+          "Probably there is a cycle in the reactive function: $failingReaction "
+          "(creation stack: ${failingReaction.debugCreationStack})",
+        );
       }
 
       final remainingReactions = allReactions.toList(growable: false);
@@ -536,7 +548,9 @@ class ReactiveContext {
   }
 
   void _resetState() {
-    _state = _ReactiveState()
-      ..allowStateChanges = _config.writePolicy == ReactiveWritePolicy.never;
+    _state =
+        _ReactiveState()
+          ..allowStateChanges =
+              _config.writePolicy == ReactiveWritePolicy.never;
   }
 }

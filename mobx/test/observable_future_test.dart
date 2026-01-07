@@ -34,63 +34,69 @@ void main() {
       expect(future.error, isNull);
     });
 
-    test('status should be pending while running and fulfilled when completed',
-        () async {
-      final completer = Completer<String>();
-      final future = ObservableFuture(completer.future);
-      completer.complete('FULFILLED');
-      await future;
-      expect(future.status, equals(FutureStatus.fulfilled));
-      expect(future.value, equals('FULFILLED'));
-      expect(future.error, isNull);
-    });
-
-    test('status should be pending while running and rejected when failed',
-        () async {
-      final completer = Completer();
-      final future = ObservableFuture(completer.future);
-      expect(future.status, equals(FutureStatus.pending));
-      expect(future.value, isNull);
-      expect(future.error, isNull);
-      completer.completeError('ERROR');
-      try {
+    test(
+      'status should be pending while running and fulfilled when completed',
+      () async {
+        final completer = Completer<String>();
+        final future = ObservableFuture(completer.future);
+        completer.complete('FULFILLED');
         await future;
-        // ignore:avoid_catches_without_on_clauses
-      } catch (error) {
-        expect(error, equals('ERROR'));
-      }
-      expect(future.status, equals(FutureStatus.rejected));
-      expect(future.value, isNull);
-      expect(future.error, equals('ERROR'));
-    });
+        expect(future.status, equals(FutureStatus.fulfilled));
+        expect(future.value, equals('FULFILLED'));
+        expect(future.error, isNull);
+      },
+    );
 
-    test('replace should update value and status after new promise completes',
-        () async {
-      var future = ObservableFuture<String>.error('ERROR');
-      expect(future.status, FutureStatus.rejected);
-      expect(future.result, equals('ERROR'));
+    test(
+      'status should be pending while running and rejected when failed',
+      () async {
+        final completer = Completer();
+        final future = ObservableFuture(completer.future);
+        expect(future.status, equals(FutureStatus.pending));
+        expect(future.value, isNull);
+        expect(future.error, isNull);
+        completer.completeError('ERROR');
+        try {
+          await future;
+          // ignore:avoid_catches_without_on_clauses
+        } catch (error) {
+          expect(error, equals('ERROR'));
+        }
+        expect(future.status, equals(FutureStatus.rejected));
+        expect(future.value, isNull);
+        expect(future.error, equals('ERROR'));
+      },
+    );
 
-      final completer = Completer<String>();
+    test(
+      'replace should update value and status after new promise completes',
+      () async {
+        var future = ObservableFuture<String>.error('ERROR');
+        expect(future.status, FutureStatus.rejected);
+        expect(future.result, equals('ERROR'));
 
-      future = future.replace(completer.future);
-      expect(future.status, FutureStatus.rejected);
-      expect(future.result, equals('ERROR'));
+        final completer = Completer<String>();
 
-      completer.complete('success');
-      await future;
+        future = future.replace(completer.future);
+        expect(future.status, FutureStatus.rejected);
+        expect(future.result, equals('ERROR'));
 
-      expect(future.status, equals(FutureStatus.fulfilled));
-      expect(future.value, equals('success'));
-    });
+        completer.complete('success');
+        await future;
+
+        expect(future.status, equals(FutureStatus.fulfilled));
+        expect(future.value, equals('success'));
+      },
+    );
 
     test('match works for future completing with a value', () async {
       final future = ObservableFuture<int>(Future(() => 0));
 
       String? getResult() => future.match(
-            fulfilled: (i) => 'fulfilled',
-            pending: () => 'pending',
-            rejected: (error) => 'rejected',
-          );
+        fulfilled: (i) => 'fulfilled',
+        pending: () => 'pending',
+        rejected: (error) => 'rejected',
+      );
 
       expect(getResult(), equals('pending'));
       expect(future.status, equals(FutureStatus.pending));
@@ -106,10 +112,10 @@ void main() {
       final future = ObservableFuture<int>(completer.future);
 
       String? getResult() => future.match(
-            fulfilled: (i) => 'fulfilled',
-            pending: () => 'pending',
-            rejected: (error) => 'rejected',
-          );
+        fulfilled: (i) => 'fulfilled',
+        pending: () => 'pending',
+        rejected: (error) => 'rejected',
+      );
 
       expect(getResult(), equals('pending'));
       expect(future.status, equals(FutureStatus.pending));
@@ -125,57 +131,60 @@ void main() {
     });
 
     test(
-        'match return null if state is pending and no pending matcher is provided',
-        () async {
-      final future = ObservableFuture<int>(Future(() => 0));
+      'match return null if state is pending and no pending matcher is provided',
+      () async {
+        final future = ObservableFuture<int>(Future(() => 0));
 
-      String? getResult() => future.match(
-            fulfilled: (i) => 'fulfilled',
-            rejected: (error) => 'rejected',
-          );
+        String? getResult() => future.match(
+          fulfilled: (i) => 'fulfilled',
+          rejected: (error) => 'rejected',
+        );
 
-      expect(getResult(), equals(null));
+        expect(getResult(), equals(null));
 
-      await future;
-      expect(getResult(), equals('fulfilled'));
-    });
-
-    test(
-        'match return null if state is fulfilled and no fulfilled matcher is provided',
-        () async {
-      final future = ObservableFuture<int>(Future(() => 0));
-
-      String? getResult() => future.match(
-            pending: () => 'pending',
-            rejected: (error) => 'rejected',
-          );
-
-      expect(getResult(), equals('pending'));
-
-      await future;
-      expect(getResult(), equals(null));
-    });
-
-    test(
-        'match return null if state is rejected and no rejected matcher is provided',
-        () async {
-      final completer = Completer<int>();
-      final future = ObservableFuture<int>(completer.future);
-
-      String? getResult() => future.match(
-            pending: () => 'pending',
-            fulfilled: (i) => 'fulfilled',
-          );
-
-      expect(getResult(), equals('pending'));
-
-      completer.completeError('ERROR');
-      try {
         await future;
-        // ignore:avoid_catches_without_on_clauses
-      } catch (_) {}
-      expect(getResult(), equals(null));
-    });
+        expect(getResult(), equals('fulfilled'));
+      },
+    );
+
+    test(
+      'match return null if state is fulfilled and no fulfilled matcher is provided',
+      () async {
+        final future = ObservableFuture<int>(Future(() => 0));
+
+        String? getResult() => future.match(
+          pending: () => 'pending',
+          rejected: (error) => 'rejected',
+        );
+
+        expect(getResult(), equals('pending'));
+
+        await future;
+        expect(getResult(), equals(null));
+      },
+    );
+
+    test(
+      'match return null if state is rejected and no rejected matcher is provided',
+      () async {
+        final completer = Completer<int>();
+        final future = ObservableFuture<int>(completer.future);
+
+        String? getResult() => future.match(
+          pending: () => 'pending',
+          fulfilled: (i) => 'fulfilled',
+        );
+
+        expect(getResult(), equals('pending'));
+
+        completer.completeError('ERROR');
+        try {
+          await future;
+          // ignore:avoid_catches_without_on_clauses
+        } catch (_) {}
+        expect(getResult(), equals(null));
+      },
+    );
 
     test('stream should work', () async {
       final future = ObservableFuture(Future(() => 1));
@@ -200,21 +209,26 @@ void main() {
     });
 
     test('catchError works', () async {
-      final future = ObservableFuture(Future<int>(() {
-        // ignore:only_throw_errors
-        throw 'Error';
-      })).catchError((error) => 1);
+      final future = ObservableFuture(
+        Future<int>(() {
+          // ignore:only_throw_errors
+          throw 'Error';
+        }),
+      ).catchError((error) => 1);
 
       expect(await future, equals(1));
     });
 
     test('timeout works', () async {
       final completer = Completer<int>();
-      final future = ObservableFuture(completer.future)
-          .timeout(const Duration(milliseconds: 1));
+      final future = ObservableFuture(
+        completer.future,
+      ).timeout(const Duration(milliseconds: 1));
 
-      expect(() async => await future,
-          throwsA(const TypeMatcher<TimeoutException>()));
+      expect(
+        () async => await future,
+        throwsA(const TypeMatcher<TimeoutException>()),
+      );
     });
 
     test('whenComplete works', () async {

@@ -3,9 +3,9 @@ mixin _$User on UserBase, Store {
 
   @override
   String get fullName => (_$fullNameComputed ??= Computed<String>(
-    () => super.fullName,
-    name: 'UserBase.fullName',
-  )).value;
+        () => super.fullName,
+        name: 'UserBase.fullName',
+      )).value;
   Computed<String?>? _$fullNameNullableComputed;
 
   @override
