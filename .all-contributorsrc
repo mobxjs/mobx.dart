@@ -644,6 +644,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jlandon",
+      "name": "Jonathan Landon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4239255?v=4",
+      "profile": "https://github.com/jlandon",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
