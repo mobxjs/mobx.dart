@@ -1,7 +1,7 @@
 ## 2.7.6
 
 - Add support for analyzer 9.0.0 by migrating to the Element API (from deprecated Element2 API)
-- Update analyzer version constraint to `>=7.4.0 < 10.0.0`
+- Require `analyzer: ^9.0.0` (drop support for analyzer <9.0.0)
 
 ## 2.7.5
 
