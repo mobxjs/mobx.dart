@@ -1,53 +1,62 @@
+## 2.7.6
+
+- Add support for analyzer 9.0.0 by migrating to the Element API (from deprecated Element2 API)
+- Require `analyzer: ^9.0.0` (drop support for analyzer <9.0.0)
+- **FIX**: useDeepEquality is not being correctly passed to the generated code.
+
 ## 2.7.5
 
- - Upgrading sdk and Analyzer fixes
+- Upgrading sdk and Analyzer fixes
 
- - **FIX**: fixing lints in tests.
- - **FIX**: package upgrades, analysis issue fixes.
- - **FIX**: error with code generation when file has unnamed extension (#1020).
- - **FIX**: make readonly work with computed (#710).
- - **FIX**: ObservableStream.listen() should also keep observable values updated (#708).
- - **FIX**: useDeepEquality is not being correctly passed to the generated code.
- - **FEAT**: add keepAlive to Computed (#976).
- - **FEAT**: support late observables (#973).
- - **FEAT**: Adds `useEquatable` for creating observables (#971).
- - **FEAT**: require `analyzer: ^5.12.0` (#934).
- - **FEAT**: Adds custom `equals` for creating observables. (#907).
- - **FEAT**: Adds support for annotations (#904).
- - **FEAT**: Allow use custom context (#770).
+- **FIX**: fixing lints in tests.
+- **FIX**: package upgrades, analysis issue fixes.
+- **FIX**: error with code generation when file has unnamed extension (#1020).
+- **FIX**: make readonly work with computed (#710).
+- **FIX**: ObservableStream.listen() should also keep observable values updated (#708).
+- **FEAT**: add keepAlive to Computed (#976).
+- **FEAT**: support late observables (#973).
+- **FEAT**: Adds `useEquatable` for creating observables (#971).
+- **FEAT**: require `analyzer: ^5.12.0` (#934).
+- **FEAT**: Adds custom `equals` for creating observables. (#907).
+- **FEAT**: Adds support for annotations (#904).
+- **FEAT**: Allow use custom context (#770).
 
 ## 2.7.4
+
 - Drop build_resolvers as a dependency, which enables support for build_runner 2.8.0
 
 ## 2.7.3
+
 - Update analyzer version to `>=7.4.0 < 9.0.0`
 - Update source_gen version to `>=3.0.0 < 5.0.0`
 - Update build version to `>=3.0.0 < 5.0.0`
 - Update build_resolvers version to `>=3.0.0 < 5.0.0`
 
 ## 2.7.2
+
 - Update analyzer version to `>=7.4.0 < 8.0.0`
 - Update source_gen version to 3.0.0
 - Update build version to 3.0.0
 - Update build_resolvers version to 3.0.0
 
 ## 2.7.1
+
 - Update source_gen package to 2.0.0
 - Update analyzer version to `>=6.9.0 < 8.0.0`
 
 ## 2.7.0
 
- - **FIX**: package upgrades, analysis issue fixes.
- - **FIX**: error with code generation when file has unnamed extension (#1020).
- - **FIX**: make readonly work with computed (#710).
- - **FIX**: ObservableStream.listen() should also keep observable values updated (#708).
- - **FEAT**: add keepAlive to Computed (#976).
- - **FEAT**: support late observables (#973).
- - **FEAT**: Adds `useEquatable` for creating observables (#971).
- - **FEAT**: require `analyzer: ^5.12.0` (#934).
- - **FEAT**: Adds custom `equals` for creating observables. (#907).
- - **FEAT**: Adds support for annotations (#904).
- - **FEAT**: Allow use custom context (#770).
+- **FIX**: package upgrades, analysis issue fixes.
+- **FIX**: error with code generation when file has unnamed extension (#1020).
+- **FIX**: make readonly work with computed (#710).
+- **FIX**: ObservableStream.listen() should also keep observable values updated (#708).
+- **FEAT**: add keepAlive to Computed (#976).
+- **FEAT**: support late observables (#973).
+- **FEAT**: Adds `useEquatable` for creating observables (#971).
+- **FEAT**: require `analyzer: ^5.12.0` (#934).
+- **FEAT**: Adds custom `equals` for creating observables. (#907).
+- **FEAT**: Adds support for annotations (#904).
+- **FEAT**: Allow use custom context (#770).
 
 ## 2.6.2
 

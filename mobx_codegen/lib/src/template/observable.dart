@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
 import 'package:mobx_codegen/src/template/store.dart';
 import 'package:mobx_codegen/src/utils/non_private_name_extension.dart';
@@ -25,7 +25,7 @@ class ObservableTemplate {
   final bool isPrivate;
   final bool isReadOnly;
   final bool isLate;
-  final ExecutableElement2? equals;
+  final ExecutableElement? equals;
   final bool? useDeepEquality;
 
   /// Formats the `name` from `_foo_bar` to `foo_bar`
@@ -76,7 +76,7 @@ class ObservableTemplate {
   set $name($type value) {
     $atomName.reportWrite(value, super.$name, () {
       super.$name = value;
-    }${equals != null ? ', equals: ${equals!.name3}' : ''}${useDeepEquality != null ? ', useDeepEquality: $useDeepEquality' : ''});
+    }${equals != null ? ', equals: ${equals!.name}' : ''}${useDeepEquality != null ? ', useDeepEquality: $useDeepEquality' : ''});
   }''';
   }
 
