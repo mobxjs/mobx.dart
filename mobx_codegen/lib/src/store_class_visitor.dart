@@ -144,7 +144,7 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
           ?.getField('equals')
           ?.toFunctionValue();
 
-  bool? _getUseDeepEquality(FieldElement2 element) =>
+  bool? _getUseDeepEquality(FieldElement element) =>
       _observableChecker
           .firstAnnotationOfExact(element)
           ?.getField('useDeepEquality')
