@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-01-08
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`mobx_codegen` - `v2.7.6`](#mobx_codegen---v276)
+
+---
+
+#### `mobx_codegen` - `v2.7.6`
+
+ - **FEAT**: Add support for analyzer 9.0.0 by migrating to the Element API (from deprecated Element2 API) (#1065)
+ - **FEAT**: require `analyzer: ^9.0.0` (#1065)
+
 ## 2025-12-28
 
 ### Changes
