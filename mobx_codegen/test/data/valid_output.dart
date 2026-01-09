@@ -2,18 +2,21 @@ mixin _$User on UserBase, Store {
   Computed<String>? _$fullNameComputed;
 
   @override
-  String get fullName => (_$fullNameComputed ??= Computed<String>(
-        () => super.fullName,
-        name: 'UserBase.fullName',
-      )).value;
+  String get fullName =>
+      (_$fullNameComputed ??= Computed<String>(
+            () => super.fullName,
+            name: 'UserBase.fullName',
+          ))
+          .value;
   Computed<String?>? _$fullNameNullableComputed;
 
   @override
   String? get fullNameNullable =>
       (_$fullNameNullableComputed ??= Computed<String?>(
-        () => super.fullNameNullable,
-        name: 'UserBase.fullNameNullable',
-      )).value;
+            () => super.fullNameNullable,
+            name: 'UserBase.fullNameNullable',
+          ))
+          .value;
 
   late final _$firstNameAtom = Atom(
     name: 'UserBase.firstName',
@@ -30,7 +33,7 @@ mixin _$User on UserBase, Store {
   set firstName(String value) {
     _$firstNameAtom.reportWrite(value, super.firstName, () {
       super.firstName = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$firstNameNullableAtom = Atom(
@@ -48,7 +51,7 @@ mixin _$User on UserBase, Store {
   set firstNameNullable(String? value) {
     _$firstNameNullableAtom.reportWrite(value, super.firstNameNullable, () {
       super.firstNameNullable = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$middleNameAtom = Atom(
@@ -66,7 +69,7 @@ mixin _$User on UserBase, Store {
   set middleName(String value) {
     _$middleNameAtom.reportWrite(value, super.middleName, () {
       super.middleName = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$lastNameAtom = Atom(name: 'UserBase.lastName', context: context);
@@ -81,7 +84,7 @@ mixin _$User on UserBase, Store {
   set lastName(String value) {
     _$lastNameAtom.reportWrite(value, super.lastName, () {
       super.lastName = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$friendAtom = Atom(name: 'UserBase.friend', context: context);
@@ -96,7 +99,7 @@ mixin _$User on UserBase, Store {
   set friend(User value) {
     _$friendAtom.reportWrite(value, super.friend, () {
       super.friend = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$friendNullableAtom = Atom(
@@ -114,7 +117,7 @@ mixin _$User on UserBase, Store {
   set friendNullable(User? value) {
     _$friendNullableAtom.reportWrite(value, super.friendNullable, () {
       super.friendNullable = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$callbackAtom = Atom(name: 'UserBase.callback', context: context);
@@ -129,7 +132,7 @@ mixin _$User on UserBase, Store {
   set callback(void Function() value) {
     _$callbackAtom.reportWrite(value, super.callback, () {
       super.callback = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$callbackNullableAtom = Atom(
@@ -147,7 +150,7 @@ mixin _$User on UserBase, Store {
   set callbackNullable(void Function() value) {
     _$callbackNullableAtom.reportWrite(value, super.callbackNullable, () {
       super.callbackNullable = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$callback2Atom = Atom(
@@ -165,7 +168,7 @@ mixin _$User on UserBase, Store {
   set callback2(VoidCallback value) {
     _$callback2Atom.reportWrite(value, super.callback2, () {
       super.callback2 = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$callback2NullableAtom = Atom(
@@ -183,7 +186,7 @@ mixin _$User on UserBase, Store {
   set callback2Nullable(VoidCallback? value) {
     _$callback2NullableAtom.reportWrite(value, super.callback2Nullable, () {
       super.callback2Nullable = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$_testUsersAtom = Atom(
@@ -201,7 +204,7 @@ mixin _$User on UserBase, Store {
   set _testUsers(List<User> value) {
     _$_testUsersAtom.reportWrite(value, super._testUsers, () {
       super._testUsers = value;
-    });
+    }, useDeepEquality: true);
   }
 
   @override
