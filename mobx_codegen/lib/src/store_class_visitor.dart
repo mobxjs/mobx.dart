@@ -32,23 +32,34 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
     this.typeNameFinder,
     this.options,
   ) : errors = StoreClassCodegenErrors(publicTypeName) {
-    _storeTemplate = template
-      ..typeParams.templates.addAll(userClass.typeParameters
-          .map((type) => typeParamTemplate(type, typeNameFinder)))
-      ..typeArgs.templates.addAll(
-          userClass.typeParameters.map((t) => t.name).whereType<String>())
-      ..parentTypeName = userClass.name!
-      ..publicTypeName = publicTypeName;
+    _storeTemplate =
+        template
+          ..typeParams.templates.addAll(
+            userClass.typeParameters.map(
+              (type) => typeParamTemplate(type, typeNameFinder),
+            ),
+          )
+          ..typeArgs.templates.addAll(
+            userClass.typeParameters.map((t) => t.name).whereType<String>(),
+          )
+          ..parentTypeName = userClass.name!
+          ..publicTypeName = publicTypeName;
   }
 
-  final _observableChecker =
-      const TypeChecker.typeNamed(MakeObservable, inPackage: 'mobx');
+  final _observableChecker = const TypeChecker.typeNamed(
+    MakeObservable,
+    inPackage: 'mobx',
+  );
 
-  final _computedChecker =
-      const TypeChecker.typeNamed(ComputedMethod, inPackage: 'mobx');
+  final _computedChecker = const TypeChecker.typeNamed(
+    ComputedMethod,
+    inPackage: 'mobx',
+  );
 
-  final _actionChecker =
-      const TypeChecker.typeNamed(MakeAction, inPackage: 'mobx');
+  final _actionChecker = const TypeChecker.typeNamed(
+    MakeAction,
+    inPackage: 'mobx',
+  );
 
   final _asyncChecker = AsyncMethodChecker();
 
@@ -75,8 +86,10 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
   @override
   void visitClassElement(ClassElement element) {
     if (isMixinStoreClass(element)) {
-      errors.nonAbstractStoreMixinDeclarations
-          .addIf(!element.isAbstract, element.name!);
+      errors.nonAbstractStoreMixinDeclarations.addIf(
+        !element.isAbstract,
+        element.name!,
+      );
     }
     // if the class is annotated to generate toString() method we add the information to the _storeTemplate
     _storeTemplate.generateToString = hasGeneratedToString(options, element);
@@ -111,6 +124,7 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
       isReadOnly: _isObservableReadOnly(element),
       isLate: element.isLate,
       equals: _getEquals(element),
+      useDeepEquality: _getUseDeepEquality(element),
     );
 
     _storeTemplate.observables.add(template);
@@ -124,24 +138,32 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
           ?.toBoolValue() ??
       false;
 
-  ExecutableElement? _getEquals(FieldElement element) => _observableChecker
-      .firstAnnotationOfExact(element)
-      ?.getField('equals')
-      ?.toFunctionValue();
+  ExecutableElement? _getEquals(FieldElement element) =>
+      _observableChecker
+          .firstAnnotationOfExact(element)
+          ?.getField('equals')
+          ?.toFunctionValue();
+
+  bool? _getUseDeepEquality(FieldElement element) =>
+      _observableChecker
+          .firstAnnotationOfExact(element)
+          ?.getField('useDeepEquality')
+          ?.toBoolValue();
 
   bool _fieldIsNotValid(FieldElement element) => _any([
-        errors.staticObservables.addIf(element.isStatic, element.name!),
-        errors.finalObservables.addIf(element.isFinal, element.name!),
-        errors.invalidReadOnlyAnnotations.addIf(
-          _isObservableReadOnly(element) && element.setter!.isPublic,
-          element.name!,
-        ),
-      ]);
+    errors.staticObservables.addIf(element.isStatic, element.name!),
+    errors.finalObservables.addIf(element.isFinal, element.name!),
+    errors.invalidReadOnlyAnnotations.addIf(
+      _isObservableReadOnly(element) && element.setter!.isPublic,
+      element.name!,
+    ),
+  ]);
 
-  bool? _isComputedKeepAlive(Element element) => _computedChecker
-      .firstAnnotationOfExact(element)
-      ?.getField('keepAlive')
-      ?.toBoolValue();
+  bool? _isComputedKeepAlive(Element element) =>
+      _computedChecker
+          .firstAnnotationOfExact(element)
+          ?.getField('keepAlive')
+          ?.toBoolValue();
 
   @override
   void visitGetterElement(GetterElement element) =>
@@ -172,12 +194,13 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
     }
 
     final template = ComputedTemplate(
-        computedName: '_\$${element.name}Computed',
-        storeTemplate: _storeTemplate,
-        name: element.name!,
-        type: typeNameFinder.findGetterTypeName(element),
-        isPrivate: element.isPrivate,
-        isKeepAlive: _isComputedKeepAlive(element));
+      computedName: '_\$${element.name}Computed',
+      storeTemplate: _storeTemplate,
+      name: element.name!,
+      type: typeNameFinder.findGetterTypeName(element),
+      isPrivate: element.isPrivate,
+      isKeepAlive: _isComputedKeepAlive(element),
+    );
 
     _storeTemplate.computeds.add(template);
     return;
@@ -247,21 +270,22 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
   }
 
   bool _asyncObservableIsNotValid(MethodElement method) => _any([
-        errors.staticMethods.addIf(method.isStatic, method.name!),
-        errors.nonAsyncMethods.addIf(
-            !_asyncChecker.returnsFuture(method) &&
-                !_asyncChecker.returnsStream(method),
-            method.name!),
-      ]);
+    errors.staticMethods.addIf(method.isStatic, method.name!),
+    errors.nonAsyncMethods.addIf(
+      !_asyncChecker.returnsFuture(method) &&
+          !_asyncChecker.returnsStream(method),
+      method.name!,
+    ),
+  ]);
 
   bool _actionIsNotValid(MethodElement element) => _any([
-        errors.staticMethods.addIf(element.isStatic, element.name!),
-        errors.asyncGeneratorActions.addIf(
-          element.fragments.any((fragment) => fragment.isAsynchronous) &&
-              element.fragments.any((fragment) => fragment.isGenerator),
-          element.name!,
-        ),
-      ]);
+    errors.staticMethods.addIf(element.isStatic, element.name!),
+    errors.asyncGeneratorActions.addIf(
+      element.fragments.any((fragment) => fragment.isAsynchronous) &&
+          element.fragments.any((fragment) => fragment.isGenerator),
+      element.name!,
+    ),
+  ]);
 
   /// Runs validations after all elements have been visited.
   void validate() {
@@ -274,17 +298,19 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
   }
 
   bool _isInvalidPublicSetterOnReadOnlyObservable(
-          PropertyAccessorElement publicSetter) =>
-      _storeTemplate.observables.templates.any(
-        (template) =>
-            template.name.nonPrivateName == publicSetter.displayName &&
-            template.isReadOnly,
-      );
+    PropertyAccessorElement publicSetter,
+  ) => _storeTemplate.observables.templates.any(
+    (template) =>
+        template.name.nonPrivateName == publicSetter.displayName &&
+        template.isReadOnly,
+  );
 }
 
 const _storeMixinChecker = TypeChecker.typeNamed(Store, inPackage: 'mobx');
-const _toStringAnnotationChecker =
-    TypeChecker.typeNamed(StoreConfig, inPackage: 'mobx');
+const _toStringAnnotationChecker = TypeChecker.typeNamed(
+  StoreConfig,
+  inPackage: 'mobx',
+);
 
 bool isMixinStoreClass(ClassElement classElement) =>
     classElement.mixins.any(_storeMixinChecker.isExactlyType);
@@ -297,8 +323,9 @@ bool hasGeneratedToString(BuilderOptions options, ClassElement? classElement) {
   const fieldKey = 'hasToString';
 
   if (classElement != null && isStoreConfigAnnotatedStoreClass(classElement)) {
-    final annotation =
-        _toStringAnnotationChecker.firstAnnotationOfExact(classElement);
+    final annotation = _toStringAnnotationChecker.firstAnnotationOfExact(
+      classElement,
+    );
     return annotation?.getField(fieldKey)?.toBoolValue() ?? false;
   }
 

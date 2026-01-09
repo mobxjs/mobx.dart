@@ -2,6 +2,7 @@
 
 - Add support for analyzer 9.0.0 by migrating to the Element API (from deprecated Element2 API)
 - Require `analyzer: ^9.0.0` (drop support for analyzer <9.0.0)
+- **FIX**: useDeepEquality is not being correctly passed to the generated code.
 
 ## 2.7.5
 
