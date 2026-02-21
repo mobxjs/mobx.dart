@@ -108,7 +108,7 @@ class LibraryScopedNameFinder {
         typeElement == null ||
             // This is a bare type param, like "T"
             type is TypeParameterType) {
-      return type.getDisplayString(withNullability: true);
+      return type.getDisplayString();
     }
 
     return _getNamedElementTypeName(typeElement, type);
