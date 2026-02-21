@@ -1,3 +1,7 @@
+## 2.7.7
+
+- Add support for analyzer 10.0.0
+
 ## 2.7.6
 
 - Add support for analyzer 9.0.0 by migrating to the Element API (from deprecated Element2 API)
