@@ -1,7 +1,5 @@
 // https://github.com/dart-lang/sdk/blob/main/pkg/analyzer/doc/element_model_migration_guide.md
 
-// ignore_for_file: deprecated_member_use
-
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor2.dart';
 import 'package:build/build.dart';
