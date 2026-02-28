@@ -3,9 +3,9 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
 
   @override
   io.File get biographyNotes => (_$biographyNotesComputed ??= Computed<io.File>(
-        () => super.biographyNotes,
-        name: 'UserBase.biographyNotes',
-      )).value;
+    () => super.biographyNotes,
+    name: 'UserBase.biographyNotes',
+  )).value;
   Computed<io.File?>? _$biographyNotesNullableComputed;
 
   @override
@@ -27,7 +27,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set names(List<String> value) {
     _$namesAtom.reportWrite(value, super.names, () {
       super.names = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$filesAtom = Atom(name: 'UserBase.files', context: context);
@@ -42,7 +42,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set files(List<io.File> value) {
     _$filesAtom.reportWrite(value, super.files, () {
       super.files = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$filesNullableAtom = Atom(
@@ -60,7 +60,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set filesNullable(List<io.File?> value) {
     _$filesNullableAtom.reportWrite(value, super.filesNullable, () {
       super.filesNullable = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$processesAtom = Atom(
@@ -78,7 +78,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set processes(List<T> value) {
     _$processesAtom.reportWrite(value, super.processes, () {
       super.processes = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$biographyAtom = Atom(
@@ -96,7 +96,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set biography(io.File value) {
     _$biographyAtom.reportWrite(value, super.biography, () {
       super.biography = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$biographyNullableAtom = Atom(
@@ -114,7 +114,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set biographyNullable(io.File? value) {
     _$biographyNullableAtom.reportWrite(value, super.biographyNullable, () {
       super.biographyNullable = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$friendWithImplicitTypeArgumentAtom = Atom(
@@ -136,6 +136,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       () {
         super.friendWithImplicitTypeArgument = value;
       },
+      useDeepEquality: true,
     );
   }
 
@@ -158,6 +159,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       () {
         super.friendWithImplicitTypeArgumentNullable = value;
       },
+      useDeepEquality: true,
     );
   }
 
@@ -180,6 +182,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       () {
         super.friendWithExplicitTypeArgument = value;
       },
+      useDeepEquality: true,
     );
   }
 
@@ -202,6 +205,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       () {
         super.friendWithExplicitTypeArgumentNullable = value;
       },
+      useDeepEquality: true,
     );
   }
 
@@ -217,7 +221,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set callback(void Function(io.File, {T another}) value) {
     _$callbackAtom.reportWrite(value, super.callback, () {
       super.callback = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$callbackNullableAtom = Atom(
@@ -235,7 +239,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set callbackNullable(void Function(io.File?, {T? another}) value) {
     _$callbackNullableAtom.reportWrite(value, super.callbackNullable, () {
       super.callbackNullable = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$callback2Atom = Atom(
@@ -253,7 +257,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set callback2(io.File Function(String, [int, io.File]) value) {
     _$callback2Atom.reportWrite(value, super.callback2, () {
       super.callback2 = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$callback2NullableAtom = Atom(
@@ -271,7 +275,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
   set callback2Nullable(io.File? Function(String?, [int?, io.File?]) value) {
     _$callback2NullableAtom.reportWrite(value, super.callback2Nullable, () {
       super.callback2Nullable = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$localTypedefCallbackAtom = Atom(
@@ -293,6 +297,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       () {
         super.localTypedefCallback = value;
       },
+      useDeepEquality: true,
     );
   }
 
@@ -315,6 +320,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       () {
         super.localTypedefCallbackNullable = value;
       },
+      useDeepEquality: true,
     );
   }
 
@@ -337,6 +343,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       () {
         super.prefixedTypedefCallback = value;
       },
+      useDeepEquality: true,
     );
   }
 
@@ -359,6 +366,7 @@ mixin _$User<T extends io.Process> on UserBase<T>, Store {
       () {
         super.prefixedTypedefCallbackNullable = value;
       },
+      useDeepEquality: true,
     );
   }
 

@@ -9,8 +9,11 @@ import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
 class TestInfo {
-  const TestInfo(
-      {required this.description, required this.source, required this.output});
+  const TestInfo({
+    required this.description,
+    required this.source,
+    required this.output,
+  });
 
   final String description;
   final String output;
@@ -24,9 +27,7 @@ Future<String> generate(String source) async {
   // classes with the same name in the same library, which will clash.
   final Builder builder = PartBuilder([StoreGenerator()], '.g.dart');
 
-  final sources = {
-    '$pkgName|lib/generator_sample.dart': source,
-  };
+  final sources = {'$pkgName|lib/generator_sample.dart': source};
 
   final errors = <String>[];
   void captureError(LogRecord logRecord) {
@@ -34,7 +35,8 @@ Future<String> generate(String source) async {
       // If we've encountered an exception, print to stderr for easier debugging
       if (logRecord.error != null) {
         stderr.writeln(
-            '${logRecord.message}\n${logRecord.error}${logRecord.stackTrace}');
+          '${logRecord.message}\n${logRecord.error}${logRecord.stackTrace}',
+        );
       }
 
       errors.add(logRecord.message);
@@ -44,15 +46,22 @@ Future<String> generate(String source) async {
   final readerWriter = TestReaderWriter(rootPackage: pkgName);
   await readerWriter.testing.loadIsolateSources();
 
-  await testBuilder(builder, sources,
-      rootPackage: pkgName, readerWriter: readerWriter, onLog: captureError);
+  await testBuilder(
+    builder,
+    sources,
+    rootPackage: pkgName,
+    readerWriter: readerWriter,
+    onLog: captureError,
+  );
 
   if (errors.isNotEmpty) {
     return errors.join('\n');
   }
 
-  final assetId = AssetId(pkgName,
-      '.dart_tool/build/generated/generator_sample/lib/generator_sample.g.dart');
+  final assetId = AssetId(
+    pkgName,
+    '.dart_tool/build/generated/generator_sample/lib/generator_sample.g.dart',
+  );
   final assetExists = await readerWriter.canRead(assetId);
 
   if (!assetExists) {
@@ -64,7 +73,8 @@ Future<String> generate(String source) async {
 
 String getFilePath(String filename) {
   final context = path.Context(
-      style: Platform.isWindows ? path.Style.windows : path.Style.posix);
+    style: Platform.isWindows ? path.Style.windows : path.Style.posix,
+  );
   final baseDir = context.dirname(Directory.current.path);
   final filePath = context.join(baseDir, 'mobx_codegen', 'test', filename);
 

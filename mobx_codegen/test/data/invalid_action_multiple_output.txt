@@ -1,2 +1,3 @@
+Generating .g.dart: StoreGenerator on lib/generator_sample.dart:
 Could not make class "Test" observable. Changes needed:
   1. Remove @action annotation for members "firstName" and "lastName". They only apply to methods.
