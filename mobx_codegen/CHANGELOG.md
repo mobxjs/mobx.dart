@@ -1,6 +1,6 @@
 ## 2.7.7
 
-- Add support for analyzer 10.0.0
+- Add support for analyzer 10.x and 11.x
 
 ## 2.7.6
 
