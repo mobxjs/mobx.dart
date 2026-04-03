@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
 import 'package:mobx_codegen/src/template/store.dart';

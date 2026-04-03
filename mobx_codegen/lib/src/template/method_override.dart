@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:analyzer/dart/element/element.dart';
 import 'package:mobx_codegen/src/template/comma_list.dart';
 import 'package:mobx_codegen/src/template/params.dart';
