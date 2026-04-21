@@ -1,0 +1,13 @@
+{
+  "name": "mobx-dart",
+  "version": "2.6.0",
+  "description": "MobX.dart agent skills for Claude Code — reactive state management with observables, actions, reactions, and Flutter integration",
+  "author": {
+    "name": "MobX.dart Contributors",
+    "url": "https://github.com/mobxjs/mobx.dart"
+  },
+  "homepage": "https://mobx.netlify.app",
+  "repository": "https://github.com/mobxjs/mobx.dart",
+  "license": "MIT",
+  "keywords": ["dart", "flutter", "mobx", "state-management", "reactive"]
+}

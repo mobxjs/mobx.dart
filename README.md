@@ -393,6 +393,47 @@ class _CounterExampleState extends State<CounterExample> {
 }
 ```
 
+## Working with AI
+
+This repository includes [Agent Skills](https://agentskills.io) that give AI coding assistants deep knowledge of MobX.dart APIs, patterns, and best practices. Skills work with Claude Code, Cursor, Windsurf, and [35+ other agents](https://skills.sh).
+
+### Installation
+
+```bash
+npx skills add mobxjs/mobx.dart
+```
+
+Target a specific agent with `--agent`:
+
+```bash
+npx skills add mobxjs/mobx.dart --agent cursor
+npx skills add mobxjs/mobx.dart --agent claude-code
+```
+
+Or install globally so the skill is available across all your projects:
+
+```bash
+npx skills add mobxjs/mobx.dart --global
+```
+
+For Claude Code, you can also install via the plugin system:
+
+```
+/plugin marketplace add mobxjs/mobx.dart
+/plugin install mobx-dart@mobx-dart
+```
+
+### What's Included
+
+The `mobx-dart` skill covers:
+
+- **Core APIs** — Store class pattern, `@observable`, `@computed`, `@action`, `@readonly` annotations, code generation with `mobx_codegen`
+- **Reactions** — `autorun`, `reaction`, `when`, `asyncWhen`, custom schedulers
+- **Flutter Integration** — `Observer` widget, `Observer.withBuiltChild`, `ReactionBuilder`
+- **Reactive Collections** — `ObservableList`, `ObservableMap`, `ObservableSet`, `ObservableFuture`, `ObservableStream`, `Atom`
+- **Best Practices** — Widget-Store-Service triad, store organization, reactivity rules, JSON serialization
+- **Advanced** — `ReactiveContext`, `ReactiveConfig`, read/write policies, Spy debugging
+
 ## Contributing
 
 If you have read up till here, then 🎉🎉🎉. There are couple of ways in which you can contribute to
