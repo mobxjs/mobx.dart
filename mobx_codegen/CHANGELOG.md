@@ -1,3 +1,7 @@
+## 2.7.8
+
+- Update analyzer version to `>=9.0.0 < 14.0.0`
+
 ## 2.7.7
 
 - Update analyzer version to `>=9.0.0 < 13.0.0`
