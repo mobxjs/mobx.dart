@@ -656,7 +656,7 @@ void main() {
         // ignore: avoid_function_literals_in_foreach_calls
         'forEach': (list) => list.forEach((a) {}),
 
-        'contains': (list) => list.contains(null),
+        'contains': (list) => list.contains(20),
         'indexWhere': (list) => list.indexWhere((_) => true),
         'lastWhere': (list) => list.lastWhere((_) => true, orElse: () => 0),
         'lastIndexWhere': (list) => list.lastIndexWhere((_) => true),
