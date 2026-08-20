@@ -62,16 +62,15 @@ class ComputedValueSpyEvent extends SpyEvent {
 }
 
 class ReactionSpyEvent extends SpyEvent {
-  ReactionSpyEvent({required String name})
-    : super._(null, type: 'reaction', name: name, isStart: true);
+  ReactionSpyEvent({required super.name})
+    : super._(null, type: 'reaction', isStart: true);
 }
 
 class ReactionErrorSpyEvent extends SpyEvent {
-  ReactionErrorSpyEvent(this.error, {required String name})
+  ReactionErrorSpyEvent(this.error, {required super.name})
     : super._(
         null,
         type: 'reaction-error',
-        name: name,
         isStart: true,
         isEnd: true,
       );
@@ -83,27 +82,26 @@ class ReactionErrorSpyEvent extends SpyEvent {
 }
 
 class ReactionDisposedSpyEvent extends SpyEvent {
-  ReactionDisposedSpyEvent({required String name})
+  ReactionDisposedSpyEvent({required super.name})
     : super._(
         null,
         type: 'reaction-dispose',
-        name: name,
         isStart: true,
         isEnd: true,
       );
 }
 
 class ActionSpyEvent extends SpyEvent {
-  ActionSpyEvent({required String name})
-    : super._(null, type: 'action', name: name, isStart: true);
+  ActionSpyEvent({required super.name})
+    : super._(null, type: 'action', isStart: true);
 }
 
 class EndedSpyEvent extends SpyEvent {
   EndedSpyEvent({
-    required String type,
-    required String name,
-    Duration? duration,
-  }) : super._(null, type: type, name: name, duration: duration, isEnd: true);
+    required super.type,
+    required super.name,
+    super.duration,
+  }) : super._(null, isEnd: true);
 }
 
 /// Utility function that only invokes the given [fn] once.

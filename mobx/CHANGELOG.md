@@ -1,3 +1,7 @@
+## 2.6.1
+
+ - **FIX**: use super parameters in spy event constructors to satisfy the `use_super_parameters` lint on the beta analyzer.
+
 ## 2.6.0
 
  - Upgrading sdk and Analyzer fixes
