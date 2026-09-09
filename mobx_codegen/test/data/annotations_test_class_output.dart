@@ -14,7 +14,7 @@ mixin _$AnnotationsTestClass on AnnotationsTestClassBase, Store {
   set foo(String value) {
     _$fooAtom.reportWrite(value, super.foo, () {
       super.foo = value;
-    });
+    }, useDeepEquality: true);
   }
 
   @override

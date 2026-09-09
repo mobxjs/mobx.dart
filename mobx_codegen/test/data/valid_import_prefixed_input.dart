@@ -91,14 +91,18 @@ abstract class UserBase<T extends io.Process> with Store {
   Future<io.File?> futureBiographyNullable() async => biographyNullable;
 
   @observable
-  Stream<T> loadDirectory<T extends io.Directory>(String arg1,
-      {T directory}) async* {
+  Stream<T> loadDirectory<T extends io.Directory>(
+    String arg1, {
+    T directory,
+  }) async* {
     yield directory;
   }
 
   @observable
-  Stream<T?> loadDirectoryNullable<T extends io.Directory>(String? arg1,
-      {T? directory}) async* {
+  Stream<T?> loadDirectoryNullable<T extends io.Directory>(
+    String? arg1, {
+    T? directory,
+  }) async* {
     yield directory;
   }
 }

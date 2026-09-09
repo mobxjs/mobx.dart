@@ -11,7 +11,7 @@ mixin _$Item<T extends num> on _Item<T>, Store {
   set value1(T value) {
     _$value1Atom.reportWrite(value, super.value1, () {
       super.value1 = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$value2Atom = Atom(name: '_Item.value2', context: context);
@@ -26,7 +26,7 @@ mixin _$Item<T extends num> on _Item<T>, Store {
   set value2(T? value) {
     _$value2Atom.reportWrite(value, super.value2, () {
       super.value2 = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$values1Atom = Atom(name: '_Item.values1', context: context);
@@ -41,7 +41,7 @@ mixin _$Item<T extends num> on _Item<T>, Store {
   set values1(List<T> value) {
     _$values1Atom.reportWrite(value, super.values1, () {
       super.values1 = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$values2Atom = Atom(name: '_Item.values2', context: context);
@@ -56,6 +56,6 @@ mixin _$Item<T extends num> on _Item<T>, Store {
   set values2(List<T> value) {
     _$values2Atom.reportWrite(value, super.values2, () {
       super.values2 = value;
-    });
+    }, useDeepEquality: true);
   }
 }

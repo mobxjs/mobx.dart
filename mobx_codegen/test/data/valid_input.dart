@@ -52,8 +52,8 @@ abstract class UserBase with Store {
   @observable
   List<User> _testUsers = <User>[];
 
-//  @observable
-//  List<Color> backColor = List.generate(60, (i) => Colors.transparent);
+  //  @observable
+  //  List<Color> backColor = List.generate(60, (i) => Colors.transparent);
 
   @computed
   String get fullName => '$firstName $middleName $lastName';
