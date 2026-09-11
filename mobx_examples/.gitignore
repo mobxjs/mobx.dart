@@ -34,7 +34,8 @@ android
 macos
 linux
 windows
-web
+web/*
+!web/index.html
 
 # Web related
 
