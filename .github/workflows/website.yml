@@ -1,0 +1,63 @@
+name: Deploy website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'mobx/**'
+      - 'flutter_mobx/**'
+      - 'mobx_codegen/**'
+      - 'mobx_examples/**'
+      - 'mobx_lint/**'
+      - 'pubspec.*'
+      - 'tool/**'
+      - 'wrangler.jsonc'
+      - '.github/workflows/website.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-pages-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CLOUDFLARE_ACCOUNT_ID: 8e7561a2f1d77b61ee68fd14f8d65e22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.2'
+          channel: stable
+          cache: true
+      - name: Build and check website with Flutter examples
+        run: FLUTTER_BIN="$(command -v flutter)" bash tool/cloudflare/build.sh
+      - name: Save deployable website
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobx-website
+          path: docs/build
+          include-hidden-files: true
+          retention-days: 7
+      - name: Ensure Pages project exists
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node tool/cloudflare/ensure-project.mjs
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx --yes wrangler@4.131.0 pages deploy docs/build --project-name=mobx-dart --branch=main
+      - name: Check deployment
+        run: |
+          curl --fail --retry 8 --retry-delay 10 https://mobx-dart.pages.dev/ -o /dev/null
+          curl --fail --retry 8 --retry-delay 10 https://mobx-dart.pages.dev/flutter/flutter_bootstrap.js -o /dev/null
+          curl --fail --retry 8 --retry-delay 10 https://mobx-dart.pages.dev/gallery-app/flutter_bootstrap.js -o /dev/null

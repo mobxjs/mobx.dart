@@ -4,6 +4,9 @@ cd "$(dirname "$0")/../.."
 # Pin the SDK used by the verified native and Wasm release tests.
 FLUTTER_VERSION=3.47.2
 sdk_dir="${TMPDIR:-/tmp}/mobx-flutter-${FLUTTER_VERSION}"
+if [[ -n "${FLUTTER_BIN:-}" ]]; then
+  sdk_dir="$(cd "$(dirname "$FLUTTER_BIN")/.." && pwd)"
+fi
 if [[ ! -x "$sdk_dir/bin/flutter" ]]; then
   git clone --depth 1 --branch "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$sdk_dir"
 fi
