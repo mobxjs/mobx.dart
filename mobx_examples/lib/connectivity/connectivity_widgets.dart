@@ -5,7 +5,7 @@ import 'package:mobx/mobx.dart';
 import 'package:mobx_examples/connectivity/connectivity_store.dart';
 
 class ConnectivityExample extends StatelessWidget {
-  const ConnectivityExample(this.store, {Key? key}) : super(key: key);
+  const ConnectivityExample(this.store, {super.key});
 
   final ConnectivityStore store;
 

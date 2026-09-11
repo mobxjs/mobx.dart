@@ -17,6 +17,10 @@ dev_dependencies:
     path: ../mobx_lint
   test: ^1.15.0
 
+  path: any
+  custom_lint_core: any
+  analyzer_plugin: any
+  analyzer: any
 dependency_overrides:
   mobx:
     path: ../mobx
