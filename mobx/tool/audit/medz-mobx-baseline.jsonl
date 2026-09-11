@@ -1,0 +1,8 @@
+{"case":"avoidablePropagation","success":true,"samples_us":[1558549,1514500,1564407],"median_us":1558549}
+{"case":"broadPropagation","success":true,"samples_us":[2981722,3035583,3075262],"median_us":3035583}
+{"case":"deepPropagation","success":true,"samples_us":[1161300,1226518,1036680],"median_us":1161300}
+{"case":"diamond","success":true,"samples_us":[1505526,1523805,1532768],"median_us":1523805}
+{"case":"mux","success":true,"samples_us":[1217961,1251388,1216037],"median_us":1217961}
+{"case":"repeatedObservers","success":true,"samples_us":[137430,138492,137282],"median_us":137430}
+{"case":"triangle","success":true,"samples_us":[504281,482621,491591],"median_us":491591}
+{"case":"unstable","success":true,"samples_us":[215262,210636,274657],"median_us":215262}

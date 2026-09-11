@@ -1,0 +1,8 @@
+allowBuilds:
+  esbuild: true
+# Preserve versions already in the lockfile during the pnpm migration.
+minimumReleaseAgeExclude:
+  - baseline-browser-mapping@2.11.22
+  - electron-to-chromium@1.5.427
+  - nanoid@3.3.19
+  - update-browserslist-db@1.3.3

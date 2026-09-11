@@ -34,9 +34,7 @@ class Observable<T> extends Atom
   );
 
   Observable._(super.context, this._value, {String? name, this.equals})
-    : _interceptors = Interceptors(context),
-      _listeners = Listeners(context),
-      super._(name: name ?? context.nameFor('Observable')) {
+    : super._(name: name ?? context.nameFor('Observable')) {
     if (_context.isSpyEnabled) {
       _context.spyReport(
         ObservableValueSpyEvent(
@@ -49,8 +47,13 @@ class Observable<T> extends Atom
     }
   }
 
-  final Interceptors<T> _interceptors;
-  final Listeners<ChangeNotification<T>> _listeners;
+  Interceptors<T>? _interceptorsField;
+  Listeners<ChangeNotification<T>>? _listenersField;
+
+  Interceptors<T> get _interceptors =>
+      _interceptorsField ??= Interceptors(context);
+  Listeners<ChangeNotification<T>> get _listeners =>
+      _listenersField ??= Listeners(context);
   final EqualityComparer<T>? equals;
 
   T _value;
@@ -94,9 +97,9 @@ class Observable<T> extends Atom
 
     reportChanged();
 
-    if (_listeners.hasHandlers) {
+    if (_listenersField?.hasHandlers ?? false) {
       final change = ChangeNotification<T>(
-        newValue: value,
+        newValue: newValue,
         oldValue: oldValue,
         type: OperationType.update,
         object: this,
@@ -111,7 +114,7 @@ class Observable<T> extends Atom
 
   dynamic _prepareNewValue(T newValue) {
     T? prepared = newValue;
-    if (_interceptors.hasHandlers) {
+    if (_interceptorsField?.hasHandlers ?? false) {
       final change = _interceptors.interceptChange(
         WillChangeNotification(
           newValue: prepared,
@@ -128,7 +131,9 @@ class Observable<T> extends Atom
     }
 
     final areEqual =
-        equals == null ? equatable(prepared, value) : equals!(prepared, _value);
+        equals == null
+            ? equatable(prepared, _value)
+            : equals!(prepared, _value);
 
     return (!areEqual) ? prepared : WillChangeNotification.unchanged;
   }

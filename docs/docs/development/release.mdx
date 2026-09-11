@@ -2,69 +2,82 @@
 title: Release Guidelines
 ---
 
-If you are a developer on the MobX project, here are few guidelines that will
-help in your journey. These apply to all the packages: `mobx`, `mobx_codegen`,
-`flutter_mobx`.
+The repository uses Melos 8 and a shared Pub workspace for `mobx`,
+`flutter_mobx`, `mobx_codegen`, and the Flutter examples. Development requires
+Dart 3.11 or newer and a compatible Flutter SDK. Published packages declare
+their own minimum SDK versions in their manifests.
 
-### 1. Format your code
+## Resolve and verify
 
-To format your files following
-[Dart guidelines](https://dart.dev/guides/language/effective-dart/style#formatting).
-This will format your code accordingly regardless of your IDE settings.
+Run these commands from the repository root:
 
-```
-dart format .
-```
-
-### 2. pubspec.yaml
-
-- Use the [semantic versioning policy](https://dart.dev/tools/pub/versioning) to
-  update the version in `pubspec.yaml`.
-- Say you are updating from `0.1.0` to `0.2.0`, then update the `version` field
-  in `pubspec.yaml`:
-
-```yaml
-version: 0.2.0
+```sh
+flutter pub get
+dart run melos run analyze
+dart run melos run test_core
+dart run melos run test_codegen
+dart run melos run test_flutter
 ```
 
-### 3. Expose version
+The lint plugin uses a separate dependency resolution because `custom_lint`
+requires an older analyzer and a `cli_util` version incompatible with Melos.
+Resolve and test it independently:
 
-- Expose the updated version of `pubspec.yaml` to the library by running the
-  following command in each package. This will run this command in each of the
-  package folders.
-
-```bash
-melos run set_version
+```sh
+cd mobx_lint
+dart pub get
+cd ../mobx_lint_flutter_test
+flutter pub get
+dart test
+cd ..
 ```
 
-:::note
+Run the example tests with `flutter test` from `mobx_examples`. Run web widget
+tests with `flutter test --platform chrome --wasm` from `flutter_mobx` and
+`mobx_examples`. The core Wasm gate is
+`dart test test/all_tests.dart --platform chrome --compiler dart2wasm` from
+`mobx`. The performance suite lives in `mobx/benchmark`; its README explains
+native and Wasm measurements, attribution, and baseline comparisons.
 
-This requires you to have the `melos` package installed globally. Install it
-using:
+For the website, run `pnpm install --frozen-lockfile`, `pnpm test`,
+`pnpm build`, and `pnpm typecheck` from `docs`.
 
-```shell
-dart pub global activate melos
+## Commit, then version
+
+Commit reviewed changes using Conventional Commits. Use `fix:` for a bug fix,
+`perf:` for a performance change, `feat:` for a feature, and explicitly describe
+breaking changes. Keep package changelogs clear about SDK and toolchain changes.
+
+```sh
+dart run melos version
 ```
 
-:::
+Melos calculates versions, updates dependent constraints and changelogs, and
+creates a local release commit and tags. The pre-commit hook regenerates the
+published packages' `lib/version.dart` constants. Explicit version choices are
+supported when a release requires them:
 
-### 4. Changelog
-
-- Update the `CHANGELOG.md` file to include the changes introduced in the new
-  version. Normally, you would do this by adding a new bullet point for the
-  version and follow the template from earlier versions.
-- If the changes are minimal, you can also append the change to an earlier
-  bullet point but include the new version as a range. For example, the changes
-  in `0.3.2+3` were minimal, so we added it as a range from the earlier version.
-
-```markdown
-## 0.3.0 - 0.3.2+3
+```sh
+dart run melos version --manual-version=mobx:minor
 ```
 
-### 5. Git Push
+Version the independent lint package using the same pinned Melos runtime:
 
-And that's it! The rest of the work will be automatically done by
-[Github Actions](https://github.com/mobxjs/mobx.dart/actions). The Build and
-Publish workflow will inspect the local and remote versions of the package and
-publish to `pub.dev` if newer. It will also tag the commit with the right tags
-following the format of: `<package-name>-<version-number>`
+```sh
+dart run tool/version_lint.dart mobx_lint minor
+```
+
+The helper runs Melos in the lint package without adding Melos to its dependency
+graph. Its pre-commit hook also refreshes `lib/version.dart`.
+
+After versioning, run `flutter pub get` at the root, refresh the independent
+lint lockfiles, and inspect the diff. Keep updated lockfiles in a follow-up
+commit if resolution changes them. Verify version constants match the manifests.
+
+## Publish deliberately
+
+Local versioning does not push tags or publish packages. Review the release
+commits and changelogs before separately pushing and publishing. Publish `mobx`
+before packages that require its new version. Validate each package with
+`dart pub publish --dry-run` (or `flutter pub publish --dry-run` for Flutter
+packages), then publish only after release approval.

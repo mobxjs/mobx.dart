@@ -1,0 +1,18 @@
+{
+  "baseline": "dc532481ab5d1044889e63335defd40501bee8c6",
+  "candidate": "working tree",
+  "sha256": {
+    "flutter_mobx/lib/src/observer.dart": "2baf4d0ec6e381f174f4103ee52e7c930e65900de2293e0fa912ff4cb55ee564",
+    "mobx/lib/src/api/action.dart": "588ad67dc9678eaf7bba1863f4e75f6917a77eac88dddacadf6e6db5243b1f05",
+    "mobx/lib/src/api/observable_collections/observable_list.dart": "49302951073b767b6c33de5365522ff1045fdb550cffe55eea8986afe6b9c8f2",
+    "mobx/lib/src/api/observable_collections/observable_map.dart": "252e5247ce68a91a69554e7cc82da99bd279bffdbe7e7229264c8182ccae6275",
+    "mobx/lib/src/api/observable_collections/observable_set.dart": "6c6b27d3e15fb2bb7ea5e9f32e41f00421be017aa57b38ee2bb73257648d9ecf",
+    "mobx/lib/src/core/action.dart": "2e65a5f7703d6c2764c086541bca1336527569b2bc9c6864527816cfd56deaab",
+    "mobx/lib/src/core/atom.dart": "962a3d31c6e8711d46b116067fcd94b09fca140d3eef873ef23a50b9fda0e791",
+    "mobx/lib/src/core/computed.dart": "a95a40d2fad53f6599b57071f947df2eef83915cbaea2bdc3cb81781d2e3d7ca",
+    "mobx/lib/src/core/context.dart": "5c45080b1f62410cb236bac7995b0406082cfb791020cd6574b14f726237622c",
+    "mobx/lib/src/core/derivation.dart": "ee6e3293e6865883c712549e0b87bcce0edd0b530395994c2d7119abd035f710",
+    "mobx/lib/src/core/observable.dart": "b894cf20ed08d89d314c87b714b1fea72ffacd9cc843b8a3ccf84a156ef1d4b5",
+    "mobx/lib/src/core/reaction.dart": "9b501fd4f3347ab8cb8bb6d2cb932c303c2237d05fe1acc534f3972702117902"
+  }
+}

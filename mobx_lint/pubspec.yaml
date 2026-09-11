@@ -11,16 +11,25 @@ topics:
   - mobx
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: ">=3.9.0 <4.0.0"
 
 dependencies:
-  analyzer: ">=6.0.0 <7.0.0"
-  analyzer_plugin: ^0.11.2
-  collection: ^1.16.0
-  custom_lint_builder: ^0.5.2
-  meta: ^1.7.0
-  path: ^1.8.1
-  mobx: ^2.6.0
+  analyzer: ^8.4.0
+  analyzer_plugin: ^0.13.10
+  collection: ^1.19.1
+  custom_lint_builder: ^0.8.1
+  meta: ^1.19.0
+  path: ^1.9.1
+  mobx: ^2.6.1
 dev_dependencies:
-  lints: ^5.0.0
-  test: ^1.21.0
+  lints: ^6.1.0
+  test: ^1.31.1
+
+# Run with the root workspace's Melos runtime through tool/version_lint.dart.
+# Keeping Melos out of this resolver avoids custom_lint's cli_util conflict.
+melos:
+  useRootAsPackage: true
+  command:
+    version:
+      hooks:
+        preCommit: dart run ../tool/expose_version.dart

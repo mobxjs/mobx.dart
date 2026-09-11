@@ -42,7 +42,7 @@ void main() {
 
     group('equality override', () {
       test('yields a new value', () {
-        final x = Observable(10, equals: (_, __) => false);
+        final x = Observable(10, equals: (_, _) => false);
 
         var executed = false;
 
@@ -66,7 +66,7 @@ void main() {
       });
 
       test('does not yield a new value', () {
-        final x = Observable(10, equals: (_, __) => true);
+        final x = Observable(10, equals: (_, _) => true);
 
         var executed = false;
 

@@ -12,7 +12,8 @@ module.exports = {
   themeConfig: {
     colorMode: {
       defaultMode: 'light',
-      disableSwitch: true,
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: 'MobX.dart',
@@ -31,11 +32,13 @@ module.exports = {
           href: 'https://discord.gg/dNHY52k',
           position: 'right',
           className: 'icon-link discord-link',
+          'aria-label': 'Join the MobX Discord community',
         },
         {
           href: 'https://github.com/mobxjs/mobx.dart',
           position: 'right',
           className: 'icon-link github-link',
+          'aria-label': 'MobX source on GitHub',
         },
       ],
     },
@@ -46,7 +49,7 @@ module.exports = {
           title: 'Learn',
           items: [
             {
-              label: 'Getting Started 🚀',
+              label: 'Getting started',
               href: '/getting-started',
             },
             {
@@ -89,7 +92,8 @@ module.exports = {
       copyright: `Copyright © 2018-${new Date().getFullYear()} MobX.dart team. All rights reserved.`,
     },
     prism: {
-      theme: require('prism-react-renderer').themes.vsDark,
+      theme: require('prism-react-renderer').themes.github,
+      darkTheme: require('prism-react-renderer').themes.vsDark,
       additionalLanguages: ['dart'],
       defaultLanguage: 'dart',
     },
@@ -126,24 +130,12 @@ module.exports = {
     },
   },
   plugins: [
-    // require.resolve('docusaurus-lunr-search'),
     [
       path.resolve(__dirname, './plugins/fetch-versions'),
       {
         indexBaseUrl: true,
       },
     ],
-    function postCSSPlugin(context, options) {
-      return {
-        name: 'docusaurus-tailwindcss',
-        configurePostCss(postcssOptions) {
-          postcssOptions.plugins.push(require('tailwindcss/nesting'));
-          postcssOptions.plugins.push(require('tailwindcss'));
-          postcssOptions.plugins.push(require('autoprefixer'));
-          return postcssOptions;
-        },
-      };
-    },
   ],
   presets: [
     [

@@ -37,8 +37,12 @@ class ObservableList<T>
          List<T>.of(elements, growable: true),
        );
 
-  ObservableList._wrap(ReactiveContext? context, this._atom, this._list)
-    : _context = context ?? mainContext;
+  ObservableList._wrap(
+    ReactiveContext? context,
+    this._atom,
+    this._list, [
+    this._notificationSource,
+  ]) : _context = context ?? mainContext;
 
   final ReactiveContext _context;
   final Atom _atom;
@@ -46,10 +50,17 @@ class ObservableList<T>
 
   List<T> get nonObservableInner => _list;
 
-  Listeners<ListChange<T>>? _listenersField;
+  // Cast views share one notification owner as well as the same storage/atom.
+  final ObservableList<dynamic>? _notificationSource;
+  Listeners<ListChange<dynamic>>? _listenersField;
 
-  Listeners<ListChange<T>> get _listeners =>
-      _listenersField ??= Listeners(_context);
+  Listeners<ListChange<dynamic>> get _listeners =>
+      _notificationSource?._listeners ??
+      (_listenersField ??= Listeners(_context));
+
+  bool get _hasListeners =>
+      _notificationSource?._hasListeners ??
+      (_listenersField?.hasHandlers ?? false);
 
   /// The name used to identify for debugging purposes
   String get name => _atom.name;
@@ -174,7 +185,12 @@ class ObservableList<T>
   Map<int, T> asMap() => ObservableMap._wrap(_context, _list.asMap(), _atom);
 
   @override
-  List<R> cast<R>() => ObservableList._wrap(_context, _atom, _list.cast<R>());
+  List<R> cast<R>() => ObservableList<R>._wrap(
+    _context,
+    _atom,
+    _list.cast<R>(),
+    _notificationSource ?? this,
+  );
 
   @override
   List<T> toList({bool growable = true}) {
@@ -209,6 +225,7 @@ class ObservableList<T>
   @override
   void fillRange(int start, int end, [T? fill]) {
     _context.conditionallyRunInAction(() {
+      RangeError.checkValidRange(start, end, _list.length);
       if (end > start) {
         final oldContents = _list.sublist(start, end);
         _list.fillRange(start, end, fill);
@@ -243,10 +260,10 @@ class ObservableList<T>
     var didRemove = false;
 
     _context.conditionallyRunInAction(() {
-      final index = _list.indexOf(element as T);
+      final index = _list.indexWhere((value) => value == element);
       if (index >= 0) {
-        _list.removeAt(index);
-        _notifyElementUpdate(index, null, element, type: OperationType.remove);
+        final removed = _list.removeAt(index);
+        _notifyElementUpdate(index, null, removed, type: OperationType.remove);
         didRemove = true;
       }
     }, _atom);
@@ -287,6 +304,7 @@ class ObservableList<T>
   @override
   void removeRange(int start, int end) {
     _context.conditionallyRunInAction(() {
+      RangeError.checkValidRange(start, end, _list.length);
       if (end > start) {
         final removedItems = _list.sublist(start, end);
         _list.removeRange(start, end);
@@ -297,30 +315,13 @@ class ObservableList<T>
 
   @override
   void removeWhere(bool Function(T element) test) {
-    _context.conditionallyRunInAction(() {
-      final removedElements = Queue<ElementChange<T>>();
-      for (var i = _list.length - 1; i >= 0; --i) {
-        final element = _list[i];
-        if (test(element)) {
-          removedElements.addFirst(
-            ElementChange(
-              index: i,
-              oldValue: element,
-              type: OperationType.remove,
-            ),
-          );
-          _list.removeAt(i);
-        }
-      }
-      if (removedElements.isNotEmpty) {
-        _notifyElementsUpdate(removedElements.toList(growable: false));
-      }
-    }, _atom);
+    _filter(test, removeMatching: true);
   }
 
   @override
   void replaceRange(int start, int end, Iterable<T> newContents) {
     _context.conditionallyRunInAction(() {
+      RangeError.checkValidRange(start, end, _list.length);
       final list = newContents.toList(growable: false);
 
       if (end > start || list.isNotEmpty) {
@@ -334,23 +335,47 @@ class ObservableList<T>
 
   @override
   void retainWhere(bool Function(T element) test) {
+    _filter(test, removeMatching: false);
+  }
+
+  void _filter(bool Function(T element) test, {required bool removeMatching}) {
     _context.conditionallyRunInAction(() {
-      final removedElements = Queue<ElementChange<T>>();
-      for (var i = _list.length - 1; i >= 0; --i) {
-        final element = _list[i];
-        if (!test(element)) {
-          removedElements.addFirst(
-            ElementChange(
-              index: i,
-              oldValue: element,
-              type: OperationType.remove,
-            ),
-          );
-          _list.removeAt(i);
+      final length = _list.length;
+      final removed = <int>[];
+      // Preserve the existing reverse predicate order. Evaluate before moving
+      // elements so a throwing predicate cannot leave an unreported mutation.
+      for (var i = length - 1; i >= 0; i--) {
+        final matches = test(_list[i]);
+        if (_list.length != length) throw ConcurrentModificationError(this);
+        if (matches == removeMatching) removed.add(i);
+      }
+      if (removed.isEmpty) return;
+      final changes =
+          _hasListeners
+              ? [
+                for (final index in removed.reversed)
+                  ElementChange(
+                    index: index,
+                    oldValue: _list[index],
+                    type: OperationType.remove,
+                  ),
+              ]
+              : null;
+      var write = 0;
+      var removal = removed.length - 1;
+      for (var read = 0; read < length; read++) {
+        if (removal >= 0 && removed[removal] == read) {
+          removal--;
+        } else {
+          if (write != read) _list[write] = _list[read];
+          write++;
         }
       }
-      if (removedElements.isNotEmpty) {
-        _notifyElementsUpdate(removedElements.toList(growable: false));
+      _list.length = write;
+      if (changes != null) {
+        _notifyElementsUpdate(changes);
+      } else {
+        _atom.reportChanged();
       }
     }, _atom);
   }
@@ -358,6 +383,7 @@ class ObservableList<T>
   @override
   void setAll(int index, Iterable<T> iterable) {
     _context.conditionallyRunInAction(() {
+      RangeError.checkValueInInterval(index, 0, _list.length, 'index');
       final newValues = iterable.toList(growable: false);
 
       if (newValues.isNotEmpty) {
@@ -371,6 +397,7 @@ class ObservableList<T>
   @override
   void setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
     _context.conditionallyRunInAction(() {
+      RangeError.checkValidRange(start, end, _list.length);
       if (end > start) {
         final oldValues = _list.sublist(start, end);
 
@@ -451,7 +478,13 @@ class ObservableList<T>
       listener(change);
     }
 
-    return _listeners.add(listener);
+    return _listeners.add((change) {
+      listener(
+        change is ListChange<T> && identical(change.list, this)
+            ? change
+            : _ListChangeView<T>(this, change),
+      );
+    });
   }
 
   void _notifyElementUpdate(
@@ -461,6 +494,8 @@ class ObservableList<T>
     OperationType type = OperationType.update,
   }) {
     _atom.reportChanged();
+
+    if (!_hasListeners) return;
 
     final change = ListChange<T>(
       list: this,
@@ -480,6 +515,8 @@ class ObservableList<T>
   void _notifyElementsUpdate(final List<ElementChange<T>> elementChanges) {
     _atom.reportChanged();
 
+    if (!_hasListeners) return;
+
     final change = ListChange<T>(list: this, elementChanges: elementChanges);
 
     _listeners.notifyListeners(change);
@@ -487,6 +524,8 @@ class ObservableList<T>
 
   void _notifyRangeUpdate(int index, List<T>? newValues, List<T>? oldValues) {
     _atom.reportChanged();
+
+    if (!_hasListeners) return;
 
     final change = ListChange<T>(
       list: this,
@@ -563,3 +602,39 @@ class ListChange<T> {
 @visibleForTesting
 ObservableList<T> wrapInObservableList<T>(Atom atom, List<T> list) =>
     ObservableList._wrap(mainContext, atom, list);
+
+// Preserve cast-view semantics: incompatible values throw when read, not while
+// delivering a notification about a mutation made through a wider view.
+class _ListChangeView<T> implements ListChange<T> {
+  _ListChangeView(this.list, this._change);
+  @override
+  final ObservableList<T> list;
+  final ListChange<dynamic> _change;
+  @override
+  late final List<ElementChange<T>>? elementChanges = _change.elementChanges
+      ?.map((change) => _ElementChangeView<T>(change))
+      .toList(growable: false);
+  @override
+  late final List<RangeChange<T>>? rangeChanges = _change.rangeChanges
+      ?.map(
+        (change) => RangeChange<T>(
+          index: change.index,
+          newValues: change.newValues?.cast<T>(),
+          oldValues: change.oldValues?.cast<T>(),
+        ),
+      )
+      .toList(growable: false);
+}
+
+class _ElementChangeView<T> implements ElementChange<T> {
+  _ElementChangeView(this._change);
+  final ElementChange<dynamic> _change;
+  @override
+  int get index => _change.index;
+  @override
+  OperationType get type => _change.type;
+  @override
+  T? get newValue => _change.newValue as T?;
+  @override
+  T? get oldValue => _change.oldValue as T?;
+}

@@ -1,3 +1,7 @@
+## Unreleased
+
+- Fix Observer debug caller names for Dart Wasm stack traces, including subclass constructor frames. Verify widget tests on native Flutter and Chrome Wasm.
+
 ## 2.3.0
 
  - **REFACTOR**: export `MultiReactionBuilder` from `flutter_mobx.dart` (#946).

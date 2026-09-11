@@ -1,0 +1,10 @@
+{"case":"native_remove_alternating","size":10000,"median_us":70}
+{"case":"observable_remove_alternating","size":10000,"median_us":12676}
+{"case":"native_remove_alternating","size":50000,"median_us":351}
+{"case":"observable_remove_alternating","size":50000,"median_us":321743}
+{"case":"native_remove_alternating","size":100000,"median_us":768}
+{"case":"observable_remove_alternating","size":100000,"median_us":1273513}
+{"case":"bulk_map_set","batched":false,"map_reactions":10000,"set_reactions":10000,"us":10697}
+{"case":"bulk_map_set","batched":true,"map_reactions":1,"set_reactions":1,"us":1507}
+{"case":"single_key_write","observers":1000,"reactions":1000}
+sink=102468999

@@ -21,6 +21,7 @@ class _ReactiveState {
   /// The atoms that must be disconnected from their observed reactions. This happens
   /// if a reaction has been disposed during a batch
   List<Atom> pendingUnobservations = [];
+  bool isRunningUnobservations = false;
 
   /// Tracks if within a computed property evaluation
   int computationDepth = 0;
@@ -83,8 +84,6 @@ class ReactiveConfig {
   /// Max number of iterations before bailing out for a cyclic reaction
   final int maxIterations;
 
-  final Set<ReactionErrorHandler> _reactionErrorHandlers = {};
-
   final bool isSpyEnabled;
 
   ReactiveConfig clone({
@@ -116,7 +115,10 @@ class ReactiveContext {
     _state.allowStateChanges = _config.writePolicy == ReactiveWritePolicy.never;
   }
 
-  _ReactiveState _state = _ReactiveState();
+  final _ReactiveState _state = _ReactiveState();
+
+  int _nextTrackingId = 0;
+  final Set<ReactionErrorHandler> _reactionErrorHandlers = {};
 
   int get nextId => ++_state.nextIdCounter;
 
@@ -155,26 +157,30 @@ class ReactiveContext {
   void endBatch() {
     if (--_state.batch == 0) {
       runReactions();
+      _runUnobservations();
+    }
+  }
 
-      for (var i = 0; i < _state.pendingUnobservations.length; i++) {
-        final ob =
-            _state.pendingUnobservations[i].._isPendingUnobservation = false;
-
-        if (ob._observers.isEmpty) {
-          if (ob._isBeingObserved) {
-            // if this observable had reactive observers, trigger the hooks
-            ob
-              .._isBeingObserved = false
-              .._notifyOnBecomeUnobserved();
-          }
-
-          if (ob is Computed) {
-            ob._suspend();
-          }
+  void _runUnobservations() {
+    if (_state.isRunningUnobservations) return;
+    _state.isRunningUnobservations = true;
+    final pending = _state.pendingUnobservations;
+    var processed = 0;
+    try {
+      while (processed < pending.length) {
+        final ob = pending[processed++].._isPendingUnobservation = false;
+        if (ob._observers.isNotEmpty) continue;
+        if (ob._isBeingObserved) {
+          ob
+            .._isBeingObserved = false
+            .._notifyOnBecomeUnobserved();
         }
+        // A lifecycle callback may have created a replacement subscriber.
+        if (ob._observers.isEmpty && ob is Computed) ob._suspend();
       }
-
-      _state.pendingUnobservations = [];
+    } finally {
+      pending.removeRange(0, processed);
+      _state.isRunningUnobservations = false;
     }
   }
 
@@ -244,7 +250,10 @@ class ReactiveContext {
     _state.trackingDerivation = derivation;
 
     _resetDerivationState(derivation);
-    derivation._newObservables = {};
+    derivation
+      .._trackingId = ++_nextTrackingId
+      .._trackingIndex = 0
+      .._newObservables = null;
 
     return prevDerivation;
   }
@@ -258,18 +267,20 @@ class ReactiveContext {
     final prevDerivation = _startTracking(d);
     T? result;
 
-    if (config.disableErrorBoundaries == true) {
-      result = fn();
-    } else {
-      try {
+    try {
+      if (config.disableErrorBoundaries == true) {
         result = fn();
-        d._errorValue = null;
-      } on Object catch (e, s) {
-        d._errorValue = MobXCaughtException(e, stackTrace: s);
+      } else {
+        try {
+          result = fn();
+          d._errorValue = null;
+        } on Object catch (e, s) {
+          d._errorValue = MobXCaughtException(e, stackTrace: s);
+        }
       }
+    } finally {
+      _endTracking(d, prevDerivation);
     }
-
-    _endTracking(d, prevDerivation);
     return result;
   }
 
@@ -278,7 +289,24 @@ class ReactiveContext {
     final derivation = _state.trackingDerivation;
 
     if (derivation != null) {
-      derivation._newObservables!.add(atom);
+      if (atom._lastAccessedBy != derivation._trackingId) {
+        atom._lastAccessedBy = derivation._trackingId;
+        final newObservables = derivation._newObservables;
+        if (newObservables != null) {
+          newObservables.add(atom);
+        } else {
+          final index = derivation._trackingIndex;
+          final previous = derivation._observables;
+          if (index < previous.length && identical(previous[index], atom)) {
+            derivation._trackingIndex = index + 1;
+          } else {
+            // Stable graphs reuse their dependency array. Only changed order
+            // or membership needs a Set and dependency reconciliation.
+            derivation._newObservables =
+                previous.take(index).toSet()..add(atom);
+          }
+        }
+      }
       if (!atom._isBeingObserved) {
         atom
           .._isBeingObserved = true
@@ -288,16 +316,18 @@ class ReactiveContext {
   }
 
   void _bindDependencies(Derivation derivation) {
-    final staleObservables = derivation._observables.difference(
-      derivation._newObservables!,
-    );
-    final newObservables = derivation._newObservables!.difference(
-      derivation._observables,
-    );
+    final previous = derivation._observables;
+    var next = derivation._newObservables;
+    if (next == null) {
+      if (derivation._trackingIndex == previous.length) return;
+      next = previous.take(derivation._trackingIndex).toSet();
+    }
+    final previousSet = previous.isEmpty ? const <Atom>{} : previous.toSet();
     var lowestNewDerivationState = DerivationState.upToDate;
 
     // Add newly found observables
-    for (final observable in newObservables) {
+    for (final observable in next) {
+      if (previousSet.contains(observable)) continue;
       observable._addObserver(derivation);
 
       // Computed = Observable + Derivation
@@ -310,8 +340,8 @@ class ReactiveContext {
     }
 
     // Remove previous observables
-    for (final ob in staleObservables) {
-      ob._removeObserver(derivation);
+    for (final ob in previous) {
+      if (!next.contains(ob)) ob._removeObserver(derivation);
     }
 
     if (lowestNewDerivationState != DerivationState.upToDate) {
@@ -321,8 +351,8 @@ class ReactiveContext {
     }
 
     derivation
-      .._observables = derivation._newObservables!
-      .._newObservables = {}; // No need for newObservables beyond this point
+      .._observables = next.toList(growable: false)
+      .._newObservables = null;
   }
 
   void addPendingReaction(Reaction reaction) {
@@ -339,37 +369,48 @@ class ReactiveContext {
 
   void _runReactionsInternal() {
     _state.isRunningReactions = true;
-
     var iterations = 0;
-    final allReactions = _state.pendingReactions;
-
-    // While running reactions, new reactions might be triggered.
-    // Hence we work with two variables and check whether
-    // we converge to no remaining reactions after a while.
-    while (allReactions.isNotEmpty) {
-      if (++iterations == config.maxIterations) {
-        final failingReaction = allReactions[0];
-
-        // Resetting ensures we have no bad-state left
-        _resetState();
-
-        throw MobXCyclicReactionException(
-          "Reaction doesn't converge to a stable state after ${config.maxIterations} iterations. "
-          "Probably there is a cycle in the reactive function: $failingReaction "
-          "(creation stack: ${failingReaction.debugCreationStack})",
-        );
+    var current = <Reaction>[];
+    var index = 0;
+    try {
+      while (_state.pendingReactions.isNotEmpty) {
+        if (++iterations == config.maxIterations) {
+          final failingReaction = _state.pendingReactions[0];
+          throw MobXCyclicReactionException(
+            "Reaction doesn't converge to a stable state after ${config.maxIterations} iterations. "
+            "Probably there is a cycle in the reactive function: $failingReaction "
+            "(creation stack: ${failingReaction.debugCreationStack})",
+          );
+        }
+        // Reuse two wave buffers; callbacks enqueue into the other buffer.
+        final reusable = current;
+        current = _state.pendingReactions;
+        _state.pendingReactions = reusable;
+        for (index = 0; index < current.length; index++) {
+          current[index]._run();
+        }
+        current.clear();
+        index = 0;
       }
-
-      final remainingReactions = allReactions.toList(growable: false);
-      allReactions.clear();
-      for (final reaction in remainingReactions) {
-        reaction._run();
+    } catch (_) {
+      // Queue membership and scheduling flags must be recovered together.
+      // Keep the context, spy listeners, IDs, and independent graph intact.
+      for (final reaction in current.skip(index)) {
+        _resetQueuedReaction(reaction);
       }
+      for (final reaction in _state.pendingReactions) {
+        _resetQueuedReaction(reaction);
+      }
+      _state.pendingReactions.clear();
+      rethrow;
+    } finally {
+      _state.isRunningReactions = false;
     }
+  }
 
-    _state
-      ..pendingReactions = []
-      ..isRunningReactions = false;
+  void _resetQueuedReaction(Reaction reaction) {
+    if (reaction is ReactionImpl) reaction._isScheduled = false;
+    _resetDerivationState(reaction);
   }
 
   void propagateChanged(Atom atom) {
@@ -422,7 +463,7 @@ class ReactiveContext {
   @protected
   void clearObservables(Derivation derivation) {
     final observables = derivation._observables;
-    derivation._observables = {};
+    derivation._observables = const [];
 
     for (final x in observables) {
       x._removeObserver(derivation);
@@ -513,15 +554,15 @@ class ReactiveContext {
   }
 
   Dispose onReactionError(ReactionErrorHandler handler) {
-    config._reactionErrorHandlers.add(handler);
+    _reactionErrorHandlers.add(handler);
     return () {
-      config._reactionErrorHandlers.removeWhere((f) => f == handler);
+      _reactionErrorHandlers.remove(handler);
     };
   }
 
   void _notifyReactionErrorHandlers(Object exception, Reaction reaction) {
     // ignore: avoid_function_literals_in_foreach_calls
-    config._reactionErrorHandlers.forEach((f) {
+    _reactionErrorHandlers.toList(growable: false).forEach((f) {
       f(exception, reaction);
     });
   }
@@ -545,12 +586,5 @@ class ReactiveContext {
   @protected
   void popComputation() {
     _state.computationDepth--;
-  }
-
-  void _resetState() {
-    _state =
-        _ReactiveState()
-          ..allowStateChanges =
-              _config.writePolicy == ReactiveWritePolicy.never;
   }
 }

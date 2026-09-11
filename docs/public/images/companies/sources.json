@@ -1,0 +1,14 @@
+{
+  "note": "Company adoption list and section heading supplied by the site owner. Logos sourced from official websites; Supernova and Nubank extracted from their header SVGs.",
+  "assets": {
+    "yono": "https://sbi.bank.in/documents/16012/57163377/YONO+new+Logo+Horizontal.png/3c34af5f-acef-0ac7-abee-98a2cae88509?t=1766985707990",
+    "tata": "https://ik.imagekit.io/tatadigitalltd/Logo%20(1)_dCKnXNKon.svg",
+    "vyuh": "https://vyuh.tech/assets/logo.svg",
+    "caliber": "https://caliberuniversal.com/wp-content/uploads/2023/06/caliber-logo-100px.png",
+    "highlevel": "https://assets.cdn.filesafe.space/knES3eSWYIsc5YSZ3YLl/media/6a3d48e8e4daecfbb47f2a0b.svg",
+    "its-all-widgets": "https://itsallwidgets.com/images/logo.png",
+    "netlify-sponsor": "https://www.netlify.com/assets/logos/full/large/lightmode/logo-netlify-large-fullcolor-lightmode.svg"
+  },
+  "supernova": "https://www.supernova.io/",
+  "nubank": "https://nubank.com.br/"
+}

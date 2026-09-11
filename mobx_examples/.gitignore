@@ -37,7 +37,6 @@ windows
 web
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Mobx Examples
 mobx_examples/test/widget_test*.*

@@ -14,18 +14,17 @@ class AsyncAction {
 
   final ActionController _actions;
 
-  Zone? _zoneField;
-  Zone get _zone {
-    if (_zoneField == null) {
-      final spec = ZoneSpecification(run: _run, runUnary: _runUnary);
-      _zoneField = Zone.current.fork(specification: spec);
-    }
-    return _zoneField!;
-  }
-
   Future<R> run<R>(Future<R> Function() body) async {
     try {
-      return await _zone.run(body);
+      // Each invocation inherits its caller's values, error handlers and zone hooks.
+      final zone = Zone.current.fork(
+        specification: ZoneSpecification(
+          run: _run,
+          runUnary: _runUnary,
+          runBinary: _runBinary,
+        ),
+      );
+      return await zone.run(body);
     } finally {
       // @katis:
       // Delay completion until next microtask completion.
@@ -67,15 +66,21 @@ class AsyncAction {
     }
   }
 
-  // Will be invoked for a catch clause that has two arguments: exception and stacktrace
-  //  R _runBinary<R, A, B>(Zone self, ZoneDelegate parent, Zone zone,
-  //      R Function(A a, B b) f, A a, B b) {
-  //    final actionInfo = _actions.startAction();
-  //    try {
-  //      final result = parent.runBinary(zone, f, a, b);
-  //      return result;
-  //    } finally {
-  //      _actions.endAction(actionInfo);
-  //    }
-  //  }
+  R _runBinary<R, A, B>(
+    Zone self,
+    ZoneDelegate parent,
+    Zone zone,
+    R Function(A a, B b) f,
+    A a,
+    B b,
+  ) {
+    final actionInfo = _actions.startAction(
+      name: '${_actions.name}(Zone.runBinary)',
+    );
+    try {
+      return parent.runBinary(zone, f, a, b);
+    } finally {
+      _actions.endAction(actionInfo);
+    }
+  }
 }

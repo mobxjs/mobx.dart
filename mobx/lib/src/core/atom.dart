@@ -51,11 +51,15 @@ class Atom with DebugCreationStack {
   // ignore: prefer_final_fields
   bool _isBeingObserved = false;
 
-  final Set<Derivation> _observers = {};
+  Set<Derivation> _observers = const {};
+
+  // Nested tracking may overwrite this hint; binding still deduplicates reads
+  // when the stable dependency order diverges.
+  int _lastAccessedBy = 0;
 
   bool get hasObservers => _observers.isNotEmpty;
 
-  final Map<_ListenerKind, Set<void Function()>?> _observationListeners = {};
+  Map<_ListenerKind, Set<void Function()>>? _observationListeners;
 
   void reportObserved() {
     _context.reportObserved(this);
@@ -69,7 +73,11 @@ class Atom with DebugCreationStack {
   }
 
   void _addObserver(Derivation d) {
-    _observers.add(d);
+    if (_observers.isEmpty) {
+      _observers = {d};
+    } else {
+      _observers.add(d);
+    }
 
     if (_lowestObserverState.index > d._dependenciesState.index) {
       _lowestObserverState = d._dependenciesState;
@@ -77,22 +85,32 @@ class Atom with DebugCreationStack {
   }
 
   void _removeObserver(Derivation d) {
+    if (_observers.isEmpty) return;
     _observers.remove(d);
     if (_observers.isEmpty) {
+      _observers = const {};
       _context._enqueueForUnobservation(this);
     }
   }
 
   void _notifyOnBecomeObserved() {
-    final listeners = _observationListeners[_ListenerKind.onBecomeObserved];
-    listeners?.forEach(_notifyListener);
+    final listeners = _observationListeners?[_ListenerKind.onBecomeObserved];
+    if (listeners != null) {
+      _context.untracked(
+        () => listeners.toList(growable: false).forEach(_notifyListener),
+      );
+    }
   }
 
   static void _notifyListener(void Function() listener) => listener();
 
   void _notifyOnBecomeUnobserved() {
-    final listeners = _observationListeners[_ListenerKind.onBecomeUnobserved];
-    listeners?.forEach(_notifyListener);
+    final listeners = _observationListeners?[_ListenerKind.onBecomeUnobserved];
+    if (listeners != null) {
+      _context.untracked(
+        () => listeners.toList(growable: false).forEach(_notifyListener),
+      );
+    }
   }
 
   void Function() onBecomeObserved(void Function() fn) =>
@@ -102,17 +120,18 @@ class Atom with DebugCreationStack {
       _addListener(_ListenerKind.onBecomeUnobserved, fn);
 
   void Function() _addListener(_ListenerKind kind, void Function() fn) {
-    (_observationListeners[kind] ??= {}).add(fn);
+    ((_observationListeners ??= {})[kind] ??= {}).add(fn);
 
     return () {
-      final listeners = _observationListeners[kind];
+      final listeners = _observationListeners?[kind];
       if (listeners == null) {
         return;
       }
 
       listeners.removeWhere((f) => f == fn);
       if (listeners.isEmpty) {
-        _observationListeners[kind] = null;
+        _observationListeners!.remove(kind);
+        if (_observationListeners!.isEmpty) _observationListeners = null;
       }
     };
   }

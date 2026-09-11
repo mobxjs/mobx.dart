@@ -2,25 +2,25 @@ name: mobx_lint_flutter_test
 publish_to: none
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.7.0 <4.0.0"
   flutter: ">=3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  mobx:
-  flutter_mobx:
+  mobx: ^2.6.1
+  flutter_mobx: ^2.3.0
 
 
 dev_dependencies:
   mobx_lint:
     path: ../mobx_lint
-  test: ^1.15.0
+  test: ^1.31.1
 
-  path: any
-  custom_lint_core: any
-  analyzer_plugin: any
-  analyzer: any
+  path: ^1.9.1
+  custom_lint_core: ^0.8.1
+  analyzer_plugin: ^0.13.10
+  analyzer: ^8.4.0
 dependency_overrides:
   mobx:
     path: ../mobx

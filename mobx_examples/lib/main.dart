@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
               create: (_) => PreferencesService(sharedPreferences),
             ),
             ProxyProvider<PreferencesService, SettingsStore>(
-                update: (_, preferencesService, __) =>
+                update: (_, preferencesService, _) =>
                     SettingsStore(preferencesService)),
             Provider<ConnectivityStore>(
               create: (_) => ConnectivityStore(),
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             )
           ],
           child: Consumer<SettingsStore>(
-            builder: (_, store, __) => Observer(
+            builder: (_, store, _) => Observer(
               builder: (_) => MaterialApp(
                 initialRoute: '/',
                 theme: ThemeData(

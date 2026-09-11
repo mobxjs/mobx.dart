@@ -1,0 +1,18 @@
+Generated wasm module '/var/folders/q2/5mxyb_rx1yqdk3r0g6crrr8c0000gn/T/flutter_tools.yjBanN/flutter_test.aeeerj/main.dart.wasm', and JS init file '/var/folders/q2/5mxyb_rx1yqdk3r0g6crrr8c0000gn/T/flutter_tools.yjBanN/flutter_test.aeeerj/main.dart.mjs'.
+00:00 +0: loading /Users/pavanpodila/Projects/mobx.dart/mobx_examples/test/widget_test.dart
+00:00 +0: TodoList JSON serialization/(de)serialization
+00:00 +1: TodoList starts with default configuration
+00:00 +2: when a todo is added, the computed properties are updated
+00:00 +3: when a todo is completed, the computed properties are updated
+00:00 +4: when a todo is added, the pendingTodos count increases by 1
+00:00 +5: when a todo is removed, the computed properties update
+00:00 +6: when all todos are marked completed, the properties are updated
+00:00 +7: when all todos are removed, the properties are updated
+00:00 +8: when filter is set to "all" all todos are visible
+00:00 +9: when filter is set to "all" when there are no completed todos, can-remove-all-completed is false
+00:00 +10: when filter is set to "all" when there are no pending todos, can-mark-all-completed is false
+00:00 +11: when filter is set to "completed" only completed todos are visible
+00:00 +12: when filter is set to "completed" batch actions are enabled as appropriate
+00:00 +13: when filter is set to "pending" only pending todos are visible
+00:00 +14: when filter is set to "pending" batch actions are enabled as appropriate
+00:00 +15: All tests passed!

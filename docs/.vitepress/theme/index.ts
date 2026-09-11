@@ -1,0 +1,10 @@
+import DefaultTheme from 'vitepress/theme-without-fonts';
+import type {Theme} from 'vitepress';
+import HomePage from './components/HomePage';
+import FlutterExample from './components/FlutterExample.vue';
+import ExampleGallery from './components/ExampleGallery.vue';
+import PubBadge from './components/PubBadge.vue';
+import {Profile} from './components/Profile';
+import './custom.css';
+import './home.css';
+export default {extends:DefaultTheme,enhanceApp({app}){app.component('HomePage',HomePage);app.component('FlutterExample',FlutterExample);app.component('ExampleGallery',ExampleGallery);app.component('PubBadge',PubBadge);app.component('Profile',Profile);}} satisfies Theme;

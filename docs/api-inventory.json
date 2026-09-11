@@ -1,0 +1,3542 @@
+[
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "MultiReactionBuilder",
+    "kind": "class",
+    "signature": "class MultiReactionBuilder extends MultiProvider",
+    "description": "/// {@template multi_reaction_builder}\n/// Merges multiple [ReactionBuilder] widgets into one widget tree.\n///\n/// [MultiReactionBuilder] improves the readability and eliminates the need\n/// to nest multiple [ReactionBuilder]s.\n///\n/// By using [MultiReactionBuilder] we can go from:\n///\n/// ```dart\n/// ReactionBuilder(\n///   builder: (context) {},\n///   child: ReactionBuilder(\n///     builder: (context) {},\n///     child: ReactionBuilder(\n///       builder: (context) {},\n///       child: ChildA(),\n///     ),\n///   ),\n/// )\n/// ```\n///\n/// to:\n///\n/// ```dart\n/// MultiReactionBuilder(\n///   builders: [\n///     ReactionBuilder(\n///       builder: (context) {},\n///     ),\n///     ReactionBuilder(\n///       builder: (context) {},\n///     ),\n///     ReactionBuilder(\n///       builder: (context) {},\n///     ),\n///   ],\n///   child: ChildA(),\n/// )\n/// ```\n///\n/// [MultiReactionBuilder] converts the [ReactionBuilder] list into a tree of nested\n/// [ReactionBuilder] widgets.\n/// As a result, the only advantage of using [MultiReactionBuilder] is improved\n/// readability due to the reduction in nesting and boilerplate.\n/// {@endtemplate}",
+    "members": [
+      {
+        "name": "MultiReactionBuilder",
+        "signature": "MultiReactionBuilder({Key? key, required List<ReactionBuilder> builders, required Widget child})",
+        "description": "/// {@macro multi_reaction_builder}"
+      }
+    ]
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "Observer",
+    "kind": "class",
+    "signature": "class Observer extends StatelessObserverWidget",
+    "description": "/// A [StatelessObserverWidget] that delegate its [build] method to [builder].\n///\n/// See also:\n///\n/// - [Builder], which is the same thing but for [StatelessWidget] instead.",
+    "members": [
+      {
+        "name": "Observer",
+        "signature": "Observer({Key? key, required Widget Function(BuildContext) builder, String? name, bool? warnWhenNoObservables})",
+        "description": ""
+      },
+      {
+        "name": "Observer.withBuiltChild",
+        "signature": "Observer.withBuiltChild({Key? key, required Widget Function(BuildContext, Widget) builder, required Widget child, String? name, bool? warnWhenNoObservables})",
+        "description": "/// Observer which excludes the child branch from being rebuilt\n///\n/// - [builder] is a builder function with a child widget as a parameter;\n///\n/// - [child] is the widget to pass to the [builder] function."
+      },
+      {
+        "name": "builder",
+        "signature": "Widget Function(BuildContext) builder",
+        "description": ""
+      },
+      {
+        "name": "debugConstructingStackFrame",
+        "signature": "String? debugConstructingStackFrame",
+        "description": "/// The stack frame pointing to the source that constructed this instance."
+      },
+      {
+        "name": "builder",
+        "signature": "Widget Function(BuildContext) get builder",
+        "description": ""
+      },
+      {
+        "name": "debugConstructingStackFrame",
+        "signature": "String? get debugConstructingStackFrame",
+        "description": ""
+      },
+      {
+        "name": "getName",
+        "signature": "String getName()",
+        "description": ""
+      },
+      {
+        "name": "build",
+        "signature": "Widget build(BuildContext context)",
+        "description": ""
+      },
+      {
+        "name": "debugFindConstructingStackFrame",
+        "signature": "String? debugFindConstructingStackFrame([StackTrace? stackTrace])",
+        "description": "/// Finds the first non-constructor frame in the stack trace.\n///\n/// [stackTrace] defaults to [StackTrace.current]."
+      }
+    ]
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "ObserverElementMixin",
+    "kind": "mixin",
+    "signature": "mixin ObserverElementMixin on ComponentElement",
+    "description": "/// A mixin that overrides [build] to listen to the observables used by\n/// [ObserverWidgetMixin].",
+    "members": [
+      {
+        "name": "reaction",
+        "signature": "ReactionImpl reaction",
+        "description": ""
+      },
+      {
+        "name": "reaction",
+        "signature": "ReactionImpl get reaction",
+        "description": ""
+      },
+      {
+        "name": "mount",
+        "signature": "void mount(Element? parent, dynamic newSlot)",
+        "description": ""
+      },
+      {
+        "name": "invalidate",
+        "signature": "void invalidate()",
+        "description": ""
+      },
+      {
+        "name": "build",
+        "signature": "Widget build()",
+        "description": ""
+      },
+      {
+        "name": "unmount",
+        "signature": "void unmount()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "ObserverWidgetMixin",
+    "kind": "mixin",
+    "signature": "mixin ObserverWidgetMixin on Widget",
+    "description": "/// Observer observes the observables used in the `build` method and rebuilds\n/// the Widget whenever any of them change. There is no need to do any other\n/// wiring besides simply referencing the required observables.\n///\n/// Internally, [ObserverWidgetMixin] uses a [Reaction] around the `build`\n/// method.\n///\n/// If your `build` method does not contain any observables,\n/// [ObserverWidgetMixin] will print a warning on the console. This is a\n/// debug-time hint to let you know that you are not observing any observables.",
+    "members": [
+      {
+        "name": "warnWhenNoObservables",
+        "signature": "bool? warnWhenNoObservables",
+        "description": ""
+      },
+      {
+        "name": "warnWhenNoObservables",
+        "signature": "bool? get warnWhenNoObservables",
+        "description": "/// Whether to warn when there is no observables in the builder function\n/// null means true"
+      },
+      {
+        "name": "getName",
+        "signature": "String getName()",
+        "description": "/// An identifiable name that can be overriden for debugging."
+      },
+      {
+        "name": "getContext",
+        "signature": "ReactiveContext getContext()",
+        "description": "/// The context within which its reaction should be run. It is the\n/// [mainContext] in most cases."
+      },
+      {
+        "name": "createReaction",
+        "signature": "Reaction createReaction(dynamic Function() onInvalidate, {dynamic Function(Object, Reaction)? onError})",
+        "description": "/// A convenience method used for testing."
+      },
+      {
+        "name": "log",
+        "signature": "void log(String msg)",
+        "description": "/// Convenience method to output console messages as debugging output. Logging\n/// usually happens when some internal error needs to be surfaced to the user."
+      }
+    ]
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "ReactionBuilder",
+    "kind": "class",
+    "signature": "class ReactionBuilder extends SingleChildStatefulWidget",
+    "description": "/// ReactionBuilder is useful for triggering reactions via a builder function rather\n/// than creating a custom StatefulWidget for handling the same.\n/// Without a [ReactionBuilder] you would normally have to create a StatefulWidget\n/// where the `initState()` would be used to setup the reaction and then dispose it off\n/// in the `dispose()` method.\n///\n/// Although simple, this little helper Widget eliminates the need to create such a\n/// widget and handles the lifetime of the reaction correctly. To use it, pass a\n/// [builder] that takes in a [BuildContext] and prepares the reaction. It should\n/// end up returning a [ReactionDisposer]. This will be disposed when the [ReactionBuilder]\n/// is disposed. The [child] Widget gets rendered as part of the build process.",
+    "members": [
+      {
+        "name": "ReactionBuilder",
+        "signature": "ReactionBuilder({Key? key, Widget? child, required ReactionDisposer Function(BuildContext) builder})",
+        "description": ""
+      },
+      {
+        "name": "builder",
+        "signature": "ReactionDisposer Function(BuildContext) builder",
+        "description": ""
+      },
+      {
+        "name": "builder",
+        "signature": "ReactionDisposer Function(BuildContext) get builder",
+        "description": ""
+      },
+      {
+        "name": "createState",
+        "signature": "ReactionBuilderState createState()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "ReactionBuilderFunction",
+    "kind": "type alias",
+    "signature": "typedef ReactionBuilderFunction = ReactionDisposer Function(BuildContext)",
+    "description": "/// A builder function that creates a reaction",
+    "members": []
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "StatefulObserverElement",
+    "kind": "class",
+    "signature": "class StatefulObserverElement extends StatefulElement with ObserverElementMixin",
+    "description": "/// An [Element] that uses a [StatefulObserverWidget] as its configuration.",
+    "members": [
+      {
+        "name": "StatefulObserverElement",
+        "signature": "StatefulObserverElement(StatefulObserverWidget widget)",
+        "description": "/// Creates an element that uses the given widget as its configuration."
+      },
+      {
+        "name": "widget",
+        "signature": "StatefulObserverWidget widget",
+        "description": ""
+      },
+      {
+        "name": "widget",
+        "signature": "StatefulObserverWidget get widget",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "StatefulObserverWidget",
+    "kind": "class",
+    "signature": "abstract class StatefulObserverWidget extends StatefulWidget with ObserverWidgetMixin",
+    "description": "/// A [StatefulWidget] that rebuilds when an [Observable] used inside\n/// [State.build] updates.\n///\n/// See also:\n///\n/// - [Observer], which subclass this interface and delegate its `build` to a\n///   callback.\n/// - [StatelessObserverWidget], similar to this class, but with no [State].",
+    "members": [
+      {
+        "name": "StatefulObserverWidget",
+        "signature": "StatefulObserverWidget({Key? key, ReactiveContext? context, String? name})",
+        "description": "/// Initializes [key], [context] and [name] for subclasses."
+      },
+      {
+        "name": "getName",
+        "signature": "String getName()",
+        "description": ""
+      },
+      {
+        "name": "getContext",
+        "signature": "ReactiveContext getContext()",
+        "description": ""
+      },
+      {
+        "name": "createElement",
+        "signature": "StatefulObserverElement createElement()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "StatelessObserverElement",
+    "kind": "class",
+    "signature": "class StatelessObserverElement extends StatelessElement with ObserverElementMixin",
+    "description": "/// An [Element] that uses a [StatelessObserverWidget] as its configuration.",
+    "members": [
+      {
+        "name": "StatelessObserverElement",
+        "signature": "StatelessObserverElement(StatelessObserverWidget widget)",
+        "description": "/// Creates an element that uses the given widget as its configuration."
+      },
+      {
+        "name": "widget",
+        "signature": "StatelessObserverWidget widget",
+        "description": ""
+      },
+      {
+        "name": "widget",
+        "signature": "StatelessObserverWidget get widget",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "StatelessObserverWidget",
+    "kind": "class",
+    "signature": "abstract class StatelessObserverWidget extends StatelessWidget with ObserverWidgetMixin",
+    "description": "/// A [StatelessWidget] that rebuilds when an [Observable] used inside [build]\n/// updates.\n///\n/// See also:\n///\n/// - [Observer], which subclass this interface and delegate its [build]\n///   to a callback.\n/// - [StatefulObserverWidget], similar to this class, but that has a [State].",
+    "members": [
+      {
+        "name": "StatelessObserverWidget",
+        "signature": "StatelessObserverWidget({Key? key, ReactiveContext? context, String? name, bool? warnWhenNoObservables})",
+        "description": "/// Initializes [key], [context] and [name] for subclasses."
+      },
+      {
+        "name": "warnWhenNoObservables",
+        "signature": "bool? warnWhenNoObservables",
+        "description": ""
+      },
+      {
+        "name": "warnWhenNoObservables",
+        "signature": "bool? get warnWhenNoObservables",
+        "description": ""
+      },
+      {
+        "name": "getName",
+        "signature": "String getName()",
+        "description": ""
+      },
+      {
+        "name": "getContext",
+        "signature": "ReactiveContext getContext()",
+        "description": ""
+      },
+      {
+        "name": "createElement",
+        "signature": "StatelessObserverElement createElement()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "debugAddStackTraceInObserverName",
+    "kind": "getter",
+    "signature": "bool get debugAddStackTraceInObserverName",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "debugAddStackTraceInObserverName=",
+    "kind": "setter",
+    "signature": "set debugAddStackTraceInObserverName(bool value)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "enableWarnWhenNoObservables",
+    "kind": "getter",
+    "signature": "bool get enableWarnWhenNoObservables",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "enableWarnWhenNoObservables=",
+    "kind": "setter",
+    "signature": "set enableWarnWhenNoObservables(bool value)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "flutter_mobx",
+    "library": "flutter_mobx.dart",
+    "name": "version",
+    "kind": "getter",
+    "signature": "String get version",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Action",
+    "kind": "class",
+    "signature": "class Action with DebugCreationStack",
+    "description": "",
+    "members": [
+      {
+        "name": "Action",
+        "signature": "Action(Function fn, {ReactiveContext? context, String? name})",
+        "description": "/// Creates an action that encapsulates all the mutations happening on the\n/// observables.\n///\n/// Wrapping mutations inside an action ensures the depending observers\n/// are only notified when the action completes. This is useful to silent the notifications\n/// when several observables are being changed together. You will want to run your\n/// reactions only when all the mutations complete. This also helps in keeping\n/// the state of your application consistent.\n///\n/// You can give a debug-friendly [name] to identify the action.\n///\n/// ```\n/// var x = Observable(10);\n/// var y = Observable(20);\n/// var total = Observable(0);\n///\n/// autorun((){\n///   print('x = ${x}, y = ${y}, total = ${total}');\n/// });\n///\n/// var totalUp = Action((){\n///   x.value++;\n///   y.value++;\n///\n///   total.value = x.value + y.value;\n/// }, name: 'adder');\n/// ```\n/// Even though we are changing 3 observables (`x`, `y` and `total`), the [autorun()]\n/// is only executed once. This is the benefit of action. It batches up all the change\n/// notifications and propagates them only after the completion of the action. Actions\n/// can also be nested inside, in which case the change notification will propagate when\n/// the top-level action completes."
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "call",
+        "signature": "dynamic call([List<dynamic> args = const [], Map<String, dynamic>? namedArgs])",
+        "description": ""
+      },
+      {
+        "name": "toString",
+        "signature": "String toString()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ActionController",
+    "kind": "class",
+    "signature": "class ActionController",
+    "description": "/// `ActionController` is used to define the start/end boundaries of code which\n/// should be wrapped inside an action. This ensures all observable mutations are neatly\n/// encapsulated.\n///\n/// You would rarely need to use this directly. This is primarily meant for the **`mobx_codegen`** package.\n///",
+    "members": [
+      {
+        "name": "ActionController",
+        "signature": "ActionController({ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "startAction",
+        "signature": "ActionRunInfo startAction({String? name})",
+        "description": ""
+      },
+      {
+        "name": "endAction",
+        "signature": "void endAction(ActionRunInfo info)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ActionRunInfo",
+    "kind": "class",
+    "signature": "class ActionRunInfo",
+    "description": "",
+    "members": [
+      {
+        "name": "ActionRunInfo",
+        "signature": "ActionRunInfo({required String name, DateTime? startTime, Derivation? prevDerivation, bool prevAllowStateChanges = true})",
+        "description": ""
+      },
+      {
+        "name": "prevDerivation",
+        "signature": "Derivation? prevDerivation",
+        "description": ""
+      },
+      {
+        "name": "prevAllowStateChanges",
+        "signature": "bool prevAllowStateChanges",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "startTime",
+        "signature": "DateTime? startTime",
+        "description": ""
+      },
+      {
+        "name": "prevDerivation",
+        "signature": "Derivation? get prevDerivation",
+        "description": ""
+      },
+      {
+        "name": "prevAllowStateChanges",
+        "signature": "bool get prevAllowStateChanges",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "startTime",
+        "signature": "DateTime? get startTime",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ActionSpyEvent",
+    "kind": "class",
+    "signature": "class ActionSpyEvent extends SpyEvent",
+    "description": "",
+    "members": [
+      {
+        "name": "ActionSpyEvent",
+        "signature": "ActionSpyEvent({required String name})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "AsyncAction",
+    "kind": "class",
+    "signature": "class AsyncAction",
+    "description": "/// AsyncAction uses a [Zone] to keep track of async operations like [Future], timers and other\n/// kinds of micro-tasks.\n///\n/// You would rarely need to use this class directly. Instead, use the `@action` annotation along with\n/// the `mobx_codegen` package.",
+    "members": [
+      {
+        "name": "AsyncAction",
+        "signature": "AsyncAction(String name, {ReactiveContext? context})",
+        "description": ""
+      },
+      {
+        "name": "run",
+        "signature": "Future<R> run<R>(Future<R> Function() body)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Atom",
+    "kind": "class",
+    "signature": "class Atom with DebugCreationStack",
+    "description": "",
+    "members": [
+      {
+        "name": "Atom",
+        "signature": "Atom({String? name, dynamic Function()? onObserved, dynamic Function()? onUnobserved, ReactiveContext? context})",
+        "description": "/// Creates a simple Atom for tracking its usage in a reactive context. This is useful when\n/// you don't need the value but instead a way of knowing when it becomes active and inactive\n/// in a reaction.\n///\n/// Use the [onObserved] and [onUnobserved] handlers to know when the atom is active and inactive\n/// respectively. Use a debug [name] to identify easily."
+      },
+      {
+        "name": "context",
+        "signature": "ReactiveContext context",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "isBeingObserved",
+        "signature": "bool isBeingObserved",
+        "description": ""
+      },
+      {
+        "name": "hasObservers",
+        "signature": "bool hasObservers",
+        "description": ""
+      },
+      {
+        "name": "context",
+        "signature": "ReactiveContext get context",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "isBeingObserved",
+        "signature": "bool get isBeingObserved",
+        "description": ""
+      },
+      {
+        "name": "hasObservers",
+        "signature": "bool get hasObservers",
+        "description": ""
+      },
+      {
+        "name": "reportObserved",
+        "signature": "void reportObserved()",
+        "description": ""
+      },
+      {
+        "name": "reportChanged",
+        "signature": "void reportChanged()",
+        "description": ""
+      },
+      {
+        "name": "onBecomeObserved",
+        "signature": "void Function() onBecomeObserved(void Function() fn)",
+        "description": ""
+      },
+      {
+        "name": "onBecomeUnobserved",
+        "signature": "void Function() onBecomeUnobserved(void Function() fn)",
+        "description": ""
+      },
+      {
+        "name": "toString",
+        "signature": "String toString()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "AtomSpyReporter",
+    "kind": "extension",
+    "signature": "extension AtomSpyReporter on Atom",
+    "description": "",
+    "members": [
+      {
+        "name": "reportRead",
+        "signature": "void reportRead()",
+        "description": ""
+      },
+      {
+        "name": "reportWrite",
+        "signature": "void reportWrite<T>(T newValue, T oldValue, void Function() setNewValue, {bool Function(T?, T?)? equals, bool? useDeepEquality})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "BoolExtension",
+    "kind": "extension",
+    "signature": "extension BoolExtension on bool",
+    "description": "",
+    "members": [
+      {
+        "name": "obs",
+        "signature": "Observable<bool> obs({ReactiveContext? context, String? name})",
+        "description": "/// turns a bool into Observable"
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ChangeNotification",
+    "kind": "class",
+    "signature": "class ChangeNotification<T>",
+    "description": "",
+    "members": [
+      {
+        "name": "ChangeNotification",
+        "signature": "ChangeNotification<T>({OperationType? type, T? newValue, T? oldValue, dynamic object})",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "OperationType? type",
+        "description": "/// One of add | update | delete"
+      },
+      {
+        "name": "oldValue",
+        "signature": "T? oldValue",
+        "description": ""
+      },
+      {
+        "name": "newValue",
+        "signature": "T? newValue",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "dynamic object",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "OperationType? get type",
+        "description": ""
+      },
+      {
+        "name": "oldValue",
+        "signature": "T? get oldValue",
+        "description": ""
+      },
+      {
+        "name": "newValue",
+        "signature": "T? get newValue",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "dynamic get object",
+        "description": ""
+      },
+      {
+        "name": "newValue",
+        "signature": "set newValue(T? value)",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "set object(dynamic value)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Computed",
+    "kind": "class",
+    "signature": "class Computed<T> extends Atom implements Derivation, ObservableValue<T>",
+    "description": "",
+    "members": [
+      {
+        "name": "Computed",
+        "signature": "Computed<T>(T Function() fn, {String? name, ReactiveContext? context, bool Function(T?, T?)? equals, bool? keepAlive})",
+        "description": "/// Creates a computed value with an optional [name].\n///\n/// The passed in function: [fn], is used to give back the computed value.\n/// Computed values can depend on other observables and computed values!\n/// This makes them both an *observable* and an *observer*.\n/// Computed values are also referred to as _derived-values_ because they inherently _derive_ their\n/// value from other observables. Don't underestimate the power of the **computed**.\n/// They are possibly the most powerful observables in your application.\n///\n/// A computed's value is read with the `value` property.\n///\n/// It is possible to override equality comparison (when deciding whether to notify observers)\n/// by providing an [equals] comparator.\n///\n/// [keepAlive]\n/// This avoids suspending computed values when they are not being observed by anything.\n/// Can potentially create memory leaks.\n///\n/// ```\n/// var x = Observable(10);\n/// var y = Observable(10);\n/// var total = Computed((){\n///   return x.value + y.value;\n/// });\n///\n/// x.value = 100; // recomputes total\n/// y.value = 100; // recomputes total again\n///\n/// print('total = ${total.value}'); // prints \"total = 200\"\n/// ```\n///\n/// A computed value is _cached_ and it recomputes only when the dependent observables actually\n/// change. This makes them fast and you are free to use them throughout your application. Internally\n/// MobX uses a 2-phase change propagation that ensures no unnecessary computations are performed."
+      },
+      {
+        "name": "equals",
+        "signature": "bool Function(T?, T?)? equals",
+        "description": ""
+      },
+      {
+        "name": "errorValue",
+        "signature": "MobXCaughtException? errorValue",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T value",
+        "description": ""
+      },
+      {
+        "name": "equals",
+        "signature": "bool Function(T?, T?)? get equals",
+        "description": ""
+      },
+      {
+        "name": "errorValue",
+        "signature": "MobXCaughtException? get errorValue",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T get value",
+        "description": ""
+      },
+      {
+        "name": "computeValue",
+        "signature": "T? computeValue({required bool track})",
+        "description": ""
+      },
+      {
+        "name": "observe",
+        "signature": "void Function() observe(void Function(ChangeNotification<T>) handler, {bool? fireImmediately})",
+        "description": ""
+      },
+      {
+        "name": "toString",
+        "signature": "String toString()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ComputedMethod",
+    "kind": "class",
+    "signature": "class ComputedMethod",
+    "description": "/// Internal class only used for code-generation with `mobx_codegen`.\n///\n/// During code-generation, this type is detected to identify a `Computed`",
+    "members": [
+      {
+        "name": "ComputedMethod",
+        "signature": "ComputedMethod({bool? keepAlive})",
+        "description": ""
+      },
+      {
+        "name": "keepAlive",
+        "signature": "bool? keepAlive",
+        "description": ""
+      },
+      {
+        "name": "keepAlive",
+        "signature": "bool? get keepAlive",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ComputedValueSpyEvent",
+    "kind": "class",
+    "signature": "class ComputedValueSpyEvent extends SpyEvent",
+    "description": "",
+    "members": [
+      {
+        "name": "ComputedValueSpyEvent",
+        "signature": "ComputedValueSpyEvent(dynamic object, {required String name})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ConditionalAction",
+    "kind": "extension",
+    "signature": "extension ConditionalAction on ReactiveContext",
+    "description": "",
+    "members": [
+      {
+        "name": "conditionallyRunInAction",
+        "signature": "void conditionallyRunInAction(void Function() fn, Atom atom, {String? name, ActionController? actionController})",
+        "description": "/// Only run within an action if outside a batch\n/// [fn] is the function to execute. Optionally provide a debug-[name]."
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Derivation",
+    "kind": "class",
+    "signature": "abstract class Derivation",
+    "description": "",
+    "members": [
+      {
+        "name": "Derivation",
+        "signature": "Derivation()",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "errorValue",
+        "signature": "MobXCaughtException? errorValue",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "errorValue",
+        "signature": "MobXCaughtException? get errorValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Dispose",
+    "kind": "type alias",
+    "signature": "typedef Dispose = void Function()",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "DoubleExtension",
+    "kind": "extension",
+    "signature": "extension DoubleExtension on double",
+    "description": "",
+    "members": [
+      {
+        "name": "obs",
+        "signature": "Observable<double> obs({ReactiveContext? context, String? name})",
+        "description": "/// turns a double into Observable"
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "EndedSpyEvent",
+    "kind": "class",
+    "signature": "class EndedSpyEvent extends SpyEvent",
+    "description": "",
+    "members": [
+      {
+        "name": "EndedSpyEvent",
+        "signature": "EndedSpyEvent({required String type, required String name, Duration? duration})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "EqualityComparer",
+    "kind": "type alias",
+    "signature": "typedef EqualityComparer<in T> = bool Function(T?, T?)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "FutureStatus",
+    "kind": "enum",
+    "signature": "enum FutureStatus",
+    "description": "",
+    "members": [
+      {
+        "name": "FutureStatus",
+        "signature": "FutureStatus()",
+        "description": ""
+      },
+      {
+        "name": "pending",
+        "signature": "FutureStatus pending",
+        "description": ""
+      },
+      {
+        "name": "rejected",
+        "signature": "FutureStatus rejected",
+        "description": ""
+      },
+      {
+        "name": "fulfilled",
+        "signature": "FutureStatus fulfilled",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<FutureStatus> values",
+        "description": ""
+      },
+      {
+        "name": "pending",
+        "signature": "FutureStatus get pending",
+        "description": ""
+      },
+      {
+        "name": "rejected",
+        "signature": "FutureStatus get rejected",
+        "description": ""
+      },
+      {
+        "name": "fulfilled",
+        "signature": "FutureStatus get fulfilled",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<FutureStatus> get values",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "IntExtension",
+    "kind": "extension",
+    "signature": "extension IntExtension on int",
+    "description": "",
+    "members": [
+      {
+        "name": "obs",
+        "signature": "Observable<int> obs({ReactiveContext? context, String? name})",
+        "description": "/// turns an int into Observable"
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Interceptable",
+    "kind": "class",
+    "signature": "abstract class Interceptable<T>",
+    "description": "",
+    "members": [
+      {
+        "name": "Interceptable",
+        "signature": "Interceptable<T>()",
+        "description": ""
+      },
+      {
+        "name": "intercept",
+        "signature": "void Function() intercept(WillChangeNotification<T>? Function(WillChangeNotification<T>) interceptor)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Interceptor",
+    "kind": "type alias",
+    "signature": "typedef Interceptor<inout T> = WillChangeNotification<T>? Function(WillChangeNotification<T>)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Interceptors",
+    "kind": "class",
+    "signature": "class Interceptors<T> extends NotificationHandlers<WillChangeNotification<T>>",
+    "description": "/// Stores the intercept-handlers that have been attached to a specific Observable.\n///\n/// When `observableInstance.intercept(handler)` is invoked, the passed-in handler\n/// is stored inside the `Interceptors<T>`.\n/// This is an internal class and should not be used directly.",
+    "members": [
+      {
+        "name": "Interceptors",
+        "signature": "Interceptors<T>(ReactiveContext context)",
+        "description": ""
+      },
+      {
+        "name": "add",
+        "signature": "void Function() add(WillChangeNotification<T>? Function(WillChangeNotification<T>) handler)",
+        "description": ""
+      },
+      {
+        "name": "interceptChange",
+        "signature": "WillChangeNotification<T>? interceptChange(WillChangeNotification<T> change)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ListChange",
+    "kind": "class",
+    "signature": "class ListChange<T>",
+    "description": "/// Stores the change related information when items was modified, added or removed from [list].\n///\n/// The [elementChanges] object stores change mappings for the indexes of changed elements.\n/// The [rangeChanges] object stores mappings of the changed ranges to the indexes of the first\n/// elements of this ranges.\n/// These two objects cannot overlap (cannot contain the same indexes of changed elements), in\n/// most cases only one of them will be defined.",
+    "members": [
+      {
+        "name": "ListChange",
+        "signature": "ListChange<T>({required ObservableList<T> list, List<ElementChange<T>>? elementChanges, List<RangeChange<T>>? rangeChanges})",
+        "description": ""
+      },
+      {
+        "name": "list",
+        "signature": "ObservableList<T> list",
+        "description": ""
+      },
+      {
+        "name": "elementChanges",
+        "signature": "List<ElementChange<T>>? elementChanges",
+        "description": ""
+      },
+      {
+        "name": "rangeChanges",
+        "signature": "List<RangeChange<T>>? rangeChanges",
+        "description": ""
+      },
+      {
+        "name": "list",
+        "signature": "ObservableList<T> get list",
+        "description": ""
+      },
+      {
+        "name": "elementChanges",
+        "signature": "List<ElementChange<T>>? get elementChanges",
+        "description": ""
+      },
+      {
+        "name": "rangeChanges",
+        "signature": "List<RangeChange<T>>? get rangeChanges",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ListChangeListener",
+    "kind": "type alias",
+    "signature": "typedef ListChangeListener<in TNotification> = void Function(ListChange<TNotification>)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Listenable",
+    "kind": "class",
+    "signature": "abstract class Listenable<TNotification>",
+    "description": "",
+    "members": [
+      {
+        "name": "Listenable",
+        "signature": "Listenable<TNotification>()",
+        "description": ""
+      },
+      {
+        "name": "observe",
+        "signature": "void Function() observe(void Function(TNotification) listener, {bool fireImmediately = false})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Listener",
+    "kind": "type alias",
+    "signature": "typedef Listener<in TNotification> = void Function(TNotification)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Listeners",
+    "kind": "class",
+    "signature": "class Listeners<TNotification> extends NotificationHandlers<TNotification>",
+    "description": "/// Stores the handler functions that have been attached via [Observable.observe] method\n/// This is an internal class and should not be used directly.",
+    "members": [
+      {
+        "name": "Listeners",
+        "signature": "Listeners<TNotification>(ReactiveContext context)",
+        "description": ""
+      },
+      {
+        "name": "add",
+        "signature": "void Function() add(void Function(TNotification) handler)",
+        "description": ""
+      },
+      {
+        "name": "notifyListeners",
+        "signature": "void notifyListeners(TNotification change)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "MakeObservable",
+    "kind": "class",
+    "signature": "class MakeObservable",
+    "description": "/// Internal class only used for code-generation with `mobx_codegen`.\n///\n/// During code-generation, this type is detected to identify an `Observable`\n/// [readOnly] indicates that the field is only modifiable within the Store.\n/// It is possible to override equality comparison of new values with [equals].\n/// ```\n///\n/// bool _alwaysNotEqual(_, __) => false;\n///\n/// @MakeObservable(equals: _alwaysNotEqual)\n/// String alwaysNotifyObservable = 'hello';\n///\n/// bool _equals(oldValue, newValue) => oldValue == newValue;\n///\n/// @MakeObservable(equals: _equals)\n/// String withEquals = 'world';\n/// ```",
+    "members": [
+      {
+        "name": "MakeObservable",
+        "signature": "MakeObservable({bool readOnly = false, Function? equals, bool useDeepEquality = true})",
+        "description": ""
+      },
+      {
+        "name": "readOnly",
+        "signature": "bool readOnly",
+        "description": ""
+      },
+      {
+        "name": "equals",
+        "signature": "Function? equals",
+        "description": "/// A [Function] to use check whether the value of an observable has changed.\n///\n/// Must be a top-level or static [Function] that takes two arguments and\n/// returns a [bool].\n/// The arguments are the old value and the new value of the observable.\n/// If the function returns `true`, the values are equal and no reaction is triggered.\n/// If the function returns `false`, the value has changed and reactions are notified.\n/// If no function is provided, the default behavior is to only trigger if\n/// : `oldValue != newValue`."
+      },
+      {
+        "name": "useDeepEquality",
+        "signature": "bool useDeepEquality",
+        "description": "/// By default, MobX uses the `==` to compare the previous value. This is fine for\n/// primitives, but for Iterable and Map, you may want to use a deep equality on collections. When\n/// using deep equal, no reaction will occur if all elements are equal."
+      },
+      {
+        "name": "readOnly",
+        "signature": "bool get readOnly",
+        "description": ""
+      },
+      {
+        "name": "equals",
+        "signature": "Function? get equals",
+        "description": ""
+      },
+      {
+        "name": "useDeepEquality",
+        "signature": "bool get useDeepEquality",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "MapChange",
+    "kind": "class",
+    "signature": "class MapChange<K, V>",
+    "description": "/// Stores the information related to changes happening in an [ObservableMap]. This is\n/// used when firing the change notifications to all the listeners",
+    "members": [
+      {
+        "name": "MapChange",
+        "signature": "MapChange<K, V>({OperationType? type, K? key, V? newValue, V? oldValue, required ObservableMap<K, V> object})",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "OperationType? type",
+        "description": ""
+      },
+      {
+        "name": "key",
+        "signature": "K? key",
+        "description": ""
+      },
+      {
+        "name": "newValue",
+        "signature": "V? newValue",
+        "description": ""
+      },
+      {
+        "name": "oldValue",
+        "signature": "V? oldValue",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "ObservableMap<K, V> object",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "OperationType? get type",
+        "description": ""
+      },
+      {
+        "name": "key",
+        "signature": "K? get key",
+        "description": ""
+      },
+      {
+        "name": "newValue",
+        "signature": "V? get newValue",
+        "description": ""
+      },
+      {
+        "name": "oldValue",
+        "signature": "V? get oldValue",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "ObservableMap<K, V> get object",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "MapChangeListener",
+    "kind": "type alias",
+    "signature": "typedef MapChangeListener<in K, in V> = void Function(MapChange<K, V>)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "MobXCaughtException",
+    "kind": "class",
+    "signature": "class MobXCaughtException extends MobXException",
+    "description": "/// This captures the stack trace when user-land code throws an exception",
+    "members": [
+      {
+        "name": "MobXCaughtException",
+        "signature": "MobXCaughtException(Object exception, {required StackTrace stackTrace})",
+        "description": ""
+      },
+      {
+        "name": "exception",
+        "signature": "Object exception",
+        "description": ""
+      },
+      {
+        "name": "stackTrace",
+        "signature": "StackTrace? stackTrace",
+        "description": ""
+      },
+      {
+        "name": "exception",
+        "signature": "Object get exception",
+        "description": ""
+      },
+      {
+        "name": "stackTrace",
+        "signature": "StackTrace? get stackTrace",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "MobXCyclicReactionException",
+    "kind": "class",
+    "signature": "class MobXCyclicReactionException extends MobXException",
+    "description": "/// This exception would be fired when an reaction has a cycle and does\n/// not stabilize in [ReactiveConfig.maxIterations] iterations",
+    "members": [
+      {
+        "name": "MobXCyclicReactionException",
+        "signature": "MobXCyclicReactionException(String message)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "MobXException",
+    "kind": "class",
+    "signature": "class MobXException extends Error implements Exception",
+    "description": "/// An Exception class to capture MobX specific exceptions",
+    "members": [
+      {
+        "name": "MobXException",
+        "signature": "MobXException(String message)",
+        "description": ""
+      },
+      {
+        "name": "message",
+        "signature": "String message",
+        "description": ""
+      },
+      {
+        "name": "message",
+        "signature": "String get message",
+        "description": ""
+      },
+      {
+        "name": "message",
+        "signature": "set message(String value)",
+        "description": ""
+      },
+      {
+        "name": "toString",
+        "signature": "String toString()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Observable",
+    "kind": "class",
+    "signature": "class Observable<T> extends Atom implements Interceptable<T>, Listenable<ChangeNotification<T>>, ObservableValue<T>",
+    "description": "",
+    "members": [
+      {
+        "name": "Observable",
+        "signature": "Observable<T>(T initialValue, {String? name, ReactiveContext? context, bool Function(T?, T?)? equals})",
+        "description": "/// Create an observable value with an [initialValue] and an optional [name]\n///\n/// Observable values are tracked inside MobX. When a reaction uses them\n/// they are implicitly added as a dependency of the reaction. When its value changes\n/// the linked reaction is re-triggered.\n///\n/// An Observable's value is read with the `value` property.\n///\n/// It is possible to override equality comparison of new values with [equals].\n///\n/// ```\n/// var x = Observable(10);\n/// var message = Observable('hello');\n///\n/// print('x = ${x.value}'); // read an Observable's value\n/// ```"
+      },
+      {
+        "name": "equals",
+        "signature": "bool Function(T?, T?)? equals",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T value",
+        "description": ""
+      },
+      {
+        "name": "nonObservableValue",
+        "signature": "T nonObservableValue",
+        "description": ""
+      },
+      {
+        "name": "equals",
+        "signature": "bool Function(T?, T?)? get equals",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T get value",
+        "description": ""
+      },
+      {
+        "name": "nonObservableValue",
+        "signature": "T get nonObservableValue",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "set value(T value)",
+        "description": ""
+      },
+      {
+        "name": "observe",
+        "signature": "void Function() observe(void Function(ChangeNotification<T>) listener, {bool fireImmediately = false})",
+        "description": ""
+      },
+      {
+        "name": "intercept",
+        "signature": "void Function() intercept(WillChangeNotification<T>? Function(WillChangeNotification<T>) interceptor)",
+        "description": ""
+      },
+      {
+        "name": "toString",
+        "signature": "String toString()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableBoolExtension",
+    "kind": "extension",
+    "signature": "extension ObservableBoolExtension on Observable<bool>",
+    "description": "",
+    "members": [
+      {
+        "name": "toggle",
+        "signature": "void toggle()",
+        "description": "/// lets you toggle the internal value of ObservableBool"
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableFuture",
+    "kind": "class",
+    "signature": "class ObservableFuture<T> implements Future<T>, ObservableValue<T?>",
+    "description": "",
+    "members": [
+      {
+        "name": "ObservableFuture",
+        "signature": "ObservableFuture<T>(Future<T> future, {ReactiveContext? context, String? name})",
+        "description": "/// Create a new observable future that tracks the state of the provided future."
+      },
+      {
+        "name": "ObservableFuture.value",
+        "signature": "ObservableFuture<T>.value(T value, {ReactiveContext? context, String? name})",
+        "description": "/// Create a new future that is completed with a value.\n///\n/// [status] is immediately [FutureStatus.fulfilled]."
+      },
+      {
+        "name": "ObservableFuture.error",
+        "signature": "ObservableFuture<T>.error(Object error, {ReactiveContext? context, String? name})",
+        "description": "/// Create a new future that is completed with an error.\n///\n/// [status] is immediately [FutureStatus.rejected]."
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "status",
+        "signature": "FutureStatus status",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T? value",
+        "description": ""
+      },
+      {
+        "name": "error",
+        "signature": "dynamic error",
+        "description": ""
+      },
+      {
+        "name": "result",
+        "signature": "dynamic result",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "status",
+        "signature": "FutureStatus get status",
+        "description": "/// Observable status of this."
+      },
+      {
+        "name": "value",
+        "signature": "T? get value",
+        "description": "/// Value if this completed with a value.\n///\n/// Null otherwise."
+      },
+      {
+        "name": "error",
+        "signature": "dynamic get error",
+        "description": "/// Error value if this completed with an error\n///\n/// Null otherwise."
+      },
+      {
+        "name": "result",
+        "signature": "dynamic get result",
+        "description": "/// Error or value of this.\n///\n/// Null if this hasn't yet completed."
+      },
+      {
+        "name": "match",
+        "signature": "R? match<R>({R Function(T)? fulfilled, R Function(dynamic)? rejected, R Function()? pending})",
+        "description": "/// Maps the current state of this.\n///\n/// Returns null if a handler for the current state is not provided."
+      },
+      {
+        "name": "replace",
+        "signature": "ObservableFuture<T> replace(Future<T> nextFuture)",
+        "description": "/// Returns a new future that starts with the [status] and [result] of this.\n///\n/// The [status] and [result] changes when the provided future completes.\n/// Useful when you don't want to clear the result of the previous operation while\n/// executing the new operation."
+      },
+      {
+        "name": "asStream",
+        "signature": "ObservableStream<T> asStream()",
+        "description": ""
+      },
+      {
+        "name": "catchError",
+        "signature": "ObservableFuture<T> catchError(Function onError, {bool Function(Object)? test})",
+        "description": ""
+      },
+      {
+        "name": "then",
+        "signature": "ObservableFuture<R> then<R>(FutureOr<R> Function(T) onValue, {Function? onError})",
+        "description": ""
+      },
+      {
+        "name": "timeout",
+        "signature": "ObservableFuture<T> timeout(Duration timeLimit, {FutureOr<T> Function()? onTimeout})",
+        "description": ""
+      },
+      {
+        "name": "whenComplete",
+        "signature": "ObservableFuture<T> whenComplete(FutureOr<dynamic> Function() action)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableFutureExtension",
+    "kind": "extension",
+    "signature": "extension ObservableFutureExtension<T> on Future<T>",
+    "description": "/// Turn the Future into an ObservableFuture.",
+    "members": [
+      {
+        "name": "asObservable",
+        "signature": "ObservableFuture<T> asObservable({ReactiveContext? context, String? name})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableList",
+    "kind": "class",
+    "signature": "class ObservableList<T> with ListBase<T> implements Listenable<ListChange<T>>",
+    "description": "/// The ObservableList tracks the various read-methods (eg: [List.first], [List.last]) and\n/// write-methods (eg: [List.add], [List.insert]) making it easier to use it inside reactions.\n///\n/// As the name suggests, this is the Observable-counterpart to the standard Dart `List<T>`.\n///\n/// ```dart\n/// final list = ObservableList<int>.of([1]);\n///\n/// autorun((_) {\n///   print(list.first);\n/// }) // prints 1\n///\n/// list[0] = 100; // autorun prints 100\n/// ```",
+    "members": [
+      {
+        "name": "ObservableList",
+        "signature": "ObservableList<T>({ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "ObservableList.of",
+        "signature": "ObservableList<T>.of(Iterable<T> elements, {ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "nonObservableInner",
+        "signature": "List<T> nonObservableInner",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "length",
+        "signature": "int length",
+        "description": ""
+      },
+      {
+        "name": "iterator",
+        "signature": "Iterator<T> iterator",
+        "description": ""
+      },
+      {
+        "name": "single",
+        "signature": "T single",
+        "description": ""
+      },
+      {
+        "name": "first",
+        "signature": "T first",
+        "description": ""
+      },
+      {
+        "name": "nonObservableInner",
+        "signature": "List<T> get nonObservableInner",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": "/// The name used to identify for debugging purposes"
+      },
+      {
+        "name": "length",
+        "signature": "int get length",
+        "description": ""
+      },
+      {
+        "name": "iterator",
+        "signature": "Iterator<T> get iterator",
+        "description": ""
+      },
+      {
+        "name": "single",
+        "signature": "T get single",
+        "description": ""
+      },
+      {
+        "name": "length",
+        "signature": "set length(int value)",
+        "description": ""
+      },
+      {
+        "name": "first",
+        "signature": "set first(T value)",
+        "description": ""
+      },
+      {
+        "name": "+",
+        "signature": "List<T> +(List<T> other)",
+        "description": ""
+      },
+      {
+        "name": "[]",
+        "signature": "T [](int index)",
+        "description": ""
+      },
+      {
+        "name": "[]=",
+        "signature": "void []=(int index, T value)",
+        "description": ""
+      },
+      {
+        "name": "add",
+        "signature": "void add(T element)",
+        "description": ""
+      },
+      {
+        "name": "addAll",
+        "signature": "void addAll(Iterable<T> iterable)",
+        "description": ""
+      },
+      {
+        "name": "lastIndexWhere",
+        "signature": "int lastIndexWhere(bool Function(T) test, [int? start])",
+        "description": ""
+      },
+      {
+        "name": "lastWhere",
+        "signature": "T lastWhere(bool Function(T) test, {T Function()? orElse})",
+        "description": ""
+      },
+      {
+        "name": "sublist",
+        "signature": "List<T> sublist(int start, [int? end])",
+        "description": ""
+      },
+      {
+        "name": "asMap",
+        "signature": "Map<int, T> asMap()",
+        "description": ""
+      },
+      {
+        "name": "cast",
+        "signature": "List<R> cast<R>()",
+        "description": ""
+      },
+      {
+        "name": "toList",
+        "signature": "List<T> toList({bool growable = true})",
+        "description": ""
+      },
+      {
+        "name": "clear",
+        "signature": "void clear()",
+        "description": ""
+      },
+      {
+        "name": "fillRange",
+        "signature": "void fillRange(int start, int end, [T? fill])",
+        "description": ""
+      },
+      {
+        "name": "insert",
+        "signature": "void insert(int index, T element)",
+        "description": ""
+      },
+      {
+        "name": "insertAll",
+        "signature": "void insertAll(int index, Iterable<T> iterable)",
+        "description": ""
+      },
+      {
+        "name": "remove",
+        "signature": "bool remove(Object? element)",
+        "description": ""
+      },
+      {
+        "name": "removeAt",
+        "signature": "T removeAt(int index)",
+        "description": ""
+      },
+      {
+        "name": "removeLast",
+        "signature": "T removeLast()",
+        "description": ""
+      },
+      {
+        "name": "removeRange",
+        "signature": "void removeRange(int start, int end)",
+        "description": ""
+      },
+      {
+        "name": "removeWhere",
+        "signature": "void removeWhere(bool Function(T) test)",
+        "description": ""
+      },
+      {
+        "name": "replaceRange",
+        "signature": "void replaceRange(int start, int end, Iterable<T> newContents)",
+        "description": ""
+      },
+      {
+        "name": "retainWhere",
+        "signature": "void retainWhere(bool Function(T) test)",
+        "description": ""
+      },
+      {
+        "name": "setAll",
+        "signature": "void setAll(int index, Iterable<T> iterable)",
+        "description": ""
+      },
+      {
+        "name": "setRange",
+        "signature": "void setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0])",
+        "description": ""
+      },
+      {
+        "name": "shuffle",
+        "signature": "void shuffle([Random? random])",
+        "description": ""
+      },
+      {
+        "name": "sort",
+        "signature": "void sort([int Function(T, T)? compare])",
+        "description": ""
+      },
+      {
+        "name": "observe",
+        "signature": "void Function() observe(void Function(ListChange<T>) listener, {bool fireImmediately = false})",
+        "description": "/// Attach a [listener] to the changes happening in the list.\n///\n/// You can choose to receive the change notification immediately (with [fireImmediately])\n/// or on the first change"
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableListExtension",
+    "kind": "extension",
+    "signature": "extension ObservableListExtension<T> on List<T>",
+    "description": "/// Turn the List into an ObservableList.",
+    "members": [
+      {
+        "name": "asObservable",
+        "signature": "ObservableList<T> asObservable({ReactiveContext? context, String? name})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableMap",
+    "kind": "class",
+    "signature": "class ObservableMap<K, V> with MapBase<K, V> implements Listenable<MapChange<K, V>>",
+    "description": "/// The ObservableMap tracks the various read-methods (eg: [Map.length], [Map.isEmpty]) and\n/// write-methods (eg: [Map.[]=], [Map.clear]) making it easier to use it inside reactions.\n///\n/// As the name suggests, this is the Observable-counterpart to the standard Dart `Map<K,V>`.\n///\n/// ```dart\n/// final map = ObservableMap<String, int>.of({'first': 1});\n///\n/// autorun((_) {\n///   print(map['first']);\n/// }) // prints 1\n///\n/// map['first'] = 100; // autorun prints 100\n/// ```",
+    "members": [
+      {
+        "name": "ObservableMap",
+        "signature": "ObservableMap<K, V>({ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "ObservableMap.of",
+        "signature": "ObservableMap<K, V>.of(Map<K, V> other, {ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "ObservableMap.linkedHashMapFrom",
+        "signature": "ObservableMap<K, V>.linkedHashMapFrom(Map<K, V> other, {ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "ObservableMap.splayTreeMapFrom",
+        "signature": "ObservableMap<K, V>.splayTreeMapFrom(Map<K, V> other, {int Function(K, K)? compare, bool Function(dynamic)? isValidKey, ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "nonObservableInner",
+        "signature": "Map<K, V> nonObservableInner",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "keys",
+        "signature": "Iterable<K> keys",
+        "description": ""
+      },
+      {
+        "name": "length",
+        "signature": "int length",
+        "description": ""
+      },
+      {
+        "name": "isNotEmpty",
+        "signature": "bool isNotEmpty",
+        "description": ""
+      },
+      {
+        "name": "isEmpty",
+        "signature": "bool isEmpty",
+        "description": ""
+      },
+      {
+        "name": "nonObservableInner",
+        "signature": "Map<K, V> get nonObservableInner",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "keys",
+        "signature": "Iterable<K> get keys",
+        "description": ""
+      },
+      {
+        "name": "length",
+        "signature": "int get length",
+        "description": ""
+      },
+      {
+        "name": "isNotEmpty",
+        "signature": "bool get isNotEmpty",
+        "description": ""
+      },
+      {
+        "name": "isEmpty",
+        "signature": "bool get isEmpty",
+        "description": ""
+      },
+      {
+        "name": "[]",
+        "signature": "V? [](Object? key)",
+        "description": ""
+      },
+      {
+        "name": "[]=",
+        "signature": "void []=(K key, V value)",
+        "description": ""
+      },
+      {
+        "name": "addAll",
+        "signature": "void addAll(Map<K, V> other)",
+        "description": ""
+      },
+      {
+        "name": "addEntries",
+        "signature": "void addEntries(Iterable<MapEntry<K, V>> newEntries)",
+        "description": ""
+      },
+      {
+        "name": "updateAll",
+        "signature": "void updateAll(V Function(K, V) update)",
+        "description": ""
+      },
+      {
+        "name": "removeWhere",
+        "signature": "void removeWhere(bool Function(K, V) test)",
+        "description": ""
+      },
+      {
+        "name": "clear",
+        "signature": "void clear()",
+        "description": ""
+      },
+      {
+        "name": "cast",
+        "signature": "Map<RK, RV> cast<RK, RV>()",
+        "description": ""
+      },
+      {
+        "name": "remove",
+        "signature": "V? remove(Object? key)",
+        "description": ""
+      },
+      {
+        "name": "containsKey",
+        "signature": "bool containsKey(Object? key)",
+        "description": ""
+      },
+      {
+        "name": "observe",
+        "signature": "void Function() observe(void Function(MapChange<K, V>) listener, {bool fireImmediately = false})",
+        "description": "/// Used to attach a listener for getting notified on changes happening to the map\n///\n/// You can also choose to receive the notifications immediately (with [fireImmediately])"
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableMapExtension",
+    "kind": "extension",
+    "signature": "extension ObservableMapExtension<K, V> on Map<K, V>",
+    "description": "/// Turn the Map into an ObservableMap.",
+    "members": [
+      {
+        "name": "asObservable",
+        "signature": "ObservableMap<K, V> asObservable({ReactiveContext? context, String? name})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableSet",
+    "kind": "class",
+    "signature": "class ObservableSet<T> with SetBase<T> implements Listenable<SetChange<T>>",
+    "description": "/// ObservableSet provides a reactive set that notifies changes when a member is added or removed.\n///\n/// ```dart\n/// final set = ObservableSet.of([1, 2, 3]);\n///\n/// const disposer = autorun((_){\n///   print(set);\n/// });\n///\n/// set.add(4); // prints {1, 2, 3, 4}\n///\n/// ```",
+    "members": [
+      {
+        "name": "ObservableSet",
+        "signature": "ObservableSet<T>({ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "ObservableSet.of",
+        "signature": "ObservableSet<T>.of(Iterable<T> other, {ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "ObservableSet.splayTreeSetFrom",
+        "signature": "ObservableSet<T>.splayTreeSetFrom(Iterable<T> other, {int Function(T, T)? compare, bool Function(dynamic)? isValidKey, ReactiveContext? context, String? name})",
+        "description": ""
+      },
+      {
+        "name": "nonObservableInner",
+        "signature": "Set<T> nonObservableInner",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "iterator",
+        "signature": "Iterator<T> iterator",
+        "description": ""
+      },
+      {
+        "name": "length",
+        "signature": "int length",
+        "description": ""
+      },
+      {
+        "name": "nonObservableInner",
+        "signature": "Set<T> get nonObservableInner",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "iterator",
+        "signature": "Iterator<T> get iterator",
+        "description": ""
+      },
+      {
+        "name": "length",
+        "signature": "int get length",
+        "description": ""
+      },
+      {
+        "name": "add",
+        "signature": "bool add(T value)",
+        "description": ""
+      },
+      {
+        "name": "addAll",
+        "signature": "void addAll(Iterable<T> elements)",
+        "description": ""
+      },
+      {
+        "name": "removeAll",
+        "signature": "void removeAll(Iterable<Object?> elements)",
+        "description": ""
+      },
+      {
+        "name": "retainAll",
+        "signature": "void retainAll(Iterable<Object?> elements)",
+        "description": ""
+      },
+      {
+        "name": "removeWhere",
+        "signature": "void removeWhere(bool Function(T) test)",
+        "description": ""
+      },
+      {
+        "name": "retainWhere",
+        "signature": "void retainWhere(bool Function(T) test)",
+        "description": ""
+      },
+      {
+        "name": "contains",
+        "signature": "bool contains(Object? element)",
+        "description": ""
+      },
+      {
+        "name": "lookup",
+        "signature": "T? lookup(Object? element)",
+        "description": ""
+      },
+      {
+        "name": "remove",
+        "signature": "bool remove(Object? value)",
+        "description": ""
+      },
+      {
+        "name": "clear",
+        "signature": "void clear()",
+        "description": ""
+      },
+      {
+        "name": "cast",
+        "signature": "Set<R> cast<R>()",
+        "description": ""
+      },
+      {
+        "name": "toSet",
+        "signature": "Set<T> toSet()",
+        "description": ""
+      },
+      {
+        "name": "observe",
+        "signature": "void Function() observe(void Function(SetChange<T>) listener, {bool fireImmediately = false})",
+        "description": "/// Attaches a listener to changes happening in the [ObservableSet]. You have\n/// the option to be notified immediately ([fireImmediately]) or wait for until the first change."
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableSetExtension",
+    "kind": "extension",
+    "signature": "extension ObservableSetExtension<T> on Set<T>",
+    "description": "/// Turn the Set into an ObservableSet.",
+    "members": [
+      {
+        "name": "asObservable",
+        "signature": "ObservableSet<T> asObservable({ReactiveContext? context, String? name})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableStream",
+    "kind": "class",
+    "signature": "class ObservableStream<T> implements Stream<T>, ObservableValue<T?>",
+    "description": "/// Stream that tracks the emitted values of the provided stream and makes\n/// them available as a MobX observable value.\n///\n/// The latest events emitted by the stream are captured an made available as\n/// MobX observable values via properties such as [data], [value], [error],\n/// [hasError] and [status].\n///\n/// If the source `stream` is a single-subscription stream, this stream will\n/// also be single-subscription. Either calling [listen] or observing [value],\n/// etc. in a reaction will start the stream. Both can be done at the same time.\n///\n/// If the observation ends, and a subscription was never created via [listen],\n/// the stream will be paused. If a subscription (created via [listen]) is\n/// cancelled, the stream ends, and [value] etc. can no longer be observed\n/// inside a reaction.\n///\n/// If the source `stream` is a broadcast stream, this stream will also be a\n/// broadcast stream. This means the observable stream can be listened to\n/// multiple times.",
+    "members": [
+      {
+        "name": "ObservableStream",
+        "signature": "ObservableStream<T>(Stream<T> stream, {T? initialValue, bool cancelOnError = false, ReactiveContext? context, String? name, bool Function(dynamic, dynamic)? equals})",
+        "description": "/// Create a stream that tracks the emitted values of the provided stream and\n/// makes them available as a MobX observable value.\n///\n/// If the source `stream` is a single-subscription stream, this stream will\n/// also be single-subscription. If the source `stream` is a broadcast stream,\n/// this stream will also be a broadcast stream.\n///\n/// If `initialValue` is provided, [value] will use it as the initial value\n/// while waiting for the first item to be emitted from the source stream.\n/// If the stream is a single-subscription stream, `initialValue` will also be\n/// the first value emitted to the subscription created by [listen].\n///\n/// If `cancelOnError` is `true`, the stream will be cancelled when an error\n/// event is emitted by the source stream. The observable status becomes\n/// [StreamStatus.done] and downstream listeners receive the error followed\n/// by done, unless their own subscription cancels on error. The default\n/// value is `false`.\n///\n/// It is possible to override equality comparison of new values with [equals]."
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "data",
+        "signature": "dynamic data",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T? value",
+        "description": ""
+      },
+      {
+        "name": "error",
+        "signature": "dynamic error",
+        "description": ""
+      },
+      {
+        "name": "hasError",
+        "signature": "bool hasError",
+        "description": ""
+      },
+      {
+        "name": "status",
+        "signature": "StreamStatus status",
+        "description": ""
+      },
+      {
+        "name": "first",
+        "signature": "ObservableFuture<T> first",
+        "description": ""
+      },
+      {
+        "name": "isBroadcast",
+        "signature": "bool isBroadcast",
+        "description": ""
+      },
+      {
+        "name": "isEmpty",
+        "signature": "ObservableFuture<bool> isEmpty",
+        "description": ""
+      },
+      {
+        "name": "last",
+        "signature": "ObservableFuture<T> last",
+        "description": ""
+      },
+      {
+        "name": "length",
+        "signature": "ObservableFuture<int> length",
+        "description": ""
+      },
+      {
+        "name": "single",
+        "signature": "ObservableFuture<T> single",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "data",
+        "signature": "dynamic get data",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T? get value",
+        "description": "/// Current value or null if waiting and no initialValue, or null if data is an error."
+      },
+      {
+        "name": "error",
+        "signature": "dynamic get error",
+        "description": "/// Current error or null if not failed."
+      },
+      {
+        "name": "hasError",
+        "signature": "bool get hasError",
+        "description": "/// Current data is an error."
+      },
+      {
+        "name": "status",
+        "signature": "StreamStatus get status",
+        "description": "/// Current stream status."
+      },
+      {
+        "name": "first",
+        "signature": "ObservableFuture<T> get first",
+        "description": ""
+      },
+      {
+        "name": "isBroadcast",
+        "signature": "bool get isBroadcast",
+        "description": ""
+      },
+      {
+        "name": "isEmpty",
+        "signature": "ObservableFuture<bool> get isEmpty",
+        "description": ""
+      },
+      {
+        "name": "last",
+        "signature": "ObservableFuture<T> get last",
+        "description": ""
+      },
+      {
+        "name": "length",
+        "signature": "ObservableFuture<int> get length",
+        "description": ""
+      },
+      {
+        "name": "single",
+        "signature": "ObservableFuture<T> get single",
+        "description": ""
+      },
+      {
+        "name": "match",
+        "signature": "R? match<R>({R Function()? waiting, R Function(T)? active, R Function(dynamic)? error, R Function(T?, dynamic)? done})",
+        "description": "/// Maps the current status and value or error into a value.\n///\n/// Returns null if a callback is not provided for the active status.\n/// If [done] is null, [active] and [error] are used instead."
+      },
+      {
+        "name": "configure",
+        "signature": "ObservableStream<T> configure({T? initialValue, bool cancelOnError = false})",
+        "description": "/// Create a new stream with the provided initialValue and cancelOnError."
+      },
+      {
+        "name": "close",
+        "signature": "Future<void> close()",
+        "description": "/// Close the observable stream, and stop any future updates to observable\n/// properties or any stream subscribers.\n///\n/// Most of the time, this method doesn't need to be called. ObservableStream\n/// can clean-up automatically. This is always true if the original stream\n/// is a broadcast stream.\n///\n/// However, if the original stream is a single-subscription stream and you\n/// previously observed the stream's properties ([data], [value], [error],\n/// [hasError], [status], etc.) but then stopped the observation (thereby\n/// pausing the stream), then this method can be used to ensure the original\n/// paused stream closes correctly.\n///\n/// Note that if you [listen] to this observable stream, the observable stream\n/// will be closed automatically when you cancel the subscription."
+      },
+      {
+        "name": "any",
+        "signature": "ObservableFuture<bool> any(bool Function(T) test)",
+        "description": ""
+      },
+      {
+        "name": "asBroadcastStream",
+        "signature": "ObservableStream<T> asBroadcastStream({void Function(StreamSubscription<T>)? onListen, void Function(StreamSubscription<T>)? onCancel})",
+        "description": ""
+      },
+      {
+        "name": "asyncExpand",
+        "signature": "ObservableStream<E> asyncExpand<E>(Stream<E>? Function(T) convert)",
+        "description": ""
+      },
+      {
+        "name": "asyncMap",
+        "signature": "ObservableStream<E> asyncMap<E>(FutureOr<E> Function(T) convert)",
+        "description": ""
+      },
+      {
+        "name": "cast",
+        "signature": "ObservableStream<R> cast<R>()",
+        "description": ""
+      },
+      {
+        "name": "contains",
+        "signature": "ObservableFuture<bool> contains(Object? needle)",
+        "description": ""
+      },
+      {
+        "name": "distinct",
+        "signature": "ObservableStream<T> distinct([bool Function(T, T)? equals])",
+        "description": ""
+      },
+      {
+        "name": "drain",
+        "signature": "ObservableFuture<E> drain<E>([E? futureValue])",
+        "description": ""
+      },
+      {
+        "name": "elementAt",
+        "signature": "ObservableFuture<T> elementAt(int index)",
+        "description": ""
+      },
+      {
+        "name": "every",
+        "signature": "ObservableFuture<bool> every(bool Function(T) test)",
+        "description": ""
+      },
+      {
+        "name": "expand",
+        "signature": "ObservableStream<S> expand<S>(Iterable<S> Function(T) convert)",
+        "description": ""
+      },
+      {
+        "name": "firstWhere",
+        "signature": "ObservableFuture<T> firstWhere(bool Function(T) test, {T Function()? orElse})",
+        "description": ""
+      },
+      {
+        "name": "fold",
+        "signature": "ObservableFuture<S> fold<S>(S initialValue, S Function(S, T) combine)",
+        "description": ""
+      },
+      {
+        "name": "forEach",
+        "signature": "ObservableFuture<dynamic> forEach(void Function(T) action)",
+        "description": ""
+      },
+      {
+        "name": "handleError",
+        "signature": "ObservableStream<T> handleError(Function onError, {bool Function(dynamic)? test})",
+        "description": ""
+      },
+      {
+        "name": "join",
+        "signature": "ObservableFuture<String> join([String separator = ''])",
+        "description": ""
+      },
+      {
+        "name": "lastWhere",
+        "signature": "ObservableFuture<T> lastWhere(bool Function(T) test, {T Function()? orElse})",
+        "description": ""
+      },
+      {
+        "name": "listen",
+        "signature": "StreamSubscription<T> listen(void Function(T)? onData, {Function? onError, void Function()? onDone, bool? cancelOnError})",
+        "description": ""
+      },
+      {
+        "name": "map",
+        "signature": "ObservableStream<S> map<S>(S Function(T) convert)",
+        "description": ""
+      },
+      {
+        "name": "pipe",
+        "signature": "ObservableFuture<dynamic> pipe(StreamConsumer<T> streamConsumer)",
+        "description": ""
+      },
+      {
+        "name": "reduce",
+        "signature": "ObservableFuture<T> reduce(T Function(T, T) combine)",
+        "description": ""
+      },
+      {
+        "name": "singleWhere",
+        "signature": "ObservableFuture<T> singleWhere(bool Function(T) test, {T Function()? orElse})",
+        "description": ""
+      },
+      {
+        "name": "skip",
+        "signature": "ObservableStream<T> skip(int count)",
+        "description": ""
+      },
+      {
+        "name": "skipWhile",
+        "signature": "ObservableStream<T> skipWhile(bool Function(T) test)",
+        "description": ""
+      },
+      {
+        "name": "take",
+        "signature": "ObservableStream<T> take(int count)",
+        "description": ""
+      },
+      {
+        "name": "takeWhile",
+        "signature": "ObservableStream<T> takeWhile(bool Function(T) test)",
+        "description": ""
+      },
+      {
+        "name": "timeout",
+        "signature": "ObservableStream<T> timeout(Duration timeLimit, {void Function(EventSink<T>)? onTimeout})",
+        "description": ""
+      },
+      {
+        "name": "toList",
+        "signature": "ObservableFuture<List<T>> toList()",
+        "description": ""
+      },
+      {
+        "name": "toSet",
+        "signature": "ObservableFuture<Set<T>> toSet()",
+        "description": ""
+      },
+      {
+        "name": "transform",
+        "signature": "ObservableStream<S> transform<S>(StreamTransformer<T, S> streamTransformer)",
+        "description": ""
+      },
+      {
+        "name": "where",
+        "signature": "ObservableStream<T> where(bool Function(T) test)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableStreamExtension",
+    "kind": "extension",
+    "signature": "extension ObservableStreamExtension<T> on Stream<T>",
+    "description": "/// Turn the Stream into an ObservableStream.",
+    "members": [
+      {
+        "name": "asObservable",
+        "signature": "ObservableStream<T> asObservable({T? initialValue, bool cancelOnError = false, ReactiveContext? context, String? name})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableValue",
+    "kind": "class",
+    "signature": "abstract class ObservableValue<T>",
+    "description": "",
+    "members": [
+      {
+        "name": "ObservableValue",
+        "signature": "ObservableValue<T>()",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T value",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T get value",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ObservableValueSpyEvent",
+    "kind": "class",
+    "signature": "class ObservableValueSpyEvent extends SpyEvent",
+    "description": "/// Used for reporting value changes on an Observable",
+    "members": [
+      {
+        "name": "ObservableValueSpyEvent",
+        "signature": "ObservableValueSpyEvent(dynamic object, {dynamic newValue, dynamic oldValue, required String name, bool isEnd = false})",
+        "description": ""
+      },
+      {
+        "name": "newValue",
+        "signature": "dynamic newValue",
+        "description": ""
+      },
+      {
+        "name": "oldValue",
+        "signature": "dynamic oldValue",
+        "description": ""
+      },
+      {
+        "name": "newValue",
+        "signature": "dynamic get newValue",
+        "description": ""
+      },
+      {
+        "name": "oldValue",
+        "signature": "dynamic get oldValue",
+        "description": ""
+      },
+      {
+        "name": "toString",
+        "signature": "String toString()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "OperationType",
+    "kind": "enum",
+    "signature": "enum OperationType",
+    "description": "",
+    "members": [
+      {
+        "name": "OperationType",
+        "signature": "OperationType()",
+        "description": ""
+      },
+      {
+        "name": "add",
+        "signature": "OperationType add",
+        "description": ""
+      },
+      {
+        "name": "update",
+        "signature": "OperationType update",
+        "description": ""
+      },
+      {
+        "name": "remove",
+        "signature": "OperationType remove",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<OperationType> values",
+        "description": ""
+      },
+      {
+        "name": "add",
+        "signature": "OperationType get add",
+        "description": ""
+      },
+      {
+        "name": "update",
+        "signature": "OperationType get update",
+        "description": ""
+      },
+      {
+        "name": "remove",
+        "signature": "OperationType get remove",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<OperationType> get values",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Reaction",
+    "kind": "class",
+    "signature": "abstract class Reaction implements Derivation",
+    "description": "",
+    "members": [
+      {
+        "name": "Reaction",
+        "signature": "Reaction()",
+        "description": ""
+      },
+      {
+        "name": "isDisposed",
+        "signature": "bool isDisposed",
+        "description": ""
+      },
+      {
+        "name": "debugCreationStack",
+        "signature": "StackTrace? debugCreationStack",
+        "description": ""
+      },
+      {
+        "name": "isDisposed",
+        "signature": "bool get isDisposed",
+        "description": ""
+      },
+      {
+        "name": "debugCreationStack",
+        "signature": "StackTrace? get debugCreationStack",
+        "description": ""
+      },
+      {
+        "name": "dispose",
+        "signature": "void dispose()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ReactionDisposedSpyEvent",
+    "kind": "class",
+    "signature": "class ReactionDisposedSpyEvent extends SpyEvent",
+    "description": "",
+    "members": [
+      {
+        "name": "ReactionDisposedSpyEvent",
+        "signature": "ReactionDisposedSpyEvent({required String name})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ReactionDisposer",
+    "kind": "class",
+    "signature": "class ReactionDisposer",
+    "description": "/// A callable class that is used to dispose a [reaction], [autorun] or [when]\n///\n/// ```\n/// var dispose = autorun((){\n///   // ...\n/// });\n///\n/// dispose(); // dispose the autorun()\n/// ```\n///\n/// In the above code, `dispose` is of type `ReactionDisposer`.",
+    "members": [
+      {
+        "name": "ReactionDisposer",
+        "signature": "ReactionDisposer(Reaction reaction)",
+        "description": ""
+      },
+      {
+        "name": "reaction",
+        "signature": "Reaction reaction",
+        "description": ""
+      },
+      {
+        "name": "reaction",
+        "signature": "Reaction get reaction",
+        "description": ""
+      },
+      {
+        "name": "call",
+        "signature": "void call()",
+        "description": "/// Invoking it will dispose the underlying [reaction]"
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ReactionErrorHandler",
+    "kind": "type alias",
+    "signature": "typedef ReactionErrorHandler = void Function(Object, Reaction)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ReactionErrorSpyEvent",
+    "kind": "class",
+    "signature": "class ReactionErrorSpyEvent extends SpyEvent",
+    "description": "",
+    "members": [
+      {
+        "name": "ReactionErrorSpyEvent",
+        "signature": "ReactionErrorSpyEvent(Object error, {required String name})",
+        "description": ""
+      },
+      {
+        "name": "error",
+        "signature": "Object error",
+        "description": ""
+      },
+      {
+        "name": "error",
+        "signature": "Object get error",
+        "description": ""
+      },
+      {
+        "name": "toString",
+        "signature": "String toString()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ReactionSpyEvent",
+    "kind": "class",
+    "signature": "class ReactionSpyEvent extends SpyEvent",
+    "description": "",
+    "members": [
+      {
+        "name": "ReactionSpyEvent",
+        "signature": "ReactionSpyEvent({required String name})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ReactiveConfig",
+    "kind": "class",
+    "signature": "class ReactiveConfig",
+    "description": "/// Configuration used by [ReactiveContext]",
+    "members": [
+      {
+        "name": "ReactiveConfig",
+        "signature": "ReactiveConfig({bool disableErrorBoundaries = false, ReactiveWritePolicy writePolicy = ReactiveWritePolicy.observed, ReactiveReadPolicy readPolicy = ReactiveReadPolicy.never, int maxIterations = 100, bool isSpyEnabled = false})",
+        "description": ""
+      },
+      {
+        "name": "main",
+        "signature": "ReactiveConfig main",
+        "description": "/// The main or default configuration used by [ReactiveContext]"
+      },
+      {
+        "name": "disableErrorBoundaries",
+        "signature": "bool disableErrorBoundaries",
+        "description": "/// Whether MobX should throw exceptions instead of catching them and store\n/// as [Derivation.errorValue]."
+      },
+      {
+        "name": "writePolicy",
+        "signature": "ReactiveWritePolicy writePolicy",
+        "description": "/// Enforce mutation of observables inside an action"
+      },
+      {
+        "name": "readPolicy",
+        "signature": "ReactiveReadPolicy readPolicy",
+        "description": "/// Enforce the use of reactions for reading observables"
+      },
+      {
+        "name": "maxIterations",
+        "signature": "int maxIterations",
+        "description": "/// Max number of iterations before bailing out for a cyclic reaction"
+      },
+      {
+        "name": "isSpyEnabled",
+        "signature": "bool isSpyEnabled",
+        "description": ""
+      },
+      {
+        "name": "main",
+        "signature": "ReactiveConfig get main",
+        "description": ""
+      },
+      {
+        "name": "disableErrorBoundaries",
+        "signature": "bool get disableErrorBoundaries",
+        "description": ""
+      },
+      {
+        "name": "writePolicy",
+        "signature": "ReactiveWritePolicy get writePolicy",
+        "description": ""
+      },
+      {
+        "name": "readPolicy",
+        "signature": "ReactiveReadPolicy get readPolicy",
+        "description": ""
+      },
+      {
+        "name": "maxIterations",
+        "signature": "int get maxIterations",
+        "description": ""
+      },
+      {
+        "name": "isSpyEnabled",
+        "signature": "bool get isSpyEnabled",
+        "description": ""
+      },
+      {
+        "name": "clone",
+        "signature": "ReactiveConfig clone({bool? disableErrorBoundaries, ReactiveWritePolicy? writePolicy, ReactiveReadPolicy? readPolicy, int? maxIterations, bool? isSpyEnabled})",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ReactiveContext",
+    "kind": "class",
+    "signature": "class ReactiveContext",
+    "description": "",
+    "members": [
+      {
+        "name": "ReactiveContext",
+        "signature": "ReactiveContext({ReactiveConfig? config})",
+        "description": ""
+      },
+      {
+        "name": "config",
+        "signature": "ReactiveConfig config",
+        "description": ""
+      },
+      {
+        "name": "nextId",
+        "signature": "int nextId",
+        "description": ""
+      },
+      {
+        "name": "isWithinBatch",
+        "signature": "bool isWithinBatch",
+        "description": ""
+      },
+      {
+        "name": "isSpyEnabled",
+        "signature": "bool isSpyEnabled",
+        "description": ""
+      },
+      {
+        "name": "config",
+        "signature": "ReactiveConfig get config",
+        "description": ""
+      },
+      {
+        "name": "nextId",
+        "signature": "int get nextId",
+        "description": ""
+      },
+      {
+        "name": "isWithinBatch",
+        "signature": "bool get isWithinBatch",
+        "description": ""
+      },
+      {
+        "name": "isSpyEnabled",
+        "signature": "bool get isSpyEnabled",
+        "description": ""
+      },
+      {
+        "name": "config",
+        "signature": "set config(ReactiveConfig newValue)",
+        "description": ""
+      },
+      {
+        "name": "nameFor",
+        "signature": "String nameFor(String prefix)",
+        "description": ""
+      },
+      {
+        "name": "spy",
+        "signature": "void Function() spy(void Function(SpyEvent) listener)",
+        "description": ""
+      },
+      {
+        "name": "spyReport",
+        "signature": "void spyReport(SpyEvent event)",
+        "description": ""
+      },
+      {
+        "name": "startBatch",
+        "signature": "void startBatch()",
+        "description": ""
+      },
+      {
+        "name": "endBatch",
+        "signature": "void endBatch()",
+        "description": ""
+      },
+      {
+        "name": "enforceReadPolicy",
+        "signature": "void enforceReadPolicy(Atom atom)",
+        "description": ""
+      },
+      {
+        "name": "enforceWritePolicy",
+        "signature": "void enforceWritePolicy(Atom atom)",
+        "description": ""
+      },
+      {
+        "name": "trackDerivation",
+        "signature": "T? trackDerivation<T>(Derivation d, T Function() fn)",
+        "description": ""
+      },
+      {
+        "name": "reportObserved",
+        "signature": "void reportObserved(Atom atom)",
+        "description": ""
+      },
+      {
+        "name": "addPendingReaction",
+        "signature": "void addPendingReaction(Reaction reaction)",
+        "description": ""
+      },
+      {
+        "name": "runReactions",
+        "signature": "void runReactions()",
+        "description": ""
+      },
+      {
+        "name": "propagateChanged",
+        "signature": "void propagateChanged(Atom atom)",
+        "description": ""
+      },
+      {
+        "name": "clearObservables",
+        "signature": "void clearObservables(Derivation derivation)",
+        "description": ""
+      },
+      {
+        "name": "isComputingDerivation",
+        "signature": "bool isComputingDerivation()",
+        "description": ""
+      },
+      {
+        "name": "startUntracked",
+        "signature": "Derivation? startUntracked()",
+        "description": ""
+      },
+      {
+        "name": "endUntracked",
+        "signature": "void endUntracked(Derivation? prevDerivation)",
+        "description": ""
+      },
+      {
+        "name": "untracked",
+        "signature": "T untracked<T>(T Function() fn)",
+        "description": ""
+      },
+      {
+        "name": "onReactionError",
+        "signature": "void Function() onReactionError(void Function(Object, Reaction) handler)",
+        "description": ""
+      },
+      {
+        "name": "startAllowStateChanges",
+        "signature": "bool startAllowStateChanges({bool allow = true})",
+        "description": ""
+      },
+      {
+        "name": "endAllowStateChanges",
+        "signature": "void endAllowStateChanges({bool allow = true})",
+        "description": ""
+      },
+      {
+        "name": "pushComputation",
+        "signature": "void pushComputation()",
+        "description": ""
+      },
+      {
+        "name": "popComputation",
+        "signature": "void popComputation()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ReactiveReadPolicy",
+    "kind": "enum",
+    "signature": "enum ReactiveReadPolicy",
+    "description": "/// Defines the behavior for observables read outside actions and reactions\n///\n/// `always`: If observables are read outside actions/reactions, throw an Exception\n/// `never`: Allow unrestricted reading of observables everywhere. This is the default.",
+    "members": [
+      {
+        "name": "ReactiveReadPolicy",
+        "signature": "ReactiveReadPolicy()",
+        "description": ""
+      },
+      {
+        "name": "always",
+        "signature": "ReactiveReadPolicy always",
+        "description": ""
+      },
+      {
+        "name": "never",
+        "signature": "ReactiveReadPolicy never",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<ReactiveReadPolicy> values",
+        "description": ""
+      },
+      {
+        "name": "always",
+        "signature": "ReactiveReadPolicy get always",
+        "description": ""
+      },
+      {
+        "name": "never",
+        "signature": "ReactiveReadPolicy get never",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<ReactiveReadPolicy> get values",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "ReactiveWritePolicy",
+    "kind": "enum",
+    "signature": "enum ReactiveWritePolicy",
+    "description": "/// Defines the behavior for observables mutated outside actions\n///\n/// `observed`: If there are observers for the mutated observable, then throw. Else allow mutation outside an action.\n/// `always`: Always throw if an observable is mutated outside an action\n/// `never`: Allow mutating observables outside actions",
+    "members": [
+      {
+        "name": "ReactiveWritePolicy",
+        "signature": "ReactiveWritePolicy()",
+        "description": ""
+      },
+      {
+        "name": "observed",
+        "signature": "ReactiveWritePolicy observed",
+        "description": ""
+      },
+      {
+        "name": "always",
+        "signature": "ReactiveWritePolicy always",
+        "description": ""
+      },
+      {
+        "name": "never",
+        "signature": "ReactiveWritePolicy never",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<ReactiveWritePolicy> values",
+        "description": ""
+      },
+      {
+        "name": "observed",
+        "signature": "ReactiveWritePolicy get observed",
+        "description": ""
+      },
+      {
+        "name": "always",
+        "signature": "ReactiveWritePolicy get always",
+        "description": ""
+      },
+      {
+        "name": "never",
+        "signature": "ReactiveWritePolicy get never",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<ReactiveWritePolicy> get values",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "SetChange",
+    "kind": "class",
+    "signature": "class SetChange<T>",
+    "description": "/// Capture the change related information for an [ ObservableSet]. This is used\n/// as the notification instance.",
+    "members": [
+      {
+        "name": "SetChange",
+        "signature": "SetChange<T>({required ObservableSet<T> object, required OperationType type, required T? value})",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "ObservableSet<T> object",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "OperationType type",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T? value",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "ObservableSet<T> get object",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "OperationType get type",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "signature": "T? get value",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "SetChangeListener",
+    "kind": "type alias",
+    "signature": "typedef SetChangeListener<in T> = void Function(SetChange<T>)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "SpyEvent",
+    "kind": "class",
+    "signature": "abstract class SpyEvent",
+    "description": "",
+    "members": [
+      {
+        "name": "object",
+        "signature": "dynamic object",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String name",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "String type",
+        "description": ""
+      },
+      {
+        "name": "duration",
+        "signature": "Duration? duration",
+        "description": ""
+      },
+      {
+        "name": "isStart",
+        "signature": "bool isStart",
+        "description": ""
+      },
+      {
+        "name": "isEnd",
+        "signature": "bool isEnd",
+        "description": ""
+      },
+      {
+        "name": "sentinel",
+        "signature": "String sentinel",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "dynamic get object",
+        "description": ""
+      },
+      {
+        "name": "name",
+        "signature": "String get name",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "String get type",
+        "description": ""
+      },
+      {
+        "name": "duration",
+        "signature": "Duration? get duration",
+        "description": ""
+      },
+      {
+        "name": "isStart",
+        "signature": "bool get isStart",
+        "description": ""
+      },
+      {
+        "name": "isEnd",
+        "signature": "bool get isEnd",
+        "description": ""
+      },
+      {
+        "name": "sentinel",
+        "signature": "String get sentinel",
+        "description": ""
+      },
+      {
+        "name": "toString",
+        "signature": "String toString()",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "SpyListener",
+    "kind": "type alias",
+    "signature": "typedef SpyListener = void Function(SpyEvent)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "Store",
+    "kind": "mixin",
+    "signature": "mixin Store on Object",
+    "description": "/// The `Store` mixin is primarily meant for code-generation and used as part of the\n/// `mobx_codegen` package.\n///\n/// A class using this mixin is considered a MobX store and `mobx_codegen`\n/// weaves the code needed to simplify the usage of MobX. It will detect annotations like\n/// `@observables`, `@computed` and `@action` and generate the code needed to support these behaviors.",
+    "members": [
+      {
+        "name": "context",
+        "signature": "ReactiveContext context",
+        "description": ""
+      },
+      {
+        "name": "context",
+        "signature": "ReactiveContext get context",
+        "description": "/// Override this method to use a custom context."
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "StoreConfig",
+    "kind": "class",
+    "signature": "class StoreConfig",
+    "description": "",
+    "members": [
+      {
+        "name": "StoreConfig",
+        "signature": "StoreConfig({bool hasToString = true})",
+        "description": ""
+      },
+      {
+        "name": "hasToString",
+        "signature": "bool hasToString",
+        "description": ""
+      },
+      {
+        "name": "hasToString",
+        "signature": "bool get hasToString",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "StreamStatus",
+    "kind": "enum",
+    "signature": "enum StreamStatus",
+    "description": "",
+    "members": [
+      {
+        "name": "StreamStatus",
+        "signature": "StreamStatus()",
+        "description": ""
+      },
+      {
+        "name": "waiting",
+        "signature": "StreamStatus waiting",
+        "description": ""
+      },
+      {
+        "name": "active",
+        "signature": "StreamStatus active",
+        "description": ""
+      },
+      {
+        "name": "done",
+        "signature": "StreamStatus done",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<StreamStatus> values",
+        "description": ""
+      },
+      {
+        "name": "waiting",
+        "signature": "StreamStatus get waiting",
+        "description": ""
+      },
+      {
+        "name": "active",
+        "signature": "StreamStatus get active",
+        "description": ""
+      },
+      {
+        "name": "done",
+        "signature": "StreamStatus get done",
+        "description": ""
+      },
+      {
+        "name": "values",
+        "signature": "List<StreamStatus> get values",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "StringExtension",
+    "kind": "extension",
+    "signature": "extension StringExtension on String",
+    "description": "",
+    "members": [
+      {
+        "name": "obs",
+        "signature": "Observable<String> obs({ReactiveContext? context, String? name})",
+        "description": "/// turns a String into Observable"
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "WillChangeNotification",
+    "kind": "class",
+    "signature": "class WillChangeNotification<T>",
+    "description": "",
+    "members": [
+      {
+        "name": "WillChangeNotification",
+        "signature": "WillChangeNotification<T>({OperationType? type, T? newValue, dynamic object})",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "OperationType? type",
+        "description": "/// One of add | update | delete"
+      },
+      {
+        "name": "newValue",
+        "signature": "T? newValue",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "dynamic object",
+        "description": ""
+      },
+      {
+        "name": "unchanged",
+        "signature": "WillChangeNotification<dynamic> unchanged",
+        "description": ""
+      },
+      {
+        "name": "type",
+        "signature": "OperationType? get type",
+        "description": ""
+      },
+      {
+        "name": "newValue",
+        "signature": "T? get newValue",
+        "description": ""
+      },
+      {
+        "name": "object",
+        "signature": "dynamic get object",
+        "description": ""
+      },
+      {
+        "name": "unchanged",
+        "signature": "WillChangeNotification<dynamic> get unchanged",
+        "description": ""
+      },
+      {
+        "name": "newValue",
+        "signature": "set newValue(T? value)",
+        "description": ""
+      },
+      {
+        "name": "unchanged",
+        "signature": "set unchanged(WillChangeNotification<dynamic> value)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "action",
+    "kind": "getter",
+    "signature": "MakeAction get action",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "alwaysNotify",
+    "kind": "getter",
+    "signature": "MakeObservable get alwaysNotify",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "asyncWhen",
+    "kind": "function",
+    "signature": "Future<void> asyncWhen(bool Function(Reaction) predicate, {String? name, int? timeout, ReactiveContext? context})",
+    "description": "/// A variant of [when()] which returns a Future. The Future completes when the [predicate()] turns true.\n/// Note that there is no effect function here. Typically you would await on the Future and execute the\n/// effect after that.\n///\n/// ```\n/// await asyncWhen((_) => x.value > 10);\n/// // ... execute the effect ...\n/// ```",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "autorun",
+    "kind": "function",
+    "signature": "ReactionDisposer autorun(dynamic Function(Reaction) fn, {String? name, int? delay, ReactiveContext? context, Timer Function(void Function())? scheduler, void Function(Object, Reaction)? onError})",
+    "description": "/// Executes the specified [fn], whenever the dependent observables change. It returns\n/// a disposer that can be used to dispose the autorun.\n///\n/// Optional configuration:\n/// * [name]: debug name for this reaction\n/// * [delay]: Number of milliseconds that can be used to throttle the effect function. If zero (default), no throttling happens.\n/// * [context]: the [ReactiveContext] to use. By default the [mainContext] is used.\n/// * [scheduler]: Set a custom scheduler to determine how re-running the autorun function should be scheduled. It takes a function that should be invoked at some point in the future.\n/// * [onError]: By default, any exception thrown inside an reaction will be logged, but not further thrown. This is to make sure that an exception in one reaction does not prevent the scheduled execution of other, possibly unrelated reactions. This also allows reactions to recover from exceptions. Throwing an exception does not break the tracking done by MobX, so subsequent runs of the reaction might complete normally again if the cause for the exception is removed. This option allows overriding that behavior. It is possible to set a global error handler or to disable catching errors completely using [ReactiveConfig].\n///\n/// ```\n/// var x = Observable(10);\n/// var y = Observable(20);\n/// var total = Observable(0);\n///\n/// var dispose = autorun((_){\n///   print('x = ${x}, y = ${y}, total = ${total}');\n/// });\n///\n/// x.value = 20; // will cause autorun() to re-trigger.\n///\n/// dispose(); // This disposes the autorun() and will not be triggered again\n///\n/// x.value = 30; // Will not cause autorun() to re-trigger as it's disposed.\n/// ```",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "computed",
+    "kind": "getter",
+    "signature": "ComputedMethod get computed",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "createContext",
+    "kind": "function",
+    "signature": "ReactiveContext createContext({ReactiveConfig? config})",
+    "description": "/// Create a new context for running actions and reactions.\n///\n/// You can use this to run a reactivity system in parallel to the [mainContext].\n/// All actions, reactions will be run within this context. Make sure to pass\n/// this context in calls to `autorun`, `reaction`, `when`, `action`, `observable`, etc.\n///\n/// Most of the time you should be fine with the [mainContext]",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "mainContext",
+    "kind": "getter",
+    "signature": "ReactiveContext get mainContext",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "observable",
+    "kind": "getter",
+    "signature": "MakeObservable get observable",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "observableAlwaysNotEqual",
+    "kind": "function",
+    "signature": "bool observableAlwaysNotEqual(dynamic _, dynamic _)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "reaction",
+    "kind": "function",
+    "signature": "ReactionDisposer reaction<T>(T Function(Reaction) fn, void Function(T) effect, {String? name, int? delay, bool? fireImmediately, bool Function(T?, T?)? equals, ReactiveContext? context, Timer Function(void Function())? scheduler, void Function(Object, Reaction)? onError})",
+    "description": "/// Executes the [fn] function and tracks the observables used in it. Returns\n/// a function to dispose the reaction.\n///\n/// Optional configuration:\n/// * [name]: debug name for this reaction\n/// * [delay]: Number of milliseconds that can be used to throttle the effect function. If zero (default), no throttling happens.\n/// * [context]: the [ReactiveContext] to use. By default the [mainContext] is used.\n/// * [scheduler]: Set a custom scheduler to determine how re-running the autorun function should be scheduled. It takes a function that should be invoked at some point in the future.\n/// * [onError]: By default, any exception thrown inside an reaction will be logged, but not further thrown. This is to make sure that an exception in one reaction does not prevent the scheduled execution of other, possibly unrelated reactions. This also allows reactions to recover from exceptions. Throwing an exception does not break the tracking done by MobX, so subsequent runs of the reaction might complete normally again if the cause for the exception is removed. This option allows overriding that behavior. It is possible to set a global error handler or to disable catching errors completely using [ReactiveConfig].\n///\n/// The [fn] is supposed to return a value of type T. When it changes, the\n/// [effect] function is executed.\n///\n/// *Note*: Only the [fn] function is tracked and not the [effect].\n///\n/// You can also pass in an optional [name], a throttling [delay] in milliseconds. Use\n/// [fireImmediately] if you want to invoke the effect immediately without waiting for\n/// the [fn] to change its value. It is possible to define a custom [equals] function\n/// to override the default comparison for the value returned by [fn], to have fined\n/// grained control over when the reactions should run. By default, the [mainContext]\n/// is used, but you can also pass in a custom [context].\n/// You can also pass in an optional [onError] handler for errors thrown during the [fn] execution.\n/// You can also pass in an optional [scheduler] to schedule the [effect] execution.",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "readonly",
+    "kind": "getter",
+    "signature": "MakeObservable get readonly",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "runInAction",
+    "kind": "function",
+    "signature": "T runInAction<T>(T Function() fn, {String? name, ReactiveContext? context})",
+    "description": "/// Executes the mutation function [fn] within an `Action`. This ensures that all change notifications\n/// are fired only at the end of the `Action` block. Note that actions can be nested, in which case\n/// the notifications go out when the outermost `Action` completes.\n///\n/// Giving a [name] makes it easier to identify this action during debugging. You can also run this in a\n/// custom [context]. By default the `mainContext` will be used.",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "transaction",
+    "kind": "function",
+    "signature": "T transaction<T>(T Function() fn, {ReactiveContext? context})",
+    "description": "/// During a transaction, no derivations ([Reaction] or [Computed]) will be run\n/// and will be deferred until the end of the transaction (batch). Transactions can\n/// be nested, in which case, no derivation will be run until the top-most batch completes",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "untracked",
+    "kind": "function",
+    "signature": "T untracked<T>(T Function() fn, {ReactiveContext? context})",
+    "description": "/// Untracked ensures there is no tracking derivation while the given action runs.\n/// This is useful in cases where no observers should be linked to a running (tracking) derivation.",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "version",
+    "kind": "getter",
+    "signature": "String get version",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx",
+    "library": "mobx.dart",
+    "name": "when",
+    "kind": "function",
+    "signature": "ReactionDisposer when(bool Function(Reaction) predicate, void Function() effect, {String? name, ReactiveContext? context, int? timeout, void Function(Object, Reaction)? onError})",
+    "description": "/// A one-time reaction that auto-disposes when the [predicate] becomes true. It also\n/// executes the [effect] when the predicate turns true.\n///\n/// You can read it as: \"*when* [predicate()] turns true, the [effect()] is executed.\"\n///\n/// Returns a function to dispose pre-maturely.",
+    "members": []
+  },
+  {
+    "package": "mobx_codegen",
+    "library": "mobx_codegen.dart",
+    "name": "StoreGenerator",
+    "kind": "class",
+    "signature": "class StoreGenerator extends Generator",
+    "description": "",
+    "members": [
+      {
+        "name": "StoreGenerator",
+        "signature": "StoreGenerator([BuilderOptions options = BuilderOptions.empty])",
+        "description": ""
+      },
+      {
+        "name": "options",
+        "signature": "BuilderOptions options",
+        "description": ""
+      },
+      {
+        "name": "options",
+        "signature": "BuilderOptions get options",
+        "description": ""
+      },
+      {
+        "name": "generate",
+        "signature": "FutureOr<String> generate(LibraryReader library, BuildStep buildStep)",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "package": "mobx_codegen",
+    "library": "builder.dart",
+    "name": "storeGenerator",
+    "kind": "function",
+    "signature": "Builder storeGenerator(BuilderOptions options)",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx_codegen",
+    "library": "mobx_codegen.dart",
+    "name": "version",
+    "kind": "getter",
+    "signature": "String get version",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx_lint",
+    "library": "mobx_lint.dart",
+    "name": "createPlugin",
+    "kind": "function",
+    "signature": "PluginBase createPlugin()",
+    "description": "",
+    "members": []
+  },
+  {
+    "package": "mobx_lint",
+    "library": "version.dart",
+    "name": "version",
+    "kind": "getter",
+    "signature": "String get version",
+    "description": "",
+    "members": []
+  }
+]

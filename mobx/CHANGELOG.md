@@ -1,3 +1,15 @@
+## Unreleased
+
+- Fix custom-context ownership for observable futures and reaction/when effects. Reused and overlapping async actions now inherit each caller's zone, including binary callbacks.
+- Cancel scheduled reaction and when-timeout timers on disposal. Complete observable streams on source cancel-on-error, preserve error stacks, and handle empty and nullable stream results correctly.
+- Share list change notifications across cast views with lazy value casts, validate empty/reversed list ranges, and report the committed intercepted value to listeners. Promote all audit probes into the normal regression suite.
+
+- Reuse stable dependency arrays and reaction-wave buffers; avoid reflective invocation in `runInAction` and disabled-spy event allocations.
+- Filter observable lists in linear time, preserving reverse predicate order and original-index notifications. Predicate failures no longer leave partially filtered storage. Bulk map/set operations now batch reactions.
+- Fix dependency cleanup after resubscription, unintended dependencies from writes and lifecycle hooks, lifecycle listener self-disposal, cycle queue recovery, computed comparer error propagation, and per-context reaction error handlers.
+- Organize core regressions under `test/regressions/` and benchmark correctness tests under `test/benchmark/`. Workloads in `benchmark/workloads/` return typed results and follow normal formatting/static analysis.
+- Add native and release-Wasm performance suites with 35 locally maintained workloads, collection benchmarks, JSON comparison tooling, and CI smoke checks. Upgrade the development test runner for Wasm support.
+
 ## 2.6.1
 
  - **FIX**: use super parameters in spy event constructors to satisfy the `use_super_parameters` lint on the beta analyzer.

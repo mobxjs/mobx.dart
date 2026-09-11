@@ -1,0 +1,8 @@
+{
+  "mobx": "2.6.1",
+  "flutter_mobx": "2.3.0",
+  "mobx_codegen": "2.7.8",
+  "build_runner": "2.16.1",
+  "json_serializable": "6.14.1",
+  "json_annotation": "4.12.0"
+}

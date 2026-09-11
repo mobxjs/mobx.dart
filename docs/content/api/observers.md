@@ -1,0 +1,183 @@
+---
+title: Observers
+---
+
+# Observers
+
+
+## Observer Widget
+
+#### `Observer({required Widget Function(BuildContext context) builder})`
+
+One of the most visual reactions in the app is the UI. The **Observer** widget
+(which is part of the <PubBadge name="flutter_mobx" /> package), provides a
+granular observer of the observables used in its `builder` function. Whenever
+these observables change, `Observer` rebuilds and renders.
+
+:::info Immediate context for `builder`
+
+The key thing to note is that the `builder` function will only track the
+observables in its immediate execution context. If an observable is being used
+in a nested function, it will not be tracked. Make sure to dereference (a.k.a.
+read) an observable in the immediate execution context. If no observables are
+found when running the `builder` function, it will warn you on the console.
+
+This is one of the most common gotchas when using MobX. Just because you have
+nested functions inside a `builder`, which are reading an observable, it does
+not actually track the observable. It can appear deceiving but the fact is, the
+observable was not in the **immediate execution context**. Be watchful for this
+scenario, especially when your `Observer`-wrapped `Widgets` are not updating
+properly.
+
+:::
+
+Below is the _Counter_ example in its entirety.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+
+part 'counter.g.dart';
+
+class Counter = CounterBase with _$Counter;
+
+abstract class CounterBase with Store {
+  @observable
+  int value = 0;
+
+  @action
+  void increment() {
+    value++;
+  }
+}
+
+class CounterExample extends StatefulWidget {
+  const CounterExample({Key key}) : super(key: key);
+
+  @override
+  _CounterExampleState createState() => _CounterExampleState();
+}
+
+class _CounterExampleState extends State<CounterExample> {
+  final _counter = Counter();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Counter'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Observer(
+                  builder: (_) => Text(
+                        '${_counter.value}',
+                        style: const TextStyle(fontSize: 20),
+                      )),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _counter.increment,
+          tooltip: 'Increment',
+          child: const Icon(Icons.add),
+        ),
+      );
+}
+```
+
+#### Performance optimizations
+Mostly you try to make `Observer` as small as possible. But sometimes you want to exclude
+the widget subtree from being rebuilt and improve the performance.
+
+For that you can use an `Observer.withBuiltChild` constructor. It takes `builder`
+and `child` arguments and internally uses the same technique as in [AnimatedBuilder](https://api.flutter.dev/flutter/widgets/AnimatedBuilder-class.html)
+
+Here is a brief example:
+
+```dart
+final obsColor = Observable(Colors.green);
+
+Observer.withBuiltChild(
+  builder: (context, child) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      color: obsColor.value, // this widget will be rebuilt when the color value changes
+      child: child,
+    );
+  },
+  child: ListView.builder( // this part will not be rebuilt
+    shrinkWrap: true,
+    itemCount: 1000,
+    itemBuilder: (context, index) {
+      return ListTile(title: Text('Item $index'));
+    },
+  ),
+)
+```
+
+## ReactionBuilder widget
+
+If you ever ran into a need for running a reaction when a Widget loads, you most
+likely created a `StatefulWidget` and put your reaction in the `initState()`.
+
+This forces you to make a wrapper widget, whose sole purpose is to run the
+reaction and dispose it as part of the `dispose()` method. Rather that doing
+that ceremony everytime, there is a simpler way of handling this with the
+`ReactionBuilder`.
+
+#### `ReactionBuilder({required ReactionDisposer Function(BuildContext context) builder, required Widget child})`
+
+Here is a snippet from the [ConnectivityExample](/examples/connectivity):
+
+```dart
+
+class ConnectivityExample extends StatelessWidget {
+  const ConnectivityExample(this.store, {Key? key}) : super(key: key);
+
+  final ConnectivityStore store;
+
+  @override
+  Widget build(BuildContext context) => ScaffoldMessenger(
+// highlight-start
+        child: ReactionBuilder(
+            builder: (context) {
+              return reaction((_) => store.connectivityStream.value, (result) {
+                final messenger = ScaffoldMessenger.of(context);
+
+                messenger.showSnackBar(SnackBar(
+                    content: Text(result == ConnectivityResult.none
+                        ? 'You\'re offline'
+                        : 'You\'re online')));
+              }, delay: 4000);
+            },
+// highlight-end
+            child: Scaffold(
+              appBar: AppBar(
+                title: const Text('Settings'),
+              ),
+              body: const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                    'Turn your connection on/off for approximately 4 seconds to see the app respond to changes in your connection status.'),
+              ),
+            )),
+      );
+}
+
+```
+
+Notice the use of the `ReactionBuilder` that sets up the reaction in the
+`builder()` method.
+
+This simplifies the outer widget and keeps it as a `StatelessWidget`. Without
+the `ReactionBuilder`, you would have to create a wrapper `StatefulWidget`,
+prepare the reaction in the `initState()` and then dispose it in the `dispose()`
+of the widget.
+
+Use the `ReactionBuilder` to keep your UI tree as a set of `StatelessWidgets`.

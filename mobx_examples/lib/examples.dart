@@ -82,7 +82,7 @@ final List<Example> examples = [
     description: 'Settings for toggling dark mode',
     path: '/settings',
     widgetBuilder: (_) => Consumer<SettingsStore>(
-      builder: (_, store, __) => SettingsExample(store),
+      builder: (_, store, _) => SettingsExample(store),
     ),
   ),
   Example(
@@ -90,7 +90,7 @@ final List<Example> examples = [
     description: 'Responding to changes in connection status',
     path: '/connectivity',
     widgetBuilder: (_) => Consumer<ConnectivityStore>(
-      builder: (_, store, __) => ConnectivityExample(store),
+      builder: (_, store, _) => ConnectivityExample(store),
     ),
   ),
   Example(

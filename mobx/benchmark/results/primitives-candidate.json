@@ -1,0 +1,249 @@
+{
+  "schema": 1,
+  "suite": "primitives",
+  "upstream_revision": "03663d64413a84c3449b932dac10f576b6314dd0",
+  "dart": "3.13.2 (stable) (Tue Aug 25 01:01:12 2026 -0700) on \"macos_arm64\"",
+  "os": "macos",
+  "processors": 12,
+  "samples": 7,
+  "cases": [
+    {
+      "name": "create_signals",
+      "samples_us": [
+        24286,
+        25790,
+        26801,
+        24767,
+        23210,
+        32389,
+        31956
+      ],
+      "median_us": 25790,
+      "success": true
+    },
+    {
+      "name": "comp_0to1",
+      "samples_us": [
+        11311,
+        12947,
+        13616,
+        14578,
+        17996,
+        16507,
+        15291
+      ],
+      "median_us": 14578,
+      "success": true
+    },
+    {
+      "name": "comp_1to1",
+      "samples_us": [
+        20643,
+        21161,
+        22791,
+        24550,
+        14737,
+        22269,
+        12833
+      ],
+      "median_us": 21161,
+      "success": true
+    },
+    {
+      "name": "comp_2to1",
+      "samples_us": [
+        7634,
+        13391,
+        13946,
+        9707,
+        15820,
+        16064,
+        8943
+      ],
+      "median_us": 13391,
+      "success": true
+    },
+    {
+      "name": "comp_4to1",
+      "samples_us": [
+        12302,
+        11343,
+        13876,
+        14322,
+        5580,
+        4291,
+        3374
+      ],
+      "median_us": 11343,
+      "success": true
+    },
+    {
+      "name": "comp_1000to1",
+      "samples_us": [
+        9,
+        9,
+        8,
+        10,
+        10,
+        14,
+        10
+      ],
+      "median_us": 10,
+      "success": true
+    },
+    {
+      "name": "comp_1to2",
+      "samples_us": [
+        16600,
+        13349,
+        15047,
+        20332,
+        16887,
+        18525,
+        11166
+      ],
+      "median_us": 16600,
+      "success": true
+    },
+    {
+      "name": "comp_1to4",
+      "samples_us": [
+        18577,
+        12358,
+        13042,
+        12515,
+        12387,
+        13590,
+        12158
+      ],
+      "median_us": 12515,
+      "success": true
+    },
+    {
+      "name": "comp_1to8",
+      "samples_us": [
+        11718,
+        11356,
+        12316,
+        11710,
+        9986,
+        10514,
+        11010
+      ],
+      "median_us": 11356,
+      "success": true
+    },
+    {
+      "name": "comp_1to1000",
+      "samples_us": [
+        7570,
+        7718,
+        7883,
+        8066,
+        8437,
+        9243,
+        7876
+      ],
+      "median_us": 7883,
+      "success": true
+    },
+    {
+      "name": "update_1to1",
+      "samples_us": [
+        11300,
+        11297,
+        11507,
+        11531,
+        11198,
+        11346,
+        11075
+      ],
+      "median_us": 11300,
+      "success": true
+    },
+    {
+      "name": "update_2to1",
+      "samples_us": [
+        5670,
+        5589,
+        5593,
+        5691,
+        5590,
+        5979,
+        5540
+      ],
+      "median_us": 5593,
+      "success": true
+    },
+    {
+      "name": "update_4to1",
+      "samples_us": [
+        2748,
+        2849,
+        2871,
+        2852,
+        2801,
+        2865,
+        2723
+      ],
+      "median_us": 2849,
+      "success": true
+    },
+    {
+      "name": "update_1000to1",
+      "samples_us": [
+        28,
+        28,
+        27,
+        28,
+        28,
+        29,
+        27
+      ],
+      "median_us": 28,
+      "success": true
+    },
+    {
+      "name": "update_1to2",
+      "samples_us": [
+        5670,
+        5541,
+        5593,
+        5862,
+        5700,
+        5793,
+        5574
+      ],
+      "median_us": 5670,
+      "success": true
+    },
+    {
+      "name": "update_1to4",
+      "samples_us": [
+        2972,
+        2807,
+        2841,
+        2781,
+        2723,
+        2868,
+        2740
+      ],
+      "median_us": 2807,
+      "success": true
+    },
+    {
+      "name": "update_1to1000",
+      "samples_us": [
+        97,
+        81,
+        171,
+        83,
+        81,
+        88,
+        81
+      ],
+      "median_us": 83,
+      "success": true
+    }
+  ]
+}

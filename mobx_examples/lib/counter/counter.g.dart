@@ -24,13 +24,16 @@ mixin _$Counter on _Counter, Store {
     });
   }
 
-  late final _$_CounterActionController =
-      ActionController(name: '_Counter', context: context);
+  late final _$_CounterActionController = ActionController(
+    name: '_Counter',
+    context: context,
+  );
 
   @override
   void increment() {
-    final _$actionInfo =
-        _$_CounterActionController.startAction(name: '_Counter.increment');
+    final _$actionInfo = _$_CounterActionController.startAction(
+      name: '_Counter.increment',
+    );
     try {
       return super.increment();
     } finally {

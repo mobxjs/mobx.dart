@@ -86,7 +86,9 @@ class ActionController {
 
   ActionRunInfo startAction({String? name}) {
     final reportingName = name ?? this.name;
-    _context.spyReport(ActionSpyEvent(name: reportingName));
+    if (_context.isSpyEnabled) {
+      _context.spyReport(ActionSpyEvent(name: reportingName));
+    }
     final startTime = _context.isSpyEnabled ? DateTime.now() : null;
 
     final prevDerivation = _context.startUntracked();
@@ -102,19 +104,23 @@ class ActionController {
   }
 
   void endAction(ActionRunInfo info) {
-    final duration =
-        _context.isSpyEnabled
-            ? DateTime.now().difference(info.startTime!)
-            : Duration.zero;
-    _context.spyReport(
-      EndedSpyEvent(type: 'action', name: info.name, duration: duration),
-    );
+    if (_context.isSpyEnabled) {
+      final duration =
+          info.startTime == null
+              ? Duration.zero
+              : DateTime.now().difference(info.startTime!);
+      _context.spyReport(
+        EndedSpyEvent(type: 'action', name: info.name, duration: duration),
+      );
+    }
 
     // ignore: cascade_invocations
-    _context
-      ..endAllowStateChanges(allow: info.prevAllowStateChanges)
-      ..endBatch()
-      ..endUntracked(info.prevDerivation);
+    _context.endAllowStateChanges(allow: info.prevAllowStateChanges);
+    try {
+      _context.endBatch();
+    } finally {
+      _context.endUntracked(info.prevDerivation);
+    }
   }
 }
 

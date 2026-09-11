@@ -97,3 +97,17 @@ coverage_badge.svg
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
+
+# Reproducible development and isolated lint toolchains.
+!/pubspec.lock
+!/mobx_lint/pubspec.lock
+!/mobx_lint_flutter_test/pubspec.lock
+
+# Generated Flutter documentation runtime
+docs/public/flutter/
+.pnpm-store/
+docs/public/gallery-app/
+
+# Local VitePress development cache and visual review captures.
+docs/.vitepress/cache/
+docs/.impeccable/review/

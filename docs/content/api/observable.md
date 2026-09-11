@@ -1,0 +1,577 @@
+---
+title: Observables
+---
+
+# Observables
+
+
+Observables form the _reactive state_ of your MobX Application. You can use the
+API directly or rely on annotations to make it easier. The reactive state of
+your application can be divided into the **Core State** and **Derived State**.
+Core State is the state inherent to your business domain, where as Derived State
+is state that can be derived from the Core State.
+
+> **Reactive State** = **Core-State** + **Derived-State**
+
+<img src="/images/core-derived-state.png" />
+
+As you can tell from the image above, the Derived-State is almost always
+read-only. In the MobX parlance, derived-state is also called _computed
+properties_, or just _computeds_.
+
+The derived state can be much bigger than the core-state. This is understandable
+as the number of variations in which the core-state can be visualized can keep
+increasing over time. All of these are projections from the core-state. For
+example, the same list of items can be visualized as the raw list, a table,
+chart or some custom visualization. The view-specific data can be _**derived**_
+from the same _core-state_.
+
+## Observable
+
+#### `Observable(T initialValue, {String name, ReactiveContext context})`
+
+- **`T initialValue`**: the initial value for the `Observable` or `null`
+  otherwise.
+- **`String name`**: a name to identify during debugging
+- **`ReactiveContext context`**: the context to which this observable is bound.
+  By default, all observables are bound to the singleton `mainContext` of the
+  application.
+
+An `Observable` is used to track a single value, either primitive or complex.
+Whenever it changes value, it will fire a notification so that all connected
+reactions will re-execute.
+
+```dart
+final counter = Observable(0); // initially 0
+
+final list = Observable<List<Todo>>(); // start with an initialValue of null
+```
+
+If you use a `Store` class, you could do the following to annotate observable
+properties of the class:
+
+```dart
+import 'package:mobx/mobx.dart';
+
+part 'todo.g.dart';
+
+class Todo = _Todo with _$Todo;
+
+abstract class _Todo with Store {
+  _Todo(this.description);
+
+  @observable
+  String description = '';
+
+  @observable
+  bool done = false;
+
+  @action
+  void markDone(bool flag) {
+    done = flag;
+  }
+}
+```
+
+:::info Reactive Extensions
+
+You can convert plain `int`, 'double', `bool`, and `String` literals into
+an observable version with the `.obs()` extension method. For example:
+
+```dart
+var name = ''.obs(); // infers ObservableString
+var counter = 0.obs(); // infers ObservableInt
+```
+
+You can toggle an internal value of `Observable<bool>` with `.toggle()`:
+
+```dart
+var lights = true.obs();
+lights.toggle(); // now lights.value is false
+```
+
+:::
+
+## Readonly
+
+Generally speaking you want two things in your stores: reactive fields and
+encapsulation. Let's take a look at the counter example once again.
+
+```dart
+import 'package:mobx/mobx.dart';
+
+part 'counter.g.dart';
+
+class Counter = CounterBase with _$Counter;
+
+abstract class CounterBase with Store {
+  @observable
+  int value = 0;
+
+  @action
+  void increment() {
+    value++;
+  }
+}
+```
+
+As you can see, the `value` field is public, which means you are allowed to do
+the following:
+
+```dart
+final counter = Counter();
+counter.value = -42;
+```
+
+This violates the encapsulation principle from OOP, so let's make it private.
+
+```dart
+import 'package:mobx/mobx.dart';
+
+part 'counter.g.dart';
+
+class Counter = CounterBase with _$Counter;
+
+abstract class CounterBase with Store {
+  @observable
+  int _value = 0;
+
+  @computed
+  int get value => _value;
+
+  @action
+  void increment() {
+    _value++;
+  }
+}
+```
+
+So, because you made it private you're now required to make a getter, otherwise
+the client wouldn't have access to `value`. But, as most of the time you want to
+keep things privatly, a _Store_ with slightly more fields would result in some
+serious boilerplate. Could we avoid that?
+
+I'm glad you asked. To solve this problem we made a annotation which makes
+getters for private variables so that you don't have to. Look how it translates
+into code:
+
+```dart
+import 'package:mobx/mobx.dart';
+
+part 'counter.g.dart';
+
+class Counter = CounterBase with _$Counter;
+
+abstract class CounterBase with Store {
+  @readonly
+  int _value = 0;
+
+  @action
+  void increment() {
+    _value++;
+  }
+}
+```
+
+Isn't it awesome? Now your fields can only be changed by `@actions` methods
+while being available throught getters. It is no different than an observable
+though, you're allowed to use of computed getters the same way you do with
+`@observable`.
+
+> **Note:** Just don't forget to use it only on **private fields**, because it
+> just doesn't make sense otherwise. But don't worry, if by any chance you
+> happens to forget, we warn you with friendly errors at code generation time.
+
+## Use deep equality on collections
+
+By default, MobX uses the `==` to compare the previous value. This is fine for
+primitives, but for collections, you may want to use a
+[DeepCollectionEquality](https://api.flutter.dev/flutter/package-collection_collection/DeepCollectionEquality-class.html).
+When using deep equal, no reaction will occur if all elements are equal.
+
+```dart
+import 'package:mobx/mobx.dart';
+
+part 'todo.g.dart';
+
+class Todo = _Todo with _$Todo;
+
+abstract class _Todo with Store {
+  _Todo(this.description);
+
+  @observable
+  String description = '';
+
+  @observable
+  bool done = false;
+
+  @action
+  void markDone(bool flag) {
+    done = flag;
+  }
+
+  @override
+  int get hashCode => description.hashCode ^ done.hashCode;
+
+  @override
+  operator ==(Object other) =>
+      identical(this, other) ||
+      other is Todo &&
+          runtimeType == other.runtimeType &&
+          description == other.description &&
+          done == other.done;
+}
+
+class Todos = _Todos with _$Todos;
+
+abstract class _Todos with Store {
+  _Todos();
+
+  @MakeObservable(useDeepEquals: true)
+  List<Todo> _todos = [];
+
+  @computed
+  List get todos => _todos;
+
+  @action
+  void setTodos(List<Todo> todos) {
+    _todos = todos;
+  }
+}
+```
+
+## Computed
+
+#### `Computed(T Function() fn, {String name, ReactiveContext context, EqualityComparer<T>? equals, bool? keepAlive})`
+
+- **`T Function() fn`**: the function which relies on observables to compute its
+  value.
+- **`String name`**: a name to identify during debugging
+- **`ReactiveContext context`**: the context to which this computed is bound. By
+  default, all computeds are bound to the singleton `mainContext` of the
+  application.
+- **`EqualityComparer<T>? equals`**: It acts as a comparison function for
+  comparing the previous value with the next value. If this function considers
+  the values to be equal, then the observers will not be re-evaluated. This is
+  useful when working with structural data and types from other libraries.
+- **`bool? keepAlive`**: This avoids suspending computed values when they are
+  not being observed by anything (see the above explanation). Can potentially
+  create memory leaks.
+
+**Computed-s** form the derived state of your application. They depend on other
+observables or `computed` for their value. Any time the depending-observables
+change, they will recompute their new value. Computed-s are also smart and
+**cache** their previous value. Only when the computed-value is different from
+the cached-value, will they fire notifications. This behavior is key to ensure
+the connected reactions don't execute unnecessarily.
+
+:::info
+
+#### Caching
+
+The caching behavior is only for _notifications_ and **not** for the _value_.
+Calling a computed property will always evaluate and return the value. There is
+no caching on the computation itself. However, notifications fire only when the
+computed value is different from the previous one. This is where the caching
+behavior applies.
+
+It can be overridden by setting the annotation with the `keepAlive` option or by
+creating a no-op `autorun(() { someComputed })`, which can be nicely cleaned up
+later if needed. Note that both solutions have the risk of creating memory
+leaks. Changing the default behavior here is an anti-pattern.
+
+:::
+
+```dart
+final first = Observable('Pavan');
+final last = Observable('Podila');
+
+final fullName = Computed(() => '${first.value} ${last.value}');
+
+print(fullName.value); // Pavan Podila
+
+runInAction(() => first.value = 'Siri');
+
+print(fullName.value); // Siri Podila
+```
+
+With **annotations**, this can become easier to use:
+
+```dart
+part 'todo_list.g.dart';
+
+class Contact = _Contact with _$Contact;
+
+abstract class _Contact with Store {
+  @observable
+  String first = 'Pavan';
+
+  @observable
+  String last = 'Podila';
+
+  @computed
+  String get fullName => '${first} ${last}';
+
+}
+```
+
+:::info
+
+#### Why do we need an `Observable***` Class for types like `Future`, `Stream`, `List`, `Map`, `Set`?
+
+The core types provided by Dart are not reactive by nature. They don't
+participate in the MobX reactive system and hence changes in them are not
+notified to the `Observer`. To have a well-behaving reactive system, we need
+data-structures that are also reactive inherently. This requires that we have an
+`Observable`-version of the core types like `List`,`Set`, `Map`, `Future` and
+`Stream`.The following set of types will help you build stores that participate
+well in the MobX world. Use them when you need reactive data-structures that are
+MobX-ready!
+
+:::
+
+## ObservableList
+
+#### `ObservableList({ReactiveContext context})`
+
+- **`ReactiveContext context`**: the context to which this list is bound. By
+  default, all `ObservableList`s are bound to the singleton `mainContext` of the
+  application.
+
+An `ObservableList` gives you a deeper level of observability on a list of
+values. It tracks when items are added, removed or modified and notifies the
+observers. Use an `ObservableList` when a change in the list matters. You can
+couple this with the `@observable` annotation to also track when the list
+reference changes, eg: going from `null` to a list with values.
+
+Whenever you are using `Observer` and need to pass `ObservableList` to Observer
+child, use `observableList.toList()` to tell your `Observer` to track your list
+mutations and pass it to child widget as a `List`. Look for the example below
+for better understanding.
+
+#### Example
+
+Below is the example to use `ObservableList` with `Observer`.
+
+```dart
+class Controller {
+  final ObservableList<String> observableList = ObservableList<String>();
+}
+```
+
+```dart
+  Observer(builder: (_) {
+            return SizedBox(
+              width: 1024,
+              height: 512,
+              child: ChildWidget(
+                list: controller.observableList.toList(), // Mobx will detect mutations to observableList
+              ),
+            );
+          }),
+```
+
+```dart
+class ChildWidget extends StatelessWidget {
+  const ChildWidget({super.key, required this.list});
+
+/// Don't use ObservableList here otherwise the context for parent widget
+/// observer will change and it will not track these mutations.
+
+  final List<String> list;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          return SizedBox(
+            width: 112,
+            height: 48,
+            child: ListTile(
+              title: Text(list[index]),
+            ),
+          );
+        });
+  }
+}
+```
+
+## ObservableMap
+
+#### `ObservableMap({ReactiveContext context})`
+
+- **`ReactiveContext context`**: the context to which this map is bound. By
+  default, all `ObservableMap`s are bound to the singleton `mainContext` of the
+  application.
+
+An `ObservableMap` gives you a deeper level of observability on a map of values.
+It tracks when keys are added, removed or modified and notifies the observers.
+Use an `ObservableMap` when a change in the map matters. You can couple this
+with the `@observable` annotation to also track when the map reference changes,
+eg: going from `null` to a map with values.
+
+## ObservableSet
+
+#### `ObservableSet({ReactiveContext context})`
+
+- **`ReactiveContext context`**: the context to which this set is bound. By
+  default, all `ObservableSet`s are bound to the singleton `mainContext` of the
+  application.
+
+An `ObservableSet` gives you a deeper level of observability on a set of values.
+It tracks when values are added, removed or modified and notifies the observers.
+Use an `ObservableSet` when a change in the set matters. You can couple this
+with the `@observable` annotation to also track when the set reference changes,
+eg: going from `null` to a set with values.
+
+## ObservableFuture
+
+#### `ObservableFuture(Future<T> future, {ReactiveContext context})`
+
+- **`Future<T> future`**: The future that is tracked for status changes.
+- **`ReactiveContext context`**: the context to which this observable-future is
+  bound. By default, all `ObservableFuture`s are bound to the singleton
+  `mainContext` of the application.
+
+The `ObservableFuture` is the reactive wrapper around a `Future`. You can use it
+to show the UI under various states of a `Future`, from `pending` to `fulfilled`
+or `rejected`. The `status`, `result` and `error` fields of an
+`ObservableFuture` are observable and can be consumed on the UI.
+
+Here is a simple `LoadingIndicator` widget that uses the `ObservableFuture` to
+show a progress bar during a fetch operation:
+
+```dart
+
+// github_store.dart
+part 'github_store.g.dart';
+
+class GithubStore = _GithubStore with _$GithubStore;
+
+abstract class _GithubStore with Store {
+  // ...
+
+  static ObservableFuture<List<Repository>> emptyResponse =
+      ObservableFuture.value([]);
+
+  // We are starting with an empty future to avoid a null check
+  @observable
+  ObservableFuture<List<Repository>> fetchReposFuture = emptyResponse;
+
+  // ...
+}
+
+// github_widgets.dart
+class LoadingIndicator extends StatelessWidget {
+  const LoadingIndicator(this.store);
+
+  final GithubStore store;
+
+  @override
+  Widget build(BuildContext context) => Observer(
+      builder: (_) => store.fetchReposFuture.status == FutureStatus.pending
+          ? const LinearProgressIndicator()
+          : Container());
+}
+
+```
+
+## ObservableStream
+
+#### `ObservableStream(Stream<T> stream, {T initialValue, bool cancelOnError, ReactiveContext context, String? name, EqualityComparer<dynamic>? equals})`
+
+- **`Stream<T> stream`**: The stream that is tracked for `status` and `value`
+  changes.
+- **`T initialValue`**: The starting value of the stream.
+- **`bool cancelOnError`**: Should the stream be cancelled on error. Default is
+  set to `false`.
+- **`ReactiveContext context`**: the context to which this observable-stream is
+  bound. By default, all `ObservableStream`s are bound to the singleton
+  `mainContext` of the application.
+- **`String? name`**: This string is used as a debug name.
+- **`EqualityComparer<dynamic>? equals`**: It acts as a comparison function for
+  comparing the previous value with the next value. If this function considers
+  the values to be equal, then the observers will not be re-evaluated.
+
+Similar to `ObservableFuture`, an **`ObservableStream`** provides a reactive
+wrapper around a `Stream`. This gives an easy way to observe and re-render
+whenever there is new `data`, or `error` or a `status` change on the
+`ObservableStream`.
+
+## Atom
+
+An `Atom` is at the core of the MobX reactivity system. It tracks when it is
+observed and notifies whenever it changes. Note that an Atom does not store any
+value. That is the responsibility of the `Observable`, which extends `Atom` to
+add the storage. You would rarely need to use an Atom directly. Instead, depend
+on an `Observable` for most use-cases.
+
+:::info Aside
+
+The **`mobx_codegen`** package uses an `Atom` internally for all the
+`@observable` annotated fields.
+
+:::
+
+### Atomic Clock
+
+Here is a simple clock that relies on an `Atom` to notify every second.
+
+> Full code can be seen
+> [here](https://github.com/mobxjs/mobx.dart/tree/main/mobx_examples/lib/clock).
+
+- When the clock gets observed the first time, we start the timer
+  (`_startTimer`).
+- When the clock is no longer observed (eg: when a reaction is disposed), we
+  dispose off the timer (`_stopTimer`).
+- In each tick of the timer, we call `_atom.reportChanged()`. This notifies the
+  MobX reactive system that the atom has changed value and all connected
+  reactions should be re-executed.
+- When the `now` property is read the first time, the clock gets observed and
+  starts ticking. It also fires the `_atom.reportObserved()` to make MobX start
+  tracking this atom.
+
+```dart
+import 'dart:async';
+
+import 'package:mobx/mobx.dart';
+
+class Clock {
+  Clock() {
+    _atom = Atom(
+        name: 'Clock Atom', onObserved: _startTimer, onUnobserved: _stopTimer);
+  }
+
+  DateTime get now {
+    _atom.reportObserved();
+    return DateTime.now();
+  }
+
+  Atom _atom;
+  Timer _timer;
+
+  void _startTimer() {
+    print('Clock started ticking');
+
+    if (_timer != null) {
+      _timer.cancel();
+    }
+
+    _timer = Timer.periodic(Duration(seconds: 1), _onTick);
+  }
+
+  void _stopTimer() {
+    if (_timer != null) {
+      _timer.cancel();
+    }
+
+    print('Clock stopped ticking');
+  }
+
+  void _onTick(_) {
+    _atom.reportChanged();
+  }
+}
+
+```

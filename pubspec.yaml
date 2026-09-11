@@ -1,7 +1,36 @@
 name: mobx_dart
+publish_to: none
 
 environment:
-  sdk: ">=3.7.0 <4.0.0"
+  sdk: ^3.11.0
+
+workspace:
+  - mobx
+  - flutter_mobx
+  - mobx_codegen
+  - mobx_examples
 
 dev_dependencies:
-  melos: ^6.2.0
+  melos: ^8.7.0
+
+  analyzer: any
+melos:
+  command:
+    version:
+      hooks:
+        preCommit: dart run melos run set_version --no-select
+  scripts:
+    analyze:
+      run: dart analyze .
+    set_version:
+      exec: dart run $MELOS_ROOT_PATH/tool/expose_version.dart
+      packageFilters:
+        scope: "{mobx,mobx_codegen,flutter_mobx}"
+    generate:
+      run: cd mobx_examples && dart run build_runner build
+    test_core:
+      run: cd mobx && dart test test/all_tests.dart
+    test_codegen:
+      run: cd mobx_codegen && dart test
+    test_flutter:
+      run: cd flutter_mobx && flutter test

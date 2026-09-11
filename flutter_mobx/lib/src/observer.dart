@@ -58,7 +58,8 @@ class Observer extends StatelessObserverWidget {
   /// Matches constructor stack frames, in both VM and web environments.
   static final _constructorStackFramePattern = RegExp(r'\bnew\b');
 
-  static final _stackFrameCleanUpPattern = RegExp(r'^#\d+\s+(.*)$');
+  static final _stackFrameCleanUpPattern =
+      RegExp(r'^(?:#\d+\s+|\s*at (?:M\.)?)(.*)$');
 
   /// Finds the first non-constructor frame in the stack trace.
   ///
@@ -70,7 +71,10 @@ class Observer extends StatelessObserverWidget {
     assert(() {
       if (debugAddStackTraceInObserverName) {
         final stackTraceString = (stackTrace ?? StackTrace.current).toString();
-        final rawStackFrame = LineSplitter.split(stackTraceString)
+        final frames = LineSplitter.split(stackTraceString).toList();
+        final rawStackFrame = frames
+            .asMap()
+            .entries
             // We are skipping frames representing:
             // 1. The anonymous function in the assert
             // 2. The debugFindConstructingStackFrame method
@@ -81,9 +85,17 @@ class Observer extends StatelessObserverWidget {
             // regex)
             .skip(3)
             // Search for the first non-constructor frame
-            .firstWhere(
-                (frame) => !_constructorStackFramePattern.hasMatch(frame),
-                orElse: () => '');
+            .where((entry) {
+              if (_constructorStackFramePattern.hasMatch(entry.value)) {
+                return false;
+              }
+              // Wasm emits a constructor entry immediately after its
+              // initializer frame. Both belong to construction, not the caller.
+              return !(entry.value.contains(':wasm-function[') &&
+                  frames[entry.key - 1].contains('(initializer)'));
+            })
+            .map((entry) => entry.value)
+            .firstWhere((_) => true, orElse: () => '');
 
         final stackFrameCore =
             _stackFrameCleanUpPattern.firstMatch(rawStackFrame)?.group(1);

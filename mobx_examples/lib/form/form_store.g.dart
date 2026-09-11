@@ -12,16 +12,21 @@ mixin _$FormStore on _FormStore, Store {
   Computed<bool>? _$isUserCheckPendingComputed;
 
   @override
-  bool get isUserCheckPending => (_$isUserCheckPendingComputed ??=
-          Computed<bool>(() => super.isUserCheckPending,
-              name: '_FormStore.isUserCheckPending'))
-      .value;
+  bool get isUserCheckPending =>
+      (_$isUserCheckPendingComputed ??= Computed<bool>(
+            () => super.isUserCheckPending,
+            name: '_FormStore.isUserCheckPending',
+          ))
+          .value;
   Computed<bool>? _$canLoginComputed;
 
   @override
-  bool get canLogin => (_$canLoginComputed ??=
-          Computed<bool>(() => super.canLogin, name: '_FormStore.canLogin'))
-      .value;
+  bool get canLogin =>
+      (_$canLoginComputed ??= Computed<bool>(
+            () => super.canLogin,
+            name: '_FormStore.canLogin',
+          ))
+          .value;
 
   late final _$colorAtom = Atom(name: '_FormStore.color', context: context);
 
@@ -68,8 +73,10 @@ mixin _$FormStore on _FormStore, Store {
     });
   }
 
-  late final _$passwordAtom =
-      Atom(name: '_FormStore.password', context: context);
+  late final _$passwordAtom = Atom(
+    name: '_FormStore.password',
+    context: context,
+  );
 
   @override
   String get password {
@@ -84,8 +91,10 @@ mixin _$FormStore on _FormStore, Store {
     });
   }
 
-  late final _$usernameCheckAtom =
-      Atom(name: '_FormStore.usernameCheck', context: context);
+  late final _$usernameCheckAtom = Atom(
+    name: '_FormStore.usernameCheck',
+    context: context,
+  );
 
   @override
   ObservableFuture<bool> get usernameCheck {
@@ -100,22 +109,28 @@ mixin _$FormStore on _FormStore, Store {
     });
   }
 
-  late final _$validateUsernameAsyncAction =
-      AsyncAction('_FormStore.validateUsername', context: context);
+  late final _$validateUsernameAsyncAction = AsyncAction(
+    '_FormStore.validateUsername',
+    context: context,
+  );
 
   @override
   Future<dynamic> validateUsername(String value) {
-    return _$validateUsernameAsyncAction
-        .run(() => super.validateUsername(value));
+    return _$validateUsernameAsyncAction.run(
+      () => super.validateUsername(value),
+    );
   }
 
-  late final _$_FormStoreActionController =
-      ActionController(name: '_FormStore', context: context);
+  late final _$_FormStoreActionController = ActionController(
+    name: '_FormStore',
+    context: context,
+  );
 
   @override
   void validatePassword(String value) {
     final _$actionInfo = _$_FormStoreActionController.startAction(
-        name: '_FormStore.validatePassword');
+      name: '_FormStore.validatePassword',
+    );
     try {
       return super.validatePassword(value);
     } finally {
@@ -126,7 +141,8 @@ mixin _$FormStore on _FormStore, Store {
   @override
   void validateEmail(String value) {
     final _$actionInfo = _$_FormStoreActionController.startAction(
-        name: '_FormStore.validateEmail');
+      name: '_FormStore.validateEmail',
+    );
     try {
       return super.validateEmail(value);
     } finally {
@@ -153,12 +169,16 @@ mixin _$FormErrorState on _FormErrorState, Store {
 
   @override
   bool get hasErrors =>
-      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
-              name: '_FormErrorState.hasErrors'))
+      (_$hasErrorsComputed ??= Computed<bool>(
+            () => super.hasErrors,
+            name: '_FormErrorState.hasErrors',
+          ))
           .value;
 
-  late final _$usernameAtom =
-      Atom(name: '_FormErrorState.username', context: context);
+  late final _$usernameAtom = Atom(
+    name: '_FormErrorState.username',
+    context: context,
+  );
 
   @override
   String? get username {
@@ -173,8 +193,10 @@ mixin _$FormErrorState on _FormErrorState, Store {
     });
   }
 
-  late final _$emailAtom =
-      Atom(name: '_FormErrorState.email', context: context);
+  late final _$emailAtom = Atom(
+    name: '_FormErrorState.email',
+    context: context,
+  );
 
   @override
   String? get email {
@@ -189,8 +211,10 @@ mixin _$FormErrorState on _FormErrorState, Store {
     });
   }
 
-  late final _$passwordAtom =
-      Atom(name: '_FormErrorState.password', context: context);
+  late final _$passwordAtom = Atom(
+    name: '_FormErrorState.password',
+    context: context,
+  );
 
   @override
   String? get password {

@@ -1,0 +1,16 @@
+{
+  "getting-started/index.md": "getting-started.md",
+  "guides/json-serialization.md": "guides/json.md",
+  "guides/cheat-sheet.md": "guides/cheat-sheet.md",
+  "guides/organizing-stores.md": "guides/stores.md",
+  "guides/when-does-mobx-react.md": "guides/when-does-mobx-react.md",
+  "guides/build-output.md": "guides/output.md",
+  "guides/mobx-vs-inherited-model.md": "guides/mobx-vs-inherited-model.md",
+  "examples/form/index.md": "examples/form.md",
+  "examples/hacker-news/index.md": "examples/hacker-news.md",
+  "examples/connectivity/index.md": "examples/connectivity.md",
+  "examples/dice/index.md": "examples/dice.md",
+  "examples/github/index.md": "examples/github-repos.md",
+  "examples/random-stream/index.md": "examples/random-stream.md",
+  "examples/todos/index.md": "examples/todos.md"
+}

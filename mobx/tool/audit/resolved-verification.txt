@@ -1,0 +1,32 @@
+00:00 +0: loading tool/audit/audit_test.dart
+00:00 +0: tool/audit/audit_test.dart: F1 future uses supplied context
+00:00 +1: tool/audit/propagation_test.dart: G8 computed equality failures reach observing reaction
+00:00 +2: tool/audit/audit_test.dart: F2 reused async action preserves caller zone
+00:00 +3: tool/audit/propagation_test.dart: G9 writing an observable does not subscribe to its previous value
+00:00 +4: tool/audit/audit_test.dart: F3 binary error callback executes inside action
+00:00 +5: tool/audit/audit_test.dart: F3 binary error callback executes inside action
+00:00 +6: tool/audit/propagation_test.dart: G1 computed reports successive distinct errors
+00:00 +7: tool/audit/audit_test.dart: F4 stream forwards original error stack
+00:00 +8: tool/audit/audit_test.dart: F4 stream forwards original error stack
+00:00 +9: tool/audit/audit_test.dart: F4 stream forwards original error stack
+00:00 +10: tool/audit/audit_test.dart: F4 stream forwards original error stack
+00:00 +11: tool/audit/propagation_test.dart: G5 error handler registration is isolated per context
+00:00 +12: tool/audit/audit_test.dart: F5 cancelOnError finishes downstream
+00:00 +13: tool/audit/audit_test.dart: F5 cancelOnError finishes downstream
+00:00 +14: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +15: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +16: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +17: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +18: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +19: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +20: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +21: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +22: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +23: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +24: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +25: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +26: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +27: tool/audit/propagation_test.dart: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +28: tool/audit/audit_test.dart: P4 observation-only single stream retains historical events
+00:00 +29: tool/audit/audit_test.dart: F19 throwing reaction error handler restores default-boundary context
+00:00 +30: All tests passed!

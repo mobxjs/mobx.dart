@@ -2,60 +2,31 @@
   "name": "mobx-dart-docs",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve --port 3001"
+    "dev": "node scripts/prepare.mjs && vitepress dev --host localhost --port 4178 --strictPort",
+    "start": "pnpm dev",
+    "build": "node scripts/build-flutter.mjs && node scripts/api-reference.mjs && node scripts/prepare.mjs && vitepress build",
+    "serve": "vitepress preview --host localhost --port 4178 --strictPort",
+    "test": "node --test scripts/*.test.mjs",
+    "typecheck": "vue-tsc --noEmit",
+    "build:flutter": "node scripts/build-flutter.mjs",
+    "build:docs": "node scripts/api-reference.mjs && node scripts/prepare.mjs && vitepress build"
   },
   "dependencies": {
-    "@algolia/client-search": "^4.24.0",
-    "@docusaurus/core": "^3.6.3",
-    "@docusaurus/preset-classic": "^3.6.3",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mdx-js/react": "^3.1.0",
-    "@splinetool/react-spline": "^2.2.6",
-    "@splinetool/runtime": "^1.9.48",
-    "axios": "^1.18.0",
-    "docusaurus-lunr-search": "^3.5.0",
-    "lodash.get": "^4.4.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-loadable": "^5.5.0"
+    "vue": "^3.5.42",
+    "@fontsource/chakra-petch": "^5.3.0",
+    "@fontsource/poppins": "^5.3.0",
+    "@lucide/vue": "^1.44.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.6.3",
-    "@docusaurus/types": "^3.6.3",
-    "@types/lodash.get": "^4.4.9",
-    "@types/node": "^20.17.10",
-    "@types/react": "^18.3.16",
-    "autoprefixer": "^10.4.20",
-    "lunr": "^2.3.9",
-    "postcss": "^8.5.18",
-    "prettier": "^3.4.2",
-    "prism-react-renderer": "^2.4.1",
-    "raw-loader": "^4.0.2",
-    "tailwindcss": "^3.4.16",
-    "typescript": "^5.7.2",
-    "webpack": "^5.104.1"
+    "vitepress": "^1.6.4",
+    "@vitejs/plugin-vue-jsx": "^5.1.6",
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.3.11",
+    "@types/node": "^22.20.2",
+    "prettier": "^3.9.6",
+    "shiki": "^4.4.3"
   },
-  "peerDependencies": {
-    "@algolia/client-search": "^4.22.0",
-    "react-loadable": "^5.5.0"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "packageManager": "pnpm@12.3.4"
 }

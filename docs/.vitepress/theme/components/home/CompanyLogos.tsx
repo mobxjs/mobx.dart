@@ -1,0 +1,41 @@
+import { defineComponent, ref } from 'vue';
+import { Pause, Play } from '@lucide/vue';
+
+const companies = [
+  { name: 'YONO SBI', file: 'yono.png', url: 'https://sbi.bank.in/web/yono' },
+  { name: 'Tata Neu', file: 'tata.svg', url: 'https://www.tataneu.com/' },
+  { name: 'Supernova', file: 'supernova.svg', url: 'https://www.supernova.io/' },
+  { name: 'Vyuh Technologies', file: 'vyuh.svg', url: 'https://vyuh.tech/', label: 'Vyuh' },
+  { name: 'Caliber Technologies', file: 'caliber.png', url: 'https://caliberuniversal.com/' },
+  { name: 'Nubank', file: 'nubank.svg', url: 'https://nubank.com.br/', label: 'Nubank' },
+  { name: "It's All Widgets!", file: 'its-all-widgets.png', url: 'https://itsallwidgets.com/podcast' },
+  { name: 'GoHighLevel', file: 'highlevel.svg', url: 'https://www.gohighlevel.com/' },
+];
+
+export const CompanyLogos = defineComponent({
+  setup() {
+    const paused = ref(false);
+    return () => (
+      <section class="company-section home-section" aria-labelledby="companies-title">
+        <div class="company-heading">
+          <h2 id="companies-title">Used by thousands of companies across the world.</h2>
+          <button class="company-motion" type="button" aria-label={paused.value ? 'Resume logo scrolling' : 'Pause logo scrolling'} aria-pressed={paused.value} onClick={() => paused.value = !paused.value}>
+            {paused.value ? <Play size={16} /> : <Pause size={16} />}
+          </button>
+        </div>
+        <div class={['company-window', { 'is-paused': paused.value }]}>
+          <div class="company-track">
+            {[false, true].map(duplicate => <ul class="company-list" aria-hidden={duplicate ? 'true' : undefined} key={String(duplicate)}>
+              {companies.map(company => <li key={company.name}>
+                <a href={company.url} aria-label={company.name} tabindex={duplicate ? -1 : undefined}>
+                  <img src={'/images/companies/' + company.file} alt={company.label ? '' : company.name} width="160" height="48" loading="lazy" class={company.label ? 'company-symbol' : ''} />
+                  {company.label && <span>{company.label}</span>}
+                </a>
+              </li>)}
+            </ul>)}
+          </div>
+        </div>
+      </section>
+    );
+  },
+});

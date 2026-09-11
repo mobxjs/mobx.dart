@@ -623,7 +623,7 @@ void main() {
       var mapChanges = 0;
       autorun((_) {
         mapChanges++;
-        map.forEach((_, __) {});
+        map.forEach((_, _) {});
       });
       expect(mapChanges, equals(1));
 
