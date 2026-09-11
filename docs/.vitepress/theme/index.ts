@@ -7,4 +7,13 @@ import PubBadge from './components/PubBadge.vue';
 import {Profile} from './components/Profile';
 import './custom.css';
 import './home.css';
-export default {extends:DefaultTheme,enhanceApp({app}){app.component('HomePage',HomePage);app.component('FlutterExample',FlutterExample);app.component('ExampleGallery',ExampleGallery);app.component('PubBadge',PubBadge);app.component('Profile',Profile);}} satisfies Theme;
+import {initAnalytics,trackEvent} from './analytics';
+export default {extends:DefaultTheme,enhanceApp({app,router}){
+ initAnalytics();
+ const previous = router.onAfterRouteChanged;
+ router.onAfterRouteChanged = (to) => {
+  previous?.(to);
+  trackEvent('docs_navigation', {destination: new URL(to, 'https://mobx.vyuh.tech').pathname});
+ };
+ app.component('HomePage',HomePage);app.component('FlutterExample',FlutterExample);app.component('ExampleGallery',ExampleGallery);app.component('PubBadge',PubBadge);app.component('Profile',Profile);
+}} satisfies Theme;

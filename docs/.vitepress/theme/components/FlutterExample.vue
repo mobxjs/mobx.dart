@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref,onMounted,onBeforeUnmount,watch,nextTick} from 'vue';
 import {useData} from 'vitepress';
+import {trackEvent} from '../analytics';
 import {Play, RotateCw, ExternalLink, ArrowRight, RotateCcw} from '@lucide/vue';
 const props=withDefaults(defineProps<{route:string;height?:number;autostart?:boolean}>(),{height:480,autostart:false});
 const {isDark}=useData();
@@ -16,7 +17,8 @@ async function start(){
   app=runtime;id=app.addView({hostElement:host.value,initialData:{route:props.route,dark:isDark.value,embedded:true}});status.value='ready';
  }catch(error){console.error('Flutter example failed',error);if(token===generation)status.value='error';}
 }
-function reset(){remove();window.mobxResetExample?.(props.route);void start();}
+function launch(){trackEvent('example_launch',{example_route:props.route});void start();}
+function reset(){trackEvent('example_reset',{example_route:props.route});remove();window.mobxResetExample?.(props.route);void start();}
 function remove(){generation++;if(id!==undefined)app?.removeView(id);id=undefined;}
 watch([()=>props.route,isDark],()=>{const wasStarted=status.value!=='idle';remove();if(wasStarted)void start();});
 onMounted(()=>{if(props.autostart)void start();});
@@ -39,7 +41,7 @@ function loadFlutter():Promise<FlutterApp>{
  <div class="flutter-example">
   <div class="flutter-host" ref="host" :style="{height:height+'px'}"></div>
   <div v-if="status!=='ready'" class="flutter-placeholder" :style="{height:height+'px'}">
-   <template v-if="status==='idle'"><Play :size="28" aria-hidden="true"/><p>Try the real Flutter example.</p><button class="gallery-cta" @click="start">Run example <ArrowRight :size="16"/></button><small>The Flutter runtime loads when you press Run.</small></template>
+   <template v-if="status==='idle'"><Play :size="28" aria-hidden="true"/><p>Try the real Flutter example.</p><button class="gallery-cta" @click="launch">Run example <ArrowRight :size="16"/></button><small>The Flutter runtime loads when you press Run.</small></template>
    <p v-else-if="status==='loading'" role="status">Loading Flutter…</p>
    <template v-else><p role="alert">The example could not load. Check your connection and try again.</p><button class="gallery-cta" @click="start">Retry <RotateCw :size="16"/></button></template>
   </div>
