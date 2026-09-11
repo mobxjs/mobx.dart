@@ -10,6 +10,20 @@ export default defineConfig({
  srcDir:'content',outDir:'build',cleanUrls:true,rewrites:routes,
  appearance:true,lastUpdated:true,
  sitemap:{hostname:'https://mobx.vyuh.tech'},
+ transformHead({pageData}){
+  const path = (routes[pageData.relativePath as keyof typeof routes] ?? pageData.relativePath).replace(/(^|\/)index\.md$/, '$1').replace(/\.md$/, '');
+  if(path === '404') return [['meta',{name:'robots',content:'noindex'}]];
+  const url = `https://mobx.vyuh.tech/${path}`;
+  const title = `${pageData.title || 'Friendly, reactive state management'} | MobX.dart`;
+  const description = pageData.description || 'Friendly, reactive state management for Dart and Flutter. Connect state, computed values, and your UI with MobX.';
+  const image = 'https://mobx.vyuh.tech/images/social-card.jpg';
+  const alt = 'MobX.dart — Big ideas. Simple state. Action connects to Observable, which connects to Reaction.';
+  return [
+   ['link',{rel:'canonical',href:url}],
+   ...Object.entries({'og:type':'website','og:site_name':'MobX.dart','og:locale':'en_US','og:title':title,'og:description':description,'og:url':url,'og:image':image,'og:image:secure_url':image,'og:image:type':'image/jpeg','og:image:width':'1200','og:image:height':'630','og:image:alt':alt}).map(([property,content]):[string,Record<string,string>]=>['meta',{property,content}]),
+   ...Object.entries({'twitter:card':'summary_large_image','twitter:title':title,'twitter:description':description,'twitter:image':image,'twitter:image:alt':alt}).map(([name,content]):[string,Record<string,string>]=>['meta',{name,content}]),
+  ];
+ },
  head:[['link',{rel:'icon',href:'/mobx.png'}],['script',{},`try { if (!localStorage.getItem('vitepress-theme-appearance')) localStorage.setItem('vitepress-theme-appearance', 'light'); } catch {}`]],
  themeConfig:{
   lastUpdated:{formatOptions:{dateStyle:'medium'}},
