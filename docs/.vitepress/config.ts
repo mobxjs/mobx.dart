@@ -9,6 +9,7 @@ export default defineConfig({
  title:'MobX.dart',description:'Friendly, reactive state management for Dart and Flutter.',
  srcDir:'content',outDir:'build',cleanUrls:true,rewrites:routes,
  appearance:true,lastUpdated:true,
+ sitemap:{hostname:'https://mobx.vyuh.tech'},
  head:[['link',{rel:'icon',href:'/mobx.png'}],['script',{},`try { if (!localStorage.getItem('vitepress-theme-appearance')) localStorage.setItem('vitepress-theme-appearance', 'light'); } catch {}`]],
  themeConfig:{
   logo:{src:'/mobx.svg',alt:'MobX.dart'},siteTitle:'MobX.dart',
@@ -25,7 +26,7 @@ export default defineConfig({
    {text:'Contributors',items:[{text:'Inside reactivity',link:'/development/reactivity'}]},
    {text:'Community',items:[page('community.md'),...pages.filter(p=>p.source.startsWith('development/')).map(p=>page(p.source))]},
   ],
-  editLink:{pattern:'https://github.com/mobxjs/mobx.dart/edit/master/docs/content/:path',text:'Improve this page'},
+  editLink:{pattern:'https://github.com/mobxjs/mobx.dart/edit/main/docs/content/:path',text:'Improve this page'},
   footer:{message:'Made with care for the Dart & Flutter community. MIT licensed.',copyright:`Copyright © 2018–${new Date().getFullYear()} MobX.dart contributors.`},
   outline:[2,3],
  },
