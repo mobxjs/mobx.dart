@@ -68,6 +68,8 @@ jobs:
         run: dart test
 
   website:
+    # Paused while website deployment moves to Cloudflare Pages.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     defaults:
       run:
