@@ -12,6 +12,7 @@ export default defineConfig({
  sitemap:{hostname:'https://mobx.vyuh.tech'},
  head:[['link',{rel:'icon',href:'/mobx.png'}],['script',{},`try { if (!localStorage.getItem('vitepress-theme-appearance')) localStorage.setItem('vitepress-theme-appearance', 'light'); } catch {}`]],
  themeConfig:{
+  lastUpdated:{formatOptions:{dateStyle:'medium'}},
   logo:{src:'/mobx.svg',alt:'MobX.dart'},siteTitle:'MobX.dart',
   nav:[{text:'Docs',link:'/getting-started'},{text:'Examples',link:'/gallery/'}],
   socialLinks:[{icon:'github',link:'https://github.com/mobxjs/mobx.dart'},{icon:'discord',link:'https://discord.gg/dNHY52k'}],
