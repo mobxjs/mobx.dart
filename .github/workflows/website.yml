@@ -58,6 +58,6 @@ jobs:
         run: npx --yes wrangler@4.131.0 pages deploy docs/build --project-name=mobx-dart --branch=main
       - name: Check deployment
         run: |
-          curl --fail --retry 8 --retry-delay 10 https://mobx-dart.pages.dev/ -o /dev/null
-          curl --fail --retry 8 --retry-delay 10 https://mobx-dart.pages.dev/flutter/flutter_bootstrap.js -o /dev/null
-          curl --fail --retry 8 --retry-delay 10 https://mobx-dart.pages.dev/gallery-app/flutter_bootstrap.js -o /dev/null
+          curl --fail --retry-all-errors --retry 8 --retry-delay 10 https://mobx-dart.pages.dev/ -o /dev/null
+          curl --fail --retry-all-errors --retry 8 --retry-delay 10 https://mobx-dart.pages.dev/flutter/flutter_bootstrap.js -o /dev/null
+          curl --fail --retry-all-errors --retry 8 --retry-delay 10 https://mobx-dart.pages.dev/gallery-app/flutter_bootstrap.js -o /dev/null
