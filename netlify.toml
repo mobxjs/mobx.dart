@@ -1,5 +1,9 @@
+[build]
+  command = "echo 'Deploying redirect to mobx.vyuh.tech'"
+  publish = "tool/netlify-redirect"
+
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
+  to = "https://mobx.vyuh.tech/:splat"
+  status = 301
+  force = true
