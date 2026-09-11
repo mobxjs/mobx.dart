@@ -4,8 +4,6 @@
  - **FIX**: upgrade SDK to 3.7.0 and use multiple underscore wildcards for unused parametersFeature/annotations update (#1062).
  - **FEAT**: improve reactivity performance and correctness with a new documentation gallery.
 
-## Unreleased
-
 - Fix custom-context ownership for observable futures and reaction/when effects. Reused and overlapping async actions now inherit each caller's zone, including binary callbacks.
 - Cancel scheduled reaction and when-timeout timers on disposal. Complete observable streams on source cancel-on-error, preserve error stacks, and handle empty and nullable stream results correctly.
 - Share list change notifications across cast views with lazy value casts, validate empty/reversed list ranges, and report the committed intercepted value to listeners. Promote all audit probes into the normal regression suite.

@@ -279,7 +279,7 @@ packages:
       path: "../mobx"
       relative: true
     source: path
-    version: "2.6.1"
+    version: "2.7.0"
   node_preamble:
     dependency: transitive
     description:

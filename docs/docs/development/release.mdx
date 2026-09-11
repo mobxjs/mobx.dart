@@ -53,8 +53,9 @@ dart run melos version
 ```
 
 Melos calculates versions, updates dependent constraints and changelogs, and
-creates a local release commit and tags. The pre-commit hook regenerates the
-published packages' `lib/version.dart` constants. Explicit version choices are
+creates a local release commit and tags. The pre-commit hook regenerates and stages the
+published packages' `lib/version.dart` constants. To rerun it explicitly, use
+`dart run melos run set_version --no-select`. Explicit version choices are
 supported when a release requires them:
 
 ```sh
@@ -76,8 +77,9 @@ commit if resolution changes them. Verify version constants match the manifests.
 
 ## Publish deliberately
 
-Local versioning does not push tags or publish packages. Review the release
-commits and changelogs before separately pushing and publishing. Publish `mobx`
-before packages that require its new version. Validate each package with
+Local versioning does not push tags or publish packages. Pushing `main` triggers
+the Publish workflow, which publishes `mobx` before its dependent packages.
+Review the release commits, version constants, lockfiles, and changelogs before
+pushing the branch and its release tags. Validate each package with
 `dart pub publish --dry-run` (or `flutter pub publish --dry-run` for Flutter
 packages), then publish only after release approval.
