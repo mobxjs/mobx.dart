@@ -1,3 +1,9 @@
+## 2.7.0
+
+ - **FIX**(mobx): fix analyzer infos on beta channel (super parameters + collection contains) (#1081).
+ - **FIX**: upgrade SDK to 3.7.0 and use multiple underscore wildcards for unused parametersFeature/annotations update (#1062).
+ - **FEAT**: improve reactivity performance and correctness with a new documentation gallery.
+
 ## Unreleased
 
 - Fix custom-context ownership for observable futures and reaction/when effects. Reused and overlapping async actions now inherit each caller's zone, including binary callbacks.

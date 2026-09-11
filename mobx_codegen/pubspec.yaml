@@ -1,6 +1,6 @@
 name: mobx_codegen
 description: Code generator for MobX that adds support for annotating your code with @observable, @computed, @action and also creating Store classes.
-version: 2.7.8
+version: 2.8.0
 
 repository: https://github.com/mobxjs/mobx.dart
 issue_tracker: https://github.com/mobxjs/mobx.dart/issues
@@ -17,7 +17,7 @@ dependencies:
   analyzer: ^13.3.0
   build: ^4.0.11
   meta: ^1.19.0
-  mobx: ^2.6.1
+  mobx: ^2.7.0
   path: ^1.9.1
   source_gen: ^4.2.4
 

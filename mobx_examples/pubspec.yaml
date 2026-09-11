@@ -17,15 +17,15 @@ dependencies:
   cupertino_icons: ^1.0.9
   flutter:
     sdk: flutter
-  flutter_mobx: ^2.3.0
+  flutter_mobx: ^2.4.0
   lucide_icons_flutter: ^3.1.19
   go_router: ^18.0.1
   github: ^9.26.0
   http: ^1.6.0
   json_annotation: ^4.12.0
   json_serializable: ^6.14.1
-  mobx: ^2.6.1
-  mobx_codegen: ^2.7.8
+  mobx: ^2.7.0
+  mobx_codegen: ^2.8.0
   provider: ^6.1.5+1
   shared_preferences: ^2.5.5
   url_launcher: ^6.3.2

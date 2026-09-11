@@ -1,3 +1,10 @@
+## 2.8.0
+
+ - **FIX**: upgrade SDK to 3.7.0 and use multiple underscore wildcards for unused parametersFeature/annotations update (#1062).
+ - **FIX**: fixing lints in tests.
+ - **FEAT**: improve reactivity performance and correctness with a new documentation gallery.
+ - **FEAT**: add support for analyzer 9.0.0 (#1065).
+
 ## 2.7.8
 
 - Update analyzer version to `>=9.0.0 < 14.0.0`

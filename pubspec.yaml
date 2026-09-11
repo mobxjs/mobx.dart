@@ -18,7 +18,7 @@ melos:
   command:
     version:
       hooks:
-        preCommit: dart run melos run set_version --no-select
+        preCommit: dart run melos run set_version --no-select && git add mobx/lib/version.dart flutter_mobx/lib/version.dart mobx_codegen/lib/version.dart
   scripts:
     analyze:
       run: dart analyze .

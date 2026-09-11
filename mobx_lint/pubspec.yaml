@@ -32,4 +32,4 @@ melos:
   command:
     version:
       hooks:
-        preCommit: dart run ../tool/expose_version.dart
+        preCommit: dart run ../tool/expose_version.dart && git add lib/version.dart

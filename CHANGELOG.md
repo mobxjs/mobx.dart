@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-09-11
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`flutter_mobx` - `v2.4.0`](#flutter_mobx---v240)
+ - [`mobx` - `v2.7.0`](#mobx---v270)
+ - [`mobx_codegen` - `v2.8.0`](#mobx_codegen---v280)
+
+---
+
+#### `flutter_mobx` - `v2.4.0`
+
+ - **REFACTOR**: simplify constructors and update analysis exclusions.
+ - **FIX**: upgrade SDK to 3.7.0 and use multiple underscore wildcards for unused parametersFeature/annotations update (#1062).
+ - **FEAT**: improve reactivity performance and correctness with a new documentation gallery.
+
+#### `mobx` - `v2.7.0`
+
+ - **FIX**(mobx): fix analyzer infos on beta channel (super parameters + collection contains) (#1081).
+ - **FIX**: upgrade SDK to 3.7.0 and use multiple underscore wildcards for unused parametersFeature/annotations update (#1062).
+ - **FEAT**: improve reactivity performance and correctness with a new documentation gallery.
+
+#### `mobx_codegen` - `v2.8.0`
+
+ - **FIX**: upgrade SDK to 3.7.0 and use multiple underscore wildcards for unused parametersFeature/annotations update (#1062).
+ - **FIX**: fixing lints in tests.
+ - **FEAT**: improve reactivity performance and correctness with a new documentation gallery.
+ - **FEAT**: add support for analyzer 9.0.0 (#1065).
+
+
 
 ## 2026-01-08
 

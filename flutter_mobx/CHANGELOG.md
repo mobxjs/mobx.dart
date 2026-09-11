@@ -1,3 +1,9 @@
+## 2.4.0
+
+ - **REFACTOR**: simplify constructors and update analysis exclusions.
+ - **FIX**: upgrade SDK to 3.7.0 and use multiple underscore wildcards for unused parametersFeature/annotations update (#1062).
+ - **FEAT**: improve reactivity performance and correctness with a new documentation gallery.
+
 ## Unreleased
 
 - Fix Observer debug caller names for Dart Wasm stack traces, including subclass constructor frames. Verify widget tests on native Flutter and Chrome Wasm.
