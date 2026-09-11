@@ -1,6 +1,6 @@
 name: mobx_lint
 description: mobx_lint is a developer tool for users of mobx, designed to help stop common issues and simplify repetitive tasks.
-version: 1.1.0
+version: 1.2.0
 
 homepage: https://mobx.netlify.app/
 repository: https://github.com/mobxjs/mobx.dart
