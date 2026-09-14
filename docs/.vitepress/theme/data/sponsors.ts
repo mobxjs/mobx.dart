@@ -9,13 +9,13 @@ export const sponsors = [
     logo: '/images/netlify-sponsor.svg',
     name: 'Netlify',
     url: 'https://www.netlify.com',
-    active: true,
+    active: false,
   },
   {
     logo: '/images/algolia-sponsor.png',
     name: 'Algolia',
     url: 'https://www.algolia.com',
-    active: true,
+    active: false,
   },
   {
     logo: '/images/wunderdog-sponsor.png',
