@@ -167,30 +167,6 @@
 }
 @media(prefers-reduced-motion:reduce) { .triad-signal { animation:none!important; }.loading-projects > span { animation:none; }.shipping-track > span,.home-button,.triad-action { transition:none; }.home-button:hover { transform:none; } }
 
-.company-section { padding-block:48px 36px; }
-.company-heading { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:28px; }
-.company-heading h2 { font-family:var(--vp-font-family-base); font-size:1rem; font-weight:500; color:var(--mobx-muted); text-align:center; margin:0; }
-.company-motion { display:flex; align-items:center; justify-content:center; flex-shrink:0; width:36px; height:36px; border-radius:50%; color:var(--mobx-muted); cursor:pointer; }
-.company-motion:hover { background:var(--mobx-soft-band); color:var(--mobx-ink); }
-.company-motion:focus-visible,.company-list a:focus-visible { outline:2px solid var(--mobx-blue); outline-offset:3px; }
-.company-window { overflow:hidden; }
-.company-track { display:flex; width:max-content; animation:company-scroll 38s linear infinite; }
-.company-list { display:flex; align-items:center; list-style:none; padding:0!important; margin:0!important; }
-.company-list li { flex:0 0 210px; list-style:none; margin:0!important; padding:8px 22px; }
-.company-list a { display:flex; align-items:center; justify-content:center; gap:12px; height:64px; color:var(--mobx-ink); font-size:24px; font-weight:600; white-space:nowrap; }
-.company-list img { width:160px; height:48px; object-fit:contain; filter:grayscale(1) brightness(0); opacity:.65; }
-.company-list .company-symbol { width:44px; height:40px; }
-.dark .company-list img { filter:grayscale(1) brightness(0) invert(1); opacity:.8; }
-.company-window:hover .company-track,.company-window:focus-within .company-track,.company-window.is-paused .company-track { animation-play-state:paused; }
-@keyframes company-scroll { to { transform:translateX(-50%); } }
-@media(max-width:640px) { .company-heading h2 { font-size:.85rem; text-align:left; }.company-section { padding-block:32px 20px; }.company-list li { flex-basis:185px; }.company-list img { width:140px; } }
-@media(prefers-reduced-motion:reduce) { .company-track { animation:none; width:auto; }.company-window { overflow:visible; }.company-list { flex-wrap:wrap; justify-content:center; width:100%; }.company-list li { flex:0 1 185px; }.company-list[aria-hidden="true"],.company-motion { display:none; } }
-
-/* YONO's official PNG includes an opaque white background. Preserve its
-   luminance so the background does not become a solid block. */
-.company-list img[src$="/yono.png"] { filter:grayscale(1); mix-blend-mode:multiply; }
-.dark .company-list img[src$="/yono.png"] { filter:grayscale(1) invert(1); mix-blend-mode:screen; }
-
 .sponsor-list a { display:inline-flex; align-items:center; gap:12px; min-height:48px; }
 .sponsor-list img { display:block; height:44px; object-fit:contain; }
 .dark .sponsor-list img { filter:brightness(0) invert(1); }

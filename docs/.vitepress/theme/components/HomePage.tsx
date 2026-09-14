@@ -2,7 +2,6 @@ import {Eye,Zap,Calculator,Sparkles,PanelsTopLeft,Radio} from '@lucide/vue';
 import { Arrow } from './Arrow';
 import { MobxTriad } from './home/MobxTriad';
 import { ExampleShowcase } from './home/ExampleShowcase';
-import { CompanyLogos } from './home/CompanyLogos';
 import { CommunitySection } from './home/CommunitySection';
 
 
@@ -64,7 +63,6 @@ export default function Home() {
           </a>
         </nav>
         <ExampleShowcase />
-        <CompanyLogos />
         <section id="how-it-works" class="pieces-section home-section" aria-labelledby="pieces-title">
           <div class="section-heading"><h2 id="pieces-title">Small pieces.<br/><em>Wonderful possibilities.</em></h2><p>Learn a few ideas. Use them everywhere.<br/>From your first counter to state shared across an entire app.</p></div>
           <div class="atomic-pieces">
