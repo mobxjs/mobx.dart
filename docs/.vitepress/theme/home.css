@@ -172,7 +172,6 @@
 .dark .sponsor-list img { filter:brightness(0) invert(1); }
 
 .company-section { padding-block:48px 36px; }
-.company-caption { margin:24px 0 0; text-align:center; color:var(--mobx-muted); font-size:.9rem; }
 .company-heading { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:28px; }
 .company-heading h2 { font-family:var(--vp-font-family-base); font-size:1rem; font-weight:500; color:var(--mobx-muted); text-align:center; margin:0; }
 .company-motion { display:flex; align-items:center; justify-content:center; flex-shrink:0; width:36px; height:36px; border-radius:50%; color:var(--mobx-muted); cursor:pointer; }

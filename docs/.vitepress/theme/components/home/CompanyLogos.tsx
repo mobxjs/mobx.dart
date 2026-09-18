@@ -21,7 +21,7 @@ export const CompanyLogos = defineComponent({
     return () => (
       <section class="company-section home-section" aria-labelledby="companies-title">
         <div class="company-heading">
-          <h2 id="companies-title">Built with MobX.</h2>
+          <h2 id="companies-title">Used by thousands of companies across the world</h2>
           <button class="company-motion" type="button" aria-label={paused.value ? 'Resume logo scrolling' : 'Pause logo scrolling'} aria-pressed={paused.value} onClick={() => paused.value = !paused.value}>
             {paused.value ? <Play size={16} /> : <Pause size={16} />}
           </button>
@@ -38,7 +38,6 @@ export const CompanyLogos = defineComponent({
             </ul>)}
           </div>
         </div>
-        <p class="company-caption">used by thousands of companies</p>
       </section>
     );
   },
