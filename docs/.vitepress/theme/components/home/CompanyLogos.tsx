@@ -2,6 +2,7 @@ import { defineComponent, ref } from 'vue';
 import { Pause, Play } from '@lucide/vue';
 
 // Approved company names and locally stored logos.
+// All company logos must render in grayscale in both themes; never add color exceptions.
 const companies = [
   { name: 'YONO SBI', file: 'yono.png', url: 'https://sbi.bank.in/web/yono' },
   { name: 'Tata Neu', file: 'tata.svg', url: 'https://www.tataneu.com/' },

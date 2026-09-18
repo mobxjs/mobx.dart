@@ -179,12 +179,13 @@
 .company-motion:focus-visible,.company-list a:focus-visible { outline:2px solid var(--mobx-blue); outline-offset:3px; }
 .company-window { overflow:hidden; }
 .company-track { display:flex; width:max-content; animation:company-scroll 38s linear infinite; }
-.company-list { display:flex; align-items:center; list-style:none; padding:0!important; margin:0!important; }
+/* Keep every company logo grayscale, including future assets and image overrides. */
+.company-list { display:flex; align-items:center; list-style:none; padding:0!important; margin:0!important; filter:grayscale(1); }
 .company-list li { flex:0 0 210px; list-style:none; margin:0!important; padding:8px 22px; }
 .company-list a { display:flex; align-items:center; justify-content:center; gap:12px; height:64px; color:var(--mobx-ink); font-size:24px; font-weight:600; white-space:nowrap; }
 .company-list img { width:160px; height:48px; object-fit:contain; filter:grayscale(1) brightness(0); opacity:.65; }
 .company-list .company-symbol { width:44px; height:40px; }
-.company-list img[src$="/hyperzones.png"],.dark .company-list img[src$="/hyperzones.png"],.company-list img[src$="/multipl.png"],.dark .company-list img[src$="/multipl.png"] { filter:none; opacity:1; }
+.company-list img[src$="/hyperzones.png"],.dark .company-list img[src$="/hyperzones.png"],.company-list img[src$="/multipl.png"],.dark .company-list img[src$="/multipl.png"] { filter:grayscale(1); }
 .dark .company-list img { filter:grayscale(1) brightness(0) invert(1); opacity:.8; }
 /* Preserve the YONO logo's opaque background in both themes. */
 .company-list img[src$="/yono.png"] { filter:grayscale(1); mix-blend-mode:multiply; }
