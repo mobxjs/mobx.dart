@@ -43,6 +43,14 @@ When working on Generative Art, it helps me create highly configurable widgets w
 MobX supports me on all of my projects.`,
   },
   {
+    author: 'Birju Vachhani',
+    twitter: 'https://twitter.com/birjuvachhani',
+    title: 'Built Hyper Zones, an app to manage time zones. | @birjuvachhani',
+    photoUrl: '/images/people/birju.png',
+    message:
+      'MobX has made managing UI state a breeze. Instead of worrying about how and when we need to update UI, we just run actions and update data like we normally do in Dart and it just works! How MobX does this is pure magic!',
+  },
+  {
     author: 'Jacob Moura',
     twitter: 'https://twitter.com/jacob_moura',
     title:
