@@ -3,6 +3,7 @@ import { Arrow } from './Arrow';
 import { MobxTriad } from './home/MobxTriad';
 import { ExampleShowcase } from './home/ExampleShowcase';
 import { CommunitySection } from './home/CommunitySection';
+import { CompanyLogos } from './home/CompanyLogos';
 
 
 export default function Home() {
@@ -62,6 +63,7 @@ export default function Home() {
             </span>
           </a>
         </nav>
+        <CompanyLogos />
         <ExampleShowcase />
         <section id="how-it-works" class="pieces-section home-section" aria-labelledby="pieces-title">
           <div class="section-heading"><h2 id="pieces-title">Small pieces.<br/><em>Wonderful possibilities.</em></h2><p>Learn a few ideas. Use them everywhere.<br/>From your first counter to state shared across an entire app.</p></div>
