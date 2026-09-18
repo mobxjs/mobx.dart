@@ -38,6 +38,7 @@ export const CompanyLogos = defineComponent({
             </ul>)}
           </div>
         </div>
+        <p class="company-caption">used by thousands of companies</p>
       </section>
     );
   },
