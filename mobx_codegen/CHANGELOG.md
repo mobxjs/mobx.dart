@@ -1,3 +1,7 @@
+## 2.8.1
+
+- **FIX**: pass `useDeepEquality` through generated regular and late observable setters.
+
 ## 2.8.0
 
  - **FIX**: upgrade SDK to 3.7.0 and use multiple underscore wildcards for unused parametersFeature/annotations update (#1062).

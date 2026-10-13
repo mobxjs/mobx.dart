@@ -12,23 +12,30 @@ mixin _$TestStore on _TestStore, Store {
   Computed<String>? _$fieldsComputed;
 
   @override
-  String get fields => (_$fieldsComputed ??=
-          Computed<String>(() => super.fields, name: '_TestStore.fields'))
-      .value;
+  String get fields =>
+      (_$fieldsComputed ??= Computed<String>(
+            () => super.fields,
+            name: '_TestStore.fields',
+          ))
+          .value;
   Computed<String>? _$fieldsKeepAliveComputed;
 
   @override
-  String get fieldsKeepAlive => (_$fieldsKeepAliveComputed ??= Computed<String>(
-          () => super.fieldsKeepAlive,
-          name: '_TestStore.fieldsKeepAlive',
-          keepAlive: true))
-      .value;
+  String get fieldsKeepAlive =>
+      (_$fieldsKeepAliveComputed ??= Computed<String>(
+            () => super.fieldsKeepAlive,
+            name: '_TestStore.fieldsKeepAlive',
+            keepAlive: true,
+          ))
+          .value;
   Computed<String>? _$batchedItemsComputed;
 
   @override
   String get batchedItems =>
-      (_$batchedItemsComputed ??= Computed<String>(() => super.batchedItems,
-              name: '_TestStore.batchedItems'))
+      (_$batchedItemsComputed ??= Computed<String>(
+            () => super.batchedItems,
+            name: '_TestStore.batchedItems',
+          ))
           .value;
 
   late final _$field1Atom = Atom(name: '_TestStore.field1', context: context);
@@ -43,7 +50,7 @@ mixin _$TestStore on _TestStore, Store {
   set field1(String value) {
     _$field1Atom.reportWrite(value, super.field1, () {
       super.field1 = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$field2Atom = Atom(name: '_TestStore.field2', context: context);
@@ -58,7 +65,7 @@ mixin _$TestStore on _TestStore, Store {
   set field2(String? value) {
     _$field2Atom.reportWrite(value, super.field2, () {
       super.field2 = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$stuffAtom = Atom(name: '_TestStore.stuff', context: context);
@@ -73,7 +80,7 @@ mixin _$TestStore on _TestStore, Store {
   set stuff(String value) {
     _$stuffAtom.reportWrite(value, super.stuff, () {
       super.stuff = value;
-    });
+    }, useDeepEquality: true);
   }
 
   late final _$alwaysAtom = Atom(name: '_TestStore.always', context: context);
@@ -86,9 +93,15 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set always(String value) {
-    _$alwaysAtom.reportWrite(value, super.always, () {
-      super.always = value;
-    }, equals: observableAlwaysNotEqual);
+    _$alwaysAtom.reportWrite(
+      value,
+      super.always,
+      () {
+        super.always = value;
+      },
+      equals: observableAlwaysNotEqual,
+      useDeepEquality: true,
+    );
   }
 
   late final _$customAtom = Atom(name: '_TestStore.custom', context: context);
@@ -101,13 +114,21 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set custom(String value) {
-    _$customAtom.reportWrite(value, super.custom, () {
-      super.custom = value;
-    }, equals: customEquals);
+    _$customAtom.reportWrite(
+      value,
+      super.custom,
+      () {
+        super.custom = value;
+      },
+      equals: customEquals,
+      useDeepEquality: true,
+    );
   }
 
-  late final _$batchItem1Atom =
-      Atom(name: '_TestStore.batchItem1', context: context);
+  late final _$batchItem1Atom = Atom(
+    name: '_TestStore.batchItem1',
+    context: context,
+  );
 
   @override
   String get batchItem1 {
@@ -119,11 +140,13 @@ mixin _$TestStore on _TestStore, Store {
   set batchItem1(String value) {
     _$batchItem1Atom.reportWrite(value, super.batchItem1, () {
       super.batchItem1 = value;
-    });
+    }, useDeepEquality: true);
   }
 
-  late final _$batchItem2Atom =
-      Atom(name: '_TestStore.batchItem2', context: context);
+  late final _$batchItem2Atom = Atom(
+    name: '_TestStore.batchItem2',
+    context: context,
+  );
 
   @override
   String get batchItem2 {
@@ -135,11 +158,13 @@ mixin _$TestStore on _TestStore, Store {
   set batchItem2(String value) {
     _$batchItem2Atom.reportWrite(value, super.batchItem2, () {
       super.batchItem2 = value;
-    });
+    }, useDeepEquality: true);
   }
 
-  late final _$batchItem3Atom =
-      Atom(name: '_TestStore.batchItem3', context: context);
+  late final _$batchItem3Atom = Atom(
+    name: '_TestStore.batchItem3',
+    context: context,
+  );
 
   @override
   String get batchItem3 {
@@ -151,11 +176,13 @@ mixin _$TestStore on _TestStore, Store {
   set batchItem3(String value) {
     _$batchItem3Atom.reportWrite(value, super.batchItem3, () {
       super.batchItem3 = value;
-    });
+    }, useDeepEquality: true);
   }
 
-  late final _$batchItem4Atom =
-      Atom(name: '_TestStore.batchItem4', context: context);
+  late final _$batchItem4Atom = Atom(
+    name: '_TestStore.batchItem4',
+    context: context,
+  );
 
   @override
   String get batchItem4 {
@@ -167,11 +194,13 @@ mixin _$TestStore on _TestStore, Store {
   set batchItem4(String value) {
     _$batchItem4Atom.reportWrite(value, super.batchItem4, () {
       super.batchItem4 = value;
-    });
+    }, useDeepEquality: true);
   }
 
-  late final _$errorFieldAtom =
-      Atom(name: '_TestStore.errorField', context: context);
+  late final _$errorFieldAtom = Atom(
+    name: '_TestStore.errorField',
+    context: context,
+  );
 
   @override
   String get errorField {
@@ -183,11 +212,13 @@ mixin _$TestStore on _TestStore, Store {
   set errorField(String value) {
     _$errorFieldAtom.reportWrite(value, super.errorField, () {
       super.errorField = value;
-    });
+    }, useDeepEquality: true);
   }
 
-  late final _$lateFieldAtom =
-      Atom(name: '_TestStore.lateField', context: context);
+  late final _$lateFieldAtom = Atom(
+    name: '_TestStore.lateField',
+    context: context,
+  );
 
   @override
   String get lateField {
@@ -200,10 +231,14 @@ mixin _$TestStore on _TestStore, Store {
   @override
   set lateField(String value) {
     _$lateFieldAtom.reportWrite(
-        value, _lateFieldIsInitialized ? super.lateField : null, () {
-      super.lateField = value;
-      _lateFieldIsInitialized = true;
-    });
+      value,
+      _lateFieldIsInitialized ? super.lateField : null,
+      () {
+        super.lateField = value;
+        _lateFieldIsInitialized = true;
+      },
+      useDeepEquality: true,
+    );
   }
 
   @override
@@ -230,46 +265,58 @@ mixin _$TestStore on _TestStore, Store {
     return ObservableStream<String>(_$stream, context: context);
   }
 
-  late final _$loadStuffAsyncAction =
-      AsyncAction('_TestStore.loadStuff', context: context);
+  late final _$loadStuffAsyncAction = AsyncAction(
+    '_TestStore.loadStuff',
+    context: context,
+  );
 
   @override
   Future<void> loadStuff() {
     return _$loadStuffAsyncAction.run(() => super.loadStuff());
   }
 
-  late final _$loadStuff2AsyncAction =
-      AsyncAction('_TestStore.loadStuff2', context: context);
+  late final _$loadStuff2AsyncAction = AsyncAction(
+    '_TestStore.loadStuff2',
+    context: context,
+  );
 
   @override
   ObservableFuture<void> loadStuff2() {
     return ObservableFuture<void>(
-        _$loadStuff2AsyncAction.run(() => super.loadStuff2()));
+      _$loadStuff2AsyncAction.run(() => super.loadStuff2()),
+    );
   }
 
-  late final _$batchedChangesAsyncAction =
-      AsyncAction('_TestStore.batchedChanges', context: context);
+  late final _$batchedChangesAsyncAction = AsyncAction(
+    '_TestStore.batchedChanges',
+    context: context,
+  );
 
   @override
   Future<void> batchedChanges() {
     return _$batchedChangesAsyncAction.run(() => super.batchedChanges());
   }
 
-  late final _$throwsErrorAsyncAction =
-      AsyncAction('_TestStore.throwsError', context: context);
+  late final _$throwsErrorAsyncAction = AsyncAction(
+    '_TestStore.throwsError',
+    context: context,
+  );
 
   @override
   Future<void> throwsError() {
     return _$throwsErrorAsyncAction.run(() => super.throwsError());
   }
 
-  late final _$_TestStoreActionController =
-      ActionController(name: '_TestStore', context: context);
+  late final _$_TestStoreActionController = ActionController(
+    name: '_TestStore',
+    context: context,
+  );
 
   @override
   void setFields(String field1, String field2) {
-    final _$actionInfo =
-        _$_TestStoreActionController.startAction(name: '_TestStore.setFields');
+    final _$actionInfo = _$_TestStoreActionController.startAction(
+      name: '_TestStore.setFields',
+    );
     try {
       return super.setFields(field1, field2);
     } finally {

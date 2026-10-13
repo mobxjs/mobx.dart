@@ -1,3 +1,4 @@
+Generating .g.dart: StoreGenerator on lib/generator_sample.dart:
 Could not make class "User" observable. Changes needed:
   1. Remove static modifier from the field "foobar".
   2. Remove static modifier from the method "getUser".
