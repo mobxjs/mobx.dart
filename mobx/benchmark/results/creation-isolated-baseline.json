@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "suite": "primitives",
+  "upstream_revision": "03663d64413a84c3449b932dac10f576b6314dd0",
+  "dart": "3.13.2 (stable) (Tue Aug 25 01:01:12 2026 -0700) on \"macos_arm64\"",
+  "os": "macos",
+  "processors": 12,
+  "samples": 15,
+  "case_filter": "comp_2to1",
+  "cases": [
+    {
+      "name": "comp_2to1",
+      "samples_us": [
+        12327,
+        16279,
+        17406,
+        12756,
+        9818,
+        19108,
+        9065,
+        9551,
+        10528,
+        16720,
+        6156,
+        19597,
+        8820,
+        17560,
+        5675
+      ],
+      "median_us": 12327,
+      "success": true
+    }
+  ]
+}

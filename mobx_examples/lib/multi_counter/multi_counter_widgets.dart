@@ -4,7 +4,7 @@ import 'package:mobx_examples/multi_counter/multi_counter_store.dart';
 import 'package:provider/provider.dart';
 
 class MultiCounterExample extends StatefulWidget {
-  const MultiCounterExample({Key? key}) : super(key: key);
+  const MultiCounterExample({super.key});
 
   @override
   State<MultiCounterExample> createState() => _MultiCounterExampleState();
@@ -23,7 +23,7 @@ class _MultiCounterExampleState extends State<MultiCounterExample> {
 }
 
 class CounterListPage extends StatelessWidget {
-  const CounterListPage({Key? key}) : super(key: key);
+  const CounterListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +63,7 @@ class CounterListPage extends StatelessWidget {
 }
 
 class CounterViewPage extends StatelessWidget {
-  const CounterViewPage({Key? key, required this.store, required this.index})
-      : super(key: key);
+  const CounterViewPage({super.key, required this.store, required this.index});
 
   final int index;
   final MultiCounterStore store;

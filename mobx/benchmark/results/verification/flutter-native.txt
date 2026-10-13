@@ -1,0 +1,33 @@
+00:00 +0: loading /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/multi_reaction_builder_test.dart
+00:00 +0: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/multi_reaction_builder_test.dart: MultiReactionBuilder calls reactions on state changes
+00:00 +1: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/multi_reaction_builder_test.dart: MultiReactionBuilder calls reactions on state changes
+00:00 +2: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/multi_reaction_builder_test.dart: MultiReactionBuilder calls reactions on state changes
+00:00 +3: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer re-renders when observed state changes
+00:00 +4: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer re-renders when observed state changes
+00:00 +5: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/reaction_builder_test.dart: ReactionBuilder throws AssertionError if child is not specified in the builder
+00:00 +6: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer doesn't re-render when observed state doesn't change
+00:00 +7: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer.withBuiltChild's child doesn't re-render
+00:00 +8: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer build should call reaction.track
+00:00 +9: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer should throw exception if exceptions occur inside the reaction
+00:00 +10: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer should report Flutter errors during invalidation
+00:00 +11: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer should report non-Flutter errors during invalidation
+00:00 +12: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer should report exceptions during invalidation
+00:00 +13: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer should print full stacktrace of error coming from computed
+00:00 +14: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer unmount should dispose Reaction
+00:00 +15: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Release mode, the reaction's default name is widget.toString()
+00:00 +16: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Debug mode inserts the caller's stack frame in the reaction's name
+00:00 +17: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer stack frame lookup gracefully if caller's stack frame is not found
+00:00 +18: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: debugFindConstructingStackFrame has friendly output
+00:00 +19: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Wasm debug frames skip initializer and subclass constructor entries
+00:00 +20: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer should log when there are no observables in builder
+00:00 +21: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer should NOT log when there are observables in builder
+00:00 +22: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer should NOT log when there are no observables in builder but it is disabled by the field
+00:00 +23: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: Observer should NOT log when there are no observables in builder but it is disabled by global config
+00:00 +24: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: StatelessObserverWidget can be subclassed
+00:00 +25: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: StatefulObserverWidget can be subclassed
+No observables detected in the build method of ConstStatefulObserver
+00:00 +26: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: The `setState() or markNeedsBuild() called during build` error is resolved
+00:00 +27: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: ReactionBuilder Reaction is invoked on init
+00:00 +28: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: ReactionBuilder Reaction is disposed on dispose
+00:00 +29: /Users/pavanpodila/Projects/mobx.dart/flutter_mobx/test/flutter_mobx_test.dart: ReactionBuilder Given child is returned as part of the build method
+00:00 +30: All tests passed!

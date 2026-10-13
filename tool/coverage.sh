@@ -13,5 +13,6 @@ dart run coverage:format_coverage \
   --lcov \
   --in=coverage \
   --out=coverage/lcov.txt \
-  --packages=.dart_tool/package_config.json \
+  --package=. \
   --report-on=lib
+

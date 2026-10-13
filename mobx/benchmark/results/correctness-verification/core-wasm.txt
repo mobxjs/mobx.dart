@@ -1,0 +1,512 @@
+00:00 +0: [Chrome, Dart2Wasm] loading test/all_tests.dart
+Generated wasm module '/private/var/folders/q2/5mxyb_rx1yqdk3r0g6crrr8c0000gn/T/dart_test_ald7wy/test_eEUpl2/all_tests.dart.browser_test.dart.wasm', and JS init file '/private/var/folders/q2/5mxyb_rx1yqdk3r0g6crrr8c0000gn/T/dart_test_ald7wy/test_eEUpl2/all_tests.dart.browser_test.dart.mjs'.
+
+00:00 +0: [Chrome, Dart2Wasm] benchmark workloads graph workloads avoidablePropagation
+00:00 +1: [Chrome, Dart2Wasm] benchmark workloads graph workloads broadPropagation
+00:00 +2: [Chrome, Dart2Wasm] benchmark workloads graph workloads deepPropagation
+00:00 +3: [Chrome, Dart2Wasm] benchmark workloads graph workloads diamond
+00:00 +4: [Chrome, Dart2Wasm] benchmark workloads graph workloads mux
+00:00 +5: [Chrome, Dart2Wasm] benchmark workloads graph workloads repeatedObservers
+00:00 +6: [Chrome, Dart2Wasm] benchmark workloads graph workloads triangle
+00:00 +7: [Chrome, Dart2Wasm] benchmark workloads graph workloads unstable
+00:00 +8: [Chrome, Dart2Wasm] benchmark workloads dynamic workload failure is a typed result, independent of its label
+00:00 +9: [Chrome, Dart2Wasm] audit_correctness_regression_test F1 future uses supplied context
+00:00 +10: [Chrome, Dart2Wasm] audit_correctness_regression_test F2 reused async action preserves caller zone
+00:00 +11: [Chrome, Dart2Wasm] audit_correctness_regression_test F3 binary error callback executes inside action
+00:00 +12: [Chrome, Dart2Wasm] audit_correctness_regression_test F4 stream forwards original error stack
+00:00 +13: [Chrome, Dart2Wasm] audit_correctness_regression_test F5 cancelOnError finishes downstream
+00:00 +14: [Chrome, Dart2Wasm] audit_correctness_regression_test F6 throwing map listener does not hide committed mutation
+00:00 +15: [Chrome, Dart2Wasm] audit_correctness_regression_test F7 throwing list predicate does not hide partial mutation
+00:00 +16: [Chrome, Dart2Wasm] audit_correctness_regression_test F8 list remove accepts unrelated Object
+00:00 +17: [Chrome, Dart2Wasm] audit_correctness_regression_test F9 map lookup accepts unrelated Object
+00:00 +18: [Chrome, Dart2Wasm] audit_correctness_regression_test F10 interceptor notification reports committed value
+00:00 +19: [Chrome, Dart2Wasm] audit_correctness_regression_test F11 computed exception restores context with boundaries disabled
+00:00 +20: [Chrome, Dart2Wasm] audit_correctness_regression_test F12 list cast shares change listeners
+00:00 +21: [Chrome, Dart2Wasm] audit_correctness_regression_test F13 empty range still validates bounds
+00:00 +22: [Chrome, Dart2Wasm] audit_correctness_regression_test F14 throwing set listener does not hide committed mutation
+00:00 +23: [Chrome, Dart2Wasm] audit_correctness_regression_test F15 empty stream match supports nullable done value
+00:00 +24: [Chrome, Dart2Wasm] audit_correctness_regression_test F16 disposed delayed reaction cancels its timer
+00:00 +25: [Chrome, Dart2Wasm] audit_correctness_regression_test F17 when effect uses supplied context
+00:00 +26: [Chrome, Dart2Wasm] audit_correctness_regression_test F18 scheduled reaction effect batches supplied context
+00:00 +27: [Chrome, Dart2Wasm] audit_correctness_regression_test P4 observation-only single stream retains historical events
+00:00 +28: [Chrome, Dart2Wasm] audit_correctness_regression_test F19 throwing reaction error handler restores default-boundary context
+00:00 +29: [Chrome, Dart2Wasm] audit_correctness_regression_test async ownership and completion overlapping calls on one AsyncAction keep separate zones
+00:00 +30: [Chrome, Dart2Wasm] audit_correctness_regression_test async ownership and completion binary zone callbacks batch and restore after throwing
+00:00 +31: [Chrome, Dart2Wasm] audit_correctness_regression_test async ownership and completion future rejection and derived completion use their supplied context
+00:00 +32: [Chrome, Dart2Wasm] audit_correctness_regression_test async ownership and completion an empty completed stream does not invoke active or error fallbacks
+00:00 +33: [Chrome, Dart2Wasm] audit_correctness_regression_test async ownership and completion a real null event is distinct from an empty stream
+00:00 +34: [Chrome, Dart2Wasm] audit_correctness_regression_test async ownership and completion cancelOnError broadcasts error and done exactly once
+00:00 +35: [Chrome, Dart2Wasm] audit_correctness_regression_test async ownership and completion completed broadcast properties can be observed again
+00:00 +36: [Chrome, Dart2Wasm] audit_correctness_regression_test reaction timer ownership disposing a scheduled reaction directly cancels pending work
+00:00 +37: [Chrome, Dart2Wasm] audit_correctness_regression_test reaction timer ownership disposing when cancels its timeout and cannot report a later error
+00:00 +38: [Chrome, Dart2Wasm] audit_correctness_regression_test reaction timer ownership a synchronous scheduler cannot retain a timer after self-disposal
+00:00 +39: [Chrome, Dart2Wasm] audit_correctness_regression_test collection view and range contracts casts created before listeners share mutations in both directions
+00:00 +40: [Chrome, Dart2Wasm] audit_correctness_regression_test collection view and range contracts a narrow view checks event values lazily
+00:00 +41: [Chrome, Dart2Wasm] audit_correctness_regression_test collection view and range contracts invalid empty and reversed ranges throw without notifications
+00:00 +42: [Chrome, Dart2Wasm] benchmark_harness_test compares a complete successful report
+00:00 +43: [Chrome, Dart2Wasm] benchmark_harness_test refuses incompatible workload sizes
+00:00 +44: [Chrome, Dart2Wasm] benchmark_harness_test refuses a fast but incorrect result
+00:00 +45: [Chrome, Dart2Wasm] benchmark_harness_test refuses missing cases and zero duration
+00:00 +46: [Chrome, Dart2Wasm] collection_performance_regression_test removeWhere publishes one coherent original-index change
+00:00 +47: [Chrome, Dart2Wasm] collection_performance_regression_test removeWhere leaves storage untouched on predicate failure
+00:00 +48: [Chrome, Dart2Wasm] collection_performance_regression_test retainWhere publishes one coherent original-index change
+00:00 +49: [Chrome, Dart2Wasm] collection_performance_regression_test retainWhere leaves storage untouched on predicate failure
+00:00 +50: [Chrome, Dart2Wasm] collection_performance_regression_test map bulk methods batch reactions and retain per-entry events
+00:00 +51: [Chrome, Dart2Wasm] collection_performance_regression_test set bulk methods batch reactions and retain membership events
+00:00 +52: [Chrome, Dart2Wasm] collection_performance_regression_test listener errors do not hide map or set insertion
+00:00 +53: [Chrome, Dart2Wasm] collection_performance_regression_test Object arguments to lookup and removal remain type-safe
+00:00 +54: [Chrome, Dart2Wasm] dependency_propagation_regression_test generated acyclic graphs agree with a reference after branch churn
+00:00 +55: [Chrome, Dart2Wasm] dependency_propagation_regression_test nested and repeated reads are deduplicated and released on disposal
+00:00 +56: [Chrome, Dart2Wasm] dependency_propagation_regression_test G8 computed equality failures reach observing reaction
+00:00 +57: [Chrome, Dart2Wasm] dependency_propagation_regression_test G9 writing an observable does not subscribe to its previous value
+00:00 +58: [Chrome, Dart2Wasm] dependency_propagation_regression_test G10 lifecycle handler may unregister itself during delivery
+00:00 +59: [Chrome, Dart2Wasm] dependency_propagation_regression_test G1 computed reports successive distinct errors
+00:00 +60: [Chrome, Dart2Wasm] dependency_propagation_regression_test G2 resubscribing during computed unobserve preserves dependencies
+00:00 +61: [Chrome, Dart2Wasm] dependency_propagation_regression_test G3 lifecycle hook reads do not become caller dependencies
+00:00 +62: [Chrome, Dart2Wasm] dependency_propagation_regression_test G4 cycle recovery does not strand an unrelated scheduled reaction
+00:00 +63: [Chrome, Dart2Wasm] dependency_propagation_regression_test G5 error handler registration is isolated per context
+00:00 +64: [Chrome, Dart2Wasm] dependency_propagation_regression_test G6 computed equality exception can recover without stale cache
+00:00 +65: [Chrome, Dart2Wasm] dependency_propagation_regression_test G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +66: [Chrome, Dart2Wasm] observable_test observable<T> toString
+00:00 +67: [Chrome, Dart2Wasm] observable_test observable<T> debugCreationStack
+00:00 +68: [Chrome, Dart2Wasm] observable_test observable<T> basics work
+00:00 +69: [Chrome, Dart2Wasm] observable_test observable<T> works with current context
+00:00 +70: [Chrome, Dart2Wasm] observable_test observable<T> uses provided context
+00:00 +71: [Chrome, Dart2Wasm] observable_test observable<T> nonObservableValue
+00:00 +72: [Chrome, Dart2Wasm] observable_test observable<T> set value covariant
+00:00 +73: [Chrome, Dart2Wasm] observable_test createAtom() basics works
+00:00 +74: [Chrome, Dart2Wasm] observable_test createAtom() provides a default name
+00:00 +75: [Chrome, Dart2Wasm] observable_value_test ObservableValue basics work
+00:00 +76: [Chrome, Dart2Wasm] computed_test Computed toString
+00:00 +77: [Chrome, Dart2Wasm] computed_test Computed debugCreationStack
+00:00 +78: [Chrome, Dart2Wasm] computed_test Computed basics work
+00:00 +79: [Chrome, Dart2Wasm] computed_test Computed value hierarchy
+00:00 +80: [Chrome, Dart2Wasm] computed_test Computed can be observed
+00:00 +81: [Chrome, Dart2Wasm] computed_test Computed only notifies observers when computed value changed
+00:00 +82: [Chrome, Dart2Wasm] computed_test Computed can use a custom equality
+00:00 +83: [Chrome, Dart2Wasm] computed_test Computed uses provided context
+00:00 +84: [Chrome, Dart2Wasm] computed_test Computed catches exception in evaluation
+00:00 +85: [Chrome, Dart2Wasm] computed_test Computed throws on finding a cycle
+00:00 +86: [Chrome, Dart2Wasm] computed_test Computed with disableErrorBoundaries = true, exception is thrown
+00:00 +87: [Chrome, Dart2Wasm] computed_test Computed with nullable values will propagate changes after errors
+00:00 +88: [Chrome, Dart2Wasm] computed_test Computed keeping computed properties alive does not run before access
+00:00 +89: [Chrome, Dart2Wasm] computed_test Computed keeping computed properties alive runs on first access
+00:00 +90: [Chrome, Dart2Wasm] computed_test Computed keeping computed properties alive caches values on subsequent accesses
+00:00 +91: [Chrome, Dart2Wasm] computed_test Computed keeping computed properties alive does not recalculate when dirty
+00:00 +92: [Chrome, Dart2Wasm] computed_test Computed keeping computed properties alive recalculates when accessing it dirty
+00:00 +93: [Chrome, Dart2Wasm] observable_list_test ObservableList generates a name if not given
+00:00 +94: [Chrome, Dart2Wasm] observable_list_test ObservableList uses the name if given
+00:00 +95: [Chrome, Dart2Wasm] observable_list_test ObservableList basics work
+00:00 +96: [Chrome, Dart2Wasm] observable_list_test ObservableList cast returns a live view to list
+00:00 +97: [Chrome, Dart2Wasm] observable_list_test ObservableList Autorun should execute when items are added to an empty list
+00:00 +98: [Chrome, Dart2Wasm] observable_list_test ObservableList observe basics work
+00:00 +99: [Chrome, Dart2Wasm] observable_list_test ObservableList observe with fireImmediately works
+00:00 +100: [Chrome, Dart2Wasm] observable_list_test ObservableList observe with fireImmediately should not send events to already registered listeners
+00:00 +101: [Chrome, Dart2Wasm] observable_list_test ObservableList observe set length works
+00:00 +102: [Chrome, Dart2Wasm] observable_list_test ObservableList observe insert item works
+00:00 +103: [Chrome, Dart2Wasm] observable_list_test ObservableList observe insertAll works
+00:00 +104: [Chrome, Dart2Wasm] observable_list_test ObservableList observe add item works
+00:00 +105: [Chrome, Dart2Wasm] observable_list_test ObservableList observe addAll items works
+00:00 +106: [Chrome, Dart2Wasm] observable_list_test ObservableList observe first works
+00:00 +107: [Chrome, Dart2Wasm] observable_list_test ObservableList observe clear works
+00:00 +108: [Chrome, Dart2Wasm] observable_list_test ObservableList observe fillRange works
+00:00 +109: [Chrome, Dart2Wasm] observable_list_test ObservableList observe remove works
+00:00 +110: [Chrome, Dart2Wasm] observable_list_test ObservableList observe removeAt works
+00:00 +111: [Chrome, Dart2Wasm] observable_list_test ObservableList observe removeLast works
+00:00 +112: [Chrome, Dart2Wasm] observable_list_test ObservableList observe removeRange works
+00:00 +113: [Chrome, Dart2Wasm] observable_list_test ObservableList observe replaceRange works
+00:00 +114: [Chrome, Dart2Wasm] observable_list_test ObservableList observe removeWhere works
+00:00 +115: [Chrome, Dart2Wasm] observable_list_test ObservableList observe retainWhere works
+00:00 +116: [Chrome, Dart2Wasm] observable_list_test ObservableList observe setAll works
+00:00 +117: [Chrome, Dart2Wasm] observable_list_test ObservableList observe setRange works
+00:00 +118: [Chrome, Dart2Wasm] observable_list_test ObservableList observe sort works
+00:00 +119: [Chrome, Dart2Wasm] observable_list_test ObservableList shuffle do not produce excess changes
+00:00 +120: [Chrome, Dart2Wasm] observable_list_test ObservableList asMap returns an observable and unmodifiable view to the list
+00:00 +121: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods isEmpty
+00:00 +122: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods isNotEmpty
+00:00 +123: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods iterator
+00:00 +124: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods single
+00:00 +125: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods first
+00:00 +126: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods last
+00:00 +127: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods toSet
+00:00 +128: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods toList
+00:00 +129: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods join
+00:00 +130: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods fold
+00:00 +131: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods sublist
+00:00 +132: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods elementAt
+00:00 +133: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods singleWhere
+00:00 +134: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods lastIndexOf
+00:00 +135: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods indexOf
+00:00 +136: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods getRange
+00:00 +137: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods forEach
+00:00 +138: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods contains
+00:00 +139: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods indexWhere
+00:00 +140: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods lastWhere
+00:00 +141: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods lastIndexWhere
+00:00 +142: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods firstWhere
+00:00 +143: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods every
+00:00 +144: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods any
+00:00 +145: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods []
+00:00 +146: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods +
+00:00 +147: [Chrome, Dart2Wasm] observable_list_test ObservableList fires reportObserved() for read-methods bypass observable system
+00:00 +148: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods length=
+00:00 +149: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods last=
+00:00 +150: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods first=
+00:00 +151: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods insertAll
+00:00 +152: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods insert
+00:00 +153: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods sort
+00:00 +154: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods setRange
+00:00 +155: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods fillRange
+00:00 +156: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods replaceRange
+00:00 +157: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods setAll
+00:00 +158: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods []=
+00:00 +159: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods add
+00:00 +160: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods addAll
+00:00 +161: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods clear
+00:00 +162: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods removeLast
+00:00 +163: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods remove
+00:00 +164: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods removeRange
+00:00 +165: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods removeAt
+00:00 +166: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods removeWhere
+00:00 +167: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods shuffle
+00:00 +168: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods retainWhere
+00:00 +169: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !length=
+00:00 +170: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !last=
+00:00 +171: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !first=
+00:00 +172: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !insertAll
+00:00 +173: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !sort
+00:00 +174: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !setRange
+00:00 +175: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !fillRange
+00:00 +176: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !replaceRange
+00:00 +177: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !setAll
+00:00 +178: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods ![]=
+00:00 +179: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !addAll
+00:00 +180: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !remove
+00:00 +181: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !removeRange
+00:00 +182: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !removeWhere
+00:00 +183: [Chrome, Dart2Wasm] observable_list_test fires reportChanged() for write-methods !retainWhere
+00:00 +184: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods map
+00:00 +185: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods expand
+00:00 +186: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods where
+00:00 +187: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods whereType
+00:00 +188: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods skip
+00:00 +189: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods skipWhile
+00:00 +190: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods followedBy
+00:00 +191: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods take
+00:00 +192: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods takeWhile
+00:00 +193: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods cast
+00:00 +194: [Chrome, Dart2Wasm] observable_list_test fires reportObserved() lazily on iterator returning methods reversed
+00:00 +195: [Chrome, Dart2Wasm] observable_list_test checks for iterable use with ObservableList ObservableList addAll runs Iterable only once
+00:00 +196: [Chrome, Dart2Wasm] observable_list_test checks for iterable use with ObservableList ObservableList insertAll runs Iterable only once
+00:00 +197: [Chrome, Dart2Wasm] observable_list_test checks for iterable use with ObservableList ObservableList replaceRange runs Iterable only once
+00:00 +198: [Chrome, Dart2Wasm] observable_list_test checks for iterable use with ObservableList ObservableList setAll runs Iterable only once
+00:00 +199: [Chrome, Dart2Wasm] observable_list_test checks for iterable use with ObservableList ObservableList setRange runs Iterable only once
+00:00 +200: [Chrome, Dart2Wasm] observable_map_test MapKeysIterable length reports observed
+00:00 +201: [Chrome, Dart2Wasm] observable_map_test MapKeysIterable contains reports observed
+00:00 +202: [Chrome, Dart2Wasm] observable_map_test ObservableMap generates a name if not given
+00:00 +203: [Chrome, Dart2Wasm] observable_map_test ObservableMap uses the name if given
+00:00 +204: [Chrome, Dart2Wasm] observable_map_test ObservableMap Observing a map key works
+00:00 +205: [Chrome, Dart2Wasm] observable_map_test ObservableMap Inserting a key is observed
+00:00 +206: [Chrome, Dart2Wasm] observable_map_test ObservableMap linkedHashMapFrom iterates on insertion order
+00:00 +207: [Chrome, Dart2Wasm] observable_map_test ObservableMap splayTreeMapFrom iterates based on compare function
+00:00 +208: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for read methods []
+00:00 +209: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for read methods containsKey
+00:00 +210: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for read methods containsValue
+00:00 +211: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for read methods forEach
+00:00 +212: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for read methods putIfAbsent
+00:00 +213: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for read methods length
+00:00 +214: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for read methods isEmpty
+00:00 +215: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for read methods isNotEmpty
+00:00 +216: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for read methods map
+00:00 +217: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for iterable transformation methods only when iterating keys
+00:00 +218: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for iterable transformation methods only when iterating values
+00:00 +219: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for iterable transformation methods only when iterating entries
+00:00 +220: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportObserved() for iterable transformation methods only when iterating cast
+00:00 +221: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods []=
+00:00 +222: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods addAll
+00:00 +223: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods addEntries
+00:00 +224: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods clear
+00:00 +225: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods remove
+00:00 +226: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods removeWhere
+00:00 +227: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods update
+00:00 +228: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods update ifAbsent
+00:00 +229: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods updateAll
+00:00 +230: [Chrome, Dart2Wasm] observable_map_test ObservableMap fires reportChanged() for write methods putIfAbsent absent
+00:00 +231: [Chrome, Dart2Wasm] observable_map_test ObservableMap []= reports an add change when there are listeners
+00:00 +232: [Chrome, Dart2Wasm] observable_map_test ObservableMap []= reports an add change when there is a reaction
+00:00 +233: [Chrome, Dart2Wasm] observable_map_test ObservableMap []= reports an update when there are listeners
+00:00 +234: [Chrome, Dart2Wasm] observable_map_test ObservableMap clear reports removed change when there are listeners
+00:00 +235: [Chrome, Dart2Wasm] observable_map_test ObservableMap remove reports remove change when there are listeners and the item exists
+00:00 +236: [Chrome, Dart2Wasm] observable_map_test ObservableMap remove doesn't report changes when there are listeners and the item doesn't exist
+00:00 +237: [Chrome, Dart2Wasm] observable_map_test ObservableMap observe sends changes immediately when fireImmediately is true
+00:00 +238: [Chrome, Dart2Wasm] observable_map_test ObservableMap observe should not send changes to all listeners immediately when fireImmediately is true
+00:00 +239: [Chrome, Dart2Wasm] observable_map_test ObservableMap works when adding a null value
+00:00 +240: [Chrome, Dart2Wasm] observable_map_test ObservableMap bypass observable system
+00:00 +241: [Chrome, Dart2Wasm] observable_set_test ObservableSet generates a name if not given
+00:00 +242: [Chrome, Dart2Wasm] observable_set_test ObservableSet uses the name if given
+00:00 +243: [Chrome, Dart2Wasm] observable_set_test ObservableSet creates a set that iterates at insertion order
+00:00 +244: [Chrome, Dart2Wasm] observable_set_test ObservableSet of creates a set that iterates at insertion order
+00:00 +245: [Chrome, Dart2Wasm] observable_set_test ObservableSet splayTreeSet creates a set that iterates at sorted order
+00:00 +246: [Chrome, Dart2Wasm] observable_set_test ObservableSet add with listeners reports a change
+00:00 +247: [Chrome, Dart2Wasm] observable_set_test ObservableSet remove with listeners reports a change
+00:00 +248: [Chrome, Dart2Wasm] observable_set_test ObservableSet clear with listeners reports a change
+00:00 +249: [Chrome, Dart2Wasm] observable_set_test ObservableSet observe receives add events when fireImmediately is true
+00:00 +250: [Chrome, Dart2Wasm] observable_set_test ObservableSet observe should not send add events to all listeners when fireImmediately is true
+00:00 +251: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods union
+00:00 +252: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods toSet
+00:00 +253: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods length
+00:00 +254: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods lookup
+00:00 +255: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods reduce
+00:00 +256: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods singleWhere
+00:00 +257: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods toList
+00:00 +258: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods any
+00:00 +259: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods contains
+00:00 +260: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods containsAll
+00:00 +261: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods difference
+00:00 +262: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods elementAt
+00:00 +263: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods every
+00:00 +264: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods first
+00:00 +265: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods firstWhere
+00:00 +266: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods fold
+00:00 +267: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods forEach
+00:00 +268: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods intersection
+00:00 +269: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods isEmpty
+00:00 +270: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods isNotEmpty
+00:00 +271: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods join
+00:00 +272: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods last
+00:00 +273: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for read methods lastWhere
+00:00 +274: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating cast
+00:00 +275: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating expand
+00:00 +276: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating followedBy
+00:00 +277: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating map
+00:00 +278: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating skip
+00:00 +279: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating skipWhile
+00:00 +280: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating take
+00:00 +281: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating takeWhile
+00:00 +282: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating where
+00:00 +283: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportObserved() for iterable transformation methods only when iterating whereType
+00:00 +284: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportChanged() for write methods add
+00:00 +285: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportChanged() for write methods addAll
+00:00 +286: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportChanged() for write methods clear
+00:00 +287: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportChanged() for write methods remove
+00:00 +288: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportChanged() for write methods removeAll
+00:00 +289: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportChanged() for write methods removeWhere
+00:00 +290: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportChanged() for write methods retainAll
+00:00 +291: [Chrome, Dart2Wasm] observable_set_test ObservableSet fires reportChanged() for write methods retainWhere
+00:00 +292: [Chrome, Dart2Wasm] observable_set_test ObservableSet bypass observable system
+00:00 +293: [Chrome, Dart2Wasm] observable_future_test ObservableFuture generates a name if not given
+00:00 +294: [Chrome, Dart2Wasm] observable_future_test ObservableFuture uses the name if given
+00:00 +295: [Chrome, Dart2Wasm] observable_future_test ObservableFuture value constructor creates an immediately fulfilled future
+00:00 +296: [Chrome, Dart2Wasm] observable_future_test ObservableFuture status should be pending with no value initially
+00:00 +297: [Chrome, Dart2Wasm] observable_future_test ObservableFuture status should be pending while running and fulfilled when completed
+00:00 +298: [Chrome, Dart2Wasm] observable_future_test ObservableFuture status should be pending while running and rejected when failed
+00:00 +299: [Chrome, Dart2Wasm] observable_future_test ObservableFuture replace should update value and status after new promise completes
+00:00 +300: [Chrome, Dart2Wasm] observable_future_test ObservableFuture match works for future completing with a value
+00:00 +301: [Chrome, Dart2Wasm] observable_future_test ObservableFuture match works for future completing with an error
+00:00 +302: [Chrome, Dart2Wasm] observable_future_test ObservableFuture match return null if state is pending and no pending matcher is provided
+00:00 +303: [Chrome, Dart2Wasm] observable_future_test ObservableFuture match return null if state is fulfilled and no fulfilled matcher is provided
+00:00 +304: [Chrome, Dart2Wasm] observable_future_test ObservableFuture match return null if state is rejected and no rejected matcher is provided
+00:00 +305: [Chrome, Dart2Wasm] observable_future_test ObservableFuture stream should work
+00:00 +306: [Chrome, Dart2Wasm] observable_future_test ObservableFuture observing stream should work
+00:00 +307: [Chrome, Dart2Wasm] observable_future_test ObservableFuture then works
+00:00 +308: [Chrome, Dart2Wasm] observable_future_test ObservableFuture catchError works
+00:00 +309: [Chrome, Dart2Wasm] observable_future_test ObservableFuture timeout works
+00:00 +310: [Chrome, Dart2Wasm] observable_future_test ObservableFuture whenComplete works
+00:00 +311: [Chrome, Dart2Wasm] observable_stream_test ObservableStream generates a name if not given
+00:00 +312: [Chrome, Dart2Wasm] observable_stream_test ObservableStream uses the name if given
+00:00 +313: [Chrome, Dart2Wasm] observable_stream_test ObservableStream listening to a stream gives back a subscription
+00:00 +314: [Chrome, Dart2Wasm] observable_stream_test ObservableStream match works
+00:00 +315: [Chrome, Dart2Wasm] observable_stream_test ObservableStream omitting done in match uses value instead for values
+00:00 +316: [Chrome, Dart2Wasm] observable_stream_test ObservableStream omitting done in match uses error instead for errors
+00:00 +317: [Chrome, Dart2Wasm] observable_stream_test ObservableStream providing no initialValue sets initial status to waiting
+00:00 +318: [Chrome, Dart2Wasm] observable_stream_test ObservableStream providing initialValue sets initial status to value
+00:00 +319: [Chrome, Dart2Wasm] observable_stream_test ObservableStream transforming the stream works
+00:00 +320: [Chrome, Dart2Wasm] observable_stream_test ObservableStream pauses and unpauses when starting/stopping observation
+00:00 +321: [Chrome, Dart2Wasm] observable_stream_test ObservableStream listen() subscription keeps observable values updated
+00:00 +322: [Chrome, Dart2Wasm] observable_stream_test ObservableStream listen() receives all events if source is non-broadcast
+00:01 +323: [Chrome, Dart2Wasm] observable_stream_test ObservableStream listen() and observation both keep values updated
+00:01 +324: [Chrome, Dart2Wasm] observable_stream_test ObservableStream listen() also keeps values updated for broadcast streams
+00:02 +325: [Chrome, Dart2Wasm] observable_stream_test ObservableStream listen() can be used multiple times for broadcast streams
+00:03 +326: [Chrome, Dart2Wasm] observable_stream_test ObservableStream implicit subscriptions keep observable values updated
+00:03 +327: [Chrome, Dart2Wasm] observable_stream_test ObservableStream cancelOnError cancels the stream on first error
+00:03 +328: [Chrome, Dart2Wasm] observable_stream_test ObservableStream cancelOnError in listen() cancels observation on error
+00:03 +329: [Chrome, Dart2Wasm] observable_stream_test ObservableStream .close() can be used to close stream correctly
+00:03 +330: [Chrome, Dart2Wasm] observable_stream_test ObservableStream .close() can close broadcast streams correctly
+00:03 +331: [Chrome, Dart2Wasm] observable_stream_test ObservableStream trying to listen or observe after close throws
+00:03 +332: [Chrome, Dart2Wasm] observable_stream_test ObservableStream closes correctly when all subscriptions are cancelled
+00:03 +333: [Chrome, Dart2Wasm] observable_stream_test ObservableStream closes correctly even if broadcast stream
+00:03 +334: [Chrome, Dart2Wasm] observable_stream_test ObservableStream cannot observe non-broadcast stream once sub is cancelled
+00:03 +335: [Chrome, Dart2Wasm] observable_stream_test ObservableStream can observe value with custom equals
+00:03 +336: [Chrome, Dart2Wasm] observable_stream_test ObservableStream asBroadcastStream
+00:03 +337: [Chrome, Dart2Wasm] observable_stream_test ObservableStream asyncExpand
+00:03 +338: [Chrome, Dart2Wasm] observable_stream_test ObservableStream asyncMap
+00:03 +339: [Chrome, Dart2Wasm] observable_stream_test ObservableStream cast
+00:03 +340: [Chrome, Dart2Wasm] observable_stream_test ObservableStream distinct
+00:03 +341: [Chrome, Dart2Wasm] observable_stream_test ObservableStream expand
+00:03 +342: [Chrome, Dart2Wasm] observable_stream_test ObservableStream skip
+00:03 +343: [Chrome, Dart2Wasm] observable_stream_test ObservableStream skipWhile
+00:03 +344: [Chrome, Dart2Wasm] observable_stream_test ObservableStream take
+00:03 +345: [Chrome, Dart2Wasm] observable_stream_test ObservableStream takeWhile
+00:03 +346: [Chrome, Dart2Wasm] observable_stream_test ObservableStream handleError
+00:03 +347: [Chrome, Dart2Wasm] observable_stream_test ObservableStream timeout
+00:03 +348: [Chrome, Dart2Wasm] observable_stream_test ObservableStream transform
+00:03 +349: [Chrome, Dart2Wasm] observable_stream_test ObservableStream where
+00:03 +350: [Chrome, Dart2Wasm] observable_stream_test ObservableStream any
+00:03 +351: [Chrome, Dart2Wasm] observable_stream_test ObservableStream contains
+00:03 +352: [Chrome, Dart2Wasm] observable_stream_test ObservableStream drain
+00:03 +353: [Chrome, Dart2Wasm] observable_stream_test ObservableStream elementAt
+00:03 +354: [Chrome, Dart2Wasm] observable_stream_test ObservableStream every
+00:03 +355: [Chrome, Dart2Wasm] observable_stream_test ObservableStream first
+00:03 +356: [Chrome, Dart2Wasm] observable_stream_test ObservableStream firstWhere
+00:03 +357: [Chrome, Dart2Wasm] observable_stream_test ObservableStream fold
+00:03 +358: [Chrome, Dart2Wasm] observable_stream_test ObservableStream forEach
+00:03 +359: [Chrome, Dart2Wasm] observable_stream_test ObservableStream isEmpty
+00:03 +360: [Chrome, Dart2Wasm] observable_stream_test ObservableStream join
+00:03 +361: [Chrome, Dart2Wasm] observable_stream_test ObservableStream last
+00:03 +362: [Chrome, Dart2Wasm] observable_stream_test ObservableStream lastWhere
+00:03 +363: [Chrome, Dart2Wasm] observable_stream_test ObservableStream length
+00:03 +364: [Chrome, Dart2Wasm] observable_stream_test ObservableStream pipe
+00:03 +365: [Chrome, Dart2Wasm] observable_stream_test ObservableStream reduce
+00:03 +366: [Chrome, Dart2Wasm] observable_stream_test ObservableStream single
+00:03 +367: [Chrome, Dart2Wasm] observable_stream_test ObservableStream singleWhere
+00:03 +368: [Chrome, Dart2Wasm] observable_stream_test ObservableStream toList
+00:03 +369: [Chrome, Dart2Wasm] observable_stream_test ObservableStream toSet
+00:03 +370: [Chrome, Dart2Wasm] reaction_test Reaction toString
+00:03 +371: [Chrome, Dart2Wasm] reaction_test Reaction debugCreationStack
+00:03 +372: [Chrome, Dart2Wasm] reaction_test Reaction basics work
+00:03 +373: [Chrome, Dart2Wasm] reaction_test Reaction equals override basics work
+00:03 +374: [Chrome, Dart2Wasm] reaction_test Reaction works with delay
+00:03 +375: [Chrome, Dart2Wasm] reaction_test Reaction works with scheduler
+00:03 +376: [Chrome, Dart2Wasm] reaction_test Reaction that fires immediately
+00:03 +377: [Chrome, Dart2Wasm] reaction_test Reaction that fires immediately with delay
+00:03 +378: [Chrome, Dart2Wasm] reaction_test Reaction with pre-mature disposal in tracking function
+00:03 +379: [Chrome, Dart2Wasm] reaction_test Reaction fires onError on exception inside tracking function
+00:03 +380: [Chrome, Dart2Wasm] reaction_test Reaction fires onError on exception inside effect
+00:03 +381: [Chrome, Dart2Wasm] reaction_test Reaction uses provided context
+00:03 +382: [Chrome, Dart2Wasm] reaction_test Reaction reaction throws when config.disableErrorBoundaries = true
+00:03 +383: [Chrome, Dart2Wasm] reaction_test Reaction start/endTracking reacts to changes to reactive values between begin and end
+00:03 +384: [Chrome, Dart2Wasm] reaction_test Reaction start/endTracking when disposed, doesn't call onInvalidate
+00:03 +385: [Chrome, Dart2Wasm] reaction_test Reaction start/endTracking autorun works inside tracking
+00:03 +386: [Chrome, Dart2Wasm] reaction_test Reaction start/endTracking ReactionImpl tracks observables
+00:03 +387: [Chrome, Dart2Wasm] reaction_test Reaction start/endTracking when disposed, clearObservables
+00:03 +388: [Chrome, Dart2Wasm] autorun_test autorun() basics work
+00:03 +389: [Chrome, Dart2Wasm] autorun_test autorun() with 2 observables
+00:03 +390: [Chrome, Dart2Wasm] autorun_test autorun() with changing observables
+00:03 +391: [Chrome, Dart2Wasm] autorun_test autorun() with delayed scheduler
+00:03 +392: [Chrome, Dart2Wasm] autorun_test autorun() with custom scheduler
+00:03 +393: [Chrome, Dart2Wasm] autorun_test autorun() with pre-mature disposal in tracking function
+00:03 +394: [Chrome, Dart2Wasm] autorun_test autorun() fires onError on exception
+00:03 +395: [Chrome, Dart2Wasm] autorun_test autorun() uses provided context
+00:03 +396: [Chrome, Dart2Wasm] autorun_test autorun() can be disposed inside the tracking function
+00:03 +397: [Chrome, Dart2Wasm] autorun_test autorun() can be disposed inside the tracking function with delay
+00:03 +398: [Chrome, Dart2Wasm] when_test when() basics work
+00:03 +399: [Chrome, Dart2Wasm] when_test when() with default name
+00:03 +400: [Chrome, Dart2Wasm] when_test when() works with asyncWhen
+00:03 +401: [Chrome, Dart2Wasm] when_test when() fires onError on exception
+00:03 +402: [Chrome, Dart2Wasm] when_test when() exceptions inside asyncWhen are caught and reaction is disposed
+00:03 +403: [Chrome, Dart2Wasm] when_test when() uses provided context
+00:03 +404: [Chrome, Dart2Wasm] when_test when() throws if timeout occurs before when() completes
+00:03 +405: [Chrome, Dart2Wasm] when_test when() does NOT throw if when() completes before timeout
+00:03 +406: [Chrome, Dart2Wasm] context_test ReactiveContext comes with default config
+00:03 +407: [Chrome, Dart2Wasm] context_test ReactiveContext global onReactionError is invoked for reaction errors
+00:03 +408: [Chrome, Dart2Wasm] context_test ReactiveContext can change observables inside computed if there are no observers
+00:03 +409: [Chrome, Dart2Wasm] context_test ReactiveContext cannot change observables inside computed if they have observers
+00:03 +410: [Chrome, Dart2Wasm] context_test ReactiveContext throws Exception for reactions that do not converge
+00:03 +411: [Chrome, Dart2Wasm] context_test ReactiveContext conditionallyRunInAction (setUpAll)
+00:03 +411: [Chrome, Dart2Wasm] context_test ReactiveContext conditionallyRunInAction when running OUTSIDE an Action, it should USE the ActionController
+00:03 +412: [Chrome, Dart2Wasm] context_test ReactiveContext conditionallyRunInAction when no ActionController is provided, it should create an ad-hoc ActionController
+00:03 +413: [Chrome, Dart2Wasm] context_test ReactiveContext conditionallyRunInAction when running INSIDE an Action, it should NOT USE the ActionController
+00:03 +414: [Chrome, Dart2Wasm] context_test ReactiveContext conditionallyRunInAction (tearDownAll)
+00:03 +414: [Chrome, Dart2Wasm] context_test ReactiveConfig clone works
+00:03 +415: [Chrome, Dart2Wasm] context_test ReactiveConfig when no overrides are provided the clone reuses source values
+00:03 +416: [Chrome, Dart2Wasm] action_test Action toString
+00:03 +417: [Chrome, Dart2Wasm] action_test Action debugCreationStack
+00:03 +418: [Chrome, Dart2Wasm] action_test Action basics work
+00:03 +419: [Chrome, Dart2Wasm] action_test Action modifications are picked up
+00:03 +420: [Chrome, Dart2Wasm] action_test Action modifications are batched
+00:03 +421: [Chrome, Dart2Wasm] action_test Action inside autorun should be untracked
+00:03 +422: [Chrome, Dart2Wasm] action_test Action can be invoked with named args
+00:03 +423: [Chrome, Dart2Wasm] action_test Action when nested works
+00:03 +424: [Chrome, Dart2Wasm] action_test Action uses provided context
+00:03 +425: [Chrome, Dart2Wasm] action_test Action on mainContext, should throw if mutating outside an action, with observers
+00:03 +426: [Chrome, Dart2Wasm] action_test Action on custom context, should throw if mutating outside an action, with observers
+00:03 +427: [Chrome, Dart2Wasm] action_test Action should throw if mutating outside an action, when always enforced
+00:03 +428: [Chrome, Dart2Wasm] action_test Action utility functions runInAction works
+00:03 +429: [Chrome, Dart2Wasm] action_test Action utility functions transaction works
+00:03 +430: [Chrome, Dart2Wasm] action_test Action utility functions untracked works
+00:03 +431: [Chrome, Dart2Wasm] action_test Action utility functions runInAction return type
+00:03 +432: [Chrome, Dart2Wasm] action_test Action utility functions action should wrap in transaction
+00:03 +433: [Chrome, Dart2Wasm] async_action_test AsyncAction run allows updating observable values in an async function
+00:03 +434: [Chrome, Dart2Wasm] async_action_test AsyncAction run allows updating observable values in a Future returning function
+00:03 +435: [Chrome, Dart2Wasm] async_action_test AsyncAction nested runs with different actions work
+00:03 +436: [Chrome, Dart2Wasm] action_controller_test ActionController can be created with both null context and name
+00:03 +437: [Chrome, Dart2Wasm] action_controller_test ActionController startAction calls startUntracked, startBatch and startAllowStateChanges
+00:03 +438: [Chrome, Dart2Wasm] action_controller_test ActionController endAction calls endAllowStateChanges, endBatch and endUntracked
+00:03 +439: [Chrome, Dart2Wasm] exceptions_test MobXException has the right toString()
+00:03 +440: [Chrome, Dart2Wasm] exceptions_test MobXCyclicReactionException has the right toString()
+00:03 +441: [Chrome, Dart2Wasm] exceptions_test MobXCaughtException contains the stacktrace
+00:03 +442: [Chrome, Dart2Wasm] exceptions_test should preserve stacktrace
+00:03 +443: [Chrome, Dart2Wasm] listenable_test Listenable dispose function removes added listener
+00:03 +444: [Chrome, Dart2Wasm] listenable_test Listenable uses provided context
+00:03 +445: [Chrome, Dart2Wasm] listenable_test Listenable asserts for null notifications
+00:03 +446: [Chrome, Dart2Wasm] intercept_test intercept basics work
+00:03 +447: [Chrome, Dart2Wasm] intercept_test intercept prevents a change
+00:03 +448: [Chrome, Dart2Wasm] intercept_test intercept can be chained
+00:03 +449: [Chrome, Dart2Wasm] intercept_test intercept chain can be short-circuited
+00:03 +450: [Chrome, Dart2Wasm] intercept_test intercept uses provided context
+00:03 +451: [Chrome, Dart2Wasm] observe_test observe works
+00:03 +452: [Chrome, Dart2Wasm] observe_test observe fires when changed
+00:03 +453: [Chrome, Dart2Wasm] observe_test observe equality override yields a new value
+00:03 +454: [Chrome, Dart2Wasm] observe_test observe equality override does not yield a new value
+00:03 +455: [Chrome, Dart2Wasm] observe_test observe can be disposed
+00:03 +456: [Chrome, Dart2Wasm] observe_test observe can have multiple listeners
+00:03 +457: [Chrome, Dart2Wasm] observe_test onBecomeObserved / onBecomeUnobserved works for observables
+00:03 +458: [Chrome, Dart2Wasm] observe_test onBecomeObserved / onBecomeUnobserved works for computeds
+00:03 +459: [Chrome, Dart2Wasm] observe_test onBecomeObserved / onBecomeUnobserved multiple can be attached
+00:03 +460: [Chrome, Dart2Wasm] extensions_observable_list_extension_test ObservableListExtension Transform List in ObservableList
+00:03 +461: [Chrome, Dart2Wasm] extensions_observable_map_extension_test ObservableMapExtension Transform Map in ObservableMap
+00:03 +462: [Chrome, Dart2Wasm] extensions_observable_set_extension_test ObservableSetExtension Transform Set in ObservableSet
+00:03 +463: [Chrome, Dart2Wasm] extensions_observable_future_extension_test ObservableFutureExtension Transform Future in ObservableFuture
+00:03 +464: [Chrome, Dart2Wasm] extensions_observable_stream_extension_test ObservableStreamExtension Transform Stream in ObservableStream
+00:03 +465: [Chrome, Dart2Wasm] extensions_primitive_types_extensions_test PrimitiveTypesExtensions Transform Int into ObsInt
+00:03 +466: [Chrome, Dart2Wasm] extensions_primitive_types_extensions_test PrimitiveTypesExtensions Transform Double into ObsDouble
+00:03 +467: [Chrome, Dart2Wasm] extensions_primitive_types_extensions_test PrimitiveTypesExtensions Transform Bool into ObsBool
+00:03 +468: [Chrome, Dart2Wasm] extensions_primitive_types_extensions_test PrimitiveTypesExtensions Transform String into ObsString
+00:03 +469: [Chrome, Dart2Wasm] extensions_primitive_types_extensions_test PrimitiveTypesExtensions Toggles ObservableBool
+00:03 +470: [Chrome, Dart2Wasm] atom_extensions_test when write to @observable field with changed value, should trigger notifications for downstream
+00:03 +471: [Chrome, Dart2Wasm] atom_extensions_test when write to @observable field with unchanged value, should not trigger notifications for downstream
+00:03 +472: [Chrome, Dart2Wasm] atom_extensions_test when write to @alwaysNotify field with unchanged value, should trigger notifications for downstream
+00:03 +473: [Chrome, Dart2Wasm] atom_extensions_test when write to @MakeObservable(equals: "a?.length == b?.length") field with changed value and not equals, should trigger notifications for downstream
+00:03 +474: [Chrome, Dart2Wasm] atom_extensions_test when write to iterable @observable field with unchanged value, should not trigger notifications for downstream
+00:03 +475: [Chrome, Dart2Wasm] atom_extensions_test when write to map @observable field with unchanged value, should not trigger notifications for downstream
+00:03 +476: [Chrome, Dart2Wasm] atom_extensions_test when write to @MakeObservable(useDeepEquality: true) field with same value, should not trigger notifications for downstream
+00:03 +477: [Chrome, Dart2Wasm] bug_related_test reaction should work with a map operation on list. Github Issue #211
+00:03 +478: [Chrome, Dart2Wasm] bug_related_test Should expose the library's version. Github Issue #213
+00:03 +479: [Chrome, Dart2Wasm] reactive_policies_test when reactive-reads are enforced should throw when reads happen OUTSIDE actions or reactions
+00:03 +480: [Chrome, Dart2Wasm] reactive_policies_test when reactive-reads are enforced should NOT throw when reads happen INSIDE reactions
+00:03 +481: [Chrome, Dart2Wasm] reactive_policies_test when reactive-reads are enforced should NOT throw when reads happen INSIDE actions
+00:03 +482: [Chrome, Dart2Wasm] reactive_policies_test when reactive-reads are NOT enforced should NOT throw when reads happen OUTSIDE actions or reactions
+00:03 +483: [Chrome, Dart2Wasm] reactive_policies_test when reactive-reads are NOT enforced should NOT throw when reads happen INSIDE reactions
+00:03 +484: [Chrome, Dart2Wasm] reactive_policies_test when reactive-reads are NOT enforced should NOT throw when reads happen INSIDE actions
+00:03 +485: [Chrome, Dart2Wasm] annotations_test annotations are defined
+00:03 +486: [Chrome, Dart2Wasm] annotations_test observableAlwaysNotEqual should return false
+00:03 +487: [Chrome, Dart2Wasm] spy_test Spy spies are disabled by default
+00:03 +488: [Chrome, Dart2Wasm] spy_test Spy spies can be added and removed
+00:03 +489: [Chrome, Dart2Wasm] spy_test Spy spy-event is raised when an Observable is created
+00:03 +490: [Chrome, Dart2Wasm] spy_test Spy spy-event is raised when an Observable is updated
+00:03 +491: [Chrome, Dart2Wasm] spy_test Spy spy-event is raised when a Computed is evaluated
+00:03 +492: [Chrome, Dart2Wasm] spy_test Spy spy-event is raised when an Action is executed
+00:03 +493: [Chrome, Dart2Wasm] spy_test Spy spy-event is raised only once when an AsyncAction is executed
+00:03 +493 ~1: [Chrome, Dart2Wasm] spy_test Spy spy-event is raised when a Reaction is executed
+00:03 +494 ~1: [Chrome, Dart2Wasm] spy_test Spy spy-event is raised when a Reaction errors
+00:03 +495 ~1: [Chrome, Dart2Wasm] spy_test Spy spy-event is raised when a Reaction disposes
+00:03 +496 ~1: [Chrome, Dart2Wasm] spy_test Spy calling atom read/write raises a spy event
+00:03 +497 ~1: [Chrome, Dart2Wasm] store_test Store can get context
+00:03 +498 ~1: [Chrome, Dart2Wasm] store_test Store Store with custom context
+00:03 +499 ~1: [Chrome, Dart2Wasm] atom_test Atom toString
+00:03 +500 ~1: [Chrome, Dart2Wasm] atom_test Atom debugCreationStack
+00:03 +501 ~1: [Chrome, Dart2Wasm] atom_test Atom isBeingObserved
+00:03 +502 ~1: [Chrome, Dart2Wasm] utils_test Utils equatable
+00:03 +503 ~1: [Chrome, Dart2Wasm] utils_test Utils equatable iterable
+00:03 +504 ~1: [Chrome, Dart2Wasm] utils_test Utils equatable with deep equality
+00:03 +505 ~1: All tests passed!

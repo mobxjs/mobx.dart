@@ -49,7 +49,6 @@ ReactionDisposer createAutorun(
     final schedulerFromOptions =
         scheduler ?? (delay != null ? createDelayedScheduler(delay) : null);
     var isScheduled = false;
-    Timer? timer;
 
     rxn = ReactionImpl(
       context,
@@ -57,17 +56,19 @@ ReactionDisposer createAutorun(
         if (!isScheduled) {
           isScheduled = true;
 
-          timer?.cancel();
-          timer = null;
+          rxn._timer?.cancel();
+          rxn._timer = null;
 
-          timer = schedulerFromOptions!(() {
-            isScheduled = false;
-            if (!rxn.isDisposed) {
-              rxn.track(() => trackingFn(rxn));
-            } else {
-              timer?.cancel();
-            }
-          });
+          rxn._setTimer(
+            schedulerFromOptions!(() {
+              isScheduled = false;
+              if (!rxn.isDisposed) {
+                rxn.track(() => trackingFn(rxn));
+              } else {
+                rxn._timer?.cancel();
+              }
+            }),
+          );
         }
       },
       name: rxnName,
@@ -98,6 +99,7 @@ ReactionDisposer createReaction<T>(
   final effectAction = Action(
     (T? value) => effect(value as T),
     name: '$rxnName-effect',
+    context: context,
   );
 
   final runSync = scheduler == null && delay == null;
@@ -136,7 +138,6 @@ ReactionDisposer createReaction<T>(
     }
   }
 
-  Timer? timer;
   var isScheduled = false;
 
   rxn = ReactionImpl(
@@ -147,17 +148,19 @@ ReactionDisposer createReaction<T>(
       } else if (!isScheduled) {
         isScheduled = true;
 
-        timer?.cancel();
-        timer = null;
+        rxn._timer?.cancel();
+        rxn._timer = null;
 
-        timer = schedulerFromOptions!(() {
-          isScheduled = false;
-          if (!rxn.isDisposed) {
-            reactionRunner();
-          } else {
-            timer?.cancel();
-          }
-        });
+        rxn._setTimer(
+          schedulerFromOptions!(() {
+            isScheduled = false;
+            if (!rxn.isDisposed) {
+              reactionRunner();
+            } else {
+              rxn._timer?.cancel();
+            }
+          }),
+        );
       }
     },
     name: rxnName,
@@ -180,7 +183,11 @@ ReactionDisposer createWhenReaction(
   void Function(Object, Reaction)? onError,
 }) {
   final rxnName = name ?? context.nameFor('When');
-  final effectAction = Action(effect, name: '$rxnName-effect');
+  final effectAction = Action(
+    effect,
+    name: '$rxnName-effect',
+    context: context,
+  );
 
   Timer? timer;
   late ReactionDisposer dispose;
@@ -203,19 +210,26 @@ ReactionDisposer createWhenReaction(
     });
   }
 
-  return dispose = createAutorun(
-    context,
-    (reaction) {
-      if (predicate(reaction)) {
-        reaction.dispose();
-        timer?.cancel();
-        timer = null;
-        effectAction();
-      }
-    },
-    name: rxnName,
-    onError: onError,
-  );
+  try {
+    dispose = createAutorun(
+      context,
+      (reaction) {
+        if (predicate(reaction)) {
+          reaction.dispose();
+          timer?.cancel();
+          timer = null;
+          effectAction();
+        }
+      },
+      name: rxnName,
+      onError: onError,
+    );
+    if (timer != null) (dispose.reaction as ReactionImpl)._setTimer(timer!);
+    return dispose;
+  } catch (_) {
+    timer?.cancel();
+    rethrow;
+  }
 }
 
 /// An internal helper function to create an [asyncWhen]

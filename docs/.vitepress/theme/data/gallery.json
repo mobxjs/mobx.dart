@@ -1,0 +1,50 @@
+[
+  {
+    "id": "counter",
+    "title": "Start with a counter",
+    "level": "Fundamentals",
+    "concept": "Observable + Action + Observer"
+  },
+  {
+    "id": "cart",
+    "title": "Connect a shopping bag",
+    "level": "Fundamentals",
+    "concept": "Computed + shared state"
+  },
+  {
+    "id": "tasks",
+    "title": "Filter a task list",
+    "level": "Collections",
+    "concept": "ObservableSet + Computed"
+  },
+  {
+    "id": "collections",
+    "title": "Plan a small inventory",
+    "level": "Collections",
+    "concept": "ObservableList + Map + Set"
+  },
+  {
+    "id": "async",
+    "title": "Load your projects",
+    "level": "Async",
+    "concept": "ObservableFuture + retry"
+  },
+  {
+    "id": "stream",
+    "title": "Follow a live signal",
+    "level": "Async",
+    "concept": "ObservableStream + lifecycle"
+  },
+  {
+    "id": "reactions",
+    "title": "Respond once, or often",
+    "level": "Architecture",
+    "concept": "autorun + reaction + when"
+  },
+  {
+    "id": "dependencies",
+    "title": "Switch dependencies",
+    "level": "Architecture",
+    "concept": "Conditional tracking + caching"
+  }
+]

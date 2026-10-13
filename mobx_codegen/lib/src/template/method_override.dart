@@ -57,8 +57,7 @@ class MethodOverrideTemplate {
   late CommaList<String> _optionalArgs;
   late CommaList<NamedArgTemplate> _namedArgs;
 
-  // ignore: always_declare_return_types, type_annotate_public_apis
-  setTypeParams(Iterable<TypeParamTemplate> params) {
+  void setTypeParams(Iterable<TypeParamTemplate> params) {
     _typeParams = SurroundedCommaList('<', '>', params.toList());
     _typeArgs =
         SurroundedCommaList('<', '>', params.map((p) => p.asArgument).toList());

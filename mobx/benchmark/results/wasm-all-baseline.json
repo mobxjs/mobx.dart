@@ -1,0 +1,361 @@
+{
+  "schema": 1,
+  "suite": "all",
+  "runtime": "wasm-release",
+  "upstream_revision": "03663d64413a84c3449b932dac10f576b6314dd0",
+  "dart": "3.13.2 (stable) (Tue Aug 25 01:01:12 2026 -0700) on \"macos_arm64\"",
+  "os": "macos",
+  "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "processors": 12,
+  "samples": 1,
+  "cases": [
+    {
+      "name": "avoidablePropagation (success)",
+      "samples_us": [
+        738100
+      ],
+      "median_us": 738100,
+      "success": true
+    },
+    {
+      "name": "broadPropagation (success)",
+      "samples_us": [
+        1727900
+      ],
+      "median_us": 1727900,
+      "success": true
+    },
+    {
+      "name": "deepPropagation (success)",
+      "samples_us": [
+        598701
+      ],
+      "median_us": 598701,
+      "success": true
+    },
+    {
+      "name": "diamond (success)",
+      "samples_us": [
+        986500
+      ],
+      "median_us": 986500,
+      "success": true
+    },
+    {
+      "name": "mux (success)",
+      "samples_us": [
+        850400
+      ],
+      "median_us": 850400,
+      "success": true
+    },
+    {
+      "name": "repeatedObservers (success)",
+      "samples_us": [
+        85599
+      ],
+      "median_us": 85599,
+      "success": true
+    },
+    {
+      "name": "triangle (success)",
+      "samples_us": [
+        349600
+      ],
+      "median_us": 349600,
+      "success": true
+    },
+    {
+      "name": "unstable (success)",
+      "samples_us": [
+        140800
+      ],
+      "median_us": 140800,
+      "success": true
+    },
+    {
+      "name": "molBench",
+      "samples_us": [
+        224100
+      ],
+      "median_us": 224100,
+      "success": true
+    },
+    {
+      "name": "create_signals",
+      "samples_us": [
+        15500
+      ],
+      "median_us": 15500,
+      "success": true
+    },
+    {
+      "name": "comp_0to1",
+      "samples_us": [
+        13899
+      ],
+      "median_us": 13899,
+      "success": true
+    },
+    {
+      "name": "comp_1to1",
+      "samples_us": [
+        9400
+      ],
+      "median_us": 9400,
+      "success": true
+    },
+    {
+      "name": "comp_2to1",
+      "samples_us": [
+        5900
+      ],
+      "median_us": 5900,
+      "success": true
+    },
+    {
+      "name": "comp_4to1",
+      "samples_us": [
+        7000
+      ],
+      "median_us": 7000,
+      "success": true
+    },
+    {
+      "name": "comp_1000to1",
+      "samples_us": [
+        0
+      ],
+      "median_us": 0,
+      "success": true
+    },
+    {
+      "name": "comp_1to2",
+      "samples_us": [
+        11100
+      ],
+      "median_us": 11100,
+      "success": true
+    },
+    {
+      "name": "comp_1to4",
+      "samples_us": [
+        8401
+      ],
+      "median_us": 8401,
+      "success": true
+    },
+    {
+      "name": "comp_1to8",
+      "samples_us": [
+        7000
+      ],
+      "median_us": 7000,
+      "success": true
+    },
+    {
+      "name": "comp_1to1000",
+      "samples_us": [
+        4800
+      ],
+      "median_us": 4800,
+      "success": true
+    },
+    {
+      "name": "update_1to1",
+      "samples_us": [
+        18000
+      ],
+      "median_us": 18000,
+      "success": true
+    },
+    {
+      "name": "update_2to1",
+      "samples_us": [
+        9000
+      ],
+      "median_us": 9000,
+      "success": true
+    },
+    {
+      "name": "update_4to1",
+      "samples_us": [
+        4500
+      ],
+      "median_us": 4500,
+      "success": true
+    },
+    {
+      "name": "update_1000to1",
+      "samples_us": [
+        0
+      ],
+      "median_us": 0,
+      "success": true
+    },
+    {
+      "name": "update_1to2",
+      "samples_us": [
+        9200
+      ],
+      "median_us": 9200,
+      "success": true
+    },
+    {
+      "name": "update_1to4",
+      "samples_us": [
+        4500
+      ],
+      "median_us": 4500,
+      "success": true
+    },
+    {
+      "name": "update_1to1000",
+      "samples_us": [
+        0
+      ],
+      "median_us": 0,
+      "success": true
+    },
+    {
+      "name": "cellx1000 (first: pass, last: pass)",
+      "samples_us": [
+        37998
+      ],
+      "median_us": 37998,
+      "success": true
+    },
+    {
+      "name": "cellx2500 (first: pass, last: pass)",
+      "samples_us": [
+        115599
+      ],
+      "median_us": 115599,
+      "success": true
+    },
+    {
+      "name": "cellx5000 (first: pass, last: pass)",
+      "samples_us": [
+        238300
+      ],
+      "median_us": 238300,
+      "success": true
+    },
+    {
+      "name": "10x5 - 2 sources - read 20.0% (simple, sum: pass, count: pass)",
+      "samples_us": [
+        939700
+      ],
+      "median_us": 939700,
+      "success": true
+    },
+    {
+      "name": "10x10 - 6 sources - dynamic - read 20.0% (dynamic, sum: pass, count: pass)",
+      "samples_us": [
+        810701
+      ],
+      "median_us": 810701,
+      "success": true
+    },
+    {
+      "name": "1000x12 - 4 sources - dynamic (large, sum: pass, count: pass)",
+      "samples_us": [
+        768400
+      ],
+      "median_us": 768400,
+      "success": true
+    },
+    {
+      "name": "1000x5 - 25 sources (wide dense, sum: pass, count: pass)",
+      "samples_us": [
+        1945100
+      ],
+      "median_us": 1945100,
+      "success": true
+    },
+    {
+      "name": "5x500 - 3 sources (deep, sum: pass, count: pass)",
+      "samples_us": [
+        492399
+      ],
+      "median_us": 492399,
+      "success": true
+    },
+    {
+      "name": "100x15 - 6 sources - dynamic (very dynamic, sum: pass, count: pass)",
+      "samples_us": [
+        841701
+      ],
+      "median_us": 841701,
+      "success": true
+    },
+    {
+      "name": "native_remove_alternating_10000",
+      "samples_us": [
+        201
+      ],
+      "median_us": 201,
+      "success": true
+    },
+    {
+      "name": "observable_remove_alternating_10000",
+      "samples_us": [
+        899
+      ],
+      "median_us": 899,
+      "success": true
+    },
+    {
+      "name": "native_remove_alternating_50000",
+      "samples_us": [
+        300
+      ],
+      "median_us": 300,
+      "success": true
+    },
+    {
+      "name": "observable_remove_alternating_50000",
+      "samples_us": [
+        16500
+      ],
+      "median_us": 16500,
+      "success": true
+    },
+    {
+      "name": "native_remove_alternating_100000",
+      "samples_us": [
+        500
+      ],
+      "median_us": 500,
+      "success": true
+    },
+    {
+      "name": "observable_remove_alternating_100000",
+      "samples_us": [
+        2747300
+      ],
+      "median_us": 2747300,
+      "success": true
+    },
+    {
+      "name": "bulk_map_set_direct",
+      "samples_us": [
+        10699
+      ],
+      "median_us": 10699,
+      "success": true,
+      "map_reactions": 10000,
+      "set_reactions": 10000
+    },
+    {
+      "name": "bulk_map_set_outer_action",
+      "samples_us": [
+        1100
+      ],
+      "median_us": 1100,
+      "success": true,
+      "map_reactions": 1,
+      "set_reactions": 1
+    }
+  ]
+}

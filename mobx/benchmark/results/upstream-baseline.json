@@ -1,0 +1,291 @@
+{
+  "schema": 1,
+  "suite": "upstream",
+  "upstream_revision": "03663d64413a84c3449b932dac10f576b6314dd0",
+  "dart": "3.13.2 (stable) (Tue Aug 25 01:01:12 2026 -0700) on \"macos_arm64\"",
+  "os": "macos",
+  "processors": 12,
+  "samples": 1,
+  "cases": [
+    {
+      "name": "avoidablePropagation (success)",
+      "samples_us": [
+        1422466
+      ],
+      "median_us": 1422466,
+      "success": true
+    },
+    {
+      "name": "broadPropagation (success)",
+      "samples_us": [
+        2491174
+      ],
+      "median_us": 2491174,
+      "success": true
+    },
+    {
+      "name": "deepPropagation (success)",
+      "samples_us": [
+        897306
+      ],
+      "median_us": 897306,
+      "success": true
+    },
+    {
+      "name": "diamond (success)",
+      "samples_us": [
+        1402940
+      ],
+      "median_us": 1402940,
+      "success": true
+    },
+    {
+      "name": "mux (success)",
+      "samples_us": [
+        1114948
+      ],
+      "median_us": 1114948,
+      "success": true
+    },
+    {
+      "name": "repeatedObservers (success)",
+      "samples_us": [
+        131415
+      ],
+      "median_us": 131415,
+      "success": true
+    },
+    {
+      "name": "triangle (success)",
+      "samples_us": [
+        468739
+      ],
+      "median_us": 468739,
+      "success": true
+    },
+    {
+      "name": "unstable (success)",
+      "samples_us": [
+        197574
+      ],
+      "median_us": 197574,
+      "success": true
+    },
+    {
+      "name": "molBench",
+      "samples_us": [
+        380574
+      ],
+      "median_us": 380574,
+      "success": true
+    },
+    {
+      "name": "create_signals",
+      "samples_us": [
+        32464
+      ],
+      "median_us": 32464,
+      "success": true
+    },
+    {
+      "name": "comp_0to1",
+      "samples_us": [
+        10379
+      ],
+      "median_us": 10379,
+      "success": true
+    },
+    {
+      "name": "comp_1to1",
+      "samples_us": [
+        24136
+      ],
+      "median_us": 24136,
+      "success": true
+    },
+    {
+      "name": "comp_2to1",
+      "samples_us": [
+        18333
+      ],
+      "median_us": 18333,
+      "success": true
+    },
+    {
+      "name": "comp_4to1",
+      "samples_us": [
+        6547
+      ],
+      "median_us": 6547,
+      "success": true
+    },
+    {
+      "name": "comp_1000to1",
+      "samples_us": [
+        10
+      ],
+      "median_us": 10,
+      "success": true
+    },
+    {
+      "name": "comp_1to2",
+      "samples_us": [
+        17339
+      ],
+      "median_us": 17339,
+      "success": true
+    },
+    {
+      "name": "comp_1to4",
+      "samples_us": [
+        18655
+      ],
+      "median_us": 18655,
+      "success": true
+    },
+    {
+      "name": "comp_1to8",
+      "samples_us": [
+        15437
+      ],
+      "median_us": 15437,
+      "success": true
+    },
+    {
+      "name": "comp_1to1000",
+      "samples_us": [
+        9497
+      ],
+      "median_us": 9497,
+      "success": true
+    },
+    {
+      "name": "update_1to1",
+      "samples_us": [
+        11306
+      ],
+      "median_us": 11306,
+      "success": true
+    },
+    {
+      "name": "update_2to1",
+      "samples_us": [
+        5675
+      ],
+      "median_us": 5675,
+      "success": true
+    },
+    {
+      "name": "update_4to1",
+      "samples_us": [
+        2759
+      ],
+      "median_us": 2759,
+      "success": true
+    },
+    {
+      "name": "update_1000to1",
+      "samples_us": [
+        28
+      ],
+      "median_us": 28,
+      "success": true
+    },
+    {
+      "name": "update_1to2",
+      "samples_us": [
+        5834
+      ],
+      "median_us": 5834,
+      "success": true
+    },
+    {
+      "name": "update_1to4",
+      "samples_us": [
+        2846
+      ],
+      "median_us": 2846,
+      "success": true
+    },
+    {
+      "name": "update_1to1000",
+      "samples_us": [
+        95
+      ],
+      "median_us": 95,
+      "success": true
+    },
+    {
+      "name": "cellx1000 (first: pass, last: pass)",
+      "samples_us": [
+        62637
+      ],
+      "median_us": 62637,
+      "success": true
+    },
+    {
+      "name": "cellx2500 (first: pass, last: pass)",
+      "samples_us": [
+        195835
+      ],
+      "median_us": 195835,
+      "success": true
+    },
+    {
+      "name": "cellx5000 (first: pass, last: pass)",
+      "samples_us": [
+        437475
+      ],
+      "median_us": 437475,
+      "success": true
+    },
+    {
+      "name": "10x5 - 2 sources - read 20.0% (simple, sum: pass, count: pass)",
+      "samples_us": [
+        1256476
+      ],
+      "median_us": 1256476,
+      "success": true
+    },
+    {
+      "name": "10x10 - 6 sources - dynamic - read 20.0% (dynamic, sum: pass, count: pass)",
+      "samples_us": [
+        955771
+      ],
+      "median_us": 955771,
+      "success": true
+    },
+    {
+      "name": "1000x12 - 4 sources - dynamic (large, sum: pass, count: pass)",
+      "samples_us": [
+        1095486
+      ],
+      "median_us": 1095486,
+      "success": true
+    },
+    {
+      "name": "1000x5 - 25 sources (wide dense, sum: pass, count: pass)",
+      "samples_us": [
+        2272935
+      ],
+      "median_us": 2272935,
+      "success": true
+    },
+    {
+      "name": "5x500 - 3 sources (deep, sum: pass, count: pass)",
+      "samples_us": [
+        654007
+      ],
+      "median_us": 654007,
+      "success": true
+    },
+    {
+      "name": "100x15 - 6 sources - dynamic (very dynamic, sum: pass, count: pass)",
+      "samples_us": [
+        1025449
+      ],
+      "median_us": 1025449,
+      "success": true
+    }
+  ]
+}

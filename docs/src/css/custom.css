@@ -1,49 +1,94 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* stylelint-disable docusaurus/copyright-header */
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
-/* You can override the default Infima variables here. */
+@import '@fontsource-variable/manrope';
 :root {
-  --ifm-color-primary: #1389fd;
-  --ifm-color-primary-dark: #027bf3;
-  --ifm-color-primary-darker: #0275e5;
-  --ifm-color-primary-darkest: #0260bd;
-  --ifm-color-primary-light: #2e96fd;
-  --ifm-color-primary-lighter: #3b9dfd;
-  --ifm-color-primary-lightest: #64b1fe;
-
-  --ifm-code-font-size: 100%;
-
-  --ifm-navbar-search-input-background-color: theme('colors.blue.100');
-  --ifm-code-padding-horizontal: 0.5rem;
+  --ifm-color-primary: #376ba5; --ifm-color-primary-dark: #316094; --ifm-color-primary-darker: #2e5b8c; --ifm-color-primary-darkest: #264b73; --ifm-color-primary-light: #4278b5; --ifm-color-primary-lighter: #5082bb; --ifm-color-primary-lightest: #709bcd;
+  --ifm-font-family-base: 'Manrope Variable', sans-serif;
+  --ifm-heading-font-family: 'Manrope Variable', sans-serif;
+  --ifm-heading-font-weight: 750; --ifm-code-font-size: 90%; --ifm-navbar-height: 4.7rem; --ifm-navbar-shadow: none;
+  --mobx-paper: #fcfbf8; --mobx-surface: #ffffff; --mobx-ink: #283646; --mobx-muted: #5d6c7d;
+  --mobx-line: #e0e5e9; --mobx-line-strong: #bfccd8; --mobx-shadow: #22344908;
+  --mobx-soft: #f0f3f6; --mobx-soft-band: #f1f6f7; --mobx-halo: #f5eee0; --mobx-code: #f8fafc;
+  --mobx-accent: #bd522d; --mobx-heading-accent: #376ba5; --mobx-green: #438b73; --mobx-button-hover: #405872;
+  --mobx-peach: #fff0e5; --mobx-peach-edge: #edc5ab; --mobx-peach-ink: #9c482a;
+  --mobx-blue: #eaf2ff; --mobx-blue-edge: #bad0ed; --mobx-blue-ink: #386ca6;
+  --mobx-mint: #e8f5ee; --mobx-mint-edge: #b8d9c7; --mobx-mint-ink: #367560;
+  --mobx-violet: #efebfa; --mobx-violet-ink: #72629b; --mobx-pink: #fbeaf0; --mobx-pink-ink: #a45d76;
+  --ifm-font-color-base: var(--mobx-ink); --ifm-background-color: var(--mobx-paper); --ifm-navbar-background-color: var(--mobx-paper);
+}
+[data-theme='dark'] {
+  --ifm-color-primary: #95bce8; --ifm-color-primary-dark: #81afe2; --ifm-color-primary-darker: #77a8df; --ifm-color-primary-darkest: #5994d6; --ifm-color-primary-light: #a9c9ee; --ifm-color-primary-lighter: #b3cff1; --ifm-color-primary-lightest: #d1e2fa;
+  --mobx-paper: #15212d; --mobx-surface: #1b2a39; --mobx-ink: #e9eff4; --mobx-muted: #afbfce;
+  --mobx-line: #344454; --mobx-line-strong: #52677b; --mobx-shadow: #00000018;
+  --mobx-soft: #243545; --mobx-soft-band: #192b38; --mobx-halo: #273540; --mobx-code: #172532;
+  --mobx-accent: #f2ac87; --mobx-heading-accent: #95bce8; --mobx-green: #7ac2a9; --mobx-button-hover: #cbddec;
+  --mobx-peach: #422f29; --mobx-peach-edge: #745142; --mobx-peach-ink: #f2b490;
+  --mobx-blue: #233a52; --mobx-blue-edge: #426487; --mobx-blue-ink: #a1c6ef;
+  --mobx-mint: #233f35; --mobx-mint-edge: #456b5c; --mobx-mint-ink: #9fd6bf;
+  --mobx-violet: #38324b; --mobx-violet-ink: #c4b8e7; --mobx-pink: #462f3b; --mobx-pink-ink: #e7b0c5;
 }
 
-.navbar__search-input {
-  border: 1px solid theme('colors.blue.300');
-  font-size: 1rem;
-
-  &::placeholder {
-      color: theme('colors.blue.400');
-  }
+html {
+  scroll-behavior: smooth;
 }
-
+.navbar {
+  border-bottom: 1px solid var(--mobx-line);
+  padding-inline: clamp(1rem, 4vw, 4rem);
+}
 .navbar__title {
-  @apply invisible;
+  font-size: 1.3rem;
+  letter-spacing: -0.04em;
 }
-
-@media screen and (min-width: 400px) {
-  .navbar__title {
-    @apply visible;
+.navbar__logo {
+  height: 2rem;
+}
+.navbar__link {
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+.footer--dark {
+  --ifm-footer-background-color: #252820;
+  --ifm-footer-title-color: #faf9f5;
+  --ifm-footer-link-color: #d9dcd0;
+}
+.footer {
+  padding: 4rem clamp(1rem, 4vw, 4rem) 2rem;
+}
+.footer__copyright {
+  text-align: left;
+  font-size: 0.8rem;
+  color: #c1c5b8;
+}
+.markdown h1 {
+  letter-spacing: -0.04em;
+}
+.markdown h2 {
+  letter-spacing: -0.035em;
+}
+.markdown {
+  line-height: 1.8;
+}
+.menu__link--active:not(.menu__link--sublist) {
+  background: var(--mobx-blue);
+}
+.circle-bullet {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  color: white;
+  font-weight: 700;
+}
+:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
-
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
   display: block;
@@ -73,3 +118,40 @@
   background: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
     no-repeat;
 }
+.author-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+.author-profile img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.author-profile p {
+  font-size: 0.8rem;
+  color: var(--mobx-muted);
+  margin: 0.25rem 0 0;
+}
+
+::selection {
+  background: #efd5bd;
+  color: #252820;
+}
+input,
+textarea {
+  caret-color: var(--ifm-color-primary);
+}
+a {
+  text-underline-offset: 0.2em;
+}
+.link-arrow {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .icon-link:before { filter: invert(1); }
+[data-theme='dark'] .footer--dark { --ifm-footer-background-color: #101a24; }

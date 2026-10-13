@@ -70,10 +70,16 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
 
   @override
   // ignore: prefer_final_fields
-  Set<Atom> _observables = {};
+  List<Atom> _observables = const [];
 
   @override
   Set<Atom>? _newObservables;
+
+  @override
+  int _trackingId = 0;
+
+  @override
+  int _trackingIndex = 0;
 
   T Function() _fn;
 
@@ -96,8 +102,11 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
     if (!_context.isWithinBatch && _observers.isEmpty && !_keepAlive) {
       if (_context._shouldCompute(this)) {
         _context.startBatch();
-        _value = computeValue(track: false);
-        _context.endBatch();
+        try {
+          _value = computeValue(track: false);
+        } finally {
+          _context.endBatch();
+        }
       }
     } else {
       reportObserved();
@@ -119,26 +128,25 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
     _isComputing = true;
     _context.pushComputation();
 
-    T? value;
-    if (track) {
-      value = _context.trackDerivation(this, _fn);
-    } else {
-      if (_context.config.disableErrorBoundaries == true) {
-        value = _fn();
+    try {
+      if (track) {
+        return _context.trackDerivation(this, _fn);
+      } else if (_context.config.disableErrorBoundaries == true) {
+        return _fn();
       } else {
         try {
-          value = _fn();
+          final value = _fn();
           _errorValue = null;
+          return value;
         } on Object catch (e, s) {
           _errorValue = MobXCaughtException(e, stackTrace: s);
+          return null;
         }
       }
+    } finally {
+      _context.popComputation();
+      _isComputing = false;
     }
-
-    _context.popComputation();
-    _isComputing = false;
-
-    return value;
   }
 
   @override
@@ -167,8 +175,18 @@ class Computed<T> extends Atom implements Derivation, ObservableValue<T> {
 
     final changedException =
         hadCaughtException != _context._hasCaughtException(this);
-    final changed =
-        wasSuspended || changedException || !_isEqual(oldValue, newValue);
+    bool changed;
+    try {
+      changed =
+          wasSuspended || changedException || !_isEqual(oldValue, newValue);
+    } on Object catch (error, stack) {
+      if (_context.config.disableErrorBoundaries) {
+        _dependenciesState = DerivationState.stale;
+        rethrow;
+      }
+      _errorValue = MobXCaughtException(error, stackTrace: stack);
+      return true;
+    }
 
     if (changed) {
       _value = newValue;

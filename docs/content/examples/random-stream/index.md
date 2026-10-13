@@ -1,0 +1,129 @@
+---
+title: Random Stream
+---
+
+# Random Stream
+
+MobX provides a variety of reactive data structures to create your
+reactive-state. You must have already seen examples of the `Observable`,
+`ObservableSet`, `ObservableMap`, `ObservableList`, `ObservableFuture`. To add
+to this mix, we have the `ObservableStream<T>` that takes a stream and makes it
+reactive.
+
+In this example, we will take a quick look at using the `ObservableStream` by
+observing a stream of random numbers.
+
+:::info
+
+See the complete code
+[here](https://github.com/mobxjs/mobx.dart/tree/main/mobx_examples/lib/random_stream).
+
+:::
+
+## The RandomStore
+
+Let's start out by creating a `Store` to define our reactive state. The
+`RandomStore` defines a field named `randomStream`, that is pumped with random
+integers, every second. You can see the code below that defines the store:
+
+```dart
+part 'random_store.g.dart';
+
+class RandomStore = _RandomStore with _$RandomStore;
+
+abstract class _RandomStore with Store {
+  _RandomStore() {
+    _streamController = StreamController<int>();
+
+    _timer = Timer.periodic(const Duration(seconds: 1),
+        (_) => _streamController.add(_random.nextInt(100)));
+
+    randomStream = ObservableStream(_streamController.stream);
+  }
+
+  late final Timer _timer;
+
+  final _random = Random();
+
+  late final StreamController<int> _streamController;
+
+  late final ObservableStream<int?> randomStream;
+
+  // ignore: avoid_void_async
+  void dispose() async {
+    _timer.cancel();
+    await _streamController.close();
+  }
+}
+
+```
+
+The `ObservableStream<int>` wraps a `Stream<int>` coming from the
+`StreamController<int>`. When the `_timer` ticks, we are putting a new random
+integer into the stream, now tracked by `ObservableStream`. If there is a
+reaction reading the `randomStream.value` somewhere, it will surely re-execute
+(react? :-)).
+
+## The reactive Observer
+
+Well, in this case, our reaction happens to be the Observer which will simply
+show the new random number on the screen.
+
+
+<img src="/content-assets/examples/random-stream/random-number.png" width="300" />
+
+The code is fairly straightforward. We are just reading the `randomStream.value`
+and showing it inside the `Text` component.
+
+```dart
+class RandomNumberExample extends StatefulWidget {
+  const RandomNumberExample();
+
+  @override
+  _RandomNumberExampleState createState() => _RandomNumberExampleState();
+}
+
+class _RandomNumberExampleState extends State<RandomNumberExample> {
+  final RandomStore store = RandomStore();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: const Text('Random Number Generator'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Random number',
+              style: TextStyle(color: Colors.grey),
+            ),
+            Observer(
+              builder: (_) {
+                final value = store.randomStream.value;
+
+                return Text(
+                  '${value == null ? '---' : value}',
+                  style: TextStyle(fontSize: 96),
+                );
+              },
+            ),
+          ],
+        ),
+      ));
+
+  @override
+  void dispose() {
+    store.dispose();
+  }
+}
+
+```
+
+:::info
+
+See the complete code
+[here](https://github.com/mobxjs/mobx.dart/tree/main/mobx_examples/lib/random_stream).
+
+:::

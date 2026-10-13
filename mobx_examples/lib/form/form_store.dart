@@ -5,7 +5,7 @@ import 'package:validators2/validators2.dart';
 part 'form_store.g.dart';
 
 class CustomColor extends Color {
-  CustomColor(int value) : super(value);
+  CustomColor(super.value);
 }
 
 // ignore: library_private_types_in_public_api

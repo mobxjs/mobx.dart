@@ -1,0 +1,61 @@
+name: Performance suite
+
+on:
+  pull_request:
+    paths:
+      - 'mobx/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.github/workflows/performance.yml'
+  workflow_dispatch:
+    inputs:
+      full:
+        description: Run all 35 locally maintained workloads as well as smoke checks
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: mobx
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+        working-directory: .
+      - name: Correctness gates
+        run: dart test test/all_tests.dart
+      - name: Wasm correctness
+        run: dart test test/all_tests.dart --platform chrome --compiler dart2wasm
+      - name: Compile native performance runner
+        run: dart compile exe benchmark/run.dart -o /tmp/mobx-perf
+      - name: Smoke workloads
+        run: |
+          mkdir -p /tmp/mobx-perf-results
+          /tmp/mobx-perf --suite=propagation --samples=1 --iterations=5 --output=/tmp/mobx-perf-results/propagation.json
+          /tmp/mobx-perf --suite=collections --samples=1 --output=/tmp/mobx-perf-results/collections.json
+      - name: Release Wasm smoke workloads
+        run: |
+          mkdir -p .dart_tool/mobx-wasm
+          dart compile wasm benchmark/web.dart -o .dart_tool/mobx-wasm/run.wasm
+          dart benchmark/run_wasm.dart --suite=propagation --samples=1 --iterations=5 --output=/tmp/mobx-perf-results/wasm-propagation.json
+          dart benchmark/run_wasm.dart --suite=collections --samples=1 --output=/tmp/mobx-perf-results/wasm-collections.json
+      - name: Full locally maintained suite
+        if: github.event_name == 'workflow_dispatch' && inputs.full
+        run: |
+          /tmp/mobx-perf --suite=upstream --samples=3 --output=/tmp/mobx-perf-results/upstream.json
+          dart benchmark/run_wasm.dart --suite=upstream --samples=3 --output=/tmp/mobx-perf-results/wasm-upstream.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: performance-results
+          path: /tmp/mobx-perf-results/*.json
+          if-no-files-found: warn

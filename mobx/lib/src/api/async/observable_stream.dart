@@ -35,7 +35,10 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
   /// the first value emitted to the subscription created by [listen].
   ///
   /// If `cancelOnError` is `true`, the stream will be cancelled when an error
-  /// event is emitted by the source stream. The default value is `false`.
+  /// event is emitted by the source stream. The observable status becomes
+  /// [StreamStatus.done] and downstream listeners receive the error followed
+  /// by done, unless their own subscription cancels on error. The default
+  /// value is `false`.
   ///
   /// It is possible to override equality comparison of new values with [equals].
   ObservableStream(
@@ -132,6 +135,9 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
     }
 
     final data = _controller.data;
+    if (_controller.valueType == _ValueType.none) {
+      return done == null ? null : done(null, null);
+    }
     final hasValue = _controller.valueType == _ValueType.value;
     final overrideDone = status == StreamStatus.done && done == null;
     final isActive = status == StreamStatus.active;
@@ -143,7 +149,7 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
         return error == null ? null : error(data);
       }
     }
-    return hasValue ? done!(data as T, null) : done!(null, data);
+    return hasValue ? done!(data as T?, null) : done!(null, data);
   }
 
   /// Create a new stream with the provided initialValue and cancelOnError.
@@ -369,7 +375,7 @@ class ObservableStream<T> implements Stream<T>, ObservableValue<T?> {
       _wrap(_controller.stream.where(test));
 }
 
-enum _ValueType { value, error }
+enum _ValueType { none, value, error }
 
 class _ObservableStreamController<T> {
   _ObservableStreamController(
@@ -390,7 +396,7 @@ class _ObservableStreamController<T> {
          name: '$name.status',
        ),
        _valueType = Observable(
-         _ValueType.value,
+         initialValue == null ? _ValueType.none : _ValueType.value,
          context: context,
          name: '$name.valueType',
        ),
@@ -450,6 +456,7 @@ class _ObservableStreamController<T> {
 
   int _listenCount = 0;
   bool _isCancelled = false;
+  bool _hasEnded = false;
 
   bool get isCancelled => _isCancelled;
 
@@ -473,6 +480,7 @@ class _ObservableStreamController<T> {
 
   void _listen() {
     _listenCount++;
+    if (_hasEnded && !_isCancelled) return;
     if (_subscription == null) {
       if (_isCancelled) {
         throw StateError(
@@ -522,7 +530,7 @@ class _ObservableStreamController<T> {
     }
   }
 
-  void _onError(Object error) {
+  void _onError(Object error, StackTrace stackTrace) {
     final actionInfo = _actions.startAction();
     try {
       _status.value = StreamStatus.active;
@@ -531,11 +539,14 @@ class _ObservableStreamController<T> {
     } finally {
       _actions.endAction(actionInfo);
       _tryInsertInitialValue();
-      _controller.addError(error);
+      _controller.addError(error, stackTrace);
+      if (cancelOnError) _onDone();
     }
   }
 
   void _onDone() {
+    if (_hasEnded) return;
+    _hasEnded = true;
     final actionInfo = _actions.startAction();
     try {
       _status.value = StreamStatus.done;
@@ -548,6 +559,10 @@ class _ObservableStreamController<T> {
 
   void _tryInsertInitialValue() {
     final initialStreamValue = _initialStreamValue;
+    if (_isCancelled || _controller.isClosed) {
+      _initialStreamValue = null;
+      return;
+    }
     if (initialStreamValue != null) {
       _initialStreamValue = null;
       _controller.add(initialStreamValue);

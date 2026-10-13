@@ -25,6 +25,16 @@ class ReactionImpl with DebugCreationStack implements Reaction {
 
   final ReactiveContext _context;
   late void Function() _onInvalidate;
+  Timer? _timer;
+
+  void _setTimer(Timer timer) {
+    if (_isDisposed) {
+      timer.cancel();
+    } else {
+      _timer = timer;
+    }
+  }
+
   bool _isScheduled = false;
   bool _isDisposed = false;
   bool _isRunning = false;
@@ -36,8 +46,14 @@ class ReactionImpl with DebugCreationStack implements Reaction {
   Set<Atom>? _newObservables;
 
   @override
+  int _trackingId = 0;
+
+  @override
+  int _trackingIndex = 0;
+
+  @override
   // ignore: prefer_final_fields
-  Set<Atom> _observables = {};
+  List<Atom> _observables = const [];
 
   bool get hasObservables => _observables.isNotEmpty;
 
@@ -87,28 +103,25 @@ class ReactionImpl with DebugCreationStack implements Reaction {
     }
 
     _isRunning = true;
-    _context.trackDerivation(this, fn);
-    _isRunning = false;
-
-    if (_isDisposed) {
-      _context.clearObservables(this);
+    try {
+      _context.trackDerivation(this, fn);
+      if (_context._hasCaughtException(this)) {
+        _reportException(_errorValue!, _errorValue!.stackTrace);
+      }
+      if (notify) {
+        _context.spyReport(
+          EndedSpyEvent(
+            type: 'reaction',
+            name: name,
+            duration: DateTime.now().difference(startTime!),
+          ),
+        );
+      }
+    } finally {
+      _isRunning = false;
+      if (_isDisposed) _context.clearObservables(this);
+      _context.endBatch();
     }
-
-    if (_context._hasCaughtException(this)) {
-      _reportException(_errorValue!, _errorValue!.stackTrace);
-    }
-
-    if (notify) {
-      _context.spyReport(
-        EndedSpyEvent(
-          type: 'reaction',
-          name: name,
-          duration: DateTime.now().difference(startTime!),
-        ),
-      );
-    }
-
-    _context.endBatch();
   }
 
   @override
@@ -121,17 +134,16 @@ class ReactionImpl with DebugCreationStack implements Reaction {
 
     _isScheduled = false;
 
-    if (_context._shouldCompute(this)) {
-      try {
+    try {
+      if (_context._shouldCompute(this)) {
         _onInvalidate();
-      } on Object catch (e, s) {
-        // Note: "on Object" accounts for both Error and Exception
-        _errorValue = MobXCaughtException(e, stackTrace: s);
-        _reportException(_errorValue!, s);
       }
+    } on Object catch (e, s) {
+      _errorValue = MobXCaughtException(e, stackTrace: s);
+      _reportException(_errorValue!, s);
+    } finally {
+      _context.endBatch();
     }
-
-    _context.endBatch();
   }
 
   @override
@@ -141,6 +153,8 @@ class ReactionImpl with DebugCreationStack implements Reaction {
     }
 
     _isDisposed = true;
+    _timer?.cancel();
+    _timer = null;
 
     if (_isRunning) {
       return;

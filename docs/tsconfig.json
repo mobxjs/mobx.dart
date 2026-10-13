@@ -1,13 +1,4 @@
 {
-  "extends": "@docusaurus/types/tsconfig.json",
-  "include": ["src/"],
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "allowJs": true,
-    "jsx": "react"
-  },
-  "exclude": ["node_modules"]
+ "include":[".vitepress/**/*.ts",".vitepress/**/*.tsx",".vitepress/**/*.vue"],
+ "compilerOptions":{"target":"ES2022","module":"ESNext","moduleResolution":"bundler","jsx":"preserve","jsxImportSource":"vue","lib":["ES2022","DOM"],"strict":true,"esModuleInterop":true,"resolveJsonModule":true,"skipLibCheck":true,"noEmit":true,"types":["node"]}
 }

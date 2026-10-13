@@ -22,7 +22,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp(this.sharedPreferences, {Key? key}) : super(key: key);
+  const MyApp(this.sharedPreferences, {super.key});
 
   final SharedPreferences sharedPreferences;
 
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
               create: (_) => PreferencesService(sharedPreferences),
             ),
             ProxyProvider<PreferencesService, SettingsStore>(
-                update: (_, preferencesService, __) =>
+                update: (_, preferencesService, _) =>
                     SettingsStore(preferencesService)),
             Provider<ConnectivityStore>(
               create: (_) => ConnectivityStore(),
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             )
           ],
           child: Consumer<SettingsStore>(
-            builder: (_, store, __) => Observer(
+            builder: (_, store, _) => Observer(
               builder: (_) => MaterialApp(
                 initialRoute: '/',
                 theme: ThemeData(
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
 }
 
 class ExampleList extends StatelessWidget {
-  const ExampleList({Key? key}) : super(key: key);
+  const ExampleList({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(

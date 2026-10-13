@@ -34,10 +34,10 @@ android
 macos
 linux
 windows
-web
+web/*
+!web/index.html
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Mobx Examples
 mobx_examples/test/widget_test*.*

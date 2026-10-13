@@ -1,0 +1,21 @@
+{
+  "baseline": "dc532481ab5d1044889e63335defd40501bee8c6",
+  "sha256": {
+    "flutter_mobx/lib/src/observer.dart": "2baf4d0ec6e381f174f4103ee52e7c930e65900de2293e0fa912ff4cb55ee564",
+    "mobx/lib/src/api/action.dart": "588ad67dc9678eaf7bba1863f4e75f6917a77eac88dddacadf6e6db5243b1f05",
+    "mobx/lib/src/api/async/async_action.dart": "37f2f87562e921d0cf085c5aa414733028f6c1e1da1df38a0f734cbbc8b329d2",
+    "mobx/lib/src/api/async/observable_future.dart": "69065b0f3c61f8c8793974e4c6bc7bd87ace92724d4248685f9b62d75683c364",
+    "mobx/lib/src/api/async/observable_stream.dart": "2ad7f97e0c07635c1fa97bce6bba71f85e036cb218b7507968782d4c67d8b0b5",
+    "mobx/lib/src/api/observable_collections/observable_list.dart": "c84918552b543a7e6c6e27e80dff94e987e46835807070f378ec4ceb83213427",
+    "mobx/lib/src/api/observable_collections/observable_map.dart": "252e5247ce68a91a69554e7cc82da99bd279bffdbe7e7229264c8182ccae6275",
+    "mobx/lib/src/api/observable_collections/observable_set.dart": "6c6b27d3e15fb2bb7ea5e9f32e41f00421be017aa57b38ee2bb73257648d9ecf",
+    "mobx/lib/src/core/action.dart": "2e65a5f7703d6c2764c086541bca1336527569b2bc9c6864527816cfd56deaab",
+    "mobx/lib/src/core/atom.dart": "962a3d31c6e8711d46b116067fcd94b09fca140d3eef873ef23a50b9fda0e791",
+    "mobx/lib/src/core/computed.dart": "a95a40d2fad53f6599b57071f947df2eef83915cbaea2bdc3cb81781d2e3d7ca",
+    "mobx/lib/src/core/context.dart": "5c45080b1f62410cb236bac7995b0406082cfb791020cd6574b14f726237622c",
+    "mobx/lib/src/core/derivation.dart": "ee6e3293e6865883c712549e0b87bcce0edd0b530395994c2d7119abd035f710",
+    "mobx/lib/src/core/observable.dart": "2061967d4359660bc1140001c6d7df6e12d6d4269854c74872c660734377e383",
+    "mobx/lib/src/core/reaction.dart": "40f7b3c0066101dc77a18b7f790cd585c5836ea7df5b438ae544c9ed29ec7377",
+    "mobx/lib/src/core/reaction_helper.dart": "a22f021a488a70fdf10c80ae082e0d30d6b9542bc9859b5afdab87e2632cf1d4"
+  }
+}

@@ -1,0 +1,66 @@
+00:00 +0: loading tool/audit/propagation_test.dart
+00:00 +0: G8 computed equality failures reach observing reaction
+00:00 +0 -1: G8 computed equality failures reach observing reaction [E]
+  Expected: non-empty
+    Actual: []
+  
+  package:matcher                        expect
+  tool/audit/propagation_test.dart 29:5  main.<fn>
+  
+00:00 +0 -1: G9 writing an observable does not subscribe to its previous value
+00:00 +0 -2: G9 writing an observable does not subscribe to its previous value [E]
+  Expected: <1>
+    Actual: <3>
+  
+  package:matcher                        expect
+  tool/audit/propagation_test.dart 44:5  main.<fn>
+  
+00:00 +0 -2: G10 lifecycle handler may unregister itself during delivery
+00:00 +0 -3: G10 lifecycle handler may unregister itself during delivery [E]
+  Expected: empty
+    Actual: [
+              MobXCaughtException:MobXCaughtException: Concurrent modification during iteration: _Set len:1.
+            ]
+  
+  package:matcher                        expect
+  tool/audit/propagation_test.dart 68:5  main.<fn>
+  
+00:00 +0 -3: G1 computed reports successive distinct errors
+00:00 +1 -3: G2 resubscribing during computed unobserve preserves dependencies
+00:00 +1 -4: G2 resubscribing during computed unobserve preserves dependencies [E]
+  Expected: <4>
+    Actual: <2>
+  
+  package:matcher                         expect
+  tool/audit/propagation_test.dart 115:5  main.<fn>
+  
+00:00 +1 -4: G3 lifecycle hook reads do not become caller dependencies
+00:00 +1 -5: G3 lifecycle hook reads do not become caller dependencies [E]
+  Expected: <1>
+    Actual: <2>
+  
+  package:matcher                         expect
+  tool/audit/propagation_test.dart 136:5  main.<fn>
+  
+00:00 +1 -5: G4 cycle recovery does not strand an unrelated scheduled reaction
+00:00 +1 -6: G4 cycle recovery does not strand an unrelated scheduled reaction [E]
+  Expected: <2>
+    Actual: <0>
+  
+  package:matcher                         expect
+  tool/audit/propagation_test.dart 169:5  main.<fn>
+  
+00:00 +1 -6: G5 error handler registration is isolated per context
+00:00 +1 -7: G5 error handler registration is isolated per context [E]
+  Expected: <0>
+    Actual: <1>
+  
+  package:matcher                         expect
+  tool/audit/propagation_test.dart 182:5  main.<fn>
+  
+00:00 +1 -7: G6 computed equality exception can recover without stale cache
+00:00 +2 -7: G7 seeded dynamic diamond graph stays consistent across batches
+00:00 +3 -7: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

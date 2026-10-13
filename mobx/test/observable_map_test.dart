@@ -61,7 +61,7 @@ void main() {
       var count = 0;
       autorun((_) {
         // ignore:unnecessary_statements
-        map.forEach((_, __) {});
+        map.forEach((_, _) {});
         count++;
       });
       expect(count, equals(1));
@@ -96,7 +96,7 @@ void main() {
         '[]': (m) => m['a'],
         'containsKey': (m) => m.containsKey('a'),
         'containsValue': (m) => m.containsValue(1),
-        'forEach': (m) => m.forEach((_, __) {}),
+        'forEach': (m) => m.forEach((_, _) {}),
         'putIfAbsent': (m) => m.putIfAbsent('a', () => 1),
         'length': (m) => m.length,
         'isEmpty': (m) => m.isEmpty,

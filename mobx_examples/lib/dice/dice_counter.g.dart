@@ -12,9 +12,12 @@ mixin _$DiceCounter on _DiceCounter, Store {
   Computed<int>? _$totalComputed;
 
   @override
-  int get total => (_$totalComputed ??=
-          Computed<int>(() => super.total, name: '_DiceCounter.total'))
-      .value;
+  int get total =>
+      (_$totalComputed ??= Computed<int>(
+            () => super.total,
+            name: '_DiceCounter.total',
+          ))
+          .value;
 
   late final _$leftAtom = Atom(name: '_DiceCounter.left', context: context);
 
@@ -46,13 +49,16 @@ mixin _$DiceCounter on _DiceCounter, Store {
     });
   }
 
-  late final _$_DiceCounterActionController =
-      ActionController(name: '_DiceCounter', context: context);
+  late final _$_DiceCounterActionController = ActionController(
+    name: '_DiceCounter',
+    context: context,
+  );
 
   @override
   void roll() {
-    final _$actionInfo =
-        _$_DiceCounterActionController.startAction(name: '_DiceCounter.roll');
+    final _$actionInfo = _$_DiceCounterActionController.startAction(
+      name: '_DiceCounter.roll',
+    );
     try {
       return super.roll();
     } finally {

@@ -236,13 +236,16 @@ void main() {
 
       String? value;
       MobXCaughtException? error;
-      autorun((_) {
-        try {
-          value = c2.value;
-        } finally {
-          error = c2.errorValue;
-        }
-      });
+      autorun(
+        (_) {
+          try {
+            value = c2.value;
+          } finally {
+            error = c2.errorValue;
+          }
+        },
+        onError: (_, _) {},
+      ); // This test deliberately observes a failing computed.
 
       expect(value, isNull);
       expect(error, isNotNull);

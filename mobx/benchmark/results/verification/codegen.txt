@@ -1,0 +1,101 @@
+00:00 +0: loading test/generator_usage_test.dart
+00:00 +0: test/generator_usage_test.dart: setting fields with action works
+00:00 +1: test/errors_test.dart: StoreClassCodegenErrors message accounts for all kinds of PropertyErrors
+00:00 +2: test/errors_test.dart: StoreClassCodegenErrors message accounts for all kinds of PropertyErrors
+00:00 +3: test/generator_usage_test.dart: keep alive computed fields works
+00:00 +4: test/errors_test.dart: StoreClassCodegenErrors message contains only errors, nothing else
+00:00 +5: test/generator_usage_test.dart: async action works
+00:00 +6: test/generator_usage_test.dart: async action works
+00:00 +7: test/generator_usage_test.dart: async action works
+00:00 +8: test/generator_usage_test.dart: async action works
+00:00 +9: test/generator_usage_test.dart: async action works
+00:00 +10: test/generator_usage_test.dart: async action works
+00:00 +11: test/generator_usage_test.dart: async action works
+00:00 +12: test/generator_usage_test.dart: async action works
+00:00 +13: test/generator_usage_test.dart: async action works
+00:00 +14: test/generator_usage_test.dart: async action works
+00:00 +15: test/generator_usage_test.dart: async action works
+00:00 +16: test/generator_usage_test.dart: async action works
+00:00 +17: test/generator_usage_test.dart: async action works
+00:00 +18: test/generator_usage_test.dart: async action works
+00:00 +19: test/generator_usage_test.dart: async action works
+00:00 +20: test/generator_usage_test.dart: async action works
+00:00 +21: test/generator_usage_test.dart: async action works
+00:00 +22: test/generator_usage_test.dart: async action works
+00:00 +23: test/generator_usage_test.dart: async action works
+00:00 +24: test/generator_usage_test.dart: async action works
+00:00 +25: test/generator_usage_test.dart: async action works
+00:00 +26: test/generator_usage_test.dart: async action works
+00:00 +27: test/generator_usage_test.dart: async action works
+00:00 +28: test/generator_usage_test.dart: async action works
+00:00 +29: test/generator_usage_test.dart: async action works
+00:00 +30: test/generator_usage_test.dart: async action works
+00:00 +31: test/generator_usage_test.dart: observable async action works
+00:00 +32: test/generator_usage_test.dart: observable async generator works
+00:00 +33: test/generator_usage_test.dart: observable stream works
+00:00 +34: test/generator_usage_test.dart: observable future works
+00:00 +35: test/generator_usage_test.dart: observable async method works
+00:00 +36: test/generator_usage_test.dart: async action batches changes between awaits
+00:00 +37: test/generator_usage_test.dart: async action throwing works
+00:00 +38: test/generator_usage_test.dart: setting late fields with action works
+00:01 +39: test/store_class_visitor_test.dart: StoreClassVisitor validates errors before generating its source
+00:01 +40: test/store_class_visitor_test.dart: StoreClassVisitor hasGeneratedToString understands BuilderOptions
+00:02 +41: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +42: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +43: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +44: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +45: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +46: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +47: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +48: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +49: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +50: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +51: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +52: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +53: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +54: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +55: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +56: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +57: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +58: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +59: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +60: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +61: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +62: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +63: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +64: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +65: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +66: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +67: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +68: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +69: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +70: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +71: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +72: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +73: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +74: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +75: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +76: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +77: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +78: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:02 +79: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:06 +80: test/invalid_annotations_test.dart: invalid annotations Errors when a non-abstract class mixes in a Store
+00:06 +81: test/mobx_codegen_test.dart: generator ignores class that doesn't implement Store
+00:06 +82: test/invalid_annotations_test.dart: invalid annotations Errors when there is a single invalid @computed annotation
+00:07 +83: test/mobx_codegen_test.dart: generator ignores when there is no class other than the abstract Store
+00:07 +84: test/invalid_annotations_test.dart: invalid annotations Errors when there are multiple invalid @computed annotations
+00:07 +85: test/mobx_codegen_test.dart: generator generates for a class mixing Store
+00:08 +86: test/mobx_codegen_test.dart: generator generates for a class mixing Store
+00:08 +87: test/invalid_annotations_test.dart: invalid annotations Errors when there are multiple invalid @observable annotations
+00:08 +88: test/mobx_codegen_test.dart: generator generates for a class containing late observables
+00:08 +89: test/invalid_annotations_test.dart: invalid annotations Errors when there are multiple invalid @action annotations
+00:09 +90: test/mobx_codegen_test.dart: generator generates for a class mixing Store with annotation @StoreConfig(hasToString: true)
+00:09 +91: test/invalid_annotations_test.dart: invalid annotations Errors when there is a single InvalidSetterOnReadOnlyObservable
+00:09 +92: test/mobx_codegen_test.dart: generator generates for a class containing annotations "@protected", "@visibleForTesting" and "visibleForOverriding"
+00:09 +93: test/invalid_annotations_test.dart: invalid annotations Errors when there are multiple InvalidSetterOnReadOnlyObservable
+00:10 +94: test/mobx_codegen_test.dart: generator generates for a class containing keep alive computed
+00:10 +95: test/mobx_codegen_test.dart: generator generates for a class with extension
+00:10 +96: test/mobx_codegen_test.dart: generator invalid output is handled
+00:11 +97: test/mobx_codegen_test.dart: generator generates for a generic class mixing Store
+00:11 +98: test/mobx_codegen_test.dart: generator generates types with import prefixes correctly
+00:12 +99: All tests passed!

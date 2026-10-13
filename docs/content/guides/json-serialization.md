@@ -1,0 +1,229 @@
+---
+title: JSON Serialization of Stores
+---
+
+# JSON Serialization of Stores
+
+
+The <PubBadge name="json_serializable" /> package is a popular way to
+encode/decode between json representations of your models. It works by attaching
+the `@JsonSerializable()` annotation to the `Store` classes. Since this is a
+custom annotation, we have to invoke the `build_runner` command, just like we do
+for `mobx_codegen`.
+
+Let's add support for `json_serializable` to the **todos** example.
+
+> See the complete code
+> [here](https://github.com/mobxjs/mobx.dart/tree/main/mobx_examples/lib/todos).
+
+## Adding dependency in pubspec.yaml
+
+The first step is to include the dependency on the
+
+<PubBadge name="json_serializable" /> and <PubBadge name="json_annotation" />
+packages. We add this to the `pubspec.yaml` and run `flutter pub get` to download
+it.
+
+```yaml
+dependencies:
+  json_serializable: ^{{ json_serializable }}
+  json_annotation: ^{{ json_annotation }}
+```
+
+## Adding annotations
+
+To make our store classes travel to JSON and back, we need to annotate them with
+`@JsonSerializable()`:
+
+```dart
+import 'package:json_annotation/json_annotation.dart';
+import 'package:mobx/mobx.dart';
+
+part 'todo.g.dart';
+
+// highlight-next-line
+@JsonSerializable()
+class Todo extends _Todo with _$Todo {
+  Todo(String description) : super(description);
+}
+
+enum VisibilityFilter { all, pending, completed }
+
+// highlight-next-line
+@JsonSerializable()
+class TodoList extends _TodoList with _$TodoList {}
+
+abstract class _TodoList with Store {
+  @observable
+// highlight-next-line
+  @ObservableTodoListConverter()
+  ObservableList<Todo> todos = ObservableList<Todo>();
+
+  @observable
+  VisibilityFilter filter = VisibilityFilter.all;
+
+  @observable
+  String currentDescription = '';
+
+  @computed
+  ObservableList<Todo> get pendingTodos =>
+      ObservableList.of(todos.where((todo) => todo.done != true));
+
+  @computed
+  ObservableList<Todo> get completedTodos =>
+      ObservableList.of(todos.where((todo) => todo.done == true));
+
+  @computed
+  bool get hasCompletedTodos => completedTodos.isNotEmpty;
+
+  @computed
+  bool get hasPendingTodos => pendingTodos.isNotEmpty;
+
+  @computed
+  String get itemsDescription {
+    if (todos.isEmpty) {
+      return "There are no Todos here. Why don't you add one?.";
+    }
+
+    final suffix = pendingTodos.length == 1 ? 'todo' : 'todos';
+    return '${pendingTodos.length} pending $suffix, ${completedTodos.length} completed';
+  }
+
+  @computed
+  // highlight-next-line
+  @JsonKey(ignore: true)
+  ObservableList<Todo> get visibleTodos {
+    switch (filter) {
+      case VisibilityFilter.pending:
+        return pendingTodos;
+      case VisibilityFilter.completed:
+        return completedTodos;
+      default:
+        return todos;
+    }
+  }
+
+  @computed
+  bool get canRemoveAllCompleted =>
+      hasCompletedTodos && filter != VisibilityFilter.pending;
+
+  @computed
+  bool get canMarkAllCompleted =>
+      hasPendingTodos && filter != VisibilityFilter.completed;
+
+  @action
+  void addTodo(String description) {
+    final todo = Todo(description);
+    todos.add(todo);
+    currentDescription = '';
+  }
+
+  @action
+  void removeTodo(Todo todo) {
+    todos.removeWhere((x) => x == todo);
+  }
+
+  @action
+  void removeCompleted() {
+    todos.removeWhere((todo) => todo.done);
+  }
+
+  @action
+  void markAllAsCompleted() {
+    for (final todo in todos) {
+      todo.done = true;
+    }
+  }
+}
+```
+
+## Custom Converters
+
+In case of special types like `ObservableList<Todo>`, which are not directly
+serializable into JSON, we can write custom converters by extending the
+`JsonConverter<T, S>` type, as shown below:
+
+```dart
+import 'package:json_annotation/json_annotation.dart';
+import 'package:mobx/mobx.dart';
+import 'package:mobx_examples/todos/todo.dart';
+
+// highlight-start
+class ObservableTodoListConverter extends JsonConverter<ObservableList<Todo>,
+    Iterable<Map<String, dynamic>>> {
+// highlight-end
+  const ObservableTodoListConverter();
+
+  @override
+  ObservableList<Todo> fromJson(Iterable<Map<String, dynamic>> json) =>
+      ObservableList.of(json.map(Todo.fromJson));
+
+  @override
+  Iterable<Map<String, dynamic>> toJson(ObservableList<Todo> object) =>
+      object.map((element) => element.toJson());
+}
+
+```
+
+This converter is then used for the `todos` property as shown below:
+
+```dart
+abstract class _TodoList with Store {
+  @observable
+// highlight-next-line
+  @ObservableTodoListConverter()
+  ObservableList<Todo> todos = ObservableList<Todo>();
+
+// ...
+}
+```
+
+## On with the code-generation
+
+With these changes, let's run the `build_runner` command in the project folder:
+
+```sh
+dart pub run build_runner watch --delete-conflicting-outputs
+```
+
+This will generate `todo.g.dart` and `todo_list.g.dart` files.
+
+## JSON Serialization / Deserialization
+
+```dart
+final list = TodoList();
+expect(list.todos.length, equals(0));
+
+list..addTodo('first one')..addTodo('second one');
+const targetJson = '''
+{
+ "todos": [
+  {
+   "description": "first one",
+   "done": false
+  },
+  {
+   "description": "second one",
+   "done": false
+  }
+ ],
+ "filter": "VisibilityFilter.all",
+}''';
+
+final listJson = list.toJson();
+expect(listJson, targetJson);
+
+final listInstance = TodoList.fromJson(listJson);
+expect(list.todos.length, listInstance.todos.length);
+expect(list.canMarkAllCompleted, listInstance.canMarkAllCompleted);
+expect(list.itemsDescription, listInstance.itemsDescription);
+```
+
+## Summary
+
+With these changes, you should now be able to serialize the **Todos** to/from
+`JSON` ✌️. BTW, its worth noting that `mobx_codegen` can co-exist with other
+generators.
+
+> See the complete code
+> [here](https://github.com/mobxjs/mobx.dart/tree/main/mobx_examples/lib/todos).

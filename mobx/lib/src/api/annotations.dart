@@ -39,8 +39,8 @@ class MakeObservable {
   /// Must be a top-level or static [Function] that takes two arguments and
   /// returns a [bool].
   /// The arguments are the old value and the new value of the observable.
-  /// If the function returns `true`, a reaction will be triggered.
-  /// If the function returns `false`, no reaction will be triggered.
+  /// If the function returns `true`, the values are equal and no reaction is triggered.
+  /// If the function returns `false`, the value has changed and reactions are notified.
   /// If no function is provided, the default behavior is to only trigger if
   /// : `oldValue != newValue`.
   final Function? equals;

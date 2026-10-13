@@ -1,0 +1,139 @@
+{
+  "description": "Release artifact sizes. Gzip is measured locally, not a claim about server compression or total download. Engine assets and fonts are additional; no Flutter files load before Run.",
+  "defaultRenderer": "dart2js",
+  "wasmOptIn": "?renderer=wasm",
+  "deferredJavaScriptChunks": 23,
+  "wasmDeferred": false,
+  "artifacts": [
+    {
+      "file": "main.dart.js",
+      "bytes": 2218723,
+      "gzipBytes": 657825
+    },
+    {
+      "file": "main.dart.js_1.part.js",
+      "bytes": 2217,
+      "gzipBytes": 1079
+    },
+    {
+      "file": "main.dart.js_10.part.js",
+      "bytes": 17982,
+      "gzipBytes": 5862
+    },
+    {
+      "file": "main.dart.js_11.part.js",
+      "bytes": 5213,
+      "gzipBytes": 2026
+    },
+    {
+      "file": "main.dart.js_12.part.js",
+      "bytes": 315,
+      "gzipBytes": 232
+    },
+    {
+      "file": "main.dart.js_13.part.js",
+      "bytes": 573,
+      "gzipBytes": 262
+    },
+    {
+      "file": "main.dart.js_14.part.js",
+      "bytes": 3562,
+      "gzipBytes": 1708
+    },
+    {
+      "file": "main.dart.js_15.part.js",
+      "bytes": 6268,
+      "gzipBytes": 2123
+    },
+    {
+      "file": "main.dart.js_16.part.js",
+      "bytes": 357,
+      "gzipBytes": 261
+    },
+    {
+      "file": "main.dart.js_17.part.js",
+      "bytes": 3097,
+      "gzipBytes": 1260
+    },
+    {
+      "file": "main.dart.js_18.part.js",
+      "bytes": 3639,
+      "gzipBytes": 1606
+    },
+    {
+      "file": "main.dart.js_19.part.js",
+      "bytes": 315,
+      "gzipBytes": 237
+    },
+    {
+      "file": "main.dart.js_2.part.js",
+      "bytes": 5448,
+      "gzipBytes": 2521
+    },
+    {
+      "file": "main.dart.js_20.part.js",
+      "bytes": 5930,
+      "gzipBytes": 2634
+    },
+    {
+      "file": "main.dart.js_21.part.js",
+      "bytes": 8286,
+      "gzipBytes": 3255
+    },
+    {
+      "file": "main.dart.js_22.part.js",
+      "bytes": 25001,
+      "gzipBytes": 8179
+    },
+    {
+      "file": "main.dart.js_23.part.js",
+      "bytes": 25001,
+      "gzipBytes": 8182
+    },
+    {
+      "file": "main.dart.js_3.part.js",
+      "bytes": 3576,
+      "gzipBytes": 1452
+    },
+    {
+      "file": "main.dart.js_4.part.js",
+      "bytes": 338,
+      "gzipBytes": 254
+    },
+    {
+      "file": "main.dart.js_5.part.js",
+      "bytes": 9680,
+      "gzipBytes": 3615
+    },
+    {
+      "file": "main.dart.js_6.part.js",
+      "bytes": 950,
+      "gzipBytes": 409
+    },
+    {
+      "file": "main.dart.js_7.part.js",
+      "bytes": 7461,
+      "gzipBytes": 3151
+    },
+    {
+      "file": "main.dart.js_8.part.js",
+      "bytes": 421,
+      "gzipBytes": 239
+    },
+    {
+      "file": "main.dart.js_9.part.js",
+      "bytes": 2686,
+      "gzipBytes": 1171
+    },
+    {
+      "file": "main.dart.mjs",
+      "bytes": 29954,
+      "gzipBytes": 7156
+    },
+    {
+      "file": "main.dart.wasm",
+      "bytes": 2189118,
+      "gzipBytes": 805563
+    }
+  ]
+}

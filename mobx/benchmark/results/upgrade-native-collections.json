@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "suite": "collections",
+  "upstream_revision": "03663d64413a84c3449b932dac10f576b6314dd0",
+  "dart": "3.13.2 (stable) (Tue Aug 25 01:01:12 2026 -0700) on \"macos_arm64\"",
+  "os": "macos",
+  "processors": 12,
+  "samples": 1,
+  "cases": [
+    {
+      "name": "native_remove_alternating_10000",
+      "samples_us": [
+        118
+      ],
+      "median_us": 118,
+      "success": true
+    },
+    {
+      "name": "observable_remove_alternating_10000",
+      "samples_us": [
+        71
+      ],
+      "median_us": 71,
+      "success": true
+    },
+    {
+      "name": "native_remove_alternating_50000",
+      "samples_us": [
+        322
+      ],
+      "median_us": 322,
+      "success": true
+    },
+    {
+      "name": "observable_remove_alternating_50000",
+      "samples_us": [
+        371
+      ],
+      "median_us": 371,
+      "success": true
+    },
+    {
+      "name": "native_remove_alternating_100000",
+      "samples_us": [
+        740
+      ],
+      "median_us": 740,
+      "success": true
+    },
+    {
+      "name": "observable_remove_alternating_100000",
+      "samples_us": [
+        772
+      ],
+      "median_us": 772,
+      "success": true
+    },
+    {
+      "name": "bulk_map_set_direct",
+      "samples_us": [
+        1008
+      ],
+      "median_us": 1008,
+      "success": true,
+      "map_reactions": 1,
+      "set_reactions": 1
+    },
+    {
+      "name": "bulk_map_set_outer_action",
+      "samples_us": [
+        908
+      ],
+      "median_us": 908,
+      "success": true,
+      "map_reactions": 1,
+      "set_reactions": 1
+    }
+  ]
+}

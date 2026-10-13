@@ -16,7 +16,7 @@ void main() {
       final assist = WrapWithObserver();
       final file = File('test/assists/wrap_widget/wrap_widget.dart').absolute;
 
-      final result = await resolveFile2(path: file.path);
+      final result = await resolveFile(path: file.path);
       result as ResolvedUnitResult;
 
       var changes = [

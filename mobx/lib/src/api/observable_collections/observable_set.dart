@@ -68,17 +68,34 @@ class ObservableSet<T>
     _context.conditionallyRunInAction(() {
       result = _set.add(value);
 
-      if (result && _hasListeners) {
-        _reportAdd(value);
-      }
-
       if (result) {
         _atom.reportChanged();
+        if (_hasListeners) _reportAdd(value);
       }
     }, _atom);
 
     return result;
   }
+
+  @override
+  void addAll(Iterable<T> elements) =>
+      _context.conditionallyRunInAction(() => super.addAll(elements), _atom);
+
+  @override
+  void removeAll(Iterable<Object?> elements) =>
+      _context.conditionallyRunInAction(() => super.removeAll(elements), _atom);
+
+  @override
+  void retainAll(Iterable<Object?> elements) =>
+      _context.conditionallyRunInAction(() => super.retainAll(elements), _atom);
+
+  @override
+  void removeWhere(bool Function(T element) test) =>
+      _context.conditionallyRunInAction(() => super.removeWhere(test), _atom);
+
+  @override
+  void retainWhere(bool Function(T element) test) =>
+      _context.conditionallyRunInAction(() => super.retainWhere(test), _atom);
 
   @override
   bool contains(Object? element) {

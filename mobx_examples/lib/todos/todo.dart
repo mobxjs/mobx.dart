@@ -5,7 +5,7 @@ part 'todo.g.dart';
 
 @JsonSerializable()
 class Todo extends _Todo with _$Todo {
-  Todo(String description) : super(description);
+  Todo(super.description);
 
   factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
   Map<String, dynamic> toJson() => _$TodoToJson(this);

@@ -1,0 +1,8 @@
+---
+title: MobX Utils
+---
+
+# MobX Utils
+
+[mobx_utils](https://pub.dev/packages/mobx_utils) provides an extensive series
+of additional utility functions, observables and common patterns for MobX.

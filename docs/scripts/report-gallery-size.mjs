@@ -1,0 +1,10 @@
+import {readFileSync,readdirSync,writeFileSync,existsSync} from 'node:fs';
+import {gzipSync} from 'node:zlib';
+import {fileURLToPath} from 'node:url';
+const base=fileURLToPath(new URL('../public/flutter/',import.meta.url));
+if(!existsSync(base+'main.dart.js'))throw Error('Build the Flutter gallery first');
+const files=readdirSync(base).filter(f=>f.startsWith('main.dart.')&&(f.endsWith('.js')||f.endsWith('.mjs')||f.endsWith('.wasm')));
+const artifacts=files.map(file=>{const bytes=readFileSync(base+file);return {file,bytes:bytes.length,gzipBytes:gzipSync(bytes).length};});
+const report={description:'Release artifact sizes. Gzip is measured locally, not a claim about server compression or total download. Engine assets and fonts are additional; no Flutter files load before Run.',defaultRenderer:'dart2js',wasmOptIn:'?renderer=wasm',deferredJavaScriptChunks:files.filter(f=>f.endsWith('.part.js')).length,wasmDeferred:false,artifacts};
+writeFileSync(new URL('../gallery-build-report.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));

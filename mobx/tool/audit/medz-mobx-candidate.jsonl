@@ -1,0 +1,8 @@
+{"case":"avoidablePropagation","success":true,"samples_us":[878920,878826,858223],"median_us":878826}
+{"case":"broadPropagation","success":true,"samples_us":[996125,985584,1002943],"median_us":996125}
+{"case":"deepPropagation","success":true,"samples_us":[431978,429969,433478],"median_us":431978}
+{"case":"diamond","success":true,"samples_us":[554735,556715,555048],"median_us":555048}
+{"case":"mux","success":true,"samples_us":[590768,587947,579135],"median_us":587947}
+{"case":"repeatedObservers","success":true,"samples_us":[69747,70329,72089],"median_us":70329}
+{"case":"triangle","success":true,"samples_us":[199847,197019,199981],"median_us":199847}
+{"case":"unstable","success":true,"samples_us":[144085,142600,142194],"median_us":142600}

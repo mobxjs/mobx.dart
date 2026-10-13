@@ -58,7 +58,7 @@ void main() {
       test('basics work', () {
         var executed = false;
 
-        bool equals(_, __) => false;
+        bool equals(_, _) => false;
 
         final x = Observable(10, equals: equals);
         final d = reaction(

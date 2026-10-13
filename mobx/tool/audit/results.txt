@@ -1,0 +1,148 @@
+00:00 +0: loading tool/audit/audit_test.dart
+00:00 +0: F1 future uses supplied context
+00:00 +0 -1: F1 future uses supplied context [E]
+  Expected: [FutureStatus:FutureStatus.pending, FutureStatus:FutureStatus.fulfilled]
+    Actual: [FutureStatus:FutureStatus.pending]
+     Which: at location [1] is [FutureStatus:FutureStatus.pending] which shorter than expected
+  
+  package:matcher                  expect
+  tool/audit/audit_test.dart 18:5  main.<fn>
+  
+00:00 +0 -1: F2 reused async action preserves caller zone
+00:00 +0 -2: F2 reused async action preserves caller zone [E]
+  Expected: 'B'
+    Actual: 'A'
+     Which: is different.
+            Expected: B
+              Actual: A
+                      ^
+             Differ at offset 0
+  
+  package:matcher                  expect
+  tool/audit/audit_test.dart 31:5  main.<fn>
+  
+00:00 +0 -2: F3 binary error callback executes inside action
+00:00 +1 -2: F4 stream forwards original error stack
+00:00 +2 -2: F5 cancelOnError finishes downstream
+00:00 +2 -3: F5 cancelOnError finishes downstream [E]
+  Expected: true
+    Actual: <false>
+  
+  package:matcher                  expect
+  tool/audit/audit_test.dart 84:5  main.<fn>
+  
+00:00 +2 -3: F6 throwing map listener does not hide committed mutation
+00:00 +2 -4: F6 throwing map listener does not hide committed mutation [E]
+  Expected: <2>
+    Actual: <1>
+  
+  package:matcher                  expect
+  tool/audit/audit_test.dart 98:5  main.<fn>
+  
+00:00 +2 -4: F7 throwing list predicate does not hide partial mutation
+00:00 +2 -5: F7 throwing list predicate does not hide partial mutation [E]
+  Expected: [1, 2, 3]
+    Actual: [1, 2, 3, 4]
+     Which: at location [3] is [1, 2, 3, 4] which longer than expected
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 115:5  main.<fn>
+  
+00:00 +2 -5: F8 list remove accepts unrelated Object
+00:00 +2 -6: F8 list remove accepts unrelated Object [E]
+  type 'String' is not a subtype of type 'int' in type cast
+  package:mobx/src/api/observable_collections/observable_list.dart 246:43  ObservableList.remove.<fn>
+  package:mobx/src/core/context_extensions.dart 26:11                      ConditionalAction.conditionallyRunInAction
+  package:mobx/src/api/observable_collections/observable_list.dart 245:14  ObservableList.remove
+  tool/audit/audit_test.dart 121:40                                        main.<fn>
+  
+00:00 +2 -6: F9 map lookup accepts unrelated Object
+00:00 +2 -7: F9 map lookup accepts unrelated Object [E]
+  type 'int' is not a subtype of type 'String?' in type cast
+  package:mobx/src/api/observable_collections/observable_map.dart 82:22  ObservableMap.[]
+  tool/audit/audit_test.dart 127:51                                      main.<fn>
+  
+00:00 +2 -7: F10 interceptor notification reports committed value
+00:00 +2 -8: F10 interceptor notification reports committed value [E]
+  Expected: <10>
+    Actual: <2>
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 147:5  main.<fn>
+  
+00:00 +2 -8: F11 computed exception restores context with boundaries disabled
+00:00 +2 -9: F11 computed exception restores context with boundaries disabled [E]
+  Expected: false
+    Actual: <true>
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 159:5  main.<fn>
+  
+00:00 +2 -9: F12 list cast shares change listeners
+00:00 +2 -10: F12 list cast shares change listeners [E]
+  Expected: <1>
+    Actual: <0>
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 170:5  main.<fn>
+  
+00:00 +2 -10: F13 empty range still validates bounds
+00:00 +2 -11: F13 empty range still validates bounds [E]
+  Expected: throws <Instance of 'RangeError'>
+    Actual: <Closure: () => void>
+     Which: returned <null>
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 175:5  main.<fn>
+  
+00:00 +2 -11: F14 throwing set listener does not hide committed mutation
+00:00 +2 -12: F14 throwing set listener does not hide committed mutation [E]
+  Expected: <1>
+    Actual: <0>
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 187:5  main.<fn>
+  
+00:00 +2 -12: F15 empty stream match supports nullable done value
+00:00 +2 -13: F15 empty stream match supports nullable done value [E]
+  type 'Null' is not a subtype of type 'int' in type cast
+  package:mobx/src/api/async/observable_stream.dart 146:34  ObservableStream.match
+  tool/audit/audit_test.dart 200:19                         main.<fn>
+  
+00:00 +2 -13: F16 disposed delayed reaction cancels its timer
+00:00 +2 -14: F16 disposed delayed reaction cancels its timer [E]
+  Expected: false
+    Actual: <true>
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 212:5  main.<fn>
+  
+00:00 +2 -14: F17 when effect uses supplied context
+00:00 +2 -15: F17 when effect uses supplied context [E]
+  Expected: true
+    Actual: <false>
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 228:5  main.<fn>
+  
+00:00 +2 -15: F18 scheduled reaction effect batches supplied context
+00:00 +2 -16: F18 scheduled reaction effect batches supplied context [E]
+  Expected: true
+    Actual: <false>
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 253:5  main.<fn>
+  
+00:00 +2 -16: P4 observation-only single stream retains historical events
+00:00 +3 -16: F19 throwing reaction error handler restores default-boundary context
+00:00 +3 -17: F19 throwing reaction error handler restores default-boundary context [E]
+  Expected: false
+    Actual: <true>
+  
+  package:matcher                   expect
+  tool/audit/audit_test.dart 291:7  main.<fn>
+  
+00:00 +3 -17: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

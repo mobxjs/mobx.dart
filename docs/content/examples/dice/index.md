@@ -1,0 +1,212 @@
+---
+title: Dice
+---
+
+# Dice
+
+
+
+<Profile
+  author="Giri Jeedigunta"
+  twitter="https://twitter.com/gniczz"
+  photo="/images/people/giri.jpg"
+  size="64"
+  style="margin-bottom:4rem"
+/>
+
+In this example, we will build a fun dice app. You can make the dice roll at the
+tap of a button and a random count is generated with every roll of dice.
+
+:::info
+
+See the complete code
+[here](https://github.com/mobxjs/mobx.dart/tree/main/mobx_examples/lib/dice).
+
+:::
+
+<img src="/content-assets/examples/dice/dice.gif" />
+
+## Store setup
+
+The `DiceCounter` store is quite simple. It keeps a track of dice values and the
+total count. Below is how it looks:
+
+- Generate `dice_counter.g.dart` file using `build_runner` and this must be
+  imported into the store. Read more about `build_runner` in the _MobX Code
+  Generation library_, <PubBadge name="mobx_codegen" />.
+
+```dart
+import 'dart:math';
+import 'package:mobx/mobx.dart';
+
+part 'dice_counter.g.dart';
+
+class DiceCounter = _DiceCounter with _$DiceCounter;
+
+abstract class _DiceCounter with Store {
+  @observable
+  int left = Random().nextInt(6) + 1;
+
+  @observable
+  int right = Random().nextInt(6) + 1;
+
+  @observable
+  int total;
+
+  @action
+  void roll() {
+    left = Random().nextInt(6) + 1;
+    right = Random().nextInt(6) + 1;
+    total = left + right;
+  }
+}
+
+```
+
+- In the above store `left` and `right` are the dice counts defined with
+  `@observable` annotations and are initialised with a random number ranging
+  from **1** - **6**.
+- `total` is also an observable which keeps track of the total count of the
+  dice.
+- The action-method `roll()` defined with `@action` annotation is used to update
+  the dice counts every time user taps on the dice.
+
+With the above implementation I was able to keep a track of the left, right and
+total counts with every user interaction as expected or so I thought 🤔.
+
+> #### Discovering `@computed`
+
+I ran into an issue... The `total` count was `null` for the very first time. It
+gets updated only when the action-method `roll()` is called.
+
+> In search of the solution I went through the documentation and few examples
+> and realised there is an insanely easy way to get around this issue.
+> `@computed` BOOM! my issue is solved.
+
+I have modified the above `DiceCounter` implementation using `@computed`.
+
+```dart
+import 'dart:math';
+import 'package:mobx/mobx.dart';
+
+part 'dice_counter.g.dart';
+
+class DiceCounter = _DiceCounter with _$DiceCounter;
+
+abstract class _DiceCounter with Store {
+  @observable
+  int left = Random().nextInt(6) + 1;
+
+  @observable
+  int right = Random().nextInt(6) + 1;
+
+  @computed
+  int get total => left + right;
+
+  @action
+  void roll() {
+    left = Random().nextInt(6) + 1;
+    right = Random().nextInt(6) + 1;
+  }
+}
+
+```
+
+- Now `total` is a computed observable annotated with `@computed`. Computed
+  observables are in-sync every time left or right count is updated.
+- The value of `total` is automatically updated when the instance of the store
+  is created so I no longer have the `null` value when I load the app.
+- `@computed` does more than that. Now, I do not have to write any additional
+  code like the above in the action-method to update it.
+
+> It exactly does what the author of mobx quoted... _"What can be derived,
+> should be derived. Automatically"_.
+
+## Integrating the Store with the View
+
+Now that the `DiceCounter` store is ready, it's time to add it to the `Widget`
+to see the magic happen. Let's create an instance of our store:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+
+import 'dice_counter.dart';
+
+final diceCounter = DiceCounter();
+
+```
+
+The observables and actions from the store can be accessed via the newly created
+instance `diceCounter` along with the `Observer` widget as shown below:
+
+```dart
+class DiceView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final diceCounter = Provider.of<DiceCounter>(context);
+
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: TextButton(
+            // highlight-start
+                  child: Observer(
+                    builder: (_) =>
+                        Image.asset('images/dice${diceCounter.left}.png'),
+                  ),
+            // highlight-end
+                  onPressed: diceCounter.roll,
+                ),
+              ),
+              Expanded(
+                child: TextButton(
+            // highlight-start
+                  child: Observer(
+                    builder: (_) =>
+                        Image.asset('images/dice${diceCounter.right}.png'),
+                  ),
+            // highlight-end
+                  onPressed: diceCounter.roll,
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            // highlight-start
+            child: Observer(
+              builder: (_) => Text(
+                'Total ${diceCounter.total}',
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                    fontSize: 16,
+                    fontFamily: 'Verdana'),
+              ),
+            ),
+            // highlight-end
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+## Summary
+
+The working example will be as seen in the figure below:
+
+<img src="/content-assets/examples/dice/dice.gif" style="margin-bottom:20px" />
+
+:::info
+
+See the complete code
+[here](https://github.com/mobxjs/mobx.dart/tree/main/mobx_examples/lib/dice).
+
+:::

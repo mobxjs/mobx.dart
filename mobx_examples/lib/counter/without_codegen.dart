@@ -17,7 +17,7 @@ class SimpleCounter {
 }
 
 class CounterView extends StatefulWidget {
-  const CounterView({Key? key}) : super(key: key);
+  const CounterView({super.key});
 
   @override
   CounterExampleState createState() => CounterExampleState();

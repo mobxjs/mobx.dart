@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "suite": "propagation",
+  "upstream_revision": "03663d64413a84c3449b932dac10f576b6314dd0",
+  "dart": "3.13.2 (stable) (Tue Aug 25 01:01:12 2026 -0700) on \"macos_arm64\"",
+  "os": "macos",
+  "processors": 12,
+  "samples": 3,
+  "iterations": 1000,
+  "cases": [
+    {
+      "name": "avoidablePropagation",
+      "samples_us": [
+        791953,
+        797274,
+        849169
+      ],
+      "median_us": 797274,
+      "success": true
+    },
+    {
+      "name": "broadPropagation",
+      "samples_us": [
+        794273,
+        782933,
+        789311
+      ],
+      "median_us": 789311,
+      "success": true
+    },
+    {
+      "name": "deepPropagation",
+      "samples_us": [
+        376855,
+        369259,
+        371543
+      ],
+      "median_us": 371543,
+      "success": true
+    },
+    {
+      "name": "diamond",
+      "samples_us": [
+        511129,
+        497224,
+        500141
+      ],
+      "median_us": 500141,
+      "success": true
+    },
+    {
+      "name": "mux",
+      "samples_us": [
+        522118,
+        516483,
+        518190
+      ],
+      "median_us": 518190,
+      "success": true
+    },
+    {
+      "name": "repeatedObservers",
+      "samples_us": [
+        64476,
+        64121,
+        63300
+      ],
+      "median_us": 64121,
+      "success": true
+    },
+    {
+      "name": "triangle",
+      "samples_us": [
+        154525,
+        154608,
+        154961
+      ],
+      "median_us": 154608,
+      "success": true
+    },
+    {
+      "name": "unstable",
+      "samples_us": [
+        134907,
+        136375,
+        135210
+      ],
+      "median_us": 135210,
+      "success": true
+    }
+  ]
+}

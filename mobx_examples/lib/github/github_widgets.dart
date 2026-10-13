@@ -4,7 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:mobx_examples/github/github_store.dart';
 
 class GithubExample extends StatefulWidget {
-  const GithubExample({Key? key}) : super(key: key);
+  const GithubExample({super.key});
 
   @override
   GithubExampleState createState() => GithubExampleState();
@@ -29,7 +29,7 @@ class GithubExampleState extends State<GithubExample> {
 }
 
 class LoadingIndicator extends StatelessWidget {
-  const LoadingIndicator(this.store, {Key? key}) : super(key: key);
+  const LoadingIndicator(this.store, {super.key});
 
   final GithubStore store;
 
@@ -41,7 +41,7 @@ class LoadingIndicator extends StatelessWidget {
 }
 
 class UserInput extends StatelessWidget {
-  const UserInput(this.store, {Key? key}) : super(key: key);
+  const UserInput(this.store, {super.key});
 
   final GithubStore store;
 
@@ -72,7 +72,7 @@ class UserInput extends StatelessWidget {
 }
 
 class RepositoryListView extends StatelessWidget {
-  const RepositoryListView(this.store, {Key? key}) : super(key: key);
+  const RepositoryListView(this.store, {super.key});
 
   final GithubStore store;
 
@@ -126,7 +126,7 @@ class RepositoryListView extends StatelessWidget {
 }
 
 class ShowError extends StatelessWidget {
-  const ShowError(this.store, {Key? key}) : super(key: key);
+  const ShowError(this.store, {super.key});
 
   final GithubStore store;
 

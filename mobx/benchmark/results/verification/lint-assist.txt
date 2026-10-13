@@ -1,0 +1,5 @@
+00:00 [32m+0[0m: [1m[90mloading test/assists/wrap_widget/wrap_widget_test.dart[0m[0m
+00:00 [32m+0[0m: test/assists/wrap_widget/wrap_widget_test.dart: Wrap with observer[0m
+{"priority":28,"change":{"message":"Wrap with Observer","edits":[{"file":"/Users/pavanpodila/Projects/mobx.dart/mobx_lint_flutter_test/test/assists/wrap_widget/wrap_widget.dart","fileStamp":0,"edits":[{"offset":228,"length":0,"replacement":"; },)"},{"offset":188,"length":0,"replacement":"Observer(builder: (context) { return "}]}],"linkedEditGroups":[]}}
+{"priority":28,"change":{"message":"Wrap with Observer","edits":[{"file":"/Users/pavanpodila/Projects/mobx.dart/mobx_lint_flutter_test/test/assists/wrap_widget/wrap_widget.dart","fileStamp":0,"edits":[{"offset":221,"length":0,"replacement":"; },)"},{"offset":210,"length":0,"replacement":"Observer(builder: (context) { return "}]}],"linkedEditGroups":[]}}
+00:07 [32m+1[0m: All tests passed![0m

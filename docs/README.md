@@ -1,37 +1,15 @@
-# Website
+# MobX documentation
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern
-static website generator.
+The active website is VitePress: `content/` owns Markdown and `.vitepress/` owns configuration and presentation. The Flutter gallery lives in `../mobx_examples/lib/gallery/`, with the multi-view entry point in `lib/site/main.dart`.
 
-## Installation
-
-```console
-pnpm install
+```sh
+pnpm install --frozen-lockfile
+pnpm build       # Flutter Wasm + JS, then VitePress
+pnpm dev         # http://localhost:4178
 ```
 
-## Local Development
+Set `FLUTTER_BIN` if Flutter is not on PATH. `pnpm build:docs` rebuilds documentation against an existing Flutter build; `pnpm build:flutter` refreshes the runtime. No Flutter assets are fetched until a reader runs an example.
 
-```console
-pnpm start
-```
+From the repository root, regenerate the resolved API inventory with `dart run tool/docs_inventory.dart`. CI checks it with `--check`. `pnpm build:docs` renders its local API reference. Add a guided explanation to the relevant API family whenever adding a symbol; the mechanical reference is only the coverage floor.
 
-This command starts a local development server and open up a browser window.
-Most changes are reflected live without having to restart the server.
-
-## Build
-
-```console
-pnpm build
-```
-
-This command generates static content into the `build` directory and can be
-served using any static contents hosting service.
-
-## Deployment
-
-```console
-GIT_USER=<Your GitHub username> USE_SSH=true pnpm deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to
-build the website and push to the `gh-pages` branch.
+The earlier Docusaurus source folders are legacy migration material, not the active site. New pages belong only in `content/`.

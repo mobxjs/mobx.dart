@@ -58,7 +58,7 @@ void main() {
           stream.match(
             waiting: () => 'waiting',
             active: (i) => 'value',
-            done: (_, __) => 'done',
+            done: (_, _) => 'done',
             error: (err) => 'error',
           )!,
         );
@@ -665,7 +665,7 @@ void main() {
       final stream = ObservableStream(
         ctrl.stream,
         initialValue: 3,
-        equals: (_, __) => false,
+        equals: (_, _) => false,
       );
 
       final subValues = <int>[];

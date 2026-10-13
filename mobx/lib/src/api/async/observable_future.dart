@@ -13,8 +13,16 @@ class FutureResult<T> {
         context: context,
         name: '$name.ActionController',
       ),
-      _status = Observable(initialStatus, name: '$name.status'),
-      _result = Observable<dynamic>(initialResult, name: '$name.result') {
+      _status = Observable(
+        initialStatus,
+        context: context,
+        name: '$name.status',
+      ),
+      _result = Observable<dynamic>(
+        initialResult,
+        context: context,
+        name: '$name.result',
+      ) {
     future.then(_fulfill, onError: _reject);
   }
 

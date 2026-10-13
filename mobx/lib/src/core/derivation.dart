@@ -25,8 +25,10 @@ enum DerivationState {
 
 abstract class Derivation {
   String get name;
-  late Set<Atom> _observables;
+  late List<Atom> _observables;
   Set<Atom>? _newObservables;
+  late int _trackingId;
+  late int _trackingIndex;
 
   MobXCaughtException? _errorValue;
   MobXCaughtException? get errorValue;

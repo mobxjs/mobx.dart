@@ -79,7 +79,7 @@ class ObservableMap<K, V>
     _atom.reportObserved();
 
     // Wrap in parentheses to avoid parsing conflicts when casting the key
-    return _map[(key as K?)];
+    return _map[key];
   }
 
   @override
@@ -98,15 +98,31 @@ class ObservableMap<K, V>
 
       if (!_map.containsKey(key) || value != oldValue) {
         _map[key] = value;
+        _atom.reportChanged();
         if (type == 'update') {
           _reportUpdate(key, value, oldValue);
         } else if (type == 'add') {
           _reportAdd(key, value);
         }
-        _atom.reportChanged();
       }
     }, _atom);
   }
+
+  @override
+  void addAll(Map<K, V> other) =>
+      _context.conditionallyRunInAction(() => super.addAll(other), _atom);
+
+  @override
+  void addEntries(Iterable<MapEntry<K, V>> newEntries) => _context
+      .conditionallyRunInAction(() => super.addEntries(newEntries), _atom);
+
+  @override
+  void updateAll(V Function(K key, V value) update) =>
+      _context.conditionallyRunInAction(() => super.updateAll(update), _atom);
+
+  @override
+  void removeWhere(bool Function(K key, V value) test) =>
+      _context.conditionallyRunInAction(() => super.removeWhere(test), _atom);
 
   @override
   void clear() {

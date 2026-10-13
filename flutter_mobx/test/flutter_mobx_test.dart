@@ -250,7 +250,8 @@ void main() {
     expect(element.reaction.name, startsWith('$observer\n'));
     // Note that is the stack frame representation of this testWidgets()
     // anonymous function.
-    expect(element.reaction.name, contains(' main.<anonymous closure>'));
+    expect(element.reaction.name, matches(r' main(?:\.| closure)'));
+    expect(element.reaction.name, contains('flutter_mobx_test.dart'));
   });
 
   testWidgets(
@@ -268,8 +269,24 @@ void main() {
     final observer = Observer(builder: (_) => Container());
     expect(
       observer.debugConstructingStackFrame,
-      startsWith('Observer constructed from: main.<anonymous closure> ('),
+      matches(r'^Observer constructed from: main(?:\.| closure)'),
     );
+  });
+
+  test('Wasm debug frames skip initializer and subclass constructor entries',
+      () {
+    final frame =
+        Observer.debugFindConstructingStackFrame(StackTrace.fromString(
+      '    at M.Observer.debugFindConstructingStackFrame closure (x:wasm-function[1])\n'
+      '    at M.Observer.debugFindConstructingStackFrame (x:wasm-function[2])\n'
+      '    at M.new Observer (initializer) (x:wasm-function[3])\n'
+      '    at M.Observer (x:wasm-function[4])\n'
+      '    at M.new CustomObserver (initializer) (x:wasm-function[5])\n'
+      '    at M.CustomObserver (x:wasm-function[6])\n'
+      '    at M.buildScreen (x:wasm-function[7])',
+    ));
+    expect(
+        frame, 'Observer constructed from: buildScreen (x:wasm-function[7])');
   });
 
   testWidgets('Observer should log when there are no observables in builder',

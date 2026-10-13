@@ -1,3 +1,12 @@
+import 'benchmark/options_test.dart' as options_test;
+import 'package:test/test.dart';
+import 'benchmark/workloads_test.dart' as workloads_test;
+import 'regressions/audit_correctness_test.dart' as audit_correctness_test;
+
+import 'benchmark/benchmark_harness_test.dart' as benchmark_harness_test;
+import 'regressions/collection_mutation_test.dart' as collection_mutation_test;
+import 'regressions/dependency_propagation_test.dart'
+    as dependency_propagation_test;
 import 'action_controller_test.dart' as action_controller_test;
 import 'action_test.dart' as action_test;
 import 'annotations_test.dart' as annotations_test;
@@ -39,46 +48,70 @@ import 'utils_test.dart' as utils_test;
 import 'when_test.dart' as when_test;
 
 void main() {
-  observable_test.main();
-  observable_value_test.main();
-  computed_test.main();
+  group("benchmark options", options_test.main);
+  group('benchmark workloads', workloads_test.main);
+  group('audit_correctness_test', audit_correctness_test.main);
+  group("benchmark_harness_test", benchmark_harness_test.main);
+  group("collection_mutation_test", collection_mutation_test.main);
+  group("dependency_propagation_test", dependency_propagation_test.main);
+  group("observable_test", observable_test.main);
+  group("observable_value_test", observable_value_test.main);
+  group("computed_test", computed_test.main);
 
-  observable_list_test.main();
-  observable_map_test.main();
-  observable_set_test.main();
-  observable_future_test.main();
-  observable_stream_test.main();
+  group("observable_list_test", observable_list_test.main);
+  group("observable_map_test", observable_map_test.main);
+  group("observable_set_test", observable_set_test.main);
+  group("observable_future_test", observable_future_test.main);
+  group("observable_stream_test", observable_stream_test.main);
 
-  reaction_test.main();
-  autorun_test.main();
-  when_test.main();
+  group("reaction_test", reaction_test.main);
+  group("autorun_test", autorun_test.main);
+  group("when_test", when_test.main);
 
-  context_test.main();
+  group("context_test", context_test.main);
 
-  action_test.main();
-  async_action_test.main();
-  action_controller_test.main();
+  group("action_test", action_test.main);
+  group("async_action_test", async_action_test.main);
+  group("action_controller_test", action_controller_test.main);
 
-  exceptions_test.main();
-  listenable_test.main();
-  intercept_test.main();
-  observe_test.main();
+  group("exceptions_test", exceptions_test.main);
+  group("listenable_test", listenable_test.main);
+  group("intercept_test", intercept_test.main);
+  group("observe_test", observe_test.main);
 
-  extensions_observable_list_extension_test.main();
-  extensions_observable_map_extension_test.main();
-  extensions_observable_set_extension_test.main();
-  extensions_observable_future_extension_test.main();
-  extensions_observable_stream_extension_test.main();
-  extensions_primitive_types_extensions_test.main();
-  atom_extensions_test.main();
+  group(
+    "extensions_observable_list_extension_test",
+    extensions_observable_list_extension_test.main,
+  );
+  group(
+    "extensions_observable_map_extension_test",
+    extensions_observable_map_extension_test.main,
+  );
+  group(
+    "extensions_observable_set_extension_test",
+    extensions_observable_set_extension_test.main,
+  );
+  group(
+    "extensions_observable_future_extension_test",
+    extensions_observable_future_extension_test.main,
+  );
+  group(
+    "extensions_observable_stream_extension_test",
+    extensions_observable_stream_extension_test.main,
+  );
+  group(
+    "extensions_primitive_types_extensions_test",
+    extensions_primitive_types_extensions_test.main,
+  );
+  group("atom_extensions_test", atom_extensions_test.main);
 
-  bug_related_test.main();
-  reactive_policies_test.main();
-  annotations_test.main();
+  group("bug_related_test", bug_related_test.main);
+  group("reactive_policies_test", reactive_policies_test.main);
+  group("annotations_test", annotations_test.main);
 
-  spy_test.main();
-  store_test.main();
+  group("spy_test", spy_test.main);
+  group("store_test", store_test.main);
 
-  atom_test.main();
-  utils_test.main();
+  group("atom_test", atom_test.main);
+  group("utils_test", utils_test.main);
 }

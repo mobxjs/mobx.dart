@@ -1,0 +1,31 @@
+[
+  {
+    "id": "cart",
+    "label": "Across your app",
+    "title": "One source of truth. Many happy features.",
+    "description": "Your product page, cart badge, and checkout can all read the same state. Change the quantity once. MobX keeps their derived values in sync.",
+    "file": "cart.dart",
+    "concept": "Observable + Computed + Action",
+    "link": "/api/observable"
+  },
+  {
+    "id": "tasks",
+    "label": "Lists that stay in sync",
+    "title": "The list changes. The right things follow.",
+    "description": "Complete a task and its count updates. Turn on a filter and the list follows too. Computeds express the relationship, so you don’t maintain a second copy of the data.",
+    "file": "tasks.dart",
+    "concept": "ObservableSet + Computed",
+    "link": "/examples/todos"
+  },
+  {
+    "id": "async",
+    "label": "Async, without the juggling",
+    "title": "Loading, success, and errors. All observable.",
+    "description": "Press Load projects to start a request. Try an error response, then turn it off and retry. The same observable future drives loading, errors, and the project list—without separate loading flags.",
+    "file": "async.dart",
+    "concept": "ObservableFuture + Observer",
+    "link": "/gallery/async",
+    "source": "../mobx_examples/lib/gallery/examples/async.dart",
+    "region": "homepage"
+  }
+]

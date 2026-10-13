@@ -6,6 +6,7 @@ Language: [English](README.md) | [Português](translation/pt-BR/README.md) | [Ch
 <img height="128" src="https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/flutter-favorite.png">
 </a>
 <br><br>
+  
 
 [![pub package](https://img.shields.io/pub/v/mobx.svg?label=mobx&color=blue)](https://pub.dartlang.org/packages/mobx)
 [![pub package](https://img.shields.io/pub/v/flutter_mobx.svg?label=flutter_mobx&color=blue)](https://pub.dartlang.org/packages/flutter_mobx)
@@ -72,9 +73,9 @@ Follow along with the [Getting Started guide on the MobX.dart Website](https://m
 
 ### Go deep
 
-For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
+For a deeper coverage of MobX, do check out [MobX Quick Start Guide](https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789348972). Although the book uses the JavaScript version of MobX, the concepts are **100% applicable** to Dart and Flutter.
 
-[![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
+[![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789348972)
 
 ## Core Concepts
 
