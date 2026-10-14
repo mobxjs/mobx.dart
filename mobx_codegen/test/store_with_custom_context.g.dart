@@ -27,7 +27,7 @@ mixin _$CustomContextStore on _CustomContextStore, Store {
     _$nameAtom.reportWrite(value, _nameIsInitialized ? super.name : null, () {
       super.name = value;
       _nameIsInitialized = true;
-    });
+    }, equals: _nameIsInitialized ? null : (_, _) => false);
   }
 
   @override

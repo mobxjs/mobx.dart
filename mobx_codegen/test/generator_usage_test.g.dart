@@ -219,6 +219,63 @@ mixin _$TestStore on _TestStore, Store {
         super.lateField = value;
         _lateFieldIsInitialized = true;
       },
+      equals: _lateFieldIsInitialized ? null : (_, _) => false,
+    );
+  }
+
+  late final _$lateNullableFieldAtom = Atom(
+    name: '_TestStore.lateNullableField',
+    context: context,
+  );
+
+  @override
+  String? get lateNullableField {
+    _$lateNullableFieldAtom.reportRead();
+    return super.lateNullableField;
+  }
+
+  bool _lateNullableFieldIsInitialized = false;
+
+  @override
+  set lateNullableField(String? value) {
+    _$lateNullableFieldAtom.reportWrite(
+      value,
+      _lateNullableFieldIsInitialized ? super.lateNullableField : null,
+      () {
+        super.lateNullableField = value;
+        _lateNullableFieldIsInitialized = true;
+      },
+      equals: _lateNullableFieldIsInitialized ? null : (_, _) => false,
+    );
+  }
+
+  late final _$lateNullableUninitializedFieldAtom = Atom(
+    name: '_TestStore.lateNullableUninitializedField',
+    context: context,
+  );
+
+  @override
+  String? get lateNullableUninitializedField {
+    _$lateNullableUninitializedFieldAtom.reportRead();
+    return super.lateNullableUninitializedField;
+  }
+
+  bool _lateNullableUninitializedFieldIsInitialized = false;
+
+  @override
+  set lateNullableUninitializedField(String? value) {
+    _$lateNullableUninitializedFieldAtom.reportWrite(
+      value,
+      _lateNullableUninitializedFieldIsInitialized
+          ? super.lateNullableUninitializedField
+          : null,
+      () {
+        super.lateNullableUninitializedField = value;
+        _lateNullableUninitializedFieldIsInitialized = true;
+      },
+      equals: _lateNullableUninitializedFieldIsInitialized
+          ? null
+          : (_, _) => false,
     );
   }
 
@@ -319,6 +376,8 @@ batchItem3: ${batchItem3},
 batchItem4: ${batchItem4},
 errorField: ${errorField},
 lateField: ${lateField},
+lateNullableField: ${lateNullableField},
+lateNullableUninitializedField: ${lateNullableUninitializedField},
 fields: ${fields},
 fieldsKeepAlive: ${fieldsKeepAlive},
 batchedItems: ${batchedItems}
