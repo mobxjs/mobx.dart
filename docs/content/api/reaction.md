@@ -41,7 +41,7 @@ inside `fn`.
 - **`delay`**: Number of milliseconds to throttle the effect function. If zero (default), no throttling happens.
 - **`context`**: The `ReactiveContext` to use. By default the `mainContext` is used.
 - **`scheduler`**: Set a custom scheduler to determine how re-running the autorun function should be scheduled. It takes a function that should be invoked at some point in the future.
-- **`onError`**: By default, any exception thrown inside a reaction will be logged but not further thrown. This option allows overriding that behavior.
+- **`onError`**: Handles exceptions thrown inside the reaction. Without it, exceptions are not rethrown: they are reported to the spy and to handlers registered with `ReactiveContext.onReactionError()`. Set `disableErrorBoundaries` in `ReactiveConfig` to rethrow them instead.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -78,7 +78,7 @@ observables inside `fn()` are tracked.
 - **`equals`**: Custom equality function to override the default comparison for the value returned by `fn`.
 - **`context`**: The `ReactiveContext` to use. By default the `mainContext` is used.
 - **`scheduler`**: Set a custom scheduler to determine how re-running the reaction should be scheduled. It takes a function that should be invoked at some point in the future.
-- **`onError`**: By default, any exception thrown inside a reaction will be logged but not further thrown. This option allows overriding that behavior.
+- **`onError`**: Handles exceptions thrown inside the reaction. Without it, exceptions are not rethrown: they are reported to the spy and to handlers registered with `ReactiveContext.onReactionError()`. Set `disableErrorBoundaries` in `ReactiveConfig` to rethrow them instead.
 
 ```dart
 import 'package:mobx/mobx.dart';
@@ -132,7 +132,7 @@ Similar to `when` but returns a `Future`, which is fulfilled when the
 final completed = Observable(false);
 
 void waitForCompletion() async {
-  await asyncWhen(() => completed.value == true);
+  await asyncWhen((_) => completed.value);
 
   print('Completed');
 }
