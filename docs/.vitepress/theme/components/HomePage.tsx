@@ -100,7 +100,7 @@ export default function Home() {
               <span>Learn through examples</span>
               <Arrow />
             </a>
-            <a href="https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789348972">
+            <a href="https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789344837">
               <span>Read the MobX Quick Start Guide</span>
               <Arrow />
             </a>

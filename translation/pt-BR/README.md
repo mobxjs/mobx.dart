@@ -56,9 +56,9 @@ Acompanhe esse [Guia de introdução ao MobX (em inglês)](https://mobx.netlify.
 
 ### Aprofundando
 
-Para uma visão mais profunda do MobX, veja o [MobX Quick Start Guide](https://www.packtpub.com/web-development/mobx-quick-start-guide). Embora o livro use a versão JavaScript do MobX, os conceitos são **100% aplicáveis** ao Dart e Flutter.
+Para uma visão mais profunda do MobX, veja o [MobX Quick Start Guide](https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789344837). Embora o livro use a versão JavaScript do MobX, os conceitos são **100% aplicáveis** ao Dart e Flutter.
 
-[![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
+[![Capa do livro MobX Quick Start Guide](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789344837)
 
 ## Conceitos Principais
 

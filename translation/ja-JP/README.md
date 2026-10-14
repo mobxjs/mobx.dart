@@ -55,9 +55,9 @@ MobX は、アプリケーションのリアクティブデータを UI に簡�
 
 ### 深く掘り下げる
 
-MobX をより深く理解するには、[MobX クイックスタートガイド](https://www.packtpub.com/web-development/mobx-quick-start-guide) をご覧ください。この本は JavaScript バージョンの MobX を使用していますが、コアの概念は Dart および Flutter バージョンにも完全に適用できます。
+MobX をより深く理解するには、[MobX クイックスタートガイド](https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789344837) をご覧ください。この本は JavaScript バージョンの MobX を使用していますが、コアの概念は Dart および Flutter バージョンにも完全に適用できます。
 
-[![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
+[![MobX クイックスタートガイドの表紙](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789344837)
 
 ## コアコンセプト
 
