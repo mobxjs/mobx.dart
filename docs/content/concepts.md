@@ -180,6 +180,10 @@ whenever an observable they track is changed. Reactions come in few flavors as
 listed below. All of them return a `ReactionDisposer`, a function that can be
 called to dispose the reaction.
 
+The signatures below show only the required parameters. See the
+[Reactions API](/api/reaction) for all options, such as `name`, `delay`,
+`timeout` and `onError`.
+
 One _striking feature_ of reactions is that they _automatically track_ all the
 observables without any explicit wiring. The act of _reading an observable_
 within a reaction is enough to track it!
@@ -265,7 +269,7 @@ Similar to `when` but returns a `Future`, which is fulfilled when the
 final completed = Observable(false);
 
 void waitForCompletion() async {
-  await asyncWhen(() => completed.value == true);
+  await asyncWhen((_) => completed.value);
 
   print('Completed');
 }
