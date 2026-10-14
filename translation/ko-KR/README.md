@@ -69,10 +69,10 @@ MobX는 애플리케이션의 반응형 데이터를 UI와 간편하게 연결�
 
 ### 더 깊이 알아보기
 
-MobX에 대한 자세한 내용은 [MobX 빠른 시작 가이드](https://www.packtpub.com/web-development/mobx-quick-start-guide)를 참조하세요.
+MobX에 대한 자세한 내용은 [MobX 빠른 시작 가이드](https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789344837)를 참조하세요.
 이 책에서는 자바스크립트 버전의 MobX를 사용하지만, 개념은 Dart와 Flutter에 **100% 적용**할 수 있습니다.
 
-[![](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/web-development/mobx-quick-start-guide)
+[![MobX 빠른 시작 가이드 표지](https://github.com/mobxjs/mobx.dart/raw/master/docs/src/images/book.png)](https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789344837)
 
 ## 핵심 개념
 
