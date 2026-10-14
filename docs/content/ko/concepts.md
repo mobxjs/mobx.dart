@@ -179,7 +179,7 @@ Reaction의 *두드러진 특징*은 Observable을 별도로 연결하지 않아
 추적*한다는 점입니다. Reaction 안에서 *Observable을 읽는 것*만으로 추적이
 시작됩니다!
 
-> MobX로 작성한 코드는 말 그대로 의례적인 코드(ceremony)가 거의 없어 보입니다!
+> MobX로 작성한 코드에는 말 그대로 보일러플레이트가 전혀 없어 보입니다!
 
 **`ReactionDisposer autorun(Function(Reaction) fn)`**
 
