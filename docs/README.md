@@ -12,4 +12,6 @@ Set `FLUTTER_BIN` if Flutter is not on PATH. `pnpm build:docs` rebuilds document
 
 From the repository root, regenerate the resolved API inventory with `dart run tool/docs_inventory.dart`. CI checks it with `--check`. `pnpm build:docs` renders its local API reference. Add a guided explanation to the relevant API family whenever adding a symbol; the mechanical reference is only the coverage floor.
 
+English is the root locale. A Korean translation of `content/<path>.md` lives at `content/ko/<path>.md` and is served under `/ko/`; keep its code blocks identical to the English page (`pnpm test` checks this). Korean navigation links to the English page until a translation exists. Interface copy for theme components lives in `.vitepress/theme/i18n.ts`, and homepage example copy lives under `translations.ko` in `.vitepress/theme/data/examples.json`.
+
 The earlier Docusaurus source folders are legacy migration material, not the active site. New pages belong only in `content/`.

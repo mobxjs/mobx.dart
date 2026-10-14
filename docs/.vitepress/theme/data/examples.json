@@ -6,7 +6,14 @@
     "description": "Your product page, cart badge, and checkout can all read the same state. Change the quantity once. MobX keeps their derived values in sync.",
     "file": "cart.dart",
     "concept": "Observable + Computed + Action",
-    "link": "/api/observable"
+    "link": "/api/observable",
+    "translations": {
+      "ko": {
+        "label": "앱 전체에서",
+        "title": "진실 공급원은 하나, 즐거운 기능은 여럿.",
+        "description": "상품 페이지, 장바구니 배지, 결제 화면이 모두 같은 상태를 읽습니다. 수량을 한 번만 바꾸면 MobX가 파생 값을 모두 맞춰 줍니다."
+      }
+    }
   },
   {
     "id": "tasks",
@@ -15,7 +22,14 @@
     "description": "Complete a task and its count updates. Turn on a filter and the list follows too. Computeds express the relationship, so you don’t maintain a second copy of the data.",
     "file": "tasks.dart",
     "concept": "ObservableSet + Computed",
-    "link": "/examples/todos"
+    "link": "/examples/todos",
+    "translations": {
+      "ko": {
+        "label": "늘 동기화되는 목록",
+        "title": "목록이 바뀌면 필요한 것들이 따라옵니다.",
+        "description": "할 일을 완료하면 개수가 갱신됩니다. 필터를 켜면 목록도 따라 바뀝니다. Computed가 관계를 표현하므로 데이터 사본을 따로 관리할 필요가 없습니다."
+      }
+    }
   },
   {
     "id": "async",
@@ -26,6 +40,13 @@
     "concept": "ObservableFuture + Observer",
     "link": "/gallery/async",
     "source": "../mobx_examples/lib/gallery/examples/async.dart",
-    "region": "homepage"
+    "region": "homepage",
+    "translations": {
+      "ko": {
+        "label": "번거로움 없는 비동기",
+        "title": "로딩, 성공, 오류. 모두 observable.",
+        "description": "Load projects를 눌러 요청을 시작하세요. 오류 응답을 켜 본 뒤 다시 끄고 재시도해 보세요. observable future 하나가 로딩 플래그를 따로 두지 않고도 로딩, 오류, 프로젝트 목록을 모두 처리합니다."
+      }
+    }
   }
 ]

@@ -4,9 +4,19 @@ import { MobxTriad } from './home/MobxTriad';
 import { ExampleShowcase } from './home/ExampleShowcase';
 import { CommunitySection } from './home/CommunitySection';
 import { CompanyLogos } from './home/CompanyLogos';
+import { useI18n } from '../i18n';
 
+const pieces = [
+  ['observable', Eye, '/api/observable', 'blue'],
+  ['action', Zap, '/api/action', 'orange'],
+  ['computed', Calculator, '/api/observable#computed', 'violet'],
+  ['reaction', Sparkles, '/api/reaction', 'green'],
+  ['observer', PanelsTopLeft, '/api/observers', 'pink'],
+  ['async', Radio, '/api/observable#observablefuture', 'blue'],
+] as const;
 
 export default function Home() {
+  const { t: { value: t }, link } = useI18n();
   return (
     <>
       <div class="mobx-home">
@@ -16,66 +26,59 @@ export default function Home() {
         >
           <div class="hero-copy">
             <h1 id="hero-title">
-              Big ideas.
+              {t.hero.title[0]}
               <br />
-              <em>Simple state.</em>
+              <em>{t.hero.title[1]}</em>
             </h1>
             <p>
-              Make Dart and Flutter apps that stay in sync. MobX connects your data to the places that need it, automatically. So you can get on with the good stuff.
+              {t.hero.body}
             </p>
             <div class="hero-actions">
-              <a class="home-button" href="/getting-started">
-                Start building <Arrow />
+              <a class="home-button" href={link('/getting-started')}>
+                {t.hero.start} <Arrow />
               </a>
               <a class="home-text-link" href="#examples">
-                Try an example <Arrow down />
+                {t.hero.example} <Arrow down />
               </a>
             </div>
             <div class="hero-footnote">
               <span class="status-dot" />
-              Open source. MIT licensed. Made for Dart.
+              {t.hero.footnote}
             </div>
           </div>
           <MobxTriad />
         </section>
-        <nav class="package-strip home-section" aria-label="MobX packages">
+        <nav class="package-strip home-section" aria-label={t.packages.label}>
           <span>
-            Small pieces.
+            {t.packages.title[0]}
             <br />
-            <strong>One reactive system.</strong>
+            <strong>{t.packages.title[1]}</strong>
           </span>
           <a href="https://pub.dev/packages/mobx">
             <code>mobx</code>
             <span>
-              The reactive core <Arrow />
+              {t.packages.mobx} <Arrow />
             </span>
           </a>
           <a href="https://pub.dev/packages/flutter_mobx">
             <code>flutter_mobx</code>
             <span>
-              Reactive Flutter widgets <Arrow />
+              {t.packages.flutter} <Arrow />
             </span>
           </a>
           <a href="https://pub.dev/packages/mobx_codegen">
             <code>mobx_codegen</code>
             <span>
-              Less boilerplate <Arrow />
+              {t.packages.codegen} <Arrow />
             </span>
           </a>
         </nav>
         <CompanyLogos />
         <ExampleShowcase />
         <section id="how-it-works" class="pieces-section home-section" aria-labelledby="pieces-title">
-          <div class="section-heading"><h2 id="pieces-title">Small pieces.<br/><em>Wonderful possibilities.</em></h2><p>Learn a few ideas. Use them everywhere.<br/>From your first counter to state shared across an entire app.</p></div>
+          <div class="section-heading"><h2 id="pieces-title">{t.pieces.title[0]}<br/><em>{t.pieces.title[1]}</em></h2><p>{t.pieces.body[0]}<br/>{t.pieces.body[1]}</p></div>
           <div class="atomic-pieces">
-            {[
-              ['Observable', 'The state you care about.', 'A name, a cart, a collection. Make it observable and MobX can track who uses it.', '/api/observable', 'blue'],
-              ['Action', 'A clear place to make changes.', 'Update one value or several together. Reactions see the state after the action finishes.', '/api/action', 'orange'],
-              ['Computed', 'Answers that work themselves out.', 'Totals, filtered lists, validation. Describe how to derive a value, and let MobX keep it current.', '/api/observable#computed', 'violet'],
-              ['Reaction', 'The right response to a change.', 'Save a draft or respond to a status update. Run an effect when the state it reads changes.', '/api/reaction', 'green'],
-              ['Observer', 'Your Flutter UI, connected.', 'Read observables inside an Observer builder. It rebuilds when those dependencies change.', '/api/observers', 'pink'],
-              ['Futures & streams', 'Async joins the conversation.', 'Observe request status and live events, using the same reactive ideas as the rest of your app.', '/api/observable#observablefuture', 'blue'],
-            ].map(([name,tagline,body,url,color])=><a class="atomic-piece" href={url} key={name}><span class={"atomic-symbol atomic-" + color} aria-hidden="true">{name==='Observable'?<Eye/>:name==='Computed'?<Calculator/>:name==='Action'?<Zap/>:name==='Reaction'?<Sparkles/>:name==='Observer'?<PanelsTopLeft/>:<Radio/>}</span><div><h3>{name}<Arrow/></h3><strong>{tagline}</strong><p>{body}</p></div></a>)}
+            {pieces.map(([id,Icon,url,color])=>{const [name,tagline,body]=t.pieces.items[id];return <a class="atomic-piece" href={link(url)} key={id}><span class={"atomic-symbol atomic-" + color} aria-hidden="true"><Icon/></span><div><h3>{name}<Arrow/></h3><strong>{tagline}</strong><p>{body}</p></div></a>;})}
           </div>
         </section>
         <section
@@ -83,25 +86,25 @@ export default function Home() {
           aria-labelledby="learning-title"
         >
           <h2 id="learning-title">
-            From your first counter
+            {t.learning.title[0]}
             <br />
-            to your next big app.
+            {t.learning.title[1]}
           </h2>
           <div class="learning-links">
-            <a href="/getting-started">
-              <span>Get up and running</span>
+            <a href={link('/getting-started')}>
+              <span>{t.learning.start}</span>
               <Arrow />
             </a>
-            <a href="/guides/cheat-sheet">
-              <span>Keep the cheat sheet close</span>
+            <a href={link('/guides/cheat-sheet')}>
+              <span>{t.learning.cheatSheet}</span>
               <Arrow />
             </a>
-            <a href="/gallery/">
-              <span>Learn through examples</span>
+            <a href={link('/gallery/')}>
+              <span>{t.learning.examples}</span>
               <Arrow />
             </a>
             <a href="https://www.packtpub.com/en-us/product/mobx-quick-start-guide-9781789344837">
-              <span>Read the MobX Quick Start Guide</span>
+              <span>{t.learning.book}</span>
               <Arrow />
             </a>
           </div>
@@ -109,14 +112,14 @@ export default function Home() {
         <CommunitySection />
         <section class="home-close home-section">
           <h2>
-            Make room for
+            {t.close.title[0]}
             <br />
-            what you’re building.
+            {t.close.title[1]}
           </h2>
           <div>
-            <p>Let MobX take care of keeping state in sync.</p>
-            <a class="home-button" href="/getting-started">
-              Get started with MobX <Arrow />
+            <p>{t.close.body}</p>
+            <a class="home-button" href={link('/getting-started')}>
+              {t.close.button} <Arrow />
             </a>
           </div>
         </section>
