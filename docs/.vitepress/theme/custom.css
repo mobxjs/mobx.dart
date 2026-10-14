@@ -71,4 +71,4 @@ input,textarea { caret-color:var(--vp-c-brand-1); }
 .pub-badge img { display:block; height:20px; max-width:100%; }
 .pub-badge::after { display:none!important; }
 /* Korean wraps between words, not between syllables. */
-:lang(ko) { word-break: keep-all; overflow-wrap: anywhere; }
+:lang(ko) { word-break: keep-all; overflow-wrap: break-word; }
