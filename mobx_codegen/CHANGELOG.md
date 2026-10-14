@@ -1,3 +1,11 @@
+## 2.8.1
+
+- Allow analyzer 14 again and restore wider dependency ranges (#1086)
+  - `analyzer: ">=10.0.0 <15.0.0"` (was `^13.3.0`)
+  - `build: ^4.0.4` (was `^4.0.11`)
+  - `source_gen: ^4.1.2` (was `^4.2.4`)
+  - `sdk: ">=3.9.0 <4.0.0"` (was `>=3.11.0`)
+
 ## 2.8.0
 
  - **FIX**: upgrade SDK to 3.7.0 and use multiple underscore wildcards for unused parametersFeature/annotations update (#1062).
