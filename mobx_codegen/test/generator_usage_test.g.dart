@@ -212,7 +212,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set lateField(String value) {
-    _$lateFieldAtom.reportWrite(
+    _$lateFieldAtom.reportWrite<String?>(
       value,
       _lateFieldIsInitialized ? super.lateField : null,
       () {
@@ -238,7 +238,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set lateNullableField(String? value) {
-    _$lateNullableFieldAtom.reportWrite(
+    _$lateNullableFieldAtom.reportWrite<String?>(
       value,
       _lateNullableFieldIsInitialized ? super.lateNullableField : null,
       () {
@@ -264,7 +264,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set lateNullableUninitializedField(String? value) {
-    _$lateNullableUninitializedFieldAtom.reportWrite(
+    _$lateNullableUninitializedFieldAtom.reportWrite<String?>(
       value,
       _lateNullableUninitializedFieldIsInitialized
           ? super.lateNullableUninitializedField
@@ -275,6 +275,34 @@ mixin _$TestStore on _TestStore, Store {
       },
       equals: _lateNullableUninitializedFieldIsInitialized
           ? null
+          : observableAlwaysNotEqual,
+    );
+  }
+
+  late final _$lateCustomEqualsFieldAtom = Atom(
+    name: '_TestStore.lateCustomEqualsField',
+    context: context,
+  );
+
+  @override
+  String get lateCustomEqualsField {
+    _$lateCustomEqualsFieldAtom.reportRead();
+    return super.lateCustomEqualsField;
+  }
+
+  bool _lateCustomEqualsFieldIsInitialized = false;
+
+  @override
+  set lateCustomEqualsField(String value) {
+    _$lateCustomEqualsFieldAtom.reportWrite<String?>(
+      value,
+      _lateCustomEqualsFieldIsInitialized ? super.lateCustomEqualsField : null,
+      () {
+        super.lateCustomEqualsField = value;
+        _lateCustomEqualsFieldIsInitialized = true;
+      },
+      equals: _lateCustomEqualsFieldIsInitialized
+          ? sameIgnoringCase
           : observableAlwaysNotEqual,
     );
   }
@@ -378,6 +406,7 @@ errorField: ${errorField},
 lateField: ${lateField},
 lateNullableField: ${lateNullableField},
 lateNullableUninitializedField: ${lateNullableUninitializedField},
+lateCustomEqualsField: ${lateCustomEqualsField},
 fields: ${fields},
 fieldsKeepAlive: ${fieldsKeepAlive},
 batchedItems: ${batchedItems}
