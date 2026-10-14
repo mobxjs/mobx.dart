@@ -2,9 +2,11 @@
 import {ref,onMounted,onBeforeUnmount,watch,nextTick} from 'vue';
 import {useData} from 'vitepress';
 import {trackEvent} from '../analytics';
+import {useI18n} from '../i18n';
 import {Play, RotateCw, ExternalLink, ArrowRight, RotateCcw} from '@lucide/vue';
 const props=withDefaults(defineProps<{route:string;height?:number;autostart?:boolean}>(),{height:480,autostart:false});
 const {isDark}=useData();
+const {t}=useI18n();
 const host=ref<HTMLElement>(),status=ref('idle');
 let app:FlutterApp|undefined,id:number|undefined,generation=0;
 async function start(){
@@ -41,11 +43,11 @@ function loadFlutter():Promise<FlutterApp>{
  <div class="flutter-example">
   <div class="flutter-host" ref="host" :style="{height:height+'px'}"></div>
   <div v-if="status!=='ready'" class="flutter-placeholder" :style="{height:height+'px'}">
-   <template v-if="status==='idle'"><Play :size="28" aria-hidden="true"/><p>Try the real Flutter example.</p><button class="gallery-cta" @click="launch">Run example <ArrowRight :size="16"/></button><small>The Flutter runtime loads when you press Run.</small></template>
-   <p v-else-if="status==='loading'" role="status">Loading Flutter…</p>
-   <template v-else><p role="alert">The example could not load. Check your connection and try again.</p><button class="gallery-cta" @click="start">Retry <RotateCw :size="16"/></button></template>
+   <template v-if="status==='idle'"><Play :size="28" aria-hidden="true"/><p>{{t.flutter.prompt}}</p><button class="gallery-cta" @click="launch">{{t.flutter.run}} <ArrowRight :size="16"/></button><small>{{t.flutter.note}}</small></template>
+   <p v-else-if="status==='loading'" role="status">{{t.flutter.loading}}</p>
+   <template v-else><p role="alert">{{t.flutter.error}}</p><button class="gallery-cta" @click="start">{{t.flutter.retry}} <RotateCw :size="16"/></button></template>
   </div>
-  <div class="flutter-caption"><span>Flutter widgets · flutter_mobx</span><div class="flutter-actions"><button type="button" :disabled="status!=='ready'" aria-label="Reset example" @click="reset"><RotateCcw :size="14"/>Reset</button><a :href="'/gallery-app/index.html#'+route" target="_blank" rel="noopener">Open app <ExternalLink :size="14"/></a></div></div>
+  <div class="flutter-caption"><span>Flutter widgets · flutter_mobx</span><div class="flutter-actions"><button type="button" :disabled="status!=='ready'" :aria-label="t.flutter.resetLabel" @click="reset"><RotateCcw :size="14"/>{{t.flutter.reset}}</button><a :href="'/gallery-app/index.html#'+route" target="_blank" rel="noopener">{{t.flutter.open}} <ExternalLink :size="14"/></a></div></div>
  </div>
 </template>
 <style>

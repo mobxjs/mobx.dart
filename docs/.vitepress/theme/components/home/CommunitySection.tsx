@@ -2,6 +2,7 @@ import { Arrow } from '../Arrow';
 import {Fragment} from 'vue';
 import { testimonials } from '../../data/testimonials';
 import { sponsors } from '../../data/sponsors';
+import { useI18n } from '../../i18n';
 
 function Quotes({ items }: { items: typeof testimonials }) {
   return (
@@ -29,6 +30,7 @@ function Quotes({ items }: { items: typeof testimonials }) {
 }
 
 export function CommunitySection() {
+  const { t: { value: { community: t } } } = useI18n();
   return (
     <section
       class="community-section home-section"
@@ -36,21 +38,21 @@ export function CommunitySection() {
     >
       <div class="section-heading">
         <h2 id="community-title">
-          Built in the open.
+          {t.title[0]}
           <br />
-          Used in the real world.
+          {t.title[1]}
         </h2>
         <p>
-          Part of the Dart and Flutter community.
+          {t.body[0]}
           <br />
-          Here’s what developers have shared.
+          {t.body[1]}
         </p>
       </div>
       <Quotes items={testimonials} />
       <div class="sponsor-heading">
-        <h3>Supported by our sponsors</h3>
+        <h3>{t.sponsors}</h3>
         <a href="https://opencollective.com/mobx/donate">
-          Support MobX <Arrow />
+          {t.support} <Arrow />
         </a>
       </div>
       <ul class="sponsor-list">
@@ -66,7 +68,7 @@ export function CommunitySection() {
           ))}
       </ul>
       <p class="past-sponsors">
-        With thanks to our past sponsors:{' '}
+        {t.past}{' '}
         {sponsors
           .filter((s) => !s.active)
           .map((s, i) => (

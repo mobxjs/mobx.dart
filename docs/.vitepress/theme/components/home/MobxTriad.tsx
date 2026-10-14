@@ -1,8 +1,10 @@
 import {defineComponent,ref,computed,onMounted,onUnmounted,watch} from 'vue';
 import {Zap,Eye,Sparkles,Pause,Play} from '@lucide/vue';
+import {useI18n} from '../../i18n';
 function PieceIcon({kind}:{kind:'action'|'observable'|'reaction'}){const Icon={action:Zap,observable:Eye,reaction:Sparkles}[kind];return <Icon size={24} stroke-width={1.7} aria-hidden="true"/>;}
 
 export const MobxTriad=defineComponent({setup(){
+ const {t:messages}=useI18n();
  const running=ref(false), visible=ref(false), count=ref(1), element=ref<HTMLElement>();
  const stage=ref<HTMLElement>(), action=ref<HTMLElement>(), observable=ref<HTMLElement>(), reaction=ref<HTMLElement>();
  const geometry=ref({width:560,height:390,paths:['M233 130 153 236','M202 300H354','M426 233 344 130'],labels:[{x:162,y:180,anchor:'end'},{x:280,y:282,anchor:'middle'},{x:418,y:175,anchor:'start'}]});
@@ -31,22 +33,22 @@ export const MobxTriad=defineComponent({setup(){
  });
  onUnmounted(()=>dispose());
  watch(active,(value,_,cleanup)=>{if(!value)return;const timer=setInterval(()=>count.value=count.value%9+1,5000);cleanup(()=>clearInterval(timer));});
-  return () => <figure class="mobx-triad" ref={element} aria-label="The MobX triad: actions change observable state, reactions respond. User interaction can start another action." data-running={active.value}>
+  return () => {const t=messages.value.triad;return <figure class="mobx-triad" ref={element} aria-label={t.label} data-running={active.value}>
    <div class="triad-stage" ref={stage}>
      <div class="triad-halo"/>
      <svg class="triad-wires" viewBox={'0 0 '+geometry.value.width+' '+geometry.value.height} aria-hidden="true">
        <defs>{['flow','return'].map(name=><marker id={'triad-'+name+'-tip'} viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 10 5 0 10Z" fill={name==='flow'?'#4d86bd':'#8199b1'}/></marker>)}</defs>
        {geometry.value.paths.map((path,i)=><path d={path} class={'wire '+['wire-action','wire-state','wire-interaction'][i]} marker-end={'url(#triad-'+(i===2?'return':'flow')+'-tip)'}/>)}
-       {geometry.value.labels.map((label,i)=><text x={label.x} y={label.y} text-anchor={label.anchor} dominant-baseline="middle">{['changes','updates','user interaction'][i]}</text>)}
+       {geometry.value.labels.map((label,i)=><text x={label.x} y={label.y} text-anchor={label.anchor} dominant-baseline="middle">{t.wires[i]}</text>)}
        <circle class="triad-signal signal-action" style={{offsetPath:'path("'+geometry.value.paths[0]+'")'}} r="4" fill="#4d86bd"/>
        <circle class="triad-signal signal-state" style={{offsetPath:'path("'+geometry.value.paths[1]+'")'}} r="4" fill="#4d86bd"/>
      </svg>
-     <button class="triad-piece triad-action" ref={action} onClick={()=>{count.value=count.value%9+1}} aria-label="Trigger an action in the MobX triangle"><span class="piece-icon"><PieceIcon kind="action"/></span><strong>Action</strong><code>addItem()</code></button>
-     <div class="triad-center"><span>MobX</span><small>connects the dots</small></div>
+     <button class="triad-piece triad-action" ref={action} onClick={()=>{count.value=count.value%9+1}} aria-label={t.trigger}><span class="piece-icon"><PieceIcon kind="action"/></span><strong>Action</strong><code>addItem()</code></button>
+     <div class="triad-center"><span>MobX</span><small>{t.center}</small></div>
      <div class="triad-piece triad-observable" ref={observable}><span class="piece-icon"><PieceIcon kind="observable"/></span><strong>Observable</strong><code key={count.value}>items = {count.value}</code></div>
-     <div class="triad-piece triad-reaction" ref={reaction}><span class="piece-icon"><PieceIcon kind="reaction"/></span><strong>Reaction</strong><span class="triad-ui" key={count.value}>Bag <b>{count.value}</b></span></div>
+     <div class="triad-piece triad-reaction" ref={reaction}><span class="piece-icon"><PieceIcon kind="reaction"/></span><strong>Reaction</strong><span class="triad-ui" key={count.value}>{t.bag} <b>{count.value}</b></span></div>
    </div>
-   <figcaption><span>A little change. Everything connected.</span><button onClick={()=>{running.value=!running.value}} aria-label={running.value?'Pause triangle animation':'Play triangle animation'}>{running.value?<Pause size={16}/>:<Play size={16}/>}
-{running.value?'Pause':'Play'}</button></figcaption>
- </figure>;
+   <figcaption><span>{t.caption}</span><button onClick={()=>{running.value=!running.value}} aria-label={running.value?t.pauseLabel:t.playLabel}>{running.value?<Pause size={16}/>:<Play size={16}/>}
+{running.value?t.pause:t.play}</button></figcaption>
+ </figure>;};
 }});
