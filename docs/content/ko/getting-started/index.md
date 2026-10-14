@@ -47,7 +47,7 @@ dev_dependencies:
 flutter pub get
 ```
 
-이제 개발을 이어 가는 데 필요한 패키지가 모두 준비되었습니다.
+이제 개발에 필요한 패키지가 모두 준비되었습니다.
 
 ## Store 추가하기
 
@@ -79,8 +79,8 @@ abstract class _Counter with Store {
 
 이 코드에서 눈여겨볼 부분은 다음과 같습니다.
 
-- `Store` 믹스인을 포함하는 추상 클래스 `_Counter`가 있습니다. Store와 관련된
-  코드는 모두 이 추상 클래스 안에 작성합니다. `build_runner`가 생성하는 코드를
+- `Store` 믹스인을 사용하는 추상 클래스 `_Counter`가 있습니다. Store와 관련된
+  코드는 모두 이 추상 클래스 안에 작성합니다. `build_runner`가 생성한 코드를
   합치기 위해 `Counter` 클래스를 별도로 선언합니다.
 - 생성된 코드는 `counter.g.dart` 파트 파일에 들어가며, *`part` 지시자*로
   포함합니다. 이 지시자가 없으면 `build_runner`가 아무 결과물도 만들지

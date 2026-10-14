@@ -77,7 +77,7 @@ abstract class CounterBase with Store {
 어노테이션으로 클래스의 Observable 프로퍼티를 표시한다는 점을 눈여겨보세요.
 물론 상단에 보일러플레이트가 조금 있지만, 어떤 클래스든 형태가 똑같습니다.
 더 복잡한 클래스를 만들수록 이 보일러플레이트는 눈에 띄지 않게 되고, 중괄호
-안의 코드에 대부분 집중하게 됩니다.
+안의 코드에 주로 집중하게 됩니다.
 
 **참고**: 어노테이션은 <PubBadge name="mobx_codegen"/> 패키지에서 제공합니다.
 
@@ -171,7 +171,7 @@ abstract class CounterBase with Store {
 
 Reaction은 **Observable**, **Action**, **Reaction**으로 이루어진 *MobX 삼각
 구조*를 완성합니다. Reaction은 반응형 시스템의 옵저버로, 추적 중인 Observable이
-바뀔 때마다 알림을 받습니다. Reaction에는 아래와 같은 몇 가지 종류가 있으며,
+바뀔 때마다 알림을 받습니다. Reaction에는 아래와 같이 몇 가지 종류가 있으며,
 모두 Reaction을 해제(dispose)할 때 호출하는 함수인 `ReactionDisposer`를
 반환합니다.
 

@@ -63,7 +63,7 @@ export default defineConfigWithTheme<ThemeConfig>({
    sidebar:sidebar('ko'),translated,
    editLink:{pattern:'https://github.com/mobxjs/mobx.dart/edit/main/docs/content/:path',text:'이 페이지 개선하기'},
    footer:{message:'Dart와 Flutter 커뮤니티를 위해 정성껏 만들었습니다. MIT 라이선스.',copyright:`Copyright © 2018–${new Date().getFullYear()} MobX.dart contributors.`},
-   outline:{level:[2,3],label:'이 페이지의 내용'},
+   outline:{level:[2,3],label:'이 페이지 목차'},
    lastUpdated:{text:'마지막 업데이트',formatOptions:{dateStyle:'medium'}},
    docFooter:{prev:'이전 페이지',next:'다음 페이지'},
    langMenuLabel:'언어 변경',returnToTopLabel:'맨 위로',sidebarMenuLabel:'메뉴',darkModeSwitchLabel:'테마',lightModeSwitchTitle:'라이트 모드로 전환',darkModeSwitchTitle:'다크 모드로 전환',skipToContentLabel:'본문으로 건너뛰기',
