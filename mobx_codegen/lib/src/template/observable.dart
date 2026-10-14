@@ -65,7 +65,7 @@ class ObservableTemplate {
     $atomName.reportWrite(value, _${name}IsInitialized ? super.$name : null, () {
       super.$name = value;
       _${name}IsInitialized = true;
-    }, equals: _${name}IsInitialized ? ${equals?.name ?? 'null'} : (_, _) => false);
+    }, equals: _${name}IsInitialized ? ${equals?.name ?? 'null'} : observableAlwaysNotEqual);
   }''';
     }
 

@@ -219,7 +219,7 @@ mixin _$TestStore on _TestStore, Store {
         super.lateField = value;
         _lateFieldIsInitialized = true;
       },
-      equals: _lateFieldIsInitialized ? null : (_, _) => false,
+      equals: _lateFieldIsInitialized ? null : observableAlwaysNotEqual,
     );
   }
 
@@ -245,7 +245,7 @@ mixin _$TestStore on _TestStore, Store {
         super.lateNullableField = value;
         _lateNullableFieldIsInitialized = true;
       },
-      equals: _lateNullableFieldIsInitialized ? null : (_, _) => false,
+      equals: _lateNullableFieldIsInitialized ? null : observableAlwaysNotEqual,
     );
   }
 
@@ -275,7 +275,7 @@ mixin _$TestStore on _TestStore, Store {
       },
       equals: _lateNullableUninitializedFieldIsInitialized
           ? null
-          : (_, _) => false,
+          : observableAlwaysNotEqual,
     );
   }
 
