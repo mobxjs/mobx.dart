@@ -49,11 +49,11 @@ flutter pub get
 
 이제 개발에 필요한 패키지가 모두 준비되었습니다.
 
-## Store 추가하기
+## 스토어 추가하기
 
-이제 MobX **Store**를 만들어 보겠습니다. MobX에서 Store는 서로 관련된
-Observable 상태를 하나의 클래스로 묶는 방법입니다. Store를 사용하면
-어노테이션을 활용할 수 있어 코드가 간결해집니다. **`\lib`** 폴더에
+이제 MobX **스토어**를 만들어 보겠습니다. MobX에서 스토어는 서로 관련된
+Observable 상태를 하나의 클래스로 묶는 방법입니다. 스토어를 사용하면
+주석(annotation)을 활용할 수 있어 코드가 간결해집니다. **`\lib`** 폴더에
 `counter.dart` 파일을 새로 만들고 다음 코드를 추가합니다.
 
 ```dart
@@ -79,7 +79,7 @@ abstract class _Counter with Store {
 
 이 코드에서 눈여겨볼 부분은 다음과 같습니다.
 
-- `Store` 믹스인을 사용하는 추상 클래스 `_Counter`가 있습니다. Store와 관련된
+- `Store` 믹스인을 사용하는 추상 클래스 `_Counter`가 있습니다. 스토어와 관련된
   코드는 모두 이 추상 클래스 안에 작성합니다. `build_runner`가 생성한 코드를
   합치기 위해 `Counter` 클래스를 별도로 선언합니다.
 - 생성된 코드는 `counter.g.dart` 파트 파일에 들어가며, *`part` 지시자*로
@@ -94,7 +94,7 @@ abstract class _Counter with Store {
 
 :::
 
-- `@observable` 어노테이션은 `value`를 Observable(관찰 가능한 상태)로
+- `@observable` 주석은 `value`를 Observable(관찰 가능한 상태)로
   표시합니다.
 - `@action`은 `increment()` 메서드를 Action(상태를 변경하는 동작)으로
   표시하는 데 사용합니다.
@@ -138,7 +138,7 @@ flutter pub run build_runner build
 
 #### watch 모드 사용하기
 
-Store를 수정할 때마다 `*.g.dart` 파일을 자동으로 생성하고 싶다면 다음 명령을
+스토어를 수정할 때마다 `*.g.dart` 파일을 자동으로 생성하고 싶다면 다음 명령을
 사용합니다.
 
 ```sh
@@ -157,9 +157,9 @@ flutter pub run build_runner watch --delete-conflicting-outputs
 
 :::
 
-## Store를 연결하고 위젯에 Observer 추가하기
+## 스토어를 연결하고 위젯에 Observer 추가하기
 
-이제 MobX Store를 위젯에 연결할 차례입니다. `main.dart` 파일의 내용을 다음
+이제 MobX 스토어를 위젯에 연결할 차례입니다. `main.dart` 파일의 내용을 다음
 코드로 바꿉니다.
 
 ```dart
@@ -223,7 +223,7 @@ class MyHomePage extends StatelessWidget {
 ```
 
 위 코드에는 `StatefulWidget`이 하나도 없다는 점에 주목하세요. 상태는 `Counter`
-Store에 저장되고, `Observer` 위젯은 `counter.value`를 읽어 카운트를
+스토어에 저장되고, `Observer` 위젯은 `counter.value`를 읽어 카운트를
 렌더링합니다. `counter.value`를 읽는 것만으로 `Observer`가 추적을 시작하며,
 값이 바뀔 때마다 다시 렌더링합니다.
 
