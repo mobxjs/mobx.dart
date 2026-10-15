@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx_examples/clock/clock_widgets.dart';
 import 'package:mobx_examples/connectivity/connectivity_store.dart';
 import 'package:mobx_examples/connectivity/connectivity_widgets.dart';

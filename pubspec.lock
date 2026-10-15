@@ -489,10 +489,10 @@ packages:
     dependency: transitive
     description:
       name: material_ui
-      sha256: fbfb53cab6c4629438feeade5f3d305f72944bc9d9f25786b19106d32b80ec45
+      sha256: "27ea1af251a79728ee63068417f2ab469d294931a9bb8366ba8b85b0ef839060"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.7.0"
   melos:
     dependency: "direct dev"
     description:
@@ -1043,5 +1043,5 @@ packages:
     source: hosted
     version: "2.2.4"
 sdks:
-  dart: ">=3.12.0 <4.0.0"
-  flutter: ">=3.44.0"
+  dart: ">=3.13.0 <4.0.0"
+  flutter: ">=3.47.0"

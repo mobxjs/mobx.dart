@@ -27,6 +27,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
+  material_ui: ^1.7.0
   mocktail: ^1.0.5
 
 resolution: workspace

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_mobx/src/multi_reaction_builder.dart';
 import 'package:flutter_mobx/src/reaction_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
