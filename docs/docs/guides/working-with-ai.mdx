@@ -1,0 +1,117 @@
+---
+slug: /guides/working-with-ai
+title: Working with AI
+---
+
+import { PubBadge } from '../../src/components/Shield';
+
+AI coding assistants like Claude Code, GitHub Copilot, and Cursor can be powerful
+allies when building MobX.dart applications. This guide covers tips for getting
+the most out of AI tools with MobX.
+
+## Tips for Prompting AI
+
+### Be Explicit About the MobX Triad
+
+When asking AI to create stores, mention the specific MobX concepts you want:
+
+- **"Create a store with `@observable` fields, `@computed` getters, and `@action` methods"**
+- **"Add a `reaction` that validates the email field when it changes"**
+- **"Wrap the counter display in an `Observer` widget"**
+
+AI tools work best when you use MobX-specific terminology rather than generic
+descriptions.
+
+### Remind AI About Code Generation
+
+MobX.dart relies on `mobx_codegen`. When asking AI to create a store, remind it
+about the boilerplate:
+
+```dart
+// Include the part directive and class structure
+import 'package:mobx/mobx.dart';
+
+part 'counter.g.dart';
+
+class Counter = _Counter with _$Counter;
+
+abstract class _Counter with Store {
+  // ... store body
+}
+```
+
+### Common Pitfalls to Watch For
+
+When reviewing AI-generated MobX code, watch for these issues:
+
+1. **Missing `part` directive** — AI may forget `part 'filename.g.dart';`
+2. **Deep observability assumption** — AI may assume nested objects are automatically
+   tracked. Dart MobX does **not** support deep observability.
+3. **Observer tracking scope** — AI may place observable reads inside nested
+   functions within `Observer.builder`, where they won't be tracked.
+4. **Plain collections** — AI may use `List<T>` instead of `ObservableList<T>`
+   when item-level tracking is needed.
+
+## Agent Skills
+
+This repository includes [Agent Skills](https://agentskills.io) that give AI
+coding assistants deep knowledge of MobX.dart APIs, patterns, and best practices.
+Skills work with Claude Code, Cursor, Windsurf, and other AI tools that support them.
+
+### Installation
+
+```bash
+npx skills add mobxjs/mobx.dart
+```
+
+Target a specific agent with `--agent`:
+
+```bash
+npx skills add mobxjs/mobx.dart --agent cursor
+npx skills add mobxjs/mobx.dart --agent claude-code
+```
+
+Or install globally so the skill is available across all your projects:
+
+```bash
+npx skills add mobxjs/mobx.dart --global
+```
+
+For Claude Code, you can also install via the plugin system:
+
+```
+/plugin marketplace add mobxjs/mobx.dart
+/plugin install mobx-dart@mobx-dart
+```
+
+### What's Included
+
+The `mobx-dart` skill covers:
+
+- **Core APIs** — Store class pattern, `@observable`, `@computed`, `@action`, `@readonly`,
+  code generation with <PubBadge name="mobx_codegen" />
+- **Reactions** — `autorun`, `reaction`, `when`, `asyncWhen`, custom schedulers
+- **Flutter Integration** — `Observer` widget, `Observer.withBuiltChild`, `ReactionBuilder`
+- **Reactive Collections** — `ObservableList`, `ObservableMap`, `ObservableSet`,
+  `ObservableFuture`, `ObservableStream`, `Atom`
+- **Best Practices** — Widget-Store-Service triad, store organization, reactivity rules,
+  JSON serialization
+- **Advanced** — `ReactiveContext`, `ReactiveConfig`, read/write policies, Spy debugging
+
+## Custom Instructions for AI Tools
+
+If your AI tool supports custom instructions (e.g., `.cursorrules`, `CLAUDE.md`,
+`.github/copilot-instructions.md`), consider adding MobX-specific guidance:
+
+```markdown
+## MobX.dart Conventions
+
+- Use `mobx_codegen` annotations (`@observable`, `@computed`, `@action`)
+- Always include `part 'filename.g.dart';` in store files
+- Use `ObservableList`/`ObservableMap`/`ObservableSet` for reactive collections
+- Wrap UI in `Observer` widget and read observables in immediate builder context
+- Follow Widget-Store-Service triad for architecture
+- Do not mutate observables outside of actions
+```
+
+This ensures consistent, correct MobX code regardless of which AI tool you use.

@@ -1,0 +1,19 @@
+{
+  "name": "mobx-dart",
+  "owner": {
+    "name": "MobX.dart Contributors"
+  },
+  "metadata": {
+    "description": "Claude Code plugins for MobX.dart — reactive state management for Dart and Flutter",
+    "version": "1.0.0",
+    "pluginRoot": "."
+  },
+  "plugins": [
+    {
+      "name": "mobx-dart",
+      "version": "2.6.0",
+      "description": "MobX.dart agent skills — observables, actions, reactions, Observer widget, store patterns, and code generation",
+      "source": "."
+    }
+  ]
+}

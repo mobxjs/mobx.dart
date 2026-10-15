@@ -29,6 +29,7 @@ module.exports = {
         'guides/when-does-mobx-react',
         'guides/mobx-vs-inherited-model',
         'guides/mobx-utils',
+        'guides/working-with-ai',
       ],
     },
     'community',
