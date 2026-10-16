@@ -5,6 +5,8 @@
   - `build: ^4.0.4` (was `^4.0.11`)
   - `source_gen: ^4.1.2` (was `^4.2.4`)
   - `sdk: ">=3.9.0 <4.0.0"` (was `>=3.11.0`)
+- Fix the first `null` assignment to a nullable `late` observable being ignored (#1069)
+- Fix the analyzer error `could_not_infer` in generated setters for `late` observables with a custom `equals`
 
 ## 2.8.0
 

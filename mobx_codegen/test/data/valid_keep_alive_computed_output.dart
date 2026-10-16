@@ -24,13 +24,14 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set username(String value) {
-    _$usernameAtom.reportWrite(
+    _$usernameAtom.reportWrite<String?>(
       value,
       _usernameIsInitialized ? super.username : null,
       () {
         super.username = value;
         _usernameIsInitialized = true;
       },
+      equals: _usernameIsInitialized ? null : observableAlwaysNotEqual,
     );
   }
 }
