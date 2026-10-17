@@ -24,7 +24,7 @@ mixin _$NestedStore on _NestedStore, Store {
     _$nameAtom.reportWrite(value, _nameIsInitialized ? super.name : null, () {
       super.name = value;
       _nameIsInitialized = true;
-    });
+    }, equals: _nameIsInitialized ? null : observableAlwaysNotEqual);
   }
 
   @override

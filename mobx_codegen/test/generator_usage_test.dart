@@ -130,6 +130,12 @@ abstract class _TestStore with Store {
 
   @observable
   late String lateField;
+
+  @observable
+  late String? lateNullableField = field1;
+
+  @observable
+  late String? lateNullableUninitializedField;
 }
 
 void main() {
@@ -308,5 +314,25 @@ void main() {
     store.lateField = 'field';
 
     expect(fields, equals(['field']));
+  });
+
+  test('setting an initialized late nullable field to null works', () {
+    final store = TestStore('field1', field2: 'field2');
+
+    final fields = <String?>[];
+    autorun((_) {
+      fields.add(store.lateNullableField);
+    });
+    store.lateNullableField = null;
+
+    expect(store.lateNullableField, isNull);
+    expect(fields, equals(['field1', null]));
+  });
+
+  test('setting an uninitialized late nullable field to null works', () {
+    final store = TestStore('field1', field2: 'field2')
+      ..lateNullableUninitializedField = null;
+
+    expect(store.lateNullableUninitializedField, isNull);
   });
 }
