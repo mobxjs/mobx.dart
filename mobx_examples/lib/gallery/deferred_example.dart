@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Owns one load attempt. Rebuilds never restart a download; failure is retryable.
 class DeferredExample extends StatefulWidget {
