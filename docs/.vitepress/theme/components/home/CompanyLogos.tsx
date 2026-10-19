@@ -1,5 +1,6 @@
 import { defineComponent, ref } from 'vue';
 import { Pause, Play } from '@lucide/vue';
+import { useI18n } from '../../i18n';
 
 // Approved company names and locally stored logos.
 // All company logos must render in grayscale in both themes; never add color exceptions.
@@ -18,11 +19,12 @@ const companies = [
 export const CompanyLogos = defineComponent({
   setup() {
     const paused = ref(false);
+    const { t } = useI18n();
     return () => (
       <section class="company-section home-section" aria-labelledby="companies-title">
         <div class="company-heading">
-          <h2 id="companies-title">Used by thousands of companies across the world</h2>
-          <button class="company-motion" type="button" aria-label={paused.value ? 'Resume logo scrolling' : 'Pause logo scrolling'} aria-pressed={paused.value} onClick={() => paused.value = !paused.value}>
+          <h2 id="companies-title">{t.value.companies.title}</h2>
+          <button class="company-motion" type="button" aria-label={paused.value ? t.value.companies.resume : t.value.companies.pause} aria-pressed={paused.value} onClick={() => paused.value = !paused.value}>
             {paused.value ? <Play size={16} /> : <Pause size={16} />}
           </button>
         </div>
