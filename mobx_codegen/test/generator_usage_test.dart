@@ -8,6 +8,9 @@ class TestStore = _TestStore with _$TestStore;
 
 bool customEquals(String? oldValue, String? newValue) => oldValue != newValue;
 
+bool sameIgnoringCase(String? oldValue, String? newValue) =>
+    oldValue?.toLowerCase() == newValue?.toLowerCase();
+
 abstract class _TestStore with Store {
   // ignore: unused_element, unused_element_parameter
   _TestStore(this.field1, {this.field2});
@@ -136,6 +139,9 @@ abstract class _TestStore with Store {
 
   @observable
   late String? lateNullableUninitializedField;
+
+  @MakeObservable(equals: sameIgnoringCase)
+  late String lateCustomEqualsField = field1;
 }
 
 void main() {
@@ -334,5 +340,20 @@ void main() {
       ..lateNullableUninitializedField = null;
 
     expect(store.lateNullableUninitializedField, isNull);
+  });
+
+  test('late fields use custom equals after the first write', () {
+    final store = TestStore('field1', field2: 'field2');
+
+    final fields = <String>[];
+    autorun((_) {
+      fields.add(store.lateCustomEqualsField);
+    });
+    store
+      ..lateCustomEqualsField = 'FIELD1'
+      ..lateCustomEqualsField = 'field1';
+
+    expect(store.lateCustomEqualsField, 'FIELD1');
+    expect(fields, equals(['field1', 'FIELD1']));
   });
 }

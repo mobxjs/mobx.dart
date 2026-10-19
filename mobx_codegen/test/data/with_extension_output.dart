@@ -11,10 +11,15 @@ mixin _$Foo on _Foo, Store {
 
   @override
   set name(String value) {
-    _$nameAtom.reportWrite(value, _nameIsInitialized ? super.name : null, () {
-      super.name = value;
-      _nameIsInitialized = true;
-    }, equals: _nameIsInitialized ? null : observableAlwaysNotEqual);
+    _$nameAtom.reportWrite<String?>(
+      value,
+      _nameIsInitialized ? super.name : null,
+      () {
+        super.name = value;
+        _nameIsInitialized = true;
+      },
+      equals: _nameIsInitialized ? null : observableAlwaysNotEqual,
+    );
   }
 
   @override

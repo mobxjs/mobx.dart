@@ -12,6 +12,7 @@ class ObservableTemplate {
     this.isReadOnly = false,
     this.isPrivate = false,
     this.isLate = false,
+    this.isNullable = false,
     this.equals,
     this.useDeepEquality,
   });
@@ -23,6 +24,7 @@ class ObservableTemplate {
   final bool isPrivate;
   final bool isReadOnly;
   final bool isLate;
+  final bool isNullable;
   final ExecutableElement? equals;
   final bool? useDeepEquality;
 
@@ -62,7 +64,7 @@ class ObservableTemplate {
       
   @override
   set $name($type value) {
-    $atomName.reportWrite(value, _${name}IsInitialized ? super.$name : null, () {
+    $atomName.reportWrite<${isNullable ? type : '$type?'}>(value, _${name}IsInitialized ? super.$name : null, () {
       super.$name = value;
       _${name}IsInitialized = true;
     }, equals: _${name}IsInitialized ? ${equals?.name ?? 'null'} : observableAlwaysNotEqual);

@@ -14,7 +14,7 @@ mixin _$TestStore on _TestStore, Store {
 
   @override
   set username(String value) {
-    _$usernameAtom.reportWrite(
+    _$usernameAtom.reportWrite<String?>(
       value,
       _usernameIsInitialized ? super.username : null,
       () {

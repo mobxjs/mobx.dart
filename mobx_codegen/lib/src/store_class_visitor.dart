@@ -108,6 +108,7 @@ class StoreClassVisitor extends SimpleElementVisitor2 {
       isPrivate: element.isPrivate,
       isReadOnly: _isObservableReadOnly(element),
       isLate: element.isLate,
+      isNullable: typeNameFinder.library.typeSystem.isNullable(element.type),
       equals: _getEquals(element),
     );
 
