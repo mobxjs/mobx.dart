@@ -31,6 +31,7 @@ mixin _$TestStore on _TestStore, Store {
         super.username = value;
         _usernameIsInitialized = true;
       },
+      equals: _usernameIsInitialized ? null : observableAlwaysNotEqual,
     );
   }
 }
