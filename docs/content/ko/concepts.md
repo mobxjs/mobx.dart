@@ -259,7 +259,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 final completed = Observable(false);
 
 void waitForCompletion() async {
-  await asyncWhen(() => completed.value == true);
+  await asyncWhen((_) => completed.value);
 
   print('Completed');
 }
