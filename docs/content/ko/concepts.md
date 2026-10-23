@@ -175,6 +175,9 @@ Reaction은 **Observable**, **Action**, **Reaction**으로 이루어진 *MobX �
 모두 Reaction을 dispose할 때 호출하는 함수인 `ReactionDisposer`를
 반환합니다.
 
+아래 시그니처에는 필수 매개변수만 표시했습니다. `name`, `delay`, `timeout`,
+`onError` 같은 모든 옵션은 [Reactions API](/api/reaction)에서 확인하세요.
+
 Reaction의 *두드러진 특징*은 Observable을 별도로 연결하지 않아도 모두 *자동으로
 추적*한다는 점입니다. Reaction 안에서 *Observable을 읽는 것*만으로 추적이
 시작됩니다!
@@ -259,7 +262,7 @@ greeting.value = 'Hello MobX'; // Causes a change, runs effect and disposes
 final completed = Observable(false);
 
 void waitForCompletion() async {
-  await asyncWhen(() => completed.value == true);
+  await asyncWhen((_) => completed.value);
 
   print('Completed');
 }
